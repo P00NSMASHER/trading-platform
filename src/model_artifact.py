@@ -50,9 +50,15 @@ def _skops_io():
     return sio
 
 
-def read_trusted_types(path: Path | None) -> tuple[str, ...]:
+def read_trusted_types(
+    path: Path | None,
+    *,
+    expected_sha256: str | None = None,
+) -> tuple[str, ...]:
     if path is None:
         return ()
+    if expected_sha256 is not None:
+        verify_hash_before_load(Path(path), expected_sha256)
     obj = json.loads(Path(path).read_text(encoding="utf-8"))
     if isinstance(obj, dict):
         values = obj.get("trusted_types", [])
@@ -76,9 +82,15 @@ def load_verified_skops(
     expected_sha256: str,
     *,
     trusted_types_file: Path | None,
+    expected_trusted_types_sha256: str | None,
 ) -> Any:
     verify_hash_before_load(path, expected_sha256)
-    approved = set(read_trusted_types(trusted_types_file))
+    if trusted_types_file is None:
+        raise ValueError("skops loading requires a reviewed trusted-types file")
+    approved = set(read_trusted_types(
+        trusted_types_file,
+        expected_sha256=expected_trusted_types_sha256,
+    ))
     unknown = set(inspect_skops_types(path))
     unapproved = sorted(unknown - approved)
     if unapproved:
