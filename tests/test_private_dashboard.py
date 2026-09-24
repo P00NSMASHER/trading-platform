@@ -306,3 +306,45 @@ def test_dashboard_rejects_overlong_uri(tmp_path: Path):
         assert resp.status == 414
     finally:
         server.shutdown(); server.server_close(); thread.join(timeout=5)
+
+
+def test_dashboard_rejects_excess_concurrent_connection_before_handler_thread(tmp_path: Path):
+    db = _db(tmp_path)
+    cfg = DashboardConfig(
+        db,
+        port=0,
+        max_concurrent_connections=1,
+        socket_timeout_seconds=1.0,
+    )
+    server = PrivateDashboardServer(
+        cfg,
+        csrf_token="known-token",
+        access_token=ACCESS_TOKEN,
+        session_token=SESSION_TOKEN,
+    )
+    # Occupy the only handler slot without creating a handler thread.
+    assert server._connection_slots.acquire(blocking=False) is True
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    host, port = server.server_address[:2]
+    try:
+        conn = http.client.HTTPConnection(host, port, timeout=5)
+        conn.request("GET", "/healthz", headers={"Host": f"127.0.0.1:{port}"})
+        resp = conn.getresponse()
+        body = resp.read()
+        assert resp.status == 503
+        assert body == b"service busy\n"
+        assert resp.getheader("Retry-After") == "1"
+    finally:
+        server._connection_slots.release()
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)
+
+
+def test_dashboard_connection_resource_limits_validate(tmp_path: Path):
+    db = _db(tmp_path)
+    with pytest.raises(ValueError, match="max_concurrent_connections"):
+        DashboardConfig(db, max_concurrent_connections=0).validate()
+    with pytest.raises(ValueError, match="socket_timeout_seconds"):
+        DashboardConfig(db, socket_timeout_seconds=0.1).validate()
