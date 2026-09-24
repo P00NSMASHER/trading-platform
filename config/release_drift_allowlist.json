@@ -138,8 +138,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; two-factor external signed release attestation runbook"
     },
     ".github/workflows/pr-ci.yml": {
-      "expected_sha256": "b3e83cf93c4d59be6c3898b0df811ccbf35a012a8bbd8e1bf3818594d223f013",
-      "reason": "Intentional post-Step21 repository hardening addition; read-only automatic pull request tests and secret scanning"
+      "expected_sha256": "5da4d88525286dfe42eb1a27d470054e4828da4a41a767d14e9c7e682ec3a016",
+      "reason": "Intentional post-Step21 repository hardening addition; read-only automatic pull request tests and secret scanning with ephemeral runtime permission hardening"
     }
   }
 }
