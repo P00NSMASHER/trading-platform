@@ -167,7 +167,21 @@ def verify_release_drift(
         })
 
     failed = [x for x in checks if not x["ok"]]
-    ok = not failed and not unexpected_tracked and not missing_tracked
+    try:
+        manifest_rel = release_manifest.resolve().relative_to(root).as_posix()
+    except ValueError:
+        manifest_rel = str(release_manifest.resolve())
+    manifest_self_expected = historical_sums.get(manifest_rel, "")
+    manifest_self_actual = sha256_file(release_manifest)
+    manifest_self_hash_ok = (
+        not manifest_self_expected or manifest_self_actual == manifest_self_expected
+    )
+    ok = (
+        not failed
+        and not unexpected_tracked
+        and not missing_tracked
+        and manifest_self_hash_ok
+    )
     return {
         "schema_version": "1",
         "historical_release_file_count": len(release),
@@ -178,6 +192,9 @@ def verify_release_drift(
         "unexpected_tracked_paths": unexpected_tracked,
         "missing_tracked_paths": missing_tracked,
         "failed_check_count": len(failed),
+        "historical_manifest_sha256": manifest_self_actual,
+        "historical_manifest_expected_sha256": manifest_self_expected or None,
+        "historical_manifest_hash_ok": manifest_self_hash_ok,
         "ok": ok,
         "checks": checks,
     }
