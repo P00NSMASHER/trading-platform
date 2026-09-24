@@ -104,8 +104,14 @@ def verify_release_drift(
 
     tracked = set(tracked_paths) if tracked_paths is not None else _tracked_paths(root)
     known = set(release) | set(additions)
+    try:
+        trust_root_path = exceptions.resolve().relative_to(root).as_posix()
+    except ValueError:
+        trust_root_path = str(exceptions.resolve())
+    if not Path(trust_root_path).is_absolute():
+        known.add(trust_root_path)
     unexpected_tracked = sorted(tracked - known)
-    missing_tracked = sorted(known - tracked)
+    missing_tracked = sorted((set(release) | set(additions)) - tracked)
 
     checks: list[dict] = []
     for path, entry in sorted(release.items()):
@@ -168,6 +174,7 @@ def verify_release_drift(
         "intentional_modified_count": len(modified),
         "repository_addition_count": len(additions),
         "tracked_file_count": len(tracked),
+        "trust_root_path": trust_root_path,
         "unexpected_tracked_paths": unexpected_tracked,
         "missing_tracked_paths": missing_tracked,
         "failed_check_count": len(failed),
