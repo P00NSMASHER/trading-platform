@@ -19,6 +19,7 @@ expected_model_sha256 = "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe52146589
 # Active champion remains joblib until an explicitly reviewed .skops replacement is configured.
 model_format = "joblib"
 skops_trusted_types_file = ""
+expected_skops_trusted_types_sha256 = ""
 
 [policy]
 research_use_only = true
