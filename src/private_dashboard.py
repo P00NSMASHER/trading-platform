@@ -302,14 +302,22 @@ class PrivateDashboardServer(ThreadingHTTPServer):
         config: DashboardConfig,
         csrf_token: str | None = None,
         access_token: str | None = None,
+        session_token: str | None = None,
     ):
         config.validate()
         self.config = config
         self.repo = DashboardRepository(config.db_path)
         self.csrf_token = csrf_token or secrets.token_urlsafe(32)
         self.access_token = access_token or secrets.token_urlsafe(32)
+        self.session_token = session_token or secrets.token_urlsafe(32)
         if len(self.access_token) < 32:
-            raise ValueError("dashboard access token must contain at least 32 characters")
+            raise ValueError("dashboard bootstrap token must contain at least 32 characters")
+        if len(self.session_token) < 32:
+            raise ValueError("dashboard session token must contain at least 32 characters")
+        if secrets.compare_digest(self.access_token, self.session_token):
+            raise ValueError("dashboard bootstrap and session tokens must be distinct")
+        self._auth_lock = threading.Lock()
+        self._bootstrap_consumed = False
         self._rate_lock = threading.Lock()
         self._request_times: dict[str, deque[float]] = defaultdict(deque)
         self._write_times: dict[str, deque[float]] = defaultdict(deque)
@@ -319,6 +327,15 @@ class PrivateDashboardServer(ThreadingHTTPServer):
         host, port = self.server_address[:2]
         token = urllib.parse.quote(self.access_token, safe="")
         return f"http://{host}:{port}/?access_token={token}"
+
+    def consume_bootstrap_token(self, supplied: str) -> bool:
+        with self._auth_lock:
+            if self._bootstrap_consumed:
+                return False
+            if not supplied or not secrets.compare_digest(supplied, self.access_token):
+                return False
+            self._bootstrap_consumed = True
+            return True
 
     def allow_request(self, client_ip: str, *, write: bool) -> bool:
         now = time.monotonic()
@@ -409,15 +426,15 @@ def _make_handler() -> type[BaseHTTPRequestHandler]:
 
         def _authenticated(self) -> bool:
             token = self._session_token()
-            return bool(token) and secrets.compare_digest(token, self.server.access_token)
+            return bool(token) and secrets.compare_digest(token, self.server.session_token)
 
         def _bootstrap_auth(self, parsed: urllib.parse.ParseResult) -> bool:
             params = urllib.parse.parse_qs(parsed.query, keep_blank_values=True, max_num_fields=10)
             supplied = (params.get("access_token") or [""])[-1]
-            if not supplied or not secrets.compare_digest(supplied, self.server.access_token):
+            if not self.server.consume_bootstrap_token(supplied):
                 return False
             cookie = (
-                f"{SESSION_COOKIE}={self.server.access_token}; "
+                f"{SESSION_COOKIE}={self.server.session_token}; "
                 "Path=/; HttpOnly; SameSite=Strict"
             )
             clean_query = urllib.parse.urlencode(

@@ -49,29 +49,31 @@ def _write_fixture(tmp_path: Path):
     }
     ex = tmp_path / "exceptions.json"
     ex.write_text(json.dumps(exceptions), encoding="utf-8")
-    return ex
+    return ex, drift.sha256_file(ex)
 
 
 def test_release_drift_accepts_declared_patch_and_addition(tmp_path: Path):
-    ex = _write_fixture(tmp_path)
+    ex, ex_sha = _write_fixture(tmp_path)
     result = drift.verify_release_drift(
         root=tmp_path,
         release_manifest=tmp_path / "RELEASE_MANIFEST.json",
         sha256sums=tmp_path / "SHA256SUMS",
         exceptions=ex,
+        expected_exceptions_sha256=ex_sha,
         tracked_paths={"old.txt", "changed.txt", "added.txt"},
     )
     assert result["ok"] is True
 
 
 def test_release_drift_detects_tampered_unchanged_file(tmp_path: Path):
-    ex = _write_fixture(tmp_path)
+    ex, ex_sha = _write_fixture(tmp_path)
     (tmp_path / "old.txt").write_text("tampered\n", encoding="utf-8")
     result = drift.verify_release_drift(
         root=tmp_path,
         release_manifest=tmp_path / "RELEASE_MANIFEST.json",
         sha256sums=tmp_path / "SHA256SUMS",
         exceptions=ex,
+        expected_exceptions_sha256=ex_sha,
         tracked_paths={"old.txt", "changed.txt", "added.txt"},
     )
     assert result["ok"] is False
@@ -79,13 +81,14 @@ def test_release_drift_detects_tampered_unchanged_file(tmp_path: Path):
 
 
 def test_release_drift_detects_unexpected_tracked_file(tmp_path: Path):
-    ex = _write_fixture(tmp_path)
+    ex, ex_sha = _write_fixture(tmp_path)
     (tmp_path / "surprise.txt").write_text("x", encoding="utf-8")
     result = drift.verify_release_drift(
         root=tmp_path,
         release_manifest=tmp_path / "RELEASE_MANIFEST.json",
         sha256sums=tmp_path / "SHA256SUMS",
         exceptions=ex,
+        expected_exceptions_sha256=ex_sha,
         tracked_paths={"old.txt", "changed.txt", "added.txt", "surprise.txt"},
     )
     assert result["ok"] is False
@@ -93,12 +96,31 @@ def test_release_drift_detects_unexpected_tracked_file(tmp_path: Path):
 
 
 
+def test_release_drift_rejects_tampered_trust_root(tmp_path: Path):
+    ex, ex_sha = _write_fixture(tmp_path)
+    raw = json.loads(ex.read_text(encoding="utf-8"))
+    raw["repository_additions"]["added.txt"]["reason"] = "tampered approval"
+    ex.write_text(json.dumps(raw), encoding="utf-8")
+    result = drift.verify_release_drift(
+        root=tmp_path,
+        release_manifest=tmp_path / "RELEASE_MANIFEST.json",
+        sha256sums=tmp_path / "SHA256SUMS",
+        exceptions=ex,
+        expected_exceptions_sha256=ex_sha,
+        tracked_paths={"old.txt", "changed.txt", "added.txt"},
+    )
+    assert result["ok"] is False
+    assert result["trust_root_authenticated"] is False
+
+
 def test_repository_matches_reviewed_release_drift_policy():
+    exceptions = ROOT / "config/release_drift_allowlist.json"
     result = drift.verify_release_drift(
         root=ROOT,
         release_manifest=ROOT / "RELEASE_MANIFEST.json",
         sha256sums=ROOT / "SHA256SUMS",
-        exceptions=ROOT / "config/release_drift_allowlist.json",
+        exceptions=exceptions,
+        expected_exceptions_sha256=drift.sha256_file(exceptions),
     )
     assert result["ok"] is True, {
         "unexpected": result["unexpected_tracked_paths"],

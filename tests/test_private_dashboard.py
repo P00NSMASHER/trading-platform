@@ -28,12 +28,13 @@ CONTROLS = ROOT / "data" / "examples" / "model_training_matched_controls.csv"
 BUNDLE = MODEL_DIR / "model_bundle.joblib"
 TRAINING_MANIFEST = MODEL_DIR / "training_manifest.json"
 ACCESS_TOKEN = "A" * 32
+SESSION_TOKEN = "S" * 32
 
 
 def _auth_headers(server: PrivateDashboardServer, port: int) -> dict[str, str]:
     return {
         "Host": f"127.0.0.1:{port}",
-        "Cookie": f"{SESSION_COOKIE}={server.access_token}",
+        "Cookie": f"{SESSION_COOKIE}={server.session_token}",
     }
 
 
@@ -102,7 +103,7 @@ def test_rendered_pages_include_research_notice_and_no_trade_directives(tmp_path
 
 def test_http_server_loopback_security_headers_and_health(tmp_path: Path):
     db = _db(tmp_path)
-    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN)
+    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN, session_token=SESSION_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -124,7 +125,7 @@ def test_http_server_loopback_security_headers_and_health(tmp_path: Path):
 
 def test_http_rejects_nonlocal_host_header(tmp_path: Path):
     db = _db(tmp_path)
-    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN)
+    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN, session_token=SESSION_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -140,7 +141,7 @@ def test_http_rejects_nonlocal_host_header(tmp_path: Path):
 
 def test_post_review_requires_csrf_and_appends_valid_chain(tmp_path: Path):
     db = _db(tmp_path)
-    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN)
+    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN, session_token=SESSION_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -173,7 +174,7 @@ def test_post_review_requires_csrf_and_appends_valid_chain(tmp_path: Path):
 def test_export_endpoint_generates_local_bundle(tmp_path: Path):
     db = _db(tmp_path)
     export_dir = tmp_path / "exports"
-    server = PrivateDashboardServer(DashboardConfig(db, port=0, export_dir=export_dir), csrf_token="known-token", access_token=ACCESS_TOKEN)
+    server = PrivateDashboardServer(DashboardConfig(db, port=0, export_dir=export_dir), csrf_token="known-token", access_token=ACCESS_TOKEN, session_token=SESSION_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -194,7 +195,7 @@ def test_export_endpoint_generates_local_bundle(tmp_path: Path):
 def test_dashboard_requires_per_launch_authentication(tmp_path: Path):
     db = _db(tmp_path)
     server = PrivateDashboardServer(
-        DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN
+        DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN, session_token=SESSION_TOKEN
     )
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -215,7 +216,8 @@ def test_dashboard_requires_per_launch_authentication(tmp_path: Path):
         assert resp.status == 303
         cookie = resp.getheader("Set-Cookie")
         assert cookie is not None
-        assert f"{SESSION_COOKIE}={ACCESS_TOKEN}" in cookie
+        assert f"{SESSION_COOKIE}={SESSION_TOKEN}" in cookie
+        assert ACCESS_TOKEN not in cookie
         assert "HttpOnly" in cookie
         assert "SameSite=Strict" in cookie
         assert resp.getheader("Location") == "/"
@@ -225,6 +227,30 @@ def test_dashboard_requires_per_launch_authentication(tmp_path: Path):
         resp = conn.getresponse(); body = resp.read().decode()
         assert resp.status == 200
         assert "Private Market-Surveillance Review" in body
+
+        # The bootstrap URL is single-use and cannot mint another session.
+        conn = http.client.HTTPConnection(host, port, timeout=5)
+        conn.request(
+            "GET",
+            "/?access_token=" + urllib.parse.quote(ACCESS_TOKEN),
+            headers={"Host": f"127.0.0.1:{port}"},
+        )
+        resp = conn.getresponse(); resp.read()
+        assert resp.status == 401
+        assert resp.getheader("Set-Cookie") is None
+
+        # The bootstrap token itself is never a valid session cookie.
+        conn = http.client.HTTPConnection(host, port, timeout=5)
+        conn.request(
+            "GET",
+            "/",
+            headers={
+                "Host": f"127.0.0.1:{port}",
+                "Cookie": f"{SESSION_COOKIE}={ACCESS_TOKEN}",
+            },
+        )
+        resp = conn.getresponse(); resp.read()
+        assert resp.status == 401
     finally:
         server.shutdown(); server.server_close(); thread.join(timeout=5)
 
@@ -232,7 +258,7 @@ def test_dashboard_requires_per_launch_authentication(tmp_path: Path):
 def test_dashboard_rejects_oversized_post_body(tmp_path: Path):
     db = _db(tmp_path)
     cfg = DashboardConfig(db, port=0, max_request_bytes=1024)
-    server = PrivateDashboardServer(cfg, csrf_token="known-token", access_token=ACCESS_TOKEN)
+    server = PrivateDashboardServer(cfg, csrf_token="known-token", access_token=ACCESS_TOKEN, session_token=SESSION_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -250,7 +276,7 @@ def test_dashboard_rejects_oversized_post_body(tmp_path: Path):
 def test_dashboard_rate_limits_requests(tmp_path: Path):
     db = _db(tmp_path)
     cfg = DashboardConfig(db, port=0, requests_per_minute=2, writes_per_minute=1)
-    server = PrivateDashboardServer(cfg, csrf_token="known-token", access_token=ACCESS_TOKEN)
+    server = PrivateDashboardServer(cfg, csrf_token="known-token", access_token=ACCESS_TOKEN, session_token=SESSION_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -269,7 +295,7 @@ def test_dashboard_rate_limits_requests(tmp_path: Path):
 def test_dashboard_rejects_overlong_uri(tmp_path: Path):
     db = _db(tmp_path)
     cfg = DashboardConfig(db, port=0, max_uri_bytes=256)
-    server = PrivateDashboardServer(cfg, csrf_token="known-token", access_token=ACCESS_TOKEN)
+    server = PrivateDashboardServer(cfg, csrf_token="known-token", access_token=ACCESS_TOKEN, session_token=SESSION_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]

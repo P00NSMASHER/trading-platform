@@ -4,6 +4,11 @@ name: synthetic-ci
 # Keep the workflow staged/manual until Actions runner availability is restored.
 on:
   workflow_dispatch:
+    inputs:
+      release_drift_trust_root_sha256:
+        description: "Independently recorded SHA-256 of config/release_drift_allowlist.json"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -39,7 +44,12 @@ jobs:
           python -m pip install -r requirements-dev.lock
 
       - name: Verify historical release drift
-        run: python scripts/verify_release_drift.py --root .
+        env:
+          RELEASE_DRIFT_TRUST_ROOT_SHA256: ${{ inputs.release_drift_trust_root_sha256 }}
+        run: >-
+          python scripts/verify_release_drift.py
+          --root .
+          --expected-exceptions-sha256 "$RELEASE_DRIFT_TRUST_ROOT_SHA256"
 
       - name: Run synthetic-only test suite
         run: python -m pytest -q

@@ -45,10 +45,12 @@ The model hash must match the currently trusted frozen-champion value before any
 Run:
 
 ```bash
-python scripts/verify_release_drift.py --root .
+python scripts/verify_release_drift.py \
+  --root . \
+  --expected-exceptions-sha256 <independently-recorded-allowlist-sha256>
 ```
 
-The verifier requires unchanged historical files to match their original SHA-256/size, intentional modified files and repository additions to match their reviewed Git blob identities, and rejects undeclared tracked files. Protect the trust-root file through pull-request review and an independently recorded release/commit identifier.
+The verifier requires unchanged historical files to match their original SHA-256/size, intentional modified files and repository additions to match their reviewed Git blob identities, and rejects undeclared tracked files. It also refuses release approval unless the allowlist itself matches an independently supplied SHA-256. Record that hash outside the repository (for example in an offline release note, signed tag record, or other trusted channel); reading the hash from the same working tree is not an independent trust check.
 
 ## Safer model persistence
 

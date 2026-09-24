@@ -4,10 +4,11 @@ The private dashboard remains loopback-only and research-only.
 
 ## Per-launch authentication
 
-Every dashboard process generates a new high-entropy access token in memory.
+Every dashboard process generates two distinct high-entropy secrets in memory: a one-time bootstrap token and a separate session token.
 
-- The runtime prints an authenticated bootstrap URL containing the token.
-- Opening that URL sets an `HttpOnly; SameSite=Strict` session cookie and immediately redirects to a clean URL without the token.
+- The runtime prints an authenticated bootstrap URL containing the bootstrap token.
+- The bootstrap token is accepted exactly once. A replay of the same URL cannot mint another session.
+- Opening that URL sets an `HttpOnly; SameSite=Strict` cookie containing the separate session token and immediately redirects to a clean URL without either token.
 - The token is not written to the database, runtime config, release manifest, or audit files.
 - Raw request-line logging is disabled so the bootstrap query token is not echoed by `BaseHTTPRequestHandler`.
 - Restarting the dashboard invalidates the previous token because a new token is generated.
