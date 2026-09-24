@@ -36,6 +36,7 @@ def _write_fixture(tmp_path: Path):
         encoding="utf-8",
     )
     exceptions = {
+        "schema_version": "2",
         "intentional_release_modifications": {
             "changed.txt": {"expected_sha256": _sha(changed), "reason": "security patch"}
         },
