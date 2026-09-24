@@ -27,15 +27,16 @@ def _write_fixture(tmp_path: Path):
     (tmp_path / "changed.txt").write_bytes(changed)
     (tmp_path / "added.txt").write_bytes(added)
 
+    original = b"original\n"
     manifest = {
         "files": [
             {"path": "old.txt", "sha256": _sha(old), "size_bytes": len(old)},
-            {"path": "changed.txt", "sha256": _sha(b"original\n"), "size_bytes": len(b"original\n")},
+            {"path": "changed.txt", "sha256": _sha(original), "size_bytes": len(original)},
         ]
     }
     (tmp_path / "RELEASE_MANIFEST.json").write_text(json.dumps(manifest), encoding="utf-8")
     (tmp_path / "SHA256SUMS").write_text(
-        f"{_sha(old)}  old.txt\n{_sha(b'original\n')}  changed.txt\n",
+        f"{_sha(old)}  old.txt\n{_sha(original)}  changed.txt\n",
         encoding="utf-8",
     )
     exceptions = {
