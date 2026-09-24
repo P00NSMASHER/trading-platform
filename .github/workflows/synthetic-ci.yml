@@ -1,7 +1,7 @@
 name: synthetic-ci
 
-# Hosted runner allocation is currently unavailable for this private repo.
-# Keep the workflow staged/manual until Actions runner availability is restored.
+# This workflow stays manual because release-drift verification requires an
+# independently recorded SHA-256 trust root supplied at dispatch time.
 on:
   workflow_dispatch:
     inputs:
@@ -26,10 +26,12 @@ jobs:
       PYTHONPATH: src
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.11"
           cache: pip
@@ -51,6 +53,9 @@ jobs:
           --root .
           --expected-exceptions-sha256 "$RELEASE_DRIFT_TRUST_ROOT_SHA256"
 
+      - name: Harden ephemeral runtime permissions
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+
       - name: Run synthetic-only test suite
         run: python -m pytest -q
 
@@ -60,10 +65,12 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.11"
 
