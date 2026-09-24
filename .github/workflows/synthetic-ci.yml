@@ -44,10 +44,12 @@ jobs:
           python -m pip install -r requirements-dev.lock
 
       - name: Verify historical release drift
+        env:
+          RELEASE_DRIFT_TRUST_ROOT_SHA256: ${{ inputs.release_drift_trust_root_sha256 }}
         run: >-
           python scripts/verify_release_drift.py
           --root .
-          --expected-exceptions-sha256 "${{ inputs.release_drift_trust_root_sha256 }}"
+          --expected-exceptions-sha256 "$RELEASE_DRIFT_TRUST_ROOT_SHA256"
 
       - name: Run synthetic-only test suite
         run: python -m pytest -q
