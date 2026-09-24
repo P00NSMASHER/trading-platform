@@ -16,6 +16,7 @@ from private_dashboard import (
     DashboardConfig,
     DashboardRepository,
     PrivateDashboardServer,
+    SESSION_COOKIE,
     render_case,
     render_index,
 )
@@ -26,6 +27,14 @@ FEATURES = ROOT / "data" / "examples" / "model_training_feature_vectors.csv"
 CONTROLS = ROOT / "data" / "examples" / "model_training_matched_controls.csv"
 BUNDLE = MODEL_DIR / "model_bundle.joblib"
 TRAINING_MANIFEST = MODEL_DIR / "training_manifest.json"
+ACCESS_TOKEN = "A" * 32
+
+
+def _auth_headers(server: PrivateDashboardServer, port: int) -> dict[str, str]:
+    return {
+        "Host": f"127.0.0.1:{port}",
+        "Cookie": f"{SESSION_COOKIE}={server.access_token}",
+    }
 
 
 def _db(tmp_path: Path) -> Path:
@@ -93,7 +102,7 @@ def test_rendered_pages_include_research_notice_and_no_trade_directives(tmp_path
 
 def test_http_server_loopback_security_headers_and_health(tmp_path: Path):
     db = _db(tmp_path)
-    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token")
+    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -115,7 +124,7 @@ def test_http_server_loopback_security_headers_and_health(tmp_path: Path):
 
 def test_http_rejects_nonlocal_host_header(tmp_path: Path):
     db = _db(tmp_path)
-    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token")
+    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -131,7 +140,7 @@ def test_http_rejects_nonlocal_host_header(tmp_path: Path):
 
 def test_post_review_requires_csrf_and_appends_valid_chain(tmp_path: Path):
     db = _db(tmp_path)
-    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token")
+    server = PrivateDashboardServer(DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
@@ -141,8 +150,8 @@ def test_post_review_requires_csrf_and_appends_valid_chain(tmp_path: Path):
             "disposition": "under_review", "note": "x",
         })
         conn = http.client.HTTPConnection(host, port, timeout=5)
-        conn.request("POST", "/case/CASE-H001/review", body=bad,
-                     headers={"Host": f"127.0.0.1:{port}", "Content-Type": "application/x-www-form-urlencoded"})
+        bad_headers = _auth_headers(server, port) | {"Content-Type": "application/x-www-form-urlencoded"}
+        conn.request("POST", "/case/CASE-H001/review", body=bad, headers=bad_headers)
         resp = conn.getresponse(); resp.read()
         assert resp.status == 403
 
@@ -151,8 +160,8 @@ def test_post_review_requires_csrf_and_appends_valid_chain(tmp_path: Path):
             "disposition": "under_review", "note": "dashboard test",
         })
         conn = http.client.HTTPConnection(host, port, timeout=5)
-        conn.request("POST", "/case/CASE-H001/review", body=good,
-                     headers={"Host": f"127.0.0.1:{port}", "Content-Type": "application/x-www-form-urlencoded"})
+        good_headers = _auth_headers(server, port) | {"Content-Type": "application/x-www-form-urlencoded"}
+        conn.request("POST", "/case/CASE-H001/review", body=good, headers=good_headers)
         resp = conn.getresponse(); resp.read()
         assert resp.status == 303
         assert verify_review_chain(db, "CASE-H001") is True
@@ -164,18 +173,110 @@ def test_post_review_requires_csrf_and_appends_valid_chain(tmp_path: Path):
 def test_export_endpoint_generates_local_bundle(tmp_path: Path):
     db = _db(tmp_path)
     export_dir = tmp_path / "exports"
-    server = PrivateDashboardServer(DashboardConfig(db, port=0, export_dir=export_dir), csrf_token="known-token")
+    server = PrivateDashboardServer(DashboardConfig(db, port=0, export_dir=export_dir), csrf_token="known-token", access_token=ACCESS_TOKEN)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     host, port = server.server_address[:2]
     try:
         form = urllib.parse.urlencode({"csrf_token": "known-token"})
         conn = http.client.HTTPConnection(host, port, timeout=5)
-        conn.request("POST", "/case/CASE-H001/export", body=form,
-                     headers={"Host": f"127.0.0.1:{port}", "Content-Type": "application/x-www-form-urlencoded"})
+        headers = _auth_headers(server, port) | {"Content-Type": "application/x-www-form-urlencoded"}
+        conn.request("POST", "/case/CASE-H001/export", body=form, headers=headers)
         resp = conn.getresponse(); body = resp.read().decode()
         assert resp.status == 200
         assert "Evidence bundle created locally" in body
         assert list(export_dir.glob("*.zip"))
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=5)
+
+
+
+def test_dashboard_requires_per_launch_authentication(tmp_path: Path):
+    db = _db(tmp_path)
+    server = PrivateDashboardServer(
+        DashboardConfig(db, port=0), csrf_token="known-token", access_token=ACCESS_TOKEN
+    )
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    host, port = server.server_address[:2]
+    try:
+        conn = http.client.HTTPConnection(host, port, timeout=5)
+        conn.request("GET", "/", headers={"Host": f"127.0.0.1:{port}"})
+        resp = conn.getresponse(); resp.read()
+        assert resp.status == 401
+
+        conn = http.client.HTTPConnection(host, port, timeout=5)
+        conn.request(
+            "GET",
+            "/?access_token=" + urllib.parse.quote(ACCESS_TOKEN),
+            headers={"Host": f"127.0.0.1:{port}"},
+        )
+        resp = conn.getresponse(); resp.read()
+        assert resp.status == 303
+        cookie = resp.getheader("Set-Cookie")
+        assert cookie is not None
+        assert f"{SESSION_COOKIE}={ACCESS_TOKEN}" in cookie
+        assert "HttpOnly" in cookie
+        assert "SameSite=Strict" in cookie
+        assert resp.getheader("Location") == "/"
+
+        conn = http.client.HTTPConnection(host, port, timeout=5)
+        conn.request("GET", "/", headers=_auth_headers(server, port))
+        resp = conn.getresponse(); body = resp.read().decode()
+        assert resp.status == 200
+        assert "Private Market-Surveillance Review" in body
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=5)
+
+
+def test_dashboard_rejects_oversized_post_body(tmp_path: Path):
+    db = _db(tmp_path)
+    cfg = DashboardConfig(db, port=0, max_request_bytes=1024)
+    server = PrivateDashboardServer(cfg, csrf_token="known-token", access_token=ACCESS_TOKEN)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    host, port = server.server_address[:2]
+    try:
+        body = "x=" + ("A" * 1500)
+        headers = _auth_headers(server, port) | {"Content-Type": "application/x-www-form-urlencoded"}
+        conn = http.client.HTTPConnection(host, port, timeout=5)
+        conn.request("POST", "/case/CASE-H001/review", body=body, headers=headers)
+        resp = conn.getresponse(); resp.read()
+        assert resp.status == 413
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=5)
+
+
+def test_dashboard_rate_limits_requests(tmp_path: Path):
+    db = _db(tmp_path)
+    cfg = DashboardConfig(db, port=0, requests_per_minute=2, writes_per_minute=1)
+    server = PrivateDashboardServer(cfg, csrf_token="known-token", access_token=ACCESS_TOKEN)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    host, port = server.server_address[:2]
+    try:
+        statuses = []
+        for _ in range(3):
+            conn = http.client.HTTPConnection(host, port, timeout=5)
+            conn.request("GET", "/healthz", headers={"Host": f"127.0.0.1:{port}"})
+            resp = conn.getresponse(); resp.read()
+            statuses.append(resp.status)
+        assert statuses == [200, 200, 429]
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=5)
+
+
+def test_dashboard_rejects_overlong_uri(tmp_path: Path):
+    db = _db(tmp_path)
+    cfg = DashboardConfig(db, port=0, max_uri_bytes=256)
+    server = PrivateDashboardServer(cfg, csrf_token="known-token", access_token=ACCESS_TOKEN)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    host, port = server.server_address[:2]
+    try:
+        conn = http.client.HTTPConnection(host, port, timeout=5)
+        conn.request("GET", "/?" + ("q=A&" * 100), headers={"Host": f"127.0.0.1:{port}"})
+        resp = conn.getresponse(); resp.read()
+        assert resp.status == 414
     finally:
         server.shutdown(); server.server_close(); thread.join(timeout=5)

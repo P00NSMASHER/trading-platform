@@ -38,7 +38,7 @@ def _write_config(tmp_path: Path, **policy_overrides) -> Path:
     policy.update(policy_overrides)
     p = tmp_path / "runtime.toml"
     p.write_text(
-        f'''[paths]\ncase_db = "{DB}"\nmodel_bundle = "{MODEL}"\ntraining_manifest = "{ROOT / 'data/processed/model_demo/training_manifest.json'}"\nbackup_dir = "{tmp_path / 'backups'}"\nexport_dir = "{tmp_path / 'exports'}"\naudit_dir = "{tmp_path / 'audit'}"\n\n[dashboard]\nhost = "127.0.0.1"\nport = 8765\n\n[integrity]\nexpected_model_sha256 = "{EXPECTED_MODEL_SHA256}"\n\n[policy]\nresearch_use_only = {str(policy['research_use_only']).lower()}\nallow_network_bind = {str(policy['allow_network_bind']).lower()}\nallow_execution_integration = {str(policy['allow_execution_integration']).lower()}\nallow_trade_outputs = {str(policy['allow_trade_outputs']).lower()}\n''',
+        f'''[paths]\ncase_db = "{DB}"\nmodel_bundle = "{MODEL}"\ntraining_manifest = "{ROOT / 'data/processed/model_demo/training_manifest.json'}"\nbackup_dir = "{tmp_path / 'backups'}"\nexport_dir = "{tmp_path / 'exports'}"\naudit_dir = "{tmp_path / 'audit'}"\n\n[dashboard]\nhost = "127.0.0.1"\nport = 8765\n\n[integrity]\nexpected_model_sha256 = "{EXPECTED_MODEL_SHA256}"\nmodel_format = "joblib"\nskops_trusted_types_file = ""\nexpected_skops_trusted_types_sha256 = ""\n\n[policy]\nresearch_use_only = {str(policy['research_use_only']).lower()}\nallow_network_bind = {str(policy['allow_network_bind']).lower()}\nallow_execution_integration = {str(policy['allow_execution_integration']).lower()}\nallow_trade_outputs = {str(policy['allow_trade_outputs']).lower()}\n''',
         encoding="utf-8",
     )
     return p
@@ -49,6 +49,8 @@ def test_runtime_config_loads_and_is_loopback_only():
     assert cfg.dashboard_host == "127.0.0.1"
     assert cfg.research_use_only is True
     assert cfg.allow_network_bind is False
+    assert cfg.model_format == "joblib"
+    assert cfg.skops_trusted_types_file is None
 
 
 @pytest.mark.parametrize(
@@ -63,6 +65,21 @@ def test_runtime_config_loads_and_is_loopback_only():
 def test_runtime_policy_fails_closed(tmp_path: Path, override: dict):
     with pytest.raises(ValueError):
         load_runtime_config(_write_config(tmp_path, **override))
+
+
+def test_skops_runtime_config_requires_reviewed_policy_hash(tmp_path: Path):
+    trust = tmp_path / "trusted.json"
+    trust.write_text('{"trusted_types": []}\n', encoding="utf-8")
+    p = _write_config(tmp_path)
+    text = p.read_text(encoding="utf-8")
+    text = text.replace('model_format = "joblib"', 'model_format = "skops"')
+    text = text.replace(
+        'skops_trusted_types_file = ""',
+        f'skops_trusted_types_file = "{trust}"',
+    )
+    p.write_text(text, encoding="utf-8")
+    with pytest.raises(ValueError, match="expected_skops_trusted_types_sha256"):
+        load_runtime_config(p)
 
 
 def test_model_bundle_verification_passes_and_has_no_trade_keys():
@@ -178,3 +195,6 @@ def test_lockfiles_pin_runtime_and_test_dependencies():
     for name in ("joblib", "numpy", "scipy", "scikit-learn", "threadpoolctl"):
         assert f"{name}==" in runtime
     assert "pytest==" in dev
+    optional = (ROOT / "requirements-skops.lock").read_text(encoding="utf-8")
+    for pin in ("skops==0.14.0", "packaging==26.3", "prettytable==3.18.0", "wcwidth==0.9.1"):
+        assert pin in optional

@@ -5,10 +5,13 @@ import html
 import json
 import secrets
 import threading
+import time
 import urllib.parse
 import webbrowser
+from collections import defaultdict, deque
 from dataclasses import dataclass
 from http import HTTPStatus
+from http.cookies import SimpleCookie
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Callable
@@ -22,6 +25,11 @@ SCHEMA_VERSION = "0.9.0"
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
 LOOPBACK_HOSTS = {"127.0.0.1", "::1", "localhost"}
+SESSION_COOKIE = "mnpi_dashboard_session"
+DEFAULT_MAX_REQUEST_BYTES = 16_384
+DEFAULT_MAX_URI_BYTES = 4_096
+DEFAULT_REQUESTS_PER_MINUTE = 240
+DEFAULT_WRITES_PER_MINUTE = 30
 ALLOWED_ACTIONS = {
     "review_started",
     "note_added",
@@ -58,6 +66,10 @@ class DashboardConfig:
     host: str = DEFAULT_HOST
     port: int = DEFAULT_PORT
     export_dir: Path | None = None
+    max_request_bytes: int = DEFAULT_MAX_REQUEST_BYTES
+    max_uri_bytes: int = DEFAULT_MAX_URI_BYTES
+    requests_per_minute: int = DEFAULT_REQUESTS_PER_MINUTE
+    writes_per_minute: int = DEFAULT_WRITES_PER_MINUTE
 
     def validate(self) -> None:
         if not _is_loopback_host(self.host):
@@ -66,6 +78,14 @@ class DashboardConfig:
             raise ValueError("port must be in [0,65535]")
         if not self.db_path.exists():
             raise ValueError(f"case database does not exist: {self.db_path}")
+        if not (1_024 <= int(self.max_request_bytes) <= 1_048_576):
+            raise ValueError("max_request_bytes must be in [1024,1048576]")
+        if not (256 <= int(self.max_uri_bytes) <= 65_536):
+            raise ValueError("max_uri_bytes must be in [256,65536]")
+        if not (1 <= int(self.requests_per_minute) <= 10_000):
+            raise ValueError("requests_per_minute must be in [1,10000]")
+        if not (1 <= int(self.writes_per_minute) <= int(self.requests_per_minute)):
+            raise ValueError("writes_per_minute must be in [1,requests_per_minute]")
 
 
 class DashboardRepository:
@@ -277,12 +297,47 @@ class PrivateDashboardServer(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = True
 
-    def __init__(self, config: DashboardConfig, csrf_token: str | None = None):
+    def __init__(
+        self,
+        config: DashboardConfig,
+        csrf_token: str | None = None,
+        access_token: str | None = None,
+    ):
         config.validate()
         self.config = config
         self.repo = DashboardRepository(config.db_path)
         self.csrf_token = csrf_token or secrets.token_urlsafe(32)
+        self.access_token = access_token or secrets.token_urlsafe(32)
+        if len(self.access_token) < 32:
+            raise ValueError("dashboard access token must contain at least 32 characters")
+        self._rate_lock = threading.Lock()
+        self._request_times: dict[str, deque[float]] = defaultdict(deque)
+        self._write_times: dict[str, deque[float]] = defaultdict(deque)
         super().__init__((config.host, config.port), _make_handler())
+
+    def authenticated_url(self) -> str:
+        host, port = self.server_address[:2]
+        token = urllib.parse.quote(self.access_token, safe="")
+        return f"http://{host}:{port}/?access_token={token}"
+
+    def allow_request(self, client_ip: str, *, write: bool) -> bool:
+        now = time.monotonic()
+        cutoff = now - 60.0
+        with self._rate_lock:
+            requests = self._request_times[client_ip]
+            while requests and requests[0] < cutoff:
+                requests.popleft()
+            if len(requests) >= self.config.requests_per_minute:
+                return False
+            if write:
+                writes = self._write_times[client_ip]
+                while writes and writes[0] < cutoff:
+                    writes.popleft()
+                if len(writes) >= self.config.writes_per_minute:
+                    return False
+                writes.append(now)
+            requests.append(now)
+        return True
 
 
 def _make_handler() -> type[BaseHTTPRequestHandler]:
@@ -290,8 +345,9 @@ def _make_handler() -> type[BaseHTTPRequestHandler]:
         server: PrivateDashboardServer
 
         def log_message(self, fmt: str, *args) -> None:
-            # Local-only concise audit line; do not log form bodies or evidence details.
-            super().log_message(fmt, *args)
+            # Suppress BaseHTTPRequestHandler's raw request-line logging because the
+            # one-time bootstrap URL contains an ephemeral authentication token.
+            return
 
         def _security_headers(self, content_type: str = "text/html; charset=utf-8") -> None:
             self.send_header("Content-Type", content_type)
@@ -305,17 +361,28 @@ def _make_handler() -> type[BaseHTTPRequestHandler]:
                 "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'",
             )
 
-        def _send(self, status: int, body: bytes, content_type: str = "text/html; charset=utf-8") -> None:
+        def _send(
+            self,
+            status: int,
+            body: bytes,
+            content_type: str = "text/html; charset=utf-8",
+            *,
+            extra_headers: dict[str, str] | None = None,
+        ) -> None:
             self.send_response(status)
             self._security_headers(content_type)
+            for key, value in (extra_headers or {}).items():
+                self.send_header(key, value)
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
 
-        def _redirect(self, location: str) -> None:
+        def _redirect(self, location: str, *, set_cookie: str | None = None) -> None:
             self.send_response(HTTPStatus.SEE_OTHER)
             self._security_headers()
             self.send_header("Location", location)
+            if set_cookie:
+                self.send_header("Set-Cookie", set_cookie)
             self.send_header("Content-Length", "0")
             self.end_headers()
 
@@ -324,13 +391,51 @@ def _make_handler() -> type[BaseHTTPRequestHandler]:
             host_only = host.rsplit(":", 1)[0].strip("[]").lower() if host else ""
             return host_only in LOOPBACK_HOSTS
 
+        def _rate_limit_ok(self, *, write: bool) -> bool:
+            client_ip = str(self.client_address[0]) if self.client_address else "loopback"
+            return self.server.allow_request(client_ip, write=write)
+
+        def _session_token(self) -> str:
+            raw = self.headers.get("Cookie", "")
+            if not raw:
+                return ""
+            cookie = SimpleCookie()
+            try:
+                cookie.load(raw)
+            except Exception:
+                return ""
+            morsel = cookie.get(SESSION_COOKIE)
+            return morsel.value if morsel else ""
+
+        def _authenticated(self) -> bool:
+            token = self._session_token()
+            return bool(token) and secrets.compare_digest(token, self.server.access_token)
+
+        def _bootstrap_auth(self, parsed: urllib.parse.ParseResult) -> bool:
+            params = urllib.parse.parse_qs(parsed.query, keep_blank_values=True, max_num_fields=10)
+            supplied = (params.get("access_token") or [""])[-1]
+            if not supplied or not secrets.compare_digest(supplied, self.server.access_token):
+                return False
+            cookie = (
+                f"{SESSION_COOKIE}={self.server.access_token}; "
+                "Path=/; HttpOnly; SameSite=Strict"
+            )
+            clean_query = urllib.parse.urlencode(
+                [(key, value) for key, values in params.items() if key != "access_token" for value in values]
+            )
+            clean_location = parsed.path or "/"
+            if clean_query:
+                clean_location += "?" + clean_query
+            self._redirect(clean_location, set_cookie=cookie)
+            return True
+
         def _parse_form(self) -> dict[str, str]:
             try:
                 length = int(self.headers.get("Content-Length", "0"))
             except ValueError:
                 length = 0
-            if length < 0 or length > 64_000:
-                raise ValueError("invalid form size")
+            if length < 0 or length > self.server.config.max_request_bytes:
+                raise OverflowError("request body exceeds configured limit")
             body = self.rfile.read(length).decode("utf-8", "strict")
             parsed = urllib.parse.parse_qs(body, keep_blank_values=True, max_num_fields=20)
             return {k: v[-1] for k, v in parsed.items()}
@@ -344,9 +449,20 @@ def _make_handler() -> type[BaseHTTPRequestHandler]:
             if not self._host_header_is_local():
                 self._send(HTTPStatus.FORBIDDEN, _layout("Forbidden", "<p>Non-loopback Host header rejected.</p>"))
                 return
+            if len(self.path.encode("utf-8", "ignore")) > self.server.config.max_uri_bytes:
+                self._send(HTTPStatus.REQUEST_URI_TOO_LONG, _layout("Too long", "<p>Request URI exceeds configured limit.</p>"))
+                return
+            if not self._rate_limit_ok(write=False):
+                self._send(HTTPStatus.TOO_MANY_REQUESTS, b"rate limit exceeded\n", "text/plain; charset=utf-8", extra_headers={"Retry-After": "60"})
+                return
             parsed = urllib.parse.urlparse(self.path)
             if parsed.path == "/healthz":
                 self._send(HTTPStatus.OK, b"ok\n", "text/plain; charset=utf-8")
+                return
+            if self._bootstrap_auth(parsed):
+                return
+            if not self._authenticated():
+                self._send(HTTPStatus.UNAUTHORIZED, _layout("Authentication required", "<p>Use the per-launch authenticated dashboard URL printed by the local runtime.</p>"))
                 return
             if parsed.path == "/":
                 self._send(HTTPStatus.OK, render_index(self.server.repo, urllib.parse.parse_qs(parsed.query)))
@@ -367,12 +483,24 @@ def _make_handler() -> type[BaseHTTPRequestHandler]:
             if not self._host_header_is_local():
                 self._send(HTTPStatus.FORBIDDEN, _layout("Forbidden", "<p>Non-loopback Host header rejected.</p>"))
                 return
+            if len(self.path.encode("utf-8", "ignore")) > self.server.config.max_uri_bytes:
+                self._send(HTTPStatus.REQUEST_URI_TOO_LONG, _layout("Too long", "<p>Request URI exceeds configured limit.</p>"))
+                return
+            if not self._rate_limit_ok(write=True):
+                self._send(HTTPStatus.TOO_MANY_REQUESTS, b"rate limit exceeded\n", "text/plain; charset=utf-8", extra_headers={"Retry-After": "60"})
+                return
+            if not self._authenticated():
+                self._send(HTTPStatus.UNAUTHORIZED, _layout("Authentication required", "<p>Authenticated dashboard session required.</p>"))
+                return
             parsed = urllib.parse.urlparse(self.path)
             try:
                 form = self._parse_form()
                 self._require_csrf(form)
             except PermissionError:
                 self._send(HTTPStatus.FORBIDDEN, _layout("Forbidden", "<p>Invalid CSRF token.</p>"))
+                return
+            except OverflowError:
+                self._send(HTTPStatus.REQUEST_ENTITY_TOO_LARGE, _layout("Too large", "<p>Request body exceeds configured limit.</p>"))
                 return
             except Exception as exc:
                 self._send(HTTPStatus.BAD_REQUEST, _layout("Bad request", f"<p>{_e(exc)}</p>"))
@@ -418,12 +546,12 @@ def _make_handler() -> type[BaseHTTPRequestHandler]:
 
 def serve(config: DashboardConfig, *, open_browser: bool = False) -> None:
     server = PrivateDashboardServer(config)
-    host, port = server.server_address[:2]
-    url = f"http://{host}:{port}/"
-    print(f"Private dashboard: {url}")
-    print("Bound to loopback only. Press Ctrl-C to stop.")
+    auth_url = server.authenticated_url()
+    print("Private dashboard requires a new per-launch authentication token.")
+    print(f"Authenticated launch URL: {auth_url}")
+    print("Bound to loopback only. Keep the launch URL private. Press Ctrl-C to stop.")
     if open_browser:
-        threading.Timer(0.2, lambda: webbrowser.open(url)).start()
+        threading.Timer(0.2, lambda: webbrowser.open(auth_url)).start()
     try:
         server.serve_forever()
     except KeyboardInterrupt:

@@ -11,5 +11,10 @@ dependencies = [
   "scikit-learn>=1.4,<2",
 ]
 
+[project.optional-dependencies]
+safer-model = [
+  "skops>=0.14,<0.15",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
