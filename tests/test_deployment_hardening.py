@@ -196,4 +196,5 @@ def test_lockfiles_pin_runtime_and_test_dependencies():
         assert f"{name}==" in runtime
     assert "pytest==" in dev
     optional = (ROOT / "requirements-skops.lock").read_text(encoding="utf-8")
-    assert "skops==0.14.0" in optional
+    for pin in ("skops==0.14.0", "packaging==26.3", "prettytable==3.18.0", "wcwidth==0.9.1"):
+        assert pin in optional
