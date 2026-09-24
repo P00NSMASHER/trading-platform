@@ -122,20 +122,20 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "SECURITY.md": {
-      "expected_sha256": "a5e6a8e0078df0f9c09b2bee0fbd4338246c04615468ed2a02822dac7ef6f0e9",
-      "reason": "Intentional post-Step21 repository hardening addition; external trust-root and signed-release guidance"
+      "expected_sha256": "276e3d037fc7a6b63f4124a05efd3a5d6cf66840004630bae612b8e4c0426e55",
+      "reason": "Intentional post-Step21 repository hardening addition; independent signer and drift trust pins"
     },
     "scripts/release_attestation.py": {
-      "expected_sha256": "101274acddc9d5e196873bc7236e87ee72dc9733cce8eb55057297bc98ec0b34",
-      "reason": "Intentional post-Step21 repository hardening addition; external SSH release attestation tooling"
+      "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
+      "reason": "Intentional post-Step21 repository hardening addition; external SSH release attestation with independent drift trust and external signing material"
     },
     "tests/test_release_attestation.py": {
-      "expected_sha256": "e991b75dcaf6d03e38ea8f7e0b0f72551ad99cc01f359defb096756c4c20b5db",
-      "reason": "Intentional post-Step21 repository hardening addition; release attestation trust-boundary regression coverage"
+      "expected_sha256": "6c16939693b2f8d168766ae8284875036d0139df0e8ccd4b560fb55fd0ce60b1",
+      "reason": "Intentional post-Step21 repository hardening addition; signer-path, namespace, and two-factor trust-boundary regression coverage"
     },
     "docs/release_attestation.md": {
-      "expected_sha256": "c5a3d02a2b03cacdbf8f6b096a712017b36578c63c8aa2f134f50b5f445340de",
-      "reason": "Intentional post-Step21 repository hardening addition; external signed release attestation runbook"
+      "expected_sha256": "917ca1073633fa404be60a9c1fcafa14c85351ecae249f9dc30be309693109df",
+      "reason": "Intentional post-Step21 repository hardening addition; two-factor external signed release attestation runbook"
     }
   }
 }
