@@ -136,6 +136,10 @@
     "docs/release_attestation.md": {
       "expected_sha256": "917ca1073633fa404be60a9c1fcafa14c85351ecae249f9dc30be309693109df",
       "reason": "Intentional post-Step21 repository hardening addition; two-factor external signed release attestation runbook"
+    },
+    ".github/workflows/pr-ci.yml": {
+      "expected_sha256": "b3e83cf93c4d59be6c3898b0df811ccbf35a012a8bbd8e1bf3818594d223f013",
+      "reason": "Intentional post-Step21 repository hardening addition; read-only automatic pull request tests and secret scanning"
     }
   }
 }
