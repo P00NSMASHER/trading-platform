@@ -455,16 +455,22 @@ def filesystem_permission_report(cfg: RuntimeConfig) -> dict[str, Any]:
             directories[str(path)] = {"error": f"{type(exc).__name__}: {exc}", "ok": False}
     return {"files": files, "directories": directories, "ok": all(x.get("ok") for group in (files, directories) for x in group.values())}
 
-def self_check(cfg: RuntimeConfig) -> dict[str, Any]:
+def verify_configured_model(cfg: RuntimeConfig) -> dict[str, Any]:
+    """Verify/load only the model artifact explicitly trusted by runtime config."""
     cfg.validate()
-    ensure_private_runtime_dirs(cfg)
-    model = verify_model_bundle(
+    return verify_model_bundle(
         cfg.model_bundle,
         expected_sha256=cfg.expected_model_sha256,
         model_format=cfg.model_format,
         skops_trusted_types_file=cfg.skops_trusted_types_file,
         expected_skops_trusted_types_sha256=cfg.expected_skops_trusted_types_sha256,
     )
+
+
+def self_check(cfg: RuntimeConfig) -> dict[str, Any]:
+    cfg.validate()
+    ensure_private_runtime_dirs(cfg)
+    model = verify_configured_model(cfg)
     training = verify_training_manifest(cfg.training_manifest, model)
     database = database_integrity_report(cfg.case_db, model_sha256=model.get("sha256"))
     permissions = filesystem_permission_report(cfg)
@@ -608,7 +614,7 @@ def restore_database(
 
 def recovery_drill(cfg: RuntimeConfig) -> dict[str, Any]:
     cfg.validate()
-    model = verify_model_bundle(cfg.model_bundle)
+    model = verify_configured_model(cfg)
     if not model.get("ok"):
         raise ValueError("model bundle must pass verification before recovery drill")
     original_source_sha = sha256_file(cfg.case_db)
@@ -699,12 +705,12 @@ def main() -> None:
     elif args.command == "self-check":
         report = self_check(cfg)
     elif args.command == "backup-db":
-        model = verify_model_bundle(cfg.model_bundle)
+        model = verify_configured_model(cfg)
         if not model.get("ok"):
             raise SystemExit("model verification failed; backup aborted")
         report = backup_database(cfg.case_db, cfg.backup_dir, model_sha256=model["sha256"])
     elif args.command == "restore-db":
-        model = verify_model_bundle(cfg.model_bundle)
+        model = verify_configured_model(cfg)
         if not model.get("ok"):
             raise SystemExit("model verification failed; restore aborted")
         report = restore_database(
