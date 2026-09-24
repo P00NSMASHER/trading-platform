@@ -112,7 +112,11 @@ class RuntimeConfig:
         if self.model_format not in {"joblib", "skops"}:
             raise ValueError("runtime integrity model_format must be 'joblib' or 'skops'")
         if self.model_format == "skops":
-            if self.skops_trusted_types_file is None or not self.skops_trusted_types_file.exists():
+            if (
+                self.skops_trusted_types_file is None
+                or not self.skops_trusted_types_file.exists()
+                or not self.skops_trusted_types_file.is_file()
+            ):
                 raise ValueError("skops runtime requires an existing reviewed skops_trusted_types_file")
             trust_hash = self.expected_skops_trusted_types_sha256.strip().lower()
             if len(trust_hash) != 64 or any(ch not in "0123456789abcdef" for ch in trust_hash):
@@ -414,7 +418,10 @@ def apply_private_permissions(cfg: RuntimeConfig) -> dict[str, Any]:
     cfg.validate()
     ensure_private_runtime_dirs(cfg)
     results: dict[str, Any] = {"files": {}, "directories": {}}
-    for path in (cfg.config_path, cfg.case_db, cfg.model_bundle, cfg.training_manifest):
+    protected_files = [cfg.config_path, cfg.case_db, cfg.model_bundle, cfg.training_manifest]
+    if cfg.skops_trusted_types_file is not None:
+        protected_files.append(cfg.skops_trusted_types_file)
+    for path in protected_files:
         try:
             path.chmod(0o600)
             results["files"][str(path)] = {"mode": _mode_octal(path), "ok": (path.stat().st_mode & 0o077) == 0}
@@ -433,7 +440,10 @@ def apply_private_permissions(cfg: RuntimeConfig) -> dict[str, Any]:
 def filesystem_permission_report(cfg: RuntimeConfig) -> dict[str, Any]:
     files: dict[str, Any] = {}
     directories: dict[str, Any] = {}
-    for path in (cfg.config_path, cfg.case_db, cfg.model_bundle, cfg.training_manifest):
+    protected_files = [cfg.config_path, cfg.case_db, cfg.model_bundle, cfg.training_manifest]
+    if cfg.skops_trusted_types_file is not None:
+        protected_files.append(cfg.skops_trusted_types_file)
+    for path in protected_files:
         try:
             files[str(path)] = {"mode": _mode_octal(path), "ok": (path.stat().st_mode & 0o077) == 0}
         except OSError as exc:
