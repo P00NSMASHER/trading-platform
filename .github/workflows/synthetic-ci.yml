@@ -1,10 +1,8 @@
 name: synthetic-ci
 
+# Hosted runner allocation is currently unavailable for this private repo.
+# Keep the workflow staged/manual until Actions runner availability is restored.
 on:
-  pull_request:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
