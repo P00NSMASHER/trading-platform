@@ -1,0 +1,125 @@
+{
+  "schema_version": "1",
+  "historical_release": "Step21 package 33ed148d480808474b6aab6c958aa476e6fe73be5a9eeb467e156ec88f3b4158",
+  "trust_root_notice": "This reviewed file declares intentional drift from the immutable historical release. Protect it through normal repository review and an independently recorded commit/release hash.",
+  "intentional_release_modifications": {
+    ".gitignore": {
+      "expected_git_blob_sha1": "4c9d1ad485592ced01fb070affbf1dd51a4bb84f",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "config/runtime.demo.toml": {
+      "expected_git_blob_sha1": "5650ecd5b720ea59e4cd45ff72106ddb0218342f",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "config/runtime.example.toml": {
+      "expected_git_blob_sha1": "5650ecd5b720ea59e4cd45ff72106ddb0218342f",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "pyproject.toml": {
+      "expected_git_blob_sha1": "fa9bef23f9425d20d0a1ad29e832a6eaafbd7f7f",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "src/authorized_input_orchestrator.py": {
+      "expected_git_blob_sha1": "715d523f2464a9753930862cf14bfa3d43c3365d",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "src/case_evidence.py": {
+      "expected_git_blob_sha1": "1687a6fc7fc4ffb6fc12413692e74196cf48fb64",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "src/deployment_hardening.py": {
+      "expected_git_blob_sha1": "46ea85c9b383daa1050d7c2841a142445cf7fa5b",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "src/private_dashboard.py": {
+      "expected_git_blob_sha1": "1b9eeeb8ff0ee6cca7652c350a3e480c609cde02",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "tests/test_authorized_input_orchestrator.py": {
+      "expected_git_blob_sha1": "03563355813f79ff79e12c5d2e03f700776b4578",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "tests/test_case_evidence.py": {
+      "expected_git_blob_sha1": "1946073ea9d6488c96493a2160b9511df8c02e0a",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "tests/test_deployment_hardening.py": {
+      "expected_git_blob_sha1": "f7336beabea83bf7c135b90d7ee1d29cc4152705",
+      "reason": "Intentional post-Step21 security hardening"
+    },
+    "tests/test_private_dashboard.py": {
+      "expected_git_blob_sha1": "91210ce3db8bdce5deeb7c6197678595d8cb25bb",
+      "reason": "Intentional post-Step21 security hardening"
+    }
+  },
+  "repository_additions": {
+    ".github/CODEOWNERS": {
+      "expected_git_blob_sha1": "efbadbaec6f5fc1178eea25353a94344e3c671c5",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    ".github/workflows/synthetic-ci.yml": {
+      "expected_git_blob_sha1": "9ef6c03f0f539aa279bba087b7c0287c22cb2f38",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "FROZEN_CHAMPION.md": {
+      "expected_git_blob_sha1": "474e854e78ae193b80fd9a86349f7aa68ec2fa2e",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "RELEASE_MANIFEST.json": {
+      "expected_git_blob_sha1": "1c470fe49d10823ecd3a01cac091dd0934a6e522",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "SECURITY.md": {
+      "expected_git_blob_sha1": "3df53d48c8cc7ca2093f4c6e8c84dbc62138e93f",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "SHA256SUMS": {
+      "expected_git_blob_sha1": "974bf8152f5385376165a37cf9a444b22f64585e",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "STEP21_IMPORT_PROVENANCE.md": {
+      "expected_git_blob_sha1": "f08a570a84fcb1a04f63993a323ad6348bd9bba2",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "config/skops_trusted_types.example.json": {
+      "expected_git_blob_sha1": "14f6d39dadcc41827402c79d599c8d27d378959f",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "docs/model_artifact_migration.md": {
+      "expected_git_blob_sha1": "3cb4b9ecf74fb7152af4ea3ec743ed46622c2c93",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "docs/repository_integrity.md": {
+      "expected_git_blob_sha1": "11f7c1cb5bf9b94c0338f3b5bcdae6965e4c900c",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "requirements-skops.lock": {
+      "expected_git_blob_sha1": "d9d561c56c063c0112cf31de75b89b0daa0a1e2f",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "scripts/secret_scan.py": {
+      "expected_git_blob_sha1": "b1e5e89e249a93f5768c807856169ac42d76ef88",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "scripts/verify_release_drift.py": {
+      "expected_git_blob_sha1": "44cf928c1473dc9cc58b9d87e91794c96a7f38ad",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "src/model_artifact.py": {
+      "expected_git_blob_sha1": "18e6c24ed0752e3e91b8b7554883644b80db6907",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "tests/test_model_artifact.py": {
+      "expected_git_blob_sha1": "fc385022a11dc4e7eab11406f80e57395358ee02",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "tests/test_release_drift.py": {
+      "expected_git_blob_sha1": "a5c2c0b3d67f163840eecda401a3e0791ee1c442",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "tests/test_secret_scan.py": {
+      "expected_git_blob_sha1": "038655a8cd91b239ccf32909be7f8b6d2687fa9d",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    }
+  }
+}
