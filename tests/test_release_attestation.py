@@ -60,6 +60,8 @@ def test_allowed_signers_hash_checked_before_ssh_verification(tmp_path: Path, mo
 
 
 def test_signature_verification_precedes_checkout_acceptance(tmp_path: Path, monkeypatch):
+    root = tmp_path / "repo"
+    root.mkdir()
     att_path = tmp_path / "attestation.json"
     att_path.write_text(json.dumps({"signature_namespace": ra.DEFAULT_NAMESPACE}) + "\n", encoding="utf-8")
     sig = tmp_path / "attestation.json.sig"
@@ -84,11 +86,12 @@ def test_signature_verification_precedes_checkout_acceptance(tmp_path: Path, mon
         lambda **kwargs: {"ok": True, "research_use_only": True},
     )
     result = ra.verify_signed_attestation(
-        root=tmp_path,
+        root=root,
         attestation_path=att_path,
         signature=sig,
         allowed_signers=allowed,
         expected_allowed_signers_sha256=_sha(allowed),
+        expected_drift_trust_root_sha256="1" * 64,
         identity="owner",
     )
     assert result["ok"] is True
@@ -103,9 +106,11 @@ def test_checkout_verification_rejects_missing_policy_prohibitions(tmp_path: Pat
             root=tmp_path,
             attestation={
                 "schema_version": "1",
+                "signature_namespace": ra.DEFAULT_NAMESPACE,
                 "research_use_only": True,
                 "prohibited_capabilities": [],
             },
+            expected_drift_trust_root_sha256="1" * 64,
         )
 
 
@@ -126,4 +131,122 @@ def test_checkout_verification_rejects_wrong_signature_namespace(tmp_path: Path,
                     "expected_return_outputs",
                 ],
             },
+            expected_drift_trust_root_sha256="1" * 64,
         )
+
+
+def test_signing_key_must_be_outside_repository(tmp_path: Path):
+    root = tmp_path / "repo"
+    root.mkdir()
+    att = root / "attestation.json"
+    att.write_text(
+        json.dumps({"signature_namespace": ra.DEFAULT_NAMESPACE}) + "\n",
+        encoding="utf-8",
+    )
+    key = root / "release_key"
+    key.write_text("fake", encoding="utf-8")
+    with pytest.raises(ValueError, match="outside the repository root"):
+        ra.sign_attestation(
+            root=root,
+            attestation=att,
+            private_key=key,
+        )
+
+
+def test_allowed_signers_must_be_outside_repository(tmp_path: Path, monkeypatch):
+    root = tmp_path / "repo"
+    root.mkdir()
+    att = root / "attestation.json"
+    att.write_text(
+        json.dumps({"signature_namespace": ra.DEFAULT_NAMESPACE}) + "\n",
+        encoding="utf-8",
+    )
+    sig = root / "attestation.json.sig"
+    sig.write_text("fake", encoding="utf-8")
+    allowed = root / "allowed_signers"
+    allowed.write_text("owner ssh-ed25519 AAAATEST\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="outside the repository root"):
+        ra.verify_signed_attestation(
+            root=root,
+            attestation_path=att,
+            signature=sig,
+            allowed_signers=allowed,
+            expected_allowed_signers_sha256=_sha(allowed),
+            expected_drift_trust_root_sha256="1" * 64,
+            identity="owner",
+        )
+
+
+def test_checkout_verification_requires_independent_drift_trust_root(tmp_path: Path, monkeypatch):
+    root = tmp_path / "repo"
+    root.mkdir()
+    monkeypatch.setattr(ra, "_require_clean_tracked_tree", lambda root: None)
+    monkeypatch.setattr(ra, "_git", lambda root, *args: "abc123")
+    monkeypatch.setattr(ra, "tracked_tree_sha256", lambda root: ("treehash", 1))
+
+    files = {
+        "RELEASE_MANIFEST.json": b"manifest",
+        "SHA256SUMS": b"sums",
+        "config/release_drift_allowlist.json": b"allowlist",
+        "data/processed/model_demo/model_bundle.joblib": b"champion",
+    }
+    for rel, data in files.items():
+        p = root / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(data)
+
+    attestation = {
+        "schema_version": "1",
+        "signature_namespace": ra.DEFAULT_NAMESPACE,
+        "research_use_only": True,
+        "prohibited_capabilities": [
+            "broker_connectivity",
+            "order_generation",
+            "trade_recommendations",
+            "position_sizing",
+            "expected_return_outputs",
+        ],
+        "git_commit": "abc123",
+        "tracked_tree_sha256": "treehash",
+        "tracked_file_count": 1,
+        "historical_release_manifest_sha256": _sha(root / "RELEASE_MANIFEST.json"),
+        "sha256sums_sha256": _sha(root / "SHA256SUMS"),
+        "drift_allowlist_sha256": _sha(root / "config/release_drift_allowlist.json"),
+        "champion_sha256": _sha(root / "data/processed/model_demo/model_bundle.joblib"),
+    }
+
+    with pytest.raises(ValueError, match="independently recorded trust root"):
+        ra.verify_attestation_against_checkout(
+            root=root,
+            attestation=attestation,
+            expected_drift_trust_root_sha256="0" * 64,
+        )
+
+
+def test_sign_rejects_non_release_namespace_before_ssh(tmp_path: Path, monkeypatch):
+    root = tmp_path / "repo"
+    root.mkdir()
+    att = root / "attestation.json"
+    att.write_text(
+        json.dumps({"signature_namespace": "other-purpose"}) + "\n",
+        encoding="utf-8",
+    )
+    key = tmp_path / "external_release_key"
+    key.write_text("fake", encoding="utf-8")
+    called = False
+
+    def _no_run(*args, **kwargs):
+        nonlocal called
+        called = True
+        raise AssertionError("ssh-keygen must not run for a namespace mismatch")
+
+    monkeypatch.setattr(ra.subprocess, "run", _no_run)
+    with pytest.raises(ValueError, match="namespace"):
+        ra.sign_attestation(
+            root=root,
+            attestation=att,
+            private_key=key,
+            namespace="other-purpose",
+        )
+    assert called is False
