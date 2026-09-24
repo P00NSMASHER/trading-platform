@@ -131,6 +131,7 @@ def test_checkout_verification_rejects_wrong_signature_namespace(tmp_path: Path,
                     "expected_return_outputs",
                 ],
             },
+            expected_drift_trust_root_sha256="1" * 64,
         )
 
 
@@ -221,3 +222,31 @@ def test_checkout_verification_requires_independent_drift_trust_root(tmp_path: P
             attestation=attestation,
             expected_drift_trust_root_sha256="0" * 64,
         )
+
+
+def test_sign_rejects_non_release_namespace_before_ssh(tmp_path: Path, monkeypatch):
+    root = tmp_path / "repo"
+    root.mkdir()
+    att = root / "attestation.json"
+    att.write_text(
+        json.dumps({"signature_namespace": "other-purpose"}) + "\n",
+        encoding="utf-8",
+    )
+    key = tmp_path / "external_release_key"
+    key.write_text("fake", encoding="utf-8")
+    called = False
+
+    def _no_run(*args, **kwargs):
+        nonlocal called
+        called = True
+        raise AssertionError("ssh-keygen must not run for a namespace mismatch")
+
+    monkeypatch.setattr(ra.subprocess, "run", _no_run)
+    with pytest.raises(ValueError, match="namespace"):
+        ra.sign_attestation(
+            root=root,
+            attestation=att,
+            private_key=key,
+            namespace="other-purpose",
+        )
+    assert called is False
