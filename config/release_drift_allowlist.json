@@ -58,8 +58,8 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     ".github/workflows/synthetic-ci.yml": {
-      "expected_sha256": "b65f28cf4283d11c4fc6a599f635b7b3d955e545cb1a5c8d23f1cec3ed642427",
-      "reason": "Intentional post-Step21 repository hardening addition; manual drift verification requires external allowlist SHA-256 passed via environment"
+      "expected_sha256": "89cb2dba304c685a0e7c9a8862d701433a7a332a96a5effaff0c3891c37519fa",
+      "reason": "Intentional post-Step21 repository hardening addition; manual external-trust-root verification, ephemeral runtime permission hardening, non-persisted checkout credentials, and immutable current action pins"
     },
     "FROZEN_CHAMPION.md": {
       "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
@@ -138,8 +138,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; two-factor external signed release attestation runbook"
     },
     ".github/workflows/pr-ci.yml": {
-      "expected_sha256": "5da4d88525286dfe42eb1a27d470054e4828da4a41a767d14e9c7e682ec3a016",
-      "reason": "Intentional post-Step21 repository hardening addition; read-only automatic pull request tests and secret scanning with ephemeral runtime permission hardening"
+      "expected_sha256": "af9623d7d2828c4534852b53d2acf5cd16ccfed2c3021be8d7d629ff7eafabad",
+      "reason": "Intentional post-Step21 repository hardening addition; read-only automatic pull request tests and secret scanning with ephemeral runtime permission hardening and immutable current action pins"
     }
   }
 }
