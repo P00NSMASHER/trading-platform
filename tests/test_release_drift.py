@@ -89,3 +89,18 @@ def test_release_drift_detects_unexpected_tracked_file(tmp_path: Path):
     )
     assert result["ok"] is False
     assert result["unexpected_tracked_paths"] == ["surprise.txt"]
+
+
+
+def test_repository_matches_reviewed_release_drift_policy():
+    result = drift.verify_release_drift(
+        root=ROOT,
+        release_manifest=ROOT / "RELEASE_MANIFEST.json",
+        sha256sums=ROOT / "SHA256SUMS",
+        exceptions=ROOT / "config/release_drift_allowlist.json",
+    )
+    assert result["ok"] is True, {
+        "unexpected": result["unexpected_tracked_paths"],
+        "missing": result["missing_tracked_paths"],
+        "failed": [x["path"] for x in result["checks"] if not x["ok"]],
+    }
