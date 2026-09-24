@@ -44,7 +44,7 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "tests/test_deployment_hardening.py": {
-      "expected_git_blob_sha1": "0e07de35003067d576d6d8f5911c30efb3d920b3",
+      "expected_git_blob_sha1": "5ca21a0d631d0da8a5a1abc8250ce33d4fc0cc80",
       "reason": "Intentional post-Step21 security hardening"
     },
     "tests/test_private_dashboard.py": {
@@ -98,7 +98,7 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "requirements-skops.lock": {
-      "expected_git_blob_sha1": "d9d561c56c063c0112cf31de75b89b0daa0a1e2f",
+      "expected_git_blob_sha1": "c25f51e2f6c77a7dd2d3423fa5b7e6e78bad5e81",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "scripts/secret_scan.py": {
