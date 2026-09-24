@@ -50,8 +50,17 @@ python scripts/verify_release_drift.py \
   --expected-exceptions-sha256 <independently-recorded-allowlist-sha256>
 ```
 
-The verifier requires unchanged historical files to match their original SHA-256/size, intentional modified files and repository additions to match their reviewed Git blob identities, and rejects undeclared tracked files. It also refuses release approval unless the allowlist itself matches an independently supplied SHA-256. Record that hash outside the repository (for example in an offline release note, signed tag record, or other trusted channel); reading the hash from the same working tree is not an independent trust check.
+The verifier requires unchanged historical files to match their original SHA-256/size, intentional modified files and repository additions to match reviewed SHA-256 content identities, and rejects undeclared tracked files. It also refuses release approval unless the allowlist itself matches an independently supplied SHA-256. Record that hash outside the repository (for example in an offline release note, signed tag record, or other trusted channel); reading the hash from the same working tree is not an independent trust check.
 
 ## Safer model persistence
 
 The currently active champion remains the hash-verified joblib artifact. `src/model_artifact.py` provides an optional migration to `skops.io`. A skops runtime requires both the model artifact SHA-256 and the separately reviewed trusted-types file SHA-256 to match before model loading.
+
+
+## External signed release attestation
+
+For higher-assurance releases, use `scripts/release_attestation.py` after drift verification. The generated attestation binds the exact Git commit, SHA-256 digest of the tracked tree, Step-21 release evidence, current drift allowlist, and frozen champion.
+
+Sign the attestation with an SSH signing key held outside this repository and verify it against an externally maintained allowed-signers file whose SHA-256 is recorded separately. See `docs/release_attestation.md`.
+
+The private signing key, signed attestation, detached signature, and allowed-signers trust file should remain outside Git.
