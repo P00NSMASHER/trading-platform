@@ -16,3 +16,20 @@ exports/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Authorized/vendor/reference data must stay outside Git
+data/vendor/
+data/licensed/
+data/incoming/
+data/staging/
+data/private/
+data/raw/*
+!data/raw/TimeOfFirstTrade.csv
+
+# Secret/key material
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
