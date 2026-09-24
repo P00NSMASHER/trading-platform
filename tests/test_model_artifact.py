@@ -127,3 +127,27 @@ def test_skops_trusted_types_file_hash_is_enforced_before_load(tmp_path: Path, m
             expected_trusted_types_sha256=approved_hash,
         )
     assert fake.load_called is False
+
+
+
+def test_skops_loader_requires_trusted_types_hash_before_inspection(tmp_path: Path, monkeypatch):
+    p = tmp_path / "model.skops"
+    p.write_bytes(b"artifact")
+    trust = tmp_path / "trusted.json"
+    trust.write_text(json.dumps({"trusted_types": []}), encoding="utf-8")
+    called = False
+
+    def _no_skops():
+        nonlocal called
+        called = True
+        raise AssertionError("skops inspection must not run without trusted-types hash")
+
+    monkeypatch.setattr(ma, "_skops_io", _no_skops)
+    with pytest.raises(ValueError, match="trusted SHA-256"):
+        ma.load_verified_skops(
+            p,
+            _sha(p),
+            trusted_types_file=trust,
+            expected_trusted_types_sha256=None,
+        )
+    assert called is False
