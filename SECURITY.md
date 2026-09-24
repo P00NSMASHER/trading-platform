@@ -19,7 +19,9 @@ Run:
 
 ```bash
 python scripts/secret_scan.py --root .
-python scripts/verify_release_drift.py --root .
+python scripts/verify_release_drift.py \
+  --root . \
+  --expected-exceptions-sha256 <independently-recorded-allowlist-sha256>
 PYTHONPATH=src python -m pytest -q
 ```
 
@@ -37,3 +39,8 @@ The local dashboard uses a new in-memory authentication token on every launch in
 ## Model persistence
 
 The frozen joblib champion remains allowed only after its trusted SHA-256 is verified before deserialization. Future migrations to `skops.io` must additionally use a separately reviewed trusted-types file whose SHA-256 is configured and verified before loading.
+
+
+## Signed release evidence
+
+For important releases, build and externally sign `private_runtime/release/release_attestation.json` using `scripts/release_attestation.py`. Keep signing keys and allowed-signers trust files outside the repository. Verification must pin the SHA-256 of the allowed-signers file before accepting the SSH signature.

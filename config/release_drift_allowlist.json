@@ -1,129 +1,141 @@
 {
-  "schema_version": "1",
+  "schema_version": "2",
   "historical_release": "Step21 package 33ed148d480808474b6aab6c958aa476e6fe73be5a9eeb467e156ec88f3b4158",
-  "trust_root_notice": "This reviewed file declares intentional drift from the immutable historical release. Release verification additionally requires an independently supplied SHA-256 of this allowlist; repository contents alone are not the trust anchor.",
+  "trust_root_notice": "This reviewed file declares intentional drift from the immutable historical release using SHA-256 content identities. Release verification additionally requires an independently supplied SHA-256 of this allowlist; repository contents alone are not the trust anchor.",
   "intentional_release_modifications": {
     ".gitignore": {
-      "expected_git_blob_sha1": "4c9d1ad485592ced01fb070affbf1dd51a4bb84f",
+      "expected_sha256": "4bc0bd16816f44061721c52779dab12d3ef9acbb735b2c8cfbae86cb889b1bbc",
       "reason": "Intentional post-Step21 security hardening"
     },
     "config/runtime.demo.toml": {
-      "expected_git_blob_sha1": "b342b3c10f980a9a11d79e8ada8368603330d69e",
+      "expected_sha256": "f7e649876841dc7e42dd5550a43c9903224fa8800e32caa60ccd2873824685cf",
       "reason": "Intentional post-Step21 security hardening"
     },
     "config/runtime.example.toml": {
-      "expected_git_blob_sha1": "b342b3c10f980a9a11d79e8ada8368603330d69e",
+      "expected_sha256": "f7e649876841dc7e42dd5550a43c9903224fa8800e32caa60ccd2873824685cf",
       "reason": "Intentional post-Step21 security hardening"
     },
     "pyproject.toml": {
-      "expected_git_blob_sha1": "fa9bef23f9425d20d0a1ad29e832a6eaafbd7f7f",
+      "expected_sha256": "fdf9bca34f71373fa044cb88d1c48eda960f66e09beb3e4c37420f51c0d0b788",
       "reason": "Intentional post-Step21 security hardening"
     },
     "src/authorized_input_orchestrator.py": {
-      "expected_git_blob_sha1": "715d523f2464a9753930862cf14bfa3d43c3365d",
+      "expected_sha256": "b3c49cc063626b48ba3438431a41455a289894b78f3ea617055c4549e4d7413f",
       "reason": "Intentional post-Step21 security hardening"
     },
     "src/case_evidence.py": {
-      "expected_git_blob_sha1": "1687a6fc7fc4ffb6fc12413692e74196cf48fb64",
+      "expected_sha256": "67d197a86e91a37ccc92e1e9d05daa76a9229e27dc8c44995d0759b79edea094",
       "reason": "Intentional post-Step21 security hardening"
     },
     "src/deployment_hardening.py": {
-      "expected_git_blob_sha1": "8207fa34e8d68fa1346795d8eaed1d80b4251997",
+      "expected_sha256": "b0f2c6cae64cb796ffcc65b9e38a3e2e55949340b8b33ab0ead54b29d2a19f55",
       "reason": "Intentional post-Step21 security hardening; configured model verification reused by backup/restore/recovery paths"
     },
     "src/private_dashboard.py": {
-      "expected_git_blob_sha1": "904a1a9e623ed71b01f06f17a6110f8e524ff005",
-      "reason": "Intentional post-Step21 security hardening; one-time bootstrap credential separated from session token"
+      "expected_sha256": "92f74afbb6b245518ccc55a0c561de8ca704b565933a379721458e234ae6349e",
+      "reason": "Intentional post-Step21 security hardening; one-time bootstrap/session separation plus bounded connections and socket timeouts"
     },
     "tests/test_authorized_input_orchestrator.py": {
-      "expected_git_blob_sha1": "03563355813f79ff79e12c5d2e03f700776b4578",
+      "expected_sha256": "82542d0564a4292b6b90808a34bc1cda9d143a09e4fc404049a192b577232623",
       "reason": "Intentional post-Step21 security hardening"
     },
     "tests/test_case_evidence.py": {
-      "expected_git_blob_sha1": "1946073ea9d6488c96493a2160b9511df8c02e0a",
+      "expected_sha256": "ec0153e7a770b2778c4b236ea7ed21ec9e3b9c77b7883e636cf3fa7f7274de82",
       "reason": "Intentional post-Step21 security hardening"
     },
     "tests/test_deployment_hardening.py": {
-      "expected_git_blob_sha1": "5ca21a0d631d0da8a5a1abc8250ce33d4fc0cc80",
+      "expected_sha256": "6d6d4b31b97ee4a5f0de2bfcbcb662a2e9e0d39aa3bc209011041205384374b0",
       "reason": "Intentional post-Step21 security hardening"
     },
     "tests/test_private_dashboard.py": {
-      "expected_git_blob_sha1": "4d9dca0b68afbc1d1a46f47b6c43a597e69c9c10",
-      "reason": "Intentional post-Step21 security hardening; bootstrap replay regression coverage"
+      "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
+      "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
     }
   },
   "repository_additions": {
     ".github/CODEOWNERS": {
-      "expected_git_blob_sha1": "efbadbaec6f5fc1178eea25353a94344e3c671c5",
+      "expected_sha256": "5ad7aaf62842b0279ecdc00843bff2e2a6b7f75c4631e9ed5d4756677ca27eb9",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     ".github/workflows/synthetic-ci.yml": {
-      "expected_git_blob_sha1": "e7eaa720d862dd5cf7c3582ce74c5e623789bdf8",
+      "expected_sha256": "b65f28cf4283d11c4fc6a599f635b7b3d955e545cb1a5c8d23f1cec3ed642427",
       "reason": "Intentional post-Step21 repository hardening addition; manual drift verification requires external allowlist SHA-256 passed via environment"
     },
     "FROZEN_CHAMPION.md": {
-      "expected_git_blob_sha1": "474e854e78ae193b80fd9a86349f7aa68ec2fa2e",
+      "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
       "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "RELEASE_MANIFEST.json": {
-      "expected_git_blob_sha1": "1c470fe49d10823ecd3a01cac091dd0934a6e522",
+      "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
       "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
-    "SECURITY.md": {
-      "expected_git_blob_sha1": "fd6823db71cd36861d92684eab870d7fd7361a5e",
-      "reason": "Intentional post-Step21 repository hardening addition"
-    },
     "SHA256SUMS": {
-      "expected_git_blob_sha1": "974bf8152f5385376165a37cf9a444b22f64585e",
+      "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
       "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "STEP21_IMPORT_PROVENANCE.md": {
-      "expected_git_blob_sha1": "f08a570a84fcb1a04f63993a323ad6348bd9bba2",
+      "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
       "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "config/skops_trusted_types.example.json": {
-      "expected_git_blob_sha1": "14f6d39dadcc41827402c79d599c8d27d378959f",
+      "expected_sha256": "4c5595773d3ff4c72588ea3bea57af0be7d96a00366d698e20c43f5a1e0b5881",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "docs/dashboard_security.md": {
-      "expected_git_blob_sha1": "8d095deb918e2d2b0d60f61fed64411eeb54b26c",
-      "reason": "Intentional post-Step21 repository hardening addition; documents one-time bootstrap/session separation"
+      "expected_sha256": "5b4833d8af5447e548f831265fc4901003d79aa93f1d8c9585b0bb15f141486c",
+      "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/model_artifact_migration.md": {
-      "expected_git_blob_sha1": "e6f8df6a9676ea23ef59b6df41bd6a954352f4f8",
+      "expected_sha256": "2e10d0cc29966afed315352bf1739257ca11f81c6a16b1dde6654e231f708d8c",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "docs/repository_integrity.md": {
-      "expected_git_blob_sha1": "a529fa5acc0c1b512eeb6855696cc44c12fe3b27",
-      "reason": "Intentional post-Step21 repository hardening addition; documents external trust-root SHA-256 requirement"
+      "expected_sha256": "94369492d86531c971478d21545c776e752cc050a6f72cbd0fbd7239b7e66cb2",
+      "reason": "Intentional post-Step21 repository hardening addition; documents SHA-256 drift identities and external release attestations"
     },
     "requirements-skops.lock": {
-      "expected_git_blob_sha1": "c25f51e2f6c77a7dd2d3423fa5b7e6e78bad5e81",
+      "expected_sha256": "58921131f59fe684924c48055ab9240c882fb6c5ea7f63b052b30fdd715fe456",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "scripts/secret_scan.py": {
-      "expected_git_blob_sha1": "b1e5e89e249a93f5768c807856169ac42d76ef88",
+      "expected_sha256": "ff87e7b0cc437300bb0b71d647deaf216488f5e3c8a3440f6b4b2f58967d1c49",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "scripts/verify_release_drift.py": {
-      "expected_git_blob_sha1": "a0c89da780fb0fd2bd3d712dbf1bd2a67d918e6c",
-      "reason": "Intentional post-Step21 repository hardening addition; authenticates drift allowlist with external SHA-256"
+      "expected_sha256": "241605c6377d451bbaee1f94d8fccefa6f9c10aadc05aca81967b31db161b6f4",
+      "reason": "Intentional post-Step21 repository hardening addition; SHA-256 drift identities and externally authenticated allowlist"
     },
     "src/model_artifact.py": {
-      "expected_git_blob_sha1": "a8367945e4d63eef25c6b47250b6607177f9fc00",
+      "expected_sha256": "1a1e5098581c9d4eb720f0a13824c2c9fe857558f2f5146c4386d42610d1716c",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "tests/test_model_artifact.py": {
-      "expected_git_blob_sha1": "5d6f5b61e4c71937aa6fe6c7a1c53fd80529d318",
+      "expected_sha256": "4bacac96671aeb57d5c0857949c88bf7b5b6cffec482cc9eae0ec2909e012819",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "tests/test_release_drift.py": {
-      "expected_git_blob_sha1": "f9c6f946b22ceba88b4db0fe9c6396494710b842",
-      "reason": "Intentional post-Step21 repository hardening addition; trust-root tamper regression coverage"
+      "expected_sha256": "1b73f17b2dc0e466fe9a9b1d4dcfb1637fc475dcd7ded66c3a2a7f64673699f3",
+      "reason": "Intentional post-Step21 repository hardening addition; SHA-256 identity and trust-root tamper regression coverage"
     },
     "tests/test_secret_scan.py": {
-      "expected_git_blob_sha1": "038655a8cd91b239ccf32909be7f8b6d2687fa9d",
+      "expected_sha256": "8f679611db6e32b4eed9aadb55460b457babd42e6ad0eaa0adf53634fce3dd3e",
       "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "SECURITY.md": {
+      "expected_sha256": "a5e6a8e0078df0f9c09b2bee0fbd4338246c04615468ed2a02822dac7ef6f0e9",
+      "reason": "Intentional post-Step21 repository hardening addition; external trust-root and signed-release guidance"
+    },
+    "scripts/release_attestation.py": {
+      "expected_sha256": "101274acddc9d5e196873bc7236e87ee72dc9733cce8eb55057297bc98ec0b34",
+      "reason": "Intentional post-Step21 repository hardening addition; external SSH release attestation tooling"
+    },
+    "tests/test_release_attestation.py": {
+      "expected_sha256": "e991b75dcaf6d03e38ea8f7e0b0f72551ad99cc01f359defb096756c4c20b5db",
+      "reason": "Intentional post-Step21 repository hardening addition; release attestation trust-boundary regression coverage"
+    },
+    "docs/release_attestation.md": {
+      "expected_sha256": "c5a3d02a2b03cacdbf8f6b096a712017b36578c63c8aa2f134f50b5f445340de",
+      "reason": "Intentional post-Step21 repository hardening addition; external signed release attestation runbook"
     }
   }
 }

@@ -17,12 +17,6 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
-def git_blob_sha1(path: Path) -> str:
-    data = Path(path).read_bytes()
-    header = f"blob {len(data)}\0".encode("ascii")
-    return hashlib.sha1(header + data).hexdigest()
-
-
 def _validated_sha256(value: str, *, label: str) -> str:
     value = str(value or "").strip().lower()
     if len(value) != 64 or any(ch not in "0123456789abcdef" for ch in value):
@@ -75,13 +69,13 @@ def _exception_map(raw: dict, key: str) -> dict[str, dict]:
     for path, detail in block.items():
         if not isinstance(path, str) or not path.strip() or not isinstance(detail, dict):
             raise ValueError(f"invalid {key} entry")
-        blob = str(detail.get("expected_git_blob_sha1", "")).strip().lower()
+        expected = str(detail.get("expected_sha256", "")).strip().lower()
         reason = str(detail.get("reason", "")).strip()
-        if len(blob) != 40 or any(ch not in "0123456789abcdef" for ch in blob):
-            raise ValueError(f"{key}.{path} requires expected_git_blob_sha1")
+        if len(expected) != 64 or any(ch not in "0123456789abcdef" for ch in expected):
+            raise ValueError(f"{key}.{path} requires expected_sha256")
         if not reason:
             raise ValueError(f"{key}.{path} requires a reason")
-        out[path] = {"expected_git_blob_sha1": blob, "reason": reason}
+        out[path] = {"expected_sha256": expected, "reason": reason}
     return out
 
 
@@ -102,6 +96,8 @@ def verify_release_drift(
     trust_root_authenticated = actual_trust_root_sha256 == expected_trust_root_sha256
     manifest = _read_json(release_manifest)
     exception_raw = _read_json(exceptions)
+    if exception_raw.get("schema_version") != "2":
+        raise ValueError("release drift allowlist schema_version must equal '2' (SHA-256 identities)")
     historical_sums = _parse_sums(sha256sums)
 
     entries = manifest.get("files", [])
@@ -132,14 +128,14 @@ def verify_release_drift(
         full = root / path
         if path in modified:
             exists = full.is_file()
-            actual_blob = git_blob_sha1(full) if exists else ""
-            expected_blob = modified[path]["expected_git_blob_sha1"]
+            actual_sha = sha256_file(full) if exists else ""
+            expected_sha = modified[path]["expected_sha256"]
             checks.append({
                 "path": path,
                 "status": "intentional_modified",
-                "ok": exists and actual_blob == expected_blob,
-                "actual_git_blob_sha1": actual_blob,
-                "expected_git_blob_sha1": expected_blob,
+                "ok": exists and actual_sha == expected_sha,
+                "actual_sha256": actual_sha,
+                "expected_sha256": expected_sha,
                 "reason": modified[path]["reason"],
             })
             continue
@@ -170,13 +166,13 @@ def verify_release_drift(
     for path, detail in sorted(additions.items()):
         full = root / path
         exists = full.is_file()
-        actual_blob = git_blob_sha1(full) if exists else ""
+        actual_sha = sha256_file(full) if exists else ""
         checks.append({
             "path": path,
             "status": "repository_addition",
-            "ok": exists and actual_blob == detail["expected_git_blob_sha1"],
-            "actual_git_blob_sha1": actual_blob,
-            "expected_git_blob_sha1": detail["expected_git_blob_sha1"],
+            "ok": exists and actual_sha == detail["expected_sha256"],
+            "actual_sha256": actual_sha,
+            "expected_sha256": detail["expected_sha256"],
             "reason": detail["reason"],
         })
 
