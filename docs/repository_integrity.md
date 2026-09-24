@@ -36,3 +36,20 @@ sha256sum data/processed/model_demo/model_bundle.joblib
 ```
 
 The model hash must match the currently trusted frozen-champion value before any model deserialization or private runtime launch.
+
+
+## Historical release drift
+
+`RELEASE_MANIFEST.json` and `SHA256SUMS` remain the immutable Step-21 package record. Later security patches are declared in `config/release_drift_allowlist.json`, which is an explicit reviewed trust root.
+
+Run:
+
+```bash
+python scripts/verify_release_drift.py --root .
+```
+
+The verifier requires unchanged historical files to match their original SHA-256/size, intentional modified files and repository additions to match their reviewed Git blob identities, and rejects undeclared tracked files. Protect the trust-root file through pull-request review and an independently recorded release/commit identifier.
+
+## Safer model persistence
+
+The currently active champion remains the hash-verified joblib artifact. `src/model_artifact.py` provides an optional migration to `skops.io`. A skops runtime requires both the model artifact SHA-256 and the separately reviewed trusted-types file SHA-256 to match before model loading.
