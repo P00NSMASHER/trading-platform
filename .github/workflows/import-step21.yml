@@ -21,7 +21,7 @@ jobs:
         run: |
           set -euo pipefail
           cat .import/step21/part-* | base64 --decode > /tmp/MNPI_Step21_GitHubImport.zip
-          echo "237b3ed3a0fbecf85c8b0a56de02e66a6ce33e2882592c5740795c47991ebfa1  /tmp/MNPI_Step21_GitHubImport.zip" | sha256sum -c -
+          echo "75ab615013af3b136cd5e74489f427cb95ea17339d7e610c1fd8d30ced592790  /tmp/MNPI_Step21_GitHubImport.zip" | sha256sum -c -
           rm -rf /tmp/step21-import
           mkdir -p /tmp/step21-import
           unzip -q /tmp/MNPI_Step21_GitHubImport.zip -d /tmp/step21-import
@@ -36,20 +36,20 @@ jobs:
           cat > STEP21_IMPORT_PROVENANCE.md <<'EOF'
           # Step 21 Import Provenance
 
-          Source upload: `MNPI_Prototype_Step21(1).zip`
+          Source upload: `MNPI_Prototype_Step21.zip`
 
           Original uploaded package SHA-256:
           `33ed148d480808474b6aab6c958aa476e6fe73be5a9eeb467e156ec88f3b4158`
 
           GitHub source-import archive SHA-256:
-          `237b3ed3a0fbecf85c8b0a56de02e66a6ce33e2882592c5740795c47991ebfa1`
+          `75ab615013af3b136cd5e74489f427cb95ea17339d7e610c1fd8d30ced592790`
 
           Original package manifest verification: PASS.
 
           Frozen champion SHA-256:
           `0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616`
 
-          Step 21 release self-check reports 183/183 automated tests passing in its hardened environment. A clean ZIP extraction in the import sandbox reproduced 182/183 before restoring the four documented owner-only fixture permissions to 0600; after restoring those permissions, 183/183 passed.
+          Step 21 release self-check reports 183/183 automated tests passing. A clean extraction of the verified GitHub import archive reproduced 183/183 with `PYTHONPATH=src python -m pytest -q`; the four documented owner-only fixture permissions are encoded as 0600.
 
           The historical `FROZEN_CHAMPION.md` file is intentionally retained.
           EOF
