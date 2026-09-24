@@ -103,6 +103,27 @@ def _clean(v: str | None) -> str:
     return (v or "").strip()
 
 
+def _validate_case_id(value: str) -> str:
+    case_id = _clean(value)
+    if (
+        not case_id
+        or len(case_id) > 128
+        or any(not (ch.isalnum() or ch in "-_") for ch in case_id)
+    ):
+        raise ValueError("case_id must contain only letters, numbers, '-' or '_' and be at most 128 characters")
+    return case_id
+
+
+def _contained_child(root: Path, name: str) -> Path:
+    root = Path(root).resolve()
+    child = (root / name).resolve()
+    try:
+        child.relative_to(root)
+    except ValueError as exc:
+        raise ValueError(f"refusing path outside output directory: {name!r}") from exc
+    return child
+
+
 def _sha256(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as f:
@@ -323,6 +344,7 @@ def add_review(
     reviewer, action, disposition = map(_clean, [reviewer, action, disposition])
     if not reviewer or not action or not disposition:
         raise ValueError("reviewer/action/disposition are required")
+    case_id = _validate_case_id(case_id)
     reviewed_at_utc = _parse_ts(reviewed_at_utc) if reviewed_at_utc else utc_now()
     with connect(db_path) as con:
         if not con.execute("SELECT 1 FROM case_record WHERE case_id=?", (case_id,)).fetchone():
@@ -363,6 +385,7 @@ def add_review(
 
 
 def verify_review_chain(db_path: Path, case_id: str) -> bool:
+    case_id = _validate_case_id(case_id)
     with connect(db_path) as con:
         rows = con.execute(
             "SELECT * FROM review_history WHERE case_id=? ORDER BY review_id", (case_id,)
@@ -400,9 +423,9 @@ def ingest_case(
     scorer_manifest: Path | None = None,
 ) -> dict:
     init_db(db_path)
-    case_id, sample_id = _clean(case_id), _clean(sample_id)
-    if not case_id or not sample_id:
-        raise ValueError("case_id and sample_id are required")
+    case_id, sample_id = _validate_case_id(case_id), _clean(sample_id)
+    if not sample_id:
+        raise ValueError("sample_id is required")
     captured = utc_now()
 
     score_fields, score_rows = _read_csv(scores_csv)
@@ -615,6 +638,7 @@ def _write_json(path: Path, obj: dict | list) -> None:
 
 
 def export_case(*, db_path: Path, case_id: str, output_dir: Path) -> dict:
+    case_id = _validate_case_id(case_id)
     if not verify_review_chain(db_path, case_id):
         raise ValueError("review-history integrity chain is invalid")
     with connect(db_path) as con:
@@ -629,8 +653,9 @@ def export_case(*, db_path: Path, case_id: str, output_dir: Path) -> dict:
         reviews = _query_dicts(con, "SELECT * FROM review_history WHERE case_id=? ORDER BY review_id", (case_id,))
 
     current_disposition = reviews[-1]["disposition"] if reviews else case["initial_status"]
+    output_dir = Path(output_dir).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
-    bundle_dir = output_dir / case_id
+    bundle_dir = _contained_child(output_dir, case_id)
     if bundle_dir.exists():
         shutil.rmtree(bundle_dir)
     bundle_dir.mkdir(parents=True)
@@ -697,7 +722,7 @@ def export_case(*, db_path: Path, case_id: str, output_dir: Path) -> dict:
     }
     _write_json(bundle_dir / "integrity_manifest.json", integrity)
 
-    zip_path = output_dir / f"{case_id}_evidence.zip"
+    zip_path = _contained_child(output_dir, f"{case_id}_evidence.zip")
     if zip_path.exists():
         zip_path.unlink()
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as z:
