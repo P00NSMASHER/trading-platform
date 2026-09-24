@@ -15,10 +15,6 @@ def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def _blob(data: bytes) -> str:
-    return hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest()
-
-
 def _write_fixture(tmp_path: Path):
     old = b"historical\n"
     changed = b"patched\n"
@@ -41,10 +37,10 @@ def _write_fixture(tmp_path: Path):
     )
     exceptions = {
         "intentional_release_modifications": {
-            "changed.txt": {"expected_git_blob_sha1": _blob(changed), "reason": "security patch"}
+            "changed.txt": {"expected_sha256": _sha(changed), "reason": "security patch"}
         },
         "repository_additions": {
-            "added.txt": {"expected_git_blob_sha1": _blob(added), "reason": "hardening file"}
+            "added.txt": {"expected_sha256": _sha(added), "reason": "hardening file"}
         },
     }
     ex = tmp_path / "exceptions.json"
