@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 from pathlib import Path
 from typing import Iterable
@@ -20,6 +21,13 @@ def git_blob_sha1(path: Path) -> str:
     data = Path(path).read_bytes()
     header = f"blob {len(data)}\0".encode("ascii")
     return hashlib.sha1(header + data).hexdigest()
+
+
+def _validated_sha256(value: str, *, label: str) -> str:
+    value = str(value or "").strip().lower()
+    if len(value) != 64 or any(ch not in "0123456789abcdef" for ch in value):
+        raise ValueError(f"{label} must be a trusted 64-character SHA-256 hex digest")
+    return value
 
 
 def _read_json(path: Path) -> dict:
@@ -83,9 +91,15 @@ def verify_release_drift(
     release_manifest: Path,
     sha256sums: Path,
     exceptions: Path,
+    expected_exceptions_sha256: str,
     tracked_paths: Iterable[str] | None = None,
 ) -> dict:
     root = root.resolve()
+    expected_trust_root_sha256 = _validated_sha256(
+        expected_exceptions_sha256, label="expected_exceptions_sha256"
+    )
+    actual_trust_root_sha256 = sha256_file(exceptions)
+    trust_root_authenticated = actual_trust_root_sha256 == expected_trust_root_sha256
     manifest = _read_json(release_manifest)
     exception_raw = _read_json(exceptions)
     historical_sums = _parse_sums(sha256sums)
@@ -181,6 +195,7 @@ def verify_release_drift(
         and not unexpected_tracked
         and not missing_tracked
         and manifest_self_hash_ok
+        and trust_root_authenticated
     )
     return {
         "schema_version": "1",
@@ -189,6 +204,9 @@ def verify_release_drift(
         "repository_addition_count": len(additions),
         "tracked_file_count": len(tracked),
         "trust_root_path": trust_root_path,
+        "trust_root_sha256": actual_trust_root_sha256,
+        "trust_root_expected_sha256": expected_trust_root_sha256,
+        "trust_root_authenticated": trust_root_authenticated,
         "unexpected_tracked_paths": unexpected_tracked,
         "missing_tracked_paths": missing_tracked,
         "failed_check_count": len(failed),
@@ -206,14 +224,22 @@ def main() -> int:
     p.add_argument("--release-manifest", type=Path, default=Path("RELEASE_MANIFEST.json"))
     p.add_argument("--sha256sums", type=Path, default=Path("SHA256SUMS"))
     p.add_argument("--exceptions", type=Path, default=Path("config/release_drift_allowlist.json"))
+    p.add_argument(
+        "--expected-exceptions-sha256",
+        default=os.environ.get("RELEASE_DRIFT_TRUST_ROOT_SHA256", ""),
+        help="Independently recorded SHA-256 of the reviewed drift allowlist (or RELEASE_DRIFT_TRUST_ROOT_SHA256).",
+    )
     p.add_argument("--output", type=Path)
     args = p.parse_args()
+    if not str(args.expected_exceptions_sha256).strip():
+        p.error("--expected-exceptions-sha256 (or RELEASE_DRIFT_TRUST_ROOT_SHA256) is required")
 
     result = verify_release_drift(
         root=args.root,
         release_manifest=args.release_manifest,
         sha256sums=args.sha256sums,
         exceptions=args.exceptions,
+        expected_exceptions_sha256=args.expected_exceptions_sha256,
     )
     payload = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if args.output:
