@@ -58,8 +58,8 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     ".github/workflows/synthetic-ci.yml": {
-      "expected_git_blob_sha1": "79fc55964c5707339b0d046ce3f2ad2b558067ab",
-      "reason": "Intentional post-Step21 repository hardening addition; manual drift verification requires external allowlist SHA-256"
+      "expected_git_blob_sha1": "e7eaa720d862dd5cf7c3582ce74c5e623789bdf8",
+      "reason": "Intentional post-Step21 repository hardening addition; manual drift verification requires external allowlist SHA-256 passed via environment"
     },
     "FROZEN_CHAMPION.md": {
       "expected_git_blob_sha1": "474e854e78ae193b80fd9a86349f7aa68ec2fa2e",
