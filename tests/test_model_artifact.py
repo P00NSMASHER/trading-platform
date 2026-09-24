@@ -60,7 +60,10 @@ def test_skops_load_refuses_unapproved_types_before_load(tmp_path: Path, monkeyp
     monkeypatch.setattr(ma, "_skops_io", lambda: fake)
 
     with pytest.raises(PermissionError, match="unapproved types"):
-        ma.load_verified_skops(p, _sha(p), trusted_types_file=trust)
+        ma.load_verified_skops(
+            p, _sha(p), trusted_types_file=trust,
+            expected_trusted_types_sha256=_sha(trust),
+        )
     assert fake.load_called is False
 
 
@@ -75,7 +78,10 @@ def test_skops_load_allows_only_explicitly_reviewed_types(tmp_path: Path, monkey
     fake = FakeSkops(["example.CustomEstimator"], loaded={"ok": True})
     monkeypatch.setattr(ma, "_skops_io", lambda: fake)
 
-    loaded = ma.load_verified_skops(p, _sha(p), trusted_types_file=trust)
+    loaded = ma.load_verified_skops(
+        p, _sha(p), trusted_types_file=trust,
+        expected_trusted_types_sha256=_sha(trust),
+    )
     assert loaded == {"ok": True}
     assert fake.load_called is True
 
@@ -94,3 +100,30 @@ def test_export_report_does_not_auto_approve_unknown_types(tmp_path: Path, monke
     assert result["explicit_type_review_required"] is True
     written = json.loads(report.read_text(encoding="utf-8"))
     assert written["runtime_load_permitted"] is False
+
+
+
+def test_skops_trusted_types_file_hash_is_enforced_before_load(tmp_path: Path, monkeypatch):
+    p = tmp_path / "model.skops"
+    p.write_bytes(b"artifact")
+    trust = tmp_path / "trusted.json"
+    trust.write_text(
+        json.dumps({"trusted_types": ["example.CustomEstimator"]}),
+        encoding="utf-8",
+    )
+    approved_hash = _sha(trust)
+    trust.write_text(
+        json.dumps({"trusted_types": ["example.CustomEstimator", "malicious.NewType"]}),
+        encoding="utf-8",
+    )
+    fake = FakeSkops(["example.CustomEstimator"])
+    monkeypatch.setattr(ma, "_skops_io", lambda: fake)
+
+    with pytest.raises(ValueError, match="hash mismatch"):
+        ma.load_verified_skops(
+            p,
+            _sha(p),
+            trusted_types_file=trust,
+            expected_trusted_types_sha256=approved_hash,
+        )
+    assert fake.load_called is False
