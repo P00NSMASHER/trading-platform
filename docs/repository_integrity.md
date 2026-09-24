@@ -5,8 +5,9 @@
 - The repository is private.
 - Runtime model bytes are checked against a trusted SHA-256 before `joblib.load`.
 - Step-20/21 provenance gates hash critical model/data artifacts.
-- CI is synthetic-only and has read-only repository permissions.
-- CI receives no market-data credentials, broker credentials, or private runtime inputs.
+- The staged GitHub Actions workflow is synthetic-only and has read-only repository permissions.
+- Hosted runner allocation is currently unavailable for this private repository, so the workflow is manual-only until that account/repository constraint is resolved.
+- The workflow receives no market-data credentials, broker credentials, or private runtime inputs.
 - A local tracked-file secret scan runs in CI.
 - Raw licensed/vendor inputs are ignored and belong outside Git.
 - `CODEOWNERS` identifies the repository owner for future protected-review rules.
