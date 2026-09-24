@@ -79,6 +79,16 @@ def _require_clean_tracked_tree(root: Path) -> None:
         raise ValueError("tracked working tree must be clean before building/verifying an attestation")
 
 
+def _require_external_path(root: Path, path: Path, *, label: str) -> Path:
+    root = Path(root).resolve()
+    resolved = Path(path).expanduser().resolve()
+    try:
+        resolved.relative_to(root)
+    except ValueError:
+        return resolved
+    raise ValueError(f"{label} must be stored outside the repository root")
+
+
 def build_attestation(
     *,
     root: Path,
@@ -148,16 +158,27 @@ def write_attestation(path: Path, attestation: dict[str, Any]) -> None:
 
 def sign_attestation(
     *,
+    root: Path,
     attestation: Path,
     private_key: Path,
     namespace: str = DEFAULT_NAMESPACE,
 ) -> Path:
+    root = Path(root).resolve()
     attestation = Path(attestation)
-    private_key = Path(private_key)
+    private_key = _require_external_path(root, private_key, label="private signing key")
     if not attestation.is_file():
         raise FileNotFoundError(attestation)
     if not private_key.is_file():
         raise FileNotFoundError(private_key)
+    try:
+        obj = json.loads(attestation.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise ValueError("attestation must be valid JSON before signing") from exc
+    if not isinstance(obj, dict):
+        raise ValueError("attestation JSON root must be an object")
+    declared_namespace = str(obj.get("signature_namespace", "")).strip()
+    if namespace != DEFAULT_NAMESPACE or declared_namespace != DEFAULT_NAMESPACE:
+        raise ValueError(f"release attestation namespace must equal {DEFAULT_NAMESPACE!r}")
     subprocess.run(
         [
             "ssh-keygen", "-Y", "sign",
@@ -209,9 +230,18 @@ def _verify_ssh_signature(
         raise PermissionError(f"release attestation signature verification failed: {detail}")
 
 
-def verify_attestation_against_checkout(*, root: Path, attestation: dict[str, Any]) -> dict[str, Any]:
+def verify_attestation_against_checkout(
+    *,
+    root: Path,
+    attestation: dict[str, Any],
+    expected_drift_trust_root_sha256: str,
+) -> dict[str, Any]:
     root = root.resolve()
     _require_clean_tracked_tree(root)
+    external_drift_hash = _validated_sha256(
+        expected_drift_trust_root_sha256,
+        label="expected_drift_trust_root_sha256",
+    )
 
     if attestation.get("schema_version") != SCHEMA_VERSION:
         raise ValueError("unsupported attestation schema_version")
@@ -257,12 +287,17 @@ def verify_attestation_against_checkout(*, root: Path, attestation: dict[str, An
         if actual != expected:
             raise ValueError(f"{key} mismatch: actual={actual}; expected={expected}")
 
+    if checks["drift_allowlist_sha256"] != external_drift_hash:
+        raise ValueError(
+            "drift allowlist SHA-256 does not match independently recorded trust root"
+        )
+
     drift_result = drift.verify_release_drift(
         root=root,
         release_manifest=release_manifest,
         sha256sums=sha256sums,
         exceptions=exceptions,
-        expected_exceptions_sha256=checks["drift_allowlist_sha256"],
+        expected_exceptions_sha256=external_drift_hash,
     )
     if not drift_result.get("ok"):
         raise ValueError("signed checkout fails release drift verification")
@@ -274,6 +309,7 @@ def verify_attestation_against_checkout(*, root: Path, attestation: dict[str, An
         "tracked_file_count": tracked_count,
         "champion_sha256": checks["champion_sha256"],
         "drift_allowlist_sha256": checks["drift_allowlist_sha256"],
+        "drift_trust_root_authenticated": True,
         "research_use_only": True,
     }
 
@@ -285,12 +321,17 @@ def verify_signed_attestation(
     signature: Path,
     allowed_signers: Path,
     expected_allowed_signers_sha256: str,
+    expected_drift_trust_root_sha256: str,
     identity: str,
 ) -> dict[str, Any]:
+    root = Path(root).resolve()
+    allowed_signers = _require_external_path(root, allowed_signers, label="allowed-signers trust file")
     attestation = json.loads(Path(attestation_path).read_text(encoding="utf-8"))
     if not isinstance(attestation, dict):
         raise ValueError("attestation JSON root must be an object")
-    namespace = str(attestation.get("signature_namespace", DEFAULT_NAMESPACE))
+    namespace = str(attestation.get("signature_namespace", "")).strip()
+    if namespace != DEFAULT_NAMESPACE:
+        raise ValueError(f"attestation signature_namespace must equal {DEFAULT_NAMESPACE!r}")
     _verify_ssh_signature(
         attestation=attestation_path,
         signature=signature,
@@ -299,7 +340,11 @@ def verify_signed_attestation(
         identity=identity,
         namespace=namespace,
     )
-    result = verify_attestation_against_checkout(root=root, attestation=attestation)
+    result = verify_attestation_against_checkout(
+        root=root,
+        attestation=attestation,
+        expected_drift_trust_root_sha256=expected_drift_trust_root_sha256,
+    )
     result["signature_verified"] = True
     result["signer_identity"] = identity
     result["allowed_signers_sha256"] = sha256_file(allowed_signers)
@@ -317,6 +362,7 @@ def main() -> int:
     b.add_argument("--output", type=Path, required=True)
 
     s = sub.add_parser("sign")
+    s.add_argument("--root", type=Path, default=Path.cwd())
     s.add_argument("--attestation", type=Path, required=True)
     s.add_argument("--private-key", type=Path, required=True)
     s.add_argument("--namespace", default=DEFAULT_NAMESPACE)
@@ -327,6 +373,7 @@ def main() -> int:
     v.add_argument("--signature", type=Path, required=True)
     v.add_argument("--allowed-signers", type=Path, required=True)
     v.add_argument("--expected-allowed-signers-sha256", required=True)
+    v.add_argument("--expected-drift-trust-root-sha256", required=True)
     v.add_argument("--identity", required=True)
 
     args = p.parse_args()
@@ -341,6 +388,7 @@ def main() -> int:
         return 0
     if args.command == "sign":
         sig = sign_attestation(
+            root=args.root,
             attestation=args.attestation,
             private_key=args.private_key,
             namespace=args.namespace,
@@ -353,6 +401,7 @@ def main() -> int:
         signature=args.signature,
         allowed_signers=args.allowed_signers,
         expected_allowed_signers_sha256=args.expected_allowed_signers_sha256,
+        expected_drift_trust_root_sha256=args.expected_drift_trust_root_sha256,
         identity=args.identity,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
