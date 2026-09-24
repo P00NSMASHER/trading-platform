@@ -168,3 +168,33 @@ def test_case_summary_uses_review_history_for_current_disposition(tmp_path: Path
     summary = json.loads((Path(out["bundle_dir"]) / "case_summary.json").read_text())
     assert summary["current_review_disposition"] == "closed_no_finding"
     assert summary["case"]["initial_status"] == "open_for_review"
+
+
+def test_ingest_rejects_unsafe_case_id(tmp_path: Path):
+    with pytest.raises(ValueError, match="case_id"):
+        ingest_case(
+            db_path=tmp_path / "cases.sqlite",
+            case_id="../escape",
+            sample_id="H001:TREATED",
+            scores_csv=SCORES,
+            feature_vectors=FEATURES,
+            model_bundle=BUNDLE,
+            matched_controls=CONTROLS,
+            training_manifest=TRAINING_MANIFEST,
+        )
+
+
+def test_export_rejects_symlink_escape(tmp_path: Path):
+    db, _ = _ingest(tmp_path)
+    outdir = tmp_path / "evidence"
+    outdir.mkdir()
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    link = outdir / "CASE-H001"
+    try:
+        link.symlink_to(outside, target_is_directory=True)
+    except OSError:
+        pytest.skip("symlinks unavailable on this platform")
+    with pytest.raises(ValueError, match="outside output directory"):
+        export_case(db_path=db, case_id="CASE-H001", output_dir=outdir)
+    assert outside.exists()

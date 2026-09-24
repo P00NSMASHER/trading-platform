@@ -5,6 +5,8 @@ import json
 from datetime import timedelta
 from pathlib import Path
 
+import pytest
+
 import authorized_input_orchestrator as aio
 import coverage_planner
 
@@ -124,3 +126,44 @@ def test_synthetic_market_file_is_mapped_to_g2_but_cannot_close_it(tmp_path):
     assert result["batch_end_gate_state"]["G2_REAL_MARKET_DATA"] is False
     assert result["evaluation_release_token_issued"] is False
     assert result["raw_input_files_copied_to_report_bundle"] is False
+
+
+def test_batch_id_rejects_path_traversal_before_output_creation(tmp_path):
+    batch = _write_json(tmp_path / "batch.json", {
+        "schema_version": "1", "batch_id": "../escape",
+        "market": {
+            "source_contract": str(ROOT / "config/historical_market_sources.example.json"),
+            "source_ids": ["example_taq_trades"],
+        },
+    })
+    outdir = tmp_path / "out"
+    with pytest.raises(aio.OrchestratorError, match="batch_id"):
+        aio.orchestrate_batch(
+            root=ROOT, batch_manifest=batch, runtime_dir=tmp_path / "runtime",
+            outdir=outdir, expected_champion_sha256=CHAMPION,
+        )
+    assert not (tmp_path / "escape").exists()
+
+
+def test_batch_output_rejects_existing_symlink_escape(tmp_path):
+    batch = _write_json(tmp_path / "batch.json", {
+        "schema_version": "1", "batch_id": "safe-batch",
+        "market": {
+            "source_contract": str(ROOT / "config/historical_market_sources.example.json"),
+            "source_ids": ["example_taq_trades"],
+        },
+    })
+    outdir = tmp_path / "out"
+    outdir.mkdir()
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    link = outdir / "safe-batch"
+    try:
+        link.symlink_to(outside, target_is_directory=True)
+    except OSError:
+        pytest.skip("symlinks unavailable on this platform")
+    with pytest.raises(aio.OrchestratorError, match="outside"):
+        aio.orchestrate_batch(
+            root=ROOT, batch_manifest=batch, runtime_dir=tmp_path / "runtime",
+            outdir=outdir, expected_champion_sha256=CHAMPION,
+        )

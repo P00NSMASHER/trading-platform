@@ -123,6 +123,23 @@ def _safe_id(value: str) -> str:
     return "".join(c if c.isalnum() or c in "-_" else "_" for c in value)
 
 
+def _validate_path_component(value: str, *, label: str) -> str:
+    value = str(value).strip()
+    if not value or len(value) > 128 or value in {".", ".."} or _safe_id(value) != value:
+        raise OrchestratorError(f"{label} must contain only letters, numbers, '-' or '_' and be at most 128 characters")
+    return value
+
+
+def _contained_child(root: Path, component: str, *, label: str) -> Path:
+    root = Path(root).resolve()
+    child = (root / component).resolve()
+    try:
+        child.relative_to(root)
+    except ValueError as exc:
+        raise OrchestratorError(f"{label} resolves outside the configured output directory") from exc
+    return child
+
+
 def _source_gates(domain: str, source: dict) -> list[str]:
     if domain == "market":
         return ["G2_REAL_MARKET_DATA"]
@@ -413,7 +430,8 @@ def orchestrate_batch(*, root: Path, batch_manifest: Path, runtime_dir: Path, ou
     outdir = outdir.resolve()
     manifest = load_batch_manifest(batch_manifest)
     batch_id = str(manifest.get("batch_id", "")).strip() or f"batch-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
-    batch_dir = outdir / batch_id
+    batch_id = _validate_path_component(batch_id, label="batch_id")
+    batch_dir = _contained_child(outdir, batch_id, label="batch_id")
     batch_dir.mkdir(parents=True, exist_ok=True)
     try:
         os.chmod(batch_dir, 0o700)

@@ -92,6 +92,7 @@ class RuntimeConfig:
     allow_network_bind: bool
     allow_execution_integration: bool
     allow_trade_outputs: bool
+    expected_model_sha256: str
 
     def validate(self) -> None:
         if not self.research_use_only:
@@ -102,6 +103,9 @@ class RuntimeConfig:
             raise ValueError("runtime policy must keep allow_execution_integration=false")
         if self.allow_trade_outputs:
             raise ValueError("runtime policy must keep allow_trade_outputs=false")
+        expected = self.expected_model_sha256.strip().lower()
+        if len(expected) != 64 or any(ch not in "0123456789abcdef" for ch in expected):
+            raise ValueError("runtime integrity expected_model_sha256 must be a 64-character SHA-256 hex digest")
         if self.dashboard_host.strip().lower() not in LOOPBACK_HOSTS:
             raise ValueError("runtime dashboard host must be loopback-only")
         if not (1 <= int(self.dashboard_port) <= 65535):
@@ -130,6 +134,7 @@ def load_runtime_config(path: Path) -> RuntimeConfig:
     paths = raw.get("paths", {})
     dashboard = raw.get("dashboard", {})
     policy = raw.get("policy", {})
+    integrity = raw.get("integrity", {})
     required_paths = {
         "case_db",
         "model_bundle",
@@ -157,6 +162,7 @@ def load_runtime_config(path: Path) -> RuntimeConfig:
         allow_network_bind=bool(policy.get("allow_network_bind", False)),
         allow_execution_integration=bool(policy.get("allow_execution_integration", False)),
         allow_trade_outputs=bool(policy.get("allow_trade_outputs", False)),
+        expected_model_sha256=str(integrity.get("expected_model_sha256", "")).strip().lower(),
     )
     cfg.validate()
     return cfg
@@ -184,12 +190,17 @@ def _recursive_keys(obj: Any) -> set[str]:
     return keys
 
 
-def verify_model_bundle(path: Path) -> dict[str, Any]:
+def verify_model_bundle(path: Path, *, expected_sha256: str | None = None) -> dict[str, Any]:
     path = Path(path)
+    actual_sha256 = sha256_file(path) if path.exists() else None
+    expected = (expected_sha256 or "").strip().lower()
     report: dict[str, Any] = {
         "path": str(path),
         "exists": path.exists(),
-        "sha256": sha256_file(path) if path.exists() else None,
+        "sha256": actual_sha256,
+        "expected_sha256": expected or None,
+        "hash_matches_expected": False,
+        "deserialization_attempted": False,
         "required_keys_present": False,
         "research_use_only": False,
         "prohibited_trade_keys_present": [],
@@ -198,7 +209,15 @@ def verify_model_bundle(path: Path) -> dict[str, Any]:
     }
     if not path.exists():
         return report
+    if len(expected) != 64 or any(ch not in "0123456789abcdef" for ch in expected):
+        report["load_error"] = "trusted expected_model_sha256 is required before model deserialization"
+        return report
+    report["hash_matches_expected"] = actual_sha256 == expected
+    if not report["hash_matches_expected"]:
+        report["load_error"] = "model bundle hash mismatch; refusing to deserialize untrusted bytes"
+        return report
     try:
+        report["deserialization_attempted"] = True
         bundle = joblib.load(path)
         if not isinstance(bundle, dict):
             report["load_error"] = "model bundle is not a dict"
@@ -216,7 +235,8 @@ def verify_model_bundle(path: Path) -> dict[str, Any]:
         report["selected_feature_count"] = len(tuple(bundle.get("selected_features", ())))
         report["schema_version"] = bundle.get("schema_version")
         report["ok"] = bool(
-            report["required_keys_present"]
+            report["hash_matches_expected"]
+            and report["required_keys_present"]
             and report["research_use_only"]
             and not prohibited
             and report["threshold_valid"]
@@ -383,7 +403,7 @@ def filesystem_permission_report(cfg: RuntimeConfig) -> dict[str, Any]:
 def self_check(cfg: RuntimeConfig) -> dict[str, Any]:
     cfg.validate()
     ensure_private_runtime_dirs(cfg)
-    model = verify_model_bundle(cfg.model_bundle)
+    model = verify_model_bundle(cfg.model_bundle, expected_sha256=cfg.expected_model_sha256)
     training = verify_training_manifest(cfg.training_manifest, model)
     database = database_integrity_report(cfg.case_db, model_sha256=model.get("sha256"))
     permissions = filesystem_permission_report(cfg)
