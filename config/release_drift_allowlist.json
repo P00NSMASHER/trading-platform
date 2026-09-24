@@ -28,8 +28,8 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "src/deployment_hardening.py": {
-      "expected_git_blob_sha1": "486577cd88bf3516e33394e1c92cb15bc7b27a91",
-      "reason": "Intentional post-Step21 security hardening"
+      "expected_git_blob_sha1": "8207fa34e8d68fa1346795d8eaed1d80b4251997",
+      "reason": "Intentional post-Step21 security hardening; configured model verification reused by backup/restore/recovery paths"
     },
     "src/private_dashboard.py": {
       "expected_git_blob_sha1": "1b9eeeb8ff0ee6cca7652c350a3e480c609cde02",
