@@ -24,7 +24,11 @@ Default limits:
 - request body: 16 KiB;
 - request URI: 4 KiB;
 - all requests: 240/minute per client address;
-- state-changing requests: 30/minute per client address.
+- state-changing requests: 30/minute per client address;
+- concurrent accepted connections: 16;
+- per-socket read timeout: 5 seconds.
+
+The concurrent-connection semaphore is acquired before a handler thread is created. Excess connections receive a minimal 503 response and are closed, preventing an unbounded local thread fan-out. Socket timeouts limit slow-client occupancy.
 
 The existing CSRF token remains required for POST review/export actions in addition to the authenticated session cookie.
 
