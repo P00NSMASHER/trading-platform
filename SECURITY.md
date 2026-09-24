@@ -43,4 +43,4 @@ The frozen joblib champion remains allowed only after its trusted SHA-256 is ver
 
 ## Signed release evidence
 
-For important releases, build and externally sign `private_runtime/release/release_attestation.json` using `scripts/release_attestation.py`. Keep signing keys and allowed-signers trust files outside the repository. Verification must pin the SHA-256 of the allowed-signers file before accepting the SSH signature.
+For important releases, build and externally sign `private_runtime/release/release_attestation.json` using `scripts/release_attestation.py`. Signing keys and allowed-signers trust files must live outside the repository root. Verification requires both the independently recorded SHA-256 of the allowed-signers file and the independently recorded SHA-256 of the release-drift allowlist before accepting the release.
