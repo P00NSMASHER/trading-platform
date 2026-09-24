@@ -1,0 +1,43 @@
+{
+  "conditional_itch_source_date_rows": 414,
+  "current_status": "BLOCKED_AWAITING_REAL_AUTHORIZED_INPUTS",
+  "historical_event_count": 174,
+  "ingestion_policy": {
+    "content_addressed_private_staging": true,
+    "credential_fields_permitted": false,
+    "external_fetch_or_purchase": false,
+    "hash_chained_file_receipts": true,
+    "raw_licensed_files_in_report_bundle": false,
+    "rerun_steps_17_through_20_after_each_source_file": true
+  },
+  "metadata_requirements": {
+    "control_event_dates": 72,
+    "exact_announcement_events": 174,
+    "listing_exchange_events": 174,
+    "shares_symbol_dates": 3828
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "LONG/SHORT recommendation",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "Step 21 authorized-input ingestion plan derived from the Step-16 exact coverage requirements; no data acquisition performed.",
+  "required_market_source_date_rows": 1656,
+  "research_use_only": true,
+  "schema_version": "0.21.0",
+  "source_date_rows_by_family_kind": {
+    "cboe_option_quotes/option_quote": 414,
+    "cboe_option_trades/option_trade": 414,
+    "nasdaq_itch_5_0_decoded/itch_decoded": 414,
+    "nyse_daily_taq/equity_quote": 414,
+    "nyse_daily_taq/equity_trade": 414
+  },
+  "unique_market_dates": 414,
+  "unique_symbol_date_pairs": 3828,
+  "unique_symbols": 146
+}

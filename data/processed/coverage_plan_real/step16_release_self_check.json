@@ -1,0 +1,37 @@
+{
+  "active_champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "active_champion_unchanged": true,
+  "blocking_gates": [
+    "G1_ANNOUNCEMENT_TIMES",
+    "G2_REAL_MARKET_DATA",
+    "G3_PRIMARY_LISTING_HISTORY",
+    "G4_SHARES_OUTSTANDING",
+    "G5_MATCHED_CONTROL_UNIVERSE"
+  ],
+  "broker_or_execution_connected": false,
+  "calendar": {
+    "calendar": "XNYS",
+    "calendar_library": "exchange_calendars",
+    "calendar_library_version": "4.13.1",
+    "early_close_or_short_session_skips": 14
+  },
+  "conditional_itch_source_date_rows": 414,
+  "event_count": 174,
+  "expected_frozen_champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "external_data_fetched_or_purchased": false,
+  "missing_exact_announcement_timestamps": 174,
+  "ready_for_non_synthetic_champion_challenger_comparison": false,
+  "real_authorized_required_rows_covered": 0,
+  "required_core_source_date_rows": 828,
+  "required_full_replication_source_date_rows": 828,
+  "research_use_only": true,
+  "schema_version": "0.16.0",
+  "step": 16,
+  "synthetic_rows_matching_required_keys": 4,
+  "tests_failed": 0,
+  "tests_passed": 144,
+  "unique_event_dates": 72,
+  "unique_market_dates_event_plus_baseline": 414,
+  "unique_symbol_date_pairs": 3828,
+  "unique_symbols": 146
+}

@@ -1,0 +1,130 @@
+{
+  "schema_version": "0.7.0",
+  "purpose": "post-score evaluation against sealed adjudicated-case ground truth",
+  "research_use_only": true,
+  "scoring_was_blind": true,
+  "model_retraining_performed": false,
+  "threshold_tuning_performed": false,
+  "frozen_threshold": 0.9994051578,
+  "inputs": {
+    "scores_csv": "data/processed/external_validation_demo/scoring/external_scores.csv",
+    "scores_sha256": "2d79ad516fa3c61821bb4f868e92c6f231ac7e89634f5fb47e4b64842e2a02b2",
+    "ground_truth": "data/examples/external_validation_ground_truth.csv",
+    "ground_truth_sha256": "c2fb65eb1b96f9ce24bfc1e4cf1fd71e68e6c2324908e7188e8486243a084383"
+  },
+  "metrics": {
+    "overall": {
+      "n": 24,
+      "positives": 6,
+      "negatives": 18,
+      "average_precision": 1.0,
+      "roc_auc": 1.0,
+      "brier": 2.3474999997966615e-14,
+      "log_loss": 1.4250001173188472e-07,
+      "threshold": 0.9994051578,
+      "recall_at_threshold": 1.0,
+      "false_positive_rate": 0.0,
+      "alerts_per_100_matched_controls": 0.0,
+      "true_positives": 6,
+      "false_positives": 0
+    },
+    "by_case_family": {
+      "cross_security": {
+        "n": 8,
+        "positives": 2,
+        "negatives": 6,
+        "average_precision": 1.0,
+        "roc_auc": 1.0,
+        "brier": 2.347499999796662e-14,
+        "log_loss": 1.4250001173188472e-07,
+        "threshold": 0.9994051578,
+        "recall_at_threshold": 1.0,
+        "false_positive_rate": 0.0,
+        "alerts_per_100_matched_controls": 0.0,
+        "true_positives": 2,
+        "false_positives": 0
+      },
+      "edgar_hack": {
+        "n": 8,
+        "positives": 2,
+        "negatives": 6,
+        "average_precision": 1.0,
+        "roc_auc": 1.0,
+        "brier": 2.347499999796662e-14,
+        "log_loss": 1.4250001173188472e-07,
+        "threshold": 0.9994051578,
+        "recall_at_threshold": 1.0,
+        "false_positive_rate": 0.0,
+        "alerts_per_100_matched_controls": 0.0,
+        "true_positives": 2,
+        "false_positives": 0
+      },
+      "fda_regulatory": {
+        "n": 8,
+        "positives": 2,
+        "negatives": 6,
+        "average_precision": 1.0,
+        "roc_auc": 1.0,
+        "brier": 2.347499999796662e-14,
+        "log_loss": 1.4250001173188472e-07,
+        "threshold": 0.9994051578,
+        "recall_at_threshold": 1.0,
+        "false_positive_rate": 0.0,
+        "alerts_per_100_matched_controls": 0.0,
+        "true_positives": 2,
+        "false_positives": 0
+      }
+    },
+    "by_mechanism": {
+      "peer_security": {
+        "n": 8,
+        "positives": 2,
+        "negatives": 6,
+        "average_precision": 1.0,
+        "roc_auc": 1.0,
+        "brier": 2.347499999796662e-14,
+        "log_loss": 1.4250001173188472e-07,
+        "threshold": 0.9994051578,
+        "recall_at_threshold": 1.0,
+        "false_positive_rate": 0.0,
+        "alerts_per_100_matched_controls": 0.0,
+        "true_positives": 2,
+        "false_positives": 0
+      },
+      "regulatory_decision": {
+        "n": 8,
+        "positives": 2,
+        "negatives": 6,
+        "average_precision": 1.0,
+        "roc_auc": 1.0,
+        "brier": 2.347499999796662e-14,
+        "log_loss": 1.4250001173188472e-07,
+        "threshold": 0.9994051578,
+        "recall_at_threshold": 1.0,
+        "false_positive_rate": 0.0,
+        "alerts_per_100_matched_controls": 0.0,
+        "true_positives": 2,
+        "false_positives": 0
+      },
+      "stolen_filing": {
+        "n": 8,
+        "positives": 2,
+        "negatives": 6,
+        "average_precision": 1.0,
+        "roc_auc": 1.0,
+        "brier": 2.347499999796662e-14,
+        "log_loss": 1.4250001173188472e-07,
+        "threshold": 0.9994051578,
+        "recall_at_threshold": 1.0,
+        "false_positive_rate": 0.0,
+        "alerts_per_100_matched_controls": 0.0,
+        "true_positives": 2,
+        "false_positives": 0
+      }
+    }
+  },
+  "outputs": {
+    "evaluation_rows": "external_evaluation_rows.csv"
+  },
+  "interpretation_warning": "External validation measures anomaly detection against historical adjudicated cases; it does not establish criminal intent or identify MNPI content."
+}

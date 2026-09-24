@@ -1,0 +1,53 @@
+{
+  "gate_transitions": {
+    "quality_cleared_for_non_synthetic_model_evaluation": {
+      "after": false,
+      "before": false,
+      "transition": "UNCHANGED"
+    },
+    "quality_gate_clear": {
+      "after": true,
+      "before": false,
+      "transition": "BLOCKED_TO_READY"
+    },
+    "ready_for_non_synthetic_model_evaluation_metadata": {
+      "after": true,
+      "before": false,
+      "transition": "BLOCKED_TO_READY"
+    },
+    "ready_for_step15_real_backfill_metadata": {
+      "after": true,
+      "before": false,
+      "transition": "BLOCKED_TO_READY"
+    },
+    "ready_g1_announcement_times": {
+      "after": true,
+      "before": false,
+      "transition": "BLOCKED_TO_READY"
+    },
+    "ready_g3_primary_listing_history": {
+      "after": true,
+      "before": false,
+      "transition": "BLOCKED_TO_READY"
+    },
+    "ready_g4_shares_outstanding": {
+      "after": true,
+      "before": false,
+      "transition": "BLOCKED_TO_READY"
+    },
+    "ready_g5_matched_control_universe": {
+      "after": true,
+      "before": false,
+      "transition": "BLOCKED_TO_READY"
+    }
+  },
+  "numeric_progress": {
+    "announcement_exact_resolved": 1,
+    "announcement_proxy_only": 0,
+    "control_dates_partial": 0,
+    "control_dates_resolved": 1,
+    "event_exchange_nasdaq": 1,
+    "event_exchange_resolved": 1,
+    "shares_symbol_dates_resolved": 2
+  }
+}

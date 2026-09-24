@@ -1,0 +1,80 @@
+[
+  {
+    "source_id": "demo-announcement",
+    "record_kind": "announcement_timestamp",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step19_work/data/examples/metadata/announcements.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "cdf7d49930eed8a365f2307fb7f1b10df6b3a116fd77ca8e0aa2bc9fc88321e1",
+    "license_reference_present": true
+  },
+  {
+    "source_id": "demo-announcement-conflict",
+    "record_kind": "announcement_timestamp",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step19_work/data/examples/metadata_quality_conflicts/announcement_conflict.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "e47e70fc2aad67d3a4b82b05f115857b8bccfe1b4f1a7312f198a4a87867318a",
+    "license_reference_present": true
+  },
+  {
+    "source_id": "demo-taq-master",
+    "record_kind": "security_master",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step19_work/data/examples/metadata/taq_master.csv",
+    "exists": true,
+    "row_count": 2,
+    "sha256": "80f766490403e220e7cdb6dc45eede3483028f47438c86859f07ba0279c8d50a",
+    "license_reference_present": true
+  },
+  {
+    "source_id": "demo-master-conflict",
+    "record_kind": "security_master",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step19_work/data/examples/metadata_quality_conflicts/master_conflict.csv",
+    "exists": true,
+    "row_count": 2,
+    "sha256": "0c33ee968b332327ab2a56833592902c631f0a82322140fe40538d614831fb58",
+    "license_reference_present": true
+  },
+  {
+    "source_id": "demo-controls",
+    "record_kind": "control_universe",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step19_work/data/examples/metadata/control_universe.csv",
+    "exists": true,
+    "row_count": 3,
+    "sha256": "5baecb702c42908acb97cf22cd419a0edd5c981e9674c793dc26075b937f721a",
+    "license_reference_present": true
+  },
+  {
+    "source_id": "demo-controls-conflict",
+    "record_kind": "control_universe",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step19_work/data/examples/metadata_quality_conflicts/control_conflict.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "076901c86130c54a4ff970298e9cee4dbc2eae6871904a715fb1eb9a10ada1db",
+    "license_reference_present": true
+  }
+]

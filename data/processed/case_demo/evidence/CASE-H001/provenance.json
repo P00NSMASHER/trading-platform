@@ -1,0 +1,45 @@
+{
+  "case_id": "CASE-H001",
+  "model_schema_version": "0.6.0",
+  "model_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "raw_sources_embedded": false,
+  "reason_raw_sources_not_embedded": "preserve data entitlements/privacy; hashes provide provenance",
+  "schema_version": "0.8.0",
+  "sources": [
+    {
+      "artifact_role": "scores_csv",
+      "captured_at_utc": "2026-09-24T08:33:43Z",
+      "file_name": "holdout_scores.csv",
+      "sha256": "b34504bdc330c81c65272bf94760d0087a07bab23b3a767f47a305f113469f2c",
+      "size_bytes": 3147
+    },
+    {
+      "artifact_role": "feature_vectors",
+      "captured_at_utc": "2026-09-24T08:33:43Z",
+      "file_name": "model_training_feature_vectors.csv",
+      "sha256": "c327d11611d92dbf4845cb7665d6d05f4890de65f5fe53fa81433f86b1bc759b",
+      "size_bytes": 40203
+    },
+    {
+      "artifact_role": "model_bundle",
+      "captured_at_utc": "2026-09-24T08:33:43Z",
+      "file_name": "model_bundle.joblib",
+      "sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+      "size_bytes": 68764
+    },
+    {
+      "artifact_role": "matched_controls",
+      "captured_at_utc": "2026-09-24T08:33:43Z",
+      "file_name": "model_training_matched_controls.csv",
+      "sha256": "1bce9328068ff83a5c74900cb61aa5f8d79b5b52033aa4beac9fc685682e3e6c",
+      "size_bytes": 7258
+    },
+    {
+      "artifact_role": "training_manifest",
+      "captured_at_utc": "2026-09-24T08:33:43Z",
+      "file_name": "training_manifest.json",
+      "sha256": "1012a39529484440f9c6bc5bd8f07b60d05ae16c3b841181172e1801da48bc04",
+      "size_bytes": 5144
+    }
+  ]
+}

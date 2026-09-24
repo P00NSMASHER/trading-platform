@@ -1,0 +1,26 @@
+{
+  "eligible_for_human_promotion_review": false,
+  "active_model_changed": false,
+  "automatic_promotion_permitted": false,
+  "checks": {
+    "temporal_ap_gain": false,
+    "graph_ablation_gain": false,
+    "false_alert_guardrail": true,
+    "brier_guardrail": true,
+    "unseen_issuer_not_worse": true
+  },
+  "guardrails": {
+    "target_fpr": 0.1,
+    "effective_fpr_cap": 0.01,
+    "min_temporal_average_precision_gain": 0.02,
+    "min_graph_ablation_average_precision_gain": 0.01,
+    "max_false_positive_rate_increase": 0.01,
+    "max_brier_increase": 0.01
+  },
+  "reasons": [
+    "failed:temporal_ap_gain",
+    "failed:graph_ablation_gain",
+    "blocked:synthetic_fixture"
+  ],
+  "warning": "Promotion eligibility is a research gate, not evidence of real-world market-abuse detection performance."
+}

@@ -1,0 +1,13 @@
+node_id,node_type,label,symbol,attributes_json,research_use_only
+CASE:SYN-CROSS-1,case,Synthetic cross-security case,,"{""mechanism"":""cross_security"",""information_type"":""m&a"",""instrument"":""options""}",1
+CASE:SYN-REG-1,case,Synthetic regulatory case,,"{""mechanism"":""fda_regulatory"",""information_type"":""regulatory_decision"",""instrument"":""stock""}",1
+EV:SYN-1,event,Synthetic event one,,"{""event_type"":""pending_transaction""}",1
+EV:SYN-2,event,Synthetic event two,,"{""event_type"":""regulatory_decision""}",1
+ISS:SYN-A,issuer,Synthetic Issuer A,,"{""sector"":""healthcare""}",1
+ISS:SYN-B,issuer,Synthetic Issuer B,,"{""sector"":""healthcare""}",1
+ISS:SYN-C,issuer,Synthetic Issuer C,,"{""sector"":""healthcare""}",1
+SEC:SYN-A,security,Synthetic A common,SYNA,{},1
+SEC:SYN-B,security,Synthetic B common,SYNB,{},1
+SEC:SYN-C,security,Synthetic C common,SYNC,{},1
+ORG:SYN-ADV,organization,Synthetic adviser,,{},1
+PER:SYN-P,person,Synthetic historical person,,{},1

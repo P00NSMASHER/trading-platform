@@ -1,0 +1,7 @@
+timestamp,message_type,stock,order_reference,side,shares,price,executed_shares,execution_price,match_number,printable,cancelled_shares,new_order_reference
+2015-02-17 14:19:01.000000,A,TEST,1001,S,500,100.05,,,,,,
+2015-02-17 14:19:02.000000,E,TEST,1001,,,,200,100.05,9001,Y,,
+2015-02-17 14:19:03.000000,A,TEST,1002,B,400,99.95,,,,,,
+2015-02-17 14:19:04.000000,C,TEST,1002,,,,100,99.96,9002,Y,,
+2015-02-17 14:19:05.000000,X,TEST,1001,,,,,,,,100,
+2015-02-17 14:19:06.000000,D,TEST,1002,,,,,,,,,

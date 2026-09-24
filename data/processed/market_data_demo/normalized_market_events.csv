@@ -1,0 +1,11 @@
+event_kind,event_ts_utc,symbol,underlying_symbol,price,size,bid,ask,bid_size,ask_size,option_symbol,expiration,strike,option_type,exchange,conditions,source_name,source_row_number,research_use_only
+equity_quote,2015-02-17T19:19:00.000Z,TEST,TEST,,,99.98,100.02,500,600,,,,,XNAS,,synthetic_fixture,2,1
+equity_trade,2015-02-17T19:19:02.000Z,TEST,TEST,100,100,,,,,,,,,XNAS,,synthetic_fixture,2,1
+option_quote,2015-02-17T19:19:05.000Z,TEST250220C00100000,TEST,,,2.4,2.6,20,22,TEST250220C00100000,2015-02-20,100,C,CBOE,,synthetic_fixture,2,1
+option_trade,2015-02-17T19:19:10.000Z,TEST250220C00100000,TEST,2.5,10,,,,,TEST250220C00100000,2015-02-20,100,C,CBOE,,synthetic_fixture,2,1
+equity_quote,2015-02-17T19:19:30.000Z,TEST,TEST,,,100.05,100.11,400,450,,,,,XNAS,,synthetic_fixture,3,1
+equity_trade,2015-02-17T19:19:31.000Z,TEST,TEST,100.1,200,,,,,,,,,XNAS,,synthetic_fixture,3,1
+option_quote,2015-02-17T19:19:35.000Z,TEST250220P00100000,TEST,,,2.1,2.3,15,18,TEST250220P00100000,2015-02-20,100,P,CBOE,,synthetic_fixture,3,1
+option_trade,2015-02-17T19:19:42.000Z,TEST250220P00100000,TEST,2.2,4,,,,,TEST250220P00100000,2015-02-20,100,P,CBOE,,synthetic_fixture,3,1
+equity_quote,2015-02-17T19:20:00.000Z,TEST,TEST,,,100.18,100.22,300,350,,,,,XNAS,,synthetic_fixture,4,1
+equity_trade,2015-02-17T19:20:05.000Z,TEST,TEST,100.2,50,,,,,,,,,XNAS,,synthetic_fixture,4,1

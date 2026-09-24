@@ -1,0 +1,6 @@
+gate_id,status,required_rows,requirement,resolution
+G1_ANNOUNCEMENT_TIMES,BLOCKING,174,Exact public announcement timestamp for each adjudicated event,Join licensed I/B/E/S or independently verified SEC/newswire publication timestamp
+G2_REAL_MARKET_DATA,BLOCKING,1656,Authorized non-synthetic TAQ equity trades/quotes plus full-replication options source-date coverage,Populate Step-15 source contract with authorized paths and license references
+G3_PRIMARY_LISTING_HISTORY,BLOCKING_FOR_ITCH,174,Point-in-time primary listing exchange as of each event date,Resolve historical exchange to decide which symbol-dates require Nasdaq ITCH
+G4_SHARES_OUTSTANDING,BLOCKING_FOR_TURNOVER,3828,Point-in-time shares outstanding covering every required symbol-date,Provide effective-dated authorized/public shares-outstanding series
+G5_MATCHED_CONTROL_UNIVERSE,BLOCKING_FOR_MODEL_EVAL,72,Same-day candidate universe and pre-event metadata on every distinct event date,Provide point-in-time earnings/event universe and matching covariates; run Step-5 matcher

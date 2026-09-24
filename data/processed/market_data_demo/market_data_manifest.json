@@ -1,0 +1,41 @@
+{
+  "inputs": [
+    {
+      "kind": "equity_trade",
+      "path": "data/examples/equity_trades.csv",
+      "sha256": "1b88eacf0088ff1d2b1e2e2c5aed38f9eaa60b448c2893de3e743466c43269e4"
+    },
+    {
+      "kind": "equity_quote",
+      "path": "data/examples/equity_quotes.csv",
+      "sha256": "53c9c2dfc9f9eea699b63fffa4ae4469c14a6b899ff75925197e46219eac2314"
+    },
+    {
+      "kind": "option_trade",
+      "path": "data/examples/option_trades.csv",
+      "sha256": "c43f529b6e34103694a927651e05036e60f1dc4c3513ee49d5e4a98bc85c5e0f"
+    },
+    {
+      "kind": "option_quote",
+      "path": "data/examples/option_quotes.csv",
+      "sha256": "c06aecdb29c1ce4e86c45ca0bf73f74dc2814dadf6c9c9930850c298197bc12e"
+    }
+  ],
+  "outputs": {
+    "equity_minute_count": 2,
+    "normalized_event_count": 10,
+    "option_minute_count": 1
+  },
+  "point_in_time_policy": "Only event-time fields present in the supplied lawful market-data files are normalized. No future announcement content, future prices, enforcement outcomes, or directional labels are added.",
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order"
+  ],
+  "purpose": "Historical market-surveillance research input normalization; never a trading signal.",
+  "schema_version": "0.2.0",
+  "timestamp_policy": "All normalized timestamps are UTC ISO-8601; naive inputs require an explicit source timezone."
+}

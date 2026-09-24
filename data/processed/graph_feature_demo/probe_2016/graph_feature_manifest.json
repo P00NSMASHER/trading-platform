@@ -1,0 +1,48 @@
+{
+  "inputs": {
+    "feature_vectors": {
+      "path": "data/processed/graph_feature_demo/probe_2016_input.csv",
+      "sha256": "0e95a5c47b889bc970b59de4fc095dd17d49eaff39e096c559445adde442e7fd"
+    },
+    "graph_db": {
+      "path": "data/processed/graph_demo/cross_event_graph.sqlite",
+      "sha256": "b22dee7555a884df5056058cdf3ce23effbe881717e2030e41ca8dba73abce1f"
+    }
+  },
+  "max_hops": 2,
+  "min_confidence": 0.0,
+  "outputs": {
+    "path": "data/processed/graph_feature_demo/probe_2016/graph_feature_vectors.csv",
+    "rows": 3,
+    "status_counts": {
+      "full": 3
+    }
+  },
+  "point_in_time_policy": {
+    "edge_must_be_observed_by_scoring_time": true,
+    "historical_forensics_may_use_later_public_adjudication_after_underlying_event_time": true,
+    "later_enforcement_facts_excluded_from_live_features": true,
+    "live_mode_requires_public_at_or_before_scoring_time": true
+  },
+  "prohibited_outputs": [
+    "buy",
+    "entry_price",
+    "exit_price",
+    "expected_return",
+    "order_quantity",
+    "position_size",
+    "sell",
+    "target_price",
+    "trade_direction"
+  ],
+  "purpose": "Point-in-time graph-aware surveillance features; not a trading signal.",
+  "research_use_only": true,
+  "schema_version": "0.12.0",
+  "thresholds": {
+    "equity_volume_z": 2.0,
+    "multivariate_l2": 2.0,
+    "option_volume_z": 2.0,
+    "spread_widen_z": 1.5
+  },
+  "visibility_mode": "live_surveillance"
+}

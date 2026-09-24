@@ -1,18 +1,18 @@
+# Private/local runtime configuration
+config/runtime.local.toml
+config/*.private.toml
 .env
 .env.*
-!.env.example
-*.pem
-*.key
-credentials.json
-secrets/
-broker_credentials/
+
+# Local runtime state / backups
+private_runtime/
+backups/
+exports/
+*.sqlite-wal
+*.sqlite-shm
+*.restore.tmp
+
+# Python/test caches
 __pycache__/
+*.py[cod]
 .pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.venv/
-venv/
-node_modules/
-.DS_Store
-Thumbs.db
-*.log

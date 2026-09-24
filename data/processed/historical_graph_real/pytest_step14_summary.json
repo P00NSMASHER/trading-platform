@@ -1,0 +1,18 @@
+{
+  "total_tests": 126,
+  "all_passed": true,
+  "execution_note": "Run in bounded per-file batches because the environment terminates long aggregate commands; every test file completed successfully.",
+  "counts_by_file": {
+    "test_baseline_engine.py": 7,
+    "test_case_evidence.py": 10,
+    "test_corpus_builder.py": 4,
+    "test_cross_event_graph.py": 14,
+    "test_deployment_hardening.py": 12,
+    "test_external_validation_harness.py": 8,
+    "test_feature_engine.py": 9,
+    "test_graph_challenger_harness.py": 9,
+    "test_graph_feature_engine.py": 12,
+    "test_historical_graph_reconstruction.py": 8,
+    "test_market_data_adapter.py+test_matched_control_generator.py+test_model_training_harness.py+test_private_dashboard.py": 33
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "active_champion_changed": false,
+  "comparison_executed": false,
+  "eligible_for_non_synthetic_champion_challenger_comparison": false,
+  "reasons": [
+    "base_market_feature_vectors_are_synthetic",
+    "matched_controls_are_not_eligible_with_synthetic_market_features"
+  ],
+  "required_before_comparison": [
+    "lawfully obtained point-in-time historical equity/options market features",
+    "matched controls built from the same non-synthetic feature universe",
+    "live_surveillance graph vectors generated at the corresponding timestamps"
+  ],
+  "warning": "The graph reconstruction is real historical research data; no synthetic market fixture is relabeled as real performance evidence."
+}

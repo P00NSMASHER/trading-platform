@@ -1,0 +1,73 @@
+{
+  "blocking_failures": [
+    {
+      "code": "BLOCKED",
+      "detail": "exact public announcement timestamps",
+      "gate_id": "G1_ANNOUNCEMENT_TIMES"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "point-in-time primary listing history",
+      "gate_id": "G3_PRIMARY_LISTING_HISTORY"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "point-in-time shares outstanding",
+      "gate_id": "G4_SHARES_OUTSTANDING"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "point-in-time matched-control universe",
+      "gate_id": "G5_MATCHED_CONTROL_UNIVERSE"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "quality_gate_clear=False; real_eval_clear=False; only_synthetic_sources=False; blocking_issues=0",
+      "gate_id": "G6_METADATA_QUALITY"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "coverage_plan_ready=False; required_source_dates=1656; covered_real_source_dates=0; missing=1656; backfill_unlock=False; non_synthetic_sources=0; synthetic_sources=0; all_authorized=False; license_refs_present=False",
+      "gate_id": "G2_REAL_MARKET_DATA"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "all_research_only=True; synthetic_fixture_detected=True; metadata_non_synthetic_clear=False; prohibited_outputs_policy_present=True",
+      "gate_id": "G11_NON_SYNTHETIC_RESEARCH_ONLY"
+    }
+  ],
+  "evaluation_release_permitted": false,
+  "external_fetch_or_purchase_performed": false,
+  "gate_state": {
+    "G10_CHAMPION_IMMUTABILITY": true,
+    "G11_NON_SYNTHETIC_RESEARCH_ONLY": false,
+    "G1_ANNOUNCEMENT_TIMES": false,
+    "G2_REAL_MARKET_DATA": false,
+    "G3_PRIMARY_LISTING_HISTORY": false,
+    "G4_SHARES_OUTSTANDING": false,
+    "G5_MATCHED_CONTROL_UNIVERSE": false,
+    "G6_METADATA_QUALITY": false,
+    "G7_TEMPORAL_FEATURE_INTEGRITY": true,
+    "G8_HOLDOUT_ISOLATION": true,
+    "G9_PROVENANCE": true
+  },
+  "ledger": {
+    "entry_count": 0,
+    "head_hash": "",
+    "valid": true
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "LONG/SHORT recommendation",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "Current Step 21 ingestion/readiness state without importing external inputs.",
+  "release_token_issued": false,
+  "research_use_only": true,
+  "schema_version": "0.21.0"
+}

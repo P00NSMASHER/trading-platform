@@ -1,0 +1,4 @@
+event_id,historical_symbol,first_trade_ts_utc,minute_ts_utc,relative_minute,equity_trade_count,share_volume,log_share_volume,dollar_volume,share_turnover,option_trade_count,option_contract_volume,log_option_volume,option_call_volume,option_put_volume,quoted_spread_pct,effective_spread_pct,realized_spread_5m_pct,price_impact_5m_pct,absolute_order_imbalance,order_flow_source,research_use_only
+DEMO-TEST-001,TEST,2015-02-17T19:19:00.000Z,2015-02-17T19:18:00.000Z,-1,,,,,,,,,,,,,,,,,1
+DEMO-TEST-001,TEST,2015-02-17T19:19:00.000Z,2015-02-17T19:19:00.000Z,0,2,300,5.7071102647,30020,,2,14,2.7080502011,10,4,0.0004997602,0.0003996803,,,0.3333333333,ITCH_EXECUTION,1
+DEMO-TEST-001,TEST,2015-02-17T19:19:00.000Z,2015-02-17T19:20:00.000Z,1,1,50,3.9318256327,5010,,,,,,,0.0003992016,0,,,1,TAQ_INFERRED,1

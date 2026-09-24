@@ -1,0 +1,4 @@
+match_id,event_id,treated_symbol,treated_minute_ts_utc,control_rank,control_symbol,control_minute_ts_utc,local_date,local_minute,same_sector,scheduled_event_match,candidate_pool_size,numeric_covariates_used,match_distance,max_component_z,match_quality,treated_feature_status,control_feature_status,metadata_source_names,research_use_only
+MC-7D11DB8DAB07BC50,DEMO-E1,TRT,2026-01-05T19:30:00.000Z,1,A,2026-01-05T19:30:00.000Z,2026-01-05,14:30,1,1,3,11,0.0905534409,0.3003317868,good,full,full,synthetic_match_fixture,1
+MC-024A73D32191F32E,DEMO-E1,TRT,2026-01-05T19:30:00.000Z,2,B,2026-01-05T19:30:00.000Z,2026-01-05,14:30,1,1,3,11,0.0914635409,0.3033502473,good,full,full,synthetic_match_fixture,1
+MC-410E1293B3510D25,DEMO-E1,TRT,2026-01-05T19:30:00.000Z,3,C,2026-01-05T19:30:00.000Z,2026-01-05,14:30,1,1,3,11,0.2247162498,0.7452994849,good,full,full,synthetic_match_fixture,1

@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.18.0",
+  "step": "18",
+  "test_count": 163,
+  "tests_passed": 163,
+  "demo_ledger_valid": true,
+  "demo_ledger_entries": 3,
+  "demo_final_all_four_gates_ready": true,
+  "demo_batch_gate_transitions": [
+    {
+      "ready_g1_announcement_times": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_g3_primary_listing_history": {
+        "before": false,
+        "after": false,
+        "transition": "UNCHANGED"
+      },
+      "ready_g4_shares_outstanding": {
+        "before": false,
+        "after": false,
+        "transition": "UNCHANGED"
+      },
+      "ready_g5_matched_control_universe": {
+        "before": false,
+        "after": false,
+        "transition": "UNCHANGED"
+      },
+      "ready_for_step15_real_backfill_metadata": {
+        "before": false,
+        "after": false,
+        "transition": "UNCHANGED"
+      },
+      "ready_for_non_synthetic_model_evaluation_metadata": {
+        "before": false,
+        "after": false,
+        "transition": "UNCHANGED"
+      }
+    },
+    {
+      "ready_g1_announcement_times": {
+        "before": true,
+        "after": true,
+        "transition": "UNCHANGED"
+      },
+      "ready_g3_primary_listing_history": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_g4_shares_outstanding": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_g5_matched_control_universe": {
+        "before": false,
+        "after": false,
+        "transition": "UNCHANGED"
+      },
+      "ready_for_step15_real_backfill_metadata": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_for_non_synthetic_model_evaluation_metadata": {
+        "before": false,
+        "after": false,
+        "transition": "UNCHANGED"
+      }
+    },
+    {
+      "ready_g1_announcement_times": {
+        "before": true,
+        "after": true,
+        "transition": "UNCHANGED"
+      },
+      "ready_g3_primary_listing_history": {
+        "before": true,
+        "after": true,
+        "transition": "UNCHANGED"
+      },
+      "ready_g4_shares_outstanding": {
+        "before": true,
+        "after": true,
+        "transition": "UNCHANGED"
+      },
+      "ready_g5_matched_control_universe": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_for_step15_real_backfill_metadata": {
+        "before": true,
+        "after": true,
+        "transition": "UNCHANGED"
+      },
+      "ready_for_non_synthetic_model_evaluation_metadata": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      }
+    }
+  ],
+  "real_event_count": 174,
+  "real_exact_announcements": 0,
+  "real_exchange_resolved": 0,
+  "real_shares_symbol_dates_resolved": 0,
+  "real_control_dates_resolved": 0,
+  "real_model_evaluation_metadata_ready": false,
+  "real_status": "BLOCKED_AWAITING_REAL_METADATA_INPUTS",
+  "champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "expected_champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "champion_unchanged": true,
+  "no_external_data_fetched_or_purchased": true,
+  "research_use_only": true
+}

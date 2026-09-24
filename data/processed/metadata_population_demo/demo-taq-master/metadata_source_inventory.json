@@ -1,0 +1,28 @@
+[
+  {
+    "source_id": "demo-announcement",
+    "record_kind": "announcement_timestamp",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step18_work/private_runtime/metadata_population_demo/staged/demo-announcement/cdf7d49930eed8a365f2307fb7f1b10df6b3a116fd77ca8e0aa2bc9fc88321e1.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "cdf7d49930eed8a365f2307fb7f1b10df6b3a116fd77ca8e0aa2bc9fc88321e1",
+    "license_reference_present": true
+  },
+  {
+    "source_id": "demo-taq-master",
+    "record_kind": "security_master",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step18_work/private_runtime/metadata_population_demo/staged/demo-taq-master/80f766490403e220e7cdb6dc45eede3483028f47438c86859f07ba0279c8d50a.csv",
+    "exists": true,
+    "row_count": 2,
+    "sha256": "80f766490403e220e7cdb6dc45eede3483028f47438c86859f07ba0279c8d50a",
+    "license_reference_present": true
+  }
+]

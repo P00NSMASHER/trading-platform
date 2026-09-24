@@ -1,0 +1,56 @@
+{
+  "backup": {
+    "backup_sha256": "3300dc46a3bae5ddc45004f2cd707f3d82a05c3fdf9f00c0c876c6a1265f6084",
+    "manifest_sha256": "1723ba7ee983a0e6332cddd9da6d71defa364df1064d72ad92df594a220004d7",
+    "review_chains_valid": true
+  },
+  "generated_at_utc": "2026-09-24T08:48:12Z",
+  "notice": "Surveillance anomaly prioritization only; not a finding of insider trading or MNPI misuse.",
+  "permissions": {
+    "ok": true
+  },
+  "policy": {
+    "execution_integration_disabled": true,
+    "loopback_only": true,
+    "network_bind_disabled": true,
+    "research_use_only": true,
+    "trade_outputs_disabled": true
+  },
+  "recovery_drill": {
+    "deliberate_corruption_detected": true,
+    "ok": true,
+    "source_database_unchanged": true
+  },
+  "release": "private-prototype-step10",
+  "release_manifest_sha256": "dadcc82e1a5af294f9703caa1fa2b18f84451e5cbfe3c1d448200582e8f1aed6",
+  "research_use_only": true,
+  "runtime_smoke": {
+    "body": "ok\\n",
+    "error": null,
+    "ok": true,
+    "security_headers": {
+      "Cache-Control": "no-store",
+      "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'",
+      "X-Frame-Options": "DENY"
+    },
+    "status": 200
+  },
+  "runtime_versions": {
+    "joblib": "1.5.3",
+    "numpy": "2.3.5",
+    "python": "3.13.5",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.0",
+    "threadpoolctl": "3.6.0"
+  },
+  "schema_version": "1.0.0",
+  "self_check": {
+    "audit_sha256": "1c7296f1b1fe21082e14d776d091b84dbc625cb4942ee4039631152a6b569082",
+    "ok": true
+  },
+  "sha256sums_sha256": "abe52835efc92948bbed35f3526f7e975664e03c57a5ce05d0b29bc03bf69fb4",
+  "tests": {
+    "all_passed": true,
+    "passed": 83
+  }
+}

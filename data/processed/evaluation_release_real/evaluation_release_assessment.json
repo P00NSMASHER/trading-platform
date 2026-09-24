@@ -1,0 +1,84 @@
+{
+  "blocking_failure_count": 7,
+  "blocking_failures": [
+    {
+      "code": "BLOCKED",
+      "detail": "exact public announcement timestamps",
+      "gate_id": "G1_ANNOUNCEMENT_TIMES"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "point-in-time primary listing history",
+      "gate_id": "G3_PRIMARY_LISTING_HISTORY"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "point-in-time shares outstanding",
+      "gate_id": "G4_SHARES_OUTSTANDING"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "point-in-time matched-control universe",
+      "gate_id": "G5_MATCHED_CONTROL_UNIVERSE"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "quality_gate_clear=False; real_eval_clear=False; only_synthetic_sources=False; blocking_issues=0",
+      "gate_id": "G6_METADATA_QUALITY"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "coverage_plan_ready=False; required_source_dates=1656; covered_real_source_dates=0; missing=1656; backfill_unlock=False; non_synthetic_sources=0; synthetic_sources=5; all_authorized=True; license_refs_present=False",
+      "gate_id": "G2_REAL_MARKET_DATA"
+    },
+    {
+      "code": "BLOCKED",
+      "detail": "all_research_only=True; synthetic_fixture_detected=True; metadata_non_synthetic_clear=False; prohibited_outputs_policy_present=True",
+      "gate_id": "G11_NON_SYNTHETIC_RESEARCH_ONLY"
+    }
+  ],
+  "champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "check_count": 22,
+  "evaluation_release_permitted": false,
+  "generated_at_utc": "2026-09-24T15:51:51Z",
+  "holdout_start_year": 2015,
+  "input_hashes": {
+    "base_features": "c327d11611d92dbf4845cb7665d6d05f4890de65f5fe53fa81433f86b1bc759b",
+    "challenger_cv_audit": "a7dcdebfc6931a8c8fb641753562cdf698e79619e0cbf9ac48f4650599194acc",
+    "challenger_manifest": "5624eae4b24fd28dc01a6758b9a8e312e445addb008623ce273118f5597f33ac",
+    "champion_training_manifest": "1012a39529484440f9c6bc5bd8f07b60d05ae16c3b841181172e1801da48bc04",
+    "coverage_summary": "8eaff63f34fb1289916a432ae3463a3669855330b5f9d655cfd6732d90500a45",
+    "graph_features": "ba2619d88eaf20f5fd90d87893380d0a02383f66112b333faab872e4ff076eeb",
+    "market_backfill_manifest": "986c7a83305f22dcfd27bcf45e052b8905e4042a8a3eeb7dc3fd46895b3da825",
+    "matched_controls": "1bce9328068ff83a5c74900cb61aa5f8d79b5b52033aa4beac9fc685682e3e6c",
+    "metadata_quality": "8ebbfc8e249135ec63dd98256210ff72be347745ff47a96c60cada7d6203e194",
+    "metadata_readiness": "3a004baa4c3cac79df0725336eeee5e2c296b5bb59ff1462b032f4e66f1d13ae"
+  },
+  "passed_check_count": 15,
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "LONG/SHORT recommendation",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "Fail-closed release controller for a non-synthetic offline historical MNPI/informed-trading surveillance model comparison; no trading outputs.",
+  "release_semantics": {
+    "active_champion_modification_permitted": false,
+    "automatic_promotion_permitted": false,
+    "does_not_permit": [
+      "model auto-promotion",
+      "broker connection",
+      "order generation",
+      "trade recommendation",
+      "live confidential-data ingestion"
+    ],
+    "permits": "one offline historical champion/challenger surveillance evaluation using exactly the hashed inputs"
+  },
+  "release_status": "BLOCKED",
+  "research_use_only": true,
+  "schema_version": "0.20.0"
+}

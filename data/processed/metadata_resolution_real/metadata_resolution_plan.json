@@ -1,0 +1,73 @@
+{
+  "schema_version": "0.17.0",
+  "purpose": "Minimal authorized/public metadata acquisition/import plan needed to close Step-17 gates; no data acquisition performed.",
+  "research_use_only": true,
+  "tasks": [
+    {
+      "gate": "G1_ANNOUNCEMENT_TIMES",
+      "priority": 1,
+      "required_units": 174,
+      "unit": "event timestamps",
+      "preferred_source": "licensed I/B/E/S or official newswire/issuer archive with first-public-release timestamps",
+      "fallback": "SEC EDGAR ACCEPTANCE-DATETIME as corroborating proxy only; does not by itself close G1",
+      "required_fields": [
+        "event_id or symbol+event_date",
+        "public_announcement_ts timezone-aware",
+        "timestamp_kind",
+        "source_grade",
+        "source_reference"
+      ]
+    },
+    {
+      "gate": "G3_PRIMARY_LISTING_HISTORY + G4_SHARES_OUTSTANDING",
+      "priority": 2,
+      "required_units": 414,
+      "unit": "Daily TAQ Master market dates",
+      "preferred_source": "authorized NYSE Daily TAQ Master history covering all required market dates",
+      "benefit": "One daily security-master source can provide Listed Exchange and daily Shares Outstanding for the required symbols.",
+      "required_fields": [
+        "symbol",
+        "trade_date",
+        "listed_exchange",
+        "shares_outstanding_millions"
+      ]
+    },
+    {
+      "gate": "G4_SHARES_OUTSTANDING fallback",
+      "priority": 3,
+      "required_units": 146,
+      "unit": "historical symbols",
+      "preferred_source": "SEC XBRL/companyfacts effective-dated shares-outstanding facts if Daily TAQ Master shares are unavailable",
+      "constraint": "Only facts already public by the target date are eligible; future-filed facts are rejected."
+    },
+    {
+      "gate": "G5_MATCHED_CONTROL_UNIVERSE",
+      "priority": 4,
+      "required_units": 72,
+      "unit": "event dates",
+      "preferred_source": "authorized point-in-time earnings/event calendar plus pre-event matching covariates",
+      "required_covariates": [
+        "sector",
+        "index_bucket",
+        "market_cap",
+        "price",
+        "volatility_21d",
+        "normal_volume",
+        "normal_turnover",
+        "normal_spread",
+        "options_liquidity",
+        "institutional_ownership",
+        "analyst_coverage"
+      ],
+      "research_only_helper": "vgreg/hacked_earnings_jfe SampleFirms can enumerate retrospective same-day earnings candidates but cannot alone close the point-in-time gate."
+    }
+  ],
+  "current_status": {
+    "announcement_exact_resolved": 0,
+    "event_exchange_resolved": 0,
+    "shares_symbol_dates_resolved": 0,
+    "control_dates_resolved": 0,
+    "ready_for_non_synthetic_model_evaluation_metadata": false
+  },
+  "no_external_acquisition_performed": true
+}

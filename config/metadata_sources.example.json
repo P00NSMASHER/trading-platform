@@ -1,0 +1,117 @@
+{
+  "schema_version": "1",
+  "purpose": "Point-in-time metadata sources for historical market-surveillance reconstruction. All examples are disabled. Do not place credentials, live stolen information, leaked credentials, accidental private disclosures, or other unauthorized private data in this contract.",
+  "sources": [
+    {
+      "source_id": "licensed-ibes-or-official-newswire-announcements",
+      "record_kind": "announcement_timestamp",
+      "source_family": "ibes_announcement",
+      "path": "data/private/metadata/announcement_timestamps.csv",
+      "enabled": false,
+      "authorized": true,
+      "data_classification": "authorized_reference_data",
+      "license_reference": "REPLACE_WITH_INTERNAL_LICENSE_OR_ENTITLEMENT_REFERENCE",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "Use timestamp_kind=first_public_release or official_newswire_release to close G1; timezone-aware timestamps required."
+    },
+    {
+      "source_id": "sec-edgar-acceptance-proxy",
+      "record_kind": "announcement_timestamp",
+      "source_family": "sec_edgar_submission_header",
+      "path": "data/public/metadata/sec_edgar_acceptance.csv",
+      "enabled": false,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "SEC EDGAR public filing metadata",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {},
+      "notes": "Use timestamp_kind=edgar_acceptance. Resolver retains this only as a proxy because SEC states there is no timestamp for when filing content first becomes available on sec.gov."
+    },
+    {
+      "source_id": "authorized-nyse-daily-taq-master",
+      "record_kind": "security_master",
+      "source_family": "nyse_daily_taq_master",
+      "path": "data/private/metadata/taq_master_history.csv",
+      "enabled": false,
+      "authorized": true,
+      "data_classification": "authorized_reference_data",
+      "license_reference": "REPLACE_WITH_INTERNAL_NYSE_TAQ_ENTITLEMENT_REFERENCE",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "symbol": "symbol",
+        "trade_date": "trade_date",
+        "listed_exchange": "listed_exchange",
+        "shares_outstanding_millions": "shares_outstanding_millions"
+      },
+      "notes": "Daily TAQ Master can close G3 and G4 when the licensed historical daily master is provided."
+    },
+    {
+      "source_id": "public-sec-xbrl-shares",
+      "record_kind": "shares_outstanding",
+      "source_family": "sec_xbrl_companyfacts",
+      "path": "data/public/metadata/sec_shares_outstanding.csv",
+      "enabled": false,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "SEC data.sec.gov XBRL APIs",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "symbol": "historical_symbol",
+        "fact_date": "fact_date",
+        "available_at": "available_at",
+        "shares_outstanding": "shares_outstanding"
+      },
+      "notes": "Only facts already publicly available by the target symbol-date are eligible; future-filed facts are rejected."
+    },
+    {
+      "source_id": "authorized-point-in-time-control-universe",
+      "record_kind": "control_universe",
+      "source_family": "generic_authorized_reference_data",
+      "path": "data/private/metadata/control_universe.csv",
+      "enabled": false,
+      "authorized": true,
+      "data_classification": "authorized_reference_data",
+      "license_reference": "REPLACE_WITH_INTERNAL_REFERENCE_DATA_ENTITLEMENT",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {},
+      "notes": "Each candidate should include available_at and complete pre-event matching covariates."
+    },
+    {
+      "source_id": "samplefirms-retrospective-universe",
+      "record_kind": "control_universe",
+      "source_family": "samplefirms_research_universe",
+      "path": "data/public/metadata/SampleFirms.csv",
+      "enabled": false,
+      "authorized": true,
+      "data_classification": "public_research_replication",
+      "license_reference": "vgreg/hacked_earnings_jfe public replication package",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_date": "date",
+        "symbol": "SYMBOL"
+      },
+      "notes": "Useful for retrospective same-day candidate enumeration, but without point-in-time availability and matching covariates it cannot close the live-model G5 gate."
+    }
+  ]
+}

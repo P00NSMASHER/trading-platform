@@ -1,0 +1,3 @@
+seed_security_id,security_id,symbol,hop_count,relationship_path,node_path,path_confidence,visibility_mode,research_use_only
+SEC:SYN-A,SEC:SYN-B,SYNB,1,peer_of,SEC:SYN-A>SEC:SYN-B,0.9,live_surveillance,1
+SEC:SYN-A,SEC:SYN-C,SYNC,2,peer_of>related_security,SEC:SYN-A>SEC:SYN-B>SEC:SYN-C,0.6624,live_surveillance,1

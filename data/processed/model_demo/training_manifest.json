@@ -1,0 +1,161 @@
+{
+  "schema_version": "0.6.0",
+  "purpose": "historical informed-trading market-surveillance research",
+  "research_use_only": true,
+  "inputs": {
+    "matched_controls": "data/examples/model_training_matched_controls.csv",
+    "matched_controls_sha256": "1bce9328068ff83a5c74900cb61aa5f8d79b5b52033aa4beac9fc685682e3e6c",
+    "feature_vectors": "data/examples/model_training_feature_vectors.csv",
+    "feature_vectors_sha256": "c327d11611d92dbf4845cb7665d6d05f4890de65f5fe53fa81433f86b1bc759b"
+  },
+  "feature_policy": {
+    "selected_features": [
+      "full_history_fraction",
+      "equity_volume_z",
+      "equity_turnover_z",
+      "equity_spread_z",
+      "option_volume_z",
+      "option_dollar_volume_z",
+      "equity_volume_ratio",
+      "option_volume_ratio",
+      "call_put_imbalance",
+      "option_contracts_per_100_equity_shares",
+      "return_1m",
+      "return_5m",
+      "return_15m",
+      "return_30m",
+      "realized_vol_5m",
+      "realized_vol_15m",
+      "realized_vol_30m",
+      "equity_volume_peak_z_5m",
+      "equity_volume_peak_z_15m",
+      "equity_volume_peak_z_30m",
+      "equity_volume_anomaly_count_5m",
+      "equity_volume_anomaly_count_15m",
+      "equity_volume_anomaly_count_30m",
+      "equity_volume_z_slope_5m",
+      "equity_volume_z_slope_15m",
+      "equity_volume_z_slope_30m",
+      "equity_volume_acceleration_5m",
+      "spread_widen_count_5m",
+      "option_volume_anomaly_count_5m",
+      "multivariate_l2",
+      "multivariate_2sigma_count",
+      "multivariate_change_5m"
+    ],
+    "lookahead_fields_rejected": true,
+    "future_prices_rejected": true,
+    "future_earnings_information_rejected": true,
+    "enforcement_outcomes_rejected_as_features": true
+  },
+  "validation_policy": {
+    "holdout_start_year": 2015,
+    "development_years": [
+      2011,
+      2012,
+      2013,
+      2014
+    ],
+    "holdout_years": [
+      2015
+    ],
+    "grouping_unit": "treated issuer; treated event and matched controls stay together",
+    "cv_folds": 4,
+    "cv_group_overlap_count": 0,
+    "unseen_issuer_holdout_rows": 16
+  },
+  "model": {
+    "elastic_net": "median imputation + missing indicators + standardization + elastic-net logistic regression",
+    "boosted": "median imputation + missing indicators + shallow histogram gradient boosting",
+    "blend_weights": [
+      0.5,
+      0.5
+    ],
+    "calibration": "Platt/logistic calibration fit only on grouped out-of-fold development predictions",
+    "threshold_selection": "chosen only on development OOF predictions at configured false-positive-rate ceiling",
+    "target_fpr": 0.1,
+    "selected_threshold": 0.9994051578443351,
+    "threshold_diagnostics": {
+      "target_fpr": 0.1,
+      "development_recall": 1.0,
+      "development_fpr": 0.0,
+      "development_false_positives": 0,
+      "development_true_positives": 24
+    }
+  },
+  "sample_counts": {
+    "total": 128,
+    "development": 96,
+    "holdout": 32,
+    "development_positive": 24,
+    "development_negative": 72,
+    "holdout_positive": 8,
+    "holdout_negative": 24,
+    "unique_treated_issuers_development": 12
+  },
+  "metrics": {
+    "development_oof": {
+      "n": 96,
+      "positives": 24,
+      "negatives": 72,
+      "average_precision": 1.0,
+      "roc_auc": 1.0,
+      "brier": 1.544362814894447e-07,
+      "log_loss": 0.0003715129849121178,
+      "threshold": 0.9994051578443351,
+      "recall_at_threshold": 1.0,
+      "false_positive_rate": 0.0,
+      "alerts_per_100_matched_controls": 0.0,
+      "true_positives": 24,
+      "false_positives": 0
+    },
+    "temporal_holdout": {
+      "n": 32,
+      "positives": 8,
+      "negatives": 24,
+      "average_precision": 1.0,
+      "roc_auc": 1.0,
+      "brier": 2.091104635693278e-14,
+      "log_loss": 1.355520227092057e-07,
+      "threshold": 0.9994051578443351,
+      "recall_at_threshold": 1.0,
+      "false_positive_rate": 0.0,
+      "alerts_per_100_matched_controls": 0.0,
+      "true_positives": 8,
+      "false_positives": 0
+    },
+    "temporal_holdout_unseen_treated_issuers": {
+      "n": 16,
+      "positives": 4,
+      "negatives": 12,
+      "average_precision": 1.0,
+      "roc_auc": 1.0,
+      "brier": 2.091104635693278e-14,
+      "log_loss": 1.355520227092057e-07,
+      "threshold": 0.9994051578443351,
+      "recall_at_threshold": 1.0,
+      "false_positive_rate": 0.0,
+      "alerts_per_100_matched_controls": 0.0,
+      "true_positives": 4,
+      "false_positives": 0
+    }
+  },
+  "outputs": {
+    "model_bundle": "model_bundle.joblib",
+    "holdout_scores": "holdout_scores.csv",
+    "elastic_net_coefficients": "elastic_net_coefficients.csv",
+    "development_calibration": "development_calibration.csv",
+    "cv_split_audit": "cv_split_audit.json"
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "LONG/SHORT recommendation",
+    "expected return",
+    "target price",
+    "position size",
+    "order instruction"
+  ],
+  "deployment_status": "offline research artifact; no market feed, broker, notification, or execution integration",
+  "interpretation_warning": "A surveillance score is an anomaly-prioritization signal, not a probability that a crime occurred."
+}

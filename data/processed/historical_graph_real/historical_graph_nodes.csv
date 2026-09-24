@@ -1,0 +1,468 @@
+node_id,node_type,label,symbol,attributes_json,research_use_only
+CASE:SEC-DUBOVOY-2015,case,SEC v. Dubovoy et al. hacked newswire trading scheme,,"{""case_public_date"":""2015-08-11"",""ground_truth_role"":""historical_enforcement_case"",""information_type"":""pre_release_earnings"",""instrument"":""stock_options_cfd"",""mechanism"":""hacked_newswire""}",1
+ISS:GVKEY:1300,issuer,Historical issuer GVKEY 1300,,"{""gvkey"":""1300""}",1
+SEC:PERMNO:10145,security,HON historical security,HON,"{""gvkey"":""1300"",""permno"":""10145""}",1
+EV:HEJFE-8D40B9782E1E6F33,event,HON documented first illicit trade 2012-01-26 15:53:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""1300"",""historical_symbol"":""HON"",""permno"":""10145""}",1
+ISS:GVKEY:12445,issuer,Historical issuer GVKEY 12445,,"{""gvkey"":""12445""}",1
+SEC:PERMNO:10606,security,WTS historical security,WTS,"{""gvkey"":""12445"",""permno"":""10606""}",1
+EV:HEJFE-D346C6CFDFB6E581,event,WTS documented first illicit trade 2015-02-17 14:19:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""12445"",""historical_symbol"":""WTS"",""permno"":""10606""}",1
+ISS:GVKEY:13623,issuer,Historical issuer GVKEY 13623,,"{""gvkey"":""13623""}",1
+SEC:PERMNO:11547,security,CNMD historical security,CNMD,"{""gvkey"":""13623"",""permno"":""11547""}",1
+EV:HEJFE-A413A5AC6E515E3C,event,CNMD documented first illicit trade 2011-04-27 15:22:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""13623"",""historical_symbol"":""CNMD"",""permno"":""11547""}",1
+ISS:GVKEY:14182,issuer,Historical issuer GVKEY 14182,,"{""gvkey"":""14182""}",1
+SEC:PERMNO:11599,security,ACO historical security,ACO,"{""gvkey"":""14182"",""permno"":""11599""}",1
+EV:HEJFE-AC78A2434E4AE8FB,event,ACO documented first illicit trade 2013-04-25 14:40:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""14182"",""historical_symbol"":""ACO"",""permno"":""11599""}",1
+ISS:GVKEY:14256,issuer,Historical issuer GVKEY 14256,,"{""gvkey"":""14256""}",1
+SEC:PERMNO:11896,security,MXIM historical security,MXIM,"{""gvkey"":""14256"",""permno"":""11896""}",1
+EV:HEJFE-EDFDC1213C9AF586,event,MXIM documented first illicit trade 2012-01-26 11:44:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""14256"",""historical_symbol"":""MXIM"",""permno"":""11896""}",1
+ISS:GVKEY:184603,issuer,Historical issuer GVKEY 184603,,"{""gvkey"":""184603""}",1
+SEC:PERMNO:12026,security,QLIK historical security,QLIK,"{""gvkey"":""184603"",""permno"":""12026""}",1
+EV:HEJFE-4080E04F012A7290,event,QLIK documented first illicit trade 2015-02-12 15:39:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""184603"",""historical_symbol"":""QLIK"",""permno"":""12026""}",1
+ISS:GVKEY:175503,issuer,Historical issuer GVKEY 175503,,"{""gvkey"":""175503""}",1
+SEC:PERMNO:12049,security,GORO historical security,GORO,"{""gvkey"":""175503"",""permno"":""12049""}",1
+EV:HEJFE-D7BD84C255F2273D,event,GORO documented first illicit trade 2013-05-08 15:58:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""175503"",""historical_symbol"":""GORO"",""permno"":""12049""}",1
+ISS:GVKEY:184700,issuer,Historical issuer GVKEY 184700,,"{""gvkey"":""184700""}",1
+SEC:PERMNO:12449,security,FLT historical security,FLT,"{""gvkey"":""184700"",""permno"":""12449""}",1
+EV:HEJFE-AF58BD8CAE4E8D1C,event,FLT documented first illicit trade 2015-04-30 15:28:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""184700"",""historical_symbol"":""FLT"",""permno"":""12449""}",1
+ISS:GVKEY:185646,issuer,Historical issuer GVKEY 185646,,"{""gvkey"":""185646""}",1
+SEC:PERMNO:12639,security,CSOD historical security,CSOD,"{""gvkey"":""185646"",""permno"":""12639""}",1
+EV:HEJFE-5E9AD5C9AD67944D,event,CSOD documented first illicit trade 2015-05-06 15:29:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""185646"",""historical_symbol"":""CSOD"",""permno"":""12639""}",1
+ISS:GVKEY:1439,issuer,Historical issuer GVKEY 1439,,"{""gvkey"":""1439""}",1
+SEC:PERMNO:12758,security,ECOL historical security,ECOL,"{""gvkey"":""1439"",""permno"":""12758""}",1
+EV:HEJFE-12CC8075D3F634CD,event,ECOL documented first illicit trade 2013-04-24 15:07:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""1439"",""historical_symbol"":""ECOL"",""permno"":""12758""}",1
+ISS:GVKEY:186520,issuer,Historical issuer GVKEY 186520,,"{""gvkey"":""186520""}",1
+SEC:PERMNO:12873,security,P historical security,P,"{""gvkey"":""186520"",""permno"":""12873""}",1
+EV:HEJFE-847F0EFE669B2440,event,P documented first illicit trade 2015-02-05 15:59:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""186520"",""historical_symbol"":""P"",""permno"":""12873""}",1
+ISS:GVKEY:184715,issuer,Historical issuer GVKEY 184715,,"{""gvkey"":""184715""}",1
+SEC:PERMNO:12924,security,TNGO historical security,TNGO,"{""gvkey"":""184715"",""permno"":""12924""}",1
+EV:HEJFE-AF5106891E058D23,event,TNGO documented first illicit trade 2015-02-12 15:10:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""184715"",""historical_symbol"":""TNGO"",""permno"":""12924""}",1
+ISS:GVKEY:192255,issuer,Historical issuer GVKEY 192255,,"{""gvkey"":""192255""}",1
+SEC:PERMNO:13105,security,ACHC historical security,ACHC,"{""gvkey"":""192255"",""permno"":""13105""}",1
+EV:HEJFE-6F0A7632D9B4FFF6,event,ACHC documented first illicit trade 2015-04-28 14:35:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""192255"",""historical_symbol"":""ACHC"",""permno"":""13105""}",1
+ISS:GVKEY:161036,issuer,Historical issuer GVKEY 161036,,"{""gvkey"":""161036""}",1
+SEC:PERMNO:13110,security,MFRM historical security,MFRM,"{""gvkey"":""161036"",""permno"":""13110""}",1
+EV:HEJFE-05DE1473D5D7F7FB,event,MFRM documented first illicit trade 2015-03-19 15:55:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""161036"",""historical_symbol"":""MFRM"",""permno"":""13110""}",1
+ISS:GVKEY:177966,issuer,Historical issuer GVKEY 177966,,"{""gvkey"":""177966""}",1
+SEC:PERMNO:13284,security,ALSN historical security,ALSN,"{""gvkey"":""177966"",""permno"":""13284""}",1
+EV:HEJFE-87DDC59E7BB99A84,event,ALSN documented first illicit trade 2015-04-27 15:17:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""177966"",""historical_symbol"":""ALSN"",""permno"":""13284""}",1
+ISS:GVKEY:170335,issuer,Historical issuer GVKEY 170335,,"{""gvkey"":""170335""}",1
+SEC:PERMNO:13377,security,PFPT historical security,PFPT,"{""gvkey"":""170335"",""permno"":""13377""}",1
+EV:HEJFE-6C73B4B05384BC1E,event,PFPT documented first illicit trade 2013-04-25 15:00:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""170335"",""historical_symbol"":""PFPT"",""permno"":""13377""}",1
+ISS:GVKEY:171007,issuer,Historical issuer GVKEY 171007,,"{""gvkey"":""171007""}",1
+SEC:PERMNO:13447,security,NOW historical security,NOW,"{""gvkey"":""171007"",""permno"":""13447""}",1
+EV:HEJFE-DC66D5F2BDEC7C74,event,NOW documented first illicit trade 2015-01-28 13:31:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""171007"",""historical_symbol"":""NOW"",""permno"":""13447""}",1
+EV:HEJFE-47A3794D1C360650,event,NOW documented first illicit trade 2015-04-16 14:33:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""171007"",""historical_symbol"":""NOW"",""permno"":""13447""}",1
+ISS:GVKEY:111873,issuer,Historical issuer GVKEY 111873,,"{""gvkey"":""111873""}",1
+SEC:PERMNO:13687,security,RH historical security,RH,"{""gvkey"":""111873"",""permno"":""13687""}",1
+EV:HEJFE-9B84208BA575EAC4,event,RH documented first illicit trade 2015-03-26 15:41:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""111873"",""historical_symbol"":""RH"",""permno"":""13687""}",1
+ISS:GVKEY:8551,issuer,Historical issuer GVKEY 8551,,"{""gvkey"":""8551""}",1
+SEC:PERMNO:13936,security,PVH historical security,PVH,"{""gvkey"":""8551"",""permno"":""13936""}",1
+EV:HEJFE-DF726FADF321F8E3,event,PVH documented first illicit trade 2015-03-25 15:18:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""8551"",""historical_symbol"":""PVH"",""permno"":""13936""}",1
+ISS:GVKEY:18689,issuer,Historical issuer GVKEY 18689,,"{""gvkey"":""18689""}",1
+SEC:PERMNO:14231,security,VEEV historical security,VEEV,"{""gvkey"":""18689"",""permno"":""14231""}",1
+EV:HEJFE-EBC49B9A024181AD,event,VEEV documented first illicit trade 2015-03-03 13:31:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""18689"",""historical_symbol"":""VEEV"",""permno"":""14231""}",1
+ISS:GVKEY:11584,issuer,Historical issuer GVKEY 11584,,"{""gvkey"":""11584""}",1
+SEC:PERMNO:15456,security,FL historical security,FL,"{""gvkey"":""11584"",""permno"":""15456""}",1
+EV:HEJFE-1950A4340036BB95,event,FL documented first illicit trade 2011-08-18 15:43:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""11584"",""historical_symbol"":""FL"",""permno"":""15456""}",1
+ISS:GVKEY:5234,issuer,Historical issuer GVKEY 5234,,"{""gvkey"":""5234""}",1
+SEC:PERMNO:16432,security,GT historical security,GT,"{""gvkey"":""5234"",""permno"":""16432""}",1
+EV:HEJFE-B704E62641681A73,event,GT documented first illicit trade 2011-07-27 15:59:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""5234"",""historical_symbol"":""GT"",""permno"":""16432""}",1
+ISS:GVKEY:2817,issuer,Historical issuer GVKEY 2817,,"{""gvkey"":""2817""}",1
+SEC:PERMNO:18542,security,CAT historical security,CAT,"{""gvkey"":""2817"",""permno"":""18542""}",1
+EV:HEJFE-95933AA0B84D2F60,event,CAT documented first illicit trade 2012-01-25 14:35:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""2817"",""historical_symbol"":""CAT"",""permno"":""18542""}",1
+ISS:GVKEY:3835,issuer,Historical issuer GVKEY 3835,,"{""gvkey"":""3835""}",1
+SEC:PERMNO:19350,security,DE historical security,DE,"{""gvkey"":""3835"",""permno"":""19350""}",1
+EV:HEJFE-A9D220DE2F7E7FC3,event,DE documented first illicit trade 2015-02-19 15:40:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""3835"",""historical_symbol"":""DE"",""permno"":""19350""}",1
+ISS:GVKEY:2285,issuer,Historical issuer GVKEY 2285,,"{""gvkey"":""2285""}",1
+SEC:PERMNO:19561,security,BA historical security,BA,"{""gvkey"":""2285"",""permno"":""19561""}",1
+EV:HEJFE-45E6DA32B37F83D4,event,BA documented first illicit trade 2012-01-24 15:19:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""2285"",""historical_symbol"":""BA"",""permno"":""19561""}",1
+ISS:GVKEY:3580,issuer,Historical issuer GVKEY 3580,,"{""gvkey"":""3580""}",1
+SEC:PERMNO:20204,security,CR historical security,CR,"{""gvkey"":""3580"",""permno"":""20204""}",1
+EV:HEJFE-E1B57B6A71B06A7F,event,CR documented first illicit trade 2015-04-27 15:39:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""3580"",""historical_symbol"":""CR"",""permno"":""20204""}",1
+ISS:GVKEY:2596,issuer,Historical issuer GVKEY 2596,,"{""gvkey"":""2596""}",1
+SEC:PERMNO:20512,security,CACI historical security,CACI,"{""gvkey"":""2596"",""permno"":""20512""}",1
+EV:HEJFE-B9C8B3D0EF3DCB5E,event,CACI documented first illicit trade 2015-04-29 14:54:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""2596"",""historical_symbol"":""CACI"",""permno"":""20512""}",1
+ISS:GVKEY:2615,issuer,Historical issuer GVKEY 2615,,"{""gvkey"":""2615""}",1
+SEC:PERMNO:20670,security,CAMP historical security,CAMP,"{""gvkey"":""2615"",""permno"":""20670""}",1
+EV:HEJFE-ED8CFC03F1053B9A,event,CAMP documented first illicit trade 2013-04-25 15:48:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""2615"",""historical_symbol"":""CAMP"",""permno"":""20670""}",1
+ISS:GVKEY:10519,issuer,Historical issuer GVKEY 10519,,"{""gvkey"":""10519""}",1
+SEC:PERMNO:23579,security,TXT historical security,TXT,"{""gvkey"":""10519"",""permno"":""23579""}",1
+EV:HEJFE-B5A8A297D14CD19D,event,TXT documented first illicit trade 2015-04-27 15:34:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""10519"",""historical_symbol"":""TXT"",""permno"":""23579""}",1
+ISS:GVKEY:6867,issuer,Historical issuer GVKEY 6867,,"{""gvkey"":""6867""}",1
+SEC:PERMNO:23835,security,MDU historical security,MDU,"{""gvkey"":""6867"",""permno"":""23835""}",1
+EV:HEJFE-6101FFEDBA6EE41B,event,MDU documented first illicit trade 2015-02-02 14:47:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""6867"",""historical_symbol"":""MDU"",""permno"":""23835""}",1
+EV:HEJFE-977FEBE8CA3CFCB6,event,MDU documented first illicit trade 2015-05-04 15:57:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""6867"",""historical_symbol"":""MDU"",""permno"":""23835""}",1
+ISS:GVKEY:8606,issuer,Historical issuer GVKEY 8606,,"{""gvkey"":""8606""}",1
+SEC:PERMNO:24459,security,PBI historical security,PBI,"{""gvkey"":""8606"",""permno"":""24459""}",1
+EV:HEJFE-4291CBF555CED6A9,event,PBI documented first illicit trade 2015-04-29 14:47:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""8606"",""historical_symbol"":""PBI"",""permno"":""24459""}",1
+ISS:GVKEY:11304,issuer,Historical issuer GVKEY 11304,,"{""gvkey"":""11304""}",1
+SEC:PERMNO:24969,security,AVA historical security,AVA,"{""gvkey"":""11304"",""permno"":""24969""}",1
+EV:HEJFE-76B03970FA6BDB42,event,AVA documented first illicit trade 2013-02-19 15:46:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""11304"",""historical_symbol"":""AVA"",""permno"":""24969""}",1
+ISS:GVKEY:3310,issuer,Historical issuer GVKEY 3310,,"{""gvkey"":""3310""}",1
+SEC:PERMNO:25778,security,CA historical security,CA,"{""gvkey"":""3310"",""permno"":""25778""}",1
+EV:HEJFE-376286473ECFECB4,event,CA documented first illicit trade 2011-07-20 15:46:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""3310"",""historical_symbol"":""CA"",""permno"":""25778""}",1
+EV:HEJFE-2D81C70F59E076BA,event,CA documented first illicit trade 2012-01-24 13:32:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""3310"",""historical_symbol"":""CA"",""permno"":""25778""}",1
+ISS:GVKEY:4839,issuer,Historical issuer GVKEY 4839,,"{""gvkey"":""4839""}",1
+SEC:PERMNO:25785,security,F historical security,F,"{""gvkey"":""4839"",""permno"":""25785""}",1
+EV:HEJFE-E8C5063581BE7EB7,event,F documented first illicit trade 2015-01-28 15:59:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""4839"",""historical_symbol"":""F"",""permno"":""25785""}",1
+ISS:GVKEY:3358,issuer,Historical issuer GVKEY 3358,,"{""gvkey"":""3358""}",1
+SEC:PERMNO:26201,security,CMTL historical security,CMTL,"{""gvkey"":""3358"",""permno"":""26201""}",1
+EV:HEJFE-7C93D3838E60926C,event,CMTL documented first illicit trade 2014-12-10 15:41:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""3358"",""historical_symbol"":""CMTL"",""permno"":""26201""}",1
+ISS:GVKEY:11115,issuer,Historical issuer GVKEY 11115,,"{""gvkey"":""11115""}",1
+SEC:PERMNO:27043,security,VAR historical security,VAR,"{""gvkey"":""11115"",""permno"":""27043""}",1
+EV:HEJFE-99F3FC8CE022DEA1,event,VAR documented first illicit trade 2012-01-25 12:46:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""11115"",""historical_symbol"":""VAR"",""permno"":""27043""}",1
+ISS:GVKEY:9299,issuer,Historical issuer GVKEY 9299,,"{""gvkey"":""9299""}",1
+SEC:PERMNO:27633,security,R historical security,R,"{""gvkey"":""9299"",""permno"":""27633""}",1
+EV:HEJFE-A25F33B630365184,event,R documented first illicit trade 2015-02-02 15:43:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""9299"",""historical_symbol"":""R"",""permno"":""27633""}",1
+ISS:GVKEY:8304,issuer,Historical issuer GVKEY 8304,,"{""gvkey"":""8304""}",1
+SEC:PERMNO:35051,security,PLL historical security,PLL,"{""gvkey"":""8304"",""permno"":""35051""}",1
+EV:HEJFE-36433565499915E2,event,PLL documented first illicit trade 2015-02-23 15:03:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""8304"",""historical_symbol"":""PLL"",""permno"":""35051""}",1
+ISS:GVKEY:9216,issuer,Historical issuer GVKEY 9216,,"{""gvkey"":""9216""}",1
+SEC:PERMNO:35991,security,ROG historical security,ROG,"{""gvkey"":""9216"",""permno"":""35991""}",1
+EV:HEJFE-7CEFB3FE3D986464,event,ROG documented first illicit trade 2015-02-17 15:44:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""9216"",""historical_symbol"":""ROG"",""permno"":""35991""}",1
+EV:HEJFE-33FC1D00348D7C59,event,ROG documented first illicit trade 2015-04-29 15:29:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""9216"",""historical_symbol"":""ROG"",""permno"":""35991""}",1
+ISS:GVKEY:9225,issuer,Historical issuer GVKEY 9225,,"{""gvkey"":""9225""}",1
+SEC:PERMNO:36003,security,ROL historical security,ROL,"{""gvkey"":""9225"",""permno"":""36003""}",1
+EV:HEJFE-30CA515BC590DDA6,event,ROL documented first illicit trade 2012-01-24 10:14:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""9225"",""historical_symbol"":""ROL"",""permno"":""36003""}",1
+ISS:GVKEY:11506,issuer,Historical issuer GVKEY 11506,,"{""gvkey"":""11506""}",1
+SEC:PERMNO:38156,security,WMB historical security,WMB,"{""gvkey"":""11506"",""permno"":""38156""}",1
+EV:HEJFE-1783DE88400AF6CC,event,WMB documented first illicit trade 2015-02-18 14:54:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""11506"",""historical_symbol"":""WMB"",""permno"":""38156""}",1
+ISS:GVKEY:5116,issuer,Historical issuer GVKEY 5116,,"{""gvkey"":""5116""}",1
+SEC:PERMNO:38659,security,GNTX historical security,GNTX,"{""gvkey"":""5116"",""permno"":""38659""}",1
+EV:HEJFE-BD3F577ADD90D512,event,GNTX documented first illicit trade 2013-10-21 15:21:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""5116"",""historical_symbol"":""GNTX"",""permno"":""38659""}",1
+ISS:GVKEY:7116,issuer,Historical issuer GVKEY 7116,,"{""gvkey"":""7116""}",1
+SEC:PERMNO:39538,security,MAT historical security,MAT,"{""gvkey"":""7116"",""permno"":""39538""}",1
+EV:HEJFE-263620F13A6443DD,event,MAT documented first illicit trade 2015-04-16 14:39:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""7116"",""historical_symbol"":""MAT"",""permno"":""39538""}",1
+ISS:GVKEY:7260,issuer,Historical issuer GVKEY 7260,,"{""gvkey"":""7260""}",1
+SEC:PERMNO:42796,security,MDP historical security,MDP,"{""gvkey"":""7260"",""permno"":""42796""}",1
+EV:HEJFE-704E64D64C11C119,event,MDP documented first illicit trade 2012-01-23 14:39:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""7260"",""historical_symbol"":""MDP"",""permno"":""42796""}",1
+ISS:GVKEY:6003,issuer,Historical issuer GVKEY 6003,,"{""gvkey"":""6003""}",1
+SEC:PERMNO:44506,security,IDTI historical security,IDTI,"{""gvkey"":""6003"",""permno"":""44506""}",1
+EV:HEJFE-9861757889227DD4,event,IDTI documented first illicit trade 2015-02-02 14:24:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""6003"",""historical_symbol"":""IDTI"",""permno"":""44506""}",1
+EV:HEJFE-EFFA194386ABDD28,event,IDTI documented first illicit trade 2015-05-04 15:40:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""6003"",""historical_symbol"":""IDTI"",""permno"":""44506""}",1
+ISS:GVKEY:6097,issuer,Historical issuer GVKEY 6097,,"{""gvkey"":""6097""}",1
+SEC:PERMNO:45277,security,IGT historical security,IGT,"{""gvkey"":""6097"",""permno"":""45277""}",1
+EV:HEJFE-7E8FA3E5E417B5E7,event,IGT documented first illicit trade 2012-01-23 15:31:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""6097"",""historical_symbol"":""IGT"",""permno"":""45277""}",1
+ISS:GVKEY:1327,issuer,Historical issuer GVKEY 1327,,"{""gvkey"":""1327""}",1
+SEC:PERMNO:45911,security,SWKS historical security,SWKS,"{""gvkey"":""1327"",""permno"":""45911""}",1
+EV:HEJFE-4DEF5FDB3210E91B,event,SWKS documented first illicit trade 2015-01-22 15:41:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""1327"",""historical_symbol"":""SWKS"",""permno"":""45911""}",1
+ISS:GVKEY:2593,issuer,Historical issuer GVKEY 2593,,"{""gvkey"":""2593""}",1
+SEC:PERMNO:46690,security,CBT historical security,CBT,"{""gvkey"":""2593"",""permno"":""46690""}",1
+EV:HEJFE-9DF82252ED78E41F,event,CBT documented first illicit trade 2015-04-29 13:33:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""2593"",""historical_symbol"":""CBT"",""permno"":""46690""}",1
+ISS:GVKEY:2044,issuer,Historical issuer GVKEY 2044,,"{""gvkey"":""2044""}",1
+SEC:PERMNO:46877,security,BCR historical security,BCR,"{""gvkey"":""2044"",""permno"":""46877""}",1
+EV:HEJFE-E25BAF3CFF23A3BE,event,BCR documented first illicit trade 2015-01-29 15:27:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""2044"",""historical_symbol"":""BCR"",""permno"":""46877""}",1
+ISS:GVKEY:6379,issuer,Historical issuer GVKEY 6379,,"{""gvkey"":""6379""}",1
+SEC:PERMNO:47379,security,KELYA historical security,KELYA,"{""gvkey"":""6379"",""permno"":""47379""}",1
+EV:HEJFE-5089F8E69B6BC646,event,KELYA documented first illicit trade 2013-05-07 15:49:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""6379"",""historical_symbol"":""KELYA"",""permno"":""47379""}",1
+ISS:GVKEY:6565,issuer,Historical issuer GVKEY 6565,,"{""gvkey"":""6565""}",1
+SEC:PERMNO:48486,security,LRCX historical security,LRCX,"{""gvkey"":""6565"",""permno"":""48486""}",1
+EV:HEJFE-66BA40A20548B7E3,event,LRCX documented first illicit trade 2013-04-24 13:43:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""6565"",""historical_symbol"":""LRCX"",""permno"":""48486""}",1
+ISS:GVKEY:10453,issuer,Historical issuer GVKEY 10453,,"{""gvkey"":""10453""}",1
+SEC:PERMNO:51369,security,TER historical security,TER,"{""gvkey"":""10453"",""permno"":""51369""}",1
+EV:HEJFE-334BAA0D940A418A,event,TER documented first illicit trade 2015-01-28 15:49:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""10453"",""historical_symbol"":""TER"",""permno"":""51369""}",1
+ISS:GVKEY:7146,issuer,Historical issuer GVKEY 7146,,"{""gvkey"":""7146""}",1
+SEC:PERMNO:52090,security,MKC historical security,MKC,"{""gvkey"":""7146"",""permno"":""52090""}",1
+EV:HEJFE-D1D8268651584B6A,event,MKC documented first illicit trade 2013-04-01 15:38:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""7146"",""historical_symbol"":""MKC"",""permno"":""52090""}",1
+ISS:GVKEY:7750,issuer,Historical issuer GVKEY 7750,,"{""gvkey"":""7750""}",1
+SEC:PERMNO:52337,security,THC historical security,THC,"{""gvkey"":""7750"",""permno"":""52337""}",1
+EV:HEJFE-0273F1BFCD285E7F,event,THC documented first illicit trade 2015-02-23 15:57:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""7750"",""historical_symbol"":""THC"",""permno"":""52337""}",1
+EV:HEJFE-6C4EA140AD75FFE2,event,THC documented first illicit trade 2015-05-04 15:48:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""7750"",""historical_symbol"":""THC"",""permno"":""52337""}",1
+ISS:GVKEY:7346,issuer,Historical issuer GVKEY 7346,,"{""gvkey"":""7346""}",1
+SEC:PERMNO:53640,security,MSCC historical security,MSCC,"{""gvkey"":""7346"",""permno"":""53640""}",1
+EV:HEJFE-830D52F9F7F1CEEB,event,MSCC documented first illicit trade 2012-01-26 14:51:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""7346"",""historical_symbol"":""MSCC"",""permno"":""53640""}",1
+ISS:GVKEY:3362,issuer,Historical issuer GVKEY 3362,,"{""gvkey"":""3362""}",1
+SEC:PERMNO:56274,security,CAG historical security,CAG,"{""gvkey"":""3362"",""permno"":""56274""}",1
+EV:HEJFE-EDF80619CED083CB,event,CAG documented first illicit trade 2015-03-25 15:19:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""3362"",""historical_symbol"":""CAG"",""permno"":""56274""}",1
+ISS:GVKEY:7906,issuer,Historical issuer GVKEY 7906,,"{""gvkey"":""7906""}",1
+SEC:PERMNO:57665,security,NKE historical security,NKE,"{""gvkey"":""7906"",""permno"":""57665""}",1
+EV:HEJFE-0BAF70D8CC8F1631,event,NKE documented first illicit trade 2015-03-19 15:58:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""7906"",""historical_symbol"":""NKE"",""permno"":""57665""}",1
+ISS:GVKEY:7921,issuer,Historical issuer GVKEY 7921,,"{""gvkey"":""7921""}",1
+SEC:PERMNO:57809,security,NDSN historical security,NDSN,"{""gvkey"":""7921"",""permno"":""57809""}",1
+EV:HEJFE-332D5C6DC3ACE6B1,event,NDSN documented first illicit trade 2015-05-19 15:35:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""7921"",""historical_symbol"":""NDSN"",""permno"":""57809""}",1
+ISS:GVKEY:7922,issuer,Historical issuer GVKEY 7922,,"{""gvkey"":""7922""}",1
+SEC:PERMNO:57817,security,JWN historical security,JWN,"{""gvkey"":""7922"",""permno"":""57817""}",1
+EV:HEJFE-7ED8DBD4804E4330,event,JWN documented first illicit trade 2015-02-19 14:29:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""7922"",""historical_symbol"":""JWN"",""permno"":""57817""}",1
+ISS:GVKEY:3024,issuer,Historical issuer GVKEY 3024,,"{""gvkey"":""3024""}",1
+SEC:PERMNO:59192,security,CB historical security,CB,"{""gvkey"":""3024"",""permno"":""59192""}",1
+EV:HEJFE-76DCF0FCA248E814,event,CB documented first illicit trade 2012-01-26 12:17:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""3024"",""historical_symbol"":""CB"",""permno"":""59192""}",1
+ISS:GVKEY:1632,issuer,Historical issuer GVKEY 1632,,"{""gvkey"":""1632""}",1
+SEC:PERMNO:60871,security,ADI historical security,ADI,"{""gvkey"":""1632"",""permno"":""60871""}",1
+EV:HEJFE-D9C52E6CC595C380,event,ADI documented first illicit trade 2015-02-17 14:05:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""1632"",""historical_symbol"":""ADI"",""permno"":""60871""}",1
+EV:HEJFE-09EB83905864C50A,event,ADI documented first illicit trade 2015-05-19 15:15:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""1632"",""historical_symbol"":""ADI"",""permno"":""60871""}",1
+ISS:GVKEY:1161,issuer,Historical issuer GVKEY 1161,,"{""gvkey"":""1161""}",1
+SEC:PERMNO:61241,security,AMD historical security,AMD,"{""gvkey"":""1161"",""permno"":""61241""}",1
+EV:HEJFE-B46D4F8F72DD0212,event,AMD documented first illicit trade 2013-10-17 14:40:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""1161"",""historical_symbol"":""AMD"",""permno"":""61241""}",1
+ISS:GVKEY:2220,issuer,Historical issuer GVKEY 2220,,"{""gvkey"":""2220""}",1
+SEC:PERMNO:61516,security,BIO historical security,BIO,"{""gvkey"":""2220"",""permno"":""61516""}",1
+EV:HEJFE-2FD552B9358078C6,event,BIO documented first illicit trade 2013-05-07 15:55:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""2220"",""historical_symbol"":""BIO"",""permno"":""61516""}",1
+ISS:GVKEY:8901,issuer,Historical issuer GVKEY 8901,,"{""gvkey"":""8901""}",1
+SEC:PERMNO:66683,security,RES historical security,RES,"{""gvkey"":""8901"",""permno"":""66683""}",1
+EV:HEJFE-C85CE64DFF947CFD,event,RES documented first illicit trade 2012-01-24 15:20:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""8901"",""historical_symbol"":""RES"",""permno"":""66683""}",1
+ISS:GVKEY:11923,issuer,Historical issuer GVKEY 11923,,"{""gvkey"":""11923""}",1
+SEC:PERMNO:70332,security,APC historical security,APC,"{""gvkey"":""11923"",""permno"":""70332""}",1
+EV:HEJFE-7B8A1A0CD3E2966F,event,APC documented first illicit trade 2013-05-06 13:27:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""11923"",""historical_symbol"":""APC"",""permno"":""70332""}",1
+ISS:GVKEY:9715,issuer,Historical issuer GVKEY 9715,,"{""gvkey"":""9715""}",1
+SEC:PERMNO:70616,security,SYMM historical security,SYMM,"{""gvkey"":""9715"",""permno"":""70616""}",1
+EV:HEJFE-824BABBAD988A068,event,SYMM documented first illicit trade 2012-01-25 14:54:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""9715"",""historical_symbol"":""SYMM"",""permno"":""70616""}",1
+ISS:GVKEY:10035,issuer,Historical issuer GVKEY 10035,,"{""gvkey"":""10035""}",1
+SEC:PERMNO:72726,security,STT historical security,STT,"{""gvkey"":""10035"",""permno"":""72726""}",1
+EV:HEJFE-EC5EB2BE0D97833F,event,STT documented first illicit trade 2015-01-22 15:50:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""10035"",""historical_symbol"":""STT"",""permno"":""72726""}",1
+ISS:GVKEY:12471,issuer,Historical issuer GVKEY 12471,,"{""gvkey"":""12471""}",1
+SEC:PERMNO:75070,security,INT historical security,INT,"{""gvkey"":""12471"",""permno"":""75070""}",1
+EV:HEJFE-D51AC412EDF93AA8,event,INT documented first illicit trade 2015-04-30 15:40:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""12471"",""historical_symbol"":""INT"",""permno"":""75070""}",1
+ISS:GVKEY:14790,issuer,Historical issuer GVKEY 14790,,"{""gvkey"":""14790""}",1
+SEC:PERMNO:75342,security,MTH historical security,MTH,"{""gvkey"":""14790"",""permno"":""75342""}",1
+EV:HEJFE-9B43F5B767ECD0FA,event,MTH documented first illicit trade 2013-04-23 14:24:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""14790"",""historical_symbol"":""MTH"",""permno"":""75342""}",1
+EV:HEJFE-2D6ABDFDE39E5919,event,MTH documented first illicit trade 2013-07-23 15:18:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""14790"",""historical_symbol"":""MTH"",""permno"":""75342""}",1
+ISS:GVKEY:16188,issuer,Historical issuer GVKEY 16188,,"{""gvkey"":""16188""}",1
+SEC:PERMNO:75654,security,CGNX historical security,CGNX,"{""gvkey"":""16188"",""permno"":""75654""}",1
+EV:HEJFE-FBA59D82CEE8FD00,event,CGNX documented first illicit trade 2015-02-12 14:04:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""16188"",""historical_symbol"":""CGNX"",""permno"":""75654""}",1
+EV:HEJFE-8EAA8616B1750B40,event,CGNX documented first illicit trade 2015-05-04 15:09:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""16188"",""historical_symbol"":""CGNX"",""permno"":""75654""}",1
+ISS:GVKEY:16721,issuer,Historical issuer GVKEY 16721,,"{""gvkey"":""16721""}",1
+SEC:PERMNO:75828,security,EA historical security,EA,"{""gvkey"":""16721"",""permno"":""75828""}",1
+EV:HEJFE-0B87675BF7BEDBCA,event,EA documented first illicit trade 2015-01-27 15:48:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""16721"",""historical_symbol"":""EA"",""permno"":""75828""}",1
+ISS:GVKEY:16597,issuer,Historical issuer GVKEY 16597,,"{""gvkey"":""16597""}",1
+SEC:PERMNO:75854,security,LSCC historical security,LSCC,"{""gvkey"":""16597"",""permno"":""75854""}",1
+EV:HEJFE-B7EFA7CF95262283,event,LSCC documented first illicit trade 2013-04-18 14:24:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""16597"",""historical_symbol"":""LSCC"",""permno"":""75854""}",1
+ISS:GVKEY:24113,issuer,Historical issuer GVKEY 24113,,"{""gvkey"":""24113""}",1
+SEC:PERMNO:76695,security,PNRA historical security,PNRA,"{""gvkey"":""24113"",""permno"":""76695""}",1
+EV:HEJFE-CCC7747CFBDE893E,event,PNRA documented first illicit trade 2013-04-23 14:25:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""24113"",""historical_symbol"":""PNRA"",""permno"":""76695""}",1
+EV:HEJFE-600696AB8463FFD8,event,PNRA documented first illicit trade 2013-07-23 15:11:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""24113"",""historical_symbol"":""PNRA"",""permno"":""76695""}",1
+EV:HEJFE-8167467EBF64AABE,event,PNRA documented first illicit trade 2013-10-22 15:20:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""24113"",""historical_symbol"":""PNRA"",""permno"":""76695""}",1
+EV:HEJFE-4E643D38FFB3016E,event,PNRA documented first illicit trade 2015-02-11 14:58:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""24113"",""historical_symbol"":""PNRA"",""permno"":""76695""}",1
+ISS:GVKEY:24197,issuer,Historical issuer GVKEY 24197,,"{""gvkey"":""24197""}",1
+SEC:PERMNO:76709,security,IDXX historical security,IDXX,"{""gvkey"":""24197"",""permno"":""76709""}",1
+EV:HEJFE-99CCB9D9BECE4E72,event,IDXX documented first illicit trade 2012-01-26 13:47:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""24197"",""historical_symbol"":""IDXX"",""permno"":""76709""}",1
+ISS:GVKEY:24021,issuer,Historical issuer GVKEY 24021,,"{""gvkey"":""24021""}",1
+SEC:PERMNO:76837,security,HAE historical security,HAE,"{""gvkey"":""24021"",""permno"":""76837""}",1
+EV:HEJFE-13FC93F4D143B268,event,HAE documented first illicit trade 2012-01-27 15:55:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""24021"",""historical_symbol"":""HAE"",""permno"":""76837""}",1
+ISS:GVKEY:24725,issuer,Historical issuer GVKEY 24725,,"{""gvkey"":""24725""}",1
+SEC:PERMNO:77114,security,WRLD historical security,WRLD,"{""gvkey"":""24725"",""permno"":""77114""}",1
+EV:HEJFE-DA7595FDF91D8CBC,event,WRLD documented first illicit trade 2012-01-24 15:53:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""24725"",""historical_symbol"":""WRLD"",""permno"":""77114""}",1
+ISS:GVKEY:24856,issuer,Historical issuer GVKEY 24856,,"{""gvkey"":""24856""}",1
+SEC:PERMNO:77274,security,GILD historical security,GILD,"{""gvkey"":""24856"",""permno"":""77274""}",1
+EV:HEJFE-C4D39B22234902F2,event,GILD documented first illicit trade 2015-02-03 15:50:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""24856"",""historical_symbol"":""GILD"",""permno"":""77274""}",1
+ISS:GVKEY:25166,issuer,Historical issuer GVKEY 25166,,"{""gvkey"":""25166""}",1
+SEC:PERMNO:77515,security,KOPN historical security,KOPN,"{""gvkey"":""25166"",""permno"":""77515""}",1
+EV:HEJFE-8415E931D4314106,event,KOPN documented first illicit trade 2015-03-10 14:58:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""25166"",""historical_symbol"":""KOPN"",""permno"":""77515""}",1
+ISS:GVKEY:25434,issuer,Historical issuer GVKEY 25434,,"{""gvkey"":""25434""}",1
+SEC:PERMNO:77702,security,SBUX historical security,SBUX,"{""gvkey"":""25434"",""permno"":""77702""}",1
+EV:HEJFE-A9DB7C5F6FD1D978,event,SBUX documented first illicit trade 2015-01-22 13:22:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""25434"",""historical_symbol"":""SBUX"",""permno"":""77702""}",1
+ISS:GVKEY:25737,issuer,Historical issuer GVKEY 25737,,"{""gvkey"":""25737""}",1
+SEC:PERMNO:77902,security,CAKE historical security,CAKE,"{""gvkey"":""25737"",""permno"":""77902""}",1
+EV:HEJFE-760E36DA94752F1E,event,CAKE documented first illicit trade 2015-04-22 14:22:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""25737"",""historical_symbol"":""CAKE"",""permno"":""77902""}",1
+ISS:GVKEY:26013,issuer,Historical issuer GVKEY 26013,,"{""gvkey"":""26013""}",1
+SEC:PERMNO:78170,security,SM historical security,SM,"{""gvkey"":""26013"",""permno"":""78170""}",1
+EV:HEJFE-5B6F87699FF5093E,event,SM documented first illicit trade 2015-05-05 15:08:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""26013"",""historical_symbol"":""SM"",""permno"":""78170""}",1
+ISS:GVKEY:27794,issuer,Historical issuer GVKEY 27794,,"{""gvkey"":""27794""}",1
+SEC:PERMNO:78875,security,CREE historical security,CREE,"{""gvkey"":""27794"",""permno"":""78875""}",1
+EV:HEJFE-81F188C0D790FE70,event,CREE documented first illicit trade 2015-01-20 15:39:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""27794"",""historical_symbol"":""CREE"",""permno"":""78875""}",1
+EV:HEJFE-D35C7804C2F5326C,event,CREE documented first illicit trade 2015-04-21 15:29:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""27794"",""historical_symbol"":""CREE"",""permno"":""78875""}",1
+ISS:GVKEY:21440,issuer,Historical issuer GVKEY 21440,,"{""gvkey"":""21440""}",1
+SEC:PERMNO:78981,security,LSTR historical security,LSTR,"{""gvkey"":""21440"",""permno"":""78981""}",1
+EV:HEJFE-AA2597B95CFD2A2D,event,LSTR documented first illicit trade 2011-10-21 15:48:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""21440"",""historical_symbol"":""LSTR"",""permno"":""78981""}",1
+ISS:GVKEY:27936,issuer,Historical issuer GVKEY 27936,,"{""gvkey"":""27936""}",1
+SEC:PERMNO:78990,security,DEST historical security,DEST,"{""gvkey"":""27936"",""permno"":""78990""}",1
+EV:HEJFE-8596DDD6A535BD90,event,DEST documented first illicit trade 2012-01-25 15:34:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""27936"",""historical_symbol"":""DEST"",""permno"":""78990""}",1
+ISS:GVKEY:27938,issuer,Historical issuer GVKEY 27938,,"{""gvkey"":""27938""}",1
+SEC:PERMNO:79007,security,SCVL historical security,SCVL,"{""gvkey"":""27938"",""permno"":""79007""}",1
+EV:HEJFE-D6BA56FA6D57427E,event,SCVL documented first illicit trade 2015-05-20 15:17:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""27938"",""historical_symbol"":""SCVL"",""permno"":""79007""}",1
+ISS:GVKEY:28704,issuer,Historical issuer GVKEY 28704,,"{""gvkey"":""28704""}",1
+SEC:PERMNO:79507,security,MCRI historical security,MCRI,"{""gvkey"":""28704"",""permno"":""79507""}",1
+EV:HEJFE-8F17F6BEDF631C8B,event,MCRI documented first illicit trade 2013-04-25 15:08:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""28704"",""historical_symbol"":""MCRI"",""permno"":""79507""}",1
+ISS:GVKEY:28742,issuer,Historical issuer GVKEY 28742,,"{""gvkey"":""28742""}",1
+SEC:PERMNO:79545,security,BWA historical security,BWA,"{""gvkey"":""28742"",""permno"":""79545""}",1
+EV:HEJFE-5CB3223BB28A6F14,event,BWA documented first illicit trade 2011-07-27 10:59:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""28742"",""historical_symbol"":""BWA"",""permno"":""79545""}",1
+ISS:GVKEY:28877,issuer,Historical issuer GVKEY 28877,,"{""gvkey"":""28877""}",1
+SEC:PERMNO:79588,security,GMCR historical security,GMCR,"{""gvkey"":""28877"",""permno"":""79588""}",1
+EV:HEJFE-7482DE1CD44C1A00,event,GMCR documented first illicit trade 2015-02-04 14:07:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""28877"",""historical_symbol"":""GMCR"",""permno"":""79588""}",1
+ISS:GVKEY:12459,issuer,Historical issuer GVKEY 12459,,"{""gvkey"":""12459""}",1
+SEC:PERMNO:79785,security,NVR historical security,NVR,"{""gvkey"":""12459"",""permno"":""79785""}",1
+EV:HEJFE-56483839E5F0E88F,event,NVR documented first illicit trade 2012-01-25 15:56:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""12459"",""historical_symbol"":""NVR"",""permno"":""79785""}",1
+ISS:GVKEY:29246,issuer,Historical issuer GVKEY 29246,,"{""gvkey"":""29246""}",1
+SEC:PERMNO:79796,security,AF historical security,AF,"{""gvkey"":""29246"",""permno"":""79796""}",1
+EV:HEJFE-89844B5980EB5339,event,AF documented first illicit trade 2012-01-25 15:18:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""29246"",""historical_symbol"":""AF"",""permno"":""79796""}",1
+ISS:GVKEY:30098,issuer,Historical issuer GVKEY 30098,,"{""gvkey"":""30098""}",1
+SEC:PERMNO:80446,security,GDI historical security,GDI,"{""gvkey"":""30098"",""permno"":""80446""}",1
+EV:HEJFE-8536AD777ECEEACB,event,GDI documented first illicit trade 2013-04-25 15:17:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""30098"",""historical_symbol"":""GDI"",""permno"":""80446""}",1
+ISS:GVKEY:31147,issuer,Historical issuer GVKEY 31147,,"{""gvkey"":""31147""}",1
+SEC:PERMNO:81162,security,MCRL historical security,MCRL,"{""gvkey"":""31147"",""permno"":""81162""}",1
+EV:HEJFE-489E74F74AFB5AFA,event,MCRL documented first illicit trade 2013-04-25 14:32:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""31147"",""historical_symbol"":""MCRL"",""permno"":""81162""}",1
+ISS:GVKEY:31488,issuer,Historical issuer GVKEY 31488,,"{""gvkey"":""31488""}",1
+SEC:PERMNO:81256,security,ISSI historical security,ISSI,"{""gvkey"":""31488"",""permno"":""81256""}",1
+EV:HEJFE-D4E8CD312A2AA576,event,ISSI documented first illicit trade 2012-01-25 14:51:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""31488"",""historical_symbol"":""ISSI"",""permno"":""81256""}",1
+ISS:GVKEY:31607,issuer,Historical issuer GVKEY 31607,,"{""gvkey"":""31607""}",1
+SEC:PERMNO:81501,security,NATI historical security,NATI,"{""gvkey"":""31607"",""permno"":""81501""}",1
+EV:HEJFE-F9E72EEF6E5BD373,event,NATI documented first illicit trade 2015-01-29 15:51:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""31607"",""historical_symbol"":""NATI"",""permno"":""81501""}",1
+EV:HEJFE-7F8218B15679F14D,event,NATI documented first illicit trade 2015-04-28 13:59:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""31607"",""historical_symbol"":""NATI"",""permno"":""81501""}",1
+ISS:GVKEY:24466,issuer,Historical issuer GVKEY 24466,,"{""gvkey"":""24466""}",1
+SEC:PERMNO:81564,security,IBKC historical security,IBKC,"{""gvkey"":""24466"",""permno"":""81564""}",1
+EV:HEJFE-2F14F138D09BCA76,event,IBKC documented first illicit trade 2012-01-24 13:53:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""24466"",""historical_symbol"":""IBKC"",""permno"":""81564""}",1
+ISS:GVKEY:61513,issuer,Historical issuer GVKEY 61513,,"{""gvkey"":""61513""}",1
+SEC:PERMNO:82618,security,SNDK historical security,SNDK,"{""gvkey"":""61513"",""permno"":""82618""}",1
+EV:HEJFE-48B08BAEDCEEDEFC,event,SNDK documented first illicit trade 2015-01-21 15:00:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""61513"",""historical_symbol"":""SNDK"",""permno"":""82618""}",1
+ISS:GVKEY:61685,issuer,Historical issuer GVKEY 61685,,"{""gvkey"":""61685""}",1
+SEC:PERMNO:82759,security,NUAN historical security,NUAN,"{""gvkey"":""61685"",""permno"":""82759""}",1
+EV:HEJFE-54A5D1D8A5B593C8,event,NUAN documented first illicit trade 2015-02-05 15:33:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""61685"",""historical_symbol"":""NUAN"",""permno"":""82759""}",1
+ISS:GVKEY:62516,issuer,Historical issuer GVKEY 62516,,"{""gvkey"":""62516""}",1
+SEC:PERMNO:83244,security,CENX historical security,CENX,"{""gvkey"":""62516"",""permno"":""83244""}",1
+EV:HEJFE-7CA38C1FDA5EA4D0,event,CENX documented first illicit trade 2013-04-25 15:22:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""62516"",""historical_symbol"":""CENX"",""permno"":""83244""}",1
+ISS:GVKEY:64480,issuer,Historical issuer GVKEY 64480,,"{""gvkey"":""64480""}",1
+SEC:PERMNO:84624,security,ROVI historical security,ROVI,"{""gvkey"":""64480"",""permno"":""84624""}",1
+EV:HEJFE-809E53BB4081FBAE,event,ROVI documented first illicit trade 2015-04-30 14:48:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""64480"",""historical_symbol"":""ROVI"",""permno"":""84624""}",1
+ISS:GVKEY:66065,issuer,Historical issuer GVKEY 66065,,"{""gvkey"":""66065""}",1
+SEC:PERMNO:85663,security,URI historical security,URI,"{""gvkey"":""66065"",""permno"":""85663""}",1
+EV:HEJFE-00D863517A3A754C,event,URI documented first illicit trade 2015-01-21 15:43:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""66065"",""historical_symbol"":""URI"",""permno"":""85663""}",1
+ISS:GVKEY:65967,issuer,Historical issuer GVKEY 65967,,"{""gvkey"":""65967""}",1
+SEC:PERMNO:85675,security,AMSG historical security,AMSG,"{""gvkey"":""65967"",""permno"":""85675""}",1
+EV:HEJFE-0AA84E6E44ED02D8,event,AMSG documented first illicit trade 2015-02-25 15:57:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""65967"",""historical_symbol"":""AMSG"",""permno"":""85675""}",1
+ISS:GVKEY:66032,issuer,Historical issuer GVKEY 66032,,"{""gvkey"":""66032""}",1
+SEC:PERMNO:85710,security,POWI historical security,POWI,"{""gvkey"":""66032"",""permno"":""85710""}",1
+EV:HEJFE-8A0517D50278EAE4,event,POWI documented first illicit trade 2015-04-29 15:23:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""66032"",""historical_symbol"":""POWI"",""permno"":""85710""}",1
+ISS:GVKEY:66368,issuer,Historical issuer GVKEY 66368,,"{""gvkey"":""66368""}",1
+SEC:PERMNO:85753,security,VRSN historical security,VRSN,"{""gvkey"":""66368"",""permno"":""85753""}",1
+EV:HEJFE-1FCAAB3F7CC931CF,event,VRSN documented first illicit trade 2013-04-25 14:07:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""66368"",""historical_symbol"":""VRSN"",""permno"":""85753""}",1
+ISS:GVKEY:105936,issuer,Historical issuer GVKEY 105936,,"{""gvkey"":""105936""}",1
+SEC:PERMNO:85863,security,COLM historical security,COLM,"{""gvkey"":""105936"",""permno"":""85863""}",1
+EV:HEJFE-FBFFFD99898188CF,event,COLM documented first illicit trade 2015-02-12 14:33:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""105936"",""historical_symbol"":""COLM"",""permno"":""85863""}",1
+EV:HEJFE-0BCEF81B6C0111FB,event,COLM documented first illicit trade 2015-04-30 15:13:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""105936"",""historical_symbol"":""COLM"",""permno"":""85863""}",1
+ISS:GVKEY:121142,issuer,Historical issuer GVKEY 121142,,"{""gvkey"":""121142""}",1
+SEC:PERMNO:86949,security,SKX historical security,SKX,"{""gvkey"":""121142"",""permno"":""86949""}",1
+EV:HEJFE-F170013A9B3F85E2,event,SKX documented first illicit trade 2015-04-22 15:24:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""121142"",""historical_symbol"":""SKX"",""permno"":""86949""}",1
+ISS:GVKEY:121718,issuer,Historical issuer GVKEY 121718,,"{""gvkey"":""121718""}",1
+SEC:PERMNO:86979,security,JNPR historical security,JNPR,"{""gvkey"":""121718"",""permno"":""86979""}",1
+EV:HEJFE-D7FD00AF94DD8F41,event,JNPR documented first illicit trade 2011-04-19 15:50:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""121718"",""historical_symbol"":""JNPR"",""permno"":""86979""}",1
+EV:HEJFE-2558DC6865781793,event,JNPR documented first illicit trade 2013-04-23 14:31:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""121718"",""historical_symbol"":""JNPR"",""permno"":""86979""}",1
+EV:HEJFE-E61095F8DC4132DE,event,JNPR documented first illicit trade 2013-07-23 15:03:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""121718"",""historical_symbol"":""JNPR"",""permno"":""86979""}",1
+EV:HEJFE-F20ECC0C09BBC89E,event,JNPR documented first illicit trade 2013-10-22 13:58:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""121718"",""historical_symbol"":""JNPR"",""permno"":""86979""}",1
+ISS:GVKEY:121673,issuer,Historical issuer GVKEY 121673,,"{""gvkey"":""121673""}",1
+SEC:PERMNO:87000,security,STMP historical security,STMP,"{""gvkey"":""121673"",""permno"":""87000""}",1
+EV:HEJFE-06AE65B9C8FB0395,event,STMP documented first illicit trade 2013-04-24 15:28:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""121673"",""historical_symbol"":""STMP"",""permno"":""87000""}",1
+ISS:GVKEY:122061,issuer,Historical issuer GVKEY 122061,,"{""gvkey"":""122061""}",1
+SEC:PERMNO:87092,security,TIBX historical security,TIBX,"{""gvkey"":""122061"",""permno"":""87092""}",1
+EV:HEJFE-2C887DA6F617936F,event,TIBX documented first illicit trade 2013-09-19 15:29:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""122061"",""historical_symbol"":""TIBX"",""permno"":""87092""}",1
+ISS:GVKEY:130762,issuer,Historical issuer GVKEY 130762,,"{""gvkey"":""130762""}",1
+SEC:PERMNO:87612,security,ISIL historical security,ISIL,"{""gvkey"":""130762"",""permno"":""87612""}",1
+EV:HEJFE-E575622C8FDAB71F,event,ISIL documented first illicit trade 2013-04-24 14:57:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""130762"",""historical_symbol"":""ISIL"",""permno"":""87612""}",1
+ISS:GVKEY:133366,issuer,Historical issuer GVKEY 133366,,"{""gvkey"":""133366""}",1
+SEC:PERMNO:87657,security,EW historical security,EW,"{""gvkey"":""133366"",""permno"":""87657""}",1
+EV:HEJFE-198DE6D99E934F32,event,EW documented first illicit trade 2011-04-20 14:29:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""133366"",""historical_symbol"":""EW"",""permno"":""87657""}",1
+EV:HEJFE-ED329F780A1085DA,event,EW documented first illicit trade 2013-04-23 13:28:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""133366"",""historical_symbol"":""EW"",""permno"":""87657""}",1
+ISS:GVKEY:66686,issuer,Historical issuer GVKEY 66686,,"{""gvkey"":""66686""}",1
+SEC:PERMNO:88203,security,VDSI historical security,VDSI,"{""gvkey"":""66686"",""permno"":""88203""}",1
+EV:HEJFE-BFE8A42E0C19BA39,event,VDSI documented first illicit trade 2011-10-26 14:26:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""66686"",""historical_symbol"":""VDSI"",""permno"":""88203""}",1
+ISS:GVKEY:137131,issuer,Historical issuer GVKEY 137131,,"{""gvkey"":""137131""}",1
+SEC:PERMNO:88281,security,CRL historical security,CRL,"{""gvkey"":""137131"",""permno"":""88281""}",1
+EV:HEJFE-947F50EBAFBA54DC,event,CRL documented first illicit trade 2015-02-10 15:55:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""137131"",""historical_symbol"":""CRL"",""permno"":""88281""}",1
+ISS:GVKEY:136884,issuer,Historical issuer GVKEY 136884,,"{""gvkey"":""136884""}",1
+SEC:PERMNO:88335,security,DNDN historical security,DNDN,"{""gvkey"":""136884"",""permno"":""88335""}",1
+EV:HEJFE-4FB44934BC5C5221,event,DNDN documented first illicit trade 2011-08-03 15:56:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""136884"",""historical_symbol"":""DNDN"",""permno"":""88335""}",1
+ISS:GVKEY:138205,issuer,Historical issuer GVKEY 138205,,"{""gvkey"":""138205""}",1
+SEC:PERMNO:88446,security,ILMN historical security,ILMN,"{""gvkey"":""138205"",""permno"":""88446""}",1
+EV:HEJFE-8A11E54A9679E09D,event,ILMN documented first illicit trade 2015-01-27 15:11:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""138205"",""historical_symbol"":""ILMN"",""permno"":""88446""}",1
+EV:HEJFE-45559DD90D876D39,event,ILMN documented first illicit trade 2015-04-21 14:48:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""138205"",""historical_symbol"":""ILMN"",""permno"":""88446""}",1
+ISS:GVKEY:138483,issuer,Historical issuer GVKEY 138483,,"{""gvkey"":""138483""}",1
+SEC:PERMNO:88504,security,BRKR historical security,BRKR,"{""gvkey"":""138483"",""permno"":""88504""}",1
+EV:HEJFE-3046057647A0FC5C,event,BRKR documented first illicit trade 2015-05-06 15:30:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""138483"",""historical_symbol"":""BRKR"",""permno"":""88504""}",1
+ISS:GVKEY:4818,issuer,Historical issuer GVKEY 4818,,"{""gvkey"":""4818""}",1
+SEC:PERMNO:88853,security,FLR historical security,FLR,"{""gvkey"":""4818"",""permno"":""88853""}",1
+EV:HEJFE-1E37362063697486,event,FLR documented first illicit trade 2015-02-17 15:06:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""4818"",""historical_symbol"":""FLR"",""permno"":""88853""}",1
+ISS:GVKEY:141384,issuer,Historical issuer GVKEY 141384,,"{""gvkey"":""141384""}",1
+SEC:PERMNO:88860,security,ALGN historical security,ALGN,"{""gvkey"":""141384"",""permno"":""88860""}",1
+EV:HEJFE-830337A8564B826E,event,ALGN documented first illicit trade 2013-10-17 13:43:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""141384"",""historical_symbol"":""ALGN"",""permno"":""88860""}",1
+ISS:GVKEY:141460,issuer,Historical issuer GVKEY 141460,,"{""gvkey"":""141460""}",1
+SEC:PERMNO:88949,security,SGEN historical security,SGEN,"{""gvkey"":""141460"",""permno"":""88949""}",1
+EV:HEJFE-D6AE4ACB99958A73,event,SGEN documented first illicit trade 2015-04-30 14:18:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""141460"",""historical_symbol"":""SGEN"",""permno"":""88949""}",1
+ISS:GVKEY:144066,issuer,Historical issuer GVKEY 144066,,"{""gvkey"":""144066""}",1
+SEC:PERMNO:89014,security,COL historical security,COL,"{""gvkey"":""144066"",""permno"":""89014""}",1
+EV:HEJFE-791693865584F9CB,event,COL documented first illicit trade 2015-04-22 14:29:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""144066"",""historical_symbol"":""COL"",""permno"":""89014""}",1
+ISS:GVKEY:145367,issuer,Historical issuer GVKEY 145367,,"{""gvkey"":""145367""}",1
+SEC:PERMNO:89204,security,AGP historical security,AGP,"{""gvkey"":""145367"",""permno"":""89204""}",1
+EV:HEJFE-74011A906BCCABE9,event,AGP documented first illicit trade 2011-10-27 13:03:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""145367"",""historical_symbol"":""AGP"",""permno"":""89204""}",1
+ISS:GVKEY:143356,issuer,Historical issuer GVKEY 143356,,"{""gvkey"":""143356""}",1
+SEC:PERMNO:89258,security,PRU historical security,PRU,"{""gvkey"":""143356"",""permno"":""89258""}",1
+EV:HEJFE-A3C5C43F6AC75C44,event,PRU documented first illicit trade 2015-05-06 15:47:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""143356"",""historical_symbol"":""PRU"",""permno"":""89258""}",1
+ISS:GVKEY:145049,issuer,Historical issuer GVKEY 145049,,"{""gvkey"":""145049""}",1
+SEC:PERMNO:89301,security,GME historical security,GME,"{""gvkey"":""145049"",""permno"":""89301""}",1
+EV:HEJFE-753716A61B8622B0,event,GME documented first illicit trade 2015-03-26 15:42:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""145049"",""historical_symbol"":""GME"",""permno"":""89301""}",1
+ISS:GVKEY:156155,issuer,Historical issuer GVKEY 156155,,"{""gvkey"":""156155""}",1
+SEC:PERMNO:89900,security,SNX historical security,SNX,"{""gvkey"":""156155"",""permno"":""89900""}",1
+EV:HEJFE-238D29A9B584466D,event,SNX documented first illicit trade 2015-03-31 15:54:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""156155"",""historical_symbol"":""SNX"",""permno"":""89900""}",1
+ISS:GVKEY:155393,issuer,Historical issuer GVKEY 155393,,"{""gvkey"":""155393""}",1
+SEC:PERMNO:89901,security,WLL historical security,WLL,"{""gvkey"":""155393"",""permno"":""89901""}",1
+EV:HEJFE-BB62E8864F35DCD0,event,WLL documented first illicit trade 2015-02-25 15:54:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""155393"",""historical_symbol"":""WLL"",""permno"":""89901""}",1
+ISS:GVKEY:157153,issuer,Historical issuer GVKEY 157153,,"{""gvkey"":""157153""}",1
+SEC:PERMNO:89952,security,CMP historical security,CMP,"{""gvkey"":""157153"",""permno"":""89952""}",1
+EV:HEJFE-5408AADD0CBD54E8,event,CMP documented first illicit trade 2015-04-27 15:46:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""157153"",""historical_symbol"":""CMP"",""permno"":""89952""}",1
+ISS:GVKEY:156861,issuer,Historical issuer GVKEY 156861,,"{""gvkey"":""156861""}",1
+SEC:PERMNO:89971,security,TPX historical security,TPX,"{""gvkey"":""156861"",""permno"":""89971""}",1
+EV:HEJFE-3A94836BBC9F224A,event,TPX documented first illicit trade 2011-07-26 13:40:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""156861"",""historical_symbol"":""TPX"",""permno"":""89971""}",1
+ISS:GVKEY:264265,issuer,Historical issuer GVKEY 264265,,"{""gvkey"":""264265""}",1
+SEC:PERMNO:90178,security,ALNY historical security,ALNY,"{""gvkey"":""264265"",""permno"":""90178""}",1
+EV:HEJFE-22BF36BABB9D19D7,event,ALNY documented first illicit trade 2015-02-12 15:55:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""264265"",""historical_symbol"":""ALNY"",""permno"":""90178""}",1
+ISS:GVKEY:25495,issuer,Historical issuer GVKEY 25495,,"{""gvkey"":""25495""}",1
+SEC:PERMNO:90352,security,DYN historical security,DYN,"{""gvkey"":""25495"",""permno"":""90352""}",1
+EV:HEJFE-E28050410A1480C6,event,DYN documented first illicit trade 2015-05-06 14:24:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""25495"",""historical_symbol"":""DYN"",""permno"":""90352""}",1
+ISS:GVKEY:160376,issuer,Historical issuer GVKEY 160376,,"{""gvkey"":""160376""}",1
+SEC:PERMNO:90427,security,TXRH historical security,TXRH,"{""gvkey"":""160376"",""permno"":""90427""}",1
+EV:HEJFE-0704950C71CFAFB4,event,TXRH documented first illicit trade 2015-02-23 15:24:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""160376"",""historical_symbol"":""TXRH"",""permno"":""90427""}",1
+ISS:GVKEY:161120,issuer,Historical issuer GVKEY 161120,,"{""gvkey"":""161120""}",1
+SEC:PERMNO:90507,security,MIC historical security,MIC,"{""gvkey"":""161120"",""permno"":""90507""}",1
+EV:HEJFE-93A7D27EF425EDF0,event,MIC documented first illicit trade 2015-02-18 15:58:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""161120"",""historical_symbol"":""MIC"",""permno"":""90507""}",1
+ISS:GVKEY:162733,issuer,Historical issuer GVKEY 162733,,"{""gvkey"":""162733""}",1
+SEC:PERMNO:90657,security,PAY historical security,PAY,"{""gvkey"":""162733"",""permno"":""90657""}",1
+EV:HEJFE-C926C41F03E66E82,event,PAY documented first illicit trade 2014-12-15 15:36:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""162733"",""historical_symbol"":""PAY"",""permno"":""90657""}",1
+EV:HEJFE-873A37657E58A8CD,event,PAY documented first illicit trade 2015-03-10 15:11:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""162733"",""historical_symbol"":""PAY"",""permno"":""90657""}",1
+ISS:GVKEY:162887,issuer,Historical issuer GVKEY 162887,,"{""gvkey"":""162887""}",1
+SEC:PERMNO:90664,security,DXCM historical security,DXCM,"{""gvkey"":""162887"",""permno"":""90664""}",1
+EV:HEJFE-99F31DB35F001A44,event,DXCM documented first illicit trade 2015-02-25 15:44:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""162887"",""historical_symbol"":""DXCM"",""permno"":""90664""}",1
+ISS:GVKEY:11721,issuer,Historical issuer GVKEY 11721,,"{""gvkey"":""11721""}",1
+SEC:PERMNO:90756,security,OSK historical security,OSK,"{""gvkey"":""11721"",""permno"":""90756""}",1
+EV:HEJFE-CFA461ED8BCCB889,event,OSK documented first illicit trade 2015-04-27 15:29:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""11721"",""historical_symbol"":""OSK"",""permno"":""90756""}",1
+ISS:GVKEY:163889,issuer,Historical issuer GVKEY 163889,,"{""gvkey"":""163889""}",1
+SEC:PERMNO:90856,security,ATRC historical security,ATRC,"{""gvkey"":""163889"",""permno"":""90856""}",1
+EV:HEJFE-826F68D9DA88B37C,event,ATRC documented first illicit trade 2015-02-23 15:58:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""163889"",""historical_symbol"":""ATRC"",""permno"":""90856""}",1
+ISS:GVKEY:164708,issuer,Historical issuer GVKEY 164708,,"{""gvkey"":""164708""}",1
+SEC:PERMNO:90880,security,AMP historical security,AMP,"{""gvkey"":""164708"",""permno"":""90880""}",1
+EV:HEJFE-5ED55A2EAC950921,event,AMP documented first illicit trade 2015-04-22 15:22:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""164708"",""historical_symbol"":""AMP"",""permno"":""90880""}",1
+ISS:GVKEY:164422,issuer,Historical issuer GVKEY 164422,,"{""gvkey"":""164422""}",1
+SEC:PERMNO:91032,security,TRAK historical security,TRAK,"{""gvkey"":""164422"",""permno"":""91032""}",1
+EV:HEJFE-4D7E68AD113380B3,event,TRAK documented first illicit trade 2015-02-23 15:41:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""164422"",""historical_symbol"":""TRAK"",""permno"":""91032""}",1
+ISS:GVKEY:175319,issuer,Historical issuer GVKEY 175319,,"{""gvkey"":""175319""}",1
+SEC:PERMNO:91416,security,HBI historical security,HBI,"{""gvkey"":""175319"",""permno"":""91416""}",1
+EV:HEJFE-3ADF019D07BA84CE,event,HBI documented first illicit trade 2015-01-29 14:38:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""175319"",""historical_symbol"":""HBI"",""permno"":""91416""}",1
+ISS:GVKEY:174541,issuer,Historical issuer GVKEY 174541,,"{""gvkey"":""174541""}",1
+SEC:PERMNO:91432,security,INWK historical security,INWK,"{""gvkey"":""174541"",""permno"":""91432""}",1
+EV:HEJFE-20EC97300E6205B9,event,INWK documented first illicit trade 2015-02-12 14:01:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""174541"",""historical_symbol"":""INWK"",""permno"":""91432""}",1
+ISS:GVKEY:174389,issuer,Historical issuer GVKEY 174389,,"{""gvkey"":""174389""}",1
+SEC:PERMNO:91498,security,EHTH historical security,EHTH,"{""gvkey"":""174389"",""permno"":""91498""}",1
+EV:HEJFE-E4D3EE1A6CB984DB,event,EHTH documented first illicit trade 2011-04-26 15:07:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""174389"",""historical_symbol"":""EHTH"",""permno"":""91498""}",1
+EV:HEJFE-9527526FED86FA7D,event,EHTH documented first illicit trade 2013-04-25 15:56:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""174389"",""historical_symbol"":""EHTH"",""permno"":""91498""}",1
+ISS:GVKEY:178083,issuer,Historical issuer GVKEY 178083,,"{""gvkey"":""178083""}",1
+SEC:PERMNO:92257,security,VMW historical security,VMW,"{""gvkey"":""178083"",""permno"":""92257""}",1
+EV:HEJFE-749FFC4028DF7B1C,event,VMW documented first illicit trade 2011-04-19 14:56:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""178083"",""historical_symbol"":""VMW"",""permno"":""92257""}",1
+EV:HEJFE-3BBEC23702C1A375,event,VMW documented first illicit trade 2013-07-23 15:35:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""178083"",""historical_symbol"":""VMW"",""permno"":""92257""}",1
+EV:HEJFE-350B3481A9CBBF0E,event,VMW documented first illicit trade 2013-10-21 15:49:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""178083"",""historical_symbol"":""VMW"",""permno"":""92257""}",1
+ISS:GVKEY:180029,issuer,Historical issuer GVKEY 180029,,"{""gvkey"":""180029""}",1
+SEC:PERMNO:92924,security,DGI historical security,DGI,"{""gvkey"":""180029"",""permno"":""92924""}",1
+EV:HEJFE-09EF6AD227D3AC5D,event,DGI documented first illicit trade 2012-07-31 12:21:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""180029"",""historical_symbol"":""DGI"",""permno"":""92924""}",1
+EV:HEJFE-A5AE76F13A48C40F,event,DGI documented first illicit trade 2013-05-07 14:29:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""180029"",""historical_symbol"":""DGI"",""permno"":""92924""}",1
+EV:HEJFE-A76C746507C0D9AF,event,DGI documented first illicit trade 2015-02-26 15:42:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""180029"",""historical_symbol"":""DGI"",""permno"":""92924""}",1
+ISS:GVKEY:179957,issuer,Historical issuer GVKEY 179957,,"{""gvkey"":""179957""}",1
+SEC:PERMNO:93079,security,ECHO historical security,ECHO,"{""gvkey"":""179957"",""permno"":""93079""}",1
+EV:HEJFE-C368B17FADFC15C7,event,ECHO documented first illicit trade 2013-04-25 14:14:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""179957"",""historical_symbol"":""ECHO"",""permno"":""93079""}",1
+ISS:GVKEY:180635,issuer,Historical issuer GVKEY 180635,,"{""gvkey"":""180635""}",1
+SEC:PERMNO:93095,security,CLD historical security,CLD,"{""gvkey"":""180635"",""permno"":""93095""}",1
+EV:HEJFE-B04F1AF8B6E30A43,event,CLD documented first illicit trade 2015-02-17 15:35:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""180635"",""historical_symbol"":""CLD"",""permno"":""93095""}",1
+EV:HEJFE-DB1E964E02F5921F,event,CLD documented first illicit trade 2015-04-30 15:33:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""180635"",""historical_symbol"":""CLD"",""permno"":""93095""}",1
+ISS:GVKEY:29887,issuer,Historical issuer GVKEY 29887,,"{""gvkey"":""29887""}",1
+SEC:PERMNO:93223,security,TW historical security,TW,"{""gvkey"":""29887"",""permno"":""93223""}",1
+EV:HEJFE-5D222F0F8E0C77D0,event,TW documented first illicit trade 2015-05-04 15:47:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""29887"",""historical_symbol"":""TW"",""permno"":""93223""}",1
+ISS:GVKEY:183736,issuer,Historical issuer GVKEY 183736,,"{""gvkey"":""183736""}",1
+SEC:PERMNO:93246,security,GNRC historical security,GNRC,"{""gvkey"":""183736"",""permno"":""93246""}",1
+EV:HEJFE-E342F6A93B35E012,event,GNRC documented first illicit trade 2015-02-10 15:52:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""183736"",""historical_symbol"":""GNRC"",""permno"":""93246""}",1
+ISS:GVKEY:175087,issuer,Historical issuer GVKEY 175087,,"{""gvkey"":""175087""}",1
+SEC:PERMNO:93323,security,MUSA historical security,MUSA,"{""gvkey"":""175087"",""permno"":""93323""}",1
+EV:HEJFE-DC002D2C6C767277,event,MUSA documented first illicit trade 2011-10-20 15:48:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""175087"",""historical_symbol"":""MUSA"",""permno"":""93323""}",1
+EV:HEJFE-51F3066EAC9B8138,event,MUSA documented first illicit trade 2012-01-26 12:21:00,,"{""event_type"":""documented_first_illicit_trade"",""gvkey"":""175087"",""historical_symbol"":""MUSA"",""permno"":""93323""}",1

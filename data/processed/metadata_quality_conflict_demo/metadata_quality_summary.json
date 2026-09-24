@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.19.0",
+  "purpose": "Metadata quality/reconciliation gate for historical market-surveillance research; no trading outputs.",
+  "research_use_only": true,
+  "events_path": "data/examples/metadata/events.csv",
+  "events_sha256": "f21f1e1a4830eea1ed94ab1ad4898161ec303cc0e4e85b2e9f26288816c59bc6",
+  "symbol_dates_path": "data/examples/metadata/symbol_dates.csv",
+  "symbol_dates_sha256": "aa91685e108e457b3104a46655d96b92dbf6f38982c3fb3805f45c2800f59b4c",
+  "contract_path": "config/metadata_sources.quality_conflict_demo.json",
+  "contract_sha256": "d5e55b47a5bfee5df7ebb7851aee0a22deb377a17c93581a04c6cc7eccbccd7d",
+  "resolver_dir": "data/processed/metadata_quality_conflict_resolver",
+  "resolver_summary_sha256": "936de40237c665d9180fa0d780145a0188768ec33009c36760ad5cc4917faf2a",
+  "contract_issues": [],
+  "blocking_issue_count": 7,
+  "warning_issue_count": 0,
+  "info_issue_count": 0,
+  "quarantined_announcement_events": 1,
+  "quarantined_exchange_events": 1,
+  "quarantined_share_symbol_dates": 2,
+  "quarantined_control_dates": 1,
+  "coverage_ready_before_quality": true,
+  "quality_gate_clear": false,
+  "only_synthetic_sources": true,
+  "quality_cleared_for_non_synthetic_model_evaluation": false,
+  "status": "BLOCKED",
+  "domain_quality": [
+    {
+      "domain": "announcement",
+      "required_count": 1,
+      "resolver_ready_count": 1,
+      "quality_clear_count": 0,
+      "quarantined_count": 1,
+      "warning_count": 0,
+      "quality_score": 0.0,
+      "status": "QUARANTINED_CONFLICTS",
+      "research_use_only": 1
+    },
+    {
+      "domain": "exchange",
+      "required_count": 1,
+      "resolver_ready_count": 1,
+      "quality_clear_count": 0,
+      "quarantined_count": 1,
+      "warning_count": 0,
+      "quality_score": 0.0,
+      "status": "QUARANTINED_CONFLICTS",
+      "research_use_only": 1
+    },
+    {
+      "domain": "shares",
+      "required_count": 2,
+      "resolver_ready_count": 2,
+      "quality_clear_count": 0,
+      "quarantined_count": 2,
+      "warning_count": 0,
+      "quality_score": 0.0,
+      "status": "QUARANTINED_CONFLICTS",
+      "research_use_only": 1
+    },
+    {
+      "domain": "control_universe",
+      "required_count": 1,
+      "resolver_ready_count": 1,
+      "quality_clear_count": 0,
+      "quarantined_count": 1,
+      "warning_count": 0,
+      "quality_score": 0.0,
+      "status": "QUARANTINED_CONFLICTS",
+      "research_use_only": 1
+    }
+  ],
+  "reconciliation_policy": {
+    "announcement_exact_conflict_seconds": 60,
+    "shares_same_freshness_relative_tolerance": 0.02,
+    "shares_nearby_days": 7,
+    "shares_nearby_relative_tolerance": 0.1,
+    "control_numeric_relative_tolerance": 0.05,
+    "source_priority": {
+      "official_newswire_archive": 10,
+      "ibes_announcement": 20,
+      "nyse_daily_taq_master": 10,
+      "nasdaq_daily_list": 10,
+      "sec_xbrl_companyfacts": 20,
+      "generic_authorized_reference_data": 30,
+      "sec_edgar_submission_header": 60,
+      "samplefirms_research_universe": 70,
+      "synthetic_fixture": 90
+    },
+    "rule": "coverage cannot unlock evaluation unless Step-19 quality gate is also clear"
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ]
+}

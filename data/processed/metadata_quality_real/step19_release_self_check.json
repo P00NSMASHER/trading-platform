@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.19.0",
+  "step": "19",
+  "test_count": 172,
+  "tests_passed": 172,
+  "clean_demo_coverage_ready": true,
+  "clean_demo_quality_gate_clear": true,
+  "clean_demo_only_synthetic": true,
+  "clean_demo_real_evaluation_cleared": false,
+  "population_demo_evaluation_release_gate": false,
+  "conflict_demo_coverage_ready": true,
+  "conflict_demo_quality_gate_clear": false,
+  "conflict_demo_blocking_issue_count": 7,
+  "conflict_demo_quarantines": {
+    "announcement_events": 1,
+    "exchange_events": 1,
+    "share_symbol_dates": 2,
+    "control_dates": 1
+  },
+  "real_event_count": 174,
+  "real_coverage_ready_before_quality": false,
+  "real_quality_gate_clear": false,
+  "real_model_evaluation_cleared": false,
+  "real_status": "BLOCKED_AWAITING_REAL_METADATA_INPUTS_AND_G6_QUALITY_CLEARANCE",
+  "champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "expected_champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "champion_unchanged": true,
+  "no_external_data_fetched_or_purchased": true,
+  "research_use_only": true,
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ]
+}

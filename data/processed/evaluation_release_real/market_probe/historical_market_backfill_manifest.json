@@ -1,0 +1,198 @@
+{
+  "alignment": {
+    "anchor": "first_documented_illicit_trade_ts",
+    "post_minutes": 30,
+    "pre_minutes": 30,
+    "public_announcement_alignment": "not_available_until_authorized_exact_release_timestamp_join"
+  },
+  "contract_sha256": "5f37562f204fa23ada0c870ea1297eba986d04af5a6ba2c9c36d60def36f3114",
+  "event_count": 174,
+  "historical_events_sha256": "43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12",
+  "microstructure_policy": {
+    "effective_spread_point_in_time": true,
+    "future_5m_fields_forbidden_from_live_model": true,
+    "itch_signing": "execution side inferred from resting displayed order side for decoded E/C execution messages",
+    "price_impact_5m_posthoc_only": true,
+    "realized_spread_5m_posthoc_only": true,
+    "taq_trade_signing": "quote-midpoint rule with tick-rule fallback; an inferred public-market proxy, not known trader identity"
+  },
+  "non_synthetic_comparison_readiness": {
+    "eligible_for_champion_challenger_unlock": false,
+    "eligible_for_real_feature_backfill": false,
+    "reasons": [
+      "no_non_synthetic_authorized_market_source_present",
+      "no_equity_minute_coverage_for_historical_events",
+      "no_option_minute_coverage_for_historical_events",
+      "no_decoded_itch_order_flow_coverage_for_historical_events"
+    ],
+    "warning": "Presence of authorized files is not a performance result. Champion/challenger evaluation remains a separate locked step."
+  },
+  "outputs": {
+    "equity_minute_count": 2,
+    "event_panel_row_count": 10614,
+    "itch_execution_count": 2,
+    "normalized_market_event_count": 10,
+    "option_minute_count": 1,
+    "order_flow_minute_count": 1
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order"
+  ],
+  "purpose": "Authorized historical market-data backfill for MNPI/informed-trading surveillance research; not a trading feed.",
+  "research_use_only": true,
+  "schema_version": "0.15.0",
+  "shares_file_sha256": null,
+  "source_contract_policy": {
+    "authorization_required": true,
+    "credentials_stored_in_contract": false,
+    "explicit_column_mapping": true,
+    "raw_itch_binary_policy": "Raw binary is not parsed here; use an authorized decoder and provide decoded events with the ITCH specification version recorded."
+  },
+  "source_contracts": [
+    {
+      "authorized": true,
+      "column_map": {
+        "conditions": "conditions",
+        "exchange": "exchange",
+        "price": "price",
+        "size": "size",
+        "symbol": "symbol",
+        "timestamp": "timestamp"
+      },
+      "data_classification": "synthetic_fixture",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "format_version": "synthetic-example",
+      "license_reference": "",
+      "notes": "",
+      "path": "equity_trades.csv",
+      "record_kind": "equity_trade",
+      "sha256": "1b88eacf0088ff1d2b1e2e2c5aed38f9eaa60b448c2893de3e743466c43269e4",
+      "source_family": "nyse_daily_taq",
+      "source_id": "example_taq_trades",
+      "timezone": "America/New_York",
+      "trade_date": "2015-02-17"
+    },
+    {
+      "authorized": true,
+      "column_map": {
+        "ask": "ask",
+        "ask_size": "ask_size",
+        "bid": "bid",
+        "bid_size": "bid_size",
+        "exchange": "exchange",
+        "symbol": "symbol",
+        "timestamp": "timestamp"
+      },
+      "data_classification": "synthetic_fixture",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "format_version": "synthetic-example",
+      "license_reference": "",
+      "notes": "",
+      "path": "equity_quotes.csv",
+      "record_kind": "equity_quote",
+      "sha256": "53c9c2dfc9f9eea699b63fffa4ae4469c14a6b899ff75925197e46219eac2314",
+      "source_family": "nyse_daily_taq",
+      "source_id": "example_taq_quotes",
+      "timezone": "America/New_York",
+      "trade_date": "2015-02-17"
+    },
+    {
+      "authorized": true,
+      "column_map": {
+        "conditions": "conditions",
+        "exchange": "exchange",
+        "expiration": "expiration",
+        "option_symbol": "option_symbol",
+        "option_type": "option_type",
+        "price": "price",
+        "size": "size",
+        "strike": "strike",
+        "symbol": "symbol",
+        "timestamp": "timestamp",
+        "underlying_symbol": "underlying_symbol"
+      },
+      "data_classification": "synthetic_fixture",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "format_version": "synthetic-example",
+      "license_reference": "",
+      "notes": "",
+      "path": "option_trades.csv",
+      "record_kind": "option_trade",
+      "sha256": "c43f529b6e34103694a927651e05036e60f1dc4c3513ee49d5e4a98bc85c5e0f",
+      "source_family": "cboe_option_trades",
+      "source_id": "example_option_trades",
+      "timezone": "America/New_York",
+      "trade_date": "2015-02-17"
+    },
+    {
+      "authorized": true,
+      "column_map": {
+        "ask": "ask",
+        "ask_size": "ask_size",
+        "bid": "bid",
+        "bid_size": "bid_size",
+        "exchange": "exchange",
+        "expiration": "expiration",
+        "option_symbol": "option_symbol",
+        "option_type": "option_type",
+        "strike": "strike",
+        "symbol": "symbol",
+        "timestamp": "timestamp",
+        "underlying_symbol": "underlying_symbol"
+      },
+      "data_classification": "synthetic_fixture",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "format_version": "synthetic-example",
+      "license_reference": "",
+      "notes": "",
+      "path": "option_quotes.csv",
+      "record_kind": "option_quote",
+      "sha256": "c06aecdb29c1ce4e86c45ca0bf73f74dc2814dadf6c9c9930850c298197bc12e",
+      "source_family": "cboe_option_quotes",
+      "source_id": "example_option_quotes",
+      "timezone": "America/New_York",
+      "trade_date": "2015-02-17"
+    },
+    {
+      "authorized": true,
+      "column_map": {
+        "cancelled_shares": "cancelled_shares",
+        "executed_shares": "executed_shares",
+        "execution_price": "execution_price",
+        "match_number": "match_number",
+        "message_type": "message_type",
+        "new_order_reference": "new_order_reference",
+        "order_reference": "order_reference",
+        "price": "price",
+        "printable": "printable",
+        "shares": "shares",
+        "side": "side",
+        "symbol": "stock",
+        "timestamp": "timestamp"
+      },
+      "data_classification": "synthetic_fixture",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "format_version": "ITCH-5.0-synthetic-example",
+      "license_reference": "",
+      "notes": "",
+      "path": "itch_decoded.csv",
+      "record_kind": "itch_decoded",
+      "sha256": "b8928f856c67be9f8e55b71edca337df0a0d3c77124dfdd163b48ec7182601bd",
+      "source_family": "nasdaq_itch_5_0_decoded",
+      "source_id": "example_itch_decoded",
+      "timezone": "America/New_York",
+      "trade_date": "2015-02-17"
+    }
+  ],
+  "source_count": 5
+}

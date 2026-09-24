@@ -1,0 +1,35 @@
+{
+  "directories": {
+    "/mnt/data/mnpi_surveillance_private/private_runtime/audit": {
+      "mode": "0o700",
+      "ok": true
+    },
+    "/mnt/data/mnpi_surveillance_private/private_runtime/backups": {
+      "mode": "0o700",
+      "ok": true
+    },
+    "/mnt/data/mnpi_surveillance_private/private_runtime/exports": {
+      "mode": "0o700",
+      "ok": true
+    }
+  },
+  "files": {
+    "/mnt/data/mnpi_surveillance_private/config/runtime.demo.toml": {
+      "mode": "0o600",
+      "ok": true
+    },
+    "/mnt/data/mnpi_surveillance_private/data/processed/case_demo/cases.sqlite": {
+      "mode": "0o600",
+      "ok": true
+    },
+    "/mnt/data/mnpi_surveillance_private/data/processed/model_demo/model_bundle.joblib": {
+      "mode": "0o600",
+      "ok": true
+    },
+    "/mnt/data/mnpi_surveillance_private/data/processed/model_demo/training_manifest.json": {
+      "mode": "0o600",
+      "ok": true
+    }
+  },
+  "ok": true
+}

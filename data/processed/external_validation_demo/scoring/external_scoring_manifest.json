@@ -1,0 +1,51 @@
+{
+  "schema_version": "0.7.0",
+  "purpose": "blind external validation of frozen historical market-surveillance model",
+  "research_use_only": true,
+  "frozen_model_policy": {
+    "model_bundle_sha256_before": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+    "model_bundle_sha256_after": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+    "bundle_unchanged": true,
+    "retraining_performed": false,
+    "recalibration_performed": false,
+    "threshold_tuning_performed": false,
+    "threshold_source": "frozen Step-6 model bundle",
+    "frozen_threshold": 0.9994051578443351,
+    "selected_features_source": "frozen Step-6 model bundle"
+  },
+  "blindness_policy": {
+    "ground_truth_loaded_during_scoring": false,
+    "registry_forbids_label_outcome_fields": true,
+    "future_prices_rejected": true,
+    "future_earnings_information_rejected": true,
+    "enforcement_outcomes_rejected_as_features": true
+  },
+  "inputs": {
+    "model_bundle": "data/processed/model_demo/model_bundle.joblib",
+    "registry": "data/examples/external_validation_registry.csv",
+    "registry_sha256": "92e131dcfb660192088f3588bce6eb32540020ce014490bf97e30140008181cc",
+    "feature_vectors": "data/examples/external_validation_feature_vectors.csv",
+    "feature_vectors_sha256": "708c8c6676588a8cce9c0772486291cf6c48987d6593b83a6a8655db457224f3"
+  },
+  "sample_counts": {
+    "total": 24,
+    "by_case_family": {
+      "edgar_hack": 8,
+      "fda_regulatory": 8,
+      "cross_security": 8
+    }
+  },
+  "outputs": {
+    "external_scores": "external_scores.csv"
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "LONG/SHORT recommendation",
+    "expected return",
+    "target price",
+    "position size",
+    "order instruction"
+  ],
+  "interpretation_warning": "A surveillance score prioritizes historical anomaly review and is not a probability that a crime occurred."
+}

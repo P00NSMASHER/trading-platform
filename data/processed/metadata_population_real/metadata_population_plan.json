@@ -1,0 +1,79 @@
+{
+  "schema_version": "0.18.0",
+  "purpose": "Incremental metadata population plan for the real 174-event historical surveillance corpus; no data fetched by Step 18.",
+  "research_use_only": true,
+  "current_real_readiness": {
+    "events": 174,
+    "symbol_date_requirements": 3828,
+    "event_dates": 72,
+    "announcement_exact_resolved": 0,
+    "event_exchange_resolved": 0,
+    "shares_symbol_dates_resolved": 0,
+    "control_dates_resolved": 0
+  },
+  "recommended_population_lanes": [
+    {
+      "priority": 1,
+      "lane": "exact_announcement_times",
+      "source_profile": "licensed-ibes-or-official-newswire-announcements",
+      "closes": [
+        "G1_ANNOUNCEMENT_TIMES"
+      ],
+      "required_event_rows": 174
+    },
+    {
+      "priority": 2,
+      "lane": "daily_taq_master",
+      "source_profile": "authorized-nyse-daily-taq-master",
+      "closes": [
+        "G3_PRIMARY_LISTING_HISTORY",
+        "G4_SHARES_OUTSTANDING"
+      ],
+      "required_market_dates": 414,
+      "required_symbol_dates": 3828
+    },
+    {
+      "priority": 3,
+      "lane": "sec_companyfacts_shares_fallback",
+      "source_profile": "public-sec-xbrl-shares",
+      "closes": [
+        "G4_SHARES_OUTSTANDING where TAQ Master coverage is absent"
+      ],
+      "normalizer": "src/sec_companyfacts_normalizer.py"
+    },
+    {
+      "priority": 4,
+      "lane": "point_in_time_controls",
+      "source_profile": "authorized-point-in-time-control-universe",
+      "closes": [
+        "G5_MATCHED_CONTROL_UNIVERSE"
+      ],
+      "required_event_dates": 72
+    },
+    {
+      "priority": 5,
+      "lane": "samplefirms_retrospective_candidates",
+      "source_profile": "samplefirms-retrospective-universe",
+      "closes": [],
+      "note": "Candidate enumeration only; cannot close G5 without point-in-time availability and complete pre-event covariates."
+    }
+  ],
+  "batch_policy": {
+    "one_or_more_sources_per_batch": true,
+    "content_addressed_private_staging": true,
+    "append_only_hash_chained_receipts": true,
+    "idempotent_identical_hash_reimport": "NO_OP",
+    "coverage_delta_after_every_batch": true,
+    "raw_licensed_files_in_report_bundle": false
+  },
+  "current_status": "BLOCKED_AWAITING_REAL_METADATA_INPUTS",
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ]
+}

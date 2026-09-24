@@ -1,0 +1,97 @@
+{
+  "active_contract_path": "private_runtime/metadata_population_demo/active_metadata_sources.json",
+  "active_contract_sha256": "08e114883f802ca67adbd131c5e2604b0627aa7cfeb596206e9332e4abdd428a",
+  "after_gate_state": {
+    "ready_for_non_synthetic_model_evaluation_metadata": true,
+    "ready_for_step15_real_backfill_metadata": true,
+    "ready_g1_announcement_times": true,
+    "ready_g3_primary_listing_history": true,
+    "ready_g4_shares_outstanding": true,
+    "ready_g5_matched_control_universe": true
+  },
+  "batch_id": "demo-controls",
+  "before_gate_state": {
+    "ready_for_non_synthetic_model_evaluation_metadata": false,
+    "ready_for_step15_real_backfill_metadata": true,
+    "ready_g1_announcement_times": true,
+    "ready_g3_primary_listing_history": true,
+    "ready_g4_shares_outstanding": true,
+    "ready_g5_matched_control_universe": false
+  },
+  "coverage_delta": {
+    "gate_transitions": {
+      "ready_for_non_synthetic_model_evaluation_metadata": {
+        "after": true,
+        "before": false,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_for_step15_real_backfill_metadata": {
+        "after": true,
+        "before": true,
+        "transition": "UNCHANGED"
+      },
+      "ready_g1_announcement_times": {
+        "after": true,
+        "before": true,
+        "transition": "UNCHANGED"
+      },
+      "ready_g3_primary_listing_history": {
+        "after": true,
+        "before": true,
+        "transition": "UNCHANGED"
+      },
+      "ready_g4_shares_outstanding": {
+        "after": true,
+        "before": true,
+        "transition": "UNCHANGED"
+      },
+      "ready_g5_matched_control_universe": {
+        "after": true,
+        "before": false,
+        "transition": "BLOCKED_TO_READY"
+      }
+    },
+    "numeric_progress": {
+      "announcement_exact_resolved": 0,
+      "announcement_proxy_only": 0,
+      "control_dates_partial": 0,
+      "control_dates_resolved": 1,
+      "event_exchange_nasdaq": 0,
+      "event_exchange_resolved": 0,
+      "shares_symbol_dates_resolved": 0
+    }
+  },
+  "events_sha256": "f21f1e1a4830eea1ed94ab1ad4898161ec303cc0e4e85b2e9f26288816c59bc6",
+  "imported_at": "2026-09-24T14:17:02Z",
+  "ledger_schema_version": "1",
+  "no_op_sources": [],
+  "previous_receipt_hash": "e24dccd5987aed0fdb95febc6c82af82b29d1d3ea7e87f9c64ea46d013a4745b",
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "receipt_hash": "5cbb7567991b545039f7aee6ae1bb651e8a0b3824e6da7c9a1b11f6d806371a2",
+  "research_use_only": true,
+  "source_contract": "config/metadata_sources.demo.json",
+  "source_contract_sha256": "22c7adaf431042cf284feb82c126d3cab0f292a124a6f3ac7272b5d3183ef205",
+  "sources": [
+    {
+      "data_classification": "synthetic_fixture",
+      "license_reference": "synthetic-fixture",
+      "record_kind": "control_universe",
+      "sha256": "5baecb702c42908acb97cf22cd419a0edd5c981e9674c793dc26075b937f721a",
+      "size_bytes": 491,
+      "source_family": "synthetic_fixture",
+      "source_id": "demo-controls",
+      "source_path": "/mnt/data/mnpi_surveillance_private_step18_work/data/examples/metadata/control_universe.csv",
+      "staged_path": "private_runtime/metadata_population_demo/staged/demo-controls/5baecb702c42908acb97cf22cd419a0edd5c981e9674c793dc26075b937f721a.csv"
+    }
+  ],
+  "step_schema_version": "0.18.0",
+  "symbol_dates_sha256": "aa91685e108e457b3104a46655d96b92dbf6f38982c3fb3805f45c2800f59b4c"
+}

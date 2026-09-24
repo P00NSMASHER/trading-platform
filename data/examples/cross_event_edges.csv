@@ -1,0 +1,13 @@
+edge_id,src_id,dst_id,edge_type,valid_from,valid_to,observed_at,public_at,source_class,source_reference,adjudication_status,confidence,research_use_only
+GE1,CASE:SYN-CROSS-1,EV:SYN-1,case_contains_event,,,2016-08-18T19:19:00Z,2021-08-17T12:00:00Z,synthetic,synthetic-demo,synthetic,0.50,1
+GE2,EV:SYN-1,ISS:SYN-A,event_concerns_issuer,2016-08-18T19:19:00Z,,2016-08-18T19:19:00Z,2021-08-17T12:00:00Z,synthetic,synthetic-demo,synthetic,0.50,1
+GE3,ISS:SYN-A,SEC:SYN-A,issuer_has_security,2010-01-01T00:00:00Z,,2010-01-01T00:00:00Z,2010-01-01T00:00:00Z,synthetic,synthetic-demo,synthetic,0.98,1
+GE4,ISS:SYN-B,SEC:SYN-B,issuer_has_security,2010-01-01T00:00:00Z,,2010-01-01T00:00:00Z,2010-01-01T00:00:00Z,synthetic,synthetic-demo,synthetic,0.98,1
+GE5,ISS:SYN-C,SEC:SYN-C,issuer_has_security,2010-01-01T00:00:00Z,,2010-01-01T00:00:00Z,2010-01-01T00:00:00Z,synthetic,synthetic-demo,synthetic,0.98,1
+GE6,SEC:SYN-A,SEC:SYN-B,peer_of,2015-01-01T00:00:00Z,,2015-01-01T00:00:00Z,2015-01-01T00:00:00Z,synthetic,synthetic-demo,synthetic,0.90,1
+GE7,SEC:SYN-B,SEC:SYN-C,related_security,2015-01-01T00:00:00Z,,2015-01-01T00:00:00Z,2015-01-01T00:00:00Z,synthetic,synthetic-demo,synthetic,0.80,1
+GE8,CASE:SYN-CROSS-1,PER:SYN-P,subject_of_case,,,2016-08-18T19:26:00Z,2021-08-17T12:00:00Z,synthetic,synthetic-demo,synthetic,0.50,1
+GE9,PER:SYN-P,ORG:SYN-ADV,employed_by,2016-01-01T00:00:00Z,2016-12-31T23:59:59Z,2016-08-18T00:00:00Z,2016-01-01T00:00:00Z,synthetic,synthetic-demo,synthetic,0.85,1
+GE10,CASE:SYN-REG-1,EV:SYN-2,case_contains_event,,,2019-04-01T14:00:00Z,2020-02-01T12:00:00Z,synthetic,synthetic-demo,synthetic,0.50,1
+GE11,EV:SYN-2,ISS:SYN-B,event_concerns_issuer,2019-04-01T14:00:00Z,,2019-04-01T14:00:00Z,2020-02-01T12:00:00Z,synthetic,synthetic-demo,synthetic,0.50,1
+GE12,CASE:SYN-REG-1,SEC:SYN-B,event_observed_in_security,,,2019-04-01T14:10:00Z,2020-02-01T12:00:00Z,synthetic,synthetic-demo,synthetic,0.50,1

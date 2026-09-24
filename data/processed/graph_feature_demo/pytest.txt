@@ -1,0 +1,23 @@
+........................................................................ [ 66%]
+.....................................                                    [100%]
+=============================== warnings summary ===============================
+tests/test_external_validation_harness.py::test_frozen_bundle_requires_research_only
+  /opt/pyvenv/lib/python3.13/site-packages/sklearn/utils/parallel.py:161: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x7f50c6f1fc40>
+    for k, v in zip(warning_filter_keys, filter_args)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_external_validation_harness.py::test_frozen_bundle_requires_research_only
+  /opt/pyvenv/lib/python3.13/site-packages/sklearn/utils/parallel.py:161: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x7f50c6f1fd30>
+    for k, v in zip(warning_filter_keys, filter_args)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_external_validation_harness.py::test_frozen_bundle_requires_research_only
+  /opt/pyvenv/lib/python3.13/site-packages/sklearn/utils/parallel.py:161: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x7f50e5b7de40>
+    for k, v in zip(warning_filter_keys, filter_args)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+109 passed, 3 warnings in 17.02s

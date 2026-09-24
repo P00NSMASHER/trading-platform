@@ -1,0 +1,12 @@
+covariate,treated_n,candidate_n,matched_n,treated_mean_transformed,candidate_mean_transformed,matched_mean_transformed,smd_before,smd_after,preferred_abs_smd_max,maximum_abs_smd,research_use_only
+market_cap,1,5,3,20.7232658379,21.1887013778,20.7314633738,-1.0159480928,-0.6648288681,0.1,0.2,1
+price,1,5,3,4.6151205168,4.6151205168,4.6151205168,0,0,0.1,0.2,1
+trailing_21d_vol,1,5,3,0.02,0.02,0.02,0,0,0.1,0.2,1
+normal_minute_volume,1,5,3,9.210440367,9.210440367,9.210440367,0,0,0.1,0.2,1
+normal_minute_turnover,1,5,3,0.0009995003,0.0009995003,0.0009995003,0,0,0.1,0.2,1
+normal_relative_spread,1,5,3,0.0007996802,0.0007996802,0.0007996802,0,0,0.1,0.2,1
+option_liquidity,1,5,3,6.2166061011,6.2166061011,6.2166061011,0,0,0.1,0.2,1
+institutional_ownership,1,5,3,0.7,0.7,0.7,0,0,0.1,0.2,1
+analyst_coverage,1,5,3,3.0445224377,3.0445224377,3.0445224377,0,0,0.1,0.2,1
+borrow_cost,1,5,3,0.01,0.01,0.01,0,0,0.1,0.2,1
+pre_event_return,1,5,3,0.002,0.002,0.002,0,0,0.1,0.2,1

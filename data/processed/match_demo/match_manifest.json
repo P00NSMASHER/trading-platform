@@ -1,0 +1,72 @@
+{
+  "balance_policy": {
+    "maximum_abs_smd": 0.2,
+    "preferred_abs_smd_max": 0.1
+  },
+  "inputs": [
+    {
+      "kind": "historical_events",
+      "path": "data/examples/matching_events.csv",
+      "sha256": "8668132d0a13d9e11d6f40fa75b6082637c31d65047c88cda9f478f0e8d1d90d"
+    },
+    {
+      "kind": "feature_vectors",
+      "path": "data/examples/matching_feature_vectors.csv",
+      "sha256": "e9c9b4b50bd5f6157b1b9d7e02243e09df757f498bac562ee29a92f650ea1bf8"
+    },
+    {
+      "kind": "point_in_time_metadata",
+      "path": "data/examples/matching_metadata.csv",
+      "sha256": "60dd467ae990b4fce8fb72576848039efac0a9b0a15b40c3022e1a140421fee7"
+    }
+  ],
+  "lookahead_policy": "Control selection uses only metadata effective at or before the treated event timestamp. Step-4 anomaly features are used only to confirm window availability and are never used in the match distance. Future prices, announcement reactions, earnings surprises, enforcement outcomes, hacked/prosecuted labels for candidate selection, and unreleased content are prohibited.",
+  "matching_policy": {
+    "controls_per_event": 3,
+    "distance": "Root-mean-square robust standardized pre-event covariate distance; market-cap/price/liquidity-like covariates use log1p transforms.",
+    "known_positive_event_controls_excluded": true,
+    "max_standardized_component_distance": 10.0,
+    "min_feature_status": "partial",
+    "minimum_controls": 3,
+    "numeric_covariates": [
+      "market_cap",
+      "price",
+      "trailing_21d_vol",
+      "normal_minute_volume",
+      "normal_minute_turnover",
+      "normal_relative_spread",
+      "option_liquidity",
+      "institutional_ownership",
+      "analyst_coverage",
+      "borrow_cost",
+      "pre_event_return"
+    ],
+    "same_index_bucket_required_when_both_available": true,
+    "same_local_date_and_minute_required": true,
+    "same_scheduled_event_status_required_when_available": true,
+    "same_sector_required_when_available": true
+  },
+  "outputs": {
+    "balance_rows": 11,
+    "event_count": 1,
+    "event_status_counts": {
+      "matched": 1
+    },
+    "match_quality_counts": {
+      "good": 3
+    },
+    "matched_control_rows": 3
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "bullish",
+    "bearish",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order"
+  ],
+  "purpose": "Point-in-time matched-control construction for historical market-surveillance research; not a trading signal.",
+  "schema_version": "0.5.0"
+}

@@ -1,0 +1,47 @@
+{
+  "case_nodes": 2,
+  "db_sha256": "b22dee7555a884df5056058cdf3ce23effbe881717e2030e41ca8dba73abce1f",
+  "edges": 12,
+  "input_sha256": {
+    "cross_event_edges.csv": "301fdbe978f65ea21135ee6e67f10e0b16807328dd9354ba69cd23424bba929b",
+    "cross_event_nodes.csv": "83ad69c33e940d2f1bb413ee5398553a26cfc260d39782916c03510a431b855f"
+  },
+  "nodes": 12,
+  "point_in_time_policy": {
+    "future_enforcement_information_not_live_visible": true,
+    "historical_forensics_may_use_later_adjudication": true,
+    "live_surveillance_uses_public_at": true
+  },
+  "prohibited_outputs": [
+    "buy",
+    "entry_price",
+    "exit_price",
+    "expected_return",
+    "order_quantity",
+    "position_size",
+    "sell",
+    "target_price",
+    "trade_direction"
+  ],
+  "research_use_only": true,
+  "schema_version": "0.11.1",
+  "security_nodes": 3,
+  "source_policy": {
+    "allowed_source_classes": [
+      "adjudicated_public",
+      "licensed_authorized",
+      "official_public",
+      "public_filing",
+      "synthetic"
+    ],
+    "forbidden_source_classes": [
+      "accidental_private",
+      "active_credential",
+      "leaked_credential",
+      "live_stolen",
+      "stolen_private",
+      "unverified_private"
+    ],
+    "live_stolen_or_leaked_inputs_allowed": false
+  }
+}

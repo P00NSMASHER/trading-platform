@@ -1,0 +1,32 @@
+{
+  "announcement_time_status": "Exact public release timestamps are intentionally blank until joined from an authorized point-in-time source such as licensed I/B/E/S or an independently verified public-release timestamp.",
+  "ground_truth_definition": "Positive historical event = first trade by hackers according to SEC complaint documentation, as represented in the source replication package.",
+  "purpose": "Historical market-surveillance research corpus; not a trading signal dataset.",
+  "schema_version": "0.1.0",
+  "source_description": "Historical first-trade timestamps documented in SEC complaint materials, as packaged by the hacked_earnings_jfe replication repository.",
+  "source_path": "Data/TimeOfFirstTrade.csv",
+  "source_record_hash_sha256": "d36adb8338b7d4733c7f3b78808981a83201e99acefb475ab8a9ee766fd1af74",
+  "source_repository": "vgreg/hacked_earnings_jfe",
+  "validation": {
+    "first_trade_hour_distribution": {
+      "10": 2,
+      "11": 1,
+      "12": 4,
+      "13": 15,
+      "14": 43,
+      "15": 109
+    },
+    "issues": [],
+    "row_count": 174,
+    "unique_event_ids": 174,
+    "unique_symbols": 146,
+    "valid": true,
+    "year_distribution": {
+      "2011": 15,
+      "2012": 23,
+      "2013": 37,
+      "2014": 2,
+      "2015": 97
+    }
+  }
+}

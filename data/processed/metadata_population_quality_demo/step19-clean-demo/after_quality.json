@@ -1,0 +1,100 @@
+{
+  "blocking_issue_count": 0,
+  "contract_issues": [],
+  "contract_path": "private_runtime/metadata_population_quality_demo/active_metadata_sources.json",
+  "contract_sha256": "6640b28283dfa4f0042a586a775a0b62fe5b6a8607326c94a9db96ec1fa7927b",
+  "coverage_ready_before_quality": true,
+  "domain_quality": [
+    {
+      "domain": "announcement",
+      "quality_clear_count": 1,
+      "quality_score": 100.0,
+      "quarantined_count": 0,
+      "required_count": 1,
+      "research_use_only": 1,
+      "resolver_ready_count": 1,
+      "status": "QUALITY_CLEAR",
+      "warning_count": 0
+    },
+    {
+      "domain": "exchange",
+      "quality_clear_count": 1,
+      "quality_score": 100.0,
+      "quarantined_count": 0,
+      "required_count": 1,
+      "research_use_only": 1,
+      "resolver_ready_count": 1,
+      "status": "QUALITY_CLEAR",
+      "warning_count": 0
+    },
+    {
+      "domain": "shares",
+      "quality_clear_count": 2,
+      "quality_score": 100.0,
+      "quarantined_count": 0,
+      "required_count": 2,
+      "research_use_only": 1,
+      "resolver_ready_count": 2,
+      "status": "QUALITY_CLEAR",
+      "warning_count": 0
+    },
+    {
+      "domain": "control_universe",
+      "quality_clear_count": 1,
+      "quality_score": 100.0,
+      "quarantined_count": 0,
+      "required_count": 1,
+      "research_use_only": 1,
+      "resolver_ready_count": 1,
+      "status": "QUALITY_CLEAR",
+      "warning_count": 0
+    }
+  ],
+  "events_path": "data/examples/metadata/events.csv",
+  "events_sha256": "f21f1e1a4830eea1ed94ab1ad4898161ec303cc0e4e85b2e9f26288816c59bc6",
+  "info_issue_count": 1,
+  "only_synthetic_sources": true,
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "Metadata quality/reconciliation gate for historical market-surveillance research; no trading outputs.",
+  "quality_cleared_for_non_synthetic_model_evaluation": false,
+  "quality_gate_clear": true,
+  "quarantined_announcement_events": 0,
+  "quarantined_control_dates": 0,
+  "quarantined_exchange_events": 0,
+  "quarantined_share_symbol_dates": 0,
+  "reconciliation_policy": {
+    "announcement_exact_conflict_seconds": 60,
+    "control_numeric_relative_tolerance": 0.05,
+    "rule": "coverage cannot unlock evaluation unless Step-19 quality gate is also clear",
+    "shares_nearby_days": 7,
+    "shares_nearby_relative_tolerance": 0.1,
+    "shares_same_freshness_relative_tolerance": 0.02,
+    "source_priority": {
+      "generic_authorized_reference_data": 30,
+      "ibes_announcement": 20,
+      "nasdaq_daily_list": 10,
+      "nyse_daily_taq_master": 10,
+      "official_newswire_archive": 10,
+      "samplefirms_research_universe": 70,
+      "sec_edgar_submission_header": 60,
+      "sec_xbrl_companyfacts": 20,
+      "synthetic_fixture": 90
+    }
+  },
+  "research_use_only": true,
+  "resolver_dir": "private_runtime/metadata_population_quality_demo/current_resolver/after",
+  "resolver_summary_sha256": "5b1023e7fa7162bf1eaaa3b27212919e00b4c34cd0c51f670cf2423f965c01e4",
+  "schema_version": "0.19.0",
+  "status": "SYNTHETIC_ONLY",
+  "symbol_dates_path": "data/examples/metadata/symbol_dates.csv",
+  "symbol_dates_sha256": "aa91685e108e457b3104a46655d96b92dbf6f38982c3fb3805f45c2800f59b4c",
+  "warning_issue_count": 0
+}

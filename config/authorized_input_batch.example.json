@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "batch_id": "replace-with-batch-id",
+  "metadata": {
+    "source_contract": "config/metadata_sources.example.json",
+    "source_ids": [
+      "replace-with-enabled-metadata-source-id"
+    ]
+  },
+  "market": {
+    "source_contract": "config/historical_market_sources.example.json",
+    "source_ids": [
+      "replace-with-authorized-market-source-id"
+    ]
+  }
+}

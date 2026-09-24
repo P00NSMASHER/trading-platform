@@ -1,0 +1,41 @@
+[
+  {
+    "source_id": "demo-announcement",
+    "record_kind": "announcement_timestamp",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step17_work/data/examples/metadata/announcements.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "cdf7d49930eed8a365f2307fb7f1b10df6b3a116fd77ca8e0aa2bc9fc88321e1",
+    "license_reference_present": true
+  },
+  {
+    "source_id": "demo-taq-master",
+    "record_kind": "security_master",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step17_work/data/examples/metadata/taq_master.csv",
+    "exists": true,
+    "row_count": 2,
+    "sha256": "80f766490403e220e7cdb6dc45eede3483028f47438c86859f07ba0279c8d50a",
+    "license_reference_present": true
+  },
+  {
+    "source_id": "demo-controls",
+    "record_kind": "control_universe",
+    "source_family": "synthetic_fixture",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "synthetic_fixture",
+    "path": "/mnt/data/mnpi_surveillance_private_step17_work/data/examples/metadata/control_universe.csv",
+    "exists": true,
+    "row_count": 3,
+    "sha256": "5baecb702c42908acb97cf22cd419a0edd5c981e9674c793dc26075b937f721a",
+    "license_reference_present": true
+  }
+]

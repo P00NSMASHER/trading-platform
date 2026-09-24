@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "purpose": "Synthetic Step-17 resolver demo",
+  "sources": [
+    {
+      "source_id": "demo-announcement",
+      "record_kind": "announcement_timestamp",
+      "source_family": "synthetic_fixture",
+      "path": "data/examples/metadata/announcements.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "synthetic_fixture",
+      "license_reference": "synthetic-fixture",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {}
+    },
+    {
+      "source_id": "demo-taq-master",
+      "record_kind": "security_master",
+      "source_family": "synthetic_fixture",
+      "path": "data/examples/metadata/taq_master.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "synthetic_fixture",
+      "license_reference": "synthetic-fixture",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {}
+    },
+    {
+      "source_id": "demo-controls",
+      "record_kind": "control_universe",
+      "source_family": "synthetic_fixture",
+      "path": "data/examples/metadata/control_universe.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "synthetic_fixture",
+      "license_reference": "synthetic-fixture",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {}
+    }
+  ]
+}

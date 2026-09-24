@@ -1,0 +1,14 @@
+# Test/development dependency lock. Install after requirements.lock.
+iniconfig==2.3.0
+packaging==25.0
+pluggy==1.6.0
+Pygments==2.20.0
+pytest==9.0.2
+
+# Step 16 exact XNYS trading-session planner
+exchange-calendars==4.13.1
+pandas==2.2.3
+python-dateutil==2.9.0.post0
+pyluach==2.3.0
+toolz==1.1.0
+tzdata==2026.2

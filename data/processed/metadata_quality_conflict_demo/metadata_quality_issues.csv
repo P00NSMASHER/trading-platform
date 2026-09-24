@@ -1,0 +1,8 @@
+issue_id,domain,key,severity,code,message,source_ids,values,quarantined,research_use_only
+c35273a34c4bb499,announcement,E1,BLOCKING,ANN_EXACT_CONFLICT,Authoritative exact-release candidates disagree by 1800 seconds (> 60s).,demo-announcement;demo-announcement-conflict,2015-02-17T21:05:00Z;2015-02-17T21:35:00Z,1,1
+a5fbce6bfca58e23,exchange,E1,BLOCKING,EXCHANGE_OVERLAP_CONFLICT,Overlapping point-in-time security-master records disagree on primary listing exchange.,demo-master-conflict;demo-taq-master,XNAS;XNYS,1,1
+a018df74cde41e51,shares,TEST|2015-02-16,BLOCKING,SHARES_SAME_DATE_CONFLICT,Equally fresh shares-outstanding candidates differ by more than 2%.,demo-master-conflict;demo-taq-master,2015-02-16:9900000;2015-02-16:14800000,1,1
+8cf8f249b0b6225e,shares,TEST|2015-02-16,BLOCKING,SHARES_NEARBY_FACT_CONFLICT,Nearby point-in-time shares facts differ by more than 10%; corporate-action reconciliation required.,demo-master-conflict;demo-taq-master,2015-02-16:9900000;2015-02-16:14800000,1,1
+699e6f121f4164a0,shares,TEST|2015-02-17,BLOCKING,SHARES_SAME_DATE_CONFLICT,Equally fresh shares-outstanding candidates differ by more than 2%.,demo-master-conflict;demo-taq-master,2015-02-17:10000000;2015-02-17:15000000,1,1
+470cae0ceb643db0,shares,TEST|2015-02-17,BLOCKING,SHARES_NEARBY_FACT_CONFLICT,Nearby point-in-time shares facts differ by more than 10%; corporate-action reconciliation required.,demo-master-conflict;demo-taq-master,2015-02-17:10000000;2015-02-17:15000000;2015-02-16:9900000;2015-02-16:14800000,1,1
+324984c66a09271b,control_universe,2015-02-17,BLOCKING,CONTROL_DUPLICATE_CONFLICT,Duplicate point-in-time control rows for C1 disagree on matching covariates: market_cap.,demo-controls;demo-controls-conflict,market_cap,1,1

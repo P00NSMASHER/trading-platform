@@ -1,0 +1,118 @@
+{
+  "audit_sha256": "d86b4f944698ddc79a60347407ff4677472370d968067235c9851f2c3cf52977",
+  "case_database": {
+    "case_count": 1,
+    "exists": true,
+    "foreign_key_violation_count": 0,
+    "foreign_keys_clean": true,
+    "logical_fingerprint": "4a82d24902f44e73da790e084d49e597758f72b0ade1794720f656e884ebc330",
+    "model_hash_consistent": true,
+    "model_source_count": 1,
+    "ok": true,
+    "path": "/mnt/data/mnpi_surveillance_private/data/processed/case_demo/cases.sqlite",
+    "review_chain_results": {
+      "CASE-H001": true
+    },
+    "review_chains_valid": true,
+    "row_counts": {
+      "case_record": 1,
+      "case_timeline": 6,
+      "control_snapshot": 3,
+      "feature_snapshot": 32,
+      "review_history": 2,
+      "source_artifact": 5
+    },
+    "sha256": "319c06160255509600aa97252412fc5ee6a30d437f000abbdd1102e2759b2092",
+    "source_hashes_well_formed": true,
+    "sqlite_integrity": true,
+    "sqlite_integrity_rows": [
+      "ok"
+    ]
+  },
+  "config_path": "/mnt/data/mnpi_surveillance_private/config/runtime.demo.toml",
+  "filesystem_permissions": {
+    "directories": {
+      "/mnt/data/mnpi_surveillance_private/private_runtime/audit": {
+        "mode": "0o700",
+        "ok": true
+      },
+      "/mnt/data/mnpi_surveillance_private/private_runtime/backups": {
+        "mode": "0o700",
+        "ok": true
+      },
+      "/mnt/data/mnpi_surveillance_private/private_runtime/exports": {
+        "mode": "0o700",
+        "ok": true
+      }
+    },
+    "files": {
+      "/mnt/data/mnpi_surveillance_private/config/runtime.demo.toml": {
+        "mode": "0o600",
+        "ok": true
+      },
+      "/mnt/data/mnpi_surveillance_private/data/processed/case_demo/cases.sqlite": {
+        "mode": "0o600",
+        "ok": true
+      },
+      "/mnt/data/mnpi_surveillance_private/data/processed/model_demo/model_bundle.joblib": {
+        "mode": "0o600",
+        "ok": true
+      },
+      "/mnt/data/mnpi_surveillance_private/data/processed/model_demo/training_manifest.json": {
+        "mode": "0o600",
+        "ok": true
+      }
+    },
+    "ok": true
+  },
+  "generated_at_utc": "2026-09-24T08:48:57Z",
+  "model_bundle": {
+    "exists": true,
+    "ok": true,
+    "path": "/mnt/data/mnpi_surveillance_private/data/processed/model_demo/model_bundle.joblib",
+    "prohibited_trade_keys_present": [],
+    "required_keys_present": true,
+    "research_use_only": true,
+    "schema_version": "0.6.0",
+    "selected_feature_count": 32,
+    "sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+    "threshold_valid": true
+  },
+  "ok": true,
+  "policy": {
+    "execution_integration_disabled": true,
+    "loopback_only": true,
+    "network_bind_disabled": true,
+    "research_use_only": true,
+    "trade_outputs_disabled": true
+  },
+  "research_notice": "Historical market-surveillance research only. A surveillance score is not a finding of insider trading, MNPI misuse, or any other violation.",
+  "runtime_versions": {
+    "joblib": "1.5.3",
+    "numpy": "2.3.5",
+    "python": "3.13.5",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.0",
+    "threadpoolctl": "3.6.0"
+  },
+  "schema_version": "1.0.0",
+  "training_manifest": {
+    "deployment_status": "offline research artifact; no market feed, broker, notification, or execution integration",
+    "exists": true,
+    "lookahead_fields_rejected": true,
+    "model_schema_matches": true,
+    "ok": true,
+    "path": "/mnt/data/mnpi_surveillance_private/data/processed/model_demo/training_manifest.json",
+    "prohibited_outputs": [
+      "BUY",
+      "SELL",
+      "LONG/SHORT recommendation",
+      "expected return",
+      "target price",
+      "position size",
+      "order instruction"
+    ],
+    "research_use_only": true,
+    "sha256": "1012a39529484440f9c6bc5bd8f07b60d05ae16c3b841181172e1801da48bc04"
+  }
+}

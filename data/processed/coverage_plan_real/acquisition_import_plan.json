@@ -1,0 +1,30 @@
+{
+  "announcement_timestamp_rows": 174,
+  "date_count": 414,
+  "event_count": 174,
+  "matched_control_candidate_dates": 72,
+  "next_action": "Supply authorized source paths/license references and point-in-time metadata, then rerun Step-15 importer and this readiness audit.",
+  "policy": {
+    "authorization_required": true,
+    "credentials_in_plan": false,
+    "do_not_fetch_or_purchase_automatically": true,
+    "license_reference_required_for_non_synthetic_sources": true
+  },
+  "profiles": {
+    "core_equity_surveillance": [
+      "nyse_daily_taq/equity_trade",
+      "nyse_daily_taq/equity_quote"
+    ],
+    "full_research_replication": [
+      "nyse_daily_taq/equity_trade",
+      "nyse_daily_taq/equity_quote",
+      "cboe_option_trades/option_trade",
+      "cboe_option_quotes/option_quote"
+    ],
+    "order_flow_extension": [
+      "nasdaq_itch_5_0_decoded/itch_decoded when point-in-time Nasdaq listing is confirmed"
+    ]
+  },
+  "schema_version": "1",
+  "symbol_date_pair_count": 3828
+}

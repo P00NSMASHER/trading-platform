@@ -1,0 +1,32 @@
+{
+  "case": {
+    "case_id": "CASE-H001",
+    "created_at_utc": "2026-09-24T08:33:43Z",
+    "determination_notice": "Historical market-surveillance research only; a surveillance score or case file is not a finding that insider trading, MNPI misuse, or any other violation occurred.",
+    "event_id": "H001",
+    "flagged": 1,
+    "initial_status": "open_for_review",
+    "minute_ts_utc": "2015-03-10T19:35:00.000Z",
+    "model_schema_version": "0.6.0",
+    "model_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+    "research_use_only": 1,
+    "sample_id": "H001:TREATED",
+    "surveillance_risk_score": 99.999978,
+    "surveillance_threshold": 0.9994051578443351,
+    "symbol": "T00"
+  },
+  "current_review_disposition": "under_review",
+  "determination_notice": "Historical market-surveillance research only; a surveillance score or case file is not a finding that insider trading, MNPI misuse, or any other violation occurred.",
+  "prohibited_outputs": [
+    "buy",
+    "expected_return",
+    "order_instruction",
+    "position_size",
+    "sell",
+    "target_price",
+    "trade_direction"
+  ],
+  "research_use_only": true,
+  "review_chain_valid": true,
+  "schema_version": "0.8.0"
+}

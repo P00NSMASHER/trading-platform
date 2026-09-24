@@ -1,0 +1,27 @@
+{
+  "contract_sha256": "7fe9dace45d5ec6d343b780fc960dcb8a22c1d7f0f2f73951b6ca5d7726bb14c",
+  "historical_events_sha256": "43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12",
+  "non_synthetic_comparison_readiness": {
+    "eligible_for_champion_challenger_unlock": false,
+    "eligible_for_real_feature_backfill": false,
+    "reasons": [
+      "no_active_market_sources"
+    ]
+  },
+  "outputs": {},
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "LONG/SHORT recommendation",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "Step 21 empty authorized historical market-data state; fail-closed until market sources are imported.",
+  "research_use_only": true,
+  "schema_version": "0.15.0",
+  "source_contracts": [],
+  "source_count": 0
+}

@@ -1,0 +1,6 @@
+source_id,case_id,artifact_role,file_name,sha256,size_bytes,captured_at_utc
+1,CASE-H001,scores_csv,holdout_scores.csv,b34504bdc330c81c65272bf94760d0087a07bab23b3a767f47a305f113469f2c,3147,2026-09-24T08:33:43Z
+2,CASE-H001,feature_vectors,model_training_feature_vectors.csv,c327d11611d92dbf4845cb7665d6d05f4890de65f5fe53fa81433f86b1bc759b,40203,2026-09-24T08:33:43Z
+3,CASE-H001,model_bundle,model_bundle.joblib,0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616,68764,2026-09-24T08:33:43Z
+4,CASE-H001,matched_controls,model_training_matched_controls.csv,1bce9328068ff83a5c74900cb61aa5f8d79b5b52033aa4beac9fc685682e3e6c,7258,2026-09-24T08:33:43Z
+5,CASE-H001,training_manifest,training_manifest.json,1012a39529484440f9c6bc5bd8f07b60d05ae16c3b841181172e1801da48bc04,5144,2026-09-24T08:33:43Z

@@ -1,0 +1,197 @@
+{
+  "files": [
+    {
+      "bytes": 266,
+      "path": ".gitignore",
+      "sha256": "aceb9258c62a4f2cecd43c5529aba64e495c98e75edd09c29dd7a758b105cda2"
+    },
+    {
+      "bytes": 13599,
+      "path": "README.md",
+      "sha256": "8c993b179ec847143d4f2968d604df07666c719f013a5c01fd2119685bbb5b93"
+    },
+    {
+      "bytes": 616,
+      "path": "config/runtime.demo.toml",
+      "sha256": "a83a5ca33282c567d713f8d8d2f43e72a1c9a7d6d9ad82730c6143d5404a4e17"
+    },
+    {
+      "bytes": 616,
+      "path": "config/runtime.example.toml",
+      "sha256": "a83a5ca33282c567d713f8d8d2f43e72a1c9a7d6d9ad82730c6143d5404a4e17"
+    },
+    {
+      "bytes": 1782,
+      "path": "docs/baseline_engine.md",
+      "sha256": "27aabc725bc46a959407c8b4aef02c3f3f41ec44c5a75a847fd74524947438e6"
+    },
+    {
+      "bytes": 2525,
+      "path": "docs/case_evidence.md",
+      "sha256": "729a2c8b254a68bd357c1a00bea228ef6cc4d938a96c93e3b80aed174bcde0ef"
+    },
+    {
+      "bytes": 7620,
+      "path": "docs/deployment_runbook.md",
+      "sha256": "f8d2040f29bb515b57d776e5cc7e123beb4a38444785661c5748965adef81131"
+    },
+    {
+      "bytes": 2269,
+      "path": "docs/external_validation_harness.md",
+      "sha256": "bb80ad7e3b189fff7a7c3da97ecd025b333da24c3c93c37e425f606fd2ecb98e"
+    },
+    {
+      "bytes": 1889,
+      "path": "docs/feature_engine.md",
+      "sha256": "6d45d3af509e3d3077f7eae01e17c71e6312b055f14212be0206626287a0dda2"
+    },
+    {
+      "bytes": 1666,
+      "path": "docs/market_data_schema.md",
+      "sha256": "e15176510b4a2365d010b6719451b803ab15d988116707de87453890dd1c6922"
+    },
+    {
+      "bytes": 1927,
+      "path": "docs/matched_controls.md",
+      "sha256": "f2b79b7178bde04c37098164bac0980c9d226df4a236e7b52927f4e376e44ecc"
+    },
+    {
+      "bytes": 2392,
+      "path": "docs/model_training_harness.md",
+      "sha256": "889788256d224a1048448a8d80742230fdef59ad15352c46a3cf3b706e5b1d3d"
+    },
+    {
+      "bytes": 1709,
+      "path": "docs/private_dashboard.md",
+      "sha256": "76852cf4f93b66ed49e2ced5227639a89b7e24e5f61a032d3f3bc978a96f0b26"
+    },
+    {
+      "bytes": 6474,
+      "path": "docs/private_deployment_runbook.md",
+      "sha256": "23df8fc7ff9abcc09af6bd9ebb8207f16ccb03c1df469eb4b279cbdcdc1da8e3"
+    },
+    {
+      "bytes": 294,
+      "path": "pyproject.toml",
+      "sha256": "064b0e780efd666c90910ed7c5cb909c89a70f6c9bda37ada1761e00aeb8b997"
+    },
+    {
+      "bytes": 147,
+      "path": "requirements-dev.lock",
+      "sha256": "92cd06552f4bddd712556141e47a42270a7bafafdbfb2b7889ad7afc1c9dc39c"
+    },
+    {
+      "bytes": 261,
+      "path": "requirements.lock",
+      "sha256": "2405ab98d7e7b272c14b1c09a0b14cfe1e772b285b719ed8ac1b806a2b607f34"
+    },
+    {
+      "bytes": 15908,
+      "path": "src/baseline_engine.py",
+      "sha256": "645bf688e9844c8f0ad2ef1bdb6671f769ab44febd704d5ed4723715546054c7"
+    },
+    {
+      "bytes": 29153,
+      "path": "src/case_evidence.py",
+      "sha256": "b182177049ac5265d6e3eeab6ddac59ec7491875c4deea614b299be882ac1cc8"
+    },
+    {
+      "bytes": 6812,
+      "path": "src/corpus_builder.py",
+      "sha256": "071e8d1e620cd9c0b0ab7e6b07679ec64ff047221d6462497998475630df0bad"
+    },
+    {
+      "bytes": 26216,
+      "path": "src/deployment_hardening.py",
+      "sha256": "89eedfca1402cc6599b1f1ac0378ecdd7f8b9189133b586c678f8862fb37db49"
+    },
+    {
+      "bytes": 19175,
+      "path": "src/external_validation_harness.py",
+      "sha256": "e771fa10cba7faacaf74ced05518edbb84cfc348d2771d455bb102f4980df980"
+    },
+    {
+      "bytes": 23517,
+      "path": "src/feature_engine.py",
+      "sha256": "1fe274315bf115180096bc81357d22a35f07c7b40184396d261df005df13dd9b"
+    },
+    {
+      "bytes": 19726,
+      "path": "src/market_data_adapter.py",
+      "sha256": "52b0e146e7b6efc6634368d75c9e342305890225169849ba4cd2c42ec00ebbfc"
+    },
+    {
+      "bytes": 27581,
+      "path": "src/matched_control_generator.py",
+      "sha256": "ab974cb0dc32c46566c59ad23644eecc222e84c469ba6bb4b7ee0e4c062851de"
+    },
+    {
+      "bytes": 26046,
+      "path": "src/model_training_harness.py",
+      "sha256": "32f1b2d761042f1b8a382447aab63830ecf3cb8dac84e90eafa0c3520bb1bede"
+    },
+    {
+      "bytes": 25908,
+      "path": "src/private_dashboard.py",
+      "sha256": "9dbd185039c848c04d85fbf5dd2cfe85f20cec9e1ae9324b56e00a6fd4c57e3f"
+    },
+    {
+      "bytes": 1543,
+      "path": "src/private_runtime.py",
+      "sha256": "ab85e92d5f1f01043c7b0bd3b6670247cd480300bf72415096a233f0d59e46a7"
+    },
+    {
+      "bytes": 5754,
+      "path": "tests/test_baseline_engine.py",
+      "sha256": "2fa417d286eeb0d82283d0c259e3bdf5ebdee80ea06d9b57d7bd5a3537ab2379"
+    },
+    {
+      "bytes": 6561,
+      "path": "tests/test_case_evidence.py",
+      "sha256": "d6530e4aed5ee33fca15a309da3a130010fa3c33cd6ac9d93b35e041f3c040aa"
+    },
+    {
+      "bytes": 1401,
+      "path": "tests/test_corpus_builder.py",
+      "sha256": "b5f0d24f80b71cde0fb988db0569fdba7ad97895af55646db83efebc868e9f0f"
+    },
+    {
+      "bytes": 4988,
+      "path": "tests/test_deployment_hardening.py",
+      "sha256": "b6335eeabd37e19051a9b5cc71f1cf6bd1606059419c7ec2db0abdac2d969967"
+    },
+    {
+      "bytes": 9676,
+      "path": "tests/test_external_validation_harness.py",
+      "sha256": "97b33e5d26ccfd1fa24690db000e2e633b0a0eeac0db58887a8b645f83240481"
+    },
+    {
+      "bytes": 5951,
+      "path": "tests/test_feature_engine.py",
+      "sha256": "b5e791446a1e3a8849fcf7eca85ae3a23913c847ef45cb7d18229d16a9f22195"
+    },
+    {
+      "bytes": 2838,
+      "path": "tests/test_market_data_adapter.py",
+      "sha256": "6b339b334c21945ac08ca53bd6332412f2c594ddf5c8a0507d98d72a9a40de85"
+    },
+    {
+      "bytes": 10235,
+      "path": "tests/test_matched_control_generator.py",
+      "sha256": "b6f4990e0c1036e76ef76eb66b989ee2a6b70e5a82a3750bae2d4fd2f3a705e6"
+    },
+    {
+      "bytes": 7855,
+      "path": "tests/test_model_training_harness.py",
+      "sha256": "489d7ff11f7b46ad1a43a6c161a8013641231c036d0567efa84d48e482ffdf1f"
+    },
+    {
+      "bytes": 6912,
+      "path": "tests/test_private_dashboard.py",
+      "sha256": "c2ab3a7b95346cf9a5a72da84989a83dbabb4362cde68511c5a23f30949dcc70"
+    }
+  ],
+  "research_use_only": true,
+  "root_sha256": "cb408437741c78614b399bfa73e03ae6449cc6c7eff009ddc680037e5a9b35b7",
+  "schema_version": "1.0.0"
+}

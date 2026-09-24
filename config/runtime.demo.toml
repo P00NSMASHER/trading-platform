@@ -1,0 +1,20 @@
+# Copy to config/runtime.local.toml and edit locally.
+# Do not place API keys, passwords, broker credentials, or data-vendor secrets here.
+
+[paths]
+case_db = "data/processed/case_demo/cases.sqlite"
+model_bundle = "data/processed/model_demo/model_bundle.joblib"
+training_manifest = "data/processed/model_demo/training_manifest.json"
+backup_dir = "private_runtime/backups"
+export_dir = "private_runtime/exports"
+audit_dir = "private_runtime/audit"
+
+[dashboard]
+host = "127.0.0.1"
+port = 8765
+
+[policy]
+research_use_only = true
+allow_network_bind = false
+allow_execution_integration = false
+allow_trade_outputs = false

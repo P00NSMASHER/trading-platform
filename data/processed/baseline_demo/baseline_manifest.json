@@ -1,0 +1,50 @@
+{
+  "exchange_timezone": "America/New_York",
+  "inputs": [
+    {
+      "kind": "equity_minutes",
+      "path": "data/processed/market_data_demo/equity_minutes.csv",
+      "sha256": "069318bad6f496d2e1185a6719b793c017856a37389714e9f365c243c92ec3f3"
+    },
+    {
+      "kind": "option_minutes",
+      "path": "data/processed/market_data_demo/option_minutes.csv",
+      "sha256": "79800ae87305c73608ede9f53bfd61c7b55926681a61627f6162b898276a1dd9"
+    }
+  ],
+  "lookahead_policy": "Each observation is scored only against same-symbol, same-local-minute values from strictly earlier local dates. The current observation is appended only after scoring. Future shares-outstanding records are never used.",
+  "lookback_trading_days": 21,
+  "minimum_history_observations": 10,
+  "outputs": {
+    "baseline_metric_rows": 17,
+    "history_status_counts": {
+      "insufficient": 17
+    },
+    "metric_row_counts": {
+      "equity:dollar_volume": 2,
+      "equity:mean_quoted_spread": 2,
+      "equity:mean_relative_spread": 2,
+      "equity:trade_count": 2,
+      "equity:volume": 2,
+      "option:call_volume": 1,
+      "option:contract_volume": 1,
+      "option:dollar_volume": 1,
+      "option:mean_quoted_spread": 1,
+      "option:put_volume": 1,
+      "option:trade_count": 1,
+      "option:unique_contracts_traded": 1
+    }
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order"
+  ],
+  "purpose": "Point-in-time historical normalization for market-surveillance research; never a trading signal.",
+  "robust_score_policy": "robust_zscore = 0.6744897502 * (x - median) / MAD when MAD > 0.",
+  "schema_version": "0.3.0",
+  "turnover_policy": "Minute turnover is computed as minute share volume / latest shares_outstanding effective on or before the local date. Turnover is omitted when no point-in-time shares record exists."
+}

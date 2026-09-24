@@ -1,0 +1,49 @@
+{
+  "anomaly_thresholds": {
+    "multivariate_component_sigma": 2.0,
+    "spread_widen_sigma": 1.5,
+    "volume_sigma": 2.0
+  },
+  "inputs": [
+    {
+      "kind": "baseline_metrics",
+      "path": "data/processed/baseline_demo/baseline_metrics.csv",
+      "sha256": "be33cf8b98da958e8ad4c66dd9a8ec44327649e8b34a1b383a114b5bf6a16cbe"
+    },
+    {
+      "kind": "equity_minutes",
+      "path": "data/processed/market_data_demo/equity_minutes.csv",
+      "sha256": "069318bad6f496d2e1185a6719b793c017856a37389714e9f365c243c92ec3f3"
+    },
+    {
+      "kind": "option_minutes",
+      "path": "data/processed/market_data_demo/option_minutes.csv",
+      "sha256": "79800ae87305c73608ede9f53bfd61c7b55926681a61627f6162b898276a1dd9"
+    }
+  ],
+  "lookahead_policy": "Every feature uses only the current minute and information timestamped at or before it. Lagged returns and rolling anomaly features are backward-looking; no future price, public-announcement outcome, enforcement outcome, or unreleased content is accepted as an input.",
+  "outputs": {
+    "feature_status_counts": {
+      "insufficient": 2
+    },
+    "feature_vector_rows": 2
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "bullish",
+    "bearish",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order"
+  ],
+  "purpose": "Backward-looking surveillance feature construction from lawful historical market data; not a trading signal.",
+  "schema_version": "0.4.0",
+  "score_policy": "Robust z-scores are preferred when present; conventional z-scores are fallback only.",
+  "sequence_windows_minutes": [
+    5,
+    15,
+    30
+  ]
+}

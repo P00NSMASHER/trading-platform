@@ -1,0 +1,58 @@
+{
+  "active_champion_modified": false,
+  "context_audit": {
+    "forensic_case_visible_rows": 174,
+    "forensic_rows_with_related_securities": 173,
+    "live_case_visible_rows": 0,
+    "live_rows_with_related_securities": 0,
+    "max_forensic_related_security_count": 145,
+    "rows": 174
+  },
+  "graph_counts": {
+    "case_nodes": 1,
+    "case_public_at": "2015-08-11T23:59:59Z",
+    "edges": 668,
+    "event_nodes": 174,
+    "identity_edges": 146,
+    "issuer_nodes": 146,
+    "nodes": 467,
+    "security_nodes": 146
+  },
+  "live_future_enforcement_leak_rows": 0,
+  "live_related_security_rows_at_event_time": 0,
+  "readiness": {
+    "active_champion_changed": false,
+    "comparison_executed": false,
+    "eligible_for_non_synthetic_champion_challenger_comparison": false,
+    "reasons": [
+      "base_market_feature_vectors_are_synthetic",
+      "matched_controls_are_not_eligible_with_synthetic_market_features"
+    ],
+    "required_before_comparison": [
+      "lawfully obtained point-in-time historical equity/options market features",
+      "matched controls built from the same non-synthetic feature universe",
+      "live_surveillance graph vectors generated at the corresponding timestamps"
+    ],
+    "warning": "The graph reconstruction is real historical research data; no synthetic market fixture is relabeled as real performance evidence."
+  },
+  "release": "step14",
+  "research_use_only": true,
+  "tests": {
+    "all_passed": true,
+    "counts_by_file": {
+      "test_baseline_engine.py": 7,
+      "test_case_evidence.py": 10,
+      "test_corpus_builder.py": 4,
+      "test_cross_event_graph.py": 14,
+      "test_deployment_hardening.py": 12,
+      "test_external_validation_harness.py": 8,
+      "test_feature_engine.py": 9,
+      "test_graph_challenger_harness.py": 9,
+      "test_graph_feature_engine.py": 12,
+      "test_historical_graph_reconstruction.py": 8,
+      "test_market_data_adapter.py+test_matched_control_generator.py+test_model_training_harness.py+test_private_dashboard.py": 33
+    },
+    "execution_note": "Run in bounded per-file batches because the environment terminates long aggregate commands; every test file completed successfully.",
+    "total_tests": 126
+  }
+}

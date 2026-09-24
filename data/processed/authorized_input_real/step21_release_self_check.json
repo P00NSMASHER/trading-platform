@@ -1,0 +1,82 @@
+{
+  "champion_expected_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "champion_unchanged": true,
+  "current_real_state": {
+    "blocking_gate_ids": [
+      "G1_ANNOUNCEMENT_TIMES",
+      "G3_PRIMARY_LISTING_HISTORY",
+      "G4_SHARES_OUTSTANDING",
+      "G5_MATCHED_CONTROL_UNIVERSE",
+      "G6_METADATA_QUALITY",
+      "G2_REAL_MARKET_DATA",
+      "G11_NON_SYNTHETIC_RESEARCH_ONLY"
+    ],
+    "evaluation_release_permitted": false,
+    "gate_state": {
+      "G10_CHAMPION_IMMUTABILITY": true,
+      "G11_NON_SYNTHETIC_RESEARCH_ONLY": false,
+      "G1_ANNOUNCEMENT_TIMES": false,
+      "G2_REAL_MARKET_DATA": false,
+      "G3_PRIMARY_LISTING_HISTORY": false,
+      "G4_SHARES_OUTSTANDING": false,
+      "G5_MATCHED_CONTROL_UNIVERSE": false,
+      "G6_METADATA_QUALITY": false,
+      "G7_TEMPORAL_FEATURE_INTEGRITY": true,
+      "G8_HOLDOUT_ISOLATION": true,
+      "G9_PROVENANCE": true
+    },
+    "real_authorized_market_source_date_rows_covered": 0,
+    "real_authorized_market_source_date_rows_missing": 1656,
+    "real_authorized_market_source_date_rows_required": 1656,
+    "release_token_issued": false
+  },
+  "evaluation_controller_check_count": 22,
+  "evaluation_controller_passed_check_count": 15,
+  "orchestrator_guards": {
+    "broker_or_execution_integration_present": false,
+    "content_addressed_private_staging": true,
+    "credential_like_batch_fields_rejected": true,
+    "external_fetch_or_purchase_performed": false,
+    "hash_chained_step21_ledger": true,
+    "idempotent_identical_reimport_no_op": true,
+    "per_source_actual_closed_gates": true,
+    "per_source_before_after_g1_g11_snapshot": true,
+    "raw_licensed_inputs_copied_to_report_bundle": false
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "LONG/SHORT recommendation",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "Release self-check for the authorized-input ingestion orchestrator.",
+  "research_use_only": true,
+  "schema_version": "0.21.0",
+  "source_sha256": "21db19405914ba565c63c70c48f3489b8591a6531e3edb5e00d706e9e0c3c7af",
+  "status": "COMPLETE",
+  "step": 21,
+  "test_validation": {
+    "bounded_batches": [
+      {
+        "log": "pytest_batch1.txt",
+        "passed": 88
+      },
+      {
+        "log": "pytest_batch2.txt",
+        "passed": 39
+      },
+      {
+        "log": "pytest_batch3.txt",
+        "passed": 56
+      }
+    ],
+    "new_step21_tests": 5,
+    "total_tests_failed": 0,
+    "total_tests_passed": 183
+  }
+}

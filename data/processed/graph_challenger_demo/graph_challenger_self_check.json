@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.13.0",
+  "tests_passed": 118,
+  "champion_hash_unchanged": true,
+  "active_champion_modified": false,
+  "challenger_active_model": false,
+  "graph_visibility_mode_required": "live_surveillance",
+  "synthetic_fixture_detected": true,
+  "promotion_eligible": false,
+  "automatic_promotion_permitted": false,
+  "promotion_reasons": [
+    "failed:temporal_ap_gain",
+    "failed:graph_ablation_gain",
+    "blocked:synthetic_fixture"
+  ],
+  "challenger_temporal_holdout": {
+    "n": 32,
+    "positives": 8,
+    "negatives": 24,
+    "average_precision": 1.0,
+    "roc_auc": 1.0,
+    "brier": 1.9400855752078633e-14,
+    "log_loss": 1.2833286229515484e-07,
+    "threshold": 0.9994021409140775,
+    "recall_at_threshold": 1.0,
+    "false_positive_rate": 0.0,
+    "alerts_per_100_matched_controls": 0.0,
+    "true_positives": 8,
+    "false_positives": 0
+  },
+  "champion_temporal_holdout": {
+    "n": 32,
+    "positives": 8,
+    "negatives": 24,
+    "average_precision": 1.0,
+    "roc_auc": 1.0,
+    "brier": 2.091104635693278e-14,
+    "log_loss": 1.355520227092057e-07,
+    "threshold": 0.9994051578443351,
+    "recall_at_threshold": 1.0,
+    "false_positive_rate": 0.0,
+    "alerts_per_100_matched_controls": 0.0,
+    "true_positives": 8,
+    "false_positives": 0
+  },
+  "graph_increment_over_base_ablation": {
+    "average_precision": 0.0,
+    "brier": -1.3311213450604851e-15,
+    "false_positive_rate": 0.0
+  },
+  "research_use_only": true,
+  "broker_execution_connected": false
+}

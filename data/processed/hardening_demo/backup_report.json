@@ -1,0 +1,22 @@
+{
+  "backup_logical_fingerprint": "4a82d24902f44e73da790e084d49e597758f72b0ade1794720f656e884ebc330",
+  "backup_path": "/mnt/data/mnpi_surveillance_private/private_runtime/backups/cases_20260924T084638Z.sqlite",
+  "backup_sha256": "3300dc46a3bae5ddc45004f2cd707f3d82a05c3fdf9f00c0c876c6a1265f6084",
+  "created_at_utc": "2026-09-24T08:46:38Z",
+  "manifest_path": "/mnt/data/mnpi_surveillance_private/private_runtime/backups/cases_20260924T084638Z.manifest.json",
+  "manifest_sha256": "296effadf2cb7dfe638821447625e9ebb205469af12657e5ddff0195d2559c12",
+  "research_use_only": true,
+  "review_chains_valid": true,
+  "row_counts": {
+    "case_record": 1,
+    "case_timeline": 6,
+    "control_snapshot": 3,
+    "feature_snapshot": 32,
+    "review_history": 2,
+    "source_artifact": 5
+  },
+  "schema_version": "1.0.0",
+  "source_logical_fingerprint": "4a82d24902f44e73da790e084d49e597758f72b0ade1794720f656e884ebc330",
+  "source_path": "/mnt/data/mnpi_surveillance_private/data/processed/case_demo/cases.sqlite",
+  "source_sha256": "319c06160255509600aa97252412fc5ee6a30d437f000abbdd1102e2759b2092"
+}

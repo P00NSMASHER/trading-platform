@@ -1,0 +1,50 @@
+{
+  "active_champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "active_champion_unchanged": true,
+  "authorized_non_synthetic_market_data_supplied_in_workspace": false,
+  "credentials_stored_in_source_contract": false,
+  "full_test_suite": {
+    "execution": "3 bounded batches: 73 + 36 + 28",
+    "failed": 0,
+    "passed": 137
+  },
+  "future_5m_microstructure_fields_live_model_eligible": false,
+  "historical_ground_truth_event_count": 174,
+  "new_step15_tests": {
+    "failed": 0,
+    "passed": 11
+  },
+  "next_unlock_condition": "Supply lawfully obtained non-synthetic historical equity/options/order-flow data under an explicit authorized source contract, then build point-in-time baselines/matched controls from that same universe.",
+  "real_champion_challenger_comparison_executed": false,
+  "research_use_only": true,
+  "schema_version": "0.15.0",
+  "status": "complete",
+  "step": 15,
+  "step14_champion_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+  "synthetic_contract_validation": {
+    "non_synthetic_authorized_source_count": 0,
+    "source_count": 5,
+    "source_ids": [
+      "example_taq_trades",
+      "example_taq_quotes",
+      "example_option_trades",
+      "example_option_quotes",
+      "example_itch_decoded"
+    ],
+    "synthetic_source_count": 5,
+    "valid": true
+  },
+  "synthetic_demo_outputs": {
+    "equity_minute_count": 2,
+    "event_panel_row_count": 3,
+    "itch_execution_count": 2,
+    "normalized_market_event_count": 10,
+    "option_minute_count": 1,
+    "order_flow_minute_count": 1
+  },
+  "synthetic_demo_readiness_reasons": [
+    "no_non_synthetic_authorized_market_source_present"
+  ],
+  "synthetic_demo_real_comparison_unlock": false,
+  "trade_or_execution_outputs_enabled": false
+}

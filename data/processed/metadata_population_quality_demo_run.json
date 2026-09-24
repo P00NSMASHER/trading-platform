@@ -1,0 +1,392 @@
+{
+  "schema_version": "0.19.0",
+  "last_batch_id": "step19-clean-demo",
+  "last_imported_at": "2026-09-24T14:49:55Z",
+  "active_source_count": 3,
+  "active_contract_sha256": "6640b28283dfa4f0042a586a775a0b62fe5b6a8607326c94a9db96ec1fa7927b",
+  "ledger": {
+    "valid": true,
+    "entry_count": 1,
+    "head_hash": "9f833928bce74a15a6143564f65d3b7151732914d400c29fe168574b2e357a41"
+  },
+  "current_readiness": {
+    "schema_version": "0.17.0",
+    "purpose": "Point-in-time metadata resolution for historical market-surveillance research; no trading outputs.",
+    "research_use_only": true,
+    "events_path": "data/examples/metadata/events.csv",
+    "events_sha256": "f21f1e1a4830eea1ed94ab1ad4898161ec303cc0e4e85b2e9f26288816c59bc6",
+    "symbol_date_requirements_path": "data/examples/metadata/symbol_dates.csv",
+    "symbol_date_requirements_sha256": "aa91685e108e457b3104a46655d96b92dbf6f38982c3fb3805f45c2800f59b4c",
+    "contract_path": "private_runtime/metadata_population_quality_demo/active_metadata_sources.json",
+    "contract_sha256": "6640b28283dfa4f0042a586a775a0b62fe5b6a8607326c94a9db96ec1fa7927b",
+    "contract_issues": [],
+    "event_count": 1,
+    "symbol_date_requirement_count": 2,
+    "event_date_count": 1,
+    "announcement_exact_resolved": 1,
+    "announcement_proxy_only": 0,
+    "announcement_unresolved": 0,
+    "event_exchange_resolved": 1,
+    "event_exchange_unresolved": 0,
+    "event_exchange_nasdaq": 1,
+    "shares_symbol_dates_resolved": 2,
+    "shares_symbol_dates_unresolved": 0,
+    "control_dates_resolved": 1,
+    "control_dates_partial": 0,
+    "control_dates_unresolved": 0,
+    "ready_g1_announcement_times": true,
+    "ready_g3_primary_listing_history": true,
+    "ready_g4_shares_outstanding": true,
+    "ready_g5_matched_control_universe": true,
+    "ready_for_step15_real_backfill_metadata": true,
+    "ready_for_non_synthetic_model_evaluation_metadata": true,
+    "prohibited_outputs": [
+      "BUY",
+      "SELL",
+      "expected_return",
+      "target_price",
+      "position_size",
+      "order",
+      "execution_instruction"
+    ],
+    "source_inventory": [
+      {
+        "source_id": "demo-announcement",
+        "record_kind": "announcement_timestamp",
+        "source_family": "synthetic_fixture",
+        "enabled": true,
+        "authorized": true,
+        "data_classification": "synthetic_fixture",
+        "path": "/mnt/data/mnpi_surveillance_private_step19_work/private_runtime/metadata_population_quality_demo/staged/demo-announcement/cdf7d49930eed8a365f2307fb7f1b10df6b3a116fd77ca8e0aa2bc9fc88321e1.csv",
+        "exists": true,
+        "row_count": 1,
+        "sha256": "cdf7d49930eed8a365f2307fb7f1b10df6b3a116fd77ca8e0aa2bc9fc88321e1",
+        "license_reference_present": true
+      },
+      {
+        "source_id": "demo-controls",
+        "record_kind": "control_universe",
+        "source_family": "synthetic_fixture",
+        "enabled": true,
+        "authorized": true,
+        "data_classification": "synthetic_fixture",
+        "path": "/mnt/data/mnpi_surveillance_private_step19_work/private_runtime/metadata_population_quality_demo/staged/demo-controls/5baecb702c42908acb97cf22cd419a0edd5c981e9674c793dc26075b937f721a.csv",
+        "exists": true,
+        "row_count": 3,
+        "sha256": "5baecb702c42908acb97cf22cd419a0edd5c981e9674c793dc26075b937f721a",
+        "license_reference_present": true
+      },
+      {
+        "source_id": "demo-taq-master",
+        "record_kind": "security_master",
+        "source_family": "synthetic_fixture",
+        "enabled": true,
+        "authorized": true,
+        "data_classification": "synthetic_fixture",
+        "path": "/mnt/data/mnpi_surveillance_private_step19_work/private_runtime/metadata_population_quality_demo/staged/demo-taq-master/80f766490403e220e7cdb6dc45eede3483028f47438c86859f07ba0279c8d50a.csv",
+        "exists": true,
+        "row_count": 2,
+        "sha256": "80f766490403e220e7cdb6dc45eede3483028f47438c86859f07ba0279c8d50a",
+        "license_reference_present": true
+      }
+    ]
+  },
+  "current_quality": {
+    "schema_version": "0.19.0",
+    "purpose": "Metadata quality/reconciliation gate for historical market-surveillance research; no trading outputs.",
+    "research_use_only": true,
+    "events_path": "data/examples/metadata/events.csv",
+    "events_sha256": "f21f1e1a4830eea1ed94ab1ad4898161ec303cc0e4e85b2e9f26288816c59bc6",
+    "symbol_dates_path": "data/examples/metadata/symbol_dates.csv",
+    "symbol_dates_sha256": "aa91685e108e457b3104a46655d96b92dbf6f38982c3fb3805f45c2800f59b4c",
+    "contract_path": "private_runtime/metadata_population_quality_demo/active_metadata_sources.json",
+    "contract_sha256": "6640b28283dfa4f0042a586a775a0b62fe5b6a8607326c94a9db96ec1fa7927b",
+    "resolver_dir": "private_runtime/metadata_population_quality_demo/current_resolver/after",
+    "resolver_summary_sha256": "5b1023e7fa7162bf1eaaa3b27212919e00b4c34cd0c51f670cf2423f965c01e4",
+    "contract_issues": [],
+    "blocking_issue_count": 0,
+    "warning_issue_count": 0,
+    "info_issue_count": 1,
+    "quarantined_announcement_events": 0,
+    "quarantined_exchange_events": 0,
+    "quarantined_share_symbol_dates": 0,
+    "quarantined_control_dates": 0,
+    "coverage_ready_before_quality": true,
+    "quality_gate_clear": true,
+    "only_synthetic_sources": true,
+    "quality_cleared_for_non_synthetic_model_evaluation": false,
+    "status": "SYNTHETIC_ONLY",
+    "domain_quality": [
+      {
+        "domain": "announcement",
+        "required_count": 1,
+        "resolver_ready_count": 1,
+        "quality_clear_count": 1,
+        "quarantined_count": 0,
+        "warning_count": 0,
+        "quality_score": 100.0,
+        "status": "QUALITY_CLEAR",
+        "research_use_only": 1
+      },
+      {
+        "domain": "exchange",
+        "required_count": 1,
+        "resolver_ready_count": 1,
+        "quality_clear_count": 1,
+        "quarantined_count": 0,
+        "warning_count": 0,
+        "quality_score": 100.0,
+        "status": "QUALITY_CLEAR",
+        "research_use_only": 1
+      },
+      {
+        "domain": "shares",
+        "required_count": 2,
+        "resolver_ready_count": 2,
+        "quality_clear_count": 2,
+        "quarantined_count": 0,
+        "warning_count": 0,
+        "quality_score": 100.0,
+        "status": "QUALITY_CLEAR",
+        "research_use_only": 1
+      },
+      {
+        "domain": "control_universe",
+        "required_count": 1,
+        "resolver_ready_count": 1,
+        "quality_clear_count": 1,
+        "quarantined_count": 0,
+        "warning_count": 0,
+        "quality_score": 100.0,
+        "status": "QUALITY_CLEAR",
+        "research_use_only": 1
+      }
+    ],
+    "reconciliation_policy": {
+      "announcement_exact_conflict_seconds": 60,
+      "shares_same_freshness_relative_tolerance": 0.02,
+      "shares_nearby_days": 7,
+      "shares_nearby_relative_tolerance": 0.1,
+      "control_numeric_relative_tolerance": 0.05,
+      "source_priority": {
+        "official_newswire_archive": 10,
+        "ibes_announcement": 20,
+        "nyse_daily_taq_master": 10,
+        "nasdaq_daily_list": 10,
+        "sec_xbrl_companyfacts": 20,
+        "generic_authorized_reference_data": 30,
+        "sec_edgar_submission_header": 60,
+        "samplefirms_research_universe": 70,
+        "synthetic_fixture": 90
+      },
+      "rule": "coverage cannot unlock evaluation unless Step-19 quality gate is also clear"
+    },
+    "prohibited_outputs": [
+      "BUY",
+      "SELL",
+      "expected_return",
+      "target_price",
+      "position_size",
+      "order",
+      "execution_instruction"
+    ]
+  },
+  "evaluation_release_gate": false,
+  "last_coverage_delta": {
+    "numeric_progress": {
+      "announcement_exact_resolved": 1,
+      "announcement_proxy_only": 0,
+      "event_exchange_resolved": 1,
+      "event_exchange_nasdaq": 1,
+      "shares_symbol_dates_resolved": 2,
+      "control_dates_resolved": 1,
+      "control_dates_partial": 0
+    },
+    "gate_transitions": {
+      "ready_g1_announcement_times": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_g3_primary_listing_history": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_g4_shares_outstanding": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_g5_matched_control_universe": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_for_step15_real_backfill_metadata": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "ready_for_non_synthetic_model_evaluation_metadata": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "quality_gate_clear": {
+        "before": false,
+        "after": true,
+        "transition": "BLOCKED_TO_READY"
+      },
+      "quality_cleared_for_non_synthetic_model_evaluation": {
+        "before": false,
+        "after": false,
+        "transition": "UNCHANGED"
+      }
+    }
+  },
+  "research_use_only": true,
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "batch_receipt": {
+    "ledger_schema_version": "1",
+    "step_schema_version": "0.19.0",
+    "batch_id": "step19-clean-demo",
+    "imported_at": "2026-09-24T14:49:55Z",
+    "source_contract": "config/metadata_sources.demo.json",
+    "source_contract_sha256": "22c7adaf431042cf284feb82c126d3cab0f292a124a6f3ac7272b5d3183ef205",
+    "events_sha256": "f21f1e1a4830eea1ed94ab1ad4898161ec303cc0e4e85b2e9f26288816c59bc6",
+    "symbol_dates_sha256": "aa91685e108e457b3104a46655d96b92dbf6f38982c3fb3805f45c2800f59b4c",
+    "active_contract_path": "private_runtime/metadata_population_quality_demo/active_metadata_sources.json",
+    "active_contract_sha256": "6640b28283dfa4f0042a586a775a0b62fe5b6a8607326c94a9db96ec1fa7927b",
+    "sources": [
+      {
+        "source_id": "demo-announcement",
+        "record_kind": "announcement_timestamp",
+        "source_family": "synthetic_fixture",
+        "data_classification": "synthetic_fixture",
+        "source_path": "/mnt/data/mnpi_surveillance_private_step19_work/data/examples/metadata/announcements.csv",
+        "staged_path": "private_runtime/metadata_population_quality_demo/staged/demo-announcement/cdf7d49930eed8a365f2307fb7f1b10df6b3a116fd77ca8e0aa2bc9fc88321e1.csv",
+        "sha256": "cdf7d49930eed8a365f2307fb7f1b10df6b3a116fd77ca8e0aa2bc9fc88321e1",
+        "size_bytes": 203,
+        "license_reference": "synthetic-fixture"
+      },
+      {
+        "source_id": "demo-taq-master",
+        "record_kind": "security_master",
+        "source_family": "synthetic_fixture",
+        "data_classification": "synthetic_fixture",
+        "source_path": "/mnt/data/mnpi_surveillance_private_step19_work/data/examples/metadata/taq_master.csv",
+        "staged_path": "private_runtime/metadata_population_quality_demo/staged/demo-taq-master/80f766490403e220e7cdb6dc45eede3483028f47438c86859f07ba0279c8d50a.csv",
+        "sha256": "80f766490403e220e7cdb6dc45eede3483028f47438c86859f07ba0279c8d50a",
+        "size_bytes": 107,
+        "license_reference": "synthetic-fixture"
+      },
+      {
+        "source_id": "demo-controls",
+        "record_kind": "control_universe",
+        "source_family": "synthetic_fixture",
+        "data_classification": "synthetic_fixture",
+        "source_path": "/mnt/data/mnpi_surveillance_private_step19_work/data/examples/metadata/control_universe.csv",
+        "staged_path": "private_runtime/metadata_population_quality_demo/staged/demo-controls/5baecb702c42908acb97cf22cd419a0edd5c981e9674c793dc26075b937f721a.csv",
+        "sha256": "5baecb702c42908acb97cf22cd419a0edd5c981e9674c793dc26075b937f721a",
+        "size_bytes": 491,
+        "license_reference": "synthetic-fixture"
+      }
+    ],
+    "no_op_sources": [],
+    "before_gate_state": {
+      "ready_g1_announcement_times": false,
+      "ready_g3_primary_listing_history": false,
+      "ready_g4_shares_outstanding": false,
+      "ready_g5_matched_control_universe": false,
+      "ready_for_step15_real_backfill_metadata": false,
+      "ready_for_non_synthetic_model_evaluation_metadata": false,
+      "quality_gate_clear": false,
+      "quality_cleared_for_non_synthetic_model_evaluation": false
+    },
+    "after_gate_state": {
+      "ready_g1_announcement_times": true,
+      "ready_g3_primary_listing_history": true,
+      "ready_g4_shares_outstanding": true,
+      "ready_g5_matched_control_universe": true,
+      "ready_for_step15_real_backfill_metadata": true,
+      "ready_for_non_synthetic_model_evaluation_metadata": true,
+      "quality_gate_clear": true,
+      "quality_cleared_for_non_synthetic_model_evaluation": false
+    },
+    "coverage_delta": {
+      "numeric_progress": {
+        "announcement_exact_resolved": 1,
+        "announcement_proxy_only": 0,
+        "event_exchange_resolved": 1,
+        "event_exchange_nasdaq": 1,
+        "shares_symbol_dates_resolved": 2,
+        "control_dates_resolved": 1,
+        "control_dates_partial": 0
+      },
+      "gate_transitions": {
+        "ready_g1_announcement_times": {
+          "before": false,
+          "after": true,
+          "transition": "BLOCKED_TO_READY"
+        },
+        "ready_g3_primary_listing_history": {
+          "before": false,
+          "after": true,
+          "transition": "BLOCKED_TO_READY"
+        },
+        "ready_g4_shares_outstanding": {
+          "before": false,
+          "after": true,
+          "transition": "BLOCKED_TO_READY"
+        },
+        "ready_g5_matched_control_universe": {
+          "before": false,
+          "after": true,
+          "transition": "BLOCKED_TO_READY"
+        },
+        "ready_for_step15_real_backfill_metadata": {
+          "before": false,
+          "after": true,
+          "transition": "BLOCKED_TO_READY"
+        },
+        "ready_for_non_synthetic_model_evaluation_metadata": {
+          "before": false,
+          "after": true,
+          "transition": "BLOCKED_TO_READY"
+        },
+        "quality_gate_clear": {
+          "before": false,
+          "after": true,
+          "transition": "BLOCKED_TO_READY"
+        },
+        "quality_cleared_for_non_synthetic_model_evaluation": {
+          "before": false,
+          "after": false,
+          "transition": "UNCHANGED"
+        }
+      }
+    },
+    "research_use_only": true,
+    "prohibited_outputs": [
+      "BUY",
+      "SELL",
+      "expected_return",
+      "target_price",
+      "position_size",
+      "order",
+      "execution_instruction"
+    ],
+    "previous_receipt_hash": "",
+    "receipt_hash": "9f833928bce74a15a6143564f65d3b7151732914d400c29fe168574b2e357a41"
+  },
+  "batch_dir": "data/processed/metadata_population_quality_demo/step19-clean-demo"
+}

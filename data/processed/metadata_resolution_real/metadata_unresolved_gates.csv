@@ -1,0 +1,5 @@
+gate_id,status,resolved,required,requirement
+G1_ANNOUNCEMENT_TIMES,BLOCKING,0,174,Exact first-public announcement timestamp from authoritative/authorized point-in-time source. EDGAR acceptance timestamps are retained as proxies and do not by themselves close this gate.
+G3_PRIMARY_LISTING_HISTORY,BLOCKING_FOR_ITCH,0,174,Point-in-time primary listing exchange at each event date.
+G4_SHARES_OUTSTANDING,BLOCKING_FOR_TURNOVER,0,3828,Shares outstanding known on/effective before every required symbol-date; future-filed facts prohibited.
+G5_MATCHED_CONTROL_UNIVERSE,BLOCKING_FOR_MODEL_EVAL,0,72,At least three same-day point-in-time candidates with complete pre-event matching covariates for each distinct event date.
