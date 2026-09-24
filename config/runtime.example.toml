@@ -13,6 +13,10 @@ audit_dir = "private_runtime/audit"
 host = "127.0.0.1"
 port = 8765
 
+[integrity]
+# Trusted out-of-band hash checked before joblib deserialization.
+expected_model_sha256 = "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616"
+
 [policy]
 research_use_only = true
 allow_network_bind = false
