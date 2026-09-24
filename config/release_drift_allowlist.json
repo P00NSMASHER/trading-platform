@@ -8,11 +8,11 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "config/runtime.demo.toml": {
-      "expected_git_blob_sha1": "5650ecd5b720ea59e4cd45ff72106ddb0218342f",
+      "expected_git_blob_sha1": "b342b3c10f980a9a11d79e8ada8368603330d69e",
       "reason": "Intentional post-Step21 security hardening"
     },
     "config/runtime.example.toml": {
-      "expected_git_blob_sha1": "5650ecd5b720ea59e4cd45ff72106ddb0218342f",
+      "expected_git_blob_sha1": "b342b3c10f980a9a11d79e8ada8368603330d69e",
       "reason": "Intentional post-Step21 security hardening"
     },
     "pyproject.toml": {
@@ -28,7 +28,7 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "src/deployment_hardening.py": {
-      "expected_git_blob_sha1": "46ea85c9b383daa1050d7c2841a142445cf7fa5b",
+      "expected_git_blob_sha1": "486577cd88bf3516e33394e1c92cb15bc7b27a91",
       "reason": "Intentional post-Step21 security hardening"
     },
     "src/private_dashboard.py": {
@@ -44,7 +44,7 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "tests/test_deployment_hardening.py": {
-      "expected_git_blob_sha1": "f7336beabea83bf7c135b90d7ee1d29cc4152705",
+      "expected_git_blob_sha1": "0e07de35003067d576d6d8f5911c30efb3d920b3",
       "reason": "Intentional post-Step21 security hardening"
     },
     "tests/test_private_dashboard.py": {
@@ -58,7 +58,7 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     ".github/workflows/synthetic-ci.yml": {
-      "expected_git_blob_sha1": "9ef6c03f0f539aa279bba087b7c0287c22cb2f38",
+      "expected_git_blob_sha1": "5f057ff6cdfb809e61fd04d3d0530e3d81d6f7de",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "FROZEN_CHAMPION.md": {
@@ -70,7 +70,7 @@
       "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "SECURITY.md": {
-      "expected_git_blob_sha1": "3df53d48c8cc7ca2093f4c6e8c84dbc62138e93f",
+      "expected_git_blob_sha1": "fd6823db71cd36861d92684eab870d7fd7361a5e",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "SHA256SUMS": {
@@ -85,12 +85,16 @@
       "expected_git_blob_sha1": "14f6d39dadcc41827402c79d599c8d27d378959f",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
+    "docs/dashboard_security.md": {
+      "expected_git_blob_sha1": "b38b525fbfed56d43d75fff62a5c03c14f03cf95",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
     "docs/model_artifact_migration.md": {
-      "expected_git_blob_sha1": "3cb4b9ecf74fb7152af4ea3ec743ed46622c2c93",
+      "expected_git_blob_sha1": "e6f8df6a9676ea23ef59b6df41bd6a954352f4f8",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "docs/repository_integrity.md": {
-      "expected_git_blob_sha1": "11f7c1cb5bf9b94c0338f3b5bcdae6965e4c900c",
+      "expected_git_blob_sha1": "1f8f70e121044ee768c9270c32bbc48b99744708",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "requirements-skops.lock": {
@@ -102,19 +106,19 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "scripts/verify_release_drift.py": {
-      "expected_git_blob_sha1": "44cf928c1473dc9cc58b9d87e91794c96a7f38ad",
+      "expected_git_blob_sha1": "f2b9fb12906b6aa9f339c7589ca3bcd2ff5aed07",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "src/model_artifact.py": {
-      "expected_git_blob_sha1": "18e6c24ed0752e3e91b8b7554883644b80db6907",
+      "expected_git_blob_sha1": "2cc3f1a4bc6ca40d5e83b5bee71f4dfa3b7cd56c",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "tests/test_model_artifact.py": {
-      "expected_git_blob_sha1": "fc385022a11dc4e7eab11406f80e57395358ee02",
+      "expected_git_blob_sha1": "a968576331576969e8a0779dfa8036a56dca1be3",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "tests/test_release_drift.py": {
-      "expected_git_blob_sha1": "a5c2c0b3d67f163840eecda401a3e0791ee1c442",
+      "expected_git_blob_sha1": "8fb89cab0db7d7180ee59e6032ad3a6a518a53d1",
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "tests/test_secret_scan.py": {
