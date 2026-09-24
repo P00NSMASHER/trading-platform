@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Reassemble and verify package
+      - name: Reassemble and verify private transfer archive
         shell: bash
         run: |
           set -euo pipefail
@@ -25,50 +25,41 @@ jobs:
             echo "READY sentinel absent; nothing to import."
             exit 0
           fi
-          cat bootstrap/step21.part*.b64 | base64 --decode > /tmp/MNPI_Prototype_Step21.zip
-          echo "33ed148d480808474b6aab6c958aa476e6fe73be5a9eeb467e156ec88f3b4158  /tmp/MNPI_Prototype_Step21.zip" | sha256sum -c -
+          cat bootstrap/step21.part*.b64 | base64 --decode > /tmp/step21.tar.xz
+          echo "c69137181d890425b3e43cf999cb06a381d25f1b96e3480cf23557bd1d3633f0  /tmp/step21.tar.xz" | sha256sum -c -
 
       - name: Safely unpack package into repository
         shell: bash
         run: |
           set -euo pipefail
+          rm -rf /tmp/step21_extract
+          mkdir -p /tmp/step21_extract
+
           python - <<'PY'
-          from pathlib import Path
-          import os, shutil, zipfile
-
-          repo = Path.cwd()
-          zp = Path("/tmp/MNPI_Prototype_Step21.zip")
-          tmp = Path("/tmp/step21_extract")
-          wrapper = "mnpi_surveillance_private_step21_work"
-
-          if tmp.exists():
-              shutil.rmtree(tmp)
-          tmp.mkdir(parents=True)
-
-          with zipfile.ZipFile(zp) as z:
-              for info in z.infolist():
-                  normalized = os.path.normpath(info.filename)
-                  if os.path.isabs(normalized) or normalized == ".." or normalized.startswith("../"):
-                      raise SystemExit(f"unsafe archive path: {info.filename}")
-              z.extractall(tmp)
-
-          src = tmp / wrapper
-          if not src.is_dir():
-              raise SystemExit("expected Step 21 wrapper directory is missing")
-
-          for item in src.iterdir():
-              if item.name == ".git":
+          import subprocess
+          names = subprocess.check_output(
+              ["tar", "-tJf", "/tmp/step21.tar.xz"],
+              text=True,
+          ).splitlines()
+          for name in names:
+              cleaned = name.rstrip("/")
+              if not cleaned:
                   continue
-              dest = repo / item.name
-              if item.is_dir():
-                  shutil.copytree(item, dest, dirs_exist_ok=True)
-              else:
-                  shutil.copy2(item, dest)
-
-          release_dir = repo / "releases"
-          release_dir.mkdir(exist_ok=True)
-          shutil.copy2(zp, release_dir / "MNPI_Prototype_Step21.zip")
+              if cleaned.startswith("/") or any(part == ".." for part in cleaned.split("/")):
+                  raise SystemExit(f"unsafe archive path: {name}")
           PY
+
+          tar -xJf /tmp/step21.tar.xz -C /tmp/step21_extract
+          src=/tmp/step21_extract/mnpi_surveillance_private_step21_work
+          test -d "$src"
+
+          shopt -s dotglob nullglob
+          for item in "$src"/*; do
+            name="$(basename "$item")"
+            [[ "$name" == ".git" ]] && continue
+            rm -rf "./$name"
+            cp -a "$item" "./$name"
+          done
 
       - name: Record import provenance
         shell: bash
@@ -76,17 +67,18 @@ jobs:
           cat > STEP21_IMPORT.md <<'EOF'
           # Step 21 Import Provenance
 
-          Imported from the validated private prototype package.
+          Imported from the validated private Step 21 prototype supplied in ChatGPT.
 
-          - Package: `MNPI_Prototype_Step21.zip`
-          - Package SHA-256: `33ed148d480808474b6aab6c958aa476e6fe73be5a9eeb467e156ec88f3b4158`
+          - Original package: `MNPI_Prototype_Step21.zip`
+          - Original package SHA-256: `33ed148d480808474b6aab6c958aa476e6fe73be5a9eeb467e156ec88f3b4158`
+          - Private transfer archive SHA-256: `c69137181d890425b3e43cf999cb06a381d25f1b96e3480cf23557bd1d3633f0`
           - Frozen champion SHA-256: `0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616`
           - Local validation before import: `183 passed`
-          - Internal package SHA256SUMS verification: PASS
-          - Credential-pattern scan before import: no matches found
-          - Step 21 remains historical surveillance research only; evaluation release remains fail-closed.
+          - Original package internal SHA256SUMS verification: PASS
+          - Credential-pattern scan before import: no obvious embedded credentials found
+          - Evaluation release remains fail-closed.
 
-          `FROZEN_CHAMPION.md` is intentionally preserved from repository initialization.
+          `FROZEN_CHAMPION.md` is intentionally preserved as repository-level baseline evidence.
           EOF
           rm -rf bootstrap
 
