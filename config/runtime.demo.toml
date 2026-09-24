@@ -14,8 +14,11 @@ host = "127.0.0.1"
 port = 8765
 
 [integrity]
-# Trusted out-of-band hash checked before joblib deserialization.
+# Trusted out-of-band hash checked before model deserialization.
 expected_model_sha256 = "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616"
+# Active champion remains joblib until an explicitly reviewed .skops replacement is configured.
+model_format = "joblib"
+skops_trusted_types_file = ""
 
 [policy]
 research_use_only = true
