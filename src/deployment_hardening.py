@@ -95,6 +95,7 @@ class RuntimeConfig:
     expected_model_sha256: str
     model_format: str
     skops_trusted_types_file: Path | None
+    expected_skops_trusted_types_sha256: str
 
     def validate(self) -> None:
         if not self.research_use_only:
@@ -113,6 +114,9 @@ class RuntimeConfig:
         if self.model_format == "skops":
             if self.skops_trusted_types_file is None or not self.skops_trusted_types_file.exists():
                 raise ValueError("skops runtime requires an existing reviewed skops_trusted_types_file")
+            trust_hash = self.expected_skops_trusted_types_sha256.strip().lower()
+            if len(trust_hash) != 64 or any(ch not in "0123456789abcdef" for ch in trust_hash):
+                raise ValueError("skops runtime requires expected_skops_trusted_types_sha256")
         if self.dashboard_host.strip().lower() not in LOOPBACK_HOSTS:
             raise ValueError("runtime dashboard host must be loopback-only")
         if not (1 <= int(self.dashboard_port) <= 65535):
@@ -176,6 +180,9 @@ def load_runtime_config(path: Path) -> RuntimeConfig:
             if str(integrity.get("skops_trusted_types_file", "")).strip()
             else None
         ),
+        expected_skops_trusted_types_sha256=str(
+            integrity.get("expected_skops_trusted_types_sha256", "")
+        ).strip().lower(),
     )
     cfg.validate()
     return cfg
@@ -209,6 +216,7 @@ def verify_model_bundle(
     expected_sha256: str | None = None,
     model_format: str = "joblib",
     skops_trusted_types_file: Path | None = None,
+    expected_skops_trusted_types_sha256: str | None = None,
 ) -> dict[str, Any]:
     path = Path(path)
     actual_sha256 = sha256_file(path) if path.exists() else None
@@ -220,6 +228,7 @@ def verify_model_bundle(
         "expected_sha256": expected or None,
         "model_format": model_format,
         "skops_trusted_types_file": str(skops_trusted_types_file) if skops_trusted_types_file else None,
+        "expected_skops_trusted_types_sha256": expected_skops_trusted_types_sha256 or None,
         "hash_matches_expected": False,
         "deserialization_attempted": False,
         "required_keys_present": False,
@@ -253,6 +262,7 @@ def verify_model_bundle(
                 path,
                 expected,
                 trusted_types_file=skops_trusted_types_file,
+                expected_trusted_types_sha256=expected_skops_trusted_types_sha256,
             )
         if not isinstance(bundle, dict):
             report["load_error"] = "model bundle is not a dict"
@@ -443,6 +453,7 @@ def self_check(cfg: RuntimeConfig) -> dict[str, Any]:
         expected_sha256=cfg.expected_model_sha256,
         model_format=cfg.model_format,
         skops_trusted_types_file=cfg.skops_trusted_types_file,
+        expected_skops_trusted_types_sha256=cfg.expected_skops_trusted_types_sha256,
     )
     training = verify_training_manifest(cfg.training_manifest, model)
     database = database_integrity_report(cfg.case_db, model_sha256=model.get("sha256"))
