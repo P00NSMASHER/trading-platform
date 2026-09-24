@@ -93,6 +93,8 @@ class RuntimeConfig:
     allow_execution_integration: bool
     allow_trade_outputs: bool
     expected_model_sha256: str
+    model_format: str
+    skops_trusted_types_file: Path | None
 
     def validate(self) -> None:
         if not self.research_use_only:
@@ -106,6 +108,11 @@ class RuntimeConfig:
         expected = self.expected_model_sha256.strip().lower()
         if len(expected) != 64 or any(ch not in "0123456789abcdef" for ch in expected):
             raise ValueError("runtime integrity expected_model_sha256 must be a 64-character SHA-256 hex digest")
+        if self.model_format not in {"joblib", "skops"}:
+            raise ValueError("runtime integrity model_format must be 'joblib' or 'skops'")
+        if self.model_format == "skops":
+            if self.skops_trusted_types_file is None or not self.skops_trusted_types_file.exists():
+                raise ValueError("skops runtime requires an existing reviewed skops_trusted_types_file")
         if self.dashboard_host.strip().lower() not in LOOPBACK_HOSTS:
             raise ValueError("runtime dashboard host must be loopback-only")
         if not (1 <= int(self.dashboard_port) <= 65535):
@@ -163,6 +170,12 @@ def load_runtime_config(path: Path) -> RuntimeConfig:
         allow_execution_integration=bool(policy.get("allow_execution_integration", False)),
         allow_trade_outputs=bool(policy.get("allow_trade_outputs", False)),
         expected_model_sha256=str(integrity.get("expected_model_sha256", "")).strip().lower(),
+        model_format=str(integrity.get("model_format", "joblib")).strip().lower(),
+        skops_trusted_types_file=(
+            _resolve(base, str(integrity["skops_trusted_types_file"]))
+            if str(integrity.get("skops_trusted_types_file", "")).strip()
+            else None
+        ),
     )
     cfg.validate()
     return cfg
@@ -190,7 +203,13 @@ def _recursive_keys(obj: Any) -> set[str]:
     return keys
 
 
-def verify_model_bundle(path: Path, *, expected_sha256: str | None = None) -> dict[str, Any]:
+def verify_model_bundle(
+    path: Path,
+    *,
+    expected_sha256: str | None = None,
+    model_format: str = "joblib",
+    skops_trusted_types_file: Path | None = None,
+) -> dict[str, Any]:
     path = Path(path)
     actual_sha256 = sha256_file(path) if path.exists() else None
     expected = (expected_sha256 or "").strip().lower()
@@ -199,6 +218,8 @@ def verify_model_bundle(path: Path, *, expected_sha256: str | None = None) -> di
         "exists": path.exists(),
         "sha256": actual_sha256,
         "expected_sha256": expected or None,
+        "model_format": model_format,
+        "skops_trusted_types_file": str(skops_trusted_types_file) if skops_trusted_types_file else None,
         "hash_matches_expected": False,
         "deserialization_attempted": False,
         "required_keys_present": False,
@@ -216,9 +237,23 @@ def verify_model_bundle(path: Path, *, expected_sha256: str | None = None) -> di
     if not report["hash_matches_expected"]:
         report["load_error"] = "model bundle hash mismatch; refusing to deserialize untrusted bytes"
         return report
+    if model_format not in {"joblib", "skops"}:
+        report["load_error"] = f"unsupported model_format={model_format!r}"
+        return report
     try:
         report["deserialization_attempted"] = True
-        bundle = joblib.load(path)
+        if model_format == "joblib":
+            bundle = joblib.load(path)
+        else:
+            try:
+                from model_artifact import load_verified_skops
+            except ImportError:
+                from .model_artifact import load_verified_skops
+            bundle = load_verified_skops(
+                path,
+                expected,
+                trusted_types_file=skops_trusted_types_file,
+            )
         if not isinstance(bundle, dict):
             report["load_error"] = "model bundle is not a dict"
             return report
@@ -403,7 +438,12 @@ def filesystem_permission_report(cfg: RuntimeConfig) -> dict[str, Any]:
 def self_check(cfg: RuntimeConfig) -> dict[str, Any]:
     cfg.validate()
     ensure_private_runtime_dirs(cfg)
-    model = verify_model_bundle(cfg.model_bundle, expected_sha256=cfg.expected_model_sha256)
+    model = verify_model_bundle(
+        cfg.model_bundle,
+        expected_sha256=cfg.expected_model_sha256,
+        model_format=cfg.model_format,
+        skops_trusted_types_file=cfg.skops_trusted_types_file,
+    )
     training = verify_training_manifest(cfg.training_manifest, model)
     database = database_integrity_report(cfg.case_db, model_sha256=model.get("sha256"))
     permissions = filesystem_permission_report(cfg)
