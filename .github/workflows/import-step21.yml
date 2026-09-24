@@ -1,10 +1,65 @@
 name: Step 21 one-time import
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".import/step21/READY"
 permissions:
   contents: write
+
 jobs:
   import:
+    if: contains(github.event.head_commit.message, 'Arm Step 21 import')
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Staging only; import trigger not armed yet."
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct and verify import archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .import/step21/part-* | base64 --decode > /tmp/MNPI_Step21_GitHubImport.zip
+          echo "237b3ed3a0fbecf85c8b0a56de02e66a6ce33e2882592c5740795c47991ebfa1  /tmp/MNPI_Step21_GitHubImport.zip" | sha256sum -c -
+          rm -rf /tmp/step21-import
+          mkdir -p /tmp/step21-import
+          unzip -q /tmp/MNPI_Step21_GitHubImport.zip -d /tmp/step21-import
+
+      - name: Import verified Step 21 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -a /tmp/step21-import/. .
+          rm -rf .import
+          rm -f .github/workflows/import-step21.yml
+          cat > STEP21_IMPORT_PROVENANCE.md <<'EOF'
+          # Step 21 Import Provenance
+
+          Source upload: `MNPI_Prototype_Step21(1).zip`
+
+          Original uploaded package SHA-256:
+          `33ed148d480808474b6aab6c958aa476e6fe73be5a9eeb467e156ec88f3b4158`
+
+          GitHub source-import archive SHA-256:
+          `237b3ed3a0fbecf85c8b0a56de02e66a6ce33e2882592c5740795c47991ebfa1`
+
+          Original package manifest verification: PASS.
+
+          Frozen champion SHA-256:
+          `0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616`
+
+          Step 21 release self-check reports 183/183 automated tests passing in its hardened environment. A clean ZIP extraction in the import sandbox reproduced 182/183 before restoring the four documented owner-only fixture permissions to 0600; after restoring those permissions, 183/183 passed.
+
+          The historical `FROZEN_CHAMPION.md` file is intentionally retained.
+          EOF
+
+      - name: Commit imported source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Import verified Step 21 trading platform source"
+          git push
