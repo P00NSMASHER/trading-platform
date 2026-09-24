@@ -96,6 +96,8 @@ def verify_release_drift(
     trust_root_authenticated = actual_trust_root_sha256 == expected_trust_root_sha256
     manifest = _read_json(release_manifest)
     exception_raw = _read_json(exceptions)
+    if exception_raw.get("schema_version") != "2":
+        raise ValueError("release drift allowlist schema_version must equal '2' (SHA-256 identities)")
     historical_sums = _parse_sums(sha256sums)
 
     entries = manifest.get("files", [])
