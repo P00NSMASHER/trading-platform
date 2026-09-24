@@ -23,13 +23,14 @@ PYTHONPATH=src python src/model_artifact.py export-skops \
 
 The export report lists types that `skops.io` does not trust by default. **Do not automatically copy that list into the trusted-types file.** Review each type against the trained pipeline and the exact locked environment.
 
-After review, copy `config/skops_trusted_types.example.json` to a private local file and list only the reviewed types. Configure the runtime with `model_format = "skops"`, the converted artifact path/hash, and the reviewed trusted-types file.
+After review, copy `config/skops_trusted_types.example.json` to a private local file and list only the reviewed types. Compute and record that file's SHA-256 separately. Configure the runtime with `model_format = "skops"`, the converted artifact path/hash, the reviewed trusted-types file, and `expected_skops_trusted_types_sha256`.
 
 At load time the runtime:
 
-1. verifies the artifact SHA-256 before parsing/loading;
-2. asks `skops.io` which types are not trusted by default;
-3. refuses any type not present in the separately reviewed allowlist;
-4. only then loads the model.
+1. verifies the model artifact SHA-256 before parsing/loading;
+2. verifies the reviewed trusted-types file SHA-256 before reading it;
+3. asks `skops.io` which model types are not trusted by default;
+4. refuses any type not present in the separately reviewed allowlist;
+5. only then loads the model.
 
 This is a migration path, not an automatic model promotion or model change. Champion/challenger and research-only controls remain unchanged.
