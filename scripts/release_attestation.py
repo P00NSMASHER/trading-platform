@@ -215,6 +215,8 @@ def verify_attestation_against_checkout(*, root: Path, attestation: dict[str, An
 
     if attestation.get("schema_version") != SCHEMA_VERSION:
         raise ValueError("unsupported attestation schema_version")
+    if attestation.get("signature_namespace") != DEFAULT_NAMESPACE:
+        raise ValueError(f"attestation signature_namespace must equal {DEFAULT_NAMESPACE!r}")
     if attestation.get("research_use_only") is not True:
         raise ValueError("attestation must preserve research_use_only=true")
 
