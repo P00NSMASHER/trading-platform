@@ -19,6 +19,7 @@ Run:
 
 ```bash
 python scripts/secret_scan.py --root .
+python scripts/verify_release_drift.py --root .
 PYTHONPATH=src python -m pytest -q
 ```
 
@@ -27,3 +28,12 @@ The runtime must continue to verify the frozen model SHA-256 before deserializat
 ## Repository integrity
 
 Prefer signed commits/tags where available. Treat `FROZEN_CHAMPION.md`, `RELEASE_MANIFEST.json`, and `SHA256SUMS` as integrity evidence, not as a substitute for an independently trusted release hash.
+
+
+## Dashboard access
+
+The local dashboard uses a new in-memory authentication token on every launch in addition to loopback binding and CSRF protection. Do not copy authenticated launch URLs into logs, tickets, or shared documents.
+
+## Model persistence
+
+The frozen joblib champion remains allowed only after its trusted SHA-256 is verified before deserialization. Future migrations to `skops.io` must additionally use a separately reviewed trusted-types file whose SHA-256 is configured and verified before loading.
