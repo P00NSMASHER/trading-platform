@@ -38,6 +38,9 @@ jobs:
           python -m pip install -r requirements.lock
           python -m pip install -r requirements-dev.lock
 
+      - name: Verify historical release drift
+        run: python scripts/verify_release_drift.py --root .
+
       - name: Run synthetic-only test suite
         run: python -m pytest -q
 
