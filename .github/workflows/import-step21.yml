@@ -1,0 +1,10 @@
+name: Step 21 one-time import
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Staging only; import trigger not armed yet."
