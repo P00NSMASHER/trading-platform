@@ -87,9 +87,12 @@ def load_verified_skops(
     verify_hash_before_load(path, expected_sha256)
     if trusted_types_file is None:
         raise ValueError("skops loading requires a reviewed trusted-types file")
+    trust_hash = str(expected_trusted_types_sha256 or "").strip().lower()
+    if len(trust_hash) != 64 or any(ch not in "0123456789abcdef" for ch in trust_hash):
+        raise ValueError("skops loading requires a trusted SHA-256 for the reviewed trusted-types file")
     approved = set(read_trusted_types(
         trusted_types_file,
-        expected_sha256=expected_trusted_types_sha256,
+        expected_sha256=trust_hash,
     ))
     unknown = set(inspect_skops_types(path))
     unapproved = sorted(unknown - approved)
