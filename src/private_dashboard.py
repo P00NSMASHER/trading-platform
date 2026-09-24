@@ -30,6 +30,8 @@ DEFAULT_MAX_REQUEST_BYTES = 16_384
 DEFAULT_MAX_URI_BYTES = 4_096
 DEFAULT_REQUESTS_PER_MINUTE = 240
 DEFAULT_WRITES_PER_MINUTE = 30
+DEFAULT_MAX_CONCURRENT_CONNECTIONS = 16
+DEFAULT_SOCKET_TIMEOUT_SECONDS = 5.0
 ALLOWED_ACTIONS = {
     "review_started",
     "note_added",
@@ -70,6 +72,8 @@ class DashboardConfig:
     max_uri_bytes: int = DEFAULT_MAX_URI_BYTES
     requests_per_minute: int = DEFAULT_REQUESTS_PER_MINUTE
     writes_per_minute: int = DEFAULT_WRITES_PER_MINUTE
+    max_concurrent_connections: int = DEFAULT_MAX_CONCURRENT_CONNECTIONS
+    socket_timeout_seconds: float = DEFAULT_SOCKET_TIMEOUT_SECONDS
 
     def validate(self) -> None:
         if not _is_loopback_host(self.host):
@@ -86,6 +90,10 @@ class DashboardConfig:
             raise ValueError("requests_per_minute must be in [1,10000]")
         if not (1 <= int(self.writes_per_minute) <= int(self.requests_per_minute)):
             raise ValueError("writes_per_minute must be in [1,requests_per_minute]")
+        if not (1 <= int(self.max_concurrent_connections) <= 256):
+            raise ValueError("max_concurrent_connections must be in [1,256]")
+        if not (0.5 <= float(self.socket_timeout_seconds) <= 60.0):
+            raise ValueError("socket_timeout_seconds must be in [0.5,60.0]")
 
 
 class DashboardRepository:
@@ -318,6 +326,7 @@ class PrivateDashboardServer(ThreadingHTTPServer):
             raise ValueError("dashboard bootstrap and session tokens must be distinct")
         self._auth_lock = threading.Lock()
         self._bootstrap_consumed = False
+        self._connection_slots = threading.BoundedSemaphore(config.max_concurrent_connections)
         self._rate_lock = threading.Lock()
         self._request_times: dict[str, deque[float]] = defaultdict(deque)
         self._write_times: dict[str, deque[float]] = defaultdict(deque)
@@ -336,6 +345,53 @@ class PrivateDashboardServer(ThreadingHTTPServer):
                 return False
             self._bootstrap_consumed = True
             return True
+
+    def get_request(self):
+        request, client_address = super().get_request()
+        request.settimeout(float(self.config.socket_timeout_seconds))
+        return request, client_address
+
+    def _reject_over_capacity(self, request) -> None:
+        body = b"service busy\n"
+        response = (
+            b"HTTP/1.1 503 Service Unavailable\r\n"
+            b"Connection: close\r\n"
+            b"Content-Type: text/plain; charset=utf-8\r\n"
+            b"Retry-After: 1\r\n"
+            + f"Content-Length: {len(body)}\r\n\r\n".encode("ascii")
+            + body
+        )
+        try:
+            request.sendall(response)
+        except OSError:
+            pass
+        finally:
+            self.shutdown_request(request)
+
+    def _process_request_with_slot(self, request, client_address) -> None:
+        try:
+            self.finish_request(request, client_address)
+        except Exception:
+            self.handle_error(request, client_address)
+        finally:
+            self.shutdown_request(request)
+            self._connection_slots.release()
+
+    def process_request(self, request, client_address) -> None:
+        if not self._connection_slots.acquire(blocking=False):
+            self._reject_over_capacity(request)
+            return
+        try:
+            thread = threading.Thread(
+                target=self._process_request_with_slot,
+                args=(request, client_address),
+                daemon=self.daemon_threads,
+            )
+            thread.start()
+        except Exception:
+            self._connection_slots.release()
+            self.shutdown_request(request)
+            raise
 
     def allow_request(self, client_ip: str, *, write: bool) -> bool:
         now = time.monotonic()
