@@ -107,3 +107,23 @@ def test_checkout_verification_rejects_missing_policy_prohibitions(tmp_path: Pat
                 "prohibited_capabilities": [],
             },
         )
+
+
+def test_checkout_verification_rejects_wrong_signature_namespace(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(ra, "_require_clean_tracked_tree", lambda root: None)
+    with pytest.raises(ValueError, match="signature_namespace"):
+        ra.verify_attestation_against_checkout(
+            root=tmp_path,
+            attestation={
+                "schema_version": "1",
+                "signature_namespace": "other-purpose",
+                "research_use_only": True,
+                "prohibited_capabilities": [
+                    "broker_connectivity",
+                    "order_generation",
+                    "trade_recommendations",
+                    "position_sizing",
+                    "expected_return_outputs",
+                ],
+            },
+        )
