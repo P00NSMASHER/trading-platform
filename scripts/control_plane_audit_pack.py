@@ -136,16 +136,24 @@ def _workflow_audit(root: Path) -> dict[str, Any]:
 
 def _policy_file_audit(root: Path) -> dict[str, Any]:
     security = (root / "SECURITY.md").read_text(encoding="utf-8").lower()
-    required = [
-        "broker",
-        "order",
-        "trade",
-        "private key",
-        "release-drift",
-        "loopback",
+    required_concepts = {
+        "broker_boundary": ("broker",),
+        "execution_boundary": ("execution integration", "execution"),
+        "trade_output_boundary": ("trading outputs", "trade outputs", "trade-output"),
+        "private_signing_material": ("private key",),
+        "release_drift": ("release-drift",),
+        "loopback_dashboard": ("loopback",),
+    }
+    missing = [
+        name
+        for name, alternatives in required_concepts.items()
+        if not any(term in security for term in alternatives)
     ]
-    missing = [x for x in required if x not in security]
-    return {"required_terms": required, "missing_terms": missing, "ok": not missing}
+    return {
+        "required_concepts": {k: list(v) for k, v in required_concepts.items()},
+        "missing_concepts": missing,
+        "ok": not missing,
+    }
 
 
 def _build_report(
