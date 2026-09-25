@@ -80,3 +80,15 @@ Step 17/19/20 remain authoritative. The Phase-B audit is an earlier fail-fast ch
 ## Current blocker
 
 The repository does not contain an authorized I/B/E/S/RavenPack export or a complete 174-row independently verified official timestamp set. Therefore G1 must remain BLOCKED until the exact source data are supplied.
+
+
+## Study-author bulk mapping
+
+The public `vgreg/earnings_news_jar` replication code shows the authors constructing the I/B/E/S announcement timestamp from:
+
+- `ANNDATS_ACT` — actual announcement date
+- `ANNTIMS_ACT` — actual announcement time
+
+Their notebook concatenates those fields into an `IBES_Timestamp`. If an authorized I/B/E/S export is available, this is the preferred bulk mapping into `public_announcement_ts`; the resulting timestamps still need timezone normalization, event matching, provenance, and Step-19 reconciliation before G1 can pass.
+
+The authors also publish a RavenPack notebook specifically for extracting earnings-announcement timestamps. RavenPack is therefore a second high-value bulk source when an authorized export is available.
