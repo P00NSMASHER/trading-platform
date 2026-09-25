@@ -50,6 +50,10 @@
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
+    },
+    "src/evaluation_release_controller.py": {
+      "expected_sha256": "e8005837868915ad2f950bfdabc5246a97f2ad12aba32d8f2d1d52deed92ef2a",
+      "reason": "Control-plane Step 6: preserve G1-G11 assessment while requiring freshly verified signed G12-G15 authority before execution"
     }
   },
   "repository_additions": {
@@ -220,6 +224,18 @@
     "docs/control_plane_step5.md": {
       "expected_sha256": "6c96cd94116b38b3743cbae030a271c4535459f5ab10c823d7650e3965427348",
       "reason": "Control-plane Step 5 recursive lineage and recovery implementation note"
+    },
+    "src/control_plane/release_authority.py": {
+      "expected_sha256": "c056d318256ef1e280457c68cde141fe0dba118e475714e0a1c23a21c72d2e13",
+      "reason": "Control-plane Step 6: G12-G15 assessment and externally signed fail-closed release authority"
+    },
+    "tests/test_control_plane_release_authority.py": {
+      "expected_sha256": "633349097e6651a1b5901ca3c77822fb4459b8b3cd36eca464e50c9fd0f89ba0",
+      "reason": "Control-plane Step 6 regression coverage for G12-G15, signer trust, stale authority, and legacy-token bypass prevention"
+    },
+    "docs/control_plane_step6.md": {
+      "expected_sha256": "9adba4ab9ced87d28392704b9c5067a5dabdb9a630f422aceae613c4678af3b6",
+      "reason": "Control-plane Step 6 G12-G15 and signed release-authority implementation note"
     }
   }
 }
