@@ -32,8 +32,8 @@
       "reason": "Intentional post-Step21 security hardening; configured model verification reused by backup/restore/recovery paths"
     },
     "src/private_dashboard.py": {
-      "expected_sha256": "92f74afbb6b245518ccc55a0c561de8ca704b565933a379721458e234ae6349e",
-      "reason": "Intentional post-Step21 security hardening; one-time bootstrap/session separation plus bounded connections and socket timeouts"
+      "expected_sha256": "16fd6f193f7c1e5721f0c145711aeb45e5a9fed38878f03ee73d64e046ebff1e",
+      "reason": "Control-plane Step 7: authenticated read-only pseudonymous account-surveillance and control-plane status views"
     },
     "tests/test_authorized_input_orchestrator.py": {
       "expected_sha256": "4b945970402535ddd59c1323a4a8ea13c45539727f5d6d90e0ef42b92bc30fc2",
@@ -236,6 +236,18 @@
     "docs/control_plane_step6.md": {
       "expected_sha256": "9adba4ab9ced87d28392704b9c5067a5dabdb9a630f422aceae613c4678af3b6",
       "reason": "Control-plane Step 6 G12-G15 and signed release-authority implementation note"
+    },
+    "src/control_plane/account_surveillance.py": {
+      "expected_sha256": "70ce2f24fb1b0bc6417b45e5c11e34055f941a0182c8ddef321ffb9743aff5c1",
+      "reason": "Control-plane Step 7: immutable pseudonymous account-to-case surveillance aggregation without raw account identity persistence"
+    },
+    "tests/test_control_plane_dashboard_accounts.py": {
+      "expected_sha256": "919aa49fc274347c29a54f7f2e501d34b62c8f4af61f4690f2b65a7e394777c7",
+      "reason": "Control-plane Step 7 regression coverage for pseudonymization, immutable case binding, read-only dashboard routes, and fail-closed optional sources"
+    },
+    "docs/control_plane_step7.md": {
+      "expected_sha256": "7eb8ce2bc479f2fbb7b8805fe948341386c1585cdb1e5a569f9de6899b256047",
+      "reason": "Control-plane Step 7 dashboard and pseudonymous account-surveillance implementation note"
     }
   }
 }
