@@ -36,7 +36,7 @@
       "reason": "Intentional post-Step21 security hardening; one-time bootstrap/session separation plus bounded connections and socket timeouts"
     },
     "tests/test_authorized_input_orchestrator.py": {
-      "expected_sha256": "8afeeff3cce8d3ff1e98b4c74a2f22eea8bb5ce4405a099fd2bcac1942bf3a07",
+      "expected_sha256": "4b945970402535ddd59c1323a4a8ea13c45539727f5d6d90e0ef42b92bc30fc2",
       "reason": "Control-plane Step 2 regression coverage including TOCTOU, quarantine, review-required, and receipt linkage"
     },
     "tests/test_case_evidence.py": {
@@ -158,7 +158,7 @@
       "reason": "Control-plane Step 2 foundation"
     },
     "src/control_plane/storage.py": {
-      "expected_sha256": "5d458251a878e9d36aba551c8cb9d64e5b8d2f1e358670818122a85218fa5fe5",
+      "expected_sha256": "9f0384edfcd2ca986e69a42dfb55cec36914e05d7dcb0d0b3d01b7c37d8f648f",
       "reason": "Control-plane Step 2 foundation"
     },
     "src/control_plane/registry.py": {
@@ -166,7 +166,7 @@
       "reason": "Control-plane Step 2 foundation"
     },
     "src/control_plane/integrity.py": {
-      "expected_sha256": "ed68a0ebe29f320fb3538dc6698716714fdcd062cc986787aa2555b78b3737e6",
+      "expected_sha256": "134b0f67ab86e55b48642bb5c41326376c304ce6d6cd9d2ffd8db1df96cac537",
       "reason": "Control-plane Step 2 foundation"
     },
     "tests/test_control_plane_foundation.py": {
