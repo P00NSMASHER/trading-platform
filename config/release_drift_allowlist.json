@@ -54,8 +54,8 @@
   },
   "repository_additions": {
     ".github/CODEOWNERS": {
-      "expected_sha256": "5ad7aaf62842b0279ecdc00843bff2e2a6b7f75c4631e9ed5d4756677ca27eb9",
-      "reason": "Intentional post-Step21 repository hardening addition"
+      "expected_sha256": "8550f3a6561bb91b9e7ead7751196e2b9924350b1647f1f18d7ca74044b00953",
+      "reason": "Intentional post-Step21 repository hardening addition; current ownership note for active Protect main ruleset"
     },
     ".github/workflows/synthetic-ci.yml": {
       "expected_sha256": "89cb2dba304c685a0e7c9a8862d701433a7a332a96a5effaff0c3891c37519fa",
@@ -122,8 +122,8 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "SECURITY.md": {
-      "expected_sha256": "276e3d037fc7a6b63f4124a05efd3a5d6cf66840004630bae612b8e4c0426e55",
-      "reason": "Intentional post-Step21 repository hardening addition; independent signer and drift trust pins"
+      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
+      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -140,6 +140,10 @@
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "af9623d7d2828c4534852b53d2acf5cd16ccfed2c3021be8d7d629ff7eafabad",
       "reason": "Intentional post-Step21 repository hardening addition; read-only automatic pull request tests and secret scanning with ephemeral runtime permission hardening and immutable current action pins"
+    },
+    ".github/dependabot.yml": {
+      "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
+      "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     }
   }
 }
