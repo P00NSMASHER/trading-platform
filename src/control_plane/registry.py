@@ -59,12 +59,37 @@ def init_db(db_path: Path) -> Path:
             location_class TEXT NOT NULL, path_fingerprint TEXT NOT NULL,
             content_sha256 TEXT NOT NULL, observed_at_utc TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS lineage_artifact (
+            artifact_id TEXT PRIMARY KEY,
+            content_sha256 TEXT NOT NULL,
+            size_bytes INTEGER NOT NULL CHECK(size_bytes >= 0),
+            artifact_kind TEXT NOT NULL,
+            transform_id TEXT NOT NULL,
+            transform_version TEXT NOT NULL,
+            lineage_manifest_sha256 TEXT NOT NULL,
+            created_at_utc TEXT NOT NULL,
+            research_use_only INTEGER NOT NULL CHECK(research_use_only = 1),
+            model_plane_eligible INTEGER NOT NULL CHECK(model_plane_eligible = 0)
+        );
+        CREATE TABLE IF NOT EXISTS lineage_parent (
+            child_artifact_id TEXT NOT NULL REFERENCES lineage_artifact(artifact_id),
+            parent_ordinal INTEGER NOT NULL CHECK(parent_ordinal >= 0),
+            parent_kind TEXT NOT NULL CHECK(parent_kind IN ('information','artifact')),
+            parent_id TEXT NOT NULL,
+            parent_event_head TEXT NOT NULL,
+            parent_content_sha256 TEXT NOT NULL,
+            PRIMARY KEY(child_artifact_id, parent_ordinal)
+        );
         CREATE TRIGGER IF NOT EXISTS information_object_no_update BEFORE UPDATE ON information_object BEGIN SELECT RAISE(ABORT, 'information_object is immutable'); END;
         CREATE TRIGGER IF NOT EXISTS information_object_no_delete BEFORE DELETE ON information_object BEGIN SELECT RAISE(ABORT, 'information_object is immutable'); END;
         CREATE TRIGGER IF NOT EXISTS information_event_no_update BEFORE UPDATE ON information_event BEGIN SELECT RAISE(ABORT, 'information_event is append-only'); END;
         CREATE TRIGGER IF NOT EXISTS information_event_no_delete BEFORE DELETE ON information_event BEGIN SELECT RAISE(ABORT, 'information_event is append-only'); END;
         CREATE TRIGGER IF NOT EXISTS information_location_no_update BEFORE UPDATE ON information_location BEGIN SELECT RAISE(ABORT, 'information_location is append-only'); END;
         CREATE TRIGGER IF NOT EXISTS information_location_no_delete BEFORE DELETE ON information_location BEGIN SELECT RAISE(ABORT, 'information_location is append-only'); END;
+        CREATE TRIGGER IF NOT EXISTS lineage_artifact_no_update BEFORE UPDATE ON lineage_artifact BEGIN SELECT RAISE(ABORT, 'lineage_artifact is immutable'); END;
+        CREATE TRIGGER IF NOT EXISTS lineage_artifact_no_delete BEFORE DELETE ON lineage_artifact BEGIN SELECT RAISE(ABORT, 'lineage_artifact is immutable'); END;
+        CREATE TRIGGER IF NOT EXISTS lineage_parent_no_update BEFORE UPDATE ON lineage_parent BEGIN SELECT RAISE(ABORT, 'lineage_parent is immutable'); END;
+        CREATE TRIGGER IF NOT EXISTS lineage_parent_no_delete BEFORE DELETE ON lineage_parent BEGIN SELECT RAISE(ABORT, 'lineage_parent is immutable'); END;
         """)
     try: db_path.chmod(0o600)
     except OSError: pass
@@ -179,6 +204,95 @@ def add_location(db_path: Path, information_id: str, location_class: str, path_f
     with connect(db_path) as con:
         con.execute("INSERT INTO information_location(information_id,location_class,path_fingerprint,content_sha256,observed_at_utc) VALUES (?,?,?,?,?)",
                     (information_id,location_class,path_fingerprint,content_sha256,utc_now()))
+
+
+def register_lineage_artifact(
+    db_path: Path,
+    *,
+    artifact_id: str,
+    content_sha256: str,
+    size_bytes: int,
+    artifact_kind: str,
+    transform_id: str,
+    transform_version: str,
+    lineage_manifest_sha256: str,
+    parents: list[dict],
+) -> dict:
+    created = utc_now()
+    canonical_parents = [
+        {
+            "parent_ordinal": int(row["parent_ordinal"]),
+            "parent_kind": str(row["parent_kind"]),
+            "parent_id": str(row["parent_id"]),
+            "parent_event_head": str(row.get("parent_event_head", "")),
+            "parent_content_sha256": str(row["parent_content_sha256"]),
+        }
+        for row in parents
+    ]
+    with connect(db_path) as con:
+        existing = con.execute("SELECT * FROM lineage_artifact WHERE artifact_id=?", (artifact_id,)).fetchone()
+        if existing is not None:
+            expected = {
+                "content_sha256": content_sha256,
+                "size_bytes": int(size_bytes),
+                "artifact_kind": artifact_kind,
+                "transform_id": transform_id,
+                "transform_version": transform_version,
+                "lineage_manifest_sha256": lineage_manifest_sha256,
+            }
+            for key, value in expected.items():
+                if existing[key] != value:
+                    raise ValueError(f"lineage artifact identity collision/mismatch for {key}")
+            rows = [
+                dict(r)
+                for r in con.execute(
+                    "SELECT parent_ordinal,parent_kind,parent_id,parent_event_head,parent_content_sha256 "
+                    "FROM lineage_parent WHERE child_artifact_id=? ORDER BY parent_ordinal",
+                    (artifact_id,),
+                ).fetchall()
+            ]
+            if rows != canonical_parents:
+                raise ValueError("lineage artifact parent set does not match existing immutable record")
+            return {"artifact_id": artifact_id, "created_at_utc": existing["created_at_utc"], "created": False}
+        con.execute(
+            """INSERT INTO lineage_artifact(
+                artifact_id,content_sha256,size_bytes,artifact_kind,transform_id,transform_version,
+                lineage_manifest_sha256,created_at_utc,research_use_only,model_plane_eligible
+            ) VALUES (?,?,?,?,?,?,?,?,1,0)""",
+            (
+                artifact_id,content_sha256,int(size_bytes),artifact_kind,transform_id,transform_version,
+                lineage_manifest_sha256,created,
+            ),
+        )
+        for row in canonical_parents:
+            con.execute(
+                """INSERT INTO lineage_parent(
+                    child_artifact_id,parent_ordinal,parent_kind,parent_id,parent_event_head,parent_content_sha256
+                ) VALUES (?,?,?,?,?,?)""",
+                (
+                    artifact_id,row["parent_ordinal"],row["parent_kind"],row["parent_id"],
+                    row["parent_event_head"],row["parent_content_sha256"],
+                ),
+            )
+    return {"artifact_id": artifact_id, "created_at_utc": created, "created": True}
+
+
+def get_lineage_artifact(db_path: Path, artifact_id: str) -> dict:
+    with connect(db_path) as con:
+        row = con.execute("SELECT * FROM lineage_artifact WHERE artifact_id=?", (artifact_id,)).fetchone()
+    if row is None:
+        raise ValueError(f"unknown artifact_id={artifact_id!r}")
+    return dict(row)
+
+
+def get_lineage_parents(db_path: Path, artifact_id: str) -> list[dict]:
+    with connect(db_path) as con:
+        rows = con.execute(
+            "SELECT parent_ordinal,parent_kind,parent_id,parent_event_head,parent_content_sha256 "
+            "FROM lineage_parent WHERE child_artifact_id=? ORDER BY parent_ordinal",
+            (artifact_id,),
+        ).fetchall()
+    return [dict(r) for r in rows]
 
 
 def current_state(db_path: Path, information_id: str) -> str:

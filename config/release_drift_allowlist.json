@@ -166,12 +166,12 @@
       "reason": "Control-plane Step 2 foundation"
     },
     "src/control_plane/registry.py": {
-      "expected_sha256": "48ffdfec4819a41f6806fed06f95121b6290d4dae43b19d4da9faf6aefe4c428",
-      "reason": "Control-plane Step 4: enforce verified, exact-head publicity-clearance transitions"
+      "expected_sha256": "1b8e26d36e64e5908037ec50e5d301a590a442fa6d1311d03261e026a796ccb6",
+      "reason": "Control-plane Step 5: immutable derived-artifact registry and ordered recursive parent bindings"
     },
     "src/control_plane/integrity.py": {
-      "expected_sha256": "9c74508645db2d998ed5c3950c3b8c713afc8a41ec00e3b9d3c7094350d89968",
-      "reason": "Control-plane Step 4: verify archived signed publicity-clearance artifacts"
+      "expected_sha256": "cbb2aa87befd5fc84a9acea3a7c581d97517a29bdd47958af87549b0cbced957",
+      "reason": "Control-plane Step 5: recursive lineage integrity becomes part of the control-plane self-check"
     },
     "tests/test_control_plane_foundation.py": {
       "expected_sha256": "8f738e0adae5bc92094d372ba83de8b41c9d7ae19ae0f74b289a7d085e8bf3ba",
@@ -208,6 +208,18 @@
     "docs/control_plane_step4.md": {
       "expected_sha256": "6e79f7dd59e540466b8541e70a1028c63e25d96791caed56ff45092211aca6eb",
       "reason": "Control-plane Step 4 signed publicity-clearance implementation note"
+    },
+    "src/control_plane/lineage.py": {
+      "expected_sha256": "c0016eaa86a5dea6f0980826c2f42d6fd062acbf19e47ac03269f2dc20111133",
+      "reason": "Control-plane Step 5: deterministic recursive lineage verification and atomic artifact recovery"
+    },
+    "tests/test_control_plane_lineage.py": {
+      "expected_sha256": "cdf5894b74b9b8b3957a970debde1f038f1102d7c507bfd5e631717152a961f6",
+      "reason": "Control-plane Step 5 lineage/recovery regression coverage including recursive tamper blocking and overwrite refusal"
+    },
+    "docs/control_plane_step5.md": {
+      "expected_sha256": "6c96cd94116b38b3743cbae030a271c4535459f5ab10c823d7650e3965427348",
+      "reason": "Control-plane Step 5 recursive lineage and recovery implementation note"
     }
   }
 }

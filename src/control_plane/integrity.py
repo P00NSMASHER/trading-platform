@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from . import registry
+from . import lineage, registry
 from .storage import sha256_file
 
 
@@ -49,7 +49,8 @@ def _active_contract_issues(db_path: Path, contract: Path) -> list[str]:
 def verify_control_plane(db_path: Path, control_dir: Path, active_contracts: list[Path] | None = None) -> dict:
     db_path=Path(db_path); control_dir=Path(control_dir)
     report={"sqlite_integrity":False,"foreign_keys_clean":False,"event_chains_valid":False,"holding_hashes_valid":False,
-            "quarantine_hashes_valid":False,"publicity_clearance_artifacts_valid":False,"active_contract_issues":[],"information_object_count":0,"ok":False}
+            "quarantine_hashes_valid":False,"publicity_clearance_artifacts_valid":False,"lineage_integrity":{"ok":False,"artifact_count":0,"errors":[]},
+            "active_contract_issues":[],"information_object_count":0,"ok":False}
     if not db_path.exists(): report["error"]="control database missing"; return report
     try:
         with registry.connect(db_path) as con:
@@ -73,9 +74,10 @@ def verify_control_plane(db_path: Path, control_dir: Path, active_contracts: lis
                 if detail.get("clearance_signature_verified") is not True:
                     publicity_ok=False
         report["holding_hashes_valid"]=holding_ok; report["quarantine_hashes_valid"]=quarantine_ok; report["publicity_clearance_artifacts_valid"]=publicity_ok
+        lineage_report=lineage.verify_all(control_dir=control_dir); report["lineage_integrity"]=lineage_report
         issues=[]
         for contract in active_contracts or []: issues.extend(_active_contract_issues(db_path,Path(contract)))
         report["active_contract_issues"]=issues
-        report["ok"]=bool(report["sqlite_integrity"] and report["foreign_keys_clean"] and report["event_chains_valid"] and holding_ok and quarantine_ok and publicity_ok and not issues)
+        report["ok"]=bool(report["sqlite_integrity"] and report["foreign_keys_clean"] and report["event_chains_valid"] and holding_ok and quarantine_ok and publicity_ok and lineage_report["ok"] and not issues)
     except Exception as exc: report["error"]=f"{type(exc).__name__}: {exc}"
     return report
