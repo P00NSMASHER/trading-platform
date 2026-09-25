@@ -88,7 +88,15 @@ records:
 
 These are historical repository artifacts, not a claim that pytest was re-executed locally at the source commit during this baseline step.
 
-The connected execution sandbox could not resolve github.com for a local clone, and GitHub Actions has no completed workflow run attached to source commit `579730f1abb595579de199277a95a8c89f733d0f`. A draft PR from the implementation branch is used to obtain fresh PR-CI evidence without changing surveillance runtime code.
+The connected execution sandbox could not resolve github.com for a local clone, and GitHub Actions has no completed workflow run attached directly to source commit `579730f1abb595579de199277a95a8c89f733d0f`. A draft PR from the implementation branch therefore supplied fresh CI evidence without changing surveillance runtime code.
+
+Fresh PR-CI evidence on commit `be9e1f0bf67eab49ba6e5c88a960d59f46c398ed`:
+
+- full pytest suite: `221 passed in 38.32s`
+- repository secret scan: PASS
+- ephemeral runtime permission hardening step: PASS
+
+The only changes relative to the source revision at that point were this baseline document and its release-drift allowlist entry.
 
 ## Release-drift trust-root state
 
