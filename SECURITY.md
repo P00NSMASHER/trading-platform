@@ -1,6 +1,6 @@
 # Security policy
 
-This repository is a private, research-only market-surveillance prototype.
+This repository is a public, research-only market-surveillance prototype.
 
 ## Sensitive material
 
@@ -15,22 +15,26 @@ Use `private_runtime/` or another ignored local directory for authorized private
 
 ## Validation before merging
 
-Run:
+Every pull request to `main` runs the read-only PR checks:
 
 ```bash
 python scripts/secret_scan.py --root .
+PYTHONPATH=src python -m pytest -q
+```
+
+Important release verification additionally requires the independently recorded release-drift trust root:
+
+```bash
 python scripts/verify_release_drift.py \
   --root . \
   --expected-exceptions-sha256 <independently-recorded-allowlist-sha256>
-PYTHONPATH=src python -m pytest -q
 ```
 
 The runtime must continue to verify the frozen model SHA-256 before deserialization, bind the dashboard to loopback only, prohibit broker/execution integration, and keep trading outputs disabled.
 
 ## Repository integrity
 
-Prefer signed commits/tags where available. Treat `FROZEN_CHAMPION.md`, `RELEASE_MANIFEST.json`, and `SHA256SUMS` as integrity evidence, not as a substitute for an independently trusted release hash.
-
+`main` is protected by the active `Protect main` ruleset. Prefer signed commits/tags where available. Treat `FROZEN_CHAMPION.md`, `RELEASE_MANIFEST.json`, and `SHA256SUMS` as integrity evidence, not as a substitute for an independently trusted release hash.
 
 ## Dashboard access
 
@@ -39,7 +43,6 @@ The local dashboard uses a new in-memory authentication token on every launch in
 ## Model persistence
 
 The frozen joblib champion remains allowed only after its trusted SHA-256 is verified before deserialization. Future migrations to `skops.io` must additionally use a separately reviewed trusted-types file whose SHA-256 is configured and verified before loading.
-
 
 ## Signed release evidence
 
