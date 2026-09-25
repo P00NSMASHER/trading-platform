@@ -1,0 +1,29 @@
+{
+  "schema_version": "1",
+  "purpose": "Phase B exact first-public announcement timestamps for G1. Populate the referenced CSV with licensed I/B/E/S timestamps or independently verified official issuer/newswire release timestamps. Do not substitute EDGAR acceptance time by itself.",
+  "sources": [
+    {
+      "source_id": "phase-b-exact-public-announcements",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/private/metadata/announcement_timestamps.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "Original issuer/newswire/SEC exhibit sources; exact provenance retained per row in source_reference",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "Only first_public_release or official_newswire_release with A/B provenance can close G1. Use timezone-aware timestamps."
+    }
+  ]
+}
