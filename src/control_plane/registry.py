@@ -6,7 +6,7 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .contracts import INFORMATION_STATES
+from .contracts import INFORMATION_STATES, UNSTRUCTURED_HOLDING_EXIT_STATES
 
 
 def utc_now() -> str:
@@ -85,10 +85,34 @@ def register_information(db_path: Path, *, domain: str, source_id: str, content_
     return {"information_id":info_id,"received_at_utc":received,"created":True}
 
 
+def _validate_unstructured_transition(domain: str, current_state: str, state_after: str) -> None:
+    if domain != "unstructured":
+        return
+    if not current_state:
+        if state_after != "RECEIVED":
+            raise ValueError("unstructured information must begin in RECEIVED")
+        return
+    if current_state == "RECEIVED":
+        if state_after != "HOLDING":
+            raise ValueError("unstructured information must move from RECEIVED to HOLDING")
+        return
+    if current_state == "HOLDING":
+        if state_after not in UNSTRUCTURED_HOLDING_EXIT_STATES:
+            raise ValueError(
+                "unstructured HOLDING may only exit to PUBLICITY_PENDING, REVIEW_REQUIRED, or QUARANTINED"
+            )
+        return
+    raise ValueError(f"unstructured state {current_state!r} is terminal until a later control-plane step authorizes onward transition")
+
+
 def append_event(db_path: Path, information_id: str, event_type: str, state_after: str, detail: dict | None = None) -> dict:
     if state_after not in INFORMATION_STATES: raise ValueError(f"unsupported state_after={state_after!r}")
     with connect(db_path) as con:
-        prior=con.execute("SELECT sequence,event_hash FROM information_event WHERE information_id=? ORDER BY sequence DESC LIMIT 1",(information_id,)).fetchone()
+        obj=con.execute("SELECT domain FROM information_object WHERE information_id=?",(information_id,)).fetchone()
+        if obj is None: raise ValueError(f"unknown information_id={information_id!r}")
+        prior=con.execute("SELECT sequence,event_hash,state_after FROM information_event WHERE information_id=? ORDER BY sequence DESC LIMIT 1",(information_id,)).fetchone()
+        current_state=str(prior["state_after"]) if prior else ""
+        _validate_unstructured_transition(str(obj["domain"]), current_state, state_after)
         sequence=(int(prior["sequence"])+1) if prior else 1; previous=str(prior["event_hash"]) if prior else "GENESIS"; occurred=utc_now()
         detail_json=json.dumps(detail or {},sort_keys=True,separators=(",",":"))
         payload={"information_id":information_id,"sequence":sequence,"event_type":event_type,"state_after":state_after,

@@ -6,12 +6,13 @@ INFORMATION_STATES = {
     "RECEIVED",
     "HOLDING",
     "ADMITTED_STRUCTURED",
+    "PUBLICITY_PENDING",
     "REVIEW_REQUIRED",
     "QUARANTINED",
     "IMPORT_FAILED",
 }
 
-DECISIONS = {"ADMIT_STRUCTURED", "REVIEW_REQUIRED", "QUARANTINE"}
+DECISIONS = {"ADMIT_STRUCTURED", "PUBLICITY_PENDING", "REVIEW_REQUIRED", "QUARANTINE"}
 
 STRUCTURED_ALLOWED_CLASSIFICATIONS = {
     "authorized_reference_data",
@@ -19,6 +20,19 @@ STRUCTURED_ALLOWED_CLASSIFICATIONS = {
     "public_research_replication",
     "authorized_historical_market_data",
     "synthetic_fixture",
+}
+
+UNSTRUCTURED_PUBLICITY_CANDIDATE_CLASSIFICATIONS = {
+    "authorized_reference_data",
+    "public_official_data",
+    "public_research_replication",
+    "synthetic_fixture",
+}
+
+UNSTRUCTURED_HOLDING_EXIT_STATES = {
+    "PUBLICITY_PENDING",
+    "REVIEW_REQUIRED",
+    "QUARANTINED",
 }
 
 PROHIBITED_CLASSIFICATIONS = {
