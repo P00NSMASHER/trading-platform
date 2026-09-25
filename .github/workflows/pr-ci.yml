@@ -22,9 +22,10 @@ jobs:
       PYTHONPATH: src
 
     steps:
-      - name: Checkout
+      - name: Checkout exact PR head
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
 
       - name: Set up Python
@@ -54,9 +55,10 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - name: Checkout
+      - name: Checkout exact PR head
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
 
       - name: Set up Python
@@ -66,3 +68,61 @@ jobs:
 
       - name: Scan tracked files
         run: python scripts/secret_scan.py --root .
+
+  adversarial-audit:
+    name: Control-plane adversarial audit
+    needs:
+      - tests
+      - secret-scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    env:
+      PYTHONPATH: src
+
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+
+      - name: Harden ephemeral runtime permissions
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+
+      - name: Run adversarial control-plane suite
+        run: |
+          mkdir -p private_runtime/audit/control-plane-pack
+          python -m pytest -q tests/test_control_plane_adversarial.py \
+            --junitxml=private_runtime/audit/control-plane-pack/adversarial-junit.xml
+
+      - name: Generate deterministic audit pack
+        run: |
+          python scripts/control_plane_audit_pack.py \
+            --root . \
+            --junit-xml private_runtime/audit/control-plane-pack/adversarial-junit.xml \
+            --output-dir private_runtime/audit/control-plane-pack \
+            --expected-champion-sha256 0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616
+
+      - name: Upload audit pack
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: control-plane-audit-${{ github.event.pull_request.head.sha }}
+          path: private_runtime/audit/control-plane-pack
+          if-no-files-found: error
+          retention-days: 30

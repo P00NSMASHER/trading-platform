@@ -19,15 +19,17 @@ concurrency:
 
 jobs:
   tests:
-    name: Synthetic-only tests
+    name: Synthetic-only tests + release audit
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       PYTHONPATH: src
+      RELEASE_DRIFT_TRUST_ROOT_SHA256: ${{ inputs.release_drift_trust_root_sha256 }}
     steps:
-      - name: Checkout
+      - name: Checkout exact dispatched commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.sha }}
           persist-credentials: false
 
       - name: Set up Python
@@ -46,8 +48,6 @@ jobs:
           python -m pip install -r requirements-dev.lock
 
       - name: Verify historical release drift
-        env:
-          RELEASE_DRIFT_TRUST_ROOT_SHA256: ${{ inputs.release_drift_trust_root_sha256 }}
         run: >-
           python scripts/verify_release_drift.py
           --root .
@@ -56,17 +56,39 @@ jobs:
       - name: Harden ephemeral runtime permissions
         run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
 
-      - name: Run synthetic-only test suite
-        run: python -m pytest -q
+      - name: Run full test suite with JUnit evidence
+        run: |
+          mkdir -p private_runtime/audit/control-plane-pack
+          python -m pytest -q \
+            --junitxml=private_runtime/audit/control-plane-pack/full-junit.xml
+
+      - name: Generate externally authenticated release audit pack
+        run: |
+          python scripts/control_plane_audit_pack.py \
+            --root . \
+            --junit-xml private_runtime/audit/control-plane-pack/full-junit.xml \
+            --output-dir private_runtime/audit/control-plane-pack \
+            --expected-champion-sha256 0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616 \
+            --expected-drift-trust-root-sha256 "$RELEASE_DRIFT_TRUST_ROOT_SHA256" \
+            --require-external-trust-root
+
+      - name: Upload release audit pack
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: release-audit-${{ github.sha }}
+          path: private_runtime/audit/control-plane-pack
+          if-no-files-found: error
+          retention-days: 90
 
   secret-scan:
     name: Repository secret scan
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Checkout
+      - name: Checkout exact dispatched commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.sha }}
           persist-credentials: false
 
       - name: Set up Python

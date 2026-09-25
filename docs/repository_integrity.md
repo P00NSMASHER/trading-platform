@@ -2,11 +2,13 @@
 
 ## Current controls
 
-- The repository is private.
+- The repository is public; no raw licensed/vendor inputs, private runtime state, credentials, or signing material may be committed.
 - Runtime model bytes are checked against a trusted SHA-256 before `joblib.load`.
 - Step-20/21 provenance gates hash critical model/data artifacts.
-- The staged GitHub Actions workflow is synthetic-only and has read-only repository permissions.
-- Hosted runner allocation is currently unavailable for this private repository, so the workflow is manual-only until that account/repository constraint is resolved.
+- Automatic pull-request CI and the manual release-audit workflow both have read-only repository permissions and pin external actions to reviewed full commit SHAs.
+- Pull-request jobs explicitly check out the pull request head SHA rather than relying on the default synthetic merge ref.
+- PR CI runs the full test suite, secret scan, a dedicated adversarial control-plane suite, and produces a downloadable audit pack.
+- The manual release workflow additionally requires the independently recorded release-drift trust-root SHA-256 and produces an externally authenticated release audit pack.
 - The workflow receives no market-data credentials, broker credentials, or private runtime inputs.
 - A local tracked-file secret scan runs in CI.
 - Raw licensed/vendor inputs are ignored and belong outside Git.
@@ -34,6 +36,10 @@ python scripts/secret_scan.py --root .
 PYTHONPATH=src python -m pytest -q
 sha256sum data/processed/model_demo/model_bundle.joblib
 ```
+
+PR CI additionally runs `tests/test_control_plane_adversarial.py` and generates `control_plane_audit.json`, `CONTROL_PLANE_AUDIT.md`, and audit-pack `SHA256SUMS`. A PR audit pack deliberately reports `release_ready=false` when the independent release-drift trust root was not supplied.
+
+For a release candidate, dispatch `.github/workflows/synthetic-ci.yml` with the independently stored SHA-256 of `config/release_drift_allowlist.json`. That workflow re-verifies historical release drift, runs the full test suite, regenerates the audit pack, and requires `external_release_drift_trust_root_verified=true`.
 
 The model hash must match the currently trusted frozen-champion value before any model deserialization or private runtime launch.
 
