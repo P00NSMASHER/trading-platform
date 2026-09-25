@@ -6,7 +6,11 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .contracts import INFORMATION_STATES, UNSTRUCTURED_HOLDING_EXIT_STATES
+from .contracts import (
+    INFORMATION_STATES,
+    PUBLICITY_CLEARANCE_REQUIRED_DETAIL_KEYS,
+    UNSTRUCTURED_HOLDING_EXIT_STATES,
+)
 
 
 def utc_now() -> str:
@@ -19,6 +23,11 @@ def _canonical(obj: object) -> bytes:
 
 def _information_id(domain: str, source_id: str, content_sha256: str) -> str:
     return "info_" + hashlib.sha256(f"{domain}\0{source_id}\0{content_sha256}".encode("utf-8")).hexdigest()
+
+
+def _is_sha256(value: object) -> bool:
+    text = str(value or "").strip().lower()
+    return len(text) == 64 and all(ch in "0123456789abcdef" for ch in text)
 
 
 def init_db(db_path: Path) -> Path:
@@ -85,7 +94,23 @@ def register_information(db_path: Path, *, domain: str, source_id: str, content_
     return {"information_id":info_id,"received_at_utc":received,"created":True}
 
 
-def _validate_unstructured_transition(domain: str, current_state: str, state_after: str) -> None:
+def get_information(db_path: Path, information_id: str) -> dict:
+    with connect(db_path) as con:
+        row = con.execute("SELECT * FROM information_object WHERE information_id=?", (information_id,)).fetchone()
+    if row is None:
+        raise ValueError(f"unknown information_id={information_id!r}")
+    return dict(row)
+
+
+def _validate_unstructured_transition(
+    *,
+    domain: str,
+    current_state: str,
+    state_after: str,
+    event_type: str,
+    detail: dict,
+    prior_event_hash: str,
+) -> None:
     if domain != "unstructured":
         return
     if not current_state:
@@ -102,19 +127,46 @@ def _validate_unstructured_transition(domain: str, current_state: str, state_aft
                 "unstructured HOLDING may only exit to PUBLICITY_PENDING, REVIEW_REQUIRED, or QUARANTINED"
             )
         return
+    if current_state == "PUBLICITY_PENDING":
+        if state_after != "PUBLICITY_CLEARED" or event_type != "PUBLICITY_CLEARED":
+            raise ValueError("PUBLICITY_PENDING may only advance through a verified PUBLICITY_CLEARED event")
+        missing = sorted(PUBLICITY_CLEARANCE_REQUIRED_DETAIL_KEYS - set(detail))
+        if missing:
+            raise ValueError(f"PUBLICITY_CLEARED event missing verification detail: {missing}")
+        for key in ("clearance_sha256", "allowed_signers_sha256", "public_release_evidence_sha256"):
+            if not _is_sha256(detail.get(key)):
+                raise ValueError(f"PUBLICITY_CLEARED event requires valid {key}")
+        if detail.get("clearance_signature_verified") is not True:
+            raise ValueError("PUBLICITY_CLEARED event requires clearance_signature_verified=true")
+        if str(detail.get("signature_namespace", "")).strip() != "mnpi-publicity-clearance":
+            raise ValueError("PUBLICITY_CLEARED event requires the fixed publicity signature namespace")
+        if not str(detail.get("signer_identity", "")).strip():
+            raise ValueError("PUBLICITY_CLEARED event requires signer_identity")
+        if str(detail.get("preclearance_event_head", "")).strip() != prior_event_hash:
+            raise ValueError("PUBLICITY_CLEARED event is stale or bound to the wrong event head")
+        return
     raise ValueError(f"unstructured state {current_state!r} is terminal until a later control-plane step authorizes onward transition")
 
 
 def append_event(db_path: Path, information_id: str, event_type: str, state_after: str, detail: dict | None = None) -> dict:
     if state_after not in INFORMATION_STATES: raise ValueError(f"unsupported state_after={state_after!r}")
+    event_detail = dict(detail or {})
     with connect(db_path) as con:
         obj=con.execute("SELECT domain FROM information_object WHERE information_id=?",(information_id,)).fetchone()
         if obj is None: raise ValueError(f"unknown information_id={information_id!r}")
         prior=con.execute("SELECT sequence,event_hash,state_after FROM information_event WHERE information_id=? ORDER BY sequence DESC LIMIT 1",(information_id,)).fetchone()
         current_state=str(prior["state_after"]) if prior else ""
-        _validate_unstructured_transition(str(obj["domain"]), current_state, state_after)
-        sequence=(int(prior["sequence"])+1) if prior else 1; previous=str(prior["event_hash"]) if prior else "GENESIS"; occurred=utc_now()
-        detail_json=json.dumps(detail or {},sort_keys=True,separators=(",",":"))
+        previous=str(prior["event_hash"]) if prior else "GENESIS"
+        _validate_unstructured_transition(
+            domain=str(obj["domain"]),
+            current_state=current_state,
+            state_after=state_after,
+            event_type=event_type,
+            detail=event_detail,
+            prior_event_hash=previous,
+        )
+        sequence=(int(prior["sequence"])+1) if prior else 1; occurred=utc_now()
+        detail_json=json.dumps(event_detail,sort_keys=True,separators=(",",":"))
         payload={"information_id":information_id,"sequence":sequence,"event_type":event_type,"state_after":state_after,
                  "occurred_at_utc":occurred,"detail_json":detail_json,"previous_event_hash":previous}
         event_hash=hashlib.sha256(_canonical(payload)).hexdigest()
@@ -139,6 +191,15 @@ def event_head(db_path: Path, information_id: str) -> str:
     with connect(db_path) as con:
         row=con.execute("SELECT event_hash FROM information_event WHERE information_id=? ORDER BY sequence DESC LIMIT 1",(information_id,)).fetchone()
     return str(row["event_hash"]) if row else ""
+
+
+def latest_event_detail(db_path: Path, information_id: str) -> dict:
+    with connect(db_path) as con:
+        row=con.execute("SELECT detail_json FROM information_event WHERE information_id=? ORDER BY sequence DESC LIMIT 1",(information_id,)).fetchone()
+    if row is None:
+        return {}
+    raw = json.loads(str(row["detail_json"]))
+    return raw if isinstance(raw, dict) else {}
 
 
 def verify_event_chain(db_path: Path, information_id: str) -> bool:

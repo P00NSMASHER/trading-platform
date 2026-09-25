@@ -154,8 +154,8 @@
       "reason": "Control-plane Step 2 foundation"
     },
     "src/control_plane/contracts.py": {
-      "expected_sha256": "f29fd164c08a20fa7bcbb58ca52b283a867c457005276799f57e1cbeaaea0188",
-      "reason": "Control-plane Step 3: add PUBLICITY_PENDING and fail-closed unstructured HOLDING exit contract"
+      "expected_sha256": "97399b99db4e3ddbbe378597498921549ae129c9398ffaedd432958bf98d81aa",
+      "reason": "Control-plane Step 4: add signed PUBLICITY_CLEARED state and verification-detail contract"
     },
     "src/control_plane/source_policy.py": {
       "expected_sha256": "c74adca1d8348773289886e963a3a638a71c4ef87625fce0b6bb1a634cf3ccca",
@@ -166,12 +166,12 @@
       "reason": "Control-plane Step 2 foundation"
     },
     "src/control_plane/registry.py": {
-      "expected_sha256": "33d2568db430961cacf501125a1ad54566de7d7dec69d119f861b3d5bf790406",
-      "reason": "Control-plane Step 3: registry-enforced unstructured transition boundary"
+      "expected_sha256": "48ffdfec4819a41f6806fed06f95121b6290d4dae43b19d4da9faf6aefe4c428",
+      "reason": "Control-plane Step 4: enforce verified, exact-head publicity-clearance transitions"
     },
     "src/control_plane/integrity.py": {
-      "expected_sha256": "134b0f67ab86e55b48642bb5c41326376c304ce6d6cd9d2ffd8db1df96cac537",
-      "reason": "Control-plane Step 2 foundation"
+      "expected_sha256": "9c74508645db2d998ed5c3950c3b8c713afc8a41ec00e3b9d3c7094350d89968",
+      "reason": "Control-plane Step 4: verify archived signed publicity-clearance artifacts"
     },
     "tests/test_control_plane_foundation.py": {
       "expected_sha256": "8f738e0adae5bc92094d372ba83de8b41c9d7ae19ae0f74b289a7d085e8bf3ba",
@@ -192,6 +192,22 @@
     "docs/control_plane_step3.md": {
       "expected_sha256": "ed5fb6f13a5493078388531d3bc6bf3f365eee930165c237e71dc2ebd1d31da2",
       "reason": "Control-plane Step 3 implementation note for the fail-closed JUNAS unstructured lane"
+    },
+    "src/control_plane/publicity.py": {
+      "expected_sha256": "4fdfc9ce3a2ccef748750d10a56a0c43c9d333cab157a7d3232c3ad90b30bb1e",
+      "reason": "Control-plane Step 4: build, verify, archive, and apply signed publicity clearances"
+    },
+    "src/control_plane/signature_trust.py": {
+      "expected_sha256": "efede217a661f3f61c35fc0f41e4df1fb1b8492108e13eda4f78f0b2e1a61426",
+      "reason": "Control-plane Step 4: external SSH signer trust with independently pinned allowed-signers hash"
+    },
+    "tests/test_control_plane_publicity.py": {
+      "expected_sha256": "4a5db071b079e71e1cc38c963e93cd66029b629dd5e65d45742e0843d1e66562",
+      "reason": "Control-plane Step 4 adversarial publicity-clearance regression coverage"
+    },
+    "docs/control_plane_step4.md": {
+      "expected_sha256": "6e79f7dd59e540466b8541e70a1028c63e25d96791caed56ff45092211aca6eb",
+      "reason": "Control-plane Step 4 signed publicity-clearance implementation note"
     }
   }
 }

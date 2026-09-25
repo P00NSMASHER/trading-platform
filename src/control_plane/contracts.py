@@ -7,6 +7,7 @@ INFORMATION_STATES = {
     "HOLDING",
     "ADMITTED_STRUCTURED",
     "PUBLICITY_PENDING",
+    "PUBLICITY_CLEARED",
     "REVIEW_REQUIRED",
     "QUARANTINED",
     "IMPORT_FAILED",
@@ -33,6 +34,15 @@ UNSTRUCTURED_HOLDING_EXIT_STATES = {
     "PUBLICITY_PENDING",
     "REVIEW_REQUIRED",
     "QUARANTINED",
+}
+
+PUBLICITY_CLEARANCE_REQUIRED_DETAIL_KEYS = {
+    "clearance_sha256",
+    "signer_identity",
+    "allowed_signers_sha256",
+    "public_release_evidence_sha256",
+    "preclearance_event_head",
+    "signature_namespace",
 }
 
 PROHIBITED_CLASSIFICATIONS = {
