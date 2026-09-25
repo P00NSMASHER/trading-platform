@@ -43,6 +43,16 @@ def _private_file(path: Path) -> None:
         pass
 
 
+def _snapshot_name(source: Path) -> str:
+    """Preserve only format-relevant suffixes while keeping the original name private."""
+    suffixes = [s.lower() for s in Path(source).suffixes]
+    if suffixes[-2:] in ([".csv", ".gz"], [".txt", ".gz"], [".json", ".gz"]):
+        return "original" + "".join(suffixes[-2:])
+    if suffixes and suffixes[-1] in {".gz", ".csv", ".txt", ".json"}:
+        return "original" + suffixes[-1]
+    return "original"
+
+
 def receive_to_holding(source: Path, control_dir: Path) -> HoldingSnapshot:
     source = Path(source).resolve()
     if not source.exists() or not source.is_file():
@@ -63,7 +73,7 @@ def receive_to_holding(source: Path, control_dir: Path) -> HoldingSnapshot:
             dst.flush(); os.fsync(dst.fileno())
         digest = h.hexdigest()
         final_dir = holding_root / digest; _private_dir(final_dir)
-        final = final_dir / "original"
+        final = final_dir / _snapshot_name(source)
         if final.exists():
             if sha256_file(final) != digest or final.stat().st_size != size:
                 raise ValueError("existing HOLDING snapshot does not match expected digest")
@@ -82,7 +92,7 @@ def quarantine_snapshot(snapshot: HoldingSnapshot, control_dir: Path) -> Path:
     root = control_dir / "quarantine" / snapshot.sha256
     tmp_root = control_dir / "_tmp"
     _private_dir(root); _private_dir(tmp_root)
-    final = root / "original"
+    final = root / snapshot.path.name
     if final.exists():
         if sha256_file(final) != snapshot.sha256:
             raise ValueError("existing quarantine snapshot hash mismatch")
