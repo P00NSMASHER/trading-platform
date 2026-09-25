@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "batch_id": "phase-a-reference-data",
+  "metadata": {
+    "source_contract": "config/metadata_sources.example.json",
+    "source_ids": [
+      "authorized-nyse-daily-taq-master",
+      "public-sec-xbrl-shares"
+    ]
+  }
+}
