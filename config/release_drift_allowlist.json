@@ -140,6 +140,10 @@
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "af9623d7d2828c4534852b53d2acf5cd16ccfed2c3021be8d7d629ff7eafabad",
       "reason": "Intentional post-Step21 repository hardening addition; read-only automatic pull request tests and secret scanning with ephemeral runtime permission hardening and immutable current action pins"
+    },
+    "docs/control_plane_implementation_baseline.md": {
+      "expected_sha256": "0b0f2e953c634f979b1aa80e273eb12f859e2aee23af5d08cd175d6669ca97a1",
+      "reason": "Control-plane implementation Step 1 baseline evidence; records the pre-change G1-G11, champion, hardening, test, and release-integrity reference state"
     }
   }
 }
