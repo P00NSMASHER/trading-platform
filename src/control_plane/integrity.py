@@ -7,6 +7,16 @@ from . import registry
 from .storage import sha256_file
 
 
+def _snapshot_exists(root: Path, digest: str) -> bool:
+    directory = Path(root) / digest
+    if not directory.exists():
+        return False
+    for candidate in directory.glob("original*"):
+        if candidate.is_file() and not candidate.is_symlink() and sha256_file(candidate) == digest:
+            return True
+    return False
+
+
 def _active_contract_issues(db_path: Path, contract: Path) -> list[str]:
     if not contract.exists(): return []
     raw=json.loads(contract.read_text(encoding="utf-8")); issues=[]
@@ -35,11 +45,11 @@ def verify_control_plane(db_path: Path, control_dir: Path, active_contracts: lis
         report["event_chains_valid"]=all(registry.verify_event_chain(db_path,x["information_id"]) for x in objects)
         holding_ok=True; quarantine_ok=True
         for obj in objects:
-            holding=control_dir/"holding"/obj["content_sha256"]/"original"
-            if not holding.exists() or sha256_file(holding)!=obj["content_sha256"]: holding_ok=False
+            if not _snapshot_exists(control_dir/"holding", obj["content_sha256"]):
+                holding_ok=False
             if registry.current_state(db_path,obj["information_id"])=="QUARANTINED":
-                q=control_dir/"quarantine"/obj["content_sha256"]/"original"
-                if not q.exists() or sha256_file(q)!=obj["content_sha256"]: quarantine_ok=False
+                if not _snapshot_exists(control_dir/"quarantine", obj["content_sha256"]):
+                    quarantine_ok=False
         report["holding_hashes_valid"]=holding_ok; report["quarantine_hashes_valid"]=quarantine_ok
         issues=[]
         for contract in active_contracts or []: issues.extend(_active_contract_issues(db_path,Path(contract)))
