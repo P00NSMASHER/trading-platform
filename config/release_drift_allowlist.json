@@ -20,8 +20,8 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "src/authorized_input_orchestrator.py": {
-      "expected_sha256": "b3c49cc063626b48ba3438431a41455a289894b78f3ea617055c4549e4d7413f",
-      "reason": "Intentional post-Step21 security hardening"
+      "expected_sha256": "9dae028c98c67d9050b9448118c29de524f338f90dc5c513b347d90870aae8c2",
+      "reason": "Control-plane Step 2: immutable HOLDING, information identity, source-policy routing, and Step-21 receipt linkage"
     },
     "src/case_evidence.py": {
       "expected_sha256": "67d197a86e91a37ccc92e1e9d05daa76a9229e27dc8c44995d0759b79edea094",
@@ -36,8 +36,8 @@
       "reason": "Intentional post-Step21 security hardening; one-time bootstrap/session separation plus bounded connections and socket timeouts"
     },
     "tests/test_authorized_input_orchestrator.py": {
-      "expected_sha256": "82542d0564a4292b6b90808a34bc1cda9d143a09e4fc404049a192b577232623",
-      "reason": "Intentional post-Step21 security hardening"
+      "expected_sha256": "8afeeff3cce8d3ff1e98b4c74a2f22eea8bb5ce4405a099fd2bcac1942bf3a07",
+      "reason": "Control-plane Step 2 regression coverage including TOCTOU, quarantine, review-required, and receipt linkage"
     },
     "tests/test_case_evidence.py": {
       "expected_sha256": "ec0153e7a770b2778c4b236ea7ed21ec9e3b9c77b7883e636cf3fa7f7274de82",
@@ -144,6 +144,34 @@
     "docs/control_plane_implementation_baseline.md": {
       "expected_sha256": "82b42a0bebbb57d7d16f9dd16b7aa7bb211ff7fe2b64c4740700a9c96136cbf4",
       "reason": "Control-plane implementation Step 1 baseline evidence; records the pre-change G1-G11, champion, hardening, test, and release-integrity reference state"
+    },
+    "src/control_plane/__init__.py": {
+      "expected_sha256": "9c85c627406ac58621635d1394cabe5a32c066093d28e8cdaf44752ed88da358",
+      "reason": "Control-plane Step 2 foundation"
+    },
+    "src/control_plane/contracts.py": {
+      "expected_sha256": "964f18fdfccb85a825e72bc4172f54b2a921563ef9cfa28b71706d296f434c4e",
+      "reason": "Control-plane Step 2 foundation"
+    },
+    "src/control_plane/source_policy.py": {
+      "expected_sha256": "3fca60c22dee31a3c34f2b50e7f28b0cfd11ed929d978a1e7d9c836ec647a192",
+      "reason": "Control-plane Step 2 foundation"
+    },
+    "src/control_plane/storage.py": {
+      "expected_sha256": "5d458251a878e9d36aba551c8cb9d64e5b8d2f1e358670818122a85218fa5fe5",
+      "reason": "Control-plane Step 2 foundation"
+    },
+    "src/control_plane/registry.py": {
+      "expected_sha256": "52a89cb5a1863592185d2e8f0faed2a84b39e539181c6c324aa821390899c7c6",
+      "reason": "Control-plane Step 2 foundation"
+    },
+    "src/control_plane/integrity.py": {
+      "expected_sha256": "ed68a0ebe29f320fb3538dc6698716714fdcd062cc986787aa2555b78b3737e6",
+      "reason": "Control-plane Step 2 foundation"
+    },
+    "tests/test_control_plane_foundation.py": {
+      "expected_sha256": "8f738e0adae5bc92094d372ba83de8b41c9d7ae19ae0f74b289a7d085e8bf3ba",
+      "reason": "Control-plane Step 2 foundation"
     }
   }
 }

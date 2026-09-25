@@ -1,0 +1,49 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from . import registry
+from .storage import sha256_file
+
+
+def _active_contract_issues(db_path: Path, contract: Path) -> list[str]:
+    if not contract.exists(): return []
+    raw=json.loads(contract.read_text(encoding="utf-8")); issues=[]
+    with registry.connect(db_path) as con:
+        for source in raw.get("sources",[]):
+            source_id=str(source.get("source_id","")); p=Path(str(source.get("path","")))
+            if not p.exists() or not p.is_file(): issues.append(f"{source_id}: active source path missing"); continue
+            digest=sha256_file(p)
+            rows=con.execute("SELECT information_id FROM information_object WHERE source_id=? AND content_sha256=?",(source_id,digest)).fetchall()
+            if not rows: issues.append(f"{source_id}: active source lacks control-plane identity"); continue
+            if not any(registry.current_state(db_path,str(r["information_id"]))=="ADMITTED_STRUCTURED" for r in rows):
+                issues.append(f"{source_id}: active source is not ADMITTED_STRUCTURED")
+    return issues
+
+
+def verify_control_plane(db_path: Path, control_dir: Path, active_contracts: list[Path] | None = None) -> dict:
+    db_path=Path(db_path); control_dir=Path(control_dir)
+    report={"sqlite_integrity":False,"foreign_keys_clean":False,"event_chains_valid":False,"holding_hashes_valid":False,
+            "quarantine_hashes_valid":False,"active_contract_issues":[],"information_object_count":0,"ok":False}
+    if not db_path.exists(): report["error"]="control database missing"; return report
+    try:
+        with registry.connect(db_path) as con:
+            integrity=[str(r[0]) for r in con.execute("PRAGMA integrity_check").fetchall()]; fk=con.execute("PRAGMA foreign_key_check").fetchall()
+            objects=[dict(r) for r in con.execute("SELECT * FROM information_object ORDER BY information_id").fetchall()]
+        report["sqlite_integrity"]=integrity==["ok"]; report["foreign_keys_clean"]=len(fk)==0; report["information_object_count"]=len(objects)
+        report["event_chains_valid"]=all(registry.verify_event_chain(db_path,x["information_id"]) for x in objects)
+        holding_ok=True; quarantine_ok=True
+        for obj in objects:
+            holding=control_dir/"holding"/obj["content_sha256"]/"original"
+            if not holding.exists() or sha256_file(holding)!=obj["content_sha256"]: holding_ok=False
+            if registry.current_state(db_path,obj["information_id"])=="QUARANTINED":
+                q=control_dir/"quarantine"/obj["content_sha256"]/"original"
+                if not q.exists() or sha256_file(q)!=obj["content_sha256"]: quarantine_ok=False
+        report["holding_hashes_valid"]=holding_ok; report["quarantine_hashes_valid"]=quarantine_ok
+        issues=[]
+        for contract in active_contracts or []: issues.extend(_active_contract_issues(db_path,Path(contract)))
+        report["active_contract_issues"]=issues
+        report["ok"]=bool(report["sqlite_integrity"] and report["foreign_keys_clean"] and report["event_chains_valid"] and holding_ok and quarantine_ok and not issues)
+    except Exception as exc: report["error"]=f"{type(exc).__name__}: {exc}"
+    return report
