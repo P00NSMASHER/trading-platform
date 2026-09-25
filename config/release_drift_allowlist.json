@@ -172,6 +172,10 @@
     "tests/test_control_plane_foundation.py": {
       "expected_sha256": "8f738e0adae5bc92094d372ba83de8b41c9d7ae19ae0f74b289a7d085e8bf3ba",
       "reason": "Control-plane Step 2 foundation"
+    },
+    "docs/control_plane_step2.md": {
+      "expected_sha256": "1a92ec25408262bf29437c28bf41dab505d4459f52a28883d55b6c2defaf23d1",
+      "reason": "Control-plane Step 2 implementation note for immutable HOLDING and structured source registry"
     }
   }
 }
