@@ -142,7 +142,7 @@
       "reason": "Intentional post-Step21 repository hardening addition; read-only automatic pull request tests and secret scanning with ephemeral runtime permission hardening and immutable current action pins"
     },
     "docs/control_plane_implementation_baseline.md": {
-      "expected_sha256": "0b0f2e953c634f979b1aa80e273eb12f859e2aee23af5d08cd175d6669ca97a1",
+      "expected_sha256": "82b42a0bebbb57d7d16f9dd16b7aa7bb211ff7fe2b64c4740700a9c96136cbf4",
       "reason": "Control-plane implementation Step 1 baseline evidence; records the pre-change G1-G11, champion, hardening, test, and release-integrity reference state"
     }
   }
