@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import gzip
 import json
 from datetime import timedelta
 from pathlib import Path
@@ -128,6 +129,43 @@ def test_synthetic_market_file_is_mapped_to_g2_but_cannot_close_it(tmp_path):
     assert result["raw_input_files_copied_to_report_bundle"] is False
 
 
+def test_gzip_market_source_preserves_decoder_semantics_after_holding(tmp_path):
+    source = ROOT / "data/examples/equity_trades.csv"
+    compressed = tmp_path / "equity_trades.csv.gz"
+    with gzip.open(compressed, "wt", encoding="utf-8", newline="") as f:
+        f.write(source.read_text(encoding="utf-8"))
+
+    raw = json.loads((ROOT / "config/historical_market_sources.example.json").read_text(encoding="utf-8"))
+    row = dict(raw["sources"][0])
+    row["source_id"] = "gzip-taq"
+    row["path"] = str(compressed)
+    contract = _write_json(tmp_path / "gzip-market-contract.json", {
+        "schema_version": "1",
+        "sources": [row],
+    })
+    batch = _write_json(tmp_path / "gzip-market-batch.json", {
+        "schema_version": "1",
+        "batch_id": "gzip-market",
+        "market": {"source_contract": str(contract), "source_ids": ["gzip-taq"]},
+    })
+
+    result = aio.orchestrate_batch(
+        root=ROOT,
+        batch_manifest=batch,
+        runtime_dir=tmp_path / "runtime",
+        outdir=tmp_path / "out",
+        expected_champion_sha256=CHAMPION,
+    )
+    receipt = result["file_receipts"][0]
+    assert receipt["import_status"] == "IMPORTED"
+    assert receipt["control_state"] == "ADMITTED_STRUCTURED"
+    holding_dir = tmp_path / "runtime/control/holding" / receipt["holding_sha256"]
+    held = list(holding_dir.glob("original*.gz"))
+    assert len(held) == 1
+    assert result["batch_end_gate_state"]["G2_REAL_MARKET_DATA"] is False
+    assert result["control_plane_integrity"]["ok"] is True
+
+
 def test_batch_id_rejects_path_traversal_before_output_creation(tmp_path):
     batch = _write_json(tmp_path / "batch.json", {
         "schema_version": "1", "batch_id": "../escape",
@@ -167,3 +205,49 @@ def test_batch_output_rejects_existing_symlink_escape(tmp_path):
             root=ROOT, batch_manifest=batch, runtime_dir=tmp_path / "runtime",
             outdir=outdir, expected_champion_sha256=CHAMPION,
         )
+
+
+def test_step21_receipt_links_control_information_and_holding(tmp_path):
+    contract=_announcement_contract(tmp_path); batch=_write_json(tmp_path/"batch-control.json",{"schema_version":"1","batch_id":"control-link","metadata":{"source_contract":str(contract),"source_ids":["all-announcements"]}})
+    result=aio.orchestrate_batch(root=ROOT,batch_manifest=batch,runtime_dir=tmp_path/"runtime",outdir=tmp_path/"out",expected_champion_sha256=CHAMPION)
+    receipt=result["file_receipts"][0]
+    assert receipt["information_id"].startswith("info_"); assert receipt["control_state"]=="ADMITTED_STRUCTURED"; assert receipt["source_policy_decision"]=="ADMIT_STRUCTURED"
+    assert receipt["holding_sha256"]==receipt["source_sha256"]
+    holding_dir = tmp_path/"runtime/control/holding"/receipt["holding_sha256"]
+    assert any(p.is_file() for p in holding_dir.glob("original*"))
+    assert result["control_plane_integrity"]["ok"] is True
+
+
+def test_external_source_mutation_after_holding_does_not_change_consumed_bytes(tmp_path, monkeypatch):
+    contract=_announcement_contract(tmp_path); obj=json.loads(contract.read_text(encoding="utf-8")); original=Path(obj["sources"][0]["path"])
+    batch=_write_json(tmp_path/"batch-toctou.json",{"schema_version":"1","batch_id":"toctou","metadata":{"source_contract":str(contract),"source_ids":["all-announcements"]}})
+    real=aio.metadata_population.populate_batch; mutated=False
+    def mutate_original_then_populate(**kwargs):
+        nonlocal mutated
+        if not mutated: original.write_text("corrupted_after_holding\n",encoding="utf-8"); mutated=True
+        return real(**kwargs)
+    monkeypatch.setattr(aio.metadata_population,"populate_batch",mutate_original_then_populate)
+    result=aio.orchestrate_batch(root=ROOT,batch_manifest=batch,runtime_dir=tmp_path/"runtime",outdir=tmp_path/"out",expected_champion_sha256=CHAMPION)
+    assert mutated is True; assert result["batch_end_gate_state"]["G1_ANNOUNCEMENT_TIMES"] is True
+    receipt=result["file_receipts"][0]
+    holding=next((tmp_path/"runtime/control/holding"/receipt["holding_sha256"]).glob("original*"))
+    assert "corrupted_after_holding" not in holding.read_text(encoding="utf-8")
+
+
+def test_prohibited_source_is_quarantined_without_gate_changes(tmp_path):
+    source=tmp_path/"prohibited.csv"; source.write_text("historical_symbol,event_date,public_announcement_ts\nX,2015-01-01,2015-01-01T12:00:00-05:00\n",encoding="utf-8")
+    contract=_write_json(tmp_path/"prohibited-contract.json",{"schema_version":"1","sources":[{"source_id":"prohibited","record_kind":"announcement_timestamp","source_family":"generic_authorized_reference_data","path":str(source),"enabled":True,"authorized":False,"data_classification":"live_stolen_information","license_reference":"","delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{}}]})
+    batch=_write_json(tmp_path/"prohibited-batch.json",{"schema_version":"1","batch_id":"prohibited-batch","metadata":{"source_contract":str(contract),"source_ids":["prohibited"]}})
+    result=aio.orchestrate_batch(root=ROOT,batch_manifest=batch,runtime_dir=tmp_path/"runtime",outdir=tmp_path/"out",expected_champion_sha256=CHAMPION)
+    receipt=result["file_receipts"][0]; assert receipt["import_status"]=="QUARANTINED"; assert receipt["control_state"]=="QUARANTINED"; assert receipt["closed_gates"]==[]
+    assert result["batch_start_gate_state"]==result["batch_end_gate_state"]
+    quarantine_dir = tmp_path/"runtime/control/quarantine"/receipt["source_sha256"]
+    assert any(p.is_file() for p in quarantine_dir.glob("original*"))
+
+
+def test_unknown_source_classification_requires_review_without_gate_changes(tmp_path):
+    source=tmp_path/"unknown.csv"; source.write_text("historical_symbol,event_date,public_announcement_ts\nX,2015-01-01,2015-01-01T12:00:00-05:00\n",encoding="utf-8")
+    contract=_write_json(tmp_path/"unknown-contract.json",{"schema_version":"1","sources":[{"source_id":"unknown","record_kind":"announcement_timestamp","source_family":"generic_authorized_reference_data","path":str(source),"enabled":True,"authorized":False,"data_classification":"brand_new_class","license_reference":"","delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{}}]})
+    batch=_write_json(tmp_path/"unknown-batch.json",{"schema_version":"1","batch_id":"unknown-batch","metadata":{"source_contract":str(contract),"source_ids":["unknown"]}})
+    result=aio.orchestrate_batch(root=ROOT,batch_manifest=batch,runtime_dir=tmp_path/"runtime",outdir=tmp_path/"out",expected_champion_sha256=CHAMPION)
+    receipt=result["file_receipts"][0]; assert receipt["import_status"]=="REVIEW_REQUIRED"; assert receipt["control_state"]=="REVIEW_REQUIRED"; assert receipt["closed_gates"]==[]

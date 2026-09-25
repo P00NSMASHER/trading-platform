@@ -17,6 +17,11 @@ import metadata_population
 import metadata_quality
 import metadata_resolver
 
+from control_plane import integrity as control_integrity
+from control_plane import registry as control_registry
+from control_plane import source_policy as control_source_policy
+from control_plane import storage as control_storage
+
 SCHEMA_VERSION = "0.21.0"
 LEDGER_SCHEMA_VERSION = "1"
 PROHIBITED_OUTPUTS = [
@@ -186,6 +191,42 @@ def _resolve_market_source_path(contract: Path, source: dict) -> Path:
     return p if p.is_absolute() else (contract.parent / p).resolve()
 
 
+def _resolve_metadata_source_path(contract: Path, source: dict) -> Path:
+    p = Path(str(source.get("path", "")))
+    return p if p.is_absolute() else (contract.parent.parent / p).resolve()
+
+
+def _controlled_source_contract(*, runtime_dir: Path, domain: str, source_id: str, source: dict, holding_path: Path) -> tuple[Path, dict]:
+    row = dict(source); row["path"] = str(Path(holding_path).resolve())
+    contract_dir = runtime_dir / "control" / "contracts"; contract_dir.mkdir(parents=True, exist_ok=True)
+    try: os.chmod(contract_dir, 0o700)
+    except OSError: pass
+    path = contract_dir / f"{domain}-{_safe_id(source_id)}.json"
+    _write_json(path, {"schema_version": "1", "purpose": "Controlled HOLDING snapshot contract", "sources": [row]}, mode=0o600)
+    return path, row
+
+
+def _prepare_controlled_source(*, runtime_dir: Path, domain: str, contract: Path, source_id: str, source: dict) -> dict:
+    original_path = _resolve_metadata_source_path(contract, source) if domain == "metadata" else _resolve_market_source_path(contract, source)
+    control_dir = runtime_dir / "control"; db_path = control_dir / "control.sqlite"
+    snapshot = control_storage.receive_to_holding(original_path, control_dir)
+    registered = control_registry.register_information(
+        db_path, domain=domain, source_id=source_id, content_sha256=snapshot.sha256, size_bytes=snapshot.size_bytes,
+        source_contract_sha256=_sha256(contract), data_classification=str(source.get("data_classification", "")),
+        record_kind=str(source.get("record_kind", "")), source_family=str(source.get("source_family", "")),
+    )
+    info_id = registered["information_id"]
+    if registered["created"]:
+        control_registry.append_event(db_path, info_id, "RECEIVED", "RECEIVED", {"source_path_fingerprint": snapshot.source_path_fingerprint})
+        control_registry.add_location(db_path, info_id, "SOURCE", snapshot.source_path_fingerprint, snapshot.sha256)
+        control_registry.append_event(db_path, info_id, "HELD", "HOLDING")
+        control_registry.add_location(db_path, info_id, "HOLDING", control_storage.path_fingerprint(snapshot.path), snapshot.sha256)
+    policy = control_source_policy.evaluate(source)
+    controlled_contract, controlled_row = _controlled_source_contract(runtime_dir=runtime_dir, domain=domain, source_id=source_id, source=source, holding_path=snapshot.path)
+    return {"information_id": info_id, "snapshot": snapshot, "policy": policy, "controlled_contract": controlled_contract,
+            "controlled_row": controlled_row, "received_at_utc": registered["received_at_utc"]}
+
+
 def _empty_market_contract() -> dict:
     return {"schema_version": "1", "purpose": "Step 21 cumulative authorized market inputs", "sources": []}
 
@@ -193,7 +234,8 @@ def _empty_market_contract() -> dict:
 def _ensure_runtime(runtime_dir: Path) -> tuple[Path, Path]:
     metadata_runtime = runtime_dir / "metadata"
     market_runtime = runtime_dir / "market"
-    for d in (runtime_dir, metadata_runtime, market_runtime, runtime_dir / "current"):
+    control_runtime = runtime_dir / "control"
+    for d in (runtime_dir, metadata_runtime, market_runtime, control_runtime, runtime_dir / "current"):
         d.mkdir(parents=True, exist_ok=True)
         try:
             os.chmod(d, 0o700)
@@ -205,6 +247,7 @@ def _ensure_runtime(runtime_dir: Path) -> tuple[Path, Path]:
     market_active = market_runtime / "active_market_sources.json"
     if not market_active.exists():
         _write_json(market_active, _empty_market_contract(), mode=0o600)
+    control_registry.init_db(control_runtime / "control.sqlite")
     return meta_active, market_active
 
 
@@ -465,68 +508,97 @@ def orchestrate_batch(*, root: Path, batch_manifest: Path, runtime_dir: Path, ou
     for ordinal, (domain, contract, source_id, source_row) in enumerate(work_items, 1):
         before = dict(current["gate_state"])
         imported_at = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
-        if domain == "metadata":
-            result = metadata_population.populate_batch(
-                events=root / "data/processed/historical_events.csv",
-                symbol_dates=root / "data/processed/coverage_plan_real/symbol_date_requirements.csv",
-                source_contract=contract,
-                runtime_dir=runtime_dir / "metadata",
-                outdir=batch_dir / "metadata_population",
-                source_ids=[source_id],
-                batch_id=f"{batch_id}-metadata-{ordinal:04d}-{_safe_id(source_id)}",
-            )
-            no_op = result.get("status") == "NO_OP"
-            if no_op:
-                validation = metadata_population.validate_source_file(contract, source_row)
-                source_receipt = {
-                    "source_id": source_id, "status": "NO_OP", "sha256": validation["sha256"],
-                    "source_path": validation["path"], "size_bytes": validation["size_bytes"],
-                    "data_classification": source_row.get("data_classification", ""),
-                    "record_kind": source_row.get("record_kind", ""), "source_family": source_row.get("source_family", ""),
-                    "license_reference": source_row.get("license_reference", ""),
-                }
+        controlled = _prepare_controlled_source(runtime_dir=runtime_dir, domain=domain, contract=contract, source_id=source_id, source=source_row)
+        info_id = str(controlled["information_id"]); snapshot = controlled["snapshot"]; policy = controlled["policy"]
+        controlled_contract = Path(controlled["controlled_contract"]); controlled_row = controlled["controlled_row"]
+        db_path = runtime_dir / "control" / "control.sqlite"
+
+        if policy.decision != "ADMIT_STRUCTURED":
+            if policy.decision == "QUARANTINE":
+                quarantine_path = control_storage.quarantine_snapshot(snapshot, runtime_dir / "control")
+                if control_registry.current_state(db_path, info_id) != "QUARANTINED":
+                    control_registry.append_event(db_path, info_id, "QUARANTINED", "QUARANTINED", {"reason": policy.reason})
+                    control_registry.add_location(db_path, info_id, "QUARANTINE", control_storage.path_fingerprint(quarantine_path), snapshot.sha256)
+                import_status = "QUARANTINED"
             else:
-                srcs = result.get("batch_receipt", {}).get("sources", [])
-                if len(srcs) != 1:
-                    raise OrchestratorError(f"unexpected metadata population receipt for {source_id}")
-                source_receipt = dict(srcs[0]) | {"status": "IMPORTED"}
-        else:
-            _, source_receipt, no_op = _validate_and_stage_market_source(
-                contract=contract, source=source_row, market_runtime=runtime_dir / "market"
-            )
+                if control_registry.current_state(db_path, info_id) != "REVIEW_REQUIRED":
+                    control_registry.append_event(db_path, info_id, "REVIEW_REQUIRED", "REVIEW_REQUIRED", {"reason": policy.reason})
+                import_status = "REVIEW_REQUIRED"
+            after = dict(before); transitions = _gate_transitions(before, after)
+            receipt = {
+                "ledger_schema_version": LEDGER_SCHEMA_VERSION, "step_schema_version": SCHEMA_VERSION,
+                "batch_id": batch_id, "ordinal": ordinal, "domain": domain, "source_contract": str(contract),
+                "source_contract_sha256": _sha256(contract), "source_id": source_id, "source_sha256": snapshot.sha256,
+                "holding_sha256": snapshot.sha256, "size_bytes": snapshot.size_bytes,
+                "data_classification": source_row.get("data_classification", ""), "record_kind": source_row.get("record_kind", ""),
+                "source_family": source_row.get("source_family", ""), "trade_date": source_row.get("trade_date", ""),
+                "license_reference": source_row.get("license_reference", ""), "import_status": import_status,
+                "imported_at_utc": imported_at, "potential_gates": _source_gates(domain, source_row),
+                "before_gate_state": before, "after_gate_state": after, **transitions,
+                "evaluation_release_permitted_after": bool(current["assessment"].get("evaluation_release_permitted")),
+                "information_id": info_id, "control_state": control_registry.current_state(db_path, info_id),
+                "source_policy_decision": policy.decision, "source_policy_reason": policy.reason,
+                "received_at_utc": controlled["received_at_utc"], "source_path_fingerprint": snapshot.source_path_fingerprint,
+                "control_event_head": control_registry.event_head(db_path, info_id),
+                "research_use_only": True, "prohibited_outputs": PROHIBITED_OUTPUTS,
+            }
+            ledger_receipt = _append_ledger(ledger_path, receipt); receipt["receipt_hash"] = ledger_receipt["receipt_hash"]; file_receipts.append(receipt)
+            continue
+
+        try:
+            if domain == "metadata":
+                metadata_population.validate_source_file(controlled_contract, controlled_row)
+                result = metadata_population.populate_batch(
+                    events=root / "data/processed/historical_events.csv",
+                    symbol_dates=root / "data/processed/coverage_plan_real/symbol_date_requirements.csv",
+                    source_contract=controlled_contract, runtime_dir=runtime_dir / "metadata",
+                    outdir=batch_dir / "metadata_population", source_ids=[source_id],
+                    batch_id=f"{batch_id}-metadata-{ordinal:04d}-{_safe_id(source_id)}",
+                )
+                no_op = result.get("status") == "NO_OP"
+                if no_op:
+                    validation = metadata_population.validate_source_file(controlled_contract, controlled_row)
+                    source_receipt = {"source_id":source_id,"status":"NO_OP","sha256":validation["sha256"],
+                        "source_path":validation["path"],"size_bytes":validation["size_bytes"],
+                        "data_classification":source_row.get("data_classification",""),"record_kind":source_row.get("record_kind",""),
+                        "source_family":source_row.get("source_family",""),"license_reference":source_row.get("license_reference","")}
+                else:
+                    srcs=result.get("batch_receipt",{}).get("sources",[])
+                    if len(srcs)!=1: raise OrchestratorError(f"unexpected metadata population receipt for {source_id}")
+                    source_receipt=dict(srcs[0])|{"status":"IMPORTED"}
+            else:
+                hmb.load_contract(controlled_contract)
+                _, source_receipt, no_op = _validate_and_stage_market_source(contract=controlled_contract, source=controlled_row, market_runtime=runtime_dir / "market")
+            if no_op:
+                control_registry.append_event(db_path, info_id, "NO_OP_REFERENCED", "ADMITTED_STRUCTURED")
+            elif control_registry.current_state(db_path, info_id) != "ADMITTED_STRUCTURED":
+                control_registry.append_event(db_path, info_id, "ADMITTED", "ADMITTED_STRUCTURED")
+        except Exception as exc:
+            control_registry.append_event(db_path, info_id, "IMPORT_FAILED", "IMPORT_FAILED", {"error_type": type(exc).__name__})
+            raise
 
         current = _refresh_all(root=root, runtime_dir=runtime_dir, expected_champion_sha256=expected_champion_sha256)
-        after = dict(current["gate_state"])
-        transitions = _gate_transitions(before, after)
+        after = dict(current["gate_state"]); transitions = _gate_transitions(before, after)
         receipt = {
-            "ledger_schema_version": LEDGER_SCHEMA_VERSION,
-            "step_schema_version": SCHEMA_VERSION,
-            "batch_id": batch_id,
-            "ordinal": ordinal,
-            "domain": domain,
-            "source_contract": str(contract),
-            "source_contract_sha256": _sha256(contract),
-            "source_id": source_id,
-            "source_sha256": source_receipt.get("sha256", ""),
-            "size_bytes": source_receipt.get("size_bytes", 0),
+            "ledger_schema_version": LEDGER_SCHEMA_VERSION, "step_schema_version": SCHEMA_VERSION,
+            "batch_id": batch_id, "ordinal": ordinal, "domain": domain, "source_contract": str(contract),
+            "source_contract_sha256": _sha256(contract), "source_id": source_id,
+            "source_sha256": source_receipt.get("sha256", ""), "size_bytes": source_receipt.get("size_bytes", 0),
             "data_classification": source_receipt.get("data_classification", source_row.get("data_classification", "")),
             "record_kind": source_receipt.get("record_kind", source_row.get("record_kind", "")),
             "source_family": source_receipt.get("source_family", source_row.get("source_family", "")),
             "trade_date": source_receipt.get("trade_date", source_row.get("trade_date", "")),
             "license_reference": source_receipt.get("license_reference", source_row.get("license_reference", "")),
-            "import_status": "NO_OP" if no_op else "IMPORTED",
-            "imported_at_utc": imported_at,
-            "potential_gates": _source_gates(domain, source_row),
-            "before_gate_state": before,
-            "after_gate_state": after,
-            **transitions,
+            "import_status": "NO_OP" if no_op else "IMPORTED", "imported_at_utc": imported_at,
+            "potential_gates": _source_gates(domain, source_row), "before_gate_state": before, "after_gate_state": after, **transitions,
             "evaluation_release_permitted_after": bool(current["assessment"].get("evaluation_release_permitted")),
-            "research_use_only": True,
-            "prohibited_outputs": PROHIBITED_OUTPUTS,
+            "information_id": info_id, "control_state": control_registry.current_state(db_path, info_id),
+            "source_policy_decision": policy.decision, "source_policy_reason": policy.reason,
+            "received_at_utc": controlled["received_at_utc"], "holding_sha256": snapshot.sha256,
+            "source_path_fingerprint": snapshot.source_path_fingerprint, "control_event_head": control_registry.event_head(db_path, info_id),
+            "research_use_only": True, "prohibited_outputs": PROHIBITED_OUTPUTS,
         }
-        ledger_receipt = _append_ledger(ledger_path, receipt)
-        receipt["receipt_hash"] = ledger_receipt["receipt_hash"]
-        file_receipts.append(receipt)
+        ledger_receipt = _append_ledger(ledger_path, receipt); receipt["receipt_hash"] = ledger_receipt["receipt_hash"]; file_receipts.append(receipt)
 
     champion_after = _sha256(champion)
     if champion_after != champion_before:
@@ -583,6 +655,9 @@ def orchestrate_batch(*, root: Path, batch_manifest: Path, runtime_dir: Path, ou
         "champion_sha256_after": champion_after,
         "champion_unchanged": champion_before == champion_after,
         "ledger": verify_ledger(ledger_path),
+        "control_plane_integrity": control_integrity.verify_control_plane(
+            runtime_dir / "control" / "control.sqlite", runtime_dir / "control", [meta_active, market_active]
+        ),
         "raw_input_files_copied_to_report_bundle": False,
         "external_fetch_or_purchase_performed": False,
         "broker_or_execution_integration_present": False,
@@ -607,6 +682,10 @@ def assess_current(*, root: Path, runtime_dir: Path, outdir: Path, expected_cham
         "blocking_failures": current["assessment"].get("blocking_failures", []),
         "release_token_issued": bool(current["paths"]["release_token"]),
         "ledger": verify_ledger(runtime_dir / "authorized_input_ingestion_ledger.jsonl"),
+        "control_plane_integrity": control_integrity.verify_control_plane(
+            runtime_dir / "control" / "control.sqlite", runtime_dir / "control",
+            [runtime_dir / "metadata" / "active_metadata_sources.json", runtime_dir / "market" / "active_market_sources.json"],
+        ),
         "research_use_only": True,
         "external_fetch_or_purchase_performed": False,
         "prohibited_outputs": PROHIBITED_OUTPUTS,

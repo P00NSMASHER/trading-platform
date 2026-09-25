@@ -4,6 +4,7 @@ import argparse
 import html
 import json
 import secrets
+import sqlite3
 import threading
 import time
 import urllib.parse
@@ -21,7 +22,9 @@ try:
 except ImportError:  # package-style import
     from .case_evidence import RESEARCH_NOTICE, add_review, connect, export_case, verify_review_chain
 
-SCHEMA_VERSION = "0.9.0"
+from control_plane import account_surveillance, integrity as control_integrity, storage as control_storage
+
+SCHEMA_VERSION = "0.9.1"
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
 LOOPBACK_HOSTS = {"127.0.0.1", "::1", "localhost"}
@@ -74,6 +77,10 @@ class DashboardConfig:
     writes_per_minute: int = DEFAULT_WRITES_PER_MINUTE
     max_concurrent_connections: int = DEFAULT_MAX_CONCURRENT_CONNECTIONS
     socket_timeout_seconds: float = DEFAULT_SOCKET_TIMEOUT_SECONDS
+    account_db_path: Path | None = None
+    control_dir: Path | None = None
+    g12_g15_assessment_path: Path | None = None
+    release_authority_token_path: Path | None = None
 
     def validate(self) -> None:
         if not _is_loopback_host(self.host):
@@ -94,11 +101,33 @@ class DashboardConfig:
             raise ValueError("max_concurrent_connections must be in [1,256]")
         if not (0.5 <= float(self.socket_timeout_seconds) <= 60.0):
             raise ValueError("socket_timeout_seconds must be in [0.5,60.0]")
+        if self.account_db_path is not None and not Path(self.account_db_path).is_file():
+            raise ValueError(f"account surveillance database does not exist: {self.account_db_path}")
+        if self.control_dir is not None:
+            control_db = Path(self.control_dir) / "control.sqlite"
+            if not control_db.is_file():
+                raise ValueError(f"control-plane database does not exist: {control_db}")
+        if self.g12_g15_assessment_path is not None and not Path(self.g12_g15_assessment_path).is_file():
+            raise ValueError(f"G12-G15 assessment does not exist: {self.g12_g15_assessment_path}")
+        if self.release_authority_token_path is not None and not Path(self.release_authority_token_path).is_file():
+            raise ValueError(f"release-authority token does not exist: {self.release_authority_token_path}")
 
 
 class DashboardRepository:
-    def __init__(self, db_path: Path):
+    def __init__(
+        self,
+        db_path: Path,
+        *,
+        account_db_path: Path | None = None,
+        control_dir: Path | None = None,
+        g12_g15_assessment_path: Path | None = None,
+        release_authority_token_path: Path | None = None,
+    ):
         self.db_path = Path(db_path)
+        self.account_db_path = Path(account_db_path) if account_db_path is not None else None
+        self.control_dir = Path(control_dir) if control_dir is not None else None
+        self.g12_g15_assessment_path = Path(g12_g15_assessment_path) if g12_g15_assessment_path is not None else None
+        self.release_authority_token_path = Path(release_authority_token_path) if release_authority_token_path is not None else None
 
     def list_cases(
         self,
@@ -168,6 +197,98 @@ class DashboardRepository:
             "ok": review_ok and hashes_well_formed and model_hash_consistent,
         }
 
+    def list_accounts(self) -> list[dict]:
+        if self.account_db_path is None:
+            return []
+        return account_surveillance.list_accounts(
+            account_db=self.account_db_path,
+            case_db=self.db_path,
+        )
+
+    def account_detail(self, subject_id: str) -> dict:
+        if self.account_db_path is None:
+            raise KeyError(subject_id)
+        return account_surveillance.account_detail(
+            account_db=self.account_db_path,
+            case_db=self.db_path,
+            subject_id=subject_id,
+        )
+
+    def control_plane_status(self) -> dict:
+        if self.control_dir is None:
+            return {"configured": False}
+        control_dir = self.control_dir.resolve()
+        db_path = control_dir / "control.sqlite"
+        report = control_integrity.verify_control_plane(db_path, control_dir)
+        state_counts: dict[str, int] = {}
+        lineage_artifact_count = 0
+        con = sqlite3.connect(f"file:{db_path.resolve()}?mode=ro", uri=True)
+        con.row_factory = sqlite3.Row
+        try:
+            for row in con.execute(
+                """SELECT e.state_after, COUNT(*) AS n
+                   FROM information_event e
+                   JOIN (
+                       SELECT information_id, MAX(sequence) AS max_sequence
+                       FROM information_event GROUP BY information_id
+                   ) last
+                   ON last.information_id=e.information_id AND last.max_sequence=e.sequence
+                   GROUP BY e.state_after ORDER BY e.state_after"""
+            ).fetchall():
+                state_counts[str(row["state_after"])] = int(row["n"])
+            lineage_artifact_count = int(
+                con.execute("SELECT COUNT(*) FROM lineage_artifact").fetchone()[0]
+            )
+        finally:
+            con.close()
+
+        assessment = None
+        if self.g12_g15_assessment_path is not None:
+            raw = json.loads(self.g12_g15_assessment_path.read_text(encoding="utf-8"))
+            if not isinstance(raw, dict) or raw.get("research_use_only") is not True:
+                raise ValueError("dashboard requires a research-only G12-G15 assessment")
+            assessment = raw
+
+        authority = None
+        if self.release_authority_token_path is not None:
+            raw = json.loads(self.release_authority_token_path.read_text(encoding="utf-8"))
+            if not isinstance(raw, dict):
+                raise ValueError("release-authority token root must be an object")
+            authority = {
+                "recorded_token_sha256": control_storage.sha256_file(self.release_authority_token_path),
+                "authority_claim_sha256": str(raw.get("authority_claim_sha256", "")),
+                "scope": str(raw.get("scope", "")),
+                "signature_verified_recorded": raw.get("authority_signature_verified") is True,
+                "research_use_only": raw.get("research_use_only") is True,
+                "automatic_promotion_permitted": raw.get("automatic_promotion_permitted"),
+                "active_champion_modification_permitted": raw.get("active_champion_modification_permitted"),
+                "shape_ok": bool(
+                    raw.get("authority_signature_verified") is True
+                    and raw.get("research_use_only") is True
+                    and raw.get("automatic_promotion_permitted") is False
+                    and raw.get("active_champion_modification_permitted") is False
+                ),
+            }
+
+        account_integrity = None
+        if self.account_db_path is not None:
+            account_integrity = account_surveillance.verify_account_surveillance(
+                account_db=self.account_db_path,
+                case_db=self.db_path,
+            )
+
+        return {
+            "configured": True,
+            "integrity": report,
+            "information_state_counts": state_counts,
+            "lineage_artifact_count": lineage_artifact_count,
+            "g12_g15_assessment": assessment,
+            "recorded_release_authority": authority,
+            "account_surveillance_integrity": account_integrity,
+            "read_only": True,
+            "research_use_only": True,
+        }
+
     def case_detail(self, case_id: str) -> dict:
         with connect(self.db_path) as con:
             case = con.execute("SELECT * FROM case_record WHERE case_id=?", (case_id,)).fetchone()
@@ -232,6 +353,10 @@ def render_index(repo: DashboardRepository, params: dict[str, list[str]]) -> byt
     integrity_n = sum(bool(r["integrity_ok"]) for r in rows)
     avg = sum(float(r["surveillance_risk_score"]) for r in rows) / total if total else 0
     body = f"""
+    <div class='filters'>
+      <a class='button secondary' href='/accounts'>Account surveillance</a>
+      <a class='button secondary' href='/control-plane'>Control plane</a>
+    </div>
     <div class='grid'>
       <div class='card'><div class='muted'>Visible cases</div><div class='metric'>{total}</div></div>
       <div class='card'><div class='muted'>Flagged for review</div><div class='metric'>{flagged_n}</div></div>
@@ -301,6 +426,129 @@ def render_case(repo: DashboardRepository, case_id: str, csrf_token: str, flash:
     return _layout(f"Case {case_id}", body)
 
 
+def render_accounts(repo: DashboardRepository) -> bytes:
+    rows = repo.list_accounts()
+    total = len(rows)
+    flagged = sum(int(x["flagged_case_count"]) for x in rows)
+    verified = sum(bool(x["integrity_ok"]) for x in rows)
+    body = f"""
+      <a class='back' href='/'>← case dashboard</a>
+      <div class='notice'>{_e(account_surveillance.ACCOUNT_NOTICE)}</div>
+      <div class='grid'>
+        <div class='card'><div class='muted'>Pseudonymous subjects</div><div class='metric'>{total}</div></div>
+        <div class='card'><div class='muted'>Linked flagged cases</div><div class='metric'>{flagged}</div></div>
+        <div class='card'><div class='muted'>Account-link integrity</div><div class='metric'>{verified}/{total}</div></div>
+        <div class='card'><div class='muted'>Identity handling</div><div class='metric' style='font-size:18px'>redacted</div><div class='muted'>raw account keys are not persisted</div></div>
+      </div>
+      <div class='section'><h2>Account-level case aggregation</h2>
+      <table><thead><tr><th>Subject</th><th>Cases</th><th>Flagged</th><th>Symbols</th><th>Max score</th><th>Latest case</th><th>Integrity</th></tr></thead><tbody>
+      {''.join(_account_row(x) for x in rows) if rows else "<tr><td colspan='7'>No pseudonymous account-case links are configured.</td></tr>"}
+      </tbody></table></div>
+    """
+    return _layout("Account surveillance", body)
+
+
+def _account_row(row: dict) -> str:
+    integrity = "<span class='ok'>verified</span>" if row["integrity_ok"] else "<span class='bad'>check</span>"
+    sid = str(row["subject_id"])
+    return (
+        f"<tr><td><a href='/account/{urllib.parse.quote(sid)}'><span class='hash'>{_e(sid)}</span></a></td>"
+        f"<td>{int(row['linked_case_count'])}</td><td>{int(row['flagged_case_count'])}</td>"
+        f"<td>{int(row['distinct_symbol_count'])}</td><td>{float(row['max_surveillance_risk_score']):.1f}</td>"
+        f"<td>{_e(row['latest_case_ts_utc'])}</td><td>{integrity}</td></tr>"
+    )
+
+
+def render_account(repo: DashboardRepository, subject_id: str) -> bytes:
+    detail = repo.account_detail(subject_id)
+    integrity = "<span class='ok'>VERIFIED</span>" if detail["integrity_ok"] else "<span class='bad'>CHECK REQUIRED</span>"
+    cases = detail["linked_cases"]
+    body = f"""
+      <a class='back' href='/accounts'>← all account subjects</a>
+      <div class='notice'>{_e(detail['notice'])}</div>
+      <div class='grid'>
+        <div class='card'><div class='muted'>Pseudonymous subject</div><div class='hash'>{_e(subject_id)}</div></div>
+        <div class='card'><div class='muted'>Linked cases</div><div class='metric'>{len(cases)}</div></div>
+        <div class='card'><div class='muted'>Integrity</div><div class='metric' style='font-size:18px'>{integrity}</div></div>
+        <div class='card'><div class='muted'>Identity data</div><div class='metric' style='font-size:18px'>not stored</div></div>
+      </div>
+      <div class='section'><h2>Linked surveillance cases</h2>
+      <table><thead><tr><th>Case</th><th>Security</th><th>Time</th><th>Score</th><th>Flag</th><th>Disposition</th><th>Binding</th></tr></thead><tbody>
+      {''.join(_account_case_row(x) for x in cases) if cases else "<tr><td colspan='7'>No linked cases.</td></tr>"}
+      </tbody></table></div>
+      <div class='section'><div class='card'><strong>Read-only aggregation.</strong> Account pages cannot append reviews, modify cases, close gates, issue authority, or execute an evaluation.</div></div>
+    """
+    return _layout("Account surveillance subject", body)
+
+
+def _account_case_row(row: dict) -> str:
+    binding = "<span class='ok'>verified</span>" if row["link_integrity_ok"] else "<span class='bad'>check</span>"
+    if not row["link_integrity_ok"]:
+        return f"<tr><td>{_e(row['case_id'])}</td><td colspan='5'>Linked case evidence no longer matches the immutable account binding.</td><td>{binding}</td></tr>"
+    flag = "<span class='pill flag'>flagged</span>" if row["flagged"] else "<span class='pill'>not flagged</span>"
+    return (
+        f"<tr><td><a href='/case/{urllib.parse.quote(str(row['case_id']))}'>{_e(row['case_id'])}</a></td>"
+        f"<td>{_e(row['symbol'])}</td><td>{_e(row['minute_ts_utc'])}</td>"
+        f"<td>{float(row['surveillance_risk_score']):.1f}</td><td>{flag}</td>"
+        f"<td>{_e(row['current_disposition'])}</td><td>{binding}</td></tr>"
+    )
+
+
+def _gate_status_html(passed: bool) -> str:
+    return "<span class='ok'>READY</span>" if passed else "<span class='bad'>BLOCKED</span>"
+
+
+def render_control_plane(repo: DashboardRepository) -> bytes:
+    status = repo.control_plane_status()
+    if not status.get("configured"):
+        return _layout(
+            "Control plane",
+            "<a class='back' href='/'>← case dashboard</a><div class='card'>Control-plane status is not configured for this dashboard launch.</div>",
+        )
+    integrity = status["integrity"]
+    integ_html = "<span class='ok'>VERIFIED</span>" if integrity.get("ok") else "<span class='bad'>CHECK REQUIRED</span>"
+    states = status["information_state_counts"]
+    assessment = status.get("g12_g15_assessment")
+    authority = status.get("recorded_release_authority")
+    account_integrity = status.get("account_surveillance_integrity")
+    gate_rows = ""
+    if assessment:
+        gate_rows = "".join(
+            f"<tr><td>{_e(x.get('gate_id'))}</td><td>{_gate_status_html(bool(x.get('passed')))}</td><td>{_e(x.get('detail'))}</td></tr>"
+            for x in assessment.get("checks", [])
+        )
+    else:
+        gate_rows = "<tr><td colspan='3'>No G12-G15 assessment file configured.</td></tr>"
+    authority_html = "<span class='muted'>No authority token configured.</span>"
+    if authority:
+        cls = "ok" if authority["shape_ok"] else "bad"
+        authority_html = (
+            f"<span class='{cls}'>{'recorded verified shape' if authority['shape_ok'] else 'check required'}</span>"
+            f"<div class='muted'>claim {_e(authority['authority_claim_sha256'])}</div>"
+            f"<div class='muted'>token SHA-256 {_e(authority['recorded_token_sha256'])}</div>"
+            "<div class='muted'>Display only: execution re-verifies the external signature and all gates.</div>"
+        )
+    body = f"""
+      <a class='back' href='/'>← case dashboard</a>
+      <div class='grid'>
+        <div class='card'><div class='muted'>Control-plane integrity</div><div class='metric' style='font-size:18px'>{integ_html}</div></div>
+        <div class='card'><div class='muted'>Information objects</div><div class='metric'>{int(integrity.get('information_object_count',0))}</div></div>
+        <div class='card'><div class='muted'>Lineage artifacts</div><div class='metric'>{int(status['lineage_artifact_count'])}</div></div>
+        <div class='card'><div class='muted'>Dashboard mode</div><div class='metric' style='font-size:18px'>read only</div></div>
+      </div>
+      <div class='section two'>
+        <div><h2>Information states</h2><table><thead><tr><th>State</th><th>Count</th></tr></thead><tbody>
+        {''.join(f"<tr><td>{_e(k)}</td><td>{int(v)}</td></tr>" for k,v in sorted(states.items())) or "<tr><td colspan='2'>No information objects.</td></tr>"}
+        </tbody></table></div>
+        <div><h2>Recorded release authority</h2><div class='card'>{authority_html}</div>
+        <h2 style='margin-top:14px'>Account surveillance integrity</h2><div class='card'>{_e(account_integrity if account_integrity is not None else 'not configured')}</div></div>
+      </div>
+      <div class='section'><h2>G12-G15</h2><table><thead><tr><th>Gate</th><th>Status</th><th>Evidence</th></tr></thead><tbody>{gate_rows}</tbody></table></div>
+      <div class='section'><div class='card'><strong>No control actions are exposed here.</strong> This page cannot clear publicity, create lineage, issue release authority, alter the champion, or execute a model.</div></div>
+    """
+    return _layout("Control plane", body)
+
+
 class PrivateDashboardServer(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = True
@@ -314,7 +562,13 @@ class PrivateDashboardServer(ThreadingHTTPServer):
     ):
         config.validate()
         self.config = config
-        self.repo = DashboardRepository(config.db_path)
+        self.repo = DashboardRepository(
+            config.db_path,
+            account_db_path=config.account_db_path,
+            control_dir=config.control_dir,
+            g12_g15_assessment_path=config.g12_g15_assessment_path,
+            release_authority_token_path=config.release_authority_token_path,
+        )
         self.csrf_token = csrf_token or secrets.token_urlsafe(32)
         self.access_token = access_token or secrets.token_urlsafe(32)
         self.session_token = session_token or secrets.token_urlsafe(32)
@@ -540,6 +794,25 @@ def _make_handler() -> type[BaseHTTPRequestHandler]:
             if parsed.path == "/":
                 self._send(HTTPStatus.OK, render_index(self.server.repo, urllib.parse.parse_qs(parsed.query)))
                 return
+            if parsed.path == "/accounts":
+                self._send(HTTPStatus.OK, render_accounts(self.server.repo))
+                return
+            if parsed.path.startswith("/account/"):
+                subject_id = urllib.parse.unquote(parsed.path[len("/account/"):]).strip("/")
+                if "/" in subject_id or not subject_id:
+                    self._send(HTTPStatus.NOT_FOUND, _layout("Not found", "<p>Unknown route.</p>"))
+                    return
+                try:
+                    self._send(HTTPStatus.OK, render_account(self.server.repo, subject_id))
+                except KeyError:
+                    self._send(HTTPStatus.NOT_FOUND, _layout("Not found", "<p>Account subject not found.</p>"))
+                return
+            if parsed.path == "/control-plane":
+                try:
+                    self._send(HTTPStatus.OK, render_control_plane(self.server.repo))
+                except Exception as exc:
+                    self._send(HTTPStatus.INTERNAL_SERVER_ERROR, _layout("Control-plane check failed", f"<p>{_e(exc)}</p>"))
+                return
             if parsed.path.startswith("/case/"):
                 case_id = urllib.parse.unquote(parsed.path[len("/case/"):]).strip("/")
                 if "/" in case_id or not case_id:
@@ -639,13 +912,26 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--host", default=DEFAULT_HOST)
     p.add_argument("--port", type=int, default=DEFAULT_PORT)
     p.add_argument("--export-dir", type=Path)
+    p.add_argument("--account-db", type=Path)
+    p.add_argument("--control-dir", type=Path)
+    p.add_argument("--g12-g15-assessment", type=Path)
+    p.add_argument("--release-authority-token", type=Path)
     p.add_argument("--open-browser", action="store_true")
     return p
 
 
 def main() -> None:
     args = build_parser().parse_args()
-    cfg = DashboardConfig(args.db, args.host, args.port, args.export_dir)
+    cfg = DashboardConfig(
+        args.db,
+        args.host,
+        args.port,
+        args.export_dir,
+        account_db_path=args.account_db,
+        control_dir=args.control_dir,
+        g12_g15_assessment_path=args.g12_g15_assessment,
+        release_authority_token_path=args.release_authority_token,
+    )
     serve(cfg, open_browser=args.open_browser)
 
 

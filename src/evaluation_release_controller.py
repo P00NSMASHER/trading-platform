@@ -304,11 +304,33 @@ def assess_release(*, coverage_summary: Path, market_backfill_manifest: Path, ma
     return assessment
 
 
-def run_if_released(*, release_kwargs: dict, evaluation_output_dir: Path, target_fpr: float = 0.05, cv_folds: int = 4) -> dict:
+def run_if_released(*, release_kwargs: dict, evaluation_output_dir: Path, target_fpr: float = 0.05, cv_folds: int = 4,
+                    authority_kwargs: dict | None = None) -> dict:
     assessment = assess_release(**release_kwargs)
     if not assessment["evaluation_release_permitted"]:
         raise RuntimeError("evaluation release is BLOCKED; see evaluation_release_assessment.json")
+    if not authority_kwargs:
+        raise RuntimeError("G12-G15 signed release authority is required; the legacy G1-G11 token is not sufficient to execute")
+
+    from control_plane import release_authority as control_release_authority
+
     champion_bundle = Path(release_kwargs["champion_bundle"])
+    authority_args = dict(authority_kwargs)
+    authority_assessment = dict(authority_args.get("assessment_kwargs") or {})
+    authority_assessment.update({
+        "legacy_assessment": Path(release_kwargs["output_dir"]) / "evaluation_release_assessment.json",
+        "graph_features": Path(release_kwargs["graph_features"]),
+        "challenger_manifest": Path(release_kwargs["challenger_manifest"]),
+        "challenger_cv_audit": Path(release_kwargs["challenger_cv_audit"]),
+        "market_backfill_manifest": Path(release_kwargs["market_backfill_manifest"]),
+        "expected_champion_sha256": str(release_kwargs.get("expected_champion_sha256") or assessment["champion_sha256"]),
+    })
+    authority_args["assessment_kwargs"] = authority_assessment
+    authority_args["champion_bundle"] = champion_bundle
+    authority_token = control_release_authority.verify_execution_token(**authority_args)
+    if authority_token.get("champion_sha256") != _sha256(champion_bundle):
+        raise RuntimeError("release authority champion hash does not match the active champion")
+
     before = _sha256(champion_bundle)
     result = gch.train_challenger(
         matched_controls=Path(release_kwargs["matched_controls"]),
@@ -328,6 +350,10 @@ def run_if_released(*, release_kwargs: dict, evaluation_output_dir: Path, target
     result["step20_champion_sha256_after"] = after
     result["step20_controller_research_use_only"] = True
     result["step20_automatic_promotion_permitted"] = False
+    result["control_plane_g12_g15_authorized"] = True
+    result["control_plane_release_authority_claim_sha256"] = authority_token["authority_claim_sha256"]
+    result["control_plane_release_authority_signer"] = authority_token["signer_identity"]
+    result["control_plane_automatic_promotion_permitted"] = False
     (evaluation_output_dir / "step20_controlled_evaluation_manifest.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     return result
 
