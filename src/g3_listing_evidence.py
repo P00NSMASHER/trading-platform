@@ -70,7 +70,7 @@ def classify_exchange(text: str, symbol: str) -> tuple[set[str], str]:
         ("XASE", rf"\b(?:nyse mkt|nyse american|amex)\s+{sym}\b"),
         (
             "XNAS",
-            rf"\b(?:nasdaq(?: global select market| global market| capital market| gs| gm| cm)?|"
+            rf"\b(?:nasdaq(?: global select market| global select| global market| capital market| gs| gm| cm)?|"
             rf"the nasdaq global select market)\s+{sym}\b",
         ),
         ("XNYS", rf"\b(?:nyse|new york stock exchange)\s+{sym}\b"),
