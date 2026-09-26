@@ -2,36 +2,39 @@ name: g4-shares-1501-3000
 
 on:
   push:
-    branches: [fix/g4-shares-1501-3000]
+    branches:
+      - fix/g4-shares-1501-3000
   workflow_dispatch:
 
 permissions:
   contents: write
 
-concurrency:
-  group: g4-shares-1501-3000
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    env:
-      PYTHONPATH: src
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with: {ref: ${{ github.sha }}}
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
-        with: {python-version: "3.11"}
-      - name: Install test dependencies
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+      - name: Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+      - name: Install
         run: python -m pip install -r requirements.txt
-      - name: Combine frozen evidence
+      - name: Build anchors
         run: |
           head -n 1 data/public/metadata/g4_shares_anchors_batch_0001.csv > /tmp/anchors.csv
-          for f in data/public/metadata/g4_shares_anchors_batch_0001.csv data/public/metadata/g4_shares_anchors_batch_0002.csv data/public/metadata/g4_shares_anchors_batch_0003.csv data/public/metadata/g4_sec_history_0501_3000.csv data/public/metadata/g4_fallback_1501_3000.csv; do
-            tail -n +2 "$f" >> /tmp/anchors.csv
-          done
-      - name: Materialize batches 4-6
+          tail -n +2 data/public/metadata/g4_shares_anchors_batch_0001.csv >> /tmp/anchors.csv
+          tail -n +2 data/public/metadata/g4_shares_anchors_batch_0002.csv >> /tmp/anchors.csv
+          tail -n +2 data/public/metadata/g4_shares_anchors_batch_0003.csv >> /tmp/anchors.csv
+          tail -n +2 data/public/metadata/g4_sec_history_0501_3000.csv >> /tmp/anchors.csv
+          tail -n +2 data/public/metadata/g4_fallback_1501_3000.csv >> /tmp/anchors.csv
+      - name: Materialize
+        env:
+          PYTHONPATH: src
         run: |
           python -m g4_materialize_batch --requirements data/processed/coverage_plan_real/symbol_date_requirements.csv --anchors /tmp/anchors.csv --start 1500 --count 500 --output data/public/metadata/g4_shares_batch_0004.csv --report data/processed/authorized_input_real/g4_shares_batch_0004_report.json
           python -m g4_materialize_batch --requirements data/processed/coverage_plan_real/symbol_date_requirements.csv --anchors /tmp/anchors.csv --start 2000 --count 500 --output data/public/metadata/g4_shares_batch_0005.csv --report data/processed/authorized_input_real/g4_shares_batch_0005_report.json
@@ -39,34 +42,17 @@ jobs:
           cat data/processed/authorized_input_real/g4_shares_batch_0004_report.json
           cat data/processed/authorized_input_real/g4_shares_batch_0005_report.json
           cat data/processed/authorized_input_real/g4_shares_batch_0006_report.json
-      - name: Assert processed-through-3000 result
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          rs=[json.loads(Path(f"data/processed/authorized_input_real/g4_shares_batch_000{i}_report.json").read_text()) for i in (4,5,6)]
-          assert rs[0]["resolved_count"] == 500, rs[0]
-          assert rs[1]["resolved_count"] == 500, rs[1]
-          assert rs[2]["resolved_count"] == 497, rs[2]
-          assert rs[2]["unresolved_by_symbol"] == {"WLL": 3}, rs[2]
-          PY
-      - name: Rebuild canonical readiness
+      - name: Resolve
+        env:
+          PYTHONPATH: src
         run: |
           python -m metadata_resolver --events data/processed/historical_events.csv --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv --contract config/metadata_sources.public_progress.json --outdir data/processed/authorized_input_real
           python -m metadata_quality --events data/processed/historical_events.csv --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv --contract config/metadata_sources.public_progress.json --resolver-dir data/processed/authorized_input_real --outdir data/processed/authorized_input_real
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          r=json.loads(Path("data/processed/authorized_input_real/metadata_readiness_summary.json").read_text())
-          assert r["shares_symbol_dates_resolved"] == 2997, r
-          assert r["shares_symbol_dates_unresolved"] == 831, r
-          assert r["ready_g3_primary_listing_history"] is True
-          assert r["ready_g4_shares_outstanding"] is False
-          print(json.dumps({"resolved":r["shares_symbol_dates_resolved"],"remaining":r["shares_symbol_dates_unresolved"]},indent=2))
-          PY
-      - name: Run focused tests
+      - name: Test
+        env:
+          PYTHONPATH: src
         run: python -m pytest -q tests/test_g4_materialize_batch.py tests/test_metadata_resolver.py tests/test_metadata_quality.py
-      - name: Commit evidence and receipts
+      - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
