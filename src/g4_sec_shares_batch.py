@@ -175,6 +175,31 @@ def _acceptance_map(cik10: str) -> dict[str, str]:
     return out
 
 
+def _load_fact_bundle(path: Path) -> tuple[dict[str, list[dict]], dict[str, str]]:
+    by_symbol: dict[str, list[dict]] = {}
+    entities: dict[str, str] = {}
+    for row in _read_csv(path):
+        sym = row.get("historical_symbol", "").upper()
+        if not sym:
+            continue
+        try:
+            cand = {
+                "tag": row["source_tag"],
+                "tag_rank": int(row.get("tag_rank", "1") or 1),
+                "val": int(float(row["shares_outstanding"])),
+                "end": date.fromisoformat(row["fact_date"]),
+                "filed": date.fromisoformat(row["filed_date"]),
+                "form": row["form"],
+                "accn": row["accession"],
+                "frame": "",
+            }
+        except Exception as exc:
+            raise G4Error(f"invalid fact bundle row for {sym}: {exc}") from exc
+        by_symbol.setdefault(sym, []).append(cand)
+        entities[sym] = row.get("entity_name", "")
+    return by_symbol, entities
+
+
 def _fact_candidates(companyfacts: dict) -> list[dict]:
     facts = companyfacts.get("facts") or {}
     candidates = []
@@ -264,30 +289,44 @@ def _select_fact(req: dict[str, str], candidates: list[dict], acceptance: dict[s
     return chosen, ""
 
 
-def build(*, requirements: Path, overrides: Path, start: int, count: int, output: Path, report: Path) -> dict:
+def build(*, requirements: Path, overrides: Path, start: int, count: int, output: Path, report: Path, fact_bundle: Path | None = None) -> dict:
     all_reqs = _read_csv(requirements)
     if start < 0 or count <= 0 or start + count > len(all_reqs):
         raise G4Error(f"invalid batch bounds start={start} count={count} total={len(all_reqs)}")
     batch = all_reqs[start:start + count]
     symbols = sorted({r["historical_symbol"].upper() for r in batch})
 
-    cik_map, cik_methods = resolve_ciks(symbols, _load_overrides(overrides))
+    overrides_map = _load_overrides(overrides)
+    cik_map = {sym: overrides_map[sym] for sym in symbols if sym in overrides_map}
+    cik_methods = {sym: ("override" if sym in cik_map else "unresolved") for sym in symbols}
     per_cik = {}
     sec_failures = {}
-    for sym, cik10 in sorted(cik_map.items()):
-        if cik10 in per_cik:
-            continue
-        try:
-            facts = _request(COMPANYFACTS.format(cik10=cik10), as_json=True)
-            accept = _acceptance_map(cik10)
-            per_cik[cik10] = {
-                "candidates": _fact_candidates(facts),
-                "acceptance": accept,
-                "entity_name": str(facts.get("entityName", "")),
-            }
-        except Exception as exc:
-            sec_failures[cik10] = f"{type(exc).__name__}: {exc}"
-            per_cik[cik10] = {"candidates": [], "acceptance": {}, "entity_name": ""}
+    if fact_bundle is not None:
+        bundle, entities = _load_fact_bundle(fact_bundle)
+        for sym, cik10 in cik_map.items():
+            per_cik.setdefault(cik10, {
+                "candidates": bundle.get(sym, []),
+                "acceptance": {},
+                "entity_name": entities.get(sym, ""),
+            })
+    else:
+        live_cik_map, live_methods = resolve_ciks(symbols, overrides_map)
+        cik_map = live_cik_map
+        cik_methods = live_methods
+        for sym, cik10 in sorted(cik_map.items()):
+            if cik10 in per_cik:
+                continue
+            try:
+                facts = _request(COMPANYFACTS.format(cik10=cik10), as_json=True)
+                accept = _acceptance_map(cik10)
+                per_cik[cik10] = {
+                    "candidates": _fact_candidates(facts),
+                    "acceptance": accept,
+                    "entity_name": str(facts.get("entityName", "")),
+                }
+            except Exception as exc:
+                sec_failures[cik10] = f"{type(exc).__name__}: {exc}"
+                per_cik[cik10] = {"candidates": [], "acceptance": {}, "entity_name": ""}
 
     rows = []
     unresolved_symbols = Counter()
@@ -383,6 +422,7 @@ def build(*, requirements: Path, overrides: Path, start: int, count: int, output
         "availability_policy": "SEC acceptanceDateTime must be at or before the earliest requested local market window; missing exact acceptance is conservatively placed at 23:59:59 on filed date.",
         "future_filed_facts_prohibited": True,
         "output_path": str(output),
+        "fact_bundle_path": str(fact_bundle) if fact_bundle is not None else "",
     }
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(json.dumps(report_obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -397,6 +437,7 @@ def main() -> None:
     ap.add_argument("--count", type=int, required=True)
     ap.add_argument("--output", type=Path, required=True)
     ap.add_argument("--report", type=Path, required=True)
+    ap.add_argument("--fact-bundle", type=Path)
     args = ap.parse_args()
     print(json.dumps(build(
         requirements=args.requirements,
@@ -405,6 +446,7 @@ def main() -> None:
         count=args.count,
         output=args.output,
         report=args.report,
+        fact_bundle=args.fact_bundle,
     ), indent=2))
 
 
