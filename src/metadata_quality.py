@@ -14,7 +14,7 @@ from zoneinfo import ZoneInfo
 
 import metadata_resolver as mr
 
-SCHEMA_VERSION = "0.19.1"
+SCHEMA_VERSION = "0.19.2"
 UTC = timezone.utc
 NY = ZoneInfo("America/New_York")
 
@@ -246,8 +246,10 @@ def audit_exchanges(events, resolver_rows, loaded) -> tuple[list[QualityIssue], 
     return issues, quarantined, warnings
 
 
-def _shares_candidates(symbol: str, td: str, loaded):
-    target_end = datetime.fromisoformat(td + "T23:59:59").replace(tzinfo=NY).astimezone(UTC)
+def _shares_candidates(req: dict[str, str], loaded):
+    symbol = req["historical_symbol"]
+    td = req["trade_date"]
+    cutoff = mr._shares_target_cutoff(req)
     out = []
     for src, rows, path in loaded:
         if src.record_kind not in {"shares_outstanding", "security_master"}:
@@ -255,6 +257,9 @@ def _shares_candidates(symbol: str, td: str, loaded):
         for row in rows:
             sym = (mr._get(row, src, "historical_symbol") or mr._get(row, src, "symbol")).upper()
             if sym != symbol.upper():
+                continue
+            target_trade_date = mr._get(row, src, "target_trade_date")
+            if target_trade_date and target_trade_date != td:
                 continue
             fd = mr._get(row, src, "fact_date") or mr._get(row, src, "effective_date") or mr._get(row, src, "trade_date")
             if not fd or fd > td:
@@ -269,12 +274,12 @@ def _shares_candidates(symbol: str, td: str, loaded):
             avail = mr._get(row, src, "available_at")
             if avail:
                 a = _parse_dt(avail, src.timezone)
-                if a is None or a > target_end:
+                if a is None or a > cutoff:
                     continue
             stale = (date.fromisoformat(td) - date.fromisoformat(fd)).days
             out.append({"value": float(val), "fact_date": fd, "stale": stale, "source_id": src.source_id,
                         "source_family": src.source_family, "priority": _priority(src), "available_at": avail,
-                        "path": str(path)})
+                        "path": mr._get(row, src, "source_reference") or str(path)})
     return out
 
 
@@ -292,7 +297,7 @@ def audit_shares(symbol_dates, resolver_rows, loaded, max_staleness_days: int = 
     for req in symbol_dates:
         sym, td = req["historical_symbol"].upper(), req["trade_date"]
         key = f"{sym}|{td}"
-        cands = _shares_candidates(sym, td, loaded)
+        cands = _shares_candidates(req, loaded)
         if not cands:
             continue
         freshest = min(x["stale"] for x in cands)
