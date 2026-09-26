@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trading Platform — Research Control Dashboard</title>
+<style>
+:root{
+  --bg:#07111f; --panel:#0d1a2b; --panel2:#101f33; --text:#edf4ff;
+  --muted:#94a7bf; --line:#1e3450; --green:#36d399; --amber:#f6c453;
+  --red:#fb7185; --blue:#60a5fa; --cyan:#67e8f9; --purple:#c084fc;
+}
+*{box-sizing:border-box}
+body{margin:0;background:
+radial-gradient(900px 500px at 20% -10%,#163052 0%,transparent 60%),
+radial-gradient(800px 500px at 100% 0%,#172443 0%,transparent 60%),
+var(--bg); color:var(--text); font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1380px;margin:0 auto;padding:28px 22px 60px}
+.top{display:flex;gap:20px;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+.eyebrow{color:var(--cyan);text-transform:uppercase;letter-spacing:.16em;font-weight:800;font-size:11px}
+h1{margin:5px 0 3px;font-size:30px;letter-spacing:-.03em}
+.sub{color:var(--muted);max-width:760px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.badge{border:1px solid var(--line);background:#0a1728;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700}
+.ok{color:var(--green);border-color:#1d5b4b}
+.block{color:var(--red);border-color:#633041}
+.info{color:var(--blue);border-color:#294b72}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.card{background:linear-gradient(180deg,rgba(18,35,57,.95),rgba(10,24,40,.95));border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.kpi{grid-column:span 3;min-height:128px}
+.kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.kpi .value{font-size:34px;font-weight:850;letter-spacing:-.04em;margin-top:8px}
+.kpi .detail{color:var(--muted);margin-top:4px}
+.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:1/-1}
+h2{font-size:16px;margin:0 0 13px;letter-spacing:-.01em}
+.small{color:var(--muted);font-size:12px}
+.progress{height:11px;background:#091522;border:1px solid #182d46;border-radius:999px;overflow:hidden;margin:11px 0 7px}
+.fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));width:68.18%}
+.gates{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.gate{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:10px 11px;background:rgba(8,20,34,.58)}
+.gate b{font-size:12px}.gate span{font-size:11px;font-weight:800}
+.passed span{color:var(--green)} .failed span{color:var(--red)}
+.rows{display:grid;gap:9px}
+.row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(43,68,99,.55);padding-bottom:9px}
+.row:last-child{border:0;padding-bottom:0}
+.row .name{color:var(--muted)} .row .v{font-weight:750;text-align:right}
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.stage{padding:11px;border:1px solid var(--line);background:#0a1728;border-radius:12px;min-height:85px}
+.stage .n{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.stage .t{font-weight:750;margin-top:5px}.stage .s{font-size:11px;color:var(--green);margin-top:6px}
+.stage.blocked .s{color:var(--red)}
+.callout{border-left:4px solid var(--amber);background:rgba(246,196,83,.07);padding:12px 14px;border-radius:9px;color:#f3dfac}
+.hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#bfd0e5;word-break:break-all}
+.list{display:grid;gap:8px}
+.item{padding:10px 11px;border:1px solid var(--line);border-radius:11px;background:#0a1728}
+.item .title{font-weight:750}.item .meta{font-size:11px;color:var(--muted);margin-top:3px}
+.footer{margin-top:18px;color:var(--muted);font-size:11px;text-align:center}
+@media(max-width:900px){
+  .kpi{grid-column:span 6}.wide,.side{grid-column:1/-1}.pipeline{grid-template-columns:repeat(2,1fr)}
+  .top{flex-direction:column}.badges{justify-content:flex-start}
+}
+@media(max-width:520px){
+  .wrap{padding:18px 12px 40px}.kpi{grid-column:1/-1}.gates{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr}
+  h1{font-size:26px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="eyebrow">P00NSMASHER / trading-platform</div>
+      <h1>Research Control Dashboard</h1>
+      <div class="sub">Historical market-surveillance research platform. This dashboard intentionally exposes no raw licensed data and produces no BUY/SELL, expected-return, target-price, position-size, order, or execution outputs.</div>
+    </div>
+    <div class="badges">
+      <div class="badge ok">● main protected</div>
+      <div class="badge ok">● latest release audit passed</div>
+      <div class="badge block">● evaluation release blocked</div>
+      <div class="badge info">research only</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <section class="card kpi"><div class="label">Historical events</div><div class="value">174</div><div class="detail">146 unique symbols · 2011–2015</div></section>
+    <section class="card kpi"><div class="label">Release checks</div><div class="value">15 / 22</div><div class="detail">68.2% passed · 7 blocking failures</div></section>
+    <section class="card kpi"><div class="label">Symbol-date requirements</div><div class="value">3,828</div><div class="detail">Point-in-time coverage plan</div></section>
+    <section class="card kpi"><div class="label">Current release state</div><div class="value" style="font-size:28px;color:var(--red)">BLOCKED</div><div class="detail">Fail-closed by design</div></section>
+
+    <section class="card wide">
+      <h2>Release readiness</h2>
+      <div class="small">15 of 22 release-controller checks currently pass. The platform refuses to issue an evaluation release token until all required non-synthetic inputs and metadata gates clear.</div>
+      <div class="progress"><div class="fill"></div></div>
+      <div class="small">Passed checks: 15 · Blocking checks: 7</div>
+      <div style="height:14px"></div>
+      <div class="gates">
+        <div class="gate failed"><b>G1 · Exact announcement times</b><span>BLOCKED</span></div>
+        <div class="gate failed"><b>G2 · Real authorized market data</b><span>BLOCKED</span></div>
+        <div class="gate failed"><b>G3 · Primary listing history</b><span>BLOCKED</span></div>
+        <div class="gate failed"><b>G4 · Shares outstanding</b><span>BLOCKED</span></div>
+        <div class="gate failed"><b>G5 · Matched-control universe</b><span>BLOCKED</span></div>
+        <div class="gate failed"><b>G6 · Metadata quality</b><span>BLOCKED</span></div>
+        <div class="gate passed"><b>G7 · Temporal feature integrity</b><span>PASS</span></div>
+        <div class="gate passed"><b>G8 · Holdout isolation</b><span>PASS</span></div>
+        <div class="gate passed"><b>G9 · Provenance</b><span>PASS</span></div>
+        <div class="gate passed"><b>G10 · Champion immutability</b><span>PASS</span></div>
+        <div class="gate failed"><b>G11 · Non-synthetic research-only</b><span>BLOCKED</span></div>
+      </div>
+    </section>
+
+    <section class="card side">
+      <h2>Coverage blockers</h2>
+      <div class="rows">
+        <div class="row"><div class="name">Announcement timestamps unresolved</div><div class="v">174 / 174</div></div>
+        <div class="row"><div class="name">Required source-date rows missing</div><div class="v">1,656</div></div>
+        <div class="row"><div class="name">Shares symbol-dates unresolved</div><div class="v">3,828</div></div>
+        <div class="row"><div class="name">Control dates unresolved</div><div class="v">72</div></div>
+        <div class="row"><div class="name">Authorized-input ledger entries</div><div class="v">0</div></div>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>Platform pipeline</h2>
+      <div class="pipeline">
+        <div class="stage"><div class="n">Foundation</div><div class="t">Historical corpus</div><div class="s">174 events validated</div></div>
+        <div class="stage"><div class="n">Market layer</div><div class="t">Adapters + baselines</div><div class="s">Architecture implemented</div></div>
+        <div class="stage"><div class="n">Features</div><div class="t">Point-in-time surveillance</div><div class="s">Temporal integrity passes</div></div>
+        <div class="stage"><div class="n">Models</div><div class="t">Champion + challenger</div><div class="s">Champion frozen</div></div>
+        <div class="stage"><div class="n">Evidence</div><div class="t">Case database</div><div class="s">Append-only review chain</div></div>
+        <div class="stage"><div class="n">Graph</div><div class="t">Cross-event intelligence</div><div class="s">Real historical graph exists</div></div>
+        <div class="stage"><div class="n">Control plane</div><div class="t">Authorized information</div><div class="s">Merged + audited</div></div>
+        <div class="stage"><div class="n">Security</div><div class="t">Fail-closed release authority</div><div class="s">Signed trust architecture</div></div>
+        <div class="stage blocked"><div class="n">Evaluation</div><div class="t">Non-synthetic comparison</div><div class="s">Blocked on inputs</div></div>
+        <div class="stage blocked"><div class="n">Execution</div><div class="t">Broker / orders</div><div class="s">Not permitted / not present</div></div>
+      </div>
+    </section>
+
+    <section class="card wide">
+      <h2>Current champion & model state</h2>
+      <div class="rows">
+        <div class="row"><div class="name">Champion unchanged</div><div class="v" style="color:var(--green)">YES</div></div>
+        <div class="row"><div class="name">Automatic promotion permitted</div><div class="v">NO</div></div>
+        <div class="row"><div class="name">Active champion modification permitted</div><div class="v">NO</div></div>
+        <div class="row"><div class="name">Non-synthetic comparison executed</div><div class="v">NO</div></div>
+        <div class="row"><div class="name">Champion SHA-256</div><div class="v hash">0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616</div></div>
+      </div>
+      <div style="height:14px"></div>
+      <div class="callout"><b>No performance fiction:</b> synthetic demonstration metrics are deliberately not displayed here as evidence of real-world detector performance.</div>
+    </section>
+
+    <section class="card side">
+      <h2>Repository health</h2>
+      <div class="rows">
+        <div class="row"><div class="name">Visibility</div><div class="v">Public</div></div>
+        <div class="row"><div class="name">Default branch</div><div class="v">main</div></div>
+        <div class="row"><div class="name">main protection</div><div class="v" style="color:var(--green)">Enabled</div></div>
+        <div class="row"><div class="name">Open PRs</div><div class="v">2</div></div>
+        <div class="row"><div class="name">Primary language</div><div class="v">Python</div></div>
+      </div>
+    </section>
+
+    <section class="card wide">
+      <h2>Latest verified software state</h2>
+      <div class="list">
+        <div class="item"><div class="title">Protected main</div><div class="meta">HEAD: <span class="hash">34f4aa55967bc139ae5f1f73f35d6991aaa6b1a6</span></div></div>
+        <div class="item"><div class="title">Control-plane implementation merged</div><div class="meta">Audited implementation head: <span class="hash">ef8a320abb8d52f3abcc2a2989ecf886848b7c35</span></div></div>
+        <div class="item"><div class="title">Latest release audit</div><div class="meta">GitHub Actions run 36181664709 · success · release_ready=true for the audited control-plane implementation</div></div>
+      </div>
+    </section>
+
+    <section class="card side">
+      <h2>Open maintenance</h2>
+      <div class="list">
+        <div class="item"><div class="title">PR #12</div><div class="meta">skops dependency range update</div></div>
+        <div class="item"><div class="title">PR #13</div><div class="meta">pandas dependency range update</div></div>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>What unlocks the next level</h2>
+      <div class="gates">
+        <div class="gate failed"><b>1. Resolve exact public announcement timestamps</b><span>174 EVENTS</span></div>
+        <div class="gate failed"><b>2. Supply lawfully authorized historical market coverage</b><span>1,656 ROWS</span></div>
+        <div class="gate failed"><b>3. Resolve point-in-time listing + shares metadata</b><span>3,828 PAIRS</span></div>
+        <div class="gate failed"><b>4. Build the real matched-control universe</b><span>72 DATES</span></div>
+      </div>
+      <p class="small" style="margin:12px 0 0">When these gates clear, the release controller can determine whether one offline historical champion/challenger surveillance evaluation is permitted. It still does not permit brokerage connection, order generation, or trade recommendations.</p>
+    </section>
+  </div>
+
+  <div class="footer">Snapshot built from verified repository state on September 25, 2026 · Read-only dashboard · Public-safe metadata only</div>
+</div>
+</body>
+</html>
