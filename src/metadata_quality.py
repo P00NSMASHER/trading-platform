@@ -14,7 +14,7 @@ from zoneinfo import ZoneInfo
 
 import metadata_resolver as mr
 
-SCHEMA_VERSION = "0.19.0"
+SCHEMA_VERSION = "0.19.1"
 UTC = timezone.utc
 NY = ZoneInfo("America/New_York")
 
@@ -33,6 +33,7 @@ SOURCE_PRIORITY = {
     "nasdaq_daily_list": 10,
     "sec_xbrl_companyfacts": 20,
     "generic_authorized_reference_data": 30,
+    "public_listing_evidence": 15,
     "sec_edgar_submission_header": 60,
     "samplefirms_research_universe": 70,
     "synthetic_fixture": 90,
@@ -199,12 +200,15 @@ def audit_announcements(events, resolver_rows, loaded) -> tuple[list[QualityIssu
     return issues, quarantined, warnings
 
 
-def _security_candidates(symbol: str, td: str, loaded):
+def _security_candidates(event_id: str, symbol: str, td: str, loaded):
     out = []
     for src, rows, path in loaded:
         if src.record_kind != "security_master":
             continue
         for row in rows:
+            row_event_id = mr._get(row, src, "event_id")
+            if row_event_id and row_event_id != event_id:
+                continue
             sym = (mr._get(row, src, "historical_symbol") or mr._get(row, src, "symbol")).upper()
             if sym != symbol.upper():
                 continue
@@ -214,8 +218,10 @@ def _security_candidates(symbol: str, td: str, loaded):
                 continue
             ex = mr._normalize_exchange(mr._get(row, src, "primary_exchange") or mr._get(row, src, "listed_exchange"))
             if ex:
-                out.append({"exchange": ex, "effective": eff, "source_id": src.source_id,
-                            "source_family": src.source_family, "priority": _priority(src), "path": str(path)})
+                out.append({"exchange": ex, "effective": eff, "event_bound": bool(row_event_id),
+                            "source_id": src.source_id, "source_family": src.source_family,
+                            "priority": _priority(src),
+                            "path": mr._get(row, src, "source_reference") or str(path)})
     return out
 
 
@@ -225,7 +231,7 @@ def audit_exchanges(events, resolver_rows, loaded) -> tuple[list[QualityIssue], 
     warnings = 0
     for e in events:
         eid, sym, td = e["event_id"], e["historical_symbol"], e["first_documented_illicit_trade_ts"][:10]
-        cands = _security_candidates(sym, td, loaded)
+        cands = _security_candidates(eid, sym, td, loaded)
         exchanges = sorted(set(x["exchange"] for x in cands))
         if len(exchanges) > 1:
             quarantined.add(eid)

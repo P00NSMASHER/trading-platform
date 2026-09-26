@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Iterable
 from zoneinfo import ZoneInfo
 
-SCHEMA_VERSION = "0.17.0"
+SCHEMA_VERSION = "0.17.1"
 NY = ZoneInfo("America/New_York")
 UTC = timezone.utc
 
@@ -31,6 +31,7 @@ ALLOWED_SOURCE_FAMILIES = {
     "sec_xbrl_companyfacts",
     "samplefirms_research_universe",
     "generic_authorized_reference_data",
+    "public_listing_evidence",
     "synthetic_fixture",
 }
 ALLOWED_CLASSIFICATIONS = {
@@ -55,8 +56,14 @@ EXCHANGE_MAP = {
     "XNYS": "XNYS",
     "Q": "XNAS",
     "NASDAQ": "XNAS",
+    "NASDAQ NM": "XNAS",
+    "NASDAQ GLOBAL SELECT": "XNAS",
+    "NASDAQ GLOBAL SELECT MARKET": "XNAS",
+    "NASDAQ GLOBAL MARKET": "XNAS",
+    "NASDAQ CAPITAL MARKET": "XNAS",
     "XNAS": "XNAS",
     "A": "XASE",
+    "XASE": "XASE",
     "NYSE AMERICAN": "XASE",
     "NYSE MKT": "XASE",
     "P": "ARCX",
@@ -327,6 +334,9 @@ def resolve_event_exchanges(events: list[dict[str,str]], sources) -> list[EventE
         matches=[]
         for src, rows, path in sec_sources:
             for row in rows:
+                row_event_id = _get(row, src, "event_id")
+                if row_event_id and row_event_id != e["event_id"]:
+                    continue
                 sym = _get(row, src, "historical_symbol") or _get(row, src, "symbol")
                 if sym.upper() != e["historical_symbol"].upper(): continue
                 eff = _get(row, src, "effective_date") or _get(row, src, "trade_date")
@@ -334,9 +344,12 @@ def resolve_event_exchanges(events: list[dict[str,str]], sources) -> list[EventE
                 if not eff or eff > td or (end and end < td): continue
                 ex = _normalize_exchange(_get(row, src, "primary_exchange") or _get(row, src, "listed_exchange"))
                 if not ex: continue
-                # Prefer exact-date daily masters, then latest prior effective record.
+                # Event-bound evidence wins over symbol/date fallback; within each class,
+                # prefer exact-date records and then the latest effective record.
+                event_bound = 0 if row_event_id else 1
                 exact = 0 if eff == td else 1
-                matches.append(((exact, -date.fromisoformat(eff).toordinal()), ex, src, str(path)))
+                ref = _get(row, src, "source_reference") or str(path)
+                matches.append(((event_bound, exact, -date.fromisoformat(eff).toordinal()), ex, src, ref))
         if matches:
             _, ex, src, ref = sorted(matches, key=lambda x:x[0])[0]
             itch = "required" if ex == "XNAS" else "not_required_for_primary_market_order_flow"

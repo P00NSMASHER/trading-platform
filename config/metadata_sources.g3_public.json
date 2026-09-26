@@ -1,0 +1,27 @@
+{
+  "schema_version": "1",
+  "purpose": "Public event-bound point-in-time primary-listing evidence for G3 historical market-surveillance reconstruction.",
+  "sources": [
+    {
+      "source_id": "public-g3-primary-listing-evidence",
+      "record_kind": "security_master",
+      "source_family": "public_listing_evidence",
+      "path": "data/public/metadata/g3_primary_listing_history.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_research_replication",
+      "license_reference": "Public evidence derived from vgreg/hacked_earnings_jfe at c23c7d79d067a79d70cf20e31b072d3703497eae plus row-bound SEC/issuer references",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "effective_date": "effective_date",
+        "primary_exchange": "primary_exchange",
+        "source_reference": "source_reference"
+      },
+      "notes": "Every row is bound to one historical event_id. XNYS/XNAS/XASE are explicit primary-listing classifications supported by contemporaneous public evidence. This source closes G3 only; it contains no shares-outstanding or control-universe data."
+    }
+  ]
+}

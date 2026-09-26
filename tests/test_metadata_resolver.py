@@ -57,6 +57,55 @@ def test_event_exchange_resolves_nasdaq():
     assert x.itch_requirement=="required"
 
 
+
+
+def test_event_bound_exchange_record_beats_same_symbol_fallback(tmp_path):
+    data=ROOT/"data/examples/metadata/_event_bound_exchange.csv"
+    data.write_text(
+        "event_id,historical_symbol,effective_date,primary_exchange,source_reference\n"
+        "OTHER,TEST,2015-02-17,XNYS,https://example.invalid/other\n"
+        "E1,TEST,2015-02-17,XNAS,https://example.invalid/e1\n",
+        encoding="utf-8",
+    )
+    contract={
+        "schema_version":"1",
+        "sources":[{
+            "source_id":"event-bound","record_kind":"security_master","source_family":"public_listing_evidence",
+            "path":"data/examples/metadata/_event_bound_exchange.csv","enabled":True,"authorized":True,
+            "data_classification":"public_research_replication","license_reference":"public fixture",
+            "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{}
+        }]
+    }
+    q=ROOT/"config/_tmp_event_bound.json"; q.write_text(json.dumps(contract),encoding="utf-8")
+    try:
+        x=resolve_event_exchanges(events(),load_demo_sources(q))[0]
+        assert x.primary_exchange=="XNAS"
+        assert x.source_reference=="https://example.invalid/e1"
+    finally:
+        data.unlink(missing_ok=True); q.unlink(missing_ok=True)
+
+
+def test_real_g3_public_evidence_resolves_all_event_exchanges(tmp_path):
+    contract=ROOT/"config/metadata_sources.g3_public.json"
+    evidence=ROOT/"data/public/metadata/g3_primary_listing_history.csv"
+    if not evidence.exists():
+        pytest.skip("generated G3 evidence not present yet")
+    out=tmp_path/"g3-real"
+    r=build(
+        ROOT/"data/processed/historical_events.csv",
+        ROOT/"data/processed/coverage_plan_real/symbol_date_requirements.csv",
+        contract,
+        out,
+    )
+    assert r["event_count"]==174
+    assert r["event_exchange_resolved"]==174
+    assert r["event_exchange_unresolved"]==0
+    assert r["ready_g3_primary_listing_history"] is True
+    assert r["ready_g1_announcement_times"] is False
+    assert r["ready_g4_shares_outstanding"] is False
+    assert r["ready_g5_matched_control_universe"] is False
+
+
 def test_shares_resolve_exact_day_and_millions_scale():
     rows=[{"historical_symbol":"TEST","trade_date":"2015-02-16"},{"historical_symbol":"TEST","trade_date":"2015-02-17"}]
     x=resolve_shares(rows,load_demo_sources())

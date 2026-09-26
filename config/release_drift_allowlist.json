@@ -66,6 +66,26 @@
     "tests/test_coverage_planner.py": {
       "expected_sha256": "7626a6d487741d844cd25d72a4320b859b5705699505acd3d464273327e07a24",
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
+    },
+    "data/processed/authorized_input_real/metadata_quality_summary.json": {
+      "expected_sha256": "567fe37c0a74de433c5663b7b2979652aecc8ce7439b1792fb17637560d4264d",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/metadata_readiness_summary.json": {
+      "expected_sha256": "71c9609baef5b51733c85a4660b631315eb4acabafc4bd1f1a9617c8e47dcaec",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "src/metadata_quality.py": {
+      "expected_sha256": "966119e2096ddb43f8b787300b441a3a3524238810b4140914465354d2084876",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "src/metadata_resolver.py": {
+      "expected_sha256": "982143a0c25d0ef22691402ba65aa8ea19bed97001a926e8541c15f6149c1676",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "tests/test_metadata_resolver.py": {
+      "expected_sha256": "af8830c76dc946c7181a9d1c7214a22a0705739d6ef6d0289484a7b4f805a9ea",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     }
   },
   "repository_additions": {
@@ -284,6 +304,70 @@
     "docs/g1_announcement_times.md": {
       "expected_sha256": "97b43907c1f25aa427e78134fdd44d545daf8966404446674be233936ee547d7",
       "reason": "G1 runbook documenting authoritative timestamp requirements and the non-proxy closure path"
+    },
+    "config/metadata_sources.g3_public.json": {
+      "expected_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/announcement_resolutions.csv": {
+      "expected_sha256": "e681b231cf2475c5a184aef1fefe26d6e81b9941153fd72100d9ef828d8d3f40",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/control_universe_readiness.csv": {
+      "expected_sha256": "7a8616730627787046dec9f95aa97ebde30ef477cf9cf74852c77ab9a81403e5",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/event_exchange_resolutions.csv": {
+      "expected_sha256": "8a0d6c63dd3b1dfbfd0a7f621c5e0cb7eff385e1ede25b5dabe2fc150bf2953e",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
+      "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/metadata_domain_quality.csv": {
+      "expected_sha256": "54d746074ec89a34699550a43d7720f96a3bd57c6b14c9bb464ed3f1721a29e4",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/metadata_quality_gate.csv": {
+      "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/metadata_quality_issues.csv": {
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/metadata_quarantine.csv": {
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/metadata_source_inventory.json": {
+      "expected_sha256": "a9135560a8bdce53421cdbe96220abe5591d8b54323c754d8bebb9a1ed2595a5",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
+      "expected_sha256": "eb8490e870020a5bee50e019cce904220564c30b70945a337a21541e48091c82",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
+      "expected_sha256": "546a7c146b2f8e616aa39c0cde55bca5db491326493cf80b0d4e5f2f439b8fb8",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/public/metadata/g3_listing_supplement.csv": {
+      "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/public/metadata/g3_primary_listing_history.csv": {
+      "expected_sha256": "9f7a51441cba8f3c0960fff40442df428265094be24aaa1ef6c3adffe6a491d1",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "src/g3_listing_evidence.py": {
+      "expected_sha256": "819b5ff7257ca3662a6192e15d4c69079c54cd5458306a2a3a4570149bcb1476",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "tests/test_g3_listing_evidence.py": {
+      "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     }
   }
 }
