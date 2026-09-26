@@ -87,6 +87,69 @@
         "staleness_exception_max_days": "staleness_exception_max_days",
         "staleness_exception_reason": "staleness_exception_reason"
       }
+    },
+    {
+      "source_id": "public-sec-shares-batch-0004",
+      "record_kind": "shares_outstanding",
+      "source_family": "sec_xbrl_companyfacts",
+      "path": "data/public/metadata/g4_shares_batch_0004.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "SEC public filings and XBRL Company Facts; frozen point-in-time evidence",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "historical_symbol": "historical_symbol",
+        "fact_date": "fact_date",
+        "available_at": "available_at",
+        "shares_outstanding": "shares_outstanding",
+        "source_reference": "source_reference",
+        "target_trade_date": "target_trade_date"
+      }
+    },
+    {
+      "source_id": "public-sec-shares-batch-0005",
+      "record_kind": "shares_outstanding",
+      "source_family": "sec_xbrl_companyfacts",
+      "path": "data/public/metadata/g4_shares_batch_0005.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "SEC public filings and XBRL Company Facts; frozen point-in-time evidence",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "historical_symbol": "historical_symbol",
+        "fact_date": "fact_date",
+        "available_at": "available_at",
+        "shares_outstanding": "shares_outstanding",
+        "source_reference": "source_reference",
+        "target_trade_date": "target_trade_date"
+      }
+    },
+    {
+      "source_id": "public-sec-shares-batch-0006",
+      "record_kind": "shares_outstanding",
+      "source_family": "sec_xbrl_companyfacts",
+      "path": "data/public/metadata/g4_shares_batch_0006.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "SEC public filings and XBRL Company Facts; frozen point-in-time evidence",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "historical_symbol": "historical_symbol",
+        "fact_date": "fact_date",
+        "available_at": "available_at",
+        "shares_outstanding": "shares_outstanding",
+        "source_reference": "source_reference",
+        "target_trade_date": "target_trade_date"
+      }
     }
   ]
 }
