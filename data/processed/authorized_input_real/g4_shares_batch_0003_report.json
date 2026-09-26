@@ -1,6 +1,5 @@
 {
   "anchor_usage": {
-    "ACO|2012-10-31|0001140361-12-045926": 5,
     "ACO|2013-03-27|0001140361-13-016072": 11,
     "APC|2013-01-31|0001193125-13-065430": 22,
     "BIO|2013-03-12|0000012208-13-000007": 22,
@@ -38,11 +37,13 @@
   "max_staleness_days": 130,
   "observation_index_first": 1001,
   "observation_index_last": 1500,
-  "remaining_after_batch": 2328,
+  "remaining_after_batch": 2333,
   "research_use_only": true,
-  "resolved_count": 500,
+  "resolved_count": 495,
   "schema_version": "1",
   "unique_symbol_count": 26,
-  "unresolved_by_symbol": {},
-  "unresolved_count": 0
+  "unresolved_by_symbol": {
+    "ACO": 5
+  },
+  "unresolved_count": 5
 }
