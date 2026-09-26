@@ -111,7 +111,18 @@ def _browse_cik(symbol: str) -> str:
 
 
 def resolve_ciks(symbols: list[str], overrides: dict[str, str]) -> tuple[dict[str, str], dict[str, str]]:
-    current = _current_ticker_map()
+    # Historical batch runs provide an audited CIK override for every requested symbol.
+    # Avoid a redundant current-ticker request in that case; it is not evidence for the
+    # historical identity and can be independently rate-limited by SEC.
+    if all(sym in overrides for sym in symbols):
+        return (
+            {sym: overrides[sym] for sym in symbols},
+            {sym: "override" for sym in symbols},
+        )
+    try:
+        current = _current_ticker_map()
+    except Exception:
+        current = {}
     resolved = {}
     methods = {}
     for sym in symbols:
