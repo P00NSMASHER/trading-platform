@@ -68,12 +68,12 @@
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "20339e96886b73e6d348810a2d804408a41a39548f525b3cdfe54935b4aead6f",
-      "reason": "G4 batch 0003: reviewed public point-in-time shares evidence for observations 1001-1500 and cumulative readiness/quality receipts"
+      "expected_sha256": "8f03948fd77bf99ce4aacc1b08d20d65a1e75b9996ee90c5f085ea8ff98644b6",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "5a7f4baf868f72ae7186007b889ac4e2bbe1262d51162f138d1d6bb8f5bcb00d",
-      "reason": "G4 batch 0003: reviewed public point-in-time shares evidence for observations 1001-1500 and cumulative readiness/quality receipts"
+      "expected_sha256": "bb7e4a86de9ea174c84c4692aef8b271b6cd49caf25fa08d744f0587e28bbfb0",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
     },
     "src/metadata_quality.py": {
       "expected_sha256": "a058d28788e806fa4cc657cf3daa21d6dd1534a3cc1f9f981c40e1e5fb035ff2",
@@ -326,32 +326,32 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "df6ee560dd27cae403b4674ecdec8fd7bd5490404a8d233091e2b898fa624fc7",
-      "reason": "G4 batch 0003: reviewed public point-in-time shares evidence for observations 1001-1500 and cumulative readiness/quality receipts"
+      "expected_sha256": "98682c759025bb09c1f132009f41e92f5b8b8365088292982c9c3fbf8ce12f2c",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_quality_issues.csv": {
-      "expected_sha256": "2eb3413697680ea2e41e79b25269a14de39163fa1fc8d68187567d02b7169734",
-      "reason": "G4 batch 0003: reviewed public point-in-time shares evidence for observations 1001-1500 and cumulative readiness/quality receipts"
+      "expected_sha256": "ce99a4c470223b35e66f04f2bf96a01c38259f923651eb564ba6c1f0bbe33afb",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_quarantine.csv": {
       "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "2eaae820bcb7e3c02177786cfa25dedebe37899bb12ff87d35c8473918c41b46",
-      "reason": "G4 batch 0003: reviewed public point-in-time shares evidence for observations 1001-1500 and cumulative readiness/quality receipts"
+      "expected_sha256": "c84d75052f6fea2cf4924b77375bd50a9868a7a137f4840c3479f4ce92c9d83c",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "27c0d68265f8bab55b56fd93b944daf1afa402551395e86a6f13ac3d076de68b",
-      "reason": "G4 batch 0003: reviewed public point-in-time shares evidence for observations 1001-1500 and cumulative readiness/quality receipts"
+      "expected_sha256": "2a9c1c15e6abd02f75d5a9f15996c7b3d3a4780e39a5a5949f553dbac02bfaa9",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
-      "expected_sha256": "ca6c5f3db5bcc4e5b0ea0e1f0e94d4a5ca857f729b346c04cb185615d4f5ec6d",
-      "reason": "G4 batch 0003: reviewed public point-in-time shares evidence for observations 1001-1500 and cumulative readiness/quality receipts"
+      "expected_sha256": "538a5d55a141e793934176eba8662d97b799cdf1673b81fa889560f072ed1449",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -370,8 +370,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "6fc7ac9cb8918a79e4f6eba6a4bdd7cb9a49bbe577b7e0528a234dd39d1733f4",
-      "reason": "G4 batch 0003: reviewed public point-in-time shares evidence for observations 1001-1500 and cumulative readiness/quality receipts"
+      "expected_sha256": "ddfc5b17d7c6a249b7ea62567c5cd499624024833693c46d493d35aed7d72181",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
       "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
@@ -420,6 +420,18 @@
     "data/public/metadata/g4_shares_batch_0003.csv": {
       "expected_sha256": "b941bf2bc50d2d965f57a0af5775c7c3169a03e58070c2eda0ea1af9a218f201",
       "reason": "G4 batch 0003: reviewed public point-in-time shares evidence for observations 1001-1500 and cumulative readiness/quality receipts"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0004_report.json": {
+      "expected_sha256": "cd43d50252c920e11e151bfa2346131cdefa4a8e1f8004bb2d725ef06901481f",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0004.csv": {
+      "expected_sha256": "1bb7a08bd9fc7f99fa7941c3620b437756fd55ff12df7837a5a85ae591e9733d",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_batch_0004.csv": {
+      "expected_sha256": "148da1e3c0cbfced681835e34e041b15504a57a75d90bac2fd19f9895674ed5a",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
     }
   }
 }
