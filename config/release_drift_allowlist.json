@@ -68,24 +68,24 @@
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "567fe37c0a74de433c5663b7b2979652aecc8ce7439b1792fb17637560d4264d",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "be79629b896016b1c73f5d3e1997d9a8bc40e6e84f1877973ad89c79caecadb7",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "71c9609baef5b51733c85a4660b631315eb4acabafc4bd1f1a9617c8e47dcaec",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "310ecafdc9618099f76c137fbf9231aa5bb74279db7c11f52dc545bc303144f7",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "src/metadata_quality.py": {
-      "expected_sha256": "966119e2096ddb43f8b787300b441a3a3524238810b4140914465354d2084876",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "5d7f9cb8708037883017bb94ef3315dd7fe7bcca2d5e8e0d7e72edb2a792e2f8",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "src/metadata_resolver.py": {
-      "expected_sha256": "982143a0c25d0ef22691402ba65aa8ea19bed97001a926e8541c15f6149c1676",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "f5fa9ebf102b33b299ea19e01bd262f5ec1b774f00f113bdca70452120bc17d0",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "tests/test_metadata_resolver.py": {
-      "expected_sha256": "af8830c76dc946c7181a9d1c7214a22a0705739d6ef6d0289484a7b4f805a9ea",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "5f5e3c53bc5ad6f69281a141a0d0d96755f050927d37402733d11da97ea7367f",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     }
   },
   "repository_additions": {
@@ -326,32 +326,32 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "54d746074ec89a34699550a43d7720f96a3bd57c6b14c9bb464ed3f1721a29e4",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "886d9ca0260a2679c8956afeb81591d055ef962121bb7468f693c80862d9632f",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_quality_issues.csv": {
-      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "0c27d8cb9ff1b9282978093e3940eddef68c6477d0d1d3d098283897d09dec60",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_quarantine.csv": {
       "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "a9135560a8bdce53421cdbe96220abe5591d8b54323c754d8bebb9a1ed2595a5",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "f03ac694b6140b62d7857f7b5615a4e4ba37dd13b8dfb4cb9ac0ac49e9af7c4d",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "eb8490e870020a5bee50e019cce904220564c30b70945a337a21541e48091c82",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "61c149738adbe1a431f1a19a2ecabbea8adba9cb587d317823a51423271fd9de",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
-      "expected_sha256": "546a7c146b2f8e616aa39c0cde55bca5db491326493cf80b0d4e5f2f439b8fb8",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "5684964e278de15dfb6c92eebc8565d71a0ad753a5a0212c32a95c56bc834ae1",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -368,6 +368,30 @@
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "config/metadata_sources.public_progress.json": {
+      "expected_sha256": "b6e08710763644322effbf19c791f026ea82c9820cded4bd48040dd1550caaab",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
+      "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0001.csv": {
+      "expected_sha256": "a33d9ef5bb548c56cc3566e809bd5f495ceb03d57946002848d59d4b58712a6b",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+    },
+    "data/public/metadata/g4_shares_batch_0001.csv": {
+      "expected_sha256": "98b3c1a569168787406b6e40ba16983417461fdf1afe734d7b33ea30cc879f78",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+    },
+    "src/g4_materialize_batch.py": {
+      "expected_sha256": "ebfc05f92f832f1882ba335d48349c2e2a8e3d4cfdb89abb339ac9bc0c6beed6",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+    },
+    "tests/test_g4_materialize_batch.py": {
+      "expected_sha256": "ec25a4897a6c68da66528dea1c04f3bfd281a6d5fe2efb74bb911e7ebcf3a7e8",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     }
   }
 }
