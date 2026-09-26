@@ -260,6 +260,22 @@
     "docs/control_plane_step8.md": {
       "expected_sha256": "c458c4cc07c9b0b4bbba28737f3956561dd664a252eb352aee213f7695651593",
       "reason": "Control-plane Step 8 final adversarial CI and audit-pack implementation note"
+    },
+    "src/g1_announcement_adapter.py": {
+      "expected_sha256": "4f9c8a3bf239b8a3d3e1f7f6ada485d5b978af6042d99e2f5140983e942ae179",
+      "reason": "G1 exact-announcement adapter for authorized I/B/E/S ANNDATS_ACT + ANNTIMS_ACT inputs; fail-closed on missing, ambiguous, inferred, or hash-mismatched timestamps"
+    },
+    "tests/test_g1_announcement_adapter.py": {
+      "expected_sha256": "e30dc8eb6409b4e325686e61f92961df075923161b198622f8560b4bb0a29b68",
+      "reason": "G1 regression coverage for exact timestamp conversion, missing-time refusal, ambiguity blocking, source pinning, link-file matching, and metadata-resolver integration"
+    },
+    "docs/g1_exact_announcement_adapter.md": {
+      "expected_sha256": "b1e9927de6c09f914ec6ad570b1bac1a9fcc9c09234b4287563c8263a0e79533",
+      "reason": "G1 source-lineage and fail-closed operating instructions for exact public announcement timestamps"
+    },
+    "config/g1_ibes_source.example.json": {
+      "expected_sha256": "ebded0ec71cfa3adc26adbe0b496da5f3955a48cdebec02c16801cac8b23be6d",
+      "reason": "G1 example metadata source contract; keeps licensed I/B/E/S source data outside the public repository"
     }
   }
 }
