@@ -13,19 +13,19 @@ from pathlib import Path
 
 BASE = "https://raw.githubusercontent.com/vgreg/hacked_earnings_jfe/main/Data/Press%20releases/{year}.zip"
 YEARS = range(2011, 2016)
-ENTRY_RE = re.compile(r"^(?P<permno>\\d+)_(?P<date>\\d{8})_(?P<suffix>.+)\\.txt$", re.I)
+ENTRY_RE = re.compile(r"^(?P<permno>\d+)_(?P<date>\d{8})_(?P<suffix>.+)\.txt$", re.I)
 TIME_RE = re.compile(
-    r"(?<!\\d)(?:1[0-2]|0?[1-9])(?:[:.]?[0-5]\\d)?\\s*"
-    r"(?:a\\.?m\\.?|p\\.?m\\.?)"
-    r"(?:\\s*(?:ET|EST|EDT|Eastern(?:\\s+Time)?))?",
+    r"(?<!\d)(?:1[0-2]|0?[1-9])(?:[:.]?[0-5]\d)?\s*"
+    r"(?:a\.?m\.?|p\.?m\.?)"
+    r"(?:\s*(?:ET|EST|EDT|Eastern(?:\s+Time)?))?",
     re.I,
 )
-NOISE_RE = re.compile(r"conference\\s+call|webcast|web\\s*cast|replay|dial(?:-?in)?|presentation", re.I)
-RELEASE_RE = re.compile(r"for\\s+(?:immediate\\s+)?release|release(?:d)?|published|distribution", re.I)
+NOISE_RE = re.compile(r"conference\s+call|webcast|web\s*cast|replay|dial(?:-?in)?|presentation", re.I)
+RELEASE_RE = re.compile(r"for\s+(?:immediate\s+)?release|release(?:d)?|published|distribution", re.I)
 
 
 def _norm_space(value: str) -> str:
-    return re.sub(r"\\s+", " ", value).strip()
+    return re.sub(r"\s+", " ", value).strip()
 
 
 def _decode(blob: bytes) -> str:
@@ -166,7 +166,7 @@ def scan(events_path: Path, outdir: Path) -> dict:
         "results": results,
     }
     (outdir / "g1_public_replication_scan.json").write_text(
-        json.dumps(payload, indent=2, default=str) + "\\n", encoding="utf-8"
+        json.dumps(payload, indent=2, default=str) + "\n", encoding="utf-8"
     )
 
     with (outdir / "g1_public_replication_scan.csv").open("w", newline="", encoding="utf-8") as f:
@@ -196,7 +196,7 @@ def scan(events_path: Path, outdir: Path) -> dict:
         "event_count", "events_with_candidate_files", "events_with_time_tokens",
         "events_with_release_context_time"
     )}
-    (outdir / "summary.json").write_text(json.dumps(summary, indent=2) + "\\n", encoding="utf-8")
+    (outdir / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     return summary
 
 
