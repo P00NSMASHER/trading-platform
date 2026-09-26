@@ -1,0 +1,46 @@
+{
+  "schema_version": "1",
+  "purpose": "Cumulative public point-in-time metadata progress: G3 complete plus G4 batch 0001.",
+  "sources": [
+    {
+      "source_id": "public-g3-primary-listing-evidence",
+      "record_kind": "security_master",
+      "source_family": "public_listing_evidence",
+      "path": "data/public/metadata/g3_primary_listing_history.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_research_replication",
+      "license_reference": "Public evidence derived from vgreg/hacked_earnings_jfe plus row-bound SEC/issuer references",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "effective_date": "effective_date",
+        "primary_exchange": "primary_exchange",
+        "source_reference": "source_reference"
+      }
+    },
+    {
+      "source_id": "public-sec-shares-batch-0001",
+      "record_kind": "shares_outstanding",
+      "source_family": "sec_xbrl_companyfacts",
+      "path": "data/public/metadata/g4_shares_batch_0001.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "SEC data.sec.gov XBRL Company Facts and Submissions APIs",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "historical_symbol": "historical_symbol",
+        "fact_date": "fact_date",
+        "available_at": "available_at",
+        "shares_outstanding": "shares_outstanding",
+        "source_reference": "source_reference"
+      }
+    }
+  ]
+}

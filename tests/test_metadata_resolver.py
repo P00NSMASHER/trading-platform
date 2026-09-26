@@ -113,6 +113,47 @@ def test_shares_resolve_exact_day_and_millions_scale():
     assert x[1].staleness_days=="0"
 
 
+
+
+def test_shares_target_date_binding_and_pre_window_cutoff(tmp_path):
+    data=ROOT/"data/examples/metadata/_g4_bound_shares.csv"
+    data.write_text(
+        "historical_symbol,target_trade_date,fact_date,available_at,shares_outstanding,source_reference\n"
+        "TEST,2015-02-17,2015-02-10,2015-02-17T14:00:00-05:00,10000000,https://example.invalid/early\n"
+        "TEST,2015-02-18,2015-02-10,2015-02-17T13:00:00-05:00,20000000,https://example.invalid/wrong-date\n",
+        encoding="utf-8",
+    )
+    contract={
+        "schema_version":"1",
+        "sources":[{
+            "source_id":"g4-bound","record_kind":"shares_outstanding","source_family":"sec_xbrl_companyfacts",
+            "path":"data/examples/metadata/_g4_bound_shares.csv","enabled":True,"authorized":True,
+            "data_classification":"public_official_data","license_reference":"SEC fixture",
+            "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{}
+        }]
+    }
+    q=ROOT/"config/_tmp_g4_bound.json"; q.write_text(json.dumps(contract),encoding="utf-8")
+    try:
+        rows=[{
+            "historical_symbol":"TEST","trade_date":"2015-02-17",
+            "window_intervals_local":"13:30-14:30"
+        }]
+        x=resolve_shares(rows,load_demo_sources(q))[0]
+        assert x.resolution_status=="unresolved"
+
+        data.write_text(
+            "historical_symbol,target_trade_date,fact_date,available_at,shares_outstanding,source_reference\n"
+            "TEST,2015-02-17,2015-02-10,2015-02-17T13:00:00-05:00,10000000,https://example.invalid/early\n"
+            "TEST,2015-02-18,2015-02-10,2015-02-17T12:00:00-05:00,20000000,https://example.invalid/wrong-date\n",
+            encoding="utf-8",
+        )
+        x=resolve_shares(rows,load_demo_sources(q))[0]
+        assert x.resolution_status=="resolved"
+        assert x.shares_outstanding=="10000000"
+        assert x.source_reference=="https://example.invalid/early"
+    finally:
+        data.unlink(missing_ok=True); q.unlink(missing_ok=True)
+
 def test_future_shares_fact_is_not_used(tmp_path):
     p=ROOT/"data/examples/metadata/_future_shares.csv"
     p.write_text("symbol,trade_date,listed_exchange,shares_outstanding_millions\nTEST,2015-02-18,Q,20\n",encoding="utf-8")

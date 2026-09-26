@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Iterable
 from zoneinfo import ZoneInfo
 
-SCHEMA_VERSION = "0.17.1"
+SCHEMA_VERSION = "0.17.2"
 NY = ZoneInfo("America/New_York")
 UTC = timezone.utc
 
@@ -367,6 +367,27 @@ def _parse_float(value: str) -> float | None:
         return None
 
 
+def _shares_target_cutoff(row: dict[str, str]) -> datetime:
+    td = row["trade_date"]
+    starts = []
+    for interval in str(row.get("window_intervals_local", "") or "").split(";"):
+        interval = interval.strip()
+        if not interval or "-" not in interval:
+            continue
+        start = interval.split("-", 1)[0].strip()
+        try:
+            hh, mm = start.split(":", 1)
+            starts.append((int(hh), int(mm)))
+        except Exception:
+            continue
+    if starts:
+        hh, mm = min(starts)
+        local = datetime.fromisoformat(f"{td}T{hh:02d}:{mm:02d}:00").replace(tzinfo=NY)
+    else:
+        local = datetime.fromisoformat(td + "T23:59:59").replace(tzinfo=NY)
+    return local.astimezone(UTC)
+
+
 def resolve_shares(symbol_date_rows: list[dict[str,str]], sources, *, max_staleness_days: int = 130) -> list[SharesResolution]:
     candidates=[]
     for src, rows, path in sources:
@@ -382,30 +403,34 @@ def resolve_shares(symbol_date_rows: list[dict[str,str]], sources, *, max_stalen
             if val is None and millions:
                 m=_parse_float(millions); val = m*1_000_000 if m is not None else None
             if not fact_date or val is None or val <= 0: continue
-            candidates.append((sym, fact_date, avail, val, src, str(path)))
+            target_trade_date=_get(row, src, "target_trade_date")
+            ref=_get(row, src, "source_reference") or str(path)
+            candidates.append((sym, fact_date, avail, val, target_trade_date, src, ref))
     by_sym=defaultdict(list)
     for x in candidates: by_sym[x[0]].append(x)
     for arr in by_sym.values(): arr.sort(key=lambda x:x[1])
     out=[]
     for r in symbol_date_rows:
         sym=r["historical_symbol"].upper(); td=r["trade_date"]
+        cutoff=_shares_target_cutoff(r)
         best=None
         for x in by_sym.get(sym,[]):
-            _, fd, avail, val, src, ref=x
+            _, fd, avail, val, target_trade_date, src, ref=x
+            if target_trade_date and target_trade_date != td: continue
             if fd > td: continue
-            # If a source supplies availability, it cannot be after the target date end.
+            # Point-in-time shares must have been public before the earliest
+            # requested market interval, not merely by the end of the day.
             if avail:
                 try:
                     a=_parse_aware(avail, field="available_at", default_timezone=src.timezone)
-                    target_end=datetime.fromisoformat(td+"T23:59:59").replace(tzinfo=NY).astimezone(UTC)
-                    if a > target_end: continue
+                    if a > cutoff: continue
                 except ValueError: continue
             stale=_days_between(td, fd)
             exact_bonus=0 if fd==td else 1
             key=(exact_bonus, stale)
             if best is None or key < best[0]: best=(key,x,stale)
         if best and best[2] <= max_staleness_days:
-            _, x, stale=best; _, fd, avail, val, src, ref=x
+            _, x, stale=best; _, fd, avail, val, target_trade_date, src, ref=x
             out.append(SharesResolution(sym, td, f"{val:.6f}".rstrip("0").rstrip("."), "resolved", src.source_id, src.source_family, ref, fd, avail, str(stale)))
         else:
             out.append(SharesResolution(sym, td, "", "unresolved", "", "", "", "", "", ""))
