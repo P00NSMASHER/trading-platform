@@ -95,8 +95,8 @@ def test_contract_audit_does_not_count_synthetic_as_real(tmp_path):
 def test_real_contract_row_requires_actual_required_symbol_content(tmp_path):
     data = tmp_path / "taq.csv"
     data.write_text(
-        "timestamp,symbol,price,size,exchange,conditions\\n"
-        "2015-02-17 14:19:02,OTHER,100.25,50,N,Q\\n",
+        "timestamp,symbol,price,size,exchange,conditions\n"
+        "2015-02-17 14:19:02,OTHER,100.25,50,N,Q\n",
         encoding="utf-8",
     )
     contract = tmp_path / "contract.json"
@@ -118,8 +118,8 @@ def test_real_contract_row_requires_actual_required_symbol_content(tmp_path):
 def test_generic_authorized_provider_can_satisfy_equivalent_g2_capability(tmp_path):
     data = tmp_path / "generic.csv"
     data.write_text(
-        "timestamp,symbol,price,size,exchange,conditions\\n"
-        "2015-02-17 14:19:02,TEST,100.25,50,N,Q\\n",
+        "timestamp,symbol,price,size,exchange,conditions\n"
+        "2015-02-17 14:19:02,TEST,100.25,50,N,Q\n",
         encoding="utf-8",
     )
     contract = tmp_path / "contract.json"
@@ -141,8 +141,8 @@ def test_generic_authorized_provider_can_satisfy_equivalent_g2_capability(tmp_pa
 def test_real_contract_wrong_declared_market_date_does_not_cover_requirement(tmp_path):
     data = tmp_path / "wrong-date.csv"
     data.write_text(
-        "timestamp,symbol,price,size,exchange,conditions\\n"
-        "2015-02-18 14:19:02,TEST,100.25,50,N,Q\\n",
+        "timestamp,symbol,price,size,exchange,conditions\n"
+        "2015-02-18 14:19:02,TEST,100.25,50,N,Q\n",
         encoding="utf-8",
     )
     contract = tmp_path / "contract.json"
