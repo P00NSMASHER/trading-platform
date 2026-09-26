@@ -14,7 +14,9 @@ from zoneinfo import ZoneInfo
 
 import exchange_calendars as xcals
 
-SCHEMA_VERSION = "0.16.0"
+import historical_market_backfill as hmb
+
+SCHEMA_VERSION = "0.16.1"
 NY = ZoneInfo("America/New_York")
 UTC = timezone.utc
 CALENDAR_NAME = "XNYS"
@@ -367,46 +369,105 @@ def build_announcement_requirements(events_path: Path) -> list[dict[str, str]]:
     return out
 
 
+def _g2_source_matches_requirement(spec: hmb.SourceContract, requirement: SourceDateRequirement) -> bool:
+    if spec.record_kind != requirement.record_kind or spec.trade_date != requirement.trade_date:
+        return False
+    return spec.source_family == requirement.source_family or spec.source_family == "generic_authorized_market_data"
+
+
 def audit_contract(contract_path: Path | None, source_dates: list[SourceDateRequirement]) -> dict:
-    required = {(r.source_family, r.record_kind, r.trade_date) for r in source_dates if r.requirement != "conditional"}
-    conditional = {(r.source_family, r.record_kind, r.trade_date) for r in source_dates if r.requirement == "conditional"}
+    required_rows = [r for r in source_dates if r.requirement != "conditional"]
+    conditional_rows = [r for r in source_dates if r.requirement == "conditional"]
+    required = {(r.source_family, r.record_kind, r.trade_date) for r in required_rows}
     covered_real: set[tuple[str, str, str]] = set()
     covered_synthetic: set[tuple[str, str, str]] = set()
+    provider_equivalent: set[tuple[str, str, str]] = set()
     contract_sha = ""
     contract_source_count = 0
     issues: list[str] = []
+    validation_failures: list[str] = []
+
     if contract_path is not None:
         contract_sha = _sha256(contract_path)
-        obj = json.loads(contract_path.read_text(encoding="utf-8"))
-        for s in obj.get("sources", []):
-            contract_source_count += 1
-            key = (str(s.get("source_family", "")), str(s.get("record_kind", "")), str(s.get("trade_date", "")))
-            cls = str(s.get("data_classification", ""))
-            path = Path(str(s.get("path", "")))
-            if not path.is_absolute():
-                path = (contract_path.parent / path).resolve()
-            if not path.exists():
-                issues.append(f"missing_path:{s.get('source_id','')}:{path}")
+        try:
+            specs, _ = hmb.load_contract(contract_path)
+        except Exception as exc:
+            specs = []
+            issues.append(f"contract_validation:{type(exc).__name__}:{exc}")
+        contract_source_count = len(specs)
+
+        # Preserve the old synthetic-coverage diagnostic without ever allowing it to
+        # satisfy G2. Generic synthetic fixtures may emulate any record kind.
+        for req in required_rows:
+            key = (req.source_family, req.record_kind, req.trade_date)
+            for spec in specs:
+                if spec.data_classification != hmb.SYNTHETIC_CLASS:
+                    continue
+                if spec.record_kind != req.record_kind or spec.trade_date != req.trade_date:
+                    continue
+                if spec.source_family in {req.source_family, "generic_authorized_market_data", "synthetic_fixture"}:
+                    covered_synthetic.add(key)
+                    break
+
+        # A real row is covered only after the exact file passes production-schema
+        # parsing and proves that the declared date contains every required symbol.
+        # File existence or a self-declared contract date is not sufficient.
+        for req in required_rows:
+            key = (req.source_family, req.record_kind, req.trade_date)
+            required_symbols = {
+                x.strip().upper() for x in str(getattr(req, "historical_symbols", "") or "").split(";") if x.strip()
+            }
+            candidates = [
+                spec for spec in specs
+                if spec.data_classification == hmb.NON_SYNTHETIC_CLASS
+                and _g2_source_matches_requirement(spec, req)
+            ]
+            if not candidates:
                 continue
-            if bool(s.get("authorized")) and cls == "authorized_historical_market_data":
-                covered_real.add(key)
-            elif cls == "synthetic_fixture":
-                covered_synthetic.add(key)
+
+            candidate_errors: list[str] = []
+            for spec in candidates:
+                try:
+                    report = hmb.inspect_source_coverage(
+                        spec,
+                        expected_trade_date=req.trade_date,
+                        required_symbols=required_symbols,
+                    )
+                except Exception as exc:
+                    candidate_errors.append(f"{spec.source_id}:{type(exc).__name__}:{exc}")
+                    continue
+                if report["content_coverage_valid"]:
+                    covered_real.add(key)
+                    if spec.source_family != req.source_family:
+                        provider_equivalent.add(key)
+                    break
+                missing = report.get("missing_required_symbols") or []
+                candidate_errors.append(
+                    f"{spec.source_id}:matching_date_rows={report.get('matching_date_rows', 0)};"
+                    f"missing_symbols={','.join(missing[:12]) or '<none>'}"
+                )
+
+            if key not in covered_real and candidate_errors:
+                validation_failures.append("|".join(key) + " => " + " || ".join(candidate_errors[:3]))
+
     missing_required = sorted(required - covered_real)
     return {
         "contract_path": str(contract_path) if contract_path else "",
         "contract_sha256": contract_sha,
         "contract_source_count": contract_source_count,
         "required_source_date_rows": len(required),
-        "conditional_source_date_rows": len(conditional),
+        "conditional_source_date_rows": len({(r.source_family, r.record_kind, r.trade_date) for r in conditional_rows}),
         "real_authorized_required_rows_covered": len(required & covered_real),
+        "content_validated_real_rows": len(required & covered_real),
+        "provider_equivalent_rows_covered": len(required & provider_equivalent),
         "synthetic_rows_matching_required_keys": len(required & covered_synthetic),
         "missing_real_authorized_required_rows": len(missing_required),
         "missing_required_preview": ["|".join(x) for x in missing_required[:25]],
+        "content_validation_failure_preview": validation_failures[:25],
         "issues": issues,
         "ready_for_real_backfill": len(missing_required) == 0 and not issues,
+        "coverage_rule": "G2 requires production-schema-parsable non-synthetic files with the declared date and every required symbol; generic authorized providers may satisfy an equivalent record-kind capability.",
     }
-
 
 def build_unresolved_gates(plans: list[EventCoveragePlan], symbol_dates: list[SymbolDateRequirement],
                            source_dates: list[SourceDateRequirement], contract_audit: dict) -> list[dict[str, str]]:
@@ -421,8 +482,8 @@ def build_unresolved_gates(plans: list[EventCoveragePlan], symbol_dates: list[Sy
         {
             "gate_id": "G2_REAL_MARKET_DATA", "status": "BLOCKING" if not contract_audit["ready_for_real_backfill"] else "READY",
             "required_rows": str(contract_audit["missing_real_authorized_required_rows"]),
-            "requirement": "Authorized non-synthetic TAQ equity trades/quotes plus full-replication options source-date coverage",
-            "resolution": "Populate Step-15 source contract with authorized paths and license references",
+            "requirement": "Authorized non-synthetic equity trades/quotes plus option trades/quotes for every required market date, with content-validated required-symbol coverage",
+            "resolution": "Populate Step-15 source contract with licensed vendor or capability-equivalent generic sources; each file must parse and prove date/symbol coverage",
         },
         {
             "gate_id": "G3_PRIMARY_LISTING_HISTORY", "status": "BLOCKING_FOR_ITCH",
