@@ -1,0 +1,35 @@
+name: g4-through-3000-probe
+
+on:
+  push:
+    branches: [fix/g4-shares-through-3000]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+      - name: Combine frozen anchors
+        run: |
+          head -n 1 data/public/metadata/g4_shares_anchors_batch_0001.csv > /tmp/anchors.csv
+          tail -n +2 data/public/metadata/g4_shares_anchors_batch_0001.csv >> /tmp/anchors.csv
+          tail -n +2 data/public/metadata/g4_sec_history_0501_3000.csv >> /tmp/anchors.csv
+      - name: Probe five batches
+        run: |
+          for pair in "500 0002" "1000 0003" "1500 0004" "2000 0005" "2500 0006"; do
+            set -- $pair
+            python -m g4_materialize_batch               --requirements data/processed/coverage_plan_real/symbol_date_requirements.csv               --anchors /tmp/anchors.csv               --start "$1" --count 500               --output "/tmp/g4_$2.csv"               --report "/tmp/g4_$2.json"
+            cat "/tmp/g4_$2.json"
+          done
