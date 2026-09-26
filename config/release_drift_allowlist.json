@@ -68,20 +68,20 @@
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "be79629b896016b1c73f5d3e1997d9a8bc40e6e84f1877973ad89c79caecadb7",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "95c5095ee0345d973c85b381804a23f15b1fd75cbadfe6592a6c3757b538fd6c",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "310ecafdc9618099f76c137fbf9231aa5bb74279db7c11f52dc545bc303144f7",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "68ec6c276da6dd14e340411ceea1bc566d3f491c57e7a1d67b2c7e6acfad79c0",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "src/metadata_quality.py": {
-      "expected_sha256": "5d7f9cb8708037883017bb94ef3315dd7fe7bcca2d5e8e0d7e72edb2a792e2f8",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "a058d28788e806fa4cc657cf3daa21d6dd1534a3cc1f9f981c40e1e5fb035ff2",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "src/metadata_resolver.py": {
-      "expected_sha256": "f5fa9ebf102b33b299ea19e01bd262f5ec1b774f00f113bdca70452120bc17d0",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "e53f6e856432733523b8e03dea180595603fba4681065edf24993fcd569a96e6",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "tests/test_metadata_resolver.py": {
       "expected_sha256": "5f5e3c53bc5ad6f69281a141a0d0d96755f050927d37402733d11da97ea7367f",
@@ -326,32 +326,32 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "886d9ca0260a2679c8956afeb81591d055ef962121bb7468f693c80862d9632f",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "edcafb462cb35e3442e0e2a0488bf90ef39579a4343b9c8710ccf6b020e96430",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_quality_issues.csv": {
-      "expected_sha256": "0c27d8cb9ff1b9282978093e3940eddef68c6477d0d1d3d098283897d09dec60",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "68c1f468e8e12fd06dacd3fd5952e7318b07c7238a9df7446cf48eace8a58995",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "data/processed/authorized_input_real/metadata_quarantine.csv": {
       "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "f03ac694b6140b62d7857f7b5615a4e4ba37dd13b8dfb4cb9ac0ac49e9af7c4d",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "a7934f823ec2f14ba2fcb040f1dd6c3819499563c85b0cafd29f62fc5a93462c",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "61c149738adbe1a431f1a19a2ecabbea8adba9cb587d317823a51423271fd9de",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "ce466b0216a81ceb6505a5411071ce560514b257102d899b5ba5a869c8334d09",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
-      "expected_sha256": "5684964e278de15dfb6c92eebc8565d71a0ad753a5a0212c32a95c56bc834ae1",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "1997d7ebf0264be46c244a1dc32d2e2e3c40f5220a2c25855ab44499f76cdefd",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -370,8 +370,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "b6e08710763644322effbf19c791f026ea82c9820cded4bd48040dd1550caaab",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "62f834db4eeb58c1cb33b103dcb4f051308939cdfb9b89b6e314c38d9c40be45",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
       "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
@@ -386,12 +386,28 @@
       "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
     },
     "src/g4_materialize_batch.py": {
-      "expected_sha256": "ebfc05f92f832f1882ba335d48349c2e2a8e3d4cfdb89abb339ac9bc0c6beed6",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "5999d6d0e79b1f4595aeb7a7f250ff9674d821b251347694afad845478d71904",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     },
     "tests/test_g4_materialize_batch.py": {
-      "expected_sha256": "ec25a4897a6c68da66528dea1c04f3bfd281a6d5fe2efb74bb911e7ebcf3a7e8",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "5617e7b6b2b2b0e5b7d2cf9926c252bc4b1a191dd0b360f80fff61892d7ef719",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0002_report.json": {
+      "expected_sha256": "094ad8bcebf840e0968ba25dac15a446a02d4fba16165454e5a7f41afdc04c77",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
+    },
+    "data/public/metadata/g4_historical_cik_map.csv": {
+      "expected_sha256": "f043e28e621e80a029898b8c5f287501f2be9d001d7504858f062f69218ea768",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0002.csv": {
+      "expected_sha256": "446cbdbcc514544d9e6d79db788612392a5224ef2077fce4f1552b460ddd811a",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
+    },
+    "data/public/metadata/g4_shares_batch_0002.csv": {
+      "expected_sha256": "ec0bd0995bce528bc07a3dc1bbaf836e2f10201fdff9a0c56af9b4348a7b221c",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
     }
   }
 }
