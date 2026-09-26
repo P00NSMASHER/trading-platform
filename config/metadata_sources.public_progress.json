@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G3 complete plus G4 batches 0001-0005.",
+  "purpose": "Cumulative public point-in-time metadata progress: G3 complete plus G4 batches 0001-0005; hard 130-day shares staleness enforced.",
   "sources": [
     {
       "source_id": "public-g3-primary-listing-evidence",
@@ -60,9 +60,7 @@
         "fact_date": "fact_date",
         "available_at": "available_at",
         "shares_outstanding": "shares_outstanding",
-        "source_reference": "source_reference",
-        "staleness_exception_max_days": "staleness_exception_max_days",
-        "staleness_exception_reason": "staleness_exception_reason"
+        "source_reference": "source_reference"
       }
     },
     {
@@ -83,9 +81,7 @@
         "fact_date": "fact_date",
         "available_at": "available_at",
         "shares_outstanding": "shares_outstanding",
-        "source_reference": "source_reference",
-        "staleness_exception_max_days": "staleness_exception_max_days",
-        "staleness_exception_reason": "staleness_exception_reason"
+        "source_reference": "source_reference"
       }
     },
     {
@@ -106,9 +102,7 @@
         "fact_date": "fact_date",
         "available_at": "available_at",
         "shares_outstanding": "shares_outstanding",
-        "source_reference": "source_reference",
-        "staleness_exception_max_days": "staleness_exception_max_days",
-        "staleness_exception_reason": "staleness_exception_reason"
+        "source_reference": "source_reference"
       }
     },
     {
@@ -129,9 +123,7 @@
         "fact_date": "fact_date",
         "available_at": "available_at",
         "shares_outstanding": "shares_outstanding",
-        "source_reference": "source_reference",
-        "staleness_exception_max_days": "staleness_exception_max_days",
-        "staleness_exception_reason": "staleness_exception_reason"
+        "source_reference": "source_reference"
       }
     }
   ]

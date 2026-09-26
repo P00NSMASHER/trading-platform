@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Iterable
 from zoneinfo import ZoneInfo
 
-SCHEMA_VERSION = "0.17.3"
+SCHEMA_VERSION = "0.17.4"
 NY = ZoneInfo("America/New_York")
 UTC = timezone.utc
 
@@ -405,15 +405,7 @@ def resolve_shares(symbol_date_rows: list[dict[str,str]], sources, *, max_stalen
             if not fact_date or val is None or val <= 0: continue
             target_trade_date=_get(row, src, "target_trade_date")
             ref=_get(row, src, "source_reference") or str(path)
-            exception_max_raw=_get(row, src, "staleness_exception_max_days")
-            exception_reason=_get(row, src, "staleness_exception_reason")
-            try:
-                exception_max=int(exception_max_raw) if exception_max_raw else max_staleness_days
-            except Exception:
-                exception_max=max_staleness_days
-            if exception_max > max_staleness_days and not exception_reason:
-                exception_max=max_staleness_days
-            candidates.append((sym, fact_date, avail, val, target_trade_date, exception_max, exception_reason, src, ref))
+            candidates.append((sym, fact_date, avail, val, target_trade_date, src, ref))
     by_sym=defaultdict(list)
     for x in candidates: by_sym[x[0]].append(x)
     for arr in by_sym.values(): arr.sort(key=lambda x:x[1])
@@ -423,7 +415,7 @@ def resolve_shares(symbol_date_rows: list[dict[str,str]], sources, *, max_stalen
         cutoff=_shares_target_cutoff(r)
         best=None
         for x in by_sym.get(sym,[]):
-            _, fd, avail, val, target_trade_date, exception_max, exception_reason, src, ref=x
+            _, fd, avail, val, target_trade_date, src, ref=x
             if target_trade_date and target_trade_date != td: continue
             if fd > td: continue
             # Point-in-time shares must have been public before the earliest
@@ -434,12 +426,12 @@ def resolve_shares(symbol_date_rows: list[dict[str,str]], sources, *, max_stalen
                     if a > cutoff: continue
                 except ValueError: continue
             stale=_days_between(td, fd)
-            if stale > exception_max: continue
+            if stale > max_staleness_days: continue
             exact_bonus=0 if fd==td else 1
             key=(exact_bonus, stale)
             if best is None or key < best[0]: best=(key,x,stale)
         if best:
-            _, x, stale=best; _, fd, avail, val, target_trade_date, exception_max, exception_reason, src, ref=x
+            _, x, stale=best; _, fd, avail, val, target_trade_date, src, ref=x
             out.append(SharesResolution(sym, td, f"{val:.6f}".rstrip("0").rstrip("."), "resolved", src.source_id, src.source_family, ref, fd, avail, str(stale)))
         else:
             out.append(SharesResolution(sym, td, "", "unresolved", "", "", "", "", "", ""))
