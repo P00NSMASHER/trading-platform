@@ -1,0 +1,134 @@
+name: g4-hard-staleness-repair
+
+on:
+  push:
+    branches:
+      - fix/g4-hard-staleness-repair
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: g4-hard-staleness-repair
+  cancel-in-progress: true
+
+jobs:
+  repair:
+    if: "!contains(github.event.head_commit.message, '[g4-hard-staleness-generated]')"
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONPATH: src
+
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+
+      - name: Install locked test dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+
+      - name: Regenerate batch 2 under hard 130-day rule
+        run: |
+          python -m g4_materialize_batch \
+            --requirements data/processed/coverage_plan_real/symbol_date_requirements.csv \
+            --anchors data/public/metadata/g4_shares_anchors_batch_0002.csv \
+            --start 500 --count 500 \
+            --output data/public/metadata/g4_shares_batch_0002.csv \
+            --report data/processed/authorized_input_real/g4_shares_batch_0002_report.json
+
+      - name: Regenerate batch 3 under hard 130-day rule
+        run: |
+          python -m g4_materialize_batch \
+            --requirements data/processed/coverage_plan_real/symbol_date_requirements.csv \
+            --anchors data/public/metadata/g4_shares_anchors_batch_0003.csv \
+            --start 1000 --count 500 \
+            --output data/public/metadata/g4_shares_batch_0003.csv \
+            --report data/processed/authorized_input_real/g4_shares_batch_0003_report.json
+
+      - name: Assert repaired batch counts
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          b2=json.loads(Path("data/processed/authorized_input_real/g4_shares_batch_0002_report.json").read_text())
+          b3=json.loads(Path("data/processed/authorized_input_real/g4_shares_batch_0003_report.json").read_text())
+          assert b2["resolved_count"] == 494, b2
+          assert b2["unresolved_count"] == 6, b2
+          assert b2["unresolved_by_symbol"] == {"ACO": 6}, b2
+          assert b3["resolved_count"] == 495, b3
+          assert b3["unresolved_count"] == 5, b3
+          assert b3["unresolved_by_symbol"] == {"ACO": 5}, b3
+          PY
+
+      - name: Rebuild cumulative metadata state
+        run: |
+          python -m metadata_resolver \
+            --events data/processed/historical_events.csv \
+            --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv \
+            --contract config/metadata_sources.public_progress.json \
+            --outdir data/processed/authorized_input_real
+          python -m metadata_quality \
+            --events data/processed/historical_events.csv \
+            --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv \
+            --contract config/metadata_sources.public_progress.json \
+            --resolver-dir data/processed/authorized_input_real \
+            --outdir data/processed/authorized_input_real
+
+      - name: Assert cumulative repaired state
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          r=json.loads(Path("data/processed/authorized_input_real/metadata_readiness_summary.json").read_text())
+          q=list(csv.DictReader(Path("data/processed/authorized_input_real/metadata_domain_quality.csv").open()))
+          shares=next(x for x in q if x["domain"]=="shares")
+          assert r["shares_symbol_dates_resolved"] == 2489, r
+          assert r["shares_symbol_dates_unresolved"] == 1339, r
+          assert r["ready_g3_primary_listing_history"] is True
+          assert r["ready_g4_shares_outstanding"] is False
+          assert shares["resolver_ready_count"] == "2489", shares
+          assert shares["quarantined_count"] == "0", shares
+          print(json.dumps({"shares_resolved":2489,"shares_unresolved":1339,"shares_quality":shares},indent=2))
+          PY
+
+      - name: Run focused repair tests
+        run: |
+          python -m pytest -q \
+            tests/test_g4_materialize_batch.py \
+            tests/test_metadata_resolver.py \
+            tests/test_metadata_quality.py
+
+      - name: Commit repaired evidence and receipts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            data/public/metadata/g4_shares_batch_0002.csv \
+            data/public/metadata/g4_shares_batch_0003.csv \
+            data/processed/authorized_input_real/g4_shares_batch_0002_report.json \
+            data/processed/authorized_input_real/g4_shares_batch_0003_report.json \
+            data/processed/authorized_input_real/announcement_resolutions.csv \
+            data/processed/authorized_input_real/control_universe_readiness.csv \
+            data/processed/authorized_input_real/event_exchange_resolutions.csv \
+            data/processed/authorized_input_real/metadata_domain_quality.csv \
+            data/processed/authorized_input_real/metadata_quality_gate.csv \
+            data/processed/authorized_input_real/metadata_quality_issues.csv \
+            data/processed/authorized_input_real/metadata_quality_summary.json \
+            data/processed/authorized_input_real/metadata_quarantine.csv \
+            data/processed/authorized_input_real/metadata_readiness_summary.json \
+            data/processed/authorized_input_real/metadata_source_inventory.json \
+            data/processed/authorized_input_real/metadata_unresolved_gates.csv \
+            data/processed/authorized_input_real/shares_outstanding_resolutions.csv
+          git commit -m "[g4-hard-staleness-generated] repair AMCOL stale observations"
+          git push origin HEAD:fix/g4-hard-staleness-repair
