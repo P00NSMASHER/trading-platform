@@ -260,6 +260,10 @@
     "docs/control_plane_step8.md": {
       "expected_sha256": "c458c4cc07c9b0b4bbba28737f3956561dd664a252eb352aee213f7695651593",
       "reason": "Control-plane Step 8 final adversarial CI and audit-pack implementation note"
+    },
+    "dashboard/index.html": {
+      "expected_sha256": "64e8b0edaae9368cc908c0aaa64c654ffa1b30850f1c75dd2632f37c8d5aa415",
+      "reason": "Intentional public-safe read-only research control dashboard; exposes repository-derived status only and adds no trading outputs or execution capability"
     }
   }
 }
