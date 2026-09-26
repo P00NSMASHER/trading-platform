@@ -132,7 +132,7 @@ def test_generic_authorized_provider_can_satisfy_equivalent_g2_capability(tmp_pa
     class R:
         source_family="nyse_daily_taq"; record_kind="equity_trade"; trade_date="2015-02-17"; requirement="required_core"; historical_symbols="TEST"
     report = audit_contract(contract, [R()])
-    assert report["real_authorized_required_rows_covered"] == 1, report
+    assert report["real_authorized_required_rows_covered"] == 1, report["content_validation_failure_preview"]
     assert report["provider_equivalent_rows_covered"] == 1, report
     assert report["missing_real_authorized_required_rows"] == 0
     assert report["ready_for_real_backfill"] is True
