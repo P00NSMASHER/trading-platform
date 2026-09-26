@@ -237,7 +237,8 @@ def build(events_path: Path, supplement_path: Path, output_path: Path, report_pa
 
     if conflicts or unresolved:
         raise G3EvidenceError(
-            f"G3 evidence incomplete: conflicts={len(conflicts)} unresolved={len(unresolved)}"
+            f"G3 evidence incomplete: conflicts={len(conflicts)} unresolved={len(unresolved)} "
+            f"unresolved_preview={unresolved[:10]} conflict_preview={conflicts[:5]}"
         )
     if len(output) != len(events):
         raise G3EvidenceError(f"expected {len(events)} output rows, got {len(output)}")
