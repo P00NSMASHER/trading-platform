@@ -78,7 +78,7 @@ def test_materializer_uses_freshest_valid_pre_window_anchor(tmp_path):
 
 
 
-def test_materializer_allows_reasoned_source_bound_staleness_exception(tmp_path):
+def test_materializer_rejects_staleness_exception_fields(tmp_path):
     req = tmp_path / "req.csv"
     anchors = tmp_path / "anchors.csv"
     out = tmp_path / "out.csv"
@@ -102,10 +102,12 @@ def test_materializer_allows_reasoned_source_bound_staleness_exception(tmp_path)
         ]],
     )
     result = g4.build(req, anchors, 0, 1, out, report)
-    assert result["resolved_count"] == 1
+    assert result["resolved_count"] == 0
+    assert result["unresolved_count"] == 1
     row = next(csv.DictReader(out.open(newline="", encoding="utf-8")))
-    assert row["staleness_exception_max_days"] == "160"
-    assert row["staleness_exception_reason"]
+    assert row["status"] == "UNRESOLVED"
+    assert row["staleness_exception_max_days"] == ""
+    assert row["staleness_exception_reason"] == ""
 
 
 def test_batch_0001_generated_evidence_is_exactly_500_when_present():
