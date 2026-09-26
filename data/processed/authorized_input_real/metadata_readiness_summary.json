@@ -1,13 +1,13 @@
 {
-  "schema_version": "0.17.1",
+  "schema_version": "0.17.2",
   "purpose": "Point-in-time metadata resolution for historical market-surveillance research; no trading outputs.",
   "research_use_only": true,
   "events_path": "data/processed/historical_events.csv",
   "events_sha256": "43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12",
   "symbol_date_requirements_path": "data/processed/coverage_plan_real/symbol_date_requirements.csv",
   "symbol_date_requirements_sha256": "58e05613603b95b806eedb49ede774fce763f5ca7519487bed66282e4fe0a3fb",
-  "contract_path": "config/metadata_sources.g3_public.json",
-  "contract_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
+  "contract_path": "config/metadata_sources.public_progress.json",
+  "contract_sha256": "b6e08710763644322effbf19c791f026ea82c9820cded4bd48040dd1550caaab",
   "contract_issues": [],
   "event_count": 174,
   "symbol_date_requirement_count": 3828,
@@ -18,8 +18,8 @@
   "event_exchange_resolved": 174,
   "event_exchange_unresolved": 0,
   "event_exchange_nasdaq": 80,
-  "shares_symbol_dates_resolved": 0,
-  "shares_symbol_dates_unresolved": 3828,
+  "shares_symbol_dates_resolved": 500,
+  "shares_symbol_dates_unresolved": 3328,
   "control_dates_resolved": 0,
   "control_dates_partial": 0,
   "control_dates_unresolved": 72,
@@ -50,6 +50,19 @@
       "exists": true,
       "row_count": 174,
       "sha256": "9f7a51441cba8f3c0960fff40442df428265094be24aaa1ef6c3adffe6a491d1",
+      "license_reference_present": true
+    },
+    {
+      "source_id": "public-sec-shares-batch-0001",
+      "record_kind": "shares_outstanding",
+      "source_family": "sec_xbrl_companyfacts",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g4_shares_batch_0001.csv",
+      "exists": true,
+      "row_count": 500,
+      "sha256": "98b3c1a569168787406b6e40ba16983417461fdf1afe734d7b33ea30cc879f78",
       "license_reference_present": true
     }
   ]
