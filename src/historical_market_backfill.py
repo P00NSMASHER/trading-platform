@@ -16,7 +16,7 @@ from zoneinfo import ZoneInfo
 
 import market_data_adapter as mda
 
-SCHEMA_VERSION = "0.15.0"
+SCHEMA_VERSION = "0.15.1"
 NY = ZoneInfo("America/New_York")
 
 ALLOWED_RECORD_KINDS = {
@@ -352,6 +352,61 @@ def load_market_events(spec: SourceContract) -> list[mda.NormalizedMarketEvent]:
         events.append(event)
     events.sort(key=lambda e: (e.event_ts_utc, e.symbol, e.option_symbol, e.source_row_number))
     return events
+
+
+def inspect_source_coverage(spec: SourceContract, *, expected_trade_date: str, required_symbols: set[str] | None = None) -> dict:
+    """Validate that an authorized source actually contains usable rows for a declared market date.
+
+    This is intentionally a streaming preflight rather than a replacement for the full backfill.
+    It uses the same canonical row mapping and parsers as production ingestion, stops once all
+    required symbols have been observed, and never treats file existence alone as coverage.
+    """
+    if spec.record_kind == "itch_decoded":
+        raise ValueError("inspect_source_coverage is for G2 trade/quote sources, not conditional ITCH")
+    expected = datetime.strptime(expected_trade_date, "%Y-%m-%d").date()
+    required = {str(x).strip().upper() for x in (required_symbols or set()) if str(x).strip()}
+    observed: set[str] = set()
+    scanned_rows = 0
+    matching_date_rows = 0
+
+    for row_number, row in _open_dict_rows(spec):
+        scanned_rows += 1
+        mapped = _map_market_row(row, spec)
+        if spec.record_kind.endswith("trade"):
+            event = mda._trade_event(
+                mapped, kind=spec.record_kind, input_tz=spec.timezone,
+                source_name=spec.source_id, row_number=row_number,
+            )
+        else:
+            event = mda._quote_event(
+                mapped, kind=spec.record_kind, input_tz=spec.timezone,
+                source_name=spec.source_id, row_number=row_number,
+            )
+        event_date = _parse_utc(event.event_ts_utc).astimezone(NY).date()
+        if event_date != expected:
+            continue
+        matching_date_rows += 1
+        symbol = event.underlying_symbol if spec.record_kind.startswith("option_") else event.symbol
+        symbol = (symbol or "").strip().upper()
+        if symbol:
+            observed.add(symbol)
+        if required and required.issubset(observed):
+            break
+
+    missing = sorted(required - observed)
+    return {
+        "source_id": spec.source_id,
+        "source_family": spec.source_family,
+        "record_kind": spec.record_kind,
+        "declared_trade_date": spec.trade_date,
+        "expected_trade_date": expected_trade_date,
+        "scanned_rows": scanned_rows,
+        "matching_date_rows": matching_date_rows,
+        "required_symbol_count": len(required),
+        "observed_required_symbol_count": len(required & observed) if required else 0,
+        "missing_required_symbols": missing,
+        "content_coverage_valid": matching_date_rows > 0 and not missing,
+    }
 
 
 def _parse_int(value: str, *, field: str, row_number: int) -> int:
