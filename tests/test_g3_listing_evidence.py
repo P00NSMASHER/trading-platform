@@ -26,8 +26,8 @@ def test_classifier_requires_symbol_binding():
 def test_g3_supplement_is_event_bound_and_canonical():
     p = ROOT / "data/public/metadata/g3_listing_supplement.csv"
     rows = list(csv.DictReader(p.open(newline="", encoding="utf-8")))
-    assert len(rows) == 28
-    assert len({r["event_id"] for r in rows}) == 28
+    assert len(rows) == 30
+    assert len({r["event_id"] for r in rows}) == 30
     assert {r["primary_exchange"] for r in rows} <= {"XNYS", "XNAS", "XASE"}
     assert all(r["source_reference"] for r in rows)
 
