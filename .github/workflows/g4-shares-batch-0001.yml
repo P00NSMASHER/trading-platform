@@ -32,12 +32,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Resolve G4 observations 1-500 from SEC
+      - name: Materialize G4 observations 1-500 from frozen SEC anchors
         run: |
-          python -m g4_sec_shares_batch \
+          python -m g4_materialize_batch \
             --requirements data/processed/coverage_plan_real/symbol_date_requirements.csv \
-            --overrides data/public/metadata/g4_cik_overrides.csv \
-            --fact-bundle data/public/metadata/g4_sec_fact_candidates_batch_0001.csv \
+            --anchors data/public/metadata/g4_shares_anchors_batch_0001.csv \
             --start 0 \
             --count 500 \
             --output data/public/metadata/g4_shares_batch_0001.csv \
