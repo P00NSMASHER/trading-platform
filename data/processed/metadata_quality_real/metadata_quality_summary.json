@@ -9,7 +9,7 @@
   "contract_path": "config/metadata_sources.g3_public.json",
   "contract_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
   "resolver_dir": "data/processed/metadata_resolution_real",
-  "resolver_summary_sha256": "63a19634b7c8db67e1758d17f6de8bc4eaab87b6e6d5b23cc099c7b5e607d5cf",
+  "resolver_summary_sha256": "71c9609baef5b51733c85a4660b631315eb4acabafc4bd1f1a9617c8e47dcaec",
   "contract_issues": [],
   "blocking_issue_count": 0,
   "warning_issue_count": 0,
@@ -38,12 +38,12 @@
     {
       "domain": "exchange",
       "required_count": 174,
-      "resolver_ready_count": 172,
-      "quality_clear_count": 172,
+      "resolver_ready_count": 174,
+      "quality_clear_count": 174,
       "quarantined_count": 0,
       "warning_count": 0,
-      "quality_score": 98.85,
-      "status": "BLOCKED_INCOMPLETE",
+      "quality_score": 100.0,
+      "status": "QUALITY_CLEAR",
       "research_use_only": 1
     },
     {
