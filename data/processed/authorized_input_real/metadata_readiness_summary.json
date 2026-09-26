@@ -7,7 +7,7 @@
   "symbol_date_requirements_path": "data/processed/coverage_plan_real/symbol_date_requirements.csv",
   "symbol_date_requirements_sha256": "58e05613603b95b806eedb49ede774fce763f5ca7519487bed66282e4fe0a3fb",
   "contract_path": "config/metadata_sources.public_progress.json",
-  "contract_sha256": "6fc7ac9cb8918a79e4f6eba6a4bdd7cb9a49bbe577b7e0528a234dd39d1733f4",
+  "contract_sha256": "ddfc5b17d7c6a249b7ea62567c5cd499624024833693c46d493d35aed7d72181",
   "contract_issues": [],
   "event_count": 174,
   "symbol_date_requirement_count": 3828,
@@ -18,8 +18,8 @@
   "event_exchange_resolved": 174,
   "event_exchange_unresolved": 0,
   "event_exchange_nasdaq": 80,
-  "shares_symbol_dates_resolved": 1500,
-  "shares_symbol_dates_unresolved": 2328,
+  "shares_symbol_dates_resolved": 2000,
+  "shares_symbol_dates_unresolved": 1828,
   "control_dates_resolved": 0,
   "control_dates_partial": 0,
   "control_dates_unresolved": 72,
@@ -89,6 +89,19 @@
       "exists": true,
       "row_count": 500,
       "sha256": "b941bf2bc50d2d965f57a0af5775c7c3169a03e58070c2eda0ea1af9a218f201",
+      "license_reference_present": true
+    },
+    {
+      "source_id": "public-sec-shares-batch-0004",
+      "record_kind": "shares_outstanding",
+      "source_family": "sec_xbrl_companyfacts",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g4_shares_batch_0004.csv",
+      "exists": true,
+      "row_count": 500,
+      "sha256": "148da1e3c0cbfced681835e34e041b15504a57a75d90bac2fd19f9895674ed5a",
       "license_reference_present": true
     }
   ]
