@@ -260,6 +260,18 @@
     "docs/control_plane_step8.md": {
       "expected_sha256": "c458c4cc07c9b0b4bbba28737f3956561dd664a252eb352aee213f7695651593",
       "reason": "Control-plane Step 8 final adversarial CI and audit-pack implementation note"
+    },
+    "src/g1_ibes_timestamp_adapter.py": {
+      "expected_sha256": "1561390f3f1d71559d29516ae21d70929e1266630a2fad847a93a8ab11a70a6c",
+      "reason": "G1 hardening: strict authorized I/B/E/S actual-announcement timestamp normalization without raw licensed-row persistence"
+    },
+    "tests/test_g1_ibes_timestamp_adapter.py": {
+      "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
+      "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
+    },
+    "docs/g1_announcement_times.md": {
+      "expected_sha256": "97b43907c1f25aa427e78134fdd44d545daf8966404446674be233936ee547d7",
+      "reason": "G1 runbook documenting authoritative timestamp requirements and the non-proxy closure path"
     }
   }
 }
