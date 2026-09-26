@@ -14,6 +14,7 @@ OUT_FIELDS = [
     "observation_index","historical_symbol","target_trade_date","target_cutoff_local",
     "cik","fact_date","available_at","shares_outstanding","source_tag","form",
     "accession","filed_date","staleness_days","source_grade","source_reference",
+    "staleness_exception_max_days","staleness_exception_reason",
     "status","unresolved_reason","research_use_only",
 ]
 
@@ -65,11 +66,18 @@ def build(requirements: Path, anchors: Path, start: int, count: int, output: Pat
             filed=date.fromisoformat(a["filed_date"])
             avail=available_at(a["filed_date"])
             stale=(td-fd).days
-            if fd>td or filed>td or avail>co or stale<0 or stale>MAX_STALENESS_DAYS:
+            try:
+                anchor_limit=int(a.get("max_staleness_days") or MAX_STALENESS_DAYS)
+            except Exception:
+                anchor_limit=MAX_STALENESS_DAYS
+            exception_reason=(a.get("staleness_exception_reason") or "").strip()
+            if anchor_limit > MAX_STALENESS_DAYS and not exception_reason:
+                anchor_limit=MAX_STALENESS_DAYS
+            if fd>td or filed>td or avail>co or stale<0 or stale>anchor_limit:
                 continue
-            valid.append((stale,-fd.toordinal(),a,avail))
+            valid.append((stale,-fd.toordinal(),a,avail,anchor_limit,exception_reason))
         if valid:
-            stale,_,a,avail=sorted(valid,key=lambda x:(x[0],x[1]))[0]
+            stale,_,a,avail,anchor_limit,exception_reason=sorted(valid,key=lambda x:(x[0],x[1]))[0]
             usage[f'{sym}|{a["fact_date"]}|{a["accession"]}']+=1
             row={
                 "observation_index":idx,"historical_symbol":sym,"target_trade_date":req["trade_date"],
@@ -77,8 +85,10 @@ def build(requirements: Path, anchors: Path, start: int, count: int, output: Pat
                 "available_at":avail.isoformat(),"shares_outstanding":a["shares_outstanding"],
                 "source_tag":a["source_tag"],"form":a["form"],"accession":a["accession"],
                 "filed_date":a["filed_date"],"staleness_days":stale,"source_grade":a["source_grade"],
-                "source_reference":a["source_reference"],"status":"RESOLVED","unresolved_reason":"",
-                "research_use_only":1,
+                "source_reference":a["source_reference"],
+                "staleness_exception_max_days":str(anchor_limit) if anchor_limit>MAX_STALENESS_DAYS else "",
+                "staleness_exception_reason":exception_reason if anchor_limit>MAX_STALENESS_DAYS else "",
+                "status":"RESOLVED","unresolved_reason":"","research_use_only":1,
             }
         else:
             unresolved[sym]=unresolved.get(sym,0)+1
@@ -86,8 +96,9 @@ def build(requirements: Path, anchors: Path, start: int, count: int, output: Pat
                 "observation_index":idx,"historical_symbol":sym,"target_trade_date":req["trade_date"],
                 "target_cutoff_local":co.isoformat(),"cik":"","fact_date":"","available_at":"",
                 "shares_outstanding":"","source_tag":"","form":"","accession":"","filed_date":"",
-                "staleness_days":"","source_grade":"","source_reference":"","status":"UNRESOLVED",
-                "unresolved_reason":"no_pre_window_anchor_within_130_days","research_use_only":1,
+                "staleness_days":"","source_grade":"","source_reference":"",
+                "staleness_exception_max_days":"","staleness_exception_reason":"",
+                "status":"UNRESOLVED","unresolved_reason":"no_pre_window_anchor_within_allowed_staleness","research_use_only":1,
             }
         rows.append(row)
 
