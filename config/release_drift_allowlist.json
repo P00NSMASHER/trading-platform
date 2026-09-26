@@ -54,6 +54,18 @@
     "src/evaluation_release_controller.py": {
       "expected_sha256": "e8005837868915ad2f950bfdabc5246a97f2ad12aba32d8f2d1d52deed92ef2a",
       "reason": "Control-plane Step 6: preserve G1-G11 assessment while requiring freshly verified signed G12-G15 authority before execution"
+    },
+    "src/coverage_planner.py": {
+      "expected_sha256": "4383fe7e887b7f04f72b1361f8196943c4485df08c2b54fbd12049ac677e755d",
+      "reason": "G2 hardening: require content-validated authorized market source-date coverage and permit capability-equivalent licensed providers"
+    },
+    "src/historical_market_backfill.py": {
+      "expected_sha256": "2fdc9af6cad3c7eef168162be0fc66e6cc8701f44cb72ce811e3d0d03e82cdaa",
+      "reason": "G2 hardening: streaming production-schema source-content coverage validation for declared dates and required symbols"
+    },
+    "tests/test_coverage_planner.py": {
+      "expected_sha256": "7626a6d487741d844cd25d72a4320b859b5705699505acd3d464273327e07a24",
+      "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     }
   },
   "repository_additions": {
