@@ -1,0 +1,87 @@
+{
+  "schema_version": "1",
+  "purpose": "Fail-closed blocker receipt for G4 batch 0006; this candidate batch is intentionally not registered in the active metadata source contract until all 500 observations resolve.",
+  "base_main_sha": "dd8b15d04c8201ec6c90156b3506d82a451db3be",
+  "observation_index_first": 2501,
+  "observation_index_last": 3000,
+  "resolved_count": 492,
+  "unresolved_count": 8,
+  "hard_rules_preserved": {
+    "public_before_window": true,
+    "future_filed_facts_prohibited": true,
+    "max_staleness_days": 130,
+    "no_inferred_share_totals": true
+  },
+  "blockers": [
+    {
+      "historical_symbol": "CGNX",
+      "observation_indices": [
+        2543,
+        2573,
+        2603,
+        2633,
+        2661
+      ],
+      "target_trade_dates": [
+        "2015-02-06",
+        "2015-02-09",
+        "2015-02-10",
+        "2015-02-11",
+        "2015-02-12"
+      ],
+      "target_cutoff_local": "13:34 America/New_York",
+      "last_public_anchor": {
+        "fact_date": "2014-09-28",
+        "shares_outstanding": 87045169,
+        "filed_date": "2014-10-27",
+        "source_reference": "https://data.sec.gov/api/xbrl/companyconcept/CIK0000851205/dei/EntityCommonStockSharesOutstanding.json#accn=0000851205-14-000017;end=2014-09-28"
+      },
+      "next_explicit_anchor": {
+        "fact_date": "2015-02-01",
+        "shares_outstanding": 86544015,
+        "accession": "0000851205-15-000003",
+        "sec_accepted_local": "2015-02-12T16:01:07-05:00",
+        "source_reference": "https://www.sec.gov/Archives/edgar/data/851205/000085120515000003/0000851205-15-000003-index.htm"
+      },
+      "blocker_reason": "The prior public fact exceeds the 130-day hard limit; the next explicit issuer fact was not public before any target cutoff, including the 2015-02-12 13:34 cutoff."
+    },
+    {
+      "historical_symbol": "WLL",
+      "observation_indices": [
+        2787,
+        2798,
+        2811
+      ],
+      "target_trade_dates": [
+        "2015-02-23",
+        "2015-02-24",
+        "2015-02-25"
+      ],
+      "target_cutoff_local": "15:24 America/New_York",
+      "last_public_anchor": {
+        "fact_date": "2014-10-15",
+        "shares_outstanding": 119060513,
+        "filed_date": "2014-10-30",
+        "source_reference": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001255474/dei/EntityCommonStockSharesOutstanding.json#accn=0001255474-14-000015;end=2014-10-15"
+      },
+      "intervening_corporate_action": {
+        "date": "2014-12-08",
+        "description": "Kodiak acquisition closed; Whiting issued 47,546,139 common shares plus equity-award shares, materially changing the share base."
+      },
+      "next_explicit_anchor": {
+        "fact_date": "2015-02-13",
+        "shares_outstanding": 167041054,
+        "accession": "0001255474-15-000004",
+        "sec_accepted_local": "2015-02-27T16:14:11-05:00",
+        "source_reference": "https://www.sec.gov/Archives/edgar/data/1255474/000125547415000004/c474-20141231x10k.htm"
+      },
+      "same_day_candidate_2015_02_25": {
+        "sec_accepted_local": "2015-02-25T16:32:37-05:00",
+        "usable_for_cutoff": false
+      },
+      "blocker_reason": "The prior fact exceeds the hard staleness limit and is economically invalidated by the December acquisition; later explicit totals were not public before the target cutoffs."
+    }
+  ],
+  "active_contract_registration": "WITHHELD",
+  "merge_eligibility": "BLOCKED_UNTIL_500_OF_500_RESOLVED"
+}
