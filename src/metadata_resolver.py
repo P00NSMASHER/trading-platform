@@ -63,6 +63,7 @@ EXCHANGE_MAP = {
     "NASDAQ CAPITAL MARKET": "XNAS",
     "XNAS": "XNAS",
     "A": "XASE",
+    "XASE": "XASE",
     "NYSE AMERICAN": "XASE",
     "NYSE MKT": "XASE",
     "P": "ARCX",
