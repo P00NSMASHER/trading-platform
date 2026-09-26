@@ -14,7 +14,7 @@ from zoneinfo import ZoneInfo
 
 import metadata_resolver as mr
 
-SCHEMA_VERSION = "0.19.2"
+SCHEMA_VERSION = "0.19.3"
 UTC = timezone.utc
 NY = ZoneInfo("America/New_York")
 
@@ -277,8 +277,17 @@ def _shares_candidates(req: dict[str, str], loaded):
                 if a is None or a > cutoff:
                     continue
             stale = (date.fromisoformat(td) - date.fromisoformat(fd)).days
+            exception_max_raw = mr._get(row, src, "staleness_exception_max_days")
+            exception_reason = mr._get(row, src, "staleness_exception_reason")
+            try:
+                exception_max = int(exception_max_raw) if exception_max_raw else 130
+            except Exception:
+                exception_max = 130
+            if exception_max > 130 and not exception_reason:
+                exception_max = 130
             out.append({"value": float(val), "fact_date": fd, "stale": stale, "source_id": src.source_id,
                         "source_family": src.source_family, "priority": _priority(src), "available_at": avail,
+                        "exception_max": exception_max, "exception_reason": exception_reason,
                         "path": mr._get(row, src, "source_reference") or str(path)})
     return out
 
@@ -321,7 +330,15 @@ def audit_shares(symbol_dates, resolver_rows, loaded, max_staleness_days: int = 
         rr = by_key.get((sym, td), {})
         if rr.get("resolution_status") == "resolved":
             stale = int(rr.get("staleness_days") or 0)
-            if stale > max_staleness_days:
+            matching = [x for x in cands if x["fact_date"] == rr.get("fact_date") and abs(x["value"] - float(rr.get("shares_outstanding") or 0)) < 0.5]
+            allowed = max([x.get("exception_max", max_staleness_days) for x in matching], default=max_staleness_days)
+            reasons = [x.get("exception_reason", "") for x in matching if x.get("exception_reason")]
+            if stale > max_staleness_days and stale <= allowed and reasons:
+                warnings += 1
+                issues.append(_issue("shares", key, "WARNING", "SHARES_STALENESS_EXCEPTION",
+                    f"Resolved shares fact is {stale} days old; explicit source-bound exception permits up to {allowed} days.",
+                    [rr.get("source_id", "")], [reasons[0]]))
+            elif stale > max_staleness_days:
                 quarantined.add(key)
                 issues.append(_issue("shares", key, "BLOCKING", "SHARES_STALE_RESOLUTION",
                     f"Resolved shares fact is {stale} days old, exceeding {max_staleness_days} days.",
