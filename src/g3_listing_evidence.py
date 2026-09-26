@@ -149,6 +149,7 @@ def build(events_path: Path, supplement_path: Path, output_path: Path, report_pa
     output: list[dict[str, str]] = []
     archive_resolved = 0
     supplement_resolved = 0
+    supplement_corroborated = 0
     unresolved = []
     conflicts = []
 
@@ -176,12 +177,32 @@ def build(events_path: Path, supplement_path: Path, output_path: Path, report_pa
                 continue
 
             if len(found) == 1:
-                if eid in supplement:
-                    raise G3EvidenceError(
-                        f"event {eid} resolves from archive but is also present in supplement"
-                    )
                 exchange = next(iter(found))
                 item = sorted(found[exchange], key=lambda x: (x["release_date"], x["name"]))[0]
+                row = supplement.get(eid)
+                if row is not None:
+                    if row.get("historical_symbol", "").upper() != symbol:
+                        raise G3EvidenceError(f"supplement symbol mismatch for {eid}")
+                    if row.get("effective_date") != event_date.isoformat():
+                        raise G3EvidenceError(f"supplement effective_date mismatch for {eid}")
+                    if row.get("primary_exchange") != exchange:
+                        conflicts.append({
+                            "event_id": eid,
+                            "symbol": symbol,
+                            "archive_exchange": exchange,
+                            "supplement_exchange": row.get("primary_exchange"),
+                        })
+                        continue
+                    corroborated = {k: row.get(k, "") for k in OUTPUT_FIELDS}
+                    corroborated["evidence_kind"] = (
+                        (corroborated.get("evidence_kind") or "public_event_evidence")
+                        + "+replication_archive_corroborated"
+                    )
+                    output.append(corroborated)
+                    supplement_resolved += 1
+                    supplement_corroborated += 1
+                    continue
+
                 output.append({
                     "event_id": eid,
                     "historical_symbol": symbol,
@@ -247,6 +268,7 @@ def build(events_path: Path, supplement_path: Path, output_path: Path, report_pa
         "resolved_count": len(output),
         "archive_resolved_count": archive_resolved,
         "supplement_resolved_count": supplement_resolved,
+        "supplement_corroborated_count": supplement_corroborated,
         "unresolved_count": 0,
         "conflict_count": 0,
         "exchange_counts": dict(sorted(counts.items())),
