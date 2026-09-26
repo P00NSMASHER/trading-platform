@@ -92,6 +92,74 @@ def test_contract_audit_does_not_count_synthetic_as_real(tmp_path):
     assert report["ready_for_real_backfill"] is False
 
 
+def test_real_contract_row_requires_actual_required_symbol_content(tmp_path):
+    data = tmp_path / "taq.csv"
+    data.write_text(
+        "timestamp,symbol,price,size,exchange,conditions\\n"
+        "2015-02-17 14:19:02,OTHER,100.25,50,N,Q\\n",
+        encoding="utf-8",
+    )
+    contract = tmp_path / "contract.json"
+    contract.write_text(json.dumps({"schema_version":"1", "sources":[{
+        "source_id":"real-taq", "source_family":"nyse_daily_taq", "record_kind":"equity_trade",
+        "path":str(data), "authorized":True, "data_classification":"authorized_historical_market_data",
+        "license_reference":"TEST-LICENSE", "trade_date":"2015-02-17", "timezone":"America/New_York",
+        "delimiter":",", "encoding":"utf-8", "format_version":"fixture", "column_map":{}
+    }]}), encoding="utf-8")
+    class R:
+        source_family="nyse_daily_taq"; record_kind="equity_trade"; trade_date="2015-02-17"; requirement="required_core"; historical_symbols="TEST"
+    report = audit_contract(contract, [R()])
+    assert report["real_authorized_required_rows_covered"] == 0
+    assert report["content_validated_real_rows"] == 0
+    assert report["ready_for_real_backfill"] is False
+    assert report["content_validation_failure_preview"]
+
+
+def test_generic_authorized_provider_can_satisfy_equivalent_g2_capability(tmp_path):
+    data = tmp_path / "generic.csv"
+    data.write_text(
+        "timestamp,symbol,price,size,exchange,conditions\\n"
+        "2015-02-17 14:19:02,TEST,100.25,50,N,Q\\n",
+        encoding="utf-8",
+    )
+    contract = tmp_path / "contract.json"
+    contract.write_text(json.dumps({"schema_version":"1", "sources":[{
+        "source_id":"generic-equity", "source_family":"generic_authorized_market_data", "record_kind":"equity_trade",
+        "path":str(data), "authorized":True, "data_classification":"authorized_historical_market_data",
+        "license_reference":"TEST-LICENSE", "trade_date":"2015-02-17", "timezone":"America/New_York",
+        "delimiter":",", "encoding":"utf-8", "format_version":"vendor-v1", "column_map":{}
+    }]}), encoding="utf-8")
+    class R:
+        source_family="nyse_daily_taq"; record_kind="equity_trade"; trade_date="2015-02-17"; requirement="required_core"; historical_symbols="TEST"
+    report = audit_contract(contract, [R()])
+    assert report["real_authorized_required_rows_covered"] == 1
+    assert report["provider_equivalent_rows_covered"] == 1
+    assert report["missing_real_authorized_required_rows"] == 0
+    assert report["ready_for_real_backfill"] is True
+
+
+def test_real_contract_wrong_declared_market_date_does_not_cover_requirement(tmp_path):
+    data = tmp_path / "wrong-date.csv"
+    data.write_text(
+        "timestamp,symbol,price,size,exchange,conditions\\n"
+        "2015-02-18 14:19:02,TEST,100.25,50,N,Q\\n",
+        encoding="utf-8",
+    )
+    contract = tmp_path / "contract.json"
+    contract.write_text(json.dumps({"schema_version":"1", "sources":[{
+        "source_id":"real-taq", "source_family":"nyse_daily_taq", "record_kind":"equity_trade",
+        "path":str(data), "authorized":True, "data_classification":"authorized_historical_market_data",
+        "license_reference":"TEST-LICENSE", "trade_date":"2015-02-17", "timezone":"America/New_York",
+        "delimiter":",", "encoding":"utf-8", "format_version":"fixture", "column_map":{}
+    }]}), encoding="utf-8")
+    class R:
+        source_family="nyse_daily_taq"; record_kind="equity_trade"; trade_date="2015-02-17"; requirement="required_core"; historical_symbols="TEST"
+    report = audit_contract(contract, [R()])
+    assert report["real_authorized_required_rows_covered"] == 0
+    assert report["ready_for_real_backfill"] is False
+    assert "matching_date_rows=0" in report["content_validation_failure_preview"][0]
+
+
 def test_full_build_real_corpus_counts(tmp_path):
     out = tmp_path / "out"
     report = build(ROOT / "data/processed/historical_events.csv", out,
