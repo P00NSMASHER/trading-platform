@@ -78,6 +78,7 @@ def scan(events_path: Path, outdir: Path) -> dict:
                 "url": BASE.format(year=year),
                 "byte_count": len(blob),
                 "entry_count": len(names),
+                "sample_entry_names": names[:30],
             })
             for name in names:
                 base = Path(name).name
