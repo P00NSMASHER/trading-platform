@@ -1,0 +1,82 @@
+name: g4-shares-batch-0007-candidate
+
+on:
+  push:
+    branches: [fix/g4-shares-batch-0007-candidate]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: g4-shares-batch-0007-candidate
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[g4-batch-0007-generated]')"
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONPATH: src
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+      - name: Collect strict SEC evidence for observations 3001-3500
+        run: |
+          python -m g4_sec_shares_batch \
+            --requirements data/processed/coverage_plan_real/symbol_date_requirements.csv \
+            --overrides data/public/metadata/g4_historical_cik_map_batch_0007.csv \
+            --start 3000 --count 500 \
+            --output data/public/metadata/g4_shares_batch_0007.csv \
+            --report data/processed/authorized_input_real/g4_shares_batch_0007_report.json
+      - name: Verify fail-closed candidate invariants
+        run: |
+          python - <<'PY'
+          import csv, json
+          from datetime import date, datetime
+          from pathlib import Path
+          out=Path("data/public/metadata/g4_shares_batch_0007.csv")
+          report=Path("data/processed/authorized_input_real/g4_shares_batch_0007_report.json")
+          rows=list(csv.DictReader(out.open(newline="",encoding="utf-8")))
+          r=json.loads(report.read_text())
+          assert len(rows)==500, len(rows)
+          assert [int(x["observation_index"]) for x in rows] == list(range(3001,3501))
+          assert r["batch_start_zero_based"]==3000 and r["batch_count"]==500
+          assert r["resolved_count"] + r["unresolved_count"] == 500
+          assert r["max_staleness_days"] == 130
+          for row in rows:
+              if row["status"] != "RESOLVED":
+                  assert row["shares_outstanding"] == ""
+                  continue
+              stale=int(row["staleness_days"])
+              assert 0 <= stale <= 130, row
+              assert date.fromisoformat(row["fact_date"]) <= date.fromisoformat(row["target_trade_date"]), row
+              assert date.fromisoformat(row["filed_date"]) <= date.fromisoformat(row["target_trade_date"]), row
+              assert datetime.fromisoformat(row["available_at"]) <= datetime.fromisoformat(row["target_cutoff_local"]), row
+              assert int(row["shares_outstanding"]) > 0, row
+          print(json.dumps(r,indent=2,sort_keys=True))
+          PY
+      - name: Focused collector tests
+        run: |
+          python -m pytest -q tests/test_g4_materialize_batch.py tests/test_metadata_resolver.py tests/test_metadata_quality.py
+      - name: Commit candidate evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            data/public/metadata/g4_shares_batch_0007.csv \
+            data/processed/authorized_input_real/g4_shares_batch_0007_report.json
+          git commit -m "[g4-batch-0007-generated] candidate observations 3001-3500"
+          git push origin HEAD:fix/g4-shares-batch-0007-candidate
