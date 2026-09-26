@@ -31,8 +31,6 @@ jobs:
         run: |
           head -n 1 data/public/metadata/g4_shares_anchors_batch_0001.csv > /tmp/anchors.csv
           tail -n +2 data/public/metadata/g4_shares_anchors_batch_0001.csv >> /tmp/anchors.csv
-          tail -n +2 data/public/metadata/g4_shares_anchors_batch_0002.csv >> /tmp/anchors.csv
-          tail -n +2 data/public/metadata/g4_shares_anchors_batch_0003.csv >> /tmp/anchors.csv
           tail -n +2 data/public/metadata/g4_sec_history_0501_3000.csv >> /tmp/anchors.csv
           tail -n +2 data/public/metadata/g4_fallback_1501_3000.csv >> /tmp/anchors.csv
       - name: Materialize
