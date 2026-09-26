@@ -89,11 +89,14 @@ def scan(events_path: Path, outdir: Path) -> dict:
                     release_date = datetime.strptime(m.group("date"), "%Y%m%d").date()
                 except ValueError:
                     continue
+                info = zf.getinfo(name)
                 entries_by_permno.setdefault(m.group("permno"), []).append({
                     "year": year,
                     "name": name,
                     "release_date": release_date,
-                    "zip_bytes": blob,
+                    "zip_info_date_time": list(info.date_time),
+                    "zip_info_create_system": info.create_system,
+                    "zip_info_external_attr": info.external_attr,
                 })
 
     results = []
@@ -125,6 +128,9 @@ def scan(events_path: Path, outdir: Path) -> dict:
                     "archive_year": item["year"],
                     "archive_file": item["name"],
                     "release_date": item["release_date"].isoformat(),
+                    "zip_info_date_time": item["zip_info_date_time"],
+                    "zip_info_create_system": item["zip_info_create_system"],
+                    "zip_info_external_attr": item["zip_info_external_attr"],
                     "text_length": len(text),
                     "text_head": _norm_space(text[:1200]),
                     "time_matches": times,
