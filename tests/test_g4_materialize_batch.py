@@ -76,6 +76,38 @@ def test_materializer_uses_freshest_valid_pre_window_anchor(tmp_path):
     assert row["source_reference"] == "https://example.invalid/new"
 
 
+
+
+def test_materializer_allows_reasoned_source_bound_staleness_exception(tmp_path):
+    req = tmp_path / "req.csv"
+    anchors = tmp_path / "anchors.csv"
+    out = tmp_path / "out.csv"
+    report = tmp_path / "report.json"
+    _write_csv(
+        req,
+        ["historical_symbol", "trade_date", "window_intervals_local"],
+        [["TEST", "2013-03-26", "10:00-11:00"]],
+    )
+    _write_csv(
+        anchors,
+        [
+            "historical_symbol","cik","fact_date","shares_outstanding","filed_date","form",
+            "accession","source_tag","source_reference","source_grade","max_staleness_days",
+            "staleness_exception_reason","notes",
+        ],
+        [[
+            "TEST","0000000001","2012-10-31","10000000","2012-11-07","10-Q",
+            "A","sec_cover_page","https://example.invalid/a","A","160",
+            "issuer late-filing period; latest public point-in-time share count","",
+        ]],
+    )
+    result = g4.build(req, anchors, 0, 1, out, report)
+    assert result["resolved_count"] == 1
+    row = next(csv.DictReader(out.open(newline="", encoding="utf-8")))
+    assert row["staleness_exception_max_days"] == "160"
+    assert row["staleness_exception_reason"]
+
+
 def test_batch_0001_generated_evidence_is_exactly_500_when_present():
     evidence = ROOT / "data/public/metadata/g4_shares_batch_0001.csv"
     report = ROOT / "data/processed/authorized_input_real/g4_shares_batch_0001_report.json"
