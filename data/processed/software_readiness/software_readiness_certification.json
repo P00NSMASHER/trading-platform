@@ -1,0 +1,233 @@
+{
+  "checks": [
+    {
+      "category": "software",
+      "check_id": "SOFTWARE_COMPONENTS",
+      "detail": "missing=[]",
+      "passed": true
+    },
+    {
+      "category": "adversarial_testing",
+      "check_id": "HOSTILE_TEST_COVERAGE",
+      "detail": "groups=5; missing={}",
+      "passed": true
+    },
+    {
+      "category": "adversarial_testing",
+      "check_id": "HOSTILE_REGRESSION_SUITE",
+      "detail": "returncode=0; passed=162",
+      "passed": true
+    },
+    {
+      "category": "runtime",
+      "check_id": "PRIVATE_RUNTIME_INTEGRITY",
+      "detail": "ok=True; audit_sha256=6af50bb4e78665e1d3a13fddc97b4606d75a1d29143b3c78f31bf160a96c6cfd; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+      "passed": true
+    }
+  ],
+  "git_commit": "4d1b51f5ff8a8e7484db3c29448285e212c4952f",
+  "hostile_regression_suite": {
+    "missing_test_files": [],
+    "ok": true,
+    "passed_count": 162,
+    "returncode": 0,
+    "stdout_tail": "........................................................................ [ 44%]\n........................................................................ [ 88%]\n..................                                                       [100%]\n162 passed in 9.37s\n",
+    "test_files": [
+      "tests/test_baseline_engine.py",
+      "tests/test_feature_engine.py",
+      "tests/test_historical_market_backfill.py",
+      "tests/test_metadata_resolver.py",
+      "tests/test_graph_feature_engine.py",
+      "tests/test_metadata_quality.py",
+      "tests/test_matched_control_generator.py",
+      "tests/test_coverage_planner.py",
+      "tests/test_model_training_harness.py",
+      "tests/test_graph_challenger_harness.py",
+      "tests/test_evaluation_release_controller.py",
+      "tests/test_licensed_data_intake.py",
+      "tests/test_real_data_replay.py",
+      "tests/test_real_data_release_sprint.py",
+      "tests/test_control_plane_adversarial.py",
+      "tests/test_deployment_hardening.py"
+    ]
+  },
+  "overall_status": "SOFTWARE_READY_REAL_DATA_PENDING",
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "Independent certification of software readiness versus real-data validation for the offline historical market-surveillance research platform.",
+  "real_data_state": {
+    "coverage": {
+      "covered_real_source_date_rows": 0,
+      "missing_real_source_date_rows": 1656,
+      "required_source_date_rows": 1656
+    },
+    "gates": {
+      "EVALUATION_RELEASE": false,
+      "G1_EXACT_TIMING_ANALYSIS": false,
+      "G2_REAL_MARKET_DATA": false,
+      "G3_PRIMARY_LISTING_HISTORY": true,
+      "G4_SHARES_OUTSTANDING": true,
+      "G5_MODEL_EVALUATION_CONTROLS": false,
+      "G6_METADATA_QUALITY": false,
+      "REAL_DATA_REPLAY": false
+    },
+    "input_hashes": {
+      "coverage_summary": "6bf06c331abf04265c4b2c0971ae621619009dcb7e401b08127746c5d798ffaa",
+      "metadata_quality": "09cd00104845aeb44efda59ccd06fdf95136167fa7b0945c55be2377ede2baa3",
+      "metadata_readiness": "d5bd369fe81d93cee6151e942a80d19c5a8e9cff916da61ff973592d8d123e64",
+      "real_data_replay_status": null
+    },
+    "metadata": {
+      "announcement_exact_resolved": 0,
+      "announcement_required": 174,
+      "control_dates_required": 72,
+      "control_dates_resolved": 0
+    },
+    "replay_status_exists": false,
+    "replay_status_path": "data/processed/real_data_replay/real_data_replay_status.json",
+    "validated": false
+  },
+  "real_data_validated": false,
+  "runtime_self_check": {
+    "audit_sha256": "6af50bb4e78665e1d3a13fddc97b4606d75a1d29143b3c78f31bf160a96c6cfd",
+    "case_database": {
+      "case_count": 1,
+      "exists": true,
+      "foreign_key_violation_count": 0,
+      "foreign_keys_clean": true,
+      "logical_fingerprint": "4a82d24902f44e73da790e084d49e597758f72b0ade1794720f656e884ebc330",
+      "model_hash_consistent": true,
+      "model_source_count": 1,
+      "ok": true,
+      "path": "/home/runner/work/trading-platform/trading-platform/data/processed/case_demo/cases.sqlite",
+      "review_chain_results": {
+        "CASE-H001": true
+      },
+      "review_chains_valid": true,
+      "row_counts": {
+        "case_record": 1,
+        "case_timeline": 6,
+        "control_snapshot": 3,
+        "feature_snapshot": 32,
+        "review_history": 2,
+        "source_artifact": 5
+      },
+      "sha256": "319c06160255509600aa97252412fc5ee6a30d437f000abbdd1102e2759b2092",
+      "source_hashes_well_formed": true,
+      "sqlite_integrity": true,
+      "sqlite_integrity_rows": [
+        "ok"
+      ]
+    },
+    "config_path": "/home/runner/work/trading-platform/trading-platform/config/runtime.demo.toml",
+    "filesystem_permissions": {
+      "directories": {
+        "/home/runner/work/trading-platform/trading-platform/private_runtime/audit": {
+          "mode": "0o700",
+          "ok": true
+        },
+        "/home/runner/work/trading-platform/trading-platform/private_runtime/backups": {
+          "mode": "0o700",
+          "ok": true
+        },
+        "/home/runner/work/trading-platform/trading-platform/private_runtime/exports": {
+          "mode": "0o700",
+          "ok": true
+        }
+      },
+      "files": {
+        "/home/runner/work/trading-platform/trading-platform/config/runtime.demo.toml": {
+          "mode": "0o600",
+          "ok": true
+        },
+        "/home/runner/work/trading-platform/trading-platform/data/processed/case_demo/cases.sqlite": {
+          "mode": "0o600",
+          "ok": true
+        },
+        "/home/runner/work/trading-platform/trading-platform/data/processed/model_demo/model_bundle.joblib": {
+          "mode": "0o600",
+          "ok": true
+        },
+        "/home/runner/work/trading-platform/trading-platform/data/processed/model_demo/training_manifest.json": {
+          "mode": "0o600",
+          "ok": true
+        }
+      },
+      "ok": true
+    },
+    "generated_at_utc": "2026-09-27T11:37:54Z",
+    "model_bundle": {
+      "deserialization_attempted": true,
+      "exists": true,
+      "expected_sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+      "expected_skops_trusted_types_sha256": null,
+      "hash_matches_expected": true,
+      "model_format": "joblib",
+      "ok": true,
+      "path": "/home/runner/work/trading-platform/trading-platform/data/processed/model_demo/model_bundle.joblib",
+      "prohibited_trade_keys_present": [],
+      "required_keys_present": true,
+      "research_use_only": true,
+      "schema_version": "0.6.0",
+      "selected_feature_count": 32,
+      "sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+      "skops_trusted_types_file": null,
+      "threshold_valid": true
+    },
+    "ok": true,
+    "policy": {
+      "execution_integration_disabled": true,
+      "loopback_only": true,
+      "network_bind_disabled": true,
+      "research_use_only": true,
+      "trade_outputs_disabled": true
+    },
+    "research_notice": "Historical market-surveillance research only. A surveillance score is not a finding of insider trading, MNPI misuse, or any other violation.",
+    "runtime_versions": {
+      "joblib": "1.5.3",
+      "numpy": "2.3.5",
+      "python": "3.11.16",
+      "scikit-learn": "1.8.0",
+      "scipy": "1.17.0",
+      "threadpoolctl": "3.6.0"
+    },
+    "schema_version": "1.0.0",
+    "training_manifest": {
+      "deployment_status": "offline research artifact; no market feed, broker, notification, or execution integration",
+      "exists": true,
+      "lookahead_fields_rejected": true,
+      "model_schema_matches": true,
+      "ok": true,
+      "path": "/home/runner/work/trading-platform/trading-platform/data/processed/model_demo/training_manifest.json",
+      "prohibited_outputs": [
+        "BUY",
+        "SELL",
+        "LONG/SHORT recommendation",
+        "expected return",
+        "target price",
+        "position size",
+        "order instruction"
+      ],
+      "research_use_only": true,
+      "sha256": "1012a39529484440f9c6bc5bd8f07b60d05ae16c3b841181172e1801da48bc04"
+    }
+  },
+  "schema_version": "1.0.0",
+  "semantics": {
+    "active_champion_modification_permitted": false,
+    "automatic_promotion_permitted": false,
+    "real_data_validated_requires": "G1 exact timing, G2 real market data, G3 listing, G4 shares, genuine G5 controls, metadata quality, real-data replay, and fail-closed evaluation release all green",
+    "software_ready_does_not_mean": "licensed historical market data has been received or that real-world model performance has been validated",
+    "software_ready_means": "required pipeline components exist; hostile regression suite passes; private runtime integrity self-check passes"
+  },
+  "software_failure_count": 0,
+  "software_failures": [],
+  "software_ready": true
+}

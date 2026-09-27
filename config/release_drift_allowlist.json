@@ -608,6 +608,22 @@
     "docs/licensed_data_intake.md": {
       "expected_sha256": "e2ac52726969236109428d0125615e545e8cf6ae2e03d6c1f60cf7674699d27b",
       "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
+    },
+    "src/software_readiness_certification.py": {
+      "expected_sha256": "bf7cf2aae77ee334b317b7af4365c7bd1270a9040785f5c703bb920d61ba6691",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by hostile regression and private-runtime integrity checks."
+    },
+    "tests/test_software_readiness_certification.py": {
+      "expected_sha256": "5d322e31d254397ec613423c6453ea17e58cce3927b58b2b446041cc059c0761",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by hostile regression and private-runtime integrity checks."
+    },
+    "docs/software_readiness_certification.md": {
+      "expected_sha256": "7512fff8e36f2184f0cb66d21fe8642138790c8231b74249c6c5ef56179fbefe",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by hostile regression and private-runtime integrity checks."
+    },
+    "data/processed/software_readiness/software_readiness_certification.json": {
+      "expected_sha256": "53b088b4f390ac9fa24eee5326846b7c618482425286cd4564962b0b59949452",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by hostile regression and private-runtime integrity checks."
     }
   }
 }
