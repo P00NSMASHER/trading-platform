@@ -650,8 +650,8 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "dashboard/index.html": {
-      "expected_sha256": "605c6ae3b412e90fc876864e3c0e542c8d7496aee77fa2a231dab1a9294f5228",
-      "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
+      "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
+      "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "tests/test_public_dashboard.py": {
       "expected_sha256": "2ca66c26f68bc96fa079f2ddbd795e222fb10f67e8b8dd882e48b06841968cc1",
