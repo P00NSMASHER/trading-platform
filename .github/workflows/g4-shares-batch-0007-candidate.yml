@@ -183,6 +183,12 @@ jobs:
           allow_path.write_text(json.dumps(allow,indent=2)+"\n",encoding="utf-8")
           PY
 
+      - name: Remove temporary generation machinery
+        run: |
+          rm -f .github/workflows/g4-shares-batch-0007-candidate.yml
+          rm -f src/g4_sec_shares_batch.py
+          rm -f data/public/metadata/g4_historical_cik_map_batch_0007.csv
+
       - name: Full test suite
         run: python -m pytest -q
 
@@ -190,18 +196,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
-            config/metadata_sources.public_progress.json \
-            config/release_drift_allowlist.json \
-            data/public/metadata/g4_shares_anchors_batch_0007.csv \
-            data/public/metadata/g4_shares_batch_0007.csv \
-            data/processed/authorized_input_real/g4_shares_batch_0007_report.json \
-            data/processed/authorized_input_real/metadata_domain_quality.csv \
-            data/processed/authorized_input_real/metadata_quality_issues.csv \
-            data/processed/authorized_input_real/metadata_quality_summary.json \
-            data/processed/authorized_input_real/metadata_readiness_summary.json \
-            data/processed/authorized_input_real/metadata_source_inventory.json \
-            data/processed/authorized_input_real/metadata_unresolved_gates.csv \
-            data/processed/authorized_input_real/shares_outstanding_resolutions.csv
+          git add -A
+          git status --short
           git commit -m "[g4-batch-0007-integrated] register observations 3001-3500"
           git push origin HEAD:fix/g4-shares-batch-0007-candidate
