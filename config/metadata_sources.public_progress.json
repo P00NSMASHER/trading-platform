@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G3 complete plus strict G4 batches 0001-0008 and exact ACO 2013-04-10 SEC acceptance repair; hard 130-day shares staleness enforced.",
+  "purpose": "Cumulative public point-in-time metadata progress: G3 complete and G4 fully accounted through exact shares evidence plus immutable reviewed fail-closed exclusions; hard 130-day staleness and no-lookahead rules enforced.",
   "sources": [
     {
       "source_id": "public-g3-primary-listing-evidence",
@@ -210,5 +210,14 @@
         "source_reference": "source_reference"
       }
     }
-  ]
+  ],
+  "reviewed_share_exclusions": {
+    "enabled": true,
+    "mode": "reviewed_fail_closed_exclusions",
+    "path": "data/processed/authorized_input_real/g4_final_blockers.json",
+    "expected_sha256": "ce36e5cb2839f5f8dc22b2d955954231ddeb32838c97a487b1c482f7279096ed",
+    "expected_count": 18,
+    "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL",
+    "downstream_policy": "Excluded symbol-dates remain blank, are marked excluded_fail_closed, and may not contribute shares outstanding or turnover."
+  }
 }

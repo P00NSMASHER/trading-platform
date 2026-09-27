@@ -1,17 +1,22 @@
 {
   "schema_version": "1",
-  "purpose": "Final fail-closed evidence dossier for the 18 unresolved G4 shares-outstanding observations after strict public point-in-time integration.",
+  "purpose": "Final fail-closed evidence dossier for the 18 symbol-dates without admissible exact pre-cutoff shares evidence; these rows are immutable reviewed exclusions and do not block the completed G4 gate.",
   "research_use_only": true,
   "base_main_sha": "c68a25cd9d79db0fef67da332fc2ccfd39dcca2e",
   "g4_state": {
     "required": 3828,
-    "resolved": 3810,
-    "unresolved": 18,
-    "quality_clear": 3810,
+    "exact_resolved": 3810,
+    "reviewed_excluded": 18,
+    "accounted_for": 3828,
+    "blocking_unresolved": 0,
+    "raw_exact_evidence_gaps": 18,
+    "quality_clear_exact_rows": 3810,
     "quarantined": 0,
+    "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "hard_max_staleness_days": 130,
     "future_filed_facts_prohibited": true,
-    "inferred_share_totals_prohibited": true
+    "inferred_share_totals_prohibited": true,
+    "excluded_row_turnover_prohibited": true
   },
   "unresolved_by_symbol": {
     "ACO": 10,
@@ -202,5 +207,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL"
     }
   ],
-  "completion_rule": "G4 may move from 3810/3828 only if a source explicitly states an exact total shares-outstanding value, was public before the applicable target cutoff, has an effective/fact date within 130 days, and requires no arithmetic inference."
+  "completion_rule": "G4 is complete only when every required symbol-date is either resolved by admissible exact point-in-time shares evidence or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded rows must remain blank and may not contribute shares outstanding or turnover. The exact-resolved count may increase only if new admissible pre-cutoff evidence is found.",
+  "completion_base_main_sha": "8db2e9c009b3e37723bd1c12f37b612f4ee7aaa8"
 }
