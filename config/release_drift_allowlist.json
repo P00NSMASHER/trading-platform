@@ -637,13 +637,21 @@
       "expected_sha256": "328511247939f7bfe7b966758719b40fdf1c1d836bbc52b8b459e81313de25bf",
       "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
     },
+    "config/real_data_replay.software_proof.json": {
+      "expected_sha256": "03a6165b68d2ca3857ee0d92693af72f6527ec374dce99a1b6fac38516562532",
+      "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
+    },
     "src/software_readiness_certification.py": {
-      "expected_sha256": "469a661abdc4d18d3fca8edf6642e95226b46dfeedd433fadd0e749450227a2e",
-      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+      "expected_sha256": "b472c49c8b88740ffea4c8639117390565b66395337dc1d02f5c76ad9a6511c2",
+      "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
+    },
+    "data/processed/real_data_replay/real_data_replay_status.json": {
+      "expected_sha256": "6bf33e7985870318ab863c9adcb483fac3db6bcb9529e012e632effab864ca49",
+      "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "97e66763c61b3ee8e687a09a6ef571d9a2f6365dd791712334385aee6bf64f5d",
-      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+      "expected_sha256": "bc07b0d617798e65e9d232cdced7f7ab6f8c7ead1dfb6f3021e777cbbc76d1b9",
+      "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     }
   }
 }
