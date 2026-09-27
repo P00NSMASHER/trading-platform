@@ -217,7 +217,6 @@ jobs:
           git add data/processed/authorized_input_real
           git add data/processed/real_data_replay
           git add data/processed/software_readiness
-          git add -u .github/workflows/regenerate-authoritative-receipts.yml
           git status --short
           git commit -m "Regenerate authoritative trading-platform receipts"
           git push origin "HEAD:$TARGET_BRANCH"
