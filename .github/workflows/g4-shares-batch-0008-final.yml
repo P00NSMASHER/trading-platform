@@ -186,6 +186,9 @@ jobs:
       - name: Remove temporary generation workflow
         run: git rm -f .github/workflows/g4-shares-batch-0008-final.yml
 
+      - name: Stage reviewed integration tree
+        run: git add -A
+
       - name: Harden ephemeral runtime permissions
         run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
 
