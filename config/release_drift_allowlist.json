@@ -68,11 +68,11 @@
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "4a2e915ff98bad4e5192c8e1eddbde21b67d74bd40cf807cf3b3cb5bed40e368",
+      "expected_sha256": "08f0de59fcf54e8c6f717b2f2bc9a7324a3e2e41f70acb7cb5d53815a20abc3f",
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "9b74023bd3a03e770d6b367b1ce58088a4ff10ed96039c58921fc57763949656",
+      "expected_sha256": "6ed9bc855880ff9397c1780a3b571bc0b6f54e93a78ca3b731ab345ded9dd4c8",
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "src/metadata_quality.py": {
@@ -370,7 +370,7 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "9416ec7d6d3911ca2704ef4a9f611d1511e0e3200fe7761ce89bab21e5211b04",
+      "expected_sha256": "cf85e549dc35800da6c0ef15430ccd64d82be7b5c466a15147d7156941e4f934",
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
@@ -494,12 +494,12 @@
       "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
     },
     "data/processed/authorized_input_real/g4_final_blockers.json": {
-      "expected_sha256": "95c15b483654d912bce35388b5b66db3eb3a8f8e51320d0ee4e6fb7eafbff8a7",
-      "reason": "G4 final blocker dossier: durable audit record for the 18 remaining fail-closed shares observations after exhaustive pre-cutoff evidence research."
+      "expected_sha256": "ce36e5cb2839f5f8dc22b2d955954231ddeb32838c97a487b1c482f7279096ed",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "docs/g4_final_blockers.md": {
-      "expected_sha256": "05bb5267b5ca0a6a23f31630704d1f2302a82c5faa77df20aa2ef806b9aa45d9",
-      "reason": "G4 final blocker dossier: durable audit record for the 18 remaining fail-closed shares observations after exhaustive pre-cutoff evidence research."
+      "expected_sha256": "b2d83eac9eb2cc032d9a7686107ef4e696e35afdec8fa8fd26b6f946158910ef",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "tests/test_metadata_quality.py": {
       "expected_sha256": "17c2b59823538bfaa5ea15abadd030ac87da326361cd81f7d6d3e94accf000cc",
