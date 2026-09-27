@@ -1,0 +1,23 @@
+{
+  "schema_version": "1",
+  "purpose": "Close exactly one G4 ACO observation using exact SEC EDGAR acceptance time and exact cover-page shares outstanding; no inference or staleness exception.",
+  "research_use_only": true,
+  "historical_symbol": "ACO",
+  "target_trade_date": "2013-04-10",
+  "target_cutoff_local": "2013-04-10T14:10:00-04:00",
+  "fact_date": "2013-03-27",
+  "shares_outstanding": 32287200,
+  "accession": "0001140361-13-016072",
+  "form": "10-K",
+  "filing_date": "2013-04-10",
+  "accepted_local": "2013-04-10T12:56:12-04:00",
+  "accepted_before_target_cutoff": true,
+  "staleness_days": 14,
+  "sec_filing_index": "https://www.sec.gov/Archives/edgar/data/813621/000114036113016072/0001140361-13-016072-index.html",
+  "sec_document": "https://www.sec.gov/Archives/edgar/data/813621/000114036113016072/form10k.htm",
+  "evidence_notes": [
+    "SEC filing detail reports Accepted 2013-04-10 12:56:12.",
+    "The Form 10-K cover page states 32,287,200 common shares outstanding as of March 27, 2013.",
+    "The exact acceptance precedes the 14:10 America/New_York target cutoff."
+  ]
+}

@@ -115,5 +115,18 @@
     "row_count": 328,
     "sha256": "2c7f0880436d5ef7dc526be8c2f9dfa68174e403cdb21e1302590ba21c7d4355",
     "license_reference_present": true
+  },
+  {
+    "source_id": "public-sec-shares-aco-20130410",
+    "record_kind": "shares_outstanding",
+    "source_family": "sec_xbrl_companyfacts",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g4_shares_aco_20130410.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "429731e2f6e6b9e11474c4e35a4b0c5494e5ef1b8b7ccc029a782416074cf736",
+    "license_reference_present": true
   }
 ]
