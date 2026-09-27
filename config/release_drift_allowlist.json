@@ -612,6 +612,22 @@
     "dashboard/index.html": {
       "expected_sha256": "f1370a704ebe4b7223de609b5948e6f52ba853932dd09e5dccb88b28af2d1ff2",
       "reason": "Public-safe read-only research dashboard showing software-ready/real-data-pending state, fail-closed evidence gates, and no licensed rows, credentials, trading outputs, or execution capability."
+    },
+    "src/software_readiness_certification.py": {
+      "expected_sha256": "6715ff9ec98ba4bdf6a3c65b8f74096b13dd71960f7f1b68eb067ef978877954",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
+    },
+    "tests/test_software_readiness_certification.py": {
+      "expected_sha256": "19abafff3563f52f5f5770a16ee43f31171623c2956d1d078af95e9996cfcb9e",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
+    },
+    "docs/software_readiness_certification.md": {
+      "expected_sha256": "7512fff8e36f2184f0cb66d21fe8642138790c8231b74249c6c5ef56179fbefe",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
+    },
+    "data/processed/software_readiness/software_readiness_certification.json": {
+      "expected_sha256": "8ec7419450094332084919a7abf250387886a246736c02d86cafb499b7491198",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
     }
   }
 }
