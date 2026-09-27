@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 5
-- **Immutable reviewed fail-closed exclusions:** 169
+- **Exact first-public announcement timestamps resolved:** 6
+- **Immutable reviewed fail-closed exclusions:** 168
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 5
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 6
 
 This does **not** invent announcement times.
 
@@ -50,3 +50,11 @@ One additional event now has an exact public-release timestamp from the issuer-s
 - `HEJFE-D1D8268651584B6A` (MKC): `2013-04-02T06:30:00-04:00`. McCormick's PR Newswire archive records `McCormick Reports First Quarter Financial Results, Reaffirms 2013 Outlook` at Apr. 2, 2013, 06:30 ET.
 
 The other 169 events remain fail-closed until equivalent admissible evidence is located.
+
+## Issuer archive batch 0005
+
+One additional event now has an exact public-release timestamp from the issuer's historical press-release archive and is removed from the reviewed G1 exclusion set:
+
+- `HEJFE-F170013A9B3F85E2` (SKX): `2015-04-22T16:01:00-04:00`. Skechers' issuer archive records `SKECHERS Announces First Quarter 2015 Financial Results` at Apr. 22, 2015, 4:01 pm EDT and identifies Business Wire distribution.
+
+The other 168 events remain fail-closed until equivalent admissible evidence is located.
