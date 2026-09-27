@@ -21,17 +21,17 @@
     {
       "category": "runtime",
       "check_id": "PRIVATE_RUNTIME_INTEGRITY",
-      "detail": "ok=True; audit_sha256=cdbe37c18fb6a39610d93d6bb81101baef4a7608de38375267f94a75ba7defcd; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+      "detail": "ok=True; audit_sha256=8972ff90846ec85956cf5e3f58bc0c6714c04402c3fc9629175804726e193393; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
       "passed": true
     }
   ],
-  "git_commit": "475e7fe4e1396fc54f8b5c10ddbfee17f67592b8",
+  "git_commit": "95cb977701cb6b15e6273025c0e9586120fd317e",
   "hostile_regression_suite": {
     "missing_test_files": [],
     "ok": true,
     "passed_count": 198,
     "returncode": 0,
-    "stdout_tail": "........................................................................ [ 36%]\n........................................................................ [ 72%]\n......................................................                   [100%]\n198 passed in 21.93s\n",
+    "stdout_tail": "........................................................................ [ 36%]\n........................................................................ [ 72%]\n......................................................                   [100%]\n198 passed in 17.77s\n",
     "test_files": [
       "tests/test_baseline_engine.py",
       "tests/test_feature_engine.py",
@@ -84,12 +84,12 @@
     },
     "input_hashes": {
       "coverage_summary": "6bf06c331abf04265c4b2c0971ae621619009dcb7e401b08127746c5d798ffaa",
-      "metadata_quality": "d870c71cd561962305c946fc504b2d79c5766ee04645de22a2e3deb2a62cd07f",
-      "metadata_readiness": "b32f1e3b5956aafa5323e0bb7687d268861ea7d3f61f09cb61579dc5ca6671ac",
-      "real_data_replay_status": "812df7005eee11fc2dda89339131f1d7188dc83276a4fa70a2e75fdc34771b49"
+      "metadata_quality": "1cd2554b27cc90a64130cd45593d336a58177a7bf316b9f82bd685b127adc42c",
+      "metadata_readiness": "b2a25feee1e40440a82d7be4973f6c49601e7e4d220d686dae98218b4f730a11",
+      "real_data_replay_status": "ff7be861da9ca3ba62775b8b92559434a35a66594014705b650ad2b9343a19e7"
     },
     "metadata": {
-      "announcement_exact_resolved": 3,
+      "announcement_exact_resolved": 4,
       "announcement_required": 174,
       "control_dates_required": 72,
       "control_dates_resolved": 0
@@ -100,7 +100,7 @@
   },
   "real_data_validated": false,
   "runtime_self_check": {
-    "audit_sha256": "cdbe37c18fb6a39610d93d6bb81101baef4a7608de38375267f94a75ba7defcd",
+    "audit_sha256": "8972ff90846ec85956cf5e3f58bc0c6714c04402c3fc9629175804726e193393",
     "case_database": {
       "case_count": 1,
       "exists": true,
@@ -166,7 +166,7 @@
       },
       "ok": true
     },
-    "generated_at_utc": "2026-09-27T16:58:56Z",
+    "generated_at_utc": "2026-09-27T17:08:22Z",
     "model_bundle": {
       "deserialization_attempted": true,
       "exists": true,
