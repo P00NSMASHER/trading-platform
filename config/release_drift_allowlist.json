@@ -609,10 +609,6 @@
       "expected_sha256": "f1370a704ebe4b7223de609b5948e6f52ba853932dd09e5dccb88b28af2d1ff2",
       "reason": "Public-safe read-only research dashboard showing software-ready/real-data-pending state, fail-closed evidence gates, and no licensed rows, credentials, trading outputs, or execution capability."
     },
-    "src/software_readiness_certification.py": {
-      "expected_sha256": "6715ff9ec98ba4bdf6a3c65b8f74096b13dd71960f7f1b68eb067ef978877954",
-      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
-    },
     "tests/test_software_readiness_certification.py": {
       "expected_sha256": "19abafff3563f52f5f5770a16ee43f31171623c2956d1d078af95e9996cfcb9e",
       "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
@@ -625,9 +621,33 @@
       "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
       "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
     },
+    ".github/workflows/licensed-drop-activation-validation.yml": {
+      "expected_sha256": "af5d99a3ec0143209b9ac5409834235993e4f2500053cccdc98224d639559f1e",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+    },
+    "src/licensed_data_drop_processor.py": {
+      "expected_sha256": "3f8077162fd03ccc90677e455684765be9466a07313d331b5982b269b82f568b",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+    },
+    "tests/test_licensed_data_drop_processor.py": {
+      "expected_sha256": "7cd6430dac7fcd409bf88feb57194c06c7fb7c83bf63834fa3708d22f6979558",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+    },
+    "config/licensed_entitlement_manifest.example.json": {
+      "expected_sha256": "ea2e663dfb257da11ac8cf4257c33bb0fc8634ed425c8c17e8e207f70aee4050",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+    },
+    "docs/licensed_data_drop_activation.md": {
+      "expected_sha256": "328511247939f7bfe7b966758719b40fdf1c1d836bbc52b8b459e81313de25bf",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+    },
+    "src/software_readiness_certification.py": {
+      "expected_sha256": "469a661abdc4d18d3fca8edf6642e95226b46dfeedd433fadd0e749450227a2e",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+    },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "530c2f04ddd5b8c526ea5a115cd50b86ff2834dae1309e146390e8e0ba912e2c",
-      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
+      "expected_sha256": "97e66763c61b3ee8e687a09a6ef571d9a2f6365dd791712334385aee6bf64f5d",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
     }
   }
 }
