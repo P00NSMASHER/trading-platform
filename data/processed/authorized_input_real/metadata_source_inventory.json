@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-prnewswire-g1-batch-0002",
+    "record_kind": "announcement_timestamp",
+    "source_family": "official_newswire_archive",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0002.csv",
+    "exists": true,
+    "row_count": 2,
+    "sha256": "f547c6779b0b48fe6242dddf668826e6ee52973a6f8552e060aee9172fa13a43",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-sec-cnmd-release-20110428",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
