@@ -28,6 +28,7 @@ ALLOWED_RECORD_KINDS = {
 }
 ALLOWED_SOURCE_FAMILIES = {
     "nyse_daily_taq",
+    "nasdaq_itch_4_1_decoded",
     "nasdaq_itch_5_0_decoded",
     "cboe_option_trades",
     "cboe_option_quotes",
@@ -260,7 +261,7 @@ def load_contract(path: Path) -> tuple[list[SourceContract], dict]:
             data_path = (path.parent / data_path).resolve()
         if not data_path.exists():
             raise FileNotFoundError(f"source {source_id}: file does not exist: {data_path}")
-        if family == "nasdaq_itch_5_0_decoded" and not format_version:
+        if family in {"nasdaq_itch_4_1_decoded", "nasdaq_itch_5_0_decoded"} and not format_version:
             raise ValueError(f"source {source_id}: decoded ITCH requires format_version")
         out.append(SourceContract(
             source_id=source_id,
@@ -404,6 +405,8 @@ def inspect_source_coverage(spec: SourceContract, *, expected_trade_date: str, r
         "matching_date_rows": matching_date_rows,
         "required_symbol_count": len(required),
         "observed_required_symbol_count": len(required & observed) if required else 0,
+        "observed_required_symbols": sorted(required & observed) if required else [],
+        "observed_symbol_count": len(observed),
         "missing_required_symbols": missing,
         "content_coverage_valid": matching_date_rows > 0 and not missing,
     }
