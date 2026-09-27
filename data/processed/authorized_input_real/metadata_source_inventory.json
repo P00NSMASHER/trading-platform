@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-skechers-g1-batch-0005",
+    "record_kind": "announcement_timestamp",
+    "source_family": "official_newswire_archive",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0005.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "ed8d21215a59a41505fbc0de8521edf81cdca4ac12e44d9a2ff99ac3ddd35c66",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-prnewswire-g1-batch-0004",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
