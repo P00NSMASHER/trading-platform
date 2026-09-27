@@ -3,19 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Trading Platform — Research Control Dashboard</title>
+<meta name="theme-color" content="#070e1d">
+<meta name="description" content="Research control center for the historical market surveillance platform.">
+<title>Trading Center — Research Control</title>
 <style>
 :root{
-  --bg:#07111f;--panel:#0d1a2b;--panel2:#101f33;--text:#edf4ff;
-  --muted:#94a7bf;--line:#1e3450;--green:#36d399;--amber:#f6c453;
-  --red:#fb7185;--blue:#60a5fa;--cyan:#67e8f9
+  color-scheme:dark;--bg:#060d19;--panel:#101c31;--panel2:#16253e;--text:#f0f6ff;
+  --muted:#a5b7d1;--line:#293e60;--green:#55e5bb;--amber:#ffd27b;
+  --red:#ff889d;--blue:#80aaff;--cyan:#75e8ff
 }
 *{box-sizing:border-box}
-body{margin:0;background:
-radial-gradient(900px 500px at 20% -10%,#163052 0%,transparent 60%),
-radial-gradient(800px 500px at 100% 0%,#172443 0%,transparent 60%),
-var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.wrap{max-width:1380px;margin:0 auto;padding:28px 22px 60px}
+body{margin:0;background:radial-gradient(900px 650px at 12% -8%,#1e3771 0%,transparent 65%),radial-gradient(800px 660px at 95% 16%,#103e53 0%,transparent 70%),var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1380px;margin:0 auto;padding:30px 24px 80px}
 .top{display:flex;gap:20px;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
 .eyebrow{color:var(--cyan);text-transform:uppercase;letter-spacing:.16em;font-weight:800;font-size:11px}
 h1{margin:5px 0 3px;font-size:30px;letter-spacing:-.03em}
@@ -25,7 +24,7 @@ h1{margin:5px 0 3px;font-size:30px;letter-spacing:-.03em}
 .ok{color:var(--green);border-color:#1d5b4b}.warn{color:var(--amber);border-color:#6a5530}
 .block{color:var(--red);border-color:#633041}.info{color:var(--blue);border-color:#294b72}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-.card{background:linear-gradient(180deg,rgba(18,35,57,.95),rgba(10,24,40,.95));border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.card{background:linear-gradient(140deg,rgba(23,40,68,.96),rgba(10,22,41,.97));border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.05)}
 .kpi{grid-column:span 3;min-height:128px}
 .kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
 .kpi .value{font-size:34px;font-weight:850;letter-spacing:-.04em;margin-top:8px}
@@ -51,17 +50,36 @@ h2{font-size:16px;margin:0 0 13px}
 .item{padding:10px 11px;border:1px solid var(--line);border-radius:11px;background:#0a1728}
 .item .title{font-weight:750}.item .meta{font-size:11px;color:var(--muted);margin-top:3px}
 .footer{margin-top:18px;color:var(--muted);font-size:11px;text-align:center}
+.top{align-items:center}.top h1{font-size:clamp(30px,4vw,46px);line-height:1.1}.top .sub{max-width:680px}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--cyan);font-weight:800;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.hero-kicker:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px var(--cyan)}
+.topline{border-top:1px solid var(--line);padding-top:18px;margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.priority{border-color:#425576;background:linear-gradient(125deg,rgba(31,43,72,.98),rgba(12,25,45,.98));position:relative;overflow:hidden}
+.priority:before{content:"";position:absolute;right:-65px;top:-120px;width:260px;height:260px;background:radial-gradient(circle,rgba(95,135,255,.17),transparent 70%);pointer-events:none}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:15px}.section-head h2{margin:0 0 4px;font-size:19px;letter-spacing:-.02em}.section-head p{margin:0;color:var(--muted);font-size:12px}
+.index{flex:none;color:var(--cyan);font:700 12px ui-monospace,SFMono-Regular,monospace;letter-spacing:.06em}
+.task-list,.command-grid,.learn-grid{display:grid;gap:10px}.task,.command,.learn{background:rgba(4,14,29,.65);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0}
+.task{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;align-items:start}.task-title{font-weight:800;font-size:14px}.task-detail{font-size:12px;color:var(--muted);margin-top:3px}.task-prompt{grid-column:1/-1;color:#dce9ff;font-size:12px;line-height:1.5;border-left:2px solid #568be8;padding:4px 0 4px 11px;overflow-wrap:anywhere}.task button{grid-column:2;grid-row:1/3}
+.pill{display:inline-block;border:1px solid #68504b;border-radius:999px;color:var(--amber);font-size:10px;letter-spacing:.06em;font-weight:800;padding:4px 8px;margin-bottom:7px}
+.command-grid,.learn-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.command h3,.learn h3{font-size:14px;margin:0 0 5px}.command p,.learn p{font-size:12px;color:var(--muted);margin:0 0 12px}.command .actions,.learn .actions{display:flex;flex-wrap:wrap;gap:8px}
+button,.action-link{font:700 12px/1.25 Inter,ui-sans-serif,system-ui,sans-serif;appearance:none;border:1px solid #4b6a97;color:#eef5ff;background:#1b3152;padding:9px 12px;border-radius:10px;min-height:38px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation}
+button:hover,.action-link:hover{background:#284975;border-color:#80aaff}button:focus-visible,.action-link:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.command .action-link,.learn .action-link{background:transparent}.status-note{color:var(--muted);font-size:11px;margin:12px 0 0}.status-note strong{color:var(--text)}
+.divider{margin:8px 0 4px;color:var(--cyan);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;grid-column:1/-1}
+.badge{white-space:normal}.row{min-width:0}.row .v{overflow-wrap:anywhere}
 @media(max-width:900px){.kpi{grid-column:span 6}.wide,.side{grid-column:1/-1}.pipeline{grid-template-columns:repeat(2,1fr)}.top{flex-direction:column}.badges{justify-content:flex-start}}
-@media(max-width:520px){.wrap{padding:18px 12px 40px}.kpi{grid-column:1/-1}.gates{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr}h1{font-size:26px}}
+@media(max-width:520px){.wrap{padding:max(18px,env(safe-area-inset-top)) 13px max(48px,env(safe-area-inset-bottom))}.top{gap:14px;margin-bottom:16px}.top h1{font-size:35px}.badges{gap:6px}.badge{font-size:10px}.grid{gap:10px}.card{border-radius:18px;padding:17px}.kpi{grid-column:span 6;min-height:112px}.kpi .value{font-size:27px}.kpi .detail{font-size:11px}.gates{grid-template-columns:1fr}.pipeline,.command-grid,.learn-grid{grid-template-columns:1fr}.task{grid-template-columns:1fr auto}.task button{grid-column:2}.section-head h2{font-size:18px}}
+@media(max-width:350px){.kpi{grid-column:1/-1}.task button{grid-column:1;grid-row:auto;justify-self:start}.task-prompt{grid-row:2}}
+@media(prefers-reduced-motion:no-preference){.card{animation:rise .45s both}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top">
     <div>
-      <div class="eyebrow">P00NSMASHER / trading-platform</div>
-      <h1>Research Control Dashboard</h1>
-      <div class="sub">Public-safe, read-only status for the historical market-surveillance research platform. Software plumbing is substantially complete; real-data evaluation remains fail-closed until licensed source files and exact point-in-time evidence are present.</div>
+      <div class="hero-kicker">P00NSMASHER · TRADING CENTER</div>
+      <h1>Research control.</h1>
+      <div class="sub">One view of the evidence gates, next actions, and research tools. Historical surveillance research only; real-data evaluation opens only when the source evidence clears.</div>
     </div>
     <div class="badges">
       <div class="badge ok" id="softwareBadge">● software ready</div>
@@ -71,7 +89,24 @@ h2{font-size:16px;margin:0 0 13px}
     </div>
   </div>
 
-  <div class="grid">
+  <main class="grid">
+    <section class="card full priority" aria-labelledby="fixHeading">
+      <div class="section-head"><div><h2 id="fixHeading">Needs attention</h2><p>Prioritized from the repository certification receipt. Copy a prompt to work on one blocker.</p></div><span class="index">01 / FIX</span></div>
+      <div id="taskList" class="task-list" aria-live="polite"><div class="task"><div><div class="task-title">Checking evidence receipt…</div><div class="task-detail">Loading current repository snapshot.</div></div></div></div>
+      <p class="status-note" id="taskSource">Prompts describe work to request; copying them does not run a job.</p>
+    </section>
+
+    <section class="card full" aria-labelledby="commandHeading">
+      <div class="section-head"><div><h2 id="commandHeading">Tell the platform what to do</h2><p>Copy a research task, then run it in your development workspace.</p></div><span class="index">02 / DIRECT</span></div>
+      <div class="command-grid" id="commandList"></div>
+    </section>
+
+    <section class="card full" aria-labelledby="learnHeading">
+      <div class="section-head"><div><h2 id="learnHeading">Learning center</h2><p>Improve evidence coverage, labels, and validation through the documented intake paths.</p></div><span class="index">03 / TEACH</span></div>
+      <div class="learn-grid" id="learnList"></div>
+      <p class="status-note">Public page: <strong>no uploads or model training here.</strong> Keep licensed rows, credentials, private review notes, and raw vendor files in the private runtime.</p>
+    </section>
+    <div class="divider">System telemetry · repository snapshot</div>
     <section class="card kpi"><div class="label">Historical events</div><div class="value">174</div><div class="detail">72 distinct event dates</div></section>
     <section class="card kpi"><div class="label">Symbol-date requirements</div><div class="value">3,828</div><div class="detail">3,810 exact · 18 fail-closed exclusions</div></section>
     <section class="card kpi"><div class="label">Real G2 market coverage</div><div class="value" id="g2CoverageValue">0 / 1,656</div><div class="detail" id="g2CoverageDetail">authorized source-date rows validated</div></section>
@@ -170,7 +205,7 @@ h2{font-size:16px;margin:0 0 13px}
       <h2>Operational handoff</h2>
       <div class="callout">When licensed files arrive, the intended workflow is now: <b>drop files → scan/hash → review entitlement/schema → update private contract → run replay → inspect exact remaining blockers</b>. No vendor-specific redesign should be necessary for canonical supported formats.</div>
     </section>
-  </div>
+  </main>
 
   <div class="footer" id="dashboardFooter">Read-only public-safe status snapshot · loading machine-readable receipts…</div>
 </div>
@@ -196,6 +231,93 @@ h2{font-size:16px;margin:0 0 13px}
     }
   };
   const num = (v) => Number.isFinite(Number(v)) ? Number(v) : 0;
+  const repo = "https://github.com/P00NSMASHER/trading-platform/blob/main/";
+  const actions = [
+    {title:"Audit what blocks evaluation", detail:"Reconcile the latest G1–G11 receipts and prioritize only proven gaps.", doc:"docs/evaluation_release_controller.md", prompt:"In P00NSMASHER/trading-platform, audit the latest software readiness certification, real-data replay status, and G1–G11 release receipts. Report exact missing evidence and dependent stages, with counts and source paths. Preserve fail-closed gates and do not claim synthetic results are real."},
+    {title:"Process a licensed delivery", detail:"Scan locally, verify hashes and entitlement, then replay the authorized subset.", doc:"docs/licensed_data_drop_activation.md", prompt:"In P00NSMASHER/trading-platform, inspect the locally supplied private licensed-data drop. Hash and validate each source, verify exact-file entitlement and schema against the manifest, activate only authorized rows, run the real-data replay, and report remaining requirements. Do not commit raw vendor data or credentials."},
+    {title:"Check metadata quality", detail:"Review point-in-time conflicts, quarantines, warnings and exclusions.", doc:"docs/metadata_quality_reconciliation.md", prompt:"In P00NSMASHER/trading-platform, inspect the latest metadata quality and reconciliation receipts. Separate warnings from blocking contradictions, trace each to exact source evidence and time of availability, and propose the smallest verified fix. Do not relax G6 or turn an exclusion into real evidence."},
+    {title:"Verify the software", detail:"Run targeted regression and replay proof checks without changing release state.", doc:"docs/real_data_replay.md", prompt:"In P00NSMASHER/trading-platform, run the relevant dashboard, intake, replay, and release-controller checks on the current revision. Report failures with reproducible commands and exact receipt revisions. Keep champion immutability and real-data release gates intact."}
+  ];
+  const lessons = [
+    {title:"01 · Add verified market evidence",detail:"Supply original authorized trade/quote data with exact hashes, dates, symbols and entitlement references. Each validated batch can close real G2 gaps.",doc:"docs/licensed_data_drop_activation.md",prompt:"Help me prepare one authorized market-data batch for P00NSMASHER/trading-platform. Inventory source family, date, record kind, schema and SHA-256; verify entitlement for each exact file; use the private drop activation process; then show the coverage delta and rejected rows without exposing raw licensed data."},
+    {title:"02 · Teach exact event timing",detail:"Add authoritative first-public announcement timestamps; filing acceptance alone is a proxy. This feeds the G1 timing gate.",doc:"docs/metadata_population_pipeline.md",prompt:"Help me add authoritative first-public announcement timestamps to P00NSMASHER/trading-platform through the point-in-time metadata population pipeline. For each event, preserve source reference, publication timestamp, observed availability, hash and uncertainty; quarantine contradictions and show exact G1 coverage change."},
+    {title:"03 · Build genuine controls",detail:"Provide dated, point-in-time candidate universes for matched controls. Retrospective or synthetic substitutes do not count.",doc:"docs/point_in_time_metadata_resolver.md",prompt:"Help me import genuine same-day point-in-time control-universe evidence for P00NSMASHER/trading-platform. Verify each candidate's availability at the treated event time, provenance and required fields; run reconciliation and show G5's 72-date coverage delta without lookahead."},
+    {title:"04 · Learn from review outcomes",detail:"Use private case review and append-only dispositions to improve research labels and audit error patterns.",doc:"docs/private_dashboard.md",prompt:"Review the private historical surveillance case workflow in P00NSMASHER/trading-platform. Propose a provenance-preserving review of false positives, missed cases and ambiguous labels, using append-only dispositions and issuer-separated validation. Do not retrain or promote a model until real-data gates and review evidence support it."}
+  ];
+  function element(tag, cls, value) {
+    const node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (value != null) node.textContent = value;
+    return node;
+  }
+  function copyButton(prompt) {
+    const btn = element("button", "", "Copy prompt");
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Copy prompt: " + prompt.slice(0, 75));
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(prompt);
+        btn.textContent = "Copied ✓";
+        setTimeout(() => btn.textContent = "Copy prompt", 2200);
+      } catch {
+        const selection = window.getSelection();
+        if (selection && btn.closest(".task")) {
+          const range = document.createRange();
+          range.selectNodeContents(btn.closest(".task").querySelector(".task-prompt"));
+          selection.removeAllRanges(); selection.addRange(range);
+        }
+        btn.textContent = "Select text";
+        setTimeout(() => btn.textContent = "Copy prompt", 2200);
+      }
+    });
+    return btn;
+  }
+  function renderCards(items, target) {
+    const parent = byId(target);
+    for (const item of items) {
+      const card = element("article", target === "learnList" ? "learn" : "command");
+      card.append(element("h3", "", item.title),element("p", "", item.detail));
+      const controls = element("div", "actions");
+      controls.append(copyButton(item.prompt));
+      const link = element("a", "action-link", "Read guide ↗");
+      link.href = repo + item.doc;
+      link.target = "_blank"; link.rel = "noopener noreferrer";
+      controls.append(link);
+      card.append(controls);
+      parent.append(card);
+    }
+  }
+  function renderTasks(tasks, source) {
+    const list = byId("taskList"); list.replaceChildren();
+    for (const task of tasks) {
+      const row = element("article", "task");
+      const body = element("div");
+      body.append(element("span", "pill", task.tag), element("div", "task-title", task.title),element("div", "task-detail", task.detail));
+      row.append(body,copyButton(task.prompt),element("div", "task-prompt", task.prompt));
+      list.append(row);
+    }
+    byId("taskSource").textContent = source + " · Copying a prompt does not run a job. Status changes only after a new verified receipt is published.";
+  }
+  function tasksFromReceipt(cert, replay) {
+    const state = cert.real_data_state || {};
+    const gates = state.gates || {};
+    const c = state.coverage || {};
+    const m = state.metadata || {};
+    const tasks = [];
+    if (!cert.software_ready) tasks.push({tag:"P0 · SOFTWARE",title:"Repair software certification",detail:"One or more software checks failed.",prompt:"In P00NSMASHER/trading-platform, inspect software_readiness_certification.json checks and failed test receipts at the current commit. Fix only the proven software failures, rerun targeted checks, and publish a fresh certification without weakening any evidence gate."});
+    if (!gates.G1_EXACT_TIMING_ANALYSIS) tasks.push({tag:"G1 · EVIDENCE",title:"Verify exact announcement clocks",detail:`${num(m.announcement_exact_resolved)} / ${num(m.announcement_required)} first-public timestamps verified.`,prompt:lessons[1].prompt});
+    if (!gates.G2_REAL_MARKET_DATA) tasks.push({tag:"G2 · EVIDENCE",title:"Close market-data coverage",detail:`${num(c.covered_real_source_date_rows).toLocaleString()} / ${num(c.required_source_date_rows).toLocaleString()} authorized source-date rows validated.`,prompt:lessons[0].prompt});
+    if (!gates.G3_PRIMARY_LISTING_HISTORY) tasks.push({tag:"G3 · EVIDENCE",title:"Resolve listing history",detail:"Primary exchange history is incomplete.",prompt:"In P00NSMASHER/trading-platform, audit G3 primary listing history at each treated event time. Add only verifiable point-in-time source records, reconcile conflicts, and show exact coverage delta and remaining gaps."});
+    if (!gates.G4_SHARES_OUTSTANDING) tasks.push({tag:"G4 · EVIDENCE",title:"Resolve shares outstanding",detail:"Some required symbol-date shares facts lack verified point-in-time evidence.",prompt:"In P00NSMASHER/trading-platform, resolve remaining G4 shares-outstanding requirements using authoritative point-in-time filings or authorized reference data. Preserve exact availability times, quarantine contradictions, and report exact versus excluded rows."});
+    if (!gates.G5_MODEL_EVALUATION_CONTROLS) tasks.push({tag:"G5 · EVIDENCE",title:"Supply genuine matched controls",detail:`${num(m.control_dates_resolved)} / ${num(m.control_dates_required)} control dates verified.`,prompt:lessons[2].prompt});
+    if (!gates.G6_METADATA_QUALITY) tasks.push({tag:"G6 · DEPENDENT",title:"Reconcile metadata quality",detail:"Rerun quality checks when upstream evidence changes; trace independent contradictions.",prompt:actions[2].prompt});
+    if (!replay.evaluation_release_permitted && tasks.length === 0) tasks.push({tag:"RELEASE · VERIFY",title:"Investigate remaining release locks",detail:"G1–G6 pass, but offline evaluation is still blocked by other release checks.",prompt:actions[0].prompt});
+    if (!tasks.length) tasks.push({tag:"READY · REVIEW",title:"Review the released evaluation",detail:"All displayed evidence gates are clear; verify the release receipt before drawing conclusions.",prompt:actions[0].prompt});
+    return tasks;
+  }
+
+  renderCards(actions,"commandList");
+  renderCards(lessons,"learnList");
 
   async function loadReceipt(url) {
     const response = await fetch(url, {cache: "no-store"});
@@ -221,6 +343,8 @@ h2{font-size:16px;margin:0 0 13px}
       const annRequired = num(metadata.announcement_required);
       const ctrlResolved = num(metadata.control_dates_resolved);
       const ctrlRequired = num(metadata.control_dates_required);
+
+      renderTasks(tasksFromReceipt(cert,replay),"Based on certification " + String(cert.git_commit || "unknown").slice(0,12));
 
       byId("g2CoverageValue").textContent = covered.toLocaleString() + " / " + required.toLocaleString();
       byId("g2CoverageDetail").textContent = missing.toLocaleString() + " authorized source-date rows still missing";
@@ -276,6 +400,7 @@ h2{font-size:16px;margin:0 0 13px}
         "Live machine-readable repository receipts · certification " + (commit || "unknown") +
         " · " + tests.toLocaleString() + " hostile/regression tests · research only";
     } catch (err) {
+      renderTasks([{tag:"VERIFY STATUS",title:"Refresh the evidence snapshot",detail:"Certification or replay receipt could not be loaded. The numbers below may be stale.",prompt:"In P00NSMASHER/trading-platform, inspect the current main revision and regenerate or locate software_readiness_certification.json and real_data_replay_status.json. Verify their publication path and report current G1–G11 blockers with exact receipt hashes; preserve fail-closed behavior."}],"Live receipt unavailable; static figures below are an unverified snapshot");
       byId("receiptBadge").textContent = "● static snapshot fallback";
       setClass(byId("receiptBadge"), "warn");
       byId("dashboardFooter").textContent =
