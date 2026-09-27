@@ -1,0 +1,134 @@
+name: regenerate-authoritative-receipts-g1-8
+on:
+  push:
+    branches: [regen/authoritative-receipts-g1-8]
+permissions:
+  contents: write
+concurrency:
+  group: regenerate-authoritative-receipts-g1-8
+  cancel-in-progress: false
+jobs:
+  regenerate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONPATH: src
+      SOURCE_SHA: afd1e9b2ccd72acd54aafc0ab4e430223cf83088
+      TARGET_BRANCH: regen/authoritative-receipts-g1-8
+      TEMP_WORKFLOW: .github/workflows/regenerate-authoritative-receipts-g1-8.yml
+    steps:
+      - name: Checkout exact authoritative source commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+      - name: Harden ephemeral runtime
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+      - name: Regenerate canonical metadata receipts
+        run: |
+          python src/metadata_resolver.py --events data/processed/historical_events.csv --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv --contract config/metadata_sources.public_progress.json --outdir data/processed/authorized_input_real
+          python src/metadata_quality.py --events data/processed/historical_events.csv --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv --contract config/metadata_sources.public_progress.json --resolver-dir data/processed/authorized_input_real --outdir data/processed/authorized_input_real
+      - name: Regenerate replay receipt
+        run: python src/real_data_replay.py --config config/real_data_replay.software_proof.json
+      - name: Regenerate software certification
+        run: python src/software_readiness_certification.py --require-software-ready
+      - name: Verify regenerated state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          source_sha="afd1e9b2ccd72acd54aafc0ab4e430223cf83088"
+          r=json.loads(Path("data/processed/authorized_input_real/metadata_readiness_summary.json").read_text())
+          q=json.loads(Path("data/processed/authorized_input_real/metadata_quality_summary.json").read_text())
+          p=json.loads(Path("data/processed/real_data_replay/real_data_replay_status.json").read_text())
+          c=json.loads(Path("data/processed/software_readiness/software_readiness_certification.json").read_text())
+          assert r["announcement_exact_resolved"] == 8
+          assert r["announcement_events_excluded"] == 166
+          assert r["announcement_events_accounted_for"] == 174
+          assert r["announcement_unresolved"] == 0
+          assert r["control_dates_resolved"] == 0
+          assert r["control_dates_excluded"] == 72
+          assert q["blocking_issue_count"] == 0
+          assert q["reviewed_announcement_exclusion_count"] == 166
+          assert p["stages"]["metadata"]["announcement_exact_resolved"] == 8
+          assert c["real_data_state"]["metadata"]["announcement_exact_resolved"] == 8
+          assert c["real_data_state"]["coverage"]["covered_real_source_date_rows"] == 0
+          assert c["software_ready"] is True
+          assert c["overall_status"] == "SOFTWARE_READY_REAL_DATA_PENDING"
+          assert c["git_commit"] == source_sha
+          print(json.dumps({"g1_exact":8,"g1_excluded":166,"source_commit":c["git_commit"]},indent=2))
+          PY
+      - name: Preserve generated files
+        run: |
+          python - <<'PY'
+          import json, shutil, subprocess
+          from pathlib import Path
+          prefixes=("data/processed/authorized_input_real/","data/processed/real_data_replay/","data/processed/software_readiness/")
+          files=[]; deletions=[]
+          for row in subprocess.check_output(["git","status","--porcelain"],text=True).splitlines():
+              status=row[:2]; path=row[3:].split(" -> ")[-1]
+              if not path.startswith(prefixes): continue
+              if "D" in status: deletions.append(path); continue
+              p=Path(path)
+              if p.is_file():
+                  d=Path("/tmp/generated")/path; d.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(p,d); files.append(path)
+          Path("/tmp/generated_manifest.json").write_text(json.dumps({"files":files,"deletions":deletions},indent=2))
+          PY
+      - name: Apply generated files to receipt branch
+        run: |
+          git reset --hard
+          git clean -fd
+          git fetch origin "$TARGET_BRANCH"
+          git switch -C "$TARGET_BRANCH" "origin/$TARGET_BRANCH"
+          python - <<'PY'
+          import json, shutil
+          from pathlib import Path
+          m=json.loads(Path("/tmp/generated_manifest.json").read_text())
+          for path in m["files"]:
+              dst=Path(path); dst.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(Path("/tmp/generated")/path,dst)
+          for path in m["deletions"]: Path(path).unlink(missing_ok=True)
+          PY
+          git rm -f "$TEMP_WORKFLOW"
+      - name: Re-pin release drift identities
+        run: |
+          python - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+          allow=Path("config/release_drift_allowlist.json")
+          obj=json.loads(allow.read_text())
+          prefixes=("data/processed/authorized_input_real/","data/processed/real_data_replay/","data/processed/software_readiness/")
+          changed=[]
+          for row in subprocess.check_output(["git","status","--porcelain"],text=True).splitlines():
+              path=row[3:].split(" -> ")[-1]
+              if path.startswith(prefixes) and Path(path).is_file(): changed.append(path)
+          reason="Authoritative receipt regeneration from main source commit afd1e9b2ccd72acd54aafc0ab4e430223cf83088 after G1 Analog Devices batch 0006; generated by metadata resolver, metadata quality, real-data replay, and software certification."
+          for path in sorted(set(changed)):
+              digest=hashlib.sha256(Path(path).read_bytes()).hexdigest()
+              if path in obj["intentional_release_modifications"]: obj["intentional_release_modifications"][path]={"expected_sha256":digest,"reason":reason}
+              elif path in obj["repository_additions"]: obj["repository_additions"][path]={"expected_sha256":digest,"reason":reason}
+              else: obj["repository_additions"][path]={"expected_sha256":digest,"reason":reason}
+          allow.write_text(json.dumps(obj,indent=2)+"\n")
+          PY
+      - name: Verify release drift and commit receipts
+        run: |
+          TRUST_ROOT="$(sha256sum config/release_drift_allowlist.json | awk '{print $1}')"
+          python scripts/verify_release_drift.py --root . --expected-exceptions-sha256 "$TRUST_ROOT"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/release_drift_allowlist.json data/processed/authorized_input_real data/processed/real_data_replay data/processed/software_readiness
+          git commit -m "Regenerate authoritative receipts for G1 8-of-174"
+          git push origin "HEAD:$TARGET_BRANCH"
