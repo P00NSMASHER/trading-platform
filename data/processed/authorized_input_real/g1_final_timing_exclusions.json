@@ -1,17 +1,17 @@
 {
   "schema_version": "1",
-  "purpose": "Final fail-closed evidence dossier for G1 events without admissible exact first-public earnings-announcement clock times in the available public replication corpus. These events are immutable reviewed exclusions from announcement-timing-dependent analysis.",
+  "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "f7ed3c7116e5a9f511a51a0401ee6cec12188528",
+  "base_main_sha": "31ef41c27e20181eb8a0b5715949220889c0558f",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 0,
-    "reviewed_excluded": 174,
+    "exact_resolved": 1,
+    "reviewed_excluded": 173,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 174,
+    "raw_exact_time_evidence_gaps": 173,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 0,
+    "exact_timing_analysis_eligible": 1,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -76,13 +76,6 @@
       "event_id": "HEJFE-D346C6CFDFB6E581",
       "historical_symbol": "WTS",
       "first_documented_illicit_trade_ts": "2015-02-17 14:19:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-A413A5AC6E515E3C",
-      "historical_symbol": "CNMD",
-      "first_documented_illicit_trade_ts": "2011-04-27 15:22:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1284,5 +1277,12 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     }
   ],
-  "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed."
+  "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
+  "exact_evidence_progress": {
+    "exact_resolved": 1,
+    "latest_event_id": "HEJFE-A413A5AC6E515E3C",
+    "latest_symbol": "CNMD",
+    "latest_public_announcement_ts": "2011-04-28T07:00:00-04:00",
+    "latest_source_reference": "https://www.sec.gov/Archives/edgar/data/816956/000091431711000622/ex99-1.htm"
+  }
 }

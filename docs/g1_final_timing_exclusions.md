@@ -1,12 +1,12 @@
 # G1 Final Timing Evidence Dossier
 
-**G1 is complete: 174 / 174 events accounted for (100%).**
+**G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 0
-- **Immutable reviewed fail-closed exclusions:** 174
+- **Exact first-public announcement timestamps resolved:** 1
+- **Immutable reviewed fail-closed exclusions:** 173
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 0
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 1
 
 This does **not** invent announcement times.
 
@@ -19,3 +19,9 @@ The machine-readable receipt is `data/processed/authorized_input_real/g1_final_t
 Excluded events are marked `excluded_fail_closed`. They retain blank `public_announcement_ts` and blank `information_asymmetry_seconds`, and they may not participate in timing-dependent analysis. EDGAR acceptance times, before/after-market labels, archive ZIP timestamps, and date-only release evidence are not promoted to exact announcement times.
 
 If authorized exact I/B/E/S timestamps or independently verified exact first-public release times are supplied later, the resolver will reject any stale exclusion rather than masking the new evidence.
+
+## First exact timestamp recovered
+
+CNMD event `HEJFE-A413A5AC6E515E3C` is no longer excluded. SEC EDGAR Exhibit 99.1 contains the issuer's CONMED first-quarter 2011 earnings release and explicitly states `FOR RELEASE: 7:00 AM (Eastern) April 28, 2011`. The normalized public metadata row records `2011-04-28T07:00:00-04:00` as an A-grade `first_public_release` timestamp and binds it to the event ID. The remaining 173 events stay fail-closed until equivalent admissible evidence is found.
+
+Source: https://www.sec.gov/Archives/edgar/data/816956/000091431711000622/ex99-1.htm
