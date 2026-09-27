@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 4
-- **Immutable reviewed fail-closed exclusions:** 170
+- **Exact first-public announcement timestamps resolved:** 5
+- **Immutable reviewed fail-closed exclusions:** 169
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 4
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 5
 
 This does **not** invent announcement times.
 
@@ -42,3 +42,11 @@ One additional event now has an exact public-release timestamp from the issuer-s
 - `HEJFE-30CA515BC590DDA6` (ROL): `2012-01-25T07:30:00-05:00`. Rollins' PR Newswire archive records `Rollins, Inc. Reports Fourth Quarter and Full-Year 2011 Financial Results` at Jan. 25, 2012, 07:30 ET.
 
 The other 170 events remain fail-closed until equivalent admissible evidence is located.
+
+## Public newswire batch 0004
+
+One additional event now has an exact public-release timestamp from the issuer-specific PR Newswire archive and is removed from the reviewed G1 exclusion set:
+
+- `HEJFE-D1D8268651584B6A` (MKC): `2013-04-02T06:30:00-04:00`. McCormick's PR Newswire archive records `McCormick Reports First Quarter Financial Results, Reaffirms 2013 Outlook` at Apr. 2, 2013, 06:30 ET.
+
+The other 169 events remain fail-closed until equivalent admissible evidence is located.
