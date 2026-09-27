@@ -64,18 +64,18 @@ h2{font-size:16px;margin:0 0 13px}
       <div class="sub">Public-safe, read-only status for the historical market-surveillance research platform. Software plumbing is substantially complete; real-data evaluation remains fail-closed until licensed source files and exact point-in-time evidence are present.</div>
     </div>
     <div class="badges">
-      <div class="badge ok">● software replay ready</div>
-      <div class="badge ok">● licensed-data intake ready</div>
-      <div class="badge block">● real evaluation blocked</div>
-      <div class="badge info">research only</div>
+      <div class="badge ok" id="softwareBadge">● software ready</div>
+      <div class="badge ok" id="intakeBadge">● licensed-data intake ready</div>
+      <div class="badge block" id="evaluationBadge">● real evaluation blocked</div>
+      <div class="badge info" id="receiptBadge">● loading certification</div>
     </div>
   </div>
 
   <div class="grid">
     <section class="card kpi"><div class="label">Historical events</div><div class="value">174</div><div class="detail">72 distinct event dates</div></section>
     <section class="card kpi"><div class="label">Symbol-date requirements</div><div class="value">3,828</div><div class="detail">3,810 exact · 18 fail-closed exclusions</div></section>
-    <section class="card kpi"><div class="label">Real G2 market coverage</div><div class="value">0 / 1,656</div><div class="detail">authorized source-date rows validated</div></section>
-    <section class="card kpi"><div class="label">Offline evaluation</div><div class="value" style="font-size:28px;color:var(--red)">BLOCKED</div><div class="detail">evidence locks remain closed</div></section>
+    <section class="card kpi"><div class="label">Real G2 market coverage</div><div class="value" id="g2CoverageValue">0 / 1,656</div><div class="detail" id="g2CoverageDetail">authorized source-date rows validated</div></section>
+    <section class="card kpi"><div class="label">Offline evaluation</div><div class="value" id="evaluationValue" style="font-size:28px;color:var(--red)">BLOCKED</div><div class="detail" id="evaluationDetail">evidence locks remain closed</div></section>
 
     <section class="card wide">
       <h2>Evidence-gate state</h2>
@@ -83,13 +83,13 @@ h2{font-size:16px;margin:0 0 13px}
       <div style="height:14px"></div>
       <div class="gates">
         <div class="gate reviewed"><b>G1 · Announcement accounting</b><span>ACCOUNTED · 174 EXCLUDED</span></div>
-        <div class="gate failed"><b>G1 · Exact timing analysis</b><span>BLOCKING · 0 / 174</span></div>
-        <div class="gate failed"><b>G2 · Real authorized market data</b><span>BLOCKING · 0 / 1,656</span></div>
-        <div class="gate passed"><b>G3 · Primary listing history</b><span>READY · 174 / 174</span></div>
-        <div class="gate reviewed"><b>G4 · Shares outstanding</b><span>3,810 EXACT · 18 EXCLUDED</span></div>
+        <div class="gate failed" id="g1ExactGateBox"><b>G1 · Exact timing analysis</b><span id="g1ExactGate">BLOCKING · 0 / 174</span></div>
+        <div class="gate failed" id="g2GateBox"><b>G2 · Real authorized market data</b><span id="g2Gate">BLOCKING · 0 / 1,656</span></div>
+        <div class="gate passed" id="g3GateBox"><b>G3 · Primary listing history</b><span id="g3Gate">READY · 174 / 174</span></div>
+        <div class="gate reviewed" id="g4GateBox"><b>G4 · Shares outstanding</b><span id="g4Gate">3,810 EXACT · 18 EXCLUDED</span></div>
         <div class="gate reviewed"><b>G5 · Control accounting</b><span>ACCOUNTED · 72 EXCLUDED</span></div>
-        <div class="gate failed"><b>G5 · Model-evaluation controls</b><span>BLOCKING · 0 / 72 GENUINE</span></div>
-        <div class="gate failed"><b>G6 · Metadata quality</b><span>BLOCKING DOWNSTREAM</span></div>
+        <div class="gate failed" id="g5RealGateBox"><b>G5 · Model-evaluation controls</b><span id="g5RealGate">BLOCKING · 0 / 72 GENUINE</span></div>
+        <div class="gate failed" id="g6GateBox"><b>G6 · Metadata quality</b><span id="g6Gate">BLOCKING DOWNSTREAM</span></div>
       </div>
     </section>
 
@@ -102,6 +102,8 @@ h2{font-size:16px;margin:0 0 13px}
         <div class="row"><div class="name">Options trade/quote ingestion</div><div class="v" style="color:var(--green)">READY</div></div>
         <div class="row"><div class="name">ITCH 4.1 / 5.0 path</div><div class="v" style="color:var(--green)">READY</div></div>
         <div class="row"><div class="name">Fail-closed release controller</div><div class="v" style="color:var(--green)">READY</div></div>
+        <div class="row"><div class="name">Replay proof receipt</div><div class="v" id="replayProofValue">LOADING</div></div>
+        <div class="row"><div class="name">Hostile/regression suite</div><div class="v" id="hostileTestValue">LOADING</div></div>
       </div>
     </section>
 
@@ -170,7 +172,120 @@ h2{font-size:16px;margin:0 0 13px}
     </section>
   </div>
 
-  <div class="footer">Read-only public-safe status snapshot · September 27, 2026 · repository data and controls only</div>
+  <div class="footer" id="dashboardFooter">Read-only public-safe status snapshot · loading machine-readable receipts…</div>
 </div>
+
+<script>
+(() => {
+  const CERT_URL = "../data/processed/software_readiness/software_readiness_certification.json";
+  const REPLAY_URL = "../data/processed/real_data_replay/real_data_replay_status.json";
+
+  const byId = (id) => document.getElementById(id);
+  const setClass = (el, cls) => {
+    if (!el) return;
+    el.classList.remove("ok","warn","block","info","passed","reviewed","failed");
+    el.classList.add(cls);
+  };
+  const setGate = (boxId, valueId, ready, readyText, blockedText) => {
+    const box = byId(boxId);
+    const value = byId(valueId);
+    if (value) value.textContent = ready ? readyText : blockedText;
+    if (box) {
+      box.classList.remove("passed","failed","reviewed");
+      box.classList.add(ready ? "passed" : "failed");
+    }
+  };
+  const num = (v) => Number.isFinite(Number(v)) ? Number(v) : 0;
+
+  async function loadReceipt(url) {
+    const response = await fetch(url, {cache: "no-store"});
+    if (!response.ok) throw new Error(String(response.status));
+    return response.json();
+  }
+
+  async function hydrate() {
+    try {
+      const [cert, replay] = await Promise.all([
+        loadReceipt(CERT_URL),
+        loadReceipt(REPLAY_URL),
+      ]);
+
+      const state = cert.real_data_state || {};
+      const coverage = state.coverage || {};
+      const metadata = state.metadata || {};
+      const gates = state.gates || {};
+      const required = num(coverage.required_source_date_rows);
+      const covered = num(coverage.covered_real_source_date_rows);
+      const missing = num(coverage.missing_real_source_date_rows);
+      const annResolved = num(metadata.announcement_exact_resolved);
+      const annRequired = num(metadata.announcement_required);
+      const ctrlResolved = num(metadata.control_dates_resolved);
+      const ctrlRequired = num(metadata.control_dates_required);
+
+      byId("g2CoverageValue").textContent = covered.toLocaleString() + " / " + required.toLocaleString();
+      byId("g2CoverageDetail").textContent = missing.toLocaleString() + " authorized source-date rows still missing";
+
+      const released = Boolean(replay.evaluation_release_permitted);
+      byId("evaluationValue").textContent = released ? "RELEASED" : "BLOCKED";
+      byId("evaluationValue").style.color = released ? "var(--green)" : "var(--red)";
+      byId("evaluationDetail").textContent = released
+        ? "offline historical evaluation gate released"
+        : "evidence locks remain fail-closed";
+
+      const softwareReady = Boolean(cert.software_ready);
+      byId("softwareBadge").textContent = softwareReady ? "● software ready" : "● software not ready";
+      setClass(byId("softwareBadge"), softwareReady ? "ok" : "block");
+
+      byId("evaluationBadge").textContent = released ? "● offline evaluation released" : "● real evaluation blocked";
+      setClass(byId("evaluationBadge"), released ? "ok" : "block");
+
+      const tests = num((cert.hostile_regression_suite || {}).passed_count);
+      byId("hostileTestValue").textContent = tests ? tests.toLocaleString() + " PASS" : "UNKNOWN";
+      byId("hostileTestValue").style.color = tests ? "var(--green)" : "var(--amber)";
+
+      const proofPresent = Boolean(state.replay_status_exists);
+      byId("replayProofValue").textContent = proofPresent ? "PRESENT · FAIL-CLOSED" : "MISSING";
+      byId("replayProofValue").style.color = proofPresent ? "var(--green)" : "var(--red)";
+
+      setGate("g1ExactGateBox","g1ExactGate",Boolean(gates.G1_EXACT_TIMING_ANALYSIS),
+        "READY · " + annResolved.toLocaleString() + " / " + annRequired.toLocaleString(),
+        "BLOCKING · " + annResolved.toLocaleString() + " / " + annRequired.toLocaleString());
+      setGate("g2GateBox","g2Gate",Boolean(gates.G2_REAL_MARKET_DATA),
+        "READY · " + covered.toLocaleString() + " / " + required.toLocaleString(),
+        "BLOCKING · " + covered.toLocaleString() + " / " + required.toLocaleString());
+      setGate("g3GateBox","g3Gate",Boolean(gates.G3_PRIMARY_LISTING_HISTORY),
+        "READY · 174 / 174","BLOCKING");
+      setGate("g5RealGateBox","g5RealGate",Boolean(gates.G5_MODEL_EVALUATION_CONTROLS),
+        "READY · " + ctrlResolved.toLocaleString() + " / " + ctrlRequired.toLocaleString(),
+        "BLOCKING · " + ctrlResolved.toLocaleString() + " / " + ctrlRequired.toLocaleString() + " GENUINE");
+      setGate("g6GateBox","g6Gate",Boolean(gates.G6_METADATA_QUALITY),
+        "READY","BLOCKING DOWNSTREAM");
+
+      const g4Box = byId("g4GateBox");
+      if (g4Box && !Boolean(gates.G4_SHARES_OUTSTANDING)) {
+        g4Box.classList.remove("reviewed","passed");
+        g4Box.classList.add("failed");
+        byId("g4Gate").textContent = "BLOCKING";
+      }
+
+      const status = cert.overall_status || "UNKNOWN";
+      const commit = String(cert.git_commit || "").slice(0,12);
+      byId("receiptBadge").textContent = "● " + status.replaceAll("_"," ").toLowerCase();
+      setClass(byId("receiptBadge"), softwareReady ? "info" : "block");
+      byId("dashboardFooter").textContent =
+        "Live machine-readable repository receipts · certification " + (commit || "unknown") +
+        " · " + tests.toLocaleString() + " hostile/regression tests · research only";
+    } catch (err) {
+      byId("receiptBadge").textContent = "● static snapshot fallback";
+      setClass(byId("receiptBadge"), "warn");
+      byId("dashboardFooter").textContent =
+        "Read-only public-safe static snapshot · live certification receipt unavailable";
+    }
+  }
+
+  hydrate();
+})();
+</script>
+
 </body>
 </html>
