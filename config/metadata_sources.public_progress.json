@@ -1,7 +1,29 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains three verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains four verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-prnewswire-g1-batch-0003",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0003.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "PR Newswire Rollins issuer archive: Jan. 25, 2012 07:30 ET, Rollins, Inc. Reports Fourth Quarter and Full-Year 2011 Financial Results.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      }
+    },
     {
       "source_id": "public-prnewswire-g1-batch-0002",
       "record_kind": "announcement_timestamp",
@@ -268,8 +290,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "709b8bd7804415750907a9fd746152fada82f02ee5b2adbcee954c601ca4f5f0",
-    "expected_count": 171,
+    "expected_sha256": "a75fa13b34bab6060b8cf8c83f6e7f40d1ef655779600b8a4a077620f3f6200e",
+    "expected_count": 170,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
