@@ -170,8 +170,30 @@ def audit_announcements(events, resolver_rows, loaded) -> tuple[list[QualityIssu
     for e in events:
         eid = e["event_id"]
         first = mr._event_trade_dt(e["first_documented_illicit_trade_ts"])
+        row = resolver.get(eid, {})
         cands = candidates.get(eid, [])
         exact = sorted([x for x in cands if x["exact"]], key=lambda x: (x["priority"], x["ts"]))
+
+        if row.get("resolution_status") == "excluded_fail_closed":
+            if exact:
+                quarantined.add(eid)
+                issues.append(_issue("announcement", eid, "BLOCKING", "ANN_EXCLUSION_MASKS_EXACT_SOURCE",
+                    "Fail-closed announcement exclusion is stale because an authoritative exact timestamp is now available.",
+                    [x["source_id"] for x in exact], [_fmt(x["ts"]) for x in exact], True))
+            leaked = [
+                field for field in (
+                    "public_announcement_ts", "timestamp_kind", "source_grade",
+                    "information_asymmetry_seconds"
+                )
+                if str(row.get(field, "") or "").strip()
+            ]
+            if leaked or row.get("timestamp_confidence") != "EXCLUDED-FAIL-CLOSED":
+                quarantined.add(eid)
+                issues.append(_issue("announcement", eid, "BLOCKING", "ANN_EXCLUSION_HAS_TIMING_VALUE",
+                    "Fail-closed excluded announcement row must not carry a usable public timestamp, timestamp kind, source grade, or information-asymmetry interval.",
+                    [row.get("source_id", "")], leaked or [row.get("timestamp_confidence", "")], True))
+            continue
+
         if exact:
             times = [x["ts"] for x in exact]
             spread = (max(times) - min(times)).total_seconds()
@@ -191,7 +213,6 @@ def audit_announcements(events, resolver_rows, loaded) -> tuple[list[QualityIssu
                 issues.append(_issue("announcement", eid, "BLOCKING", "ANN_NOT_AFTER_FIRST_TRADE",
                     "Resolved first-public timestamp is not after the documented first illicit trade; event-clock semantics require manual review.",
                     [x["source_id"] for x in exact], [_fmt(first), _fmt(earliest)], True))
-        row = resolver.get(eid, {})
         if row.get("resolution_status") == "resolved_exact_public_timestamp":
             if row.get("timestamp_confidence") not in {"A-EXACT", "B-EXACT"}:
                 quarantined.add(eid)
@@ -482,9 +503,13 @@ def build(*, events_path: Path, symbol_dates_path: Path, contract_path: Path,
     ct_issues, ct_quarantine, ct_warn = audit_controls(events, controls, loaded)
     issues = ann_issues + ex_issues + sh_issues + ct_issues
 
+    announcement_exclusions = int(readiness.get("announcement_events_excluded", 0))
     share_exclusions = int(readiness.get("shares_symbol_dates_excluded", 0))
     domains = [
-        _domain_quality("announcement", len(events), int(readiness.get("announcement_exact_resolved", 0)), len(ann_quarantine), ann_warn),
+        _domain_quality(
+            "announcement", len(events), int(readiness.get("announcement_exact_resolved", 0)),
+            len(ann_quarantine), ann_warn, reviewed_exclusion_count=announcement_exclusions
+        ),
         _domain_quality("exchange", len(events), int(readiness.get("event_exchange_resolved", 0)), len(ex_quarantine), ex_warn),
         _domain_quality(
             "shares", len(symbol_dates), int(readiness.get("shares_symbol_dates_resolved", 0)),
@@ -534,6 +559,7 @@ def build(*, events_path: Path, symbol_dates_path: Path, contract_path: Path,
         "quarantined_exchange_events": len(ex_quarantine),
         "quarantined_share_symbol_dates": len(sh_quarantine),
         "quarantined_control_dates": len(ct_quarantine),
+        "reviewed_announcement_exclusion_count": announcement_exclusions,
         "reviewed_share_exclusion_count": share_exclusions,
         "coverage_ready_before_quality": coverage_ready,
         "quality_gate_clear": quality_cleared,

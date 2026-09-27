@@ -12,7 +12,8 @@ sys.path.insert(0,str(ROOT/"src"))
 from metadata_resolver import (
     build, load_contract, resolve_announcements, resolve_event_exchanges,
     resolve_shares, resolve_control_readiness, _load_source_rows,
-    SharesResolution, _apply_reviewed_share_exclusions,
+    AnnouncementResolution, SharesResolution,
+    _apply_reviewed_announcement_exclusions, _apply_reviewed_share_exclusions,
 )
 
 
@@ -296,4 +297,105 @@ def test_reviewed_share_exclusion_receipt_hash_mismatch_fails_closed(tmp_path):
     with pytest.raises(ValueError, match="SHA-256 mismatch"):
         _apply_reviewed_share_exclusions(
             rows, raw_contract=contract, root=tmp_path, symbol_date_rows=symbol_dates
+        )
+
+
+def _reviewed_announcement_exclusion_fixture(tmp_path: Path, *, expected_sha_override: str | None = None):
+    event = events()[0]
+    receipt = {
+        "schema_version": "1",
+        "research_use_only": True,
+        "exclusions": [{
+            "event_id": event["event_id"],
+            "historical_symbol": event["historical_symbol"],
+            "first_documented_illicit_trade_ts": event["first_documented_illicit_trade_ts"],
+            "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
+        }],
+    }
+    p = tmp_path / "data" / "g1_final_timing_exclusions.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(receipt, indent=2) + "\n"
+    p.write_text(payload, encoding="utf-8")
+    digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    contract = {
+        "reviewed_announcement_exclusions": {
+            "enabled": True,
+            "mode": "reviewed_fail_closed_exclusions",
+            "path": "data/g1_final_timing_exclusions.json",
+            "expected_sha256": expected_sha_override or digest,
+            "expected_count": 1,
+            "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
+            "downstream_policy": "excluded events may not contribute announcement timing or information asymmetry",
+        }
+    }
+    return contract, [event]
+
+
+def _unresolved_announcement_row(event: dict[str, str]) -> AnnouncementResolution:
+    return AnnouncementResolution(
+        event_id=event["event_id"],
+        historical_symbol=event["historical_symbol"],
+        event_date=event["first_documented_illicit_trade_ts"][:10],
+        first_documented_illicit_trade_ts="2015-02-17T19:30:00Z",
+        public_announcement_ts="",
+        resolution_status="unresolved",
+        timestamp_kind="",
+        source_id="",
+        source_family="",
+        source_grade="",
+        source_reference="",
+        timestamp_confidence="UNRESOLVED",
+        information_asymmetry_seconds="",
+    )
+
+
+def test_reviewed_announcement_exclusion_marks_unresolved_fail_closed(tmp_path):
+    contract, event_rows = _reviewed_announcement_exclusion_fixture(tmp_path)
+    out, meta = _apply_reviewed_announcement_exclusions(
+        [_unresolved_announcement_row(event_rows[0])],
+        raw_contract=contract,
+        root=tmp_path,
+        events=event_rows,
+    )
+    assert out[0].resolution_status == "excluded_fail_closed"
+    assert out[0].public_announcement_ts == ""
+    assert out[0].information_asymmetry_seconds == ""
+    assert out[0].timestamp_confidence == "EXCLUDED-FAIL-CLOSED"
+    assert meta["applied_count"] == 1
+
+
+def test_reviewed_announcement_exclusion_cannot_mask_exact_timestamp(tmp_path):
+    contract, event_rows = _reviewed_announcement_exclusion_fixture(tmp_path)
+    event = event_rows[0]
+    exact = AnnouncementResolution(
+        event_id=event["event_id"],
+        historical_symbol=event["historical_symbol"],
+        event_date=event["first_documented_illicit_trade_ts"][:10],
+        first_documented_illicit_trade_ts="2015-02-17T19:30:00Z",
+        public_announcement_ts="2015-02-17T21:05:00Z",
+        resolution_status="resolved_exact_public_timestamp",
+        timestamp_kind="first_public_release",
+        source_id="exact",
+        source_family="official_newswire_archive",
+        source_grade="A",
+        source_reference="https://example.test/release",
+        timestamp_confidence="A-EXACT",
+        information_asymmetry_seconds="5700",
+    )
+    with pytest.raises(ValueError, match="exclusion is stale"):
+        _apply_reviewed_announcement_exclusions(
+            [exact], raw_contract=contract, root=tmp_path, events=event_rows
+        )
+
+
+def test_reviewed_announcement_exclusion_receipt_hash_mismatch_fails_closed(tmp_path):
+    contract, event_rows = _reviewed_announcement_exclusion_fixture(
+        tmp_path, expected_sha_override="0" * 64
+    )
+    with pytest.raises(ValueError, match="SHA-256 mismatch"):
+        _apply_reviewed_announcement_exclusions(
+            [_unresolved_announcement_row(event_rows[0])],
+            raw_contract=contract,
+            root=tmp_path,
+            events=event_rows,
         )

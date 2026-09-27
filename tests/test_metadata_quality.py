@@ -4,7 +4,7 @@ import csv
 import json
 from pathlib import Path
 
-from metadata_quality import build, _domain_quality, audit_shares
+from metadata_quality import build, _domain_quality, audit_announcements, audit_shares
 from metadata_resolver import build as resolve
 from metadata_population import populate_batch
 
@@ -189,3 +189,36 @@ def test_fail_closed_excluded_share_row_must_remain_blank():
     issues, quarantine, _ = audit_shares(reqs, rows, [])
     assert "TEST|2015-02-17" in quarantine
     assert any(x.code == "SHARES_EXCLUSION_HAS_VALUE" for x in issues)
+
+
+def test_fail_closed_excluded_announcement_row_must_remain_timing_blank():
+    events_rows = [{
+        "event_id": "E1",
+        "historical_symbol": "TEST",
+        "first_documented_illicit_trade_ts": "2015-02-17 14:30:00",
+    }]
+    rows = [{
+        "event_id": "E1",
+        "historical_symbol": "TEST",
+        "event_date": "2015-02-17",
+        "first_documented_illicit_trade_ts": "2015-02-17T19:30:00Z",
+        "public_announcement_ts": "",
+        "resolution_status": "excluded_fail_closed",
+        "timestamp_kind": "",
+        "source_id": "reviewed-g1-exclusion",
+        "source_family": "",
+        "source_grade": "",
+        "source_reference": "g1_final_timing_exclusions.json",
+        "timestamp_confidence": "EXCLUDED-FAIL-CLOSED",
+        "information_asymmetry_seconds": "",
+        "research_use_only": "1",
+    }]
+    issues, quarantine, warnings = audit_announcements(events_rows, rows, [])
+    assert issues == []
+    assert quarantine == set()
+    assert warnings == 0
+
+    rows[0]["public_announcement_ts"] = "2015-02-17T21:05:00Z"
+    issues, quarantine, _ = audit_announcements(events_rows, rows, [])
+    assert "E1" in quarantine
+    assert any(x.code == "ANN_EXCLUSION_HAS_TIMING_VALUE" for x in issues)

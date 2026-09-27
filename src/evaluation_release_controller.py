@@ -90,6 +90,15 @@ def _metadata_checks(checks: list[GateCheck], readiness: dict, quality: dict) ->
         ok = bool(readiness.get(key))
         checks.append(GateCheck(gate_id, "metadata", ok, "READY" if ok else "BLOCKED", label))
 
+    exact_timing_ok = bool(readiness.get("ready_g1_exact_timing_analysis"))
+    checks.append(GateCheck(
+        "G1_EXACT_TIMING_ANALYSIS",
+        "metadata",
+        exact_timing_ok,
+        "READY" if exact_timing_ok else "BLOCKED",
+        "all events have authoritative/authorized exact first-public announcement timestamps; reviewed exclusions do not satisfy timing-analysis eligibility",
+    ))
+
     qclear = bool(quality.get("quality_gate_clear"))
     real_clear = bool(quality.get("quality_cleared_for_non_synthetic_model_evaluation"))
     only_synthetic = bool(quality.get("only_synthetic_sources"))
