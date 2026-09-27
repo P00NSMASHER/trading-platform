@@ -1,0 +1,46 @@
+name: dashboard-drift-bind
+
+on:
+  push:
+    branches: [dashboard/read-only-command-center]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dashboard-drift-bind
+  cancel-in-progress: true
+
+jobs:
+  bind:
+    if: "!contains(github.event.head_commit.message, '[dashboard-drift-bound]')"
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+      - name: Bind dashboard hash
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p=Path("config/release_drift_allowlist.json")
+          obj=json.loads(p.read_text(encoding="utf-8"))
+          h=hashlib.sha256(Path("dashboard/index.html").read_bytes()).hexdigest()
+          obj["repository_additions"]["dashboard/index.html"]={
+            "expected_sha256":h,
+            "reason":"Public-safe read-only research dashboard showing software-ready/real-data-pending state, fail-closed evidence gates, and no licensed rows, credentials, trading outputs, or execution capability."
+          }
+          p.write_text(json.dumps(obj,indent=2)+"\n",encoding="utf-8")
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/release_drift_allowlist.json
+          git commit -m "[dashboard-drift-bound] bind dashboard hash"
+          git push origin HEAD:dashboard/read-only-command-center
