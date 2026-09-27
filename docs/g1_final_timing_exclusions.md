@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 9
-- **Immutable reviewed fail-closed exclusions:** 165
+- **Exact first-public announcement timestamps resolved:** 10
+- **Immutable reviewed fail-closed exclusions:** 164
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 9
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 10
 
 This does **not** invent announcement times.
 
@@ -75,3 +75,11 @@ One additional event now has an exact first-public release clock directly stated
 - `HEJFE-7ED8DBD4804E4330` (JWN): `2015-02-19T16:05:00-05:00`. Nordstrom Exhibit 99.1 states `FOR RELEASE: February 19, 2015 at 1:05 PM PST`, which converts to 4:05 PM EST.
 
 The other 165 events remain fail-closed until equivalent admissible evidence is located.
+
+## Original-wire archive batch 0008
+
+One additional event now has an exact public-release timestamp from the original PR Newswire issuer archive and is removed from the reviewed G1 exclusion set:
+
+- `HEJFE-87DDC59E7BB99A84` (ALSN): `2015-04-27T16:10:00-04:00`. PR Newswire's Allison Transmission archive lists `Allison Transmission Announces First Quarter 2015 Results` at Apr. 27, 2015, 04:10 ET.
+
+The other 164 events remain fail-closed until equivalent admissible evidence is located.
