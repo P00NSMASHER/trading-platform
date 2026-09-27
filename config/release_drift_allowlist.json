@@ -605,10 +605,6 @@
       "expected_sha256": "e2ac52726969236109428d0125615e545e8cf6ae2e03d6c1f60cf7674699d27b",
       "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
     },
-    "dashboard/index.html": {
-      "expected_sha256": "f1370a704ebe4b7223de609b5948e6f52ba853932dd09e5dccb88b28af2d1ff2",
-      "reason": "Public-safe read-only research dashboard showing software-ready/real-data-pending state, fail-closed evidence gates, and no licensed rows, credentials, trading outputs, or execution capability."
-    },
     "tests/test_software_readiness_certification.py": {
       "expected_sha256": "19abafff3563f52f5f5770a16ee43f31171623c2956d1d078af95e9996cfcb9e",
       "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
@@ -652,6 +648,14 @@
     "data/processed/software_readiness/software_readiness_certification.json": {
       "expected_sha256": "bc07b0d617798e65e9d232cdced7f7ab6f8c7ead1dfb6f3021e777cbbc76d1b9",
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
+    },
+    "dashboard/index.html": {
+      "expected_sha256": "605c6ae3b412e90fc876864e3c0e542c8d7496aee77fa2a231dab1a9294f5228",
+      "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
+    },
+    "tests/test_public_dashboard.py": {
+      "expected_sha256": "2ca66c26f68bc96fa079f2ddbd795e222fb10f67e8b8dd882e48b06841968cc1",
+      "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     }
   }
 }
