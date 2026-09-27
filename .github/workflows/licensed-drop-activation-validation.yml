@@ -91,6 +91,7 @@ jobs:
               "and software-readiness certification."
           )
           paths=[
+              ".github/workflows/licensed-drop-activation-validation.yml",
               "src/licensed_data_drop_processor.py",
               "tests/test_licensed_data_drop_processor.py",
               "config/licensed_entitlement_manifest.example.json",
