@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 11
-- **Immutable reviewed fail-closed exclusions:** 163
+- **Exact first-public announcement timestamps resolved:** 12
+- **Immutable reviewed fail-closed exclusions:** 162
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 11
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 12
 
 This does **not** invent announcement times.
 
@@ -91,3 +91,11 @@ One additional event now has an exact public-release timestamp directly stated i
 - `HEJFE-76B03970FA6BDB42` (AVA): `2013-02-20T07:05:00-05:00`. Avista's release states `SPOKANE, Wash. – Feb. 20, 2013, 4:05 a.m. PT`, which converts to 7:05 a.m. ET.
 
 The other 163 events remain fail-closed until equivalent admissible evidence is located.
+
+## Issuer/original-wire archive batch 0010
+
+One additional event now has an exact public-release timestamp from Gilead's archived Business Wire earnings release:
+
+- `HEJFE-C4D39B22234902F2` (GILD): `2015-02-03T16:07:00-05:00`. Gilead's archived fourth-quarter and full-year 2014 results release is timestamped `February 3, 2015 4:07 PM ET` and identifies Business Wire distribution.
+
+The other 162 events remain fail-closed until equivalent admissible evidence is located.

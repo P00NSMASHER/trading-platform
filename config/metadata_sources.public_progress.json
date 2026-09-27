@@ -1,7 +1,29 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains eleven verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twelve verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-gilead-g1-batch-0010",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0010.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "Gilead investor-relations archive PDF is timestamped February 3, 2015 4:07 PM ET and identifies Business Wire distribution.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      }
+    },
     {
       "source_id": "public-sec-ava-release-20130220",
       "record_kind": "announcement_timestamp",
@@ -422,8 +444,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "742cf906cdce537dcb2a524de588b97c7d8863aa45473c73855707cd935ae5e2",
-    "expected_count": 163,
+    "expected_sha256": "76bb6878d56d399ca823ddbbd14edb051dbafbb0659594bd1f21be772d433eb8",
+    "expected_count": 162,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
