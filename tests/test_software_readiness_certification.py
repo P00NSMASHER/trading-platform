@@ -107,6 +107,8 @@ def test_hostile_suite_defines_all_required_categories():
         "tests/test_real_data_replay.py",
         "tests/test_licensed_data_intake.py",
         "tests/test_control_plane_adversarial.py",
+        "tests/test_control_plane_dashboard_accounts.py",
+        "tests/test_private_dashboard.py",
         "tests/test_deployment_hardening.py",
     ):
         assert required in flattened
