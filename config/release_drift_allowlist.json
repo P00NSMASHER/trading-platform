@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "4d274fe6a3a69e8cfeea215c114aaae216fc6d47e9d7fca0f085c7eeb070ed37",
-      "reason": "G1 independently verified Business Wire batch 0011: add ILMN exact release clock at 2015-01-27 16:05 ET using the preserved Business Wire timestamp plus issuer corroboration; grade the evidence B, remove only the stale ILMN reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "228a82db430c4c9f50292487e00aa94269827fc882c2abda89717bf3d32f7e51",
+      "reason": "G1 independently verified issuer-attributed distribution batch 0012: add EA exact release clock at 2015-01-27 16:35 ET using EIN Presswire's issuer-attributed timestamp plus EA official-archive corroboration; grade the evidence B, remove only the stale EA reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "3e1500bab706677da84eca0dfe7b570c56d55292c4e9604a2f3e4fd505d12c42",
-      "reason": "G1 independently verified Business Wire batch 0011: add ILMN exact release clock at 2015-01-27 16:05 ET using the preserved Business Wire timestamp plus issuer corroboration; grade the evidence B, remove only the stale ILMN reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "7cd2854dfcfdd138473b161516b65e535bd952db9ce640f2c15f88a0e82ab2b5",
+      "reason": "G1 independently verified issuer-attributed distribution batch 0012: add EA exact release clock at 2015-01-27 16:35 ET using EIN Presswire's issuer-attributed timestamp plus EA official-archive corroboration; grade the evidence B, remove only the stale EA reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "3be12478fb6fd612d4bd36253c81aa2535cfc11f9ecc3e1b75251b1eeaab5a93",
       "reason": "Authoritative receipt regeneration from main source commit 93f526d190a61ef6d321a9bd583f38ae203f6fc4 after G1 Illumina batch 0011."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "ec5afa30e7b0b36308eef10623ea230c3d545b1fbc8ac0db38ff8bd833960033",
-      "reason": "G1 independently verified Business Wire batch 0011: add ILMN exact release clock at 2015-01-27 16:05 ET using the preserved Business Wire timestamp plus issuer corroboration; grade the evidence B, remove only the stale ILMN reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "5ff501ccfb339df1d9dd37e619fd3f7c5e4f1eead044a1d4b354b9a90465cb30",
+      "reason": "G1 independently verified issuer-attributed distribution batch 0012: add EA exact release clock at 2015-01-27 16:35 ET using EIN Presswire's issuer-attributed timestamp plus EA official-archive corroboration; grade the evidence B, remove only the stale EA reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -700,6 +700,10 @@
     "data/public/metadata/g1_announcement_times_batch_0011.csv": {
       "expected_sha256": "8ea09c97f3805708adba7570a7b5d6a4cf90010aa2c50aa05744f5109ed44919",
       "reason": "G1 batch 0011 evidence row for ILMN: preserved Business Wire release timestamp at 2015-01-27 4:05 PM EST, issuer-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0012.csv": {
+      "expected_sha256": "da66209a095d5c5a2b7f1e6773faf3d32888169e5439df10dd436166ea6bbb31",
+      "reason": "G1 batch 0012 evidence row for EA: issuer-attributed EIN Presswire release timestamp at 2015-01-27 21:35 GMT / 4:35 PM EST, corroborated by EA's official archive and intentionally graded B."
     }
   }
 }
