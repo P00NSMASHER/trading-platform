@@ -1,6 +1,9 @@
 gate_id,status,required_rows,requirement,resolution
-G1_ANNOUNCEMENT_TIMES,BLOCKING,174,Exact public announcement timestamp for each adjudicated event,Join licensed I/B/E/S or independently verified SEC/newswire publication timestamp
-G2_REAL_MARKET_DATA,BLOCKING,1656,Authorized non-synthetic TAQ equity trades/quotes plus full-replication options source-date coverage,Populate Step-15 source contract with authorized paths and license references
-G3_PRIMARY_LISTING_HISTORY,BLOCKING_FOR_ITCH,174,Point-in-time primary listing exchange as of each event date,Resolve historical exchange to decide which symbol-dates require Nasdaq ITCH
-G4_SHARES_OUTSTANDING,BLOCKING_FOR_TURNOVER,3828,Point-in-time shares outstanding covering every required symbol-date,Provide effective-dated authorized/public shares-outstanding series
-G5_MATCHED_CONTROL_UNIVERSE,BLOCKING_FOR_MODEL_EVAL,72,Same-day candidate universe and pre-event metadata on every distinct event date,Provide point-in-time earnings/event universe and matching covariates; run Step-5 matcher
+G1_ANNOUNCEMENT_TIMES,READY_WITH_REVIEWED_EXCLUSIONS,174,All events accounted by exact timestamp or reviewed fail-closed exclusion.,Coarse accounting gate complete; exact-timing analysis remains separate.
+G1_EXACT_TIMING_ANALYSIS,BLOCKING,174,Authoritative exact first-public announcement timestamp for every event.,Supply authorized I/B/E/S ANNDATS_ACT+ANNTIMS_ACT or independently verified exact newswire timestamps.
+G2_REAL_MARKET_DATA,BLOCKING,1656,"828 core equity + 828 option source-date rows, content validated and non-synthetic.",Populate a real authorized historical market source contract and rerun content validation.
+G3_PRIMARY_LISTING_HISTORY,READY,174,Point-in-time primary listing exchange for every event.,Complete.
+G4_SHARES_OUTSTANDING,READY_WITH_REVIEWED_EXCLUSIONS,3828,All symbol-dates accounted by exact shares or reviewed fail-closed exclusion.,Complete at coarse accounting layer.
+G5_MATCHED_CONTROL_UNIVERSE,READY_WITH_REVIEWED_EXCLUSIONS,72,All event dates accounted by real controls or reviewed fail-closed exclusion.,Coarse accounting gate complete; model-evaluation controls remain separate.
+G5_MODEL_EVALUATION_CONTROLS,BLOCKING,72,Every event date has >=3 genuine point-in-time controls with complete pre-event covariates.,Supply authorized point-in-time control metadata and rerun matching.
+G6_METADATA_QUALITY,BLOCKING,1,Metadata quality gate clear for non-synthetic evaluation.,Requires the exact-timing and real-control locks plus real market-data coverage.

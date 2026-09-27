@@ -1,11 +1,10 @@
 {
   "baseline_lookback_sessions": 21,
   "blocking_gates": [
-    "G1_ANNOUNCEMENT_TIMES",
     "G2_REAL_MARKET_DATA",
-    "G3_PRIMARY_LISTING_HISTORY",
-    "G4_SHARES_OUTSTANDING",
-    "G5_MATCHED_CONTROL_UNIVERSE"
+    "G1_EXACT_TIMING_ANALYSIS",
+    "G5_MODEL_EVALUATION_CONTROLS",
+    "G6_METADATA_QUALITY"
   ],
   "calendar": {
     "calendar": "XNYS",
@@ -53,6 +52,7 @@
     "required_source_date_rows": 1656,
     "synthetic_rows_matching_required_keys": 4
   },
+  "coverage_summary_semantics": "G1/G3/G4/G5 coarse metadata gates reflect current canonical metadata accounting. Exact timing and genuine model-control eligibility remain separate release locks.",
   "event_count": 174,
   "event_date_max": "2015-05-20",
   "event_date_min": "2011-04-19",
@@ -63,8 +63,21 @@
   },
   "events_path": "data/processed/historical_events.csv",
   "events_sha256": "43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12",
+  "g3_conditioned_itch_event_rows": 80,
+  "legacy_conditional_itch_market_date_rows": 414,
   "market_date_max": "2015-05-20",
   "market_date_min": "2011-03-21",
+  "metadata_gate_overlay": {
+    "G1_ANNOUNCEMENT_TIMES": "READY_WITH_REVIEWED_EXCLUSIONS",
+    "G1_EXACT_TIMING_ANALYSIS": "BLOCKING",
+    "G3_PRIMARY_LISTING_HISTORY": "READY",
+    "G4_SHARES_OUTSTANDING": "READY_WITH_REVIEWED_EXCLUSIONS",
+    "G5_MATCHED_CONTROL_UNIVERSE": "READY_WITH_REVIEWED_EXCLUSIONS",
+    "G5_MODEL_EVALUATION_CONTROLS": "BLOCKING",
+    "G6_METADATA_QUALITY": "BLOCKING"
+  },
+  "metadata_quality_sha256": "09cd00104845aeb44efda59ccd06fdf95136167fa7b0945c55be2377ede2baa3",
+  "metadata_readiness_sha256": "d5bd369fe81d93cee6151e942a80d19c5a8e9cff916da61ff973592d8d123e64",
   "missing_exact_announcement_timestamps": 174,
   "prohibited_outputs": [
     "BUY",

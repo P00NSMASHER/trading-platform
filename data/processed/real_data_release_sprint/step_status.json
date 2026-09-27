@@ -1,0 +1,115 @@
+{
+  "all_12_genuinely_complete": false,
+  "completed_steps": [
+    1,
+    2,
+    3,
+    4,
+    6
+  ],
+  "coverage_summary_sha256": "6bf06c331abf04265c4b2c0971ae621619009dcb7e401b08127746c5d798ffaa",
+  "dependency_blocked_steps": [
+    11,
+    12
+  ],
+  "metadata_quality_sha256": "09cd00104845aeb44efda59ccd06fdf95136167fa7b0945c55be2377ede2baa3",
+  "metadata_readiness_sha256": "d5bd369fe81d93cee6151e942a80d19c5a8e9cff916da61ff973592d8d123e64",
+  "policy": {
+    "future_data_or_lookahead_prohibited": true,
+    "prohibited_outputs": [
+      "BUY",
+      "SELL",
+      "expected_return",
+      "target_price",
+      "position_size",
+      "order",
+      "execution_instruction"
+    ],
+    "reviewed_exclusion_substitution_for_real_data_steps_prohibited": true,
+    "synthetic_substitution_prohibited": true
+  },
+  "purpose": "Truthful execution status for the 12-step real-data release sprint.",
+  "requirements_manifest_sha256": "23f3d03f79a5a10266511455418c5b3142ab27eeedd9af3e106dccfce2b122db",
+  "schema_version": "1",
+  "source_blocked_steps": [
+    5,
+    7,
+    8,
+    9,
+    10
+  ],
+  "steps": [
+    {
+      "evidence": "828 core + 828 options = 1656 required source-date rows",
+      "name": "Freeze exact G2 requirement list",
+      "status": "PASS",
+      "step": 1
+    },
+    {
+      "evidence": "production_source_contract_blueprint.json + 1,656-row source inventory template",
+      "name": "Define real-data source contract",
+      "status": "PASS",
+      "step": 2
+    },
+    {
+      "evidence": "historical_market_backfill production parser + content coverage validation",
+      "name": "Equity-trade ingestion pipeline",
+      "status": "PASS",
+      "step": 3
+    },
+    {
+      "evidence": "historical_market_backfill production parser + quote schema validation",
+      "name": "Equity-quote ingestion pipeline",
+      "status": "PASS",
+      "step": 4
+    },
+    {
+      "evidence": "real authorized aggregate coverage=0/1656; core-specific covered=0",
+      "name": "Complete 828 core equity source-date rows",
+      "status": "SOURCE_BLOCKED",
+      "step": 5
+    },
+    {
+      "evidence": "option trade + option quote production schemas and parsers are installed",
+      "name": "Options trade/quote ingestion pipeline",
+      "status": "PASS",
+      "step": 6
+    },
+    {
+      "evidence": "real authorized aggregate coverage=0/1656; option-specific covered=0",
+      "name": "Complete 828 option source-date rows",
+      "status": "SOURCE_BLOCKED",
+      "step": 7
+    },
+    {
+      "evidence": "80 G3-confirmed Nasdaq events frozen; decoded authorized ITCH files are not present",
+      "name": "Conditional Nasdaq ITCH",
+      "status": "SOURCE_BLOCKED",
+      "step": 8
+    },
+    {
+      "evidence": "exact timestamps=0/174",
+      "name": "Replace G1 timing exclusions with exact clocks",
+      "status": "SOURCE_BLOCKED",
+      "step": 9
+    },
+    {
+      "evidence": "genuine control dates=0/72",
+      "name": "Replace G5 exclusions with genuine point-in-time controls",
+      "status": "SOURCE_BLOCKED",
+      "step": 10
+    },
+    {
+      "evidence": "requires G2 real market data + G1 exact timing + genuine G5 controls",
+      "name": "Regenerate fully non-synthetic historical feature corpus",
+      "status": "DEPENDENCY_BLOCKED",
+      "step": 11
+    },
+    {
+      "evidence": "release remains fail-closed until source-dependent locks are genuinely clear",
+      "name": "Run non-synthetic release gates and champion/challenger evaluation",
+      "status": "DEPENDENCY_BLOCKED",
+      "step": 12
+    }
+  ]
+}

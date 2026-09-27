@@ -1,0 +1,116 @@
+from __future__ import annotations
+
+import csv
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+import real_data_release_sprint as sprint
+
+
+def _write_json(path: Path, obj: dict) -> None:
+    path.write_text(json.dumps(obj, indent=2) + "\n", encoding="utf-8")
+
+
+def test_freeze_real_repository_requirements(tmp_path: Path):
+    out = tmp_path / "freeze"
+    result = sprint.freeze_requirements(
+        source_date_requirements=ROOT / "data/processed/coverage_plan_real/source_date_requirements.csv",
+        event_exchange_resolutions=ROOT / "data/processed/authorized_input_real/event_exchange_resolutions.csv",
+        outdir=out,
+    )
+    assert result["counts"]["core_equity_source_date_rows"] == 828
+    assert result["counts"]["option_source_date_rows"] == 828
+    assert result["counts"]["total_required_g2_source_date_rows"] == 1656
+    assert result["counts"]["legacy_conditional_itch_market_date_rows"] == 414
+    assert result["counts"]["g3_confirmed_nasdaq_event_rows"] == 80
+    assert (out / "market_source_inventory.template.csv").exists()
+    rows = list(csv.DictReader((out / "market_source_inventory.template.csv").open()))
+    assert len(rows) == 1656
+    assert {r["status"] for r in rows} == {"MISSING_SOURCE"}
+
+
+def test_refresh_coverage_uses_current_metadata_subgates(tmp_path: Path):
+    frozen = tmp_path / "frozen"
+    sprint.freeze_requirements(
+        source_date_requirements=ROOT / "data/processed/coverage_plan_real/source_date_requirements.csv",
+        event_exchange_resolutions=ROOT / "data/processed/authorized_input_real/event_exchange_resolutions.csv",
+        outdir=frozen,
+    )
+    coverage = json.loads((ROOT / "data/processed/coverage_plan_real/coverage_summary.json").read_text())
+    coverage_path = tmp_path / "coverage.json"
+    _write_json(coverage_path, coverage)
+    gates_path = tmp_path / "gates.csv"
+
+    updated = sprint.refresh_coverage(
+        coverage_summary_path=coverage_path,
+        metadata_readiness_path=ROOT / "data/processed/authorized_input_real/metadata_readiness_summary.json",
+        metadata_quality_path=ROOT / "data/processed/authorized_input_real/metadata_quality_summary.json",
+        requirements_manifest_path=frozen / "requirements_manifest.json",
+        unresolved_gates_path=gates_path,
+    )
+    assert updated["metadata_gate_overlay"]["G1_ANNOUNCEMENT_TIMES"] == "READY_WITH_REVIEWED_EXCLUSIONS"
+    assert updated["metadata_gate_overlay"]["G3_PRIMARY_LISTING_HISTORY"] == "READY"
+    assert updated["metadata_gate_overlay"]["G4_SHARES_OUTSTANDING"] == "READY_WITH_REVIEWED_EXCLUSIONS"
+    assert updated["metadata_gate_overlay"]["G5_MATCHED_CONTROL_UNIVERSE"] == "READY_WITH_REVIEWED_EXCLUSIONS"
+    assert "G2_REAL_MARKET_DATA" in updated["blocking_gates"]
+    assert "G1_EXACT_TIMING_ANALYSIS" in updated["blocking_gates"]
+    assert "G5_MODEL_EVALUATION_CONTROLS" in updated["blocking_gates"]
+    assert updated["g3_conditioned_itch_event_rows"] == 80
+
+
+def test_status_never_labels_missing_real_sources_complete(tmp_path: Path):
+    req = tmp_path / "req.json"
+    coverage = tmp_path / "coverage.json"
+    metadata = tmp_path / "metadata.json"
+    quality = tmp_path / "quality.json"
+    out = tmp_path / "status.json"
+
+    _write_json(req, {
+        "counts": {
+            "core_equity_source_date_rows": 828,
+            "option_source_date_rows": 828,
+            "g3_confirmed_nasdaq_event_rows": 80,
+        }
+    })
+    _write_json(coverage, {
+        "contract_audit": {
+            "real_authorized_required_rows_covered": 0,
+            "ready_for_real_backfill": False,
+        },
+        "ready_for_non_synthetic_champion_challenger_comparison": False,
+    })
+    _write_json(metadata, {
+        "announcement_exact_resolved": 0,
+        "control_dates_resolved": 0,
+        "ready_g1_exact_timing_analysis": False,
+        "ready_g5_model_evaluation_controls": False,
+        "ready_for_non_synthetic_model_evaluation_metadata": False,
+    })
+    _write_json(quality, {
+        "quality_cleared_for_non_synthetic_model_evaluation": False,
+    })
+    status = sprint.build_status(
+        requirements_manifest_path=req,
+        coverage_summary_path=coverage,
+        metadata_readiness_path=metadata,
+        metadata_quality_path=quality,
+        outpath=out,
+    )
+    by_step = {x["step"]: x["status"] for x in status["steps"]}
+    assert by_step[1] == "PASS"
+    assert by_step[2] == "PASS"
+    assert by_step[3] == "PASS"
+    assert by_step[4] == "PASS"
+    assert by_step[5] == "SOURCE_BLOCKED"
+    assert by_step[6] == "PASS"
+    assert by_step[7] == "SOURCE_BLOCKED"
+    assert by_step[8] == "SOURCE_BLOCKED"
+    assert by_step[9] == "SOURCE_BLOCKED"
+    assert by_step[10] == "SOURCE_BLOCKED"
+    assert by_step[11] == "DEPENDENCY_BLOCKED"
+    assert by_step[12] == "DEPENDENCY_BLOCKED"
+    assert status["all_12_genuinely_complete"] is False

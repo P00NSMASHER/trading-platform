@@ -1,0 +1,32 @@
+{
+  "artifacts": {
+    "contract_blueprint": "production_source_contract_blueprint.json",
+    "core": "g2_core_source_date_requirements.csv",
+    "inventory_template": "market_source_inventory.template.csv",
+    "itch_events": "g2_itch_event_requirements.csv",
+    "options": "g2_option_source_date_requirements.csv"
+  },
+  "counts": {
+    "core_equity_source_date_rows": 828,
+    "g3_confirmed_nasdaq_event_rows": 80,
+    "legacy_conditional_itch_market_date_rows": 414,
+    "option_source_date_rows": 828,
+    "total_required_g2_source_date_rows": 1656,
+    "unique_g3_confirmed_nasdaq_event_dates": 46
+  },
+  "event_exchange_resolutions_path": "data/processed/authorized_input_real/event_exchange_resolutions.csv",
+  "event_exchange_resolutions_sha256": "8a0d6c63dd3b1dfbfd0a7f621c5e0cb7eff385e1ede25b5dabe2fc150bf2953e",
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "Frozen real-data requirements receipt for Steps 1-12.",
+  "schema_version": "1",
+  "source_date_requirements_path": "data/processed/coverage_plan_real/source_date_requirements.csv",
+  "source_date_requirements_sha256": "160a173febf45ae6fc6e4464983e07e4287690d236768399273f72775a1b18b9"
+}
