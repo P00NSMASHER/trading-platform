@@ -192,13 +192,13 @@ jobs:
           )
           for path in sorted(set(changed)):
               digest=hashlib.sha256(Path(path).read_bytes()).hexdigest()
-              exists=(subprocess.run(["git","cat-file","-e",f"{base}:{path}"],
-                                     stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0)
-              if exists:
-                  obj["repository_additions"].pop(path,None)
+              if path in obj["intentional_release_modifications"]:
                   obj["intentional_release_modifications"][path]={"expected_sha256":digest,"reason":reason}
+              elif path in obj["repository_additions"]:
+                  obj["repository_additions"][path]={"expected_sha256":digest,"reason":reason}
               else:
-                  obj["intentional_release_modifications"].pop(path,None)
+                  # Any newly generated path absent from the frozen-release allowlist
+                  # is a post-release repository addition by definition.
                   obj["repository_additions"][path]={"expected_sha256":digest,"reason":reason}
           allow.write_text(json.dumps(obj,indent=2)+"\n")
           print("re-pinned",len(set(changed)),"generated files")
