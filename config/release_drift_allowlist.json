@@ -621,12 +621,12 @@
       "expected_sha256": "7512fff8e36f2184f0cb66d21fe8642138790c8231b74249c6c5ef56179fbefe",
       "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
     },
-    "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "8ec7419450094332084919a7abf250387886a246736c02d86cafb499b7491198",
-      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
-    },
     "requirements-skops.lock": {
       "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
+      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
+    },
+    "data/processed/software_readiness/software_readiness_certification.json": {
+      "expected_sha256": "530c2f04ddd5b8c526ea5a115cd50b86ff2834dae1309e146390e8e0ba912e2c",
       "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
     }
   }
