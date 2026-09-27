@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twelve verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains thirteen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-businesswire-illumina-verified-mirror-20150127",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0011.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "Independently verified Business Wire release clock. Illumina's issuer archive reproduces the Business Wire release dated Jan. 27, 2015; the preserved Business Wire mirror timestamps it at 4:05 PM EST and exposes Business Wire tracking story ID 20150127006397. Grade B reflects that the exact clock is recovered from a preserved Business Wire mirror rather than a currently fetchable first-party Business Wire article page.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "Issuer corroboration: https://investor.illumina.com/news/press-release-details/2015/Illumina-Reports-Record-Financial-Results-for-Fourth-Quarter-and-FiscalYear-2014/default.aspx ; underlying Business Wire story ID: 20150127006397"
+    },
     {
       "source_id": "public-gilead-g1-batch-0010",
       "record_kind": "announcement_timestamp",
@@ -444,8 +467,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "76bb6878d56d399ca823ddbbd14edb051dbafbb0659594bd1f21be772d433eb8",
-    "expected_count": 162,
+    "expected_sha256": "4d274fe6a3a69e8cfeea215c114aaae216fc6d47e9d7fca0f085c7eeb070ed37",
+    "expected_count": 161,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
