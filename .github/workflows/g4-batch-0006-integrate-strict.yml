@@ -1,0 +1,142 @@
+name: g4-batch-0006-integrate-strict
+
+on:
+  push:
+    branches: [fix/g4-shares-batch-0006-integrate-strict]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: g4-batch-0006-integrate-strict
+  cancel-in-progress: true
+
+jobs:
+  integrate:
+    if: "!contains(github.event.head_commit.message, '[g4-batch-0006-integrated]')"
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONPATH: src
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+
+      - name: Rebuild canonical metadata
+        run: |
+          python -m metadata_resolver \
+            --events data/processed/historical_events.csv \
+            --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv \
+            --contract config/metadata_sources.public_progress.json \
+            --outdir data/processed/authorized_input_real
+          python -m metadata_quality \
+            --events data/processed/historical_events.csv \
+            --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv \
+            --contract config/metadata_sources.public_progress.json \
+            --resolver-dir data/processed/authorized_input_real \
+            --outdir data/processed/authorized_input_real
+
+      - name: Assert strict partial integration
+        run: |
+          python - <<'PY'
+          import csv, json
+          from collections import Counter
+          from pathlib import Path
+
+          out=Path("data/processed/authorized_input_real")
+          r=json.loads((out/"metadata_readiness_summary.json").read_text())
+          assert r["ready_g3_primary_listing_history"] is True
+          assert r["event_exchange_resolved"] == 174
+          assert r["shares_symbol_dates_resolved"] == 3809, r
+          assert r["shares_symbol_dates_unresolved"] == 19, r
+          assert r["ready_g4_shares_outstanding"] is False
+
+          domains=list(csv.DictReader((out/"metadata_domain_quality.csv").open(newline="",encoding="utf-8")))
+          shares=next(x for x in domains if x["domain"]=="shares")
+          assert int(shares["resolver_ready_count"]) == 3809, shares
+          assert int(shares["quality_clear_count"]) == 3809, shares
+          assert int(shares["quarantined_count"]) == 0, shares
+          assert shares["status"] == "BLOCKED_INCOMPLETE", shares
+
+          rows=list(csv.DictReader((out/"shares_outstanding_resolutions.csv").open(newline="",encoding="utf-8")))
+          unresolved=[x for x in rows if x["resolution_status"]=="unresolved"]
+          counts=Counter(x["historical_symbol"] for x in unresolved)
+          assert len(unresolved)==19, len(unresolved)
+          assert counts == Counter({"ACO":11,"CGNX":5,"WLL":3}), counts
+
+          q=out/"metadata_quarantine.csv"
+          assert q.read_text(encoding="utf-8").strip()=="" if q.exists() else True
+          print(json.dumps({"shares_resolved":3809,"shares_unresolved":19,"unresolved_by_symbol":dict(counts)},indent=2))
+          PY
+
+      - name: Update reviewed drift hashes
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          p=Path("config/release_drift_allowlist.json")
+          obj=json.loads(p.read_text(encoding="utf-8"))
+          reason="G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
+          paths=[
+            "config/metadata_sources.public_progress.json",
+            "data/processed/authorized_input_real/metadata_quality_summary.json",
+            "data/processed/authorized_input_real/metadata_readiness_summary.json",
+            "data/processed/authorized_input_real/metadata_domain_quality.csv",
+            "data/processed/authorized_input_real/metadata_quality_issues.csv",
+            "data/processed/authorized_input_real/metadata_source_inventory.json",
+            "data/processed/authorized_input_real/metadata_unresolved_gates.csv",
+            "data/processed/authorized_input_real/shares_outstanding_resolutions.csv",
+            "data/processed/authorized_input_real/g4_shares_batch_0006_report.json",
+            "data/processed/authorized_input_real/g4_shares_batch_0006_blockers.json",
+            "data/public/metadata/g4_shares_anchors_batch_0006.csv",
+            "data/public/metadata/g4_shares_batch_0006.csv",
+          ]
+          def sha(path):
+              h=hashlib.sha256()
+              with Path(path).open("rb") as f:
+                  for chunk in iter(lambda:f.read(1024*1024),b""):
+                      h.update(chunk)
+              return h.hexdigest()
+          mods=obj["intentional_release_modifications"]
+          adds=obj["repository_additions"]
+          for path in paths:
+              detail={"expected_sha256":sha(path),"reason":reason}
+              if path in mods:
+                  mods[path]=detail
+              else:
+                  adds[path]=detail
+          p.write_text(json.dumps(obj,indent=2)+"\n",encoding="utf-8")
+          PY
+
+      - name: Focused tests
+        run: |
+          python -m pytest -q \
+            tests/test_g4_materialize_batch.py \
+            tests/test_metadata_resolver.py \
+            tests/test_metadata_quality.py \
+            tests/test_release_drift.py
+
+      - name: Commit canonical integration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            config/release_drift_allowlist.json \
+            data/processed/authorized_input_real
+          git commit -m "[g4-batch-0006-integrated] register 492 strict observations"
+          git push origin HEAD:fix/g4-shares-batch-0006-integrate-strict
