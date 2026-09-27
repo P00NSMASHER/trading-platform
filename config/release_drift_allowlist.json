@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "11b45b2384b4aa968d27a75117e4175781381b9c831fc270fc67e1af4789a864",
-      "reason": "Authoritative receipt regeneration from main source commit ce80d4e2bbad8e48443d1b3a8a77c77e8b5cf004 after G1 Gilead batch 0010."
+      "expected_sha256": "063edbc88761a388df30c16ba9cfaf8ec44d8afa309e7e0035c560f2a4d1cd3e",
+      "reason": "Authoritative receipt regeneration from main source commit 93f526d190a61ef6d321a9bd583f38ae203f6fc4 after G1 Illumina batch 0011."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "9b700fd52de792b6e4df818a419d0748fcec124fb0e754c36b153ccb7086c8da",
-      "reason": "Authoritative receipt regeneration from main source commit ce80d4e2bbad8e48443d1b3a8a77c77e8b5cf004 after G1 Gilead batch 0010."
+      "expected_sha256": "9f5b0d24015df98776c991c400ac0c59afc4ee5f59112d45b1bf0920d75eb4b7",
+      "reason": "Authoritative receipt regeneration from main source commit 93f526d190a61ef6d321a9bd583f38ae203f6fc4 after G1 Illumina batch 0011."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -700,14 +700,6 @@
     "data/public/metadata/g1_announcement_times_batch_0011.csv": {
       "expected_sha256": "8ea09c97f3805708adba7570a7b5d6a4cf90010aa2c50aa05744f5109ed44919",
       "reason": "G1 batch 0011 evidence row for ILMN: preserved Business Wire release timestamp at 2015-01-27 4:05 PM EST, issuer-corroborated and intentionally graded B."
-    },
-    "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "9f5b0d24015df98776c991c400ac0c59afc4ee5f59112d45b1bf0920d75eb4b7",
-      "reason": "Authoritative receipt regeneration from main source commit 93f526d190a61ef6d321a9bd583f38ae203f6fc4 after G1 Illumina batch 0011."
-    },
-    "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "063edbc88761a388df30c16ba9cfaf8ec44d8afa309e7e0035c560f2a4d1cd3e",
-      "reason": "Authoritative receipt regeneration from main source commit 93f526d190a61ef6d321a9bd583f38ae203f6fc4 after G1 Illumina batch 0011."
     }
   }
 }
