@@ -1,0 +1,56 @@
+name: g4-aco-acceptance-probe
+
+on:
+  push:
+    branches: [research/g4-aco-acceptance-probe]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+      - name: Fetch exact static SEC submission
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://www.sec.gov/Archives/edgar/data/813621/000114036113016072/0001140361-13-016072.txt"
+          curl -fL --retry 3 --retry-delay 2 \
+            -H "User-Agent: P00NSMASHER trading-platform research 22281248+P00NSMASHER@users.noreply.github.com" \
+            -H "Accept-Encoding: gzip, deflate" \
+            "$URL" -o /tmp/aco.txt
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          s=Path("/tmp/aco.txt").read_text(errors="replace")
+          m=re.search(r"<ACCEPTANCE-DATETIME>\s*(\d{14})",s)
+          if not m:
+              raise SystemExit("ACCEPTANCE-DATETIME not found")
+          out={
+            "schema_version":"1",
+            "accession":"0001140361-13-016072",
+            "cik":"0000813621",
+            "form":"10-K",
+            "acceptance_datetime_edgar":m.group(1),
+            "source_url":"https://www.sec.gov/Archives/edgar/data/813621/000114036113016072/0001140361-13-016072.txt",
+            "target_row":{"historical_symbol":"ACO","trade_date":"2013-04-10","cutoff_local":"2013-04-10T14:10:00-04:00"},
+            "shares_fact":{"fact_date":"2013-03-27","shares_outstanding":32287200},
+            "research_use_only":True
+          }
+          p=Path("data/processed/authorized_input_real/g4_aco_acceptance_probe.json")
+          p.write_text(json.dumps(out,indent=2)+"\n")
+          print(json.dumps(out,indent=2))
+          PY
+      - name: Commit probe
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/processed/authorized_input_real/g4_aco_acceptance_probe.json
+          git commit -m "[g4-aco-probe] exact EDGAR acceptance"
+          git push origin HEAD:research/g4-aco-acceptance-probe
