@@ -189,6 +189,9 @@ jobs:
           git rm -f src/g4_sec_shares_batch.py
           git rm -f data/public/metadata/g4_historical_cik_map_batch_0007.csv
 
+      - name: Harden ephemeral runtime permissions
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+
       - name: Full test suite
         run: python -m pytest -q
 
