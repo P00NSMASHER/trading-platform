@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 13
-- **Immutable reviewed fail-closed exclusions:** 161
+- **Exact first-public announcement timestamps resolved:** 14
+- **Immutable reviewed fail-closed exclusions:** 160
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 13
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 14
 
 This does **not** invent announcement times.
 
@@ -107,3 +107,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-8A11E54A9679E09D` (ILMN): `2015-01-27T16:05:00-05:00`. The preserved Business Wire copy is published at Jan. 27, 2015, 4:05 PM EST; its Business Wire tracking request exposes story ID `20150127006397`. Illumina's issuer archive reproduces the identical Business Wire earnings release. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved wire mirror rather than a currently fetchable first-party Business Wire article page.
 
 The other 161 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified issuer-attributed distribution batch 0012
+
+One additional event now has an exact public-release timestamp recovered from an issuer-attributed distribution archive and corroborated against the issuer's official archive:
+
+- `HEJFE-0B87675BF7BEDBCA` (EA): `2015-01-27T16:35:00-05:00`. EIN Presswire preserves `Electronic Arts Reports Q3 FY15 Financial Results` as `News Provided By Electronic Arts` at Jan. 27, 2015, 21:35 GMT (4:35 PM EST). EA's official news archive independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the issuer-attributed distribution archive rather than EA's own page.
+
+The other 160 events remain fail-closed until equivalent admissible evidence is located.
