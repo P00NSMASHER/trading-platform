@@ -131,7 +131,7 @@ def test_release_token_is_bound_to_exact_hashed_inputs(tmp_path):
     kw["market_backfill_manifest"] = mp
 
     ready = json.loads(Path(kw["metadata_readiness"]).read_text())
-    for k in ["ready_g1_announcement_times", "ready_g3_primary_listing_history", "ready_g4_shares_outstanding", "ready_g5_matched_control_universe", "ready_for_non_synthetic_model_evaluation_metadata"]:
+    for k in ["ready_g1_announcement_times", "ready_g1_exact_timing_analysis", "ready_g3_primary_listing_history", "ready_g4_shares_outstanding", "ready_g5_matched_control_universe", "ready_for_non_synthetic_model_evaluation_metadata"]:
         ready[k] = True
     ready["events_sha256"] = erc._sha256(Path(kw["historical_events"]))
     rp = tmp_path / "ready.json"; rp.write_text(json.dumps(ready)); kw["metadata_readiness"] = rp
@@ -151,3 +151,25 @@ def test_release_token_is_bound_to_exact_hashed_inputs(tmp_path):
     assert token["input_hashes"]["base_features"] == erc._sha256(Path(kw["base_features"]))
     assert token["automatic_promotion_permitted"] is False
     assert token["active_champion_modification_permitted"] is False
+
+
+def test_g1_completion_with_exclusions_does_not_unlock_exact_timing_release(tmp_path):
+    kw = _base_kwargs(tmp_path)
+    ready = json.loads(Path(kw["metadata_readiness"]).read_text())
+    ready["ready_g1_announcement_times"] = True
+    ready["ready_g1_exact_timing_analysis"] = False
+    rp = tmp_path / "g1-excluded-ready.json"
+    rp.write_text(json.dumps(ready))
+    kw["metadata_readiness"] = rp
+
+    quality = json.loads(Path(kw["metadata_quality"]).read_text())
+    quality["resolver_summary_sha256"] = erc._sha256(rp)
+    qp = tmp_path / "g1-excluded-quality.json"
+    qp.write_text(json.dumps(quality))
+    kw["metadata_quality"] = qp
+
+    result = erc.assess_release(**kw)
+    gates = {x["gate_id"] for x in result["blocking_failures"]}
+    assert "G1_ANNOUNCEMENT_TIMES" not in gates
+    assert "G1_EXACT_TIMING_ANALYSIS" in gates
+    assert result["evaluation_release_permitted"] is False
