@@ -68,12 +68,12 @@
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "d81c50f2b9083435f0a7ebf1fc3cd819be24eb92ebd725da4e3e1d2ca9e22038",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "243b0df0400fffce489c7149235027f34cf49dfa938607f30e4d3538588f819b",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "313d83fe23e9a492e9937aa95ea291746bd081540a1c0c3527747e25a6f37b51",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "796365aa484ceed41ae71c73af0a0f8c34aaf4d3caaf534ffa51f38bbd70a2fe",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "src/metadata_quality.py": {
       "expected_sha256": "0d3e7405e394e9b4bbfc21450afdfb89650e5bc4703cdd609f5a905cf5ad58c8",
@@ -326,32 +326,32 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "656956594eb940e8a512e0d3be3a150eb7c0979e3fe4cf7d6920346e496f447d",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "c501753afffb1a821bac8a3654bab7b2a4755dc5f9f9244c9c73f17967dd4bb8",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_quality_issues.csv": {
-      "expected_sha256": "a4b8f12b284d9dbbf7f063d85ba74890159ea355e13044e84bc4fe1ad23c7098",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "abecf246f7637a0008ab31da1e0744c9b8223e9fcb78c48076c9b3a404b901ea",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_quarantine.csv": {
       "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "3e264445aa9a7de0e598dad51b0315ad6c66948a7a5a1cbc947695cd5396785a",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "d6a1feaa63655ad6e69dd32b16afa0c0a2e465055b49d969b669dc9756bd922a",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "b95788431cc02f1c71243b57471e88a145cc3dde7fbc0a5df50c6480097fc9d9",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "717039ff0e09587886ac968dcdeb2281da73165e6f8d27a467ffb44a8c979b76",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
-      "expected_sha256": "a7515342abebb81984820d18db190cb394afef9b7eeb8507491bf3d03c3f3907",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "ad4d055afaf3ae8bfbdb70e4420d827dc776c9cb4f2fe4e6153b918f2ef3a3dd",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -370,8 +370,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "6c8ab786ecd2cfbfc6aa25815d6ce612fe29168b9846a337a15765eba1b92e7a",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "601e5421ba8982f5ccd3b9de971b085503247f4ceb19dcc3e017b53dcacea1a3",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
       "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
@@ -456,6 +456,18 @@
     "data/public/metadata/g4_shares_batch_0007.csv": {
       "expected_sha256": "003eb158263c5f82b5dbf34c3d29d6b1a7b8864bb52068f875763248f08e7fe2",
       "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0008_report.json": {
+      "expected_sha256": "50ebb59f5a6839e9eb17802b2d5d4ac09a36e9b9de3926383d569e3842dd3a91",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0008.csv": {
+      "expected_sha256": "596608ac73f905099873d12e7c6ef3077d8fa2e84364fc094eb528baa1add24c",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_batch_0008.csv": {
+      "expected_sha256": "2c7f0880436d5ef7dc526be8c2f9dfa68174e403cdb21e1302590ba21c7d4355",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     }
   }
 }

@@ -89,5 +89,18 @@
     "row_count": 500,
     "sha256": "003eb158263c5f82b5dbf34c3d29d6b1a7b8864bb52068f875763248f08e7fe2",
     "license_reference_present": true
+  },
+  {
+    "source_id": "public-sec-shares-batch-0008",
+    "record_kind": "shares_outstanding",
+    "source_family": "sec_xbrl_companyfacts",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g4_shares_batch_0008.csv",
+    "exists": true,
+    "row_count": 328,
+    "sha256": "2c7f0880436d5ef7dc526be8c2f9dfa68174e403cdb21e1302590ba21c7d4355",
+    "license_reference_present": true
   }
 ]
