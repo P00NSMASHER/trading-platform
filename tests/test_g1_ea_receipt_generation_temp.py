@@ -3,7 +3,6 @@ from __future__ import annotations
 import base64
 import hashlib
 import json
-import zlib
 from pathlib import Path
 
 import metadata_quality
@@ -80,6 +79,7 @@ def test_emit_g1_ea_authoritative_receipts() -> None:
     )
 
     targets = targets_before_cert + [cert_rel]
-    payload = {rel: base64.b64encode((root / rel).read_bytes()).decode("ascii") for rel in targets}
-    packed = base64.b64encode(zlib.compress(json.dumps(payload, sort_keys=True).encode("utf-8"), 9)).decode("ascii")
-    raise AssertionError("G1_EA_RECEIPTS_ZLIB_B64_BEGIN" + packed + "G1_EA_RECEIPTS_ZLIB_B64_END")
+    for rel in targets:
+        encoded = base64.b64encode((root / rel).read_bytes()).decode("ascii")
+        print(f"G1_EA_FILE_BEGIN::{rel}::{encoded}::G1_EA_FILE_END")
+    raise AssertionError("G1_EA_RECEIPTS_EMITTED")
