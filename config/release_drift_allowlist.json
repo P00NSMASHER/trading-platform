@@ -621,10 +621,6 @@
       "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
       "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
     },
-    ".github/workflows/licensed-drop-activation-validation.yml": {
-      "expected_sha256": "af5d99a3ec0143209b9ac5409834235993e4f2500053cccdc98224d639559f1e",
-      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
-    },
     "src/licensed_data_drop_processor.py": {
       "expected_sha256": "3f8077162fd03ccc90677e455684765be9466a07313d331b5982b269b82f568b",
       "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
