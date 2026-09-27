@@ -21,17 +21,17 @@
     {
       "category": "runtime",
       "check_id": "PRIVATE_RUNTIME_INTEGRITY",
-      "detail": "ok=True; audit_sha256=f9ce480eae93beee43e684ec12c4a70dc53506e82f1fcef189d2c9286824862d; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+      "detail": "ok=True; audit_sha256=dcf09cfe847a0d5bc9505aea6d4152dbd54089294cf8352aeba6c139c1f5820f; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
       "passed": true
     }
   ],
-  "git_commit": "8a4ae728a557fb4a25558258af4231058174012b",
+  "git_commit": "e065cec6a87f927e6478b0ae3f15b7aaf89e2ad6",
   "hostile_regression_suite": {
     "missing_test_files": [],
     "ok": true,
     "passed_count": 185,
     "returncode": 0,
-    "stdout_tail": "........................................................................ [ 38%]\n........................................................................ [ 77%]\n.........................................                                [100%]\n185 passed in 21.03s\n",
+    "stdout_tail": "........................................................................ [ 38%]\n........................................................................ [ 77%]\n.........................................                                [100%]\n185 passed in 20.07s\n",
     "test_files": [
       "tests/test_baseline_engine.py",
       "tests/test_feature_engine.py",
@@ -98,7 +98,7 @@
   },
   "real_data_validated": false,
   "runtime_self_check": {
-    "audit_sha256": "f9ce480eae93beee43e684ec12c4a70dc53506e82f1fcef189d2c9286824862d",
+    "audit_sha256": "dcf09cfe847a0d5bc9505aea6d4152dbd54089294cf8352aeba6c139c1f5820f",
     "case_database": {
       "case_count": 1,
       "exists": true,
@@ -164,7 +164,7 @@
       },
       "ok": true
     },
-    "generated_at_utc": "2026-09-27T11:46:37Z",
+    "generated_at_utc": "2026-09-27T11:56:50Z",
     "model_bundle": {
       "deserialization_attempted": true,
       "exists": true,

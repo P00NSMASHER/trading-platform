@@ -15,10 +15,6 @@
       "expected_sha256": "f7e649876841dc7e42dd5550a43c9903224fa8800e32caa60ccd2873824685cf",
       "reason": "Intentional post-Step21 security hardening"
     },
-    "pyproject.toml": {
-      "expected_sha256": "fdf9bca34f71373fa044cb88d1c48eda960f66e09beb3e4c37420f51c0d0b788",
-      "reason": "Intentional post-Step21 security hardening"
-    },
     "src/authorized_input_orchestrator.py": {
       "expected_sha256": "9dae028c98c67d9050b9448118c29de524f338f90dc5c513b347d90870aae8c2",
       "reason": "Control-plane Step 2: immutable HOLDING, information identity, source-policy routing, and Step-21 receipt linkage"
@@ -41,10 +37,6 @@
     },
     "tests/test_case_evidence.py": {
       "expected_sha256": "ec0153e7a770b2778c4b236ea7ed21ec9e3b9c77b7883e636cf3fa7f7274de82",
-      "reason": "Intentional post-Step21 security hardening"
-    },
-    "tests/test_deployment_hardening.py": {
-      "expected_sha256": "6d6d4b31b97ee4a5f0de2bfcbcb662a2e9e0d39aa3bc209011041205384374b0",
       "reason": "Intentional post-Step21 security hardening"
     },
     "tests/test_private_dashboard.py": {
@@ -106,6 +98,14 @@
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "aa37aa294b769007ee036022a566e6ecc7026e2901924d015d5762b9c7a40943",
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "pyproject.toml": {
+      "expected_sha256": "a94ea697e62d4d2e3ffa3f19676a3fc29e3d0157124d84b31a557627e51f3bc9",
+      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
+    },
+    "tests/test_deployment_hardening.py": {
+      "expected_sha256": "89be846818b299092de1a296a9006ff9c31e8546f9c7469f30a89f56e2c988c5",
+      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
     }
   },
   "repository_additions": {
@@ -148,10 +148,6 @@
     "docs/repository_integrity.md": {
       "expected_sha256": "f09d907e0f8c048db3aa2d4d47502d0b05c9120ae799edc746ac5f7724384a8c",
       "reason": "Control-plane Step 8: current public-repository CI, adversarial audit-pack, and external trust-root release procedure"
-    },
-    "requirements-skops.lock": {
-      "expected_sha256": "58921131f59fe684924c48055ab9240c882fb6c5ea7f63b052b30fdd715fe456",
-      "reason": "Intentional post-Step21 repository hardening addition"
     },
     "scripts/secret_scan.py": {
       "expected_sha256": "ff87e7b0cc437300bb0b71d647deaf216488f5e3c8a3440f6b4b2f58967d1c49",
@@ -625,9 +621,13 @@
       "expected_sha256": "7512fff8e36f2184f0cb66d21fe8642138790c8231b74249c6c5ef56179fbefe",
       "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
     },
+    "requirements-skops.lock": {
+      "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
+      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
+    },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "8ec7419450094332084919a7abf250387886a246736c02d86cafb499b7491198",
-      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
+      "expected_sha256": "530c2f04ddd5b8c526ea5a115cd50b86ff2834dae1309e146390e8e0ba912e2c",
+      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
     }
   }
 }
