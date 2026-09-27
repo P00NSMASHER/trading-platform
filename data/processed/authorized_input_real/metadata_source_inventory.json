@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-sec-ava-release-20130220",
+    "record_kind": "announcement_timestamp",
+    "source_family": "official_newswire_archive",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0009.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "dd6472d2dad3b5782c8faed7076bd447969d057ea7803910ea50eb9a1e593561",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-prnewswire-alsn-release-20150427",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
