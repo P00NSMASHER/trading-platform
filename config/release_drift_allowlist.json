@@ -624,6 +624,10 @@
     "docs/software_readiness_certification.md": {
       "expected_sha256": "7512fff8e36f2184f0cb66d21fe8642138790c8231b74249c6c5ef56179fbefe",
       "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by hostile regression and private-runtime integrity checks."
+    },
+    "data/processed/software_readiness/software_readiness_certification.json": {
+      "expected_sha256": "a021c21e72d05df37dfbe62670875ce12a6cf88c036c1b973e05b249de7bb2b9",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by hostile regression and private-runtime integrity checks."
     }
   }
 }
