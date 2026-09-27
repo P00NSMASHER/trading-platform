@@ -36,6 +36,9 @@ jobs:
           python -m pip install -r requirements.lock
           python -m pip install -r requirements-dev.lock
 
+      - name: Harden ephemeral runtime permissions
+        run: python src/deployment_hardening.py harden-permissions --config config/runtime.demo.toml
+
       - name: Test certification logic
         run: python -m pytest -q tests/test_software_readiness_certification.py
 
