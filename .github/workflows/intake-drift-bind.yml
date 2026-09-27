@@ -1,0 +1,53 @@
+name: intake-drift-bind
+
+on:
+  push:
+    branches: [release/licensed-data-intake]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: intake-drift-bind
+  cancel-in-progress: true
+
+jobs:
+  bind:
+    if: "!contains(github.event.head_commit.message, '[intake-drift-bound]')"
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+      - name: Bind exact hashes
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p=Path("config/release_drift_allowlist.json")
+          obj=json.loads(p.read_text(encoding="utf-8"))
+          additions=obj["repository_additions"]
+          reason=(
+              "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, "
+              "and regression/documentation coverage. Generated contracts remain unauthorized until review."
+          )
+          for path in [
+              "src/licensed_data_intake.py",
+              "tests/test_licensed_data_intake.py",
+              "docs/licensed_data_intake.md",
+          ]:
+              h=hashlib.sha256(Path(path).read_bytes()).hexdigest()
+              additions[path]={"expected_sha256":h,"reason":reason}
+          p.write_text(json.dumps(obj,indent=2)+"\n",encoding="utf-8")
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/release_drift_allowlist.json
+          git commit -m "[intake-drift-bound] bind licensed-data intake hashes"
+          git push origin HEAD:release/licensed-data-intake
