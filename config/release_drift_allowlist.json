@@ -44,8 +44,8 @@
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
     },
     "src/metadata_resolver.py": {
-      "expected_sha256": "314f119d09b63b54faffe5cf6d48e706ad47711e74c25ff38f9cd2f7cea0b32e",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+      "expected_sha256": "7aababf106632c171ba6be5e60fb1ad92e778b53c184c2d3d1b40395c26bca58",
+      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
     },
     "src/metadata_quality.py": {
       "expected_sha256": "9f7d38392dfe42ffb43e811ecb1adf84deb724cc17567516f73e1fa61aed9d33",
@@ -56,8 +56,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "tests/test_metadata_resolver.py": {
-      "expected_sha256": "8521c0ee74c276db390418af442753e6e463393bdc2fb82f34d82285d106fec2",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+      "expected_sha256": "f6aab4bc7d5a32c3e215c8a4a47c218c2fb24a824acff924cc4a391adafc587c",
+      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
     },
     "tests/test_metadata_quality.py": {
       "expected_sha256": "16c7b7c9af1300aefa6c0447326555c6423221027018be61b793db244fd8903e",
@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "a6c09340c9d86b669c002e4ae7135d7877d4552e079dfc3f425dd2a7dd737e6b",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "5a9b51e213733232647f0ade0887d3fa56d60816d9e5f170b9ee8a44d955ef5e",
+      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "65816597ed138cb81130f3a5583953d98341d1acd1e749fa27463980af54a049",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "2a0d096242a454c21faa7f71cd162c45a6a7bba1f9ff426c25b7c045ac15623a",
+      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "df7861614fd9fdb2a995d2f51f32e788cb53fbdfee2ad4d17809f2600011ecf0",
       "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "ea8bad3c754fb946f7a92dd7989088c0e73f13783e8c862f687c4de88be268cc",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+      "expected_sha256": "3c81ff9521afce3bf9f07855826b8cafb8f72f29671d93f401a4e92255008e50",
+      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -656,6 +656,10 @@
     "tests/test_public_dashboard.py": {
       "expected_sha256": "2ca66c26f68bc96fa079f2ddbd795e222fb10f67e8b8dd882e48b06841968cc1",
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0001.csv": {
+      "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
+      "reason": "First public G1 exact-timestamp evidence row: CNMD bound to SEC EDGAR Exhibit 99.1 with explicit FOR RELEASE 7:00 AM Eastern on 2011-04-28."
     }
   }
 }
