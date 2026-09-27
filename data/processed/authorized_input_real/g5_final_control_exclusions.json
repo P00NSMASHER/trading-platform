@@ -1,0 +1,408 @@
+{
+  "schema_version": "1",
+  "purpose": "Final fail-closed evidence dossier for G5 event dates without an admissible point-in-time matched-control universe containing at least three pre-event candidates with complete matching covariates. These dates are immutable reviewed exclusions from model-evaluation control matching.",
+  "research_use_only": true,
+  "base_main_sha": "50e48eed9247e37b8cbad1a64f2afbc0f0c739be",
+  "g5_state": {
+    "required_event_dates": 72,
+    "point_in_time_resolved_dates": 0,
+    "reviewed_excluded_dates": 72,
+    "accounted_for_dates": 72,
+    "blocking_unresolved_dates": 0,
+    "model_evaluation_eligible_dates": 0,
+    "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
+    "future_metadata_prohibited": true,
+    "retrospective_samplefirms_as_live_controls_prohibited": true,
+    "excluded_date_model_evaluation_prohibited": true
+  },
+  "evidence_boundary": {
+    "resolver_requirement": "At least three same-day point-in-time candidates with complete pre-event matching covariates per event date.",
+    "required_covariates": [
+      "sector",
+      "index_bucket",
+      "market_cap",
+      "price",
+      "volatility_21d",
+      "normal_volume",
+      "normal_turnover",
+      "normal_spread",
+      "options_liquidity",
+      "institutional_ownership",
+      "analyst_coverage"
+    ],
+    "public_research_universe": {
+      "repository": "vgreg/hacked_earnings_jfe",
+      "artifact": "Data/SampleFirms.csv",
+      "source_family": "samplefirms_research_universe",
+      "result": "Useful for retrospective same-day candidate enumeration only. The repository contract explicitly does not treat it as point-in-time live-model evidence because it lacks reliable pre-event availability and the full matching-covariate package."
+    },
+    "authorized_source_requirement": {
+      "source_family": "generic_authorized_reference_data",
+      "expected_content": "event_date/symbol rows with available_at no later than the first illicit-trade cutoff and complete pre-event matching covariates",
+      "current_enabled_source_count": 0
+    }
+  },
+  "exclusions": [
+    {
+      "event_date": "2011-04-19",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-04-20",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-04-26",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-04-27",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-07-20",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-07-26",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-07-27",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-08-03",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-08-18",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-10-20",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-10-21",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-10-26",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2011-10-27",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2012-01-23",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2012-01-24",
+      "event_count": 6,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2012-01-25",
+      "event_count": 7,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2012-01-26",
+      "event_count": 6,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2012-01-27",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2012-07-31",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-02-19",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-04-01",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-04-18",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-04-23",
+      "event_count": 4,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-04-24",
+      "event_count": 4,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-04-25",
+      "event_count": 10,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-05-06",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-05-07",
+      "event_count": 3,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-05-08",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-07-23",
+      "event_count": 4,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-09-19",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-10-17",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-10-21",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2013-10-22",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2014-12-10",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2014-12-15",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-01-20",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-01-21",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-01-22",
+      "event_count": 3,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-01-27",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-01-28",
+      "event_count": 3,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-01-29",
+      "event_count": 3,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-02",
+      "event_count": 3,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-03",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-04",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-05",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-10",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-11",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-12",
+      "event_count": 6,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-17",
+      "event_count": 5,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-18",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-19",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-23",
+      "event_count": 5,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-25",
+      "event_count": 3,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-02-26",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-03-03",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-03-10",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-03-19",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-03-25",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-03-26",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-03-31",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-04-16",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-04-21",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-04-22",
+      "event_count": 4,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-04-27",
+      "event_count": 5,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-04-28",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-04-29",
+      "event_count": 5,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-04-30",
+      "event_count": 6,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-05-04",
+      "event_count": 5,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-05-05",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-05-06",
+      "event_count": 4,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-05-19",
+      "event_count": 2,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    },
+    {
+      "event_date": "2015-05-20",
+      "event_count": 1,
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE"
+    }
+  ],
+  "completion_rule": "G5 is complete only when every event date is either resolved by at least three admissible point-in-time controls with complete pre-event covariates or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded dates may not contribute matched controls or model-evaluation authorization. Any future date that becomes fully resolvable makes its exclusion stale and must fail closed."
+}

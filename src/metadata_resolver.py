@@ -732,6 +732,136 @@ def resolve_control_readiness(events: list[dict[str,str]], sources) -> list[Cont
     return out
 
 
+def _load_reviewed_control_exclusions(
+    raw_contract: dict,
+    root: Path,
+    events: list[dict[str, str]],
+) -> tuple[set[str], dict]:
+    spec = raw_contract.get("reviewed_control_exclusions")
+    if not spec:
+        return set(), {"enabled": False, "applied_count": 0}
+    if not isinstance(spec, dict):
+        raise ValueError("reviewed_control_exclusions must be an object")
+    if not bool(spec.get("enabled", False)):
+        return set(), {"enabled": False, "applied_count": 0}
+
+    mode = str(spec.get("mode", "")).strip()
+    if mode != "reviewed_fail_closed_exclusions":
+        raise ValueError("reviewed_control_exclusions.mode must equal reviewed_fail_closed_exclusions")
+
+    raw_path = str(spec.get("path", "")).strip()
+    expected_sha = str(spec.get("expected_sha256", "")).strip().lower()
+    expected_count = int(spec.get("expected_count", 0))
+    required_status = str(spec.get("require_resolution_status", "")).strip()
+    if not raw_path:
+        raise ValueError("reviewed_control_exclusions.path is required")
+    if len(expected_sha) != 64 or any(ch not in "0123456789abcdef" for ch in expected_sha):
+        raise ValueError("reviewed_control_exclusions.expected_sha256 must be a 64-character SHA-256 digest")
+    if expected_count < 1:
+        raise ValueError("reviewed_control_exclusions.expected_count must be >= 1")
+    if not required_status:
+        raise ValueError("reviewed_control_exclusions.require_resolution_status is required")
+
+    p = Path(raw_path)
+    if not p.is_absolute():
+        p = (root / p).resolve()
+    if not p.is_file():
+        raise FileNotFoundError(f"reviewed control exclusion receipt not found: {p}")
+    actual_sha = _sha256(p)
+    if actual_sha != expected_sha:
+        raise ValueError("reviewed control exclusion receipt SHA-256 mismatch")
+
+    obj = json.loads(p.read_text(encoding="utf-8"))
+    if obj.get("schema_version") != "1":
+        raise ValueError("reviewed control exclusion receipt schema_version must equal '1'")
+    if obj.get("research_use_only") is not True:
+        raise ValueError("reviewed control exclusion receipt must set research_use_only=true")
+    rows = obj.get("exclusions")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("reviewed control exclusion receipt must contain exclusions")
+
+    required_counts: dict[str, int] = defaultdict(int)
+    for event in events:
+        required_counts[str(event["first_documented_illicit_trade_ts"])[:10]] += 1
+
+    exclusions: set[str] = set()
+    for row in rows:
+        if not isinstance(row, dict):
+            raise ValueError("reviewed control exclusion row must be an object")
+        if str(row.get("resolution_status", "")).strip() != required_status:
+            raise ValueError("reviewed control exclusion row has unapproved resolution_status")
+        event_date = str(row.get("event_date", "")).strip()
+        if not event_date:
+            raise ValueError("reviewed control exclusion row requires event_date")
+        if event_date in exclusions:
+            raise ValueError(f"duplicate reviewed control exclusion: {event_date}")
+        if event_date not in required_counts:
+            raise ValueError(f"reviewed control exclusion references non-required event date: {event_date}")
+        if int(row.get("event_count", 0)) != required_counts[event_date]:
+            raise ValueError(f"reviewed control exclusion event_count mismatch: {event_date}")
+        exclusions.add(event_date)
+
+    if len(exclusions) != expected_count:
+        raise ValueError(
+            f"reviewed control exclusion count mismatch: expected {expected_count}, got {len(exclusions)}"
+        )
+    if exclusions != set(required_counts):
+        missing = sorted(set(required_counts) - exclusions)
+        extras = sorted(exclusions - set(required_counts))
+        raise ValueError(f"reviewed control exclusion coverage mismatch: missing={missing}, extras={extras}")
+
+    return exclusions, {
+        "enabled": True,
+        "mode": mode,
+        "path": raw_path,
+        "sha256": actual_sha,
+        "expected_count": expected_count,
+        "applied_count": 0,
+        "downstream_policy": str(spec.get("downstream_policy", "")).strip(),
+    }
+
+
+def _apply_reviewed_control_exclusions(
+    controls: list[ControlDateReadiness],
+    *,
+    raw_contract: dict,
+    root: Path,
+    events: list[dict[str, str]],
+) -> tuple[list[ControlDateReadiness], dict]:
+    exclusion_dates, meta = _load_reviewed_control_exclusions(raw_contract, root, events)
+    if not exclusion_dates:
+        return controls, meta
+
+    out: list[ControlDateReadiness] = []
+    applied: set[str] = set()
+    for row in controls:
+        if row.event_date not in exclusion_dates:
+            out.append(row)
+            continue
+        if row.readiness_status == "resolved_for_point_in_time_matching":
+            raise ValueError(
+                f"reviewed control exclusion is stale because admissible point-in-time controls now resolve {row.event_date}"
+            )
+        if row.readiness_status != "unresolved" or row.candidate_count or row.candidates_with_pre_event_covariates:
+            raise ValueError(
+                f"reviewed control exclusion requires review because new control-universe evidence now exists for {row.event_date}"
+            )
+        out.append(replace(
+            row,
+            candidate_count=0,
+            candidates_with_pre_event_covariates=0,
+            readiness_status="excluded_fail_closed",
+            source_ids="reviewed-g5-exclusion",
+        ))
+        applied.add(row.event_date)
+
+    if applied != exclusion_dates:
+        missing = sorted(exclusion_dates - applied)
+        raise ValueError(f"reviewed control exclusions were not applied to all required dates: {missing}")
+    meta = {**meta, "applied_count": len(applied)}
+    return out, meta
+
+
 def _read_symbol_dates(path: Path) -> list[dict[str,str]]:
     return _read_csv(path)
 
@@ -775,6 +905,9 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
         shares, raw_contract=raw_contract, root=root, symbol_date_rows=symbol_dates
     )
     controls=resolve_control_readiness(events,loaded)
+    controls, control_exclusion_meta = _apply_reviewed_control_exclusions(
+        controls, raw_contract=raw_contract, root=root, events=events
+    )
     outdir.mkdir(parents=True,exist_ok=True)
     _write_csv(outdir/"announcement_resolutions.csv",anns)
     _write_csv(outdir/"event_exchange_resolutions.csv",exch)
@@ -797,6 +930,12 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
     sh_accounted=sh_res+sh_exc
     g4_ready=sh_accounted==len(symbol_dates) and sh_unresolved==0
     ctl_res=sum(x.readiness_status=="resolved_for_point_in_time_matching" for x in controls)
+    ctl_exc=sum(x.readiness_status=="excluded_fail_closed" for x in controls)
+    ctl_partial=sum(x.readiness_status.startswith("partial_") for x in controls)
+    ctl_unresolved=sum(x.readiness_status=="unresolved" for x in controls)
+    ctl_accounted=ctl_res+ctl_exc
+    g5_ready=ctl_accounted==len(controls) and ctl_partial==0 and ctl_unresolved==0
+    g5_model_eval_ready=ctl_res==len(controls)
     nasdaq=sum(x.primary_exchange=="XNAS" for x in exch if x.resolution_status=="resolved")
     summary={
         "schema_version":SCHEMA_VERSION,
@@ -819,15 +958,20 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
         "shares_symbol_dates_accounted_for":sh_accounted,
         "shares_symbol_dates_unresolved":sh_unresolved,
         "shares_exclusion_receipt":share_exclusion_meta,
-        "control_dates_resolved":ctl_res,"control_dates_partial":sum(x.readiness_status.startswith("partial_") for x in controls),
-        "control_dates_unresolved":sum(x.readiness_status=="unresolved" for x in controls),
+        "control_dates_resolved":ctl_res,
+        "control_dates_excluded":ctl_exc,
+        "control_dates_accounted_for":ctl_accounted,
+        "control_dates_partial":ctl_partial,
+        "control_dates_unresolved":ctl_unresolved,
+        "control_exclusion_receipt":control_exclusion_meta,
         "ready_g1_announcement_times":g1_ready,
         "ready_g1_exact_timing_analysis":g1_exact_timing_ready,
         "ready_g3_primary_listing_history":ex_res==len(events),
         "ready_g4_shares_outstanding":g4_ready,
-        "ready_g5_matched_control_universe":ctl_res==len(controls),
-        "ready_for_step15_real_backfill_metadata": exact==len(events) and ex_res==len(events) and g4_ready,
-        "ready_for_non_synthetic_model_evaluation_metadata": exact==len(events) and ex_res==len(events) and g4_ready and ctl_res==len(controls),
+        "ready_g5_matched_control_universe":g5_ready,
+        "ready_g5_model_evaluation_controls":g5_model_eval_ready,
+        "ready_for_step15_real_backfill_metadata": g1_exact_timing_ready and ex_res==len(events) and g4_ready,
+        "ready_for_non_synthetic_model_evaluation_metadata": g1_exact_timing_ready and ex_res==len(events) and g4_ready and g5_model_eval_ready,
         "prohibited_outputs":PROHIBITED_OUTPUTS,
         "source_inventory":inventory,
     }
@@ -842,11 +986,16 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
         else "READY" if summary["ready_g4_shares_outstanding"]
         else "BLOCKING_FOR_TURNOVER"
     )
+    g5_status = (
+        "READY_WITH_REVIEWED_EXCLUSIONS" if summary["ready_g5_matched_control_universe"] and ctl_exc
+        else "READY" if summary["ready_g5_matched_control_universe"]
+        else "BLOCKING_FOR_MODEL_EVAL"
+    )
     gates=[
         {"gate_id":"G1_ANNOUNCEMENT_TIMES","status":g1_status,"resolved":exact,"excluded":ann_exc,"accounted_for":ann_accounted,"required":len(events),"requirement":"Every event must have an authoritative/authorized exact first-public announcement timestamp or be covered by an immutable reviewed fail-closed exclusion receipt. Excluded events retain blank announcement timestamps and cannot participate in announcement-timing-dependent analysis; EDGAR acceptance, archive timestamps, and inferred BMO/AMC times do not count as exact."},
         {"gate_id":"G3_PRIMARY_LISTING_HISTORY","status":"READY" if summary["ready_g3_primary_listing_history"] else "BLOCKING_FOR_ITCH","resolved":ex_res,"excluded":0,"accounted_for":ex_res,"required":len(events),"requirement":"Point-in-time primary listing exchange at each event date."},
         {"gate_id":"G4_SHARES_OUTSTANDING","status":g4_status,"resolved":sh_res,"excluded":sh_exc,"accounted_for":sh_accounted,"required":len(symbol_dates),"requirement":"Every required symbol-date must have admissible point-in-time shares outstanding or be covered by an immutable reviewed fail-closed exclusion receipt. Future-filed facts, inferred totals, and excluded-row turnover are prohibited."},
-        {"gate_id":"G5_MATCHED_CONTROL_UNIVERSE","status":"READY" if summary["ready_g5_matched_control_universe"] else "BLOCKING_FOR_MODEL_EVAL","resolved":ctl_res,"excluded":0,"accounted_for":ctl_res,"required":len(controls),"requirement":"At least three same-day point-in-time candidates with complete pre-event matching covariates for each distinct event date."},
+        {"gate_id":"G5_MATCHED_CONTROL_UNIVERSE","status":g5_status,"resolved":ctl_res,"excluded":ctl_exc,"accounted_for":ctl_accounted,"required":len(controls),"requirement":"Every event date must have at least three same-day point-in-time candidates with complete pre-event matching covariates or be covered by an immutable reviewed fail-closed exclusion receipt. Excluded dates cannot contribute matched controls or model-evaluation authorization."},
     ]
     _write_csv(outdir/"metadata_unresolved_gates.csv",gates)
     return summary

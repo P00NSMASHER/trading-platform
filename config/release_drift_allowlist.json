@@ -64,36 +64,36 @@
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     },
     "src/metadata_resolver.py": {
-      "expected_sha256": "fe86dd8b62da31000b28c07e730c3f7d41b93033ba97e4ce77c78d88d7a8318c",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "314f119d09b63b54faffe5cf6d48e706ad47711e74c25ff38f9cd2f7cea0b32e",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "src/metadata_quality.py": {
-      "expected_sha256": "10141dca57ac95a23d2ff2e05ca2f021b99ed718002fb9d5003f19638f7c16ae",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "9f7d38392dfe42ffb43e811ecb1adf84deb724cc17567516f73e1fa61aed9d33",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "src/evaluation_release_controller.py": {
-      "expected_sha256": "d63bbea36281e68c24b7b24d3ea8d4fc17517149603a7f2c37ea29d190a376e4",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "1555faa85eeddf60922abeeface711b5811ec4c9163c63513a3150c08bc2d75f",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "tests/test_metadata_resolver.py": {
-      "expected_sha256": "6c9a8e35df966afd0c6e596c72f012c8575115945967e2e8c1b1d1079b551cfd",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "8521c0ee74c276db390418af442753e6e463393bdc2fb82f34d82285d106fec2",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "tests/test_metadata_quality.py": {
-      "expected_sha256": "1a80976a606157fbf35f2f4766761a5a2137591ba176634fe7f5889d293a6d84",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "16c7b7c9af1300aefa6c0447326555c6423221027018be61b793db244fd8903e",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "tests/test_evaluation_release_controller.py": {
-      "expected_sha256": "423bf174c48188b61e9a081eecf4069f595b607f00ae3c8a44eb4c75e9a81944",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "df3fb8ccd7e326a7748604e044a85afddc129e7f73d7737318be5a94af15cbcf",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "2689ba6553565a3835b68d8edac46a538ed3eee2cdb3780c352839314a0433fd",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "d5bd369fe81d93cee6151e942a80d19c5a8e9cff916da61ff973592d8d123e64",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "bd7dd99bffc09a84b8d999318ca5849edf3c83ffb698c61d2b66bfef1fc1aa38",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "09cd00104845aeb44efda59ccd06fdf95136167fa7b0945c55be2377ede2baa3",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     }
   },
   "repository_additions": {
@@ -317,10 +317,6 @@
       "expected_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
-    "data/processed/authorized_input_real/control_universe_readiness.csv": {
-      "expected_sha256": "7a8616730627787046dec9f95aa97ebde30ef477cf9cf74852c77ab9a81403e5",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
-    },
     "data/processed/authorized_input_real/event_exchange_resolutions.csv": {
       "expected_sha256": "8a0d6c63dd3b1dfbfd0a7f621c5e0cb7eff385e1ede25b5dabe2fc150bf2953e",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
@@ -493,10 +489,6 @@
       "expected_sha256": "b2d83eac9eb2cc032d9a7686107ef4e696e35afdec8fa8fd26b6f946158910ef",
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
-    "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "8365d4fdd02e78766ee37bb13293e4c3353622c18f3aafe893c3bb49a8236257",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
-    },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
       "expected_sha256": "a6c09340c9d86b669c002e4ae7135d7877d4552e079dfc3f425dd2a7dd737e6b",
       "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
@@ -509,13 +501,29 @@
       "expected_sha256": "df7861614fd9fdb2a995d2f51f32e788cb53fbdfee2ad4d17809f2600011ecf0",
       "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
     },
+    "config/metadata_sources.public_progress.json": {
+      "expected_sha256": "ea8bad3c754fb946f7a92dd7989088c0e73f13783e8c862f687c4de88be268cc",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
+    "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
+      "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
+    "docs/g5_final_control_exclusions.md": {
+      "expected_sha256": "25bcbf78ac0ee77f5ef91c0d7e996fe0e24cec2362f407bd2360fb4731b5adfe",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
+    "data/processed/authorized_input_real/control_universe_readiness.csv": {
+      "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "278dd0d638a857f27edc4d7fd7a8ae18e743b143415245d58d2017e861a7edb0",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "87ce5e373933a5cff1fcf5db408b9eb191cb2211ad2a9b4ce7f1ec1da2c3f388",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "3d6fbdad679127dedbbd1418221ae0d63807eb098541571c5bafe22abeeed0ca",
-      "reason": "G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+      "expected_sha256": "bb10c0bc6fb7396776dab105f89e46368289df8a89b547d88a736416105c10d6",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     }
   }
 }

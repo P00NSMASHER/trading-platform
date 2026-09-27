@@ -437,6 +437,26 @@ def audit_controls(events, resolver_rows, loaded) -> tuple[list[QualityIssue], s
     for d, evs in sorted(by_date.items()):
         first_cutoff = min(mr._event_trade_dt(e["first_documented_illicit_trade_ts"]) for e in evs)
         candidates = _control_rows_for_date(d, first_cutoff, loaded)
+        row = rr.get(d, {})
+        if row.get("readiness_status") == "excluded_fail_closed":
+            if candidates:
+                quarantined.add(d)
+                issues.append(_issue("control_universe", d, "BLOCKING", "CONTROL_EXCLUSION_HAS_NEW_EVIDENCE",
+                    "Fail-closed control exclusion is stale because new control-universe evidence is now present for the event date.",
+                    [src.source_id for arr in candidates.values() for src, _, _ in arr], sorted(candidates), True))
+            leaked = []
+            if int(row.get("candidate_count") or 0) != 0:
+                leaked.append("candidate_count")
+            if int(row.get("candidates_with_pre_event_covariates") or 0) != 0:
+                leaked.append("candidates_with_pre_event_covariates")
+            if row.get("source_ids") != "reviewed-g5-exclusion":
+                leaked.append("source_ids")
+            if leaked:
+                quarantined.add(d)
+                issues.append(_issue("control_universe", d, "BLOCKING", "CONTROL_EXCLUSION_HAS_MATCHABLE_STATE",
+                    "Fail-closed excluded control date must remain zero-candidate and bound only to the reviewed exclusion receipt.",
+                    [row.get("source_ids", "")], leaked, True))
+            continue
         for sym, arr in candidates.items():
             if len(arr) < 2:
                 continue
@@ -449,7 +469,6 @@ def audit_controls(events, resolver_rows, loaded) -> tuple[list[QualityIssue], s
                 issues.append(_issue("control_universe", d, "BLOCKING", "CONTROL_DUPLICATE_CONFLICT",
                     f"Duplicate point-in-time control rows for {sym} disagree on matching covariates: {','.join(sorted(conflicting))}.",
                     [x[0].source_id for x in arr], sorted(conflicting), True))
-        row = rr.get(d, {})
         if row.get("readiness_status") == "resolved_for_point_in_time_matching" and int(row.get("candidates_with_pre_event_covariates") or 0) < 3:
             quarantined.add(d)
             issues.append(_issue("control_universe", d, "BLOCKING", "CONTROL_FALSE_READY",
@@ -505,6 +524,7 @@ def build(*, events_path: Path, symbol_dates_path: Path, contract_path: Path,
 
     announcement_exclusions = int(readiness.get("announcement_events_excluded", 0))
     share_exclusions = int(readiness.get("shares_symbol_dates_excluded", 0))
+    control_exclusions = int(readiness.get("control_dates_excluded", 0))
     domains = [
         _domain_quality(
             "announcement", len(events), int(readiness.get("announcement_exact_resolved", 0)),
@@ -515,7 +535,10 @@ def build(*, events_path: Path, symbol_dates_path: Path, contract_path: Path,
             "shares", len(symbol_dates), int(readiness.get("shares_symbol_dates_resolved", 0)),
             len(sh_quarantine), sh_warn, reviewed_exclusion_count=share_exclusions
         ),
-        _domain_quality("control_universe", len(controls), int(readiness.get("control_dates_resolved", 0)), len(ct_quarantine), ct_warn),
+        _domain_quality(
+            "control_universe", len(controls), int(readiness.get("control_dates_resolved", 0)),
+            len(ct_quarantine), ct_warn, reviewed_exclusion_count=control_exclusions
+        ),
     ]
     blocking = [x for x in issues if x.severity == "BLOCKING"]
     warnings = [x for x in issues if x.severity == "WARNING"]
@@ -561,6 +584,7 @@ def build(*, events_path: Path, symbol_dates_path: Path, contract_path: Path,
         "quarantined_control_dates": len(ct_quarantine),
         "reviewed_announcement_exclusion_count": announcement_exclusions,
         "reviewed_share_exclusion_count": share_exclusions,
+        "reviewed_control_exclusion_count": control_exclusions,
         "coverage_ready_before_quality": coverage_ready,
         "quality_gate_clear": quality_cleared,
         "only_synthetic_sources": only_synthetic,

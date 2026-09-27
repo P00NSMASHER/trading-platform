@@ -12,8 +12,9 @@ sys.path.insert(0,str(ROOT/"src"))
 from metadata_resolver import (
     build, load_contract, resolve_announcements, resolve_event_exchanges,
     resolve_shares, resolve_control_readiness, _load_source_rows,
-    AnnouncementResolution, SharesResolution,
-    _apply_reviewed_announcement_exclusions, _apply_reviewed_share_exclusions,
+    AnnouncementResolution, ControlDateReadiness, SharesResolution,
+    _apply_reviewed_announcement_exclusions, _apply_reviewed_control_exclusions,
+    _apply_reviewed_share_exclusions,
 )
 
 
@@ -398,4 +399,83 @@ def test_reviewed_announcement_exclusion_receipt_hash_mismatch_fails_closed(tmp_
             raw_contract=contract,
             root=tmp_path,
             events=event_rows,
+        )
+
+
+def _reviewed_control_exclusion_fixture(tmp_path: Path, *, expected_sha_override: str | None = None):
+    event = events()[0]
+    event_date = event["first_documented_illicit_trade_ts"][:10]
+    receipt = {
+        "schema_version": "1",
+        "research_use_only": True,
+        "exclusions": [{
+            "event_date": event_date,
+            "event_count": 1,
+            "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE",
+        }],
+    }
+    p = tmp_path / "data" / "g5_final_control_exclusions.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(receipt, indent=2) + "\n"
+    p.write_text(payload, encoding="utf-8")
+    digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    contract = {
+        "reviewed_control_exclusions": {
+            "enabled": True,
+            "mode": "reviewed_fail_closed_exclusions",
+            "path": "data/g5_final_control_exclusions.json",
+            "expected_sha256": expected_sha_override or digest,
+            "expected_count": 1,
+            "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE",
+            "downstream_policy": "excluded dates may not contribute matched controls or model-evaluation authorization",
+        }
+    }
+    return contract, [event], event_date
+
+
+def test_reviewed_control_exclusion_marks_unresolved_fail_closed(tmp_path):
+    contract, event_rows, event_date = _reviewed_control_exclusion_fixture(tmp_path)
+    rows = [ControlDateReadiness(event_date, 1, 0, 0, "unresolved", "")]
+    out, meta = _apply_reviewed_control_exclusions(
+        rows, raw_contract=contract, root=tmp_path, events=event_rows
+    )
+    assert out[0].readiness_status == "excluded_fail_closed"
+    assert out[0].candidate_count == 0
+    assert out[0].candidates_with_pre_event_covariates == 0
+    assert out[0].source_ids == "reviewed-g5-exclusion"
+    assert meta["applied_count"] == 1
+
+
+def test_reviewed_control_exclusion_cannot_mask_new_control_evidence(tmp_path):
+    contract, event_rows, event_date = _reviewed_control_exclusion_fixture(tmp_path)
+    rows = [ControlDateReadiness(
+        event_date, 1, 1, 0,
+        "partial_candidate_universe_missing_pre_event_covariates_or_availability",
+        "new-source"
+    )]
+    with pytest.raises(ValueError, match="new control-universe evidence"):
+        _apply_reviewed_control_exclusions(
+            rows, raw_contract=contract, root=tmp_path, events=event_rows
+        )
+
+
+def test_reviewed_control_exclusion_cannot_mask_resolved_controls(tmp_path):
+    contract, event_rows, event_date = _reviewed_control_exclusion_fixture(tmp_path)
+    rows = [ControlDateReadiness(
+        event_date, 1, 3, 3, "resolved_for_point_in_time_matching", "new-source"
+    )]
+    with pytest.raises(ValueError, match="exclusion is stale"):
+        _apply_reviewed_control_exclusions(
+            rows, raw_contract=contract, root=tmp_path, events=event_rows
+        )
+
+
+def test_reviewed_control_exclusion_receipt_hash_mismatch_fails_closed(tmp_path):
+    contract, event_rows, event_date = _reviewed_control_exclusion_fixture(
+        tmp_path, expected_sha_override="0" * 64
+    )
+    rows = [ControlDateReadiness(event_date, 1, 0, 0, "unresolved", "")]
+    with pytest.raises(ValueError, match="SHA-256 mismatch"):
+        _apply_reviewed_control_exclusions(
+            rows, raw_contract=contract, root=tmp_path, events=event_rows
         )

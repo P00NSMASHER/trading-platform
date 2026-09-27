@@ -4,7 +4,7 @@ import csv
 import json
 from pathlib import Path
 
-from metadata_quality import build, _domain_quality, audit_announcements, audit_shares
+from metadata_quality import build, _domain_quality, audit_announcements, audit_controls, audit_shares
 from metadata_resolver import build as resolve
 from metadata_population import populate_batch
 
@@ -222,3 +222,40 @@ def test_fail_closed_excluded_announcement_row_must_remain_timing_blank():
     issues, quarantine, _ = audit_announcements(events_rows, rows, [])
     assert "E1" in quarantine
     assert any(x.code == "ANN_EXCLUSION_HAS_TIMING_VALUE" for x in issues)
+
+
+def test_fail_closed_excluded_control_date_must_remain_zero_candidate():
+    events_rows = [{
+        "event_id": "E1",
+        "historical_symbol": "TEST",
+        "first_documented_illicit_trade_ts": "2015-02-17 14:30:00",
+    }]
+    rows = [{
+        "event_date": "2015-02-17",
+        "event_count": "1",
+        "candidate_count": "0",
+        "candidates_with_pre_event_covariates": "0",
+        "readiness_status": "excluded_fail_closed",
+        "source_ids": "reviewed-g5-exclusion",
+        "research_use_only": "1",
+    }]
+    issues, quarantine, warnings = audit_controls(events_rows, rows, [])
+    assert issues == []
+    assert quarantine == set()
+    assert warnings == 0
+
+    rows[0]["candidate_count"] = "1"
+    issues, quarantine, _ = audit_controls(events_rows, rows, [])
+    assert "2015-02-17" in quarantine
+    assert any(x.code == "CONTROL_EXCLUSION_HAS_MATCHABLE_STATE" for x in issues)
+
+
+def test_control_domain_can_be_ready_with_reviewed_exclusions():
+    d = _domain_quality(
+        "control_universe", required=2, resolver_ready=0, quarantine_count=0,
+        warning_count=0, reviewed_exclusion_count=2
+    )
+    assert d.resolver_ready_count == 0
+    assert d.reviewed_exclusion_count == 2
+    assert d.status == "READY_WITH_REVIEWED_EXCLUSIONS"
+    assert d.quality_score == 100.0
