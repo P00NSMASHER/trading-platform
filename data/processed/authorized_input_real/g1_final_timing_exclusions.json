@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "ead9ae592f6a635ebd6fc821d1f4267b7cd3ec92",
+  "base_main_sha": "c98c5a4a69b77815b53d3de7ddfd4e5c03c25515",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 5,
-    "reviewed_excluded": 169,
+    "exact_resolved": 6,
+    "reviewed_excluded": 168,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 169,
+    "raw_exact_time_evidence_gaps": 168,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 5,
+    "exact_timing_analysis_eligible": 6,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -864,13 +864,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-F170013A9B3F85E2",
-      "historical_symbol": "SKX",
-      "first_documented_illicit_trade_ts": "2015-04-22 15:24:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-D7FD00AF94DD8F41",
       "historical_symbol": "JNPR",
       "first_documented_illicit_trade_ts": "2011-04-19 15:50:00",
@@ -1251,14 +1244,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 5,
-    "latest_batch": "g1_announcement_times_batch_0004.csv",
+    "exact_resolved": 6,
+    "latest_batch": "g1_announcement_times_batch_0005.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-D1D8268651584B6A",
-        "historical_symbol": "MKC",
-        "public_announcement_ts": "2013-04-02T06:30:00-04:00",
-        "source_reference": "https://www.prnewswire.com/news/mccormick-%26-company%2C-incorporated/?page=11"
+        "event_id": "HEJFE-F170013A9B3F85E2",
+        "historical_symbol": "SKX",
+        "public_announcement_ts": "2015-04-22T16:01:00-04:00",
+        "source_reference": "https://about.skechers.com/press-release/skechers-announces-first-quarter-2015-financial-results"
       }
     ]
   }
