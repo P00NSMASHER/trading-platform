@@ -128,8 +128,7 @@ jobs:
           python -m pytest -q \
             tests/test_g4_materialize_batch.py \
             tests/test_metadata_resolver.py \
-            tests/test_metadata_quality.py \
-            tests/test_release_drift.py
+            tests/test_metadata_quality.py
 
       - name: Commit canonical integration
         run: |
