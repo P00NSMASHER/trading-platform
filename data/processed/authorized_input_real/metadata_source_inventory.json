@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-gilead-g1-batch-0010",
+    "record_kind": "announcement_timestamp",
+    "source_family": "official_newswire_archive",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0010.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "54de4006b6d5b5f6bbc101fd9d17618efeba4f612c6de452beda2fafd0619d0e",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-sec-ava-release-20130220",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
