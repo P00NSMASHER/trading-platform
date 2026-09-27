@@ -99,6 +99,15 @@ def _metadata_checks(checks: list[GateCheck], readiness: dict, quality: dict) ->
         "all events have authoritative/authorized exact first-public announcement timestamps; reviewed exclusions do not satisfy timing-analysis eligibility",
     ))
 
+    model_control_ok = bool(readiness.get("ready_g5_model_evaluation_controls"))
+    checks.append(GateCheck(
+        "G5_MODEL_EVALUATION_CONTROLS",
+        "metadata",
+        model_control_ok,
+        "READY" if model_control_ok else "BLOCKED",
+        "all event dates have genuine point-in-time matched-control universes; reviewed exclusions do not satisfy model-evaluation control eligibility",
+    ))
+
     qclear = bool(quality.get("quality_gate_clear"))
     real_clear = bool(quality.get("quality_cleared_for_non_synthetic_model_evaluation"))
     only_synthetic = bool(quality.get("only_synthetic_sources"))
