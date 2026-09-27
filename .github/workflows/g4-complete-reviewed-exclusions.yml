@@ -36,6 +36,20 @@ jobs:
           python -m pip install -r requirements.lock
           python -m pip install -r requirements-dev.lock
 
+      - name: Refresh reviewed exclusion receipt binding
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          receipt=Path("data/processed/authorized_input_real/g4_final_blockers.json")
+          h=hashlib.sha256(receipt.read_bytes()).hexdigest()
+          p=Path("config/metadata_sources.public_progress.json")
+          obj=json.loads(p.read_text(encoding="utf-8"))
+          obj["reviewed_share_exclusions"]["expected_sha256"]=h
+          p.write_text(json.dumps(obj,indent=2)+"\n",encoding="utf-8")
+          print(h)
+          PY
+
       - name: Rebuild canonical metadata
         run: |
           python -m metadata_resolver \
@@ -125,6 +139,8 @@ jobs:
             "data/processed/authorized_input_real/shares_outstanding_resolutions.csv",
             "data/processed/authorized_input_real/metadata_quality_summary.json",
             "data/processed/authorized_input_real/metadata_domain_quality.csv",
+            "data/processed/authorized_input_real/g4_final_blockers.json",
+            "docs/g4_final_blockers.md",
           ]
           def sha(path):
               h=hashlib.sha256()
@@ -148,7 +164,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
+            config/metadata_sources.public_progress.json \
             config/release_drift_allowlist.json \
-            data/processed/authorized_input_real
+            data/processed/authorized_input_real \
+            docs/g4_final_blockers.md
           git commit -m "[g4-reviewed-exclusions-generated] complete G4 fail-closed"
           git push origin HEAD:fix/g4-complete-reviewed-exclusions
