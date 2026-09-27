@@ -365,6 +365,39 @@ def test_reviewed_announcement_exclusion_marks_unresolved_fail_closed(tmp_path):
     assert meta["applied_count"] == 1
 
 
+def test_reviewed_announcement_exclusions_can_shrink_as_exact_evidence_arrives(tmp_path):
+    contract, event_rows = _reviewed_announcement_exclusion_fixture(tmp_path)
+    excluded = event_rows[0]
+    resolved = dict(excluded)
+    resolved["event_id"] = "E2"
+    resolved["historical_symbol"] = "OTHER"
+    resolved["first_documented_illicit_trade_ts"] = "2015-02-18 19:30:00"
+    exact = AnnouncementResolution(
+        event_id=resolved["event_id"],
+        historical_symbol=resolved["historical_symbol"],
+        event_date="2015-02-18",
+        first_documented_illicit_trade_ts="2015-02-19T00:30:00Z",
+        public_announcement_ts="2015-02-19T02:05:00Z",
+        resolution_status="resolved_exact_public_timestamp",
+        timestamp_kind="first_public_release",
+        source_id="exact",
+        source_family="official_newswire_archive",
+        source_grade="A",
+        source_reference="https://example.test/release",
+        timestamp_confidence="A-EXACT",
+        information_asymmetry_seconds="5700",
+    )
+    out, meta = _apply_reviewed_announcement_exclusions(
+        [_unresolved_announcement_row(excluded), exact],
+        raw_contract=contract,
+        root=tmp_path,
+        events=[excluded, resolved],
+    )
+    assert out[0].resolution_status == "excluded_fail_closed"
+    assert out[1].resolution_status == "resolved_exact_public_timestamp"
+    assert meta["applied_count"] == 1
+
+
 def test_reviewed_announcement_exclusion_cannot_mask_exact_timestamp(tmp_path):
     contract, event_rows = _reviewed_announcement_exclusion_fixture(tmp_path)
     event = event_rows[0]
@@ -443,6 +476,27 @@ def test_reviewed_control_exclusion_marks_unresolved_fail_closed(tmp_path):
     assert out[0].candidate_count == 0
     assert out[0].candidates_with_pre_event_covariates == 0
     assert out[0].source_ids == "reviewed-g5-exclusion"
+    assert meta["applied_count"] == 1
+
+
+def test_reviewed_control_exclusions_can_shrink_as_dates_resolve(tmp_path):
+    contract, event_rows, event_date = _reviewed_control_exclusion_fixture(tmp_path)
+    resolved_event = dict(event_rows[0])
+    resolved_event["event_id"] = "E2"
+    resolved_event["historical_symbol"] = "OTHER"
+    resolved_event["first_documented_illicit_trade_ts"] = "2015-02-18 19:30:00"
+    rows = [
+        ControlDateReadiness(event_date, 1, 0, 0, "unresolved", ""),
+        ControlDateReadiness("2015-02-18", 1, 3, 3, "resolved_for_point_in_time_matching", "new-source"),
+    ]
+    out, meta = _apply_reviewed_control_exclusions(
+        rows,
+        raw_contract=contract,
+        root=tmp_path,
+        events=[event_rows[0], resolved_event],
+    )
+    assert out[0].readiness_status == "excluded_fail_closed"
+    assert out[1].readiness_status == "resolved_for_point_in_time_matching"
     assert meta["applied_count"] == 1
 
 
