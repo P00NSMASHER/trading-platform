@@ -173,3 +173,49 @@ def test_full_build_real_corpus_counts(tmp_path):
     assert report["ready_for_non_synthetic_champion_challenger_comparison"] is False
     assert (out / "event_coverage_plan.csv").exists()
     assert (out / "source_date_requirements.csv").exists()
+
+
+def test_split_real_files_can_collectively_cover_one_g2_requirement(tmp_path):
+    a = tmp_path / "quotes-a.csv"
+    b = tmp_path / "quotes-b.csv"
+    a.write_text(
+        "timestamp,symbol,bid,ask,bid_size,ask_size,exchange\n"
+        "2015-02-17 14:19:01,AAA,10,10.1,100,100,N\n",
+        encoding="utf-8",
+    )
+    b.write_text(
+        "timestamp,symbol,bid,ask,bid_size,ask_size,exchange\n"
+        "2015-02-17 14:19:02,BBB,20,20.1,100,100,N\n",
+        encoding="utf-8",
+    )
+    sources = []
+    for source_id, path in [("split-a", a), ("split-b", b)]:
+        sources.append({
+            "source_id": source_id,
+            "source_family": "nyse_daily_taq",
+            "record_kind": "equity_quote",
+            "path": str(path),
+            "authorized": True,
+            "data_classification": "authorized_historical_market_data",
+            "license_reference": "TEST-LICENSE",
+            "trade_date": "2015-02-17",
+            "timezone": "America/New_York",
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "format_version": "fixture",
+            "column_map": {},
+        })
+    contract = tmp_path / "contract.json"
+    contract.write_text(json.dumps({"schema_version": "1", "sources": sources}), encoding="utf-8")
+
+    class R:
+        source_family = "nyse_daily_taq"
+        record_kind = "equity_quote"
+        trade_date = "2015-02-17"
+        requirement = "required_core"
+        historical_symbols = "AAA;BBB"
+
+    report = audit_contract(contract, [R()])
+    assert report["real_authorized_required_rows_covered"] == 1, report
+    assert report["missing_real_authorized_required_rows"] == 0
+    assert report["ready_for_real_backfill"] is True
