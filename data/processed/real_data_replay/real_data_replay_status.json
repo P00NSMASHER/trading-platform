@@ -1,0 +1,113 @@
+{
+  "active_champion_modification_permitted": false,
+  "automatic_promotion_permitted": false,
+  "blocking_stages": [
+    "coverage",
+    "metadata",
+    "market_backfill",
+    "baselines",
+    "features",
+    "graph_features",
+    "matched_controls",
+    "challenger",
+    "release"
+  ],
+  "config_path": "config/real_data_replay.software_proof.json",
+  "config_sha256": "03a6165b68d2ca3857ee0d92693af72f6527ec374dce99a1b6fac38516562532",
+  "evaluation_release_permitted": false,
+  "inputs": {
+    "control_metadata": null,
+    "events": {
+      "path": "/home/runner/work/trading-platform/trading-platform/data/processed/historical_events.csv",
+      "sha256": "43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12"
+    },
+    "graph_db": {
+      "path": "/home/runner/work/trading-platform/trading-platform/data/processed/historical_graph_real/historical_cross_event_graph.sqlite",
+      "sha256": "19816e3910331b3a5977e7e06435b15c99137d0dac82a39ba0199217ad302504"
+    },
+    "market_contract": {
+      "path": "/home/runner/work/trading-platform/trading-platform/config/historical_market_sources.example.json",
+      "sha256": "5f37562f204fa23ada0c870ea1297eba986d04af5a6ba2c9c36d60def36f3114"
+    },
+    "metadata_contract": {
+      "path": "/home/runner/work/trading-platform/trading-platform/config/metadata_sources.public_progress.json",
+      "sha256": "ea8bad3c754fb946f7a92dd7989088c0e73f13783e8c862f687c4de88be268cc"
+    }
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "One-command, provider-agnostic replay of authorized historical market-surveillance data. Missing evidence blocks downstream stages; synthetic fixtures never satisfy a real replay.",
+  "ready_for_non_synthetic_offline_evaluation": false,
+  "research_use_only": true,
+  "schema_version": "1.0.0",
+  "shares_materialization": {
+    "excluded_rows_not_materialized": true,
+    "path": "/home/runner/work/trading-platform/trading-platform/data/processed/real_data_replay/derived/shares_for_baselines.csv",
+    "resolved_rows": 3810,
+    "sha256": "1f32992070b3d8344ad689b771c2d94e4032178b322058383ef21c12766a1048"
+  },
+  "stages": {
+    "baselines": {
+      "reason": "market_backfill_not_run",
+      "status": "DEPENDENCY_BLOCKED"
+    },
+    "challenger": {
+      "reason": "real_evaluation_inputs_not_ready",
+      "status": "DEPENDENCY_BLOCKED"
+    },
+    "coverage": {
+      "covered_real_source_date_rows": 0,
+      "missing_real_source_date_rows": 1656,
+      "required_source_date_rows": 1656,
+      "status": "BLOCKED"
+    },
+    "features": {
+      "reason": "market_backfill_not_run",
+      "status": "DEPENDENCY_BLOCKED"
+    },
+    "graph_features": {
+      "reason": "market_backfill_not_run",
+      "status": "DEPENDENCY_BLOCKED"
+    },
+    "market_backfill": {
+      "has_real_sources": false,
+      "has_synthetic_sources": true,
+      "real_source_count": 0,
+      "source_count": 5,
+      "source_ids": [
+        "example_taq_trades",
+        "example_taq_quotes",
+        "example_option_trades",
+        "example_option_quotes",
+        "example_itch_decoded"
+      ],
+      "status": "BLOCKED_SYNTHETIC_SOURCE_PRESENT",
+      "synthetic_source_count": 5
+    },
+    "matched_controls": {
+      "reason": "control_metadata_not_supplied",
+      "status": "DEPENDENCY_BLOCKED"
+    },
+    "metadata": {
+      "announcement_exact_resolved": 0,
+      "announcement_required": 174,
+      "control_dates_required": 72,
+      "control_dates_resolved": 0,
+      "exact_timing_ready": false,
+      "model_controls_ready": false,
+      "quality_ready": false,
+      "status": "BLOCKED"
+    },
+    "release": {
+      "reason": "real_evaluation_inputs_not_ready",
+      "status": "DEPENDENCY_BLOCKED"
+    }
+  }
+}

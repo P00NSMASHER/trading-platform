@@ -43,6 +43,7 @@ HOSTILE_TEST_GROUPS: dict[str, tuple[str, ...]] = {
         "tests/test_control_plane_dashboard_accounts.py",
         "tests/test_private_dashboard.py",
         "tests/test_deployment_hardening.py",
+        "tests/test_software_readiness_certification.py",
     ),
 }
 
