@@ -492,6 +492,14 @@
     "data/processed/authorized_input_real/g4_aco_20130410_evidence.json": {
       "expected_sha256": "0cfae43b46407d18676209698bb8b0f907629c01144e3a91708edf6ce0fddf2d",
       "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+    },
+    "data/processed/authorized_input_real/g4_final_blockers.json": {
+      "expected_sha256": "95c15b483654d912bce35388b5b66db3eb3a8f8e51320d0ee4e6fb7eafbff8a7",
+      "reason": "G4 final blocker dossier: durable audit record for the 18 remaining fail-closed shares observations after exhaustive pre-cutoff evidence research."
+    },
+    "docs/g4_final_blockers.md": {
+      "expected_sha256": "05bb5267b5ca0a6a23f31630704d1f2302a82c5faa77df20aa2ef806b9aa45d9",
+      "reason": "G4 final blocker dossier: durable audit record for the 18 remaining fail-closed shares observations after exhaustive pre-cutoff evidence research."
     }
   }
 }
