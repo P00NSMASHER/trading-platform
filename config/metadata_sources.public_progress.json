@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains thirteen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains fourteen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-einpresswire-ea-verified-20150127",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0012.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "Independently verified issuer-attributed release clock. EIN Presswire preserves Electronic Arts' Q3 FY15 earnings release as News Provided By Electronic Arts at Jan. 27, 2015 21:35 GMT (4:35 PM EST). EA's official news archive independently corroborates the identical title, date, and release text. Grade B reflects that the exact clock comes from an issuer-attributed distribution archive rather than EA's own page.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "Issuer corroboration: https://news.ea.com/press-releases/press-releases-details/2015/Electronic-Arts-Reports-Q3-FY15-Financial-Results/default.aspx"
+    },
     {
       "source_id": "public-businesswire-illumina-verified-mirror-20150127",
       "record_kind": "announcement_timestamp",
@@ -467,8 +490,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "4d274fe6a3a69e8cfeea215c114aaae216fc6d47e9d7fca0f085c7eeb070ed37",
-    "expected_count": 161,
+    "expected_sha256": "228a82db430c4c9f50292487e00aa94269827fc882c2abda89717bf3d32f7e51",
+    "expected_count": 160,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
