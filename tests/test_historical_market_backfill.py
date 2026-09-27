@@ -187,3 +187,21 @@ def test_validate_contract_reports_classification_counts(tmp_path):
     assert report["valid"] is True
     assert report["synthetic_source_count"] == 1
     assert report["non_synthetic_authorized_source_count"] == 0
+
+
+def test_decoded_itch_4_1_is_supported_and_requires_version(tmp_path):
+    s = source(EX / "itch_decoded.csv", source_id="itch41", family="nasdaq_itch_4_1_decoded", kind="itch_decoded", format_version="")
+    p = write_contract(tmp_path, [s])
+    with pytest.raises(ValueError, match="format_version"):
+        load_contract(p)
+
+    s["format_version"] = "ITCH-4.1"
+    s["column_map"] = {
+        "timestamp": "timestamp", "message_type": "message_type", "symbol": "stock", "order_reference": "order_reference",
+        "side": "side", "shares": "shares", "price": "price", "executed_shares": "executed_shares", "execution_price": "execution_price",
+        "match_number": "match_number", "printable": "printable", "cancelled_shares": "cancelled_shares", "new_order_reference": "new_order_reference"
+    }
+    p = write_contract(tmp_path, [s])
+    specs, _ = load_contract(p)
+    exes = load_itch_executions(specs[0])
+    assert len(exes) == 2
