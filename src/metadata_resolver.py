@@ -342,8 +342,8 @@ def _load_reviewed_announcement_exclusions(
         raise ValueError("reviewed_announcement_exclusions.path is required")
     if len(expected_sha) != 64 or any(ch not in "0123456789abcdef" for ch in expected_sha):
         raise ValueError("reviewed_announcement_exclusions.expected_sha256 must be a 64-character SHA-256 digest")
-    if expected_count < 1:
-        raise ValueError("reviewed_announcement_exclusions.expected_count must be >= 1")
+    if expected_count < 0:
+        raise ValueError("reviewed_announcement_exclusions.expected_count must be >= 0")
     if not required_status:
         raise ValueError("reviewed_announcement_exclusions.require_resolution_status is required")
 
@@ -362,8 +362,8 @@ def _load_reviewed_announcement_exclusions(
     if obj.get("research_use_only") is not True:
         raise ValueError("reviewed announcement exclusion receipt must set research_use_only=true")
     rows = obj.get("exclusions")
-    if not isinstance(rows, list) or not rows:
-        raise ValueError("reviewed announcement exclusion receipt must contain exclusions")
+    if not isinstance(rows, list):
+        raise ValueError("reviewed announcement exclusion receipt exclusions must be a list")
 
     required = {str(e["event_id"]): e for e in events}
     exclusions: set[str] = set()
@@ -390,10 +390,13 @@ def _load_reviewed_announcement_exclusions(
         raise ValueError(
             f"reviewed announcement exclusion count mismatch: expected {expected_count}, got {len(exclusions)}"
         )
-    if exclusions != set(required):
-        missing = sorted(set(required) - exclusions)
-        extras = sorted(exclusions - set(required))
-        raise ValueError(f"reviewed announcement exclusion coverage mismatch: missing={missing}, extras={extras}")
+    # Exclusions intentionally may be a strict subset of required events.
+    # A newly admissible exact timestamp must be removed from this receipt; any
+    # non-excluded event that still lacks exact evidence remains unresolved and
+    # therefore cannot make the G1 exact-timing gate pass.
+    extras = exclusions - set(required)
+    if extras:
+        raise ValueError(f"reviewed announcement exclusions contain non-required events: {sorted(extras)}")
 
     return exclusions, {
         "enabled": True,
@@ -757,8 +760,8 @@ def _load_reviewed_control_exclusions(
         raise ValueError("reviewed_control_exclusions.path is required")
     if len(expected_sha) != 64 or any(ch not in "0123456789abcdef" for ch in expected_sha):
         raise ValueError("reviewed_control_exclusions.expected_sha256 must be a 64-character SHA-256 digest")
-    if expected_count < 1:
-        raise ValueError("reviewed_control_exclusions.expected_count must be >= 1")
+    if expected_count < 0:
+        raise ValueError("reviewed_control_exclusions.expected_count must be >= 0")
     if not required_status:
         raise ValueError("reviewed_control_exclusions.require_resolution_status is required")
 
@@ -777,8 +780,8 @@ def _load_reviewed_control_exclusions(
     if obj.get("research_use_only") is not True:
         raise ValueError("reviewed control exclusion receipt must set research_use_only=true")
     rows = obj.get("exclusions")
-    if not isinstance(rows, list) or not rows:
-        raise ValueError("reviewed control exclusion receipt must contain exclusions")
+    if not isinstance(rows, list):
+        raise ValueError("reviewed control exclusion receipt exclusions must be a list")
 
     required_counts: dict[str, int] = defaultdict(int)
     for event in events:
@@ -805,10 +808,12 @@ def _load_reviewed_control_exclusions(
         raise ValueError(
             f"reviewed control exclusion count mismatch: expected {expected_count}, got {len(exclusions)}"
         )
-    if exclusions != set(required_counts):
-        missing = sorted(set(required_counts) - exclusions)
-        extras = sorted(exclusions - set(required_counts))
-        raise ValueError(f"reviewed control exclusion coverage mismatch: missing={missing}, extras={extras}")
+    # Exclusions may shrink as genuine point-in-time control evidence arrives.
+    # Non-excluded dates that remain unresolved stay unresolved; a stale exclusion
+    # still fails closed in _apply_reviewed_control_exclusions.
+    extras = exclusions - set(required_counts)
+    if extras:
+        raise ValueError(f"reviewed control exclusions contain non-required dates: {sorted(extras)}")
 
     return exclusions, {
         "enabled": True,
