@@ -63,6 +63,7 @@ class DomainQuality:
     resolver_ready_count: int
     quality_clear_count: int
     quarantined_count: int
+    reviewed_exclusion_count: int
     warning_count: int
     quality_score: float
     status: str
@@ -333,6 +334,12 @@ def audit_shares(symbol_dates, resolver_rows, loaded, max_staleness_days: int = 
                 issues.append(_issue("shares", key, "WARNING", "SHARES_AGING_FACT",
                     f"Resolved shares fact is {stale} days old; still within hard limit but should be reviewed.",
                     [rr.get("source_id", "")], [rr.get("fact_date", "")]))
+        elif rr.get("resolution_status") == "excluded_fail_closed":
+            if any(str(rr.get(field, "") or "").strip() for field in ("shares_outstanding", "fact_date", "available_at", "staleness_days")):
+                quarantined.add(key)
+                issues.append(_issue("shares", key, "BLOCKING", "SHARES_EXCLUSION_HAS_VALUE",
+                    "Fail-closed excluded shares row must not carry a usable shares value, fact date, availability timestamp, or staleness.",
+                    [rr.get("source_id", "")], [rr.get("source_reference", "")], True))
 
     # Across requested dates, abrupt jumps are quarantined unless exact-date source history itself explains them.
     by_sym = defaultdict(list)
@@ -430,22 +437,28 @@ def audit_controls(events, resolver_rows, loaded) -> tuple[list[QualityIssue], s
 
 
 def _domain_quality(domain: str, required: int, resolver_ready: int, quarantine_count: int,
-                    warning_count: int) -> DomainQuality:
+                    warning_count: int, reviewed_exclusion_count: int = 0) -> DomainQuality:
     quality_clear = max(0, resolver_ready - quarantine_count)
+    accounted_for = resolver_ready + reviewed_exclusion_count
     if required == 0:
         score = 100.0
     else:
-        score = 100.0 * quality_clear / required
+        score = 100.0 * min(required, accounted_for) / required
         score = max(0.0, score - min(10.0, warning_count * 0.5))
-    if resolver_ready < required:
+    if accounted_for < required:
         status = "BLOCKED_INCOMPLETE"
     elif quarantine_count:
         status = "QUARANTINED_CONFLICTS"
+    elif reviewed_exclusion_count:
+        status = "READY_WITH_REVIEWED_EXCLUSIONS"
     elif warning_count:
         status = "READY_WITH_WARNINGS"
     else:
         status = "QUALITY_CLEAR"
-    return DomainQuality(domain, required, resolver_ready, quality_clear, quarantine_count, warning_count, round(score, 2), status)
+    return DomainQuality(
+        domain, required, resolver_ready, quality_clear, quarantine_count,
+        reviewed_exclusion_count, warning_count, round(score, 2), status
+    )
 
 
 def build(*, events_path: Path, symbol_dates_path: Path, contract_path: Path,
@@ -468,17 +481,24 @@ def build(*, events_path: Path, symbol_dates_path: Path, contract_path: Path,
     ct_issues, ct_quarantine, ct_warn = audit_controls(events, controls, loaded)
     issues = ann_issues + ex_issues + sh_issues + ct_issues
 
+    share_exclusions = int(readiness.get("shares_symbol_dates_excluded", 0))
     domains = [
         _domain_quality("announcement", len(events), int(readiness.get("announcement_exact_resolved", 0)), len(ann_quarantine), ann_warn),
         _domain_quality("exchange", len(events), int(readiness.get("event_exchange_resolved", 0)), len(ex_quarantine), ex_warn),
-        _domain_quality("shares", len(symbol_dates), int(readiness.get("shares_symbol_dates_resolved", 0)), len(sh_quarantine), sh_warn),
+        _domain_quality(
+            "shares", len(symbol_dates), int(readiness.get("shares_symbol_dates_resolved", 0)),
+            len(sh_quarantine), sh_warn, reviewed_exclusion_count=share_exclusions
+        ),
         _domain_quality("control_universe", len(controls), int(readiness.get("control_dates_resolved", 0)), len(ct_quarantine), ct_warn),
     ]
     blocking = [x for x in issues if x.severity == "BLOCKING"]
     warnings = [x for x in issues if x.severity == "WARNING"]
     info = [x for x in issues if x.severity == "INFO"]
     coverage_ready = bool(readiness.get("ready_for_non_synthetic_model_evaluation_metadata"))
-    all_quality_clear = all(d.status in {"QUALITY_CLEAR", "READY_WITH_WARNINGS"} for d in domains)
+    all_quality_clear = all(
+        d.status in {"QUALITY_CLEAR", "READY_WITH_WARNINGS", "READY_WITH_REVIEWED_EXCLUSIONS"}
+        for d in domains
+    )
     quality_cleared = coverage_ready and all_quality_clear and not blocking and not contract_issues
 
     # Synthetic/demo data can exercise the plumbing but cannot authorize a real evaluation by itself.
@@ -513,6 +533,7 @@ def build(*, events_path: Path, symbol_dates_path: Path, contract_path: Path,
         "quarantined_exchange_events": len(ex_quarantine),
         "quarantined_share_symbol_dates": len(sh_quarantine),
         "quarantined_control_dates": len(ct_quarantine),
+        "reviewed_share_exclusion_count": share_exclusions,
         "coverage_ready_before_quality": coverage_ready,
         "quality_gate_clear": quality_cleared,
         "only_synthetic_sources": only_synthetic,
