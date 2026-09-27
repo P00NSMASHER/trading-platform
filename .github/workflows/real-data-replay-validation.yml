@@ -1,0 +1,31 @@
+name: real-data-replay-validation
+
+on:
+  push:
+    branches: [release/source-agnostic-real-data-replay]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: src
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+      - name: Replay regression tests
+        run: |
+          python -m pytest -q             tests/test_real_data_replay.py             tests/test_real_data_release_sprint.py             tests/test_coverage_planner.py             tests/test_historical_market_backfill.py             tests/test_metadata_resolver.py             tests/test_metadata_quality.py             tests/test_evaluation_release_controller.py
