@@ -94,6 +94,14 @@
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
       "expected_sha256": "09cd00104845aeb44efda59ccd06fdf95136167fa7b0945c55be2377ede2baa3",
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
+    "data/processed/coverage_plan_real/coverage_summary.json": {
+      "expected_sha256": "6bf06c331abf04265c4b2c0971ae621619009dcb7e401b08127746c5d798ffaa",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "data/processed/coverage_plan_real/unresolved_gates.csv": {
+      "expected_sha256": "aa37aa294b769007ee036022a566e6ecc7026e2901924d015d5762b9c7a40943",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     }
   },
   "repository_additions": {
@@ -524,6 +532,46 @@
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
       "expected_sha256": "bb10c0bc6fb7396776dab105f89e46368289df8a89b547d88a736416105c10d6",
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
+    "src/real_data_release_sprint.py": {
+      "expected_sha256": "802f0cd07a86a929f7d650d0d7c9e2ca1949961576439095081733dee4c28ad6",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "tests/test_real_data_release_sprint.py": {
+      "expected_sha256": "7bd7c55e7bced88b42dbe6b434a0c82fb803eaa58290ed15e647957da95b9bda",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "docs/real_data_release_sprint.md": {
+      "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "data/processed/real_data_release_sprint/requirements_manifest.json": {
+      "expected_sha256": "23f3d03f79a5a10266511455418c5b3142ab27eeedd9af3e106dccfce2b122db",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "data/processed/real_data_release_sprint/g2_core_source_date_requirements.csv": {
+      "expected_sha256": "8cb88cf9120c151cde6e13fc4ca78071b8021c247aff9aa556f1fba645d05f8b",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "data/processed/real_data_release_sprint/g2_option_source_date_requirements.csv": {
+      "expected_sha256": "c050fbf7a6bc12bcf8f162075689794d26d79f85d09329cb2463e06ac457fa33",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "data/processed/real_data_release_sprint/g2_itch_event_requirements.csv": {
+      "expected_sha256": "4bceded53a700cd6cdb897852feefe1a5d767e6a16300752010fb76635c5b629",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "data/processed/real_data_release_sprint/market_source_inventory.template.csv": {
+      "expected_sha256": "b5cfbc9768b8b00a4e7c44cbd753f3d6bf3e87e9fc6e92c3b87685c28b1b7741",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "data/processed/real_data_release_sprint/production_source_contract_blueprint.json": {
+      "expected_sha256": "0b847fcfc2768bba2e36fd5f878065a469e37b11c977e2ba6a279cae8c191e4a",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "data/processed/real_data_release_sprint/step_status.json": {
+      "expected_sha256": "3869a161457df2c98bbab7335aacf01742a085558322a097d7d55da38060b406",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     }
   }
 }

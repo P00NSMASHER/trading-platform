@@ -1,0 +1,109 @@
+{
+  "authorization": {
+    "authorized_must_be_true": true,
+    "credentials_in_contract_prohibited": true,
+    "license_reference_required": true,
+    "non_synthetic_class": "authorized_historical_market_data"
+  },
+  "content_validation": {
+    "all_required_symbols_must_be_observed": true,
+    "declared_trade_date_must_match_parsed_rows": true,
+    "file_existence_is_not_coverage": true,
+    "synthetic_rows_never_satisfy_G2": true
+  },
+  "prohibited_outputs": [
+    "BUY",
+    "SELL",
+    "expected_return",
+    "target_price",
+    "position_size",
+    "order",
+    "execution_instruction"
+  ],
+  "purpose": "Production source-contract blueprint for the real-data release sprint. This is not itself an authorization claim.",
+  "schema_version": "1",
+  "source_types": {
+    "equity_quote": {
+      "accepted_families": [
+        "nyse_daily_taq",
+        "generic_authorized_market_data"
+      ],
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "symbol",
+        "bid",
+        "ask",
+        "bid_size",
+        "ask_size"
+      ]
+    },
+    "equity_trade": {
+      "accepted_families": [
+        "nyse_daily_taq",
+        "generic_authorized_market_data"
+      ],
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "symbol",
+        "price",
+        "size"
+      ]
+    },
+    "itch_decoded": {
+      "accepted_families": [
+        "nasdaq_itch_5_0_decoded"
+      ],
+      "format_version_required": true,
+      "required_canonical_fields": [
+        "timestamp",
+        "message_type",
+        "symbol",
+        "order_reference",
+        "side",
+        "shares",
+        "price",
+        "executed_shares",
+        "execution_price",
+        "match_number",
+        "printable",
+        "cancelled_shares",
+        "new_order_reference"
+      ],
+      "scope": "G3-confirmed Nasdaq event rows only unless a separate point-in-time listing-history source proves additional baseline symbol-dates."
+    },
+    "option_quote": {
+      "accepted_families": [
+        "cboe_option_quotes",
+        "generic_authorized_market_data"
+      ],
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "underlying_symbol",
+        "option_symbol",
+        "expiration",
+        "strike",
+        "option_type",
+        "bid",
+        "ask",
+        "bid_size",
+        "ask_size"
+      ]
+    },
+    "option_trade": {
+      "accepted_families": [
+        "cboe_option_trades",
+        "generic_authorized_market_data"
+      ],
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "underlying_symbol",
+        "option_symbol",
+        "expiration",
+        "strike",
+        "option_type",
+        "price",
+        "size"
+      ]
+    }
+  }
+}
