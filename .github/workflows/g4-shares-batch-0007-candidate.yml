@@ -185,9 +185,9 @@ jobs:
 
       - name: Remove temporary generation machinery
         run: |
-          rm -f .github/workflows/g4-shares-batch-0007-candidate.yml
-          rm -f src/g4_sec_shares_batch.py
-          rm -f data/public/metadata/g4_historical_cik_map_batch_0007.csv
+          git rm -f .github/workflows/g4-shares-batch-0007-candidate.yml
+          git rm -f src/g4_sec_shares_batch.py
+          git rm -f data/public/metadata/g4_historical_cik_map_batch_0007.csv
 
       - name: Full test suite
         run: python -m pytest -q
