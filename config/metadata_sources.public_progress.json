@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 and G4 fully accounted through exact evidence plus immutable reviewed fail-closed exclusions; G3 complete; hard no-lookahead and source-integrity rules enforced.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1, G4, and G5 fully accounted through exact evidence plus immutable reviewed fail-closed exclusions; G3 complete; hard no-lookahead and source-integrity rules enforced.",
   "sources": [
     {
       "source_id": "public-g3-primary-listing-evidence",
@@ -228,5 +228,14 @@
     "expected_count": 174,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
+  },
+  "reviewed_control_exclusions": {
+    "enabled": true,
+    "mode": "reviewed_fail_closed_exclusions",
+    "path": "data/processed/authorized_input_real/g5_final_control_exclusions.json",
+    "expected_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "expected_count": 72,
+    "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE",
+    "downstream_policy": "Excluded event dates retain zero candidate counts, are marked excluded_fail_closed, and may not contribute matched controls or model-evaluation authorization."
   }
 }
