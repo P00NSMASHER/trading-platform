@@ -68,12 +68,12 @@
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "243b0df0400fffce489c7149235027f34cf49dfa938607f30e4d3538588f819b",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "02e3433b15ad19f01bf8ca93f984287933f31acb584eeeb705f9f57fb93a70ae",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "796365aa484ceed41ae71c73af0a0f8c34aaf4d3caaf534ffa51f38bbd70a2fe",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "abd1fa7686fd3cb6c8bc9cdf462416a4213ebf0568ed9358071c09576892800f",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
     },
     "src/metadata_quality.py": {
       "expected_sha256": "0d3e7405e394e9b4bbfc21450afdfb89650e5bc4703cdd609f5a905cf5ad58c8",
@@ -326,32 +326,32 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "c501753afffb1a821bac8a3654bab7b2a4755dc5f9f9244c9c73f17967dd4bb8",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "1c7c41aa023abc8fe4b95ef6f4e59405bcbc0a86ba6e42115b0da53029d3f629",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_quality_issues.csv": {
-      "expected_sha256": "abecf246f7637a0008ab31da1e0744c9b8223e9fcb78c48076c9b3a404b901ea",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "51739ea6e3752a946b249895cd3770342c10c4125fb19f89986cc5df6cd8007e",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
     },
     "data/processed/authorized_input_real/metadata_quarantine.csv": {
       "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "d6a1feaa63655ad6e69dd32b16afa0c0a2e465055b49d969b669dc9756bd922a",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "6c6bb8f4251268b6cf87ccaab45992c3978644e150f89f25c0b00631603ea178",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "717039ff0e09587886ac968dcdeb2281da73165e6f8d27a467ffb44a8c979b76",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "66988d9e385b34a61416e860426fd919f8938d95f80dd2d7b4e13e3c6d5cba76",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
-      "expected_sha256": "ad4d055afaf3ae8bfbdb70e4420d827dc776c9cb4f2fe4e6153b918f2ef3a3dd",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "503c80b0e21b468eff7a88434e9627cd8466911aa24c65239b808d9f85bc11b3",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -370,8 +370,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "601e5421ba8982f5ccd3b9de971b085503247f4ceb19dcc3e017b53dcacea1a3",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+      "expected_sha256": "2c46ca64ee96746a1c3c3197ea99c543fa26e87b33dd8198f3934aeac4c86652",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
     },
     "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
       "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
@@ -468,6 +468,22 @@
     "data/public/metadata/g4_shares_batch_0008.csv": {
       "expected_sha256": "2c7f0880436d5ef7dc526be8c2f9dfa68174e403cdb21e1302590ba21c7d4355",
       "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0006_report.json": {
+      "expected_sha256": "d1649ad7a72a11661b1dd93bd4622536ed0d952023285f2c58092a18daa54098",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0006_blockers.json": {
+      "expected_sha256": "b074bbda555418ab8882f737846f8785661742bd5fc9248499dd92733019ec71",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0006.csv": {
+      "expected_sha256": "a559ddc3e833716ebcc1fb73040ee1a4d5436ed75c9a678181c641371eea5f68",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
+    },
+    "data/public/metadata/g4_shares_batch_0006.csv": {
+      "expected_sha256": "42f639b56fdf17bddef5c1eba0e4c4c744da429c41504b403e30f84b39c0cb55",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
     }
   }
 }
