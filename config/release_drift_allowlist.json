@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "76bb6878d56d399ca823ddbbd14edb051dbafbb0659594bd1f21be772d433eb8",
-      "reason": "G1 issuer/original-wire batch 0010: add exact Gilead release clock at 2015-02-03 16:07 ET from the issuer's archived Business Wire earnings release, remove only the stale GILD reviewed exclusion, and preserve all other fail-closed G1 semantics."
+      "expected_sha256": "4d274fe6a3a69e8cfeea215c114aaae216fc6d47e9d7fca0f085c7eeb070ed37",
+      "reason": "G1 independently verified Business Wire batch 0011: add ILMN exact release clock at 2015-01-27 16:05 ET using the preserved Business Wire timestamp plus issuer corroboration; grade the evidence B, remove only the stale ILMN reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "ad85b1139c7c0eee81b5bf48c191bcd78e0f61c17d4447ef78ed4dd257f7fe1e",
-      "reason": "G1 issuer/original-wire batch 0010: add exact Gilead release clock at 2015-02-03 16:07 ET from the issuer's archived Business Wire earnings release, remove only the stale GILD reviewed exclusion, and preserve all other fail-closed G1 semantics."
+      "expected_sha256": "3e1500bab706677da84eca0dfe7b570c56d55292c4e9604a2f3e4fd505d12c42",
+      "reason": "G1 independently verified Business Wire batch 0011: add ILMN exact release clock at 2015-01-27 16:05 ET using the preserved Business Wire timestamp plus issuer corroboration; grade the evidence B, remove only the stale ILMN reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "e046e799061b00f16af19f59ca7ffcda995806b95b3dc92c91cd5116307d71b4",
       "reason": "Authoritative receipt regeneration from main source commit ce80d4e2bbad8e48443d1b3a8a77c77e8b5cf004 after G1 Gilead batch 0010."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "e15b38dd7bd92c10fae0d4d1b5fe38b3634ed99f33f3feaac0f1cc6388787250",
-      "reason": "G1 issuer/original-wire batch 0010: add exact Gilead release clock at 2015-02-03 16:07 ET from the issuer's archived Business Wire earnings release, remove only the stale GILD reviewed exclusion, and preserve all other fail-closed G1 semantics."
+      "expected_sha256": "ec5afa30e7b0b36308eef10623ea230c3d545b1fbc8ac0db38ff8bd833960033",
+      "reason": "G1 independently verified Business Wire batch 0011: add ILMN exact release clock at 2015-01-27 16:05 ET using the preserved Business Wire timestamp plus issuer corroboration; grade the evidence B, remove only the stale ILMN reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -696,6 +696,10 @@
     "data/public/metadata/g1_announcement_times_batch_0010.csv": {
       "expected_sha256": "54de4006b6d5b5f6bbc101fd9d17618efeba4f612c6de452beda2fafd0619d0e",
       "reason": "G1 issuer/original-wire batch 0010 evidence row for GILD with exact 2015-02-03 4:07 PM ET timestamp from Gilead's archived Business Wire earnings release."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0011.csv": {
+      "expected_sha256": "8ea09c97f3805708adba7570a7b5d6a4cf90010aa2c50aa05744f5109ed44919",
+      "reason": "G1 batch 0011 evidence row for ILMN: preserved Business Wire release timestamp at 2015-01-27 4:05 PM EST, issuer-corroborated and intentionally graded B."
     }
   }
 }

@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "af97a0f8291fa8cf5070422f1e04d74c5c2dd648",
+  "base_main_sha": "fbff618829be8b2bb5cc4a9b42c220f5033372d4",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 12,
-    "reviewed_excluded": 162,
+    "exact_resolved": 13,
+    "reviewed_excluded": 161,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 162,
+    "raw_exact_time_evidence_gaps": 161,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 12,
+    "exact_timing_analysis_eligible": 13,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -906,13 +906,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-8A11E54A9679E09D",
-      "historical_symbol": "ILMN",
-      "first_documented_illicit_trade_ts": "2015-01-27 15:11:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-45559DD90D876D39",
       "historical_symbol": "ILMN",
       "first_documented_illicit_trade_ts": "2015-04-21 14:48:00",
@@ -1202,14 +1195,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 12,
-    "latest_batch": "g1_announcement_times_batch_0010.csv",
+    "exact_resolved": 13,
+    "latest_batch": "g1_announcement_times_batch_0011.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-C4D39B22234902F2",
-        "historical_symbol": "GILD",
-        "public_announcement_ts": "2015-02-03T16:07:00-05:00",
-        "source_reference": "https://s24.q4cdn.com/804398512/files/doc_news/archive/970dabfc-7ef2-415b-93ef-bd4f1e0f65da.pdf"
+        "event_id": "HEJFE-8A11E54A9679E09D",
+        "historical_symbol": "ILMN",
+        "public_announcement_ts": "2015-01-27T16:05:00-05:00",
+        "source_reference": "https://www.marketscreener.com/quote/stock/ILLUMINA-INC-9659/news/Illumina-Reports-Record-Financial-Results-for-Fourth-Quarter-and-Fiscal-Year-2014-19770784/"
       }
     ]
   }

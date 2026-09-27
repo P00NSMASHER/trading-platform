@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 12
-- **Immutable reviewed fail-closed exclusions:** 162
+- **Exact first-public announcement timestamps resolved:** 13
+- **Immutable reviewed fail-closed exclusions:** 161
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 12
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 13
 
 This does **not** invent announcement times.
 
@@ -99,3 +99,11 @@ One additional event now has an exact public-release timestamp from Gilead's arc
 - `HEJFE-C4D39B22234902F2` (GILD): `2015-02-03T16:07:00-05:00`. Gilead's archived fourth-quarter and full-year 2014 results release is timestamped `February 3, 2015 4:07 PM ET` and identifies Business Wire distribution.
 
 The other 162 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified Business Wire batch 0011
+
+One additional event now has an exact public-release timestamp recovered from a preserved Business Wire mirror and corroborated against the issuer's identical Business Wire release:
+
+- `HEJFE-8A11E54A9679E09D` (ILMN): `2015-01-27T16:05:00-05:00`. The preserved Business Wire copy is published at Jan. 27, 2015, 4:05 PM EST; its Business Wire tracking request exposes story ID `20150127006397`. Illumina's issuer archive reproduces the identical Business Wire earnings release. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved wire mirror rather than a currently fetchable first-party Business Wire article page.
+
+The other 161 events remain fail-closed until equivalent admissible evidence is located.
