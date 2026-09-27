@@ -37,6 +37,15 @@ jobs:
           python -m pip install -r requirements-dev.lock
           python -m pip install -r requirements-skops.lock
 
+      - name: Harden ephemeral runtime permissions
+        run: |
+          mkdir -p private_runtime/audit private_runtime/backups private_runtime/exports
+          chmod 700 private_runtime/audit private_runtime/backups private_runtime/exports
+          chmod 600 config/runtime.demo.toml
+          chmod 600 data/processed/case_demo/cases.sqlite
+          chmod 600 data/processed/model_demo/model_bundle.joblib
+          chmod 600 data/processed/model_demo/training_manifest.json
+
       - name: Assert exact skops version
         run: |
           python - <<'PY'
@@ -51,7 +60,11 @@ jobs:
 
       - name: Exercise real champion skops export and inspection
         run: |
-          python src/model_artifact.py export-skops             --source-joblib data/processed/model_demo/model_bundle.joblib             --expected-joblib-sha256 0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616             --output-skops /tmp/champion.skops             --inspection-report /tmp/champion-skops-inspection.json
+          python src/model_artifact.py export-skops \
+            --source-joblib data/processed/model_demo/model_bundle.joblib \
+            --expected-joblib-sha256 0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616 \
+            --output-skops /tmp/champion.skops \
+            --inspection-report /tmp/champion-skops-inspection.json
           python - <<'PY'
           import hashlib, json
           from pathlib import Path
@@ -80,7 +93,7 @@ jobs:
             "Security maintenance: require skops 0.15.x for the optional safer-model path, "
             "validated with actual champion export/inspection and fail-closed artifact tests."
           )
-          paths=["pyproject.toml","requirements-skops.lock"]
+          paths=["pyproject.toml","requirements-skops.lock","tests/test_deployment_hardening.py"]
           def sha(path):
               h=hashlib.sha256()
               with Path(path).open("rb") as f:
