@@ -19,7 +19,10 @@ OPTION_KEYS = {
     ("cboe_option_trades", "option_trade"),
     ("cboe_option_quotes", "option_quote"),
 }
-ITCH_KEY = ("nasdaq_itch_5_0_decoded", "itch_decoded")
+ITCH_V4_FAMILY = "nasdaq_itch_4_1_decoded"
+ITCH_V5_FAMILY = "nasdaq_itch_5_0_decoded"
+ITCH_RECORD_KIND = "itch_decoded"
+ITCH_V5_START_DATE = "2014-04-08"
 
 
 def _sha256(path: Path) -> str:
@@ -74,22 +77,26 @@ def freeze_requirements(
     legacy_itch = [
         r for r in reqs
         if r.get("requirement") == "conditional"
-        and (r.get("source_family"), r.get("record_kind")) == ITCH_KEY
+        and r.get("record_kind") == ITCH_RECORD_KIND
     ]
-    nasdaq_events = [
-        {
+    nasdaq_events = []
+    for r in exchanges:
+        if r.get("resolution_status") != "resolved" or r.get("primary_exchange") != "XNAS":
+            continue
+        event_date = r["trade_date"]
+        family = ITCH_V4_FAMILY if event_date < ITCH_V5_START_DATE else ITCH_V5_FAMILY
+        version = "ITCH-4.1" if family == ITCH_V4_FAMILY else "ITCH-5.0"
+        nasdaq_events.append({
             "event_id": r["event_id"],
             "historical_symbol": r["historical_symbol"],
-            "event_date": r["trade_date"],
+            "event_date": event_date,
             "primary_exchange": r["primary_exchange"],
             "requirement": "required_event_order_flow",
-            "source_family": ITCH_KEY[0],
-            "record_kind": ITCH_KEY[1],
+            "source_family": family,
+            "record_kind": ITCH_RECORD_KIND,
+            "format_version": version,
             "research_use_only": "1",
-        }
-        for r in exchanges
-        if r.get("resolution_status") == "resolved" and r.get("primary_exchange") == "XNAS"
-    ]
+        })
 
     if len(core) != 828:
         raise ValueError(f"expected 828 core source-date rows, found {len(core)}")
@@ -160,7 +167,7 @@ def freeze_requirements(
                 ],
             },
             "itch_decoded": {
-                "accepted_families": ["nasdaq_itch_5_0_decoded"],
+                "accepted_families": ["nasdaq_itch_4_1_decoded", "nasdaq_itch_5_0_decoded"],
                 "required_canonical_fields": [
                     "timestamp", "message_type", "symbol", "order_reference", "side",
                     "shares", "price", "executed_shares", "execution_price", "match_number",
@@ -193,6 +200,8 @@ def freeze_requirements(
             "total_required_g2_source_date_rows": len(core) + len(options),
             "legacy_conditional_itch_market_date_rows": len(legacy_itch),
             "g3_confirmed_nasdaq_event_rows": len(nasdaq_events),
+            "g3_confirmed_nasdaq_itch_4_1_event_rows": sum(r["source_family"] == ITCH_V4_FAMILY for r in nasdaq_events),
+            "g3_confirmed_nasdaq_itch_5_0_event_rows": sum(r["source_family"] == ITCH_V5_FAMILY for r in nasdaq_events),
             "unique_g3_confirmed_nasdaq_event_dates": len({r["event_date"] for r in nasdaq_events}),
         },
         "artifacts": {
