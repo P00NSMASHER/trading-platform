@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 8
-- **Immutable reviewed fail-closed exclusions:** 166
+- **Exact first-public announcement timestamps resolved:** 9
+- **Immutable reviewed fail-closed exclusions:** 165
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 8
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 9
 
 This does **not** invent announcement times.
 
@@ -67,3 +67,11 @@ Two additional ADI events now have exact public-release timestamps from Analog D
 - `HEJFE-09EB83905864C50A` (ADI): `2015-05-19T16:00:00-04:00`. Analog Devices' archive records the second-quarter fiscal 2015 results at May 19, 2015, 4:00 PM EDT.
 
 The other 166 events remain fail-closed until equivalent admissible evidence is located.
+
+## SEC release-clock batch 0007
+
+One additional event now has an exact first-public release clock directly stated in the issuer's SEC-hosted earnings exhibit:
+
+- `HEJFE-7ED8DBD4804E4330` (JWN): `2015-02-19T16:05:00-05:00`. Nordstrom Exhibit 99.1 states `FOR RELEASE: February 19, 2015 at 1:05 PM PST`, which converts to 4:05 PM EST.
+
+The other 165 events remain fail-closed until equivalent admissible evidence is located.
