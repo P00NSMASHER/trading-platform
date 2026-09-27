@@ -39,6 +39,8 @@ HOSTILE_TEST_GROUPS: dict[str, tuple[str, ...]] = {
     ),
     "control_plane_and_runtime_security": (
         "tests/test_control_plane_adversarial.py",
+        "tests/test_control_plane_dashboard_accounts.py",
+        "tests/test_private_dashboard.py",
         "tests/test_deployment_hardening.py",
     ),
 }
@@ -53,6 +55,8 @@ REQUIRED_SOFTWARE = (
     "src/model_training_harness.py",
     "src/graph_challenger_harness.py",
     "src/evaluation_release_controller.py",
+    "src/private_dashboard.py",
+    "src/private_runtime.py",
 )
 
 PROHIBITED_OUTPUTS = [
