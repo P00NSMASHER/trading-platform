@@ -68,24 +68,24 @@
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "3b69d197faccb3477861b08aa83e398367380b48066326d3570f7c76680d7f54",
-      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+      "expected_sha256": "4a2e915ff98bad4e5192c8e1eddbde21b67d74bd40cf807cf3b3cb5bed40e368",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "515901fdb61f3738f6e2916574a9743559aad6e6ab606103978a7a0ef5cd22b1",
-      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+      "expected_sha256": "9b74023bd3a03e770d6b367b1ce58088a4ff10ed96039c58921fc57763949656",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "src/metadata_quality.py": {
-      "expected_sha256": "0d3e7405e394e9b4bbfc21450afdfb89650e5bc4703cdd609f5a905cf5ad58c8",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "9453888aa884d9b91c7a21900cd60219942cbc24d3a8fc029604bfda75f6e1d4",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "src/metadata_resolver.py": {
-      "expected_sha256": "49647762004b7798cd0d6942d5af76eafbf8d8170e4b06a55fa82b2bf1503a29",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "b7c1a33dfe1d7225b3eeff91ebe941d7bb32a2b57b0571a4765638bb492e558a",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "tests/test_metadata_resolver.py": {
-      "expected_sha256": "5f5e3c53bc5ad6f69281a141a0d0d96755f050927d37402733d11da97ea7367f",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+      "expected_sha256": "4fc22384286e6bea7227cc29d0f0e0d82bf1dcbd8817fc660d96a7320060f912",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     }
   },
   "repository_additions": {
@@ -326,8 +326,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "bfdd37645a25875990704b2cc4e7ea474af0e5c4f43ae46092071da6f8de31fa",
-      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+      "expected_sha256": "c2699aec15a593df1708e7e321f276fbffe5abbc663866ca87e7a68b6f215642",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -346,12 +346,12 @@
       "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "d928c9094dcf97e5a177bb50cb5425374ca015a8273e4e374beaac5ca981aa81",
-      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+      "expected_sha256": "950645c8f575db848ae5d02b0c555988033dd83b79a2466a00d49500a075cadc",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
-      "expected_sha256": "d54143f8e9118adebc34c0a6a595708c41ec0bc390e8cb4d71299c4460a866db",
-      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+      "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -370,8 +370,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "c4cd6a57be209f91c5b42eca59fccf599de3ee9fcf3cf948afab696336793eaa",
-      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+      "expected_sha256": "9416ec7d6d3911ca2704ef4a9f611d1511e0e3200fe7761ce89bab21e5211b04",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
       "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
@@ -500,6 +500,10 @@
     "docs/g4_final_blockers.md": {
       "expected_sha256": "05bb5267b5ca0a6a23f31630704d1f2302a82c5faa77df20aa2ef806b9aa45d9",
       "reason": "G4 final blocker dossier: durable audit record for the 18 remaining fail-closed shares observations after exhaustive pre-cutoff evidence research."
+    },
+    "tests/test_metadata_quality.py": {
+      "expected_sha256": "17c2b59823538bfaa5ea15abadd030ac87da326361cd81f7d6d3e94accf000cc",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     }
   }
 }
