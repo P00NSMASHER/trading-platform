@@ -612,6 +612,18 @@
     "dashboard/index.html": {
       "expected_sha256": "f1370a704ebe4b7223de609b5948e6f52ba853932dd09e5dccb88b28af2d1ff2",
       "reason": "Public-safe read-only research dashboard showing software-ready/real-data-pending state, fail-closed evidence gates, and no licensed rows, credentials, trading outputs, or execution capability."
+    },
+    "src/software_readiness_certification.py": {
+      "expected_sha256": "bf7cf2aae77ee334b317b7af4365c7bd1270a9040785f5c703bb920d61ba6691",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by hostile regression and private-runtime integrity checks."
+    },
+    "tests/test_software_readiness_certification.py": {
+      "expected_sha256": "5d322e31d254397ec613423c6453ea17e58cce3927b58b2b446041cc059c0761",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by hostile regression and private-runtime integrity checks."
+    },
+    "docs/software_readiness_certification.md": {
+      "expected_sha256": "7512fff8e36f2184f0cb66d21fe8642138790c8231b74249c6c5ef56179fbefe",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by hostile regression and private-runtime integrity checks."
     }
   }
 }
