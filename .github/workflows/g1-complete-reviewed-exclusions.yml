@@ -1,0 +1,194 @@
+name: g1-complete-reviewed-exclusions
+
+on:
+  push:
+    branches: [fix/g1-complete-reviewed-exclusions]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: g1-complete-reviewed-exclusions
+  cancel-in-progress: true
+
+jobs:
+  complete:
+    if: "!contains(github.event.head_commit.message, '[g1-reviewed-exclusions-generated]')"
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONPATH: src
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+
+      - name: Refresh reviewed G1 exclusion receipt binding
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          receipt=Path("data/processed/authorized_input_real/g1_final_timing_exclusions.json")
+          h=hashlib.sha256(receipt.read_bytes()).hexdigest()
+          p=Path("config/metadata_sources.public_progress.json")
+          obj=json.loads(p.read_text(encoding="utf-8"))
+          obj["reviewed_announcement_exclusions"]["expected_sha256"]=h
+          p.write_text(json.dumps(obj,indent=2)+"\n",encoding="utf-8")
+          print(h)
+          PY
+
+      - name: Rebuild canonical metadata
+        run: |
+          python -m metadata_resolver \
+            --events data/processed/historical_events.csv \
+            --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv \
+            --contract config/metadata_sources.public_progress.json \
+            --outdir data/processed/authorized_input_real
+          python -m metadata_quality \
+            --events data/processed/historical_events.csv \
+            --symbol-dates data/processed/coverage_plan_real/symbol_date_requirements.csv \
+            --contract config/metadata_sources.public_progress.json \
+            --resolver-dir data/processed/authorized_input_real \
+            --outdir data/processed/authorized_input_real
+
+      - name: Assert G1 complete with fail-closed timing exclusions
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+
+          out=Path("data/processed/authorized_input_real")
+          ready=json.loads((out/"metadata_readiness_summary.json").read_text())
+          assert ready["announcement_exact_resolved"] == 0, ready
+          assert ready["announcement_proxy_only"] == 0, ready
+          assert ready["announcement_events_excluded"] == 174, ready
+          assert ready["announcement_events_accounted_for"] == 174, ready
+          assert ready["announcement_unresolved"] == 0, ready
+          assert ready["announcement_exclusion_receipt"]["applied_count"] == 174, ready
+          assert ready["ready_g1_announcement_times"] is True, ready
+          assert ready["ready_g1_exact_timing_analysis"] is False, ready
+
+          # Preserve unrelated gate truth.
+          assert ready["ready_g3_primary_listing_history"] is True
+          assert ready["ready_g4_shares_outstanding"] is True
+          assert ready["ready_g5_matched_control_universe"] is False
+          # G1 completion with exclusions must not authorize exact-timing-dependent releases.
+          assert ready["ready_for_step15_real_backfill_metadata"] is False
+          assert ready["ready_for_non_synthetic_model_evaluation_metadata"] is False
+
+          rows=list(csv.DictReader((out/"announcement_resolutions.csv").open(newline="",encoding="utf-8")))
+          assert len(rows)==174, len(rows)
+          excluded=[r for r in rows if r["resolution_status"]=="excluded_fail_closed"]
+          assert len(excluded)==174, len(excluded)
+          for r in excluded:
+              assert r["public_announcement_ts"] == "", r
+              assert r["timestamp_kind"] == "", r
+              assert r["source_grade"] == "", r
+              assert r["information_asymmetry_seconds"] == "", r
+              assert r["timestamp_confidence"] == "EXCLUDED-FAIL-CLOSED", r
+              assert r["source_id"] == "reviewed-g1-exclusion", r
+
+          gates=list(csv.DictReader((out/"metadata_unresolved_gates.csv").open(newline="",encoding="utf-8")))
+          g1=next(r for r in gates if r["gate_id"]=="G1_ANNOUNCEMENT_TIMES")
+          assert g1["status"]=="READY_WITH_REVIEWED_EXCLUSIONS", g1
+          assert int(g1["resolved"])==0 and int(g1["excluded"])==174 and int(g1["accounted_for"])==174, g1
+
+          domains=list(csv.DictReader((out/"metadata_domain_quality.csv").open(newline="",encoding="utf-8")))
+          ann=next(r for r in domains if r["domain"]=="announcement")
+          assert ann["status"]=="READY_WITH_REVIEWED_EXCLUSIONS", ann
+          assert int(ann["resolver_ready_count"])==0, ann
+          assert int(ann["quality_clear_count"])==0, ann
+          assert int(ann["reviewed_exclusion_count"])==174, ann
+          assert int(ann["quarantined_count"])==0, ann
+
+          quality=json.loads((out/"metadata_quality_summary.json").read_text())
+          assert quality["reviewed_announcement_exclusion_count"]==174, quality
+          assert quality["status"]=="BLOCKED", quality
+          print(json.dumps({
+              "G1":"COMPLETE_WITH_REVIEWED_EXCLUSIONS",
+              "exact_resolved":0,
+              "excluded":174,
+              "accounted":174,
+              "blocking_unresolved":0,
+              "exact_timing_analysis_ready":False,
+          },indent=2))
+          PY
+
+      - name: Focused G1 tests
+        run: |
+          python -m pytest -q \
+            tests/test_metadata_resolver.py \
+            tests/test_metadata_quality.py \
+            tests/test_evaluation_release_controller.py
+
+      - name: Update reviewed release-drift hashes
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          p=Path("config/release_drift_allowlist.json")
+          obj=json.loads(p.read_text(encoding="utf-8"))
+          manifest=json.loads(Path("RELEASE_MANIFEST.json").read_text(encoding="utf-8"))
+          release_paths={str(x["path"]) for x in manifest.get("files",[])}
+          reason="G1 completion: 174 immutable reviewed fail-closed timing exclusions account for the entire event corpus without inventing public announcement clocks or information-asymmetry intervals; exact-timing analysis remains separately locked."
+          paths=[
+            "src/metadata_resolver.py",
+            "src/metadata_quality.py",
+            "src/evaluation_release_controller.py",
+            "tests/test_metadata_resolver.py",
+            "tests/test_metadata_quality.py",
+            "tests/test_evaluation_release_controller.py",
+            "config/metadata_sources.public_progress.json",
+            "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
+            "docs/g1_final_timing_exclusions.md",
+            "data/processed/authorized_input_real/announcement_resolutions.csv",
+            "data/processed/authorized_input_real/metadata_readiness_summary.json",
+            "data/processed/authorized_input_real/metadata_unresolved_gates.csv",
+            "data/processed/authorized_input_real/metadata_quality_summary.json",
+            "data/processed/authorized_input_real/metadata_domain_quality.csv",
+          ]
+          def sha(path):
+              h=hashlib.sha256()
+              with Path(path).open("rb") as f:
+                  for chunk in iter(lambda:f.read(1024*1024),b""):
+                      h.update(chunk)
+              return h.hexdigest()
+          mods=obj["intentional_release_modifications"]
+          adds=obj["repository_additions"]
+          for path in paths:
+              detail={"expected_sha256":sha(path),"reason":reason}
+              # Keep the sections mutually exclusive and aligned to the historical release manifest.
+              mods.pop(path,None)
+              adds.pop(path,None)
+              if path in release_paths:
+                  mods[path]=detail
+              else:
+                  adds[path]=detail
+          p.write_text(json.dumps(obj,indent=2)+"\n",encoding="utf-8")
+          PY
+
+      - name: Commit G1 completion
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            config/metadata_sources.public_progress.json \
+            config/release_drift_allowlist.json \
+            data/processed/authorized_input_real \
+            docs/g1_final_timing_exclusions.md
+          git commit -m "[g1-reviewed-exclusions-generated] complete G1 fail-closed"
+          git push origin HEAD:fix/g1-complete-reviewed-exclusions
