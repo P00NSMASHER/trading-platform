@@ -6,7 +6,7 @@ import hashlib
 import json
 import math
 from collections import defaultdict
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Iterable
@@ -438,6 +438,122 @@ def resolve_shares(symbol_date_rows: list[dict[str,str]], sources, *, max_stalen
     return out
 
 
+def _load_reviewed_share_exclusions(raw_contract: dict, root: Path, symbol_date_rows: list[dict[str, str]]) -> tuple[set[tuple[str, str]], dict]:
+    spec = raw_contract.get("reviewed_share_exclusions")
+    if not spec:
+        return set(), {"enabled": False, "applied_count": 0}
+    if not isinstance(spec, dict):
+        raise ValueError("reviewed_share_exclusions must be an object")
+    if not bool(spec.get("enabled", False)):
+        return set(), {"enabled": False, "applied_count": 0}
+
+    mode = str(spec.get("mode", "")).strip()
+    if mode != "reviewed_fail_closed_exclusions":
+        raise ValueError("reviewed_share_exclusions.mode must equal reviewed_fail_closed_exclusions")
+
+    raw_path = str(spec.get("path", "")).strip()
+    expected_sha = str(spec.get("expected_sha256", "")).strip().lower()
+    expected_count = int(spec.get("expected_count", 0))
+    required_status = str(spec.get("require_resolution_status", "")).strip()
+    if not raw_path:
+        raise ValueError("reviewed_share_exclusions.path is required")
+    if len(expected_sha) != 64 or any(ch not in "0123456789abcdef" for ch in expected_sha):
+        raise ValueError("reviewed_share_exclusions.expected_sha256 must be a 64-character SHA-256 digest")
+    if expected_count < 1:
+        raise ValueError("reviewed_share_exclusions.expected_count must be >= 1")
+    if not required_status:
+        raise ValueError("reviewed_share_exclusions.require_resolution_status is required")
+
+    p = Path(raw_path)
+    if not p.is_absolute():
+        p = (root / p).resolve()
+    if not p.is_file():
+        raise FileNotFoundError(f"reviewed share exclusion receipt not found: {p}")
+    actual_sha = _sha256(p)
+    if actual_sha != expected_sha:
+        raise ValueError("reviewed share exclusion receipt SHA-256 mismatch")
+
+    obj = json.loads(p.read_text(encoding="utf-8"))
+    if obj.get("schema_version") != "1":
+        raise ValueError("reviewed share exclusion receipt schema_version must equal '1'")
+    if obj.get("research_use_only") is not True:
+        raise ValueError("reviewed share exclusion receipt must set research_use_only=true")
+    blockers = obj.get("blockers")
+    if not isinstance(blockers, list) or not blockers:
+        raise ValueError("reviewed share exclusion receipt must contain blockers")
+
+    required_keys = {(str(r["historical_symbol"]).upper(), str(r["trade_date"])) for r in symbol_date_rows}
+    exclusions: set[tuple[str, str]] = set()
+    for blocker in blockers:
+        if not isinstance(blocker, dict):
+            raise ValueError("reviewed share exclusion blocker must be an object")
+        if str(blocker.get("resolution_status", "")).strip() != required_status:
+            raise ValueError("reviewed share exclusion blocker has unapproved resolution_status")
+        symbol = str(blocker.get("historical_symbol", "")).strip().upper()
+        dates = blocker.get("target_trade_dates")
+        if not symbol or not isinstance(dates, list) or not dates:
+            raise ValueError("reviewed share exclusion blocker requires historical_symbol and target_trade_dates")
+        for trade_date in dates:
+            key = (symbol, str(trade_date))
+            if key in exclusions:
+                raise ValueError(f"duplicate reviewed share exclusion: {symbol}|{trade_date}")
+            exclusions.add(key)
+
+    if len(exclusions) != expected_count:
+        raise ValueError(f"reviewed share exclusion count mismatch: expected {expected_count}, got {len(exclusions)}")
+    extras = exclusions - required_keys
+    if extras:
+        raise ValueError(f"reviewed share exclusions contain non-required symbol-dates: {sorted(extras)}")
+
+    return exclusions, {
+        "enabled": True,
+        "mode": mode,
+        "path": raw_path,
+        "sha256": actual_sha,
+        "expected_count": expected_count,
+        "applied_count": 0,
+        "downstream_policy": str(spec.get("downstream_policy", "")).strip(),
+    }
+
+
+def _apply_reviewed_share_exclusions(
+    shares: list[SharesResolution],
+    *,
+    raw_contract: dict,
+    root: Path,
+    symbol_date_rows: list[dict[str, str]],
+) -> tuple[list[SharesResolution], dict]:
+    exclusion_keys, meta = _load_reviewed_share_exclusions(raw_contract, root, symbol_date_rows)
+    if not exclusion_keys:
+        return shares, meta
+
+    out: list[SharesResolution] = []
+    applied: set[tuple[str, str]] = set()
+    for row in shares:
+        key = (row.historical_symbol.upper(), row.trade_date)
+        if key not in exclusion_keys:
+            out.append(row)
+            continue
+        if row.resolution_status == "resolved":
+            raise ValueError(
+                f"reviewed share exclusion is stale because an admissible exact fact now resolves {row.historical_symbol}|{row.trade_date}"
+            )
+        out.append(replace(
+            row,
+            resolution_status="excluded_fail_closed",
+            source_id="reviewed-g4-exclusion",
+            source_family="",
+            source_reference=meta["path"],
+        ))
+        applied.add(key)
+
+    if applied != exclusion_keys:
+        missing = sorted(exclusion_keys - applied)
+        raise ValueError(f"reviewed share exclusions were not applied to all required rows: {missing}")
+    meta = {**meta, "applied_count": len(applied)}
+    return out, meta
+
+
 CONTROL_COVARIATES = [
     "sector", "index_bucket", "market_cap", "price", "volatility_21d", "normal_volume",
     "normal_turnover", "normal_spread", "options_liquidity", "institutional_ownership", "analyst_coverage",
@@ -521,6 +637,9 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
     anns=resolve_announcements(events,loaded)
     exch=resolve_event_exchanges(events,loaded)
     shares=resolve_shares(symbol_dates,loaded)
+    shares, share_exclusion_meta = _apply_reviewed_share_exclusions(
+        shares, raw_contract=raw_contract, root=root, symbol_date_rows=symbol_dates
+    )
     controls=resolve_control_readiness(events,loaded)
     outdir.mkdir(parents=True,exist_ok=True)
     _write_csv(outdir/"announcement_resolutions.csv",anns)
@@ -534,6 +653,10 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
     proxies=sum(x.resolution_status.startswith("proxy_") for x in anns)
     ex_res=sum(x.resolution_status=="resolved" for x in exch)
     sh_res=sum(x.resolution_status=="resolved" for x in shares)
+    sh_exc=sum(x.resolution_status=="excluded_fail_closed" for x in shares)
+    sh_unresolved=sum(x.resolution_status=="unresolved" for x in shares)
+    sh_accounted=sh_res+sh_exc
+    g4_ready=sh_accounted==len(symbol_dates) and sh_unresolved==0
     ctl_res=sum(x.readiness_status=="resolved_for_point_in_time_matching" for x in controls)
     nasdaq=sum(x.primary_exchange=="XNAS" for x in exch if x.resolution_status=="resolved")
     summary={
@@ -547,24 +670,33 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
         "event_count":len(events),"symbol_date_requirement_count":len(symbol_dates),"event_date_count":len(controls),
         "announcement_exact_resolved":exact,"announcement_proxy_only":proxies,"announcement_unresolved":len(anns)-exact-proxies,
         "event_exchange_resolved":ex_res,"event_exchange_unresolved":len(exch)-ex_res,"event_exchange_nasdaq":nasdaq,
-        "shares_symbol_dates_resolved":sh_res,"shares_symbol_dates_unresolved":len(shares)-sh_res,
+        "shares_symbol_dates_resolved":sh_res,
+        "shares_symbol_dates_excluded":sh_exc,
+        "shares_symbol_dates_accounted_for":sh_accounted,
+        "shares_symbol_dates_unresolved":sh_unresolved,
+        "shares_exclusion_receipt":share_exclusion_meta,
         "control_dates_resolved":ctl_res,"control_dates_partial":sum(x.readiness_status.startswith("partial_") for x in controls),
         "control_dates_unresolved":sum(x.readiness_status=="unresolved" for x in controls),
         "ready_g1_announcement_times":exact==len(events),
         "ready_g3_primary_listing_history":ex_res==len(events),
-        "ready_g4_shares_outstanding":sh_res==len(symbol_dates),
+        "ready_g4_shares_outstanding":g4_ready,
         "ready_g5_matched_control_universe":ctl_res==len(controls),
-        "ready_for_step15_real_backfill_metadata": exact==len(events) and ex_res==len(events) and sh_res==len(symbol_dates),
-        "ready_for_non_synthetic_model_evaluation_metadata": exact==len(events) and ex_res==len(events) and sh_res==len(symbol_dates) and ctl_res==len(controls),
+        "ready_for_step15_real_backfill_metadata": exact==len(events) and ex_res==len(events) and g4_ready,
+        "ready_for_non_synthetic_model_evaluation_metadata": exact==len(events) and ex_res==len(events) and g4_ready and ctl_res==len(controls),
         "prohibited_outputs":PROHIBITED_OUTPUTS,
         "source_inventory":inventory,
     }
     (outdir/"metadata_readiness_summary.json").write_text(json.dumps(summary,indent=2),encoding="utf-8")
+    g4_status = (
+        "READY_WITH_REVIEWED_EXCLUSIONS" if summary["ready_g4_shares_outstanding"] and sh_exc
+        else "READY" if summary["ready_g4_shares_outstanding"]
+        else "BLOCKING_FOR_TURNOVER"
+    )
     gates=[
-        {"gate_id":"G1_ANNOUNCEMENT_TIMES","status":"READY" if summary["ready_g1_announcement_times"] else "BLOCKING","resolved":exact,"required":len(events),"requirement":"Exact first-public announcement timestamp from authoritative/authorized point-in-time source. EDGAR acceptance timestamps are retained as proxies and do not by themselves close this gate."},
-        {"gate_id":"G3_PRIMARY_LISTING_HISTORY","status":"READY" if summary["ready_g3_primary_listing_history"] else "BLOCKING_FOR_ITCH","resolved":ex_res,"required":len(events),"requirement":"Point-in-time primary listing exchange at each event date."},
-        {"gate_id":"G4_SHARES_OUTSTANDING","status":"READY" if summary["ready_g4_shares_outstanding"] else "BLOCKING_FOR_TURNOVER","resolved":sh_res,"required":len(symbol_dates),"requirement":"Shares outstanding known on/effective before every required symbol-date; future-filed facts prohibited."},
-        {"gate_id":"G5_MATCHED_CONTROL_UNIVERSE","status":"READY" if summary["ready_g5_matched_control_universe"] else "BLOCKING_FOR_MODEL_EVAL","resolved":ctl_res,"required":len(controls),"requirement":"At least three same-day point-in-time candidates with complete pre-event matching covariates for each distinct event date."},
+        {"gate_id":"G1_ANNOUNCEMENT_TIMES","status":"READY" if summary["ready_g1_announcement_times"] else "BLOCKING","resolved":exact,"excluded":0,"accounted_for":exact,"required":len(events),"requirement":"Exact first-public announcement timestamp from authoritative/authorized point-in-time source. EDGAR acceptance timestamps are retained as proxies and do not by themselves close this gate."},
+        {"gate_id":"G3_PRIMARY_LISTING_HISTORY","status":"READY" if summary["ready_g3_primary_listing_history"] else "BLOCKING_FOR_ITCH","resolved":ex_res,"excluded":0,"accounted_for":ex_res,"required":len(events),"requirement":"Point-in-time primary listing exchange at each event date."},
+        {"gate_id":"G4_SHARES_OUTSTANDING","status":g4_status,"resolved":sh_res,"excluded":sh_exc,"accounted_for":sh_accounted,"required":len(symbol_dates),"requirement":"Every required symbol-date must have admissible point-in-time shares outstanding or be covered by an immutable reviewed fail-closed exclusion receipt. Future-filed facts, inferred totals, and excluded-row turnover are prohibited."},
+        {"gate_id":"G5_MATCHED_CONTROL_UNIVERSE","status":"READY" if summary["ready_g5_matched_control_universe"] else "BLOCKING_FOR_MODEL_EVAL","resolved":ctl_res,"excluded":0,"accounted_for":ctl_res,"required":len(controls),"requirement":"At least three same-day point-in-time candidates with complete pre-event matching covariates for each distinct event date."},
     ]
     _write_csv(outdir/"metadata_unresolved_gates.csv",gates)
     return summary
