@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 3
-- **Immutable reviewed fail-closed exclusions:** 171
+- **Exact first-public announcement timestamps resolved:** 4
+- **Immutable reviewed fail-closed exclusions:** 170
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 3
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 4
 
 This does **not** invent announcement times.
 
@@ -34,3 +34,11 @@ Two additional events now have exact public-release timestamps from PR Newswire 
 - `HEJFE-A9D220DE2F7E7FC3` (DE): `2015-02-20T07:00:00-05:00`. PR Newswire's Deere archive timestamps the earnings release at Feb. 20, 2015, 07:00 ET; SEC Exhibit 99.1 corroborates the title and date.
 
 The other 171 events remain fail-closed until equivalent admissible evidence is located.
+
+## Public newswire batch 0003
+
+One additional event now has an exact public-release timestamp from the issuer-specific PR Newswire archive and is removed from the reviewed G1 exclusion set:
+
+- `HEJFE-30CA515BC590DDA6` (ROL): `2012-01-25T07:30:00-05:00`. Rollins' PR Newswire archive records `Rollins, Inc. Reports Fourth Quarter and Full-Year 2011 Financial Results` at Jan. 25, 2012, 07:30 ET.
+
+The other 170 events remain fail-closed until equivalent admissible evidence is located.
