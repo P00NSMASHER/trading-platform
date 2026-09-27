@@ -34,6 +34,7 @@ HOSTILE_TEST_GROUPS: dict[str, tuple[str, ...]] = {
     ),
     "intake_and_replay_fail_closed": (
         "tests/test_licensed_data_intake.py",
+        "tests/test_licensed_data_drop_processor.py",
         "tests/test_real_data_replay.py",
         "tests/test_real_data_release_sprint.py",
     ),
@@ -47,6 +48,7 @@ HOSTILE_TEST_GROUPS: dict[str, tuple[str, ...]] = {
 
 REQUIRED_SOFTWARE = (
     "src/licensed_data_intake.py",
+    "src/licensed_data_drop_processor.py",
     "src/real_data_replay.py",
     "src/historical_market_backfill.py",
     "src/metadata_resolver.py",
