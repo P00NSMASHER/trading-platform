@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 10
-- **Immutable reviewed fail-closed exclusions:** 164
+- **Exact first-public announcement timestamps resolved:** 11
+- **Immutable reviewed fail-closed exclusions:** 163
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 10
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 11
 
 This does **not** invent announcement times.
 
@@ -83,3 +83,11 @@ One additional event now has an exact public-release timestamp from the original
 - `HEJFE-87DDC59E7BB99A84` (ALSN): `2015-04-27T16:10:00-04:00`. PR Newswire's Allison Transmission archive lists `Allison Transmission Announces First Quarter 2015 Results` at Apr. 27, 2015, 04:10 ET.
 
 The other 164 events remain fail-closed until equivalent admissible evidence is located.
+
+## SEC release-clock batch 0009
+
+One additional event now has an exact public-release timestamp directly stated in the issuer's SEC-hosted earnings release:
+
+- `HEJFE-76B03970FA6BDB42` (AVA): `2013-02-20T07:05:00-05:00`. Avista's release states `SPOKANE, Wash. – Feb. 20, 2013, 4:05 a.m. PT`, which converts to 7:05 a.m. ET.
+
+The other 163 events remain fail-closed until equivalent admissible evidence is located.
