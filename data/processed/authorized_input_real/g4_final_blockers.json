@@ -1,0 +1,206 @@
+{
+  "schema_version": "1",
+  "purpose": "Final fail-closed evidence dossier for the 18 unresolved G4 shares-outstanding observations after strict public point-in-time integration.",
+  "research_use_only": true,
+  "base_main_sha": "c68a25cd9d79db0fef67da332fc2ccfd39dcca2e",
+  "g4_state": {
+    "required": 3828,
+    "resolved": 3810,
+    "unresolved": 18,
+    "quality_clear": 3810,
+    "quarantined": 0,
+    "hard_max_staleness_days": 130,
+    "future_filed_facts_prohibited": true,
+    "inferred_share_totals_prohibited": true
+  },
+  "unresolved_by_symbol": {
+    "ACO": 10,
+    "CGNX": 5,
+    "WLL": 3
+  },
+  "blockers": [
+    {
+      "historical_symbol": "ACO",
+      "target_trade_dates": [
+        "2013-03-26",
+        "2013-03-27",
+        "2013-03-28",
+        "2013-04-01",
+        "2013-04-02",
+        "2013-04-03",
+        "2013-04-04",
+        "2013-04-05",
+        "2013-04-08",
+        "2013-04-09"
+      ],
+      "target_cutoff_local": "14:10 America/New_York",
+      "prior_exact_fact": {
+        "fact_date": "2012-10-31",
+        "shares_outstanding": 31959139,
+        "filed_date": "2012-11-07",
+        "source": "AMCOL 2012 10-Q",
+        "blocker": "Exceeds the hard 130-day staleness ceiling for all remaining dates."
+      },
+      "next_exact_fact": {
+        "fact_date": "2013-03-27",
+        "shares_outstanding": 32287200,
+        "accession": "0001140361-13-016072",
+        "accepted_local": "2013-04-10T12:56:12-04:00",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/813621/000114036113016072/0001140361-13-016072-index.html",
+        "note": "This exact fact legitimately closed 2013-04-10, but was not public for the 10 earlier remaining dates."
+      },
+      "pre_cutoff_sources_checked": [
+        {
+          "accession": "0001102624-13-000089",
+          "form": "8-K",
+          "filed_date": "2013-01-25",
+          "accepted_local": "2013-01-25T07:14:12-05:00",
+          "result": "Earnings exhibit provides weighted-average common shares only; no exact outstanding total."
+        },
+        {
+          "forms": "SC 13G/SC 13G-A",
+          "filing_dates": [
+            "2013-02-06",
+            "2013-02-08",
+            "2013-02-11",
+            "2013-02-13",
+            "2013-02-14"
+          ],
+          "accessions": [
+            "0001086364-13-002623",
+            "0000080255-13-000232",
+            "0000922898-13-000005",
+            "0001102578-13-000016",
+            "0000932471-13-004999"
+          ],
+          "result": "Beneficial share counts and ownership percentages are stated, but no explicit issuer-wide shares-outstanding denominator is stated; back-calculation is prohibited."
+        },
+        {
+          "forms": "PRE 14A / DEF 14A",
+          "result": "No 2013 proxy filing was public before 2013-03-26."
+        },
+        {
+          "accession": "0001102624-13-000372",
+          "form": "8-K",
+          "filed_date": "2013-03-22",
+          "result": "No explicit exact common-shares-outstanding total suitable for G4."
+        }
+      ],
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL"
+    },
+    {
+      "historical_symbol": "CGNX",
+      "target_trade_dates": [
+        "2015-02-06",
+        "2015-02-09",
+        "2015-02-10",
+        "2015-02-11",
+        "2015-02-12"
+      ],
+      "target_cutoff_local": "13:34 America/New_York",
+      "prior_exact_fact": {
+        "fact_date": "2014-09-28",
+        "shares_outstanding": 87045169,
+        "filed_date": "2014-10-27",
+        "blocker": "Becomes 131 days old on 2015-02-06 and therefore exceeds the hard 130-day ceiling."
+      },
+      "next_exact_fact": {
+        "fact_date": "2015-02-01",
+        "shares_outstanding": 86544015,
+        "accession": "0000851205-15-000003",
+        "accepted_local": "2015-02-12T16:01:07-05:00",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/851205/000085120515000003/cgnx-20141231x10xk.htm",
+        "blocker": "Not public before any target cutoff, including 2015-02-12 13:34."
+      },
+      "pre_cutoff_sources_checked": [
+        {
+          "accession": "0001398344-15-000652",
+          "form": "SC 13G/A",
+          "filed_date": "2015-02-05",
+          "accepted_local": "2015-02-05T10:27:26-05:00",
+          "result": "States beneficial shares and 6.66% ownership but no explicit total shares-outstanding denominator."
+        },
+        {
+          "accession": "0000072971-15-000315",
+          "form": "SC 13G",
+          "filed_date": "2015-02-10",
+          "accepted_local": "2015-02-10T14:33:38-05:00",
+          "result": "Accepted after the 13:34 cutoff and states no explicit total denominator."
+        },
+        {
+          "accession": "0000932471-15-005025",
+          "form": "SC 13G/A",
+          "filed_date": "2015-02-11",
+          "accepted_local": "2015-02-11T10:37:38-05:00",
+          "result": "No explicit issuer-wide shares-outstanding denominator."
+        },
+        {
+          "accession": "0001157523-15-000551",
+          "form": "8-K",
+          "filed_date": "2015-02-12",
+          "accepted_local": "2015-02-12T16:07:05-05:00",
+          "result": "Accepted after the cutoff; earnings release contains weighted-average shares, not a usable exact outstanding total."
+        }
+      ],
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL"
+    },
+    {
+      "historical_symbol": "WLL",
+      "target_trade_dates": [
+        "2015-02-23",
+        "2015-02-24",
+        "2015-02-25"
+      ],
+      "target_cutoff_local": "15:24 America/New_York",
+      "prior_exact_fact": {
+        "fact_date": "2014-10-15",
+        "shares_outstanding": 119060513,
+        "filed_date": "2014-10-30",
+        "blocker": "Exceeds the hard staleness ceiling by the target dates and the December 2014 Kodiak acquisition materially changed the share base."
+      },
+      "intervening_event": {
+        "date": "2014-12-08",
+        "description": "Kodiak acquisition closed. Public pro forma material states 47,546,139 Whiting shares issued to Kodiak holders plus 257,601 shares for Kodiak equity awards, but using these to reconstruct a total would be inference."
+      },
+      "next_exact_fact": {
+        "fact_date": "2015-02-13",
+        "shares_outstanding": 167041054,
+        "accession": "0001255474-15-000004",
+        "filed_date": "2015-02-27",
+        "blocker": "Exact total was not public before the target dates."
+      },
+      "pre_cutoff_sources_checked": [
+        {
+          "accession": "0000932471-15-004275",
+          "form": "SC 13G/A",
+          "filed_date": "2015-02-10",
+          "accepted_local": "2015-02-10T14:03:06-05:00",
+          "result": "No explicit issuer-wide shares-outstanding denominator."
+        },
+        {
+          "accession": "0001011438-15-000136",
+          "form": "SC 13G/A",
+          "filed_date": "2015-02-17",
+          "accepted_local": "2015-02-17T16:44:16-05:00",
+          "result": "No explicit issuer-wide shares-outstanding denominator."
+        },
+        {
+          "accession": "0001193125-15-054393",
+          "form": "8-K/A",
+          "filed_date": "2015-02-19",
+          "accepted_local": "2015-02-19T17:20:07-05:00",
+          "result": "Public before all target dates, but pro forma exhibits disclose shares issued in the transaction rather than exact total Whiting shares outstanding; arithmetic reconstruction is prohibited."
+        },
+        {
+          "accession": "0001255474-15-000002",
+          "form": "8-K",
+          "filed_date": "2015-02-25",
+          "accepted_local": "2015-02-25T16:32:37-05:00",
+          "result": "Accepted after the 15:24 cutoff."
+        }
+      ],
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL"
+    }
+  ],
+  "completion_rule": "G4 may move from 3810/3828 only if a source explicitly states an exact total shares-outstanding value, was public before the applicable target cutoff, has an effective/fact date within 130 days, and requires no arithmetic inference."
+}
