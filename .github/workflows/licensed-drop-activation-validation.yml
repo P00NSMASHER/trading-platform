@@ -36,6 +36,15 @@ jobs:
           python -m pip install -r requirements.lock
           python -m pip install -r requirements-dev.lock
 
+      - name: Harden ephemeral runtime permissions
+        run: |
+          mkdir -p private_runtime/audit private_runtime/backups private_runtime/exports
+          chmod 700 private_runtime/audit private_runtime/backups private_runtime/exports
+          chmod 600 config/runtime.demo.toml
+          chmod 600 data/processed/case_demo/cases.sqlite
+          chmod 600 data/processed/model_demo/model_bundle.joblib
+          chmod 600 data/processed/model_demo/training_manifest.json
+
       - name: Focused activation tests
         run: |
           python -m pytest -q             tests/test_licensed_data_intake.py             tests/test_licensed_data_drop_processor.py             tests/test_real_data_replay.py             tests/test_real_data_release_sprint.py
