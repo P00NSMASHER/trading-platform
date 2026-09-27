@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G3 complete plus strict G4 batches 0001-0005 and 0007; hard 130-day shares staleness enforced.",
+  "purpose": "Cumulative public point-in-time metadata progress: G3 complete plus strict G4 batches 0001-0005, 0007, and 0008; hard 130-day shares staleness enforced.",
   "sources": [
     {
       "source_id": "public-g3-primary-listing-evidence",
@@ -135,6 +135,27 @@
       "authorized": true,
       "data_classification": "public_official_data",
       "license_reference": "SEC public filings / evidence frozen in batch-0007 anchors",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "historical_symbol": "historical_symbol",
+        "target_trade_date": "target_trade_date",
+        "fact_date": "fact_date",
+        "available_at": "available_at",
+        "shares_outstanding": "shares_outstanding",
+        "source_reference": "source_reference"
+      }
+    },
+    {
+      "source_id": "public-sec-shares-batch-0008",
+      "record_kind": "shares_outstanding",
+      "source_family": "sec_xbrl_companyfacts",
+      "path": "data/public/metadata/g4_shares_batch_0008.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "SEC public filings / evidence frozen in batch-0008 anchors",
       "delimiter": ",",
       "encoding": "utf-8",
       "timezone": "America/New_York",
