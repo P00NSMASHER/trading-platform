@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 1
-- **Immutable reviewed fail-closed exclusions:** 173
+- **Exact first-public announcement timestamps resolved:** 3
+- **Immutable reviewed fail-closed exclusions:** 171
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 1
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 3
 
 This does **not** invent announcement times.
 
@@ -25,3 +25,12 @@ If authorized exact I/B/E/S timestamps or independently verified exact first-pub
 CNMD event `HEJFE-A413A5AC6E515E3C` is no longer excluded. SEC EDGAR Exhibit 99.1 contains the issuer's CONMED first-quarter 2011 earnings release and explicitly states `FOR RELEASE: 7:00 AM (Eastern) April 28, 2011`. The normalized public metadata row records `2011-04-28T07:00:00-04:00` as an A-grade `first_public_release` timestamp and binds it to the event ID. The remaining 173 events stay fail-closed until equivalent admissible evidence is found.
 
 Source: https://www.sec.gov/Archives/edgar/data/816956/000091431711000622/ex99-1.htm
+
+## Public newswire batch 0002
+
+Two additional events now have exact public-release timestamps from PR Newswire issuer archives and are removed from the reviewed G1 exclusion set:
+
+- `HEJFE-95933AA0B84D2F60` (CAT): `2012-01-26T07:30:00-05:00`. PR Newswire's Caterpillar archive timestamps the earnings release at Jan. 26, 2012, 07:30 ET; Caterpillar's archived 4Q 2011 release corroborates the title and date.
+- `HEJFE-A9D220DE2F7E7FC3` (DE): `2015-02-20T07:00:00-05:00`. PR Newswire's Deere archive timestamps the earnings release at Feb. 20, 2015, 07:00 ET; SEC Exhibit 99.1 corroborates the title and date.
+
+The other 171 events remain fail-closed until equivalent admissible evidence is located.
