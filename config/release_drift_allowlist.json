@@ -86,6 +86,10 @@
     "tests/test_metadata_resolver.py": {
       "expected_sha256": "4fc22384286e6bea7227cc29d0f0e0d82bf1dcbd8817fc660d96a7320060f912",
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
+    },
+    "tests/test_metadata_quality.py": {
+      "expected_sha256": "17c2b59823538bfaa5ea15abadd030ac87da326361cd81f7d6d3e94accf000cc",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     }
   },
   "repository_additions": {
@@ -499,10 +503,6 @@
     },
     "docs/g4_final_blockers.md": {
       "expected_sha256": "b2d83eac9eb2cc032d9a7686107ef4e696e35afdec8fa8fd26b6f946158910ef",
-      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
-    },
-    "tests/test_metadata_quality.py": {
-      "expected_sha256": "17c2b59823538bfaa5ea15abadd030ac87da326361cd81f7d6d3e94accf000cc",
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     }
   }
