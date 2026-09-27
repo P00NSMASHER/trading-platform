@@ -317,6 +317,137 @@ def resolve_announcements(events: list[dict[str, str]], sources: list[tuple[Meta
     return out
 
 
+def _load_reviewed_announcement_exclusions(
+    raw_contract: dict,
+    root: Path,
+    events: list[dict[str, str]],
+) -> tuple[set[str], dict]:
+    spec = raw_contract.get("reviewed_announcement_exclusions")
+    if not spec:
+        return set(), {"enabled": False, "applied_count": 0}
+    if not isinstance(spec, dict):
+        raise ValueError("reviewed_announcement_exclusions must be an object")
+    if not bool(spec.get("enabled", False)):
+        return set(), {"enabled": False, "applied_count": 0}
+
+    mode = str(spec.get("mode", "")).strip()
+    if mode != "reviewed_fail_closed_exclusions":
+        raise ValueError("reviewed_announcement_exclusions.mode must equal reviewed_fail_closed_exclusions")
+
+    raw_path = str(spec.get("path", "")).strip()
+    expected_sha = str(spec.get("expected_sha256", "")).strip().lower()
+    expected_count = int(spec.get("expected_count", 0))
+    required_status = str(spec.get("require_resolution_status", "")).strip()
+    if not raw_path:
+        raise ValueError("reviewed_announcement_exclusions.path is required")
+    if len(expected_sha) != 64 or any(ch not in "0123456789abcdef" for ch in expected_sha):
+        raise ValueError("reviewed_announcement_exclusions.expected_sha256 must be a 64-character SHA-256 digest")
+    if expected_count < 1:
+        raise ValueError("reviewed_announcement_exclusions.expected_count must be >= 1")
+    if not required_status:
+        raise ValueError("reviewed_announcement_exclusions.require_resolution_status is required")
+
+    p = Path(raw_path)
+    if not p.is_absolute():
+        p = (root / p).resolve()
+    if not p.is_file():
+        raise FileNotFoundError(f"reviewed announcement exclusion receipt not found: {p}")
+    actual_sha = _sha256(p)
+    if actual_sha != expected_sha:
+        raise ValueError("reviewed announcement exclusion receipt SHA-256 mismatch")
+
+    obj = json.loads(p.read_text(encoding="utf-8"))
+    if obj.get("schema_version") != "1":
+        raise ValueError("reviewed announcement exclusion receipt schema_version must equal '1'")
+    if obj.get("research_use_only") is not True:
+        raise ValueError("reviewed announcement exclusion receipt must set research_use_only=true")
+    rows = obj.get("exclusions")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("reviewed announcement exclusion receipt must contain exclusions")
+
+    required = {str(e["event_id"]): e for e in events}
+    exclusions: set[str] = set()
+    for row in rows:
+        if not isinstance(row, dict):
+            raise ValueError("reviewed announcement exclusion row must be an object")
+        if str(row.get("resolution_status", "")).strip() != required_status:
+            raise ValueError("reviewed announcement exclusion row has unapproved resolution_status")
+        event_id = str(row.get("event_id", "")).strip()
+        if not event_id:
+            raise ValueError("reviewed announcement exclusion row requires event_id")
+        if event_id in exclusions:
+            raise ValueError(f"duplicate reviewed announcement exclusion: {event_id}")
+        event = required.get(event_id)
+        if event is None:
+            raise ValueError(f"reviewed announcement exclusion references non-required event: {event_id}")
+        if str(row.get("historical_symbol", "")).strip().upper() != str(event["historical_symbol"]).strip().upper():
+            raise ValueError(f"reviewed announcement exclusion symbol mismatch: {event_id}")
+        if str(row.get("first_documented_illicit_trade_ts", "")).strip() != str(event["first_documented_illicit_trade_ts"]).strip():
+            raise ValueError(f"reviewed announcement exclusion first-trade timestamp mismatch: {event_id}")
+        exclusions.add(event_id)
+
+    if len(exclusions) != expected_count:
+        raise ValueError(
+            f"reviewed announcement exclusion count mismatch: expected {expected_count}, got {len(exclusions)}"
+        )
+    if exclusions != set(required):
+        missing = sorted(set(required) - exclusions)
+        extras = sorted(exclusions - set(required))
+        raise ValueError(f"reviewed announcement exclusion coverage mismatch: missing={missing}, extras={extras}")
+
+    return exclusions, {
+        "enabled": True,
+        "mode": mode,
+        "path": raw_path,
+        "sha256": actual_sha,
+        "expected_count": expected_count,
+        "applied_count": 0,
+        "downstream_policy": str(spec.get("downstream_policy", "")).strip(),
+    }
+
+
+def _apply_reviewed_announcement_exclusions(
+    announcements: list[AnnouncementResolution],
+    *,
+    raw_contract: dict,
+    root: Path,
+    events: list[dict[str, str]],
+) -> tuple[list[AnnouncementResolution], dict]:
+    exclusion_ids, meta = _load_reviewed_announcement_exclusions(raw_contract, root, events)
+    if not exclusion_ids:
+        return announcements, meta
+
+    out: list[AnnouncementResolution] = []
+    applied: set[str] = set()
+    for row in announcements:
+        if row.event_id not in exclusion_ids:
+            out.append(row)
+            continue
+        if row.resolution_status == "resolved_exact_public_timestamp":
+            raise ValueError(
+                f"reviewed announcement exclusion is stale because an admissible exact timestamp now resolves {row.event_id}"
+            )
+        out.append(replace(
+            row,
+            public_announcement_ts="",
+            resolution_status="excluded_fail_closed",
+            timestamp_kind="",
+            source_id="reviewed-g1-exclusion",
+            source_family="",
+            source_grade="",
+            source_reference=meta["path"],
+            timestamp_confidence="EXCLUDED-FAIL-CLOSED",
+            information_asymmetry_seconds="",
+        ))
+        applied.add(row.event_id)
+
+    if applied != exclusion_ids:
+        missing = sorted(exclusion_ids - applied)
+        raise ValueError(f"reviewed announcement exclusions were not applied to all required events: {missing}")
+    meta = {**meta, "applied_count": len(applied)}
+    return out, meta
+
+
 def _normalize_exchange(value: str) -> str:
     v = (value or "").strip().upper()
     return EXCHANGE_MAP.get(v, "")
@@ -635,6 +766,9 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
             p=Path(src.path); p=(root/p).resolve() if not p.is_absolute() else p
             loaded.append((src,[],p))
     anns=resolve_announcements(events,loaded)
+    anns, announcement_exclusion_meta = _apply_reviewed_announcement_exclusions(
+        anns, raw_contract=raw_contract, root=root, events=events
+    )
     exch=resolve_event_exchanges(events,loaded)
     shares=resolve_shares(symbol_dates,loaded)
     shares, share_exclusion_meta = _apply_reviewed_share_exclusions(
@@ -651,6 +785,11 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
 
     exact=sum(x.resolution_status=="resolved_exact_public_timestamp" for x in anns)
     proxies=sum(x.resolution_status.startswith("proxy_") for x in anns)
+    ann_exc=sum(x.resolution_status=="excluded_fail_closed" for x in anns)
+    ann_unresolved=sum(x.resolution_status=="unresolved" for x in anns)
+    ann_accounted=exact+ann_exc
+    g1_ready=ann_accounted==len(events) and ann_unresolved==0 and proxies==0
+    g1_exact_timing_ready=exact==len(events)
     ex_res=sum(x.resolution_status=="resolved" for x in exch)
     sh_res=sum(x.resolution_status=="resolved" for x in shares)
     sh_exc=sum(x.resolution_status=="excluded_fail_closed" for x in shares)
@@ -668,7 +807,12 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
         "contract_path":str(contract_path),"contract_sha256":_sha256(contract_path),
         "contract_issues":issues,
         "event_count":len(events),"symbol_date_requirement_count":len(symbol_dates),"event_date_count":len(controls),
-        "announcement_exact_resolved":exact,"announcement_proxy_only":proxies,"announcement_unresolved":len(anns)-exact-proxies,
+        "announcement_exact_resolved":exact,
+        "announcement_proxy_only":proxies,
+        "announcement_events_excluded":ann_exc,
+        "announcement_events_accounted_for":ann_accounted,
+        "announcement_unresolved":ann_unresolved,
+        "announcement_exclusion_receipt":announcement_exclusion_meta,
         "event_exchange_resolved":ex_res,"event_exchange_unresolved":len(exch)-ex_res,"event_exchange_nasdaq":nasdaq,
         "shares_symbol_dates_resolved":sh_res,
         "shares_symbol_dates_excluded":sh_exc,
@@ -677,7 +821,8 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
         "shares_exclusion_receipt":share_exclusion_meta,
         "control_dates_resolved":ctl_res,"control_dates_partial":sum(x.readiness_status.startswith("partial_") for x in controls),
         "control_dates_unresolved":sum(x.readiness_status=="unresolved" for x in controls),
-        "ready_g1_announcement_times":exact==len(events),
+        "ready_g1_announcement_times":g1_ready,
+        "ready_g1_exact_timing_analysis":g1_exact_timing_ready,
         "ready_g3_primary_listing_history":ex_res==len(events),
         "ready_g4_shares_outstanding":g4_ready,
         "ready_g5_matched_control_universe":ctl_res==len(controls),
@@ -687,13 +832,18 @@ def build(events_path: Path, symbol_date_path: Path, contract_path: Path, outdir
         "source_inventory":inventory,
     }
     (outdir/"metadata_readiness_summary.json").write_text(json.dumps(summary,indent=2),encoding="utf-8")
+    g1_status = (
+        "READY_WITH_REVIEWED_EXCLUSIONS" if summary["ready_g1_announcement_times"] and ann_exc
+        else "READY" if summary["ready_g1_announcement_times"]
+        else "BLOCKING"
+    )
     g4_status = (
         "READY_WITH_REVIEWED_EXCLUSIONS" if summary["ready_g4_shares_outstanding"] and sh_exc
         else "READY" if summary["ready_g4_shares_outstanding"]
         else "BLOCKING_FOR_TURNOVER"
     )
     gates=[
-        {"gate_id":"G1_ANNOUNCEMENT_TIMES","status":"READY" if summary["ready_g1_announcement_times"] else "BLOCKING","resolved":exact,"excluded":0,"accounted_for":exact,"required":len(events),"requirement":"Exact first-public announcement timestamp from authoritative/authorized point-in-time source. EDGAR acceptance timestamps are retained as proxies and do not by themselves close this gate."},
+        {"gate_id":"G1_ANNOUNCEMENT_TIMES","status":g1_status,"resolved":exact,"excluded":ann_exc,"accounted_for":ann_accounted,"required":len(events),"requirement":"Every event must have an authoritative/authorized exact first-public announcement timestamp or be covered by an immutable reviewed fail-closed exclusion receipt. Excluded events retain blank announcement timestamps and cannot participate in announcement-timing-dependent analysis; EDGAR acceptance, archive timestamps, and inferred BMO/AMC times do not count as exact."},
         {"gate_id":"G3_PRIMARY_LISTING_HISTORY","status":"READY" if summary["ready_g3_primary_listing_history"] else "BLOCKING_FOR_ITCH","resolved":ex_res,"excluded":0,"accounted_for":ex_res,"required":len(events),"requirement":"Point-in-time primary listing exchange at each event date."},
         {"gate_id":"G4_SHARES_OUTSTANDING","status":g4_status,"resolved":sh_res,"excluded":sh_exc,"accounted_for":sh_accounted,"required":len(symbol_dates),"requirement":"Every required symbol-date must have admissible point-in-time shares outstanding or be covered by an immutable reviewed fail-closed exclusion receipt. Future-filed facts, inferred totals, and excluded-row turnover are prohibited."},
         {"gate_id":"G5_MATCHED_CONTROL_UNIVERSE","status":"READY" if summary["ready_g5_matched_control_universe"] else "BLOCKING_FOR_MODEL_EVAL","resolved":ctl_res,"excluded":0,"accounted_for":ctl_res,"required":len(controls),"requirement":"At least three same-day point-in-time candidates with complete pre-event matching covariates for each distinct event date."},
