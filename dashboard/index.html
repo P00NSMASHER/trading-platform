@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trading Platform — Research Control Dashboard</title>
+<style>
+:root{
+  --bg:#07111f;--panel:#0d1a2b;--panel2:#101f33;--text:#edf4ff;
+  --muted:#94a7bf;--line:#1e3450;--green:#36d399;--amber:#f6c453;
+  --red:#fb7185;--blue:#60a5fa;--cyan:#67e8f9
+}
+*{box-sizing:border-box}
+body{margin:0;background:
+radial-gradient(900px 500px at 20% -10%,#163052 0%,transparent 60%),
+radial-gradient(800px 500px at 100% 0%,#172443 0%,transparent 60%),
+var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1380px;margin:0 auto;padding:28px 22px 60px}
+.top{display:flex;gap:20px;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+.eyebrow{color:var(--cyan);text-transform:uppercase;letter-spacing:.16em;font-weight:800;font-size:11px}
+h1{margin:5px 0 3px;font-size:30px;letter-spacing:-.03em}
+.sub{color:var(--muted);max-width:860px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.badge{border:1px solid var(--line);background:#0a1728;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700}
+.ok{color:var(--green);border-color:#1d5b4b}.warn{color:var(--amber);border-color:#6a5530}
+.block{color:var(--red);border-color:#633041}.info{color:var(--blue);border-color:#294b72}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.card{background:linear-gradient(180deg,rgba(18,35,57,.95),rgba(10,24,40,.95));border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.kpi{grid-column:span 3;min-height:128px}
+.kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.kpi .value{font-size:34px;font-weight:850;letter-spacing:-.04em;margin-top:8px}
+.kpi .detail{color:var(--muted);margin-top:4px}
+.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:1/-1}
+h2{font-size:16px;margin:0 0 13px}
+.small{color:var(--muted);font-size:12px}
+.gates{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.gate{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:10px 11px;background:rgba(8,20,34,.58)}
+.gate b{font-size:12px}.gate span{font-size:11px;font-weight:800;text-align:right}
+.passed span{color:var(--green)}.reviewed span{color:var(--amber)}.failed span{color:var(--red)}
+.rows{display:grid;gap:9px}
+.row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(43,68,99,.55);padding-bottom:9px}
+.row:last-child{border:0;padding-bottom:0}.row .name{color:var(--muted)}.row .v{font-weight:750;text-align:right}
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stage{padding:11px;border:1px solid var(--line);background:#0a1728;border-radius:12px;min-height:92px}
+.stage .n{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.stage .t{font-weight:750;margin-top:5px}.stage .s{font-size:11px;color:var(--green);margin-top:6px}
+.stage.blocked .s{color:var(--red)}.stage.reviewed .s{color:var(--amber)}
+.callout{border-left:4px solid var(--amber);background:rgba(246,196,83,.07);padding:12px 14px;border-radius:9px;color:#f3dfac}
+.hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#bfd0e5;word-break:break-all}
+.list{display:grid;gap:8px}
+.item{padding:10px 11px;border:1px solid var(--line);border-radius:11px;background:#0a1728}
+.item .title{font-weight:750}.item .meta{font-size:11px;color:var(--muted);margin-top:3px}
+.footer{margin-top:18px;color:var(--muted);font-size:11px;text-align:center}
+@media(max-width:900px){.kpi{grid-column:span 6}.wide,.side{grid-column:1/-1}.pipeline{grid-template-columns:repeat(2,1fr)}.top{flex-direction:column}.badges{justify-content:flex-start}}
+@media(max-width:520px){.wrap{padding:18px 12px 40px}.kpi{grid-column:1/-1}.gates{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr}h1{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="eyebrow">P00NSMASHER / trading-platform</div>
+      <h1>Research Control Dashboard</h1>
+      <div class="sub">Public-safe, read-only status for the historical market-surveillance research platform. Software plumbing is substantially complete; real-data evaluation remains fail-closed until licensed source files and exact point-in-time evidence are present.</div>
+    </div>
+    <div class="badges">
+      <div class="badge ok">● software replay ready</div>
+      <div class="badge ok">● licensed-data intake ready</div>
+      <div class="badge block">● real evaluation blocked</div>
+      <div class="badge info">research only</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <section class="card kpi"><div class="label">Historical events</div><div class="value">174</div><div class="detail">72 distinct event dates</div></section>
+    <section class="card kpi"><div class="label">Symbol-date requirements</div><div class="value">3,828</div><div class="detail">3,810 exact · 18 fail-closed exclusions</div></section>
+    <section class="card kpi"><div class="label">Real G2 market coverage</div><div class="value">0 / 1,656</div><div class="detail">authorized source-date rows validated</div></section>
+    <section class="card kpi"><div class="label">Offline evaluation</div><div class="value" style="font-size:28px;color:var(--red)">BLOCKED</div><div class="detail">evidence locks remain closed</div></section>
+
+    <section class="card wide">
+      <h2>Evidence-gate state</h2>
+      <div class="small">Reviewed exclusions account for known gaps but never become real evidence. Exact timing, market coverage, genuine controls, and downstream quality remain independent locks.</div>
+      <div style="height:14px"></div>
+      <div class="gates">
+        <div class="gate reviewed"><b>G1 · Announcement accounting</b><span>ACCOUNTED · 174 EXCLUDED</span></div>
+        <div class="gate failed"><b>G1 · Exact timing analysis</b><span>BLOCKING · 0 / 174</span></div>
+        <div class="gate failed"><b>G2 · Real authorized market data</b><span>BLOCKING · 0 / 1,656</span></div>
+        <div class="gate passed"><b>G3 · Primary listing history</b><span>READY · 174 / 174</span></div>
+        <div class="gate reviewed"><b>G4 · Shares outstanding</b><span>3,810 EXACT · 18 EXCLUDED</span></div>
+        <div class="gate reviewed"><b>G5 · Control accounting</b><span>ACCOUNTED · 72 EXCLUDED</span></div>
+        <div class="gate failed"><b>G5 · Model-evaluation controls</b><span>BLOCKING · 0 / 72 GENUINE</span></div>
+        <div class="gate failed"><b>G6 · Metadata quality</b><span>BLOCKING DOWNSTREAM</span></div>
+      </div>
+    </section>
+
+    <section class="card side">
+      <h2>Software readiness</h2>
+      <div class="rows">
+        <div class="row"><div class="name">Provider-agnostic replay</div><div class="v" style="color:var(--green)">READY</div></div>
+        <div class="row"><div class="name">Licensed-data intake scanner</div><div class="v" style="color:var(--green)">READY</div></div>
+        <div class="row"><div class="name">Equity trade/quote ingestion</div><div class="v" style="color:var(--green)">READY</div></div>
+        <div class="row"><div class="name">Options trade/quote ingestion</div><div class="v" style="color:var(--green)">READY</div></div>
+        <div class="row"><div class="name">ITCH 4.1 / 5.0 path</div><div class="v" style="color:var(--green)">READY</div></div>
+        <div class="row"><div class="name">Fail-closed release controller</div><div class="v" style="color:var(--green)">READY</div></div>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>Vendor-delivery to replay path</h2>
+      <div class="pipeline">
+        <div class="stage"><div class="n">1</div><div class="t">Private vendor drop</div><div class="s">SUPPORTED</div></div>
+        <div class="stage"><div class="n">2</div><div class="t">Hash + schema triage</div><div class="s">INTAKE READY</div></div>
+        <div class="stage reviewed"><div class="n">3</div><div class="t">Explicit entitlement review</div><div class="s">HUMAN / SOURCE EVIDENCE</div></div>
+        <div class="stage"><div class="n">4</div><div class="t">Canonical source contract</div><div class="s">SUPPORTED</div></div>
+        <div class="stage"><div class="n">5</div><div class="t">One-command replay</div><div class="s">READY</div></div>
+        <div class="stage"><div class="n">6</div><div class="t">Baselines + features</div><div class="s">AUTO WHEN DATA EXISTS</div></div>
+        <div class="stage"><div class="n">7</div><div class="t">Controls + challenger</div><div class="s">AUTO WHEN GATES CLEAR</div></div>
+        <div class="stage blocked"><div class="n">8</div><div class="t">Evaluation release</div><div class="s">FAIL-CLOSED UNTIL REAL DATA</div></div>
+      </div>
+      <p class="small" style="margin:12px 0 0">Generated intake contracts remain <b>authorized: false</b> until explicitly reviewed. Synthetic fixtures and reviewed exclusions can never satisfy the real-data release gates.</p>
+    </section>
+
+    <section class="card wide">
+      <h2>Real-data requirement ledger</h2>
+      <div class="list">
+        <div class="item"><div class="title">Equity trades + quotes</div><div class="meta">828 source-date rows across 414 market dates.</div></div>
+        <div class="item"><div class="title">Options trades + quotes</div><div class="meta">828 source-date rows across the same 414 market dates.</div></div>
+        <div class="item"><div class="title">Nasdaq order flow</div><div class="meta">80 Nasdaq events across 46 dates · 35 ITCH 4.1 events · 45 ITCH 5.0 events.</div></div>
+        <div class="item"><div class="title">Exact announcement clocks</div><div class="meta">174 / 174 authoritative first-public timestamps required.</div></div>
+        <div class="item"><div class="title">Genuine matched-control dates</div><div class="meta">72 / 72 dates require real point-in-time candidate universes.</div></div>
+      </div>
+    </section>
+
+    <section class="card side">
+      <h2>Quality & exclusion ledger</h2>
+      <div class="rows">
+        <div class="row"><div class="name">Blocking metadata issues</div><div class="v">0</div></div>
+        <div class="row"><div class="name">Metadata warnings</div><div class="v">900</div></div>
+        <div class="row"><div class="name">Announcement exclusions</div><div class="v">174</div></div>
+        <div class="row"><div class="name">Shares exclusions</div><div class="v">18</div></div>
+        <div class="row"><div class="name">Control-date exclusions</div><div class="v">72</div></div>
+      </div>
+    </section>
+
+    <section class="card wide">
+      <h2>Frozen champion</h2>
+      <div class="rows">
+        <div class="row"><div class="name">Champion unchanged</div><div class="v" style="color:var(--green)">YES</div></div>
+        <div class="row"><div class="name">Automatic promotion permitted</div><div class="v">NO</div></div>
+        <div class="row"><div class="name">Champion SHA-256</div><div class="v hash">0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616</div></div>
+      </div>
+      <div style="height:14px"></div>
+      <div class="callout"><b>No performance fiction:</b> synthetic/demo corpora verify software behavior only. This dashboard does not present synthetic results as real-world detector performance.</div>
+    </section>
+
+    <section class="card side">
+      <h2>Safety boundaries</h2>
+      <div class="rows">
+        <div class="row"><div class="name">Raw licensed rows displayed</div><div class="v">NO</div></div>
+        <div class="row"><div class="name">Credentials displayed</div><div class="v">NO</div></div>
+        <div class="row"><div class="name">Schema guess unlocks replay</div><div class="v">NO</div></div>
+        <div class="row"><div class="name">Future/lookahead data</div><div class="v">PROHIBITED</div></div>
+        <div class="row"><div class="name">Trading/execution outputs</div><div class="v">PROHIBITED</div></div>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>Operational handoff</h2>
+      <div class="callout">When licensed files arrive, the intended workflow is now: <b>drop files → scan/hash → review entitlement/schema → update private contract → run replay → inspect exact remaining blockers</b>. No vendor-specific redesign should be necessary for canonical supported formats.</div>
+    </section>
+  </div>
+
+  <div class="footer">Read-only public-safe status snapshot · September 27, 2026 · repository data and controls only</div>
+</div>
+</body>
+</html>

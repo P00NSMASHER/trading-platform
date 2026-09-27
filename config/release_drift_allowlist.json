@@ -608,6 +608,10 @@
     "docs/licensed_data_intake.md": {
       "expected_sha256": "e2ac52726969236109428d0125615e545e8cf6ae2e03d6c1f60cf7674699d27b",
       "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
+    },
+    "dashboard/index.html": {
+      "expected_sha256": "f1370a704ebe4b7223de609b5948e6f52ba853932dd09e5dccb88b28af2d1ff2",
+      "reason": "Public-safe read-only research dashboard showing software-ready/real-data-pending state, fail-closed evidence gates, and no licensed rows, credentials, trading outputs, or execution capability."
     }
   }
 }
