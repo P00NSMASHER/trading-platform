@@ -1,5 +1,6 @@
 from pathlib import Path
 import csv
+import hashlib
 import json
 import sys
 
@@ -11,6 +12,7 @@ sys.path.insert(0,str(ROOT/"src"))
 from metadata_resolver import (
     build, load_contract, resolve_announcements, resolve_event_exchanges,
     resolve_shares, resolve_control_readiness, _load_source_rows,
+    SharesResolution, _apply_reviewed_share_exclusions,
 )
 
 
@@ -232,3 +234,66 @@ def test_real_corpus_empty_contract_remains_fail_closed(tmp_path):
     assert r["shares_symbol_dates_resolved"]==0
     assert r["control_dates_resolved"]==0
     assert r["ready_for_non_synthetic_model_evaluation_metadata"] is False
+
+
+def _reviewed_exclusion_fixture(tmp_path: Path, *, expected_sha_override: str | None = None):
+    receipt = {
+        "schema_version": "1",
+        "research_use_only": True,
+        "blockers": [{
+            "historical_symbol": "TEST",
+            "target_trade_dates": ["2015-02-17"],
+            "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL",
+        }],
+    }
+    p = tmp_path / "data" / "g4_final_blockers.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(receipt, indent=2) + "\n"
+    p.write_text(payload, encoding="utf-8")
+    digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    contract = {
+        "reviewed_share_exclusions": {
+            "enabled": True,
+            "mode": "reviewed_fail_closed_exclusions",
+            "path": "data/g4_final_blockers.json",
+            "expected_sha256": expected_sha_override or digest,
+            "expected_count": 1,
+            "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL",
+            "downstream_policy": "excluded rows may not contribute turnover",
+        }
+    }
+    symbol_dates = [{"historical_symbol": "TEST", "trade_date": "2015-02-17"}]
+    return contract, symbol_dates
+
+
+def test_reviewed_share_exclusion_marks_unresolved_fail_closed(tmp_path):
+    contract, symbol_dates = _reviewed_exclusion_fixture(tmp_path)
+    rows = [SharesResolution("TEST", "2015-02-17", "", "unresolved", "", "", "", "", "", "")]
+    out, meta = _apply_reviewed_share_exclusions(
+        rows, raw_contract=contract, root=tmp_path, symbol_date_rows=symbol_dates
+    )
+    assert out[0].resolution_status == "excluded_fail_closed"
+    assert out[0].shares_outstanding == ""
+    assert out[0].fact_date == ""
+    assert meta["applied_count"] == 1
+
+
+def test_reviewed_share_exclusion_cannot_mask_resolved_fact(tmp_path):
+    contract, symbol_dates = _reviewed_exclusion_fixture(tmp_path)
+    rows = [SharesResolution(
+        "TEST", "2015-02-17", "1000000", "resolved", "src", "sec_xbrl_companyfacts",
+        "https://example.test", "2015-02-01", "2015-02-02T12:00:00-05:00", "16"
+    )]
+    with pytest.raises(ValueError, match="exclusion is stale"):
+        _apply_reviewed_share_exclusions(
+            rows, raw_contract=contract, root=tmp_path, symbol_date_rows=symbol_dates
+        )
+
+
+def test_reviewed_share_exclusion_receipt_hash_mismatch_fails_closed(tmp_path):
+    contract, symbol_dates = _reviewed_exclusion_fixture(tmp_path, expected_sha_override="0" * 64)
+    rows = [SharesResolution("TEST", "2015-02-17", "", "unresolved", "", "", "", "", "", "")]
+    with pytest.raises(ValueError, match="SHA-256 mismatch"):
+        _apply_reviewed_share_exclusions(
+            rows, raw_contract=contract, root=tmp_path, symbol_date_rows=symbol_dates
+        )
