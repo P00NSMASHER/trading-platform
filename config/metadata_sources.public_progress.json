@@ -233,7 +233,7 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g5_final_control_exclusions.json",
-    "expected_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
     "expected_count": 72,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_POINT_IN_TIME_CONTROL_UNIVERSE",
     "downstream_policy": "Excluded event dates retain zero candidate counts, are marked excluded_fail_closed, and may not contribute matched controls or model-evaluation authorization."
