@@ -1,0 +1,107 @@
+name: software-readiness-certification
+
+on:
+  push:
+    branches: [release/software-readiness-certification]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: software-readiness-certification
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    if: "!contains(github.event.head_commit.message, '[software-readiness-generated]')"
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      PYTHONPATH: src
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+
+      - name: Test certification logic
+        run: python -m pytest -q tests/test_software_readiness_certification.py
+
+      - name: Generate actual software readiness certification
+        run: |
+          python src/software_readiness_certification.py --require-software-ready
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("data/processed/software_readiness/software_readiness_certification.json")
+          x=json.loads(p.read_text())
+          assert x["software_ready"] is True
+          assert x["overall_status"] in {
+              "SOFTWARE_READY_REAL_DATA_PENDING",
+              "SOFTWARE_READY_REAL_DATA_VALIDATED",
+          }
+          print("overall_status=",x["overall_status"])
+          print("hostile_tests_passed=",x["hostile_regression_suite"]["passed_count"])
+          print("real_data_validated=",x["real_data_validated"])
+          PY
+
+      - name: Bind certification files into release drift allowlist
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          allow=Path("config/release_drift_allowlist.json")
+          obj=json.loads(allow.read_text(encoding="utf-8"))
+          release=json.loads(Path("RELEASE_MANIFEST.json").read_text(encoding="utf-8"))
+          release_paths={str(x["path"]) for x in release.get("files",[])}
+
+          reason=(
+              "Software-readiness certification: machine-readable separation of software readiness "
+              "from real-data validation, backed by hostile regression and private-runtime integrity checks."
+          )
+          paths=[
+              "src/software_readiness_certification.py",
+              "tests/test_software_readiness_certification.py",
+              "docs/software_readiness_certification.md",
+              "data/processed/software_readiness/software_readiness_certification.json",
+          ]
+          def sha(path):
+              h=hashlib.sha256()
+              with Path(path).open("rb") as f:
+                  for chunk in iter(lambda:f.read(1024*1024),b""):
+                      h.update(chunk)
+              return h.hexdigest()
+
+          mods=obj["intentional_release_modifications"]
+          adds=obj["repository_additions"]
+          for path in paths:
+              detail={"expected_sha256":sha(path),"reason":reason}
+              mods.pop(path,None)
+              adds.pop(path,None)
+              if path in release_paths:
+                  mods[path]=detail
+              else:
+                  adds[path]=detail
+          allow.write_text(json.dumps(obj,indent=2)+"\n",encoding="utf-8")
+          PY
+
+      - name: Commit certification receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add             config/release_drift_allowlist.json             data/processed/software_readiness/software_readiness_certification.json
+          git commit -m "[software-readiness-generated] certify software readiness"
+          git push origin HEAD:release/software-readiness-certification
