@@ -68,12 +68,12 @@
       "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "b2035fdc5720c2adbde42cbddff57c22d19b19a48fded6059eb477e37535f5c7",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "d81c50f2b9083435f0a7ebf1fc3cd819be24eb92ebd725da4e3e1d2ca9e22038",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "be0b45a9fd7413bf8f598187e7b7d3d3e8c202de07ee7adb99d827bd1c0118ee",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "313d83fe23e9a492e9937aa95ea291746bd081540a1c0c3527747e25a6f37b51",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "src/metadata_quality.py": {
       "expected_sha256": "0d3e7405e394e9b4bbfc21450afdfb89650e5bc4703cdd609f5a905cf5ad58c8",
@@ -326,32 +326,32 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "6fda550d0087dc580e43f42230c1c87dbd873631fcd0bbcc69c3d339baa26c74",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "656956594eb940e8a512e0d3be3a150eb7c0979e3fe4cf7d6920346e496f447d",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_quality_issues.csv": {
-      "expected_sha256": "1c7f3ea66bba38d458798f9cf0ad96748b452536aabc710b3ac6d8b1335c99f0",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "a4b8f12b284d9dbbf7f063d85ba74890159ea355e13044e84bc4fe1ad23c7098",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_quarantine.csv": {
       "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "a486ec3c72c93451679b02ada976fcf7c3b09c15de135c73f8b68a7215c48c6f",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "3e264445aa9a7de0e598dad51b0315ad6c66948a7a5a1cbc947695cd5396785a",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "e600c5f72b5b6ad7af504b62df969bc6c0ead4fa6e9570598e8364a5d114cf94",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "b95788431cc02f1c71243b57471e88a145cc3dde7fbc0a5df50c6480097fc9d9",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
-      "expected_sha256": "2638dd45f64671f5e50618abdadd0a467e42ca11ff58b22adb140860a9edbc83",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "a7515342abebb81984820d18db190cb394afef9b7eeb8507491bf3d03c3f3907",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -370,8 +370,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "c2d7df2b669b6f4464d9618ab7e1f34fe731a95cb77a3a36d891b5722765faa7",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+      "expected_sha256": "6c8ab786ecd2cfbfc6aa25815d6ce612fe29168b9846a337a15765eba1b92e7a",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
     "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
       "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
@@ -444,6 +444,18 @@
     "data/public/metadata/g4_shares_batch_0005.csv": {
       "expected_sha256": "f966487ab921c52ccc9ab6085ca77cf10ac3166fa05bfac65caccbdbadda4135",
       "reason": "G4 batch 0005: reviewed public point-in-time shares evidence for observations 2001-2500 and cumulative readiness/quality receipts"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0007_report.json": {
+      "expected_sha256": "12cf61f99c531e0601e4297727cef377df406d55fe322bb8a9769a74e75ad31e",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0007.csv": {
+      "expected_sha256": "402c6d9a59a3e79df97ad41bc018ba19e20b06e091446b924f6b6acdd44c0c53",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_batch_0007.csv": {
+      "expected_sha256": "003eb158263c5f82b5dbf34c3d29d6b1a7b8864bb52068f875763248f08e7fe2",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     }
   }
 }
