@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "e5ac7907dcc1236f87d98d0209f16d798ce45e1e",
+  "base_main_sha": "1964aa9f758b4dc031f450e85e54b5ed3ead9283",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 10,
-    "reviewed_excluded": 164,
+    "exact_resolved": 11,
+    "reviewed_excluded": 163,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 164,
+    "raw_exact_time_evidence_gaps": 163,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 10,
+    "exact_timing_analysis_eligible": 11,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -265,13 +265,6 @@
       "event_id": "HEJFE-4291CBF555CED6A9",
       "historical_symbol": "PBI",
       "first_documented_illicit_trade_ts": "2015-04-29 14:47:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-76B03970FA6BDB42",
-      "historical_symbol": "AVA",
-      "first_documented_illicit_trade_ts": "2013-02-19 15:46:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1216,14 +1209,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 10,
-    "latest_batch": "g1_announcement_times_batch_0008.csv",
+    "exact_resolved": 11,
+    "latest_batch": "g1_announcement_times_batch_0009.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-87DDC59E7BB99A84",
-        "historical_symbol": "ALSN",
-        "public_announcement_ts": "2015-04-27T16:10:00-04:00",
-        "source_reference": "https://www.prnewswire.com/news/allison-transmission-holdings-inc./?page=6&pagesize=25"
+        "event_id": "HEJFE-76B03970FA6BDB42",
+        "historical_symbol": "AVA",
+        "public_announcement_ts": "2013-02-20T07:05:00-05:00",
+        "source_reference": "https://www.sec.gov/Archives/edgar/data/104918/000010491813000036/february202013earningspres.htm"
       }
     ]
   }
