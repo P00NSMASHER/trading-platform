@@ -51,18 +51,6 @@
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
     },
-    "src/coverage_planner.py": {
-      "expected_sha256": "4383fe7e887b7f04f72b1361f8196943c4485df08c2b54fbd12049ac677e755d",
-      "reason": "G2 hardening: require content-validated authorized market source-date coverage and permit capability-equivalent licensed providers"
-    },
-    "src/historical_market_backfill.py": {
-      "expected_sha256": "2fdc9af6cad3c7eef168162be0fc66e6cc8701f44cb72ce811e3d0d03e82cdaa",
-      "reason": "G2 hardening: streaming production-schema source-content coverage validation for declared dates and required symbols"
-    },
-    "tests/test_coverage_planner.py": {
-      "expected_sha256": "7626a6d487741d844cd25d72a4320b859b5705699505acd3d464273327e07a24",
-      "reason": "G2 regression coverage for content validation, wrong-date rejection, synthetic exclusion, and generic-provider equivalence"
-    },
     "src/metadata_resolver.py": {
       "expected_sha256": "314f119d09b63b54faffe5cf6d48e706ad47711e74c25ff38f9cd2f7cea0b32e",
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
@@ -95,13 +83,29 @@
       "expected_sha256": "09cd00104845aeb44efda59ccd06fdf95136167fa7b0945c55be2377ede2baa3",
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
+    "src/historical_market_backfill.py": {
+      "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "src/coverage_planner.py": {
+      "expected_sha256": "a3588646bd0b035a4097a21662e86f2ca4806c5a07a1664c1589f15cf67a9437",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "tests/test_historical_market_backfill.py": {
+      "expected_sha256": "d7e95730e352f98b2824b4edfa7821d0ab6e4e7eabc7b98cb155c4f86bbf7da6",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "tests/test_coverage_planner.py": {
+      "expected_sha256": "d94cbd8658a10a0e01bc141502603be7c1e3a6e44b007ff28cd03b7bc965ee61",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
     "data/processed/coverage_plan_real/coverage_summary.json": {
       "expected_sha256": "6bf06c331abf04265c4b2c0971ae621619009dcb7e401b08127746c5d798ffaa",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "aa37aa294b769007ee036022a566e6ecc7026e2901924d015d5762b9c7a40943",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     }
   },
   "repository_additions": {
@@ -533,20 +537,8 @@
       "expected_sha256": "bb10c0bc6fb7396776dab105f89e46368289df8a89b547d88a736416105c10d6",
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
-    "src/real_data_release_sprint.py": {
-      "expected_sha256": "802f0cd07a86a929f7d650d0d7c9e2ca1949961576439095081733dee4c28ad6",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
-    },
-    "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "7bd7c55e7bced88b42dbe6b434a0c82fb803eaa58290ed15e647957da95b9bda",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
-    },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
-    },
-    "data/processed/real_data_release_sprint/requirements_manifest.json": {
-      "expected_sha256": "23f3d03f79a5a10266511455418c5b3142ab27eeedd9af3e106dccfce2b122db",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
     "data/processed/real_data_release_sprint/g2_core_source_date_requirements.csv": {
@@ -557,21 +549,37 @@
       "expected_sha256": "c050fbf7a6bc12bcf8f162075689794d26d79f85d09329cb2463e06ac457fa33",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
-    "data/processed/real_data_release_sprint/g2_itch_event_requirements.csv": {
-      "expected_sha256": "4bceded53a700cd6cdb897852feefe1a5d767e6a16300752010fb76635c5b629",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
-    },
     "data/processed/real_data_release_sprint/market_source_inventory.template.csv": {
       "expected_sha256": "b5cfbc9768b8b00a4e7c44cbd753f3d6bf3e87e9fc6e92c3b87685c28b1b7741",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
+    "src/real_data_release_sprint.py": {
+      "expected_sha256": "db1c4e5a0c7d0bfa282d4cb310c9b330b4a0f194bbc25cdeb2e759c2ea90837c",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "tests/test_real_data_release_sprint.py": {
+      "expected_sha256": "812c59eed1b38625f638f717a4e4edd2faba18c2d245e9422712f01089125cfc",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "docs/licensed_data_acquisition.md": {
+      "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "data/processed/real_data_release_sprint/requirements_manifest.json": {
+      "expected_sha256": "a797ac7a22ea8dfb7e81ad8d671e0f0913f2249fceb0189a4c1b49d6efbd7520",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "data/processed/real_data_release_sprint/g2_itch_event_requirements.csv": {
+      "expected_sha256": "f8c24d02fe0c612a7efaa3c3c93e69b7fede8af765d3ea80bf467c1d457ef084",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
     "data/processed/real_data_release_sprint/production_source_contract_blueprint.json": {
-      "expected_sha256": "0b847fcfc2768bba2e36fd5f878065a469e37b11c977e2ba6a279cae8c191e4a",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+      "expected_sha256": "965cbb2a151d9d3bed146912960f5ba3f5521cc21d600cfb7bba6bc6ed1cf382",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "3869a161457df2c98bbab7335aacf01742a085558322a097d7d55da38060b406",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+      "expected_sha256": "242863aeb0a39e44a024750e3e3d6f2f156f47e000f27ceb9eefffb8f2659897",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     }
   }
 }

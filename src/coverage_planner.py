@@ -409,9 +409,11 @@ def audit_contract(contract_path: Path | None, source_dates: list[SourceDateRequ
                     covered_synthetic.add(key)
                     break
 
-        # A real row is covered only after the exact file passes production-schema
-        # parsing and proves that the declared date contains every required symbol.
-        # File existence or a self-declared contract date is not sufficient.
+        # A real requirement is covered only after production-schema parsing proves
+        # that the declared date contains every required symbol. Coverage may be
+        # satisfied by multiple files for the same date (for example NYSE split
+        # quote files or symbol-sharded vendor exports); file existence or a
+        # self-declared contract date is never sufficient.
         for req in required_rows:
             key = (req.source_family, req.record_kind, req.trade_date)
             required_symbols = {
@@ -426,6 +428,8 @@ def audit_contract(contract_path: Path | None, source_dates: list[SourceDateRequ
                 continue
 
             candidate_errors: list[str] = []
+            observed_union: set[str] = set()
+            contributing_families: set[str] = set()
             for spec in candidates:
                 try:
                     report = hmb.inspect_source_coverage(
@@ -436,19 +440,26 @@ def audit_contract(contract_path: Path | None, source_dates: list[SourceDateRequ
                 except Exception as exc:
                     candidate_errors.append(f"{spec.source_id}:{type(exc).__name__}:{exc}")
                     continue
+                observed = {str(x).strip().upper() for x in report.get("observed_required_symbols", []) if str(x).strip()}
+                if int(report.get("matching_date_rows", 0) or 0) > 0:
+                    observed_union.update(observed)
+                    contributing_families.add(spec.source_family)
                 if report["content_coverage_valid"]:
-                    covered_real.add(key)
-                    if spec.source_family != req.source_family:
-                        provider_equivalent.add(key)
-                    break
-                missing = report.get("missing_required_symbols") or []
+                    observed_union.update(required_symbols)
+                    contributing_families.add(spec.source_family)
+                missing = sorted(required_symbols - observed_union)
                 candidate_errors.append(
                     f"{spec.source_id}:matching_date_rows={report.get('matching_date_rows', 0)};"
-                    f"missing_symbols={','.join(missing[:12]) or '<none>'}"
+                    f"observed_required={len(observed)};"
+                    f"aggregate_missing_symbols={','.join(missing[:12]) or '<none>'}"
                 )
 
-            if key not in covered_real and candidate_errors:
-                validation_failures.append("|".join(key) + " => " + " || ".join(candidate_errors[:3]))
+            if required_symbols.issubset(observed_union):
+                covered_real.add(key)
+                if any(f != req.source_family for f in contributing_families):
+                    provider_equivalent.add(key)
+            elif candidate_errors:
+                validation_failures.append("|".join(key) + " => " + " || ".join(candidate_errors[:5]))
 
     missing_required = sorted(required - covered_real)
     return {
@@ -466,7 +477,7 @@ def audit_contract(contract_path: Path | None, source_dates: list[SourceDateRequ
         "content_validation_failure_preview": validation_failures[:25],
         "issues": issues,
         "ready_for_real_backfill": len(missing_required) == 0 and not issues,
-        "coverage_rule": "G2 requires production-schema-parsable non-synthetic files with the declared date and every required symbol; generic authorized providers may satisfy an equivalent record-kind capability.",
+        "coverage_rule": "G2 requires production-schema-parsable non-synthetic files whose aggregate coverage for a declared date includes every required symbol; split/sharded files are unioned, and generic authorized providers may satisfy an equivalent record-kind capability.",
     }
 
 def build_unresolved_gates(plans: list[EventCoveragePlan], symbol_dates: list[SymbolDateRequirement],
