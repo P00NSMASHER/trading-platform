@@ -596,6 +596,18 @@
     "docs/real_data_replay.md": {
       "expected_sha256": "7c2ef27fec352875af69596a50cd4bece9d2abf6c33de8c34875405ff68817b8",
       "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
+    },
+    "src/licensed_data_intake.py": {
+      "expected_sha256": "559f944ac53565e935fb2c361e2abdbf18a97603f95b158e2d96a77469579d3b",
+      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
+    },
+    "tests/test_licensed_data_intake.py": {
+      "expected_sha256": "7f5767209023d8144e041b25467a25673abd2b95ccf7895c643dea63070275fa",
+      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
+    },
+    "docs/licensed_data_intake.md": {
+      "expected_sha256": "e2ac52726969236109428d0125615e545e8cf6ae2e03d6c1f60cf7674699d27b",
+      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
     }
   }
 }
