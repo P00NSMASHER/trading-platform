@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 6
-- **Immutable reviewed fail-closed exclusions:** 168
+- **Exact first-public announcement timestamps resolved:** 8
+- **Immutable reviewed fail-closed exclusions:** 166
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 6
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 8
 
 This does **not** invent announcement times.
 
@@ -58,3 +58,12 @@ One additional event now has an exact public-release timestamp from the issuer's
 - `HEJFE-F170013A9B3F85E2` (SKX): `2015-04-22T16:01:00-04:00`. Skechers' issuer archive records `SKECHERS Announces First Quarter 2015 Financial Results` at Apr. 22, 2015, 4:01 pm EDT and identifies Business Wire distribution.
 
 The other 168 events remain fail-closed until equivalent admissible evidence is located.
+
+## Issuer archive batch 0006
+
+Two additional ADI events now have exact public-release timestamps from Analog Devices' issuer investor-relations archive and are removed from the reviewed G1 exclusion set:
+
+- `HEJFE-D9C52E6CC595C380` (ADI): `2015-02-17T16:05:00-05:00`. Analog Devices' archive records the first-quarter fiscal 2015 results at Feb. 17, 2015, 4:05 PM EST.
+- `HEJFE-09EB83905864C50A` (ADI): `2015-05-19T16:00:00-04:00`. Analog Devices' archive records the second-quarter fiscal 2015 results at May 19, 2015, 4:00 PM EDT.
+
+The other 166 events remain fail-closed until equivalent admissible evidence is located.
