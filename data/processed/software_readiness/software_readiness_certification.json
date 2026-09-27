@@ -15,23 +15,23 @@
     {
       "category": "adversarial_testing",
       "check_id": "HOSTILE_REGRESSION_SUITE",
-      "detail": "returncode=0; passed=162",
+      "detail": "returncode=0; passed=185",
       "passed": true
     },
     {
       "category": "runtime",
       "check_id": "PRIVATE_RUNTIME_INTEGRITY",
-      "detail": "ok=True; audit_sha256=c38efe3fb8474aea6ed9261fb1039ed0c0d228092b25f3e25feb3711d00c1977; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+      "detail": "ok=True; audit_sha256=f9ce480eae93beee43e684ec12c4a70dc53506e82f1fcef189d2c9286824862d; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
       "passed": true
     }
   ],
-  "git_commit": "567d3f11e8ae95f172b7e7f0bf6c5be58f7bfbb5",
+  "git_commit": "8a4ae728a557fb4a25558258af4231058174012b",
   "hostile_regression_suite": {
     "missing_test_files": [],
     "ok": true,
-    "passed_count": 162,
+    "passed_count": 185,
     "returncode": 0,
-    "stdout_tail": "........................................................................ [ 44%]\n........................................................................ [ 88%]\n..................                                                       [100%]\n162 passed in 16.13s\n",
+    "stdout_tail": "........................................................................ [ 38%]\n........................................................................ [ 77%]\n.........................................                                [100%]\n185 passed in 21.03s\n",
     "test_files": [
       "tests/test_baseline_engine.py",
       "tests/test_feature_engine.py",
@@ -48,6 +48,8 @@
       "tests/test_real_data_replay.py",
       "tests/test_real_data_release_sprint.py",
       "tests/test_control_plane_adversarial.py",
+      "tests/test_control_plane_dashboard_accounts.py",
+      "tests/test_private_dashboard.py",
       "tests/test_deployment_hardening.py"
     ]
   },
@@ -96,7 +98,7 @@
   },
   "real_data_validated": false,
   "runtime_self_check": {
-    "audit_sha256": "c38efe3fb8474aea6ed9261fb1039ed0c0d228092b25f3e25feb3711d00c1977",
+    "audit_sha256": "f9ce480eae93beee43e684ec12c4a70dc53506e82f1fcef189d2c9286824862d",
     "case_database": {
       "case_count": 1,
       "exists": true,
@@ -162,7 +164,7 @@
       },
       "ok": true
     },
-    "generated_at_utc": "2026-09-27T11:42:43Z",
+    "generated_at_utc": "2026-09-27T11:46:37Z",
     "model_bundle": {
       "deserialization_attempted": true,
       "exists": true,
