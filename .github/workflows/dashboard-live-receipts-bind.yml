@@ -23,6 +23,14 @@ jobs:
         with:
           ref: ${{ github.sha }}
 
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependency
+        run: python -m pip install -r requirements-dev.lock
+
       - name: Verify dashboard receipt contract
         run: python -m pytest -q tests/test_public_dashboard.py
 
