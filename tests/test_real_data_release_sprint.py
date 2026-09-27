@@ -27,10 +27,17 @@ def test_freeze_real_repository_requirements(tmp_path: Path):
     assert result["counts"]["total_required_g2_source_date_rows"] == 1656
     assert result["counts"]["legacy_conditional_itch_market_date_rows"] == 414
     assert result["counts"]["g3_confirmed_nasdaq_event_rows"] == 80
+    assert result["counts"]["g3_confirmed_nasdaq_itch_4_1_event_rows"] == 35
+    assert result["counts"]["g3_confirmed_nasdaq_itch_5_0_event_rows"] == 45
     assert (out / "market_source_inventory.template.csv").exists()
     rows = list(csv.DictReader((out / "market_source_inventory.template.csv").open()))
     assert len(rows) == 1656
     assert {r["status"] for r in rows} == {"MISSING_SOURCE"}
+    itch = list(csv.DictReader((out / "g2_itch_event_requirements.csv").open()))
+    assert len(itch) == 80
+    assert sum(r["source_family"] == "nasdaq_itch_4_1_decoded" for r in itch) == 35
+    assert sum(r["source_family"] == "nasdaq_itch_5_0_decoded" for r in itch) == 45
+    assert {r["format_version"] for r in itch} == {"ITCH-4.1", "ITCH-5.0"}
 
 
 def test_refresh_coverage_uses_current_metadata_subgates(tmp_path: Path):
