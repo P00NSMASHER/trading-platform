@@ -4,7 +4,7 @@ import csv
 import json
 from pathlib import Path
 
-from metadata_quality import build
+from metadata_quality import build, _domain_quality, audit_shares
 from metadata_resolver import build as resolve
 from metadata_population import populate_batch
 
@@ -151,3 +151,41 @@ def test_real_empty_contract_is_blocked_not_quality_promoted(tmp_path):
     assert s["coverage_ready_before_quality"] is False
     assert s["quality_cleared_for_non_synthetic_model_evaluation"] is False
     assert s["status"] == "BLOCKED"
+
+
+def test_share_domain_can_be_ready_with_reviewed_exclusions():
+    d = _domain_quality(
+        "shares", required=2, resolver_ready=1, quarantine_count=0,
+        warning_count=0, reviewed_exclusion_count=1
+    )
+    assert d.resolver_ready_count == 1
+    assert d.quality_clear_count == 1
+    assert d.reviewed_exclusion_count == 1
+    assert d.status == "READY_WITH_REVIEWED_EXCLUSIONS"
+    assert d.quality_score == 100.0
+
+
+def test_fail_closed_excluded_share_row_must_remain_blank():
+    reqs = [{"historical_symbol": "TEST", "trade_date": "2015-02-17"}]
+    rows = [{
+        "historical_symbol": "TEST",
+        "trade_date": "2015-02-17",
+        "shares_outstanding": "",
+        "resolution_status": "excluded_fail_closed",
+        "source_id": "reviewed-g4-exclusion",
+        "source_family": "",
+        "source_reference": "receipt.json",
+        "fact_date": "",
+        "available_at": "",
+        "staleness_days": "",
+        "research_use_only": "1",
+    }]
+    issues, quarantine, warnings = audit_shares(reqs, rows, [])
+    assert issues == []
+    assert quarantine == set()
+    assert warnings == 0
+
+    rows[0]["shares_outstanding"] = "123"
+    issues, quarantine, _ = audit_shares(reqs, rows, [])
+    assert "TEST|2015-02-17" in quarantine
+    assert any(x.code == "SHARES_EXCLUSION_HAS_VALUE" for x in issues)
