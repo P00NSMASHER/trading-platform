@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "742cf906cdce537dcb2a524de588b97c7d8863aa45473c73855707cd935ae5e2",
-      "reason": "G1 SEC release-clock batch 0009: add exact Avista release clock at 2013-02-20 07:05 ET from SEC-hosted earnings release, remove only the stale AVA reviewed exclusion, and preserve all other fail-closed G1 semantics."
+      "expected_sha256": "76bb6878d56d399ca823ddbbd14edb051dbafbb0659594bd1f21be772d433eb8",
+      "reason": "G1 issuer/original-wire batch 0010: add exact Gilead release clock at 2015-02-03 16:07 ET from the issuer's archived Business Wire earnings release, remove only the stale GILD reviewed exclusion, and preserve all other fail-closed G1 semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "3017f6f9a5f0102cab069313c807df4d327f845979c381f248dbe2259f39c163",
-      "reason": "G1 SEC release-clock batch 0009: add exact Avista release clock at 2013-02-20 07:05 ET from SEC-hosted earnings release, remove only the stale AVA reviewed exclusion, and preserve all other fail-closed G1 semantics."
+      "expected_sha256": "ad85b1139c7c0eee81b5bf48c191bcd78e0f61c17d4447ef78ed4dd257f7fe1e",
+      "reason": "G1 issuer/original-wire batch 0010: add exact Gilead release clock at 2015-02-03 16:07 ET from the issuer's archived Business Wire earnings release, remove only the stale GILD reviewed exclusion, and preserve all other fail-closed G1 semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "5a676b239ffda5f68411fc1018dc62e8324de4f16d0bec07dde81c5ccc117f4a",
       "reason": "Authoritative receipt regeneration from main source commit 9e6ba7e6899efcd63e8358d0e4990b2fa5dfcdad after G1 Avista batch 0009."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "650e05f793e2671fd1daaa5e41f85d4564f6b0cb423cdb17437c1166f057042a",
-      "reason": "G1 SEC release-clock batch 0009: add exact Avista release clock at 2013-02-20 07:05 ET from SEC-hosted earnings release, remove only the stale AVA reviewed exclusion, and preserve all other fail-closed G1 semantics."
+      "expected_sha256": "e15b38dd7bd92c10fae0d4d1b5fe38b3634ed99f33f3feaac0f1cc6388787250",
+      "reason": "G1 issuer/original-wire batch 0010: add exact Gilead release clock at 2015-02-03 16:07 ET from the issuer's archived Business Wire earnings release, remove only the stale GILD reviewed exclusion, and preserve all other fail-closed G1 semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -692,6 +692,10 @@
     "data/public/metadata/g1_announcement_times_batch_0009.csv": {
       "expected_sha256": "dd6472d2dad3b5782c8faed7076bd447969d057ea7803910ea50eb9a1e593561",
       "reason": "G1 SEC release-clock batch 0009 evidence row for AVA with explicit 4:05 a.m. PT release timestamp from SEC-hosted Avista earnings release."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0010.csv": {
+      "expected_sha256": "54de4006b6d5b5f6bbc101fd9d17618efeba4f612c6de452beda2fafd0619d0e",
+      "reason": "G1 issuer/original-wire batch 0010 evidence row for GILD with exact 2015-02-03 4:07 PM ET timestamp from Gilead's archived Business Wire earnings release."
     }
   }
 }
