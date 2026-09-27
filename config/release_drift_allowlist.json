@@ -580,6 +580,22 @@
     "data/processed/real_data_release_sprint/step_status.json": {
       "expected_sha256": "242863aeb0a39e44a024750e3e3d6f2f156f47e000f27ceb9eefffb8f2659897",
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "src/real_data_replay.py": {
+      "expected_sha256": "5e7f9b65c71e16f0eb0ee18ba418df759320c0f64dfd84615fbc9574bc231517",
+      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
+    },
+    "tests/test_real_data_replay.py": {
+      "expected_sha256": "046f772d4bf931bf7ccd366788d1626667627cf717d723bfc4c43f544e35d31c",
+      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
+    },
+    "config/real_data_replay.example.json": {
+      "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
+      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
+    },
+    "docs/real_data_replay.md": {
+      "expected_sha256": "7c2ef27fec352875af69596a50cd4bece9d2abf6c33de8c34875405ff68817b8",
+      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
     }
   }
 }
