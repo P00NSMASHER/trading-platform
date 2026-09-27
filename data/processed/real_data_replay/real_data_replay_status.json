@@ -12,7 +12,7 @@
     "challenger",
     "release"
   ],
-  "config_path": "config/real_data_replay.software_proof.json",
+  "config_path": "/home/runner/work/trading-platform/trading-platform/config/real_data_replay.software_proof.json",
   "config_sha256": "03a6165b68d2ca3857ee0d92693af72f6527ec374dce99a1b6fac38516562532",
   "evaluation_release_permitted": false,
   "inputs": {
@@ -31,7 +31,7 @@
     },
     "metadata_contract": {
       "path": "/home/runner/work/trading-platform/trading-platform/config/metadata_sources.public_progress.json",
-      "sha256": "650e05f793e2671fd1daaa5e41f85d4564f6b0cb423cdb17437c1166f057042a"
+      "sha256": "e15b38dd7bd92c10fae0d4d1b5fe38b3634ed99f33f3feaac0f1cc6388787250"
     }
   },
   "prohibited_outputs": [
@@ -96,7 +96,7 @@
       "status": "DEPENDENCY_BLOCKED"
     },
     "metadata": {
-      "announcement_exact_resolved": 11,
+      "announcement_exact_resolved": 12,
       "announcement_required": 174,
       "control_dates_required": 72,
       "control_dates_resolved": 0,
