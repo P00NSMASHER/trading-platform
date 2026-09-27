@@ -300,6 +300,14 @@ def audit_shares(symbol_dates, resolver_rows, loaded, max_staleness_days: int = 
     for req in symbol_dates:
         sym, td = req["historical_symbol"].upper(), req["trade_date"]
         key = f"{sym}|{td}"
+        rr = by_key.get((sym, td), {})
+        if rr.get("resolution_status") == "excluded_fail_closed":
+            if any(str(rr.get(field, "") or "").strip() for field in ("shares_outstanding", "fact_date", "available_at", "staleness_days")):
+                quarantined.add(key)
+                issues.append(_issue("shares", key, "BLOCKING", "SHARES_EXCLUSION_HAS_VALUE",
+                    "Fail-closed excluded shares row must not carry a usable shares value, fact date, availability timestamp, or staleness.",
+                    [rr.get("source_id", "")], [rr.get("source_reference", "")], True))
+            continue
         cands = _shares_candidates(req, loaded)
         if not cands:
             continue
@@ -321,7 +329,6 @@ def audit_shares(symbol_dates, resolver_rows, loaded, max_staleness_days: int = 
                 issues.append(_issue("shares", key, "BLOCKING", "SHARES_NEARBY_FACT_CONFLICT",
                     f"Nearby point-in-time shares facts differ by more than {SHARES_NEARBY_REL_TOL:.0%}; corporate-action reconciliation required.",
                     [x["source_id"] for x in recent], [f"{x['fact_date']}:{x['value']:.0f}" for x in recent], True))
-        rr = by_key.get((sym, td), {})
         if rr.get("resolution_status") == "resolved":
             stale = int(rr.get("staleness_days") or 0)
             if stale > max_staleness_days:
@@ -334,12 +341,6 @@ def audit_shares(symbol_dates, resolver_rows, loaded, max_staleness_days: int = 
                 issues.append(_issue("shares", key, "WARNING", "SHARES_AGING_FACT",
                     f"Resolved shares fact is {stale} days old; still within hard limit but should be reviewed.",
                     [rr.get("source_id", "")], [rr.get("fact_date", "")]))
-        elif rr.get("resolution_status") == "excluded_fail_closed":
-            if any(str(rr.get(field, "") or "").strip() for field in ("shares_outstanding", "fact_date", "available_at", "staleness_days")):
-                quarantined.add(key)
-                issues.append(_issue("shares", key, "BLOCKING", "SHARES_EXCLUSION_HAS_VALUE",
-                    "Fail-closed excluded shares row must not carry a usable shares value, fact date, availability timestamp, or staleness.",
-                    [rr.get("source_id", "")], [rr.get("source_reference", "")], True))
 
     # Across requested dates, abrupt jumps are quarantined unless exact-date source history itself explains them.
     by_sym = defaultdict(list)
