@@ -15,23 +15,23 @@
     {
       "category": "adversarial_testing",
       "check_id": "HOSTILE_REGRESSION_SUITE",
-      "detail": "returncode=0; passed=185",
+      "detail": "returncode=0; passed=191",
       "passed": true
     },
     {
       "category": "runtime",
       "check_id": "PRIVATE_RUNTIME_INTEGRITY",
-      "detail": "ok=True; audit_sha256=dcf09cfe847a0d5bc9505aea6d4152dbd54089294cf8352aeba6c139c1f5820f; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+      "detail": "ok=True; audit_sha256=1382fc1de44d6b99ac5366dad522cd1217f8b8ed702419ca995ba90481183136; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
       "passed": true
     }
   ],
-  "git_commit": "e065cec6a87f927e6478b0ae3f15b7aaf89e2ad6",
+  "git_commit": "54f7806fe97fec584a5fd972091926a0956259ff",
   "hostile_regression_suite": {
     "missing_test_files": [],
     "ok": true,
-    "passed_count": 185,
+    "passed_count": 191,
     "returncode": 0,
-    "stdout_tail": "........................................................................ [ 38%]\n........................................................................ [ 77%]\n.........................................                                [100%]\n185 passed in 20.07s\n",
+    "stdout_tail": "........................................................................ [ 37%]\n........................................................................ [ 75%]\n...............................................                          [100%]\n191 passed in 21.95s\n",
     "test_files": [
       "tests/test_baseline_engine.py",
       "tests/test_feature_engine.py",
@@ -45,6 +45,7 @@
       "tests/test_graph_challenger_harness.py",
       "tests/test_evaluation_release_controller.py",
       "tests/test_licensed_data_intake.py",
+      "tests/test_licensed_data_drop_processor.py",
       "tests/test_real_data_replay.py",
       "tests/test_real_data_release_sprint.py",
       "tests/test_control_plane_adversarial.py",
@@ -98,7 +99,7 @@
   },
   "real_data_validated": false,
   "runtime_self_check": {
-    "audit_sha256": "dcf09cfe847a0d5bc9505aea6d4152dbd54089294cf8352aeba6c139c1f5820f",
+    "audit_sha256": "1382fc1de44d6b99ac5366dad522cd1217f8b8ed702419ca995ba90481183136",
     "case_database": {
       "case_count": 1,
       "exists": true,
@@ -164,7 +165,7 @@
       },
       "ok": true
     },
-    "generated_at_utc": "2026-09-27T11:56:50Z",
+    "generated_at_utc": "2026-09-27T12:08:01Z",
     "model_bundle": {
       "deserialization_attempted": true,
       "exists": true,

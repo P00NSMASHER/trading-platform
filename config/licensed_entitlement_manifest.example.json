@@ -1,0 +1,18 @@
+{
+  "schema_version": "1",
+  "purpose": "Local-only entitlement assertions for licensed historical market-data files. Do not commit a populated copy.",
+  "files": [
+    {
+      "sha256": "REPLACE_WITH_64_HEX_SHA256",
+      "authorized": true,
+      "license_reference": "REPLACE_WITH_INTERNAL_ENTITLEMENT_OR_CONTRACT_REFERENCE",
+      "source_family": "nyse_daily_taq",
+      "record_kind": "equity_trade",
+      "trade_date": "2015-02-17",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "format_version": "REPLACE_WITH_VENDOR_FORMAT_VERSION"
+    }
+  ]
+}
