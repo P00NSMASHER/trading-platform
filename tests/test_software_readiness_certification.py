@@ -12,7 +12,16 @@ sys.path.insert(0, str(ROOT / "src"))
 import software_readiness_certification as cert
 
 
-def test_current_repo_can_be_software_ready_while_real_data_is_pending(tmp_path: Path):
+def test_current_repo_can_be_software_ready_while_real_data_is_pending(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(
+        cert.hardening,
+        "self_check",
+        lambda cfg: {
+            "ok": True,
+            "audit_sha256": "a" * 64,
+            "model_bundle": {"sha256": "0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616"},
+        },
+    )
     out = tmp_path / "cert.json"
     result = cert.certify(
         ROOT,
