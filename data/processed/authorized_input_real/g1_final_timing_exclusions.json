@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "fb2916415cb0b9ba0fea12d1696219f0c1b74e00",
+  "base_main_sha": "0a3f6c228364931a8d2e89229bccce0688086396",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 25,
-    "reviewed_excluded": 149,
+    "exact_resolved": 26,
+    "reviewed_excluded": 148,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 149,
+    "raw_exact_time_evidence_gaps": 148,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 25,
+    "exact_timing_analysis_eligible": 26,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -167,13 +167,6 @@
       "event_id": "HEJFE-9B84208BA575EAC4",
       "historical_symbol": "RH",
       "first_documented_illicit_trade_ts": "2015-03-26 15:41:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-DF726FADF321F8E3",
-      "historical_symbol": "PVH",
-      "first_documented_illicit_trade_ts": "2015-03-25 15:18:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1111,14 +1104,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 25,
-    "latest_batch": "g1_announcement_times_batch_0023.csv",
+    "exact_resolved": 26,
+    "latest_batch": "g1_announcement_times_batch_0024.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-8D40B9782E1E6F33",
-        "historical_symbol": "HON",
-        "public_announcement_ts": "2012-01-27T07:30:00-05:00",
-        "source_reference": "https://uk.marketscreener.com/quote/stock/HONEYWELL-INTERNATIONAL-I-4827/news/Honeywell-International-Inc-Honeywell-Reports-Full-Year-Sales-Up-13-to-36-5-Billion-Proforma-E-13990003/"
+        "event_id": "HEJFE-DF726FADF321F8E3",
+        "historical_symbol": "PVH",
+        "public_announcement_ts": "2015-03-25T16:01:00-04:00",
+        "source_reference": "https://investorshub.advfn.com/boards/read_msg.aspx?message_id=112656236"
       }
     ]
   }
