@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-fluor-issuer-20150218",
+    "record_kind": "announcement_timestamp",
+    "source_family": "official_newswire_archive",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0020.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "fc773bfba4f65a751c6fc11e8ee77669dba1c294d87b62570755d96e92d9506f",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-businesswire-uri-verified-mirror-20150121",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
