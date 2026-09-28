@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 18
-- **Immutable reviewed fail-closed exclusions:** 156
+- **Exact first-public announcement timestamps resolved:** 19
+- **Immutable reviewed fail-closed exclusions:** 155
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 18
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 19
 
 This does **not** invent announcement times.
 
@@ -147,3 +147,11 @@ One additional event now has an exact first-public release timestamp directly pr
 - `HEJFE-E342F6A93B35E012` (GNRC): `2015-02-11T06:00:00-05:00`. Generac's issuer-hosted archive explicitly timestamps `Generac Reports Fourth Quarter and Full-Year 2014 Results` at `Feb. 11, 2015 11:00 UTC` and identifies Business Wire distribution. SEC Exhibit 99.1 independently corroborates the same release title, date, and content. This row is graded `A` because the exact clock is preserved by the issuer-hosted release itself.
 
 The other 156 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified Business Wire batch 0017
+
+One additional event now has an exact public-release timestamp recovered from a preserved Business Wire article and corroborated against the SEC-hosted issuer release:
+
+- `HEJFE-48B08BAEDCEEDEFC` (SNDK): `2015-01-21T16:05:00-05:00`. MarketScreener preserves `SanDisk Announces Fourth Quarter and Fiscal 2014 Results` as published Jan. 21, 2015 at 4:05 PM EST and labels it Business Wire. SEC Exhibit 99.1 independently reproduces the same SanDisk release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved Business Wire mirror rather than a currently fetchable first-party Business Wire article page.
+
+The other 155 events remain fail-closed until equivalent admissible evidence is located.
