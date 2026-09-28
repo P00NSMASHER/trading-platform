@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 28
-- **Immutable reviewed fail-closed exclusions:** 146
+- **Exact first-public announcement timestamps resolved:** 29
+- **Immutable reviewed fail-closed exclusions:** 145
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 28
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 29
 
 This does **not** invent announcement times.
 
@@ -227,3 +227,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-EC5EB2BE0D97833F` (STT): `2015-01-23T05:52:00-05:00`. MarketScreener preserves State Street's fourth-quarter/full-year 2014 results release as `Published on 01/23/2015 at 10:52 am GMT` and labels it `Business Wire`. State Street's issuer-hosted archive reproduces the same Business Wire release, and its SEC Form 8-K states that on January 23, 2015 State Street issued the news release announcing those results. This row is deliberately graded `B`, not `A`, because the literal clock is recovered from the preserved Business Wire mirror rather than the issuer-hosted page itself.
 
 The other 146 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified Business Wire batch 0027
+
+One additional event now has an exact public-release timestamp recovered from a preserved distribution feed and corroborated against both the issuer archive and SEC exhibit:
+
+- `HEJFE-0BCEF81B6C0111FB` (COLM): `2015-04-30T16:00:00-04:00`. StreetInsider's historical COLM feed preserves `Columbia Sportswear Company Reports Record First Quarter` at `Apr. 30, 2015 04:00PM`. Columbia's issuer-hosted page identifies the matching release as `BUSINESS WIRE`, and SEC Exhibit 99.1 independently corroborates the same title, date, and content. This row is deliberately graded `B`, not `A`, because the literal clock is recovered from the preserved distribution mirror rather than the issuer-hosted page itself.
+
+The other 145 events remain fail-closed until equivalent admissible evidence is located.
