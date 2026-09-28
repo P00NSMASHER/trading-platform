@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "b0138d31acb9d5899bca52021668414c68472601b78415f3b2f2106292a31e0c",
-      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
+      "expected_sha256": "4ff154a4a307937fb35b5c2a850056a0f2f6fa6a32f19d0ae5c71d281d562b14",
+      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "d379c6c7ee8b06c121b6833be752a03a946d8016d828d4ed137edc9c1c849253",
-      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
+      "expected_sha256": "41643a253c805e1bb6fd4d24417abdc7705054343c80cc76cb7f7c8c8a371d0d",
+      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "56d83d8c9ba3d06c824987c1ad3790d7c822980ba8bf73603562223703c7d6a9",
-      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
+      "expected_sha256": "90a636bddb4649b8a24b5f7ccb338dde0eb0553313cc0ca81b0667f337a39853",
+      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 issuer-hosted Business Wire batch 0016: add GNRC exact release clock at 2015-02-11 06:00 ET from Generac's issuer-hosted 11:00 UTC archive, SEC-corroborated; remove only the stale GNRC reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "1fd6ead83adb187867f0602ec4014096d027d094a0864cc2226cbbbd4ef4b1b2",
-      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
+      "expected_sha256": "3f19bf83964c136408d95cf6609f2b2019d15a9f6ccb8de102a6ddede5ecc0e9",
+      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "8e072e89fd48edbcd1173ee2162758af459815881e0b0922c1f2035e313c81c0",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "68757a5f6cd4a945e30c1d97311eefabf2d38e210d2052b849bfdc70d2c73835",
-      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
+      "expected_sha256": "3bd563acd8365e3cb5d624c1d32fec2d40c2042a06ab755d2c97f0bf6a66118c",
+      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "80e82c12c3b654a500a555a79ec55f4428bbc2fb540dd5df8cc37546a7cce1ae",
-      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
+      "expected_sha256": "5ecc3ef023ca5601ce20d2dc250323a1f62cfdf9d0134d35ea75248a970be302",
+      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "51156de4c57c7a3f1da336bd2cf74c84bd1c9ec8469e9698f52b8a94062cef86",
-      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
+      "expected_sha256": "c7ea35eedc24d59cad614ba5abd2b8253eb7e81c855e45baed2ac1abe09c9d57",
+      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "708bc55d1f820336dd06f32c18eba8cdaa788a5c08b1dfd329d94b06dddf927d",
-      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
+      "expected_sha256": "1100a49003b1cf6af41816370e397fed8122c820f1080e267ee13ab37c6d209f",
+      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",

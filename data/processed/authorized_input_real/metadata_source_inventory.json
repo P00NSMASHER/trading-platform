@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-generac-businesswire-issuer-20150211",
+    "record_kind": "announcement_timestamp",
+    "source_family": "official_newswire_archive",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0016.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "7b1d1177057a3980d9806576f5731cd33ae54bfab9393889288e850f8b9c77f4",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-businesswire-hbi-verified-mirror-20150129",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
