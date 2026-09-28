@@ -4,12 +4,15 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
-SCHEMA_VERSION = "1.0.0"
+# Version 2 writes fixed-width microseconds instead of truncating to milliseconds.
+# Legacy v1 tapes/checkpoints must be regenerated from original inputs, not relabeled.
+SCHEMA_VERSION = "2.0.0"
 PROHIBITED_OUTPUTS = [
     "BUY", "SELL", "expected_return", "target_price", "position_size",
     "order", "execution_instruction", "trade_direction",
@@ -28,6 +31,14 @@ def _parse_ts(v: str, field: str) -> datetime:
     value = _clean(v)
     if not value:
         raise ValueError(f"{field} is required")
+    # datetime cannot represent sub-microsecond instants. Reject excess precision
+    # before parsing, including comma fractions, rather than silently truncating it.
+    if re.search(r"[.,][0-9]{7}", value):
+        raise ValueError(f"{field} exceeds supported microsecond precision (maximum 6 fractional digits)")
+    # Fractional offsets are outside this tape's contract; some ISO parsers erase
+    # sub-second zero-hour offsets. Never silently change an instant at a cutoff.
+    if re.search(r"[+-][0-9:]+[.,][0-9]+$", value):
+        raise ValueError(f"{field}: fractional UTC offsets are unsupported")
     dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
     if dt.tzinfo is None:
         raise ValueError(f"{field} must include timezone")
@@ -35,7 +46,9 @@ def _parse_ts(v: str, field: str) -> datetime:
 
 
 def _fmt_ts(dt: datetime) -> str:
-    return dt.astimezone(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+    # Fixed-width UTC retains every supported digit and is chronologically sortable.
+    # Zero padding is an encoding choice, not a claim about source clock accuracy.
+    return dt.astimezone(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
 
 
 def _sha256(path: Path) -> str:
@@ -178,6 +191,13 @@ def build_event_tape(
             "replay_time_utc=max(event_time_utc,available_at_utc)",
             "event_time_utc", "source_name", "source_sequence", "event_id",
         ],
+        "timestamp_encoding": {
+            "timezone": "UTC",
+            "fractional_second_digits": 6,
+            "submicrosecond_input_policy": "reject",
+            "fractional_utc_offset_policy": "reject",
+            "precision_does_not_imply_accuracy": True,
+        },
         "point_in_time_policy": {
             "event_not_visible_before_event_time": True,
             "event_not_visible_before_source_availability": True,
