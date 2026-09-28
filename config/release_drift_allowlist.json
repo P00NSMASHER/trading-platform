@@ -318,8 +318,8 @@
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "97b43907c1f25aa427e78134fdd44d545daf8966404446674be233936ee547d7",
-      "reason": "G1 runbook documenting authoritative timestamp requirements and the non-proxy closure path"
+      "expected_sha256": "0eef1f1a273946a0b518db6cec088a5c8a5e635ae0b3fb78b641b1eac7c0272e",
+      "reason": "G1 source-research integration: documents the 25-batch/27-event distinction, research-only source probes, promotion boundary, and lawful I/B/E/S fallback without weakening exact-time evidence requirements."
     },
     "config/metadata_sources.g3_public.json": {
       "expected_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
@@ -756,6 +756,18 @@
     "data/public/metadata/g1_announcement_times_batch_0025.csv": {
       "expected_sha256": "f219f0ae4c3089a31a21b18763522119dd39d459e0bb785fa1fff8185052c806",
       "reason": "G1 batch 0025 evidence row for Ford: SEC-hosted issuer earnings exhibit explicitly states a 7:00 a.m. EST first-public results release on January 29, 2015; graded A."
+    },
+    "data/public/metadata/g1_source_research_20260928.json": {
+      "expected_sha256": "2992bd57248976367cf0d54605fb1f99b71047664dca5a8ecc270b3f94f38120",
+      "reason": "G1 research-only source-discovery map for the 174-event exact-public-announcement-time sweep; records source-family probes and priorities without resolving any event."
+    },
+    "src/g1_source_research.py": {
+      "expected_sha256": "abdc37bb7aa5d4473ea9e5b63a5e5adda73ba496adfd7b808deb18fcc883663f",
+      "reason": "G1 fail-closed validator and priority-queue generator that prevents wrong-year, date-only, inferred, archive-capture, or mismatched probes from becoming exact timestamp evidence."
+    },
+    "tests/test_g1_source_research.py": {
+      "expected_sha256": "e6b82cc3e33d6bc5cde82f90d7d2574d1558d3ed4e5b721f6398af24e303937f",
+      "reason": "Regression coverage for G1 source-research state, 25-batch/27-event accounting, and false-positive promotion blocking."
     }
   }
 }

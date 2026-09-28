@@ -51,3 +51,45 @@ A complete extract produces `g1_ready=true`. The normalized CSV can then be enab
 ## Why this does not weaken G1
 
 The adapter changes the ingestion path, not the gate definition. In particular, it does not relabel public proxies as exact timestamps and it does not alter any of G2–G6.
+
+## 2026-09-28 source-research integration
+
+The public exact-time sweep now has a separate machine-readable research layer at
+`data/public/metadata/g1_source_research_20260928.json`, validated by
+`src/g1_source_research.py`.
+
+The current repository state is **25 public exact-time batches / 27 exact-resolved
+historical event records**. Those are different counters because some batches resolve
+more than one historical event.
+
+The latest repository/dataset search did **not** locate a public one-stop dataset
+containing the full 174-event exact first-public clock-time join. The public replication
+press-release archive remains useful for release identity/date discovery, but its
+candidate files do not preserve the required release-context clock times. The companion
+public code confirms that the original research constructs exact timestamps from
+I/B/E/S `ANNDATS_ACT + ANNTIMS_ACT`; the licensed rows themselves are not public.
+
+The source-research map therefore records two things separately:
+
+1. **Priority historical events** for the next public sweep: QLIK, TNGO, CAKE, NKE,
+   BCR, and two NATI events.
+2. **Source-family probes** that help locate archives but are not evidence. In
+   particular, 2026 Cheesecake Factory and Tangoe pages demonstrate durable
+   issuer/Business Wire/SEC trails, but they are wrong-year and/or date-only records
+   and are explicitly ineligible to resolve the 2015 G1 events.
+
+Run the research queue validator with:
+
+```bash
+PYTHONPATH=src python -m g1_source_research
+```
+
+The validator cross-checks every priority event against the current fail-closed exclusion
+dossier. A source-discovery probe cannot become evidence unless it matches the historical
+event and carries an authoritative/authorized exact first-public clock. Wrong-year,
+date-only, archive-capture, scheduled, inferred, and EDGAR-acceptance timestamps remain
+ineligible.
+
+If public searching stalls, the identified lawful one-stop path remains an entitled
+LSEG I/B/E/S extract containing `ANNDATS_ACT` and `ANNTIMS_ACT`, passed through the
+existing `g1_ibes_timestamp_adapter.py`.
