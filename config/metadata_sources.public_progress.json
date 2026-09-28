@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-nine verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains thirty verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-businesswire-mfrm-verified-mirror-20150319",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0028.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "MarketScreener preserves the Business Wire article 'Mattress Firm Announces Fourth Fiscal Quarter and Full Fiscal Year Financial Results' as published March 19, 2015 at 4:01 PM EDT. SEC Exhibit 99.1 independently corroborates the identical Mattress Firm release title, date, and content. Grade B reflects that the exact clock is recovered from a preserved Business Wire mirror.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "SEC corroboration: https://www.sec.gov/Archives/edgar/data/1419852/000110465915021058/a15-7282_1ex99d1.htm"
+    },
     {
       "source_id": "public-streetinsider-businesswire-colm-verified-20150430",
       "record_kind": "announcement_timestamp",
@@ -835,8 +858,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "557ff2ba504b87d166ff77873aa44c712c3e50ea50a9ed7b301128cda4e9ad53",
-    "expected_count": 145,
+    "expected_sha256": "1608b919b0032b074975391f6a3d62a75f27d5f259dc492e87dd85ea041ae83a",
+    "expected_count": 144,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
