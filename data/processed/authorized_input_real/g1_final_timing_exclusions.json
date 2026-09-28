@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "13ea2648119a3c8f4cee6c9a17ef21cd06284c99",
+  "base_main_sha": "f6ff2254bb570b051ea9c4a586b6b7fc84028a4b",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 14,
-    "reviewed_excluded": 160,
+    "exact_resolved": 15,
+    "reviewed_excluded": 159,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 160,
+    "raw_exact_time_evidence_gaps": 159,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 14,
+    "exact_timing_analysis_eligible": 15,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -160,13 +160,6 @@
       "event_id": "HEJFE-6C73B4B05384BC1E",
       "historical_symbol": "PFPT",
       "first_documented_illicit_trade_ts": "2013-04-25 15:00:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-DC66D5F2BDEC7C74",
-      "historical_symbol": "NOW",
-      "first_documented_illicit_trade_ts": "2015-01-28 13:31:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1188,14 +1181,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 14,
-    "latest_batch": "g1_announcement_times_batch_0012.csv",
+    "exact_resolved": 15,
+    "latest_batch": "g1_announcement_times_batch_0013.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-0B87675BF7BEDBCA",
-        "historical_symbol": "EA",
-        "public_announcement_ts": "2015-01-27T16:35:00-05:00",
-        "source_reference": "https://www.einpresswire.com/article/246669799/electronic-arts-reports-q3-fy15-financial-results"
+        "event_id": "HEJFE-DC66D5F2BDEC7C74",
+        "historical_symbol": "NOW",
+        "public_announcement_ts": "2015-01-28T16:05:00-05:00",
+        "source_reference": "https://au.marketscreener.com/quote/stock/SERVICENOW-INC-10912979/news/ServiceNow-Reports-Financial-Results-for-Fourth-Quarter-and-Fiscal-Year-2014-19777027/"
       }
     ]
   }
