@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "2672d3c4e7717fe279779a27c702cfd4062b66ec5c35a98628341f6202fe72b2",
-      "reason": "G1 independently verified Business Wire batch 0019: add URI exact release clock at 2015-01-21 16:10 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale URI reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "9b535022ff554c7158beb65c541c168ddcc3ca936d7ae0d81df1609f2416d7e3",
+      "reason": "G1 issuer-hosted release-clock batch 0020: add FLR exact release clock at 2015-02-18 08:30 ET from Fluor's issuer-hosted newsroom, SEC-corroborated; remove only the stale FLR reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "2b81dc6cba12b769f96d8aaa3a071df3bbe329e170244cdfcd649909430b644a",
-      "reason": "G1 independently verified Business Wire batch 0019: add URI exact release clock at 2015-01-21 16:10 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale URI reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "3c029f7f44474757a176ce4d0c2ecfa7247afc83287ad57b56e8703e2c007ff3",
+      "reason": "G1 issuer-hosted release-clock batch 0020: add FLR exact release clock at 2015-02-18 08:30 ET from Fluor's issuer-hosted newsroom, SEC-corroborated; remove only the stale FLR reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "1a40c717b48474efffd978c2e52caf5a72500c56b3b6d72eeead9d09b42e86eb",
       "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "3d1578b587950fa951f895c69a42e7694b85efd3b7d2e27d55875fe0426a4edf",
-      "reason": "G1 independently verified Business Wire batch 0019: add URI exact release clock at 2015-01-21 16:10 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale URI reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "3c7443344ea2b1b31848cdfde03db01433a34da20c02cf08218454b86a081cda",
+      "reason": "G1 issuer-hosted release-clock batch 0020: add FLR exact release clock at 2015-02-18 08:30 ET from Fluor's issuer-hosted newsroom, SEC-corroborated; remove only the stale FLR reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -732,6 +732,10 @@
     "data/public/metadata/g1_announcement_times_batch_0019.csv": {
       "expected_sha256": "28cc61f5656fd5fb5afd85a43c77fbd137891aa65e08a59e879e4d61934c8c7d",
       "reason": "G1 batch 0019 evidence row for URI: preserved Business Wire timestamp at 2015-01-21 4:10 PM EST, SEC-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0020.csv": {
+      "expected_sha256": "fc773bfba4f65a751c6fc11e8ee77669dba1c294d87b62570755d96e92d9506f",
+      "reason": "G1 batch 0020 evidence row for FLR: issuer-hosted Fluor newsroom timestamp at 2015-02-18 08:30 EST, SEC-corroborated and graded A."
     }
   }
 }
