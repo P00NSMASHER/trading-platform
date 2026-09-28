@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-marketwired-juniper-verified-20130423",
+    "record_kind": "announcement_timestamp",
+    "source_family": "official_newswire_archive",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0022.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "e01356466d757905737ed67c155f751893ccf9406765629ae904957864c52505",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-prnewswire-chubb-verified-mirror-20120126",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
