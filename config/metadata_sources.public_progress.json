@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-two verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-three verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-prnewswire-chubb-verified-mirror-20120126",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0021.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "MarketScreener preserves Chubb's PRNewswire fourth-quarter 2011 earnings release as published Jan. 26, 2012 at 4:03 PM EST. PR Newswire's Chubb archive lists the same release at 04:03 ET, and SEC Exhibit 99.1 independently corroborates the identical release title, date, and content. Grade B reflects that the explicit PM clock is recovered from a preserved PRNewswire mirror.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "SEC corroboration: https://www.sec.gov/Archives/edgar/data/20171/000119312512025164/d290231dex991.htm"
+    },
     {
       "source_id": "public-fluor-issuer-20150218",
       "record_kind": "announcement_timestamp",
@@ -674,8 +697,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "9b535022ff554c7158beb65c541c168ddcc3ca936d7ae0d81df1609f2416d7e3",
-    "expected_count": 152,
+    "expected_sha256": "c5689f034f14e5b3b47f4b66e37985a2d45a84bc70a26bc8769e8ae369ff038e",
+    "expected_count": 151,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
