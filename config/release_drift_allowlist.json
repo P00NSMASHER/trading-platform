@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "6e87597f53323240e80a31747fc35cb1f49bb42ec5cd49b9686222a602e69060",
-      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
+      "expected_sha256": "bd4923709a46a8597f5d99c1aa5cc261dee4ee7b63ca21accc8ad63ccfa53eae",
+      "reason": "Authoritative receipt regeneration from main source commit dfeef8baa1ba0abdb5862c46a2992e17ec1418b6 after G1 Juniper batch 0022."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "da1e454a9036d094a4e9202a8c94912779817ccaef55cc2b911663ba21bd55e7",
-      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
+      "expected_sha256": "d145e48dc7c1bd0677e9c8e9a32d4df2d6689acd2a3501f14e7678e2963a40bd",
+      "reason": "Authoritative receipt regeneration from main source commit dfeef8baa1ba0abdb5862c46a2992e17ec1418b6 after G1 Juniper batch 0022."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "5b8c5430f78c45d90211573be87ed86bd90184cfdb827487240b900b816f6be1",
-      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
+      "expected_sha256": "a71f92c9a1d9f82ab86429fa53fbe36710db4d1701ba4b6b42a5718e49dda7c5",
+      "reason": "Authoritative receipt regeneration from main source commit dfeef8baa1ba0abdb5862c46a2992e17ec1418b6 after G1 Juniper batch 0022."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified Marketwired batch 0022: add JNPR exact release clock at 2013-04-23 16:05 ET using a preserved Marketwired distribution page plus issuer-hosted Juniper corroboration; grade evidence B, remove only the stale JNPR reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "bbfff29c5dc1ef1e371bbbff73e52a33c208312a326f78b564e085087a7d122a",
-      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
+      "expected_sha256": "dc98c293ec10b3a63aac200e4f49eaf28b056a2ee0f9bf8873d50d3c9e15278c",
+      "reason": "Authoritative receipt regeneration from main source commit dfeef8baa1ba0abdb5862c46a2992e17ec1418b6 after G1 Juniper batch 0022."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "273922062760fa010e82fcd299f5a21691117a20e1f2a52ba7478462da9f7a9d",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "915c8723204251c15b42c3c6ddf718b4136349bdc9bd77049b576273b580bcdb",
-      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
+      "expected_sha256": "eae0565ef0289c128972a57b9b527c0824f9c096d1ca46df313cfe025758a88a",
+      "reason": "Authoritative receipt regeneration from main source commit dfeef8baa1ba0abdb5862c46a2992e17ec1418b6 after G1 Juniper batch 0022."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "f66235903b05b8a8447d87f59037867faf04b378f776d45126dc24f358f0cdfb",
-      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
+      "expected_sha256": "ba256ce9b6a7c640e46479db2f65f66ab0bf05a13f732798b52c7f9b6f462035",
+      "reason": "Authoritative receipt regeneration from main source commit dfeef8baa1ba0abdb5862c46a2992e17ec1418b6 after G1 Juniper batch 0022."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "ae6de4dc9283dabf063549375797023b9d93eb754f2c18633c823118eb5972b3",
-      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
+      "expected_sha256": "0996bd1f9b535348245dde8016ffcc8eeccaf91d535f815f838f2b7be6fc233c",
+      "reason": "Authoritative receipt regeneration from main source commit dfeef8baa1ba0abdb5862c46a2992e17ec1418b6 after G1 Juniper batch 0022."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "00ff5cff8994f5ec2298ae7c528d8fd9c79b69ce4d7f12b997ae31406e9433f7",
-      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
+      "expected_sha256": "99e1b0e66700a4d4c71266a1825b0c298b6f303955c273b712669ceadad21e93",
+      "reason": "Authoritative receipt regeneration from main source commit dfeef8baa1ba0abdb5862c46a2992e17ec1418b6 after G1 Juniper batch 0022."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
