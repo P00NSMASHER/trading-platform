@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 17
-- **Immutable reviewed fail-closed exclusions:** 157
+- **Exact first-public announcement timestamps resolved:** 18
+- **Immutable reviewed fail-closed exclusions:** 156
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 17
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 18
 
 This does **not** invent announcement times.
 
@@ -139,3 +139,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-3ADF019D07BA84CE` (HBI): `2015-01-29T16:05:00-05:00`. MarketScreener preserves `HanesBrands Reports Fourth-Quarter 2014 Financial Results` as published Jan. 29, 2015 at 4:05 PM EST and identifies Business Wire. SEC Exhibit 99.1 independently reproduces the same issuer release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved wire mirror rather than a currently fetchable first-party Business Wire article page.
 
 The other 157 events remain fail-closed until equivalent admissible evidence is located.
+
+## Issuer-hosted Business Wire batch 0016
+
+One additional event now has an exact first-public release timestamp directly preserved by the issuer's investor-relations archive:
+
+- `HEJFE-E342F6A93B35E012` (GNRC): `2015-02-11T06:00:00-05:00`. Generac's issuer-hosted archive explicitly timestamps `Generac Reports Fourth Quarter and Full-Year 2014 Results` at `Feb. 11, 2015 11:00 UTC` and identifies Business Wire distribution. SEC Exhibit 99.1 independently corroborates the same release title, date, and content. This row is graded `A` because the exact clock is preserved by the issuer-hosted release itself.
+
+The other 156 events remain fail-closed until equivalent admissible evidence is located.
