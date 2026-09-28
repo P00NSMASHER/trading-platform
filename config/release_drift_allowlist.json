@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "d7423f250c7653e00f55367f2715338dc3515ce2a4e0d76ae785435258818dc0",
-      "reason": "G1 independently verified Business Wire batch 0017: add SNDK exact release clock at 2015-01-21 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale SNDK reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "0e1a1e8367b921414b6a7640a1142176b950958f2f03ce9301a0bd9281035c69",
+      "reason": "G1 independently verified issuer-attributed distribution batch 0018: add GME exact release clock at 2015-03-26 16:29 ET from EIN Presswire's 20:29 GMT historical release entry, corroborated by GameStop's issuer archive and SEC Exhibit 99.1; grade evidence B, remove only the stale GME reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "aae47d772d47c38771197606a3ebfd92fc3d537c59f1e4f57698b971e17d509b",
-      "reason": "G1 independently verified Business Wire batch 0017: add SNDK exact release clock at 2015-01-21 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale SNDK reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "a9429d8ba4b37cc9d7dea282da09e56847decd637b0dd6a60a39135eb6439ab1",
+      "reason": "G1 independently verified issuer-attributed distribution batch 0018: add GME exact release clock at 2015-03-26 16:29 ET from EIN Presswire's 20:29 GMT historical release entry, corroborated by GameStop's issuer archive and SEC Exhibit 99.1; grade evidence B, remove only the stale GME reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "6991709e02aa14dc3a4805a65a2197b17494fcf7d9eb435c58ee0b5ebdd6fb95",
       "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "6c2befdffe6da9a89f9781a07dd1f7be3d20def9d27a84f2ef8f3934b92ca17b",
-      "reason": "G1 independently verified Business Wire batch 0017: add SNDK exact release clock at 2015-01-21 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale SNDK reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "0ca3751454c9d6b08449c138522c1be3fd4a2a1d49d2a6176d1eafdd0ab9b092",
+      "reason": "G1 independently verified issuer-attributed distribution batch 0018: add GME exact release clock at 2015-03-26 16:29 ET from EIN Presswire's 20:29 GMT historical release entry, corroborated by GameStop's issuer archive and SEC Exhibit 99.1; grade evidence B, remove only the stale GME reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -724,6 +724,10 @@
     "data/public/metadata/g1_announcement_times_batch_0017.csv": {
       "expected_sha256": "a7a4f130341577debe925d17bac3baedca956e92e5cf72162e29f43949753729",
       "reason": "G1 batch 0017 evidence row for SNDK: preserved Business Wire timestamp at 2015-01-21 4:05 PM EST, SEC-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0018.csv": {
+      "expected_sha256": "9efaca763dad61dfa1ba1b716d79848c9ffe8c6009c460d5b1b96922c44ae0a5",
+      "reason": "G1 batch 0018 evidence row for GME: EIN Presswire historical entry timestamped 2015-03-26 20:29 GMT / 16:29 EDT, issuer- and SEC-corroborated and intentionally graded B."
     }
   }
 }
