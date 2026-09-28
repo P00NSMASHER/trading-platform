@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "f2254bc9060f480afe46c7b803d9bf6768bbdf03d07c5103659b352ba35e840c",
-      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
+      "expected_sha256": "bb86296f7823ae434384eec7b9109e62ddef1aa4c8cb9052ff02877002448965",
+      "reason": "Authoritative receipt regeneration from main source commit 608b9a17d5ff95f0a55d1d432c4b1b7e8e3ba504 after G1 Ford batch 0025."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "d23c72272e89d8ad1a98a686ca6d42ddf7cb5c396d0d1e9103daba2d0d940bae",
-      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
+      "expected_sha256": "848ad3490837e87d1dae94d18a3a5420884740c8fa69f207b8e38743de80058c",
+      "reason": "Authoritative receipt regeneration from main source commit 608b9a17d5ff95f0a55d1d432c4b1b7e8e3ba504 after G1 Ford batch 0025."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "f22ecc787d94ceddc4abcc88d0a1f8d6112deb35774b7bec07f6e22298335be0",
-      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
+      "expected_sha256": "636599181b06ab03bdb9542b3d986606035ce9fba26457c7f36f198510f76e7b",
+      "reason": "Authoritative receipt regeneration from main source commit 608b9a17d5ff95f0a55d1d432c4b1b7e8e3ba504 after G1 Ford batch 0025."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 SEC issuer release-clock batch 0025: add Ford exact first-public release clock at 2015-01-29 07:00 EST from Ford's SEC-hosted earnings exhibit; remove only the stale Ford reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "c3fbcb5ae666a1b195b3a11fc1a1567afc9150f74eb8f81cbe9e9ba6dcfe6df4",
-      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
+      "expected_sha256": "884f1094159a003d607d02837915d3fd4614967b6bf979bbaaacb82270e97a1f",
+      "reason": "Authoritative receipt regeneration from main source commit 608b9a17d5ff95f0a55d1d432c4b1b7e8e3ba504 after G1 Ford batch 0025."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "af39570ff1b710226baf3fd1b5a96716bd100d19845f3bbe6cbf20e6e945fe08",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "cf440980e0d43989fa617dafe1f99c53c14e940963428318fba465c56dd24f4a",
-      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
+      "expected_sha256": "1e0eca78b73dd8df8044d5db575c81124325c18968dc456bb3f351b311645b36",
+      "reason": "Authoritative receipt regeneration from main source commit 608b9a17d5ff95f0a55d1d432c4b1b7e8e3ba504 after G1 Ford batch 0025."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "4d92818b6627b760f78f6357e3ba45250499d21b4992bd2f83298e53d9b72dd0",
-      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
+      "expected_sha256": "a6c5edd91cc89c721fdd476f60bb30a357e88a90e9b7a4051d65f8d578dd76fb",
+      "reason": "Authoritative receipt regeneration from main source commit 608b9a17d5ff95f0a55d1d432c4b1b7e8e3ba504 after G1 Ford batch 0025."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "4b6bb9ad9921d2dc47db10cb5b2239519efc32586b9be7b7327d70b32cc48330",
-      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
+      "expected_sha256": "36ba5a28817f1a07932ed522903d88038dd9d24ac99af1aa122ea96d83431883",
+      "reason": "Authoritative receipt regeneration from main source commit 608b9a17d5ff95f0a55d1d432c4b1b7e8e3ba504 after G1 Ford batch 0025."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "fa3121fd018abc3985e3455d0c154024f6297c28db005428903598b59ec40e6f",
-      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
+      "expected_sha256": "a0aee3fbf9f89c7a9f0cc8a5e8383219060bfc66b1a4ca548061f6800db2c927",
+      "reason": "Authoritative receipt regeneration from main source commit 608b9a17d5ff95f0a55d1d432c4b1b7e8e3ba504 after G1 Ford batch 0025."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
