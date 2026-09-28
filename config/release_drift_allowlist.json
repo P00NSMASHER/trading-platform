@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "2947146c51d73801b0f158ded8d281f81f6aefd0302382fad328f557de60b44e",
-      "reason": "G1 independently verified PR Newswire batch 0023: add HON exact release clock at 2012-01-27 07:30 ET using a preserved PR Newswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale HON reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "d930f86f46e9d967ff3947af1c7e4be424f041dc77d76449b9d08afdf7160dc0",
+      "reason": "G1 preserved Business Wire distribution-copy batch 0024: add PVH exact release clock at 2015-03-25 16:01 ET using a preserved Business Wire copy plus issuer and SEC corroboration; grade evidence B, remove only the stale PVH reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "7834256d2710b051aae97dac8468614658f8240058d72c5784bf687d95211fc1",
-      "reason": "G1 independently verified PR Newswire batch 0023: add HON exact release clock at 2012-01-27 07:30 ET using a preserved PR Newswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale HON reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "30078e422d8503e1f54ddeeb383d610a8cc64d5c0a8778ceb98fc4c1dd11ca6c",
+      "reason": "G1 preserved Business Wire distribution-copy batch 0024: add PVH exact release clock at 2015-03-25 16:01 ET using a preserved Business Wire copy plus issuer and SEC corroboration; grade evidence B, remove only the stale PVH reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "5fe14f545543e092c7f80d4241ea4ca953ce48ffbc550bcbb924e19dc2e7ec68",
       "reason": "Authoritative receipt regeneration from main source commit fde07924af7a45765933295d5c5fa574da1d3407 after G1 Honeywell batch 0023."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "92bf26aed54d516d35bb2f0690f3feb4d737aeb553d56a6b9f67ba8ce12d869c",
-      "reason": "G1 independently verified PR Newswire batch 0023: add HON exact release clock at 2012-01-27 07:30 ET using a preserved PR Newswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale HON reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "ac0b895f065bdc7771870e9b77b5bd9119351e93781809fe95ab0ed01df3e71f",
+      "reason": "G1 preserved Business Wire distribution-copy batch 0024: add PVH exact release clock at 2015-03-25 16:01 ET using a preserved Business Wire copy plus issuer and SEC corroboration; grade evidence B, remove only the stale PVH reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -748,6 +748,10 @@
     "data/public/metadata/g1_announcement_times_batch_0023.csv": {
       "expected_sha256": "0c670780406d62420ca3424b449fd9b93607ece5602a8d24f3cf7e717b1d62d0",
       "reason": "G1 batch 0023 evidence row for HON: preserved PR Newswire timestamp at 2012-01-27 12:30 GMT / 07:30 EST, SEC-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0024.csv": {
+      "expected_sha256": "4f0b58de63b3bed3e097c13fd3b5dc95f7cd777566eb51ee0a1c9e4b5f9dd27a",
+      "reason": "G1 batch 0024 evidence row for PVH: preserved Business Wire distribution copy at 2015-03-25 4:01 PM EDT, issuer- and SEC-corroborated, intentionally graded B."
     }
   }
 }
