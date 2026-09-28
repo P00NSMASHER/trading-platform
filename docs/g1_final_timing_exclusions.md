@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 25
-- **Immutable reviewed fail-closed exclusions:** 149
+- **Exact first-public announcement timestamps resolved:** 26
+- **Immutable reviewed fail-closed exclusions:** 148
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 25
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 26
 
 This does **not** invent announcement times.
 
@@ -203,3 +203,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-8D40B9782E1E6F33` (HON): `2012-01-27T07:30:00-05:00`. MarketScreener preserves Honeywell's full-year 2011 earnings release as published Jan. 27, 2012 at 12:30 PM GMT (7:30 AM EST) and labels the article PRNewswire. SEC Exhibit 99 independently reproduces the same Honeywell release title, date, and content; Honeywell's 8-K also states that the earnings release was distributed on PR Newswire approximately two hours before its 9:30 AM ET conference call. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved PR Newswire mirror rather than a currently fetchable first-party PR Newswire article page.
 
 The other 149 events remain fail-closed until equivalent admissible evidence is located.
+
+## Preserved Business Wire distribution copy batch 0024
+
+One additional event now has an exact public-release timestamp recovered from a preserved copy of the original Business Wire distribution and independently corroborated against PVH's issuer archive and SEC exhibit:
+
+- `HEJFE-DF726FADF321F8E3` (PVH): `2015-03-25T16:01:00-04:00`. The preserved distribution copy records `PVH Corp. Reports 2014 Fourth Quarter and Full Year Results and Announces 2015 Outlook` at `Wed March 25, 2015 4:01 PM | Business Wire`. PVH's issuer-hosted page independently reproduces the same Business Wire release and date, and SEC Exhibit 99.1 corroborates the release text. This row is deliberately graded `B`, not `A`, because the literal clock survives in the preserved distribution copy rather than the current issuer page.
+
+The other 148 events remain fail-closed until equivalent admissible evidence is located.

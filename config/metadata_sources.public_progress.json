@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-five verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-six verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-businesswire-pvh-preserved-copy-20150325",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0024.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "A preserved copy of the original Seeking Alpha/Business Wire release records 'PVH Corp. Reports 2014 Fourth Quarter and Full Year Results and Announces 2015 Outlook' at Wed March 25, 2015 4:01 PM and labels it Business Wire. PVH's issuer-hosted archive independently reproduces the identical Business Wire release and date; SEC Exhibit 99.1 independently corroborates the release text. Grade B reflects that the exact clock survives in a preserved distribution copy rather than the current issuer page.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "Issuer corroboration: https://www.pvh.com/news/press-releases/PVH-Corp-Reports-2014-Fourth-Quarter-and-Full-Year-Results-and-Announces-2015-Outlook ; SEC corroboration: https://www.sec.gov/Archives/edgar/data/78239/000007823915000004/ex99120144q8k.htm"
+    },
     {
       "source_id": "public-prnewswire-hon-verified-mirror-20120127",
       "record_kind": "announcement_timestamp",
@@ -743,8 +766,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "2947146c51d73801b0f158ded8d281f81f6aefd0302382fad328f557de60b44e",
-    "expected_count": 149,
+    "expected_sha256": "d930f86f46e9d967ff3947af1c7e4be424f041dc77d76449b9d08afdf7160dc0",
+    "expected_count": 148,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
