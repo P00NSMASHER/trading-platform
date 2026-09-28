@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "0a3f6c228364931a8d2e89229bccce0688086396",
+  "base_main_sha": "49fa19d50afec39679a33b4a1745fc188f087bd2",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 26,
-    "reviewed_excluded": 148,
+    "exact_resolved": 27,
+    "reviewed_excluded": 147,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 148,
+    "raw_exact_time_evidence_gaps": 147,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 26,
+    "exact_timing_analysis_eligible": 27,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -251,13 +251,6 @@
       "event_id": "HEJFE-2D81C70F59E076BA",
       "historical_symbol": "CA",
       "first_documented_illicit_trade_ts": "2012-01-24 13:32:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-E8C5063581BE7EB7",
-      "historical_symbol": "F",
-      "first_documented_illicit_trade_ts": "2015-01-28 15:59:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1104,14 +1097,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 26,
-    "latest_batch": "g1_announcement_times_batch_0024.csv",
+    "exact_resolved": 27,
+    "latest_batch": "g1_announcement_times_batch_0025.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-DF726FADF321F8E3",
-        "historical_symbol": "PVH",
-        "public_announcement_ts": "2015-03-25T16:01:00-04:00",
-        "source_reference": "https://investorshub.advfn.com/boards/read_msg.aspx?message_id=112656236"
+        "event_id": "HEJFE-E8C5063581BE7EB7",
+        "historical_symbol": "F",
+        "public_announcement_ts": "2015-01-29T07:00:00-05:00",
+        "source_reference": "https://www.sec.gov/Archives/edgar/data/37996/000003799615000007/exhibit99toearnings8-kdate.htm"
       }
     ]
   }
