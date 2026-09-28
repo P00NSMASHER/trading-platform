@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "f6ff2254bb570b051ea9c4a586b6b7fc84028a4b",
+  "base_main_sha": "feb75a5f019e7321b806e09d288d6e42012d3bdb",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 15,
-    "reviewed_excluded": 159,
+    "exact_resolved": 16,
+    "reviewed_excluded": 158,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 159,
+    "raw_exact_time_evidence_gaps": 158,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 15,
+    "exact_timing_analysis_eligible": 16,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -237,13 +237,6 @@
       "event_id": "HEJFE-B5A8A297D14CD19D",
       "historical_symbol": "TXT",
       "first_documented_illicit_trade_ts": "2015-04-27 15:34:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-6101FFEDBA6EE41B",
-      "historical_symbol": "MDU",
-      "first_documented_illicit_trade_ts": "2015-02-02 14:47:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1181,14 +1174,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 15,
-    "latest_batch": "g1_announcement_times_batch_0013.csv",
+    "exact_resolved": 16,
+    "latest_batch": "g1_announcement_times_batch_0014.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-DC66D5F2BDEC7C74",
-        "historical_symbol": "NOW",
-        "public_announcement_ts": "2015-01-28T16:05:00-05:00",
-        "source_reference": "https://au.marketscreener.com/quote/stock/SERVICENOW-INC-10912979/news/ServiceNow-Reports-Financial-Results-for-Fourth-Quarter-and-Fiscal-Year-2014-19777027/"
+        "event_id": "HEJFE-6101FFEDBA6EE41B",
+        "historical_symbol": "MDU",
+        "public_announcement_ts": "2015-02-02T17:30:00-05:00",
+        "source_reference": "https://ca.marketscreener.com/quote/stock/MDU-RESOURCES-GROUP-INC-13482/news/MDU-Resources-Reports-Higher-2014-Earnings-Initiates-Guidance-for-2015-19802399/"
       }
     ]
   }
