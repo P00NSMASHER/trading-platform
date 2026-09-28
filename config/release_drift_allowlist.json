@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "9b535022ff554c7158beb65c541c168ddcc3ca936d7ae0d81df1609f2416d7e3",
-      "reason": "G1 issuer-hosted release-clock batch 0020: add FLR exact release clock at 2015-02-18 08:30 ET from Fluor's issuer-hosted newsroom, SEC-corroborated; remove only the stale FLR reviewed exclusion and preserve all remaining fail-closed semantics."
+      "expected_sha256": "c5689f034f14e5b3b47f4b66e37985a2d45a84bc70a26bc8769e8ae369ff038e",
+      "reason": "G1 independently verified PR Newswire batch 0021: add CB exact release clock at 2012-01-26 16:03 ET using a preserved PRNewswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale CB reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "3c029f7f44474757a176ce4d0c2ecfa7247afc83287ad57b56e8703e2c007ff3",
-      "reason": "G1 issuer-hosted release-clock batch 0020: add FLR exact release clock at 2015-02-18 08:30 ET from Fluor's issuer-hosted newsroom, SEC-corroborated; remove only the stale FLR reviewed exclusion and preserve all remaining fail-closed semantics."
+      "expected_sha256": "9b4e6e34238490cb4cb91c5db7a14fcf1a03be55b570d448a831cc80db736e75",
+      "reason": "G1 independently verified PR Newswire batch 0021: add CB exact release clock at 2012-01-26 16:03 ET using a preserved PRNewswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale CB reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "cdbee6c19f56991549a419f5550ff55864c63ca7c63d385189ee3a41e7d41849",
       "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "3c7443344ea2b1b31848cdfde03db01433a34da20c02cf08218454b86a081cda",
-      "reason": "G1 issuer-hosted release-clock batch 0020: add FLR exact release clock at 2015-02-18 08:30 ET from Fluor's issuer-hosted newsroom, SEC-corroborated; remove only the stale FLR reviewed exclusion and preserve all remaining fail-closed semantics."
+      "expected_sha256": "ea7c624d6a921b8382b29d0525ce24f2fe04065759460aae03dbb1e8c0a3657d",
+      "reason": "G1 independently verified PR Newswire batch 0021: add CB exact release clock at 2012-01-26 16:03 ET using a preserved PRNewswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale CB reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -736,6 +736,10 @@
     "data/public/metadata/g1_announcement_times_batch_0020.csv": {
       "expected_sha256": "fc773bfba4f65a751c6fc11e8ee77669dba1c294d87b62570755d96e92d9506f",
       "reason": "G1 batch 0020 evidence row for FLR: issuer-hosted Fluor newsroom timestamp at 2015-02-18 08:30 EST, SEC-corroborated and graded A."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0021.csv": {
+      "expected_sha256": "c4d34a6b7a2cf54947b7c2828a6767e1d6dface4a7a9fdebeefd86bede2c762a",
+      "reason": "G1 batch 0021 evidence row for CB: preserved PRNewswire publication at 2012-01-26 4:03 PM EST, SEC-corroborated and intentionally graded B."
     }
   }
 }

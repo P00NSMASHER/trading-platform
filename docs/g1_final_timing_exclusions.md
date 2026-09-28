@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 22
-- **Immutable reviewed fail-closed exclusions:** 152
+- **Exact first-public announcement timestamps resolved:** 23
+- **Immutable reviewed fail-closed exclusions:** 151
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 22
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 23
 
 This does **not** invent announcement times.
 
@@ -179,3 +179,11 @@ One additional event now has an exact first-public release timestamp directly pr
 - `HEJFE-1E37362063697486` (FLR): `2015-02-18T08:30:00-05:00`. Fluor's issuer-hosted newsroom explicitly timestamps `Fluor Reports Fourth Quarter and Full Year 2014 Results` on Wednesday, February 18, 2015 at 08:30 AM. SEC Exhibit 99.1 independently corroborates the same release title, date, and content. This row is graded `A` because the exact clock is preserved by the issuer-hosted release itself.
 
 The other 152 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified PR Newswire batch 0021
+
+One additional event now has an exact public-release timestamp recovered from a preserved PRNewswire article and corroborated against the SEC-hosted issuer release:
+
+- `HEJFE-76DCF0FCA248E814` (CB): `2012-01-26T16:03:00-05:00`. MarketScreener preserves `Chubb Reports Fourth Quarter Net Income per Share of $1.60; Operating Income per Share Is $1.63; Combined Ratio Is 89.9%` as published Jan. 26, 2012 at 4:03 PM EST and identifies PRNewswire. PR Newswire's Chubb archive lists the same release at 04:03 ET, while SEC Exhibit 99.1 independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the explicit PM clock is recovered from the preserved wire mirror rather than a currently fetchable first-party PRNewswire article page.
+
+The other 151 events remain fail-closed until equivalent admissible evidence is located.
