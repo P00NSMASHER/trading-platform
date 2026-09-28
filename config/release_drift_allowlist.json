@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "2756ee98ad98e7110ac6704ddf7cc2e1946fdb25f9f82e90eb59dde9a03e3f7c",
-      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
+      "expected_sha256": "ef9fa943ece821acf978c8b9e0cff3abe91a58d4b83bc39ba123e301c35aabd6",
+      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "b383745a68d63ae0abd291ce922715a216389cfa1390ea50f8f861b3386bdd97",
-      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
+      "expected_sha256": "68bc7da5ec6e940caf33c26196faf62d2d731f14153b6897dba7922feb179bfe",
+      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "e048fa2fefc6597959dd9fb5658598fb8ec2813221b7573fed93bdd3ea281c52",
-      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
+      "expected_sha256": "7bc0409e3b381e221968aaec17bf1e5dee5ddfbc3d8c2101c716034325315a4e",
+      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 issuer-hosted release-clock batch 0020: add FLR exact release clock at 2015-02-18 08:30 ET from Fluor's issuer-hosted newsroom, SEC-corroborated; remove only the stale FLR reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "1a40c717b48474efffd978c2e52caf5a72500c56b3b6d72eeead9d09b42e86eb",
-      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
+      "expected_sha256": "cdbee6c19f56991549a419f5550ff55864c63ca7c63d385189ee3a41e7d41849",
+      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "3c7443344ea2b1b31848cdfde03db01433a34da20c02cf08218454b86a081cda",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "9aedb55d42d148896522bd6766d659dc7780606dc4c2b3dec49bca7472b88e70",
-      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
+      "expected_sha256": "33698993a901f4130005b14dff2fe19071ede87942d8f8c3e77e18e2bb2a474e",
+      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "610dc20312d64f14d3883853552ea3e56aa3515521b52599f69c87bfb6e674f9",
-      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
+      "expected_sha256": "da094847f135e7461b3cbcea89ff593ccd76294c9929f20a2783201b4bd8e3ef",
+      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "64673d2577c952bfcf45b27e240827e25b26500c78ea677a658504305678b08d",
-      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
+      "expected_sha256": "7923fcd4785005376016b4bccf454ae8f22a1a7242e6d392d6de063064a24278",
+      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "573f79946e3bbc1f937038d9c6cff6bdb90f0e0c1e6857a63c91549e7a1c6a5a",
-      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
+      "expected_sha256": "8426131ce3e5cb1167756bb94a1b0c9e268e42c64145e9309b8bd81e2a1ab266",
+      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
