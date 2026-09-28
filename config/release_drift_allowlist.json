@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "c5689f034f14e5b3b47f4b66e37985a2d45a84bc70a26bc8769e8ae369ff038e",
-      "reason": "G1 independently verified PR Newswire batch 0021: add CB exact release clock at 2012-01-26 16:03 ET using a preserved PRNewswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale CB reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "eb2bd711b735afa8caa29657f9421a51a073d509f22f4a21d6bf964ff612826b",
+      "reason": "G1 independently verified Marketwired batch 0022: add JNPR exact release clock at 2013-04-23 16:05 ET using a preserved Marketwired distribution page plus issuer-hosted Juniper corroboration; grade evidence B, remove only the stale JNPR reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "9b4e6e34238490cb4cb91c5db7a14fcf1a03be55b570d448a831cc80db736e75",
-      "reason": "G1 independently verified PR Newswire batch 0021: add CB exact release clock at 2012-01-26 16:03 ET using a preserved PRNewswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale CB reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "d4aa531d87f54924f50752aaf64741738fc494709fe4ac58ebbc49c179dfc176",
+      "reason": "G1 independently verified Marketwired batch 0022: add JNPR exact release clock at 2013-04-23 16:05 ET using a preserved Marketwired distribution page plus issuer-hosted Juniper corroboration; grade evidence B, remove only the stale JNPR reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "bbfff29c5dc1ef1e371bbbff73e52a33c208312a326f78b564e085087a7d122a",
       "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "ea7c624d6a921b8382b29d0525ce24f2fe04065759460aae03dbb1e8c0a3657d",
-      "reason": "G1 independently verified PR Newswire batch 0021: add CB exact release clock at 2012-01-26 16:03 ET using a preserved PRNewswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale CB reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "273922062760fa010e82fcd299f5a21691117a20e1f2a52ba7478462da9f7a9d",
+      "reason": "G1 independently verified Marketwired batch 0022: add JNPR exact release clock at 2013-04-23 16:05 ET using a preserved Marketwired distribution page plus issuer-hosted Juniper corroboration; grade evidence B, remove only the stale JNPR reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -740,6 +740,10 @@
     "data/public/metadata/g1_announcement_times_batch_0021.csv": {
       "expected_sha256": "c4d34a6b7a2cf54947b7c2828a6767e1d6dface4a7a9fdebeefd86bede2c762a",
       "reason": "G1 batch 0021 evidence row for CB: preserved PRNewswire publication at 2012-01-26 4:03 PM EST, SEC-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0022.csv": {
+      "expected_sha256": "e01356466d757905737ed67c155f751893ccf9406765629ae904957864c52505",
+      "reason": "G1 batch 0022 evidence row for JNPR: preserved Marketwired distribution timestamp at 2013-04-23 16:05 ET, issuer-corroborated and intentionally graded B."
     }
   }
 }
