@@ -3,13 +3,13 @@
   "research_date": "2026-09-28",
   "purpose": "Machine-readable G1 source-discovery intelligence for the 174-event exact public-announcement-time sweep. This file is research guidance only and must never resolve a G1 event by itself.",
   "research_use_only": true,
-  "base_main_sha": "0643b42e3de83188b1d10e12257cd160383ddc0d",
+  "base_main_sha": "fccd411ab3c16aa5db76d83becfcbffb61be8e12",
   "current_g1_state": {
     "required_event_count": 174,
-    "public_exact_batch_count": 28,
-    "exact_resolved_event_records": 30,
-    "reviewed_excluded_event_records": 144,
-    "note": "The repository is at batch_0028; cumulative exact event records are 30 because some public batches resolve more than one historical event."
+    "public_exact_batch_count": 29,
+    "exact_resolved_event_records": 31,
+    "reviewed_excluded_event_records": 143,
+    "note": "The repository is at batch_0029; cumulative exact event records are 31 because some public batches resolve more than one historical event."
   },
   "consolidated_source_search": {
     "public_one_stop_exact_timestamp_dataset_found": false,
@@ -156,14 +156,16 @@
       "reason": "No consolidated public dataset or exact-clock release record was located in the deep-research pass."
     },
     {
-      "probe_id": "BCR-search-negative",
+      "probe_id": "BCR-2015-Q4-resolved",
       "historical_symbol": "BCR",
-      "source_family": "repository_and_archive_search",
-      "exact_clock_observed": false,
-      "historical_event_match": false,
+      "source_family": "preserved_wire_mirror",
+      "exact_clock_observed": true,
+      "historical_event_match": true,
       "evidence_eligible": false,
-      "disposition": "NO_EXACT_TIME_FOUND_IN_PASS",
-      "reason": "No consolidated public dataset or exact-clock release record was located in the deep-research pass."
+      "disposition": "RESOLVED_IN_BATCH_0029",
+      "reason": "Exact Business Wire clock was recovered and promoted through the separately reviewed G1 batch_0029 evidence path; the research map remains guidance-only and does not itself resolve the event.",
+      "source_reference": "https://www.marketscreener.com/quote/stock/C-R-BARD-11788/news/C-R-Bard-Bard-Announces-Fourth-Quarter-Results-19785868/",
+      "exact_public_release_ts": "2015-01-29T16:05:00-05:00"
     },
     {
       "probe_id": "NATI-search-negative",
@@ -235,20 +237,6 @@
     },
     {
       "priority_rank": 5,
-      "event_id": "HEJFE-E25BAF3CFF23A3BE",
-      "historical_symbol": "BCR",
-      "first_documented_illicit_trade_ts": "2015-01-29 15:27:00",
-      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
-      "research_signal": "strong_release_trail",
-      "next_source_families": [
-        "official_newswire_archive",
-        "issuer_investor_relations_archive",
-        "preserved_wire_mirror",
-        "sec_exhibit_corroboration"
-      ]
-    },
-    {
-      "priority_rank": 6,
       "event_id": "HEJFE-F9E72EEF6E5BD373",
       "historical_symbol": "NATI",
       "first_documented_illicit_trade_ts": "2015-01-29 15:51:00",
@@ -262,7 +250,7 @@
       ]
     },
     {
-      "priority_rank": 7,
+      "priority_rank": 6,
       "event_id": "HEJFE-7F8218B15679F14D",
       "historical_symbol": "NATI",
       "first_documented_illicit_trade_ts": "2015-04-28 13:59:00",
