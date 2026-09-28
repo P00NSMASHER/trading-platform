@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "0325cd6361f88c53fdc48b8e5004cce5b841e8ed",
+  "base_main_sha": "0643b42e3de83188b1d10e12257cd160383ddc0d",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 29,
-    "reviewed_excluded": 145,
+    "exact_resolved": 30,
+    "reviewed_excluded": 144,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 145,
+    "raw_exact_time_evidence_gaps": 144,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 29,
+    "exact_timing_analysis_eligible": 30,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -139,13 +139,6 @@
       "event_id": "HEJFE-6F0A7632D9B4FFF6",
       "historical_symbol": "ACHC",
       "first_documented_illicit_trade_ts": "2015-04-28 14:35:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-05DE1473D5D7F7FB",
-      "historical_symbol": "MFRM",
-      "first_documented_illicit_trade_ts": "2015-03-19 15:55:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1083,14 +1076,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 29,
-    "latest_batch": "g1_announcement_times_batch_0027.csv",
+    "exact_resolved": 30,
+    "latest_batch": "g1_announcement_times_batch_0028.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-0BCEF81B6C0111FB",
-        "historical_symbol": "COLM",
-        "public_announcement_ts": "2015-04-30T16:00:00-04:00",
-        "source_reference": "https://www.streetinsider.com/entities/Definitive%2BAgreement/COLM"
+        "event_id": "HEJFE-05DE1473D5D7F7FB",
+        "historical_symbol": "MFRM",
+        "public_announcement_ts": "2015-03-19T16:01:00-04:00",
+        "source_reference": "https://www.marketscreener.com/quote/stock/MATTRESS-FIRM-HOLDING-COR-9445891/news/Mattress-Firm-Announces-Fourth-Fiscal-Quarter-and-Full-Fiscal-Year-Financial-Results-20057085/"
       }
     ]
   }
