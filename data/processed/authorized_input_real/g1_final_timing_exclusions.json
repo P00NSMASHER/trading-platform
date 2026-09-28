@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "0643b42e3de83188b1d10e12257cd160383ddc0d",
+  "base_main_sha": "fccd411ab3c16aa5db76d83becfcbffb61be8e12",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 30,
-    "reviewed_excluded": 144,
+    "exact_resolved": 31,
+    "reviewed_excluded": 143,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 144,
+    "raw_exact_time_evidence_gaps": 143,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 30,
+    "exact_timing_analysis_eligible": 31,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -349,13 +349,6 @@
       "event_id": "HEJFE-9DF82252ED78E41F",
       "historical_symbol": "CBT",
       "first_documented_illicit_trade_ts": "2015-04-29 13:33:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-E25BAF3CFF23A3BE",
-      "historical_symbol": "BCR",
-      "first_documented_illicit_trade_ts": "2015-01-29 15:27:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1076,14 +1069,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 30,
-    "latest_batch": "g1_announcement_times_batch_0028.csv",
+    "exact_resolved": 31,
+    "latest_batch": "g1_announcement_times_batch_0029.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-05DE1473D5D7F7FB",
-        "historical_symbol": "MFRM",
-        "public_announcement_ts": "2015-03-19T16:01:00-04:00",
-        "source_reference": "https://www.marketscreener.com/quote/stock/MATTRESS-FIRM-HOLDING-COR-9445891/news/Mattress-Firm-Announces-Fourth-Fiscal-Quarter-and-Full-Fiscal-Year-Financial-Results-20057085/"
+        "event_id": "HEJFE-E25BAF3CFF23A3BE",
+        "historical_symbol": "BCR",
+        "public_announcement_ts": "2015-01-29T16:05:00-05:00",
+        "source_reference": "https://www.marketscreener.com/quote/stock/C-R-BARD-11788/news/C-R-Bard-Bard-Announces-Fourth-Quarter-Results-19785868/"
       }
     ]
   }
