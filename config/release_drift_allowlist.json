@@ -766,8 +766,8 @@
       "reason": "G1 fail-closed validator and priority-queue generator that prevents wrong-year, date-only, inferred, archive-capture, or mismatched probes from becoming exact timestamp evidence."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "e6b82cc3e33d6bc5cde82f90d7d2574d1558d3ed4e5b721f6398af24e303937f",
-      "reason": "Regression coverage for G1 source-research state, 25-batch/27-event accounting, and false-positive promotion blocking."
+      "expected_sha256": "c6ee2c7a9b98e03ca693bff470a544e9e4d85902bfda58c8187c437c104f5623",
+      "reason": "G1 source-research regression expectations synchronized to State Street batch 0026: assert 26 public exact-time batches / 28 exact events / 146 reviewed exclusions while preserving all fail-closed promotion tests."
     },
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
