@@ -318,8 +318,8 @@
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "0eef1f1a273946a0b518db6cec088a5c8a5e635ae0b3fb78b641b1eac7c0272e",
-      "reason": "G1 source-research integration: documents the 25-batch/27-event distinction, research-only source probes, promotion boundary, and lawful I/B/E/S fallback without weakening exact-time evidence requirements."
+      "expected_sha256": "ddea3b08ddc621259ade85f29712297be168c879381a3362ff51eee59293a432",
+      "reason": "G1 source-research synchronization after State Street batch 0026: keep the research-only priority map aligned to 28 exact-resolved events / 146 reviewed exclusions without changing evidence eligibility or promotion rules."
     },
     "config/metadata_sources.g3_public.json": {
       "expected_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
@@ -758,8 +758,8 @@
       "reason": "G1 batch 0025 evidence row for Ford: SEC-hosted issuer earnings exhibit explicitly states a 7:00 a.m. EST first-public results release on January 29, 2015; graded A."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "2992bd57248976367cf0d54605fb1f99b71047664dca5a8ecc270b3f94f38120",
-      "reason": "G1 research-only source-discovery map for the 174-event exact-public-announcement-time sweep; records source-family probes and priorities without resolving any event."
+      "expected_sha256": "b5c7548ead3d6f2eee086015bed6dd36de3525125d0320e03ff7f884a570efe6",
+      "reason": "G1 source-research synchronization after State Street batch 0026: keep the research-only priority map aligned to 28 exact-resolved events / 146 reviewed exclusions without changing evidence eligibility or promotion rules."
     },
     "src/g1_source_research.py": {
       "expected_sha256": "abdc37bb7aa5d4473ea9e5b63a5e5adda73ba496adfd7b808deb18fcc883663f",
