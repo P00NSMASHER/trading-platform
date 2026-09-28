@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "56c276232dfe056f92aa3a7a1426520f1648a4902e873d45ea9acbb69d84906a",
-      "reason": "G1 independently verified Business Wire batch 0015: add HBI exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire mirror plus SEC-hosted issuer corroboration; grade the evidence B, remove only the stale HBI reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "7981ffa86c524ddcadcdfa17f4d8d29d2566d3cb45e2e3e1148b4b01c9b66794",
+      "reason": "G1 issuer-hosted Business Wire batch 0016: add GNRC exact release clock at 2015-02-11 06:00 ET from Generac's issuer-hosted 11:00 UTC archive, SEC-corroborated; remove only the stale GNRC reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "6c4cbc8eb8d24aa4af10282adc062b38e96f42cc8129f4ec75087d5df324622b",
-      "reason": "G1 independently verified Business Wire batch 0015: add HBI exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire mirror plus SEC-hosted issuer corroboration; grade the evidence B, remove only the stale HBI reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "eb7e8b28a0cb518461dd21c9514301013f6947ceeb96280e672a0bc8bc9782ce",
+      "reason": "G1 issuer-hosted Business Wire batch 0016: add GNRC exact release clock at 2015-02-11 06:00 ET from Generac's issuer-hosted 11:00 UTC archive, SEC-corroborated; remove only the stale GNRC reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "1fd6ead83adb187867f0602ec4014096d027d094a0864cc2226cbbbd4ef4b1b2",
       "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "f2353ff2f89f03ff08ed2c9e4fa70255e33a5d9aeba7e1de4cbb06f98a939cda",
-      "reason": "G1 independently verified Business Wire batch 0015: add HBI exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire mirror plus SEC-hosted issuer corroboration; grade the evidence B, remove only the stale HBI reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "8e072e89fd48edbcd1173ee2162758af459815881e0b0922c1f2035e313c81c0",
+      "reason": "G1 issuer-hosted Business Wire batch 0016: add GNRC exact release clock at 2015-02-11 06:00 ET from Generac's issuer-hosted 11:00 UTC archive, SEC-corroborated; remove only the stale GNRC reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -716,6 +716,10 @@
     "data/public/metadata/g1_announcement_times_batch_0015.csv": {
       "expected_sha256": "4c59c614c0caf2199ffbbe51c517c4db19d309249bb5f2582c92fb12fa8d8903",
       "reason": "G1 batch 0015 evidence row for HBI: preserved Business Wire mirror timestamp at 2015-01-29 4:05 PM EST, SEC-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0016.csv": {
+      "expected_sha256": "7b1d1177057a3980d9806576f5731cd33ae54bfab9393889288e850f8b9c77f4",
+      "reason": "G1 batch 0016 evidence row for GNRC: issuer-hosted Generac Business Wire release explicitly timestamped 2015-02-11 11:00 UTC / 06:00 EST; SEC-corroborated and graded A."
     }
   }
 }

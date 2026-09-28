@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains seventeen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains eighteen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-generac-businesswire-issuer-20150211",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0016.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "Generac's issuer-hosted investor-relations archive explicitly timestamps 'Generac Reports Fourth Quarter and Full-Year 2014 Results' at Feb. 11, 2015 11:00 UTC and identifies Business Wire distribution. SEC Exhibit 99.1 independently corroborates the identical issuer release title, date, and content.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "SEC corroboration: https://www.sec.gov/Archives/edgar/data/1474735/000143774915002323/ex99-1.htm"
+    },
     {
       "source_id": "public-businesswire-hbi-verified-mirror-20150129",
       "record_kind": "announcement_timestamp",
@@ -559,8 +582,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "56c276232dfe056f92aa3a7a1426520f1648a4902e873d45ea9acbb69d84906a",
-    "expected_count": 157,
+    "expected_sha256": "7981ffa86c524ddcadcdfa17f4d8d29d2566d3cb45e2e3e1148b4b01c9b66794",
+    "expected_count": 156,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
