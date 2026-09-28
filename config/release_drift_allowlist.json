@@ -318,8 +318,8 @@
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "c772c3d3ab4d6eccb645bc381f785429b17ae5a9220c6ee20cd0e984f6030804",
-      "reason": "G1 source-research queue refresh after BCR resolution in batch 0029: remove resolved BCR from unresolved priorities, advance research counters to 31 exact / 143 fail-closed, and preserve fail-closed promotion semantics."
+      "expected_sha256": "949645db79ce612090fe41165870ca8518099257a1a0d3a996fe803625f9a72c",
+      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
     },
     "config/metadata_sources.g3_public.json": {
       "expected_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "8cf1ff1f4de974fa458156aa334579e7412733e0a0ce01700f08f7d5bcefede9",
-      "reason": "G1 independently verified Business Wire batch 0029: add BCR exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale BCR reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "6b283e678138a480b63369cf7d8d8a877e113368ac0213c5dc97b056a2843118",
+      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "5ac9f5e69d1e2f38d244515a4739e9931c8bfb116fb4a590d2f467b68d6d5189",
-      "reason": "G1 independently verified Business Wire batch 0029: add BCR exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale BCR reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "bc79721043a99ed9b3b6d8f53f5b025487cbc637d5298a3420a7c25bb3bc5eea",
+      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "3b195c84a1ea44eeab9a08f9d86cf0f379ae6e2b35d5b502899334baf0114d1f",
       "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "dc22ab8f8962c787e5795a066bb6642423ae966d6d84f39b04088d4d0dd24f7f",
-      "reason": "G1 independently verified Business Wire batch 0029: add BCR exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale BCR reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "65e7b1d9743850570446f5cccf056076354186df0c0e6c247f9cad07288655fd",
+      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -758,16 +758,16 @@
       "reason": "G1 batch 0025 evidence row for Ford: SEC-hosted issuer earnings exhibit explicitly states a 7:00 a.m. EST first-public results release on January 29, 2015; graded A."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "33e088f77868d33b76789d199c7a4e4f7900c32dd7186c94492f35daeac27639",
-      "reason": "G1 source-research queue refresh after BCR resolution in batch 0029: remove resolved BCR from unresolved priorities, advance research counters to 31 exact / 143 fail-closed, and preserve fail-closed promotion semantics."
+      "expected_sha256": "82cf9ac8f51b7c530ab95151c1e641b2899322656a42858368746b332163e4f8",
+      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
     },
     "src/g1_source_research.py": {
       "expected_sha256": "34dd8d8e07bdb10c82b30caba2145d6e30493d1f27ec9f68a68e1e937e086ed2",
       "reason": "G1 research promotion hardening: independently validate event identity, timezone-aware first-public-release timestamp semantics, admissible source family, source reference, chronology, seven-calendar-day window, and mirror corroboration."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "cc70ea12695b84fc55d7e15a08763ce5e0c45406079c0388ca1c087799ef98f8",
-      "reason": "Regression coverage for G1 research promotion hardening, including flag-only bypass, timezone, symbol, timestamp semantics, chronology, seven-day window, and preserved-mirror corroboration."
+      "expected_sha256": "e28369d00b26b48805dac24763140f1be60d69d31352bbc29b76d02ba2cd5141",
+      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
     },
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
@@ -804,6 +804,10 @@
     "data/public/metadata/g1_announcement_times_batch_0029.csv": {
       "expected_sha256": "d85c281af482f774d4ccc2318362304c5cde91e83381bbcd11d97ff86e244f38",
       "reason": "G1 batch 0029 evidence row for BCR: preserved Business Wire timestamp at 2015-01-29 4:05 PM EST, SEC-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0030.csv": {
+      "expected_sha256": "46ab2af9aaeafb3a289f407277362fd89348ef38fea6867574bbf24dfd44c47a",
+      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
     }
   }
 }
