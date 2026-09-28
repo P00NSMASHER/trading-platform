@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "7981ffa86c524ddcadcdfa17f4d8d29d2566d3cb45e2e3e1148b4b01c9b66794",
-      "reason": "G1 issuer-hosted Business Wire batch 0016: add GNRC exact release clock at 2015-02-11 06:00 ET from Generac's issuer-hosted 11:00 UTC archive, SEC-corroborated; remove only the stale GNRC reviewed exclusion and preserve all remaining fail-closed semantics."
+      "expected_sha256": "d7423f250c7653e00f55367f2715338dc3515ce2a4e0d76ae785435258818dc0",
+      "reason": "G1 independently verified Business Wire batch 0017: add SNDK exact release clock at 2015-01-21 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale SNDK reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "eb7e8b28a0cb518461dd21c9514301013f6947ceeb96280e672a0bc8bc9782ce",
-      "reason": "G1 issuer-hosted Business Wire batch 0016: add GNRC exact release clock at 2015-02-11 06:00 ET from Generac's issuer-hosted 11:00 UTC archive, SEC-corroborated; remove only the stale GNRC reviewed exclusion and preserve all remaining fail-closed semantics."
+      "expected_sha256": "aae47d772d47c38771197606a3ebfd92fc3d537c59f1e4f57698b971e17d509b",
+      "reason": "G1 independently verified Business Wire batch 0017: add SNDK exact release clock at 2015-01-21 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale SNDK reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "3f19bf83964c136408d95cf6609f2b2019d15a9f6ccb8de102a6ddede5ecc0e9",
       "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "8e072e89fd48edbcd1173ee2162758af459815881e0b0922c1f2035e313c81c0",
-      "reason": "G1 issuer-hosted Business Wire batch 0016: add GNRC exact release clock at 2015-02-11 06:00 ET from Generac's issuer-hosted 11:00 UTC archive, SEC-corroborated; remove only the stale GNRC reviewed exclusion and preserve all remaining fail-closed semantics."
+      "expected_sha256": "6c2befdffe6da9a89f9781a07dd1f7be3d20def9d27a84f2ef8f3934b92ca17b",
+      "reason": "G1 independently verified Business Wire batch 0017: add SNDK exact release clock at 2015-01-21 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale SNDK reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -720,6 +720,10 @@
     "data/public/metadata/g1_announcement_times_batch_0016.csv": {
       "expected_sha256": "7b1d1177057a3980d9806576f5731cd33ae54bfab9393889288e850f8b9c77f4",
       "reason": "G1 batch 0016 evidence row for GNRC: issuer-hosted Generac Business Wire release explicitly timestamped 2015-02-11 11:00 UTC / 06:00 EST; SEC-corroborated and graded A."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0017.csv": {
+      "expected_sha256": "a7a4f130341577debe925d17bac3baedca956e92e5cf72162e29f43949753729",
+      "reason": "G1 batch 0017 evidence row for SNDK: preserved Business Wire timestamp at 2015-01-21 4:05 PM EST, SEC-corroborated and intentionally graded B."
     }
   }
 }

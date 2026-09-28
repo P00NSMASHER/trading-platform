@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains eighteen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains nineteen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-businesswire-sndk-verified-mirror-20150121",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0017.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "MarketScreener preserves the Business Wire article 'SanDisk Announces Fourth Quarter and Fiscal 2014 Results' as published Jan. 21, 2015 at 4:05 PM EST. SEC Exhibit 99.1 independently corroborates the identical SanDisk release title, date, and content. Grade B reflects that the exact clock is recovered from a preserved Business Wire mirror.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "SEC corroboration: https://www.sec.gov/Archives/edgar/data/1000180/000100018015000006/exhibit991-q414earningsrel.htm"
+    },
     {
       "source_id": "public-generac-businesswire-issuer-20150211",
       "record_kind": "announcement_timestamp",
@@ -582,8 +605,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "7981ffa86c524ddcadcdfa17f4d8d29d2566d3cb45e2e3e1148b4b01c9b66794",
-    "expected_count": 156,
+    "expected_sha256": "d7423f250c7653e00f55367f2715338dc3515ce2a4e0d76ae785435258818dc0",
+    "expected_count": 155,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
