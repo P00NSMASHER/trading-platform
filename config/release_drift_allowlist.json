@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "db129018f71fc1bedbbf30da5bd521b3a959b414a6b4186adf371545422903bb",
-      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
+      "expected_sha256": "ea0256fd9a162f4cfaf1e71c15a960d0a6cbbc1f340707bd6b92c829cde488e2",
+      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "1eb1b623478a344a97603367f8f063ce8bb87c1f5d41b8493cecfb7621c92bf3",
-      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
+      "expected_sha256": "b91b7a9ddf47dddfd830f2ed6ff2f6a62cfb5164478eff15bed7b8f216c28d8d",
+      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "633c8bd4846fc6263f6d849e632b31d1227ac1e15f84d7d3b307de04ba273627",
-      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
+      "expected_sha256": "947a169276310eb727713e40caafd3e76b26c7d31fe0711141195df24296c131",
+      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified issuer-attributed distribution batch 0018: add GME exact release clock at 2015-03-26 16:29 ET from EIN Presswire's 20:29 GMT historical release entry, corroborated by GameStop's issuer archive and SEC Exhibit 99.1; grade evidence B, remove only the stale GME reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "6991709e02aa14dc3a4805a65a2197b17494fcf7d9eb435c58ee0b5ebdd6fb95",
-      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
+      "expected_sha256": "3600dea3021e21c9a6f936a738786972012d3f9c6b4025c9b9de8010124defbe",
+      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "0ca3751454c9d6b08449c138522c1be3fd4a2a1d49d2a6176d1eafdd0ab9b092",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "3b8dd5fe99045fa5cd5418ce12fb8e611cab7109e2624d0ad91425c607f89539",
-      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
+      "expected_sha256": "457dcdbeef5e87bd02a64aaa6947260847adc422291e7613dabb2910beb397d7",
+      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "8cc5a1167435e0d39822b9535dedddb6e83ee12d485931f522fc8ea3341a4bad",
-      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
+      "expected_sha256": "58268ec82c3a3d126f1f3cc75784b08f576cba8f3fa178c9879d39f58abb4438",
+      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "f17682cf12388218b7d34bbcc7420694b75ee2546c305e4ea7307ba4a5380eca",
-      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
+      "expected_sha256": "13b137740f00d34f228cba46b89523b8ab5d2c33fbace485daef35f2bea70d3a",
+      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "09e6be388091bb5ab8bfc19bef88183567fa75167ef9ead99902a6ee069e6088",
-      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
+      "expected_sha256": "87eedc0c23251185c5f4f63aad5da820274f1a5ad546d53d1ecd0cef97442d69",
+      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
