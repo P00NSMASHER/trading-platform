@@ -3,11 +3,140 @@ from __future__ import annotations
 import argparse
 import json
 from copy import deepcopy
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 
 class G1SourceResearchError(ValueError):
     pass
+
+
+_ALLOWED_EVIDENCE_SOURCE_FAMILIES = frozenset({
+    "official_newswire_archive",
+    "issuer_investor_relations_archive",
+    "preserved_wire_mirror",
+    "ibes_announcement",
+    "licensed_ibes_actuals",
+})
+_ALLOWED_TIMESTAMP_EVIDENCE_KINDS = frozenset({
+    "publisher_timestamp",
+    "explicit_release_clock",
+    "licensed_actual_announcement_time",
+})
+_FIRST_TRADE_TIMEZONE = ZoneInfo("America/New_York")
+_MAX_RELEASE_LAG_DAYS = 7
+
+
+def _parse_exact_public_release_ts(value: object, *, probe_id: str) -> datetime:
+    raw = str(value or "").strip()
+    if not raw:
+        raise G1SourceResearchError(
+            f"probe {probe_id} cannot be evidence without exact_public_release_ts"
+        )
+    try:
+        parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise G1SourceResearchError(
+            f"probe {probe_id} exact_public_release_ts must be valid ISO-8601"
+        ) from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise G1SourceResearchError(
+            f"probe {probe_id} exact_public_release_ts must be timezone-aware"
+        )
+    return parsed.astimezone(timezone.utc)
+
+
+def _parse_first_trade_ts(value: object, *, event_id: str) -> datetime:
+    raw = str(value or "").strip()
+    if not raw:
+        raise G1SourceResearchError(
+            f"current exclusion {event_id} is missing first_documented_illicit_trade_ts"
+        )
+    try:
+        parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise G1SourceResearchError(
+            f"current exclusion {event_id} has invalid first_documented_illicit_trade_ts"
+        ) from exc
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=_FIRST_TRADE_TIMEZONE)
+    return parsed.astimezone(timezone.utc)
+
+
+def _validate_evidence_eligible_probe(
+    probe: dict, exclusion_by_id: dict[str, dict]
+) -> None:
+    probe_id = str(probe.get("probe_id", "")).strip() or "<unnamed>"
+    event_id = str(probe.get("event_id", "")).strip()
+    if not event_id:
+        raise G1SourceResearchError(
+            f"probe {probe_id} cannot be evidence without event_id"
+        )
+    current = exclusion_by_id.get(event_id)
+    if current is None:
+        raise G1SourceResearchError(
+            f"probe {probe_id} event_id is not a current fail-closed exclusion: {event_id}"
+        )
+
+    symbol = str(probe.get("historical_symbol", "")).strip()
+    if symbol != str(current.get("historical_symbol", "")).strip():
+        raise G1SourceResearchError(
+            f"probe {probe_id} historical_symbol does not match event_id {event_id}"
+        )
+    if not probe.get("historical_event_match"):
+        raise G1SourceResearchError(
+            f"probe {probe_id} cannot be evidence without historical_event_match"
+        )
+    if not probe.get("exact_clock_observed"):
+        raise G1SourceResearchError(
+            f"probe {probe_id} cannot be evidence without exact_clock_observed"
+        )
+    if str(probe.get("timestamp_kind", "")).strip() != "first_public_release":
+        raise G1SourceResearchError(
+            f"probe {probe_id} timestamp_kind must be first_public_release"
+        )
+
+    evidence_kind = str(probe.get("timestamp_evidence_kind", "")).strip()
+    if evidence_kind not in _ALLOWED_TIMESTAMP_EVIDENCE_KINDS:
+        raise G1SourceResearchError(
+            f"probe {probe_id} timestamp_evidence_kind is not admissible"
+        )
+
+    source_family = str(probe.get("source_family", "")).strip()
+    if source_family not in _ALLOWED_EVIDENCE_SOURCE_FAMILIES:
+        raise G1SourceResearchError(
+            f"probe {probe_id} source_family is not admissible for an exact release clock"
+        )
+    if not str(probe.get("source_reference", "")).strip():
+        raise G1SourceResearchError(
+            f"probe {probe_id} cannot be evidence without source_reference"
+        )
+    if (
+        source_family == "preserved_wire_mirror"
+        and not str(probe.get("corroboration_reference", "")).strip()
+    ):
+        raise G1SourceResearchError(
+            f"probe {probe_id} preserved_wire_mirror evidence requires corroboration_reference"
+        )
+
+    release_ts = _parse_exact_public_release_ts(
+        probe.get("exact_public_release_ts"), probe_id=probe_id
+    )
+    trade_ts = _parse_first_trade_ts(
+        current.get("first_documented_illicit_trade_ts"), event_id=event_id
+    )
+    if release_ts <= trade_ts:
+        raise G1SourceResearchError(
+            f"probe {probe_id} exact public release must be strictly after first documented trade"
+        )
+
+    release_local = release_ts.astimezone(_FIRST_TRADE_TIMEZONE)
+    trade_local = trade_ts.astimezone(_FIRST_TRADE_TIMEZONE)
+    if release_local.date() > trade_local.date() + timedelta(days=_MAX_RELEASE_LAG_DAYS):
+        raise G1SourceResearchError(
+            f"probe {probe_id} exact public release exceeds seven calendar days after first documented trade"
+        )
 
 
 def _read_json(path: Path) -> dict:
@@ -40,18 +169,7 @@ def validate_research_map(research: dict, exclusions: dict) -> dict:
     for probe in research.get("validation_probes", []):
         if not probe.get("evidence_eligible"):
             continue
-        if not probe.get("historical_event_match"):
-            raise G1SourceResearchError(
-                f"probe {probe.get('probe_id')} cannot be evidence without historical_event_match"
-            )
-        if not probe.get("exact_clock_observed"):
-            raise G1SourceResearchError(
-                f"probe {probe.get('probe_id')} cannot be evidence without exact_clock_observed"
-            )
-        if not str(probe.get("exact_public_release_ts", "")).strip():
-            raise G1SourceResearchError(
-                f"probe {probe.get('probe_id')} cannot be evidence without exact_public_release_ts"
-            )
+        _validate_evidence_eligible_probe(probe, exclusion_by_id)
 
     current_state = research.get("current_g1_state", {})
     g1_state = exclusions.get("g1_state", {})

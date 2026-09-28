@@ -762,12 +762,12 @@
       "reason": "G1 source-research queue refresh after BCR resolution in batch 0029: remove resolved BCR from unresolved priorities, advance research counters to 31 exact / 143 fail-closed, and preserve fail-closed promotion semantics."
     },
     "src/g1_source_research.py": {
-      "expected_sha256": "abdc37bb7aa5d4473ea9e5b63a5e5adda73ba496adfd7b808deb18fcc883663f",
-      "reason": "G1 fail-closed validator and priority-queue generator that prevents wrong-year, date-only, inferred, archive-capture, or mismatched probes from becoming exact timestamp evidence."
+      "expected_sha256": "34dd8d8e07bdb10c82b30caba2145d6e30493d1f27ec9f68a68e1e937e086ed2",
+      "reason": "G1 research promotion hardening: independently validate event identity, timezone-aware first-public-release timestamp semantics, admissible source family, source reference, chronology, seven-calendar-day window, and mirror corroboration."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "381bfe97d949caa4e7da4baf8d4e022da343462a2e0263a048a6f80f529ec053",
-      "reason": "G1 source-research queue refresh after BCR resolution in batch 0029: remove resolved BCR from unresolved priorities, advance research counters to 31 exact / 143 fail-closed, and preserve fail-closed promotion semantics."
+      "expected_sha256": "cc70ea12695b84fc55d7e15a08763ce5e0c45406079c0388ca1c087799ef98f8",
+      "reason": "Regression coverage for G1 research promotion hardening, including flag-only bypass, timezone, symbol, timestamp semantics, chronology, seven-day window, and preserved-mirror corroboration."
     },
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
