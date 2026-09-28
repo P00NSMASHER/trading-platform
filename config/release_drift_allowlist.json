@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "1608b919b0032b074975391f6a3d62a75f27d5f259dc492e87dd85ea041ae83a",
-      "reason": "G1 independently verified Business Wire batch 0028: add MFRM exact release clock at 2015-03-19 16:01 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale MFRM reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "8cf1ff1f4de974fa458156aa334579e7412733e0a0ce01700f08f7d5bcefede9",
+      "reason": "G1 independently verified Business Wire batch 0029: add BCR exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale BCR reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "b24f674e15fcae4067a1078351beb9c334bf91b203c81649bed824481c1115af",
-      "reason": "G1 independently verified Business Wire batch 0028: add MFRM exact release clock at 2015-03-19 16:01 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale MFRM reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "5ac9f5e69d1e2f38d244515a4739e9931c8bfb116fb4a590d2f467b68d6d5189",
+      "reason": "G1 independently verified Business Wire batch 0029: add BCR exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale BCR reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "16430bc4d2f1d6582233d955f7d198b63dfd49ba0ee43c0b9e37e15bfdec2f36",
       "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "ce9632a8640a2dd3ee2ec14cc4ea78ab9e67a0a7c8546ae81fd42c95ede86cf7",
-      "reason": "G1 independently verified Business Wire batch 0028: add MFRM exact release clock at 2015-03-19 16:01 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale MFRM reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "dc22ab8f8962c787e5795a066bb6642423ae966d6d84f39b04088d4d0dd24f7f",
+      "reason": "G1 independently verified Business Wire batch 0029: add BCR exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale BCR reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -800,6 +800,10 @@
     "data/public/metadata/g1_announcement_times_batch_0028.csv": {
       "expected_sha256": "8aa3df05355ad89ce15ba1765d76507e0e8943948e4088471eaa500baa188e43",
       "reason": "G1 batch 0028 evidence row for MFRM: preserved Business Wire timestamp at 2015-03-19 4:01 PM EDT, SEC-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0029.csv": {
+      "expected_sha256": "d85c281af482f774d4ccc2318362304c5cde91e83381bbcd11d97ff86e244f38",
+      "reason": "G1 batch 0029 evidence row for BCR: preserved Business Wire timestamp at 2015-01-29 4:05 PM EST, SEC-corroborated and intentionally graded B."
     }
   }
 }
