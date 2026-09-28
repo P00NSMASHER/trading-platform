@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "2957cfdc8325f070caccf7cf421f5d4dc3fbdd8fa4ecacc222f5d88c904a9d90",
-      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
+      "expected_sha256": "b5c1940588c3d51fb5abad70abee53ade93cdcd025eebade2a000f21ceb9f2a2",
+      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "7ccad8a34b32293fc88ee08a69c75183b9eaf97d4dc5c67daf069217f946d022",
-      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
+      "expected_sha256": "2e717a04e57bbbbeccb9a2084aca724d92e6c142a1572e50f39e7fc4e6ebe579",
+      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "25dd06b162f9f20c5059fb9b9305cdb297aaf0da1492c2c1c7f4ae4e5b640962",
-      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
+      "expected_sha256": "33b3f9571bf916081fbd2467c25b5935ccd49dbbc4d0e5eb53e7676de54ef8d2",
+      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified Business Wire batch 0028: add MFRM exact release clock at 2015-03-19 16:01 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale MFRM reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "e15774cbf3c15d319cbfcafa120ccbce877044b84eec457d0242394038b56648",
-      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
+      "expected_sha256": "16430bc4d2f1d6582233d955f7d198b63dfd49ba0ee43c0b9e37e15bfdec2f36",
+      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "ce9632a8640a2dd3ee2ec14cc4ea78ab9e67a0a7c8546ae81fd42c95ede86cf7",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "e2fc412f5663832c286a01e1a349a40f3e68bc03c7b1b0fcc6b335f2db60b709",
-      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
+      "expected_sha256": "ba9bc3ad5b53de7b1cf7e9b876adc51c5f50b9d790b4327045ffaa15f275a800",
+      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "98c30babf750b91df0cacbfef0072a9f03a3b23b29551656682c5dbb261e735d",
-      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
+      "expected_sha256": "88958f7112c5a91b77bfca9ea4760b56ea9c794f2a23ef3ef3eaf41c126d7103",
+      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "b188f0100b4e9d899502accac9a71c1d503b28955e7385d2b8c0c0d7442a127c",
-      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
+      "expected_sha256": "3495f0a0018740cab6db16a898f4d61896e5c9d2a6303b1a353e065e057ab710",
+      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "cd25d3ab855a5179724dcf038b3d5fc562bb17f7d4b658d2fbe2437723e037d4",
-      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
+      "expected_sha256": "4d502b164f2fd7ec415fd7de38508cccaad624f94e1d91864f766f245d11eba7",
+      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
