@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 29
-- **Immutable reviewed fail-closed exclusions:** 145
+- **Exact first-public announcement timestamps resolved:** 30
+- **Immutable reviewed fail-closed exclusions:** 144
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 29
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 30
 
 This does **not** invent announcement times.
 
@@ -235,3 +235,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-0BCEF81B6C0111FB` (COLM): `2015-04-30T16:00:00-04:00`. StreetInsider's historical COLM feed preserves `Columbia Sportswear Company Reports Record First Quarter` at `Apr. 30, 2015 04:00PM`. Columbia's issuer-hosted page identifies the matching release as `BUSINESS WIRE`, and SEC Exhibit 99.1 independently corroborates the same title, date, and content. This row is deliberately graded `B`, not `A`, because the literal clock is recovered from the preserved distribution mirror rather than the issuer-hosted page itself.
 
 The other 145 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified Business Wire batch 0028
+
+One additional event now has an exact public-release timestamp recovered from a preserved Business Wire article and corroborated against the SEC-hosted issuer release:
+
+- `HEJFE-05DE1473D5D7F7FB` (MFRM): `2015-03-19T16:01:00-04:00`. MarketScreener preserves `Mattress Firm Announces Fourth Fiscal Quarter and Full Fiscal Year Financial Results` as published March 19, 2015 at 4:01 PM EDT and labels it Business Wire. SEC Exhibit 99.1 independently reproduces the same release title, date, and content. The frozen first documented illicit trade was at 3:55 PM EDT, yielding a six-minute interval. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from a preserved Business Wire mirror rather than a currently fetchable first-party Business Wire article page.
+
+The other 144 events remain fail-closed until equivalent admissible evidence is located.
