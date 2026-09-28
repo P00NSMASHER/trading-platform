@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 31
-- **Immutable reviewed fail-closed exclusions:** 143
+- **Exact first-public announcement timestamps resolved:** 32
+- **Immutable reviewed fail-closed exclusions:** 142
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 31
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 32
 
 This does **not** invent announcement times.
 
@@ -251,3 +251,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-E25BAF3CFF23A3BE` (BCR): `2015-01-29T16:05:00-05:00`. MarketScreener preserves `Bard Announces Fourth Quarter Results` as published Jan. 29, 2015 at 4:05 PM EST and labels it Business Wire. SEC Exhibit 99.1 independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved Business Wire mirror.
 
 The other 143 events remain fail-closed until equivalent admissible evidence is located.
+
+## Issuer newsroom batch 0030
+
+One additional event now has an exact public-release timestamp from the issuer-hosted newsroom and independent SEC corroboration:
+
+- `HEJFE-A25F33B630365184` (R): `2015-02-03T08:55:00-05:00`. Ryder's issuer-hosted newsroom timestamps `Ryder Reports Record Fourth Quarter and Full-Year 2014 Results and Provides 2015 Forecast` at `Tuesday, February 03, 2015 8:55 AM`. The source is normalized using the repository's configured `America/New_York` timezone; the same page separately identifies the 11:00 AM conference call as Eastern Time. SEC Exhibit 99.1 independently corroborates the identical release title, date, and content. This row is graded `A` under the same issuer-newsroom pattern used by existing A-grade recoveries.
+
+The other 142 events remain fail-closed until equivalent admissible evidence is located.
