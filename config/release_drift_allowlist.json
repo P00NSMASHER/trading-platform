@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "ef9fa943ece821acf978c8b9e0cff3abe91a58d4b83bc39ba123e301c35aabd6",
-      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
+      "expected_sha256": "6e87597f53323240e80a31747fc35cb1f49bb42ec5cd49b9686222a602e69060",
+      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "68bc7da5ec6e940caf33c26196faf62d2d731f14153b6897dba7922feb179bfe",
-      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
+      "expected_sha256": "da1e454a9036d094a4e9202a8c94912779817ccaef55cc2b911663ba21bd55e7",
+      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "7bc0409e3b381e221968aaec17bf1e5dee5ddfbc3d8c2101c716034325315a4e",
-      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
+      "expected_sha256": "5b8c5430f78c45d90211573be87ed86bd90184cfdb827487240b900b816f6be1",
+      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified PR Newswire batch 0021: add CB exact release clock at 2012-01-26 16:03 ET using a preserved PRNewswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale CB reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "cdbee6c19f56991549a419f5550ff55864c63ca7c63d385189ee3a41e7d41849",
-      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
+      "expected_sha256": "bbfff29c5dc1ef1e371bbbff73e52a33c208312a326f78b564e085087a7d122a",
+      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "ea7c624d6a921b8382b29d0525ce24f2fe04065759460aae03dbb1e8c0a3657d",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "33698993a901f4130005b14dff2fe19071ede87942d8f8c3e77e18e2bb2a474e",
-      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
+      "expected_sha256": "915c8723204251c15b42c3c6ddf718b4136349bdc9bd77049b576273b580bcdb",
+      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "da094847f135e7461b3cbcea89ff593ccd76294c9929f20a2783201b4bd8e3ef",
-      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
+      "expected_sha256": "f66235903b05b8a8447d87f59037867faf04b378f776d45126dc24f358f0cdfb",
+      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "7923fcd4785005376016b4bccf454ae8f22a1a7242e6d392d6de063064a24278",
-      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
+      "expected_sha256": "ae6de4dc9283dabf063549375797023b9d93eb754f2c18633c823118eb5972b3",
+      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "8426131ce3e5cb1167756bb94a1b0c9e268e42c64145e9309b8bd81e2a1ab266",
-      "reason": "Authoritative receipt regeneration from main source commit 020206cec9460b8b1b69d654437d515aacc2d1fa after G1 Fluor batch 0020."
+      "expected_sha256": "00ff5cff8994f5ec2298ae7c528d8fd9c79b69ce4d7f12b997ae31406e9433f7",
+      "reason": "Authoritative receipt regeneration from main source commit 4428c0a4a208958cd2da38da2c3e4ff8dd8eef6e after G1 Chubb batch 0021."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
