@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 26
-- **Immutable reviewed fail-closed exclusions:** 148
+- **Exact first-public announcement timestamps resolved:** 27
+- **Immutable reviewed fail-closed exclusions:** 147
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 26
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 27
 
 This does **not** invent announcement times.
 
@@ -211,3 +211,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-DF726FADF321F8E3` (PVH): `2015-03-25T16:01:00-04:00`. The preserved distribution copy records `PVH Corp. Reports 2014 Fourth Quarter and Full Year Results and Announces 2015 Outlook` at `Wed March 25, 2015 4:01 PM | Business Wire`. PVH's issuer-hosted page independently reproduces the same Business Wire release and date, and SEC Exhibit 99.1 corroborates the release text. This row is deliberately graded `B`, not `A`, because the literal clock survives in the preserved distribution copy rather than the current issuer page.
 
 The other 148 events remain fail-closed until equivalent admissible evidence is located.
+
+## SEC issuer release-clock batch 0025
+
+One additional event now has an exact first-public release clock directly stated in the issuer's SEC-hosted earnings exhibit:
+
+- `HEJFE-E8C5063581BE7EB7` (F): `2015-01-29T07:00:00-05:00`. Ford's Exhibit 99 states that Ford Motor Company releases its preliminary 2014 fourth-quarter financial results at `7:00 a.m. EST` on Thursday, January 29, 2015. The exhibit separately schedules the earnings conference call for 9:00 a.m. EST, so the 7:00 a.m. value is explicitly the release time rather than the call time. Ford's media-hosted copy independently preserves the same language. This row is graded `A`.
+
+The other 147 events remain fail-closed until equivalent admissible evidence is located.
