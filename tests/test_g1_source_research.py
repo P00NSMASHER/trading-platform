@@ -27,8 +27,8 @@ def test_research_map_builds_fail_closed_priority_queue():
     assert report["status"] == "RESEARCH_PRIORITIES_READY"
     assert report["research_use_only"] is True
     assert report["required_event_count"] == 174
-    assert report["exact_resolved_event_records"] == 27
-    assert report["reviewed_excluded_event_records"] == 147
+    assert report["exact_resolved_event_records"] == 28
+    assert report["reviewed_excluded_event_records"] == 146
     assert report["priority_event_count"] == 7
     assert [row["historical_symbol"] for row in report["queue"]] == [
         "QLIK", "TNGO", "CAKE", "NKE", "BCR", "NATI", "NATI"
@@ -72,8 +72,8 @@ def test_batch_count_and_event_count_are_explicitly_distinct():
     research = _load(RESEARCH_PATH)
     state = research["current_g1_state"]
 
-    assert state["public_exact_batch_count"] == 25
-    assert state["exact_resolved_event_records"] == 27
+    assert state["public_exact_batch_count"] == 26
+    assert state["exact_resolved_event_records"] == 28
     assert "some public batches resolve more than one historical event" in state["note"]
 
 

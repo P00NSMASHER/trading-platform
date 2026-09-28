@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 27
-- **Immutable reviewed fail-closed exclusions:** 147
+- **Exact first-public announcement timestamps resolved:** 28
+- **Immutable reviewed fail-closed exclusions:** 146
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 27
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 28
 
 This does **not** invent announcement times.
 
@@ -219,3 +219,11 @@ One additional event now has an exact first-public release clock directly stated
 - `HEJFE-E8C5063581BE7EB7` (F): `2015-01-29T07:00:00-05:00`. Ford's Exhibit 99 states that Ford Motor Company releases its preliminary 2014 fourth-quarter financial results at `7:00 a.m. EST` on Thursday, January 29, 2015. The exhibit separately schedules the earnings conference call for 9:00 a.m. EST, so the 7:00 a.m. value is explicitly the release time rather than the call time. Ford's media-hosted copy independently preserves the same language. This row is graded `A`.
 
 The other 147 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified Business Wire batch 0026
+
+One additional event now has an exact public-release timestamp recovered from a preserved Business Wire article and independently corroborated against both the issuer archive and SEC filing:
+
+- `HEJFE-EC5EB2BE0D97833F` (STT): `2015-01-23T05:52:00-05:00`. MarketScreener preserves State Street's fourth-quarter/full-year 2014 results release as `Published on 01/23/2015 at 10:52 am GMT` and labels it `Business Wire`. State Street's issuer-hosted archive reproduces the same Business Wire release, and its SEC Form 8-K states that on January 23, 2015 State Street issued the news release announcing those results. This row is deliberately graded `B`, not `A`, because the literal clock is recovered from the preserved Business Wire mirror rather than the issuer-hosted page itself.
+
+The other 146 events remain fail-closed until equivalent admissible evidence is located.

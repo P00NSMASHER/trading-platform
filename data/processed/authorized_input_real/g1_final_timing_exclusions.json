@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "49fa19d50afec39679a33b4a1745fc188f087bd2",
+  "base_main_sha": "73f2262b7a8a8b2ab8ab8cc2dd9f675c2ad5690b",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 27,
-    "reviewed_excluded": 147,
+    "exact_resolved": 28,
+    "reviewed_excluded": 146,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 147,
+    "raw_exact_time_evidence_gaps": 146,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 27,
+    "exact_timing_analysis_eligible": 28,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -461,13 +461,6 @@
       "event_id": "HEJFE-824BABBAD988A068",
       "historical_symbol": "SYMM",
       "first_documented_illicit_trade_ts": "2012-01-25 14:54:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-EC5EB2BE0D97833F",
-      "historical_symbol": "STT",
-      "first_documented_illicit_trade_ts": "2015-01-22 15:50:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1097,14 +1090,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 27,
-    "latest_batch": "g1_announcement_times_batch_0025.csv",
+    "exact_resolved": 28,
+    "latest_batch": "g1_announcement_times_batch_0026.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-E8C5063581BE7EB7",
-        "historical_symbol": "F",
-        "public_announcement_ts": "2015-01-29T07:00:00-05:00",
-        "source_reference": "https://www.sec.gov/Archives/edgar/data/37996/000003799615000007/exhibit99toearnings8-kdate.htm"
+        "event_id": "HEJFE-EC5EB2BE0D97833F",
+        "historical_symbol": "STT",
+        "public_announcement_ts": "2015-01-23T05:52:00-05:00",
+        "source_reference": "https://uk.marketscreener.com/quote/stock/STATE-STREET-CORPORATION-14499/news/State-Street-Reports-Fourth-Quarter-2014-GAAP-Basis-EPS-of-1-24-on-Revenue-of-2-6-Billion-Full-19751146/"
       }
     ]
   }

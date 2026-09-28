@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **25 public exact-time batches / 27 exact-resolved
+The current repository state is **26 public exact-time batches / 28 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
