@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **29 public exact-time batches / 31 exact-resolved
+The current repository state is **30 public exact-time batches / 32 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -72,7 +72,7 @@ I/B/E/S `ANNDATS_ACT + ANNTIMS_ACT`; the licensed rows themselves are not public
 The source-research map therefore records two things separately:
 
 1. **Priority historical events** for the next public sweep: QLIK, TNGO, CAKE, NKE,
-   and two NATI events. BCR has been removed after resolution in batch 0029.
+   and two NATI events. BCR has been removed after resolution in batch 0029. Ryder has also been resolved independently in batch 0030 from an issuer-hosted exact newsroom timestamp.
 2. **Source-family probes** that help locate archives but are not evidence. In
    particular, 2026 Cheesecake Factory and Tangoe pages demonstrate durable
    issuer/Business Wire/SEC trails, but they are wrong-year and/or date-only records
@@ -93,3 +93,7 @@ ineligible.
 If public searching stalls, the identified lawful one-stop path remains an entitled
 LSEG I/B/E/S extract containing `ANNDATS_ACT` and `ANNTIMS_ACT`, passed through the
 existing `g1_ibes_timestamp_adapter.py`.
+
+### Batch 0030 recovery
+
+Ryder event `HEJFE-A25F33B630365184` is resolved at `2015-02-03T08:55:00-05:00` from Ryder's issuer-hosted newsroom timestamp, with the matching SEC Exhibit 99.1 retained as corroboration. The frozen first documented trade occurred on February 2 at 3:43 PM New York time, so the release is strictly later and remains within the seven-calendar-day promotion window. The six existing priority events remain fail-closed and stay at the front of the public-research queue.
