@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "4ff154a4a307937fb35b5c2a850056a0f2f6fa6a32f19d0ae5c71d281d562b14",
-      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
+      "expected_sha256": "db129018f71fc1bedbbf30da5bd521b3a959b414a6b4186adf371545422903bb",
+      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "41643a253c805e1bb6fd4d24417abdc7705054343c80cc76cb7f7c8c8a371d0d",
-      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
+      "expected_sha256": "1eb1b623478a344a97603367f8f063ce8bb87c1f5d41b8493cecfb7621c92bf3",
+      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "90a636bddb4649b8a24b5f7ccb338dde0eb0553313cc0ca81b0667f337a39853",
-      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
+      "expected_sha256": "633c8bd4846fc6263f6d849e632b31d1227ac1e15f84d7d3b307de04ba273627",
+      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified Business Wire batch 0017: add SNDK exact release clock at 2015-01-21 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale SNDK reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "3f19bf83964c136408d95cf6609f2b2019d15a9f6ccb8de102a6ddede5ecc0e9",
-      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
+      "expected_sha256": "6991709e02aa14dc3a4805a65a2197b17494fcf7d9eb435c58ee0b5ebdd6fb95",
+      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "6c2befdffe6da9a89f9781a07dd1f7be3d20def9d27a84f2ef8f3934b92ca17b",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "3bd563acd8365e3cb5d624c1d32fec2d40c2042a06ab755d2c97f0bf6a66118c",
-      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
+      "expected_sha256": "3b8dd5fe99045fa5cd5418ce12fb8e611cab7109e2624d0ad91425c607f89539",
+      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "5ecc3ef023ca5601ce20d2dc250323a1f62cfdf9d0134d35ea75248a970be302",
-      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
+      "expected_sha256": "8cc5a1167435e0d39822b9535dedddb6e83ee12d485931f522fc8ea3341a4bad",
+      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "c7ea35eedc24d59cad614ba5abd2b8253eb7e81c855e45baed2ac1abe09c9d57",
-      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
+      "expected_sha256": "f17682cf12388218b7d34bbcc7420694b75ee2546c305e4ea7307ba4a5380eca",
+      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "1100a49003b1cf6af41816370e397fed8122c820f1080e267ee13ab37c6d209f",
-      "reason": "Authoritative receipt regeneration from main source commit d50f793a452b39dc1b21d092a5900ef4812c2bd4 after G1 Generac batch 0016."
+      "expected_sha256": "09e6be388091bb5ab8bfc19bef88183567fa75167ef9ead99902a6ee069e6088",
+      "reason": "Authoritative receipt regeneration from main source commit 0fc1c2e363776ec260042d603d512fc0672179f7 after G1 SanDisk batch 0017."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
