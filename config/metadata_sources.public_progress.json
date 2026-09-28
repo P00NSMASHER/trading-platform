@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-nine verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains thirty verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-businesswire-swks-verified-mirror-20150122",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0028.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "MarketScreener preserves the Business Wire release 'Skyworks Exceeds Q1 FY15 Revenue and EPS Guidance' as published Jan. 22, 2015 at 4:15 PM EST. SEC Exhibit 99.1 independently corroborates the identical Skyworks release title, date, and content and separately identifies the later 5:00 PM Eastern conference call. Grade B reflects that the exact publication clock is recovered from a preserved Business Wire mirror.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "SEC corroboration: https://www.sec.gov/Archives/edgar/data/4127/000000412715000002/q1158-kex991earningsrelease.htm"
+    },
     {
       "source_id": "public-streetinsider-businesswire-colm-verified-20150430",
       "record_kind": "announcement_timestamp",
@@ -835,8 +858,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "557ff2ba504b87d166ff77873aa44c712c3e50ea50a9ed7b301128cda4e9ad53",
-    "expected_count": 145,
+    "expected_sha256": "2474711f143514f1d0e5b4fc597eaa93ca7419bdf2700514c87c18c6ab455ecb",
+    "expected_count": 144,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
