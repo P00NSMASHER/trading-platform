@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 24
-- **Immutable reviewed fail-closed exclusions:** 150
+- **Exact first-public announcement timestamps resolved:** 25
+- **Immutable reviewed fail-closed exclusions:** 149
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 24
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 25
 
 This does **not** invent announcement times.
 
@@ -195,3 +195,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-2558DC6865781793` (JNPR): `2013-04-23T16:05:00-04:00`. The preserved distribution page explicitly shows `April 23, 2013 16:05 ET` for `Juniper Networks Reports Preliminary First Quarter 2013 Financial Results` and identifies Juniper Networks as the source. Juniper's issuer-hosted PDF independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved distribution archive rather than a currently fetchable original Marketwired article page.
 
 The other 150 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified PR Newswire batch 0023
+
+One additional event now has an exact public-release timestamp recovered from a preserved PR Newswire article and corroborated against Honeywell's SEC-hosted issuer release:
+
+- `HEJFE-8D40B9782E1E6F33` (HON): `2012-01-27T07:30:00-05:00`. MarketScreener preserves Honeywell's full-year 2011 earnings release as published Jan. 27, 2012 at 12:30 PM GMT (7:30 AM EST) and labels the article PRNewswire. SEC Exhibit 99 independently reproduces the same Honeywell release title, date, and content; Honeywell's 8-K also states that the earnings release was distributed on PR Newswire approximately two hours before its 9:30 AM ET conference call. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved PR Newswire mirror rather than a currently fetchable first-party PR Newswire article page.
+
+The other 149 events remain fail-closed until equivalent admissible evidence is located.
