@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-one verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-two verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-fluor-issuer-20150218",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0020.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "Fluor's issuer-hosted newsroom page explicitly timestamps 'Fluor Reports Fourth Quarter and Full Year 2014 Results' Wednesday, February 18, 2015 at 08:30 AM. SEC Exhibit 99.1 independently corroborates the identical Fluor earnings release title, date, and content.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "SEC corroboration: https://www.sec.gov/Archives/edgar/data/1124198/000110465915011525/a15-4708_1ex99d1.htm"
+    },
     {
       "source_id": "public-businesswire-uri-verified-mirror-20150121",
       "record_kind": "announcement_timestamp",
@@ -651,8 +674,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "2672d3c4e7717fe279779a27c702cfd4062b66ec5c35a98628341f6202fe72b2",
-    "expected_count": 153,
+    "expected_sha256": "9b535022ff554c7158beb65c541c168ddcc3ca936d7ae0d81df1609f2416d7e3",
+    "expected_count": 152,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
