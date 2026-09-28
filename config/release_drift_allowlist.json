@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "4a6819c716ea34592ef98258949e681c28f1c5b0f6f727b2e97661b2ca04eeee",
-      "reason": "Authoritative receipt regeneration from main source commit 7374b319e4332764b33867bb9026db7409965aba after G1 Electronic Arts batch 0012."
+      "expected_sha256": "2091b025f0fcb7b9b1e26c122baef37c7ce3cacdd9c4e03d71155cb6f7d060c5",
+      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "f2980941405de2c638464d8c8c31ef109032247763c632587002e299057093d8",
-      "reason": "Authoritative receipt regeneration from main source commit 7374b319e4332764b33867bb9026db7409965aba after G1 Electronic Arts batch 0012."
+      "expected_sha256": "191ec45b8f7fc70302e3f7d1f12f70d226aafcf1caf05701a56033a1ed437472",
+      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "0f256583e6b5ed07352a6465cdd7e92127767222e5450c47cc4eeed0f1b11fba",
-      "reason": "Authoritative receipt regeneration from main source commit 7374b319e4332764b33867bb9026db7409965aba after G1 Electronic Arts batch 0012."
+      "expected_sha256": "c1c3b64824132a099474e4e4fd1722d720cde0e7085e78a01d13d794b0eb7eec",
+      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified Business Wire batch 0013: add Jan 2015 NOW exact release clock at 2015-01-28 16:05 ET using a preserved Business Wire mirror plus SEC-hosted Business Wire corroboration; grade the evidence B, remove only the stale NOW reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "3d1277c23c2ad81efde5fb991fff634cd9123329c520940eda5fdbcaf06096e1",
-      "reason": "Authoritative receipt regeneration from main source commit 7374b319e4332764b33867bb9026db7409965aba after G1 Electronic Arts batch 0012."
+      "expected_sha256": "ac35d854e3056d886c0d12d4eef1fe684c1ae0ac02e137f9cc2f308c50026be3",
+      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "6d7f6e326fbc5cb2396cc20f20be95d11b4d9ba505ecb1e47578ec933a886ee0",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "5da43b027d3ee0d11ec3dccde5851451dfbb1126030eee1d1798da64bb4fd616",
-      "reason": "Authoritative receipt regeneration from main source commit 7374b319e4332764b33867bb9026db7409965aba after G1 Electronic Arts batch 0012."
+      "expected_sha256": "a3803a548593deab98bda0f594f34a61fac6bfa4977b2617e213bbd19f977a63",
+      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "82d2a32b1a3bf0231abec98d77cb063b168e74b1b69dc5c2a1ca97a0973a1235",
-      "reason": "Authoritative receipt regeneration from main source commit 7374b319e4332764b33867bb9026db7409965aba after G1 Electronic Arts batch 0012."
+      "expected_sha256": "45781beab59437e7655c50caafd2f14b0e567038280b4ae4ffc10aa95b49943e",
+      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "3b5797a7599ef12dfa81b682da5ac7a440ee81504bcaea83d6ca500238a23af2",
-      "reason": "Authoritative receipt regeneration from main source commit 7374b319e4332764b33867bb9026db7409965aba after G1 Electronic Arts batch 0012."
+      "expected_sha256": "5327a8a32150c6781a7ef0531972abe33a34ad6e3be9f526c5d4d7d540158aaf",
+      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "48380ff3a471b71bc1d9c7db6c8a9754336c1aac4ea5b4fe515ee66300db60be",
-      "reason": "Authoritative receipt regeneration from main source commit 7374b319e4332764b33867bb9026db7409965aba after G1 Electronic Arts batch 0012."
+      "expected_sha256": "e613273b486567b48e0fc3876da48ee496f27c35e62b90a26d8a11c8b452d2d9",
+      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
