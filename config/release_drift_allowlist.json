@@ -774,16 +774,16 @@
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
     },
     "src/event_tape_replay.py": {
-      "expected_sha256": "59fb3d24f9b706d5c6789d1c1f55abf47ce8977eca75ad7d7a34846ef442ab06",
-      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+      "expected_sha256": "ba5b7ad14150a95d3d367fe43e320671498e7bde3b927b7ca348ea5344ca70cc",
+      "reason": "Event-tape precision repair: preserve microsecond replay eligibility/order/cutoff semantics and fail closed on unsupported finer precision."
     },
     "src/surveillance_feature_diagnostics.py": {
       "expected_sha256": "d9f8459d35bc7e99c941af00187b96ccd3ded2d9b33913f37b4310ebc24c59a8",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
     },
     "tests/test_event_tape_replay.py": {
-      "expected_sha256": "05a7cc899c81b7e203d457bc7ac9e995ad2814511baba1173a0100bf6696390c",
-      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+      "expected_sha256": "46c1776e307f3654bad5f1632cefac47a307c532e0fd2424311da4689425da32",
+      "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
