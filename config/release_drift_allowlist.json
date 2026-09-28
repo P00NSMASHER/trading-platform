@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "ea0256fd9a162f4cfaf1e71c15a960d0a6cbbc1f340707bd6b92c829cde488e2",
-      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
+      "expected_sha256": "2756ee98ad98e7110ac6704ddf7cc2e1946fdb25f9f82e90eb59dde9a03e3f7c",
+      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "b91b7a9ddf47dddfd830f2ed6ff2f6a62cfb5164478eff15bed7b8f216c28d8d",
-      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
+      "expected_sha256": "b383745a68d63ae0abd291ce922715a216389cfa1390ea50f8f861b3386bdd97",
+      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "947a169276310eb727713e40caafd3e76b26c7d31fe0711141195df24296c131",
-      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
+      "expected_sha256": "e048fa2fefc6597959dd9fb5658598fb8ec2813221b7573fed93bdd3ea281c52",
+      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified Business Wire batch 0019: add URI exact release clock at 2015-01-21 16:10 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale URI reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "3600dea3021e21c9a6f936a738786972012d3f9c6b4025c9b9de8010124defbe",
-      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
+      "expected_sha256": "1a40c717b48474efffd978c2e52caf5a72500c56b3b6d72eeead9d09b42e86eb",
+      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "3d1578b587950fa951f895c69a42e7694b85efd3b7d2e27d55875fe0426a4edf",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "457dcdbeef5e87bd02a64aaa6947260847adc422291e7613dabb2910beb397d7",
-      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
+      "expected_sha256": "9aedb55d42d148896522bd6766d659dc7780606dc4c2b3dec49bca7472b88e70",
+      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "58268ec82c3a3d126f1f3cc75784b08f576cba8f3fa178c9879d39f58abb4438",
-      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
+      "expected_sha256": "610dc20312d64f14d3883853552ea3e56aa3515521b52599f69c87bfb6e674f9",
+      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "13b137740f00d34f228cba46b89523b8ab5d2c33fbace485daef35f2bea70d3a",
-      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
+      "expected_sha256": "64673d2577c952bfcf45b27e240827e25b26500c78ea677a658504305678b08d",
+      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "87eedc0c23251185c5f4f63aad5da820274f1a5ad546d53d1ecd0cef97442d69",
-      "reason": "Authoritative receipt regeneration from main source commit bc1c25d268e481b8feeed62792f3860e0eb9f654 after G1 GameStop batch 0018."
+      "expected_sha256": "573f79946e3bbc1f937038d9c6cff6bdb90f0e0c1e6857a63c91549e7a1c6a5a",
+      "reason": "Authoritative receipt regeneration from main source commit 34b354e4e53bd5b0bd8018c870d29b5bafa72e2a after G1 United Rentals batch 0019."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
