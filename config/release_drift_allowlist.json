@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "eb2bd711b735afa8caa29657f9421a51a073d509f22f4a21d6bf964ff612826b",
-      "reason": "G1 independently verified Marketwired batch 0022: add JNPR exact release clock at 2013-04-23 16:05 ET using a preserved Marketwired distribution page plus issuer-hosted Juniper corroboration; grade evidence B, remove only the stale JNPR reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "2947146c51d73801b0f158ded8d281f81f6aefd0302382fad328f557de60b44e",
+      "reason": "G1 independently verified PR Newswire batch 0023: add HON exact release clock at 2012-01-27 07:30 ET using a preserved PR Newswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale HON reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "d4aa531d87f54924f50752aaf64741738fc494709fe4ac58ebbc49c179dfc176",
-      "reason": "G1 independently verified Marketwired batch 0022: add JNPR exact release clock at 2013-04-23 16:05 ET using a preserved Marketwired distribution page plus issuer-hosted Juniper corroboration; grade evidence B, remove only the stale JNPR reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "7834256d2710b051aae97dac8468614658f8240058d72c5784bf687d95211fc1",
+      "reason": "G1 independently verified PR Newswire batch 0023: add HON exact release clock at 2012-01-27 07:30 ET using a preserved PR Newswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale HON reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "dc98c293ec10b3a63aac200e4f49eaf28b056a2ee0f9bf8873d50d3c9e15278c",
       "reason": "Authoritative receipt regeneration from main source commit dfeef8baa1ba0abdb5862c46a2992e17ec1418b6 after G1 Juniper batch 0022."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "273922062760fa010e82fcd299f5a21691117a20e1f2a52ba7478462da9f7a9d",
-      "reason": "G1 independently verified Marketwired batch 0022: add JNPR exact release clock at 2013-04-23 16:05 ET using a preserved Marketwired distribution page plus issuer-hosted Juniper corroboration; grade evidence B, remove only the stale JNPR reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "92bf26aed54d516d35bb2f0690f3feb4d737aeb553d56a6b9f67ba8ce12d869c",
+      "reason": "G1 independently verified PR Newswire batch 0023: add HON exact release clock at 2012-01-27 07:30 ET using a preserved PR Newswire mirror plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale HON reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -744,6 +744,10 @@
     "data/public/metadata/g1_announcement_times_batch_0022.csv": {
       "expected_sha256": "e01356466d757905737ed67c155f751893ccf9406765629ae904957864c52505",
       "reason": "G1 batch 0022 evidence row for JNPR: preserved Marketwired distribution timestamp at 2013-04-23 16:05 ET, issuer-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0023.csv": {
+      "expected_sha256": "0c670780406d62420ca3424b449fd9b93607ece5602a8d24f3cf7e717b1d62d0",
+      "reason": "G1 batch 0023 evidence row for HON: preserved PR Newswire timestamp at 2012-01-27 12:30 GMT / 07:30 EST, SEC-corroborated and intentionally graded B."
     }
   }
 }
