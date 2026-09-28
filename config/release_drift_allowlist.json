@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "2a98af8dcdbced35e90a70e5a4215af89674d84005e16ab19395b601702e1a57",
-      "reason": "Authoritative receipt regeneration from main source commit fde07924af7a45765933295d5c5fa574da1d3407 after G1 Honeywell batch 0023."
+      "expected_sha256": "f2254bc9060f480afe46c7b803d9bf6768bbdf03d07c5103659b352ba35e840c",
+      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "3177fb6dfcc7d203f0df1c4264a5e2fbbcecf526bd9fc1878464d7b88c762bdf",
-      "reason": "Authoritative receipt regeneration from main source commit fde07924af7a45765933295d5c5fa574da1d3407 after G1 Honeywell batch 0023."
+      "expected_sha256": "d23c72272e89d8ad1a98a686ca6d42ddf7cb5c396d0d1e9103daba2d0d940bae",
+      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "7ec3dd47ee907bed8a8b11419428880932e2e92f89139d0e1c11736fc44091c8",
-      "reason": "Authoritative receipt regeneration from main source commit fde07924af7a45765933295d5c5fa574da1d3407 after G1 Honeywell batch 0023."
+      "expected_sha256": "f22ecc787d94ceddc4abcc88d0a1f8d6112deb35774b7bec07f6e22298335be0",
+      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 preserved Business Wire distribution-copy batch 0024: add PVH exact release clock at 2015-03-25 16:01 ET using a preserved Business Wire copy plus issuer and SEC corroboration; grade evidence B, remove only the stale PVH reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "5fe14f545543e092c7f80d4241ea4ca953ce48ffbc550bcbb924e19dc2e7ec68",
-      "reason": "Authoritative receipt regeneration from main source commit fde07924af7a45765933295d5c5fa574da1d3407 after G1 Honeywell batch 0023."
+      "expected_sha256": "c3fbcb5ae666a1b195b3a11fc1a1567afc9150f74eb8f81cbe9e9ba6dcfe6df4",
+      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "ac0b895f065bdc7771870e9b77b5bd9119351e93781809fe95ab0ed01df3e71f",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "989608547209eba898930811e50de8482099e6a5ee037c986946fd8b8d500a47",
-      "reason": "Authoritative receipt regeneration from main source commit fde07924af7a45765933295d5c5fa574da1d3407 after G1 Honeywell batch 0023."
+      "expected_sha256": "cf440980e0d43989fa617dafe1f99c53c14e940963428318fba465c56dd24f4a",
+      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "086560751c5a95f72d394517340ca7b2722a8f9044846e1bb4af49070f6d7870",
-      "reason": "Authoritative receipt regeneration from main source commit fde07924af7a45765933295d5c5fa574da1d3407 after G1 Honeywell batch 0023."
+      "expected_sha256": "4d92818b6627b760f78f6357e3ba45250499d21b4992bd2f83298e53d9b72dd0",
+      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "6671980ec47c379faff21ef33e02319fd2ccc30ca2534b6721fe005e315710fa",
-      "reason": "Authoritative receipt regeneration from main source commit fde07924af7a45765933295d5c5fa574da1d3407 after G1 Honeywell batch 0023."
+      "expected_sha256": "4b6bb9ad9921d2dc47db10cb5b2239519efc32586b9be7b7327d70b32cc48330",
+      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "55295b5a13c84423eb0394743c259ed4d5f7823d5778d773b1ed17c52eb96a1b",
-      "reason": "Authoritative receipt regeneration from main source commit fde07924af7a45765933295d5c5fa574da1d3407 after G1 Honeywell batch 0023."
+      "expected_sha256": "fa3121fd018abc3985e3455d0c154024f6297c28db005428903598b59ec40e6f",
+      "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
