@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "228a82db430c4c9f50292487e00aa94269827fc882c2abda89717bf3d32f7e51",
-      "reason": "G1 independently verified issuer-attributed distribution batch 0012: add EA exact release clock at 2015-01-27 16:35 ET using EIN Presswire's issuer-attributed timestamp plus EA official-archive corroboration; grade the evidence B, remove only the stale EA reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "ca6ed5e596947c28bb59442a946eea1428f6d30323301693b059647d5d790ed3",
+      "reason": "G1 independently verified Business Wire batch 0013: add Jan 2015 NOW exact release clock at 2015-01-28 16:05 ET using a preserved Business Wire mirror plus SEC-hosted Business Wire corroboration; grade the evidence B, remove only the stale NOW reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "7cd2854dfcfdd138473b161516b65e535bd952db9ce640f2c15f88a0e82ab2b5",
-      "reason": "G1 independently verified issuer-attributed distribution batch 0012: add EA exact release clock at 2015-01-27 16:35 ET using EIN Presswire's issuer-attributed timestamp plus EA official-archive corroboration; grade the evidence B, remove only the stale EA reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "0163fdd56d90f3717ceaa3534445ea5fe83517d19dc369920f8d12d4baecc9c7",
+      "reason": "G1 independently verified Business Wire batch 0013: add Jan 2015 NOW exact release clock at 2015-01-28 16:05 ET using a preserved Business Wire mirror plus SEC-hosted Business Wire corroboration; grade the evidence B, remove only the stale NOW reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "3d1277c23c2ad81efde5fb991fff634cd9123329c520940eda5fdbcaf06096e1",
       "reason": "Authoritative receipt regeneration from main source commit 7374b319e4332764b33867bb9026db7409965aba after G1 Electronic Arts batch 0012."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "5ff501ccfb339df1d9dd37e619fd3f7c5e4f1eead044a1d4b354b9a90465cb30",
-      "reason": "G1 independently verified issuer-attributed distribution batch 0012: add EA exact release clock at 2015-01-27 16:35 ET using EIN Presswire's issuer-attributed timestamp plus EA official-archive corroboration; grade the evidence B, remove only the stale EA reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "6d7f6e326fbc5cb2396cc20f20be95d11b4d9ba505ecb1e47578ec933a886ee0",
+      "reason": "G1 independently verified Business Wire batch 0013: add Jan 2015 NOW exact release clock at 2015-01-28 16:05 ET using a preserved Business Wire mirror plus SEC-hosted Business Wire corroboration; grade the evidence B, remove only the stale NOW reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -704,6 +704,10 @@
     "data/public/metadata/g1_announcement_times_batch_0012.csv": {
       "expected_sha256": "da66209a095d5c5a2b7f1e6773faf3d32888169e5439df10dd436166ea6bbb31",
       "reason": "G1 batch 0012 evidence row for EA: issuer-attributed EIN Presswire release timestamp at 2015-01-27 21:35 GMT / 4:35 PM EST, corroborated by EA's official archive and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0013.csv": {
+      "expected_sha256": "c6a4c417b6bd6726ff5086fe0bd8ebd82ece31f301b8af29f202f36552587cc5",
+      "reason": "G1 batch 0013 evidence row for Jan 2015 NOW: preserved Business Wire timestamp at 2015-01-28 16:05 EST, SEC-corroborated and intentionally graded B."
     }
   }
 }
