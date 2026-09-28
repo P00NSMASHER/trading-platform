@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 19
-- **Immutable reviewed fail-closed exclusions:** 155
+- **Exact first-public announcement timestamps resolved:** 20
+- **Immutable reviewed fail-closed exclusions:** 154
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 19
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 20
 
 This does **not** invent announcement times.
 
@@ -155,3 +155,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-48B08BAEDCEEDEFC` (SNDK): `2015-01-21T16:05:00-05:00`. MarketScreener preserves `SanDisk Announces Fourth Quarter and Fiscal 2014 Results` as published Jan. 21, 2015 at 4:05 PM EST and labels it Business Wire. SEC Exhibit 99.1 independently reproduces the same SanDisk release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved Business Wire mirror rather than a currently fetchable first-party Business Wire article page.
 
 The other 155 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified issuer-attributed distribution batch 0018
+
+One additional event now has an exact public-release timestamp recovered from EIN Presswire's historical release calendar and independently corroborated against both the issuer archive and SEC exhibit:
+
+- `HEJFE-753716A61B8622B0` (GME): `2015-03-26T16:29:00-04:00`. EIN Presswire records `GameStop Reports Sales and Earnings for Fiscal 2014 and Provides 2015 Outlook` at `March 26, 2015 - 20:29 GMT` and reproduces the Business Wire dateline. GameStop's issuer archive and SEC Exhibit 99.1 independently match the same release. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from an issuer-attributed distribution archive rather than the issuer-hosted page itself.
+
+The other 154 events remain fail-closed until equivalent admissible evidence is located.

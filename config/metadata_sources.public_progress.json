@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains nineteen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-einpresswire-gme-verified-20150326",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0018.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "EIN Presswire's March 26, 2015 release calendar preserves 'GameStop Reports Sales and Earnings for Fiscal 2014 and Provides 2015 Outlook' at 20:29 GMT and reproduces the Business Wire dateline. GameStop's issuer archive and SEC Exhibit 99.1 independently corroborate the identical release title, date, and content. Grade B reflects that the exact clock comes from an issuer-attributed distribution archive rather than the issuer page itself.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "Issuer corroboration: https://investor.gamestop.com/news-releases/news-details/2015/GameStop-Reports-Sales-and-Earnings-for-Fiscal-2014-and-Provides-2015-Outlook-03-26-2015/default.aspx ; SEC corroboration: https://www.sec.gov/Archives/edgar/data/1326380/000132638015000075/exhibit991.htm"
+    },
     {
       "source_id": "public-businesswire-sndk-verified-mirror-20150121",
       "record_kind": "announcement_timestamp",
@@ -605,8 +628,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "d7423f250c7653e00f55367f2715338dc3515ce2a4e0d76ae785435258818dc0",
-    "expected_count": 155,
+    "expected_sha256": "0e1a1e8367b921414b6a7640a1142176b950958f2f03ce9301a0bd9281035c69",
+    "expected_count": 154,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
