@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-four verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-five verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-prnewswire-hon-verified-mirror-20120127",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0023.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "MarketScreener preserves Honeywell's PR Newswire full-year 2011 earnings release as published Jan. 27, 2012 at 12:30 PM GMT (7:30 AM EST). SEC Exhibit 99 independently corroborates the identical release title, date, and content. Grade B reflects that the exact clock is recovered from a preserved PR Newswire mirror.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "SEC release corroboration: https://www.sec.gov/Archives/edgar/data/773840/000093041312000308/c68229_ex99.htm ; Honeywell 8-K corroborates PR Newswire distribution approximately two hours before the 9:30 AM ET conference call: https://www.sec.gov/Archives/edgar/data/773840/000093041312000308/c68229_8k.htm"
+    },
     {
       "source_id": "public-marketwired-juniper-verified-20130423",
       "record_kind": "announcement_timestamp",
@@ -720,8 +743,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "eb2bd711b735afa8caa29657f9421a51a073d509f22f4a21d6bf964ff612826b",
-    "expected_count": 150,
+    "expected_sha256": "2947146c51d73801b0f158ded8d281f81f6aefd0302382fad328f557de60b44e",
+    "expected_count": 149,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
