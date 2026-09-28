@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "8320839b17cf0b9e5ad53df55549128327e4ed25",
+  "base_main_sha": "058f0041125a9b661296d885997f7e0792099e54",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 22,
-    "reviewed_excluded": 152,
+    "exact_resolved": 23,
+    "reviewed_excluded": 151,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 152,
+    "raw_exact_time_evidence_gaps": 151,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 22,
+    "exact_timing_analysis_eligible": 23,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -447,13 +447,6 @@
       "event_id": "HEJFE-332D5C6DC3ACE6B1",
       "historical_symbol": "NDSN",
       "first_documented_illicit_trade_ts": "2015-05-19 15:35:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-76DCF0FCA248E814",
-      "historical_symbol": "CB",
-      "first_documented_illicit_trade_ts": "2012-01-26 12:17:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1132,14 +1125,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 22,
-    "latest_batch": "g1_announcement_times_batch_0020.csv",
+    "exact_resolved": 23,
+    "latest_batch": "g1_announcement_times_batch_0021.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-1E37362063697486",
-        "historical_symbol": "FLR",
-        "public_announcement_ts": "2015-02-18T08:30:00-05:00",
-        "source_reference": "https://newsroom.fluor.com/news-releases/news-details/2015/Fluor-Reports-Fourth-Quarter-and-Full-Year-2014-Results/default.aspx"
+        "event_id": "HEJFE-76DCF0FCA248E814",
+        "historical_symbol": "CB",
+        "public_announcement_ts": "2012-01-26T16:03:00-05:00",
+        "source_reference": "https://www.marketscreener.com/quote/stock/CHUBB-CORP-11975/news/The-Chubb-Corporation-Chubb-Reports-Fourth-Quarter-Net-Income-per-Share-of-1-60-Operating-Income-13988932/"
       }
     ]
   }
