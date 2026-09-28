@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains twenty-one verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-businesswire-uri-verified-mirror-20150121",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0019.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "MarketScreener preserves the Business Wire article 'United Rentals Announces Fourth Quarter and Full Year 2014 Results and Provides 2015 Outlook' as published Jan. 21, 2015 at 4:10 PM EST. SEC Exhibit 99.1 independently corroborates the identical United Rentals release title, date, and content. Grade B reflects that the exact clock is recovered from a preserved Business Wire mirror.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "SEC corroboration: https://www.sec.gov/Archives/edgar/data/1047166/000106770115000008/uri-12312014xex991.htm"
+    },
     {
       "source_id": "public-einpresswire-gme-verified-20150326",
       "record_kind": "announcement_timestamp",
@@ -628,8 +651,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "0e1a1e8367b921414b6a7640a1142176b950958f2f03ce9301a0bd9281035c69",
-    "expected_count": 154,
+    "expected_sha256": "2672d3c4e7717fe279779a27c702cfd4062b66ec5c35a98628341f6202fe72b2",
+    "expected_count": 153,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
