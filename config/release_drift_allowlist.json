@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "557ff2ba504b87d166ff77873aa44c712c3e50ea50a9ed7b301128cda4e9ad53",
-      "reason": "G1 Columbia batch 0027: add COLM 2015-04-30 exact 16:00 EDT release clock from preserved StreetInsider distribution history, corroborated by Columbia's Business Wire issuer page and SEC Exhibit 99.1; synchronize research counts to 29 exact / 145 reviewed exclusions without weakening promotion rules."
+      "expected_sha256": "1608b919b0032b074975391f6a3d62a75f27d5f259dc492e87dd85ea041ae83a",
+      "reason": "G1 independently verified Business Wire batch 0028: add MFRM exact release clock at 2015-03-19 16:01 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale MFRM reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "ca42756f0944429b7c789b75901c4b15bbce5f56bbba30ffb2d53d5a7b45d152",
-      "reason": "G1 Columbia batch 0027: add COLM 2015-04-30 exact 16:00 EDT release clock from preserved StreetInsider distribution history, corroborated by Columbia's Business Wire issuer page and SEC Exhibit 99.1; synchronize research counts to 29 exact / 145 reviewed exclusions without weakening promotion rules."
+      "expected_sha256": "b24f674e15fcae4067a1078351beb9c334bf91b203c81649bed824481c1115af",
+      "reason": "G1 independently verified Business Wire batch 0028: add MFRM exact release clock at 2015-03-19 16:01 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale MFRM reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "e15774cbf3c15d319cbfcafa120ccbce877044b84eec457d0242394038b56648",
       "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "738979af2015b8e46f6b9770855bab554be853169fc139a595af50363b7cb17d",
-      "reason": "G1 Columbia batch 0027: add COLM 2015-04-30 exact 16:00 EDT release clock from preserved StreetInsider distribution history, corroborated by Columbia's Business Wire issuer page and SEC Exhibit 99.1; synchronize research counts to 29 exact / 145 reviewed exclusions without weakening promotion rules."
+      "expected_sha256": "ce9632a8640a2dd3ee2ec14cc4ea78ab9e67a0a7c8546ae81fd42c95ede86cf7",
+      "reason": "G1 independently verified Business Wire batch 0028: add MFRM exact release clock at 2015-03-19 16:01 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale MFRM reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -796,6 +796,10 @@
     "data/public/metadata/g1_announcement_times_batch_0027.csv": {
       "expected_sha256": "979bcb95899a8d489be29c917e1eb6fbe27ea3d2b7fbd13843a2104bd9aa8ed8",
       "reason": "G1 Columbia batch 0027: add COLM 2015-04-30 exact 16:00 EDT release clock from preserved StreetInsider distribution history, corroborated by Columbia's Business Wire issuer page and SEC Exhibit 99.1; synchronize research counts to 29 exact / 145 reviewed exclusions without weakening promotion rules."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0028.csv": {
+      "expected_sha256": "8aa3df05355ad89ce15ba1765d76507e0e8943948e4088471eaa500baa188e43",
+      "reason": "G1 batch 0028 evidence row for MFRM: preserved Business Wire timestamp at 2015-03-19 4:01 PM EDT, SEC-corroborated and intentionally graded B."
     }
   }
 }
