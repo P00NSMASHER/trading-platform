@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "d930f86f46e9d967ff3947af1c7e4be424f041dc77d76449b9d08afdf7160dc0",
-      "reason": "G1 preserved Business Wire distribution-copy batch 0024: add PVH exact release clock at 2015-03-25 16:01 ET using a preserved Business Wire copy plus issuer and SEC corroboration; grade evidence B, remove only the stale PVH reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "cd7aada62eeca67b75b680a3fb73b2a7c1d874c92af050888df92e159e87e170",
+      "reason": "G1 SEC issuer release-clock batch 0025: add Ford exact first-public release clock at 2015-01-29 07:00 EST from Ford's SEC-hosted earnings exhibit; remove only the stale Ford reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "30078e422d8503e1f54ddeeb383d610a8cc64d5c0a8778ceb98fc4c1dd11ca6c",
-      "reason": "G1 preserved Business Wire distribution-copy batch 0024: add PVH exact release clock at 2015-03-25 16:01 ET using a preserved Business Wire copy plus issuer and SEC corroboration; grade evidence B, remove only the stale PVH reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "bf494946fca0913993497fa41d2f31fcd1b86f4ff488f49c00e0f355e8143e68",
+      "reason": "G1 SEC issuer release-clock batch 0025: add Ford exact first-public release clock at 2015-01-29 07:00 EST from Ford's SEC-hosted earnings exhibit; remove only the stale Ford reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "c3fbcb5ae666a1b195b3a11fc1a1567afc9150f74eb8f81cbe9e9ba6dcfe6df4",
       "reason": "Authoritative receipt regeneration from main source commit a4e57569abd3f7b4d0dc735b487e72aad957ef52 after G1 PVH batch 0024."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "ac0b895f065bdc7771870e9b77b5bd9119351e93781809fe95ab0ed01df3e71f",
-      "reason": "G1 preserved Business Wire distribution-copy batch 0024: add PVH exact release clock at 2015-03-25 16:01 ET using a preserved Business Wire copy plus issuer and SEC corroboration; grade evidence B, remove only the stale PVH reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "af39570ff1b710226baf3fd1b5a96716bd100d19845f3bbe6cbf20e6e945fe08",
+      "reason": "G1 SEC issuer release-clock batch 0025: add Ford exact first-public release clock at 2015-01-29 07:00 EST from Ford's SEC-hosted earnings exhibit; remove only the stale Ford reviewed exclusion and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -752,6 +752,10 @@
     "data/public/metadata/g1_announcement_times_batch_0024.csv": {
       "expected_sha256": "4f0b58de63b3bed3e097c13fd3b5dc95f7cd777566eb51ee0a1c9e4b5f9dd27a",
       "reason": "G1 batch 0024 evidence row for PVH: preserved Business Wire distribution copy at 2015-03-25 4:01 PM EDT, issuer- and SEC-corroborated, intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0025.csv": {
+      "expected_sha256": "f219f0ae4c3089a31a21b18763522119dd39d459e0bb785fa1fff8185052c806",
+      "reason": "G1 batch 0025 evidence row for Ford: SEC-hosted issuer earnings exhibit explicitly states a 7:00 a.m. EST first-public results release on January 29, 2015; graded A."
     }
   }
 }
