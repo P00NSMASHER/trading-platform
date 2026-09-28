@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "95b26f4717fb3358fa2074b078e415e0984edf082349949ebe69df38787e0528",
-      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
+      "expected_sha256": "b0138d31acb9d5899bca52021668414c68472601b78415f3b2f2106292a31e0c",
+      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "1b6b5f9bc47aeb3d9ea4637bb0089791405b4b341f6971a9fa29dc3c374d7c16",
-      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
+      "expected_sha256": "d379c6c7ee8b06c121b6833be752a03a946d8016d828d4ed137edc9c1c849253",
+      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "4bdf7682f987d0e646920e5c6602670372f2204cd659f37e56aaa519f41eeb19",
-      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
+      "expected_sha256": "56d83d8c9ba3d06c824987c1ad3790d7c822980ba8bf73603562223703c7d6a9",
+      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified Business Wire batch 0015: add HBI exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire mirror plus SEC-hosted issuer corroboration; grade the evidence B, remove only the stale HBI reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "5e4696119ca6cd26a8b96bbdead7892c744449481cccd3e1a1e62d3fc5863219",
-      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
+      "expected_sha256": "1fd6ead83adb187867f0602ec4014096d027d094a0864cc2226cbbbd4ef4b1b2",
+      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "f2353ff2f89f03ff08ed2c9e4fa70255e33a5d9aeba7e1de4cbb06f98a939cda",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "45016ab60c4a4fedc4d802df2f0c6df3631a2af572b3d89899383b0bf2ab5161",
-      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
+      "expected_sha256": "68757a5f6cd4a945e30c1d97311eefabf2d38e210d2052b849bfdc70d2c73835",
+      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "2938f3c4eb3133833ee012a337a070218e6bd77da65f90bcd1812194fcea547f",
-      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
+      "expected_sha256": "80e82c12c3b654a500a555a79ec55f4428bbc2fb540dd5df8cc37546a7cce1ae",
+      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "827da3311547b9ce83107cf8e5105041f90eb8779e209dd84ced31b69a1b9f4b",
-      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
+      "expected_sha256": "51156de4c57c7a3f1da336bd2cf74c84bd1c9ec8469e9698f52b8a94062cef86",
+      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "d29d528dfcec1faf3c54b4085466c50daaabc7e1bfd13165f8c9ca879f4cf9c9",
-      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
+      "expected_sha256": "708bc55d1f820336dd06f32c18eba8cdaa788a5c08b1dfd329d94b06dddf927d",
+      "reason": "Authoritative receipt regeneration from main source commit 8410453b61cb95990decfd9cc616eae58ec2ddd9 after G1 HanesBrands batch 0015."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
