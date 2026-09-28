@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "ae3e76a9f26c8288a2d3593e5fd8a1fb0a834f64",
+  "base_main_sha": "bff1190cd092d7bf9036e41b0e1efb2b5a121718",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 19,
-    "reviewed_excluded": 155,
+    "exact_resolved": 20,
+    "reviewed_excluded": 154,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 155,
+    "raw_exact_time_evidence_gaps": 154,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 19,
+    "exact_timing_analysis_eligible": 20,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -934,13 +934,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-753716A61B8622B0",
-      "historical_symbol": "GME",
-      "first_documented_illicit_trade_ts": "2015-03-26 15:42:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-238D29A9B584466D",
       "historical_symbol": "SNX",
       "first_documented_illicit_trade_ts": "2015-03-31 15:54:00",
@@ -1153,14 +1146,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 19,
-    "latest_batch": "g1_announcement_times_batch_0017.csv",
+    "exact_resolved": 20,
+    "latest_batch": "g1_announcement_times_batch_0018.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-48B08BAEDCEEDEFC",
-        "historical_symbol": "SNDK",
-        "public_announcement_ts": "2015-01-21T16:05:00-05:00",
-        "source_reference": "https://www.marketscreener.com/quote/stock/SANDISK-CORPORATION-4843/news/SanDisk-Announces-Fourth-Quarter-and-Fiscal-2014-Results-19742836/"
+        "event_id": "HEJFE-753716A61B8622B0",
+        "historical_symbol": "GME",
+        "public_announcement_ts": "2015-03-26T16:29:00-04:00",
+        "source_reference": "https://api.einpresswire.com/calendar/2015/03/26"
       }
     ]
   }
