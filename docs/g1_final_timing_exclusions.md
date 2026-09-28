@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 23
-- **Immutable reviewed fail-closed exclusions:** 151
+- **Exact first-public announcement timestamps resolved:** 24
+- **Immutable reviewed fail-closed exclusions:** 150
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 23
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 24
 
 This does **not** invent announcement times.
 
@@ -187,3 +187,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-76DCF0FCA248E814` (CB): `2012-01-26T16:03:00-05:00`. MarketScreener preserves `Chubb Reports Fourth Quarter Net Income per Share of $1.60; Operating Income per Share Is $1.63; Combined Ratio Is 89.9%` as published Jan. 26, 2012 at 4:03 PM EST and identifies PRNewswire. PR Newswire's Chubb archive lists the same release at 04:03 ET, while SEC Exhibit 99.1 independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the explicit PM clock is recovered from the preserved wire mirror rather than a currently fetchable first-party PRNewswire article page.
 
 The other 151 events remain fail-closed until equivalent admissible evidence is located.
+
+## Original PR Newswire archive batch 0022
+
+One additional event now has an exact first-public release timestamp from the original PR Newswire issuer archive:
+
+- `HEJFE-C85CE64DFF947CFD` (RES): `2012-01-25T07:22:00-05:00`. PR Newswire's RPC, Inc. archive explicitly lists `RPC, Inc. Reports Fourth Quarter and Record 2011 Financial Results` at `Jan. 25, 2012, 07:22 ET`. SEC Exhibit 99 independently reproduces the same release title, date, and content. This row is graded `A` because the exact clock and timezone are preserved by the original newswire archive.
+
+The other 150 events remain fail-closed until equivalent admissible evidence is located.
