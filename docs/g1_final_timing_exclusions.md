@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 23
-- **Immutable reviewed fail-closed exclusions:** 151
+- **Exact first-public announcement timestamps resolved:** 24
+- **Immutable reviewed fail-closed exclusions:** 150
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 23
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 24
 
 This does **not** invent announcement times.
 
@@ -187,3 +187,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-76DCF0FCA248E814` (CB): `2012-01-26T16:03:00-05:00`. MarketScreener preserves `Chubb Reports Fourth Quarter Net Income per Share of $1.60; Operating Income per Share Is $1.63; Combined Ratio Is 89.9%` as published Jan. 26, 2012 at 4:03 PM EST and identifies PRNewswire. PR Newswire's Chubb archive lists the same release at 04:03 ET, while SEC Exhibit 99.1 independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the explicit PM clock is recovered from the preserved wire mirror rather than a currently fetchable first-party PRNewswire article page.
 
 The other 151 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified Marketwired batch 0022
+
+One additional event now has an exact public-release timestamp recovered from a preserved Marketwired distribution page and corroborated against Juniper Networks' issuer-hosted release:
+
+- `HEJFE-2558DC6865781793` (JNPR): `2013-04-23T16:05:00-04:00`. The preserved distribution page explicitly shows `April 23, 2013 16:05 ET` for `Juniper Networks Reports Preliminary First Quarter 2013 Financial Results` and identifies Juniper Networks as the source. Juniper's issuer-hosted PDF independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved distribution archive rather than a currently fetchable original Marketwired article page.
+
+The other 150 events remain fail-closed until equivalent admissible evidence is located.
