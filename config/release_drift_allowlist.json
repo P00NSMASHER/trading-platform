@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "cd7aada62eeca67b75b680a3fb73b2a7c1d874c92af050888df92e159e87e170",
-      "reason": "G1 SEC issuer release-clock batch 0025: add Ford exact first-public release clock at 2015-01-29 07:00 EST from Ford's SEC-hosted earnings exhibit; remove only the stale Ford reviewed exclusion and preserve all remaining fail-closed semantics."
+      "expected_sha256": "d9becd37607d73236c1bc9c75a4f5bf6b01a93c4e173f64553e4dc1716420138",
+      "reason": "G1 independently verified Business Wire batch 0026: add STT exact release clock at 2015-01-23 05:52 EST from a preserved Business Wire mirror, issuer- and SEC-corroborated; grade evidence B, remove only the stale STT reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "bf494946fca0913993497fa41d2f31fcd1b86f4ff488f49c00e0f355e8143e68",
-      "reason": "G1 SEC issuer release-clock batch 0025: add Ford exact first-public release clock at 2015-01-29 07:00 EST from Ford's SEC-hosted earnings exhibit; remove only the stale Ford reviewed exclusion and preserve all remaining fail-closed semantics."
+      "expected_sha256": "e68801f57e7af31687994a39aa18a18dceb87a7eddc747846ce0780af8941209",
+      "reason": "G1 independently verified Business Wire batch 0026: add STT exact release clock at 2015-01-23 05:52 EST from a preserved Business Wire mirror, issuer- and SEC-corroborated; grade evidence B, remove only the stale STT reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "884f1094159a003d607d02837915d3fd4614967b6bf979bbaaacb82270e97a1f",
       "reason": "Authoritative receipt regeneration from main source commit 608b9a17d5ff95f0a55d1d432c4b1b7e8e3ba504 after G1 Ford batch 0025."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "af39570ff1b710226baf3fd1b5a96716bd100d19845f3bbe6cbf20e6e945fe08",
-      "reason": "G1 SEC issuer release-clock batch 0025: add Ford exact first-public release clock at 2015-01-29 07:00 EST from Ford's SEC-hosted earnings exhibit; remove only the stale Ford reviewed exclusion and preserve all remaining fail-closed semantics."
+      "expected_sha256": "08d486205afbe6163a506b073acb5310b4d1e5d306661fbeb24b877bb4883628",
+      "reason": "G1 independently verified Business Wire batch 0026: add STT exact release clock at 2015-01-23 05:52 EST from a preserved Business Wire mirror, issuer- and SEC-corroborated; grade evidence B, remove only the stale STT reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -788,6 +788,10 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0026.csv": {
+      "expected_sha256": "78f009b03d3c14b53cd82c6b88530f920dd26626b23d153728d60508a3726be2",
+      "reason": "G1 batch 0026 evidence row for STT: preserved Business Wire timestamp at 2015-01-23 10:52 GMT / 05:52 EST, issuer- and SEC-corroborated and intentionally graded B."
     }
   }
 }
