@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 15
-- **Immutable reviewed fail-closed exclusions:** 159
+- **Exact first-public announcement timestamps resolved:** 16
+- **Immutable reviewed fail-closed exclusions:** 158
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 15
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 16
 
 This does **not** invent announcement times.
 
@@ -123,3 +123,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-DC66D5F2BDEC7C74` (NOW): `2015-01-28T16:05:00-05:00`. MarketScreener preserves `ServiceNow Reports Financial Results for Fourth Quarter and Fiscal Year 2014` as published Jan. 29, 2015 at 08:05 AEDT, equivalent to Jan. 28 at 4:05 PM EST. SEC Exhibit 99.1 independently corroborates the identical Business Wire release. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved mirror rather than a currently fetchable first-party Business Wire article page.
 
 The other 159 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified Business Wire batch 0014
+
+One additional event now has an exact public-release timestamp recovered from a preserved Business Wire mirror and corroborated against the SEC-hosted issuer release:
+
+- `HEJFE-6101FFEDBA6EE41B` (MDU): `2015-02-02T17:30:00-05:00`. MarketScreener preserves `MDU Resources Reports Higher 2014 Earnings, Initiates Guidance for 2015` as published Feb. 2, 2015 at 5:30 PM EST and identifies Business Wire. SEC Exhibit 99 independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved wire mirror rather than a currently fetchable first-party Business Wire article page.
+
+The other 158 events remain fail-closed until equivalent admissible evidence is located.

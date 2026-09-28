@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "ca6ed5e596947c28bb59442a946eea1428f6d30323301693b059647d5d790ed3",
-      "reason": "G1 independently verified Business Wire batch 0013: add Jan 2015 NOW exact release clock at 2015-01-28 16:05 ET using a preserved Business Wire mirror plus SEC-hosted Business Wire corroboration; grade the evidence B, remove only the stale NOW reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "c5867810cdfe4a7fde8303c37c24b5668f7a78cebfdc014b76bc216604691ad8",
+      "reason": "G1 independently verified Business Wire batch 0014: add Feb 2015 MDU exact release clock at 2015-02-02 17:30 ET using a preserved Business Wire mirror plus SEC-hosted issuer corroboration; grade the evidence B, remove only the stale MDU reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "0163fdd56d90f3717ceaa3534445ea5fe83517d19dc369920f8d12d4baecc9c7",
-      "reason": "G1 independently verified Business Wire batch 0013: add Jan 2015 NOW exact release clock at 2015-01-28 16:05 ET using a preserved Business Wire mirror plus SEC-hosted Business Wire corroboration; grade the evidence B, remove only the stale NOW reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "8cfaa32cca0500ae3108c5be02b1998662fc5a94d96c1d96e57aacab59538b07",
+      "reason": "G1 independently verified Business Wire batch 0014: add Feb 2015 MDU exact release clock at 2015-02-02 17:30 ET using a preserved Business Wire mirror plus SEC-hosted issuer corroboration; grade the evidence B, remove only the stale MDU reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "ac35d854e3056d886c0d12d4eef1fe684c1ae0ac02e137f9cc2f308c50026be3",
       "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "6d7f6e326fbc5cb2396cc20f20be95d11b4d9ba505ecb1e47578ec933a886ee0",
-      "reason": "G1 independently verified Business Wire batch 0013: add Jan 2015 NOW exact release clock at 2015-01-28 16:05 ET using a preserved Business Wire mirror plus SEC-hosted Business Wire corroboration; grade the evidence B, remove only the stale NOW reviewed exclusion, and preserve all remaining fail-closed semantics."
+      "expected_sha256": "f801c4935d3716f001e22be005d5bc68c012e52bb325e7899d0e5bacca12062c",
+      "reason": "G1 independently verified Business Wire batch 0014: add Feb 2015 MDU exact release clock at 2015-02-02 17:30 ET using a preserved Business Wire mirror plus SEC-hosted issuer corroboration; grade the evidence B, remove only the stale MDU reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -708,6 +708,10 @@
     "data/public/metadata/g1_announcement_times_batch_0013.csv": {
       "expected_sha256": "c6a4c417b6bd6726ff5086fe0bd8ebd82ece31f301b8af29f202f36552587cc5",
       "reason": "G1 batch 0013 evidence row for Jan 2015 NOW: preserved Business Wire timestamp at 2015-01-28 16:05 EST, SEC-corroborated and intentionally graded B."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0014.csv": {
+      "expected_sha256": "810bdba11e487bb2d967e2688c75cc94a2c23851d4f0e52f9ed71996a8774ab0",
+      "reason": "G1 batch 0014 evidence row for MDU: preserved Business Wire mirror timestamp at 2015-02-02 5:30 PM EST, SEC-corroborated and intentionally graded B."
     }
   }
 }

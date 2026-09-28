@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains fifteen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains sixteen verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-businesswire-mdu-verified-mirror-20150202",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0014.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "Independently verified Business Wire release clock. MarketScreener preserves MDU Resources' 2014 earnings release as published Feb. 2, 2015 at 5:30 PM EST and identifies Business Wire. SEC Exhibit 99 independently corroborates the identical title, date, and release text. Grade B reflects that the exact clock is recovered from a preserved Business Wire mirror.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "SEC corroboration: https://www.sec.gov/Archives/edgar/data/67716/000006771615000011/yeearningsnewsrelease2014.htm"
+    },
     {
       "source_id": "public-businesswire-servicenow-verified-mirror-20150128",
       "record_kind": "announcement_timestamp",
@@ -513,8 +536,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "ca6ed5e596947c28bb59442a946eea1428f6d30323301693b059647d5d790ed3",
-    "expected_count": 159,
+    "expected_sha256": "c5867810cdfe4a7fde8303c37c24b5668f7a78cebfdc014b76bc216604691ad8",
+    "expected_count": 158,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
