@@ -768,6 +768,26 @@
     "tests/test_g1_source_research.py": {
       "expected_sha256": "e6b82cc3e33d6bc5cde82f90d7d2574d1558d3ed4e5b721f6398af24e303937f",
       "reason": "Regression coverage for G1 source-research state, 25-batch/27-event accounting, and false-positive promotion blocking."
+    },
+    "docs/surveillance_analytics_upgrade.md": {
+      "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
+      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/event_tape_replay.py": {
+      "expected_sha256": "59fb3d24f9b706d5c6789d1c1f55abf47ce8977eca75ad7d7a34846ef442ab06",
+      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/surveillance_feature_diagnostics.py": {
+      "expected_sha256": "d9f8459d35bc7e99c941af00187b96ccd3ded2d9b33913f37b4310ebc24c59a8",
+      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "tests/test_event_tape_replay.py": {
+      "expected_sha256": "05a7cc899c81b7e203d457bc7ac9e995ad2814511baba1173a0100bf6696390c",
+      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "tests/test_surveillance_feature_diagnostics.py": {
+      "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
+      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
     }
   }
 }
