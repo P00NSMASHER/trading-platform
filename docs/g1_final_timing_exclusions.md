@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 16
-- **Immutable reviewed fail-closed exclusions:** 158
+- **Exact first-public announcement timestamps resolved:** 17
+- **Immutable reviewed fail-closed exclusions:** 157
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 16
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 17
 
 This does **not** invent announcement times.
 
@@ -131,3 +131,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-6101FFEDBA6EE41B` (MDU): `2015-02-02T17:30:00-05:00`. MarketScreener preserves `MDU Resources Reports Higher 2014 Earnings, Initiates Guidance for 2015` as published Feb. 2, 2015 at 5:30 PM EST and identifies Business Wire. SEC Exhibit 99 independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved wire mirror rather than a currently fetchable first-party Business Wire article page.
 
 The other 158 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified Business Wire batch 0015
+
+One additional event now has an exact public-release timestamp recovered from a preserved Business Wire mirror and corroborated against the SEC-hosted issuer release:
+
+- `HEJFE-3ADF019D07BA84CE` (HBI): `2015-01-29T16:05:00-05:00`. MarketScreener preserves `HanesBrands Reports Fourth-Quarter 2014 Financial Results` as published Jan. 29, 2015 at 4:05 PM EST and identifies Business Wire. SEC Exhibit 99.1 independently reproduces the same issuer release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved wire mirror rather than a currently fetchable first-party Business Wire article page.
+
+The other 157 events remain fail-closed until equivalent admissible evidence is located.
