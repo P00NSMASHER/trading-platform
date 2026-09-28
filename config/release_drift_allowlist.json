@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "0fe1fc45dba9c6408e2c593907fb74b4f724f21907c9a1f504dd055b0cd8e2c6",
-      "reason": "Authoritative receipt regeneration from main source commit 2b71f37b26bb78a4ce20c9f1d1fc26fa67805310 after G1 State Street batch 0026."
+      "expected_sha256": "2957cfdc8325f070caccf7cf421f5d4dc3fbdd8fa4ecacc222f5d88c904a9d90",
+      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "b2787b292401016e3f98e373bde09e196cd43a9283c608d9cf6e849ec7f8469a",
-      "reason": "Authoritative receipt regeneration from main source commit 2b71f37b26bb78a4ce20c9f1d1fc26fa67805310 after G1 State Street batch 0026."
+      "expected_sha256": "7ccad8a34b32293fc88ee08a69c75183b9eaf97d4dc5c67daf069217f946d022",
+      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "7a5bf68ed839c61e5f5bf7a05003a40ec391de2d9abf9e55d8ec645f4cc275d8",
-      "reason": "Authoritative receipt regeneration from main source commit 2b71f37b26bb78a4ce20c9f1d1fc26fa67805310 after G1 State Street batch 0026."
+      "expected_sha256": "25dd06b162f9f20c5059fb9b9305cdb297aaf0da1492c2c1c7f4ae4e5b640962",
+      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 Columbia batch 0027: add COLM 2015-04-30 exact 16:00 EDT release clock from preserved StreetInsider distribution history, corroborated by Columbia's Business Wire issuer page and SEC Exhibit 99.1; synchronize research counts to 29 exact / 145 reviewed exclusions without weakening promotion rules."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "ee63343c365bc6c615a4eb2823dd031f968c9885300cbd28df01a777e4181d63",
-      "reason": "Authoritative receipt regeneration from main source commit 2b71f37b26bb78a4ce20c9f1d1fc26fa67805310 after G1 State Street batch 0026."
+      "expected_sha256": "e15774cbf3c15d319cbfcafa120ccbce877044b84eec457d0242394038b56648",
+      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "738979af2015b8e46f6b9770855bab554be853169fc139a595af50363b7cb17d",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "677df6c723e08cd4aca180cbb7a60c79447e3d113e03ee56de80ab63c43a3ac8",
-      "reason": "Authoritative receipt regeneration from main source commit 2b71f37b26bb78a4ce20c9f1d1fc26fa67805310 after G1 State Street batch 0026."
+      "expected_sha256": "e2fc412f5663832c286a01e1a349a40f3e68bc03c7b1b0fcc6b335f2db60b709",
+      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "fd8b9ccce165f4ed5f1394d2f5873801c97c354bfd127069dcfb34fe3c3a098e",
-      "reason": "Authoritative receipt regeneration from main source commit 2b71f37b26bb78a4ce20c9f1d1fc26fa67805310 after G1 State Street batch 0026."
+      "expected_sha256": "98c30babf750b91df0cacbfef0072a9f03a3b23b29551656682c5dbb261e735d",
+      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "31ccce94811ea83bd5681d393da7e1f44413ccdba981fbe690b283c7ec02da10",
-      "reason": "Authoritative receipt regeneration from main source commit 2b71f37b26bb78a4ce20c9f1d1fc26fa67805310 after G1 State Street batch 0026."
+      "expected_sha256": "b188f0100b4e9d899502accac9a71c1d503b28955e7385d2b8c0c0d7442a127c",
+      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "e0c2c189c19656129443c086ce83d3be43fca99aa8ef23fe0c0f158804fd4b2c",
-      "reason": "Authoritative receipt regeneration from main source commit 2b71f37b26bb78a4ce20c9f1d1fc26fa67805310 after G1 State Street batch 0026."
+      "expected_sha256": "cd25d3ab855a5179724dcf038b3d5fc562bb17f7d4b658d2fbe2437723e037d4",
+      "reason": "Authoritative receipt regeneration from main source commit 7a822c227e7e0a9e97eecff256f253fd43c5d209 after G1 Columbia Sportswear batch 0027."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
