@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "2091b025f0fcb7b9b1e26c122baef37c7ce3cacdd9c4e03d71155cb6f7d060c5",
-      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
+      "expected_sha256": "95b26f4717fb3358fa2074b078e415e0984edf082349949ebe69df38787e0528",
+      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "191ec45b8f7fc70302e3f7d1f12f70d226aafcf1caf05701a56033a1ed437472",
-      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
+      "expected_sha256": "1b6b5f9bc47aeb3d9ea4637bb0089791405b4b341f6971a9fa29dc3c374d7c16",
+      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "c1c3b64824132a099474e4e4fd1722d720cde0e7085e78a01d13d794b0eb7eec",
-      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
+      "expected_sha256": "4bdf7682f987d0e646920e5c6602670372f2204cd659f37e56aaa519f41eeb19",
+      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified Business Wire batch 0014: add Feb 2015 MDU exact release clock at 2015-02-02 17:30 ET using a preserved Business Wire mirror plus SEC-hosted issuer corroboration; grade the evidence B, remove only the stale MDU reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "ac35d854e3056d886c0d12d4eef1fe684c1ae0ac02e137f9cc2f308c50026be3",
-      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
+      "expected_sha256": "5e4696119ca6cd26a8b96bbdead7892c744449481cccd3e1a1e62d3fc5863219",
+      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "f801c4935d3716f001e22be005d5bc68c012e52bb325e7899d0e5bacca12062c",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "a3803a548593deab98bda0f594f34a61fac6bfa4977b2617e213bbd19f977a63",
-      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
+      "expected_sha256": "45016ab60c4a4fedc4d802df2f0c6df3631a2af572b3d89899383b0bf2ab5161",
+      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "45781beab59437e7655c50caafd2f14b0e567038280b4ae4ffc10aa95b49943e",
-      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
+      "expected_sha256": "2938f3c4eb3133833ee012a337a070218e6bd77da65f90bcd1812194fcea547f",
+      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "5327a8a32150c6781a7ef0531972abe33a34ad6e3be9f526c5d4d7d540158aaf",
-      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
+      "expected_sha256": "827da3311547b9ce83107cf8e5105041f90eb8779e209dd84ced31b69a1b9f4b",
+      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "e613273b486567b48e0fc3876da48ee496f27c35e62b90a26d8a11c8b452d2d9",
-      "reason": "Authoritative receipt regeneration from main source commit 4128ec5948d2b1e995e54499bb89899554262a90 after G1 ServiceNow batch 0013."
+      "expected_sha256": "d29d528dfcec1faf3c54b4085466c50daaabc7e1bfd13165f8c9ca879f4cf9c9",
+      "reason": "Authoritative receipt regeneration from main source commit 82f736c06a1e94600fc490c9497712edac557ccd after G1 MDU Resources batch 0014."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
