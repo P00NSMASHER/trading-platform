@@ -758,16 +758,16 @@
       "reason": "G1 batch 0025 evidence row for Ford: SEC-hosted issuer earnings exhibit explicitly states a 7:00 a.m. EST first-public results release on January 29, 2015; graded A."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "e66851acb3a36fe34361e2ead114e2c18a6974653858a6064c449892f19fc942",
-      "reason": "G1 Columbia batch 0027: add COLM 2015-04-30 exact 16:00 EDT release clock from preserved StreetInsider distribution history, corroborated by Columbia's Business Wire issuer page and SEC Exhibit 99.1; synchronize research counts to 29 exact / 145 reviewed exclusions without weakening promotion rules."
+      "expected_sha256": "5134f8af6106497cc1ed0e689adfa8736eaf52492cd6462c168ea4297517690f",
+      "reason": "G1 Mattress Firm batch 0028: synchronize source-research regression expectations and SHA-bound research-map identity to 30 exact / 144 reviewed exclusions / batch 28 without changing fail-closed promotion semantics."
     },
     "src/g1_source_research.py": {
       "expected_sha256": "abdc37bb7aa5d4473ea9e5b63a5e5adda73ba496adfd7b808deb18fcc883663f",
       "reason": "G1 fail-closed validator and priority-queue generator that prevents wrong-year, date-only, inferred, archive-capture, or mismatched probes from becoming exact timestamp evidence."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "1b62057d7ef400977e58126a9261ecfca288177b10fc40a0613df09d8f095b27",
-      "reason": "G1 Columbia batch 0027: add COLM 2015-04-30 exact 16:00 EDT release clock from preserved StreetInsider distribution history, corroborated by Columbia's Business Wire issuer page and SEC Exhibit 99.1; synchronize research counts to 29 exact / 145 reviewed exclusions without weakening promotion rules."
+      "expected_sha256": "fe64ebcf060b0abaf098f3bb8176bc7463484c38613a0ca606db3772b29e2da5",
+      "reason": "G1 Mattress Firm batch 0028: synchronize source-research regression expectations and SHA-bound research-map identity to 30 exact / 144 reviewed exclusions / batch 28 without changing fail-closed promotion semantics."
     },
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
