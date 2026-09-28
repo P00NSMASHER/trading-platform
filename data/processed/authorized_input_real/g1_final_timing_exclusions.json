@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "058f0041125a9b661296d885997f7e0792099e54",
+  "base_main_sha": "15897bf7351a299007a5ec6fc92b9d008402fedf",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 23,
-    "reviewed_excluded": 151,
+    "exact_resolved": 24,
+    "reviewed_excluded": 150,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 151,
+    "raw_exact_time_evidence_gaps": 150,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 23,
+    "exact_timing_analysis_eligible": 24,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -462,13 +462,6 @@
       "historical_symbol": "BIO",
       "first_documented_illicit_trade_ts": "2013-05-07 15:55:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-C85CE64DFF947CFD",
-      "historical_symbol": "RES",
-      "first_documented_illicit_trade_ts": "2012-01-24 15:20:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
@@ -1125,14 +1118,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 23,
-    "latest_batch": "g1_announcement_times_batch_0021.csv",
+    "exact_resolved": 24,
+    "latest_batch": "g1_announcement_times_batch_0022.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-76DCF0FCA248E814",
-        "historical_symbol": "CB",
-        "public_announcement_ts": "2012-01-26T16:03:00-05:00",
-        "source_reference": "https://www.marketscreener.com/quote/stock/CHUBB-CORP-11975/news/The-Chubb-Corporation-Chubb-Reports-Fourth-Quarter-Net-Income-per-Share-of-1-60-Operating-Income-13988932/"
+        "event_id": "HEJFE-C85CE64DFF947CFD",
+        "historical_symbol": "RES",
+        "public_announcement_ts": "2012-01-25T07:22:00-05:00",
+        "source_reference": "https://www.prnewswire.com/news/rpc,-inc./?page=9&pagesize=25"
       }
     ]
   }
