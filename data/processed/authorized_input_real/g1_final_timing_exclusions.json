@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "39eaef2dbc20465d84fe6f93f718526682d30801",
+  "base_main_sha": "8320839b17cf0b9e5ad53df55549128327e4ed25",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 21,
-    "reviewed_excluded": 153,
+    "exact_resolved": 22,
+    "reviewed_excluded": 152,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 153,
+    "raw_exact_time_evidence_gaps": 152,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 21,
+    "exact_timing_analysis_eligible": 22,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -885,13 +885,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-1E37362063697486",
-      "historical_symbol": "FLR",
-      "first_documented_illicit_trade_ts": "2015-02-17 15:06:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-830337A8564B826E",
       "historical_symbol": "ALGN",
       "first_documented_illicit_trade_ts": "2013-10-17 13:43:00",
@@ -1139,14 +1132,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 21,
-    "latest_batch": "g1_announcement_times_batch_0019.csv",
+    "exact_resolved": 22,
+    "latest_batch": "g1_announcement_times_batch_0020.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-00D863517A3A754C",
-        "historical_symbol": "URI",
-        "public_announcement_ts": "2015-01-21T16:10:00-05:00",
-        "source_reference": "https://www.marketscreener.com/quote/stock/UNITED-RENTALS-14759/news/United-Rentals-Announces-Fourth-Quarter-and-Full-Year-2014-Results-and-Provides-2015-Outlook-19742858/"
+        "event_id": "HEJFE-1E37362063697486",
+        "historical_symbol": "FLR",
+        "public_announcement_ts": "2015-02-18T08:30:00-05:00",
+        "source_reference": "https://newsroom.fluor.com/news-releases/news-details/2015/Fluor-Reports-Fourth-Quarter-and-Full-Year-2014-Results/default.aspx"
       }
     ]
   }

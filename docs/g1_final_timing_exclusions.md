@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 21
-- **Immutable reviewed fail-closed exclusions:** 153
+- **Exact first-public announcement timestamps resolved:** 22
+- **Immutable reviewed fail-closed exclusions:** 152
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 21
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 22
 
 This does **not** invent announcement times.
 
@@ -171,3 +171,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-00D863517A3A754C` (URI): `2015-01-21T16:10:00-05:00`. MarketScreener preserves `United Rentals Announces Fourth Quarter and Full Year 2014 Results and Provides 2015 Outlook` as published Jan. 21, 2015 at 4:10 PM EST and labels it Business Wire. SEC Exhibit 99.1 independently reproduces the same United Rentals release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved Business Wire mirror rather than a currently fetchable first-party Business Wire page.
 
 The other 153 events remain fail-closed until equivalent admissible evidence is located.
+
+## Issuer-hosted release-clock batch 0020
+
+One additional event now has an exact first-public release timestamp directly preserved by the issuer's newsroom:
+
+- `HEJFE-1E37362063697486` (FLR): `2015-02-18T08:30:00-05:00`. Fluor's issuer-hosted newsroom explicitly timestamps `Fluor Reports Fourth Quarter and Full Year 2014 Results` on Wednesday, February 18, 2015 at 08:30 AM. SEC Exhibit 99.1 independently corroborates the same release title, date, and content. This row is graded `A` because the exact clock is preserved by the issuer-hosted release itself.
+
+The other 152 events remain fail-closed until equivalent admissible evidence is located.
