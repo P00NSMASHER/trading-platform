@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "fccd411ab3c16aa5db76d83becfcbffb61be8e12",
+  "base_main_sha": "d99df656a622ccfe0f50363c8b3c0a672b13cb9b",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 31,
-    "reviewed_excluded": 143,
+    "exact_resolved": 32,
+    "reviewed_excluded": 142,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 143,
+    "raw_exact_time_evidence_gaps": 142,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 31,
+    "exact_timing_analysis_eligible": 32,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -258,13 +258,6 @@
       "event_id": "HEJFE-99F3FC8CE022DEA1",
       "historical_symbol": "VAR",
       "first_documented_illicit_trade_ts": "2012-01-25 12:46:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-A25F33B630365184",
-      "historical_symbol": "R",
-      "first_documented_illicit_trade_ts": "2015-02-02 15:43:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1069,14 +1062,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 31,
-    "latest_batch": "g1_announcement_times_batch_0029.csv",
+    "exact_resolved": 32,
+    "latest_batch": "g1_announcement_times_batch_0030.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-E25BAF3CFF23A3BE",
-        "historical_symbol": "BCR",
-        "public_announcement_ts": "2015-01-29T16:05:00-05:00",
-        "source_reference": "https://www.marketscreener.com/quote/stock/C-R-BARD-11788/news/C-R-Bard-Bard-Announces-Fourth-Quarter-Results-19785868/"
+        "event_id": "HEJFE-A25F33B630365184",
+        "historical_symbol": "R",
+        "public_announcement_ts": "2015-02-03T08:55:00-05:00",
+        "source_reference": "https://newsroom.ryder.com/news/news-details/2015/Ryder-Reports-Record-Fourth-Quarter-and-Full-Year-2014-Results-and-Provides-2015-Forecast/default.aspx"
       }
     ]
   }

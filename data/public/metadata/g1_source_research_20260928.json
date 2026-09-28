@@ -3,13 +3,13 @@
   "research_date": "2026-09-28",
   "purpose": "Machine-readable G1 source-discovery intelligence for the 174-event exact public-announcement-time sweep. This file is research guidance only and must never resolve a G1 event by itself.",
   "research_use_only": true,
-  "base_main_sha": "fccd411ab3c16aa5db76d83becfcbffb61be8e12",
+  "base_main_sha": "d99df656a622ccfe0f50363c8b3c0a672b13cb9b",
   "current_g1_state": {
     "required_event_count": 174,
-    "public_exact_batch_count": 29,
-    "exact_resolved_event_records": 31,
-    "reviewed_excluded_event_records": 143,
-    "note": "The repository is at batch_0029; cumulative exact event records are 31 because some public batches resolve more than one historical event."
+    "public_exact_batch_count": 30,
+    "exact_resolved_event_records": 32,
+    "reviewed_excluded_event_records": 142,
+    "note": "The repository is at batch_0030; cumulative exact event records are 32 because some public batches resolve more than one historical event."
   },
   "consolidated_source_search": {
     "public_one_stop_exact_timestamp_dataset_found": false,
@@ -176,6 +176,22 @@
       "evidence_eligible": false,
       "disposition": "NO_EXACT_TIME_FOUND_IN_PASS",
       "reason": "No consolidated public dataset or exact-clock release record was located in the deep-research pass."
+    },
+    {
+      "probe_id": "R-2015-Q4-resolved",
+      "event_id": "HEJFE-A25F33B630365184",
+      "historical_symbol": "R",
+      "historical_event_match": true,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-02-03T08:55:00-05:00",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "issuer_investor_relations_archive",
+      "source_reference": "https://newsroom.ryder.com/news/news-details/2015/Ryder-Reports-Record-Fourth-Quarter-and-Full-Year-2014-Results-and-Provides-2015-Forecast/default.aspx",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/85961/000008596115000006/exhibit991-pressreleasex20.htm",
+      "evidence_eligible": false,
+      "disposition": "RESOLVED_IN_BATCH_0030",
+      "reason": "Ryder's issuer-hosted newsroom preserves the matching release at February 3, 2015 8:55 AM; the timestamp is normalized in the repository's America/New_York source timezone and the matching SEC exhibit independently corroborates the release. Promotion occurs through the separately reviewed batch_0030 evidence path."
     }
   ],
   "priority_events": [
