@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 30
-- **Immutable reviewed fail-closed exclusions:** 144
+- **Exact first-public announcement timestamps resolved:** 31
+- **Immutable reviewed fail-closed exclusions:** 143
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 30
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 31
 
 This does **not** invent announcement times.
 
@@ -243,3 +243,11 @@ One additional event now has an exact public-release timestamp recovered from a 
 - `HEJFE-05DE1473D5D7F7FB` (MFRM): `2015-03-19T16:01:00-04:00`. MarketScreener preserves `Mattress Firm Announces Fourth Fiscal Quarter and Full Fiscal Year Financial Results` as published March 19, 2015 at 4:01 PM EDT and labels it Business Wire. SEC Exhibit 99.1 independently reproduces the same release title, date, and content. The frozen first documented illicit trade was at 3:55 PM EDT, yielding a six-minute interval. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from a preserved Business Wire mirror rather than a currently fetchable first-party Business Wire article page.
 
 The other 144 events remain fail-closed until equivalent admissible evidence is located.
+
+## Independently verified Business Wire batch 0029
+
+One additional event now has an exact public-release timestamp recovered from a preserved Business Wire article and corroborated against the SEC-hosted issuer release:
+
+- `HEJFE-E25BAF3CFF23A3BE` (BCR): `2015-01-29T16:05:00-05:00`. MarketScreener preserves `Bard Announces Fourth Quarter Results` as published Jan. 29, 2015 at 4:05 PM EST and labels it Business Wire. SEC Exhibit 99.1 independently reproduces the same release title, date, and content. This row is deliberately graded `B`, not `A`, because the exact clock is recovered from the preserved Business Wire mirror.
+
+The other 143 events remain fail-closed until equivalent admissible evidence is located.
