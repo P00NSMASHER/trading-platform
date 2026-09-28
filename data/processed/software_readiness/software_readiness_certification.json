@@ -21,11 +21,11 @@
     {
       "category": "runtime",
       "check_id": "PRIVATE_RUNTIME_INTEGRITY",
-      "detail": "ok=True; audit_sha256=b9c2e384f86f42abd5272ab50ab68d215279dbc21a97d3528d483999bd96d830; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
+      "detail": "ok=True; audit_sha256=235e82be04893330993fe59d9c8fc3a3f61cfd19404fbb0be72efbd31954708a; model_sha256=0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616",
       "passed": true
     }
   ],
-  "git_commit": "720a69eaaedd5604f143af2c2275d2d15244a977",
+  "git_commit": "3df10ea558af8f886452843b52b836b3523e6bc3",
   "hostile_regression_suite": {
     "missing_test_files": [],
     "ok": true,
@@ -84,12 +84,12 @@
     },
     "input_hashes": {
       "coverage_summary": "6bf06c331abf04265c4b2c0971ae621619009dcb7e401b08127746c5d798ffaa",
-      "metadata_quality": "2e717a04e57bbbbeccb9a2084aca724d92e6c142a1572e50f39e7fc4e6ebe579",
-      "metadata_readiness": "b5c1940588c3d51fb5abad70abee53ade93cdcd025eebade2a000f21ceb9f2a2",
-      "real_data_replay_status": "3495f0a0018740cab6db16a898f4d61896e5c9d2a6303b1a353e065e057ab710"
+      "metadata_quality": "1621501968a344b128473d8b66010ac72617121b2461a582bf79457782b50851",
+      "metadata_readiness": "f0600450de1eef3211c9206b0d790af2a2831c1e24e41d094139749ceee0e03e",
+      "real_data_replay_status": "e1adaee14792fb380e1200b227cdff57e62ae5c4dfda3c13ab0090840c759a83"
     },
     "metadata": {
-      "announcement_exact_resolved": 30,
+      "announcement_exact_resolved": 31,
       "announcement_required": 174,
       "control_dates_required": 72,
       "control_dates_resolved": 0
@@ -100,7 +100,7 @@
   },
   "real_data_validated": false,
   "runtime_self_check": {
-    "audit_sha256": "b9c2e384f86f42abd5272ab50ab68d215279dbc21a97d3528d483999bd96d830",
+    "audit_sha256": "235e82be04893330993fe59d9c8fc3a3f61cfd19404fbb0be72efbd31954708a",
     "case_database": {
       "case_count": 1,
       "exists": true,
@@ -166,7 +166,7 @@
       },
       "ok": true
     },
-    "generated_at_utc": "2026-09-28T18:30:41Z",
+    "generated_at_utc": "2026-09-28T18:53:08Z",
     "model_bundle": {
       "deserialization_attempted": true,
       "exists": true,

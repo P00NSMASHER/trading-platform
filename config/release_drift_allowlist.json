@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "b5c1940588c3d51fb5abad70abee53ade93cdcd025eebade2a000f21ceb9f2a2",
-      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
+      "expected_sha256": "f0600450de1eef3211c9206b0d790af2a2831c1e24e41d094139749ceee0e03e",
+      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "2e717a04e57bbbbeccb9a2084aca724d92e6c142a1572e50f39e7fc4e6ebe579",
-      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
+      "expected_sha256": "1621501968a344b128473d8b66010ac72617121b2461a582bf79457782b50851",
+      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "33b3f9571bf916081fbd2467c25b5935ccd49dbbc4d0e5eb53e7676de54ef8d2",
-      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
+      "expected_sha256": "fd63b6b3a41fbddf72730be5ca0a4d7f9fd9debe8fce5aa060e5a5dbe38ddabb",
+      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 independently verified Business Wire batch 0029: add BCR exact release clock at 2015-01-29 16:05 ET using a preserved Business Wire article plus SEC-hosted issuer corroboration; grade evidence B, remove only the stale BCR reviewed exclusion, and preserve all remaining fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "16430bc4d2f1d6582233d955f7d198b63dfd49ba0ee43c0b9e37e15bfdec2f36",
-      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
+      "expected_sha256": "3b195c84a1ea44eeab9a08f9d86cf0f379ae6e2b35d5b502899334baf0114d1f",
+      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "dc22ab8f8962c787e5795a066bb6642423ae966d6d84f39b04088d4d0dd24f7f",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "ba9bc3ad5b53de7b1cf7e9b876adc51c5f50b9d790b4327045ffaa15f275a800",
-      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
+      "expected_sha256": "c910d773f5b1a540e2dddcb9adf712829fbbf63e59f4b622c4076b666acf267f",
+      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "88958f7112c5a91b77bfca9ea4760b56ea9c794f2a23ef3ef3eaf41c126d7103",
-      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
+      "expected_sha256": "6f4be55553495ee1a34705816835ccc3534447b5ca471a36019f9f2f263a8a51",
+      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "3495f0a0018740cab6db16a898f4d61896e5c9d2a6303b1a353e065e057ab710",
-      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
+      "expected_sha256": "e1adaee14792fb380e1200b227cdff57e62ae5c4dfda3c13ab0090840c759a83",
+      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "4d502b164f2fd7ec415fd7de38508cccaad624f94e1d91864f766f245d11eba7",
-      "reason": "Authoritative receipt regeneration from main source commit 720a69eaaedd5604f143af2c2275d2d15244a977 after G1 Mattress Firm batch 0028."
+      "expected_sha256": "bb9c6a2f174305045cbeaf443b72e35794d7eac7100c7efc362af535569341e3",
+      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
