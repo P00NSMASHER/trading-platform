@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 35
-- **Immutable reviewed fail-closed exclusions:** 139
+- **Exact first-public announcement timestamps resolved:** 37
+- **Immutable reviewed fail-closed exclusions:** 137
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 35
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 37
 
 This does **not** invent announcement times.
 
@@ -271,3 +271,7 @@ The other 141 events remain fail-closed until equivalent admissible evidence is 
 ## Public primary-clock batch 0032
 
 AMD and Haemonetics were removed from the exclusion set only after source-specific exact-clock review. The remaining 139 events retain blank release timestamps and remain excluded from timing-dependent analysis. Authoritative evidence: `data/public/metadata/g1_announcement_times_batch_0032_evidence.json`.
+
+## Public syndicated-clock batch 0033
+
+Proofpoint and VeriSign leave the exclusion set after review of the Marketwired-attributed publication metadata and matching SEC release exhibits. Grade B and mirror-clock limitations are retained. The remaining 137 events have no accepted exact release clocks and stay excluded from timing-dependent analysis.

@@ -3,13 +3,13 @@
   "research_date": "2026-09-28",
   "purpose": "Machine-readable G1 source-discovery intelligence for the 174-event exact public-announcement-time sweep. This file is research guidance only and must never resolve a G1 event by itself.",
   "research_use_only": true,
-  "base_main_sha": "ea09d64fa029eec7439cc3850dcba5999db0ed1b",
+  "base_main_sha": "88dfa6fa4f69a6c9f33714edca92442376dfc8d4",
   "current_g1_state": {
     "required_event_count": 174,
-    "public_exact_batch_count": 32,
-    "exact_resolved_event_records": 35,
-    "reviewed_excluded_event_records": 139,
-    "note": "The repository is at batch_0032; cumulative exact event records are 35 because some public batches resolve more than one historical event."
+    "public_exact_batch_count": 33,
+    "exact_resolved_event_records": 37,
+    "reviewed_excluded_event_records": 137,
+    "note": "The repository is at batch_0033; cumulative exact event records are 37 because some public batches resolve more than one historical event."
   },
   "consolidated_source_search": {
     "public_one_stop_exact_timestamp_dataset_found": false,
@@ -240,6 +240,40 @@
       "evidence_eligible": false,
       "disposition": "RESOLVED_IN_BATCH_0032",
       "reason": "Resolved through separately reviewed public batch_0032; this research hint is not itself resolution evidence."
+    },
+    {
+      "probe_id": "PFPT-batch0033-resolved",
+      "event_id": "HEJFE-6C73B4B05384BC1E",
+      "historical_symbol": "PFPT",
+      "historical_event_match": true,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-25T16:05:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "preserved_wire_mirror",
+      "source_reference": "https://finance.yahoo.com/news/proofpoint-announces-first-quarter-2013-200500289.html",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1212458/000110465913033018/a13-10811_1ex99d1.htm",
+      "source_grade": "B",
+      "evidence_eligible": false,
+      "disposition": "RESOLVED_IN_BATCH_0033",
+      "reason": "Resolved by separately reviewed batch_0033 from preserved Marketwired article publication metadata; SEC content corroboration and mirror-clock limitation retained in the evidence dossier."
+    },
+    {
+      "probe_id": "VRSN-batch0033-resolved",
+      "event_id": "HEJFE-1FCAAB3F7CC931CF",
+      "historical_symbol": "VRSN",
+      "historical_event_match": true,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-25T16:05:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "preserved_wire_mirror",
+      "source_reference": "https://finance.yahoo.com/news/verisign-reports-15-percent-over-200500976.html",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1014473/000101447313000027/ex991.htm",
+      "source_grade": "B",
+      "evidence_eligible": false,
+      "disposition": "RESOLVED_IN_BATCH_0033",
+      "reason": "Resolved by separately reviewed batch_0033 from preserved Marketwired article publication metadata; SEC content corroboration and mirror-clock limitation retained in the evidence dossier."
     }
   ],
   "priority_events": [

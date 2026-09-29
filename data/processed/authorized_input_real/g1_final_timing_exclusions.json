@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "ea09d64fa029eec7439cc3850dcba5999db0ed1b",
+  "base_main_sha": "88dfa6fa4f69a6c9f33714edca92442376dfc8d4",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 35,
-    "reviewed_excluded": 139,
+    "exact_resolved": 37,
+    "reviewed_excluded": 137,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 139,
+    "raw_exact_time_evidence_gaps": 137,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 35,
+    "exact_timing_analysis_eligible": 37,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -132,13 +132,6 @@
       "event_id": "HEJFE-AF5106891E058D23",
       "historical_symbol": "TNGO",
       "first_documented_illicit_trade_ts": "2015-02-12 15:10:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-6C73B4B05384BC1E",
-      "historical_symbol": "PFPT",
-      "first_documented_illicit_trade_ts": "2013-04-25 15:00:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -685,13 +678,6 @@
       "event_id": "HEJFE-8A0517D50278EAE4",
       "historical_symbol": "POWI",
       "first_documented_illicit_trade_ts": "2015-04-29 15:23:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-1FCAAB3F7CC931CF",
-      "historical_symbol": "VRSN",
-      "first_documented_illicit_trade_ts": "2013-04-25 14:07:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },

@@ -1,0 +1,98 @@
+{
+  "schema_version": "1",
+  "base_main_sha": "88dfa6fa4f69a6c9f33714edca92442376dfc8d4",
+  "frozen_events_sha256": "43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12",
+  "batch_sha256": "f16687a8784884624c944cad40c402d68497abd4455d5f03cfe43c2a76a0db51",
+  "research_use_only": true,
+  "evidence_review_date": "2026-09-29",
+  "purpose": "Two reviewed Marketwired syndication-clock recoveries, explicitly Grade B; no WRDS, licensed extract, URL-time inference or new first-public clock inferred from SEC data.",
+  "before": {
+    "exact": 35,
+    "excluded": 139
+  },
+  "after": {
+    "exact": 37,
+    "excluded": 137
+  },
+  "non_promoted_resolution_rows_sha256": "e042b78ed0a587ab9be5ceb502cd2c1d96dbd7b440007637796984d210b153b5",
+  "candidates": [
+    {
+      "event_id": "HEJFE-6C73B4B05384BC1E",
+      "historical_symbol": "PFPT",
+      "first_trade": "2013-04-25 15:00:00",
+      "event_date": "2013-04-25",
+      "public_announcement_ts": "2013-04-25T16:05:00-04:00",
+      "source_reference": "https://finance.yahoo.com/news/proofpoint-announces-first-quarter-2013-200500289.html",
+      "title": "Proofpoint Announces First Quarter 2013 Financial Results",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1212458/000110465913033018/a13-10811_1ex99d1.htm",
+      "corroboration_detail": "SEC Exhibit 99.1 matches the April 25, 2013 title, quarter ended March 31, revenue of $30.8 million, billings of $35.1 million and GAAP EPS loss of $0.19. The SEC exhibit corroborates release identity/content, not the clock.",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "B",
+      "evidence_source_family": "preserved_wire_mirror",
+      "clock_evidence_kind": "publisher_timestamp",
+      "original_wire_publisher_byline": "Marketwired",
+      "observed_html_time_datetime": "2013-04-25T20:05:00+00:00",
+      "visible_publication_date": "April 25, 2013",
+      "visible_clock_observed": false,
+      "later_update_time_separately_shown": false,
+      "original_wire_source_link_observed": null,
+      "observation_method": "Read-only browser inspection of the article HTML time datetime attribute and Marketwired byline; the date alone and digits in the URL were not used.",
+      "observation_run_id": "0c282afc-12fd-4ca6-a5fa-be5c178b94b5",
+      "source_grade_reason": "Grade B: clock preserved by a Marketwired-attributed syndication copy, not independently fetched from the original wire archive. SEC corroboration establishes matching release identity, not independent clock confirmation.",
+      "prohibited_substitutes_not_used": [
+        "URL-derived clock",
+        "conference call time",
+        "EDGAR acceptance time",
+        "archive capture time",
+        "scheduled release notice"
+      ],
+      "separate_conference_call_time_not_used": "2013-04-25 16:30 America/New_York",
+      "research_use_only": true,
+      "seconds_after_frozen_trade": 3900
+    },
+    {
+      "event_id": "HEJFE-1FCAAB3F7CC931CF",
+      "historical_symbol": "VRSN",
+      "first_trade": "2013-04-25 14:07:00",
+      "event_date": "2013-04-25",
+      "public_announcement_ts": "2013-04-25T16:05:00-04:00",
+      "source_reference": "https://finance.yahoo.com/news/verisign-reports-15-percent-over-200500976.html",
+      "title": "Verisign Reports 15 Percent Year-Over-Year Revenue Growth in First Quarter 2013",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1014473/000101447313000027/ex991.htm",
+      "corroboration_detail": "SEC Exhibit 99.1 matches the April 25, 2013 title, quarter ended March 31, revenue of $236 million, net income of $85 million and GAAP EPS of $0.52. The SEC exhibit corroborates release identity/content, not the clock.",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "B",
+      "evidence_source_family": "preserved_wire_mirror",
+      "clock_evidence_kind": "publisher_timestamp",
+      "original_wire_publisher_byline": "Marketwired",
+      "observed_html_time_datetime": "2013-04-25T20:05:00+00:00",
+      "visible_publication_date": "April 25, 2013",
+      "visible_clock_observed": false,
+      "later_update_time_separately_shown": false,
+      "original_wire_source_link_observed": null,
+      "observation_method": "Read-only browser inspection of the article HTML time datetime attribute and Marketwired byline; the date alone and digits in the URL were not used.",
+      "observation_run_id": "0c282afc-12fd-4ca6-a5fa-be5c178b94b5",
+      "source_grade_reason": "Grade B: clock preserved by a Marketwired-attributed syndication copy, not independently fetched from the original wire archive. SEC corroboration establishes matching release identity, not independent clock confirmation.",
+      "prohibited_substitutes_not_used": [
+        "URL-derived clock",
+        "conference call time",
+        "EDGAR acceptance time",
+        "archive capture time",
+        "scheduled release notice"
+      ],
+      "separate_conference_call_time_not_used": "2013-04-25 16:30 America/New_York",
+      "research_use_only": true,
+      "seconds_after_frozen_trade": 7080
+    }
+  ],
+  "policy": {
+    "exact_clock_required": true,
+    "exclusions_are_not_exact": true,
+    "syndicated_clock_not_primary_wire_claim": true,
+    "sec_corroboration_not_independent_clock_claim": true,
+    "publication_metadata_not_modified_time": true,
+    "conference_call_substitution_prohibited": true,
+    "edgar_acceptance_substitution_prohibited": true,
+    "url_clock_inference_prohibited": true
+  }
+}

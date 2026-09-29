@@ -68,12 +68,12 @@
       "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "ef2db9c0953e1bd635deed79bbe29d1264fea05acec4f6c1ca225734f5cfa6ea",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "0deaa3cbd07fbb366f137debf5ce0090b6d22e3b33378ef6bedc597722524111",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "7bd75b4b2f81019451acf36bcd29dcfe707cf4e5efcc3b67089cba275e13efe1",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "a7a4e53a42090a85cedc8a76dfbf9bbd5c4624ed4c70d7d7be3128ea93698fb6",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "748ffe77a01fb15aad9f1e2ab81af5e09bf6aa58a03568d2632d722b0f5f7ab8",
@@ -92,8 +92,8 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "597495e158b6c3854902ae8342783e69140ab026dd375521645067feb65997b6",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "a8e48cb38e96e4d5e2e6991f2206d893457e640d6375ba624395903b93c77c70",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -318,8 +318,8 @@
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "68c0887b7a44b978db40ca1ea191b3052f3828a68a4f1ea18e05ffa872c67437",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "4856ba58cdb2f6b261f852be7556d8a8ddc6b6c7fee860c228a7f570426eeb99",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "config/metadata_sources.g3_public.json": {
       "expected_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "5a7d03ebb33cbfcba60a0f9242e8207ddd26c5d1b80823433b43a2752ebd484e",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "ce8fa0fdf8d9550c198ee57341ae9d04bcfa68d29d69655b0762c8f8b2d67a7f",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "4397af189e37f5860307ed90372a6534f83729c9487d25df87e36216413beead",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "897ea53d67427e694af222d6f53195b24d709b2904cc895d2d981ff13deeb1e6",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "d28a11c29588332cad8e706658de93e5283fccc7d88319c13c573c9540c52b0b",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "5660b380a23a1b0c38b7a72922fbf0ba90205dbb0c777bb3716c08d58b0351fe",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "1be76a9d5665109caa4fc7692bd250dd3cacfd6c928b07e556cc2af01fa6eb71",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "cd87ab6d6889a2cf0fb70aed279b279b09850b00809c2983c1f634be86deb024",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "b619d68ac627699ffc782d4dbc62d41c78fd0d0ab170a7113c2fcd1e828a1870",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "b31f09b6f45e0366ec6cc1834b0cb62395ea931eb46aa1729bdb3e2b2d03981c",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "aa5a02078008c625ec1c32b16205e3fad417a89b187034c887579b1145575408",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "713c4977684adf0b8857eedb87a1e717648d8e23d732f9f060b2633d18d5ea22",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "3fff665a05662700929055c24065ae96f7b0d8b8754cc10f4929ce933a5d0d76",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -554,8 +554,8 @@
       "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "8965c222643c9ae47e00ef66d3a62f428da1b6a68ec9fa40fca8fbc6a7e06660",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "2af89ca0555e227274f517343a9f22e779d33a6259049e1df74ff062dde391e3",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "docs/licensed_data_acquisition.md": {
       "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
@@ -574,8 +574,8 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "2a4ef5089dd6d30ef5fc681e6280e002d78b781e316a79f7def86454833e5ae7",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "115e034568d8132f23d6d86198b4c3107b38934ff67ad6a4eeedd8ec6d86a658",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "src/real_data_replay.py": {
       "expected_sha256": "438ef2f5b9cd5d986f74c974b3715524e7bf37a0ba4876b044d8cde58af0489d",
@@ -642,8 +642,8 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "cc064774fa15e8c58adb650a5239e4ac47014b5f0af0fdbac562e24e547cebef",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "9cb10e38dc46db6d4c19f1e89459ee321c0b6d293ba1911623749fbfc9ce7f97",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
       "expected_sha256": "e8778826460c9a341d0458f43ce9fe14337c3f460e12f8535735b9396e0ea405",
@@ -758,16 +758,16 @@
       "reason": "G1 batch 0025 evidence row for Ford: SEC-hosted issuer earnings exhibit explicitly states a 7:00 a.m. EST first-public results release on January 29, 2015; graded A."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "c48951f7d0ebf16a7414c89acd4e2e7a58e4e2f12108573e67be16be0c93dbfc",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "042e75e996767ad973fd7ef60be176f45b907969e843abf01af580b653fe3697",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "src/g1_source_research.py": {
       "expected_sha256": "34dd8d8e07bdb10c82b30caba2145d6e30493d1f27ec9f68a68e1e937e086ed2",
       "reason": "G1 research promotion hardening: independently validate event identity, timezone-aware first-public-release timestamp semantics, admissible source family, source reference, chronology, seven-calendar-day window, and mirror corroboration."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "c2d478eab3f1a9d8f4ecbbf5abd2b253161601fba06be170eb002ba15b973c10",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "7cc543a905cd4832dcd6a270e70893a75cbab9d27ebc1b867f7fa2e5d3f01a84",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
@@ -818,20 +818,20 @@
       "reason": "Regression coverage for deterministic receipt reproduction, manifest ordering, and rollback on interrupted publication."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "6888671859245269fa2c241da75094e90f5c033e4c1a414ec53ecb83da312c5d",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "a114897f3fd5a165520e9624cb190039bdb6687ca3d6a158a2362d50aaf7d8d6",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "src/g1_acquisition_manifest.py": {
       "expected_sha256": "04536264c405e94208e113de3e21a07dc3d2021dad427c5cd8c3b15a8b36da4c",
       "reason": "G1 acquisition routing: deterministically reconcile all 174 events, suppress already-resolved events, route remaining exact-clock work between public archives and lawful I/B/E/S bulk acquisition, and emit stable dedupe/work-queue identities."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "e5808256ae3509675bc9efea35a3c374ef315dbf51866111365a835c24dad884",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "642e0d046a8702df5af2d991b16f5c675c5683f5920f6ccf002eeed510e15d92",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "9175b93ad1e4accbbf27ac34574490220dbafe76e5027e70bf3474438c75c2f2",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "a67494554b9516e1ca4a0e9cfe1bef8c2afcc1800ba5007e7a097e7dc82363b6",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     },
     "data/public/metadata/g1_announcement_times_batch_0031.csv": {
       "expected_sha256": "5c997dcc805c9e5df65bac36213726c1550d852492cd26271288688ceb528491",
@@ -874,8 +874,20 @@
       "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "64c484a7e7fc8136e19e2be7c9cc651e46b7a66554ecb0216f874d8d9d580855",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "fe673af47c4896e50a99779c9f96a65d7ca69da4179a89c381d4cbc69839f520",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0033.csv": {
+      "expected_sha256": "f16687a8784884624c944cad40c402d68497abd4455d5f03cfe43c2a76a0db51",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0033_evidence.json": {
+      "expected_sha256": "b3991617207e8a7fbe12a945d8569468578a8e1cc39e103c1cc839fd3c84c8a5",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
+    },
+    "tests/test_g1_public_batch_0033.py": {
+      "expected_sha256": "615e330ebc95cafa1c75edc7c4c50a2608997bd88ea4dbb6fa4694a678bf6831",
+      "reason": "Reviewed public batch 0033: two Grade B Marketwired syndicated publication clocks with SEC identity corroboration; deterministic 37 exact / 137 reviewed-exclusion receipts and focused regressions. No runtime gate change."
     }
   }
 }

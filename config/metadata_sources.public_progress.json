@@ -1,7 +1,30 @@
 {
   "schema_version": "1",
-  "purpose": "Cumulative public point-in-time metadata progress: G1 contains thirty-five verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
+  "purpose": "Cumulative public point-in-time metadata progress: G1 contains thirty-seven verified exact public-release timestamps plus reviewed fail-closed exclusions; G3 complete; G4 and G5 remain accounted under hard no-lookahead and source-integrity rules.",
   "sources": [
+    {
+      "source_id": "public-yahoo-marketwired-pfpt-vrsn-batch-0033",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "path": "data/public/metadata/g1_announcement_times_batch_0033.csv",
+      "enabled": true,
+      "authorized": true,
+      "data_classification": "public_official_data",
+      "license_reference": "Public Marketwired-attributed press-release syndication copies on Yahoo Finance. Exact article time datetime attributes observed with timezone offsets; SEC exhibits independently corroborate release identity/date/content. Grade B preserves the mirror-only clock provenance. Narrow factual metadata only, not a license to republish the full articles.",
+      "delimiter": ",",
+      "encoding": "utf-8",
+      "timezone": "America/New_York",
+      "column_map": {
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "event_date": "event_date",
+        "public_announcement_ts": "public_announcement_ts",
+        "timestamp_kind": "timestamp_kind",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference"
+      },
+      "notes": "Source observations and provenance limitations: data/public/metadata/g1_announcement_times_batch_0033_evidence.json"
+    },
     {
       "source_id": "public-primary-clock-amd-hae-batch-0032",
       "record_kind": "announcement_timestamp",
@@ -950,8 +973,8 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "expected_sha256": "4397af189e37f5860307ed90372a6534f83729c9487d25df87e36216413beead",
-    "expected_count": 139,
+    "expected_sha256": "897ea53d67427e694af222d6f53195b24d709b2904cc895d2d981ff13deeb1e6",
+    "expected_count": 137,
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
   },
