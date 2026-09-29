@@ -95,7 +95,7 @@ def event_identities():
         evidence_date = (row.get("evidence_date") or "").strip()
         source_reference = row.get("source_reference") or ""
         if not evidence_date:
-            mdate = re.search(r"_(20\\d{6})_", source_reference)
+            mdate = re.search(r"_(20\d{6})_", source_reference)
             if mdate:
                 raw = mdate.group(1)
                 evidence_date = f"{raw[:4]}-{raw[4:6]}-{raw[6:8]}"
@@ -212,13 +212,13 @@ def article_match(article, events, identities):
     timestamp_consistent = page_dt is None or abs((page_dt-ts).total_seconds()) <= 5
     # Require a release-body signature, not a provider word elsewhere in Yahoo chrome.
     wire = None
-    if re.search(r"\\(BUSINESS\\s+WIRE\\)", body, re.I):
+    if re.search(r"\(BUSINESS\s+WIRE\)", body, re.I):
         wire = "Business Wire"
-    elif re.search(r"\\(Marketwired\\s*[-–]", body, re.I):
+    elif re.search(r"\(Marketwired\s*[-–]", body, re.I):
         wire = "Marketwired"
-    elif re.search(r"(?:/PRNewswire/|PR\\s+Newswire)", body, re.I):
+    elif re.search(r"(?:/PRNewswire/|PR\s+Newswire)", body, re.I):
         wire = "PR Newswire"
-    elif re.search(r"GLOBE\\s+NEWSWIRE", body, re.I):
+    elif re.search(r"GLOBE\s+NEWSWIRE", body, re.I):
         wire = "GlobeNewswire"
 
     matches = []
@@ -237,7 +237,7 @@ def article_match(article, events, identities):
         issuer_terms = ident.get("issuer_terms", [])
         body_lower = body.lower()
         body_identity = ticker_marker or (
-            bool(issuer_terms) and all(re.search(r"\\b"+re.escape(t)+r"\\b", body_lower) for t in issuer_terms[:3])
+            bool(issuer_terms) and all(re.search(r"\b"+re.escape(t)+r"\b", body_lower) for t in issuer_terms[:3])
         )
         score = 0
         if title_identity_matches(title, event, identities):
