@@ -1,0 +1,1845 @@
+{
+  "acquisition_lanes": {
+    "AUTHORIZED_MARKET_SECURITY_MASTER": {
+      "can_close_request": true,
+      "examples": [
+        "authorized TAQ/market-data symbol master plus dated PERMNO bridge",
+        "exchange/vendor security master with explicit stable-ID crosswalk"
+      ],
+      "requirement": "Use an authorized historical market-data symbol/security master only when it includes or is joined through an explicit dated bridge to PERMNO for the requested date.",
+      "role": "SECONDARY"
+    },
+    "LICENSED_STABLE_ID_MASTER": {
+      "can_close_request": true,
+      "examples": [
+        "CRSP/WRDS security-name or security-master history",
+        "equivalent licensed stable-ID security master"
+      ],
+      "requirement": "Use lawfully licensed point-in-time security-master data that directly binds PERMNO (or an explicit stable identifier crosswalk to PERMNO) to the historical market identifier/symbol for the requested date.",
+      "role": "PRIMARY"
+    },
+    "PUBLIC_CORPORATE_ACTION_CORROBORATION": {
+      "can_close_request": false,
+      "examples": [
+        "SEC filings/exhibits",
+        "issuer corporate-action notices",
+        "exchange symbol-change notices"
+      ],
+      "requirement": "Use issuer, SEC, or exchange notices to corroborate renames, mergers, share-class changes, symbol changes, or other corporate actions. Public corroboration alone cannot close a request unless it explicitly establishes the stable-ID binding.",
+      "role": "CORROBORATION_ONLY"
+    }
+  },
+  "completion_contract": {
+    "close_each_request_only_if": [
+      "requested trade_date is covered by the evidence",
+      "evidence binds the requested PERMNO or an explicit stable identifier crosswalk to that PERMNO",
+      "historical symbol/market identifier is explicit for that date",
+      "source reference and validity/as-of dates are retained",
+      "corporate-action aliases are explicit rather than inferred"
+    ],
+    "prohibited_shortcuts": [
+      "current_ticker_substitution",
+      "undated_symbol_map",
+      "symbol_only_join_without_stable_id",
+      "backward_extension_from_event_date_without_evidence",
+      "inferred_rename_or_merger_alias"
+    ]
+  },
+  "purpose": "Acquisition plan for unresolved point-in-time security identities required before non-synthetic historical market joins can unlock.",
+  "research_use_only": true,
+  "schema_version": "1",
+  "securities": [
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-8D40B9782E1E6F33"
+      ],
+      "first_required_date": "2011-12-23",
+      "gvkey": "1300",
+      "historical_symbol": "HON",
+      "last_required_date": "2012-01-25",
+      "permno": "10145",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-D346C6CFDFB6E581"
+      ],
+      "first_required_date": "2015-01-15",
+      "gvkey": "12445",
+      "historical_symbol": "WTS",
+      "last_required_date": "2015-02-13",
+      "permno": "10606",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-A413A5AC6E515E3C"
+      ],
+      "first_required_date": "2011-03-28",
+      "gvkey": "13623",
+      "historical_symbol": "CNMD",
+      "last_required_date": "2011-04-26",
+      "permno": "11547",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-AC78A2434E4AE8FB"
+      ],
+      "first_required_date": "2013-03-26",
+      "gvkey": "14182",
+      "historical_symbol": "ACO",
+      "last_required_date": "2013-04-24",
+      "permno": "11599",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-EDFDC1213C9AF586"
+      ],
+      "first_required_date": "2011-12-23",
+      "gvkey": "14256",
+      "historical_symbol": "MXIM",
+      "last_required_date": "2012-01-25",
+      "permno": "11896",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-4080E04F012A7290"
+      ],
+      "first_required_date": "2015-01-13",
+      "gvkey": "184603",
+      "historical_symbol": "QLIK",
+      "last_required_date": "2015-02-11",
+      "permno": "12026",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-D7BD84C255F2273D"
+      ],
+      "first_required_date": "2013-04-09",
+      "gvkey": "175503",
+      "historical_symbol": "GORO",
+      "last_required_date": "2013-05-07",
+      "permno": "12049",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-AF58BD8CAE4E8D1C"
+      ],
+      "first_required_date": "2015-03-31",
+      "gvkey": "184700",
+      "historical_symbol": "FLT",
+      "last_required_date": "2015-04-29",
+      "permno": "12449",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-5E9AD5C9AD67944D"
+      ],
+      "first_required_date": "2015-04-07",
+      "gvkey": "185646",
+      "historical_symbol": "CSOD",
+      "last_required_date": "2015-05-05",
+      "permno": "12639",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-12CC8075D3F634CD"
+      ],
+      "first_required_date": "2013-03-25",
+      "gvkey": "1439",
+      "historical_symbol": "ECOL",
+      "last_required_date": "2013-04-23",
+      "permno": "12758",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-847F0EFE669B2440"
+      ],
+      "first_required_date": "2015-01-06",
+      "gvkey": "186520",
+      "historical_symbol": "P",
+      "last_required_date": "2015-02-04",
+      "permno": "12873",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-AF5106891E058D23"
+      ],
+      "first_required_date": "2015-01-13",
+      "gvkey": "184715",
+      "historical_symbol": "TNGO",
+      "last_required_date": "2015-02-11",
+      "permno": "12924",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-6F0A7632D9B4FFF6"
+      ],
+      "first_required_date": "2015-03-27",
+      "gvkey": "192255",
+      "historical_symbol": "ACHC",
+      "last_required_date": "2015-04-27",
+      "permno": "13105",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-05DE1473D5D7F7FB"
+      ],
+      "first_required_date": "2015-02-18",
+      "gvkey": "161036",
+      "historical_symbol": "MFRM",
+      "last_required_date": "2015-03-18",
+      "permno": "13110",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-87DDC59E7BB99A84"
+      ],
+      "first_required_date": "2015-03-26",
+      "gvkey": "177966",
+      "historical_symbol": "ALSN",
+      "last_required_date": "2015-04-24",
+      "permno": "13284",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-6C73B4B05384BC1E"
+      ],
+      "first_required_date": "2013-03-26",
+      "gvkey": "170335",
+      "historical_symbol": "PFPT",
+      "last_required_date": "2013-04-24",
+      "permno": "13377",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-47A3794D1C360650",
+        "HEJFE-DC66D5F2BDEC7C74"
+      ],
+      "first_required_date": "2014-12-26",
+      "gvkey": "171007",
+      "historical_symbol": "NOW",
+      "last_required_date": "2015-04-15",
+      "permno": "13447",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-9B84208BA575EAC4"
+      ],
+      "first_required_date": "2015-02-25",
+      "gvkey": "111873",
+      "historical_symbol": "RH",
+      "last_required_date": "2015-03-25",
+      "permno": "13687",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-DF726FADF321F8E3"
+      ],
+      "first_required_date": "2015-02-24",
+      "gvkey": "8551",
+      "historical_symbol": "PVH",
+      "last_required_date": "2015-03-24",
+      "permno": "13936",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-EBC49B9A024181AD"
+      ],
+      "first_required_date": "2015-01-30",
+      "gvkey": "18689",
+      "historical_symbol": "VEEV",
+      "last_required_date": "2015-03-02",
+      "permno": "14231",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-1950A4340036BB95"
+      ],
+      "first_required_date": "2011-07-20",
+      "gvkey": "11584",
+      "historical_symbol": "FL",
+      "last_required_date": "2011-08-17",
+      "permno": "15456",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-B704E62641681A73"
+      ],
+      "first_required_date": "2011-06-27",
+      "gvkey": "5234",
+      "historical_symbol": "GT",
+      "last_required_date": "2011-07-26",
+      "permno": "16432",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-95933AA0B84D2F60"
+      ],
+      "first_required_date": "2011-12-22",
+      "gvkey": "2817",
+      "historical_symbol": "CAT",
+      "last_required_date": "2012-01-24",
+      "permno": "18542",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-A9D220DE2F7E7FC3"
+      ],
+      "first_required_date": "2015-01-20",
+      "gvkey": "3835",
+      "historical_symbol": "DE",
+      "last_required_date": "2015-02-18",
+      "permno": "19350",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-45E6DA32B37F83D4"
+      ],
+      "first_required_date": "2011-12-21",
+      "gvkey": "2285",
+      "historical_symbol": "BA",
+      "last_required_date": "2012-01-23",
+      "permno": "19561",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-E1B57B6A71B06A7F"
+      ],
+      "first_required_date": "2015-03-26",
+      "gvkey": "3580",
+      "historical_symbol": "CR",
+      "last_required_date": "2015-04-24",
+      "permno": "20204",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-B9C8B3D0EF3DCB5E"
+      ],
+      "first_required_date": "2015-03-30",
+      "gvkey": "2596",
+      "historical_symbol": "CACI",
+      "last_required_date": "2015-04-28",
+      "permno": "20512",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-ED8CFC03F1053B9A"
+      ],
+      "first_required_date": "2013-03-26",
+      "gvkey": "2615",
+      "historical_symbol": "CAMP",
+      "last_required_date": "2013-04-24",
+      "permno": "20670",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-B5A8A297D14CD19D"
+      ],
+      "first_required_date": "2015-03-26",
+      "gvkey": "10519",
+      "historical_symbol": "TXT",
+      "last_required_date": "2015-04-24",
+      "permno": "23579",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-6101FFEDBA6EE41B",
+        "HEJFE-977FEBE8CA3CFCB6"
+      ],
+      "first_required_date": "2014-12-31",
+      "gvkey": "6867",
+      "historical_symbol": "MDU",
+      "last_required_date": "2015-05-01",
+      "permno": "23835",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-4291CBF555CED6A9"
+      ],
+      "first_required_date": "2015-03-30",
+      "gvkey": "8606",
+      "historical_symbol": "PBI",
+      "last_required_date": "2015-04-28",
+      "permno": "24459",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-76B03970FA6BDB42"
+      ],
+      "first_required_date": "2013-01-17",
+      "gvkey": "11304",
+      "historical_symbol": "AVA",
+      "last_required_date": "2013-02-15",
+      "permno": "24969",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-2D81C70F59E076BA",
+        "HEJFE-376286473ECFECB4"
+      ],
+      "first_required_date": "2011-06-20",
+      "gvkey": "3310",
+      "historical_symbol": "CA",
+      "last_required_date": "2012-01-23",
+      "permno": "25778",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-E8C5063581BE7EB7"
+      ],
+      "first_required_date": "2014-12-26",
+      "gvkey": "4839",
+      "historical_symbol": "F",
+      "last_required_date": "2015-01-27",
+      "permno": "25785",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-7C93D3838E60926C"
+      ],
+      "first_required_date": "2014-11-07",
+      "gvkey": "3358",
+      "historical_symbol": "CMTL",
+      "last_required_date": "2014-12-09",
+      "permno": "26201",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-99F3FC8CE022DEA1"
+      ],
+      "first_required_date": "2011-12-22",
+      "gvkey": "11115",
+      "historical_symbol": "VAR",
+      "last_required_date": "2012-01-24",
+      "permno": "27043",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-A25F33B630365184"
+      ],
+      "first_required_date": "2014-12-31",
+      "gvkey": "9299",
+      "historical_symbol": "R",
+      "last_required_date": "2015-01-30",
+      "permno": "27633",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-36433565499915E2"
+      ],
+      "first_required_date": "2015-01-22",
+      "gvkey": "8304",
+      "historical_symbol": "PLL",
+      "last_required_date": "2015-02-20",
+      "permno": "35051",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-33FC1D00348D7C59",
+        "HEJFE-7CEFB3FE3D986464"
+      ],
+      "first_required_date": "2015-01-15",
+      "gvkey": "9216",
+      "historical_symbol": "ROG",
+      "last_required_date": "2015-04-28",
+      "permno": "35991",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-30CA515BC590DDA6"
+      ],
+      "first_required_date": "2011-12-21",
+      "gvkey": "9225",
+      "historical_symbol": "ROL",
+      "last_required_date": "2012-01-23",
+      "permno": "36003",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-1783DE88400AF6CC"
+      ],
+      "first_required_date": "2015-01-16",
+      "gvkey": "11506",
+      "historical_symbol": "WMB",
+      "last_required_date": "2015-02-17",
+      "permno": "38156",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-BD3F577ADD90D512"
+      ],
+      "first_required_date": "2013-09-20",
+      "gvkey": "5116",
+      "historical_symbol": "GNTX",
+      "last_required_date": "2013-10-18",
+      "permno": "38659",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-263620F13A6443DD"
+      ],
+      "first_required_date": "2015-03-17",
+      "gvkey": "7116",
+      "historical_symbol": "MAT",
+      "last_required_date": "2015-04-15",
+      "permno": "39538",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-704E64D64C11C119"
+      ],
+      "first_required_date": "2011-12-20",
+      "gvkey": "7260",
+      "historical_symbol": "MDP",
+      "last_required_date": "2012-01-20",
+      "permno": "42796",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-9861757889227DD4",
+        "HEJFE-EFFA194386ABDD28"
+      ],
+      "first_required_date": "2014-12-31",
+      "gvkey": "6003",
+      "historical_symbol": "IDTI",
+      "last_required_date": "2015-05-01",
+      "permno": "44506",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-7E8FA3E5E417B5E7"
+      ],
+      "first_required_date": "2011-12-20",
+      "gvkey": "6097",
+      "historical_symbol": "IGT",
+      "last_required_date": "2012-01-20",
+      "permno": "45277",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-4DEF5FDB3210E91B"
+      ],
+      "first_required_date": "2014-12-18",
+      "gvkey": "1327",
+      "historical_symbol": "SWKS",
+      "last_required_date": "2015-01-21",
+      "permno": "45911",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-9DF82252ED78E41F"
+      ],
+      "first_required_date": "2015-03-30",
+      "gvkey": "2593",
+      "historical_symbol": "CBT",
+      "last_required_date": "2015-04-28",
+      "permno": "46690",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-E25BAF3CFF23A3BE"
+      ],
+      "first_required_date": "2014-12-29",
+      "gvkey": "2044",
+      "historical_symbol": "BCR",
+      "last_required_date": "2015-01-28",
+      "permno": "46877",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-5089F8E69B6BC646"
+      ],
+      "first_required_date": "2013-04-08",
+      "gvkey": "6379",
+      "historical_symbol": "KELYA",
+      "last_required_date": "2013-05-06",
+      "permno": "47379",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-66BA40A20548B7E3"
+      ],
+      "first_required_date": "2013-03-25",
+      "gvkey": "6565",
+      "historical_symbol": "LRCX",
+      "last_required_date": "2013-04-23",
+      "permno": "48486",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-334BAA0D940A418A"
+      ],
+      "first_required_date": "2014-12-26",
+      "gvkey": "10453",
+      "historical_symbol": "TER",
+      "last_required_date": "2015-01-27",
+      "permno": "51369",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-D1D8268651584B6A"
+      ],
+      "first_required_date": "2013-02-28",
+      "gvkey": "7146",
+      "historical_symbol": "MKC",
+      "last_required_date": "2013-03-28",
+      "permno": "52090",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-0273F1BFCD285E7F",
+        "HEJFE-6C4EA140AD75FFE2"
+      ],
+      "first_required_date": "2015-01-22",
+      "gvkey": "7750",
+      "historical_symbol": "THC",
+      "last_required_date": "2015-05-01",
+      "permno": "52337",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-830D52F9F7F1CEEB"
+      ],
+      "first_required_date": "2011-12-23",
+      "gvkey": "7346",
+      "historical_symbol": "MSCC",
+      "last_required_date": "2012-01-25",
+      "permno": "53640",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-EDF80619CED083CB"
+      ],
+      "first_required_date": "2015-02-24",
+      "gvkey": "3362",
+      "historical_symbol": "CAG",
+      "last_required_date": "2015-03-24",
+      "permno": "56274",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-0BAF70D8CC8F1631"
+      ],
+      "first_required_date": "2015-02-18",
+      "gvkey": "7906",
+      "historical_symbol": "NKE",
+      "last_required_date": "2015-03-18",
+      "permno": "57665",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-332D5C6DC3ACE6B1"
+      ],
+      "first_required_date": "2015-04-20",
+      "gvkey": "7921",
+      "historical_symbol": "NDSN",
+      "last_required_date": "2015-05-18",
+      "permno": "57809",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-7ED8DBD4804E4330"
+      ],
+      "first_required_date": "2015-01-20",
+      "gvkey": "7922",
+      "historical_symbol": "JWN",
+      "last_required_date": "2015-02-18",
+      "permno": "57817",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-76DCF0FCA248E814"
+      ],
+      "first_required_date": "2011-12-23",
+      "gvkey": "3024",
+      "historical_symbol": "CB",
+      "last_required_date": "2012-01-25",
+      "permno": "59192",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-09EB83905864C50A",
+        "HEJFE-D9C52E6CC595C380"
+      ],
+      "first_required_date": "2015-01-15",
+      "gvkey": "1632",
+      "historical_symbol": "ADI",
+      "last_required_date": "2015-05-18",
+      "permno": "60871",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-B46D4F8F72DD0212"
+      ],
+      "first_required_date": "2013-09-18",
+      "gvkey": "1161",
+      "historical_symbol": "AMD",
+      "last_required_date": "2013-10-16",
+      "permno": "61241",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-2FD552B9358078C6"
+      ],
+      "first_required_date": "2013-04-08",
+      "gvkey": "2220",
+      "historical_symbol": "BIO",
+      "last_required_date": "2013-05-06",
+      "permno": "61516",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-C85CE64DFF947CFD"
+      ],
+      "first_required_date": "2011-12-21",
+      "gvkey": "8901",
+      "historical_symbol": "RES",
+      "last_required_date": "2012-01-23",
+      "permno": "66683",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-7B8A1A0CD3E2966F"
+      ],
+      "first_required_date": "2013-04-05",
+      "gvkey": "11923",
+      "historical_symbol": "APC",
+      "last_required_date": "2013-05-03",
+      "permno": "70332",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-824BABBAD988A068"
+      ],
+      "first_required_date": "2011-12-22",
+      "gvkey": "9715",
+      "historical_symbol": "SYMM",
+      "last_required_date": "2012-01-24",
+      "permno": "70616",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-EC5EB2BE0D97833F"
+      ],
+      "first_required_date": "2014-12-18",
+      "gvkey": "10035",
+      "historical_symbol": "STT",
+      "last_required_date": "2015-01-21",
+      "permno": "72726",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-D51AC412EDF93AA8"
+      ],
+      "first_required_date": "2015-03-31",
+      "gvkey": "12471",
+      "historical_symbol": "INT",
+      "last_required_date": "2015-04-29",
+      "permno": "75070",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-2D6ABDFDE39E5919",
+        "HEJFE-9B43F5B767ECD0FA"
+      ],
+      "first_required_date": "2013-03-22",
+      "gvkey": "14790",
+      "historical_symbol": "MTH",
+      "last_required_date": "2013-07-22",
+      "permno": "75342",
+      "request_count": 42
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-8EAA8616B1750B40",
+        "HEJFE-FBA59D82CEE8FD00"
+      ],
+      "first_required_date": "2015-01-13",
+      "gvkey": "16188",
+      "historical_symbol": "CGNX",
+      "last_required_date": "2015-05-01",
+      "permno": "75654",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-0B87675BF7BEDBCA"
+      ],
+      "first_required_date": "2014-12-23",
+      "gvkey": "16721",
+      "historical_symbol": "EA",
+      "last_required_date": "2015-01-26",
+      "permno": "75828",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-B7EFA7CF95262283"
+      ],
+      "first_required_date": "2013-03-19",
+      "gvkey": "16597",
+      "historical_symbol": "LSCC",
+      "last_required_date": "2013-04-17",
+      "permno": "75854",
+      "request_count": 21
+    },
+    {
+      "event_count": 4,
+      "event_ids": [
+        "HEJFE-4E643D38FFB3016E",
+        "HEJFE-600696AB8463FFD8",
+        "HEJFE-8167467EBF64AABE",
+        "HEJFE-CCC7747CFBDE893E"
+      ],
+      "first_required_date": "2013-03-22",
+      "gvkey": "24113",
+      "historical_symbol": "PNRA",
+      "last_required_date": "2015-02-10",
+      "permno": "76695",
+      "request_count": 84
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-99CCB9D9BECE4E72"
+      ],
+      "first_required_date": "2011-12-23",
+      "gvkey": "24197",
+      "historical_symbol": "IDXX",
+      "last_required_date": "2012-01-25",
+      "permno": "76709",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-13FC93F4D143B268"
+      ],
+      "first_required_date": "2011-12-27",
+      "gvkey": "24021",
+      "historical_symbol": "HAE",
+      "last_required_date": "2012-01-26",
+      "permno": "76837",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-DA7595FDF91D8CBC"
+      ],
+      "first_required_date": "2011-12-21",
+      "gvkey": "24725",
+      "historical_symbol": "WRLD",
+      "last_required_date": "2012-01-23",
+      "permno": "77114",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-C4D39B22234902F2"
+      ],
+      "first_required_date": "2015-01-02",
+      "gvkey": "24856",
+      "historical_symbol": "GILD",
+      "last_required_date": "2015-02-02",
+      "permno": "77274",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-8415E931D4314106"
+      ],
+      "first_required_date": "2015-02-06",
+      "gvkey": "25166",
+      "historical_symbol": "KOPN",
+      "last_required_date": "2015-03-09",
+      "permno": "77515",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-A9DB7C5F6FD1D978"
+      ],
+      "first_required_date": "2014-12-18",
+      "gvkey": "25434",
+      "historical_symbol": "SBUX",
+      "last_required_date": "2015-01-21",
+      "permno": "77702",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-760E36DA94752F1E"
+      ],
+      "first_required_date": "2015-03-23",
+      "gvkey": "25737",
+      "historical_symbol": "CAKE",
+      "last_required_date": "2015-04-21",
+      "permno": "77902",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-5B6F87699FF5093E"
+      ],
+      "first_required_date": "2015-04-06",
+      "gvkey": "26013",
+      "historical_symbol": "SM",
+      "last_required_date": "2015-05-04",
+      "permno": "78170",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-81F188C0D790FE70",
+        "HEJFE-D35C7804C2F5326C"
+      ],
+      "first_required_date": "2014-12-16",
+      "gvkey": "27794",
+      "historical_symbol": "CREE",
+      "last_required_date": "2015-04-20",
+      "permno": "78875",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-AA2597B95CFD2A2D"
+      ],
+      "first_required_date": "2011-09-22",
+      "gvkey": "21440",
+      "historical_symbol": "LSTR",
+      "last_required_date": "2011-10-20",
+      "permno": "78981",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-8596DDD6A535BD90"
+      ],
+      "first_required_date": "2011-12-22",
+      "gvkey": "27936",
+      "historical_symbol": "DEST",
+      "last_required_date": "2012-01-24",
+      "permno": "78990",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-D6BA56FA6D57427E"
+      ],
+      "first_required_date": "2015-04-21",
+      "gvkey": "27938",
+      "historical_symbol": "SCVL",
+      "last_required_date": "2015-05-19",
+      "permno": "79007",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-8F17F6BEDF631C8B"
+      ],
+      "first_required_date": "2013-03-26",
+      "gvkey": "28704",
+      "historical_symbol": "MCRI",
+      "last_required_date": "2013-04-24",
+      "permno": "79507",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-5CB3223BB28A6F14"
+      ],
+      "first_required_date": "2011-06-27",
+      "gvkey": "28742",
+      "historical_symbol": "BWA",
+      "last_required_date": "2011-07-26",
+      "permno": "79545",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-7482DE1CD44C1A00"
+      ],
+      "first_required_date": "2015-01-05",
+      "gvkey": "28877",
+      "historical_symbol": "GMCR",
+      "last_required_date": "2015-02-03",
+      "permno": "79588",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-56483839E5F0E88F"
+      ],
+      "first_required_date": "2011-12-22",
+      "gvkey": "12459",
+      "historical_symbol": "NVR",
+      "last_required_date": "2012-01-24",
+      "permno": "79785",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-89844B5980EB5339"
+      ],
+      "first_required_date": "2011-12-22",
+      "gvkey": "29246",
+      "historical_symbol": "AF",
+      "last_required_date": "2012-01-24",
+      "permno": "79796",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-8536AD777ECEEACB"
+      ],
+      "first_required_date": "2013-03-26",
+      "gvkey": "30098",
+      "historical_symbol": "GDI",
+      "last_required_date": "2013-04-24",
+      "permno": "80446",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-489E74F74AFB5AFA"
+      ],
+      "first_required_date": "2013-03-26",
+      "gvkey": "31147",
+      "historical_symbol": "MCRL",
+      "last_required_date": "2013-04-24",
+      "permno": "81162",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-D4E8CD312A2AA576"
+      ],
+      "first_required_date": "2011-12-22",
+      "gvkey": "31488",
+      "historical_symbol": "ISSI",
+      "last_required_date": "2012-01-24",
+      "permno": "81256",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-7F8218B15679F14D",
+        "HEJFE-F9E72EEF6E5BD373"
+      ],
+      "first_required_date": "2014-12-29",
+      "gvkey": "31607",
+      "historical_symbol": "NATI",
+      "last_required_date": "2015-04-27",
+      "permno": "81501",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-2F14F138D09BCA76"
+      ],
+      "first_required_date": "2011-12-21",
+      "gvkey": "24466",
+      "historical_symbol": "IBKC",
+      "last_required_date": "2012-01-23",
+      "permno": "81564",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-48B08BAEDCEEDEFC"
+      ],
+      "first_required_date": "2014-12-17",
+      "gvkey": "61513",
+      "historical_symbol": "SNDK",
+      "last_required_date": "2015-01-20",
+      "permno": "82618",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-54A5D1D8A5B593C8"
+      ],
+      "first_required_date": "2015-01-06",
+      "gvkey": "61685",
+      "historical_symbol": "NUAN",
+      "last_required_date": "2015-02-04",
+      "permno": "82759",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-7CA38C1FDA5EA4D0"
+      ],
+      "first_required_date": "2013-03-26",
+      "gvkey": "62516",
+      "historical_symbol": "CENX",
+      "last_required_date": "2013-04-24",
+      "permno": "83244",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-809E53BB4081FBAE"
+      ],
+      "first_required_date": "2015-03-31",
+      "gvkey": "64480",
+      "historical_symbol": "ROVI",
+      "last_required_date": "2015-04-29",
+      "permno": "84624",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-00D863517A3A754C"
+      ],
+      "first_required_date": "2014-12-17",
+      "gvkey": "66065",
+      "historical_symbol": "URI",
+      "last_required_date": "2015-01-20",
+      "permno": "85663",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-0AA84E6E44ED02D8"
+      ],
+      "first_required_date": "2015-01-26",
+      "gvkey": "65967",
+      "historical_symbol": "AMSG",
+      "last_required_date": "2015-02-24",
+      "permno": "85675",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-8A0517D50278EAE4"
+      ],
+      "first_required_date": "2015-03-30",
+      "gvkey": "66032",
+      "historical_symbol": "POWI",
+      "last_required_date": "2015-04-28",
+      "permno": "85710",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-1FCAAB3F7CC931CF"
+      ],
+      "first_required_date": "2013-03-26",
+      "gvkey": "66368",
+      "historical_symbol": "VRSN",
+      "last_required_date": "2013-04-24",
+      "permno": "85753",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-0BCEF81B6C0111FB",
+        "HEJFE-FBFFFD99898188CF"
+      ],
+      "first_required_date": "2015-01-13",
+      "gvkey": "105936",
+      "historical_symbol": "COLM",
+      "last_required_date": "2015-04-29",
+      "permno": "85863",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-F170013A9B3F85E2"
+      ],
+      "first_required_date": "2015-03-23",
+      "gvkey": "121142",
+      "historical_symbol": "SKX",
+      "last_required_date": "2015-04-21",
+      "permno": "86949",
+      "request_count": 21
+    },
+    {
+      "event_count": 4,
+      "event_ids": [
+        "HEJFE-2558DC6865781793",
+        "HEJFE-D7FD00AF94DD8F41",
+        "HEJFE-E61095F8DC4132DE",
+        "HEJFE-F20ECC0C09BBC89E"
+      ],
+      "first_required_date": "2011-03-21",
+      "gvkey": "121718",
+      "historical_symbol": "JNPR",
+      "last_required_date": "2013-10-21",
+      "permno": "86979",
+      "request_count": 84
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-06AE65B9C8FB0395"
+      ],
+      "first_required_date": "2013-03-25",
+      "gvkey": "121673",
+      "historical_symbol": "STMP",
+      "last_required_date": "2013-04-23",
+      "permno": "87000",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-2C887DA6F617936F"
+      ],
+      "first_required_date": "2013-08-20",
+      "gvkey": "122061",
+      "historical_symbol": "TIBX",
+      "last_required_date": "2013-09-18",
+      "permno": "87092",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-E575622C8FDAB71F"
+      ],
+      "first_required_date": "2013-03-25",
+      "gvkey": "130762",
+      "historical_symbol": "ISIL",
+      "last_required_date": "2013-04-23",
+      "permno": "87612",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-198DE6D99E934F32",
+        "HEJFE-ED329F780A1085DA"
+      ],
+      "first_required_date": "2011-03-22",
+      "gvkey": "133366",
+      "historical_symbol": "EW",
+      "last_required_date": "2013-04-22",
+      "permno": "87657",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-BFE8A42E0C19BA39"
+      ],
+      "first_required_date": "2011-09-27",
+      "gvkey": "66686",
+      "historical_symbol": "VDSI",
+      "last_required_date": "2011-10-25",
+      "permno": "88203",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-947F50EBAFBA54DC"
+      ],
+      "first_required_date": "2015-01-09",
+      "gvkey": "137131",
+      "historical_symbol": "CRL",
+      "last_required_date": "2015-02-09",
+      "permno": "88281",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-4FB44934BC5C5221"
+      ],
+      "first_required_date": "2011-07-05",
+      "gvkey": "136884",
+      "historical_symbol": "DNDN",
+      "last_required_date": "2011-08-02",
+      "permno": "88335",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-45559DD90D876D39",
+        "HEJFE-8A11E54A9679E09D"
+      ],
+      "first_required_date": "2014-12-23",
+      "gvkey": "138205",
+      "historical_symbol": "ILMN",
+      "last_required_date": "2015-04-20",
+      "permno": "88446",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-3046057647A0FC5C"
+      ],
+      "first_required_date": "2015-04-07",
+      "gvkey": "138483",
+      "historical_symbol": "BRKR",
+      "last_required_date": "2015-05-05",
+      "permno": "88504",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-1E37362063697486"
+      ],
+      "first_required_date": "2015-01-15",
+      "gvkey": "4818",
+      "historical_symbol": "FLR",
+      "last_required_date": "2015-02-13",
+      "permno": "88853",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-830337A8564B826E"
+      ],
+      "first_required_date": "2013-09-18",
+      "gvkey": "141384",
+      "historical_symbol": "ALGN",
+      "last_required_date": "2013-10-16",
+      "permno": "88860",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-D6AE4ACB99958A73"
+      ],
+      "first_required_date": "2015-03-31",
+      "gvkey": "141460",
+      "historical_symbol": "SGEN",
+      "last_required_date": "2015-04-29",
+      "permno": "88949",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-791693865584F9CB"
+      ],
+      "first_required_date": "2015-03-23",
+      "gvkey": "144066",
+      "historical_symbol": "COL",
+      "last_required_date": "2015-04-21",
+      "permno": "89014",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-74011A906BCCABE9"
+      ],
+      "first_required_date": "2011-09-28",
+      "gvkey": "145367",
+      "historical_symbol": "AGP",
+      "last_required_date": "2011-10-26",
+      "permno": "89204",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-A3C5C43F6AC75C44"
+      ],
+      "first_required_date": "2015-04-07",
+      "gvkey": "143356",
+      "historical_symbol": "PRU",
+      "last_required_date": "2015-05-05",
+      "permno": "89258",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-753716A61B8622B0"
+      ],
+      "first_required_date": "2015-02-25",
+      "gvkey": "145049",
+      "historical_symbol": "GME",
+      "last_required_date": "2015-03-25",
+      "permno": "89301",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-238D29A9B584466D"
+      ],
+      "first_required_date": "2015-03-02",
+      "gvkey": "156155",
+      "historical_symbol": "SNX",
+      "last_required_date": "2015-03-30",
+      "permno": "89900",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-BB62E8864F35DCD0"
+      ],
+      "first_required_date": "2015-01-26",
+      "gvkey": "155393",
+      "historical_symbol": "WLL",
+      "last_required_date": "2015-02-24",
+      "permno": "89901",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-5408AADD0CBD54E8"
+      ],
+      "first_required_date": "2015-03-26",
+      "gvkey": "157153",
+      "historical_symbol": "CMP",
+      "last_required_date": "2015-04-24",
+      "permno": "89952",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-3A94836BBC9F224A"
+      ],
+      "first_required_date": "2011-06-24",
+      "gvkey": "156861",
+      "historical_symbol": "TPX",
+      "last_required_date": "2011-07-25",
+      "permno": "89971",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-22BF36BABB9D19D7"
+      ],
+      "first_required_date": "2015-01-13",
+      "gvkey": "264265",
+      "historical_symbol": "ALNY",
+      "last_required_date": "2015-02-11",
+      "permno": "90178",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-E28050410A1480C6"
+      ],
+      "first_required_date": "2015-04-07",
+      "gvkey": "25495",
+      "historical_symbol": "DYN",
+      "last_required_date": "2015-05-05",
+      "permno": "90352",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-0704950C71CFAFB4"
+      ],
+      "first_required_date": "2015-01-22",
+      "gvkey": "160376",
+      "historical_symbol": "TXRH",
+      "last_required_date": "2015-02-20",
+      "permno": "90427",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-93A7D27EF425EDF0"
+      ],
+      "first_required_date": "2015-01-16",
+      "gvkey": "161120",
+      "historical_symbol": "MIC",
+      "last_required_date": "2015-02-17",
+      "permno": "90507",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-873A37657E58A8CD",
+        "HEJFE-C926C41F03E66E82"
+      ],
+      "first_required_date": "2014-11-12",
+      "gvkey": "162733",
+      "historical_symbol": "PAY",
+      "last_required_date": "2015-03-09",
+      "permno": "90657",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-99F31DB35F001A44"
+      ],
+      "first_required_date": "2015-01-26",
+      "gvkey": "162887",
+      "historical_symbol": "DXCM",
+      "last_required_date": "2015-02-24",
+      "permno": "90664",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-CFA461ED8BCCB889"
+      ],
+      "first_required_date": "2015-03-26",
+      "gvkey": "11721",
+      "historical_symbol": "OSK",
+      "last_required_date": "2015-04-24",
+      "permno": "90756",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-826F68D9DA88B37C"
+      ],
+      "first_required_date": "2015-01-22",
+      "gvkey": "163889",
+      "historical_symbol": "ATRC",
+      "last_required_date": "2015-02-20",
+      "permno": "90856",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-5ED55A2EAC950921"
+      ],
+      "first_required_date": "2015-03-23",
+      "gvkey": "164708",
+      "historical_symbol": "AMP",
+      "last_required_date": "2015-04-21",
+      "permno": "90880",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-4D7E68AD113380B3"
+      ],
+      "first_required_date": "2015-01-22",
+      "gvkey": "164422",
+      "historical_symbol": "TRAK",
+      "last_required_date": "2015-02-20",
+      "permno": "91032",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-3ADF019D07BA84CE"
+      ],
+      "first_required_date": "2014-12-29",
+      "gvkey": "175319",
+      "historical_symbol": "HBI",
+      "last_required_date": "2015-01-28",
+      "permno": "91416",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-20EC97300E6205B9"
+      ],
+      "first_required_date": "2015-01-13",
+      "gvkey": "174541",
+      "historical_symbol": "INWK",
+      "last_required_date": "2015-02-11",
+      "permno": "91432",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-9527526FED86FA7D",
+        "HEJFE-E4D3EE1A6CB984DB"
+      ],
+      "first_required_date": "2011-03-25",
+      "gvkey": "174389",
+      "historical_symbol": "EHTH",
+      "last_required_date": "2013-04-24",
+      "permno": "91498",
+      "request_count": 42
+    },
+    {
+      "event_count": 3,
+      "event_ids": [
+        "HEJFE-350B3481A9CBBF0E",
+        "HEJFE-3BBEC23702C1A375",
+        "HEJFE-749FFC4028DF7B1C"
+      ],
+      "first_required_date": "2011-03-21",
+      "gvkey": "178083",
+      "historical_symbol": "VMW",
+      "last_required_date": "2013-10-18",
+      "permno": "92257",
+      "request_count": 63
+    },
+    {
+      "event_count": 3,
+      "event_ids": [
+        "HEJFE-09EF6AD227D3AC5D",
+        "HEJFE-A5AE76F13A48C40F",
+        "HEJFE-A76C746507C0D9AF"
+      ],
+      "first_required_date": "2012-06-29",
+      "gvkey": "180029",
+      "historical_symbol": "DGI",
+      "last_required_date": "2015-02-25",
+      "permno": "92924",
+      "request_count": 63
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-C368B17FADFC15C7"
+      ],
+      "first_required_date": "2013-03-26",
+      "gvkey": "179957",
+      "historical_symbol": "ECHO",
+      "last_required_date": "2013-04-24",
+      "permno": "93079",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-B04F1AF8B6E30A43",
+        "HEJFE-DB1E964E02F5921F"
+      ],
+      "first_required_date": "2015-01-15",
+      "gvkey": "180635",
+      "historical_symbol": "CLD",
+      "last_required_date": "2015-04-29",
+      "permno": "93095",
+      "request_count": 42
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-5D222F0F8E0C77D0"
+      ],
+      "first_required_date": "2015-04-02",
+      "gvkey": "29887",
+      "historical_symbol": "TW",
+      "last_required_date": "2015-05-01",
+      "permno": "93223",
+      "request_count": 21
+    },
+    {
+      "event_count": 1,
+      "event_ids": [
+        "HEJFE-E342F6A93B35E012"
+      ],
+      "first_required_date": "2015-01-09",
+      "gvkey": "183736",
+      "historical_symbol": "GNRC",
+      "last_required_date": "2015-02-09",
+      "permno": "93246",
+      "request_count": 21
+    },
+    {
+      "event_count": 2,
+      "event_ids": [
+        "HEJFE-51F3066EAC9B8138",
+        "HEJFE-DC002D2C6C767277"
+      ],
+      "first_required_date": "2011-09-21",
+      "gvkey": "175087",
+      "historical_symbol": "MUSA",
+      "last_required_date": "2012-01-25",
+      "permno": "93323",
+      "request_count": 42
+    }
+  ],
+  "source_identity_manifest": "data/processed/security_identity_real/security_identity_manifest.json",
+  "source_identity_manifest_sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a",
+  "state": {
+    "duplicate_request_instances_removed": 0,
+    "raw_unverified_event_date_instances": 3654,
+    "ready_for_non_synthetic_market_join": false,
+    "reasons": [
+      "stable_id_acquisition_queue_unresolved"
+    ],
+    "unique_permno_count": 146,
+    "unique_permno_date_requests": 3654
+  }
+}
