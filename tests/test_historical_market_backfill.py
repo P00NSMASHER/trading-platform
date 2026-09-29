@@ -11,6 +11,9 @@ sys.path.insert(0, str(ROOT / "src"))
 from historical_market_backfill import (
     NON_SYNTHETIC_CLASS,
     aggregate_order_flow_minutes,
+    assess_market_data_quality,
+    assess_normalized_market_quality,
+    assess_source_quality,
     build,
     build_microstructure_minutes,
     load_contract,
@@ -205,3 +208,224 @@ def test_decoded_itch_4_1_is_supported_and_requires_version(tmp_path):
     specs, _ = load_contract(p)
     exes = load_itch_executions(specs[0])
     assert len(exes) == 2
+
+
+def itch_column_map():
+    return {
+        "timestamp": "timestamp",
+        "message_type": "message_type",
+        "symbol": "stock",
+        "order_reference": "order_reference",
+        "side": "side",
+        "shares": "shares",
+        "price": "price",
+        "executed_shares": "executed_shares",
+        "execution_price": "execution_price",
+        "match_number": "match_number",
+        "printable": "printable",
+        "cancelled_shares": "cancelled_shares",
+        "new_order_reference": "new_order_reference",
+    }
+
+
+def _quality_spec(tmp_path, csv_text, *, kind="equity_trade", family="nyse_daily_taq", column_map=None, format_version="fixture"):
+    path = tmp_path / "quality.csv"
+    path.write_text(csv_text, encoding="utf-8")
+    contract = write_contract(tmp_path, [
+        source(
+            path,
+            source_id="quality",
+            family=family,
+            kind=kind,
+            column_map=column_map or {},
+            format_version=format_version,
+        )
+    ])
+    return load_contract(contract)[0][0]
+
+
+def test_quality_gate_rejects_duplicate_market_event(tmp_path):
+    spec = _quality_spec(
+        tmp_path,
+        "timestamp,symbol,price,size\n"
+        "2015-02-17 14:19:00,TEST,100,10\n"
+        "2015-02-17 14:19:00,TEST,100,10\n",
+    )
+    report = assess_source_quality(spec)
+    assert report["quality_gate_passed"] is False
+    assert report["issue_counts"]["DUPLICATE_SOURCE_ROW"] == 1
+    assert report["issue_counts"]["DUPLICATE_MARKET_EVENT"] == 1
+
+
+def test_quality_gate_rejects_declared_trade_date_mismatch(tmp_path):
+    spec = _quality_spec(
+        tmp_path,
+        "timestamp,symbol,price,size\n"
+        "2015-02-18 14:19:00,TEST,100,10\n",
+    )
+    report = assess_source_quality(spec)
+    assert report["quality_gate_passed"] is False
+    assert report["issue_counts"]["DECLARED_TRADE_DATE_MISMATCH"] == 1
+
+
+def test_quality_gate_rejects_explicit_sequence_gap(tmp_path):
+    spec = _quality_spec(
+        tmp_path,
+        "Seq,timestamp,symbol,price,size\n"
+        "1,2015-02-17 14:19:00,TEST,100,10\n"
+        "3,2015-02-17 14:19:01,TEST,100.1,10\n",
+        column_map={"sequence": "Seq"},
+    )
+    report = assess_source_quality(spec)
+    assert report["quality_gate_passed"] is False
+    assert report["issue_counts"]["SEQUENCE_GAP"] == 1
+
+
+def test_quality_gate_rejects_submicrosecond_timestamp_instead_of_truncating(tmp_path):
+    spec = _quality_spec(
+        tmp_path,
+        "timestamp,symbol,price,size\n"
+        "2015-02-17 14:19:00.123456789,TEST,100,10\n",
+    )
+    report = assess_source_quality(spec)
+    assert report["quality_gate_passed"] is False
+    assert report["issue_counts"]["UNSUPPORTED_SUBMICROSECOND_TIMESTAMP"] == 1
+
+
+def test_quality_gate_accepts_existing_valid_itch_fixture(tmp_path):
+    s = source(
+        EX / "itch_decoded.csv",
+        source_id="itch-quality",
+        family="nasdaq_itch_5_0_decoded",
+        kind="itch_decoded",
+        format_version="ITCH-5.0",
+        column_map=itch_column_map(),
+    )
+    p = write_contract(tmp_path, [s])
+    spec = load_contract(p)[0][0]
+    report = assess_source_quality(spec)
+    assert report["quality_gate_passed"] is True
+    assert report["blocking_issue_count"] == 0
+
+
+def test_quality_gate_rejects_unknown_itch_execution(tmp_path):
+    header = (
+        "timestamp,message_type,stock,order_reference,side,shares,price,"
+        "executed_shares,execution_price,match_number,printable,cancelled_shares,new_order_reference\n"
+    )
+    spec = _quality_spec(
+        tmp_path,
+        header + "2015-02-17 14:19:00,E,TEST,999,,,,10,100,9001,Y,,\n",
+        kind="itch_decoded",
+        family="nasdaq_itch_5_0_decoded",
+        column_map=itch_column_map(),
+        format_version="ITCH-5.0",
+    )
+    report = assess_source_quality(spec)
+    assert report["quality_gate_passed"] is False
+    assert report["issue_counts"]["ITCH_UNKNOWN_EXECUTION"] == 1
+
+
+def test_quality_gate_rejects_itch_over_cancel(tmp_path):
+    header = (
+        "timestamp,message_type,stock,order_reference,side,shares,price,"
+        "executed_shares,execution_price,match_number,printable,cancelled_shares,new_order_reference\n"
+    )
+    rows = (
+        "2015-02-17 14:19:00,A,TEST,1001,B,100,100,,,,,,\n"
+        "2015-02-17 14:19:01,X,TEST,1001,,,,,,,,101,\n"
+    )
+    spec = _quality_spec(
+        tmp_path, header + rows,
+        kind="itch_decoded", family="nasdaq_itch_5_0_decoded",
+        column_map=itch_column_map(), format_version="ITCH-5.0",
+    )
+    report = assess_source_quality(spec)
+    assert report["quality_gate_passed"] is False
+    assert report["issue_counts"]["ITCH_OVER_CANCEL"] == 1
+
+
+def test_quality_gate_rejects_unknown_itch_trade_break(tmp_path):
+    header = (
+        "timestamp,message_type,stock,order_reference,side,shares,price,"
+        "executed_shares,execution_price,match_number,printable,cancelled_shares,new_order_reference\n"
+    )
+    spec = _quality_spec(
+        tmp_path,
+        header + "2015-02-17 14:19:00,B,TEST,,,,,,,9001,,,\n",
+        kind="itch_decoded",
+        family="nasdaq_itch_5_0_decoded",
+        column_map=itch_column_map(),
+        format_version="ITCH-5.0",
+    )
+    report = assess_source_quality(spec)
+    assert report["quality_gate_passed"] is False
+    assert report["issue_counts"]["ITCH_UNKNOWN_TRADE_BREAK"] == 1
+
+
+def test_normalized_quality_reports_stale_quotes_without_future_substitution(tmp_path):
+    quote = tmp_path / "quotes.csv"
+    quote.write_text(
+        "timestamp,symbol,bid,ask,bid_size,ask_size\n"
+        "2015-02-17 14:19:00,TEST,99.9,100.1,10,10\n",
+        encoding="utf-8",
+    )
+    trade = tmp_path / "trades.csv"
+    trade.write_text(
+        "timestamp,symbol,price,size\n"
+        "2015-02-17 14:20:01,TEST,100,10\n",
+        encoding="utf-8",
+    )
+    import market_data_adapter as mda
+    events = (
+        mda.load_csv(quote, kind="equity_quote")
+        + mda.load_csv(trade, kind="equity_trade")
+    )
+    report = assess_normalized_market_quality(events, stale_quote_seconds=30)
+    assert report["equity_trade_count"] == 1
+    assert report["trade_with_stale_quote_count"] == 1
+    assert report["fresh_quote_trade_count"] == 0
+
+
+def test_build_writes_market_data_quality_report(tmp_path):
+    events = tmp_path / "events.csv"
+    events.write_text(
+        "event_id,historical_symbol,first_documented_illicit_trade_ts,research_use_only\n"
+        "E1,TEST,2015-02-17 14:19:00,1\n",
+        encoding="utf-8",
+    )
+    contract = write_contract(tmp_path, [
+        source(EX / "equity_trades.csv", source_id="eqt", family="synthetic_fixture", kind="equity_trade"),
+        source(EX / "equity_quotes.csv", source_id="eqq", family="synthetic_fixture", kind="equity_quote"),
+    ])
+    out = tmp_path / "out"
+    manifest = build(contract, events, out, pre_minutes=0, post_minutes=0)
+    quality = json.loads((out / "market_data_quality_report.json").read_text())
+    assert quality["quality_gate_passed"] is True
+    assert manifest["market_data_quality"]["quality_gate_passed"] is True
+    assert manifest["market_data_quality"]["blocking_issue_count"] == 0
+
+
+def test_build_blocks_before_aggregation_when_source_quality_fails(tmp_path):
+    bad = tmp_path / "bad.csv"
+    bad.write_text(
+        "timestamp,symbol,price,size\n"
+        "2015-02-17 14:19:00,TEST,100,10\n"
+        "2015-02-17 14:19:00,TEST,100,10\n",
+        encoding="utf-8",
+    )
+    events = tmp_path / "events.csv"
+    events.write_text(
+        "event_id,historical_symbol,first_documented_illicit_trade_ts,research_use_only\n"
+        "E1,TEST,2015-02-17 14:19:00,1\n",
+        encoding="utf-8",
+    )
+    contract = write_contract(tmp_path, [
+        source(bad, source_id="bad", family="nyse_daily_taq", kind="equity_trade")
+    ])
+    out = tmp_path / "out"
+    with pytest.raises(ValueError, match="market-data quality gate blocked"):
+        build(contract, events, out, pre_minutes=0, post_minutes=0)
+    report = json.loads((out / "market_data_quality_report.json").read_text())
+    assert report["quality_gate_passed"] is False
+    assert not (out / "equity_minutes.csv").exists()
