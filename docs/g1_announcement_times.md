@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **32 public exact-time batches / 35 exact-resolved
+The current repository state is **33 public exact-time batches / 36 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -105,3 +105,7 @@ Acadia Healthcare event `HEJFE-6F0A7632D9B4FFF6` is resolved at `2015-04-28T16:0
 ### Batch 0032: AMD and Haemonetics public-clock recoveries
 
 AMD resolves at 2013-10-17 16:15 Eastern from the original Marketwired distribution, now preserved by GlobeNewswire. Haemonetics resolves at 2012-01-30 08:00 Eastern from the explicit FOR RELEASE header in SEC Exhibit 99.1. Each is corroborated by its issuer archive. See the batch_0032 evidence dossier for exact URLs and short timestamp excerpts. This is 35 exact / 139 reviewed exclusions, not Step 9 completion. No WRDS access or vendor extract was used.
+
+### Batch 0033: NVR original-wire recovery
+
+NVR is recovered at 2012-01-26 08:50 ET (13:50 UTC) from PR Newswire's original issuer release, independently corroborated by SEC Exhibit 99.1. The clock is 60,840 seconds after the frozen first trade. This advances 35 exact / 139 reviewed exclusions to 36 exact / 138 reviewed exclusions and preserves every previous exact resolution, including AMD and Haemonetics. Evidence references and prior timestamps are in `data/public/metadata/g1_public_batch_0033_evidence.json`. Step 9 remains SOURCE_BLOCKED; no WRDS or paid vendor extract was used.
