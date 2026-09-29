@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "1c23cde00a5f83feca9aad5dab161d1a07c84467",
+  "base_main_sha": "1692ee04dbd6beb715b9f2b8f5ec621713640368",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 42,
-    "note": "The repository is at batch_0035; cumulative exact event records are 42 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 35,
+    "exact_resolved_event_records": 45,
+    "note": "The repository is at batch_0036; cumulative exact event records are 45 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 36,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 132
+    "reviewed_excluded_event_records": 129
   },
   "preferred_public_source_families": [
     {
@@ -500,6 +500,81 @@
       "source_family": "preserved_wire_mirror",
       "source_grade": "B",
       "source_reference": "https://finance.yahoo.com/news/verisign-reports-15-percent-over-200500976.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Yahoo preserves the original Marketwired release with published_date 2013-04-25T20:01:00Z; SEC Exhibit 99.1 independently matches Micrel, April 25 2013, first-quarter 2013 results and $59.7 million revenue. The 4:30pm conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/932111/000093211113000020/exhibit991earningsrelease4.htm",
+      "disposition": "RESOLVED_IN_BATCH_0036",
+      "event_date": "2013-04-25",
+      "event_id": "HEJFE-489E74F74AFB5AFA",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-25T16:01:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-25 14:32:00",
+      "historical_event_match": true,
+      "historical_symbol": "MCRL",
+      "information_asymmetry_seconds": 5340,
+      "probe_id": "MCRL-FB5AFA-batch0036",
+      "public_announcement_ts": "2013-04-25T16:01:00-04:00",
+      "publisher_timestamp_text": "2013-04-25T20:01:00Z",
+      "reason": "Promoted through separately reviewed preserved-wire evidence with SEC corroboration. This research hint cannot resolve events by itself.",
+      "release_title": "Micrel Reports 2013 First Quarter Financial Results",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://finance.yahoo.com/news/micrel-reports-2013-first-quarter-200100018.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Yahoo preserves the original Marketwired release with published_date 2013-07-23T20:05:00Z; SEC Exhibit 99.1 independently matches Juniper, July 23 2013, second-quarter 2013 results and $1.151 billion revenue. The 5:00pm EDT conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1043604/000119312513298913/d572332dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0036",
+      "event_date": "2013-07-23",
+      "event_id": "HEJFE-E61095F8DC4132DE",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-07-23T16:05:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-07-23 15:03:00",
+      "historical_event_match": true,
+      "historical_symbol": "JNPR",
+      "information_asymmetry_seconds": 3720,
+      "probe_id": "JNPR-4132DE-batch0036",
+      "public_announcement_ts": "2013-07-23T16:05:00-04:00",
+      "publisher_timestamp_text": "2013-07-23T20:05:00Z",
+      "reason": "Promoted through separately reviewed preserved-wire evidence with SEC corroboration. This research hint cannot resolve events by itself.",
+      "release_title": "Juniper Networks Reports Preliminary Second Quarter 2013 Financial Results and Announces Additional $1 Billion Share Repurchase Authorization",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://finance.yahoo.com/news/juniper-networks-reports-preliminary-second-200500973.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Yahoo preserves the original Marketwired release with published_date 2013-04-25T20:05:00Z; the SEC-filed release independently matches Monarch, April 25 2013 and first-quarter 2013 results. No later filing or inferred clock is used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/907242/000110262413000482/monarchcasinoandresortinc.htm",
+      "disposition": "RESOLVED_IN_BATCH_0036",
+      "event_date": "2013-04-25",
+      "event_id": "HEJFE-8F17F6BEDF631C8B",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-25T16:05:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:08:00",
+      "historical_event_match": true,
+      "historical_symbol": "MCRI",
+      "information_asymmetry_seconds": 3420,
+      "probe_id": "MCRI-631C8B-batch0036",
+      "public_announcement_ts": "2013-04-25T16:05:00-04:00",
+      "publisher_timestamp_text": "2013-04-25T20:05:00Z",
+      "reason": "Promoted through separately reviewed preserved-wire evidence with SEC corroboration. This research hint cannot resolve events by itself.",
+      "release_title": "Monarch Casino Reports 2013 First Quarter Results",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://finance.yahoo.com/news/monarch-casino-reports-2013-first-200500949.html",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }

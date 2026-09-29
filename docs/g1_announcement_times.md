@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **35 public exact-time batches / 42 exact-resolved
+The current repository state is **36 public exact-time batches / 45 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -117,3 +117,7 @@ FleetCor is recovered at 2015-04-30 16:01 EDT (20:01 UTC) from a preserved Busin
 ### Batch 0035: Meritage x2 + Proofpoint + VeriSign
 
 Meritage's own investor-relations archive supplies exact first-public clocks of 2013-04-24 08:00 EDT for Q1 and 2013-07-24 07:00 EDT for Q2. Preserved Yahoo copies of the original Marketwired releases supply 2013-04-25 20:05 UTC for both Proofpoint and VeriSign, independently corroborated by SEC Exhibit 99.1 copies. The four releases are 63,360, 56,520, 3,900 and 7,080 seconds after their frozen first trades respectively. This advances G1 from 38 exact / 136 reviewed exclusions to 42 exact / 132 reviewed exclusions. Scheduled conference-call times, EDGAR acceptance times, date-only pages and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0036: Micrel + Juniper + Monarch Casino
+
+Yahoo Finance preserves the original Marketwired publication metadata for Micrel at 2013-04-25 20:01 UTC, Juniper at 2013-07-23 20:05 UTC, and Monarch Casino at 2013-04-25 20:05 UTC. Matching SEC-filed issuer releases independently corroborate all three. These clocks are 5,340, 3,720 and 3,420 seconds after their frozen first trades respectively. This advances G1 from 42 exact / 132 reviewed exclusions to 45 exact / 129 reviewed exclusions. Conference-call times, EDGAR acceptance timestamps and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
