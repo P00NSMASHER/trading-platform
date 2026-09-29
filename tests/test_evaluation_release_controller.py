@@ -127,6 +127,14 @@ def test_release_token_is_bound_to_exact_hashed_inputs(tmp_path):
         s["authorized"] = True
         s["license_reference"] = "test-authorized-reference"
     market["non_synthetic_comparison_readiness"]["eligible_for_champion_challenger_unlock"] = True
+    market.setdefault("source_contract_policy", {})["stable_security_identity_gate_required_for_non_synthetic_unlock"] = True
+    market["security_identity_gate"] = {
+        "attached": True,
+        "ready_for_non_synthetic_market_join": True,
+        "baseline_identity_unverified_count": 0,
+        "path": "test-security-identity.json",
+        "sha256": "1" * 64,
+    }
     mp = tmp_path / "market.json"; mp.write_text(json.dumps(market))
     kw["market_backfill_manifest"] = mp
 
@@ -195,3 +203,41 @@ def test_g5_completion_with_exclusions_does_not_unlock_model_control_release(tmp
     assert "G5_MATCHED_CONTROL_UNIVERSE" not in gates
     assert "G5_MODEL_EVALUATION_CONTROLS" in gates
     assert result["evaluation_release_permitted"] is False
+
+
+def test_stable_security_identity_independently_blocks_false_market_unlock():
+    checks = []
+    coverage = {
+        "contract_audit": {
+            "ready_for_real_backfill": True,
+            "missing_real_authorized_required_rows": 0,
+            "required_source_date_rows": 1656,
+            "real_authorized_required_rows_covered": 1656,
+        }
+    }
+    market = {
+        "non_synthetic_comparison_readiness": {
+            "eligible_for_champion_challenger_unlock": True,
+        },
+        "source_contracts": [{
+            "data_classification": "authorized_historical_market_data",
+            "authorized": True,
+            "license_reference": "authorized-test-source",
+        }],
+        "source_contract_policy": {
+            "stable_security_identity_gate_required_for_non_synthetic_unlock": True,
+        },
+        "security_identity_gate": {
+            "attached": True,
+            "ready_for_non_synthetic_market_join": False,
+            "baseline_identity_unverified_count": 3654,
+            "path": "security_identity_manifest.json",
+            "sha256": "a" * 64,
+        },
+    }
+
+    erc._market_checks(checks, coverage, market)
+    by_gate = {row.gate_id: row for row in checks}
+    assert by_gate["G2_REAL_MARKET_DATA"].passed is True
+    assert by_gate["G2_STABLE_SECURITY_IDENTITY"].passed is False
+    assert "baseline_unverified=3654" in by_gate["G2_STABLE_SECURITY_IDENTITY"].detail
