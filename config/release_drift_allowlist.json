@@ -820,6 +820,18 @@
     "data/processed/research_receipt_bundle.json": {
       "expected_sha256": "dc93fd0f525859116d381198ef19aadf68ffea42fc91a25eb14561eb509c0c6b",
       "reason": "Deterministic manifest binding one coherent metadata/quality/real-data-replay receipt generation to exact input and receipt SHA-256 identities."
+    },
+    "src/g1_acquisition_manifest.py": {
+      "expected_sha256": "04536264c405e94208e113de3e21a07dc3d2021dad427c5cd8c3b15a8b36da4c",
+      "reason": "G1 acquisition routing: deterministically reconcile all 174 events, suppress already-resolved events, route remaining exact-clock work between public archives and lawful I/B/E/S bulk acquisition, and emit stable dedupe/work-queue identities."
+    },
+    "tests/test_g1_acquisition_manifest.py": {
+      "expected_sha256": "6ca2390adde13f9417c7266f43d98f6346dc185cf6419c42c1baf6bf31592f05",
+      "reason": "Regression coverage for full-universe G1 acquisition reconciliation, resolved-event suppression, lawful public/licensed routing, deterministic priorities, stale-research hints, and duplicate fail-closed behavior."
+    },
+    "data/public/metadata/g1_acquisition_manifest.json": {
+      "expected_sha256": "40423bd6f22864b9bca0c8ba709d5895767dd481ae556749cfafd78de81e5668",
+      "reason": "Machine-readable 174-event G1 acquisition manifest: 32 resolved/no-action rows and 142 exact-clock acquisition requests with stable dedupe keys, public routing, and lawful I/B/E/S bulk-request metadata."
     }
   }
 }
