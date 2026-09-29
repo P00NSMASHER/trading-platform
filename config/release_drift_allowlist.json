@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0036.yml": {
-      "expected_sha256": "21017fe1325fe309f9867b73818336336dd98023b6c893006c65bb491606f36f",
-      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -674,10 +670,6 @@
     "scripts/control_plane_audit_pack.py": {
       "expected_sha256": "d812008bda0d1d2417d4da140092e89a66ff6077ddcaf4cf6c452503fa590537",
       "reason": "Control-plane Step 8: deterministic exact-head audit-pack generator with semantic security-policy concepts, JUnit, secret, workflow, champion, and release-drift evidence"
-    },
-    "scripts/g1_batch_0036_generate.py": {
-      "expected_sha256": "f130cdf497320d1feb33f94bea717321b7288523a8b89c7556ec95bd92d7a8c9",
-      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
