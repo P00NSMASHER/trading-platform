@@ -578,12 +578,12 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "src/real_data_replay.py": {
-      "expected_sha256": "5e7f9b65c71e16f0eb0ee18ba418df759320c0f64dfd84615fbc9574bc231517",
-      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
+      "expected_sha256": "76904827a421ad80a812ec387b9738f3fa64daad6a95361227d83f718ac68ccc",
+      "reason": "Permanent receipt rebuild support: allow staging replay output while keeping logical receipt paths bound to the configured publication location."
     },
     "tests/test_real_data_replay.py": {
-      "expected_sha256": "046f772d4bf931bf7ccd366788d1626667627cf717d723bfc4c43f544e35d31c",
-      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
+      "expected_sha256": "aadfb2950052a4383ca2932ad2b8e73f2c878f4d68637aed803c44a510c338cb",
+      "reason": "Regression coverage for staged real-data replay output with canonical logical receipt paths."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -808,6 +808,18 @@
     "data/public/metadata/g1_announcement_times_batch_0030.csv": {
       "expected_sha256": "46ab2af9aaeafb3a289f407277362fd89348ef38fea6867574bbf24dfd44c47a",
       "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
+    },
+    "src/research_receipt_rebuild.py": {
+      "expected_sha256": "aad23317e159d300a462575ca8c998ed8891b62e45caf1ee626ca8034f0a3c31",
+      "reason": "Permanent deterministic research receipt rebuild: stage, reconcile, hash, compare, and transactionally publish metadata/quality/replay receipts with manifest-last rollback semantics."
+    },
+    "tests/test_research_receipt_rebuild.py": {
+      "expected_sha256": "4b0acabb8ff84f5a35ce2eb2e1e30952928f40eaaee1ac298e2c1acdc57fbc9a",
+      "reason": "Regression coverage for deterministic receipt reproduction, manifest ordering, and rollback on interrupted publication."
+    },
+    "data/processed/research_receipt_bundle.json": {
+      "expected_sha256": "dc93fd0f525859116d381198ef19aadf68ffea42fc91a25eb14561eb509c0c6b",
+      "reason": "Deterministic manifest binding one coherent metadata/quality/real-data-replay receipt generation to exact input and receipt SHA-256 identities."
     }
   }
 }
