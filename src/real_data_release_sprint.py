@@ -23,6 +23,7 @@ ITCH_V4_FAMILY = "nasdaq_itch_4_1_decoded"
 ITCH_V5_FAMILY = "nasdaq_itch_5_0_decoded"
 ITCH_RECORD_KIND = "itch_decoded"
 ITCH_V5_START_DATE = "2014-04-08"
+DEFAULT_SECURITY_IDENTITY_PATH = Path(__file__).resolve().parents[1] / "data/processed/security_identity_real/security_identity_manifest.json"
 
 
 def _sha256(path: Path) -> str:
@@ -53,6 +54,32 @@ def _write_csv(path: Path, rows: list[dict[str, object]], fields: list[str] | No
 def _write_json(path: Path, obj: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _security_identity_status(path: Path = DEFAULT_SECURITY_IDENTITY_PATH) -> dict:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if payload.get("schema_version") != "1":
+        raise ValueError("security identity manifest schema_version must equal '1'")
+    state = payload.get("state") or {}
+    event_count = int(state.get("event_count", 0) or 0)
+    verified = int(state.get("event_date_identity_verified_count", 0) or 0)
+    required = int(state.get("required_symbol_date_count", 0) or 0)
+    unverified = int(state.get("baseline_identity_unverified_count", 0) or 0)
+    ready = bool(state.get("ready_for_non_synthetic_market_join"))
+    if event_count <= 0 or required <= 0 or min(verified, unverified) < 0:
+        raise ValueError("invalid security identity counts")
+    if verified != event_count or verified + unverified != required:
+        raise ValueError("security identity counts do not reconcile")
+    if ready != (unverified == 0):
+        raise ValueError("security identity readiness disagrees with unresolved baseline count")
+    return {
+        "ready_for_non_synthetic_market_join": ready,
+        "event_count": event_count,
+        "event_date_identity_verified_count": verified,
+        "required_symbol_date_count": required,
+        "baseline_identity_unverified_count": unverified,
+        "sha256": _sha256(path),
+    }
 
 
 def freeze_requirements(
@@ -229,6 +256,11 @@ def refresh_coverage(
     readiness = json.loads(metadata_readiness_path.read_text(encoding="utf-8"))
     quality = json.loads(metadata_quality_path.read_text(encoding="utf-8"))
     req_manifest = json.loads(requirements_manifest_path.read_text(encoding="utf-8"))
+    identity = _security_identity_status()
+    if identity["event_count"] != int(summary.get("event_count", 0) or 0):
+        raise ValueError("security identity event_count disagrees with coverage universe")
+    if identity["required_symbol_date_count"] != int(summary.get("unique_symbol_date_pairs", 0) or 0):
+        raise ValueError("security identity required_symbol_date_count disagrees with coverage universe")
 
     g1_required = int(readiness.get("event_count", summary.get("event_count", 0)) or 0)
     g1_exact = int(readiness.get("announcement_exact_resolved", 0) or 0)
@@ -243,6 +275,8 @@ def refresh_coverage(
     blockers = []
     if not market_ready:
         blockers.append("G2_REAL_MARKET_DATA")
+    if not identity["ready_for_non_synthetic_market_join"]:
+        blockers.append("G2_STABLE_SECURITY_IDENTITY")
     if not readiness.get("ready_g1_exact_timing_analysis"):
         blockers.append("G1_EXACT_TIMING_ANALYSIS")
     if not readiness.get("ready_g5_model_evaluation_controls"):
@@ -253,6 +287,7 @@ def refresh_coverage(
     summary["metadata_gate_overlay"] = {
         "G1_ANNOUNCEMENT_TIMES": "READY_WITH_REVIEWED_EXCLUSIONS" if readiness.get("ready_g1_announcement_times") else "BLOCKING",
         "G1_EXACT_TIMING_ANALYSIS": "READY" if readiness.get("ready_g1_exact_timing_analysis") else "BLOCKING",
+        "G2_STABLE_SECURITY_IDENTITY": "READY" if identity["ready_for_non_synthetic_market_join"] else "BLOCKING",
         "G3_PRIMARY_LISTING_HISTORY": "READY" if readiness.get("ready_g3_primary_listing_history") else "BLOCKING",
         "G4_SHARES_OUTSTANDING": "READY_WITH_REVIEWED_EXCLUSIONS" if readiness.get("ready_g4_shares_outstanding") else "BLOCKING",
         "G5_MATCHED_CONTROL_UNIVERSE": "READY_WITH_REVIEWED_EXCLUSIONS" if readiness.get("ready_g5_matched_control_universe") else "BLOCKING",
@@ -264,6 +299,7 @@ def refresh_coverage(
     summary["g3_conditioned_itch_event_rows"] = req_manifest["counts"]["g3_confirmed_nasdaq_event_rows"]
     summary["legacy_conditional_itch_market_date_rows"] = req_manifest["counts"]["legacy_conditional_itch_market_date_rows"]
     summary["missing_exact_announcement_timestamps"] = g1_required - g1_exact
+    summary["security_identity_gate"] = identity
     summary["blocking_gates"] = blockers
     summary["ready_for_non_synthetic_champion_challenger_comparison"] = len(blockers) == 0
     summary["coverage_summary_semantics"] = (
@@ -293,6 +329,13 @@ def refresh_coverage(
             "required_rows": "1656",
             "requirement": "828 core equity + 828 option source-date rows, content validated and non-synthetic.",
             "resolution": "Populate a real authorized historical market source contract and rerun content validation.",
+        },
+        {
+            "gate_id": "G2_STABLE_SECURITY_IDENTITY",
+            "status": summary["metadata_gate_overlay"]["G2_STABLE_SECURITY_IDENTITY"],
+            "required_rows": str(identity["required_symbol_date_count"]),
+            "requirement": "Stable dated security identity for every required symbol-date.",
+            "resolution": "Provide dated security-master/crosswalk evidence for every unverified baseline date; current-ticker or inferred alias substitution is prohibited.",
         },
         {
             "gate_id": "G3_PRIMARY_LISTING_HISTORY",
@@ -351,6 +394,8 @@ def build_status(
     meta = json.loads(metadata_readiness_path.read_text(encoding="utf-8"))
     quality = json.loads(metadata_quality_path.read_text(encoding="utf-8"))
     audit = cov.get("contract_audit") or {}
+    identity = _security_identity_status()
+    identity_ready = identity["ready_for_non_synthetic_market_join"]
 
     real_covered = int(audit.get("real_authorized_required_rows_covered", 0) or 0)
     core_required = int(req["counts"]["core_equity_source_date_rows"])
@@ -413,10 +458,13 @@ def build_status(
          "status": "PASS" if meta.get("ready_g5_model_evaluation_controls") else "SOURCE_BLOCKED",
          "evidence": f"genuine control dates={meta.get('control_dates_resolved', 0)}/72"},
         {"step": 11, "name": "Regenerate fully non-synthetic historical feature corpus",
-         "status": "PASS" if meta.get("ready_for_non_synthetic_model_evaluation_metadata") and audit.get("ready_for_real_backfill") else "DEPENDENCY_BLOCKED",
-         "evidence": "requires G2 real market data + G1 exact timing + genuine G5 controls"},
+         "status": "PASS" if meta.get("ready_for_non_synthetic_model_evaluation_metadata") and audit.get("ready_for_real_backfill") and identity_ready else "DEPENDENCY_BLOCKED",
+         "evidence": (
+             "requires G2 real market data + G1 exact timing + genuine G5 controls + stable security identity; "
+             f"baseline identity unverified={identity['baseline_identity_unverified_count']}/{identity['required_symbol_date_count']}"
+         )},
         {"step": 12, "name": "Run non-synthetic release gates and champion/challenger evaluation",
-         "status": "PASS" if cov.get("ready_for_non_synthetic_champion_challenger_comparison") and quality.get("quality_cleared_for_non_synthetic_model_evaluation") else "DEPENDENCY_BLOCKED",
+         "status": "PASS" if cov.get("ready_for_non_synthetic_champion_challenger_comparison") and quality.get("quality_cleared_for_non_synthetic_model_evaluation") and identity_ready else "DEPENDENCY_BLOCKED",
          "evidence": "release remains fail-closed until source-dependent locks are genuinely clear"},
     ]
 
@@ -427,6 +475,8 @@ def build_status(
         "coverage_summary_sha256": _sha256(coverage_summary_path),
         "metadata_readiness_sha256": _sha256(metadata_readiness_path),
         "metadata_quality_sha256": _sha256(metadata_quality_path),
+        "security_identity_sha256": identity["sha256"],
+        "security_identity_state": identity,
         "steps": steps,
         "completed_steps": [x["step"] for x in steps if x["status"] == "PASS"],
         "source_blocked_steps": [x["step"] for x in steps if x["status"] == "SOURCE_BLOCKED"],
