@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "1692ee04dbd6beb715b9f2b8f5ec621713640368",
+  "base_main_sha": "2f73f5b0507b5b654ea7a0950c9a892bc4fc459f",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 44,
-    "note": "The repository is at batch_0036; cumulative exact event records are 44 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 36,
+    "exact_resolved_event_records": 46,
+    "note": "The repository is at batch_0037; cumulative exact event records are 46 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 37,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 130
+    "reviewed_excluded_event_records": 128
   },
   "preferred_public_source_families": [
     {
@@ -550,6 +550,56 @@
       "source_family": "preserved_wire_mirror",
       "source_grade": "B",
       "source_reference": "https://finance.yahoo.com/news/juniper-networks-reports-preliminary-second-200500973.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Yahoo preserves the original Marketwired release with published_date 2013-04-25T20:05:00Z; the SEC-filed release independently matches Monarch, April 25 2013 and first-quarter 2013 results. No filing acceptance or inferred clock is used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/907242/000110262413000482/monarchcasinoandresortinc.htm",
+      "disposition": "RESOLVED_IN_BATCH_0037",
+      "event_date": "2013-04-25",
+      "event_id": "HEJFE-8F17F6BEDF631C8B",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-25T16:05:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:08:00",
+      "historical_event_match": true,
+      "historical_symbol": "MCRI",
+      "information_asymmetry_seconds": 3420,
+      "probe_id": "MCRI-batch0037",
+      "public_announcement_ts": "2013-04-25T16:05:00-04:00",
+      "publisher_timestamp_text": "2013-04-25T20:05:00Z",
+      "reason": "Promoted through reviewed preserved-wire evidence with SEC corroboration.",
+      "release_title": "Monarch Casino Reports 2013 First Quarter Results",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://finance.yahoo.com/news/monarch-casino-reports-2013-first-200500949.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Yahoo preserves the original Marketwired release with published_date 2013-04-24T20:30:00Z; SEC Exhibit 99.1 independently matches Stamps.com, April 24 2013, first-quarter 2013 results and $32.1 million revenue. The 5:00pm conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1082923/000114036113017456/ex99_1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0037",
+      "event_date": "2013-04-24",
+      "event_id": "HEJFE-06AE65B9C8FB0395",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-24T16:30:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-24 15:28:00",
+      "historical_event_match": true,
+      "historical_symbol": "STMP",
+      "information_asymmetry_seconds": 3720,
+      "probe_id": "STMP-batch0037",
+      "public_announcement_ts": "2013-04-24T16:30:00-04:00",
+      "publisher_timestamp_text": "2013-04-24T20:30:00Z",
+      "reason": "Promoted through reviewed preserved-wire evidence with SEC corroboration.",
+      "release_title": "Stamps.com Announces Record Non-GAAP Earnings per Share of $0.57",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://finance.yahoo.com/news/stamps-com-announces-record-non-203000566.html",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
