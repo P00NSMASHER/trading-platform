@@ -1,332 +1,357 @@
 {
-  "schema_version": "1",
-  "research_date": "2026-09-28",
-  "purpose": "Machine-readable G1 source-discovery intelligence for the 174-event exact public-announcement-time sweep. This file is research guidance only and must never resolve a G1 event by itself.",
-  "research_use_only": true,
-  "base_main_sha": "ea09d64fa029eec7439cc3850dcba5999db0ed1b",
-  "current_g1_state": {
-    "required_event_count": 174,
-    "public_exact_batch_count": 32,
-    "exact_resolved_event_records": 35,
-    "reviewed_excluded_event_records": 139,
-    "note": "The repository is at batch_0032; cumulative exact event records are 35 because some public batches resolve more than one historical event."
-  },
+  "base_main_sha": "88dfa6fa4f69a6c9f33714edca92442376dfc8d4",
   "consolidated_source_search": {
-    "public_one_stop_exact_timestamp_dataset_found": false,
-    "conclusion": "No public GitHub/Kaggle-style repository or open consolidated dataset was located that contains the full 174-event exact first-public earnings release clock-time join.",
-    "public_replication_repository": {
-      "repository": "vgreg/hacked_earnings_jfe",
-      "path": "Data/Press releases/{2011..2015}.zip",
-      "observed_coverage": {
-        "events_with_candidate_release_files": 160,
-        "events_without_candidate_release_files": 14,
-        "events_with_any_clock_time_token": 0,
-        "events_with_release_context_clock_time": 0
-      },
-      "evidence_role": "release-text/date discovery only; not exact-time evidence"
-    },
     "companion_semantics_repository": {
-      "repository": "vgreg/earnings_news_jar",
-      "path": "IBES/IBES_Data_Processing_JAR.ipynb",
       "confirmed_fields": [
         "ANNDATS_ACT",
         "ANNTIMS_ACT"
       ],
-      "evidence_role": "confirms the original exact-time join semantics but does not publish the licensed rows"
+      "evidence_role": "confirms the original exact-time join semantics but does not publish the licensed rows",
+      "path": "IBES/IBES_Data_Processing_JAR.ipynb",
+      "repository": "vgreg/earnings_news_jar"
     },
+    "conclusion": "No public GitHub/Kaggle-style repository or open consolidated dataset was located that contains the full 174-event exact first-public earnings release clock-time join.",
     "licensed_complete_candidate": {
+      "lawful_access_only": true,
+      "likely_full_universe_path": true,
       "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
+      "repository_adapter": "src/g1_ibes_timestamp_adapter.py",
       "required_fields": [
         "TICKER or OFTIC",
         "ANNDATS_ACT",
         "ANNTIMS_ACT"
-      ],
-      "repository_adapter": "src/g1_ibes_timestamp_adapter.py",
-      "lawful_access_only": true,
-      "likely_full_universe_path": true
+      ]
+    },
+    "public_one_stop_exact_timestamp_dataset_found": false,
+    "public_replication_repository": {
+      "evidence_role": "release-text/date discovery only; not exact-time evidence",
+      "observed_coverage": {
+        "events_with_any_clock_time_token": 0,
+        "events_with_candidate_release_files": 160,
+        "events_with_release_context_clock_time": 0,
+        "events_without_candidate_release_files": 14
+      },
+      "path": "Data/Press releases/{2011..2015}.zip",
+      "repository": "vgreg/hacked_earnings_jfe"
     }
+  },
+  "current_g1_state": {
+    "exact_resolved_event_records": 36,
+    "note": "The repository is at batch_0033; cumulative exact event records are 36 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 33,
+    "required_event_count": 174,
+    "reviewed_excluded_event_records": 138
   },
   "preferred_public_source_families": [
     {
-      "rank": 1,
-      "source_family": "official_newswire_archive",
+      "admissibility": "Exact first-public clock required; issuer/SEC corroboration preferred.",
       "examples": [
         "Business Wire",
         "PR Newswire",
         "GlobeNewswire",
         "Marketwired"
       ],
-      "admissibility": "Exact first-public clock required; issuer/SEC corroboration preferred."
+      "rank": 1,
+      "source_family": "official_newswire_archive"
     },
     {
-      "rank": 2,
-      "source_family": "issuer_investor_relations_archive",
+      "admissibility": "Exact publication clock must be explicitly preserved.",
       "examples": [
         "issuer newsroom",
         "investor relations press release archive"
       ],
-      "admissibility": "Exact publication clock must be explicitly preserved."
+      "rank": 2,
+      "source_family": "issuer_investor_relations_archive"
     },
     {
-      "rank": 3,
-      "source_family": "preserved_wire_mirror",
+      "admissibility": "Clock may be used only when the mirror clearly preserves the original distribution timestamp and the release identity is independently corroborated.",
       "examples": [
         "MarketScreener",
         "EIN Presswire",
         "archive snapshots"
       ],
-      "admissibility": "Clock may be used only when the mirror clearly preserves the original distribution timestamp and the release identity is independently corroborated."
+      "rank": 3,
+      "source_family": "preserved_wire_mirror"
     },
     {
-      "rank": 4,
-      "source_family": "sec_exhibit_corroboration",
+      "admissibility": "Useful to corroborate release identity/date/content; EDGAR acceptance time alone is prohibited as the public-release time.",
       "examples": [
         "8-K Exhibit 99.1"
       ],
-      "admissibility": "Useful to corroborate release identity/date/content; EDGAR acceptance time alone is prohibited as the public-release time."
-    }
-  ],
-  "validation_probes": [
-    {
-      "probe_id": "CAKE-2026-Q4FY25",
-      "historical_symbol": "CAKE",
-      "observed_release_date": "2026-02-18",
-      "source_family": "issuer_investor_relations_archive",
-      "source_reference": "https://investors.thecheesecakefactory.com/news-and-events/news-releases/news-release-details/2026/The-Cheesecake-Factory-Reports-Results-for-Fourth-Quarter-of-Fiscal-2025/default.aspx",
-      "exact_clock_observed": false,
-      "historical_event_match": false,
-      "evidence_eligible": false,
-      "disposition": "SOURCE_FAMILY_PROBE_ONLY",
-      "reason": "Confirms an issuer-hosted release trail exists, but the record is from 2026 and has no exact clock; the target G1 CAKE event is from 2015."
-    },
-    {
-      "probe_id": "CAKE-2026-Q1",
-      "historical_symbol": "CAKE",
-      "observed_release_date": "2026-04-29",
-      "source_family": "official_newswire_archive",
-      "source_reference": "https://www.businesswire.com/news/home/20260429668073/en/The-Cheesecake-Factory-Reports-Results-for-First-Quarter-of-Fiscal-2026",
-      "exact_clock_observed": false,
-      "historical_event_match": false,
-      "evidence_eligible": false,
-      "disposition": "SOURCE_FAMILY_PROBE_ONLY",
-      "reason": "Business Wire release ID confirms a strong wire trail but not the 2015 event or an exact first-public clock."
-    },
-    {
-      "probe_id": "CAKE-2026-Q2",
-      "historical_symbol": "CAKE",
-      "observed_release_date": "2026-07-28",
-      "source_family": "sec_exhibit_corroboration",
-      "source_reference": "https://www.sec.gov/Archives/edgar/data/887596/000110465926087561/tm2621325d1_ex99-1.htm",
-      "exact_clock_observed": false,
-      "historical_event_match": false,
-      "evidence_eligible": false,
-      "disposition": "SOURCE_FAMILY_PROBE_ONLY",
-      "reason": "SEC exhibit confirms release identity/date but is unrelated to the 2015 historical event and does not establish a clock time."
-    },
-    {
-      "probe_id": "TNGO-2026-H1",
-      "historical_symbol": "TNGO",
-      "observed_release_date": "2026-07-30",
-      "source_family": "official_newswire_archive",
-      "source_reference": "https://www.businesswire.com/news/home/20260730768111/en/Tangoe-Reports-First-Half-2026-Momentum-Driven-by-Larger-Enterprise-Commitments-and-Rising-Demand-for-Advisory-Services",
-      "exact_clock_observed": false,
-      "historical_event_match": false,
-      "evidence_eligible": false,
-      "disposition": "SOURCE_FAMILY_PROBE_ONLY",
-      "reason": "Business Wire ID/date validates the source trail, but the target TNGO event is from 2015 and this page does not provide an admissible exact public clock."
-    },
-    {
-      "probe_id": "QLIK-search-negative",
-      "historical_symbol": "QLIK",
-      "source_family": "repository_and_archive_search",
-      "exact_clock_observed": false,
-      "historical_event_match": false,
-      "evidence_eligible": false,
-      "disposition": "NO_EXACT_TIME_FOUND_IN_PASS",
-      "reason": "No consolidated public dataset or exact-clock release record was located in the deep-research pass."
-    },
-    {
-      "probe_id": "NKE-search-negative",
-      "historical_symbol": "NKE",
-      "source_family": "repository_and_archive_search",
-      "exact_clock_observed": false,
-      "historical_event_match": false,
-      "evidence_eligible": false,
-      "disposition": "NO_EXACT_TIME_FOUND_IN_PASS",
-      "reason": "No consolidated public dataset or exact-clock release record was located in the deep-research pass."
-    },
-    {
-      "probe_id": "BCR-2015-Q4-resolved",
-      "historical_symbol": "BCR",
-      "source_family": "preserved_wire_mirror",
-      "exact_clock_observed": true,
-      "historical_event_match": true,
-      "evidence_eligible": false,
-      "disposition": "RESOLVED_IN_BATCH_0029",
-      "reason": "Exact Business Wire clock was recovered and promoted through the separately reviewed G1 batch_0029 evidence path; the research map remains guidance-only and does not itself resolve the event.",
-      "source_reference": "https://www.marketscreener.com/quote/stock/C-R-BARD-11788/news/C-R-Bard-Bard-Announces-Fourth-Quarter-Results-19785868/",
-      "exact_public_release_ts": "2015-01-29T16:05:00-05:00"
-    },
-    {
-      "probe_id": "NATI-search-negative",
-      "historical_symbol": "NATI",
-      "source_family": "repository_and_archive_search",
-      "exact_clock_observed": false,
-      "historical_event_match": false,
-      "evidence_eligible": false,
-      "disposition": "NO_EXACT_TIME_FOUND_IN_PASS",
-      "reason": "No consolidated public dataset or exact-clock release record was located in the deep-research pass."
-    },
-    {
-      "probe_id": "R-2015-Q4-resolved",
-      "event_id": "HEJFE-A25F33B630365184",
-      "historical_symbol": "R",
-      "historical_event_match": true,
-      "exact_clock_observed": true,
-      "exact_public_release_ts": "2015-02-03T08:55:00-05:00",
-      "timestamp_kind": "first_public_release",
-      "timestamp_evidence_kind": "publisher_timestamp",
-      "source_family": "issuer_investor_relations_archive",
-      "source_reference": "https://newsroom.ryder.com/news/news-details/2015/Ryder-Reports-Record-Fourth-Quarter-and-Full-Year-2014-Results-and-Provides-2015-Forecast/default.aspx",
-      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/85961/000008596115000006/exhibit991-pressreleasex20.htm",
-      "evidence_eligible": false,
-      "disposition": "RESOLVED_IN_BATCH_0030",
-      "reason": "Ryder's issuer-hosted newsroom preserves the matching release at February 3, 2015 8:55 AM; the timestamp is normalized in the repository's America/New_York source timezone and the matching SEC exhibit independently corroborates the release. Promotion occurs through the separately reviewed batch_0030 evidence path."
-    },
-    {
-      "probe_id": "ACHC-2015-Q1-resolved",
-      "event_id": "HEJFE-6F0A7632D9B4FFF6",
-      "historical_symbol": "ACHC",
-      "historical_event_match": true,
-      "exact_clock_observed": true,
-      "exact_public_release_ts": "2015-04-28T16:00:00-04:00",
-      "timestamp_kind": "first_public_release",
-      "timestamp_evidence_kind": "publisher_timestamp",
-      "source_family": "preserved_wire_mirror",
-      "source_reference": "https://www.streetinsider.com/Press%2BReleases/Acadia%2BHealthcare%2BFirst%2BQuarter%2BAdjusted%2BEPS%2BIncreases%2B53.6%25%2Bto%2B%240.43/10497602.html?classic=1",
-      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1520697/000115752315001376/a51090258ex99.htm",
-      "evidence_eligible": false,
-      "disposition": "RESOLVED_IN_BATCH_0031",
-      "reason": "StreetInsider preserves the matching Business Wire release at April 28, 2015 4:00 PM EDT; SEC Exhibit 99 independently corroborates the release identity, date, distribution, and content. Promotion occurs through the separately reviewed batch_0031 evidence path."
-    },
-    {
-      "probe_id": "AMD-batch0032-resolved",
-      "event_id": "HEJFE-B46D4F8F72DD0212",
-      "historical_symbol": "AMD",
-      "historical_event_match": true,
-      "exact_clock_observed": true,
-      "exact_public_release_ts": "2013-10-17T16:15:00-04:00",
-      "timestamp_kind": "first_public_release",
-      "timestamp_evidence_kind": "publisher_timestamp",
-      "source_family": "official_newswire_archive",
-      "source_reference": "https://www.globenewswire.com/news-release/2013/10/17/1011233/0/en/amd-reports-2013-third-quarter-results.html",
-      "corroboration_reference": "https://ir.amd.com/news-events/press-releases/detail/451/amd-reports-2013-third-quarter-results",
-      "evidence_eligible": false,
-      "disposition": "RESOLVED_IN_BATCH_0032",
-      "reason": "Resolved through separately reviewed public batch_0032; this research hint is not itself resolution evidence."
-    },
-    {
-      "probe_id": "HAE-batch0032-resolved",
-      "event_id": "HEJFE-13FC93F4D143B268",
-      "historical_symbol": "HAE",
-      "historical_event_match": true,
-      "exact_clock_observed": true,
-      "exact_public_release_ts": "2012-01-30T08:00:00-05:00",
-      "timestamp_kind": "first_public_release",
-      "timestamp_evidence_kind": "issuer_release_header",
-      "source_family": "official_newswire_archive",
-      "source_reference": "https://www.sec.gov/Archives/edgar/data/313143/000031314312000009/hae20121308kexhibit991.htm",
-      "corroboration_reference": "https://haemonetics.gcs-web.com/news-releases/news-release-details/haemonetics-reports-8-revenue-growth-third-quarter-fiscal-2012",
-      "evidence_eligible": false,
-      "disposition": "RESOLVED_IN_BATCH_0032",
-      "reason": "Resolved through separately reviewed public batch_0032; this research hint is not itself resolution evidence."
+      "rank": 4,
+      "source_family": "sec_exhibit_corroboration"
     }
   ],
   "priority_events": [
     {
-      "priority_rank": 1,
+      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
       "event_id": "HEJFE-4080E04F012A7290",
-      "historical_symbol": "QLIK",
       "first_documented_illicit_trade_ts": "2015-02-12 15:39:00",
-      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
-      "research_signal": "strong_release_trail",
+      "historical_symbol": "QLIK",
       "next_source_families": [
         "official_newswire_archive",
         "issuer_investor_relations_archive",
         "preserved_wire_mirror",
         "sec_exhibit_corroboration"
-      ]
+      ],
+      "priority_rank": 1,
+      "research_signal": "strong_release_trail"
     },
     {
-      "priority_rank": 2,
+      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
       "event_id": "HEJFE-AF5106891E058D23",
-      "historical_symbol": "TNGO",
       "first_documented_illicit_trade_ts": "2015-02-12 15:10:00",
-      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
-      "research_signal": "strong_release_trail",
+      "historical_symbol": "TNGO",
       "next_source_families": [
         "official_newswire_archive",
         "preserved_wire_mirror",
         "issuer_investor_relations_archive",
         "sec_exhibit_corroboration"
-      ]
+      ],
+      "priority_rank": 2,
+      "research_signal": "strong_release_trail"
     },
     {
-      "priority_rank": 3,
+      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
       "event_id": "HEJFE-760E36DA94752F1E",
-      "historical_symbol": "CAKE",
       "first_documented_illicit_trade_ts": "2015-04-22 14:22:00",
-      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
-      "research_signal": "strong_release_trail",
+      "historical_symbol": "CAKE",
       "next_source_families": [
         "official_newswire_archive",
         "issuer_investor_relations_archive",
         "preserved_wire_mirror",
         "sec_exhibit_corroboration"
-      ]
+      ],
+      "priority_rank": 3,
+      "research_signal": "strong_release_trail"
     },
     {
-      "priority_rank": 4,
+      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
       "event_id": "HEJFE-0BAF70D8CC8F1631",
-      "historical_symbol": "NKE",
       "first_documented_illicit_trade_ts": "2015-03-19 15:58:00",
-      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
-      "research_signal": "strong_release_trail",
+      "historical_symbol": "NKE",
       "next_source_families": [
         "official_newswire_archive",
         "issuer_investor_relations_archive",
         "preserved_wire_mirror",
         "sec_exhibit_corroboration"
-      ]
+      ],
+      "priority_rank": 4,
+      "research_signal": "strong_release_trail"
     },
     {
-      "priority_rank": 5,
+      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
       "event_id": "HEJFE-F9E72EEF6E5BD373",
-      "historical_symbol": "NATI",
       "first_documented_illicit_trade_ts": "2015-01-29 15:51:00",
-      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
-      "research_signal": "strong_release_trail",
+      "historical_symbol": "NATI",
       "next_source_families": [
         "official_newswire_archive",
         "issuer_investor_relations_archive",
         "preserved_wire_mirror",
         "sec_exhibit_corroboration"
-      ]
+      ],
+      "priority_rank": 5,
+      "research_signal": "strong_release_trail"
     },
     {
-      "priority_rank": 6,
-      "event_id": "HEJFE-7F8218B15679F14D",
-      "historical_symbol": "NATI",
-      "first_documented_illicit_trade_ts": "2015-04-28 13:59:00",
       "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
-      "research_signal": "strong_release_trail",
+      "event_id": "HEJFE-7F8218B15679F14D",
+      "first_documented_illicit_trade_ts": "2015-04-28 13:59:00",
+      "historical_symbol": "NATI",
       "next_source_families": [
         "official_newswire_archive",
         "issuer_investor_relations_archive",
         "preserved_wire_mirror",
         "sec_exhibit_corroboration"
-      ]
+      ],
+      "priority_rank": 6,
+      "research_signal": "strong_release_trail"
     }
   ],
-  "promotion_rule": "A research probe may become G1 evidence only when it matches the historical event and provides an authoritative/authorized timezone-aware exact first-public release timestamp. Date-only, wrong-year, archive-capture, scheduled, inferred, or EDGAR-acceptance times remain ineligible."
+  "promotion_rule": "A research probe may become G1 evidence only when it matches the historical event and provides an authoritative/authorized timezone-aware exact first-public release timestamp. Date-only, wrong-year, archive-capture, scheduled, inferred, or EDGAR-acceptance times remain ineligible.",
+  "purpose": "Machine-readable G1 source-discovery intelligence for the 174-event exact public-announcement-time sweep. This file is research guidance only and must never resolve a G1 event by itself.",
+  "research_date": "2026-09-28",
+  "research_use_only": true,
+  "schema_version": "1",
+  "validation_probes": [
+    {
+      "disposition": "SOURCE_FAMILY_PROBE_ONLY",
+      "evidence_eligible": false,
+      "exact_clock_observed": false,
+      "historical_event_match": false,
+      "historical_symbol": "CAKE",
+      "observed_release_date": "2026-02-18",
+      "probe_id": "CAKE-2026-Q4FY25",
+      "reason": "Confirms an issuer-hosted release trail exists, but the record is from 2026 and has no exact clock; the target G1 CAKE event is from 2015.",
+      "source_family": "issuer_investor_relations_archive",
+      "source_reference": "https://investors.thecheesecakefactory.com/news-and-events/news-releases/news-release-details/2026/The-Cheesecake-Factory-Reports-Results-for-Fourth-Quarter-of-Fiscal-2025/default.aspx"
+    },
+    {
+      "disposition": "SOURCE_FAMILY_PROBE_ONLY",
+      "evidence_eligible": false,
+      "exact_clock_observed": false,
+      "historical_event_match": false,
+      "historical_symbol": "CAKE",
+      "observed_release_date": "2026-04-29",
+      "probe_id": "CAKE-2026-Q1",
+      "reason": "Business Wire release ID confirms a strong wire trail but not the 2015 event or an exact first-public clock.",
+      "source_family": "official_newswire_archive",
+      "source_reference": "https://www.businesswire.com/news/home/20260429668073/en/The-Cheesecake-Factory-Reports-Results-for-First-Quarter-of-Fiscal-2026"
+    },
+    {
+      "disposition": "SOURCE_FAMILY_PROBE_ONLY",
+      "evidence_eligible": false,
+      "exact_clock_observed": false,
+      "historical_event_match": false,
+      "historical_symbol": "CAKE",
+      "observed_release_date": "2026-07-28",
+      "probe_id": "CAKE-2026-Q2",
+      "reason": "SEC exhibit confirms release identity/date but is unrelated to the 2015 historical event and does not establish a clock time.",
+      "source_family": "sec_exhibit_corroboration",
+      "source_reference": "https://www.sec.gov/Archives/edgar/data/887596/000110465926087561/tm2621325d1_ex99-1.htm"
+    },
+    {
+      "disposition": "SOURCE_FAMILY_PROBE_ONLY",
+      "evidence_eligible": false,
+      "exact_clock_observed": false,
+      "historical_event_match": false,
+      "historical_symbol": "TNGO",
+      "observed_release_date": "2026-07-30",
+      "probe_id": "TNGO-2026-H1",
+      "reason": "Business Wire ID/date validates the source trail, but the target TNGO event is from 2015 and this page does not provide an admissible exact public clock.",
+      "source_family": "official_newswire_archive",
+      "source_reference": "https://www.businesswire.com/news/home/20260730768111/en/Tangoe-Reports-First-Half-2026-Momentum-Driven-by-Larger-Enterprise-Commitments-and-Rising-Demand-for-Advisory-Services"
+    },
+    {
+      "disposition": "NO_EXACT_TIME_FOUND_IN_PASS",
+      "evidence_eligible": false,
+      "exact_clock_observed": false,
+      "historical_event_match": false,
+      "historical_symbol": "QLIK",
+      "probe_id": "QLIK-search-negative",
+      "reason": "No consolidated public dataset or exact-clock release record was located in the deep-research pass.",
+      "source_family": "repository_and_archive_search"
+    },
+    {
+      "disposition": "NO_EXACT_TIME_FOUND_IN_PASS",
+      "evidence_eligible": false,
+      "exact_clock_observed": false,
+      "historical_event_match": false,
+      "historical_symbol": "NKE",
+      "probe_id": "NKE-search-negative",
+      "reason": "No consolidated public dataset or exact-clock release record was located in the deep-research pass.",
+      "source_family": "repository_and_archive_search"
+    },
+    {
+      "disposition": "RESOLVED_IN_BATCH_0029",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-01-29T16:05:00-05:00",
+      "historical_event_match": true,
+      "historical_symbol": "BCR",
+      "probe_id": "BCR-2015-Q4-resolved",
+      "reason": "Exact Business Wire clock was recovered and promoted through the separately reviewed G1 batch_0029 evidence path; the research map remains guidance-only and does not itself resolve the event.",
+      "source_family": "preserved_wire_mirror",
+      "source_reference": "https://www.marketscreener.com/quote/stock/C-R-BARD-11788/news/C-R-Bard-Bard-Announces-Fourth-Quarter-Results-19785868/"
+    },
+    {
+      "disposition": "NO_EXACT_TIME_FOUND_IN_PASS",
+      "evidence_eligible": false,
+      "exact_clock_observed": false,
+      "historical_event_match": false,
+      "historical_symbol": "NATI",
+      "probe_id": "NATI-search-negative",
+      "reason": "No consolidated public dataset or exact-clock release record was located in the deep-research pass.",
+      "source_family": "repository_and_archive_search"
+    },
+    {
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/85961/000008596115000006/exhibit991-pressreleasex20.htm",
+      "disposition": "RESOLVED_IN_BATCH_0030",
+      "event_id": "HEJFE-A25F33B630365184",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-02-03T08:55:00-05:00",
+      "historical_event_match": true,
+      "historical_symbol": "R",
+      "probe_id": "R-2015-Q4-resolved",
+      "reason": "Ryder's issuer-hosted newsroom preserves the matching release at February 3, 2015 8:55 AM; the timestamp is normalized in the repository's America/New_York source timezone and the matching SEC exhibit independently corroborates the release. Promotion occurs through the separately reviewed batch_0030 evidence path.",
+      "source_family": "issuer_investor_relations_archive",
+      "source_reference": "https://newsroom.ryder.com/news/news-details/2015/Ryder-Reports-Record-Fourth-Quarter-and-Full-Year-2014-Results-and-Provides-2015-Forecast/default.aspx",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1520697/000115752315001376/a51090258ex99.htm",
+      "disposition": "RESOLVED_IN_BATCH_0031",
+      "event_id": "HEJFE-6F0A7632D9B4FFF6",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-04-28T16:00:00-04:00",
+      "historical_event_match": true,
+      "historical_symbol": "ACHC",
+      "probe_id": "ACHC-2015-Q1-resolved",
+      "reason": "StreetInsider preserves the matching Business Wire release at April 28, 2015 4:00 PM EDT; SEC Exhibit 99 independently corroborates the release identity, date, distribution, and content. Promotion occurs through the separately reviewed batch_0031 evidence path.",
+      "source_family": "preserved_wire_mirror",
+      "source_reference": "https://www.streetinsider.com/Press%2BReleases/Acadia%2BHealthcare%2BFirst%2BQuarter%2BAdjusted%2BEPS%2BIncreases%2B53.6%25%2Bto%2B%240.43/10497602.html?classic=1",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_reference": "https://ir.amd.com/news-events/press-releases/detail/451/amd-reports-2013-third-quarter-results",
+      "disposition": "RESOLVED_IN_BATCH_0032",
+      "event_id": "HEJFE-B46D4F8F72DD0212",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-10-17T16:15:00-04:00",
+      "historical_event_match": true,
+      "historical_symbol": "AMD",
+      "probe_id": "AMD-batch0032-resolved",
+      "reason": "Resolved through separately reviewed public batch_0032; this research hint is not itself resolution evidence.",
+      "source_family": "official_newswire_archive",
+      "source_reference": "https://www.globenewswire.com/news-release/2013/10/17/1011233/0/en/amd-reports-2013-third-quarter-results.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_reference": "https://haemonetics.gcs-web.com/news-releases/news-release-details/haemonetics-reports-8-revenue-growth-third-quarter-fiscal-2012",
+      "disposition": "RESOLVED_IN_BATCH_0032",
+      "event_id": "HEJFE-13FC93F4D143B268",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-30T08:00:00-05:00",
+      "historical_event_match": true,
+      "historical_symbol": "HAE",
+      "probe_id": "HAE-batch0032-resolved",
+      "reason": "Resolved through separately reviewed public batch_0032; this research hint is not itself resolution evidence.",
+      "source_family": "official_newswire_archive",
+      "source_reference": "https://www.sec.gov/Archives/edgar/data/313143/000031314312000009/hae20121308kexhibit991.htm",
+      "timestamp_evidence_kind": "issuer_release_header",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Matching issuer title, January 26 2012 publication date, reporting period ended December 31 2011, net income 32,392,000 and EPS 6.32. EDGAR acceptance time is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/906163/000114420412004052/v300380_ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0033",
+      "event_date": "2012-01-25",
+      "event_id": "HEJFE-56483839E5F0E88F",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-26T08:50:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-25 15:56:00",
+      "historical_event_match": true,
+      "historical_symbol": "NVR",
+      "information_asymmetry_seconds": 60840,
+      "probe_id": "NVR-batch0033",
+      "public_announcement_ts": "2012-01-26T08:50:00-05:00",
+      "publisher_timestamp_text": "Jan 26, 2012, 08:50 ET",
+      "reason": "Promoted through the separately reviewed original-wire batch_0033 path. This research hint cannot resolve events by itself.",
+      "release_title": "NVR, Inc. Announces Fourth Quarter and Full Year Results",
+      "reviewed_on": "2026-09-29",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news-releases/nvr-inc-announces-fourth-quarter-and-full-year-results-138117398.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    }
+  ]
 }

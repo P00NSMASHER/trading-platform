@@ -1,7 +1,5 @@
 {
-  "schema_version": "2",
   "historical_release": "Step21 package 33ed148d480808474b6aab6c958aa476e6fe73be5a9eeb467e156ec88f3b4158",
-  "trust_root_notice": "This reviewed file declares intentional drift from the immutable historical release using SHA-256 content identities. Release verification additionally requires an independently supplied SHA-256 of this allowlist; repository contents alone are not the trust anchor.",
   "intentional_release_modifications": {
     ".gitignore": {
       "expected_sha256": "4bc0bd16816f44061721c52779dab12d3ef9acbb735b2c8cfbae86cb889b1bbc",
@@ -15,6 +13,26 @@
       "expected_sha256": "f7e649876841dc7e42dd5550a43c9903224fa8800e32caa60ccd2873824685cf",
       "reason": "Intentional post-Step21 security hardening"
     },
+    "data/processed/authorized_input_real/metadata_quality_summary.json": {
+      "expected_sha256": "d77c616f20a5a14383fb64eaf94a7a8752004a96b3739a682af09eca9fe8dc39",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/processed/authorized_input_real/metadata_readiness_summary.json": {
+      "expected_sha256": "0f5d3c7c6968b1912d8c99a60e2b995759559bda51c97d2ab839c80445a39725",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/processed/coverage_plan_real/coverage_summary.json": {
+      "expected_sha256": "4e5b6dde7e364a87c61d67953168f2dc14687899357d628591dac73917f80aed",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/processed/coverage_plan_real/unresolved_gates.csv": {
+      "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    },
+    "pyproject.toml": {
+      "expected_sha256": "a94ea697e62d4d2e3ffa3f19676a3fc29e3d0157124d84b31a557627e51f3bc9",
+      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
+    },
     "src/authorized_input_orchestrator.py": {
       "expected_sha256": "9dae028c98c67d9050b9448118c29de524f338f90dc5c513b347d90870aae8c2",
       "reason": "Control-plane Step 2: immutable HOLDING, information identity, source-policy routing, and Step-21 receipt linkage"
@@ -23,9 +41,29 @@
       "expected_sha256": "67d197a86e91a37ccc92e1e9d05daa76a9229e27dc8c44995d0759b79edea094",
       "reason": "Intentional post-Step21 security hardening"
     },
+    "src/coverage_planner.py": {
+      "expected_sha256": "a3588646bd0b035a4097a21662e86f2ca4806c5a07a1664c1589f15cf67a9437",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
     "src/deployment_hardening.py": {
       "expected_sha256": "b0f2c6cae64cb796ffcc65b9e38a3e2e55949340b8b33ab0ead54b29d2a19f55",
       "reason": "Intentional post-Step21 security hardening; configured model verification reused by backup/restore/recovery paths"
+    },
+    "src/evaluation_release_controller.py": {
+      "expected_sha256": "44b4143eb95cc2ed115cad51dc6b40aa12c46220685eeb6e32f5ca6b405073f8",
+      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
+    },
+    "src/historical_market_backfill.py": {
+      "expected_sha256": "748ffe77a01fb15aad9f1e2ab81af5e09bf6aa58a03568d2632d722b0f5f7ab8",
+      "reason": "Stable security-identity hardening: attach a hash-bound identity manifest to non-synthetic market backfills and keep real-feature readiness fail-closed while any required-date PERMNO/symbol identity remains unproven."
+    },
+    "src/metadata_quality.py": {
+      "expected_sha256": "9f7d38392dfe42ffb43e811ecb1adf84deb724cc17567516f73e1fa61aed9d33",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
+    "src/metadata_resolver.py": {
+      "expected_sha256": "7aababf106632c171ba6be5e60fb1ad92e778b53c184c2d3d1b40395c26bca58",
+      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
     },
     "src/private_dashboard.py": {
       "expected_sha256": "16fd6f193f7c1e5721f0c145711aeb45e5a9fed38878f03ee73d64e046ebff1e",
@@ -39,79 +77,47 @@
       "expected_sha256": "ec0153e7a770b2778c4b236ea7ed21ec9e3b9c77b7883e636cf3fa7f7274de82",
       "reason": "Intentional post-Step21 security hardening"
     },
-    "tests/test_private_dashboard.py": {
-      "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
-      "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
+    "tests/test_coverage_planner.py": {
+      "expected_sha256": "d94cbd8658a10a0e01bc141502603be7c1e3a6e44b007ff28cd03b7bc965ee61",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
-    "src/metadata_resolver.py": {
-      "expected_sha256": "7aababf106632c171ba6be5e60fb1ad92e778b53c184c2d3d1b40395c26bca58",
-      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
-    },
-    "src/metadata_quality.py": {
-      "expected_sha256": "9f7d38392dfe42ffb43e811ecb1adf84deb724cc17567516f73e1fa61aed9d33",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
-    },
-    "src/evaluation_release_controller.py": {
-      "expected_sha256": "44b4143eb95cc2ed115cad51dc6b40aa12c46220685eeb6e32f5ca6b405073f8",
-      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
-    },
-    "tests/test_metadata_resolver.py": {
-      "expected_sha256": "f6aab4bc7d5a32c3e215c8a4a47c218c2fb24a824acff924cc4a391adafc587c",
-      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
-    },
-    "tests/test_metadata_quality.py": {
-      "expected_sha256": "16c7b7c9af1300aefa6c0447326555c6423221027018be61b793db244fd8903e",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    "tests/test_deployment_hardening.py": {
+      "expected_sha256": "89be846818b299092de1a296a9006ff9c31e8546f9c7469f30a89f56e2c988c5",
+      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
     },
     "tests/test_evaluation_release_controller.py": {
       "expected_sha256": "322079365adc67b068f88fc6e3ba1ea0b5a3e6700eba93c80aa6e629c2beabee",
       "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
     },
-    "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "ef2db9c0953e1bd635deed79bbe29d1264fea05acec4f6c1ca225734f5cfa6ea",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "7bd75b4b2f81019451acf36bcd29dcfe707cf4e5efcc3b67089cba275e13efe1",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "src/historical_market_backfill.py": {
-      "expected_sha256": "748ffe77a01fb15aad9f1e2ab81af5e09bf6aa58a03568d2632d722b0f5f7ab8",
-      "reason": "Stable security-identity hardening: attach a hash-bound identity manifest to non-synthetic market backfills and keep real-feature readiness fail-closed while any required-date PERMNO/symbol identity remains unproven."
-    },
-    "src/coverage_planner.py": {
-      "expected_sha256": "a3588646bd0b035a4097a21662e86f2ca4806c5a07a1664c1589f15cf67a9437",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
-    },
     "tests/test_historical_market_backfill.py": {
       "expected_sha256": "f349242f55607915b286a175711a01b9ccf875877231dd2112f660161f65434a",
       "reason": "Regression coverage for missing, ready, unready, and stale stable-security identity manifests on non-synthetic historical market backfills."
     },
-    "tests/test_coverage_planner.py": {
-      "expected_sha256": "d94cbd8658a10a0e01bc141502603be7c1e3a6e44b007ff28cd03b7bc965ee61",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    "tests/test_metadata_quality.py": {
+      "expected_sha256": "16c7b7c9af1300aefa6c0447326555c6423221027018be61b793db244fd8903e",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
-    "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "597495e158b6c3854902ae8342783e69140ab026dd375521645067feb65997b6",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    "tests/test_metadata_resolver.py": {
+      "expected_sha256": "f6aab4bc7d5a32c3e215c8a4a47c218c2fb24a824acff924cc4a391adafc587c",
+      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
     },
-    "data/processed/coverage_plan_real/unresolved_gates.csv": {
-      "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "pyproject.toml": {
-      "expected_sha256": "a94ea697e62d4d2e3ffa3f19676a3fc29e3d0157124d84b31a557627e51f3bc9",
-      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
-    },
-    "tests/test_deployment_hardening.py": {
-      "expected_sha256": "89be846818b299092de1a296a9006ff9c31e8546f9c7469f30a89f56e2c988c5",
-      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
+    "tests/test_private_dashboard.py": {
+      "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
+      "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
     }
   },
   "repository_additions": {
     ".github/CODEOWNERS": {
       "expected_sha256": "8550f3a6561bb91b9e7ead7751196e2b9924350b1647f1f18d7ca74044b00953",
       "reason": "Intentional post-Step21 repository hardening addition; current ownership note for active Protect main ruleset"
+    },
+    ".github/dependabot.yml": {
+      "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
+      "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
+    },
+    ".github/workflows/pr-ci.yml": {
+      "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
+      "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
     },
     ".github/workflows/synthetic-ci.yml": {
       "expected_sha256": "bd147ed763d528638df579a364c706ed2ed4784a98eb931dffd356c44b76c047",
@@ -125,6 +131,10 @@
       "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
       "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
+    "SECURITY.md": {
+      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
+      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
+    },
     "SHA256SUMS": {
       "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
       "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
@@ -133,205 +143,105 @@
       "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
       "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
-    "config/skops_trusted_types.example.json": {
-      "expected_sha256": "4c5595773d3ff4c72588ea3bea57af0be7d96a00366d698e20c43f5a1e0b5881",
-      "reason": "Intentional post-Step21 repository hardening addition"
-    },
-    "docs/dashboard_security.md": {
-      "expected_sha256": "5b4833d8af5447e548f831265fc4901003d79aa93f1d8c9585b0bb15f141486c",
-      "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
-    },
-    "docs/model_artifact_migration.md": {
-      "expected_sha256": "2e10d0cc29966afed315352bf1739257ca11f81c6a16b1dde6654e231f708d8c",
-      "reason": "Intentional post-Step21 repository hardening addition"
-    },
-    "docs/repository_integrity.md": {
-      "expected_sha256": "f09d907e0f8c048db3aa2d4d47502d0b05c9120ae799edc746ac5f7724384a8c",
-      "reason": "Control-plane Step 8: current public-repository CI, adversarial audit-pack, and external trust-root release procedure"
-    },
-    "scripts/secret_scan.py": {
-      "expected_sha256": "ff87e7b0cc437300bb0b71d647deaf216488f5e3c8a3440f6b4b2f58967d1c49",
-      "reason": "Intentional post-Step21 repository hardening addition"
-    },
-    "scripts/verify_release_drift.py": {
-      "expected_sha256": "241605c6377d451bbaee1f94d8fccefa6f9c10aadc05aca81967b31db161b6f4",
-      "reason": "Intentional post-Step21 repository hardening addition; SHA-256 drift identities and externally authenticated allowlist"
-    },
-    "src/model_artifact.py": {
-      "expected_sha256": "1a1e5098581c9d4eb720f0a13824c2c9fe857558f2f5146c4386d42610d1716c",
-      "reason": "Intentional post-Step21 repository hardening addition"
-    },
-    "tests/test_model_artifact.py": {
-      "expected_sha256": "4bacac96671aeb57d5c0857949c88bf7b5b6cffec482cc9eae0ec2909e012819",
-      "reason": "Intentional post-Step21 repository hardening addition"
-    },
-    "tests/test_release_drift.py": {
-      "expected_sha256": "1b73f17b2dc0e466fe9a9b1d4dcfb1637fc475dcd7ded66c3a2a7f64673699f3",
-      "reason": "Intentional post-Step21 repository hardening addition; SHA-256 identity and trust-root tamper regression coverage"
-    },
-    "tests/test_secret_scan.py": {
-      "expected_sha256": "8f679611db6e32b4eed9aadb55460b457babd42e6ad0eaa0adf53634fce3dd3e",
-      "reason": "Intentional post-Step21 repository hardening addition"
-    },
-    "SECURITY.md": {
-      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
-      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
-    },
-    "scripts/release_attestation.py": {
-      "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
-      "reason": "Intentional post-Step21 repository hardening addition; external SSH release attestation with independent drift trust and external signing material"
-    },
-    "tests/test_release_attestation.py": {
-      "expected_sha256": "6c16939693b2f8d168766ae8284875036d0139df0e8ccd4b560fb55fd0ce60b1",
-      "reason": "Intentional post-Step21 repository hardening addition; signer-path, namespace, and two-factor trust-boundary regression coverage"
-    },
-    "docs/release_attestation.md": {
-      "expected_sha256": "917ca1073633fa404be60a9c1fcafa14c85351ecae249f9dc30be309693109df",
-      "reason": "Intentional post-Step21 repository hardening addition; two-factor external signed release attestation runbook"
-    },
-    ".github/workflows/pr-ci.yml": {
-      "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
-      "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
-    },
-    ".github/dependabot.yml": {
-      "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
-      "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
-    },
-    "docs/control_plane_implementation_baseline.md": {
-      "expected_sha256": "82b42a0bebbb57d7d16f9dd16b7aa7bb211ff7fe2b64c4740700a9c96136cbf4",
-      "reason": "Control-plane implementation Step 1 baseline evidence; records the pre-change G1-G11, champion, hardening, test, and release-integrity reference state"
-    },
-    "src/control_plane/__init__.py": {
-      "expected_sha256": "9c85c627406ac58621635d1394cabe5a32c066093d28e8cdaf44752ed88da358",
-      "reason": "Control-plane Step 2 foundation"
-    },
-    "src/control_plane/contracts.py": {
-      "expected_sha256": "97399b99db4e3ddbbe378597498921549ae129c9398ffaedd432958bf98d81aa",
-      "reason": "Control-plane Step 4: add signed PUBLICITY_CLEARED state and verification-detail contract"
-    },
-    "src/control_plane/source_policy.py": {
-      "expected_sha256": "c74adca1d8348773289886e963a3a638a71c4ef87625fce0b6bb1a634cf3ccca",
-      "reason": "Control-plane Step 3: JUNAS unstructured routing to publicity pending, review, or quarantine"
-    },
-    "src/control_plane/storage.py": {
-      "expected_sha256": "9f0384edfcd2ca986e69a42dfb55cec36914e05d7dcb0d0b3d01b7c37d8f648f",
-      "reason": "Control-plane Step 2 foundation"
-    },
-    "src/control_plane/registry.py": {
-      "expected_sha256": "1b8e26d36e64e5908037ec50e5d301a590a442fa6d1311d03261e026a796ccb6",
-      "reason": "Control-plane Step 5: immutable derived-artifact registry and ordered recursive parent bindings"
-    },
-    "src/control_plane/integrity.py": {
-      "expected_sha256": "cbb2aa87befd5fc84a9acea3a7c581d97517a29bdd47958af87549b0cbced957",
-      "reason": "Control-plane Step 5: recursive lineage integrity becomes part of the control-plane self-check"
-    },
-    "tests/test_control_plane_foundation.py": {
-      "expected_sha256": "8f738e0adae5bc92094d372ba83de8b41c9d7ae19ae0f74b289a7d085e8bf3ba",
-      "reason": "Control-plane Step 2 foundation"
-    },
-    "docs/control_plane_step2.md": {
-      "expected_sha256": "1a92ec25408262bf29437c28bf41dab505d4459f52a28883d55b6c2defaf23d1",
-      "reason": "Control-plane Step 2 implementation note for immutable HOLDING and structured source registry"
-    },
-    "src/control_plane/junas.py": {
-      "expected_sha256": "a0f5d80a72e539c29e2e578c52cc6261f7f73559a8b57032803f67c1a7d3b05e",
-      "reason": "Control-plane Step 3 JUNAS fail-closed unstructured document intake lane"
-    },
-    "tests/test_control_plane_junas.py": {
-      "expected_sha256": "fe3851222dbcd6306391463772d36f828baeb8130acf11659d7c10a03b169a55",
-      "reason": "Control-plane Step 3 JUNAS regression coverage for publicity pending, quarantine, review, direct-admission rejection, and idempotency"
-    },
-    "docs/control_plane_step3.md": {
-      "expected_sha256": "ed5fb6f13a5493078388531d3bc6bf3f365eee930165c237e71dc2ebd1d31da2",
-      "reason": "Control-plane Step 3 implementation note for the fail-closed JUNAS unstructured lane"
-    },
-    "src/control_plane/publicity.py": {
-      "expected_sha256": "4fdfc9ce3a2ccef748750d10a56a0c43c9d333cab157a7d3232c3ad90b30bb1e",
-      "reason": "Control-plane Step 4: build, verify, archive, and apply signed publicity clearances"
-    },
-    "src/control_plane/signature_trust.py": {
-      "expected_sha256": "efede217a661f3f61c35fc0f41e4df1fb1b8492108e13eda4f78f0b2e1a61426",
-      "reason": "Control-plane Step 4: external SSH signer trust with independently pinned allowed-signers hash"
-    },
-    "tests/test_control_plane_publicity.py": {
-      "expected_sha256": "4a5db071b079e71e1cc38c963e93cd66029b629dd5e65d45742e0843d1e66562",
-      "reason": "Control-plane Step 4 adversarial publicity-clearance regression coverage"
-    },
-    "docs/control_plane_step4.md": {
-      "expected_sha256": "6e79f7dd59e540466b8541e70a1028c63e25d96791caed56ff45092211aca6eb",
-      "reason": "Control-plane Step 4 signed publicity-clearance implementation note"
-    },
-    "src/control_plane/lineage.py": {
-      "expected_sha256": "c0016eaa86a5dea6f0980826c2f42d6fd062acbf19e47ac03269f2dc20111133",
-      "reason": "Control-plane Step 5: deterministic recursive lineage verification and atomic artifact recovery"
-    },
-    "tests/test_control_plane_lineage.py": {
-      "expected_sha256": "cdf5894b74b9b8b3957a970debde1f038f1102d7c507bfd5e631717152a961f6",
-      "reason": "Control-plane Step 5 lineage/recovery regression coverage including recursive tamper blocking and overwrite refusal"
-    },
-    "docs/control_plane_step5.md": {
-      "expected_sha256": "6c96cd94116b38b3743cbae030a271c4535459f5ab10c823d7650e3965427348",
-      "reason": "Control-plane Step 5 recursive lineage and recovery implementation note"
-    },
-    "src/control_plane/release_authority.py": {
-      "expected_sha256": "c056d318256ef1e280457c68cde141fe0dba118e475714e0a1c23a21c72d2e13",
-      "reason": "Control-plane Step 6: G12-G15 assessment and externally signed fail-closed release authority"
-    },
-    "tests/test_control_plane_release_authority.py": {
-      "expected_sha256": "633349097e6651a1b5901ca3c77822fb4459b8b3cd36eca464e50c9fd0f89ba0",
-      "reason": "Control-plane Step 6 regression coverage for G12-G15, signer trust, stale authority, and legacy-token bypass prevention"
-    },
-    "docs/control_plane_step6.md": {
-      "expected_sha256": "9adba4ab9ced87d28392704b9c5067a5dabdb9a630f422aceae613c4678af3b6",
-      "reason": "Control-plane Step 6 G12-G15 and signed release-authority implementation note"
-    },
-    "src/control_plane/account_surveillance.py": {
-      "expected_sha256": "70ce2f24fb1b0bc6417b45e5c11e34055f941a0182c8ddef321ffb9743aff5c1",
-      "reason": "Control-plane Step 7: immutable pseudonymous account-to-case surveillance aggregation without raw account identity persistence"
-    },
-    "tests/test_control_plane_dashboard_accounts.py": {
-      "expected_sha256": "919aa49fc274347c29a54f7f2e501d34b62c8f4af61f4690f2b65a7e394777c7",
-      "reason": "Control-plane Step 7 regression coverage for pseudonymization, immutable case binding, read-only dashboard routes, and fail-closed optional sources"
-    },
-    "docs/control_plane_step7.md": {
-      "expected_sha256": "7eb8ce2bc479f2fbb7b8805fe948341386c1585cdb1e5a569f9de6899b256047",
-      "reason": "Control-plane Step 7 dashboard and pseudonymous account-surveillance implementation note"
-    },
-    "scripts/control_plane_audit_pack.py": {
-      "expected_sha256": "d812008bda0d1d2417d4da140092e89a66ff6077ddcaf4cf6c452503fa590537",
-      "reason": "Control-plane Step 8: deterministic exact-head audit-pack generator with semantic security-policy concepts, JUnit, secret, workflow, champion, and release-drift evidence"
-    },
-    "tests/test_control_plane_adversarial.py": {
-      "expected_sha256": "28773c33814d97a730a8e5ba42e2493328d3e890fd3113953d3d96f8e6e7e598",
-      "reason": "Control-plane Step 8: adversarial fail-closed suite across ingestion, publicity, lineage, authority, account, dashboard, secret, drift, and champion boundaries"
-    },
-    "docs/control_plane_step8.md": {
-      "expected_sha256": "c458c4cc07c9b0b4bbba28737f3956561dd664a252eb352aee213f7695651593",
-      "reason": "Control-plane Step 8 final adversarial CI and audit-pack implementation note"
-    },
-    "src/g1_ibes_timestamp_adapter.py": {
-      "expected_sha256": "1561390f3f1d71559d29516ae21d70929e1266630a2fad847a93a8ab11a70a6c",
-      "reason": "G1 hardening: strict authorized I/B/E/S actual-announcement timestamp normalization without raw licensed-row persistence"
-    },
-    "tests/test_g1_ibes_timestamp_adapter.py": {
-      "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
-      "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
-    },
-    "docs/g1_announcement_times.md": {
-      "expected_sha256": "68c0887b7a44b978db40ca1ea191b3052f3828a68a4f1ea18e05ffa872c67437",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    "config/licensed_entitlement_manifest.example.json": {
+      "expected_sha256": "ea2e663dfb257da11ac8cf4257c33bb0fc8634ed425c8c17e8e207f70aee4050",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
     },
     "config/metadata_sources.g3_public.json": {
       "expected_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
+    "config/metadata_sources.public_progress.json": {
+      "expected_sha256": "def6b31484329df630fdb4f3a788ff014406ff51021847a4ab54bde0f9758588",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "config/real_data_replay.example.json": {
+      "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
+      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
+    },
+    "config/real_data_replay.software_proof.json": {
+      "expected_sha256": "03a6165b68d2ca3857ee0d92693af72f6527ec374dce99a1b6fac38516562532",
+      "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
+    },
+    "config/skops_trusted_types.example.json": {
+      "expected_sha256": "4c5595773d3ff4c72588ea3bea57af0be7d96a00366d698e20c43f5a1e0b5881",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "dashboard/index.html": {
+      "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
+      "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
+    },
+    "data/processed/authorized_input_real/announcement_resolutions.csv": {
+      "expected_sha256": "25b16b29c85fe2ce79e28ba4e227b89258a84f9214a6916134eedaedd8b019a6",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/processed/authorized_input_real/control_universe_readiness.csv": {
+      "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
     "data/processed/authorized_input_real/event_exchange_resolutions.csv": {
       "expected_sha256": "8a0d6c63dd3b1dfbfd0a7f621c5e0cb7eff385e1ede25b5dabe2fc150bf2953e",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
+    "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
+      "expected_sha256": "a6c5e3b8c51fadf186cc7dcd7995c96bd4143adac17d2a32aa8d1ecad3c5e68e",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/g4_aco_20130410_evidence.json": {
+      "expected_sha256": "0cfae43b46407d18676209698bb8b0f907629c01144e3a91708edf6ce0fddf2d",
+      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+    },
+    "data/processed/authorized_input_real/g4_final_blockers.json": {
+      "expected_sha256": "ce36e5cb2839f5f8dc22b2d955954231ddeb32838c97a487b1c482f7279096ed",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
+      "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0002_report.json": {
+      "expected_sha256": "d8341c44426d53a6ed3b6ecfb58d8fc79bf790af027011d268787fb24b0ccf26",
+      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0003_report.json": {
+      "expected_sha256": "d1eed82f99bf23d04d131278f0ca73bb04113c009e9a9b6088571c69a5ba908c",
+      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0004_report.json": {
+      "expected_sha256": "cd43d50252c920e11e151bfa2346131cdefa4a8e1f8004bb2d725ef06901481f",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0005_report.json": {
+      "expected_sha256": "492b920cbbf14ed0b6e2904df147d626be606c47a04ec3fbda766c2584cef695",
+      "reason": "G4 batch 0005: reviewed public point-in-time shares evidence for observations 2001-2500 and cumulative readiness/quality receipts"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0006_blockers.json": {
+      "expected_sha256": "b074bbda555418ab8882f737846f8785661742bd5fc9248499dd92733019ec71",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0006_report.json": {
+      "expected_sha256": "d1649ad7a72a11661b1dd93bd4622536ed0d952023285f2c58092a18daa54098",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0007_report.json": {
+      "expected_sha256": "12cf61f99c531e0601e4297727cef377df406d55fe322bb8a9769a74e75ad31e",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/processed/authorized_input_real/g4_shares_batch_0008_report.json": {
+      "expected_sha256": "50ebb59f5a6839e9eb17802b2d5d4ac09a36e9b9de3926383d569e3842dd3a91",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
+      "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
+    "data/processed/authorized_input_real/metadata_domain_quality.csv": {
+      "expected_sha256": "53b1906ed11ee4125fb86e51405dfcbfe3d432563ff67bd72df08744b9518044",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -346,200 +256,24 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "5a7d03ebb33cbfcba60a0f9242e8207ddd26c5d1b80823433b43a2752ebd484e",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "fb8687594d7ff3c4fb57b061ece5fa05a0e50b715d99978e59a93c4f1b0e0046",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
+      "expected_sha256": "bdd6ce18645ec1f42ed9561277f096317e71b99bcc70ba5f69f6ef11b1b4a924",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
-    "data/public/metadata/g3_listing_supplement.csv": {
-      "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
-    },
-    "data/public/metadata/g3_primary_listing_history.csv": {
-      "expected_sha256": "9f7a51441cba8f3c0960fff40442df428265094be24aaa1ef6c3adffe6a491d1",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
-    },
-    "src/g3_listing_evidence.py": {
-      "expected_sha256": "819b5ff7257ca3662a6192e15d4c69079c54cd5458306a2a3a4570149bcb1476",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
-    },
-    "tests/test_g3_listing_evidence.py": {
-      "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
-      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
-    },
-    "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
-      "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
-    },
-    "data/public/metadata/g4_shares_anchors_batch_0001.csv": {
-      "expected_sha256": "a33d9ef5bb548c56cc3566e809bd5f495ceb03d57946002848d59d4b58712a6b",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
-    },
-    "data/public/metadata/g4_shares_batch_0001.csv": {
-      "expected_sha256": "98b3c1a569168787406b6e40ba16983417461fdf1afe734d7b33ea30cc879f78",
-      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
-    },
-    "src/g4_materialize_batch.py": {
-      "expected_sha256": "0d35b9cdff610500a035a14d5086f785fefecc217ff6a608ad0032f567464a4c",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
-    },
-    "tests/test_g4_materialize_batch.py": {
-      "expected_sha256": "90b4d870c209f7e71f70a5ef6533b0b921ccf253e1c7efde9e69c1531cfcfba2",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
-    },
-    "data/processed/authorized_input_real/g4_shares_batch_0002_report.json": {
-      "expected_sha256": "d8341c44426d53a6ed3b6ecfb58d8fc79bf790af027011d268787fb24b0ccf26",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
-    },
-    "data/public/metadata/g4_historical_cik_map.csv": {
-      "expected_sha256": "f043e28e621e80a029898b8c5f287501f2be9d001d7504858f062f69218ea768",
-      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
-    },
-    "data/public/metadata/g4_shares_anchors_batch_0002.csv": {
-      "expected_sha256": "db55275fd901fccd268cfc0cf8df6dfbd2f4bc94ca969e0efe1601ba64063782",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
-    },
-    "data/public/metadata/g4_shares_batch_0002.csv": {
-      "expected_sha256": "424332a45937310a19f7579f7fc848c9f798ab80e01f47b136c7f887a2fa418f",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
-    },
-    "data/processed/authorized_input_real/g4_shares_batch_0003_report.json": {
-      "expected_sha256": "d1eed82f99bf23d04d131278f0ca73bb04113c009e9a9b6088571c69a5ba908c",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
-    },
-    "data/public/metadata/g4_shares_anchors_batch_0003.csv": {
-      "expected_sha256": "dcbdd92fbcdd106ed9389ef2d207e8ad2cfbfd8f0d5780d6fab024b0ee13b882",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
-    },
-    "data/public/metadata/g4_shares_batch_0003.csv": {
-      "expected_sha256": "d2b6d1654b3217b1b7689dafdc97690a2eb05740eec8340ecccaaddafa6ce81a",
-      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
-    },
-    "data/processed/authorized_input_real/g4_shares_batch_0004_report.json": {
-      "expected_sha256": "cd43d50252c920e11e151bfa2346131cdefa4a8e1f8004bb2d725ef06901481f",
-      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
-    },
-    "data/public/metadata/g4_shares_anchors_batch_0004.csv": {
-      "expected_sha256": "1bb7a08bd9fc7f99fa7941c3620b437756fd55ff12df7837a5a85ae591e9733d",
-      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
-    },
-    "data/public/metadata/g4_shares_batch_0004.csv": {
-      "expected_sha256": "148da1e3c0cbfced681835e34e041b15504a57a75d90bac2fd19f9895674ed5a",
-      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
-    },
-    "data/processed/authorized_input_real/g4_shares_batch_0005_report.json": {
-      "expected_sha256": "492b920cbbf14ed0b6e2904df147d626be606c47a04ec3fbda766c2584cef695",
-      "reason": "G4 batch 0005: reviewed public point-in-time shares evidence for observations 2001-2500 and cumulative readiness/quality receipts"
-    },
-    "data/public/metadata/g4_shares_anchors_batch_0005.csv": {
-      "expected_sha256": "a3f8f166610e9c7539c92048977b35dc35e42fc2885e7afaecef6560e45f405b",
-      "reason": "G4 batch 0005: reviewed public point-in-time shares evidence for observations 2001-2500 and cumulative readiness/quality receipts"
-    },
-    "data/public/metadata/g4_shares_batch_0005.csv": {
-      "expected_sha256": "f966487ab921c52ccc9ab6085ca77cf10ac3166fa05bfac65caccbdbadda4135",
-      "reason": "G4 batch 0005: reviewed public point-in-time shares evidence for observations 2001-2500 and cumulative readiness/quality receipts"
-    },
-    "data/processed/authorized_input_real/g4_shares_batch_0007_report.json": {
-      "expected_sha256": "12cf61f99c531e0601e4297727cef377df406d55fe322bb8a9769a74e75ad31e",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
-    },
-    "data/public/metadata/g4_shares_anchors_batch_0007.csv": {
-      "expected_sha256": "402c6d9a59a3e79df97ad41bc018ba19e20b06e091446b924f6b6acdd44c0c53",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
-    },
-    "data/public/metadata/g4_shares_batch_0007.csv": {
-      "expected_sha256": "003eb158263c5f82b5dbf34c3d29d6b1a7b8864bb52068f875763248f08e7fe2",
-      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
-    },
-    "data/processed/authorized_input_real/g4_shares_batch_0008_report.json": {
-      "expected_sha256": "50ebb59f5a6839e9eb17802b2d5d4ac09a36e9b9de3926383d569e3842dd3a91",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
-    },
-    "data/public/metadata/g4_shares_anchors_batch_0008.csv": {
-      "expected_sha256": "596608ac73f905099873d12e7c6ef3077d8fa2e84364fc094eb528baa1add24c",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
-    },
-    "data/public/metadata/g4_shares_batch_0008.csv": {
-      "expected_sha256": "2c7f0880436d5ef7dc526be8c2f9dfa68174e403cdb21e1302590ba21c7d4355",
-      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
-    },
-    "data/processed/authorized_input_real/g4_shares_batch_0006_report.json": {
-      "expected_sha256": "d1649ad7a72a11661b1dd93bd4622536ed0d952023285f2c58092a18daa54098",
-      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
-    },
-    "data/processed/authorized_input_real/g4_shares_batch_0006_blockers.json": {
-      "expected_sha256": "b074bbda555418ab8882f737846f8785661742bd5fc9248499dd92733019ec71",
-      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
-    },
-    "data/public/metadata/g4_shares_anchors_batch_0006.csv": {
-      "expected_sha256": "a559ddc3e833716ebcc1fb73040ee1a4d5436ed75c9a678181c641371eea5f68",
-      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
-    },
-    "data/public/metadata/g4_shares_batch_0006.csv": {
-      "expected_sha256": "42f639b56fdf17bddef5c1eba0e4c4c744da429c41504b403e30f84b39c0cb55",
-      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
-    },
-    "data/public/metadata/g4_shares_aco_20130410.csv": {
-      "expected_sha256": "429731e2f6e6b9e11474c4e35a4b0c5494e5ef1b8b7ccc029a782416074cf736",
-      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
-    },
-    "data/processed/authorized_input_real/g4_aco_20130410_evidence.json": {
-      "expected_sha256": "0cfae43b46407d18676209698bb8b0f907629c01144e3a91708edf6ce0fddf2d",
-      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
-    },
-    "data/processed/authorized_input_real/g4_final_blockers.json": {
-      "expected_sha256": "ce36e5cb2839f5f8dc22b2d955954231ddeb32838c97a487b1c482f7279096ed",
-      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
-    },
-    "docs/g4_final_blockers.md": {
-      "expected_sha256": "b2d83eac9eb2cc032d9a7686107ef4e696e35afdec8fa8fd26b6f946158910ef",
-      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
-    },
-    "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "4397af189e37f5860307ed90372a6534f83729c9487d25df87e36216413beead",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "5660b380a23a1b0c38b7a72922fbf0ba90205dbb0c777bb3716c08d58b0351fe",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "cd87ab6d6889a2cf0fb70aed279b279b09850b00809c2983c1f634be86deb024",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
-      "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
-    },
-    "docs/g5_final_control_exclusions.md": {
-      "expected_sha256": "25bcbf78ac0ee77f5ef91c0d7e996fe0e24cec2362f407bd2360fb4731b5adfe",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
-    },
-    "data/processed/authorized_input_real/control_universe_readiness.csv": {
-      "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
-    },
-    "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "b31f09b6f45e0366ec6cc1834b0cb62395ea931eb46aa1729bdb3e2b2d03981c",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "713c4977684adf0b8857eedb87a1e717648d8e23d732f9f060b2633d18d5ea22",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "docs/real_data_release_sprint.md": {
-      "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
-    },
     "data/processed/real_data_release_sprint/g2_core_source_date_requirements.csv": {
       "expected_sha256": "8cb88cf9120c151cde6e13fc4ca78071b8021c247aff9aa556f1fba645d05f8b",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "data/processed/real_data_release_sprint/g2_itch_event_requirements.csv": {
+      "expected_sha256": "f8c24d02fe0c612a7efaa3c3c93e69b7fede8af765d3ea80bf467c1d457ef084",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/g2_option_source_date_requirements.csv": {
       "expected_sha256": "c050fbf7a6bc12bcf8f162075689794d26d79f85d09329cb2463e06ac457fa33",
@@ -549,113 +283,45 @@
       "expected_sha256": "b5cfbc9768b8b00a4e7c44cbd753f3d6bf3e87e9fc6e92c3b87685c28b1b7741",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
-    "src/real_data_release_sprint.py": {
-      "expected_sha256": "898ca321bcea4855fc9be28458669ebe25e84836520614d362d5debf54d7a17a",
-      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
-    },
-    "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "8965c222643c9ae47e00ef66d3a62f428da1b6a68ec9fa40fca8fbc6a7e06660",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "docs/licensed_data_acquisition.md": {
-      "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
+    "data/processed/real_data_release_sprint/production_source_contract_blueprint.json": {
+      "expected_sha256": "965cbb2a151d9d3bed146912960f5ba3f5521cc21d600cfb7bba6bc6ed1cf382",
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/requirements_manifest.json": {
       "expected_sha256": "a797ac7a22ea8dfb7e81ad8d671e0f0913f2249fceb0189a4c1b49d6efbd7520",
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
-    "data/processed/real_data_release_sprint/g2_itch_event_requirements.csv": {
-      "expected_sha256": "f8c24d02fe0c612a7efaa3c3c93e69b7fede8af765d3ea80bf467c1d457ef084",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
-    },
-    "data/processed/real_data_release_sprint/production_source_contract_blueprint.json": {
-      "expected_sha256": "965cbb2a151d9d3bed146912960f5ba3f5521cc21d600cfb7bba6bc6ed1cf382",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
-    },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "2a4ef5089dd6d30ef5fc681e6280e002d78b781e316a79f7def86454833e5ae7",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "src/real_data_replay.py": {
-      "expected_sha256": "438ef2f5b9cd5d986f74c974b3715524e7bf37a0ba4876b044d8cde58af0489d",
-      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
-    },
-    "tests/test_real_data_replay.py": {
-      "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
-      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
-    },
-    "config/real_data_replay.example.json": {
-      "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
-      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
-    },
-    "docs/real_data_replay.md": {
-      "expected_sha256": "7c2ef27fec352875af69596a50cd4bece9d2abf6c33de8c34875405ff68817b8",
-      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
-    },
-    "src/licensed_data_intake.py": {
-      "expected_sha256": "559f944ac53565e935fb2c361e2abdbf18a97603f95b158e2d96a77469579d3b",
-      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
-    },
-    "tests/test_licensed_data_intake.py": {
-      "expected_sha256": "7f5767209023d8144e041b25467a25673abd2b95ccf7895c643dea63070275fa",
-      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
-    },
-    "docs/licensed_data_intake.md": {
-      "expected_sha256": "e2ac52726969236109428d0125615e545e8cf6ae2e03d6c1f60cf7674699d27b",
-      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
-    },
-    "tests/test_software_readiness_certification.py": {
-      "expected_sha256": "19abafff3563f52f5f5770a16ee43f31171623c2956d1d078af95e9996cfcb9e",
-      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
-    },
-    "docs/software_readiness_certification.md": {
-      "expected_sha256": "7512fff8e36f2184f0cb66d21fe8642138790c8231b74249c6c5ef56179fbefe",
-      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
-    },
-    "requirements-skops.lock": {
-      "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
-      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
-    },
-    "src/licensed_data_drop_processor.py": {
-      "expected_sha256": "3f8077162fd03ccc90677e455684765be9466a07313d331b5982b269b82f568b",
-      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
-    },
-    "tests/test_licensed_data_drop_processor.py": {
-      "expected_sha256": "7cd6430dac7fcd409bf88feb57194c06c7fb7c83bf63834fa3708d22f6979558",
-      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
-    },
-    "config/licensed_entitlement_manifest.example.json": {
-      "expected_sha256": "ea2e663dfb257da11ac8cf4257c33bb0fc8634ed425c8c17e8e207f70aee4050",
-      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
-    },
-    "docs/licensed_data_drop_activation.md": {
-      "expected_sha256": "328511247939f7bfe7b966758719b40fdf1c1d836bbc52b8b459e81313de25bf",
-      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
-    },
-    "config/real_data_replay.software_proof.json": {
-      "expected_sha256": "03a6165b68d2ca3857ee0d92693af72f6527ec374dce99a1b6fac38516562532",
-      "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
-    },
-    "src/software_readiness_certification.py": {
-      "expected_sha256": "b472c49c8b88740ffea4c8639117390565b66395337dc1d02f5c76ad9a6511c2",
-      "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
+      "expected_sha256": "264bb742cf32a005227d104fec4c2cd010e53378a2799d828a2943c09cd17491",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "cc064774fa15e8c58adb650a5239e4ac47014b5f0af0fdbac562e24e547cebef",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "6b699dd43a5868ea72846b7db620575505c82485d8345a4cba0b03197372c51f",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/processed/research_receipt_bundle.json": {
+      "expected_sha256": "60d2fa7e9400a41f04e53c9ae7c70d99eac588a3d53ec04439b5b1189d40e6dd",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
+      "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
+      "reason": "Machine-readable 3,654-row unresolved PERMNO/date security-identity work queue; every row remains pending explicit dated stable-ID evidence."
+    },
+    "data/processed/security_identity_real/security_identity_acquisition_summary.json": {
+      "expected_sha256": "f02d09b110bba5371e5bd28fe5f0d2b31081a12e0e89e74a281033f67924ee12",
+      "reason": "146-security acquisition summary grouping the unresolved dated identity requests and defining primary, secondary, and corroboration-only evidence lanes."
+    },
+    "data/processed/security_identity_real/security_identity_manifest.json": {
+      "expected_sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a",
+      "reason": "Current security-identity receipt: 174 event-date identities verified, 3,654 baseline required dates explicitly unverified pending dated stable-ID/security-master crosswalk evidence."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
       "expected_sha256": "e8778826460c9a341d0458f43ce9fe14337c3f460e12f8535735b9396e0ea405",
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
-    "dashboard/index.html": {
-      "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
-      "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
-    },
-    "tests/test_public_dashboard.py": {
-      "expected_sha256": "2ca66c26f68bc96fa079f2ddbd795e222fb10f67e8b8dd882e48b06841968cc1",
-      "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
+    "data/public/metadata/g1_acquisition_manifest.json": {
+      "expected_sha256": "9cbe740f5be39580bd31d17a9ece95c8c3db6821d8dffe4cac3996cf6ae1583f",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -757,38 +423,6 @@
       "expected_sha256": "f219f0ae4c3089a31a21b18763522119dd39d459e0bb785fa1fff8185052c806",
       "reason": "G1 batch 0025 evidence row for Ford: SEC-hosted issuer earnings exhibit explicitly states a 7:00 a.m. EST first-public results release on January 29, 2015; graded A."
     },
-    "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "c48951f7d0ebf16a7414c89acd4e2e7a58e4e2f12108573e67be16be0c93dbfc",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "src/g1_source_research.py": {
-      "expected_sha256": "34dd8d8e07bdb10c82b30caba2145d6e30493d1f27ec9f68a68e1e937e086ed2",
-      "reason": "G1 research promotion hardening: independently validate event identity, timezone-aware first-public-release timestamp semantics, admissible source family, source reference, chronology, seven-calendar-day window, and mirror corroboration."
-    },
-    "tests/test_g1_source_research.py": {
-      "expected_sha256": "c2d478eab3f1a9d8f4ecbbf5abd2b253161601fba06be170eb002ba15b973c10",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "docs/surveillance_analytics_upgrade.md": {
-      "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
-      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
-    },
-    "src/event_tape_replay.py": {
-      "expected_sha256": "ba5b7ad14150a95d3d367fe43e320671498e7bde3b927b7ca348ea5344ca70cc",
-      "reason": "Event-tape precision repair: preserve microsecond replay eligibility/order/cutoff semantics and fail closed on unsupported finer precision."
-    },
-    "src/surveillance_feature_diagnostics.py": {
-      "expected_sha256": "d9f8459d35bc7e99c941af00187b96ccd3ded2d9b33913f37b4310ebc24c59a8",
-      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
-    },
-    "tests/test_event_tape_replay.py": {
-      "expected_sha256": "46c1776e307f3654bad5f1632cefac47a307c532e0fd2424311da4689425da32",
-      "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
-    },
-    "tests/test_surveillance_feature_diagnostics.py": {
-      "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
-      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
-    },
     "data/public/metadata/g1_announcement_times_batch_0026.csv": {
       "expected_sha256": "78f009b03d3c14b53cd82c6b88530f920dd26626b23d153728d60508a3726be2",
       "reason": "G1 batch 0026 evidence row for STT: preserved Business Wire timestamp at 2015-01-23 10:52 GMT / 05:52 EST, issuer- and SEC-corroborated and intentionally graded B."
@@ -809,61 +443,9 @@
       "expected_sha256": "46ab2af9aaeafb3a289f407277362fd89348ef38fea6867574bbf24dfd44c47a",
       "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
     },
-    "src/research_receipt_rebuild.py": {
-      "expected_sha256": "aad23317e159d300a462575ca8c998ed8891b62e45caf1ee626ca8034f0a3c31",
-      "reason": "Permanent deterministic research receipt rebuild: stage, reconcile, hash, compare, and transactionally publish metadata/quality/replay receipts with manifest-last rollback semantics."
-    },
-    "tests/test_research_receipt_rebuild.py": {
-      "expected_sha256": "4b0acabb8ff84f5a35ce2eb2e1e30952928f40eaaee1ac298e2c1acdc57fbc9a",
-      "reason": "Regression coverage for deterministic receipt reproduction, manifest ordering, and rollback on interrupted publication."
-    },
-    "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "6888671859245269fa2c241da75094e90f5c033e4c1a414ec53ecb83da312c5d",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "src/g1_acquisition_manifest.py": {
-      "expected_sha256": "04536264c405e94208e113de3e21a07dc3d2021dad427c5cd8c3b15a8b36da4c",
-      "reason": "G1 acquisition routing: deterministically reconcile all 174 events, suppress already-resolved events, route remaining exact-clock work between public archives and lawful I/B/E/S bulk acquisition, and emit stable dedupe/work-queue identities."
-    },
-    "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "e5808256ae3509675bc9efea35a3c374ef315dbf51866111365a835c24dad884",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
-    "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "9175b93ad1e4accbbf27ac34574490220dbafe76e5027e70bf3474438c75c2f2",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
     "data/public/metadata/g1_announcement_times_batch_0031.csv": {
       "expected_sha256": "5c997dcc805c9e5df65bac36213726c1550d852492cd26271288688ceb528491",
       "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
-    },
-    "src/security_identity_gate.py": {
-      "expected_sha256": "d9c8c80c2ec2843ab1d17b2182384e68ad8579751554e68fa2935aa26373d8c2",
-      "reason": "Fail-closed stable security-identity generator: bind event_id to PERMNO/historical symbol, verify event-date listing identity, expose baseline dates requiring point-in-time security-master evidence, and prohibit inferred aliases/current-ticker substitution."
-    },
-    "tests/test_security_identity_gate.py": {
-      "expected_sha256": "facbbba627fac27e0d358f08d56c5a2c433152a62ec2c2e8375a9dd5adc43002",
-      "reason": "Adversarial identity regressions for symbol reuse, PERMNO aliases, requirement mismatches, future dates, listing mismatches, and deterministic manifest reproduction."
-    },
-    "data/processed/security_identity_real/security_identity_manifest.json": {
-      "expected_sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a",
-      "reason": "Current security-identity receipt: 174 event-date identities verified, 3,654 baseline required dates explicitly unverified pending dated stable-ID/security-master crosswalk evidence."
-    },
-    "src/security_identity_acquisition.py": {
-      "expected_sha256": "abde5e36ccb418c6bb35f98ad1ce2c1c798e16c52095f20ca245063eccec5cde",
-      "reason": "Deterministic fail-closed stable-ID acquisition planner for every unresolved PERMNO/date request, with lawful licensed/authorized source lanes and no ticker or corporate-action alias inference."
-    },
-    "tests/test_security_identity_acquisition.py": {
-      "expected_sha256": "0febef36a5e0b64878d0b21f8e04b57f4c1dd6a62d6f8752f568673e5acb9417",
-      "reason": "Regression coverage for deterministic acquisition outputs, exact 3,654/146 state, request identity uniqueness, fail-closed collisions/count drift, and prohibition of ticker/alias shortcuts."
-    },
-    "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
-      "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
-      "reason": "Machine-readable 3,654-row unresolved PERMNO/date security-identity work queue; every row remains pending explicit dated stable-ID evidence."
-    },
-    "data/processed/security_identity_real/security_identity_acquisition_summary.json": {
-      "expected_sha256": "f02d09b110bba5371e5bd28fe5f0d2b31081a12e0e89e74a281033f67924ee12",
-      "reason": "146-security acquisition summary grouping the unresolved dated identity requests and defining primary, secondary, and corroboration-only evidence lanes."
     },
     "data/public/metadata/g1_announcement_times_batch_0032.csv": {
       "expected_sha256": "82f9caa85fc930fc2b955c3dc2d16fab8d17b7f676cba99f3b2c747dcf41013d",
@@ -873,9 +455,439 @@
       "expected_sha256": "e023876cf0580d0caaf5d7385604b5d9ca128bcbbc598169009dc7f3815d2999",
       "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
-    "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "64c484a7e7fc8136e19e2be7c9cc651e46b7a66554ecb0216f874d8d9d580855",
+    "data/public/metadata/g1_announcement_times_batch_0033.csv": {
+      "expected_sha256": "a1e0feec02776d71be101b3006243adf1ff9cd425232dc71ff0a2a59c62a3a00",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/public/metadata/g1_public_batch_0033_evidence.json": {
+      "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/public/metadata/g1_source_research_20260928.json": {
+      "expected_sha256": "09b72d679f0b4a0f9b6a0cbe3c1c321c6876019b7740573743a00740d83b0eb6",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "data/public/metadata/g3_listing_supplement.csv": {
+      "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/public/metadata/g3_primary_listing_history.csv": {
+      "expected_sha256": "9f7a51441cba8f3c0960fff40442df428265094be24aaa1ef6c3adffe6a491d1",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "data/public/metadata/g4_historical_cik_map.csv": {
+      "expected_sha256": "f043e28e621e80a029898b8c5f287501f2be9d001d7504858f062f69218ea768",
+      "reason": "G4 batch 0002: reviewed public point-in-time shares evidence for observations 501-1000, cumulative readiness receipts, historical CIK controls, or documented staleness-exception semantics"
+    },
+    "data/public/metadata/g4_shares_aco_20130410.csv": {
+      "expected_sha256": "429731e2f6e6b9e11474c4e35a4b0c5494e5ef1b8b7ccc029a782416074cf736",
+      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0001.csv": {
+      "expected_sha256": "a33d9ef5bb548c56cc3566e809bd5f495ceb03d57946002848d59d4b58712a6b",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0002.csv": {
+      "expected_sha256": "db55275fd901fccd268cfc0cf8df6dfbd2f4bc94ca969e0efe1601ba64063782",
+      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0003.csv": {
+      "expected_sha256": "dcbdd92fbcdd106ed9389ef2d207e8ad2cfbfd8f0d5780d6fab024b0ee13b882",
+      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0004.csv": {
+      "expected_sha256": "1bb7a08bd9fc7f99fa7941c3620b437756fd55ff12df7837a5a85ae591e9733d",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0005.csv": {
+      "expected_sha256": "a3f8f166610e9c7539c92048977b35dc35e42fc2885e7afaecef6560e45f405b",
+      "reason": "G4 batch 0005: reviewed public point-in-time shares evidence for observations 2001-2500 and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0006.csv": {
+      "expected_sha256": "a559ddc3e833716ebcc1fb73040ee1a4d5436ed75c9a678181c641371eea5f68",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0007.csv": {
+      "expected_sha256": "402c6d9a59a3e79df97ad41bc018ba19e20b06e091446b924f6b6acdd44c0c53",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_anchors_batch_0008.csv": {
+      "expected_sha256": "596608ac73f905099873d12e7c6ef3077d8fa2e84364fc094eb528baa1add24c",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_batch_0001.csv": {
+      "expected_sha256": "98b3c1a569168787406b6e40ba16983417461fdf1afe734d7b33ea30cc879f78",
+      "reason": "G4 batch 0001: reviewed public SEC point-in-time shares evidence for observations 1-500, exact pre-window availability semantics, canonical readiness receipts, or regression coverage"
+    },
+    "data/public/metadata/g4_shares_batch_0002.csv": {
+      "expected_sha256": "424332a45937310a19f7579f7fc848c9f798ab80e01f47b136c7f887a2fa418f",
+      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "data/public/metadata/g4_shares_batch_0003.csv": {
+      "expected_sha256": "d2b6d1654b3217b1b7689dafdc97690a2eb05740eec8340ecccaaddafa6ce81a",
+      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "data/public/metadata/g4_shares_batch_0004.csv": {
+      "expected_sha256": "148da1e3c0cbfced681835e34e041b15504a57a75d90bac2fd19f9895674ed5a",
+      "reason": "G4 batch 0004: reviewed public point-in-time shares evidence for observations 1501-2000 and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_batch_0005.csv": {
+      "expected_sha256": "f966487ab921c52ccc9ab6085ca77cf10ac3166fa05bfac65caccbdbadda4135",
+      "reason": "G4 batch 0005: reviewed public point-in-time shares evidence for observations 2001-2500 and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_batch_0006.csv": {
+      "expected_sha256": "42f639b56fdf17bddef5c1eba0e4c4c744da429c41504b403e30f84b39c0cb55",
+      "reason": "G4 batch 0006 partial strict integration: register 492 reviewed observations, preserve 8 batch blockers plus 11 ACO blockers fail-closed, and recompute cumulative readiness/quality receipts."
+    },
+    "data/public/metadata/g4_shares_batch_0007.csv": {
+      "expected_sha256": "003eb158263c5f82b5dbf34c3d29d6b1a7b8864bb52068f875763248f08e7fe2",
+      "reason": "G4 batch 0007: reviewed public point-in-time shares evidence for observations 3001-3500 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "data/public/metadata/g4_shares_batch_0008.csv": {
+      "expected_sha256": "2c7f0880436d5ef7dc526be8c2f9dfa68174e403cdb21e1302590ba21c7d4355",
+      "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
+    },
+    "docs/control_plane_implementation_baseline.md": {
+      "expected_sha256": "82b42a0bebbb57d7d16f9dd16b7aa7bb211ff7fe2b64c4740700a9c96136cbf4",
+      "reason": "Control-plane implementation Step 1 baseline evidence; records the pre-change G1-G11, champion, hardening, test, and release-integrity reference state"
+    },
+    "docs/control_plane_step2.md": {
+      "expected_sha256": "1a92ec25408262bf29437c28bf41dab505d4459f52a28883d55b6c2defaf23d1",
+      "reason": "Control-plane Step 2 implementation note for immutable HOLDING and structured source registry"
+    },
+    "docs/control_plane_step3.md": {
+      "expected_sha256": "ed5fb6f13a5493078388531d3bc6bf3f365eee930165c237e71dc2ebd1d31da2",
+      "reason": "Control-plane Step 3 implementation note for the fail-closed JUNAS unstructured lane"
+    },
+    "docs/control_plane_step4.md": {
+      "expected_sha256": "6e79f7dd59e540466b8541e70a1028c63e25d96791caed56ff45092211aca6eb",
+      "reason": "Control-plane Step 4 signed publicity-clearance implementation note"
+    },
+    "docs/control_plane_step5.md": {
+      "expected_sha256": "6c96cd94116b38b3743cbae030a271c4535459f5ab10c823d7650e3965427348",
+      "reason": "Control-plane Step 5 recursive lineage and recovery implementation note"
+    },
+    "docs/control_plane_step6.md": {
+      "expected_sha256": "9adba4ab9ced87d28392704b9c5067a5dabdb9a630f422aceae613c4678af3b6",
+      "reason": "Control-plane Step 6 G12-G15 and signed release-authority implementation note"
+    },
+    "docs/control_plane_step7.md": {
+      "expected_sha256": "7eb8ce2bc479f2fbb7b8805fe948341386c1585cdb1e5a569f9de6899b256047",
+      "reason": "Control-plane Step 7 dashboard and pseudonymous account-surveillance implementation note"
+    },
+    "docs/control_plane_step8.md": {
+      "expected_sha256": "c458c4cc07c9b0b4bbba28737f3956561dd664a252eb352aee213f7695651593",
+      "reason": "Control-plane Step 8 final adversarial CI and audit-pack implementation note"
+    },
+    "docs/dashboard_security.md": {
+      "expected_sha256": "5b4833d8af5447e548f831265fc4901003d79aa93f1d8c9585b0bb15f141486c",
+      "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
+    },
+    "docs/g1_announcement_times.md": {
+      "expected_sha256": "0ee1bf78bd6ceeb2aac4e00b1dd77ab18cb3131e40102bc63f6ea4ece9cd8ddd",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "docs/g1_final_timing_exclusions.md": {
+      "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
       "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    },
+    "docs/g4_final_blockers.md": {
+      "expected_sha256": "b2d83eac9eb2cc032d9a7686107ef4e696e35afdec8fa8fd26b6f946158910ef",
+      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
+    },
+    "docs/g5_final_control_exclusions.md": {
+      "expected_sha256": "25bcbf78ac0ee77f5ef91c0d7e996fe0e24cec2362f407bd2360fb4731b5adfe",
+      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+    },
+    "docs/licensed_data_acquisition.md": {
+      "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
+      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+    },
+    "docs/licensed_data_drop_activation.md": {
+      "expected_sha256": "328511247939f7bfe7b966758719b40fdf1c1d836bbc52b8b459e81313de25bf",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+    },
+    "docs/licensed_data_intake.md": {
+      "expected_sha256": "e2ac52726969236109428d0125615e545e8cf6ae2e03d6c1f60cf7674699d27b",
+      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
+    },
+    "docs/model_artifact_migration.md": {
+      "expected_sha256": "2e10d0cc29966afed315352bf1739257ca11f81c6a16b1dde6654e231f708d8c",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "docs/real_data_release_sprint.md": {
+      "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
+      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+    },
+    "docs/real_data_replay.md": {
+      "expected_sha256": "7c2ef27fec352875af69596a50cd4bece9d2abf6c33de8c34875405ff68817b8",
+      "reason": "Provider-agnostic real-data replay: one-command coverage/metadata/backfill/feature/control/release orchestration with fail-closed real-data gates."
+    },
+    "docs/release_attestation.md": {
+      "expected_sha256": "917ca1073633fa404be60a9c1fcafa14c85351ecae249f9dc30be309693109df",
+      "reason": "Intentional post-Step21 repository hardening addition; two-factor external signed release attestation runbook"
+    },
+    "docs/repository_integrity.md": {
+      "expected_sha256": "f09d907e0f8c048db3aa2d4d47502d0b05c9120ae799edc746ac5f7724384a8c",
+      "reason": "Control-plane Step 8: current public-repository CI, adversarial audit-pack, and external trust-root release procedure"
+    },
+    "docs/software_readiness_certification.md": {
+      "expected_sha256": "7512fff8e36f2184f0cb66d21fe8642138790c8231b74249c6c5ef56179fbefe",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
+    },
+    "docs/surveillance_analytics_upgrade.md": {
+      "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
+      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "requirements-skops.lock": {
+      "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
+      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
+    },
+    "scripts/control_plane_audit_pack.py": {
+      "expected_sha256": "d812008bda0d1d2417d4da140092e89a66ff6077ddcaf4cf6c452503fa590537",
+      "reason": "Control-plane Step 8: deterministic exact-head audit-pack generator with semantic security-policy concepts, JUnit, secret, workflow, champion, and release-drift evidence"
+    },
+    "scripts/release_attestation.py": {
+      "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
+      "reason": "Intentional post-Step21 repository hardening addition; external SSH release attestation with independent drift trust and external signing material"
+    },
+    "scripts/secret_scan.py": {
+      "expected_sha256": "ff87e7b0cc437300bb0b71d647deaf216488f5e3c8a3440f6b4b2f58967d1c49",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "scripts/verify_release_drift.py": {
+      "expected_sha256": "241605c6377d451bbaee1f94d8fccefa6f9c10aadc05aca81967b31db161b6f4",
+      "reason": "Intentional post-Step21 repository hardening addition; SHA-256 drift identities and externally authenticated allowlist"
+    },
+    "src/control_plane/__init__.py": {
+      "expected_sha256": "9c85c627406ac58621635d1394cabe5a32c066093d28e8cdaf44752ed88da358",
+      "reason": "Control-plane Step 2 foundation"
+    },
+    "src/control_plane/account_surveillance.py": {
+      "expected_sha256": "70ce2f24fb1b0bc6417b45e5c11e34055f941a0182c8ddef321ffb9743aff5c1",
+      "reason": "Control-plane Step 7: immutable pseudonymous account-to-case surveillance aggregation without raw account identity persistence"
+    },
+    "src/control_plane/contracts.py": {
+      "expected_sha256": "97399b99db4e3ddbbe378597498921549ae129c9398ffaedd432958bf98d81aa",
+      "reason": "Control-plane Step 4: add signed PUBLICITY_CLEARED state and verification-detail contract"
+    },
+    "src/control_plane/integrity.py": {
+      "expected_sha256": "cbb2aa87befd5fc84a9acea3a7c581d97517a29bdd47958af87549b0cbced957",
+      "reason": "Control-plane Step 5: recursive lineage integrity becomes part of the control-plane self-check"
+    },
+    "src/control_plane/junas.py": {
+      "expected_sha256": "a0f5d80a72e539c29e2e578c52cc6261f7f73559a8b57032803f67c1a7d3b05e",
+      "reason": "Control-plane Step 3 JUNAS fail-closed unstructured document intake lane"
+    },
+    "src/control_plane/lineage.py": {
+      "expected_sha256": "c0016eaa86a5dea6f0980826c2f42d6fd062acbf19e47ac03269f2dc20111133",
+      "reason": "Control-plane Step 5: deterministic recursive lineage verification and atomic artifact recovery"
+    },
+    "src/control_plane/publicity.py": {
+      "expected_sha256": "4fdfc9ce3a2ccef748750d10a56a0c43c9d333cab157a7d3232c3ad90b30bb1e",
+      "reason": "Control-plane Step 4: build, verify, archive, and apply signed publicity clearances"
+    },
+    "src/control_plane/registry.py": {
+      "expected_sha256": "1b8e26d36e64e5908037ec50e5d301a590a442fa6d1311d03261e026a796ccb6",
+      "reason": "Control-plane Step 5: immutable derived-artifact registry and ordered recursive parent bindings"
+    },
+    "src/control_plane/release_authority.py": {
+      "expected_sha256": "c056d318256ef1e280457c68cde141fe0dba118e475714e0a1c23a21c72d2e13",
+      "reason": "Control-plane Step 6: G12-G15 assessment and externally signed fail-closed release authority"
+    },
+    "src/control_plane/signature_trust.py": {
+      "expected_sha256": "efede217a661f3f61c35fc0f41e4df1fb1b8492108e13eda4f78f0b2e1a61426",
+      "reason": "Control-plane Step 4: external SSH signer trust with independently pinned allowed-signers hash"
+    },
+    "src/control_plane/source_policy.py": {
+      "expected_sha256": "c74adca1d8348773289886e963a3a638a71c4ef87625fce0b6bb1a634cf3ccca",
+      "reason": "Control-plane Step 3: JUNAS unstructured routing to publicity pending, review, or quarantine"
+    },
+    "src/control_plane/storage.py": {
+      "expected_sha256": "9f0384edfcd2ca986e69a42dfb55cec36914e05d7dcb0d0b3d01b7c37d8f648f",
+      "reason": "Control-plane Step 2 foundation"
+    },
+    "src/event_tape_replay.py": {
+      "expected_sha256": "ba5b7ad14150a95d3d367fe43e320671498e7bde3b927b7ca348ea5344ca70cc",
+      "reason": "Event-tape precision repair: preserve microsecond replay eligibility/order/cutoff semantics and fail closed on unsupported finer precision."
+    },
+    "src/g1_acquisition_manifest.py": {
+      "expected_sha256": "04536264c405e94208e113de3e21a07dc3d2021dad427c5cd8c3b15a8b36da4c",
+      "reason": "G1 acquisition routing: deterministically reconcile all 174 events, suppress already-resolved events, route remaining exact-clock work between public archives and lawful I/B/E/S bulk acquisition, and emit stable dedupe/work-queue identities."
+    },
+    "src/g1_ibes_timestamp_adapter.py": {
+      "expected_sha256": "1561390f3f1d71559d29516ae21d70929e1266630a2fad847a93a8ab11a70a6c",
+      "reason": "G1 hardening: strict authorized I/B/E/S actual-announcement timestamp normalization without raw licensed-row persistence"
+    },
+    "src/g1_source_research.py": {
+      "expected_sha256": "34dd8d8e07bdb10c82b30caba2145d6e30493d1f27ec9f68a68e1e937e086ed2",
+      "reason": "G1 research promotion hardening: independently validate event identity, timezone-aware first-public-release timestamp semantics, admissible source family, source reference, chronology, seven-calendar-day window, and mirror corroboration."
+    },
+    "src/g3_listing_evidence.py": {
+      "expected_sha256": "819b5ff7257ca3662a6192e15d4c69079c54cd5458306a2a3a4570149bcb1476",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "src/g4_materialize_batch.py": {
+      "expected_sha256": "0d35b9cdff610500a035a14d5086f785fefecc217ff6a608ad0032f567464a4c",
+      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "src/licensed_data_drop_processor.py": {
+      "expected_sha256": "3f8077162fd03ccc90677e455684765be9466a07313d331b5982b269b82f568b",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+    },
+    "src/licensed_data_intake.py": {
+      "expected_sha256": "559f944ac53565e935fb2c361e2abdbf18a97603f95b158e2d96a77469579d3b",
+      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
+    },
+    "src/model_artifact.py": {
+      "expected_sha256": "1a1e5098581c9d4eb720f0a13824c2c9fe857558f2f5146c4386d42610d1716c",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "src/real_data_release_sprint.py": {
+      "expected_sha256": "898ca321bcea4855fc9be28458669ebe25e84836520614d362d5debf54d7a17a",
+      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
+    },
+    "src/real_data_replay.py": {
+      "expected_sha256": "438ef2f5b9cd5d986f74c974b3715524e7bf37a0ba4876b044d8cde58af0489d",
+      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
+    },
+    "src/research_receipt_rebuild.py": {
+      "expected_sha256": "aad23317e159d300a462575ca8c998ed8891b62e45caf1ee626ca8034f0a3c31",
+      "reason": "Permanent deterministic research receipt rebuild: stage, reconcile, hash, compare, and transactionally publish metadata/quality/replay receipts with manifest-last rollback semantics."
+    },
+    "src/security_identity_acquisition.py": {
+      "expected_sha256": "abde5e36ccb418c6bb35f98ad1ce2c1c798e16c52095f20ca245063eccec5cde",
+      "reason": "Deterministic fail-closed stable-ID acquisition planner for every unresolved PERMNO/date request, with lawful licensed/authorized source lanes and no ticker or corporate-action alias inference."
+    },
+    "src/security_identity_gate.py": {
+      "expected_sha256": "d9c8c80c2ec2843ab1d17b2182384e68ad8579751554e68fa2935aa26373d8c2",
+      "reason": "Fail-closed stable security-identity generator: bind event_id to PERMNO/historical symbol, verify event-date listing identity, expose baseline dates requiring point-in-time security-master evidence, and prohibit inferred aliases/current-ticker substitution."
+    },
+    "src/software_readiness_certification.py": {
+      "expected_sha256": "b472c49c8b88740ffea4c8639117390565b66395337dc1d02f5c76ad9a6511c2",
+      "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
+    },
+    "src/surveillance_feature_diagnostics.py": {
+      "expected_sha256": "d9f8459d35bc7e99c941af00187b96ccd3ded2d9b33913f37b4310ebc24c59a8",
+      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "tests/test_control_plane_adversarial.py": {
+      "expected_sha256": "28773c33814d97a730a8e5ba42e2493328d3e890fd3113953d3d96f8e6e7e598",
+      "reason": "Control-plane Step 8: adversarial fail-closed suite across ingestion, publicity, lineage, authority, account, dashboard, secret, drift, and champion boundaries"
+    },
+    "tests/test_control_plane_dashboard_accounts.py": {
+      "expected_sha256": "919aa49fc274347c29a54f7f2e501d34b62c8f4af61f4690f2b65a7e394777c7",
+      "reason": "Control-plane Step 7 regression coverage for pseudonymization, immutable case binding, read-only dashboard routes, and fail-closed optional sources"
+    },
+    "tests/test_control_plane_foundation.py": {
+      "expected_sha256": "8f738e0adae5bc92094d372ba83de8b41c9d7ae19ae0f74b289a7d085e8bf3ba",
+      "reason": "Control-plane Step 2 foundation"
+    },
+    "tests/test_control_plane_junas.py": {
+      "expected_sha256": "fe3851222dbcd6306391463772d36f828baeb8130acf11659d7c10a03b169a55",
+      "reason": "Control-plane Step 3 JUNAS regression coverage for publicity pending, quarantine, review, direct-admission rejection, and idempotency"
+    },
+    "tests/test_control_plane_lineage.py": {
+      "expected_sha256": "cdf5894b74b9b8b3957a970debde1f038f1102d7c507bfd5e631717152a961f6",
+      "reason": "Control-plane Step 5 lineage/recovery regression coverage including recursive tamper blocking and overwrite refusal"
+    },
+    "tests/test_control_plane_publicity.py": {
+      "expected_sha256": "4a5db071b079e71e1cc38c963e93cd66029b629dd5e65d45742e0843d1e66562",
+      "reason": "Control-plane Step 4 adversarial publicity-clearance regression coverage"
+    },
+    "tests/test_control_plane_release_authority.py": {
+      "expected_sha256": "633349097e6651a1b5901ca3c77822fb4459b8b3cd36eca464e50c9fd0f89ba0",
+      "reason": "Control-plane Step 6 regression coverage for G12-G15, signer trust, stale authority, and legacy-token bypass prevention"
+    },
+    "tests/test_event_tape_replay.py": {
+      "expected_sha256": "46c1776e307f3654bad5f1632cefac47a307c532e0fd2424311da4689425da32",
+      "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
+    },
+    "tests/test_g1_acquisition_manifest.py": {
+      "expected_sha256": "357253d1a1f5b3051836f79a538fa3ba8c7f02551c0c71f05ea9a329c3068328",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "tests/test_g1_ibes_timestamp_adapter.py": {
+      "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
+      "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
+    },
+    "tests/test_g1_public_batch_0032.py": {
+      "expected_sha256": "3b5440a346a77a04ef3a3fae0e931cf0911f0473cf86e953fffd56f02cd451bc",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "tests/test_g1_public_batch_0033.py": {
+      "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "tests/test_g1_source_research.py": {
+      "expected_sha256": "8f25a2cf21830aa29d62efe50fa87eec8d68c8d13f9d467856584a6aca230a39",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "tests/test_g3_listing_evidence.py": {
+      "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
+      "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "tests/test_g4_materialize_batch.py": {
+      "expected_sha256": "90b4d870c209f7e71f70a5ef6533b0b921ccf253e1c7efde9e69c1531cfcfba2",
+      "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "tests/test_licensed_data_drop_processor.py": {
+      "expected_sha256": "7cd6430dac7fcd409bf88feb57194c06c7fb7c83bf63834fa3708d22f6979558",
+      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+    },
+    "tests/test_licensed_data_intake.py": {
+      "expected_sha256": "7f5767209023d8144e041b25467a25673abd2b95ccf7895c643dea63070275fa",
+      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
+    },
+    "tests/test_model_artifact.py": {
+      "expected_sha256": "4bacac96671aeb57d5c0857949c88bf7b5b6cffec482cc9eae0ec2909e012819",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "tests/test_public_dashboard.py": {
+      "expected_sha256": "2ca66c26f68bc96fa079f2ddbd795e222fb10f67e8b8dd882e48b06841968cc1",
+      "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
+    },
+    "tests/test_real_data_release_sprint.py": {
+      "expected_sha256": "539faddb48f69f49f0471bba355d228a8511b76305d25d8b34701b250620e608",
+      "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "tests/test_real_data_replay.py": {
+      "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
+      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
+    },
+    "tests/test_release_attestation.py": {
+      "expected_sha256": "6c16939693b2f8d168766ae8284875036d0139df0e8ccd4b560fb55fd0ce60b1",
+      "reason": "Intentional post-Step21 repository hardening addition; signer-path, namespace, and two-factor trust-boundary regression coverage"
+    },
+    "tests/test_release_drift.py": {
+      "expected_sha256": "1b73f17b2dc0e466fe9a9b1d4dcfb1637fc475dcd7ded66c3a2a7f64673699f3",
+      "reason": "Intentional post-Step21 repository hardening addition; SHA-256 identity and trust-root tamper regression coverage"
+    },
+    "tests/test_research_receipt_rebuild.py": {
+      "expected_sha256": "4b0acabb8ff84f5a35ce2eb2e1e30952928f40eaaee1ac298e2c1acdc57fbc9a",
+      "reason": "Regression coverage for deterministic receipt reproduction, manifest ordering, and rollback on interrupted publication."
+    },
+    "tests/test_secret_scan.py": {
+      "expected_sha256": "8f679611db6e32b4eed9aadb55460b457babd42e6ad0eaa0adf53634fce3dd3e",
+      "reason": "Intentional post-Step21 repository hardening addition"
+    },
+    "tests/test_security_identity_acquisition.py": {
+      "expected_sha256": "0febef36a5e0b64878d0b21f8e04b57f4c1dd6a62d6f8752f568673e5acb9417",
+      "reason": "Regression coverage for deterministic acquisition outputs, exact 3,654/146 state, request identity uniqueness, fail-closed collisions/count drift, and prohibition of ticker/alias shortcuts."
+    },
+    "tests/test_security_identity_gate.py": {
+      "expected_sha256": "facbbba627fac27e0d358f08d56c5a2c433152a62ec2c2e8375a9dd5adc43002",
+      "reason": "Adversarial identity regressions for symbol reuse, PERMNO aliases, requirement mismatches, future dates, listing mismatches, and deterministic manifest reproduction."
+    },
+    "tests/test_software_readiness_certification.py": {
+      "expected_sha256": "19abafff3563f52f5f5770a16ee43f31171623c2956d1d078af95e9996cfcb9e",
+      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
+    },
+    "tests/test_surveillance_feature_diagnostics.py": {
+      "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
+      "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
     }
-  }
+  },
+  "schema_version": "2",
+  "trust_root_notice": "This reviewed file declares intentional drift from the immutable historical release using SHA-256 content identities. Release verification additionally requires an independently supplied SHA-256 of this allowlist; repository contents alone are not the trust anchor."
 }

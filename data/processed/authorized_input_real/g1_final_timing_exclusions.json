@@ -1,53 +1,6 @@
 {
-  "schema_version": "1",
-  "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
-  "research_use_only": true,
-  "base_main_sha": "ea09d64fa029eec7439cc3850dcba5999db0ed1b",
-  "g1_state": {
-    "required": 174,
-    "exact_resolved": 35,
-    "reviewed_excluded": 139,
-    "accounted_for": 174,
-    "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 139,
-    "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 35,
-    "inferred_clock_times_prohibited": true,
-    "edgar_acceptance_as_exact_release_prohibited": true,
-    "excluded_event_asymmetry_prohibited": true
-  },
-  "public_replication_scan": {
-    "source_repository": "vgreg/hacked_earnings_jfe",
-    "source_archive_path": "Data/Press releases/{2011..2015}.zip",
-    "scan_workflow_run_id": 36217251076,
-    "scan_head_sha": "8f1fb6a08ac82a61401ba224e44e3f987c4e2059",
-    "scan_artifact_name": "g1-public-replication-8f1fb6a08ac82a61401ba224e44e3f987c4e2059",
-    "scan_artifact_digest": "sha256:8ebfd63af542c18f9e8fe69a1041a954ea3561338be1b27a7f3b586a199f2712",
-    "events_with_candidate_release_files": 160,
-    "events_without_candidate_release_files": 14,
-    "events_with_any_clock_time_token": 0,
-    "events_with_release_context_clock_time": 0,
-    "result": "Public replication press-release text supplies release dates for many events but no exact first-public release clock times."
-  },
-  "original_research_source_semantics": {
-    "companion_repository": "vgreg/earnings_news_jar",
-    "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
-    "required_fields": [
-      "ANNDATS_ACT",
-      "ANNTIMS_ACT"
-    ],
-    "constructed_field": "IBES_Timestamp",
-    "result": "The public companion code confirms exact announcement timing is constructed from proprietary I/B/E/S actual announcement date/time fields; those proprietary rows are not included in the public repositories."
-  },
-  "public_derivative_search": {
-    "queries": [
-      "ANNDATS_ACT ANNTIMS_ACT hacked_earnings_jfe",
-      "IBES_Timestamp hacked earnings",
-      "TimeOfFirstTrade.csv ANNDATS_ACT",
-      "hacked earnings I/B/E/S announcement time dataset"
-    ],
-    "result": "No public derivative containing the 174-event exact I/B/E/S clock-time join was located."
-  },
+  "base_main_sha": "88dfa6fa4f69a6c9f33714edca92442376dfc8d4",
+  "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
     "HEJFE-0AA84E6E44ED02D8",
@@ -64,982 +17,6 @@
     "HEJFE-ED8CFC03F1053B9A",
     "HEJFE-EDFDC1213C9AF586"
   ],
-  "exclusions": [
-    {
-      "event_id": "HEJFE-D346C6CFDFB6E581",
-      "historical_symbol": "WTS",
-      "first_documented_illicit_trade_ts": "2015-02-17 14:19:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-AC78A2434E4AE8FB",
-      "historical_symbol": "ACO",
-      "first_documented_illicit_trade_ts": "2013-04-25 14:40:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-EDFDC1213C9AF586",
-      "historical_symbol": "MXIM",
-      "first_documented_illicit_trade_ts": "2012-01-26 11:44:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-4080E04F012A7290",
-      "historical_symbol": "QLIK",
-      "first_documented_illicit_trade_ts": "2015-02-12 15:39:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-D7BD84C255F2273D",
-      "historical_symbol": "GORO",
-      "first_documented_illicit_trade_ts": "2013-05-08 15:58:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-AF58BD8CAE4E8D1C",
-      "historical_symbol": "FLT",
-      "first_documented_illicit_trade_ts": "2015-04-30 15:28:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-5E9AD5C9AD67944D",
-      "historical_symbol": "CSOD",
-      "first_documented_illicit_trade_ts": "2015-05-06 15:29:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-12CC8075D3F634CD",
-      "historical_symbol": "ECOL",
-      "first_documented_illicit_trade_ts": "2013-04-24 15:07:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-847F0EFE669B2440",
-      "historical_symbol": "P",
-      "first_documented_illicit_trade_ts": "2015-02-05 15:59:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-AF5106891E058D23",
-      "historical_symbol": "TNGO",
-      "first_documented_illicit_trade_ts": "2015-02-12 15:10:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-6C73B4B05384BC1E",
-      "historical_symbol": "PFPT",
-      "first_documented_illicit_trade_ts": "2013-04-25 15:00:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-47A3794D1C360650",
-      "historical_symbol": "NOW",
-      "first_documented_illicit_trade_ts": "2015-04-16 14:33:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-9B84208BA575EAC4",
-      "historical_symbol": "RH",
-      "first_documented_illicit_trade_ts": "2015-03-26 15:41:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-EBC49B9A024181AD",
-      "historical_symbol": "VEEV",
-      "first_documented_illicit_trade_ts": "2015-03-03 13:31:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-1950A4340036BB95",
-      "historical_symbol": "FL",
-      "first_documented_illicit_trade_ts": "2011-08-18 15:43:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-B704E62641681A73",
-      "historical_symbol": "GT",
-      "first_documented_illicit_trade_ts": "2011-07-27 15:59:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-45E6DA32B37F83D4",
-      "historical_symbol": "BA",
-      "first_documented_illicit_trade_ts": "2012-01-24 15:19:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-E1B57B6A71B06A7F",
-      "historical_symbol": "CR",
-      "first_documented_illicit_trade_ts": "2015-04-27 15:39:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-B9C8B3D0EF3DCB5E",
-      "historical_symbol": "CACI",
-      "first_documented_illicit_trade_ts": "2015-04-29 14:54:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-ED8CFC03F1053B9A",
-      "historical_symbol": "CAMP",
-      "first_documented_illicit_trade_ts": "2013-04-25 15:48:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-B5A8A297D14CD19D",
-      "historical_symbol": "TXT",
-      "first_documented_illicit_trade_ts": "2015-04-27 15:34:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-977FEBE8CA3CFCB6",
-      "historical_symbol": "MDU",
-      "first_documented_illicit_trade_ts": "2015-05-04 15:57:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-4291CBF555CED6A9",
-      "historical_symbol": "PBI",
-      "first_documented_illicit_trade_ts": "2015-04-29 14:47:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-376286473ECFECB4",
-      "historical_symbol": "CA",
-      "first_documented_illicit_trade_ts": "2011-07-20 15:46:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-2D81C70F59E076BA",
-      "historical_symbol": "CA",
-      "first_documented_illicit_trade_ts": "2012-01-24 13:32:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-7C93D3838E60926C",
-      "historical_symbol": "CMTL",
-      "first_documented_illicit_trade_ts": "2014-12-10 15:41:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-99F3FC8CE022DEA1",
-      "historical_symbol": "VAR",
-      "first_documented_illicit_trade_ts": "2012-01-25 12:46:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-36433565499915E2",
-      "historical_symbol": "PLL",
-      "first_documented_illicit_trade_ts": "2015-02-23 15:03:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-7CEFB3FE3D986464",
-      "historical_symbol": "ROG",
-      "first_documented_illicit_trade_ts": "2015-02-17 15:44:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-33FC1D00348D7C59",
-      "historical_symbol": "ROG",
-      "first_documented_illicit_trade_ts": "2015-04-29 15:29:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-1783DE88400AF6CC",
-      "historical_symbol": "WMB",
-      "first_documented_illicit_trade_ts": "2015-02-18 14:54:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-BD3F577ADD90D512",
-      "historical_symbol": "GNTX",
-      "first_documented_illicit_trade_ts": "2013-10-21 15:21:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-263620F13A6443DD",
-      "historical_symbol": "MAT",
-      "first_documented_illicit_trade_ts": "2015-04-16 14:39:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-704E64D64C11C119",
-      "historical_symbol": "MDP",
-      "first_documented_illicit_trade_ts": "2012-01-23 14:39:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-9861757889227DD4",
-      "historical_symbol": "IDTI",
-      "first_documented_illicit_trade_ts": "2015-02-02 14:24:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-EFFA194386ABDD28",
-      "historical_symbol": "IDTI",
-      "first_documented_illicit_trade_ts": "2015-05-04 15:40:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-7E8FA3E5E417B5E7",
-      "historical_symbol": "IGT",
-      "first_documented_illicit_trade_ts": "2012-01-23 15:31:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-4DEF5FDB3210E91B",
-      "historical_symbol": "SWKS",
-      "first_documented_illicit_trade_ts": "2015-01-22 15:41:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-9DF82252ED78E41F",
-      "historical_symbol": "CBT",
-      "first_documented_illicit_trade_ts": "2015-04-29 13:33:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-5089F8E69B6BC646",
-      "historical_symbol": "KELYA",
-      "first_documented_illicit_trade_ts": "2013-05-07 15:49:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-66BA40A20548B7E3",
-      "historical_symbol": "LRCX",
-      "first_documented_illicit_trade_ts": "2013-04-24 13:43:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-334BAA0D940A418A",
-      "historical_symbol": "TER",
-      "first_documented_illicit_trade_ts": "2015-01-28 15:49:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-0273F1BFCD285E7F",
-      "historical_symbol": "THC",
-      "first_documented_illicit_trade_ts": "2015-02-23 15:57:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-6C4EA140AD75FFE2",
-      "historical_symbol": "THC",
-      "first_documented_illicit_trade_ts": "2015-05-04 15:48:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-830D52F9F7F1CEEB",
-      "historical_symbol": "MSCC",
-      "first_documented_illicit_trade_ts": "2012-01-26 14:51:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-EDF80619CED083CB",
-      "historical_symbol": "CAG",
-      "first_documented_illicit_trade_ts": "2015-03-25 15:19:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-0BAF70D8CC8F1631",
-      "historical_symbol": "NKE",
-      "first_documented_illicit_trade_ts": "2015-03-19 15:58:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-332D5C6DC3ACE6B1",
-      "historical_symbol": "NDSN",
-      "first_documented_illicit_trade_ts": "2015-05-19 15:35:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-2FD552B9358078C6",
-      "historical_symbol": "BIO",
-      "first_documented_illicit_trade_ts": "2013-05-07 15:55:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-C85CE64DFF947CFD",
-      "historical_symbol": "RES",
-      "first_documented_illicit_trade_ts": "2012-01-24 15:20:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-7B8A1A0CD3E2966F",
-      "historical_symbol": "APC",
-      "first_documented_illicit_trade_ts": "2013-05-06 13:27:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-824BABBAD988A068",
-      "historical_symbol": "SYMM",
-      "first_documented_illicit_trade_ts": "2012-01-25 14:54:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-D51AC412EDF93AA8",
-      "historical_symbol": "INT",
-      "first_documented_illicit_trade_ts": "2015-04-30 15:40:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-9B43F5B767ECD0FA",
-      "historical_symbol": "MTH",
-      "first_documented_illicit_trade_ts": "2013-04-23 14:24:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-2D6ABDFDE39E5919",
-      "historical_symbol": "MTH",
-      "first_documented_illicit_trade_ts": "2013-07-23 15:18:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-FBA59D82CEE8FD00",
-      "historical_symbol": "CGNX",
-      "first_documented_illicit_trade_ts": "2015-02-12 14:04:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-8EAA8616B1750B40",
-      "historical_symbol": "CGNX",
-      "first_documented_illicit_trade_ts": "2015-05-04 15:09:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-B7EFA7CF95262283",
-      "historical_symbol": "LSCC",
-      "first_documented_illicit_trade_ts": "2013-04-18 14:24:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-CCC7747CFBDE893E",
-      "historical_symbol": "PNRA",
-      "first_documented_illicit_trade_ts": "2013-04-23 14:25:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-600696AB8463FFD8",
-      "historical_symbol": "PNRA",
-      "first_documented_illicit_trade_ts": "2013-07-23 15:11:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-8167467EBF64AABE",
-      "historical_symbol": "PNRA",
-      "first_documented_illicit_trade_ts": "2013-10-22 15:20:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-4E643D38FFB3016E",
-      "historical_symbol": "PNRA",
-      "first_documented_illicit_trade_ts": "2015-02-11 14:58:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-99CCB9D9BECE4E72",
-      "historical_symbol": "IDXX",
-      "first_documented_illicit_trade_ts": "2012-01-26 13:47:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-DA7595FDF91D8CBC",
-      "historical_symbol": "WRLD",
-      "first_documented_illicit_trade_ts": "2012-01-24 15:53:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-8415E931D4314106",
-      "historical_symbol": "KOPN",
-      "first_documented_illicit_trade_ts": "2015-03-10 14:58:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-A9DB7C5F6FD1D978",
-      "historical_symbol": "SBUX",
-      "first_documented_illicit_trade_ts": "2015-01-22 13:22:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-760E36DA94752F1E",
-      "historical_symbol": "CAKE",
-      "first_documented_illicit_trade_ts": "2015-04-22 14:22:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-5B6F87699FF5093E",
-      "historical_symbol": "SM",
-      "first_documented_illicit_trade_ts": "2015-05-05 15:08:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-81F188C0D790FE70",
-      "historical_symbol": "CREE",
-      "first_documented_illicit_trade_ts": "2015-01-20 15:39:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-D35C7804C2F5326C",
-      "historical_symbol": "CREE",
-      "first_documented_illicit_trade_ts": "2015-04-21 15:29:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-AA2597B95CFD2A2D",
-      "historical_symbol": "LSTR",
-      "first_documented_illicit_trade_ts": "2011-10-21 15:48:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-8596DDD6A535BD90",
-      "historical_symbol": "DEST",
-      "first_documented_illicit_trade_ts": "2012-01-25 15:34:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-D6BA56FA6D57427E",
-      "historical_symbol": "SCVL",
-      "first_documented_illicit_trade_ts": "2015-05-20 15:17:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-8F17F6BEDF631C8B",
-      "historical_symbol": "MCRI",
-      "first_documented_illicit_trade_ts": "2013-04-25 15:08:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-5CB3223BB28A6F14",
-      "historical_symbol": "BWA",
-      "first_documented_illicit_trade_ts": "2011-07-27 10:59:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-7482DE1CD44C1A00",
-      "historical_symbol": "GMCR",
-      "first_documented_illicit_trade_ts": "2015-02-04 14:07:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-56483839E5F0E88F",
-      "historical_symbol": "NVR",
-      "first_documented_illicit_trade_ts": "2012-01-25 15:56:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-89844B5980EB5339",
-      "historical_symbol": "AF",
-      "first_documented_illicit_trade_ts": "2012-01-25 15:18:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-8536AD777ECEEACB",
-      "historical_symbol": "GDI",
-      "first_documented_illicit_trade_ts": "2013-04-25 15:17:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-489E74F74AFB5AFA",
-      "historical_symbol": "MCRL",
-      "first_documented_illicit_trade_ts": "2013-04-25 14:32:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-D4E8CD312A2AA576",
-      "historical_symbol": "ISSI",
-      "first_documented_illicit_trade_ts": "2012-01-25 14:51:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-F9E72EEF6E5BD373",
-      "historical_symbol": "NATI",
-      "first_documented_illicit_trade_ts": "2015-01-29 15:51:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-7F8218B15679F14D",
-      "historical_symbol": "NATI",
-      "first_documented_illicit_trade_ts": "2015-04-28 13:59:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-2F14F138D09BCA76",
-      "historical_symbol": "IBKC",
-      "first_documented_illicit_trade_ts": "2012-01-24 13:53:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-54A5D1D8A5B593C8",
-      "historical_symbol": "NUAN",
-      "first_documented_illicit_trade_ts": "2015-02-05 15:33:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-7CA38C1FDA5EA4D0",
-      "historical_symbol": "CENX",
-      "first_documented_illicit_trade_ts": "2013-04-25 15:22:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-809E53BB4081FBAE",
-      "historical_symbol": "ROVI",
-      "first_documented_illicit_trade_ts": "2015-04-30 14:48:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-0AA84E6E44ED02D8",
-      "historical_symbol": "AMSG",
-      "first_documented_illicit_trade_ts": "2015-02-25 15:57:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-8A0517D50278EAE4",
-      "historical_symbol": "POWI",
-      "first_documented_illicit_trade_ts": "2015-04-29 15:23:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-1FCAAB3F7CC931CF",
-      "historical_symbol": "VRSN",
-      "first_documented_illicit_trade_ts": "2013-04-25 14:07:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-FBFFFD99898188CF",
-      "historical_symbol": "COLM",
-      "first_documented_illicit_trade_ts": "2015-02-12 14:33:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-D7FD00AF94DD8F41",
-      "historical_symbol": "JNPR",
-      "first_documented_illicit_trade_ts": "2011-04-19 15:50:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-E61095F8DC4132DE",
-      "historical_symbol": "JNPR",
-      "first_documented_illicit_trade_ts": "2013-07-23 15:03:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-F20ECC0C09BBC89E",
-      "historical_symbol": "JNPR",
-      "first_documented_illicit_trade_ts": "2013-10-22 13:58:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-06AE65B9C8FB0395",
-      "historical_symbol": "STMP",
-      "first_documented_illicit_trade_ts": "2013-04-24 15:28:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-2C887DA6F617936F",
-      "historical_symbol": "TIBX",
-      "first_documented_illicit_trade_ts": "2013-09-19 15:29:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-E575622C8FDAB71F",
-      "historical_symbol": "ISIL",
-      "first_documented_illicit_trade_ts": "2013-04-24 14:57:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-198DE6D99E934F32",
-      "historical_symbol": "EW",
-      "first_documented_illicit_trade_ts": "2011-04-20 14:29:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-ED329F780A1085DA",
-      "historical_symbol": "EW",
-      "first_documented_illicit_trade_ts": "2013-04-23 13:28:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-BFE8A42E0C19BA39",
-      "historical_symbol": "VDSI",
-      "first_documented_illicit_trade_ts": "2011-10-26 14:26:00",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-947F50EBAFBA54DC",
-      "historical_symbol": "CRL",
-      "first_documented_illicit_trade_ts": "2015-02-10 15:55:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-4FB44934BC5C5221",
-      "historical_symbol": "DNDN",
-      "first_documented_illicit_trade_ts": "2011-08-03 15:56:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-45559DD90D876D39",
-      "historical_symbol": "ILMN",
-      "first_documented_illicit_trade_ts": "2015-04-21 14:48:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-3046057647A0FC5C",
-      "historical_symbol": "BRKR",
-      "first_documented_illicit_trade_ts": "2015-05-06 15:30:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-830337A8564B826E",
-      "historical_symbol": "ALGN",
-      "first_documented_illicit_trade_ts": "2013-10-17 13:43:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-D6AE4ACB99958A73",
-      "historical_symbol": "SGEN",
-      "first_documented_illicit_trade_ts": "2015-04-30 14:18:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-791693865584F9CB",
-      "historical_symbol": "COL",
-      "first_documented_illicit_trade_ts": "2015-04-22 14:29:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-74011A906BCCABE9",
-      "historical_symbol": "AGP",
-      "first_documented_illicit_trade_ts": "2011-10-27 13:03:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-A3C5C43F6AC75C44",
-      "historical_symbol": "PRU",
-      "first_documented_illicit_trade_ts": "2015-05-06 15:47:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-238D29A9B584466D",
-      "historical_symbol": "SNX",
-      "first_documented_illicit_trade_ts": "2015-03-31 15:54:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-BB62E8864F35DCD0",
-      "historical_symbol": "WLL",
-      "first_documented_illicit_trade_ts": "2015-02-25 15:54:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-5408AADD0CBD54E8",
-      "historical_symbol": "CMP",
-      "first_documented_illicit_trade_ts": "2015-04-27 15:46:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-3A94836BBC9F224A",
-      "historical_symbol": "TPX",
-      "first_documented_illicit_trade_ts": "2011-07-26 13:40:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-22BF36BABB9D19D7",
-      "historical_symbol": "ALNY",
-      "first_documented_illicit_trade_ts": "2015-02-12 15:55:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-E28050410A1480C6",
-      "historical_symbol": "DYN",
-      "first_documented_illicit_trade_ts": "2015-05-06 14:24:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-0704950C71CFAFB4",
-      "historical_symbol": "TXRH",
-      "first_documented_illicit_trade_ts": "2015-02-23 15:24:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-93A7D27EF425EDF0",
-      "historical_symbol": "MIC",
-      "first_documented_illicit_trade_ts": "2015-02-18 15:58:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-C926C41F03E66E82",
-      "historical_symbol": "PAY",
-      "first_documented_illicit_trade_ts": "2014-12-15 15:36:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-873A37657E58A8CD",
-      "historical_symbol": "PAY",
-      "first_documented_illicit_trade_ts": "2015-03-10 15:11:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-99F31DB35F001A44",
-      "historical_symbol": "DXCM",
-      "first_documented_illicit_trade_ts": "2015-02-25 15:44:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-CFA461ED8BCCB889",
-      "historical_symbol": "OSK",
-      "first_documented_illicit_trade_ts": "2015-04-27 15:29:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-826F68D9DA88B37C",
-      "historical_symbol": "ATRC",
-      "first_documented_illicit_trade_ts": "2015-02-23 15:58:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-5ED55A2EAC950921",
-      "historical_symbol": "AMP",
-      "first_documented_illicit_trade_ts": "2015-04-22 15:22:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-4D7E68AD113380B3",
-      "historical_symbol": "TRAK",
-      "first_documented_illicit_trade_ts": "2015-02-23 15:41:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-20EC97300E6205B9",
-      "historical_symbol": "INWK",
-      "first_documented_illicit_trade_ts": "2015-02-12 14:01:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-E4D3EE1A6CB984DB",
-      "historical_symbol": "EHTH",
-      "first_documented_illicit_trade_ts": "2011-04-26 15:07:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-9527526FED86FA7D",
-      "historical_symbol": "EHTH",
-      "first_documented_illicit_trade_ts": "2013-04-25 15:56:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-749FFC4028DF7B1C",
-      "historical_symbol": "VMW",
-      "first_documented_illicit_trade_ts": "2011-04-19 14:56:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-3BBEC23702C1A375",
-      "historical_symbol": "VMW",
-      "first_documented_illicit_trade_ts": "2013-07-23 15:35:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-350B3481A9CBBF0E",
-      "historical_symbol": "VMW",
-      "first_documented_illicit_trade_ts": "2013-10-21 15:49:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-09EF6AD227D3AC5D",
-      "historical_symbol": "DGI",
-      "first_documented_illicit_trade_ts": "2012-07-31 12:21:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-A5AE76F13A48C40F",
-      "historical_symbol": "DGI",
-      "first_documented_illicit_trade_ts": "2013-05-07 14:29:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-A76C746507C0D9AF",
-      "historical_symbol": "DGI",
-      "first_documented_illicit_trade_ts": "2015-02-26 15:42:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-C368B17FADFC15C7",
-      "historical_symbol": "ECHO",
-      "first_documented_illicit_trade_ts": "2013-04-25 14:14:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-B04F1AF8B6E30A43",
-      "historical_symbol": "CLD",
-      "first_documented_illicit_trade_ts": "2015-02-17 15:35:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-DB1E964E02F5921F",
-      "historical_symbol": "CLD",
-      "first_documented_illicit_trade_ts": "2015-04-30 15:33:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-5D222F0F8E0C77D0",
-      "historical_symbol": "TW",
-      "first_documented_illicit_trade_ts": "2015-05-04 15:47:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-DC002D2C6C767277",
-      "historical_symbol": "MUSA",
-      "first_documented_illicit_trade_ts": "2011-10-20 15:48:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-51F3066EAC9B8138",
-      "historical_symbol": "MUSA",
-      "first_documented_illicit_trade_ts": "2012-01-26 12:21:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    }
-  ],
-  "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
     "exact_resolved": 33,
     "latest_batch": "g1_announcement_times_batch_0031.csv",
@@ -1051,5 +28,1021 @@
         "source_reference": "https://www.streetinsider.com/Press%2BReleases/Acadia%2BHealthcare%2BFirst%2BQuarter%2BAdjusted%2BEPS%2BIncreases%2B53.6%25%2Bto%2B%240.43/10497602.html?classic=1"
       }
     ]
-  }
+  },
+  "exclusions": [
+    {
+      "event_id": "HEJFE-D346C6CFDFB6E581",
+      "first_documented_illicit_trade_ts": "2015-02-17 14:19:00",
+      "historical_symbol": "WTS",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-AC78A2434E4AE8FB",
+      "first_documented_illicit_trade_ts": "2013-04-25 14:40:00",
+      "historical_symbol": "ACO",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-EDFDC1213C9AF586",
+      "first_documented_illicit_trade_ts": "2012-01-26 11:44:00",
+      "historical_symbol": "MXIM",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-4080E04F012A7290",
+      "first_documented_illicit_trade_ts": "2015-02-12 15:39:00",
+      "historical_symbol": "QLIK",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-D7BD84C255F2273D",
+      "first_documented_illicit_trade_ts": "2013-05-08 15:58:00",
+      "historical_symbol": "GORO",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-AF58BD8CAE4E8D1C",
+      "first_documented_illicit_trade_ts": "2015-04-30 15:28:00",
+      "historical_symbol": "FLT",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-5E9AD5C9AD67944D",
+      "first_documented_illicit_trade_ts": "2015-05-06 15:29:00",
+      "historical_symbol": "CSOD",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-12CC8075D3F634CD",
+      "first_documented_illicit_trade_ts": "2013-04-24 15:07:00",
+      "historical_symbol": "ECOL",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-847F0EFE669B2440",
+      "first_documented_illicit_trade_ts": "2015-02-05 15:59:00",
+      "historical_symbol": "P",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-AF5106891E058D23",
+      "first_documented_illicit_trade_ts": "2015-02-12 15:10:00",
+      "historical_symbol": "TNGO",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-6C73B4B05384BC1E",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:00:00",
+      "historical_symbol": "PFPT",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-47A3794D1C360650",
+      "first_documented_illicit_trade_ts": "2015-04-16 14:33:00",
+      "historical_symbol": "NOW",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-9B84208BA575EAC4",
+      "first_documented_illicit_trade_ts": "2015-03-26 15:41:00",
+      "historical_symbol": "RH",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-EBC49B9A024181AD",
+      "first_documented_illicit_trade_ts": "2015-03-03 13:31:00",
+      "historical_symbol": "VEEV",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-1950A4340036BB95",
+      "first_documented_illicit_trade_ts": "2011-08-18 15:43:00",
+      "historical_symbol": "FL",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-B704E62641681A73",
+      "first_documented_illicit_trade_ts": "2011-07-27 15:59:00",
+      "historical_symbol": "GT",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-45E6DA32B37F83D4",
+      "first_documented_illicit_trade_ts": "2012-01-24 15:19:00",
+      "historical_symbol": "BA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-E1B57B6A71B06A7F",
+      "first_documented_illicit_trade_ts": "2015-04-27 15:39:00",
+      "historical_symbol": "CR",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-B9C8B3D0EF3DCB5E",
+      "first_documented_illicit_trade_ts": "2015-04-29 14:54:00",
+      "historical_symbol": "CACI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-ED8CFC03F1053B9A",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:48:00",
+      "historical_symbol": "CAMP",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-B5A8A297D14CD19D",
+      "first_documented_illicit_trade_ts": "2015-04-27 15:34:00",
+      "historical_symbol": "TXT",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-977FEBE8CA3CFCB6",
+      "first_documented_illicit_trade_ts": "2015-05-04 15:57:00",
+      "historical_symbol": "MDU",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-4291CBF555CED6A9",
+      "first_documented_illicit_trade_ts": "2015-04-29 14:47:00",
+      "historical_symbol": "PBI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-376286473ECFECB4",
+      "first_documented_illicit_trade_ts": "2011-07-20 15:46:00",
+      "historical_symbol": "CA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-2D81C70F59E076BA",
+      "first_documented_illicit_trade_ts": "2012-01-24 13:32:00",
+      "historical_symbol": "CA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-7C93D3838E60926C",
+      "first_documented_illicit_trade_ts": "2014-12-10 15:41:00",
+      "historical_symbol": "CMTL",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-99F3FC8CE022DEA1",
+      "first_documented_illicit_trade_ts": "2012-01-25 12:46:00",
+      "historical_symbol": "VAR",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-36433565499915E2",
+      "first_documented_illicit_trade_ts": "2015-02-23 15:03:00",
+      "historical_symbol": "PLL",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-7CEFB3FE3D986464",
+      "first_documented_illicit_trade_ts": "2015-02-17 15:44:00",
+      "historical_symbol": "ROG",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-33FC1D00348D7C59",
+      "first_documented_illicit_trade_ts": "2015-04-29 15:29:00",
+      "historical_symbol": "ROG",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-1783DE88400AF6CC",
+      "first_documented_illicit_trade_ts": "2015-02-18 14:54:00",
+      "historical_symbol": "WMB",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-BD3F577ADD90D512",
+      "first_documented_illicit_trade_ts": "2013-10-21 15:21:00",
+      "historical_symbol": "GNTX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-263620F13A6443DD",
+      "first_documented_illicit_trade_ts": "2015-04-16 14:39:00",
+      "historical_symbol": "MAT",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-704E64D64C11C119",
+      "first_documented_illicit_trade_ts": "2012-01-23 14:39:00",
+      "historical_symbol": "MDP",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-9861757889227DD4",
+      "first_documented_illicit_trade_ts": "2015-02-02 14:24:00",
+      "historical_symbol": "IDTI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-EFFA194386ABDD28",
+      "first_documented_illicit_trade_ts": "2015-05-04 15:40:00",
+      "historical_symbol": "IDTI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-7E8FA3E5E417B5E7",
+      "first_documented_illicit_trade_ts": "2012-01-23 15:31:00",
+      "historical_symbol": "IGT",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-4DEF5FDB3210E91B",
+      "first_documented_illicit_trade_ts": "2015-01-22 15:41:00",
+      "historical_symbol": "SWKS",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-9DF82252ED78E41F",
+      "first_documented_illicit_trade_ts": "2015-04-29 13:33:00",
+      "historical_symbol": "CBT",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-5089F8E69B6BC646",
+      "first_documented_illicit_trade_ts": "2013-05-07 15:49:00",
+      "historical_symbol": "KELYA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-66BA40A20548B7E3",
+      "first_documented_illicit_trade_ts": "2013-04-24 13:43:00",
+      "historical_symbol": "LRCX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-334BAA0D940A418A",
+      "first_documented_illicit_trade_ts": "2015-01-28 15:49:00",
+      "historical_symbol": "TER",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-0273F1BFCD285E7F",
+      "first_documented_illicit_trade_ts": "2015-02-23 15:57:00",
+      "historical_symbol": "THC",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-6C4EA140AD75FFE2",
+      "first_documented_illicit_trade_ts": "2015-05-04 15:48:00",
+      "historical_symbol": "THC",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-830D52F9F7F1CEEB",
+      "first_documented_illicit_trade_ts": "2012-01-26 14:51:00",
+      "historical_symbol": "MSCC",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-EDF80619CED083CB",
+      "first_documented_illicit_trade_ts": "2015-03-25 15:19:00",
+      "historical_symbol": "CAG",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-0BAF70D8CC8F1631",
+      "first_documented_illicit_trade_ts": "2015-03-19 15:58:00",
+      "historical_symbol": "NKE",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-332D5C6DC3ACE6B1",
+      "first_documented_illicit_trade_ts": "2015-05-19 15:35:00",
+      "historical_symbol": "NDSN",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-2FD552B9358078C6",
+      "first_documented_illicit_trade_ts": "2013-05-07 15:55:00",
+      "historical_symbol": "BIO",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-C85CE64DFF947CFD",
+      "first_documented_illicit_trade_ts": "2012-01-24 15:20:00",
+      "historical_symbol": "RES",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-7B8A1A0CD3E2966F",
+      "first_documented_illicit_trade_ts": "2013-05-06 13:27:00",
+      "historical_symbol": "APC",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-824BABBAD988A068",
+      "first_documented_illicit_trade_ts": "2012-01-25 14:54:00",
+      "historical_symbol": "SYMM",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-D51AC412EDF93AA8",
+      "first_documented_illicit_trade_ts": "2015-04-30 15:40:00",
+      "historical_symbol": "INT",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-9B43F5B767ECD0FA",
+      "first_documented_illicit_trade_ts": "2013-04-23 14:24:00",
+      "historical_symbol": "MTH",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-2D6ABDFDE39E5919",
+      "first_documented_illicit_trade_ts": "2013-07-23 15:18:00",
+      "historical_symbol": "MTH",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-FBA59D82CEE8FD00",
+      "first_documented_illicit_trade_ts": "2015-02-12 14:04:00",
+      "historical_symbol": "CGNX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-8EAA8616B1750B40",
+      "first_documented_illicit_trade_ts": "2015-05-04 15:09:00",
+      "historical_symbol": "CGNX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-B7EFA7CF95262283",
+      "first_documented_illicit_trade_ts": "2013-04-18 14:24:00",
+      "historical_symbol": "LSCC",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-CCC7747CFBDE893E",
+      "first_documented_illicit_trade_ts": "2013-04-23 14:25:00",
+      "historical_symbol": "PNRA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-600696AB8463FFD8",
+      "first_documented_illicit_trade_ts": "2013-07-23 15:11:00",
+      "historical_symbol": "PNRA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-8167467EBF64AABE",
+      "first_documented_illicit_trade_ts": "2013-10-22 15:20:00",
+      "historical_symbol": "PNRA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-4E643D38FFB3016E",
+      "first_documented_illicit_trade_ts": "2015-02-11 14:58:00",
+      "historical_symbol": "PNRA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-99CCB9D9BECE4E72",
+      "first_documented_illicit_trade_ts": "2012-01-26 13:47:00",
+      "historical_symbol": "IDXX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-DA7595FDF91D8CBC",
+      "first_documented_illicit_trade_ts": "2012-01-24 15:53:00",
+      "historical_symbol": "WRLD",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-8415E931D4314106",
+      "first_documented_illicit_trade_ts": "2015-03-10 14:58:00",
+      "historical_symbol": "KOPN",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-A9DB7C5F6FD1D978",
+      "first_documented_illicit_trade_ts": "2015-01-22 13:22:00",
+      "historical_symbol": "SBUX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-760E36DA94752F1E",
+      "first_documented_illicit_trade_ts": "2015-04-22 14:22:00",
+      "historical_symbol": "CAKE",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-5B6F87699FF5093E",
+      "first_documented_illicit_trade_ts": "2015-05-05 15:08:00",
+      "historical_symbol": "SM",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-81F188C0D790FE70",
+      "first_documented_illicit_trade_ts": "2015-01-20 15:39:00",
+      "historical_symbol": "CREE",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-D35C7804C2F5326C",
+      "first_documented_illicit_trade_ts": "2015-04-21 15:29:00",
+      "historical_symbol": "CREE",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-AA2597B95CFD2A2D",
+      "first_documented_illicit_trade_ts": "2011-10-21 15:48:00",
+      "historical_symbol": "LSTR",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-8596DDD6A535BD90",
+      "first_documented_illicit_trade_ts": "2012-01-25 15:34:00",
+      "historical_symbol": "DEST",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-D6BA56FA6D57427E",
+      "first_documented_illicit_trade_ts": "2015-05-20 15:17:00",
+      "historical_symbol": "SCVL",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-8F17F6BEDF631C8B",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:08:00",
+      "historical_symbol": "MCRI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-5CB3223BB28A6F14",
+      "first_documented_illicit_trade_ts": "2011-07-27 10:59:00",
+      "historical_symbol": "BWA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-7482DE1CD44C1A00",
+      "first_documented_illicit_trade_ts": "2015-02-04 14:07:00",
+      "historical_symbol": "GMCR",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-89844B5980EB5339",
+      "first_documented_illicit_trade_ts": "2012-01-25 15:18:00",
+      "historical_symbol": "AF",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-8536AD777ECEEACB",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:17:00",
+      "historical_symbol": "GDI",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-489E74F74AFB5AFA",
+      "first_documented_illicit_trade_ts": "2013-04-25 14:32:00",
+      "historical_symbol": "MCRL",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-D4E8CD312A2AA576",
+      "first_documented_illicit_trade_ts": "2012-01-25 14:51:00",
+      "historical_symbol": "ISSI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-F9E72EEF6E5BD373",
+      "first_documented_illicit_trade_ts": "2015-01-29 15:51:00",
+      "historical_symbol": "NATI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-7F8218B15679F14D",
+      "first_documented_illicit_trade_ts": "2015-04-28 13:59:00",
+      "historical_symbol": "NATI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-2F14F138D09BCA76",
+      "first_documented_illicit_trade_ts": "2012-01-24 13:53:00",
+      "historical_symbol": "IBKC",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-54A5D1D8A5B593C8",
+      "first_documented_illicit_trade_ts": "2015-02-05 15:33:00",
+      "historical_symbol": "NUAN",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-7CA38C1FDA5EA4D0",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:22:00",
+      "historical_symbol": "CENX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-809E53BB4081FBAE",
+      "first_documented_illicit_trade_ts": "2015-04-30 14:48:00",
+      "historical_symbol": "ROVI",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-0AA84E6E44ED02D8",
+      "first_documented_illicit_trade_ts": "2015-02-25 15:57:00",
+      "historical_symbol": "AMSG",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-8A0517D50278EAE4",
+      "first_documented_illicit_trade_ts": "2015-04-29 15:23:00",
+      "historical_symbol": "POWI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-1FCAAB3F7CC931CF",
+      "first_documented_illicit_trade_ts": "2013-04-25 14:07:00",
+      "historical_symbol": "VRSN",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-FBFFFD99898188CF",
+      "first_documented_illicit_trade_ts": "2015-02-12 14:33:00",
+      "historical_symbol": "COLM",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-D7FD00AF94DD8F41",
+      "first_documented_illicit_trade_ts": "2011-04-19 15:50:00",
+      "historical_symbol": "JNPR",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-E61095F8DC4132DE",
+      "first_documented_illicit_trade_ts": "2013-07-23 15:03:00",
+      "historical_symbol": "JNPR",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-F20ECC0C09BBC89E",
+      "first_documented_illicit_trade_ts": "2013-10-22 13:58:00",
+      "historical_symbol": "JNPR",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-06AE65B9C8FB0395",
+      "first_documented_illicit_trade_ts": "2013-04-24 15:28:00",
+      "historical_symbol": "STMP",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-2C887DA6F617936F",
+      "first_documented_illicit_trade_ts": "2013-09-19 15:29:00",
+      "historical_symbol": "TIBX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-E575622C8FDAB71F",
+      "first_documented_illicit_trade_ts": "2013-04-24 14:57:00",
+      "historical_symbol": "ISIL",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-198DE6D99E934F32",
+      "first_documented_illicit_trade_ts": "2011-04-20 14:29:00",
+      "historical_symbol": "EW",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-ED329F780A1085DA",
+      "first_documented_illicit_trade_ts": "2013-04-23 13:28:00",
+      "historical_symbol": "EW",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-BFE8A42E0C19BA39",
+      "first_documented_illicit_trade_ts": "2011-10-26 14:26:00",
+      "historical_symbol": "VDSI",
+      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-947F50EBAFBA54DC",
+      "first_documented_illicit_trade_ts": "2015-02-10 15:55:00",
+      "historical_symbol": "CRL",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-4FB44934BC5C5221",
+      "first_documented_illicit_trade_ts": "2011-08-03 15:56:00",
+      "historical_symbol": "DNDN",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-45559DD90D876D39",
+      "first_documented_illicit_trade_ts": "2015-04-21 14:48:00",
+      "historical_symbol": "ILMN",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-3046057647A0FC5C",
+      "first_documented_illicit_trade_ts": "2015-05-06 15:30:00",
+      "historical_symbol": "BRKR",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-830337A8564B826E",
+      "first_documented_illicit_trade_ts": "2013-10-17 13:43:00",
+      "historical_symbol": "ALGN",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-D6AE4ACB99958A73",
+      "first_documented_illicit_trade_ts": "2015-04-30 14:18:00",
+      "historical_symbol": "SGEN",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-791693865584F9CB",
+      "first_documented_illicit_trade_ts": "2015-04-22 14:29:00",
+      "historical_symbol": "COL",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-74011A906BCCABE9",
+      "first_documented_illicit_trade_ts": "2011-10-27 13:03:00",
+      "historical_symbol": "AGP",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-A3C5C43F6AC75C44",
+      "first_documented_illicit_trade_ts": "2015-05-06 15:47:00",
+      "historical_symbol": "PRU",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-238D29A9B584466D",
+      "first_documented_illicit_trade_ts": "2015-03-31 15:54:00",
+      "historical_symbol": "SNX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-BB62E8864F35DCD0",
+      "first_documented_illicit_trade_ts": "2015-02-25 15:54:00",
+      "historical_symbol": "WLL",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-5408AADD0CBD54E8",
+      "first_documented_illicit_trade_ts": "2015-04-27 15:46:00",
+      "historical_symbol": "CMP",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-3A94836BBC9F224A",
+      "first_documented_illicit_trade_ts": "2011-07-26 13:40:00",
+      "historical_symbol": "TPX",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-22BF36BABB9D19D7",
+      "first_documented_illicit_trade_ts": "2015-02-12 15:55:00",
+      "historical_symbol": "ALNY",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-E28050410A1480C6",
+      "first_documented_illicit_trade_ts": "2015-05-06 14:24:00",
+      "historical_symbol": "DYN",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-0704950C71CFAFB4",
+      "first_documented_illicit_trade_ts": "2015-02-23 15:24:00",
+      "historical_symbol": "TXRH",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-93A7D27EF425EDF0",
+      "first_documented_illicit_trade_ts": "2015-02-18 15:58:00",
+      "historical_symbol": "MIC",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-C926C41F03E66E82",
+      "first_documented_illicit_trade_ts": "2014-12-15 15:36:00",
+      "historical_symbol": "PAY",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-873A37657E58A8CD",
+      "first_documented_illicit_trade_ts": "2015-03-10 15:11:00",
+      "historical_symbol": "PAY",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-99F31DB35F001A44",
+      "first_documented_illicit_trade_ts": "2015-02-25 15:44:00",
+      "historical_symbol": "DXCM",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-CFA461ED8BCCB889",
+      "first_documented_illicit_trade_ts": "2015-04-27 15:29:00",
+      "historical_symbol": "OSK",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-826F68D9DA88B37C",
+      "first_documented_illicit_trade_ts": "2015-02-23 15:58:00",
+      "historical_symbol": "ATRC",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-5ED55A2EAC950921",
+      "first_documented_illicit_trade_ts": "2015-04-22 15:22:00",
+      "historical_symbol": "AMP",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-4D7E68AD113380B3",
+      "first_documented_illicit_trade_ts": "2015-02-23 15:41:00",
+      "historical_symbol": "TRAK",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-20EC97300E6205B9",
+      "first_documented_illicit_trade_ts": "2015-02-12 14:01:00",
+      "historical_symbol": "INWK",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-E4D3EE1A6CB984DB",
+      "first_documented_illicit_trade_ts": "2011-04-26 15:07:00",
+      "historical_symbol": "EHTH",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-9527526FED86FA7D",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:56:00",
+      "historical_symbol": "EHTH",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-749FFC4028DF7B1C",
+      "first_documented_illicit_trade_ts": "2011-04-19 14:56:00",
+      "historical_symbol": "VMW",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-3BBEC23702C1A375",
+      "first_documented_illicit_trade_ts": "2013-07-23 15:35:00",
+      "historical_symbol": "VMW",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-350B3481A9CBBF0E",
+      "first_documented_illicit_trade_ts": "2013-10-21 15:49:00",
+      "historical_symbol": "VMW",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-09EF6AD227D3AC5D",
+      "first_documented_illicit_trade_ts": "2012-07-31 12:21:00",
+      "historical_symbol": "DGI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-A5AE76F13A48C40F",
+      "first_documented_illicit_trade_ts": "2013-05-07 14:29:00",
+      "historical_symbol": "DGI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-A76C746507C0D9AF",
+      "first_documented_illicit_trade_ts": "2015-02-26 15:42:00",
+      "historical_symbol": "DGI",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-C368B17FADFC15C7",
+      "first_documented_illicit_trade_ts": "2013-04-25 14:14:00",
+      "historical_symbol": "ECHO",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-B04F1AF8B6E30A43",
+      "first_documented_illicit_trade_ts": "2015-02-17 15:35:00",
+      "historical_symbol": "CLD",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-DB1E964E02F5921F",
+      "first_documented_illicit_trade_ts": "2015-04-30 15:33:00",
+      "historical_symbol": "CLD",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-5D222F0F8E0C77D0",
+      "first_documented_illicit_trade_ts": "2015-05-04 15:47:00",
+      "historical_symbol": "TW",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-DC002D2C6C767277",
+      "first_documented_illicit_trade_ts": "2011-10-20 15:48:00",
+      "historical_symbol": "MUSA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    },
+    {
+      "event_id": "HEJFE-51F3066EAC9B8138",
+      "first_documented_illicit_trade_ts": "2012-01-26 12:21:00",
+      "historical_symbol": "MUSA",
+      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
+      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
+    }
+  ],
+  "g1_state": {
+    "accounted_for": 174,
+    "blocking_unresolved": 0,
+    "edgar_acceptance_as_exact_release_prohibited": true,
+    "exact_resolved": 36,
+    "exact_timing_analysis_eligible": 36,
+    "excluded_event_asymmetry_prohibited": true,
+    "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
+    "inferred_clock_times_prohibited": true,
+    "raw_exact_time_evidence_gaps": 138,
+    "required": 174,
+    "reviewed_excluded": 138
+  },
+  "original_research_source_semantics": {
+    "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
+    "companion_repository": "vgreg/earnings_news_jar",
+    "constructed_field": "IBES_Timestamp",
+    "required_fields": [
+      "ANNDATS_ACT",
+      "ANNTIMS_ACT"
+    ],
+    "result": "The public companion code confirms exact announcement timing is constructed from proprietary I/B/E/S actual announcement date/time fields; those proprietary rows are not included in the public repositories."
+  },
+  "public_derivative_search": {
+    "queries": [
+      "ANNDATS_ACT ANNTIMS_ACT hacked_earnings_jfe",
+      "IBES_Timestamp hacked earnings",
+      "TimeOfFirstTrade.csv ANNDATS_ACT",
+      "hacked earnings I/B/E/S announcement time dataset"
+    ],
+    "result": "No public derivative containing the 174-event exact I/B/E/S clock-time join was located."
+  },
+  "public_replication_scan": {
+    "events_with_any_clock_time_token": 0,
+    "events_with_candidate_release_files": 160,
+    "events_with_release_context_clock_time": 0,
+    "events_without_candidate_release_files": 14,
+    "result": "Public replication press-release text supplies release dates for many events but no exact first-public release clock times.",
+    "scan_artifact_digest": "sha256:8ebfd63af542c18f9e8fe69a1041a954ea3561338be1b27a7f3b586a199f2712",
+    "scan_artifact_name": "g1-public-replication-8f1fb6a08ac82a61401ba224e44e3f987c4e2059",
+    "scan_head_sha": "8f1fb6a08ac82a61401ba224e44e3f987c4e2059",
+    "scan_workflow_run_id": 36217251076,
+    "source_archive_path": "Data/Press releases/{2011..2015}.zip",
+    "source_repository": "vgreg/hacked_earnings_jfe"
+  },
+  "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
+  "research_use_only": true,
+  "schema_version": "1"
 }
