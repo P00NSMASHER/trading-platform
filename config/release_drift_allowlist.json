@@ -68,12 +68,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "f0600450de1eef3211c9206b0d790af2a2831c1e24e41d094139749ceee0e03e",
-      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
+      "expected_sha256": "18d686451d4c4589514fc9f161768c33773826e1c8197a0de25d789162e70fe5",
+      "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "1621501968a344b128473d8b66010ac72617121b2461a582bf79457782b50851",
-      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
+      "expected_sha256": "eae11cbd9931a1a12499f9f084b804877909cb4f3c8822ea9bccb4486c43a0f5",
+      "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "fd63b6b3a41fbddf72730be5ca0a4d7f9fd9debe8fce5aa060e5a5dbe38ddabb",
-      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
+      "expected_sha256": "7c7e67b04be7845f1a05a97caafd5518233911d6f46409407896602c85b5a888",
+      "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -506,8 +506,8 @@
       "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "3b195c84a1ea44eeab9a08f9d86cf0f379ae6e2b35d5b502899334baf0114d1f",
-      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
+      "expected_sha256": "41a089d444f48a0ca247a25f3ba31c2a889057f47d4232a58494c65b4ef40dfb",
+      "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "65e7b1d9743850570446f5cccf056076354186df0c0e6c247f9cad07288655fd",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "c910d773f5b1a540e2dddcb9adf712829fbbf63e59f4b622c4076b666acf267f",
-      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
+      "expected_sha256": "e7790804643a31e07c943ffc18cc785bbff3f0190065b5063771b7ea5a97b730",
+      "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "6f4be55553495ee1a34705816835ccc3534447b5ca471a36019f9f2f263a8a51",
-      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
+      "expected_sha256": "3a83800c9816df44db7c02708452ea6f6bf1ae9358d095899324089242507fae",
+      "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -642,12 +642,12 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "e1adaee14792fb380e1200b227cdff57e62ae5c4dfda3c13ab0090840c759a83",
-      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
+      "expected_sha256": "d43fe111f7adde46548e8772fe45df4570244e4def96abefd7e6aa6b121660b8",
+      "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
-      "expected_sha256": "bb9c6a2f174305045cbeaf443b72e35794d7eac7100c7efc362af535569341e3",
-      "reason": "Authoritative receipt regeneration from main source commit 3df10ea558af8f886452843b52b836b3523e6bc3 after G1 C. R. Bard batch 0029."
+      "expected_sha256": "e8778826460c9a341d0458f43ce9fe14337c3f460e12f8535735b9396e0ea405",
+      "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "dashboard/index.html": {
       "expected_sha256": "a1cd81f32d3230110cc98fe2cf9b185b19f87915b4be4bca5e0e900a5a215325",
