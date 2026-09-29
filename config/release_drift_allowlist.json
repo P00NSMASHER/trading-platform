@@ -848,6 +848,22 @@
     "data/processed/security_identity_real/security_identity_manifest.json": {
       "expected_sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a",
       "reason": "Current security-identity receipt: 174 event-date identities verified, 3,654 baseline required dates explicitly unverified pending dated stable-ID/security-master crosswalk evidence."
+    },
+    "src/security_identity_acquisition.py": {
+      "expected_sha256": "abde5e36ccb418c6bb35f98ad1ce2c1c798e16c52095f20ca245063eccec5cde",
+      "reason": "Deterministic fail-closed stable-ID acquisition planner for every unresolved PERMNO/date request, with lawful licensed/authorized source lanes and no ticker or corporate-action alias inference."
+    },
+    "tests/test_security_identity_acquisition.py": {
+      "expected_sha256": "0febef36a5e0b64878d0b21f8e04b57f4c1dd6a62d6f8752f568673e5acb9417",
+      "reason": "Regression coverage for deterministic acquisition outputs, exact 3,654/146 state, request identity uniqueness, fail-closed collisions/count drift, and prohibition of ticker/alias shortcuts."
+    },
+    "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
+      "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
+      "reason": "Machine-readable 3,654-row unresolved PERMNO/date security-identity work queue; every row remains pending explicit dated stable-ID evidence."
+    },
+    "data/processed/security_identity_real/security_identity_acquisition_summary.json": {
+      "expected_sha256": "f02d09b110bba5371e5bd28fe5f0d2b31081a12e0e89e74a281033f67924ee12",
+      "reason": "146-security acquisition summary grouping the unresolved dated identity requests and defining primary, secondary, and corroboration-only evidence lanes."
     }
   }
 }
