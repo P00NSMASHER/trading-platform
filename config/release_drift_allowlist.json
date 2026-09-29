@@ -92,8 +92,8 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "6bf06c331abf04265c4b2c0971ae621619009dcb7e401b08127746c5d798ffaa",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "7451fb2aa49dedd0b1ce0d0a399ce04518716066127c3b97e8fb510c702f6f7a",
+      "reason": "Reconcile release-sprint G1 derivatives to authoritative Acadia batch 0031 state (33 exact / 141 reviewed exclusions), preserve Step 9 SOURCE_BLOCKED semantics, and add focused drift regressions."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "aa37aa294b769007ee036022a566e6ecc7026e2901924d015d5762b9c7a40943",
@@ -550,12 +550,12 @@
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
     "src/real_data_release_sprint.py": {
-      "expected_sha256": "db1c4e5a0c7d0bfa282d4cb310c9b330b4a0f194bbc25cdeb2e759c2ea90837c",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "bcab7c2444d9ebb4c7750b15b46b730d1085ea86633e70ba0e9d2961fd8252e1",
+      "reason": "Reconcile release-sprint G1 derivatives to authoritative Acadia batch 0031 state (33 exact / 141 reviewed exclusions), preserve Step 9 SOURCE_BLOCKED semantics, and add focused drift regressions."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "812c59eed1b38625f638f717a4e4edd2faba18c2d245e9422712f01089125cfc",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "7b0b32c5991d92212602491886792d9e57c14e977ecfcb2522895f17a5aee0b2",
+      "reason": "Reconcile release-sprint G1 derivatives to authoritative Acadia batch 0031 state (33 exact / 141 reviewed exclusions), preserve Step 9 SOURCE_BLOCKED semantics, and add focused drift regressions."
     },
     "docs/licensed_data_acquisition.md": {
       "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
@@ -574,8 +574,8 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "242863aeb0a39e44a024750e3e3d6f2f156f47e000f27ceb9eefffb8f2659897",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "1a013940c6415d8f253eca00ac251240d74341752acc84538a118f2ed813e4d2",
+      "reason": "Reconcile release-sprint G1 derivatives to authoritative Acadia batch 0031 state (33 exact / 141 reviewed exclusions), preserve Step 9 SOURCE_BLOCKED semantics, and add focused drift regressions."
     },
     "src/real_data_replay.py": {
       "expected_sha256": "76904827a421ad80a812ec387b9738f3fa64daad6a95361227d83f718ac68ccc",

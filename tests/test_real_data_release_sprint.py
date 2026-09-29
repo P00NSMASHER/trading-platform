@@ -67,6 +67,7 @@ def test_refresh_coverage_uses_current_metadata_subgates(tmp_path: Path):
     assert "G1_EXACT_TIMING_ANALYSIS" in updated["blocking_gates"]
     assert "G5_MODEL_EVALUATION_CONTROLS" in updated["blocking_gates"]
     assert updated["g3_conditioned_itch_event_rows"] == 80
+    assert updated["missing_exact_announcement_timestamps"] == 141
 
 
 def test_status_never_labels_missing_real_sources_complete(tmp_path: Path):
@@ -91,7 +92,10 @@ def test_status_never_labels_missing_real_sources_complete(tmp_path: Path):
         "ready_for_non_synthetic_champion_challenger_comparison": False,
     })
     _write_json(metadata, {
+        "event_count": 174,
         "announcement_exact_resolved": 0,
+        "announcement_events_excluded": 174,
+        "announcement_unresolved": 0,
         "control_dates_resolved": 0,
         "ready_g1_exact_timing_analysis": False,
         "ready_g5_model_evaluation_controls": False,
@@ -121,3 +125,67 @@ def test_status_never_labels_missing_real_sources_complete(tmp_path: Path):
     assert by_step[11] == "DEPENDENCY_BLOCKED"
     assert by_step[12] == "DEPENDENCY_BLOCKED"
     assert status["all_12_genuinely_complete"] is False
+
+
+def test_step9_reviewed_exclusions_never_count_as_exact_completion(tmp_path: Path):
+    req = tmp_path / "req.json"
+    coverage = tmp_path / "coverage.json"
+    metadata = tmp_path / "metadata.json"
+    quality = tmp_path / "quality.json"
+    out = tmp_path / "status.json"
+
+    _write_json(req, {
+        "counts": {
+            "core_equity_source_date_rows": 828,
+            "option_source_date_rows": 828,
+            "g3_confirmed_nasdaq_event_rows": 80,
+        }
+    })
+    _write_json(coverage, {
+        "contract_audit": {
+            "real_authorized_required_rows_covered": 0,
+            "ready_for_real_backfill": False,
+        },
+        "ready_for_non_synthetic_champion_challenger_comparison": False,
+    })
+    _write_json(metadata, {
+        "event_count": 174,
+        "announcement_exact_resolved": 33,
+        "announcement_events_excluded": 141,
+        "announcement_unresolved": 0,
+        "control_dates_resolved": 0,
+        "ready_g1_exact_timing_analysis": True,
+        "ready_g5_model_evaluation_controls": False,
+        "ready_for_non_synthetic_model_evaluation_metadata": False,
+    })
+    _write_json(quality, {
+        "quality_cleared_for_non_synthetic_model_evaluation": False,
+    })
+
+    status = sprint.build_status(
+        requirements_manifest_path=req,
+        coverage_summary_path=coverage,
+        metadata_readiness_path=metadata,
+        metadata_quality_path=quality,
+        outpath=out,
+    )
+    step9 = next(x for x in status["steps"] if x["step"] == 9)
+    assert step9["status"] == "SOURCE_BLOCKED"
+    assert step9["evidence"] == (
+        "exact timestamps=33/174; reviewed fail-closed exclusions=141; "
+        "exclusions do not satisfy Step 9"
+    )
+
+
+def test_committed_status_matches_current_authoritative_inputs(tmp_path: Path):
+    generated = sprint.build_status(
+        requirements_manifest_path=ROOT / "data/processed/real_data_release_sprint/requirements_manifest.json",
+        coverage_summary_path=ROOT / "data/processed/coverage_plan_real/coverage_summary.json",
+        metadata_readiness_path=ROOT / "data/processed/authorized_input_real/metadata_readiness_summary.json",
+        metadata_quality_path=ROOT / "data/processed/authorized_input_real/metadata_quality_summary.json",
+        outpath=tmp_path / "step_status.json",
+    )
+    committed = json.loads(
+        (ROOT / "data/processed/real_data_release_sprint/step_status.json").read_text(encoding="utf-8")
+    )
+    assert generated == committed
