@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0039.yml": {
-      "expected_sha256": "cfcfd5b76a9327e135c775056e8f61678f7f150f67795179aa9278a23d115099",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -698,10 +694,6 @@
     "scripts/control_plane_audit_pack.py": {
       "expected_sha256": "d812008bda0d1d2417d4da140092e89a66ff6077ddcaf4cf6c452503fa590537",
       "reason": "Control-plane Step 8: deterministic exact-head audit-pack generator with semantic security-policy concepts, JUnit, secret, workflow, champion, and release-drift evidence"
-    },
-    "scripts/g1_batch_0039_generate.py": {
-      "expected_sha256": "424e7d14bf346439bc62b42d66d098c253069f42e3e353325d5e1a41dc138494",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
