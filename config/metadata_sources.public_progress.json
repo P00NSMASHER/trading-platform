@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 49 exact release timestamps and 125 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 50 exact release timestamps and 124 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 125,
-    "expected_sha256": "a26e61ed7ebd79fb41e5f9bab8127e73e600d1ecfc5412ae270fcdacd4dff65d",
+    "expected_count": 124,
+    "expected_sha256": "fcebdd3743a78c35c4933763a9ec05a59f933f841b990ff759b298046a7ff8e6",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public StreetInsider-preserved Business Wire publication metadata for Bruker with SEC Exhibit 99.1 corroboration. No licensed vendor data used.",
+      "notes": "BRKR 2015-05-06 16:01 EDT. The 4:45pm earnings call and EDGAR acceptance timestamp are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0039.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-businesswire-preserved-brkr-batch-0039",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {

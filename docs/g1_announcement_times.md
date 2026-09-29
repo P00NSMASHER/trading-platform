@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **38 public exact-time batches / 49 exact-resolved
+The current repository state is **39 public exact-time batches / 50 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -129,3 +129,7 @@ Yahoo Finance preserves the original Marketwired publication metadata for Monarc
 ### Batch 0038: Century Aluminum + eHealth + Gardner Denver
 
 A clustered 2013-04-25 sweep recovered Century Aluminum at 2013-04-25 20:00 UTC, eHealth at 2013-04-25 20:15 UTC, and Gardner Denver at 2013-04-26 13:44 UTC. Yahoo/MarketScreener preserve the Marketwired publication clocks and independent SEC/issuer releases corroborate all three. The clocks are 2,280, 1,140, and 66,420 seconds after the frozen first trades. This advances G1 from 46 exact / 128 reviewed exclusions to 49 exact / 125 reviewed exclusions. Scheduled calls, EDGAR acceptance and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0039: Bruker preserved Business Wire clock
+
+StreetInsider preserves the original Business Wire release for Bruker's first-quarter 2015 results at 2015-05-06 16:01 EDT (20:01 UTC), independently corroborated by SEC Exhibit 99.1. The release is 1,860 seconds after the frozen first trade. This advances G1 from 49 exact / 125 reviewed exclusions to 50 exact / 124 reviewed exclusions. The 4:45pm earnings call, EDGAR acceptance timestamps and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
