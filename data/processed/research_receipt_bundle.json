@@ -1,0 +1,45 @@
+{
+  "bundle_sha256": "37134ae2135b4b2bba43ad6167c977106434601570d3aaa72e1002aa6d5a554e",
+  "input_sha256": {
+    "events": "43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12",
+    "metadata_contract": "65e7b1d9743850570446f5cccf056076354186df0c0e6c247f9cad07288655fd",
+    "replay_config": "03a6165b68d2ca3857ee0d92693af72f6527ec374dce99a1b6fac38516562532",
+    "symbol_date_requirements": "58e05613603b95b806eedb49ede774fce763f5ca7519487bed66282e4fe0a3fb"
+  },
+  "publication_policy": {
+    "all_candidates_validated_before_publish": true,
+    "manifest_published_last": true,
+    "partial_bundle_without_matching_manifest_is_invalid": true,
+    "rollback_on_publish_failure": true,
+    "software_certification_reason": "software certification executes live hostile/runtime checks and is intentionally not a deterministic receipt artifact",
+    "software_readiness_certification_separate": true
+  },
+  "purpose": "Deterministic manifest for one coherent metadata/quality/real-data-replay receipt generation.",
+  "receipt_sha256": {
+    "data/processed/authorized_input_real/announcement_resolutions.csv": "41a089d444f48a0ca247a25f3ba31c2a889057f47d4232a58494c65b4ef40dfb",
+    "data/processed/authorized_input_real/control_universe_readiness.csv": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
+    "data/processed/authorized_input_real/event_exchange_resolutions.csv": "8a0d6c63dd3b1dfbfd0a7f621c5e0cb7eff385e1ede25b5dabe2fc150bf2953e",
+    "data/processed/authorized_input_real/metadata_domain_quality.csv": "3a83800c9816df44db7c02708452ea6f6bf1ae9358d095899324089242507fae",
+    "data/processed/authorized_input_real/metadata_quality_gate.csv": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
+    "data/processed/authorized_input_real/metadata_quality_issues.csv": "51739ea6e3752a946b249895cd3770342c10c4125fb19f89986cc5df6cd8007e",
+    "data/processed/authorized_input_real/metadata_quality_summary.json": "eae11cbd9931a1a12499f9f084b804877909cb4f3c8822ea9bccb4486c43a0f5",
+    "data/processed/authorized_input_real/metadata_quarantine.csv": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/processed/authorized_input_real/metadata_readiness_summary.json": "18d686451d4c4589514fc9f161768c33773826e1c8197a0de25d789162e70fe5",
+    "data/processed/authorized_input_real/metadata_source_inventory.json": "7c7e67b04be7845f1a05a97caafd5518233911d6f46409407896602c85b5a888",
+    "data/processed/authorized_input_real/metadata_unresolved_gates.csv": "e7790804643a31e07c943ffc18cc785bbff3f0190065b5063771b7ea5a97b730",
+    "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
+    "data/processed/real_data_replay/real_data_replay_status.json": "d43fe111f7adde46548e8772fe45df4570244e4def96abefd7e6aa6b121660b8"
+  },
+  "research_use_only": true,
+  "schema_version": "1",
+  "summary": {
+    "announcement_events_excluded": 142,
+    "announcement_exact_resolved": 32,
+    "announcement_unresolved": 0,
+    "control_dates_required": 72,
+    "control_dates_resolved": 0,
+    "evaluation_release_permitted": false,
+    "event_count": 174,
+    "replay_ready": false
+  }
+}
