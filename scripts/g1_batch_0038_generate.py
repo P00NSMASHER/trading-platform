@@ -139,10 +139,10 @@ for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifes
     t=t.replace('"46/174" in step9["evidence"] and "128" in step9["evidence"]','"49/174" in step9["evidence"] and "125" in step9["evidence"]')
     t=t.replace('updated["missing_exact_announcement_timestamps"] == 128','updated["missing_exact_announcement_timestamps"] == 125')
     t=re.sub(r"== 46\b","== 49",t);t=re.sub(r"== 128\b","== 125",t)
-    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 37','state["public_exact_batch_count"] == 37')
+    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 37','state["public_exact_batch_count"] == 38')
     ast.parse(t);p.write_text(t)
 
-p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("36 public exact-time batches / 44 exact-resolved","38 public exact-time batches / 49 exact-resolved")
+p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("37 public exact-time batches / 46 exact-resolved","38 public exact-time batches / 49 exact-resolved")
 t += """
 ### Batch 0038: Century Aluminum + eHealth + Gardner Denver
 
