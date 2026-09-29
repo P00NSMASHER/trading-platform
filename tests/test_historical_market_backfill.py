@@ -429,3 +429,133 @@ def test_build_blocks_before_aggregation_when_source_quality_fails(tmp_path):
     report = json.loads((out / "market_data_quality_report.json").read_text())
     assert report["quality_gate_passed"] is False
     assert not (out / "equity_minutes.csv").exists()
+
+
+def _write_identity_manifest(path, events_path, *, ready, unverified=0):
+    import hashlib
+    h = hashlib.sha256(events_path.read_bytes()).hexdigest()
+    payload = {
+        "schema_version": "1",
+        "sources": {"sha256": {"historical_events": h}},
+        "state": {
+            "ready_for_non_synthetic_market_join": ready,
+            "baseline_identity_unverified_count": unverified,
+            "reasons": [] if ready else ["baseline_point_in_time_security_identity_not_proven"],
+        },
+    }
+    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
+def _write_contract_with_identity(tmp_path, sources, identity_path):
+    p = tmp_path / "contract-with-identity.json"
+    p.write_text(
+        json.dumps({
+            "schema_version": "1",
+            "security_identity_manifest": str(identity_path) if identity_path else "",
+            "sources": sources,
+        }, indent=2),
+        encoding="utf-8",
+    )
+    return p
+
+
+def test_non_synthetic_backfill_cannot_unlock_without_security_identity_manifest(tmp_path):
+    events = tmp_path / "events.csv"
+    events.write_text(
+        "event_id,historical_symbol,first_documented_illicit_trade_ts,research_use_only\n"
+        "E1,TEST,2015-02-17 14:19:00,1\n",
+        encoding="utf-8",
+    )
+    real = source(
+        EX / "equity_trades.csv",
+        source_id="real-eq",
+        family="nyse_daily_taq",
+        kind="equity_trade",
+        classification=NON_SYNTHETIC_CLASS,
+        license_reference="authorized-test-fixture",
+    )
+    contract = _write_contract_with_identity(tmp_path, [real], None)
+    manifest = build(contract, events, tmp_path / "out", pre_minutes=0, post_minutes=0)
+    readiness = manifest["non_synthetic_comparison_readiness"]
+    assert readiness["eligible_for_real_feature_backfill"] is False
+    assert "security_identity_manifest_not_attached" in readiness["reasons"]
+    assert manifest["security_identity_gate"]["attached"] is False
+
+
+def test_ready_security_identity_manifest_allows_real_feature_backfill_gate(tmp_path):
+    events = tmp_path / "events.csv"
+    events.write_text(
+        "event_id,historical_symbol,first_documented_illicit_trade_ts,research_use_only\n"
+        "E1,TEST,2015-02-17 14:19:00,1\n",
+        encoding="utf-8",
+    )
+    identity = tmp_path / "identity.json"
+    _write_identity_manifest(identity, events, ready=True)
+    real = source(
+        EX / "equity_trades.csv",
+        source_id="real-eq",
+        family="nyse_daily_taq",
+        kind="equity_trade",
+        classification=NON_SYNTHETIC_CLASS,
+        license_reference="authorized-test-fixture",
+    )
+    contract = _write_contract_with_identity(tmp_path, [real], identity)
+    manifest = build(contract, events, tmp_path / "out", pre_minutes=0, post_minutes=0)
+    readiness = manifest["non_synthetic_comparison_readiness"]
+    assert readiness["eligible_for_real_feature_backfill"] is True
+    assert manifest["security_identity_gate"]["attached"] is True
+    assert manifest["security_identity_gate"]["ready_for_non_synthetic_market_join"] is True
+
+
+def test_unready_security_identity_manifest_keeps_real_feature_gate_closed(tmp_path):
+    events = tmp_path / "events.csv"
+    events.write_text(
+        "event_id,historical_symbol,first_documented_illicit_trade_ts,research_use_only\n"
+        "E1,TEST,2015-02-17 14:19:00,1\n",
+        encoding="utf-8",
+    )
+    identity = tmp_path / "identity.json"
+    _write_identity_manifest(identity, events, ready=False, unverified=21)
+    real = source(
+        EX / "equity_trades.csv",
+        source_id="real-eq",
+        family="nyse_daily_taq",
+        kind="equity_trade",
+        classification=NON_SYNTHETIC_CLASS,
+        license_reference="authorized-test-fixture",
+    )
+    contract = _write_contract_with_identity(tmp_path, [real], identity)
+    manifest = build(contract, events, tmp_path / "out", pre_minutes=0, post_minutes=0)
+    reasons = manifest["non_synthetic_comparison_readiness"]["reasons"]
+    assert "security_identity_gate_not_ready" in reasons
+    assert "security_identity_unverified_required_dates:21" in reasons
+    assert manifest["non_synthetic_comparison_readiness"]["eligible_for_real_feature_backfill"] is False
+
+
+def test_stale_security_identity_manifest_is_rejected(tmp_path):
+    events = tmp_path / "events.csv"
+    events.write_text(
+        "event_id,historical_symbol,first_documented_illicit_trade_ts,research_use_only\n"
+        "E1,TEST,2015-02-17 14:19:00,1\n",
+        encoding="utf-8",
+    )
+    identity = tmp_path / "identity.json"
+    identity.write_text(
+        json.dumps({
+            "schema_version": "1",
+            "sources": {"sha256": {"historical_events": "0" * 64}},
+            "state": {"ready_for_non_synthetic_market_join": True},
+        }),
+        encoding="utf-8",
+    )
+    real = source(
+        EX / "equity_trades.csv",
+        source_id="real-eq",
+        family="nyse_daily_taq",
+        kind="equity_trade",
+        classification=NON_SYNTHETIC_CLASS,
+        license_reference="authorized-test-fixture",
+    )
+    contract = _write_contract_with_identity(tmp_path, [real], identity)
+    with pytest.raises(ValueError, match="historical_events SHA-256 mismatch"):
+        build(contract, events, tmp_path / "out", pre_minutes=0, post_minutes=0)
