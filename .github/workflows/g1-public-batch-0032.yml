@@ -1,0 +1,294 @@
+name: G1 public batch 0032
+on:
+  push:
+    branches: [g1/public-batch-0032-amd-nvr]
+permissions:
+  contents: write
+concurrency:
+  group: g1-public-batch-0032
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: github.repository == 'P00NSMASHER/trading-platform' && !contains(github.event.head_commit.message, '[g1-generated]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade 'pip==26.2.1'
+          python -m pip install -r requirements.lock -r requirements-dev.lock
+      - name: Recover reviewed primary-source clocks and rebuild receipts
+        run: |
+          python - <<'PY'
+          import copy, csv, hashlib, io, json, os, re, subprocess
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          import g1_source_research as research
+          import g1_acquisition_manifest as acquisition
+          import research_receipt_rebuild as rebuild
+          import real_data_release_sprint as sprint
+          root = Path.cwd()
+          base = 'ea09d64fa029eec7439cc3850dcba5999db0ed1b'
+          batch = Path('data/public/metadata/g1_announcement_times_batch_0032.csv')
+          evidence_path = Path('data/public/metadata/g1_public_batch_0032_evidence.json')
+          assert not batch.exists(), 'Batch already exists; refuse duplicate ingestion'
+          def load(p):
+              return json.loads(Path(p).read_text())
+          def save(p, obj):
+              Path(p).write_text(json.dumps(obj, indent=2, sort_keys=True) + '\n')
+          def sha(p):
+              return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          def rows(p):
+              with Path(p).open(newline='') as f:
+                  return list(csv.DictReader(f))
+          corpus_path = Path('data/processed/historical_events.csv')
+          assert sha(corpus_path) == '43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12'
+          events = rows(corpus_path)
+          meta_dir = Path('data/processed/authorized_input_real')
+          previous = rows(meta_dir / 'announcement_resolutions.csv')
+          previous_exact = {r['event_id']: r for r in previous if r['resolution_status'] == 'resolved_exact_public_timestamp'}
+          assert len(events) == 174 and len(previous_exact) == 33
+          exclusion_path = meta_dir / 'g1_final_timing_exclusions.json'
+          exclusions = load(exclusion_path)
+          assert len(exclusions['exclusions']) == 141
+          hint_path = Path('data/public/metadata/g1_source_research_20260928.json')
+          hints = load(hint_path)
+          items = [
+              {
+                  'historical_symbol': 'AMD',
+                  'first_documented_illicit_trade_ts': '2013-10-17 14:40:00',
+                  'public_announcement_ts': '2013-10-17T16:15:00-04:00',
+                  'publisher_timestamp_text': 'October 17, 2013 16:15 ET',
+                  'release_title': 'AMD Reports 2013 Third Quarter Results',
+                  'source_reference': 'https://www.globenewswire.com/news-release/2013/10/17/1011233/0/en/amd-reports-2013-third-quarter-results.html',
+                  'corroboration_reference': 'https://ir.amd.com/news-events/press-releases/detail/451/amd-reports-2013-third-quarter-results',
+                  'corroboration_basis': 'Issuer archive preserves the matching October 17, 2013 Marketwired earnings release; revenue 1.46 billion and net income 48 million. Publication clock is the wire header, not the 17:30 ET conference call.',
+              },
+              {
+                  'historical_symbol': 'NVR',
+                  'first_documented_illicit_trade_ts': '2012-01-25 15:56:00',
+                  'public_announcement_ts': '2012-01-26T08:50:00-05:00',
+                  'publisher_timestamp_text': 'Jan 26, 2012, 08:50 ET',
+                  'release_title': 'NVR, Inc. Announces Fourth Quarter and Full Year Results',
+                  'source_reference': 'https://www.prnewswire.com/news-releases/nvr-inc-announces-fourth-quarter-and-full-year-results-138117398.html',
+                  'corroboration_reference': 'https://www.sec.gov/Archives/edgar/data/906163/000114420412004052/v300380_ex99-1.htm',
+                  'corroboration_basis': 'SEC Exhibit 99.1 preserves the identical January 26, 2012 issuer release for fourth quarter/full year 2011; net income 32,392,000 and EPS 6.32. EDGAR acceptance time is not used.',
+              },
+          ]
+          source_rows = []
+          for item in items:
+              matching = [r for r in events if r['historical_symbol'] == item['historical_symbol'] and r['first_documented_illicit_trade_ts'] == item['first_documented_illicit_trade_ts']]
+              assert len(matching) == 1, 'Event identity must match uniquely'
+              event = matching[0]
+              eid = event['event_id']
+              assert eid not in previous_exact
+              assert sum(r['event_id'] == eid for r in exclusions['exclusions']) == 1
+              trade = datetime.fromisoformat(item['first_documented_illicit_trade_ts']).replace(tzinfo=ZoneInfo('America/New_York'))
+              release = datetime.fromisoformat(item['public_announcement_ts'])
+              assert release.tzinfo is not None and trade < release <= trade + timedelta(days=7)
+              item.update(event_id=eid, event_date=trade.date().isoformat(), timestamp_kind='first_public_release', timestamp_evidence_kind='publisher_timestamp', source_family='official_newswire_archive', source_grade='A', reviewed_on='2026-09-29', information_asymmetry_seconds=int((release-trade).total_seconds()))
+              probe = dict(item, probe_id='BATCH0032-' + eid, historical_event_match=True, exact_clock_observed=True, exact_public_release_ts=item['public_announcement_ts'], evidence_eligible=True)
+              check_hints = copy.deepcopy(hints)
+              check_hints['validation_probes'].append(probe)
+              research.validate_research_map(check_hints, exclusions)
+              source_rows.append({k: item[k] for k in ['event_id','historical_symbol','event_date','public_announcement_ts','timestamp_kind','source_grade','source_reference']})
+          new_ids = {r['event_id'] for r in source_rows}
+          assert len(new_ids) == 2
+          out = io.StringIO(newline='')
+          w = csv.DictWriter(out, fieldnames=list(source_rows[0]), lineterminator='\n')
+          w.writeheader(); w.writerows(source_rows)
+          batch.write_text(out.getvalue())
+          save(evidence_path, {
+              'schema_version': '1', 'research_use_only': True, 'base_main_sha': base,
+              'evidence_method': 'Direct review of primary public newswire publication headers and independent matching issuer/SEC release text. CI validates normalized evidence, event identity, chronology, receipt reproduction, and fail-closed state; it does not establish web-source truth by itself.',
+              'batch_path': str(batch), 'batch_sha256': sha(batch), 'items': items,
+              'previous_exact_count': 33, 'expected_exact_count_after_batch': 35,
+              'expected_reviewed_exclusions_after_batch': 139,
+              'previous_exact_timestamps': {k: v['public_announcement_ts'] for k,v in previous_exact.items()},
+              'prohibited_substitutes': ['edgar_acceptance_time','scheduled_call_time','archive_capture_time','inferred_clock','date_only'],
+          })
+          exclusions['exclusions'] = [r for r in exclusions['exclusions'] if r['event_id'] not in new_ids]
+          exclusions['base_main_sha'] = base
+          exclusions['g1_state'].update(exact_resolved=35, reviewed_excluded=139, raw_exact_time_evidence_gaps=139, exact_timing_analysis_eligible=35)
+          save(exclusion_path, exclusions)
+          contract_path = Path('config/metadata_sources.public_progress.json')
+          contract = load(contract_path)
+          contract['sources'].insert(0, {
+              'source_id': 'public-original-wire-batch-0032-amd-nvr',
+              'record_kind': 'announcement_timestamp', 'source_family': 'official_newswire_archive',
+              'path': str(batch), 'enabled': True, 'authorized': True, 'data_classification': 'public_official_data',
+              'license_reference': 'Public issuer-authored GlobeNewswire/Marketwired and PR Newswire release metadata. Exact publication headers and independent issuer/SEC corroboration references are retained in g1_public_batch_0032_evidence.json. No licensed I/B/E/S data used or redistributed.',
+              'delimiter': ',', 'encoding': 'utf-8', 'timezone': 'America/New_York',
+              'column_map': {k:k for k in source_rows[0]},
+              'notes': 'AMD 2013-10-17 16:15 ET; NVR 2012-01-26 08:50 ET. Primary release clocks, not scheduled events or filing acceptance times.',
+          })
+          contract['reviewed_announcement_exclusions'].update(expected_count=139, expected_sha256=sha(exclusion_path))
+          contract['purpose'] = contract['purpose'].replace('thirty-three', '35')
+          save(contract_path, contract)
+          hints['base_main_sha'] = base
+          hints['current_g1_state'].update(public_exact_batch_count=32, exact_resolved_event_records=35, reviewed_excluded_event_records=139, note='The repository is at batch_0032; cumulative exact event records are 35 because some public batches resolve more than one historical event.')
+          for item in items:
+              hints['validation_probes'].append({
+                  'probe_id': item['historical_symbol'] + '-batch0032-resolved',
+                  'event_id': item['event_id'], 'historical_symbol': item['historical_symbol'],
+                  'historical_event_match': True, 'exact_clock_observed': True,
+                  'exact_public_release_ts': item['public_announcement_ts'],
+                  'timestamp_kind': 'first_public_release', 'timestamp_evidence_kind': 'publisher_timestamp',
+                  'source_family': 'official_newswire_archive', 'source_reference': item['source_reference'],
+                  'corroboration_reference': item['corroboration_reference'],
+                  'evidence_eligible': False, 'disposition': 'RESOLVED_IN_BATCH_0032',
+                  'reason': 'Promoted through the separately reviewed primary-newswire batch_0032 evidence path. The research hint cannot resolve events by itself.',
+              })
+          save(hint_path, hints)
+          result = rebuild.rebuild(root, publish=True)
+          assert result['after']['up_to_date']
+          fresh = rows(meta_dir / 'announcement_resolutions.csv')
+          by_id = {r['event_id']:r for r in fresh}
+          assert len(by_id) == 174
+          for eid, old in previous_exact.items():
+              assert by_id[eid] == old, 'Previously recovered evidence changed'
+          for item in items:
+              r = by_id[item['event_id']]
+              assert r['resolution_status'] == 'resolved_exact_public_timestamp'
+              assert r['public_announcement_ts'] == datetime.fromisoformat(item['public_announcement_ts']).astimezone(timezone.utc).isoformat().replace('+00:00','Z')
+              assert int(r['information_asymmetry_seconds']) == item['information_asymmetry_seconds']
+          excluded = [r for r in fresh if r['resolution_status'] == 'excluded_fail_closed']
+          assert len(excluded) == 139 and all(not r['public_announcement_ts'] and not r['information_asymmetry_seconds'] for r in excluded)
+          readiness = load(meta_dir / 'metadata_readiness_summary.json')
+          assert readiness['announcement_exact_resolved'] == 35 and readiness['announcement_events_excluded'] == 139
+          assert readiness['ready_g1_exact_timing_analysis'] is False
+          assert readiness['ready_for_non_synthetic_model_evaluation_metadata'] is False
+          acquisition_path = Path('data/public/metadata/g1_acquisition_manifest.json')
+          acquisition_path.write_text(acquisition.render_manifest(acquisition.build_manifest()))
+          sprint_dir = Path('data/processed/real_data_release_sprint')
+          coverage_path = Path('data/processed/coverage_plan_real/coverage_summary.json')
+          sprint.refresh_coverage(coverage_summary_path=coverage_path, metadata_readiness_path=meta_dir/'metadata_readiness_summary.json', metadata_quality_path=meta_dir/'metadata_quality_summary.json', requirements_manifest_path=sprint_dir/'requirements_manifest.json', unresolved_gates_path=coverage_path.parent/'unresolved_gates.csv')
+          status = sprint.build_status(requirements_manifest_path=sprint_dir/'requirements_manifest.json', coverage_summary_path=coverage_path, metadata_readiness_path=meta_dir/'metadata_readiness_summary.json', metadata_quality_path=meta_dir/'metadata_quality_summary.json', outpath=sprint_dir/'step_status.json')
+          assert next(r for r in status['steps'] if r['step']==9)['status'] == 'SOURCE_BLOCKED'
+          assert status['all_12_genuinely_complete'] is False
+          for filename in ['tests/test_g1_source_research.py','tests/test_g1_acquisition_manifest.py']:
+              p = Path(filename); text = p.read_text()
+              text = re.sub(r'== 33\b', '== 35', text)
+              text = re.sub(r'== 141\b', '== 139', text)
+              if filename.endswith('test_g1_source_research.py'):
+                  text = text.replace('state["public_exact_batch_count"] == 31','state["public_exact_batch_count"] == 32')
+              p.write_text(text)
+          p = Path('tests/test_real_data_release_sprint.py')
+          text = p.read_text().replace('updated["missing_exact_announcement_timestamps"] == 141','updated["missing_exact_announcement_timestamps"] == 139')
+          p.write_text(text)
+          p = Path('docs/g1_announcement_times.md')
+          text = p.read_text().replace('31 public exact-time batches / 33 exact-resolved','32 public exact-time batches / 35 exact-resolved')
+          text += '\n### Batch 0032: AMD and NVR primary-newswire recovery\n\nAMD is recovered at 2013-10-17 16:15 ET from the original Marketwired release now hosted by GlobeNewswire, corroborated by AMD\'s issuer archive. NVR is recovered at 2012-01-26 08:50 ET from PR Newswire, corroborated by SEC Exhibit 99.1. This batch advances the canonical accounting from 33 exact / 141 reviewed exclusions to 35 exact / 139 reviewed exclusions. Step 9 and non-synthetic evaluation remain blocked. Source headers, URLs, chronology, and preserved prior timestamps are recorded in `data/public/metadata/g1_public_batch_0032_evidence.json`. No WRDS account, vendor extract, inferred clock, or EDGAR-acceptance-time substitution was used.\n'
+          p.write_text(text)
+          p = Path('tests/test_g1_public_batch_0032.py')
+          p.write_text('''import csv
+          import hashlib
+          import json
+          from datetime import datetime, timedelta
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          import pytest
+          ROOT = Path(__file__).resolve().parents[1]
+          EVIDENCE = ROOT / "data/public/metadata/g1_public_batch_0032_evidence.json"
+          def read_rows(path):
+              with path.open(newline="") as handle:
+                  return list(csv.DictReader(handle))
+          @pytest.mark.parametrize("symbol", ["AMD", "NVR"])
+          def test_batch0032_primary_release_identity_and_chronology(symbol):
+              evidence = json.loads(EVIDENCE.read_text())
+              item = next(r for r in evidence["items"] if r["historical_symbol"] == symbol)
+              event = next(r for r in read_rows(ROOT / "data/processed/historical_events.csv") if r["event_id"] == item["event_id"])
+              assert event["historical_symbol"] == symbol
+              trade = datetime.fromisoformat(event["first_documented_illicit_trade_ts"]).replace(tzinfo=ZoneInfo("America/New_York"))
+              release = datetime.fromisoformat(item["public_announcement_ts"])
+              assert trade < release <= trade + timedelta(days=7)
+              assert int((release-trade).total_seconds()) == item["information_asymmetry_seconds"]
+              resolved = next(r for r in read_rows(ROOT / "data/processed/authorized_input_real/announcement_resolutions.csv") if r["event_id"] == item["event_id"])
+              assert resolved["resolution_status"] == "resolved_exact_public_timestamp"
+              assert datetime.fromisoformat(resolved["public_announcement_ts"].replace("Z", "+00:00")) == release
+              assert resolved["source_reference"] == item["source_reference"]
+              assert item["timestamp_evidence_kind"] == "publisher_timestamp"
+              assert item["corroboration_reference"]
+          def test_batch0032_preserves_previous_exact_clocks_and_blank_exclusions():
+              evidence = json.loads(EVIDENCE.read_text())
+              assert hashlib.sha256((ROOT / evidence["batch_path"]).read_bytes()).hexdigest() == evidence["batch_sha256"]
+              rows = read_rows(ROOT / "data/processed/authorized_input_real/announcement_resolutions.csv")
+              by_id = {r["event_id"]: r for r in rows}
+              assert len(by_id) == 174
+              for eid, timestamp in evidence["previous_exact_timestamps"].items():
+                  assert by_id[eid]["public_announcement_ts"] == timestamp
+                  assert by_id[eid]["resolution_status"] == "resolved_exact_public_timestamp"
+              for r in rows:
+                  if r["resolution_status"] == "excluded_fail_closed":
+                      assert not r["public_announcement_ts"] and not r["information_asymmetry_seconds"]
+          '''.replace('\n          ', '\n'))
+          assert rebuild.rebuild(root, publish=False)['before']['up_to_date']
+          changed = set(subprocess.check_output(['git','diff','--name-only',base], text=True).splitlines())
+          changed.update([str(batch), str(evidence_path), str(p)])
+          allowed = {
+              '.github/workflows/g1-public-batch-0032.yml', 'config/metadata_sources.public_progress.json',
+              str(exclusion_path), str(hint_path), str(acquisition_path), str(batch), str(evidence_path),
+              'data/processed/research_receipt_bundle.json', 'data/processed/real_data_replay/real_data_replay_status.json',
+              str(coverage_path), str(coverage_path.parent/'unresolved_gates.csv'), str(sprint_dir/'step_status.json'),
+              'docs/g1_announcement_times.md', 'tests/test_g1_source_research.py', 'tests/test_g1_acquisition_manifest.py',
+              'tests/test_real_data_release_sprint.py', 'tests/test_g1_public_batch_0032.py',
+          } | {str(meta_dir / name) for name in rebuild.METADATA_RECEIPTS}
+          assert changed <= allowed, 'Unexpected modified paths: ' + str(changed - allowed)
+          allowpath = Path('config/release_drift_allowlist.json'); allow = load(allowpath)
+          reason = 'G1 primary-newswire batch 0032: AMD and NVR exact public release clocks, preserved prior evidence, deterministic 35-exact/139-reviewed-exclusion receipts; all non-synthetic release locks remain fail-closed.'
+          for name in sorted(changed):
+              section = 'intentional_release_modifications' if name in allow['intentional_release_modifications'] else 'repository_additions'
+              allow[section][name] = {'expected_sha256': sha(name), 'reason': reason}
+          save(allowpath, allow)
+          changed.add(str(allowpath))
+          subprocess.run(['git','add','--',*sorted(changed)], check=True)
+          auditdir = Path('private_runtime/audit/g1-batch-0032'); auditdir.mkdir(parents=True, exist_ok=True)
+          save(auditdir/'verification.json', {
+              'base_main_sha': base, 'source_head_sha': os.environ['GITHUB_SHA'],
+              'new_exact_events': items, 'previous_exact_preserved': len(previous_exact),
+              'exact': 35, 'reviewed_excluded': 139, 'required': 174,
+              'step9': 'SOURCE_BLOCKED', 'evaluation_release_permitted': False,
+              'deterministic_rebuild_matches': True,
+              'tracked_change_sha256': {name: sha(name) for name in sorted(changed)},
+          })
+          print(json.dumps({'exact':35,'reviewed_excluded':139,'previous_exact_preserved':33,'new_events':[r['historical_symbol'] for r in items],'step9':'SOURCE_BLOCKED'}, indent=2))
+          PY
+      - name: Harden ephemeral runtime permissions
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+      - name: Test complete candidate tree
+        run: |
+          python scripts/secret_scan.py --root .
+          python -m pytest -q --junitxml=private_runtime/audit/g1-batch-0032/all-tests.xml
+          python -m research_receipt_rebuild --check
+      - name: Publish verified receipts to this branch only
+        run: |
+          test "$GITHUB_REF_NAME" = 'g1/public-batch-0032-amd-nvr'
+          test "$(git ls-remote origin "refs/heads/$GITHUB_REF_NAME" | cut -f1)" = "$GITHUB_SHA"
+          git diff --exit-code
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'G1: recover AMD and NVR original-wire clocks, 35 exact / 139 excluded [g1-generated]'
+          git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
+          git rev-parse HEAD > private_runtime/audit/g1-batch-0032/generated-commit.txt
+      - name: Retain verification evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: g1-public-batch-0032-${{ github.sha }}
+          path: private_runtime/audit/g1-batch-0032
+          if-no-files-found: warn
+          retention-days: 30
