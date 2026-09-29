@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "d30ac479d21509ec8d7db171fde80f8f5fc68437",
+  "base_main_sha": "3433103ea5b1f8111141aad2fc607206a390bedc",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 49,
-    "note": "The repository is at batch_0038; cumulative exact event records are 49 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 38,
+    "exact_resolved_event_records": 50,
+    "note": "The repository is at batch_0039; cumulative exact event records are 50 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 39,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 125
+    "reviewed_excluded_event_records": 124
   },
   "preferred_public_source_families": [
     {
@@ -675,6 +675,31 @@
       "source_family": "preserved_wire_mirror",
       "source_grade": "B",
       "source_reference": "https://www.marketscreener.com/quote/stock/GARDNER-DENVER-INC-12725/news/Gardner-Denver-Inc-Gardner-Denver-Reports-First-Quarter-2013-Results-16778829/",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "MarketScreener preserves the original Business Wire release with an explicit 07:00am EST publication clock; SEC Exhibit 99.1 independently matches Pall Corporation, February 24 2015, second-quarter fiscal 2015 results and $673.8 million sales. The 8:30am conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/75829/000007582915000002/exhibit991_q2fy2015.htm",
+      "disposition": "RESOLVED_IN_BATCH_0039",
+      "event_date": "2015-02-23",
+      "event_id": "HEJFE-36433565499915E2",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-02-24T07:00:00-05:00",
+      "first_documented_illicit_trade_ts": "2015-02-23 15:03:00",
+      "historical_event_match": true,
+      "historical_symbol": "PLL",
+      "information_asymmetry_seconds": 57420,
+      "probe_id": "PLL-batch0037",
+      "public_announcement_ts": "2015-02-24T07:00:00-05:00",
+      "publisher_timestamp_text": "Published on 02/24/2015 at 07:00 am EST",
+      "reason": "Promoted through reviewed preserved-wire evidence with SEC corroboration.",
+      "release_title": "Pall Corporation Reports Second Quarter Results",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://www.marketscreener.com/quote/stock/PALL-CORPORATION-14053/news/Pall-Reports-Second-Quarter-Results-19920739/",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
