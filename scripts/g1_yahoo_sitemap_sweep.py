@@ -92,10 +92,20 @@ def event_identities():
             issuer = [t for t in reversed(rev) if t not in CORP_SUFFIXES and t not in GENERIC]
         # Keep only distinctive issuer terms. Symbol is always an identity fallback.
         issuer = [t for t in issuer if len(t) >= 3]
+        evidence_date = (row.get("evidence_date") or "").strip()
+        source_reference = row.get("source_reference") or ""
+        if not evidence_date:
+            mdate = re.search(r"_(20\\d{6})_", source_reference)
+            if mdate:
+                raw = mdate.group(1)
+                evidence_date = f"{raw[:4]}-{raw[4:6]}-{raw[6:8]}"
         out[eid] = {
             "symbol": sym,
             "issuer_terms": issuer,
             "issuer_phrase": " ".join(issuer),
+            "release_date_hint": evidence_date or None,
+            "evidence_kind": row.get("evidence_kind"),
+            "source_reference": source_reference,
         }
     return out
 
@@ -282,17 +292,25 @@ def known_self_check():
 
 def scan_date(date_str, date_events, identities):
     trades = [datetime.fromisoformat(r["first_documented_illicit_trade_ts"].replace("Z","+00:00")) for r in date_events]
-    earliest = min(trades)
-    date0 = earliest.date()
-    # Same-day: start just before the earliest suspicious trade, through midnight.
-    start1 = earliest.replace(minute=(earliest.minute//15)*15, second=0, microsecond=0) - timedelta(minutes=15)
-    end1 = datetime(date0.year, date0.month, date0.day, 23, 59, 59, tzinfo=timezone.utc)
+    target_day = datetime.strptime(date_str, "%Y-%m-%d").date()
+    same_day_trades = [t for t in trades if t.date() == target_day]
+    if same_day_trades:
+        earliest = min(same_day_trades)
+        start1 = earliest.replace(minute=(earliest.minute//15)*15, second=0, microsecond=0) - timedelta(minutes=15)
+    else:
+        # Evidence-date hints tell us the release day; scan from early U.S. premarket.
+        start1 = datetime(target_day.year, target_day.month, target_day.day, 9, 0, 0, tzinfo=timezone.utc)
+    end1 = datetime(target_day.year, target_day.month, target_day.day, 23, 59, 59, tzinfo=timezone.utc)
     articles1, errors1 = scan_window(date_str, start1, end1, date_events, identities)
-    # Next morning captures releases like Gardner Denver.
-    next_day = date0 + timedelta(days=1)
-    start2 = datetime(next_day.year, next_day.month, next_day.day, 9, 30, 0, tzinfo=timezone.utc)
-    end2 = datetime(next_day.year, next_day.month, next_day.day, 16, 0, 0, tzinfo=timezone.utc)
-    articles2, errors2 = scan_window(next_day.isoformat(), start2, end2, date_events, identities)
+
+    explicit_hint = all(bool(r.get("release_date_hint")) for r in date_events)
+    articles2, errors2 = [], []
+    if not explicit_hint:
+        # Fallback-only events may have been traded the prior afternoon.
+        next_day = target_day + timedelta(days=1)
+        start2 = datetime(next_day.year, next_day.month, next_day.day, 9, 0, 0, tzinfo=timezone.utc)
+        end2 = datetime(next_day.year, next_day.month, next_day.day, 16, 0, 0, tzinfo=timezone.utc)
+        articles2, errors2 = scan_window(next_day.isoformat(), start2, end2, date_events, identities)
 
     dedup = {a["url"]: a for a in articles1 + articles2}
     matches = []
@@ -321,11 +339,17 @@ def main():
     args = ap.parse_args()
 
     rows = [r for r in parse_rows(ANNOUNCEMENTS) if r["resolution_status"] == "excluded_fail_closed"]
-    grouped = defaultdict(list)
-    for r in rows:
-        grouped[r["event_date"]].append(r)
-    selected = sorted(grouped, key=lambda d: (-len(grouped[d]), d))[:args.top_dates]
     identities = event_identities()
+    grouped = defaultdict(list)
+    hinted = 0
+    for row in rows:
+        r = dict(row)
+        hint = identities.get(r["event_id"], {}).get("release_date_hint")
+        if hint:
+            hinted += 1
+        r["release_date_hint"] = hint
+        grouped[hint or r["event_date"]].append(r)
+    selected = sorted(grouped, key=lambda d: (-len(grouped[d]), d))[:args.top_dates]
 
     self_check = known_self_check()
     results = []
@@ -353,6 +377,7 @@ def main():
         "research_use_only": True,
         "method": "Yahoo historical sitemap epoch-window sweep; original/preserved wire candidates only, never auto-promotes G1.",
         "unresolved_event_count": len(rows),
+        "events_with_release_date_hint": hinted,
         "dates_scanned": selected,
         "self_check": self_check,
         "strong_candidate_count": len(strong),
@@ -366,6 +391,7 @@ def main():
     out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({
         "unresolved_event_count": len(rows),
+        "events_with_release_date_hint": hinted,
         "dates_scanned": len(selected),
         "strong_candidate_count": len(strong),
         "review_candidate_count": len(review),
