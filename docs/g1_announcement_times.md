@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **33 public exact-time batches / 36 exact-resolved
+The current repository state is **34 public exact-time batches / 38 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -109,3 +109,7 @@ AMD resolves at 2013-10-17 16:15 Eastern from the original Marketwired distribut
 ### Batch 0033: NVR original-wire recovery
 
 NVR is recovered at 2012-01-26 08:50 ET (13:50 UTC) from PR Newswire's original issuer release, independently corroborated by SEC Exhibit 99.1. The clock is 60,840 seconds after the frozen first trade. This advances 35 exact / 139 reviewed exclusions to 36 exact / 138 reviewed exclusions and preserves every previous exact resolution, including AMD and Haemonetics. Evidence references and prior timestamps are in `data/public/metadata/g1_public_batch_0033_evidence.json`. Step 9 remains SOURCE_BLOCKED; no WRDS or paid vendor extract was used.
+
+### Batch 0034: FleetCor + Starbucks preserved Business Wire clocks
+
+FleetCor is recovered at 2015-04-30 16:01 EDT (20:01 UTC) from a preserved Business Wire publication timestamp, corroborated by SEC Exhibit 99.1. Starbucks is recovered at 2015-01-22 16:03 EST (21:03 UTC) from a preserved Business Wire publication timestamp, corroborated by the Starbucks investor-relations release. These clocks are 1,980 and 9,660 seconds after the frozen first trades respectively. The batch advances G1 from 36 exact / 138 reviewed exclusions to 38 exact / 136 reviewed exclusions. Conference-call times, EDGAR acceptance times, archive capture times and inferred AMC clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.

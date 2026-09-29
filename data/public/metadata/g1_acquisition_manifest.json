@@ -3666,54 +3666,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-A9DB7C5F6FD1D978",
       "event_date": "2015-01-22",
       "event_id": "HEJFE-A9DB7C5F6FD1D978",
       "first_documented_illicit_trade_ts": "2015-01-22T18:22:00Z",
       "historical_symbol": "SBUX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-01-22T21:03:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-businesswire-preserved-flt-sbux-batch-0034",
+        "source_reference": "https://www.marketscreener.com/quote/stock/STARBUCKS-CORPORATION-4905/news/Starbucks-Delivers-Record-Q1-Revenue-and-EPS-19748926/",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-01-29",
-        "start_date": "2015-01-22"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -6806,54 +6776,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-AF58BD8CAE4E8D1C",
       "event_date": "2015-04-30",
       "event_id": "HEJFE-AF58BD8CAE4E8D1C",
       "first_documented_illicit_trade_ts": "2015-04-30T19:28:00Z",
       "historical_symbol": "FLT",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-04-30T20:01:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-businesswire-preserved-flt-sbux-batch-0034",
+        "source_reference": "https://www.marketscreener.com/quote/stock/CORPAY-INC-6996903/news/FleetCor-Technologies-Reports-First-Quarter-2015-Financial-Results-20292810/",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-05-07",
-        "start_date": "2015-04-30"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -7632,7 +7572,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 138,
+    "request_event_count": 136,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -7666,19 +7606,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 138,
+    "acquisition_needed": 136,
     "event_count": 174,
-    "exact_resolved": 36,
-    "research_hint_exact_resolved": 36,
-    "research_hint_excluded": 138,
+    "exact_resolved": 38,
+    "research_hint_exact_resolved": 38,
+    "research_hint_excluded": 136,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
     "explicit_research_priorities": 6,
     "no_public_replication_candidate": 13,
-    "public_release_file_present_without_clock": 125,
-    "resolved_no_action": 36,
-    "routed_for_acquisition": 138
+    "public_release_file_present_without_clock": 123,
+    "resolved_no_action": 38,
+    "routed_for_acquisition": 136
   },
   "work_queue": [
     {
@@ -8540,19 +8480,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-A9DB7C5F6FD1D978",
-      "event_date": "2015-01-22",
-      "event_id": "HEJFE-A9DB7C5F6FD1D978",
-      "historical_symbol": "SBUX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-334BAA0D940A418A",
       "event_date": "2015-01-28",
       "event_id": "HEJFE-334BAA0D940A418A",
@@ -9090,19 +9017,6 @@
       "event_date": "2015-04-29",
       "event_id": "HEJFE-B9C8B3D0EF3DCB5E",
       "historical_symbol": "CACI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-AF58BD8CAE4E8D1C",
-      "event_date": "2015-04-30",
-      "event_id": "HEJFE-AF58BD8CAE4E8D1C",
-      "historical_symbol": "FLT",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,

@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "88dfa6fa4f69a6c9f33714edca92442376dfc8d4",
+  "base_main_sha": "67419540d90b9bc136b9b226201fc9c70670327d",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 36,
-    "note": "The repository is at batch_0033; cumulative exact event records are 36 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 33,
+    "exact_resolved_event_records": 38,
+    "note": "The repository is at batch_0034; cumulative exact event records are 38 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 34,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 138
+    "reviewed_excluded_event_records": 136
   },
   "preferred_public_source_families": [
     {
@@ -350,6 +350,56 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news-releases/nvr-inc-announces-fourth-quarter-and-full-year-results-138117398.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "SEC Exhibit 99.1 independently matches FleetCor, April 30 2015, first-quarter 2015 results, $416.2 million revenue and $1.00 diluted EPS. EDGAR acceptance and the 5:00pm conference-call time are not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1175454/000119312515161924/d919557dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0034",
+      "event_date": "2015-04-30",
+      "event_id": "HEJFE-AF58BD8CAE4E8D1C",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-04-30T16:01:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-04-30 15:28:00",
+      "historical_event_match": true,
+      "historical_symbol": "FLT",
+      "information_asymmetry_seconds": 1980,
+      "probe_id": "FLT-batch0034",
+      "public_announcement_ts": "2015-04-30T16:01:00-04:00",
+      "publisher_timestamp_text": "Published on 04/30/2015 at 04:01 pm EDT",
+      "reason": "Promoted through separately reviewed preserved Business Wire evidence with independent issuer/SEC corroboration. This research hint cannot resolve events by itself.",
+      "release_title": "FleetCor Reports First Quarter 2015 Financial Results",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://www.marketscreener.com/quote/stock/CORPAY-INC-6996903/news/FleetCor-Technologies-Reports-First-Quarter-2015-Financial-Results-20292810/",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Starbucks investor-relations copy independently matches the January 22 2015 Business Wire release, quarter ended December 28 2014, record $4.8 billion revenue and $1.30 GAAP EPS. No scheduled call time is used.",
+      "corroboration_reference": "https://investor.starbucks.com/news/financial-releases/news-details/2015/Starbucks-Delivers-Record-Q1-Revenue-and-EPS/default.aspx",
+      "disposition": "RESOLVED_IN_BATCH_0034",
+      "event_date": "2015-01-22",
+      "event_id": "HEJFE-A9DB7C5F6FD1D978",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-01-22T16:03:00-05:00",
+      "first_documented_illicit_trade_ts": "2015-01-22 13:22:00",
+      "historical_event_match": true,
+      "historical_symbol": "SBUX",
+      "information_asymmetry_seconds": 9660,
+      "probe_id": "SBUX-batch0034",
+      "public_announcement_ts": "2015-01-22T16:03:00-05:00",
+      "publisher_timestamp_text": "Published on 01/22/2015 at 04:03 pm EST",
+      "reason": "Promoted through separately reviewed preserved Business Wire evidence with independent issuer/SEC corroboration. This research hint cannot resolve events by itself.",
+      "release_title": "Starbucks Delivers Record Q1 Revenue and EPS",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://www.marketscreener.com/quote/stock/STARBUCKS-CORPORATION-4905/news/Starbucks-Delivers-Record-Q1-Revenue-and-EPS-19748926/",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
