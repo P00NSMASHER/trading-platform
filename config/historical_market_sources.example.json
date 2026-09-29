@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "purpose": "Template only. Replace paths and mappings with lawfully obtained historical market data. For non-synthetic event-aligned evaluation, set security_identity_manifest to a current ready manifest.",
+  "purpose": "Template only. Replace paths and mappings with lawfully obtained historical market data.",
   "sources": [
     {
       "source_id": "example_taq_trades",
@@ -131,6 +131,5 @@
         "new_order_reference": "new_order_reference"
       }
     }
-  ],
-  "security_identity_manifest": ""
+  ]
 }
