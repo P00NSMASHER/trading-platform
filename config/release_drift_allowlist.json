@@ -318,8 +318,8 @@
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "949645db79ce612090fe41165870ca8518099257a1a0d3a996fe803625f9a72c",
-      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
+      "expected_sha256": "4b21fb0483470b5aa35971900fd351f0139c1adc19e6794d6c45534032da3421",
+      "reason": "G1 Acadia Healthcare batch 0031: add preserved Business Wire exact release clock at 2015-04-28 16:00 EDT, SEC-corroborated; advance G1 from 32 to 33 exact records and source research from 30 to 31 public batches without weakening fail-closed semantics."
     },
     "config/metadata_sources.g3_public.json": {
       "expected_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "6b283e678138a480b63369cf7d8d8a877e113368ac0213c5dc97b056a2843118",
-      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
+      "expected_sha256": "ab78d119c8a222a665751930050461a20593eafc0dcb59056ae0822191d146db",
+      "reason": "G1 Acadia Healthcare batch 0031: add preserved Business Wire exact release clock at 2015-04-28 16:00 EDT, SEC-corroborated; advance G1 from 32 to 33 exact records and source research from 30 to 31 public batches without weakening fail-closed semantics."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "bc79721043a99ed9b3b6d8f53f5b025487cbc637d5298a3420a7c25bb3bc5eea",
-      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
+      "expected_sha256": "6a865d7a76afa33b39636202b4cf590c1de8e2dc7204a4f6d22d6988533639e4",
+      "reason": "G1 Acadia Healthcare batch 0031: add preserved Business Wire exact release clock at 2015-04-28 16:00 EDT, SEC-corroborated; advance G1 from 32 to 33 exact records and source research from 30 to 31 public batches without weakening fail-closed semantics."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
       "expected_sha256": "41a089d444f48a0ca247a25f3ba31c2a889057f47d4232a58494c65b4ef40dfb",
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "65e7b1d9743850570446f5cccf056076354186df0c0e6c247f9cad07288655fd",
-      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
+      "expected_sha256": "a25f0cf83876c8e9892e64f47f35d028df41e4234fa69012a2d58dfc8ef008ba",
+      "reason": "G1 Acadia Healthcare batch 0031: add preserved Business Wire exact release clock at 2015-04-28 16:00 EDT, SEC-corroborated; advance G1 from 32 to 33 exact records and source research from 30 to 31 public batches without weakening fail-closed semantics."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -758,16 +758,16 @@
       "reason": "G1 batch 0025 evidence row for Ford: SEC-hosted issuer earnings exhibit explicitly states a 7:00 a.m. EST first-public results release on January 29, 2015; graded A."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "82cf9ac8f51b7c530ab95151c1e641b2899322656a42858368746b332163e4f8",
-      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
+      "expected_sha256": "6fd550db1c27a31277e1e585e505728e8fade285fdc72ca542a38aa28ba7a9e8",
+      "reason": "G1 Acadia Healthcare batch 0031: add preserved Business Wire exact release clock at 2015-04-28 16:00 EDT, SEC-corroborated; advance G1 from 32 to 33 exact records and source research from 30 to 31 public batches without weakening fail-closed semantics."
     },
     "src/g1_source_research.py": {
       "expected_sha256": "34dd8d8e07bdb10c82b30caba2145d6e30493d1f27ec9f68a68e1e937e086ed2",
       "reason": "G1 research promotion hardening: independently validate event identity, timezone-aware first-public-release timestamp semantics, admissible source family, source reference, chronology, seven-calendar-day window, and mirror corroboration."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "e28369d00b26b48805dac24763140f1be60d69d31352bbc29b76d02ba2cd5141",
-      "reason": "G1 Ryder batch 0030: add issuer-hosted exact newsroom timestamp at 2015-02-03 08:55 America/New_York, SEC-corroborated; advance G1 from 31 to 32 exact records and source research from 29 to 30 public batches without weakening fail-closed semantics."
+      "expected_sha256": "765b423ce7d46027e40c19a4752c792d5c1ab3348ac254acbe0347108f24f53d",
+      "reason": "G1 Acadia Healthcare batch 0031: add preserved Business Wire exact release clock at 2015-04-28 16:00 EDT, SEC-corroborated; advance G1 from 32 to 33 exact records and source research from 30 to 31 public batches without weakening fail-closed semantics."
     },
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
@@ -820,6 +820,10 @@
     "data/processed/research_receipt_bundle.json": {
       "expected_sha256": "dc93fd0f525859116d381198ef19aadf68ffea42fc91a25eb14561eb509c0c6b",
       "reason": "Deterministic manifest binding one coherent metadata/quality/real-data-replay receipt generation to exact input and receipt SHA-256 identities."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0031.csv": {
+      "expected_sha256": "5c997dcc805c9e5df65bac36213726c1550d852492cd26271288688ceb528491",
+      "reason": "G1 batch 0031 evidence row for ACHC: StreetInsider-preserved Business Wire timestamp at 2015-04-28 4:00 PM EDT, SEC-corroborated and intentionally graded B."
     }
   }
 }
