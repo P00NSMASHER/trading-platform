@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "1eede6ec44132d2897d205793c1b98dd97c47a16e6a9d0ab6b5935954d121586",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "170d0d9190fe4c55a50d6770c1f1cf746c6ec23dba16593e8bc4b78c6da41dca",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "d960dcb137aff147c441c9435dd1a1fd1663c5471fffd652dd5376138c93e829",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "74a39726552930bd0997f082c547271af23ffbb5d0678ab092d2cec8abf29d05",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "35ec748b321a7ba3fa9afc7fd99a7b1fff37a052c104159ea901b9f86fa2b432",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "eede95ff6b7cd7bc98e973fb8a69e9e6e3e1f4cb763a3ff7dcc4667423ab7598",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -152,8 +152,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "aa6b32a35da757dd5f5466775c3922dbe9575c338eb25a5c3a7a41cc8c17e2d5",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "ef06168fd598c8420336f0bcb4d04927c15e371a51039d6373293baf10e2cfea",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +172,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "363396b2ac27cc2fa33e4ebf577d0bf5272bf327e44f00ea31642a5e2ca3a568",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "949008b4bac95722e1746246241150f448995024153f9f2e59a08345f0acb72b",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +184,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "f73352edb4cb3bf53f46bf4722d00f074e40b1ded094871255cacd556f8d501e",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "4858024ff6d37861122fdfad874ec89f12833c5bdc463e8384ec10386ff70c4d",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +240,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "d0fcb6191ac175e35667389a4d4fe7edac2702999c724b6dfdd6becdbb94807d",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "44c0899e4c0c0a13f93e703728b0ead2dd17033c8fe2f98776b779eb40583be3",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +256,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "e70097209e25e186b695753add9e344da326395e39d1c4c56fb724c599c9fa6b",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "a1797091ec67a0cb176ee8147f33d826de168232ce4efa09e45272a666d5e0da",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "9c4a691f21a5e574a1190879eaee86c47eed63030b256f60708e9e6c2abf959e",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "5ecdb805b26aae6581f32459eb789d5e65f2ba4083d1675d5efdc58c21d7e8aa",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +292,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "09fde9bfb701f8e028877b0d074338f5c907678384a31d7208d9cf8d9c0ed339",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "44e19eebe0a0e1c6405c7053f112e843b7184df398651ea305176dc27944d0bf",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "491de197d593d40b3a6cefd81f99d9c7e8d04bf6146ab92fee993c355f4cff8a",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "b1cb3ba2fcfffffff896b62f97de6d0fdba42196f8b112574fe99055abd0f490",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "280cb31640e81629e211dda3bb27326c81101a3e045bda76b75be7b7851b9ae2",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "5b5f5daaf2df329d31ebecece5f90c7599a0ab22bd7932056573cef2d2fb8d76",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +320,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "a3c195a58f4dba90dafe0b4ebb99a4e50c860c6ab63246b4439a4c20ea324f2b",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "953cc9d20e30a25b64588941ccca6eef9f437658f101994372705afeda93f990",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -463,6 +463,10 @@
       "expected_sha256": "4bf18da5e49ad1a80ef05278ecb50aca1f14e2437e61ef815919993fe9795270",
       "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
     },
+    "data/public/metadata/g1_announcement_times_batch_0035.csv": {
+      "expected_sha256": "104d819343e5eb27f05e9823bfc01a24cf43072baecc0d7152aa40953c00b65a",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -471,9 +475,13 @@
       "expected_sha256": "179a0ebae151ae7772769d15d2ccc3f148cd7740fdf0267860018be7042c34d2",
       "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
     },
+    "data/public/metadata/g1_public_batch_0035_evidence.json": {
+      "expected_sha256": "a63e1653f1f9e936bcd353e976c2d78d7ca0b495dc3b541abedb9fe726309468",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "963512e742564f33880691ea5e8530281384218b2ddd625bfeff110a82302575",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "866f3b70530097b7bb69309078884f9a508d470371a674e5cad8ff8355036212",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -592,8 +600,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "3509f333d2c21543d01448b3fff0d56b1cfaa2f822e5bb17d3808a05e9b1e4f6",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "e0e4eb01fcfe1585826bc107411ecc9b05229491c791dd894aaf6f903575d354",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -812,28 +820,32 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "9cdd9de0c1304e01caedea538220e5a36e5c2016a98935b52cd70c67aa835655",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "8a71a8a003ab162dfebcd642408bbc22aa5079a8aea3dfd6a0101b89d975710b",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "e72b6406a5f71fe4bab4be3e3166d85687dff160cf09743229419fef6235964e",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "5592278e12bf73bde5bfc9f25ff3fbe31f69763c3071635e9d9c34c3e5474d65",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "98a5df2837e339e7c465e916f5691c6b898ac6adf0df28ea10de3396062d9397",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "746744a1df43c9c2fb9dc4c45f20e14d9a198a2b62d373d2ed555a32dfc57cc0",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+    },
+    "tests/test_g1_public_batch_0035.py": {
+      "expected_sha256": "305dcf7d73943a0b3f3ceba1e056db09abe0bd8382880af78d58c3befb384be2",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "b2cde8ec4cb8891cb602d93ad362a9296a3b56e15d26dc0be8b061e00ddf345f",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "84165e3ff76f25226f4080b9030b9ea05320c280d65691b2dae670f6e95ab317",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -860,8 +872,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "7338177bf531c069395f6704eaf2f7b577463bf936f50ae5242674819b7e29ce",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
+      "expected_sha256": "47f4ced7ab10b21a72804e9a3a7e9ae9a901e4ee16fee6bc0ea8b2f1fb93add5",
+      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

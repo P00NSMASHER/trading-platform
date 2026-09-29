@@ -9,17 +9,19 @@ ROOT=Path(__file__).resolve().parents[1]
 def read_rows(path):
     with path.open(newline="",encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
-def test_batch_0034_exact_clocks_and_event_match():
-    dossier=json.loads((ROOT/"data/public/metadata/g1_public_batch_0034_evidence.json").read_text())
+def test_batch_0035_exact_clocks_and_event_match():
+    dossier=json.loads((ROOT/"data/public/metadata/g1_public_batch_0035_evidence.json").read_text())
     events={r["event_id"]:r for r in read_rows(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in read_rows(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     expected={
-        "HEJFE-AF58BD8CAE4E8D1C":("FLT","2015-04-30T20:01:00Z",1980,"04:01 pm EDT"),
-        "HEJFE-A9DB7C5F6FD1D978":("SBUX","2015-01-22T21:03:00Z",9660,"04:03 pm EST"),
+        "HEJFE-9B43F5B767ECD0FA":("MTH","2013-04-24T12:00:00Z",63360,"A"),
+        "HEJFE-2D6ABDFDE39E5919":("MTH","2013-07-24T11:00:00Z",56520,"A"),
+        "HEJFE-6C73B4B05384BC1E":("PFPT","2013-04-25T20:05:00Z",3900,"B"),
+        "HEJFE-1FCAAB3F7CC931CF":("VRSN","2013-04-25T20:05:00Z",7080,"B"),
     }
-    assert len(dossier["items"])==2
+    assert len(dossier["items"])==4
     for item in dossier["items"]:
-        symbol,utc,delta,clock=expected[item["event_id"]]
+        symbol,utc,delta,grade=expected[item["event_id"]]
         event=events[item["event_id"]]
         trade=datetime.fromisoformat(event["first_documented_illicit_trade_ts"]).replace(tzinfo=ZoneInfo("America/New_York"))
         release=datetime.fromisoformat(item["public_announcement_ts"])
@@ -28,12 +30,10 @@ def test_batch_0034_exact_clocks_and_event_match():
         assert int((release-trade).total_seconds())==delta
         assert resolved[item["event_id"]]["public_announcement_ts"]==utc
         assert resolved[item["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
-        assert resolved[item["event_id"]]["source_grade"]=="B"
-        assert clock in item["publisher_timestamp_text"]
-        assert item["source_family"]=="preserved_wire_mirror"
+        assert resolved[item["event_id"]]["source_grade"]==grade
         assert item["corroboration_reference"].startswith("https://")
-def test_batch_0034_hash_prior_evidence_and_fail_closed_remainder():
-    dossier=json.loads((ROOT/"data/public/metadata/g1_public_batch_0034_evidence.json").read_text())
+def test_batch_0035_hash_prior_evidence_and_fail_closed_remainder():
+    dossier=json.loads((ROOT/"data/public/metadata/g1_public_batch_0035_evidence.json").read_text())
     assert hashlib.sha256((ROOT/dossier["batch_path"]).read_bytes()).hexdigest()==dossier["batch_sha256"]
     by_id={r["event_id"]:r for r in read_rows(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     assert len(by_id)==174

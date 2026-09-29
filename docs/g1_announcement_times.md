@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **34 public exact-time batches / 38 exact-resolved
+The current repository state is **35 public exact-time batches / 42 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -113,3 +113,7 @@ NVR is recovered at 2012-01-26 08:50 ET (13:50 UTC) from PR Newswire's original 
 ### Batch 0034: FleetCor + Starbucks preserved Business Wire clocks
 
 FleetCor is recovered at 2015-04-30 16:01 EDT (20:01 UTC) from a preserved Business Wire publication timestamp, corroborated by SEC Exhibit 99.1. Starbucks is recovered at 2015-01-22 16:03 EST (21:03 UTC) from a preserved Business Wire publication timestamp, corroborated by the Starbucks investor-relations release. These clocks are 1,980 and 9,660 seconds after the frozen first trades respectively. The batch advances G1 from 36 exact / 138 reviewed exclusions to 38 exact / 136 reviewed exclusions. Conference-call times, EDGAR acceptance times, archive capture times and inferred AMC clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0035: Meritage x2 + Proofpoint + VeriSign
+
+Meritage's own investor-relations archive supplies exact first-public clocks of 2013-04-24 08:00 EDT for Q1 and 2013-07-24 07:00 EDT for Q2. Preserved Yahoo copies of the original Marketwired releases supply 2013-04-25 20:05 UTC for both Proofpoint and VeriSign, independently corroborated by SEC Exhibit 99.1 copies. The four releases are 63,360, 56,520, 3,900 and 7,080 seconds after their frozen first trades respectively. This advances G1 from 38 exact / 136 reviewed exclusions to 42 exact / 132 reviewed exclusions. Scheduled conference-call times, EDGAR acceptance times, date-only pages and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
