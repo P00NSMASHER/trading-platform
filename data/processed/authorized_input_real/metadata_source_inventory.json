@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-ryder-issuer-20150203",
+    "record_kind": "announcement_timestamp",
+    "source_family": "official_newswire_archive",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0030.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "46ab2af9aaeafb3a289f407277362fd89348ef38fea6867574bbf24dfd44c47a",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-businesswire-bcr-verified-mirror-20150129",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
