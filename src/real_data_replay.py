@@ -126,7 +126,12 @@ def _stage(status: str, **details: Any) -> dict[str, Any]:
     return {"status": status, **details}
 
 
-def run_replay(config_path: Path, *, require_ready: bool = False) -> dict[str, Any]:
+def run_replay(
+    config_path: Path,
+    *,
+    require_ready: bool = False,
+    output_dir_override: Path | None = None,
+) -> dict[str, Any]:
     cfg = _read_json(config_path)
     if str(cfg.get("schema_version")) != "1":
         raise ValueError("real-data replay config schema_version must equal '1'")
@@ -138,9 +143,15 @@ def run_replay(config_path: Path, *, require_ready: bool = False) -> dict[str, A
     metadata_contract = _require_file(
         _resolve_config_path(cfg.get("metadata_contract"), config_path=config_path), "metadata contract"
     )
-    output_dir = _resolve_config_path(cfg.get("output_dir"), config_path=config_path)
-    if output_dir is None:
+    configured_output_dir = _resolve_config_path(cfg.get("output_dir"), config_path=config_path)
+    if configured_output_dir is None:
         raise ValueError("output_dir is required")
+    logical_output_dir = configured_output_dir
+    output_dir = (
+        Path(output_dir_override).resolve()
+        if output_dir_override is not None
+        else configured_output_dir
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
 
     graph_db = _resolve_config_path(cfg.get("graph_db"), config_path=config_path)
@@ -372,7 +383,10 @@ def run_replay(config_path: Path, *, require_ready: bool = False) -> dict[str, A
                 if control_metadata is not None and control_metadata.exists() else None
             ),
         },
-        "shares_materialization": shares,
+        "shares_materialization": {
+            **shares,
+            "path": str(logical_output_dir / "derived" / "shares_for_baselines.csv"),
+        },
         "stages": stages,
         "blocking_stages": blockers,
         "ready_for_non_synthetic_offline_evaluation": ready,
