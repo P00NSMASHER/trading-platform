@@ -52,8 +52,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "src/evaluation_release_controller.py": {
-      "expected_sha256": "1555faa85eeddf60922abeeface711b5811ec4c9163c63513a3150c08bc2d75f",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+      "expected_sha256": "44b4143eb95cc2ed115cad51dc6b40aa12c46220685eeb6e32f5ca6b405073f8",
+      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
     },
     "tests/test_metadata_resolver.py": {
       "expected_sha256": "f6aab4bc7d5a32c3e215c8a4a47c218c2fb24a824acff924cc4a391adafc587c",
@@ -64,8 +64,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "tests/test_evaluation_release_controller.py": {
-      "expected_sha256": "df3fb8ccd7e326a7748604e044a85afddc129e7f73d7737318be5a94af15cbcf",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+      "expected_sha256": "322079365adc67b068f88fc6e3ba1ea0b5a3e6700eba93c80aa6e629c2beabee",
+      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
       "expected_sha256": "d8b8215661fbd53f661336d4ead178e95cc93d7760c852021f36b83539545fc5",
@@ -578,12 +578,12 @@
       "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
     },
     "src/real_data_replay.py": {
-      "expected_sha256": "76904827a421ad80a812ec387b9738f3fa64daad6a95361227d83f718ac68ccc",
-      "reason": "Permanent receipt rebuild support: allow staging replay output while keeping logical receipt paths bound to the configured publication location."
+      "expected_sha256": "438ef2f5b9cd5d986f74c974b3715524e7bf37a0ba4876b044d8cde58af0489d",
+      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
     },
     "tests/test_real_data_replay.py": {
-      "expected_sha256": "aadfb2950052a4383ca2932ad2b8e73f2c878f4d68637aed803c44a510c338cb",
-      "reason": "Regression coverage for staged real-data replay output with canonical logical receipt paths."
+      "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
+      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",

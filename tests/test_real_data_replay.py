@@ -101,3 +101,32 @@ def test_output_dir_override_stages_without_changing_logical_receipt_paths(tmp_p
     assert result["shares_materialization"]["path"] == str(
         published / "derived" / "shares_for_baselines.csv"
     )
+
+
+def test_market_release_readiness_requires_stable_security_identity():
+    manifest = {
+        "non_synthetic_comparison_readiness": {
+            "eligible_for_champion_challenger_unlock": True,
+        },
+        "security_identity_gate": {
+            "attached": True,
+            "ready_for_non_synthetic_market_join": False,
+            "baseline_identity_unverified_count": 3654,
+            "sha256": "a" * 64,
+        },
+    }
+    blocked = replay._market_release_readiness(manifest)
+    assert blocked["ready"] is False
+    assert blocked["backfill_unlock"] is True
+    assert blocked["identity_ready"] is False
+    assert blocked["baseline_identity_unverified_count"] == 3654
+
+    manifest["security_identity_gate"].update({
+        "ready_for_non_synthetic_market_join": True,
+        "baseline_identity_unverified_count": 0,
+    })
+    ready = replay._market_release_readiness(manifest)
+    assert ready["ready"] is True
+
+    manifest["non_synthetic_comparison_readiness"]["eligible_for_champion_challenger_unlock"] = False
+    assert replay._market_release_readiness(manifest)["ready"] is False

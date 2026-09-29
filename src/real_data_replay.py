@@ -126,6 +126,44 @@ def _stage(status: str, **details: Any) -> dict[str, Any]:
     return {"status": status, **details}
 
 
+def _market_release_readiness(market_manifest: dict[str, Any] | None) -> dict[str, Any]:
+    if market_manifest is None:
+        return {
+            "ready": False,
+            "backfill_unlock": False,
+            "identity_attached": False,
+            "identity_ready": False,
+            "baseline_identity_unverified_count": None,
+            "identity_sha_present": False,
+        }
+    backfill = market_manifest.get("non_synthetic_comparison_readiness") or {}
+    identity = market_manifest.get("security_identity_gate") or {}
+    backfill_unlock = bool(backfill.get("eligible_for_champion_challenger_unlock"))
+    identity_attached = bool(identity.get("attached"))
+    identity_ready = bool(identity.get("ready_for_non_synthetic_market_join"))
+    raw_unverified = identity.get("baseline_identity_unverified_count")
+    try:
+        unverified = int(raw_unverified) if raw_unverified is not None else None
+    except (TypeError, ValueError):
+        unverified = None
+    identity_sha_present = bool(str(identity.get("sha256", "")).strip())
+    ready = (
+        backfill_unlock
+        and identity_attached
+        and identity_ready
+        and unverified == 0
+        and identity_sha_present
+    )
+    return {
+        "ready": ready,
+        "backfill_unlock": backfill_unlock,
+        "identity_attached": identity_attached,
+        "identity_ready": identity_ready,
+        "baseline_identity_unverified_count": unverified,
+        "identity_sha_present": identity_sha_present,
+    }
+
+
 def run_replay(
     config_path: Path,
     *,
@@ -307,8 +345,10 @@ def run_replay(
             reason="control_metadata_not_supplied" if control_metadata is None else "features_not_ready",
         )
 
+    market_release = _market_release_readiness(market_manifest)
     real_eval_inputs_ready = (
-        bool(audit.get("ready_for_real_backfill"))
+        market_release["ready"]
+        and bool(audit.get("ready_for_real_backfill"))
         and bool(readiness.get("ready_g1_exact_timing_analysis"))
         and bool(readiness.get("ready_g5_model_evaluation_controls"))
         and bool(quality.get("quality_cleared_for_non_synthetic_model_evaluation"))

@@ -142,6 +142,39 @@ def _market_checks(checks: list[GateCheck], coverage: dict, market_manifest: dic
     )
     checks.append(GateCheck("G2_REAL_MARKET_DATA", "market_data", ok, "READY" if ok else "BLOCKED", detail))
 
+    policy = market_manifest.get("source_contract_policy") or {}
+    identity = market_manifest.get("security_identity_gate") or {}
+    identity_required = bool(policy.get("stable_security_identity_gate_required_for_non_synthetic_unlock"))
+    identity_attached = bool(identity.get("attached"))
+    identity_ready = bool(identity.get("ready_for_non_synthetic_market_join"))
+    raw_unverified = identity.get("baseline_identity_unverified_count")
+    try:
+        identity_unverified = int(raw_unverified) if raw_unverified is not None else None
+    except (TypeError, ValueError):
+        identity_unverified = None
+    identity_path_present = bool(str(identity.get("path", "")).strip())
+    identity_sha_present = bool(str(identity.get("sha256", "")).strip())
+    identity_ok = (
+        identity_required
+        and identity_attached
+        and identity_ready
+        and identity_unverified == 0
+        and identity_path_present
+        and identity_sha_present
+    )
+    identity_detail = (
+        f"policy_required={identity_required}; attached={identity_attached}; ready={identity_ready}; "
+        f"baseline_unverified={identity_unverified}; path_present={identity_path_present}; "
+        f"sha256_present={identity_sha_present}"
+    )
+    checks.append(GateCheck(
+        "G2_STABLE_SECURITY_IDENTITY",
+        "market_identity",
+        identity_ok,
+        "READY" if identity_ok else "BLOCKED",
+        identity_detail,
+    ))
+
 
 def _temporal_feature_checks(checks: list[GateCheck], base_features: Path, graph_features: Path) -> None:
     base_rows = _read_csv(base_features)
