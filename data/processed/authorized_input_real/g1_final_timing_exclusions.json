@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "88dfa6fa4f69a6c9f33714edca92442376dfc8d4",
+  "base_main_sha": "67419540d90b9bc136b9b226201fc9c70670327d",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -62,13 +62,6 @@
       "event_id": "HEJFE-D7BD84C255F2273D",
       "first_documented_illicit_trade_ts": "2013-05-08 15:58:00",
       "historical_symbol": "GORO",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-AF58BD8CAE4E8D1C",
-      "first_documented_illicit_trade_ts": "2015-04-30 15:28:00",
-      "historical_symbol": "FLT",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -483,13 +476,6 @@
       "first_documented_illicit_trade_ts": "2015-03-10 14:58:00",
       "historical_symbol": "KOPN",
       "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-A9DB7C5F6FD1D978",
-      "first_documented_illicit_trade_ts": "2015-01-22 13:22:00",
-      "historical_symbol": "SBUX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
@@ -1001,14 +987,14 @@
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 36,
-    "exact_timing_analysis_eligible": 36,
+    "exact_resolved": 38,
+    "exact_timing_analysis_eligible": 38,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 138,
+    "raw_exact_time_evidence_gaps": 136,
     "required": 174,
-    "reviewed_excluded": 138
+    "reviewed_excluded": 136
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
