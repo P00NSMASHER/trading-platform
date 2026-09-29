@@ -38,6 +38,10 @@ ALLOWED_SOURCE_FAMILIES = {
 NON_SYNTHETIC_CLASS = "authorized_historical_market_data"
 SYNTHETIC_CLASS = "synthetic_fixture"
 
+QUALITY_SCHEMA_VERSION = "1"
+QUALITY_SAMPLE_LIMIT = 100
+QUALITY_STALE_QUOTE_SECONDS = 30
+
 
 @dataclass(frozen=True)
 class SourceContract:
@@ -409,6 +413,383 @@ def inspect_source_coverage(spec: SourceContract, *, expected_trade_date: str, r
         "observed_symbol_count": len(observed),
         "missing_required_symbols": missing,
         "content_coverage_valid": matching_date_rows > 0 and not missing,
+    }
+
+
+
+def _fractional_second_digits(value: str) -> int:
+    value = _clean(value)
+    if not value:
+        return 0
+    time_part = value.split("T", 1)[-1] if "T" in value else value.rsplit(" ", 1)[-1]
+    if "." not in time_part:
+        return 0
+    fraction = time_part.split(".", 1)[1]
+    digits = 0
+    for char in fraction:
+        if not char.isdigit():
+            break
+        digits += 1
+    return digits
+
+
+def _record_quality_issue(report: dict, *, severity: str, code: str, row_number: int, detail: str) -> None:
+    severity = severity.upper()
+    report["issue_counts"][code] = int(report["issue_counts"].get(code, 0)) + 1
+    key = "blocking_issue_count" if severity == "ERROR" else "warning_issue_count"
+    report[key] += 1
+    if len(report["sample_issues"]) < QUALITY_SAMPLE_LIMIT:
+        report["sample_issues"].append({
+            "severity": severity,
+            "code": code,
+            "row_number": row_number,
+            "detail": detail,
+        })
+
+
+def _market_event_fingerprint(event: mda.NormalizedMarketEvent) -> tuple[object, ...]:
+    return (
+        event.event_kind, event.event_ts_utc, event.symbol, event.underlying_symbol,
+        event.price, event.size, event.bid, event.ask, event.bid_size, event.ask_size,
+        event.option_symbol, event.expiration, event.strike, event.option_type,
+        event.exchange, event.conditions,
+    )
+
+
+def assess_source_quality(spec: SourceContract) -> dict:
+    report = {
+        "schema_version": QUALITY_SCHEMA_VERSION,
+        "source_id": spec.source_id,
+        "source_family": spec.source_family,
+        "record_kind": spec.record_kind,
+        "rows_scanned": 0,
+        "blocking_issue_count": 0,
+        "warning_issue_count": 0,
+        "issue_counts": {},
+        "sample_issues": [],
+        "quality_gate_passed": True,
+    }
+    seen_raw: set[tuple[tuple[str, str], ...]] = set()
+    seen_events: set[tuple[object, ...]] = set()
+    sequence_column = spec.column_map.get("sequence")
+    previous_sequence: int | None = None
+    previous_timestamp: datetime | None = None
+    orders: dict[str, int] = {}
+    seen_matches: set[str] = set()
+    active_matches: set[str] = set()
+
+    for row_number, row in _open_dict_rows(spec):
+        report["rows_scanned"] += 1
+        raw_fingerprint = tuple(sorted(row.items()))
+        if raw_fingerprint in seen_raw:
+            _record_quality_issue(
+                report, severity="ERROR", code="DUPLICATE_SOURCE_ROW",
+                row_number=row_number,
+                detail="exact duplicate source row would double-count market activity",
+            )
+        else:
+            seen_raw.add(raw_fingerprint)
+
+        try:
+            raw_ts = _compose_timestamp(row, spec)
+            frac_digits = _fractional_second_digits(raw_ts)
+            if frac_digits > 6:
+                _record_quality_issue(
+                    report, severity="ERROR", code="UNSUPPORTED_SUBMICROSECOND_TIMESTAMP",
+                    row_number=row_number,
+                    detail=f"timestamp has {frac_digits} fractional digits; silent truncation is forbidden",
+                )
+            parsed_ts = mda._parse_timestamp(raw_ts, spec.timezone, row_number=row_number)
+            if spec.trade_date:
+                local_date = parsed_ts.astimezone(ZoneInfo(spec.timezone)).date().isoformat()
+                if local_date != spec.trade_date:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="DECLARED_TRADE_DATE_MISMATCH",
+                        row_number=row_number,
+                        detail=f"row local date {local_date} != declared trade_date {spec.trade_date}",
+                    )
+            if previous_timestamp is not None and parsed_ts < previous_timestamp:
+                _record_quality_issue(
+                    report, severity="WARNING", code="SOURCE_TIMESTAMP_REGRESSION",
+                    row_number=row_number,
+                    detail="source-file timestamp moved backward; canonical sorting repairs order but source order is non-monotonic",
+                )
+            previous_timestamp = parsed_ts
+
+            if sequence_column:
+                raw_sequence = _clean(row.get(sequence_column))
+                if not raw_sequence:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="SEQUENCE_MISSING",
+                        row_number=row_number,
+                        detail=f"explicitly mapped sequence column {sequence_column!r} is blank",
+                    )
+                else:
+                    sequence = _parse_int(raw_sequence, field="sequence", row_number=row_number)
+                    if sequence < 0:
+                        raise ValueError(f"row {row_number}: sequence must be >= 0")
+                    if previous_sequence is not None:
+                        if sequence <= previous_sequence:
+                            _record_quality_issue(
+                                report, severity="ERROR", code="SEQUENCE_NOT_STRICTLY_INCREASING",
+                                row_number=row_number,
+                                detail=f"sequence {sequence} follows {previous_sequence}",
+                            )
+                        elif sequence != previous_sequence + 1:
+                            _record_quality_issue(
+                                report, severity="ERROR", code="SEQUENCE_GAP",
+                                row_number=row_number,
+                                detail=f"sequence jumped from {previous_sequence} to {sequence}",
+                            )
+                    previous_sequence = sequence
+
+            if spec.record_kind != "itch_decoded":
+                mapped = _map_market_row(row, spec)
+                if spec.record_kind.endswith("trade"):
+                    event = mda._trade_event(
+                        mapped, kind=spec.record_kind, input_tz=spec.timezone,
+                        source_name=spec.source_id, row_number=row_number,
+                    )
+                else:
+                    event = mda._quote_event(
+                        mapped, kind=spec.record_kind, input_tz=spec.timezone,
+                        source_name=spec.source_id, row_number=row_number,
+                    )
+                event_fingerprint = _market_event_fingerprint(event)
+                if event_fingerprint in seen_events:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="DUPLICATE_MARKET_EVENT",
+                        row_number=row_number,
+                        detail="canonical market event duplicates an earlier row in the same source",
+                    )
+                else:
+                    seen_events.add(event_fingerprint)
+                continue
+
+            message_type = _mapped(row, spec, "message_type").upper()
+            order_ref = _mapped(row, spec, "order_reference")
+            if not message_type:
+                _record_quality_issue(
+                    report, severity="ERROR", code="ITCH_MESSAGE_TYPE_MISSING",
+                    row_number=row_number, detail="decoded ITCH row has blank message_type",
+                )
+                continue
+
+            if message_type in {"A", "F", "ADD", "ADD_ORDER"}:
+                if not order_ref:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_ADD_MISSING_ORDER_REFERENCE",
+                        row_number=row_number, detail="add-order message has no order reference",
+                    )
+                    continue
+                if order_ref in orders:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_DUPLICATE_ACTIVE_ORDER",
+                        row_number=row_number, detail=f"order reference {order_ref} was added twice",
+                    )
+                    continue
+                shares = _parse_int(_mapped(row, spec, "shares"), field="shares", row_number=row_number)
+                price = _parse_float(_mapped(row, spec, "price"), field="price", row_number=row_number)
+                if shares <= 0 or price <= 0:
+                    raise ValueError(f"row {row_number}: ITCH add-order shares/price must be > 0")
+                orders[order_ref] = shares
+                continue
+
+            if message_type in {"X", "CANCEL"}:
+                if order_ref not in orders:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_UNKNOWN_CANCEL",
+                        row_number=row_number, detail=f"cancel references unknown order {order_ref}",
+                    )
+                    continue
+                cancelled = _parse_int(
+                    _mapped(row, spec, "cancelled_shares") or _mapped(row, spec, "shares"),
+                    field="cancelled_shares", row_number=row_number,
+                )
+                remaining = orders[order_ref]
+                if cancelled <= 0 or cancelled > remaining:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_OVER_CANCEL",
+                        row_number=row_number,
+                        detail=f"cancelled_shares={cancelled} is invalid for remaining_shares={remaining}",
+                    )
+                else:
+                    orders[order_ref] = remaining - cancelled
+                continue
+
+            if message_type in {"D", "DELETE"}:
+                if order_ref not in orders:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_UNKNOWN_DELETE",
+                        row_number=row_number, detail=f"delete references unknown order {order_ref}",
+                    )
+                else:
+                    orders.pop(order_ref, None)
+                continue
+
+            if message_type in {"U", "REPLACE"}:
+                new_ref = _mapped(row, spec, "new_order_reference")
+                if order_ref not in orders:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_UNKNOWN_REPLACE",
+                        row_number=row_number, detail=f"replace references unknown order {order_ref}",
+                    )
+                    continue
+                if not new_ref:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_REPLACE_MISSING_NEW_REFERENCE",
+                        row_number=row_number, detail="replace lacks new_order_reference",
+                    )
+                    continue
+                if new_ref in orders:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_REPLACE_COLLISION",
+                        row_number=row_number, detail=f"new order reference {new_ref} is already active",
+                    )
+                    continue
+                shares_raw = _mapped(row, spec, "shares")
+                shares = (
+                    _parse_int(shares_raw, field="shares", row_number=row_number)
+                    if shares_raw else orders[order_ref]
+                )
+                if shares <= 0:
+                    raise ValueError(f"row {row_number}: replacement shares must be > 0")
+                orders.pop(order_ref, None)
+                orders[new_ref] = shares
+                continue
+
+            if message_type in {"E", "C", "EXECUTE", "EXECUTE_WITH_PRICE"}:
+                if order_ref not in orders:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_UNKNOWN_EXECUTION",
+                        row_number=row_number, detail=f"execution references unknown order {order_ref}",
+                    )
+                    continue
+                executed = _parse_int(
+                    _mapped(row, spec, "executed_shares") or _mapped(row, spec, "shares"),
+                    field="executed_shares", row_number=row_number,
+                )
+                remaining = orders[order_ref]
+                if executed <= 0 or executed > remaining:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_OVER_EXECUTION",
+                        row_number=row_number,
+                        detail=f"executed_shares={executed} is invalid for remaining_shares={remaining}",
+                    )
+                else:
+                    orders[order_ref] = remaining - executed
+                match_number = _mapped(row, spec, "match_number")
+                if not match_number:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_EXECUTION_MISSING_MATCH_NUMBER",
+                        row_number=row_number, detail="execution lacks match_number",
+                    )
+                elif match_number in seen_matches:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_DUPLICATE_MATCH_NUMBER",
+                        row_number=row_number, detail=f"match_number {match_number} was already observed",
+                    )
+                else:
+                    seen_matches.add(match_number)
+                    active_matches.add(match_number)
+                continue
+
+            if message_type in {"B", "TRADE_BREAK"}:
+                match_number = _mapped(row, spec, "match_number")
+                if not match_number or match_number not in active_matches:
+                    _record_quality_issue(
+                        report, severity="ERROR", code="ITCH_UNKNOWN_TRADE_BREAK",
+                        row_number=row_number,
+                        detail=f"trade break references unknown/previously broken match {match_number!r}",
+                    )
+                else:
+                    active_matches.remove(match_number)
+
+        except Exception as exc:
+            _record_quality_issue(
+                report, severity="ERROR", code="ROW_PARSE_ERROR",
+                row_number=row_number, detail=str(exc),
+            )
+
+    report["issue_counts"] = dict(sorted(report["issue_counts"].items()))
+    report["quality_gate_passed"] = report["blocking_issue_count"] == 0
+    return report
+
+
+def assess_market_data_quality(specs: Iterable[SourceContract]) -> dict:
+    reports = [assess_source_quality(spec) for spec in specs]
+    blocking = sum(int(row["blocking_issue_count"]) for row in reports)
+    warnings = sum(int(row["warning_issue_count"]) for row in reports)
+    return {
+        "schema_version": QUALITY_SCHEMA_VERSION,
+        "purpose": "Fail-closed pre-aggregation integrity audit for authorized historical market data.",
+        "source_count": len(reports),
+        "blocking_issue_count": blocking,
+        "warning_issue_count": warnings,
+        "quality_gate_passed": blocking == 0,
+        "sources": reports,
+        "policy": {
+            "duplicate_rows_block": True,
+            "declared_trade_date_mismatch_blocks": True,
+            "explicit_mapped_sequence_gap_blocks": True,
+            "itch_state_transition_errors_block": True,
+            "unsupported_submicrosecond_timestamp_blocks": True,
+            "source_timestamp_regression_warns": True,
+            "stale_quotes_are_measured_not_fabricated": True,
+        },
+    }
+
+
+def assess_normalized_market_quality(
+    events: Iterable[mda.NormalizedMarketEvent],
+    *,
+    stale_quote_seconds: int = QUALITY_STALE_QUOTE_SECONDS,
+) -> dict:
+    if stale_quote_seconds < 0:
+        raise ValueError("stale_quote_seconds must be >= 0")
+    rows = list(events)
+    ordered = sorted(
+        rows,
+        key=lambda e: (
+            _parse_utc(e.event_ts_utc),
+            0 if e.event_kind == "equity_quote" else 1,
+            e.symbol,
+            e.source_row_number,
+        ),
+    )
+    last_quote: dict[str, datetime] = {}
+    trade_count = fresh = stale = no_quote = 0
+    max_age = 0.0
+    for event in ordered:
+        if event.event_kind == "equity_quote":
+            last_quote[event.symbol] = _parse_utc(event.event_ts_utc)
+            continue
+        if event.event_kind != "equity_trade":
+            continue
+        trade_count += 1
+        ts = _parse_utc(event.event_ts_utc)
+        prior = last_quote.get(event.symbol)
+        if prior is None:
+            no_quote += 1
+            continue
+        age = max(0.0, (ts - prior).total_seconds())
+        max_age = max(max_age, age)
+        if age > stale_quote_seconds:
+            stale += 1
+        else:
+            fresh += 1
+    return {
+        "stale_quote_threshold_seconds": stale_quote_seconds,
+        "equity_trade_count": trade_count,
+        "fresh_quote_trade_count": fresh,
+        "trade_with_stale_quote_count": stale,
+        "trade_without_prior_quote_count": no_quote,
+        "max_prior_quote_age_seconds": max_age,
+        "warning_count": stale + no_quote,
+        "policy": (
+            "Stale/missing prior quotes are never substituted with future quotes for point-in-time "
+            "effective-spread signing; the existing microstructure path leaves them unsigned."
+        ),
     }
 
 
@@ -810,12 +1191,39 @@ def build(contract_path: Path, events_path: Path, output_dir: Path, *, pre_minut
     events = load_events(events_path)
     shares = load_shares(shares_file)
 
+    source_quality = assess_market_data_quality(specs)
+    if not source_quality["quality_gate_passed"]:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / "market_data_quality_report.json").write_text(
+            json.dumps(source_quality, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        codes = sorted({
+            issue["code"]
+            for source in source_quality["sources"]
+            for issue in source["sample_issues"]
+            if issue["severity"] == "ERROR"
+        })
+        raise ValueError(
+            "market-data quality gate blocked before aggregation: "
+            + ",".join(codes[:12])
+        )
+
     market_events: list[mda.NormalizedMarketEvent] = []
     itch_execs: list[ItchExecution] = []
     for spec in specs:
         market_events.extend(load_market_events(spec))
         itch_execs.extend(load_itch_executions(spec))
     market_events.sort(key=lambda e: (e.event_ts_utc, e.event_kind, e.symbol, e.option_symbol, e.source_row_number))
+    normalized_quality = assess_normalized_market_quality(market_events)
+    quality_report = {
+        **source_quality,
+        "normalized_market_quality": normalized_quality,
+        "warning_issue_count": (
+            int(source_quality["warning_issue_count"])
+            + int(normalized_quality["warning_count"])
+        ),
+    }
 
     equity_minutes = mda.aggregate_equity_minutes(market_events)
     option_minutes = mda.aggregate_option_minutes(market_events)
@@ -828,6 +1236,10 @@ def build(contract_path: Path, events_path: Path, output_dir: Path, *, pre_minut
     coverage = [EventCoverage(**{**asdict(c), "non_synthetic_authorized_sources": len(non_synthetic_ids)}) for c in coverage]
 
     output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / "market_data_quality_report.json").write_text(
+        json.dumps(quality_report, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     mda.write_records(market_events, output_dir / "normalized_market_events.csv")
     mda.write_records(equity_minutes, output_dir / "equity_minutes.csv")
     mda.write_records(option_minutes, output_dir / "option_minutes.csv")
@@ -870,6 +1282,8 @@ def build(contract_path: Path, events_path: Path, output_dir: Path, *, pre_minut
             "credentials_stored_in_contract": False,
             "explicit_column_mapping": True,
             "raw_itch_binary_policy": "Raw binary is not parsed here; use an authorized decoder and provide decoded events with the ITCH specification version recorded.",
+            "market_data_quality_gate_required_before_aggregation": True,
+            "sequence_continuity_enforced_when_explicitly_mapped": True,
         },
         "alignment": {
             "anchor": "first_documented_illicit_trade_ts",
@@ -884,6 +1298,16 @@ def build(contract_path: Path, events_path: Path, output_dir: Path, *, pre_minut
             "itch_execution_count": len(itch_execs),
             "order_flow_minute_count": len(order_flow_minutes),
             "event_panel_row_count": len(panel),
+        },
+        "market_data_quality": {
+            "report_path": "market_data_quality_report.json",
+            "quality_gate_passed": bool(source_quality["quality_gate_passed"]),
+            "blocking_issue_count": int(source_quality["blocking_issue_count"]),
+            "warning_issue_count": int(quality_report["warning_issue_count"]),
+            "stale_quote_threshold_seconds": int(normalized_quality["stale_quote_threshold_seconds"]),
+            "equity_trade_count": int(normalized_quality["equity_trade_count"]),
+            "trade_with_stale_quote_count": int(normalized_quality["trade_with_stale_quote_count"]),
+            "trade_without_prior_quote_count": int(normalized_quality["trade_without_prior_quote_count"]),
         },
         "microstructure_policy": {
             "taq_trade_signing": "quote-midpoint rule with tick-rule fallback; an inferred public-market proxy, not known trader identity",
