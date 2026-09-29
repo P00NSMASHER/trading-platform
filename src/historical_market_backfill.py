@@ -203,6 +203,63 @@ def _read_json(path: Path) -> dict:
     return obj
 
 
+def _load_security_identity_gate(
+    raw_contract: dict,
+    contract_path: Path,
+    events_path: Path,
+) -> dict:
+    raw_path = _clean(raw_contract.get("security_identity_manifest"))
+    if not raw_path:
+        return {
+            "attached": False,
+            "ready_for_non_synthetic_market_join": False,
+            "reasons": ["security_identity_manifest_not_attached"],
+            "baseline_identity_unverified_count": None,
+            "path": None,
+            "sha256": None,
+        }
+
+    path = Path(raw_path)
+    if not path.is_absolute():
+        path = (contract_path.parent / path).resolve()
+    if not path.exists():
+        raise FileNotFoundError(
+            f"security_identity_manifest does not exist: {path}"
+        )
+
+    payload = _read_json(path)
+    if payload.get("schema_version") != "1":
+        raise ValueError("security identity manifest schema_version must equal '1'")
+    sources = payload.get("sources") or {}
+    source_hashes = sources.get("sha256") or {}
+    expected_events_sha = _clean(source_hashes.get("historical_events"))
+    current_events_sha = _sha256(events_path)
+    if not expected_events_sha:
+        raise ValueError("security identity manifest is missing historical_events SHA-256")
+    if expected_events_sha != current_events_sha:
+        raise ValueError(
+            "security identity manifest historical_events SHA-256 mismatch"
+        )
+
+    state = payload.get("state") or {}
+    ready = bool(state.get("ready_for_non_synthetic_market_join"))
+    unverified = state.get("baseline_identity_unverified_count")
+    if unverified is not None:
+        unverified = int(unverified)
+    reasons = [str(x) for x in (state.get("reasons") or [])]
+    if not ready and not reasons:
+        reasons = ["security_identity_gate_not_ready"]
+
+    return {
+        "attached": True,
+        "ready_for_non_synthetic_market_join": ready,
+        "reasons": reasons,
+        "baseline_identity_unverified_count": unverified,
+        "path": str(path),
+        "sha256": _sha256(path),
+    }
+
+
 def _safe_delimiter(value: str) -> str:
     if value in {"comma", ","}:
         return ","
@@ -1190,6 +1247,9 @@ def build(contract_path: Path, events_path: Path, output_dir: Path, *, pre_minut
     specs, raw_contract = load_contract(contract_path)
     events = load_events(events_path)
     shares = load_shares(shares_file)
+    security_identity_gate = _load_security_identity_gate(
+        raw_contract, contract_path, events_path
+    )
 
     source_quality = assess_market_data_quality(specs)
     if not source_quality["quality_gate_passed"]:
@@ -1249,10 +1309,26 @@ def build(contract_path: Path, events_path: Path, output_dir: Path, *, pre_minut
     write_records(panel, output_dir / "event_minute_panel.csv")
     write_records(coverage, output_dir / "event_coverage.csv")
 
-    eligible = bool(non_synthetic_ids) and any(c.equity_minutes_present > 0 for c in coverage)
+    identity_ready = bool(
+        security_identity_gate["ready_for_non_synthetic_market_join"]
+    )
+    eligible = (
+        bool(non_synthetic_ids)
+        and any(c.equity_minutes_present > 0 for c in coverage)
+        and identity_ready
+    )
     readiness_reasons = []
     if not non_synthetic_ids:
         readiness_reasons.append("no_non_synthetic_authorized_market_source_present")
+    elif not security_identity_gate["attached"]:
+        readiness_reasons.append("security_identity_manifest_not_attached")
+    elif not identity_ready:
+        readiness_reasons.append("security_identity_gate_not_ready")
+        if security_identity_gate["baseline_identity_unverified_count"] is not None:
+            readiness_reasons.append(
+                "security_identity_unverified_required_dates:"
+                + str(security_identity_gate["baseline_identity_unverified_count"])
+            )
     if not any(c.equity_minutes_present > 0 for c in coverage):
         readiness_reasons.append("no_equity_minute_coverage_for_historical_events")
     if not any(c.option_minutes_present > 0 for c in coverage):
@@ -1284,6 +1360,7 @@ def build(contract_path: Path, events_path: Path, output_dir: Path, *, pre_minut
             "raw_itch_binary_policy": "Raw binary is not parsed here; use an authorized decoder and provide decoded events with the ITCH specification version recorded.",
             "market_data_quality_gate_required_before_aggregation": True,
             "sequence_continuity_enforced_when_explicitly_mapped": True,
+            "stable_security_identity_gate_required_for_non_synthetic_unlock": True,
         },
         "alignment": {
             "anchor": "first_documented_illicit_trade_ts",
@@ -1299,6 +1376,7 @@ def build(contract_path: Path, events_path: Path, output_dir: Path, *, pre_minut
             "order_flow_minute_count": len(order_flow_minutes),
             "event_panel_row_count": len(panel),
         },
+        "security_identity_gate": security_identity_gate,
         "market_data_quality": {
             "report_path": "market_data_quality_report.json",
             "quality_gate_passed": bool(source_quality["quality_gate_passed"]),
