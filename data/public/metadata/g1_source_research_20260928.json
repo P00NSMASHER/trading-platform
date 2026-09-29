@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "2f73f5b0507b5b654ea7a0950c9a892bc4fc459f",
+  "base_main_sha": "d30ac479d21509ec8d7db171fde80f8f5fc68437",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 46,
-    "note": "The repository is at batch_0037; cumulative exact event records are 46 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 37,
+    "exact_resolved_event_records": 49,
+    "note": "The repository is at batch_0038; cumulative exact event records are 49 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 38,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 128
+    "reviewed_excluded_event_records": 125
   },
   "preferred_public_source_families": [
     {
@@ -600,6 +600,81 @@
       "source_family": "preserved_wire_mirror",
       "source_grade": "B",
       "source_reference": "https://finance.yahoo.com/news/stamps-com-announces-record-non-203000566.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Yahoo preserves the original Marketwired release with published_date 2013-04-25T20:00:00Z; the filed 8-K/Exhibit 99.1 independently matches Century Aluminum, April 25 2013, first-quarter results and $321.3 million sales. The 5:00pm conference call is not used.",
+      "corroboration_reference": "https://www.globenewswire.com/news-release/2013/04/26/541953/0/is/files/253109/0/CENTURYALUMINUM_8K_20130425.pdf",
+      "disposition": "RESOLVED_IN_BATCH_0038",
+      "event_date": "2013-04-25",
+      "event_id": "HEJFE-7CA38C1FDA5EA4D0",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-25T16:00:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:22:00",
+      "historical_event_match": true,
+      "historical_symbol": "CENX",
+      "information_asymmetry_seconds": 2280,
+      "probe_id": "CENX-batch0037",
+      "public_announcement_ts": "2013-04-25T16:00:00-04:00",
+      "publisher_timestamp_text": "2013-04-25T20:00:00Z",
+      "reason": "Promoted through reviewed preserved-wire evidence with SEC corroboration.",
+      "release_title": "Century Reports First Quarter 2013 Results",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://finance.yahoo.com/news/century-reports-first-quarter-2013-200000479.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Yahoo preserves the original Marketwired release with published_date 2013-04-25T20:15:00Z; SEC Exhibit 99.1 independently matches eHealth, April 25 2013, first-quarter results and $43.2 million revenue. The 5:00pm conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1333493/000133349313000042/ehth-20130425ex991843dc3.htm",
+      "disposition": "RESOLVED_IN_BATCH_0038",
+      "event_date": "2013-04-25",
+      "event_id": "HEJFE-9527526FED86FA7D",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-25T16:15:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:56:00",
+      "historical_event_match": true,
+      "historical_symbol": "EHTH",
+      "information_asymmetry_seconds": 1140,
+      "probe_id": "EHTH-batch0037",
+      "public_announcement_ts": "2013-04-25T16:15:00-04:00",
+      "publisher_timestamp_text": "2013-04-25T20:15:00Z",
+      "reason": "Promoted through reviewed preserved-wire evidence with SEC corroboration.",
+      "release_title": "eHealth, Inc. Announces First Quarter 2013 Results",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://finance.yahoo.com/news/ehealth-inc-announces-first-quarter-201500765.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "MarketScreener preserves the Marketwired release and explicit 09:44am EDT publication clock; SEC Exhibit 99.1 independently matches Gardner Denver, April 26 2013, first-quarter results and $513.5 million revenue.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/916459/000119312513178171/d527260dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0038",
+      "event_date": "2013-04-25",
+      "event_id": "HEJFE-8536AD777ECEEACB",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-26T09:44:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-25 15:17:00",
+      "historical_event_match": true,
+      "historical_symbol": "GDI",
+      "information_asymmetry_seconds": 66420,
+      "probe_id": "GDI-batch0037",
+      "public_announcement_ts": "2013-04-26T09:44:00-04:00",
+      "publisher_timestamp_text": "Published on 04/26/2013 at 09:44 am EDT",
+      "reason": "Promoted through reviewed preserved-wire evidence with SEC corroboration.",
+      "release_title": "Gardner Denver Reports First Quarter 2013 Results",
+      "reviewed_on": "2026-09-29",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://www.marketscreener.com/quote/stock/GARDNER-DENVER-INC-12725/news/Gardner-Denver-Inc-Gardner-Denver-Reports-First-Quarter-2013-Results-16778829/",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
