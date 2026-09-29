@@ -7,7 +7,7 @@
     4,
     6
   ],
-  "coverage_summary_sha256": "7451fb2aa49dedd0b1ce0d0a399ce04518716066127c3b97e8fb510c702f6f7a",
+  "coverage_summary_sha256": "a3429ce583c2646f33a9b783c91a5c2e1bdbe83632d0aa7e8a8beaec7e99729e",
   "dependency_blocked_steps": [
     11,
     12
@@ -100,7 +100,7 @@
       "step": 10
     },
     {
-      "evidence": "requires G2 real market data + G1 exact timing + genuine G5 controls",
+      "evidence": "requires G2 real market data + G1 exact timing + genuine G5 controls + stable security identity; baseline identity unverified=3654/3828",
       "name": "Regenerate fully non-synthetic historical feature corpus",
       "status": "DEPENDENCY_BLOCKED",
       "step": 11
@@ -111,5 +111,14 @@
       "status": "DEPENDENCY_BLOCKED",
       "step": 12
     }
-  ]
+  ],
+  "security_identity_sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a",
+  "security_identity_state": {
+    "baseline_identity_unverified_count": 3654,
+    "event_count": 174,
+    "event_date_identity_verified_count": 174,
+    "ready_for_non_synthetic_market_join": false,
+    "required_symbol_date_count": 3828,
+    "sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a"
+  }
 }

@@ -65,6 +65,8 @@ def test_refresh_coverage_uses_current_metadata_subgates(tmp_path: Path):
     assert updated["metadata_gate_overlay"]["G5_MATCHED_CONTROL_UNIVERSE"] == "READY_WITH_REVIEWED_EXCLUSIONS"
     assert "G2_REAL_MARKET_DATA" in updated["blocking_gates"]
     assert "G1_EXACT_TIMING_ANALYSIS" in updated["blocking_gates"]
+    assert "G2_STABLE_SECURITY_IDENTITY" in updated["blocking_gates"]
+    assert updated["security_identity_gate"]["baseline_identity_unverified_count"] == 3654
     assert "G5_MODEL_EVALUATION_CONTROLS" in updated["blocking_gates"]
     assert updated["g3_conditioned_itch_event_rows"] == 80
     assert updated["missing_exact_announcement_timestamps"] == 141
@@ -189,3 +191,36 @@ def test_committed_status_matches_current_authoritative_inputs(tmp_path: Path):
         (ROOT / "data/processed/real_data_release_sprint/step_status.json").read_text(encoding="utf-8")
     )
     assert generated == committed
+
+
+def test_security_identity_gate_prevents_release_unlock_when_other_inputs_are_ready(tmp_path: Path, monkeypatch):
+    identity = tmp_path / "identity.json"
+    _write_json(identity, {
+        "schema_version": "1",
+        "state": {
+            "event_count": 174,
+            "event_date_identity_verified_count": 174,
+            "required_symbol_date_count": 3828,
+            "baseline_identity_unverified_count": 3654,
+            "ready_for_non_synthetic_market_join": False,
+        },
+    })
+    monkeypatch.setattr(sprint, "DEFAULT_SECURITY_IDENTITY_PATH", identity)
+    monkeypatch.setattr(sprint, "_security_identity_status", lambda path=identity: {
+        "ready_for_non_synthetic_market_join": False,
+        "event_count": 174,
+        "event_date_identity_verified_count": 174,
+        "required_symbol_date_count": 3828,
+        "baseline_identity_unverified_count": 3654,
+        "sha256": sprint._sha256(identity),
+    })
+    req = tmp_path / "req.json"; coverage = tmp_path / "coverage.json"; metadata = tmp_path / "metadata.json"; quality = tmp_path / "quality.json"; out = tmp_path / "status.json"
+    _write_json(req, {"counts": {"core_equity_source_date_rows": 828, "option_source_date_rows": 828, "g3_confirmed_nasdaq_event_rows": 80}})
+    _write_json(coverage, {"event_count": 174, "unique_symbol_date_pairs": 3828, "contract_audit": {"real_authorized_required_rows_covered": 1656, "ready_for_real_backfill": True}, "ready_for_non_synthetic_champion_challenger_comparison": True})
+    _write_json(metadata, {"event_count": 174, "announcement_exact_resolved": 174, "announcement_events_excluded": 0, "announcement_unresolved": 0, "control_dates_resolved": 72, "ready_g1_exact_timing_analysis": True, "ready_g5_model_evaluation_controls": True, "ready_for_non_synthetic_model_evaluation_metadata": True})
+    _write_json(quality, {"quality_cleared_for_non_synthetic_model_evaluation": True})
+    status = sprint.build_status(requirements_manifest_path=req, coverage_summary_path=coverage, metadata_readiness_path=metadata, metadata_quality_path=quality, outpath=out)
+    by_step = {row["step"]: row for row in status["steps"]}
+    assert by_step[11]["status"] == "DEPENDENCY_BLOCKED"
+    assert by_step[12]["status"] == "DEPENDENCY_BLOCKED"
+    assert "baseline identity unverified=3654/3828" in by_step[11]["evidence"]

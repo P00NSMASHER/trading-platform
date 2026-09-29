@@ -92,12 +92,12 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "7451fb2aa49dedd0b1ce0d0a399ce04518716066127c3b97e8fb510c702f6f7a",
-      "reason": "Reconcile release-sprint G1 derivatives to authoritative Acadia batch 0031 state (33 exact / 141 reviewed exclusions), preserve Step 9 SOURCE_BLOCKED semantics, and add focused drift regressions."
+      "expected_sha256": "a3429ce583c2646f33a9b783c91a5c2e1bdbe83632d0aa7e8a8beaec7e99729e",
+      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
-      "expected_sha256": "aa37aa294b769007ee036022a566e6ecc7026e2901924d015d5762b9c7a40943",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "cd1d918be04c71b0dfe2babf4ffca39c3aa0384b97a1ddf211c0ce76a293b7da",
+      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
     },
     "pyproject.toml": {
       "expected_sha256": "a94ea697e62d4d2e3ffa3f19676a3fc29e3d0157124d84b31a557627e51f3bc9",
@@ -550,12 +550,12 @@
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
     "src/real_data_release_sprint.py": {
-      "expected_sha256": "bcab7c2444d9ebb4c7750b15b46b730d1085ea86633e70ba0e9d2961fd8252e1",
-      "reason": "Reconcile release-sprint G1 derivatives to authoritative Acadia batch 0031 state (33 exact / 141 reviewed exclusions), preserve Step 9 SOURCE_BLOCKED semantics, and add focused drift regressions."
+      "expected_sha256": "898ca321bcea4855fc9be28458669ebe25e84836520614d362d5debf54d7a17a",
+      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "7b0b32c5991d92212602491886792d9e57c14e977ecfcb2522895f17a5aee0b2",
-      "reason": "Reconcile release-sprint G1 derivatives to authoritative Acadia batch 0031 state (33 exact / 141 reviewed exclusions), preserve Step 9 SOURCE_BLOCKED semantics, and add focused drift regressions."
+      "expected_sha256": "c9a9e496669f8f9f234da9a12503a86ffdf0bc40466414f814c09fc0acc14afa",
+      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
     },
     "docs/licensed_data_acquisition.md": {
       "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
@@ -574,8 +574,8 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "1a013940c6415d8f253eca00ac251240d74341752acc84538a118f2ed813e4d2",
-      "reason": "Reconcile release-sprint G1 derivatives to authoritative Acadia batch 0031 state (33 exact / 141 reviewed exclusions), preserve Step 9 SOURCE_BLOCKED semantics, and add focused drift regressions."
+      "expected_sha256": "177bb067b2e6e1c1d4da47e52d5197b4b0d808b107459f8dbd423d1f0d95135c",
+      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
     },
     "src/real_data_replay.py": {
       "expected_sha256": "76904827a421ad80a812ec387b9738f3fa64daad6a95361227d83f718ac68ccc",
