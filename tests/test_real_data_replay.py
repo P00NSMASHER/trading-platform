@@ -75,3 +75,29 @@ def test_replay_config_requires_existing_contracts(tmp_path: Path):
         assert "market contract" in str(exc)
     else:
         raise AssertionError("missing market contract must fail closed")
+
+
+def test_output_dir_override_stages_without_changing_logical_receipt_paths(tmp_path: Path):
+    cfg = tmp_path / "replay.json"
+    published = tmp_path / "published"
+    staged = tmp_path / "staged"
+    cfg.write_text(
+        json.dumps({
+            "schema_version": "1",
+            "events": str(ROOT / "data/processed/historical_events.csv"),
+            "market_contract": str(ROOT / "config/historical_market_sources.example.json"),
+            "metadata_contract": str(ROOT / "config/metadata_sources.public_progress.json"),
+            "output_dir": str(published),
+            "graph_db": str(ROOT / "data/processed/historical_graph_real/historical_cross_event_graph.sqlite"),
+        }),
+        encoding="utf-8",
+    )
+
+    result = replay.run_replay(cfg, output_dir_override=staged)
+
+    assert (staged / "real_data_replay_status.json").exists()
+    assert not published.exists()
+    assert result["config_path"] == str(cfg)
+    assert result["shares_materialization"]["path"] == str(
+        published / "derived" / "shares_for_baselines.csv"
+    )
