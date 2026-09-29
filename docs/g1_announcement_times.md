@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **30 public exact-time batches / 32 exact-resolved
+The current repository state is **31 public exact-time batches / 33 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -97,3 +97,7 @@ existing `g1_ibes_timestamp_adapter.py`.
 ### Batch 0030 recovery
 
 Ryder event `HEJFE-A25F33B630365184` is resolved at `2015-02-03T08:55:00-05:00` from Ryder's issuer-hosted newsroom timestamp, with the matching SEC Exhibit 99.1 retained as corroboration. The frozen first documented trade occurred on February 2 at 3:43 PM New York time, so the release is strictly later and remains within the seven-calendar-day promotion window. The six existing priority events remain fail-closed and stay at the front of the public-research queue.
+
+### Batch 0031 recovery
+
+Acadia Healthcare event `HEJFE-6F0A7632D9B4FFF6` is resolved at `2015-04-28T16:00:00-04:00` from StreetInsider's preserved Business Wire distribution timestamp, with SEC Exhibit 99 retained as independent corroboration. The frozen first documented trade occurred at 2:35 PM New York time, so the release is strictly later and remains within the seven-calendar-day promotion window. The research queue remains fail-closed for all unresolved priority events.
