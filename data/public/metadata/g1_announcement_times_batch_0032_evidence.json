@@ -1,0 +1,54 @@
+{
+  "schema_version": "1",
+  "base_main_sha": "ea09d64fa029eec7439cc3850dcba5999db0ed1b",
+  "frozen_events_sha256": "43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12",
+  "batch_sha256": "82f9caa85fc930fc2b955c3dc2d16fab8d17b7f676cba99f3b2c747dcf41013d",
+  "research_use_only": true,
+  "evidence_review_date": "2026-09-29",
+  "purpose": "Two reviewed public release-clock recoveries; no WRDS or licensed extract. Source quotes are short observed evidence excerpts, not synthetic fixtures.",
+  "candidates": [
+    {
+      "event_id": "HEJFE-B46D4F8F72DD0212",
+      "historical_symbol": "AMD",
+      "first_trade": "2013-10-17 14:40:00",
+      "event_date": "2013-10-17",
+      "public_announcement_ts": "2013-10-17T16:15:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "source_reference": "https://www.globenewswire.com/news-release/2013/10/17/1011233/0/en/amd-reports-2013-third-quarter-results.html",
+      "title": "AMD Reports 2013 Third Quarter Results",
+      "clock_evidence_kind": "publisher_timestamp",
+      "clock_quote": "October 17, 2013 16:15 ET",
+      "corroboration_reference": "https://ir.amd.com/news-events/press-releases/detail/451/amd-reports-2013-third-quarter-results",
+      "corroboration_detail": "Issuer archive reproduces the matching Marketwired October 17, 2013 third-quarter results, including $1.46 billion revenue and $48 million net income.",
+      "not_used_as_release_time": "The separate 5:30 p.m. ET teleconference time is not used.",
+      "seconds_after_frozen_trade": 5700,
+      "research_use_only": true
+    },
+    {
+      "event_id": "HEJFE-13FC93F4D143B268",
+      "historical_symbol": "HAE",
+      "first_trade": "2012-01-27 15:55:00",
+      "event_date": "2012-01-27",
+      "public_announcement_ts": "2012-01-30T08:00:00-05:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "source_reference": "https://www.sec.gov/Archives/edgar/data/313143/000031314312000009/hae20121308kexhibit991.htm",
+      "title": "Haemonetics Reports 8% Revenue Growth for Third Quarter of Fiscal 2012 and $0.86 Adjusted EPS",
+      "clock_evidence_kind": "issuer_release_header",
+      "clock_quote": "FOR RELEASE: Date January 30, 2012 Time 8:00 am Eastern",
+      "corroboration_reference": "https://haemonetics.gcs-web.com/news-releases/news-release-details/haemonetics-reports-8-revenue-growth-third-quarter-fiscal-2012",
+      "corroboration_detail": "Issuer archive reproduces the matching January 30, 2012 PR Newswire earnings release, $191.2 million quarterly revenue and $0.86 adjusted EPS. The clock comes from the release header in SEC Exhibit 99.1, not EDGAR acceptance.",
+      "not_used_as_release_time": "The separate 10:00 a.m. Eastern webcast and EDGAR filing acceptance time are not used.",
+      "seconds_after_frozen_trade": 230700,
+      "research_use_only": true
+    }
+  ],
+  "policy": {
+    "exact_clock_required": true,
+    "exclusions_are_not_exact": true,
+    "edgar_acceptance_substitution_prohibited": true,
+    "conference_call_substitution_prohibited": true,
+    "wrong_year_substitution_prohibited": true
+  }
+}

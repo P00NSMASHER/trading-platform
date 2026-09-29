@@ -71,16 +71,16 @@
   "metadata_gate_overlay": {
     "G1_ANNOUNCEMENT_TIMES": "READY_WITH_REVIEWED_EXCLUSIONS",
     "G1_EXACT_TIMING_ANALYSIS": "BLOCKING",
+    "G2_STABLE_SECURITY_IDENTITY": "BLOCKING",
     "G3_PRIMARY_LISTING_HISTORY": "READY",
     "G4_SHARES_OUTSTANDING": "READY_WITH_REVIEWED_EXCLUSIONS",
     "G5_MATCHED_CONTROL_UNIVERSE": "READY_WITH_REVIEWED_EXCLUSIONS",
     "G5_MODEL_EVALUATION_CONTROLS": "BLOCKING",
-    "G6_METADATA_QUALITY": "BLOCKING",
-    "G2_STABLE_SECURITY_IDENTITY": "BLOCKING"
+    "G6_METADATA_QUALITY": "BLOCKING"
   },
-  "metadata_quality_sha256": "41ec8f603e21eabc07f6e4afe1b7e60b5f4bda782a39f374d28ce1704b61f126",
-  "metadata_readiness_sha256": "d8b8215661fbd53f661336d4ead178e95cc93d7760c852021f36b83539545fc5",
-  "missing_exact_announcement_timestamps": 141,
+  "metadata_quality_sha256": "7bd75b4b2f81019451acf36bcd29dcfe707cf4e5efcc3b67089cba275e13efe1",
+  "metadata_readiness_sha256": "ef2db9c0953e1bd635deed79bbe29d1264fea05acec4f6c1ca225734f5cfa6ea",
+  "missing_exact_announcement_timestamps": 139,
   "prohibited_outputs": [
     "BUY",
     "SELL",
@@ -96,12 +96,6 @@
   "required_full_replication_source_date_rows": 828,
   "research_use_only": true,
   "schema_version": "0.16.0",
-  "total_requested_symbol_minutes_core": 208318,
-  "total_requested_symbol_quote_minutes_including_posthoc_extension": 219362,
-  "unique_event_dates": 72,
-  "unique_market_dates_event_plus_baseline": 414,
-  "unique_symbol_date_pairs": 3828,
-  "unique_symbols": 146,
   "security_identity_gate": {
     "baseline_identity_unverified_count": 3654,
     "event_count": 174,
@@ -109,5 +103,11 @@
     "ready_for_non_synthetic_market_join": false,
     "required_symbol_date_count": 3828,
     "sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a"
-  }
+  },
+  "total_requested_symbol_minutes_core": 208318,
+  "total_requested_symbol_quote_minutes_including_posthoc_extension": 219362,
+  "unique_event_dates": 72,
+  "unique_market_dates_event_plus_baseline": 414,
+  "unique_symbol_date_pairs": 3828,
+  "unique_symbols": 146
 }

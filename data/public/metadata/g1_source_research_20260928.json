@@ -3,13 +3,13 @@
   "research_date": "2026-09-28",
   "purpose": "Machine-readable G1 source-discovery intelligence for the 174-event exact public-announcement-time sweep. This file is research guidance only and must never resolve a G1 event by itself.",
   "research_use_only": true,
-  "base_main_sha": "2138de3464fcdecef62a4df6eada7d16e35a3c87",
+  "base_main_sha": "ea09d64fa029eec7439cc3850dcba5999db0ed1b",
   "current_g1_state": {
     "required_event_count": 174,
-    "public_exact_batch_count": 31,
-    "exact_resolved_event_records": 33,
-    "reviewed_excluded_event_records": 141,
-    "note": "The repository is at batch_0031; cumulative exact event records are 33 because some public batches resolve more than one historical event."
+    "public_exact_batch_count": 32,
+    "exact_resolved_event_records": 35,
+    "reviewed_excluded_event_records": 139,
+    "note": "The repository is at batch_0032; cumulative exact event records are 35 because some public batches resolve more than one historical event."
   },
   "consolidated_source_search": {
     "public_one_stop_exact_timestamp_dataset_found": false,
@@ -208,6 +208,38 @@
       "evidence_eligible": false,
       "disposition": "RESOLVED_IN_BATCH_0031",
       "reason": "StreetInsider preserves the matching Business Wire release at April 28, 2015 4:00 PM EDT; SEC Exhibit 99 independently corroborates the release identity, date, distribution, and content. Promotion occurs through the separately reviewed batch_0031 evidence path."
+    },
+    {
+      "probe_id": "AMD-batch0032-resolved",
+      "event_id": "HEJFE-B46D4F8F72DD0212",
+      "historical_symbol": "AMD",
+      "historical_event_match": true,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-10-17T16:15:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_reference": "https://www.globenewswire.com/news-release/2013/10/17/1011233/0/en/amd-reports-2013-third-quarter-results.html",
+      "corroboration_reference": "https://ir.amd.com/news-events/press-releases/detail/451/amd-reports-2013-third-quarter-results",
+      "evidence_eligible": false,
+      "disposition": "RESOLVED_IN_BATCH_0032",
+      "reason": "Resolved through separately reviewed public batch_0032; this research hint is not itself resolution evidence."
+    },
+    {
+      "probe_id": "HAE-batch0032-resolved",
+      "event_id": "HEJFE-13FC93F4D143B268",
+      "historical_symbol": "HAE",
+      "historical_event_match": true,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-30T08:00:00-05:00",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "issuer_release_header",
+      "source_family": "official_newswire_archive",
+      "source_reference": "https://www.sec.gov/Archives/edgar/data/313143/000031314312000009/hae20121308kexhibit991.htm",
+      "corroboration_reference": "https://haemonetics.gcs-web.com/news-releases/news-release-details/haemonetics-reports-8-revenue-growth-third-quarter-fiscal-2012",
+      "evidence_eligible": false,
+      "disposition": "RESOLVED_IN_BATCH_0032",
+      "reason": "Resolved through separately reviewed public batch_0032; this research hint is not itself resolution evidence."
     }
   ],
   "priority_events": [

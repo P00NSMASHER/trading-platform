@@ -2,7 +2,7 @@ gate_id,status,required_rows,requirement,resolution
 G1_ANNOUNCEMENT_TIMES,READY_WITH_REVIEWED_EXCLUSIONS,174,All events accounted by exact timestamp or reviewed fail-closed exclusion.,Coarse accounting gate complete; exact-timing analysis remains separate.
 G1_EXACT_TIMING_ANALYSIS,BLOCKING,174,Authoritative exact first-public announcement timestamp for every event.,Supply authorized I/B/E/S ANNDATS_ACT+ANNTIMS_ACT or independently verified exact newswire timestamps.
 G2_REAL_MARKET_DATA,BLOCKING,1656,"828 core equity + 828 option source-date rows, content validated and non-synthetic.",Populate a real authorized historical market source contract and rerun content validation.
-G2_STABLE_SECURITY_IDENTITY,BLOCKING,3828,Stable dated security identity for every required symbol-date.,"Provide dated security-master/crosswalk evidence for every unverified baseline date; current-ticker or inferred alias substitution is prohibited."
+G2_STABLE_SECURITY_IDENTITY,BLOCKING,3828,Stable dated security identity for every required symbol-date.,Provide dated security-master/crosswalk evidence for every unverified baseline date; current-ticker or inferred alias substitution is prohibited.
 G3_PRIMARY_LISTING_HISTORY,READY,174,Point-in-time primary listing exchange for every event.,Complete.
 G4_SHARES_OUTSTANDING,READY_WITH_REVIEWED_EXCLUSIONS,3828,All symbol-dates accounted by exact shares or reviewed fail-closed exclusion.,Complete at coarse accounting layer.
 G5_MATCHED_CONTROL_UNIVERSE,READY_WITH_REVIEWED_EXCLUSIONS,72,All event dates accounted by real controls or reviewed fail-closed exclusion.,Coarse accounting gate complete; model-evaluation controls remain separate.
