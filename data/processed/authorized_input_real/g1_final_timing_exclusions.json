@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "2138de3464fcdecef62a4df6eada7d16e35a3c87",
+  "base_main_sha": "ea09d64fa029eec7439cc3850dcba5999db0ed1b",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 33,
-    "reviewed_excluded": 141,
+    "exact_resolved": 35,
+    "reviewed_excluded": 139,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 141,
+    "raw_exact_time_evidence_gaps": 139,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 33,
+    "exact_timing_analysis_eligible": 35,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -402,13 +402,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-B46D4F8F72DD0212",
-      "historical_symbol": "AMD",
-      "first_documented_illicit_trade_ts": "2013-10-17 14:40:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-2FD552B9358078C6",
       "historical_symbol": "BIO",
       "first_documented_illicit_trade_ts": "2013-05-07 15:55:00",
@@ -510,13 +503,6 @@
       "event_id": "HEJFE-99CCB9D9BECE4E72",
       "historical_symbol": "IDXX",
       "first_documented_illicit_trade_ts": "2012-01-26 13:47:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-13FC93F4D143B268",
-      "historical_symbol": "HAE",
-      "first_documented_illicit_trade_ts": "2012-01-27 15:55:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },

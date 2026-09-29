@@ -2,11 +2,11 @@
 
 **G1 accounting remains complete: 174 / 174 events accounted for (100%).**
 
-- **Exact first-public announcement timestamps resolved:** 33
-- **Immutable reviewed fail-closed exclusions:** 141
+- **Exact first-public announcement timestamps resolved:** 35
+- **Immutable reviewed fail-closed exclusions:** 139
 - **Blocking unresolved:** 0
 - **Gate status:** `READY_WITH_REVIEWED_EXCLUSIONS`
-- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 33
+- **Events eligible for exact announcement-timing / information-asymmetry analysis:** 35
 
 This does **not** invent announcement times.
 
@@ -267,3 +267,7 @@ One additional event now has an exact public-release timestamp from a preserved 
 - `HEJFE-6F0A7632D9B4FFF6` (ACHC): `2015-04-28T16:00:00-04:00`. StreetInsider preserves `Acadia Healthcare First Quarter Adjusted EPS Increases 53.6% to $0.43` at `April 28, 2015 4:00 PM EDT` and reproduces the Business Wire release. SEC Exhibit 99 independently corroborates the identical title, date, Business Wire distribution, and content. The frozen first documented trade occurred at 2:35 PM EDT, so the public release is 85 minutes later. This row is deliberately graded `B`, not `A`, because the literal clock is recovered from a preserved distribution mirror.
 
 The other 141 events remain fail-closed until equivalent admissible evidence is located.
+
+## Public primary-clock batch 0032
+
+AMD and Haemonetics were removed from the exclusion set only after source-specific exact-clock review. The remaining 139 events retain blank release timestamps and remain excluded from timing-dependent analysis. Authoritative evidence: `data/public/metadata/g1_announcement_times_batch_0032_evidence.json`.

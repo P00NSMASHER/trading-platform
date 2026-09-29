@@ -7,13 +7,13 @@
     4,
     6
   ],
-  "coverage_summary_sha256": "a3429ce583c2646f33a9b783c91a5c2e1bdbe83632d0aa7e8a8beaec7e99729e",
+  "coverage_summary_sha256": "597495e158b6c3854902ae8342783e69140ab026dd375521645067feb65997b6",
   "dependency_blocked_steps": [
     11,
     12
   ],
-  "metadata_quality_sha256": "41ec8f603e21eabc07f6e4afe1b7e60b5f4bda782a39f374d28ce1704b61f126",
-  "metadata_readiness_sha256": "d8b8215661fbd53f661336d4ead178e95cc93d7760c852021f36b83539545fc5",
+  "metadata_quality_sha256": "7bd75b4b2f81019451acf36bcd29dcfe707cf4e5efcc3b67089cba275e13efe1",
+  "metadata_readiness_sha256": "ef2db9c0953e1bd635deed79bbe29d1264fea05acec4f6c1ca225734f5cfa6ea",
   "policy": {
     "future_data_or_lookahead_prohibited": true,
     "prohibited_outputs": [
@@ -31,6 +31,15 @@
   "purpose": "Truthful execution status for the 12-step real-data release sprint.",
   "requirements_manifest_sha256": "a797ac7a22ea8dfb7e81ad8d671e0f0913f2249fceb0189a4c1b49d6efbd7520",
   "schema_version": "1",
+  "security_identity_sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a",
+  "security_identity_state": {
+    "baseline_identity_unverified_count": 3654,
+    "event_count": 174,
+    "event_date_identity_verified_count": 174,
+    "ready_for_non_synthetic_market_join": false,
+    "required_symbol_date_count": 3828,
+    "sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a"
+  },
   "source_blocked_steps": [
     5,
     7,
@@ -88,7 +97,7 @@
       "step": 8
     },
     {
-      "evidence": "exact timestamps=33/174; reviewed fail-closed exclusions=141; exclusions do not satisfy Step 9",
+      "evidence": "exact timestamps=35/174; reviewed fail-closed exclusions=139; exclusions do not satisfy Step 9",
       "name": "Replace G1 timing exclusions with exact clocks",
       "status": "SOURCE_BLOCKED",
       "step": 9
@@ -111,14 +120,5 @@
       "status": "DEPENDENCY_BLOCKED",
       "step": 12
     }
-  ],
-  "security_identity_sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a",
-  "security_identity_state": {
-    "baseline_identity_unverified_count": 3654,
-    "event_count": 174,
-    "event_date_identity_verified_count": 174,
-    "ready_for_non_synthetic_market_join": false,
-    "required_symbol_date_count": 3828,
-    "sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a"
-  }
+  ]
 }

@@ -68,12 +68,12 @@
       "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "d8b8215661fbd53f661336d4ead178e95cc93d7760c852021f36b83539545fc5",
-      "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
+      "expected_sha256": "ef2db9c0953e1bd635deed79bbe29d1264fea05acec4f6c1ca225734f5cfa6ea",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "41ec8f603e21eabc07f6e4afe1b7e60b5f4bda782a39f374d28ce1704b61f126",
-      "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
+      "expected_sha256": "7bd75b4b2f81019451acf36bcd29dcfe707cf4e5efcc3b67089cba275e13efe1",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "748ffe77a01fb15aad9f1e2ab81af5e09bf6aa58a03568d2632d722b0f5f7ab8",
@@ -92,12 +92,12 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "a3429ce583c2646f33a9b783c91a5c2e1bdbe83632d0aa7e8a8beaec7e99729e",
-      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
+      "expected_sha256": "597495e158b6c3854902ae8342783e69140ab026dd375521645067feb65997b6",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
-      "expected_sha256": "cd1d918be04c71b0dfe2babf4ffca39c3aa0384b97a1ddf211c0ce76a293b7da",
-      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
+      "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "pyproject.toml": {
       "expected_sha256": "a94ea697e62d4d2e3ffa3f19676a3fc29e3d0157124d84b31a557627e51f3bc9",
@@ -318,8 +318,8 @@
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "4b21fb0483470b5aa35971900fd351f0139c1adc19e6794d6c45534032da3421",
-      "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
+      "expected_sha256": "68c0887b7a44b978db40ca1ea191b3052f3828a68a4f1ea18e05ffa872c67437",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "config/metadata_sources.g3_public.json": {
       "expected_sha256": "a3806887f83609076f99bc163926c118c76ed0e4a24989c81f0a7e59cc9d6a49",
@@ -346,8 +346,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "e33237625270683d036be91905a689564c8e6bef8df890a4e3d6f83b0c0d243b",
-      "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
+      "expected_sha256": "5a7d03ebb33cbfcba60a0f9242e8207ddd26c5d1b80823433b43a2752ebd484e",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -498,20 +498,20 @@
       "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "ab78d119c8a222a665751930050461a20593eafc0dcb59056ae0822191d146db",
-      "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
+      "expected_sha256": "4397af189e37f5860307ed90372a6534f83729c9487d25df87e36216413beead",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "docs/g1_final_timing_exclusions.md": {
-      "expected_sha256": "6a865d7a76afa33b39636202b4cf590c1de8e2dc7204a4f6d22d6988533639e4",
-      "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
+      "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "0c2eb229ab7a3590e1e89ea87898b20bca1499e290947fdf01c577dfefb1ad40",
-      "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
+      "expected_sha256": "5660b380a23a1b0c38b7a72922fbf0ba90205dbb0c777bb3716c08d58b0351fe",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "a25f0cf83876c8e9892e64f47f35d028df41e4234fa69012a2d58dfc8ef008ba",
-      "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
+      "expected_sha256": "cd87ab6d6889a2cf0fb70aed279b279b09850b00809c2983c1f634be86deb024",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
@@ -526,12 +526,12 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "c0d1cb0776847460b5d5290e5e8d2feb3bbc3b0c61d2aa765f13537e798a1ed7",
-      "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
+      "expected_sha256": "b31f09b6f45e0366ec6cc1834b0cb62395ea931eb46aa1729bdb3e2b2d03981c",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "6f71bd3948b1e1fd56d9ad2976f10c6e416031119712a2644d8a6e33bab18c85",
-      "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
+      "expected_sha256": "713c4977684adf0b8857eedb87a1e717648d8e23d732f9f060b2633d18d5ea22",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "docs/real_data_release_sprint.md": {
       "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
@@ -554,8 +554,8 @@
       "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "c9a9e496669f8f9f234da9a12503a86ffdf0bc40466414f814c09fc0acc14afa",
-      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
+      "expected_sha256": "8965c222643c9ae47e00ef66d3a62f428da1b6a68ec9fa40fca8fbc6a7e06660",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "docs/licensed_data_acquisition.md": {
       "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
@@ -574,8 +574,8 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "177bb067b2e6e1c1d4da47e52d5197b4b0d808b107459f8dbd423d1f0d95135c",
-      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
+      "expected_sha256": "2a4ef5089dd6d30ef5fc681e6280e002d78b781e316a79f7def86454833e5ae7",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "src/real_data_replay.py": {
       "expected_sha256": "438ef2f5b9cd5d986f74c974b3715524e7bf37a0ba4876b044d8cde58af0489d",
@@ -642,8 +642,8 @@
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "f651b9de9fe84dcebf970b4af2de4904b29d6be68defb7c6bad956e94643a610",
-      "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
+      "expected_sha256": "cc064774fa15e8c58adb650a5239e4ac47014b5f0af0fdbac562e24e547cebef",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/processed/software_readiness/software_readiness_certification.json": {
       "expected_sha256": "e8778826460c9a341d0458f43ce9fe14337c3f460e12f8535735b9396e0ea405",
@@ -758,16 +758,16 @@
       "reason": "G1 batch 0025 evidence row for Ford: SEC-hosted issuer earnings exhibit explicitly states a 7:00 a.m. EST first-public results release on January 29, 2015; graded A."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "6fd550db1c27a31277e1e585e505728e8fade285fdc72ca542a38aa28ba7a9e8",
-      "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
+      "expected_sha256": "c48951f7d0ebf16a7414c89acd4e2e7a58e4e2f12108573e67be16be0c93dbfc",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "src/g1_source_research.py": {
       "expected_sha256": "34dd8d8e07bdb10c82b30caba2145d6e30493d1f27ec9f68a68e1e937e086ed2",
       "reason": "G1 research promotion hardening: independently validate event identity, timezone-aware first-public-release timestamp semantics, admissible source family, source reference, chronology, seven-calendar-day window, and mirror corroboration."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "765b423ce7d46027e40c19a4752c792d5c1ab3348ac254acbe0347108f24f53d",
-      "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
+      "expected_sha256": "c2d478eab3f1a9d8f4ecbbf5abd2b253161601fba06be170eb002ba15b973c10",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
@@ -818,20 +818,20 @@
       "reason": "Regression coverage for deterministic receipt reproduction, manifest ordering, and rollback on interrupted publication."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "a9bfaef8c384aca5ad70430f94c1f8e49da61e1effb86167887b4262c4f462d0",
-      "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
+      "expected_sha256": "6888671859245269fa2c241da75094e90f5c033e4c1a414ec53ecb83da312c5d",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "src/g1_acquisition_manifest.py": {
       "expected_sha256": "04536264c405e94208e113de3e21a07dc3d2021dad427c5cd8c3b15a8b36da4c",
       "reason": "G1 acquisition routing: deterministically reconcile all 174 events, suppress already-resolved events, route remaining exact-clock work between public archives and lawful I/B/E/S bulk acquisition, and emit stable dedupe/work-queue identities."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "60c37872474cb6825de10fb9bce658a847487f4fd29a8d87ec82e329ddbc14c0",
-      "reason": "G1 acquisition routing regeneration after Acadia batch 0031: 33 resolved events suppressed from acquisition and 141 unresolved events routed fail-closed."
+      "expected_sha256": "e5808256ae3509675bc9efea35a3c374ef315dbf51866111365a835c24dad884",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "84dec9b2ab91b28f85cf805a7a053b78efe596c18a520c82688f6bb27d6262d4",
-      "reason": "G1 acquisition routing regeneration after Acadia batch 0031: 33 resolved events suppressed from acquisition and 141 unresolved events routed fail-closed."
+      "expected_sha256": "9175b93ad1e4accbbf27ac34574490220dbafe76e5027e70bf3474438c75c2f2",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/public/metadata/g1_announcement_times_batch_0031.csv": {
       "expected_sha256": "5c997dcc805c9e5df65bac36213726c1550d852492cd26271288688ceb528491",
@@ -864,6 +864,18 @@
     "data/processed/security_identity_real/security_identity_acquisition_summary.json": {
       "expected_sha256": "f02d09b110bba5371e5bd28fe5f0d2b31081a12e0e89e74a281033f67924ee12",
       "reason": "146-security acquisition summary grouping the unresolved dated identity requests and defining primary, secondary, and corroboration-only evidence lanes."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0032.csv": {
+      "expected_sha256": "82f9caa85fc930fc2b955c3dc2d16fab8d17b7f676cba99f3b2c747dcf41013d",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0032_evidence.json": {
+      "expected_sha256": "e023876cf0580d0caaf5d7385604b5d9ca128bcbbc598169009dc7f3815d2999",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    },
+    "tests/test_g1_public_batch_0032.py": {
+      "expected_sha256": "64c484a7e7fc8136e19e2be7c9cc651e46b7a66554ecb0216f874d8d9d580855",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     }
   }
 }
