@@ -22,7 +22,7 @@ jobs:
       - name: Syntax check sweeper
         run: python -m py_compile scripts/g1_yahoo_sitemap_sweep.py
       - name: Run bulk sitemap sweep
-        run: python scripts/g1_yahoo_sitemap_sweep.py --top-dates 20 --workers 4
+        run: python scripts/g1_yahoo_sitemap_sweep.py --top-dates 100 --workers 8
       - name: Print compact candidate summary
         run: |
           python - <<'PY'
