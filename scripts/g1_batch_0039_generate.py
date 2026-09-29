@@ -230,3 +230,5 @@ audit=Path("private_runtime/audit/g1-batch-0039");audit.mkdir(parents=True,exist
 save(audit/"verification.json",{"base_main_sha":BASE,"source_head_sha":os.environ["GITHUB_SHA"],"exact":50,"reviewed_excluded":124,
 "previous_exact_preserved":49,"new_events":[item],"step9":"SOURCE_BLOCKED","evaluation_release_permitted":False,"deterministic_rebuild_matches":True})
 print(json.dumps({"exact":50,"reviewed_excluded":124,"new_events":[item["event_id"]]},indent=2))
+
+# trigger batch 0039 workflow
