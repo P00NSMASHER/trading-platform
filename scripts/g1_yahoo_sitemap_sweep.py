@@ -25,9 +25,13 @@ EARNINGS_RE = re.compile(r"\b(report|reports|reported|results|earnings|quarter|q
 WIRE_MARKERS = ("BUSINESS WIRE", "Marketwired", "MARKETWIRE", "PRNewswire", "PR Newswire", "GlobeNewswire", "GLOBE NEWSWIRE")
 GENERIC = {
     "reports","report","reported","results","result","quarter","quarterly","financial","earnings","fiscal",
-    "company","corporation","inc","incorporated","limited","plc","group","holdings","the","and","for","first",
+    "company","corporation","corp","inc","incorporated","limited","ltd","plc","group","holdings","the","and","for","first",
     "second","third","fourth","full","year","announces","announce","today","nasdaq","nyse","common","stock",
+    "revenue","revenues","profit","loss","adjusted","gaap","million","billion","new",
 }
+MONTHS = {"january","february","march","april","may","june","july","august","september","october","november","december","jan","feb","mar","apr","jun","jul","aug","sep","sept","oct","nov","dec"}
+CORP_SUFFIXES = {"company","corporation","corp","inc","incorporated","limited","ltd","plc","group","holdings"}
+EXCHANGE_TOKENS = {"nasdaq","nasdaqgs","nyse","amex"}
 URL_TS_RE = re.compile(r"-(\d{6})\d{3}(?:--[a-z]+)?\.html(?:\?|$)", re.I)
 DATE_PUBLISHED_RE = re.compile(r'"datePublished"\s*:\s*"([^"]+)"', re.I)
 
@@ -66,19 +70,47 @@ def clean_tokens(text: str):
     toks = re.findall(r"[A-Za-z][A-Za-z0-9&.'-]{2,}", text or "")
     return {t.lower().strip(".'-") for t in toks if t.lower().strip(".'-") not in GENERIC}
 
-def event_aliases():
+def event_identities():
     rows = parse_rows(G3)
-    out = defaultdict(set)
+    out = {}
     for row in rows:
         eid = row["event_id"]
         sym = row["historical_symbol"].upper()
-        out[eid].add(sym.lower())
-        excerpt = row.get("evidence_excerpt", "")
-        toks = list(clean_tokens(excerpt))
-        # The first press-release/SEC excerpt words are usually the issuer name.
-        for tok in toks[:14]:
-            out[eid].add(tok)
+        excerpt = (row.get("evidence_excerpt") or "").lower()
+        toks = re.findall(r"[a-z][a-z0-9&.'-]*", excerpt)
+        issuer = []
+        exchange_idx = next((i for i,t in enumerate(toks) if t in EXCHANGE_TOKENS), None)
+        if exchange_idx is not None:
+            rev = []
+            for tok in reversed(toks[:exchange_idx]):
+                tok = tok.strip(".'-")
+                if tok in MONTHS or tok in {"wire","marketwired","prnewswire","globenewswire"}:
+                    break
+                rev.append(tok)
+                if len(rev) >= 6:
+                    break
+            issuer = [t for t in reversed(rev) if t not in CORP_SUFFIXES and t not in GENERIC]
+        # Keep only distinctive issuer terms. Symbol is always an identity fallback.
+        issuer = [t for t in issuer if len(t) >= 3]
+        out[eid] = {
+            "symbol": sym,
+            "issuer_terms": issuer,
+            "issuer_phrase": " ".join(issuer),
+        }
     return out
+
+def title_identity_matches(title: str, event, identities) -> bool:
+    ident = identities.get(event["event_id"], {"symbol":event["historical_symbol"],"issuer_terms":[]})
+    tokens = clean_tokens(title)
+    sym = ident["symbol"].lower()
+    if sym in tokens:
+        return True
+    terms = [t for t in ident["issuer_terms"] if t not in GENERIC]
+    if not terms:
+        return False
+    if len(terms) == 1:
+        return len(terms[0]) >= 4 and terms[0] in tokens
+    return all(t in tokens for t in terms[:3])
 
 def parse_yahoo_url_timestamp(url: str, date_hint: str):
     m = URL_TS_RE.search(url)
@@ -107,7 +139,7 @@ def next_sitemap(links, date_str):
         return int(m.group(1)) if m else -1
     return max(candidates, key=stamp)
 
-def scan_window(date_str: str, start_dt: datetime, end_dt: datetime):
+def scan_window(date_str: str, start_dt: datetime, end_dt: datetime, events, identities):
     url = sitemap_url(date_str, start_dt)
     seen_pages = set()
     articles = {}
@@ -128,6 +160,8 @@ def scan_window(date_str: str, start_dt: datetime, end_dt: datetime):
             full = urllib.parse.urljoin("https://finance.yahoo.com", href)
             if "/news/" not in full or not title or not EARNINGS_RE.search(title):
                 continue
+            if not any(title_identity_matches(title, event, identities) for event in events):
+                continue
             ts = parse_yahoo_url_timestamp(full, date_str)
             if ts is None:
                 continue
@@ -145,7 +179,7 @@ def scan_window(date_str: str, start_dt: datetime, end_dt: datetime):
         time.sleep(0.03)
     return list(articles.values()), errors
 
-def article_match(article, events, alias_map):
+def article_match(article, events, identities):
     url = article["url"]
     title = article["title"]
     ts = datetime.fromisoformat(article["url_timestamp_utc"].replace("Z","+00:00"))
@@ -159,43 +193,69 @@ def article_match(article, events, alias_map):
     m = DATE_PUBLISHED_RE.search(body)
     if m:
         page_ts = m.group(1)
-    wire = next((w for w in WIRE_MARKERS if w.upper() in upper), None)
+    page_dt = None
+    if page_ts:
+        try:
+            page_dt = datetime.fromisoformat(page_ts.replace("Z","+00:00"))
+        except ValueError:
+            page_dt = None
+    timestamp_consistent = page_dt is None or abs((page_dt-ts).total_seconds()) <= 5
+    # Require a release-body signature, not a provider word elsewhere in Yahoo chrome.
+    wire = None
+    if re.search(r"\\(BUSINESS\\s+WIRE\\)", body, re.I):
+        wire = "Business Wire"
+    elif re.search(r"\\(Marketwired\\s*[-–]", body, re.I):
+        wire = "Marketwired"
+    elif re.search(r"(?:/PRNewswire/|PR\\s+Newswire)", body, re.I):
+        wire = "PR Newswire"
+    elif re.search(r"GLOBE\\s+NEWSWIRE", body, re.I):
+        wire = "GlobeNewswire"
+
     matches = []
     for event in events:
         trade = datetime.fromisoformat(event["first_documented_illicit_trade_ts"].replace("Z","+00:00"))
         if not (trade < ts <= trade + timedelta(days=7)):
             continue
+        if not title_identity_matches(title, event, identities):
+            continue
+        ident = identities.get(event["event_id"], {"symbol":event["historical_symbol"],"issuer_terms":[]})
         sym = event["historical_symbol"].upper()
         ticker_marker = any(marker in upper for marker in (
             f"NASDAQ: {sym}", f"NASDAQ:{sym}", f"NYSE: {sym}", f"NYSE:{sym}",
             f"NASDAQGS: {sym}", f"NASDAQGS:{sym}", f"NYSE MKT: {sym}", f"NYSE MKT:{sym}"
         ))
-        aliases = alias_map.get(event["event_id"], set())
-        alias_overlap = sorted(title_tokens & aliases)
+        issuer_terms = ident.get("issuer_terms", [])
+        body_lower = body.lower()
+        body_identity = ticker_marker or (
+            bool(issuer_terms) and all(re.search(r"\\b"+re.escape(t)+r"\\b", body_lower) for t in issuer_terms[:3])
+        )
         score = 0
+        if title_identity_matches(title, event, identities):
+            score += 6
         if ticker_marker:
             score += 7
-        if sym.lower() in title.lower().split():
-            score += 4
-        if len(alias_overlap) >= 2:
-            score += 4
-        elif len(alias_overlap) == 1:
-            score += 1
+        elif body_identity:
+            score += 3
         if wire:
-            score += 5
+            score += 6
+        if timestamp_consistent:
+            score += 3
         if EARNINGS_RE.search(title):
             score += 1
-        if score >= 5:
+        # Candidate must identify the issuer in both title and article body.
+        if score >= 10 and body_identity:
             matches.append({
                 "event_id": event["event_id"],
                 "historical_symbol": sym,
+                "issuer_terms": issuer_terms,
                 "trade_ts": event["first_documented_illicit_trade_ts"],
                 "candidate_public_ts": article["url_timestamp_utc"],
                 "title": title,
                 "url": url,
                 "wire_marker": wire,
                 "ticker_marker": ticker_marker,
-                "alias_overlap": alias_overlap,
+                "body_identity": body_identity,
+                "timestamp_consistent": timestamp_consistent,
                 "score": score,
                 "page_datePublished": page_ts,
                 "seconds_after_trade": int((ts-trade).total_seconds()),
@@ -220,24 +280,24 @@ def known_self_check():
         out.append({"url": url, "timestamp_ok": ok, "wire_marker_seen": wire})
     return out
 
-def scan_date(date_str, date_events, alias_map):
+def scan_date(date_str, date_events, identities):
     trades = [datetime.fromisoformat(r["first_documented_illicit_trade_ts"].replace("Z","+00:00")) for r in date_events]
     earliest = min(trades)
     date0 = earliest.date()
     # Same-day: start just before the earliest suspicious trade, through midnight.
     start1 = earliest.replace(minute=(earliest.minute//15)*15, second=0, microsecond=0) - timedelta(minutes=15)
     end1 = datetime(date0.year, date0.month, date0.day, 23, 59, 59, tzinfo=timezone.utc)
-    articles1, errors1 = scan_window(date_str, start1, end1)
+    articles1, errors1 = scan_window(date_str, start1, end1, date_events, identities)
     # Next morning captures releases like Gardner Denver.
     next_day = date0 + timedelta(days=1)
     start2 = datetime(next_day.year, next_day.month, next_day.day, 9, 30, 0, tzinfo=timezone.utc)
     end2 = datetime(next_day.year, next_day.month, next_day.day, 16, 0, 0, tzinfo=timezone.utc)
-    articles2, errors2 = scan_window(next_day.isoformat(), start2, end2)
+    articles2, errors2 = scan_window(next_day.isoformat(), start2, end2, date_events, identities)
 
     dedup = {a["url"]: a for a in articles1 + articles2}
     matches = []
     for article in dedup.values():
-        matches.extend(article_match(article, date_events, alias_map))
+        matches.extend(article_match(article, date_events, identities))
     # Keep best candidate per event/url, then sort by score/time.
     unique = {}
     for m in matches:
@@ -265,12 +325,12 @@ def main():
     for r in rows:
         grouped[r["event_date"]].append(r)
     selected = sorted(grouped, key=lambda d: (-len(grouped[d]), d))[:args.top_dates]
-    aliases = event_aliases()
+    identities = event_identities()
 
     self_check = known_self_check()
     results = []
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
-        futs = {pool.submit(scan_date, d, grouped[d], aliases): d for d in selected}
+        futs = {pool.submit(scan_date, d, grouped[d], identities): d for d in selected}
         for fut in as_completed(futs):
             d = futs[fut]
             try:
@@ -285,7 +345,7 @@ def main():
             eid = m["event_id"]
             if eid not in best or m["score"] > best[eid]["score"]:
                 best[eid] = m
-    strong = sorted((m for m in best.values() if m["wire_marker"] and m["score"] >= 10), key=lambda x: (-x["score"], x["event_id"]))
+    strong = sorted((m for m in best.values() if m["wire_marker"] and m["ticker_marker"] and m["timestamp_consistent"] and m["score"] >= 20), key=lambda x: (-x["score"], x["event_id"]))
     review = sorted((m for m in best.values() if m not in strong), key=lambda x: (-x["score"], x["event_id"]))
 
     payload = {
