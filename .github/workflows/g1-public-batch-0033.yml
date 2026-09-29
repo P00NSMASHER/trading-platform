@@ -1,4 +1,4 @@
-name: G1 public batch 0033
+name: Retire completed G1 importer
 on:
   push:
     branches: [g1/public-batch-0033-nvr]
@@ -8,7 +8,7 @@ concurrency:
   group: g1-public-batch-0033
   cancel-in-progress: false
 jobs:
-  recover:
+  retire:
     if: github.repository == 'P00NSMASHER/trading-platform' && !contains(github.event.head_commit.message, '[g1-generated]')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -30,62 +30,55 @@ jobs:
         run: |
           python -m pip install --upgrade 'pip==26.2.1'
           python -m pip install -r requirements.lock -r requirements-dev.lock
-      - name: Execute exact-revision NVR recovery recipe
+      - name: Remove only the completed importer and its drift entry
         run: |
           python - <<'PY'
-          import ast, subprocess
-          # Preserve the complete reviewed NVR recipe at its immutable Git revision.
-          # Only the inherited live-count regression and its exact allowed path are added.
-          source = subprocess.check_output([
-              'git', 'show',
-              'da8db841a272ad63a75d571586c8dd85721bb7ac:.github/workflows/g1-public-batch-0033.yml'
-          ], text=True)
-          assert source.count("          python - <<'PY'\n") == 1
-          body = source.split("          python - <<'PY'\n", 1)[1].split('          PY\n', 1)[0]
-          assert all(not line.strip() or line.startswith('          ') for line in body.splitlines())
-          code = '\n'.join(line[10:] for line in body.splitlines()) + '\n'
-          needle = "changed = set(subprocess.check_output(['git','diff','--name-only',base], text=True).splitlines())"
-          assert code.count(needle) == 1
-          update = '''p = Path('tests/test_g1_public_batch_0032.py')
-          text = p.read_text()
-          assert text.count('== (35,139)') == 1
-          assert text.count('len(excluded)==139') == 1
-          assert text.count('"35/174" in step9["evidence"] and "139" in step9["evidence"]') == 1
-          text = text.replace('== (35,139)', '== (36,138)')
-          text = text.replace('len(excluded)==139', 'len(excluded)==138')
-          text = text.replace('"35/174" in step9["evidence"] and "139" in step9["evidence"]', '"36/174" in step9["evidence"] and "138" in step9["evidence"]')
-          ast.parse(text)
-          p.write_text(text)
-          '''
-          code = code.replace(needle, update + needle)
-          needle = "assert changed <= permitted, 'Unexpected changes: '+str(changed-permitted)"
-          assert code.count(needle) == 1
-          code = code.replace(needle, "permitted.add('tests/test_g1_public_batch_0032.py')\n" + needle)
-          ast.parse(code)
-          exec(compile(code, 'reviewed-nvr-recipe@da8db841-with-count-refresh', 'exec'))
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          p = Path('data/processed/authorized_input_real/metadata_readiness_summary.json')
+          readiness = json.loads(p.read_text())
+          assert (readiness['announcement_exact_resolved'], readiness['announcement_events_excluded']) == (36,138)
+          assert readiness['ready_g1_exact_timing_analysis'] is False
+          before = {str(x):hashlib.sha256(x.read_bytes()).hexdigest() for x in Path('data').rglob('*') if x.is_file()}
+          workflow = '.github/workflows/g1-public-batch-0033.yml'
+          allowpath = Path('config/release_drift_allowlist.json')
+          allow = json.loads(allowpath.read_text())
+          assert workflow in allow['repository_additions']
+          del allow['repository_additions'][workflow]
+          allowpath.write_text(json.dumps(allow, indent=2, sort_keys=True) + '\n')
+          subprocess.run(['git','rm','--',workflow], check=True)
+          subprocess.run(['git','add','--',str(allowpath)], check=True)
+          changed = set(subprocess.check_output(['git','diff','--cached','--name-only'], text=True).splitlines())
+          assert changed == {workflow,str(allowpath)}
+          assert before == {str(x):hashlib.sha256(x.read_bytes()).hexdigest() for x in Path('data').rglob('*') if x.is_file()}
+          print('Only completed generator and its drift entry removed. All data bytes unchanged; 36 exact / 138 excluded; Step 9 remains blocked.')
           PY
       - name: Harden ephemeral runtime permissions
         run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
-      - name: Test complete candidate tree
+      - name: Verify clean candidate with full tests and unchanged audit policy
         run: |
+          mkdir -p private_runtime/audit/g1-batch-0033-final
           python scripts/secret_scan.py --root .
-          python -m pytest -q --junitxml=private_runtime/audit/g1-batch-0033/all-tests.xml
+          python -m pytest -q --junitxml=private_runtime/audit/g1-batch-0033-final/all-tests.xml
           python -m research_receipt_rebuild --check
-      - name: Publish verified receipts to this branch only
+          python -m pytest -q tests/test_control_plane_adversarial.py --junitxml=private_runtime/audit/g1-batch-0033-final/adversarial-junit.xml
+          python scripts/control_plane_audit_pack.py --root . --junit-xml private_runtime/audit/g1-batch-0033-final/adversarial-junit.xml --output-dir private_runtime/audit/g1-batch-0033-final --expected-champion-sha256 0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616
+      - name: Publish cleaned candidate to this branch only
         run: |
           test "$GITHUB_REF_NAME" = 'g1/public-batch-0033-nvr'
           test "$(git ls-remote origin "refs/heads/$GITHUB_REF_NAME" | cut -f1)" = "$GITHUB_SHA"
           git diff --exit-code
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'G1: recover NVR original-wire clock, 36 exact / 138 excluded [g1-generated]'
+          git commit -m 'Retire completed NVR generator; preserve verified 36/138 data [g1-generated]'
           git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
-          git rev-parse HEAD > private_runtime/audit/g1-batch-0033/generated-commit.txt
-      - name: Retain verification evidence
+          git rev-parse HEAD > private_runtime/audit/g1-batch-0033-final/generated-commit.txt
+          git rev-parse 'HEAD^{tree}' > private_runtime/audit/g1-batch-0033-final/generated-tree.txt
+      - name: Retain final candidate verification
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
-          name: g1-public-batch-0033-${{ github.sha }}
-          path: private_runtime/audit/g1-batch-0033
+          name: g1-public-batch-0033-final-${{ github.sha }}
+          path: private_runtime/audit/g1-batch-0033-final
           if-no-files-found: warn
           retention-days: 30
