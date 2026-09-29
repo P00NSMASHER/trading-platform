@@ -3,13 +3,13 @@
   "research_date": "2026-09-28",
   "purpose": "Machine-readable G1 source-discovery intelligence for the 174-event exact public-announcement-time sweep. This file is research guidance only and must never resolve a G1 event by itself.",
   "research_use_only": true,
-  "base_main_sha": "d99df656a622ccfe0f50363c8b3c0a672b13cb9b",
+  "base_main_sha": "f97b767234fedc26685deb3830705188c1e8cee5",
   "current_g1_state": {
     "required_event_count": 174,
-    "public_exact_batch_count": 30,
-    "exact_resolved_event_records": 32,
-    "reviewed_excluded_event_records": 142,
-    "note": "The repository is at batch_0030; cumulative exact event records are 32 because some public batches resolve more than one historical event."
+    "public_exact_batch_count": 31,
+    "exact_resolved_event_records": 33,
+    "reviewed_excluded_event_records": 141,
+    "note": "The repository is at batch_0031; cumulative exact event records are 33 because some public batches resolve more than one historical event."
   },
   "consolidated_source_search": {
     "public_one_stop_exact_timestamp_dataset_found": false,
@@ -192,6 +192,22 @@
       "evidence_eligible": false,
       "disposition": "RESOLVED_IN_BATCH_0030",
       "reason": "Ryder's issuer-hosted newsroom preserves the matching release at February 3, 2015 8:55 AM; the timestamp is normalized in the repository's America/New_York source timezone and the matching SEC exhibit independently corroborates the release. Promotion occurs through the separately reviewed batch_0030 evidence path."
+    },
+    {
+      "probe_id": "ACHC-2015-Q1-resolved",
+      "event_id": "HEJFE-6F0A7632D9B4FFF6",
+      "historical_symbol": "ACHC",
+      "historical_event_match": true,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-04-28T16:00:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "preserved_wire_mirror",
+      "source_reference": "https://www.streetinsider.com/Press%2BReleases/Acadia%2BHealthcare%2BFirst%2BQuarter%2BAdjusted%2BEPS%2BIncreases%2B53.6%25%2Bto%2B%240.43/10497602.html?classic=1",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1520697/000115752315001376/a51090258ex99.htm",
+      "evidence_eligible": false,
+      "disposition": "RESOLVED_IN_BATCH_0031",
+      "reason": "StreetInsider preserves the matching Business Wire release at April 28, 2015 4:00 PM EDT; SEC Exhibit 99 independently corroborates the release identity, date, distribution, and content. Promotion occurs through the separately reviewed batch_0031 evidence path."
     }
   ],
   "priority_events": [
