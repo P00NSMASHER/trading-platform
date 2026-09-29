@@ -258,7 +258,7 @@ hints["current_g1_state"].update(
     public_exact_batch_count=35,
     exact_resolved_event_records=42,
     reviewed_excluded_event_records=132,
-    note="The repository is at batch_0035; cumulative exact event records are 42 because some public batches resolve multiple historical events.",
+    note="The repository is at batch_0035; cumulative exact event records are 42 because some public batches resolve more than one historical event.",
 )
 for item in items:
     hints["validation_probes"].append(
