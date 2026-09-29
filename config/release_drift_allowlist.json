@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "170d0d9190fe4c55a50d6770c1f1cf746c6ec23dba16593e8bc4b78c6da41dca",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "357e4bf834301c34283411327bd9e510317f732828cc986c8888dca80605b94d",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "74a39726552930bd0997f082c547271af23ffbb5d0678ab092d2cec8abf29d05",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "bbdba12a0c2e6152dabfe586a0f06351cf5d5e4d349ed794291140f0b6cfe188",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "eede95ff6b7cd7bc98e973fb8a69e9e6e3e1f4cb763a3ff7dcc4667423ab7598",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "75fc932ca5e5fbb967602ed75d6e7a2e95c34c711adf851cf0ec7ea6da597740",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -152,8 +152,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "ef06168fd598c8420336f0bcb4d04927c15e371a51039d6373293baf10e2cfea",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "fc07705b793cfbb15d71670a811f1e5f9b635450a82caa67b9640d2b7d48bf19",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +172,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "949008b4bac95722e1746246241150f448995024153f9f2e59a08345f0acb72b",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "3c52e9cdbcb49b2066bbb51113e7496010d12b5286b23a9bec660028971740e6",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +184,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "4858024ff6d37861122fdfad874ec89f12833c5bdc463e8384ec10386ff70c4d",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "c296f4042b3aabc94701cb3edd19651f63d346888440a72e056c228248e4d03f",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +240,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "44c0899e4c0c0a13f93e703728b0ead2dd17033c8fe2f98776b779eb40583be3",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "d56eed7780c868a4cf976db43427a2d9da7e4b4d1fd8c7667dc76e97c1b4af4f",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +256,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "a1797091ec67a0cb176ee8147f33d826de168232ce4efa09e45272a666d5e0da",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "06fca4abaf98d2c3043523aea6e0ad93258958d32d24b5bf3df6964ab3845946",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "5ecdb805b26aae6581f32459eb789d5e65f2ba4083d1675d5efdc58c21d7e8aa",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "898ac3858653e0516c77bf64fa64225fecbf9025c4d679e943af5d9c939f1c64",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +292,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "44e19eebe0a0e1c6405c7053f112e843b7184df398651ea305176dc27944d0bf",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "437f5cd78eed2d7e4fe89dfa5cc89f0355628faee2f990488316742837dd8b31",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "b1cb3ba2fcfffffff896b62f97de6d0fdba42196f8b112574fe99055abd0f490",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "174213d9c885299342b189adfcc3357e66ff887ce2f3fc7af1130a18ef1af005",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "5b5f5daaf2df329d31ebecece5f90c7599a0ab22bd7932056573cef2d2fb8d76",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "d066bce806c0e8d3e66eab6d6558a2e803698ded8d2cf68a1804e4b9b3bf4a42",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +320,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "953cc9d20e30a25b64588941ccca6eef9f437658f101994372705afeda93f990",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "1e25f0af760088d38fb5d9f6f5c8d008674465b75871afd9555937c2fd70586b",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -467,6 +467,10 @@
       "expected_sha256": "104d819343e5eb27f05e9823bfc01a24cf43072baecc0d7152aa40953c00b65a",
       "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
+    "data/public/metadata/g1_announcement_times_batch_0036.csv": {
+      "expected_sha256": "b71f77797047405c2fea083c7770b0f1a8bbd64f40e67fbdb875223be0eea46b",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -479,9 +483,13 @@
       "expected_sha256": "a63e1653f1f9e936bcd353e976c2d78d7ca0b495dc3b541abedb9fe726309468",
       "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
+    "data/public/metadata/g1_public_batch_0036_evidence.json": {
+      "expected_sha256": "4639646d464d5cd493fee4005b9a50b496f35158993fdd2e4c71ea2f2267d7fc",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "866f3b70530097b7bb69309078884f9a508d470371a674e5cad8ff8355036212",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "03a0aea2581b973ae7181d47cf8165a1298d95929af5a4af2a178de8ab14ce4e",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -600,8 +608,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "e0e4eb01fcfe1585826bc107411ecc9b05229491c791dd894aaf6f903575d354",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "fa83cf4d53a14595f88b36307b486f9eae9c0529b20a5204d4bef9040c1839d7",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -820,32 +828,36 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "8a71a8a003ab162dfebcd642408bbc22aa5079a8aea3dfd6a0101b89d975710b",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "62f43cc86121e7e297a71b109b0016122f4e426a271881586ff501c26d3d9d48",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "5592278e12bf73bde5bfc9f25ff3fbe31f69763c3071635e9d9c34c3e5474d65",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "02dcb49867be68a9f0ae976aa11421ad89750d90bae0340dce18a86f6dece363",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "746744a1df43c9c2fb9dc4c45f20e14d9a198a2b62d373d2ed555a32dfc57cc0",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "b1f23f7c0b8a372aeb5beb38f461fdd94f24cd5716798cb32d6185356b37586d",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "305dcf7d73943a0b3f3ceba1e056db09abe0bd8382880af78d58c3befb384be2",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "2b307390e4b7fb3400e5972b7c629a3af8f12530f7b31afd44f2673c226245cf",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0036.py": {
+      "expected_sha256": "cbd993df938a3002244df1f87d0bd1ada467b6be6922dc74dce338bc1005ae0c",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "84165e3ff76f25226f4080b9030b9ea05320c280d65691b2dae670f6e95ab317",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "1ae08e226f741565c1b27c15b05dec869a245db946feec93e64f3650893927f9",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -872,8 +884,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "47f4ced7ab10b21a72804e9a3a7e9ae9a901e4ee16fee6bc0ea8b2f1fb93add5",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
+      "expected_sha256": "ad7a3f2ebd980a33d5e03405f2d8e9139ec50b5319290690df2f6c7252091c27",
+      "reason": "G1 batch 0036: Micrel and Juniper Yahoo-preserved Marketwired timestamps with SEC corroboration; deterministic 44 exact / 130 reviewed exclusions with all prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

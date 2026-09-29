@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 42 exact release timestamps and 132 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 44 exact release timestamps and 130 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 132,
-    "expected_sha256": "4858024ff6d37861122fdfad874ec89f12833c5bdc463e8384ec10386ff70c4d",
+    "expected_count": 130,
+    "expected_sha256": "c296f4042b3aabc94701cb3edd19651f63d346888440a72e056c228248e4d03f",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public Yahoo-preserved Marketwired publication metadata for Micrel and Juniper, independently corroborated by SEC Exhibit 99.1 copies. No licensed vendor data used.",
+      "notes": "MCRL 2013-04-25 16:01 EDT and JNPR 2013-07-23 16:05 EDT; conference-call and EDGAR acceptance times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0036.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-marketwired-mcrl-jnpr-batch-0036",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {
