@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 36 exact release timestamps and 138 reviewed fail-closed exclusions; all exact-timing, identity, controls and non-synthetic evaluation locks remain independently enforced.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 38 exact release timestamps and 136 reviewed fail-closed exclusions; all exact-timing, identity, controls and non-synthetic evaluation locks remain independently enforced.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 138,
-    "expected_sha256": "a6c5e3b8c51fadf186cc7dcd7995c96bd4143adac17d2a32aa8d1ecad3c5e68e",
+    "expected_count": 136,
+    "expected_sha256": "2a5f82e389744571760c0a12410a042e24c206b7b642d5d21378546f76338ccd",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public Marketwired-attributed press-release syndication copies on Yahoo Finance. Exact article time datetime attributes observed with timezone offsets; SEC exhibits independently corroborate release identity/date/content. Grade B preserves the mirror-only clock provenance. Narrow factual metadata only, not a license to republish the full articles.",
+      "notes": "Source observations and provenance limitations: data/public/metadata/g1_announcement_times_batch_0034_evidence.json",
+      "path": "data/public/metadata/g1_announcement_times_batch_0034.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-yahoo-marketwired-pfpt-vrsn-batch-0034",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {

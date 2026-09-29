@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **33 public exact-time batches / 36 exact-resolved
+The current repository state is **34 public exact-time batches / 38 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -109,3 +109,7 @@ AMD resolves at 2013-10-17 16:15 Eastern from the original Marketwired distribut
 ### Batch 0033: NVR original-wire recovery
 
 NVR is recovered at 2012-01-26 08:50 ET (13:50 UTC) from PR Newswire's original issuer release, independently corroborated by SEC Exhibit 99.1. The clock is 60,840 seconds after the frozen first trade. This advances 35 exact / 139 reviewed exclusions to 36 exact / 138 reviewed exclusions and preserves every previous exact resolution, including AMD and Haemonetics. Evidence references and prior timestamps are in `data/public/metadata/g1_public_batch_0033_evidence.json`. Step 9 remains SOURCE_BLOCKED; no WRDS or paid vendor extract was used.
+
+### Batch 0034: Proofpoint and VeriSign syndicated release clocks
+
+Both April 25, 2013 Marketwired-attributed Yahoo Finance press releases preserve an HTML time datetime value of 2013-04-25T20:05:00+00:00, equivalent to 16:05 EDT. Matching SEC exhibits independently corroborate the release identity, date and results, not the clock. Grade B explicitly records that the observed clocks are from syndicated copies; no original-wire source link was observed, and the visible page text shows the date only. The clock was read from article publication metadata, not inferred from the URL or the separate 16:30 conference-call time. Evidence and observations are retained in `data/public/metadata/g1_announcement_times_batch_0034_evidence.json`. Current cumulative state is 38 exact / 136 reviewed exclusions; Step 9 remains SOURCE_BLOCKED.
