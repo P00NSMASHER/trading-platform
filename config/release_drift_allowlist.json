@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0035.yml": {
-      "expected_sha256": "92934788e79c877b84b837351983abe3c9baf17c6cd16069ac8c122227323a3b",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -666,10 +662,6 @@
     "scripts/control_plane_audit_pack.py": {
       "expected_sha256": "d812008bda0d1d2417d4da140092e89a66ff6077ddcaf4cf6c452503fa590537",
       "reason": "Control-plane Step 8: deterministic exact-head audit-pack generator with semantic security-policy concepts, JUnit, secret, workflow, champion, and release-drift evidence"
-    },
-    "scripts/g1_batch_0035_generate.py": {
-      "expected_sha256": "fa147b8e4f64d81ba10857fc1ab6050c1eed6c6af747a6022ae9fee489fb81b7",
-      "reason": "G1 batch 0035: two Meritage issuer-IR clocks plus Proofpoint/VeriSign preserved Marketwired timestamps; deterministic 42 exact / 132 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
