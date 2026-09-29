@@ -133,13 +133,13 @@ status=sprint.build_status(requirements_manifest_path=sd/"requirements_manifest.
 step9=next(x for x in status["steps"] if x["step"]==9);assert step9["status"]=="SOURCE_BLOCKED" and "49/174" in step9["evidence"] and "125" in step9["evidence"]
 
 for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py"]:
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py"]:
     p=Path(fn);t=p.read_text()
     t=t.replace("== (46,128)","== (49,125)").replace("len(excluded)==128","len(excluded)==125").replace("len(excluded) == 128","len(excluded) == 125")
     t=t.replace('"46/174" in step9["evidence"] and "128" in step9["evidence"]','"49/174" in step9["evidence"] and "125" in step9["evidence"]')
-    t=t.replace('updated["missing_exact_announcement_timestamps"] == 125','updated["missing_exact_announcement_timestamps"] == 128')
-    t=re.sub(r"== 46\\b","== 49",t);t=re.sub(r"== 128\\b","== 125",t)
-    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 38','state["public_exact_batch_count"] == 37')
+    t=t.replace('updated["missing_exact_announcement_timestamps"] == 128','updated["missing_exact_announcement_timestamps"] == 125')
+    t=re.sub(r"== 46\b","== 49",t);t=re.sub(r"== 128\b","== 125",t)
+    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 37','state["public_exact_batch_count"] == 37')
     ast.parse(t);p.write_text(t)
 
 p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("36 public exact-time batches / 44 exact-resolved","38 public exact-time batches / 49 exact-resolved")
@@ -149,7 +149,7 @@ t += """
 A clustered 2013-04-25 sweep recovered Century Aluminum at 2013-04-25 20:00 UTC, eHealth at 2013-04-25 20:15 UTC, and Gardner Denver at 2013-04-26 13:44 UTC. Yahoo/MarketScreener preserve the Marketwired publication clocks and independent SEC/issuer releases corroborate all three. The clocks are 2,280, 1,140, and 66,420 seconds after the frozen first trades. This advances G1 from 46 exact / 128 reviewed exclusions to 49 exact / 125 reviewed exclusions. Scheduled calls, EDGAR acceptance and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
 """;p.write_text(t)
 
-tp=Path("tests/test_g1_public_batch_0037.py")
+tp=Path("tests/test_g1_public_batch_0038.py")
 ts='''import csv,json,hashlib
 from datetime import datetime,timedelta
 from pathlib import Path
@@ -182,7 +182,7 @@ assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 changed=set(subprocess.check_output(["git","diff","--name-only",BASE],text=True).splitlines());changed.update([str(batch),str(evidence_path),str(tp),SCRIPT])
 permitted={WORKFLOW,SCRIPT,str(contract_path),str(exclusion_path),str(hints_path),str(acq),str(batch),str(evidence_path),str(tp),
 "docs/g1_announcement_times.md","tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py",
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py",
 str(cp),str(cp.parent/"unresolved_gates.csv"),str(sd/"step_status.json"),"data/processed/research_receipt_bundle.json",
 "data/processed/real_data_replay/real_data_replay_status.json"} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
 assert changed<=permitted,f"Unexpected {changed-permitted}"
@@ -191,7 +191,7 @@ for name in sorted(changed):
     sec="intentional_release_modifications" if name in allow["intentional_release_modifications"] else "repository_additions"
     allow[sec][name]={"expected_sha256":sha(name),"reason":reason}
 save(allowp,allow);changed.add(str(allowp));subprocess.run(["git","add","--",*sorted(changed)],check=True)
-audit=Path("private_runtime/audit/g1-batch-0037");audit.mkdir(parents=True,exist_ok=True)
+audit=Path("private_runtime/audit/g1-batch-0038");audit.mkdir(parents=True,exist_ok=True)
 save(audit/"verification.json",{"base_main_sha":BASE,"source_head_sha":os.environ["GITHUB_SHA"],"exact":49,"reviewed_excluded":125,
 "previous_exact_preserved":46,"new_events":items,"step9":"SOURCE_BLOCKED","evaluation_release_permitted":False,"deterministic_rebuild_matches":True})
-print(json.dumps({"exact":46,"reviewed_excluded":128,"new_events":[x["event_id"] for x in items]},indent=2))
+print(json.dumps({"exact":49,"reviewed_excluded":125,"new_events":[x["event_id"] for x in items]},indent=2))
