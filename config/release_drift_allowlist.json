@@ -76,7 +76,7 @@
       "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
     },
     "src/historical_market_backfill.py": {
-      "expected_sha256": "710a95c855da3cf5330f2246e53861ee35fdfe31e4910a1a30b7a288f26d726a",
+      "expected_sha256": "748ffe77a01fb15aad9f1e2ab81af5e09bf6aa58a03568d2632d722b0f5f7ab8",
       "reason": "Stable security-identity hardening: attach a hash-bound identity manifest to non-synthetic market backfills and keep real-feature readiness fail-closed while any required-date PERMNO/symbol identity remains unproven."
     },
     "src/coverage_planner.py": {
@@ -84,7 +84,7 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "tests/test_historical_market_backfill.py": {
-      "expected_sha256": "259240ffb34721ef9ee4323f5f176d5cb85b655578f673fb62fa2397efcd30e1",
+      "expected_sha256": "f349242f55607915b286a175711a01b9ccf875877231dd2112f660161f65434a",
       "reason": "Regression coverage for missing, ready, unready, and stale stable-security identity manifests on non-synthetic historical market backfills."
     },
     "tests/test_coverage_planner.py": {
@@ -106,10 +106,6 @@
     "tests/test_deployment_hardening.py": {
       "expected_sha256": "89be846818b299092de1a296a9006ff9c31e8546f9c7469f30a89f56e2c988c5",
       "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
-    },
-    "config/historical_market_sources.example.json": {
-      "expected_sha256": "89a8c7867434641ac55a05f7d5b2df2e97fb6d289c552675eca696532b6956d0",
-      "reason": "Historical market source template now exposes the security_identity_manifest attachment required for non-synthetic event-aligned evaluation readiness."
     }
   },
   "repository_additions": {
@@ -842,15 +838,15 @@
       "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
     },
     "src/security_identity_gate.py": {
-      "expected_sha256": "97d6e9ce2872f1bb59dd3db80cd3bd886dd160297b861db47f14aec4c65522b4",
+      "expected_sha256": "d9c8c80c2ec2843ab1d17b2182384e68ad8579751554e68fa2935aa26373d8c2",
       "reason": "Fail-closed stable security-identity generator: bind event_id to PERMNO/historical symbol, verify event-date listing identity, expose baseline dates requiring point-in-time security-master evidence, and prohibit inferred aliases/current-ticker substitution."
     },
     "tests/test_security_identity_gate.py": {
-      "expected_sha256": "ac36fbeb26c0b91d7baf88522e814d620e7f7ee53e853cd83184fc9b427a8871",
+      "expected_sha256": "facbbba627fac27e0d358f08d56c5a2c433152a62ec2c2e8375a9dd5adc43002",
       "reason": "Adversarial identity regressions for symbol reuse, PERMNO aliases, requirement mismatches, future dates, listing mismatches, and deterministic manifest reproduction."
     },
     "data/processed/security_identity_real/security_identity_manifest.json": {
-      "expected_sha256": "fcaf37d4b50992884b552545748fab1286d49eb5cc204d5d3f8e04b1f0652341",
+      "expected_sha256": "330999fa5c02ca52419c82a0be43680389bce8c4fdc4571ad2bda5590c25877a",
       "reason": "Current security-identity receipt: 174 event-date identities verified, 3,654 baseline required dates explicitly unverified pending dated stable-ID/security-master crosswalk evidence."
     }
   }
