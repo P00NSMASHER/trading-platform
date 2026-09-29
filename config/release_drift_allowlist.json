@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0034.yml": {
-      "expected_sha256": "d3a985ddb9f2a034909b6d0d82fef2641989fd70bb8967d2b503f6411a44a0c6",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -658,10 +654,6 @@
     "scripts/control_plane_audit_pack.py": {
       "expected_sha256": "d812008bda0d1d2417d4da140092e89a66ff6077ddcaf4cf6c452503fa590537",
       "reason": "Control-plane Step 8: deterministic exact-head audit-pack generator with semantic security-policy concepts, JUnit, secret, workflow, champion, and release-drift evidence"
-    },
-    "scripts/g1_batch_0034_generate.py": {
-      "expected_sha256": "447494717b1ca51c981bfe8377a75f9cff30f560f1601d00ccde791f8d7c7a71",
-      "reason": "G1 FleetCor + Starbucks preserved Business Wire batch 0034; deterministic 38 exact / 136 reviewed exclusions with independent issuer/SEC corroboration and all remaining release gates unchanged."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
