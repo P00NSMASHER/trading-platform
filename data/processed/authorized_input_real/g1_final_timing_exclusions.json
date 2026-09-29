@@ -2,16 +2,16 @@
   "schema_version": "1",
   "purpose": "Fail-closed evidence dossier for G1 events still lacking admissible exact first-public earnings-announcement clock times. Events with newly verified exact evidence are removed from this exclusion set.",
   "research_use_only": true,
-  "base_main_sha": "d99df656a622ccfe0f50363c8b3c0a672b13cb9b",
+  "base_main_sha": "2138de3464fcdecef62a4df6eada7d16e35a3c87",
   "g1_state": {
     "required": 174,
-    "exact_resolved": 32,
-    "reviewed_excluded": 142,
+    "exact_resolved": 33,
+    "reviewed_excluded": 141,
     "accounted_for": 174,
     "blocking_unresolved": 0,
-    "raw_exact_time_evidence_gaps": 142,
+    "raw_exact_time_evidence_gaps": 141,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "exact_timing_analysis_eligible": 32,
+    "exact_timing_analysis_eligible": 33,
     "inferred_clock_times_prohibited": true,
     "edgar_acceptance_as_exact_release_prohibited": true,
     "excluded_event_asymmetry_prohibited": true
@@ -132,13 +132,6 @@
       "event_id": "HEJFE-AF5106891E058D23",
       "historical_symbol": "TNGO",
       "first_documented_illicit_trade_ts": "2015-02-12 15:10:00",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-6F0A7632D9B4FFF6",
-      "historical_symbol": "ACHC",
-      "first_documented_illicit_trade_ts": "2015-04-28 14:35:00",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -1062,14 +1055,14 @@
   ],
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "exact_evidence_progress": {
-    "exact_resolved": 32,
-    "latest_batch": "g1_announcement_times_batch_0030.csv",
+    "exact_resolved": 33,
+    "latest_batch": "g1_announcement_times_batch_0031.csv",
     "newly_resolved": [
       {
-        "event_id": "HEJFE-A25F33B630365184",
-        "historical_symbol": "R",
-        "public_announcement_ts": "2015-02-03T08:55:00-05:00",
-        "source_reference": "https://newsroom.ryder.com/news/news-details/2015/Ryder-Reports-Record-Fourth-Quarter-and-Full-Year-2014-Results-and-Provides-2015-Forecast/default.aspx"
+        "event_id": "HEJFE-6F0A7632D9B4FFF6",
+        "historical_symbol": "ACHC",
+        "public_announcement_ts": "2015-04-28T16:00:00-04:00",
+        "source_reference": "https://www.streetinsider.com/Press%2BReleases/Acadia%2BHealthcare%2BFirst%2BQuarter%2BAdjusted%2BEPS%2BIncreases%2B53.6%25%2Bto%2B%240.43/10497602.html?classic=1"
       }
     ]
   }
