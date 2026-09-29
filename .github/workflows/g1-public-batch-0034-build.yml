@@ -1,0 +1,106 @@
+name: g1-public-batch-0034-build
+on:
+  push:
+    branches: [data/g1-public-batch-0034-pfpt-vrsn]
+    paths: [.github/workflows/g1-public-batch-0034-build.yml]
+permissions:
+  contents: write
+concurrency:
+  group: g1-public-batch-0034-build
+  cancel-in-progress: false
+jobs:
+  rebuild-reviewed-batch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+      - name: Install repository-locked dependencies
+        run: |
+          python -m pip install --upgrade 'pip==26.2.1'
+          python -m pip install -r requirements.lock -r requirements-dev.lock
+      - name: Rebuild the reviewed candidate on NVR-inclusive main
+        run: |
+          git fetch --no-tags --depth=1 origin 87440b9639165da139b4325ca275dbcd4b7f1ed1
+          python - <<'PY'
+          import ast, re, subprocess, textwrap
+          from pathlib import Path
+          old_workflow = subprocess.check_output(['git','show','87440b9639165da139b4325ca275dbcd4b7f1ed1:.github/workflows/g1-public-batch-0033-build.yml'],text=True)
+          # Reuse only the previously reviewed, exact-revision Python generator;
+          # do not execute any prior workflow steps or trust a moving branch.
+          original = old_workflow.split("          python - <<'PY'\n",1)[1].split('\n          PY\n',1)[0]
+          old = textwrap.dedent(original)
+          ast.parse(old)
+          s = old.replace('88dfa6fa4f69a6c9f33714edca92442376dfc8d4','67419540d90b9bc136b9b226201fc9c70670327d').replace('0033','0034')
+          s = re.sub(r'\b(35|139|37|137)\b',lambda m:{'35':'36','139':'138','37':'38','137':'136'}[m.group()],s)
+          needle = "assert 'thirty-five' in contract['purpose']\ncontract['purpose']=contract['purpose'].replace('thirty-five','thirty-seven')"
+          assert needle in s
+          s=s.replace(needle,"assert '36 exact' in contract['purpose']\ncontract['purpose']=contract['purpose'].replace('36 exact','38 exact').replace('138 reviewed','136 reviewed')")
+          s=s.replace('public_exact_batch_count=33,exact_resolved_event_records=38','public_exact_batch_count=34,exact_resolved_event_records=38')
+          s=s.replace("text=text.replace('state[\"public_exact_batch_count\"] == 32','state[\"public_exact_batch_count\"] == 33')","text=text.replace('state[\"public_exact_batch_count\"] == 33','state[\"public_exact_batch_count\"] == 34')")
+          s=s.replace('**32 public exact-time batches / 36 exact-resolved','**33 public exact-time batches / 36 exact-resolved').replace('**33 public exact-time batches / 38 exact-resolved','**34 public exact-time batches / 38 exact-resolved')
+          s=s.replace("if 'Exact first-public announcement timestamps resolved' in line or 'Events eligible for exact' in line: lines[i]=line.replace('36','38')","if 'Exact first-public announcement timestamps resolved' in line or 'Events eligible for exact' in line: lines[i]=re.sub(r'\\b\\d+\\b','38',line)")
+          s=s.replace("if 'Immutable reviewed fail-closed exclusions' in line: lines[i]=line.replace('138','136')","if 'Immutable reviewed fail-closed exclusions' in line: lines[i]=re.sub(r'\\b\\d+\\b','136',line)")
+          needle="old_exclusion_by_id = {r['event_id']:r for r in excluded['exclusions']}\n"
+          assert needle in s
+          s=s.replace(needle,needle+"NVR_PATHS = ['data/public/metadata/g1_announcement_times_batch_0033.csv','data/public/metadata/g1_public_batch_0033_evidence.json','tests/test_g1_public_batch_0033.py']\nnvr_hashes = {p:sha(p) for p in NVR_PATHS}\nassert old_resolutions['HEJFE-56483839E5F0E88F']['public_announcement_ts']=='2012-01-26T13:50:00Z'\nprevious_exact_rows={k:v for k,v in old_resolutions.items() if v['resolution_status']=='resolved_exact_public_timestamp'}\nassert len(previous_exact_rows)==36\n")
+          s=s.replace('non_promoted_resolution_rows_sha256=unchanged_hash,candidates=candidates','non_promoted_resolution_rows_sha256=unchanged_hash,previous_exact_rows=previous_exact_rows,preserved_nvr_files_sha256=nvr_hashes,candidates=candidates')
+          a=s.index('def test_all_non_promoted_resolution_rows_preserved():')
+          b=s.index('def test_current_receipts_reconcile_without_completing_step9():',a)
+          s=s[:a]+'''def test_previous_exact_rows_and_concurrent_nvr_evidence_preserved():
+              d=load(DOSS)
+              actual={r["event_id"]:r for r in rows(META/"announcement_resolutions.csv")}
+              assert len(d["previous_exact_rows"])==36
+              for event_id,expected in d["previous_exact_rows"].items():
+                  assert actual[event_id]==expected
+              for name,expected in d["preserved_nvr_files_sha256"].items():
+                  assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==expected
+              assert actual["HEJFE-56483839E5F0E88F"]["public_announcement_ts"]=="2012-01-26T13:50:00Z"
+              assert hashlib.sha256((ROOT/"data/processed/historical_events.csv").read_bytes()).hexdigest()==d["frozen_events_sha256"]
+          '''+s[b:]
+          s=s.replace("assert sha('data/processed/historical_events.csv')==FROZEN\nsubprocess.run","assert sha('data/processed/historical_events.csv')==FROZEN\nassert {p:sha(p) for p in NVR_PATHS}==nvr_hashes\nsubprocess.run")
+          s=s.replace('frozen_events_sha256=FROZEN,unchanged_rows=172,non_promoted_resolution_rows_sha256=unchanged_hash)','frozen_events_sha256=FROZEN,unchanged_rows=172,non_promoted_resolution_rows_sha256=unchanged_hash,preserved_nvr_files_sha256=nvr_hashes)')
+          s=s.replace("evidence_review_date='2026-09-29',purpose=","evidence_review_date='2026-09-29',superseded_candidate_head='cc7c9d3137efe5dd9c092424f2e922cf2afa5c4b',purpose=")
+          module=ast.parse(s)
+          for n in ast.walk(module):
+              if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='write_text' and n.args and isinstance(n.args[0],ast.Constant):
+                  value=n.args[0].value
+                  if isinstance(value,str) and value.startswith('from __future__ import annotations'): ast.parse(value)
+          audit=Path('private_runtime/audit/g1-public-batch-0034');audit.mkdir(parents=True,exist_ok=True)
+          (audit/'reviewed_generator.py').write_text(s,encoding='utf-8')
+          exec(compile(s,'reviewed_batch_0034_generator','exec'))
+          PY
+      - name: Harden test runtime permissions
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+      - name: Verify new clocks and preserve NVR, deterministic receipts and drift
+        run: |
+          python -m pytest -q tests/test_g1_public_batch_0034.py tests/test_g1_public_batch_0033.py tests/test_g1_public_batch_0032.py tests/test_g1_source_research.py tests/test_g1_acquisition_manifest.py tests/test_real_data_release_sprint.py tests/test_research_receipt_rebuild.py tests/test_release_drift.py --junitxml=private_runtime/audit/g1-public-batch-0034/focused-junit.xml
+          python -m research_receipt_rebuild --check
+          python -m g1_acquisition_manifest --check
+      - name: Publish generated candidate to this branch only
+        run: |
+          test "$GITHUB_REF" = refs/heads/data/g1-public-batch-0034-pfpt-vrsn
+          git diff --exit-code
+          git config user.name 'G1 public evidence builder'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'G1: preserve NVR and recover PFPT/VRSN; rebuild 38-of-174 receipts'
+          git push origin HEAD:refs/heads/data/g1-public-batch-0034-pfpt-vrsn
+      - name: Retain build and focused-test evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: g1-public-batch-0034-${{ github.sha }}
+          path: private_runtime/audit/g1-public-batch-0034
+          if-no-files-found: warn
+          retention-days: 30
