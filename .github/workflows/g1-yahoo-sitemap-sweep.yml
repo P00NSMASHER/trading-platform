@@ -1,0 +1,50 @@
+name: G1 Yahoo sitemap bulk sweep
+on:
+  push:
+    branches:
+      - g1/yahoo-sitemap-bulk-sweeper
+permissions:
+  contents: read
+jobs:
+  sweep:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+      - name: Syntax check sweeper
+        run: python -m py_compile scripts/g1_yahoo_sitemap_sweep.py
+      - name: Run bulk sitemap sweep
+        run: python scripts/g1_yahoo_sitemap_sweep.py --top-dates 20 --workers 4
+      - name: Print compact candidate summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path("private_runtime/audit/g1-yahoo-sitemap-sweep/candidates.json").read_text())
+          out={
+            "unresolved_event_count":p["unresolved_event_count"],
+            "dates_scanned":p["dates_scanned"],
+            "self_check":p["self_check"],
+            "strong_candidate_count":p["strong_candidate_count"],
+            "strong_candidates":p["strong_candidates"],
+            "review_candidate_count":p["review_candidate_count"],
+            "review_candidates":p["review_candidates"][:25],
+          }
+          print(json.dumps(out,indent=2))
+          PY
+      - name: Retain sweep evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: g1-yahoo-sitemap-sweep-${{ github.sha }}
+          path: private_runtime/audit/g1-yahoo-sitemap-sweep
+          if-no-files-found: warn
+          retention-days: 30
