@@ -387,3 +387,5 @@ save(audit/"verification.json",{
     "tracked_change_sha256":{name:sha(name) for name in sorted(changed)},
 })
 print(json.dumps({"exact":44,"reviewed_excluded":130,"new_events":[x["event_id"] for x in items],"step9":"SOURCE_BLOCKED"},indent=2))
+
+# Trigger batch-0036 workflow after workflow registration.
