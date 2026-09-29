@@ -135,7 +135,7 @@ step9=next(x for x in status["steps"] if x["step"]==9);assert step9["status"]=="
 for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
 "tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py"]:
     p=Path(fn);t=p.read_text()
-    t=t.replace("== (46,128)","== (49,125)").replace("len(excluded)==128","len(excluded)==125").replace("len(excluded) == 128","len(excluded) == 125")
+    t=t.replace("== (46,128)","== (49,125)").replace("len(excluded)==128","len(excluded)==125").replace("len(excluded) == 128","len(excluded) == 125").replace("len(ex)==128","len(ex)==125")
     t=t.replace('"46/174" in step9["evidence"] and "128" in step9["evidence"]','"49/174" in step9["evidence"] and "125" in step9["evidence"]')
     t=t.replace('updated["missing_exact_announcement_timestamps"] == 128','updated["missing_exact_announcement_timestamps"] == 125')
     t=re.sub(r"== 46\b","== 49",t);t=re.sub(r"== 128\b","== 125",t)
