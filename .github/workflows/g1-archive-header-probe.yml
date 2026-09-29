@@ -1,0 +1,43 @@
+name: G1 archive header probe
+on:
+  push:
+    branches:
+      - g1/archive-header-probe
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Download replication archive
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 -o /tmp/2015.zip "https://raw.githubusercontent.com/vgreg/hacked_earnings_jfe/c23c7d79d067a79d70cf20e31b072d3703497eae/Data/Press%20releases/2015.zip"
+          unzip -t /tmp/2015.zip >/dev/null
+          ls -lh /tmp/2015.zip
+      - name: Inspect solved and unresolved archive entries
+        run: |
+          set -euo pipefail
+          files=(
+            "2015/QTR1/85663_20150121_0.txt"
+            "2015/QTR1/77702_20150122_0.txt"
+            "2015/QTR1/91416_20150129_0.txt"
+            "2015/QTR1/13110_20150319_0.txt"
+            "2015/QTR2/12449_20150430_0.txt"
+            "2015/QTR1/12026_20150212_0.txt"
+            "2015/QTR1/12924_20150212_0.txt"
+            "2015/QTR1/91432_20150212_0.txt"
+            "2015/QTR1/52337_20150223_0.txt"
+            "2015/QTR2/12639_20150506_0.txt"
+            "2015/QTR2/52337_20150504_0.txt"
+          )
+          for f in "${files[@]}"; do
+            echo "::group::ENTRY $f"
+            unzip -Z -v /tmp/2015.zip "$f" | sed -n '1,45p' || true
+            echo "--- FIRST 60 LINES ---"
+            unzip -p /tmp/2015.zip "$f" | sed -n '1,60p' || true
+            echo "--- CLOCK-LIKE STRINGS ---"
+            unzip -p /tmp/2015.zip "$f" | grep -Eio '([0-9]{1,2}:[0-9]{2}(:[0-9]{2})?[[:space:]]*(a\.m\.|p\.m\.|AM|PM|ET|EST|EDT|PT|PST|PDT|CT|CST|CDT)?)|([0-9]{1,2}:[0-9]{2}[[:space:]]*(ET|EST|EDT|PT|PST|PDT|CT|CST|CDT))' | head -40 || true
+            echo "::endgroup::"
+          done
