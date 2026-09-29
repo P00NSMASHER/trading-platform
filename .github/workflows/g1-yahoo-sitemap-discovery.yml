@@ -1,0 +1,25 @@
+name: G1 Yahoo sitemap bulk discovery
+on:
+  push:
+    branches:
+      - g1/yahoo-sitemap-bulk-discovery
+permissions:
+  contents: read
+jobs:
+  discover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+      - name: Run bulk Yahoo discovery
+        run: python scripts/g1_yahoo_sitemap_discovery.py
+      - name: Upload discovery report
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: g1-yahoo-sitemap-discovery-${{ github.sha }}
+          path: /tmp/g1-yahoo-sitemap-discovery.json
+          retention-days: 30
