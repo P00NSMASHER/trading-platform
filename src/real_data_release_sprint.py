@@ -230,6 +230,15 @@ def refresh_coverage(
     quality = json.loads(metadata_quality_path.read_text(encoding="utf-8"))
     req_manifest = json.loads(requirements_manifest_path.read_text(encoding="utf-8"))
 
+    g1_required = int(readiness.get("event_count", summary.get("event_count", 0)) or 0)
+    g1_exact = int(readiness.get("announcement_exact_resolved", 0) or 0)
+    g1_excluded = int(readiness.get("announcement_events_excluded", 0) or 0)
+    g1_unresolved = int(readiness.get("announcement_unresolved", 0) or 0)
+    if g1_required <= 0 or min(g1_exact, g1_excluded, g1_unresolved) < 0:
+        raise ValueError("invalid G1 readiness counts")
+    if g1_exact + g1_excluded + g1_unresolved != g1_required:
+        raise ValueError("G1 readiness counts do not reconcile to event_count")
+
     market_ready = bool((summary.get("contract_audit") or {}).get("ready_for_real_backfill"))
     blockers = []
     if not market_ready:
@@ -254,6 +263,7 @@ def refresh_coverage(
     summary["metadata_quality_sha256"] = _sha256(metadata_quality_path)
     summary["g3_conditioned_itch_event_rows"] = req_manifest["counts"]["g3_confirmed_nasdaq_event_rows"]
     summary["legacy_conditional_itch_market_date_rows"] = req_manifest["counts"]["legacy_conditional_itch_market_date_rows"]
+    summary["missing_exact_announcement_timestamps"] = g1_required - g1_exact
     summary["blocking_gates"] = blockers
     summary["ready_for_non_synthetic_champion_challenger_comparison"] = len(blockers) == 0
     summary["coverage_summary_semantics"] = (
@@ -347,6 +357,21 @@ def build_status(
     option_required = int(req["counts"]["option_source_date_rows"])
     all_required = core_required + option_required
 
+    g1_required = int(meta.get("event_count", 0) or 0)
+    g1_exact = int(meta.get("announcement_exact_resolved", 0) or 0)
+    g1_excluded = int(meta.get("announcement_events_excluded", 0) or 0)
+    g1_unresolved = int(meta.get("announcement_unresolved", 0) or 0)
+    if g1_required <= 0 or min(g1_exact, g1_excluded, g1_unresolved) < 0:
+        raise ValueError("invalid G1 readiness counts")
+    if g1_exact + g1_excluded + g1_unresolved != g1_required:
+        raise ValueError("G1 readiness counts do not reconcile to event_count")
+    g1_exact_complete = (
+        bool(meta.get("ready_g1_exact_timing_analysis"))
+        and g1_exact == g1_required
+        and g1_excluded == 0
+        and g1_unresolved == 0
+    )
+
     # Current repository has no non-synthetic source rows, so the split is provably zero.
     # Once a real contract is present, the existing coverage planner remains the source of truth
     # for total G2 coverage and this sprint must be rerun with that contract.
@@ -379,8 +404,11 @@ def build_status(
          "status": "SOURCE_BLOCKED",
          "evidence": f"{req['counts']['g3_confirmed_nasdaq_event_rows']} G3-confirmed Nasdaq events frozen; decoded authorized ITCH files are not present"},
         {"step": 9, "name": "Replace G1 timing exclusions with exact clocks",
-         "status": "PASS" if meta.get("ready_g1_exact_timing_analysis") else "SOURCE_BLOCKED",
-         "evidence": f"exact timestamps={meta.get('announcement_exact_resolved', 0)}/174"},
+         "status": "PASS" if g1_exact_complete else "SOURCE_BLOCKED",
+         "evidence": (
+             f"exact timestamps={g1_exact}/{g1_required}; "
+             f"reviewed fail-closed exclusions={g1_excluded}; exclusions do not satisfy Step 9"
+         )},
         {"step": 10, "name": "Replace G5 exclusions with genuine point-in-time controls",
          "status": "PASS" if meta.get("ready_g5_model_evaluation_controls") else "SOURCE_BLOCKED",
          "evidence": f"genuine control dates={meta.get('control_dates_resolved', 0)}/72"},
