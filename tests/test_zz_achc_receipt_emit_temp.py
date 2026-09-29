@@ -7,7 +7,7 @@ from pathlib import Path
 import research_receipt_rebuild as rebuild
 
 
-def test_emit_changed_acadia_receipts() -> None:
+# CI emitter for deterministic receipt delta.\ndef test_emit_changed_acadia_receipts() -> None:
     root = Path(__file__).resolve().parents[1]
     with tempfile.TemporaryDirectory(prefix="achc-receipts-") as td:
         candidates = rebuild.build_candidate_receipts(root, Path(td))
