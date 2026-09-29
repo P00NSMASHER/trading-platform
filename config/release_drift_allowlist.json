@@ -76,16 +76,16 @@
       "reason": "Authoritative deterministic research receipt rebuild after G1 Acadia Healthcare batch 0031 (33 exact / 141 reviewed exclusions)."
     },
     "src/historical_market_backfill.py": {
-      "expected_sha256": "21b8141bfa977b0baa3c35d4b071a7feff039c087e32deb69c8c181e45f18e28",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "4340bba01ad29dc936e8e451a207003edd9c91f36cd2549ffe9b357b086b26b8",
+      "reason": "Historical market-data quality gate: block duplicate rows/events, declared-date mismatch, explicitly mapped sequence gaps/regressions, unsupported sub-microsecond timestamps, and invalid decoded-ITCH state transitions before aggregation; report stale-quote exposure without future substitution."
     },
     "src/coverage_planner.py": {
       "expected_sha256": "a3588646bd0b035a4097a21662e86f2ca4806c5a07a1664c1589f15cf67a9437",
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "tests/test_historical_market_backfill.py": {
-      "expected_sha256": "d7e95730e352f98b2824b4edfa7821d0ab6e4e7eabc7b98cb155c4f86bbf7da6",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "fc31a2a9b3509136ea57525fbce50239bdcf46765bc00634b096757595c18ab1",
+      "reason": "Adversarial market-data quality regressions for duplicates, date mismatch, sequence gaps, sub-microsecond timestamps, ITCH state errors, stale quotes, quality reports, and pre-aggregation fail-closed behavior."
     },
     "tests/test_coverage_planner.py": {
       "expected_sha256": "d94cbd8658a10a0e01bc141502603be7c1e3a6e44b007ff28cd03b7bc965ee61",
