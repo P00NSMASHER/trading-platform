@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0037.yml": {
-      "expected_sha256": "78ab7c5f0c5f85984c48605f380e53edb80179266a6f753a24b859553e1a191d",
-      "reason": "G1 batch 0037 Monarch Casino + Stamps.com preserved Marketwired timestamps; deterministic 46 exact / 128 reviewed exclusions with SEC corroboration."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -682,10 +678,6 @@
     "scripts/control_plane_audit_pack.py": {
       "expected_sha256": "d812008bda0d1d2417d4da140092e89a66ff6077ddcaf4cf6c452503fa590537",
       "reason": "Control-plane Step 8: deterministic exact-head audit-pack generator with semantic security-policy concepts, JUnit, secret, workflow, champion, and release-drift evidence"
-    },
-    "scripts/g1_batch_0037_generate.py": {
-      "expected_sha256": "027d006ef6328eb16cd6ee55c2985ba97822ac8ef96d0b21112dd4c9c5b2a7eb",
-      "reason": "G1 batch 0037 Monarch Casino + Stamps.com preserved Marketwired timestamps; deterministic 46 exact / 128 reviewed exclusions with SEC corroboration."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
