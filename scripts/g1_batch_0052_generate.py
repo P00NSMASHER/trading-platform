@@ -54,7 +54,7 @@ for spec in specs:
     delta=int((release-trade).total_seconds());assert delta==spec["expected_delta"]
     item={"event_id":spec["event_id"],"historical_symbol":spec["historical_symbol"],"event_date":trade.date().isoformat(),
       "first_documented_illicit_trade_ts":e["first_documented_illicit_trade_ts"],"public_announcement_ts":release.isoformat(),
-      "timestamp_kind":"first_public_release","timestamp_evidence_kind":"publisher_timestamp","source_family":"issuer_investor_relations_archive",
+      "timestamp_kind":"first_public_release","timestamp_evidence_kind":"publisher_timestamp","source_family":"official_newswire_archive",
       "source_grade":"A","publisher_timestamp_text":spec["publisher_timestamp_text"],"release_title":spec["release_title"],
       "source_reference":spec["source_reference"],"corroboration_reference":spec["corroboration_reference"],
       "corroboration_basis":spec["corroboration_basis"],"reviewed_on":"2026-09-30","information_asymmetry_seconds":delta}
@@ -81,7 +81,7 @@ save(exclusion_path,exclusions)
 
 contract_path=Path("config/metadata_sources.public_progress.json");contract=load(contract_path)
 contract["sources"].insert(0,{"source_id":"public-issuer-rh-batch-0052","record_kind":"announcement_timestamp",
-"source_family":"issuer_investor_relations_archive","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
+"source_family":"official_newswire_archive","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
 "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{k:k for k in fields},
 "license_reference":"Public issuer investor-relations publication metadata for RH with independent SEC Exhibit 99.1 corroboration. No licensed vendor data used.",
 "notes":"RH 2015-03-26 13:04 PDT. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used."})
@@ -155,7 +155,7 @@ def test_batch_0052():
         assert e["historical_symbol"]==sym and tr<rel<=tr+timedelta(days=7) and int((rel-tr).total_seconds())==delta
         assert resolved[x["event_id"]]["public_announcement_ts"]==utc
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
-        assert x["source_family"]=="issuer_investor_relations_archive" and x["source_grade"]=="A"
+        assert x["source_family"]=="official_newswire_archive" and x["source_grade"]=="A"
 def test_batch_0052_preserves_prior():
     d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0052_evidence.json").read_text())
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
