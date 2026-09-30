@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **56 public exact-time batches / 84 exact-resolved
+The current repository state is **57 public exact-time batches / 86 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -201,3 +201,7 @@ Timestamp-preserving MarketScreener mirrors of the original Business Wire releas
 ### Batch 0062: VeriFone and VMware
 
 Timestamp-preserving public-wire mirrors establish VeriFone Systems, Inc.'s exact first-public clock at 2015-03-10 16:01 EDT (20:01 UTC), 3,000 seconds after the frozen 15:11 EDT trade, and VMware's exact first-public clock at 2013-07-23 16:01 EDT (20:01 UTC), 1,560 seconds after the frozen 15:35 EDT trade. StreetInsider preserves the Business Wire VeriFone publication clock; Yahoo Finance preserves the original Marketwired VMware publisher timestamp. Matching SEC Exhibits 99.1 independently corroborate issuer, title, date, reporting period, and release body for both events. This advances G1 from 82 exact / 92 reviewed exclusions to 84 exact / 90 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0068: World Fuel Services and Bruker
+
+Two previously verified Worker-4 clocks are rebased onto current main. World Fuel Services Corporation's issuer IR archive explicitly preserves the Business Wire publication clock at 2015-04-30 20:09 EDT (2015-05-01 00:09 UTC), 16,140 seconds after the frozen 15:40 EDT trade. StreetInsider preserves Bruker's original Business Wire publication clock at 2015-05-06 16:01 EDT (20:01 UTC), 1,860 seconds after the frozen 15:30 EDT trade. Matching SEC Exhibits 99.1 independently corroborate issuer, title, date, reporting period, and release body. This advances G1 from 84 exact / 90 reviewed exclusions to 86 exact / 88 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.

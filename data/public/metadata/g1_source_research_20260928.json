@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "663905045a80cb3d90a5a2d086d87d9054181317",
+  "base_main_sha": "0b4739b3997494c28dfffbfe7fe45a8be84ca638",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 84,
-    "note": "The latest integrated recovery is batch_0062; cumulative public exact-time batches are 56 and cumulative exact event records are 84 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 56,
+    "exact_resolved_event_records": 86,
+    "note": "The latest integrated recovery is batch_0068; cumulative public exact-time batches are 57 and cumulative exact event records are 86 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 57,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 90
+    "reviewed_excluded_event_records": 88
   },
   "preferred_public_source_families": [
     {
@@ -1536,6 +1536,56 @@
       "source_family": "preserved_wire_mirror",
       "source_grade": "B",
       "source_reference": "https://finance.yahoo.com/news/vmware-reports-second-quarter-2013-200100675.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "World Fuel Services' own investor-relations archive prints the exact April 30, 2015 8:09 PM EDT publication clock immediately above the Business Wire release text; SEC Exhibit 99.1 independently matches the issuer, title, date, and first-quarter 2015 results. The separately scheduled 5:00 PM conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/789460/000115752315001491/a51092972ex99_1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0068",
+      "event_date": "2015-04-30",
+      "event_id": "HEJFE-D51AC412EDF93AA8",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-04-30T20:09:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-04-30 15:40:00",
+      "historical_event_match": true,
+      "historical_symbol": "INT",
+      "information_asymmetry_seconds": 16140,
+      "probe_id": "INT-batch0068",
+      "public_announcement_ts": "2015-04-30T20:09:00-04:00",
+      "publisher_timestamp_text": "April 30, 2015 8:09 PM EDT",
+      "reason": "Promoted through admissible explicit publication-clock evidence with independent SEC Exhibit 99.1 corroboration.",
+      "release_title": "World Fuel Services Corporation Reports Record First Quarter Earnings",
+      "reviewed_on": "2026-09-30",
+      "source_family": "issuer_investor_relations_archive",
+      "source_grade": "A",
+      "source_reference": "https://ir.world-kinect.com/node/8106/pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "StreetInsider preserves the original Business Wire release and displays May 6, 2015 4:01 PM EDT; SEC Exhibit 99.1 independently matches Bruker, May 6 2015, first-quarter 2015 results and $353.5 million revenue. The 4:45 PM earnings call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1109354/000110465915034867/a15-10964_1ex99d1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0068",
+      "event_date": "2015-05-06",
+      "event_id": "HEJFE-3046057647A0FC5C",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-05-06T16:01:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-05-06 15:30:00",
+      "historical_event_match": true,
+      "historical_symbol": "BRKR",
+      "information_asymmetry_seconds": 1860,
+      "probe_id": "BRKR-batch0068",
+      "public_announcement_ts": "2015-05-06T16:01:00-04:00",
+      "publisher_timestamp_text": "May 6, 2015 4:01 PM EDT",
+      "reason": "Promoted through admissible explicit publication-clock evidence with independent SEC Exhibit 99.1 corroboration.",
+      "release_title": "Bruker Reports First Quarter 2015 Financial Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://www.streetinsider.com/Press+Releases/Bruker+Reports+First+Quarter+2015+Financial+Results/10529926.html",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
