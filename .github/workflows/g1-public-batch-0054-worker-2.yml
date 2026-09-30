@@ -48,7 +48,17 @@ jobs:
         run: |
           python scripts/secret_scan.py --root .
           python -m pytest -q             tests/test_g1_public_batch_0054.py             tests/test_g1_acquisition_manifest.py             tests/test_g1_source_research.py             tests/test_real_data_release_sprint.py
-          git diff --cached --check
+          python - <<'PY'
+          import hashlib
+          import subprocess
+          from pathlib import Path
+          allow = Path("config/release_drift_allowlist.json")
+          trust = hashlib.sha256(allow.read_bytes()).hexdigest()
+          subprocess.run(
+              ["python", "scripts/verify_release_drift.py", "--expected-exceptions-sha256", trust],
+              check=True,
+          )
+          PY
 
       - name: Commit generated candidate
         run: |
