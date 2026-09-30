@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **46 public exact-time batches / 71 exact-resolved
+The current repository state is **47 public exact-time batches / 72 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -161,3 +161,7 @@ A primary-newswire sweep recovered two additional exact first-public clocks: IDE
 ### Batch 0046: Amerigroup + Metals USA + Landstar
 
 A primary-newswire sweep recovered three additional exact first-public clocks: Amerigroup at 2011-10-28 06:00 EDT (10:00 UTC), Metals USA at 2011-10-20 17:09 EDT (21:09 UTC), and Landstar at 2011-10-24 07:50 EDT (11:50 UTC). PR Newswire historical company archives preserve the exact publication clocks, while SEC-filed Exhibit 99.1 releases independently corroborate issuer, title, date, and reporting period. The clocks are 61,020, 4,860, and 230,520 seconds after their frozen first trades. This advances G1 from 68 exact / 106 reviewed exclusions to 71 exact / 103 reviewed exclusions. Scheduled calls, scheduled-release announcements, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0047: World Acceptance Corporation
+
+A direct primary-newswire recovery established World Acceptance Corporation's exact first-public clock at 2012-01-25 06:30 EST (11:30 UTC), 52,620 seconds after the frozen 2012-01-24 15:53 EST trade. PR Newswire's historical release page preserves the exact publication clock, while SEC-filed Exhibit 99.1 independently corroborates issuer, title, date, and third-quarter fiscal 2012 results. This advances G1 from 71 exact / 103 reviewed exclusions to 72 exact / 102 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.

@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "c2aab1049e8699d8a1cfd75180edd1bd7602ef17",
+  "base_main_sha": "95ec30d6d153c4fcfabb0c13653fca08fe75b510",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 71,
-    "note": "The repository is at batch_0046; cumulative exact event records are 71 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 46,
+    "exact_resolved_event_records": 72,
+    "note": "The repository is at batch_0047; cumulative exact event records are 72 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 47,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 103
+    "reviewed_excluded_event_records": 102
   },
   "preferred_public_source_families": [
     {
@@ -1225,6 +1225,31 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news/landstar-system,-inc./?page=5&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's primary archive shows the exact Jan. 25 2012 06:30 ET publication clock for the target release; SEC Exhibit 99.1 independently matches World Acceptance Corporation, the January 25 2012 release title, and third-quarter fiscal 2012 results. The separately announced conference-call timing is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/108385/000114036112003542/ex99_1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0047",
+      "event_date": "2012-01-24",
+      "event_id": "HEJFE-DA7595FDF91D8CBC",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-25T06:30:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-24 15:53:00",
+      "historical_event_match": true,
+      "historical_symbol": "WRLD",
+      "information_asymmetry_seconds": 52620,
+      "probe_id": "WRLD-batch0047",
+      "public_announcement_ts": "2012-01-25T06:30:00-05:00",
+      "publisher_timestamp_text": "Jan 25, 2012, 06:30 ET",
+      "reason": "Promoted through direct primary PR Newswire timestamp evidence with SEC corroboration.",
+      "release_title": "World Acceptance Corporation Reports Record Third Quarter",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news-releases/world-acceptance-corporation-reports-record-third-quarter-138029893.html",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
