@@ -40,6 +40,43 @@ def test_exact_release_resolves_and_asymmetry_positive():
     assert int(x.information_asymmetry_seconds)>0
 
 
+def test_issuer_ir_family_accepts_exact_first_public_release_but_not_ir_post(tmp_path):
+    exact = tmp_path / "issuer_ir_exact.csv"
+    exact.write_text(
+        "event_id,historical_symbol,event_date,public_announcement_ts,timestamp_kind,source_grade,source_reference\n"
+        "E1,TEST,2015-02-17,2015-02-17T16:35:00-05:00,first_public_release,A,https://issuer.example/release\n",
+        encoding="utf-8",
+    )
+    proxy = tmp_path / "issuer_ir_proxy.csv"
+    proxy.write_text(
+        "event_id,historical_symbol,event_date,public_announcement_ts,timestamp_kind,source_grade,source_reference\n"
+        "E1,TEST,2015-02-17,2015-02-17T16:35:00-05:00,issuer_ir_post,A,https://issuer.example/post\n",
+        encoding="utf-8",
+    )
+    base=json.loads((ROOT/"config/metadata_sources.demo.json").read_text())
+    source=base["sources"][0]
+    source["source_family"]="issuer_investor_relations_archive"
+    source["data_classification"]="public_official_data"
+    source["license_reference"]="public issuer investor-relations archive"
+
+    source["path"]=str(exact.resolve())
+    c1=tmp_path/"issuer_ir_exact_contract.json"; c1.write_text(json.dumps(base),encoding="utf-8")
+    contracts,_=load_contract(c1)
+    rows,p=_load_source_rows(contracts[0], ROOT)
+    resolved=resolve_announcements(events(), [(contracts[0], rows, p)])[0]
+    assert resolved.resolution_status=="resolved_exact_public_timestamp"
+    assert resolved.timestamp_confidence=="A-EXACT"
+    assert resolved.source_family=="issuer_investor_relations_archive"
+
+    source["path"]=str(proxy.resolve())
+    c2=tmp_path/"issuer_ir_proxy_contract.json"; c2.write_text(json.dumps(base),encoding="utf-8")
+    contracts,_=load_contract(c2)
+    rows,p=_load_source_rows(contracts[0], ROOT)
+    proxied=resolve_announcements(events(), [(contracts[0], rows, p)])[0]
+    assert proxied.resolution_status=="proxy_public_timestamp_not_exact_release"
+    assert proxied.timestamp_confidence=="C-PROXY"
+
+
 def test_edgar_acceptance_is_proxy_not_exact(tmp_path):
     c=json.loads((ROOT/"config/metadata_sources.demo.json").read_text())
     c["sources"][0]["path"]="data/examples/metadata/edgar_proxy.csv"

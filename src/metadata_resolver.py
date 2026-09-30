@@ -25,6 +25,7 @@ ALLOWED_RECORD_KINDS = {
 ALLOWED_SOURCE_FAMILIES = {
     "ibes_announcement",
     "official_newswire_archive",
+    "issuer_investor_relations_archive",
     "sec_edgar_submission_header",
     "nyse_daily_taq_master",
     "nasdaq_daily_list",
