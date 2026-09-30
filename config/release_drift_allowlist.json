@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0044.yml": {
-      "expected_sha256": "375577995684978a8b429571c5bd5aa16e32ea5454a1d1373a1698f4c58a4c88",
-      "reason": "G1 batch 0044 direct PR Newswire clocks for IBERIABANK Corporation and Microsemi; deterministic 66 exact / 108 reviewed exclusions with SEC corroboration and prior evidence preserved."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
