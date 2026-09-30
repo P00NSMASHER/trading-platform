@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "896a3f5a17a5800aee202d22828ccaaa52f21ba4",
+  "base_main_sha": "df5b2d716c4cf2e5eb483c26c93e25b2b9a1f702",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -360,13 +360,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-99CCB9D9BECE4E72",
-      "first_documented_illicit_trade_ts": "2012-01-26 13:47:00",
-      "historical_symbol": "IDXX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-DA7595FDF91D8CBC",
       "first_documented_illicit_trade_ts": "2012-01-24 15:53:00",
       "historical_symbol": "WRLD",
@@ -612,13 +605,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-3A94836BBC9F224A",
-      "first_documented_illicit_trade_ts": "2011-07-26 13:40:00",
-      "historical_symbol": "TPX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-22BF36BABB9D19D7",
       "first_documented_illicit_trade_ts": "2015-02-12 15:55:00",
       "historical_symbol": "ALNY",
@@ -791,14 +777,14 @@
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 66,
-    "exact_timing_analysis_eligible": 66,
+    "exact_resolved": 68,
+    "exact_timing_analysis_eligible": 68,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 108,
+    "raw_exact_time_evidence_gaps": 106,
     "required": 174,
-    "reviewed_excluded": 108
+    "reviewed_excluded": 106
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
