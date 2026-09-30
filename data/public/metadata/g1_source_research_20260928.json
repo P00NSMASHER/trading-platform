@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "57335f4cd231cc2ddeabdcc71ea72438796f7839",
+  "base_main_sha": "683eb6552b3a7cd6314647fe5dad62bf1ba68ce1",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 56,
-    "note": "The repository is at batch_0041; cumulative exact event records are 56 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 41,
+    "exact_resolved_event_records": 59,
+    "note": "The repository is at batch_0042; cumulative exact event records are 59 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 42,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 118
+    "reviewed_excluded_event_records": 115
   },
   "preferred_public_source_families": [
     {
@@ -850,6 +850,81 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news/ca-technologies/?page=5&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The PR Newswire Foot Locker archive lists the exact target release at Aug 18, 2011, 04:45 ET; SEC Exhibit 99.1 independently matches Foot Locker, the August 18 2011 release title, and the second quarter ended July 30 2011.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/850209/000093041311005558/c66715_ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0042",
+      "event_date": "2011-08-18",
+      "event_id": "HEJFE-1950A4340036BB95",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2011-08-18T16:45:00-04:00",
+      "first_documented_illicit_trade_ts": "2011-08-18 15:43:00",
+      "historical_event_match": true,
+      "historical_symbol": "FL",
+      "information_asymmetry_seconds": 3720,
+      "probe_id": "FL-batch0042",
+      "public_announcement_ts": "2011-08-18T16:45:00-04:00",
+      "publisher_timestamp_text": "Aug 18, 2011, 04:45 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "Foot Locker, Inc. Reports Second Quarter Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/foot-locker,-inc./?page=14&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The PR Newswire Meredith archive lists the exact target release at Jan 24, 2012, 09:15 ET; SEC Exhibit 99 independently matches Meredith, the January 24 2012 release title, and fiscal 2012 second-quarter results.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/65011/000006501112000002/f12q2exh99earningsrelease.htm",
+      "disposition": "RESOLVED_IN_BATCH_0042",
+      "event_date": "2012-01-23",
+      "event_id": "HEJFE-704E64D64C11C119",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-24T09:15:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-23 14:39:00",
+      "historical_event_match": true,
+      "historical_symbol": "MDP",
+      "information_asymmetry_seconds": 66960,
+      "probe_id": "MDP-batch0042",
+      "public_announcement_ts": "2012-01-24T09:15:00-05:00",
+      "publisher_timestamp_text": "Jan 24, 2012, 09:15 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "Meredith Corporation Reports Fiscal 2012 Second Quarter Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/Meredith%20Corporation/?page=27&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The PR Newswire International Game Technology archive lists the exact target release at Jan 24, 2012, 06:30 ET; SEC Exhibit 99.1 independently matches IGT, the January 24 2012 release title, and fiscal first-quarter 2012 results. The 5:00 a.m. PST conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/353944/000143774912000778/ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0042",
+      "event_date": "2012-01-23",
+      "event_id": "HEJFE-7E8FA3E5E417B5E7",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-24T06:30:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-23 15:31:00",
+      "historical_event_match": true,
+      "historical_symbol": "IGT",
+      "information_asymmetry_seconds": 53940,
+      "probe_id": "IGT-batch0042",
+      "public_announcement_ts": "2012-01-24T06:30:00-05:00",
+      "publisher_timestamp_text": "Jan 24, 2012, 06:30 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "International Game Technology Reports First Quarter Fiscal Year 2012 Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/international-game-technology?page=3&pagesize=25",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
