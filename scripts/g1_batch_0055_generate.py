@@ -96,7 +96,8 @@ contract["reviewed_announcement_exclusions"].update(expected_count=96,expected_s
 contract["purpose"]="Cumulative public point-in-time metadata: G1 has 78 exact release timestamps and 96 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed."
 save(contract_path,contract)
 
-hints["priority_events"]=[r for r in hints.get("priority_events",[]) if r.get("event_id") not in ids]\nhints["base_main_sha"]=BASE
+hints["priority_events"]=[r for r in hints.get("priority_events",[]) if r.get("event_id") not in ids]
+hints["base_main_sha"]=BASE
 hints["current_g1_state"].update(public_exact_batch_count=52,exact_resolved_event_records=78,reviewed_excluded_event_records=96,
  note="This feature branch adds the 52nd public exact-time batch as batch_0055 because batch numbers 0052-0054 are concurrently claimed by other workers; cumulative exact event records are 78 because some public batches resolve more than one historical event.")
 for item in items:
