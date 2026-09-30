@@ -47,6 +47,7 @@ specs=[
  "corroboration_reference":"https://www.sec.gov/Archives/edgar/data/1206264/000120626411000024/ex991.htm",
  "corroboration_basis":"PR Newswire's Tempur-Pedic archive shows the exact Jul. 26 2011 04:05 ET publication clock; SEC Exhibit 99.1 independently matches Tempur-Pedic International, the July 26 2011 release title, and second-quarter 2011 results. The 5:00 p.m. conference call is not used.",
  "expected_delta":8700}
+]
 items=[]
 hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
 hints=load(hints_path);trial=copy.deepcopy(hints)
