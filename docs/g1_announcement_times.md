@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **44 public exact-time batches / 66 exact-resolved
+The current repository state is **45 public exact-time batches / 68 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -153,3 +153,7 @@ A clustered primary-newswire sweep recovered five additional exact first-public 
 ### Batch 0044: IBERIABANK + Microsemi
 
 A primary-newswire sweep recovered two additional exact first-public clocks: IBERIABANK Corporation at 2012-01-25 16:30 EST (21:30 UTC) and Microsemi at 2012-01-26 16:00 EST (21:00 UTC). PR Newswire historical company archives preserve the exact publication clocks, while SEC-filed Exhibit 99.1 releases independently corroborate issuer, title, date, and reporting period. The clocks are 95,820 and 4,140 seconds after their frozen first trades. This advances G1 from 64 exact / 110 reviewed exclusions to 66 exact / 108 reviewed exclusions. Scheduled calls, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0045: IDEXX + Tempur-Pedic
+
+A primary-newswire sweep recovered two additional exact first-public clocks: IDEXX Laboratories at 2012-01-27 07:00 EST (12:00 UTC) and Tempur-Pedic at 2011-07-26 16:05 EDT (20:05 UTC). PR Newswire historical company archives preserve the exact publication clocks, while SEC-filed Exhibit 99.1 releases independently corroborate issuer, title, date, and reporting period. The clocks are 61,980 and 8,700 seconds after their frozen first trades. This advances G1 from 66 exact / 108 reviewed exclusions to 68 exact / 106 reviewed exclusions. Scheduled calls, scheduled-release announcements, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.

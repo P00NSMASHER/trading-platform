@@ -41,5 +41,5 @@ def test_batch_0034_hash_prior_evidence_and_fail_closed_remainder():
         assert by_id[eid]["public_announcement_ts"]==timestamp
         assert by_id[eid]["resolution_status"]=="resolved_exact_public_timestamp"
     excluded=[r for r in by_id.values() if r["resolution_status"]=="excluded_fail_closed"]
-    assert len(excluded)==108
+    assert len(excluded)==106
     assert all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in excluded)

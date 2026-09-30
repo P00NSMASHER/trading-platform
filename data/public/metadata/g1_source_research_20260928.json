@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "896a3f5a17a5800aee202d22828ccaaa52f21ba4",
+  "base_main_sha": "df5b2d716c4cf2e5eb483c26c93e25b2b9a1f702",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 66,
-    "note": "The repository is at batch_0044; cumulative exact event records are 66 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 44,
+    "exact_resolved_event_records": 68,
+    "note": "The repository is at batch_0045; cumulative exact event records are 68 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 45,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 108
+    "reviewed_excluded_event_records": 106
   },
   "preferred_public_source_families": [
     {
@@ -1100,6 +1100,56 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news/microsemi-corporation/?page=20&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's IDEXX archive shows the exact Jan. 27 2012 07:00 ET publication clock; SEC Exhibit 99.1 independently matches IDEXX Laboratories, the January 27 2012 release title, and fourth-quarter/full-year 2011 results. Scheduled release announcements are not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/874716/000114420412004268/v300482_ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0045",
+      "event_date": "2012-01-26",
+      "event_id": "HEJFE-99CCB9D9BECE4E72",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-27T07:00:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-26 13:47:00",
+      "historical_event_match": true,
+      "historical_symbol": "IDXX",
+      "information_asymmetry_seconds": 61980,
+      "probe_id": "IDXX-batch0045",
+      "public_announcement_ts": "2012-01-27T07:00:00-05:00",
+      "publisher_timestamp_text": "Jan 27, 2012, 07:00 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "IDEXX Laboratories Announces Fourth Quarter and Full Year Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/idexx-laboratories,-inc./?page=10",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's Tempur-Pedic archive shows the exact Jul. 26 2011 04:05 ET publication clock; SEC Exhibit 99.1 independently matches Tempur-Pedic International, the July 26 2011 release title, and second-quarter 2011 results. The 5:00 p.m. conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1206264/000120626411000024/ex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0045",
+      "event_date": "2011-07-26",
+      "event_id": "HEJFE-3A94836BBC9F224A",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2011-07-26T16:05:00-04:00",
+      "first_documented_illicit_trade_ts": "2011-07-26 13:40:00",
+      "historical_event_match": true,
+      "historical_symbol": "TPX",
+      "information_asymmetry_seconds": 8700,
+      "probe_id": "TPX-batch0045",
+      "public_announcement_ts": "2011-07-26T16:05:00-04:00",
+      "publisher_timestamp_text": "Jul 26, 2011, 04:05 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "Tempur-Pedic Reports Record Second Quarter 2011 Sales and Earnings",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/tempur__pedic-international-inc./?page=2",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
