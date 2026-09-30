@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "ac54fd06da7c38c7bd3babba1dafe5dbd4e2f83d9338102e11b4a4c6e6d1babf",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "80e0add41da8b261d835124b8c664c52275303c1f2fdb5af8ebf8fdaa4c1a7db",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "995fd30dc0d746b81c5226b6e510d530cfd5a719752be277e97125d6f685a226",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2313d1cca70b843746c5dc58ff8f70c218a8e4d6765a6d2877a52389b50e3148",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "58a93661e1f79c6ca493ab22fa28193dd43076fdffa4e14babc777c6c5e24e89",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d9154cd044cb274b7706d1f2b7e50d31e4e1d5db5888b01ce2cbc3f3ac3f5f58",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -152,8 +152,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "a85691e2a209a0db1614eb4a4c9e0ec9b00f2ad32592911febc43ef7f77a9e2f",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f0c540ec780a2f4decc20548aa5e4e6cf0ca364bad837dd3a1bef911d5fc0706",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +172,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "3fcc093346ae06d0fe3c16fb87fd167c9df7eecd3e0ffd0949b46cd455e7bbd7",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8901efcf08ad73c09e1cf8fe505318769f6d5ca7e0c7afdad7db8b7499f3200b",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +184,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "b411432402b498c490160d7a286587b1c5b800c0fb4607a0c57fd7161634e64a",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "deb2fc9a1c7caf4814290ccd81fac9da4a6ca2fd6c5b8fd1bbf769f2875a4e07",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +240,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "2a6b3583713fa34def3105c90b1fdbf596868ed1cb15a568d285488da86a38a8",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "866c8bf1d9fdcc62807cbf521483fa910354335c2dcfb5ab1f58c2ddeeea547f",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +256,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "7576a024f6af169d95fd9d9f5240a331bdfa50c5f992d8a71342f5b9fa4071d4",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "238e9888d70985888cd8a75e57a04d9cd37268cf1adf7336d11c340121e8a44d",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "fcf09d1f2f0d09257a2fb02136a7f7c584ef201a63e8dd5bb9e11b9e605dfb04",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c58b31e26795d03f772befcde7db657758240a3d8528215ab3806a14965051e9",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +292,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "d2f75ee22fcbf5a2acc18272531831f88f0a2c23f0ec1fc396dc196a94ad6e78",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "81d02fbc54854e780b3f2b5ac70d615191b98dfa3528af7cf01811df0c03d09c",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "10b7c3ead10bd1fb64419ed04bfe1683c8515a33fbb4ee822caed8a612b33b41",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "98cbc99561239df84501875954b65f3bbb1323c903cbf4a507ae82390999f45e",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "204399782822c0d50dd2b246e80547b5f63a73f42ce7a088f41671c935f6edd8",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "99ce062c337e847428138aef1292afc62c8ab5e014fa3c2eeb7ca332dab4ae7c",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +320,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "941438c8e860dce028c41936ebf5ceaba35305698babbc34a64c2e7ee23ee408",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "242f6008e5d7eb3da01133533fb9896babcc6b72f4b7b37971b9123b6f33145a",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -483,6 +483,10 @@
       "expected_sha256": "7845a73437bf1cd72201e63b5cfa83f45624b5f12278686544bb571223c181d5",
       "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0040.csv": {
+      "expected_sha256": "a3aea756903b0e89d942cff993826f695aa7ae9901a43852f2cebf5bf82bf48b",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -511,9 +515,13 @@
       "expected_sha256": "c7e848bbf6298da65c0fd5cc911ccba8caa58e7d056fbaf17c72bcb98f604cd6",
       "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0040_evidence.json": {
+      "expected_sha256": "0f02274812e847bffabf314108fa05136357dff5f57cde54e29f0b8852ebd85d",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "579696c5ef4759b0e46f9e95373897a8df6281943f87f6e0075fe286b28c517b",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bb61991a337eefed6d35022fb034db3af6b5cf9502bed3234998d160389e92ce",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -632,8 +640,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "acdf89e08f2aa7bdbf460e04f6b7676752870299a09c18d9fdd18ebf9c9bf26b",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f20e0b8c42eea04f4421be75cb23aeffe549b25963a928b0a28bea4a849d5f22",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -694,6 +702,10 @@
     "scripts/control_plane_audit_pack.py": {
       "expected_sha256": "d812008bda0d1d2417d4da140092e89a66ff6077ddcaf4cf6c452503fa590537",
       "reason": "Control-plane Step 8: deterministic exact-head audit-pack generator with semantic security-policy concepts, JUnit, secret, workflow, champion, and release-drift evidence"
+    },
+    "scripts/g1_batch_0040_generate.py": {
+      "expected_sha256": "6a2a2b54912d0cc1a0ea601cfde5553bd2e5310356846e1347b87dc62c44c0ad",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -852,48 +864,52 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "5808c231fe5f2656535434f622320dc9e417ba4617c5d4f233ab889e94de122b",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a02a36af7f9df01cf1c332f3f94887f9b40a7481812e777d5fb7ee37b9dbd92f",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "1fe64795aef5c351b898cef8fd0cbfa7bb915934ecace2dd7734e18e6ff187e8",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6d650534c20ea068e5b21516e7d559501d9e2401e1628a23d4e8d40684606219",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "b1ad731e2aebf6f36f7fa9c9ab1bdb41c970a453851af8393db3794b0ccb2e2c",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "09c603a2c9b73f0d2564ce395e2e4c5f2702ed96b8825dd5576805a67400effa",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "e8e2071ed60ae3640dea99f90647399f63214a79f86891bf59f0b7c1f0748c5d",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "755c2f741b02fa1b5db4d4e7bc3fcbdd226f25fe63880608214a65695fdecc1a",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "9cdaf8e72ab23d4fa36a168807f0bbf1297a7ab88900ead5609be8eeee89523e",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0ec3f97e5b1996a77787d54bffb09ec1e55c2ee877009b3a16a73e788669aad3",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "8b5846d99e75b0507d3539b34c1d2d469689eaced29882754c59c6d237d83c54",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "58e3bb4a2423b7b1a87c5d680ad91a0354a56a0263d5395a616bae43d0d7ef21",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "5bc3524ba17146579781b8dd500d9e6a8e01d3faa5db8a538b88a86cf19c074e",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "930a8c96bd6ae6ca474b9a3f1088ff705b66ccb7f9b7b016e7669b9659d40d3c",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "38d90869de25c030a4c83a99fb22f5e79bb14d7e187c1b48cb5628d64dc9a07a",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a07e00d9ee568b49992c24d4476dd0d933e9807a276a93dcbdcf7baa37cd1299",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0040.py": {
+      "expected_sha256": "7ea1eabd12bac85d8352743b8ef8662093006d8f46d828bba00660c8f151c305",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "acfefcb5473fd14c4ca60de6afeb645824392f1472d5ee5d30646efab50d4ff5",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2a83eac5917ddda8bab70422bc62686796b8d3b6d0ef77d59566e997f4e17a12",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -920,8 +936,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "4c5d0ccdf7e084646754c5d6214b2bc7e00aeac508420309ecc17e33f711fa8e",
-      "reason": "G1 batch 0039 Pall Corporation Business Wire timestamp; deterministic 50 exact / 124 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "87373a102d7398c6d76776563f99ba0cb39fdecfc6a36271fabdae1cc34b23b2",
+      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **39 public exact-time batches / 50 exact-resolved
+The current repository state is **40 public exact-time batches / 53 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -133,3 +133,7 @@ A clustered 2013-04-25 sweep recovered Century Aluminum at 2013-04-25 20:00 UTC,
 ### Batch 0039: Pall Corporation
 
 Pall Corporation is recovered at 2015-02-24 07:00 EST (12:00 UTC) from a MarketScreener-preserved Business Wire publication timestamp, independently corroborated by SEC Exhibit 99.1. The release is 57,420 seconds after the frozen first trade. This advances G1 from 49 exact / 125 reviewed exclusions to 50 exact / 124 reviewed exclusions. The 08:30 EST conference call, EDGAR acceptance time, date-only pages and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0040: MDU Resources + Cabot + Oshkosh
+
+A clustered public-wire sweep recovered MDU Resources at 2015-05-04 17:30 EDT (21:30 UTC), Cabot at 2015-04-29 16:05 EDT (20:05 UTC), and Oshkosh at 2015-04-28 07:00 EDT (11:00 UTC). MarketScreener preserves the Business Wire publication clocks; original Business Wire, issuer IR, and SEC-filed evidence independently corroborate the releases. The clocks are 5,580, 9,120, and 55,860 seconds after their frozen first trades. This advances G1 from 50 exact / 124 reviewed exclusions to 53 exact / 121 reviewed exclusions. Scheduled calls, EDGAR acceptance and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.

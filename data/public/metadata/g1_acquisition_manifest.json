@@ -5926,54 +5926,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-CFA461ED8BCCB889",
       "event_date": "2015-04-27",
       "event_id": "HEJFE-CFA461ED8BCCB889",
       "first_documented_illicit_trade_ts": "2015-04-27T19:29:00Z",
       "historical_symbol": "OSK",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-04-28T11:00:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-businesswire-mdu-cbt-osk-batch-0040",
+        "source_reference": "https://www.marketscreener.com/quote/stock/OSHKOSH-CORPORATION-13922/news/Oshkosh-Reports-Fiscal-2015-Second-Quarter-Results-20268999/",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-05-04",
-        "start_date": "2015-04-27"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -6246,54 +6216,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-9DF82252ED78E41F",
       "event_date": "2015-04-29",
       "event_id": "HEJFE-9DF82252ED78E41F",
       "first_documented_illicit_trade_ts": "2015-04-29T17:33:00Z",
       "historical_symbol": "CBT",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-04-29T20:05:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-businesswire-mdu-cbt-osk-batch-0040",
+        "source_reference": "https://www.marketscreener.com/quote/stock/CABOT-CORPORATION-11994/news/Cabot-Reports-Second-Quarter-Adjusted-EPS-of-0-53-and-Diluted-EPS-of-0-41-20281354/",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-05-06",
-        "start_date": "2015-04-29"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -6736,54 +6676,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-977FEBE8CA3CFCB6",
       "event_date": "2015-05-04",
       "event_id": "HEJFE-977FEBE8CA3CFCB6",
       "first_documented_illicit_trade_ts": "2015-05-04T19:57:00Z",
       "historical_symbol": "MDU",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-05-04T21:30:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-businesswire-mdu-cbt-osk-batch-0040",
+        "source_reference": "https://www.marketscreener.com/quote/stock/MDU-RESOURCES-GROUP-INC-13482/news/MDU-Resources-Reports-First-Quarter-Earnings-20311156/",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-05-11",
-        "start_date": "2015-05-04"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -7212,7 +7122,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 124,
+    "request_event_count": 121,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -7246,19 +7156,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 124,
+    "acquisition_needed": 121,
     "event_count": 174,
-    "exact_resolved": 50,
-    "research_hint_exact_resolved": 50,
-    "research_hint_excluded": 124,
+    "exact_resolved": 53,
+    "research_hint_exact_resolved": 53,
+    "research_hint_excluded": 121,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
     "explicit_research_priorities": 6,
     "no_public_replication_candidate": 10,
-    "public_release_file_present_without_clock": 114,
-    "resolved_no_action": 50,
-    "routed_for_acquisition": 124
+    "public_release_file_present_without_clock": 111,
+    "resolved_no_action": 53,
+    "routed_for_acquisition": 121
   },
   "work_queue": [
     {
@@ -8458,19 +8368,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-CFA461ED8BCCB889",
-      "event_date": "2015-04-27",
-      "event_id": "HEJFE-CFA461ED8BCCB889",
-      "historical_symbol": "OSK",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-E1B57B6A71B06A7F",
       "event_date": "2015-04-27",
       "event_id": "HEJFE-E1B57B6A71B06A7F",
@@ -8514,19 +8411,6 @@
       "event_date": "2015-04-29",
       "event_id": "HEJFE-8A0517D50278EAE4",
       "historical_symbol": "POWI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-9DF82252ED78E41F",
-      "event_date": "2015-04-29",
-      "event_id": "HEJFE-9DF82252ED78E41F",
-      "historical_symbol": "CBT",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
@@ -8618,19 +8502,6 @@
       "event_date": "2015-05-04",
       "event_id": "HEJFE-8EAA8616B1750B40",
       "historical_symbol": "CGNX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-977FEBE8CA3CFCB6",
-      "event_date": "2015-05-04",
-      "event_id": "HEJFE-977FEBE8CA3CFCB6",
-      "historical_symbol": "MDU",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
