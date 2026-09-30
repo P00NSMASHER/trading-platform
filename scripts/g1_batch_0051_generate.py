@@ -81,7 +81,7 @@ save(exclusion_path,exclusions)
 
 contract_path=Path("config/metadata_sources.public_progress.json");contract=load(contract_path)
 contract["sources"].insert(0,{"source_id":"public-world-fuel-issuer-batch-0051","record_kind":"announcement_timestamp",
-"source_family":"issuer_investor_relations_archive","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
+"source_family":"official_newswire_archive","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
 "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{k:k for k in fields},
 "license_reference":"Public issuer investor-relations archive for World Fuel Services Corporation preserving the explicit Business Wire release clock, with independent SEC Exhibit 99.1 corroboration. No licensed vendor data used.",
 "notes":"INT 2015-04-30 20:09 EDT. The issuer IR PDF explicitly prints the publication clock. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used."})
@@ -123,9 +123,9 @@ for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifes
     p=Path(fn);t=p.read_text()
     t=t.replace("== (74,100)","== (75,99)").replace("len(excluded)==100","len(excluded)==99").replace("len(excluded) == 100","len(excluded) == 99").replace("len(ex)==100","len(ex)==99")
     t=t.replace('"74/174" in step9["evidence"] and "100" in step9["evidence"]','"75/174" in step9["evidence"] and "99" in step9["evidence"]')
-    t=t.replace('updated["missing_exact_announcement_timestamps"] == 99','updated["missing_exact_announcement_timestamps"] == 100')
+    t=t.replace('updated["missing_exact_announcement_timestamps"] == 100','updated["missing_exact_announcement_timestamps"] == 99')
     t=re.sub(r"== 74\\b","== 75",t);t=re.sub(r"== 100\\b","== 99",t)
-    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 50','state["public_exact_batch_count"] == 49')
+    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 49','state["public_exact_batch_count"] == 50')
     ast.parse(t);p.write_text(t)
 
 p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("49 public exact-time batches / 74 exact-resolved","50 public exact-time batches / 75 exact-resolved")
@@ -172,7 +172,7 @@ assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 changed=set(subprocess.check_output(["git","diff","--name-only",BASE],text=True).splitlines());changed.update([str(batch),str(evidence_path),str(tp),SCRIPT])
 permitted={WORKFLOW,SCRIPT,str(contract_path),str(exclusion_path),str(hints_path),str(acq),str(batch),str(evidence_path),str(tp),
 "docs/g1_announcement_times.md","tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py","tests/test_g1_public_batch_0047.py","tests/test_g1_public_batch_0048.py",
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py","tests/test_g1_public_batch_0047.py","tests/test_g1_public_batch_0048.py","tests/test_g1_public_batch_0049.py",
 str(cp),str(cp.parent/"unresolved_gates.csv"),str(sd/"step_status.json"),"data/processed/research_receipt_bundle.json",
 "data/processed/real_data_replay/real_data_replay_status.json"} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
 assert changed<=permitted,f"Unexpected {changed-permitted}"
