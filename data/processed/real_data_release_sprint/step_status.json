@@ -7,13 +7,13 @@
     4,
     6
   ],
-  "coverage_summary_sha256": "c54702e2e42a4892129b9aec78af2c997a5387561b55a3d61a5f1c1d2cdeccd7",
+  "coverage_summary_sha256": "445c89c7534dc91137788b96a91da8ce0a2943734b166dbc09d0cc6bbb97d43a",
   "dependency_blocked_steps": [
     11,
     12
   ],
-  "metadata_quality_sha256": "79d06addc75945eb0e1bfe6b3ef8f034d584a7c1090fc6bb4bd1340d67dd3169",
-  "metadata_readiness_sha256": "93be2a207907a2082e03ca9481dea0a7e09c7bf34272f85f59f52443b1ae0acd",
+  "metadata_quality_sha256": "59b94b98570370d62f97d2d6d949b1e39f0a9888fadef1f8939c7b2626df2574",
+  "metadata_readiness_sha256": "625b25c956ef94282ab107202370e4bd80a6df220c82b98aa16045953c5d6700",
   "policy": {
     "future_data_or_lookahead_prohibited": true,
     "prohibited_outputs": [
@@ -97,7 +97,7 @@
       "step": 8
     },
     {
-      "evidence": "exact timestamps=64/174; reviewed fail-closed exclusions=110; exclusions do not satisfy Step 9",
+      "evidence": "exact timestamps=66/174; reviewed fail-closed exclusions=108; exclusions do not satisfy Step 9",
       "name": "Replace G1 timing exclusions with exact clocks",
       "status": "SOURCE_BLOCKED",
       "step": 9

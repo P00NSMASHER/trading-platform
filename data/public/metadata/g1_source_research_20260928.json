@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "b55f16eefab44cccab62a1c757d9f2ea13078bd7",
+  "base_main_sha": "896a3f5a17a5800aee202d22828ccaaa52f21ba4",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 64,
-    "note": "The repository is at batch_0043; cumulative exact event records are 64 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 43,
+    "exact_resolved_event_records": 66,
+    "note": "The repository is at batch_0044; cumulative exact event records are 66 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 44,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 110
+    "reviewed_excluded_event_records": 108
   },
   "preferred_public_source_families": [
     {
@@ -1050,6 +1050,56 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news/destination-maternity-corporation/?page=6&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's IBERIABANK archive shows the exact Jan. 25 2012 04:30 ET publication clock; SEC Exhibit 99.1 independently matches IBERIABANK Corporation, the January 25 2012 release title, and fourth-quarter 2011 results. The 9:00 a.m. Central conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/933141/000119312512022713/d290001dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0044",
+      "event_date": "2012-01-24",
+      "event_id": "HEJFE-2F14F138D09BCA76",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-25T16:30:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-24 13:53:00",
+      "historical_event_match": true,
+      "historical_symbol": "IBKC",
+      "information_asymmetry_seconds": 95820,
+      "probe_id": "IBKC-batch0044",
+      "public_announcement_ts": "2012-01-25T16:30:00-05:00",
+      "publisher_timestamp_text": "Jan 25, 2012, 04:30 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "IBERIABANK Corporation Reports Fourth Quarter Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/iberiabank-corporation/?page=8&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's Microsemi archive shows the exact Jan. 26 2012 04:00 ET publication clock; SEC Exhibit 99.1 independently matches Microsemi Corporation, the January 26 2012 release title, and fiscal first-quarter 2012 results. Conference-call timing is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/310568/000114420412004117/v300492_ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0044",
+      "event_date": "2012-01-26",
+      "event_id": "HEJFE-830D52F9F7F1CEEB",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-26T16:00:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-26 14:51:00",
+      "historical_event_match": true,
+      "historical_symbol": "MSCC",
+      "information_asymmetry_seconds": 4140,
+      "probe_id": "MSCC-batch0044",
+      "public_announcement_ts": "2012-01-26T16:00:00-05:00",
+      "publisher_timestamp_text": "Jan 26, 2012, 04:00 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "Microsemi Reports First Quarter 2012 Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/microsemi-corporation/?page=20&pagesize=25",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }

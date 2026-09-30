@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **43 public exact-time batches / 64 exact-resolved
+The current repository state is **44 public exact-time batches / 66 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -149,3 +149,7 @@ A direct primary-newswire sweep recovered Foot Locker at 2011-08-18 16:45 EDT (2
 ### Batch 0043: Varian + Astoria + Symmetricom + ISSI + Destination Maternity
 
 A clustered primary-newswire sweep recovered five additional exact first-public clocks after Batch 0042: Varian Medical Systems at 2012-01-25 16:01 EST, Astoria Financial at 16:30 EST, Symmetricom at 16:18 EST, ISSI at 16:10 EST, and Destination Maternity at 2012-01-26 06:00 EST. PR Newswire historical archives preserve the exact publication clocks, while SEC-filed issuer releases independently corroborate issuer, title, date, and reporting period. This advances G1 from 59 exact / 115 reviewed exclusions to 64 exact / 110 reviewed exclusions. Scheduled calls, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0044: IBERIABANK + Microsemi
+
+A primary-newswire sweep recovered two additional exact first-public clocks: IBERIABANK Corporation at 2012-01-25 16:30 EST (21:30 UTC) and Microsemi at 2012-01-26 16:00 EST (21:00 UTC). PR Newswire historical company archives preserve the exact publication clocks, while SEC-filed Exhibit 99.1 releases independently corroborate issuer, title, date, and reporting period. The clocks are 95,820 and 4,140 seconds after their frozen first trades. This advances G1 from 64 exact / 110 reviewed exclusions to 66 exact / 108 reviewed exclusions. Scheduled calls, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
