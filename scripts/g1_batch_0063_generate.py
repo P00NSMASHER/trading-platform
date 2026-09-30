@@ -137,6 +137,9 @@ for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifes
         t=t.replace('state["public_exact_batch_count"] == 54','state["public_exact_batch_count"] == 55')
         t=t.replace('report["priority_event_count"] == 6','report["priority_event_count"] == 5')
         t=t.replace('assert [row["historical_symbol"] for row in report["queue"]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI", "NATI"\n    ]','assert [row["historical_symbol"] for row in report["queue"]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI"\n    ]')
+    if fn.endswith("test_real_data_release_sprint.py"):
+        t=t.replace('result["counts"]["g3_confirmed_nasdaq_event_rows"] == 82','result["counts"]["g3_confirmed_nasdaq_event_rows"] == 80')
+        t=t.replace('updated["g3_conditioned_itch_event_rows"] == 82','updated["g3_conditioned_itch_event_rows"] == 80')
     if fn.endswith("test_g1_acquisition_manifest.py"):
         t=t.replace('manifest["work_queue"][:6]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI", "NATI"\n    ]','manifest["work_queue"][:5]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI"\n    ]')
         t=t.replace('manifest["work_queue"][:6]] == [1, 2, 3, 4, 5, 6]','manifest["work_queue"][:5]] == [1, 2, 3, 4, 6]')
