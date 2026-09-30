@@ -125,7 +125,7 @@ for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifes
     t=t.replace('"75/174" in step9["evidence"] and "99" in step9["evidence"]','"76/174" in step9["evidence"] and "98" in step9["evidence"]')
     t=t.replace('updated["missing_exact_announcement_timestamps"] == 99','updated["missing_exact_announcement_timestamps"] == 98')
     t=re.sub(r"== 75\b","== 76",t);t=re.sub(r"== 99\b","== 98",t)
-    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 51','state["public_exact_batch_count"] == 50')
+    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 50','state["public_exact_batch_count"] == 51')
     ast.parse(t);p.write_text(t)
 
 p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("50 public exact-time batches / 75 exact-resolved","51 public exact-time batches / 76 exact-resolved")
@@ -133,7 +133,7 @@ t += """
 ### Batch 0052: VeriFone Systems, Inc.
 
 A timestamp-preserving public-wire recovery established VeriFone Systems, Inc.'s exact first-public clock at 2015-03-10 16:01 EDT (20:01 UTC), 3,000 seconds after the frozen 2015-03-10 15:11 EDT trade. StreetInsider preserves the full Business Wire release with an explicit March 10, 2015 4:01 PM EDT publication clock, while SEC Exhibit 99.1 independently corroborates issuer, title, date, Business Wire attribution, and first-quarter fiscal 2015 results. The press release separately states a 1:30 PM PT conference call; that call time is not used. This advances G1 from 75 exact / 99 reviewed exclusions to 76 exact / 98 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
-"""""";p.write_text(t)
+""";p.write_text(t)
 
 tp=Path("tests/test_g1_public_batch_0052.py")
 ts='''import csv,json,hashlib
