@@ -49,6 +49,7 @@ specs=[
  "corroboration_basis":"StreetInsider preserves the original Business Wire release and displays May 6, 2015 4:01 PM EDT; SEC Exhibit 99.1 independently matches Bruker, May 6 2015, first-quarter 2015 results and $353.5 million revenue. The 4:45 PM earnings call is not used.",
  "timestamp_evidence_kind":"publisher_timestamp","source_family":"preserved_wire_mirror","source_grade":"B",
  "expected_delta":1860}
+]
 items=[]
 hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
 hints=load(hints_path);trial=copy.deepcopy(hints)
