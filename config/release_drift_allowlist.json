@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "9c45633c843fc2792aaa97fcb98fbebb0effaf8131fe55cc7fac09136e1def8e",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4f2a954af4fede614898d173c1aa55dd061ec0ea4a116bedda00054bcae0f8a7",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "93d1765ed23c8a87911753fa5bd91e1b8e818f2cb18d83f45ee7598efefa0f0f",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9bdfbd70d3dd6b197e5d7af10c2d4f0413db320e7b911892a1eecc6a71e192c9",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "62eae690217f00247f6a6b5f65989e1efbaf8b53e48073df27ac1ea0cc416447",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "950a67efef056ae13ebcee2c21c46b5d67f9eb94bc214be29f9bf2e72219b9ef",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -115,6 +115,10 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
+    ".github/workflows/g1-public-batch-0050-worker-1.yml": {
+      "expected_sha256": "2859e8f24f866d79ab9aeaf49060ea9c60dce59808597f7c02b3173421974743",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -152,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "301499e9aa8299d9a6296ac522bb8ec5642c7ff1050b4f6c6a715deca9aa4d29",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4c9a8f18b5ff5ec408d2db56c9d2cb5d09015fdf228c3f0364e26e57a75b75d9",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "4954938e74cd9fe93129413e7c0481fe8e2084b1f703dd716122357cecfab3ae",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0eae5bc63733c8c05171551a96510a263e43ed533fd07d92b3ab2c3a00d1b114",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "64735852407e2818bf66b4f0bbf27020fd5d297ca402ff7f236be6eab2f3a954",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9041047676ce6d0702c82d9fdb9edef4f6d055975cd72a21d87a97a93691a638",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "7aa1dfdedac65aa84c507389c0c86c32f339f0e705d5b8ca2c92262ecf2880e7",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a982ea000b697403fa4a3c5b9ad249205d0d73e75ccdaf30f0a6e05437420f8b",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "7b08b79a683247f982660339e76675270c7c28756655653d711e7b5fc19b31c6",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6e2d725733806c1fd48a277483a1db5a97186f66fe500e89775c87d3f42b4c1d",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "61cd94a837a50b9b8403fb11612171f3ac01debca893553854c101cd1f86014a",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5c17422fa8d6f2b4299e2381256a72a85574add477d5edb8478efb521f6d5a48",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +296,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "4fd566702a1da3d82bfe0da316bdc27e49524eae90e7e2266dd4c1d96111ab9b",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "495e73b281c498bd1553ad8c97c24c946ee5375d3db25dd1939bc7ccc41481ee",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "6cc823a9af085c19fcccf7a20560cd9e63e0c61842044f2234b31d1cb5df37c9",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b1ed22551122d6d081b81ca2021f5eafe61b3ac354328626d7aad261594669d4",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "5e82b088ee4ff259d75260a2e4e692ab4a34918a5445b8cf5d3b56cc1c42f884",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3d26d6cbcdc459f2bf52becef78ae254eae7305293c17638e952a2d00ad03121",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +324,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "81254ae14b23b13c14cc99f60050c4b44a783b0ab9732ba2e467e0eafbf1d919",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "20ec3c0d6f38e13e40881732c0ce96ad26ce135c0ef5dc2955d5f735a0168023",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -523,6 +527,10 @@
       "expected_sha256": "ddc16020b243f8fc6a97a563b50f619e0bbaeb8237933b3c8152ca4b6f86f2d8",
       "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0050.csv": {
+      "expected_sha256": "eadaf9e4388f5c406dc6358d82bb4e82b599835e475763bc3e748ae733f4ae11",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -591,9 +599,13 @@
       "expected_sha256": "46d755bf228408ef3e578ccbef21cab96311ba677df28e4bdd2f28813714c890",
       "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0050_evidence.json": {
+      "expected_sha256": "c67ded56d6aed799abc1c54d6c7059fdb9a0e6efdc26dad746aba8f5d674a445",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "66ad85e9b11eb5de312994abbd5d4456c2a97f8adee2deb3d8909ed25944bdd3",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "70d01afc9f6a40a9b75daabe756129f48b7f2b0346ee64a6bd5012dc6cbf7244",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -712,8 +724,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "0dda014273799cb4ea4d7411acb8efa7afc15486d46e54b4cda94c903c47bbcf",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b77ca49c12bcac5cf276b846e5e85c75d150c9ad2816a630d0c5c6d5ca23f87f",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -814,6 +826,10 @@
     "scripts/g1_batch_0049_generate.py": {
       "expected_sha256": "a38fc4e874cd3a667f7dc31731ff4645e669672cbaafbb4bfc448cbcd50c18cd",
       "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0050_generate.py": {
+      "expected_sha256": "6b71d7d4df8c29c2371e60229ad8eed3e59e2146048a625cc8efc4948c73b40c",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -972,88 +988,92 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "bb02a08fa137e4cd9722319183ea8bb793dda2c1c39af76a54384fc095a98c44",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d87c0694470fd912babe5980c4e66a69b6df5f49a69cfaafab76cae2a914557f",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "f7a6090aa7af41498407e876023c84a50a3cfc61d3850969657182c2a27424c7",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f8e43cd995ef08d79bb830a5759baff3cf08fc93cf009c9a91aede2166e1dc42",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "68968422779aa825e7735ac9342eab241b03e06911b13b1a71561cf0e641a304",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "df3b808376d02e912952290862d4dcd9eb91a94b236eac38f25610900a08905d",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "8da64f8a9d8ac0a6d7198ae2986d8efdb05319f28b64a4e28d3bd7d413ec8cef",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ed42016e06501e690a811caf5cdd7b55f35490c269dd2cfe968575dd5da541e1",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "ae0434345e5ffbf2ad12ea0c4b5a378fccf8a743d35fbbd53a9bbada73daf482",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e7e6792eda3b9cc0231f82d14267f86ecb44609fe400c5829fce19905d55b95d",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "ebd25861f5c0a2be0fcc33d4d14e8108f2e018aa95daf2026213ae12fcb6e50b",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "65e4320afda2ebe2ed318b6ac34ff0390005df6cde35a83c24caf501429da56f",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "769369437f7d820c956bc5e1dcc9903da793aab0561f65fd7d51ce30d1382f87",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5fd5c842d2d40556a96e609a4ce482483e63666d9bedd1f76c9dd2674cd17247",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "8d0082d5785807877970f89660f956404ad3a4a4759dd0b68ebcf79067e9ff55",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fda19853403802b6055e827805b1fb00bfc163949b901983cc4e313a7e3e6eb1",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "4ff172f801534931a0ff7d25d630470830887646f0f48e40feb60086c7f410c5",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "15c6a3955fd0ac4e155f426d7796f0df3fa565972e1e6bb8e970e304afaa41e2",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "1d5aa64098e6cf6489e66ca859c65ec54fa5e0ed032530200c735709e0e23917",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "70ccde89b897e9b1f0c18c6ac1b6c3f5fab112f4e5e2b8cdeb1311d96432c684",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "51021aefb5f4a4bcb64ce43171b193398d51c31f4a63d27d502b47dcb0d3e499",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "91dec74403c25d91e224041c2e414847513f901dd1c9ad35e69d1541111f10ab",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "ec65698676c286e7a83bfc335cf61449fc34ccc25dc658d9dea2981ffce82089",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2015de48811b43f6fb1c8e89a4b9d17acd02e0f416e28812d2631b13a7d5e8a3",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "3ecfb14df6c46bf6205dc36e370b9e9495cc6154f1c63d69025ead199366d03d",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "37f90c05605847c266c339782f24b708d08454706a4f82c9de5dfd48d76e4888",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "7c88dc5a9c5f7eb2138274574db036b918bdc1bee88bfbb97135b7e6c4896d9e",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7cd1dd9cbae9376aedc58556a0964915d1731f42164b8d52a458da461eb99cfb",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "c244df55e68a1d674e7bfd2c24d34c898da5a5a1f7586cf353f76822b7dac47e",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "633d8995eec913295e48c14d705c0797ca8eb31071f55bef60473640e4a1f488",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "54a56d8fec2b0990c337f9ba3ffa67b4d9f2643e7b5b011ece67c4d12ee94320",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7e17de1b9ba7d8b451637076db8d97bd5a7534756edbee6f71bc65b5aa43f6de",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "6035435e60ac059cb2ef99d476f7fa01b32c9cd3e3deff542427bab924707e60",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e4d7cd63ab1cc1c8212137a0089afc4227f486472a62f9d8a9f1c89d574bf8ee",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "19203b563e680325aca6164218c7d71025abeaa8d1fc90c3fdcb20b78c3f356b",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f7d7f36cdc918d0634af7ddf95f455910ecc9c43291e7259b85cd87d2ed9518f",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0050.py": {
+      "expected_sha256": "5285b42443a55bedc5b711fec1e56c916aabefcb1e3e5a8e11aa8808ac784445",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "2ae3b9ceebf8e81dc94822f8344cd38c538a8917a45c24bee9625518617547e0",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "577c58f6bb5f5e1e2178dbc7df8995d551ae4c4647dca726942020e393b35a46",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -1080,8 +1100,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "329ef77c595141eed140ae6065475b2bdc553f5921f0372f8e9594ba1e6447df",
-      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "767125427e4821dff7fbf4b79d11d494a6ef75590522430a6ff048bfc02eeb93",
+      "reason": "G1 batch 0050 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

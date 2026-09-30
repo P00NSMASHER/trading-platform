@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "8e254578360e90c273393b4d995d63d7335bc43a",
+  "base_main_sha": "92121be3303c2b261648ed8ade33c73e00294f4b",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -722,27 +722,20 @@
       "historical_symbol": "TW",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-51F3066EAC9B8138",
-      "first_documented_illicit_trade_ts": "2012-01-26 12:21:00",
-      "historical_symbol": "MUSA",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     }
   ],
   "g1_state": {
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 74,
-    "exact_timing_analysis_eligible": 74,
+    "exact_resolved": 75,
+    "exact_timing_analysis_eligible": 75,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 100,
+    "raw_exact_time_evidence_gaps": 99,
     "required": 174,
-    "reviewed_excluded": 100
+    "reviewed_excluded": 99
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
