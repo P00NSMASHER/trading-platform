@@ -91,7 +91,7 @@ save(contract_path,contract)
 
 hints["base_main_sha"]=BASE
 hints["current_g1_state"].update(public_exact_batch_count=52,exact_resolved_event_records=77,reviewed_excluded_event_records=97,
- note="The repository has 52 public exact-time batches; latest artifact is batch_0054 and cumulative exact event records are 77.")
+ note="The repository has 52 public exact-time batches; latest artifact is batch_0054 and cumulative exact event records are 77 because some public batches resolve more than one historical event.")
 for item in items:
     hints["validation_probes"].append(dict(item,probe_id=f"{item['historical_symbol']}-batch0054",historical_event_match=True,
       exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
