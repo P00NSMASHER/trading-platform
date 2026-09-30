@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **52 public exact-time batches / 77 exact-resolved
+The current repository state is **53 public exact-time batches / 79 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -185,3 +185,7 @@ A direct primary-newswire recovery established Metals USA Holdings Corp.'s exact
 ### Batch 0052: ConAgra Foods, Inc.
 
 A timestamp-preserving public-wire mirror established ConAgra Foods, Inc.'s exact first-public clock at 2015-03-26 07:30 EDT (11:30 UTC), 58,260 seconds after the frozen 2015-03-25 15:19 EDT trade. StreetInsider preserves the Business Wire release with an explicit March 26, 2015 7:30 AM EDT publication clock, while SEC Exhibit 99.1 independently corroborates issuer, exact release title, date, and fiscal 2015 third-quarter results. The separately stated 9:30 a.m. EDT conference call is not used. This advances G1 from 76 exact / 98 reviewed exclusions to 77 exact / 97 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0053: Cornerstone OnDemand and Nordson Corporation
+
+Timestamp-preserving StreetInsider mirrors of the original Business Wire releases establish Cornerstone OnDemand's exact first-public clock at 2015-05-06 16:01 EDT (20:01 UTC), 1,920 seconds after the frozen 15:29 EDT trade, and Nordson Corporation's exact first-public clock at 2015-05-19 16:30 EDT (20:30 UTC), 3,300 seconds after the frozen 15:35 EDT trade. Matching SEC Exhibits 99.1 independently corroborate each issuer, title, date, quarter, and release body. This advances G1 from 77 exact / 97 reviewed exclusions to 79 exact / 95 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.

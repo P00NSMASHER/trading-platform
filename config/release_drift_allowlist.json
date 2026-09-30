@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "93770851a104e3f88ed0eb0f05ff2fed61cb1d5cdc78fd204144ac3645ec96ab",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d6788a871ed1dab508c1fb473f8785ca8b0a512dd5b0c6a4da874f074faeb6aa",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "a9485f9bcdd038ba7c4a69ebb66af9e13df8d804751a40060ab2da42ff1d9f29",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0df55e4fc6f91a281560e0b1df3321817c19b2740a477acef350fe1e62a41b7e",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "15d0af5ddf4f8845160948bccc73b31522a30b79e650bd3cb1bbce043523ee33",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7670e3273ca65438968117c2d9768b31aaf029b917945faa9e55a4726584e92c",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -152,8 +152,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "b3a4cd4e62d7eee8c12c2cc35c3178658b27c01dd03aaef99abaf273b503ae83",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b210fac7465b1b76536b7d18d1b631d074506f61425d01fa8652702b35ce31bb",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +172,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "f79835ebc6e9cc073d778d6af92cb569e3d39f1b0160ea6c2a45488d4ba3d0af",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f3fc34bd8533956c5eb791b3c47c247c9f76a57e54e77970b25f0532a843d891",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +184,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "6ee5c656d9bcd75d753b084c33295d04210682719db63c2cd4fef8cfebb013fe",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "68e46772c0a4cae4750958d78a0324551a74dea5d207d39e9fa9cc99763b364d",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +240,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "6f1a3e16743e72ce597060a60a9c02f81f8d348c8d4a20fcc14e4a8b681b62e0",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b78d2c5d024b2c867334561bfe4b3c9eb57e0b51f74e8e85e1bbad3783d620f6",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +256,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "18fc4cd82d241bbb1646d218986b6b4c6ced86c8752391b590949963b38fa57e",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c4f94dc0194bd0094547e095153a2f8193ee50a798c04858862d455cf8922760",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "e4ca48f4a9f02e3c87e75b2709d93fae3081609759542f68031521c4ace3a36e",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e434622c97c857af9c318daffd7a0f813d0422864aad09bf79b2c56b392805ad",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +292,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "3917d3744cb40d145e22239eaeb787a9c8762dcddff58ab4d69150aa80aa8976",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a05656ed5dcfb4d9bdf91220c0b51cd428228e1eef9f88c447f089f0e36a640a",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "d9f51dae3b53f9d4d539b20fc957f98a85b62737461278b282d0e7775bceae6d",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "384a718a87b507864b5dbf95731748d8a620d5b3150f88e039c46c4a6360513b",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "d50d99d5f47b0141343e0908315308bf65f0b3e5c9a6acfe4f8ae31324e38949",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fa594437c4dc11e68f1b89ee34c982d1a39e392034130b7cf33d6461945a5f67",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +320,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "1727c57af7d52253fa7be8204f22cd87eccd4f4ab9682304a5e55c5cb7b64fea",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3eaac97f3855f493604b4961321f4f4eec6ea87e3a5c897bc770d749e7b6bc4c",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -535,6 +535,10 @@
       "expected_sha256": "ec3c966e4d3c0d28b924d195a36bc0c11831e322774929d7fc59bfdd6d058bb7",
       "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0053.csv": {
+      "expected_sha256": "72523f90b5c183a64f94cd3aa3d55894f8262763be8f3895a0bbaa8e68cf3ef8",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -615,9 +619,13 @@
       "expected_sha256": "99d017000343c6f51b5b0aaf8c74235ff811ff3410e53b105c0ca1e9c40efa5e",
       "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0053_evidence.json": {
+      "expected_sha256": "a5d822e98c69354ef887eec95ede00daef48eb7d23401f2d5ded41f1c285245d",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "68059e366dd966b931c72b76b5e49e079d6e16d60415aef81f0661e8dff9cfe5",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "41bb2231ea29b9ef38e7bc35d62dc5171b8fd7de762e4e134529738ad331ccb8",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -736,8 +744,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "6b4516710fdd934f7d03f21d69f80d2bfb07c1ed70b0f2e411ceae63e593637b",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "38e33d37370ae767537a2bd963f9484c8fe83ff0806bb8636d045f2b3e6f085b",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -850,6 +858,10 @@
     "scripts/g1_batch_0052_generate.py": {
       "expected_sha256": "dbf192a01028a515f32a4c5d50d07cb9c8348e56a9abc38b45ee19b068032c00",
       "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0053_generate.py": {
+      "expected_sha256": "b6453a91135e160e89099cd538c5ea0288855fbd4ce47905623bd4eb9df72a6a",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -1008,100 +1020,104 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "d7d5b7056ab4c9a3968dbbc69aaae579112624f6471db7efd446f398001069f0",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4b74132baf0a22b2d159c3dbd2e15f2f31d2a1563f139ba2d9671b6416331205",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "90443b6736ee5878010e1bc134d2206708a7ffc9fad8688b265f900042adbfc0",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f56fc5e9da911e881d2a2837e11381aca542dd8c14aad4d0d6c345d4f48977aa",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "6fbec16d202829f39457e3d46280050baab2a5fbbff00164be7dfb1fa1418fd2",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "01f3bc7b5cf8ee67b8ba9e96b3de4475dc3c1ad24c4308b7762cd022aed52b4c",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "0a0be90060e7668fa30f7e21b805c610d7aaba47177e3d8040636f7938a2e466",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b2b7dc9a1b45573e021d6b055f060d4e3b6ff03aaaf21eb9d72510deb25afb08",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "5bda0452ffc07571eda61a8907bcb655280d13de8c9ee6cc464986498c1e37ec",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "38cce1c1e962944d6f13bc6e6e5d88907c0a7bc45cb14e6694be0ee33bc46d78",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "3dc85bb113d49b14b27467dd01da8f9a3a054bd3e300228cc4666a28b4f99b9a",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "039b25797f03ebf669df0b9fd716e899a57f6c313faa7696567dd026c60d09f5",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "9bb7f2b0aeb965fa8bb907a1488dc2e8f222cf0c13edf9f6be4444186c519001",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3fb5c671e46d12ae1dc3e529794a243f7dd5608a462e78189676dffa68b5f0c3",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "82fa7bd98a76d6b0532c4756dc172abaf325d75dc06ba3b548db796ab2e2a591",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7801045d0275ff36162533803da891f748e17ad920b240ccd090d09ed46700b2",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "effab9b102b113a60ac44947f8cd8c822692cbe7d032902f363c5f65202148a2",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b089397f3441bb0097f9f43b9a25680cc64c2c91076d615e68e9426c3cb60d79",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "d0a6f4bacf95eed0206c0ccf92d4be13fffa0d36bcba64c92f0cdbd5c467e29d",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bbcfab30abdf8f8ace4579af65d6220f7824815de2ad232bef3ae746d03d08a3",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "641b0e9f459c8e123193c476ce1794ad4244cc247e4eb6eb05660e62f539a776",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ee6b368a382e0b8555959bd31b620b9e26b33a2f71cb19bd61e9ad9256670943",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "5bbff264d423c1064c28083692b4cbed187ad69a33a4b7a3a82c4ad54f7a6a19",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a87823187b5c56aa92ae9a0677e299fbc8c6af3a85579ea5bfaaac4101e72435",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "fb926287df843d24a863ce4c6bd2ea573bb828c38f16a741c01312c65531e9ca",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fac788103d2452aa86f08f9d77340fa937b50e9fc2d82fcbbb4ce50ec7c866c1",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "e5f22b9cbf3407be79d0ac9a7038745255c2f662d6ead1f9324f4a6c99b0d3c6",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "495edcec6f7ef2daadf37c8e6643e711262372c842bbddf2079f418cfa17ce72",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "d9456709e859a6e2961b28cea002a5aa9fc334498583095dda7f113181b159ff",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "728c78f278e13df5ecc6e8fbc5c8e0b03f98c28f71131867bc21783c45c58eb0",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "dc4a6a270f72c918fa62b8c302b57718ba4abd8f9aab2754365fb8583971a7ef",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "cad3a498f0fbcdc3efbcb5eb796502562b5e56ac4a9155947f9e9a644ff96fff",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "ab182de59becd7dd30fa5a8c48982b7e81c133a6b70b582e16b36b36f3ac2dc3",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "07b13b553bf507767983d229ca0b05de91b5693270c268ce91254f2933c33950",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "01d67eef0034c9673a3fb73d9592e95241e663808bae9b8fedd0a0c84b7eb81d",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2d6d5866f61bfcbf198c0e8bebe5b91da9106466b6e6c8d14a14fdf5894ad116",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "41efe0dc951a0161c454c18904c5ae4225eecf78735473c21c32f63429d72a8c",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4ca798e143083a2140a76076c3d3e983098a1a677b9855d338ac6cfe7ced8d5c",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "dada23e99fea8489d82d2f3f4255bbb2b3d58cd3d6e2cd5650e47761100f6fbe",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "38d87bdbcc443b9a3dbd80c08c2caa892edc3196087d5adbd4541faec8537541",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "abddd032e55b5fe8a17c38d0846514b5d640fc2a870131704ab5c53f8d588586",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ae835374ca34699caec034db8f9c814c405221f4cc16928e1f58b3bcb7a61048",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0053.py": {
+      "expected_sha256": "12b4129783c8904af01d1570b299dd65f80e8f86e78dd0cdb9c79f21cc71f3ab",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "c852dd76d026cf141173538642a51ff3f1e684914e5d4190e097b68a7430da69",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "87a8f7710b6705441298296d837048a584df3d01113b9911505511eb4d297d66",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -1128,8 +1144,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "2da58ca7a26b663329fece25353a1b1663f08f34e1fa709687f8b4af9833c4b5",
-      "reason": "G1 batch 0052 timestamp-preserving Business Wire mirror clock for ConAgra Foods, Inc.; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "28b5684e23675464b61f96956ec6d10d7661f9a1b7ac2d18f8eeea9e80e52d8b",
+      "reason": "G1 batch 0053 timestamp-preserving Business Wire mirror clocks for Cornerstone OnDemand and Nordson Corporation; deterministic 79 exact / 95 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
