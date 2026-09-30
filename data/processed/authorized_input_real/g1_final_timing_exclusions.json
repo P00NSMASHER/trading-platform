@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "15e901307ca7cc9789b7ecd9ad4700a3b9db8f40",
+  "base_main_sha": "57335f4cd231cc2ddeabdcc71ea72438796f7839",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -167,20 +167,6 @@
       "event_id": "HEJFE-4291CBF555CED6A9",
       "first_documented_illicit_trade_ts": "2015-04-29 14:47:00",
       "historical_symbol": "PBI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-376286473ECFECB4",
-      "first_documented_illicit_trade_ts": "2011-07-20 15:46:00",
-      "historical_symbol": "CA",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-2D81C70F59E076BA",
-      "first_documented_illicit_trade_ts": "2012-01-24 13:32:00",
-      "historical_symbol": "CA",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -626,13 +612,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-4FB44934BC5C5221",
-      "first_documented_illicit_trade_ts": "2011-08-03 15:56:00",
-      "historical_symbol": "DNDN",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-45559DD90D876D39",
       "first_documented_illicit_trade_ts": "2015-04-21 14:48:00",
       "historical_symbol": "ILMN",
@@ -882,14 +861,14 @@
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 53,
-    "exact_timing_analysis_eligible": 53,
+    "exact_resolved": 56,
+    "exact_timing_analysis_eligible": 56,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 121,
+    "raw_exact_time_evidence_gaps": 118,
     "required": 174,
-    "reviewed_excluded": 121
+    "reviewed_excluded": 118
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",

@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "80e0add41da8b261d835124b8c664c52275303c1f2fdb5af8ebf8fdaa4c1a7db",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "dc19d78a8809a84f2bcc1818c9eeafe30f8044da3b9d5db637ee3948b05cdc1f",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "2313d1cca70b843746c5dc58ff8f70c218a8e4d6765a6d2877a52389b50e3148",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "fd328cd4c2bd93766116a77681df57163396bdfc867f08f73c09db361b9f18c1",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "d9154cd044cb274b7706d1f2b7e50d31e4e1d5db5888b01ce2cbc3f3ac3f5f58",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "8a00620d14c4f47e25289285907771655b8d5f4e0bee0db75f750cc47ddb9872",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -152,8 +152,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "f0c540ec780a2f4decc20548aa5e4e6cf0ca364bad837dd3a1bef911d5fc0706",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "6451738bc50925cead77e05a6fdaa8cbf5dff9bdeddf678e5c78c03bd88ede4a",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +172,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "8901efcf08ad73c09e1cf8fe505318769f6d5ca7e0c7afdad7db8b7499f3200b",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "e9a1763e3f6683666f7fb1999c02dd9b962a0b1a85f30ae6d7808a119492da1f",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +184,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "deb2fc9a1c7caf4814290ccd81fac9da4a6ca2fd6c5b8fd1bbf769f2875a4e07",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "2727c724b513623551d9e20df978b204b2ab77e53635732cc6ea02c14d23b062",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +240,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "866c8bf1d9fdcc62807cbf521483fa910354335c2dcfb5ab1f58c2ddeeea547f",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "c22da44d8d552f7e5b3723701c4b1f0c4ae3357a1b328db11e786437c86a5cb4",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +256,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "238e9888d70985888cd8a75e57a04d9cd37268cf1adf7336d11c340121e8a44d",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "75120f4667ad6b1d3cdd8efef12a8f8ee7a411e0ec7f3129bc9f990c79f5817c",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "c58b31e26795d03f772befcde7db657758240a3d8528215ab3806a14965051e9",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "8b4f15ca13dde69a39d67d63c522b8ebccd3d5098722f3b167b9ad9a06c61873",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +292,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "81d02fbc54854e780b3f2b5ac70d615191b98dfa3528af7cf01811df0c03d09c",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "504dd08fe3d58799e42a24d3bc85c78ac4b602a35c5b02121bf2213094c262e6",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "98cbc99561239df84501875954b65f3bbb1323c903cbf4a507ae82390999f45e",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "c1d27598122c552a49a3d637008224812f2fff0520711d26e4999e63334fd171",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "99ce062c337e847428138aef1292afc62c8ab5e014fa3c2eeb7ca332dab4ae7c",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "6b3b6329699c0cd1f0893a4d0f5f605a0800e38a1058a26b953502cc67fd1b2b",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +320,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "242f6008e5d7eb3da01133533fb9896babcc6b72f4b7b37971b9123b6f33145a",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "f8c54b8f470bbd0f94761126a617509379ef2a4c725a21ba11754bcbd8f05a31",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -487,6 +487,10 @@
       "expected_sha256": "a3aea756903b0e89d942cff993826f695aa7ae9901a43852f2cebf5bf82bf48b",
       "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0041.csv": {
+      "expected_sha256": "947451b66939990cde44fd2ebb0fabc967f02f2734ea5c7ab5fd808646312609",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -519,9 +523,13 @@
       "expected_sha256": "0f02274812e847bffabf314108fa05136357dff5f57cde54e29f0b8852ebd85d",
       "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0041_evidence.json": {
+      "expected_sha256": "295a3c0f45294ba75920d10c9563e0df15a0af31a39aecaef632bce06d58b6ed",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "bb61991a337eefed6d35022fb034db3af6b5cf9502bed3234998d160389e92ce",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "25db296510d7fcf949072e9458d735cd7ae20bc5db426fee50779c4cb83acc00",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -640,8 +648,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "f20e0b8c42eea04f4421be75cb23aeffe549b25963a928b0a28bea4a849d5f22",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "489dddf6632b8a5481608631b8a2793d8e78db4ab6ba29e6c3214d7e820b887b",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -706,6 +714,10 @@
     "scripts/g1_batch_0040_generate.py": {
       "expected_sha256": "6a2a2b54912d0cc1a0ea601cfde5553bd2e5310356846e1347b87dc62c44c0ad",
       "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0041_generate.py": {
+      "expected_sha256": "3faa7a98fbafcf4aa7210b62743f0204c78ae9b3e92639bcadb7fdca490ebcaf",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -864,52 +876,56 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "a02a36af7f9df01cf1c332f3f94887f9b40a7481812e777d5fb7ee37b9dbd92f",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "566ff7861736a3c86016174bacc145b65e0ea68bd73f3aaa7ff0bb9742c0ed02",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "6d650534c20ea068e5b21516e7d559501d9e2401e1628a23d4e8d40684606219",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "54f1f8563c7405839bfef3191730137af2a4ead32df525b1c8b1bdf2dfebe20e",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "09c603a2c9b73f0d2564ce395e2e4c5f2702ed96b8825dd5576805a67400effa",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "223576aa3917a5f7f5465ff17025012a6bd27872884b0c3237f9d1c8f2bfeaa5",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "755c2f741b02fa1b5db4d4e7bc3fcbdd226f25fe63880608214a65695fdecc1a",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "e007731286372c6729c88155b3a72736883547f58c5848e8e7a75d5c8ba42544",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "0ec3f97e5b1996a77787d54bffb09ec1e55c2ee877009b3a16a73e788669aad3",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "fe8fe855761f8ded473e99fdc6f2aa8ddd43da6ae20cc11ff057df08d9b7bf5f",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "58e3bb4a2423b7b1a87c5d680ad91a0354a56a0263d5395a616bae43d0d7ef21",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "a6d2ba361fa1df83c0038e765c22f3e91c7e68141dc3dbed30b80372eb58ab20",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "930a8c96bd6ae6ca474b9a3f1088ff705b66ccb7f9b7b016e7669b9659d40d3c",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "2c42a0ec42244cc410c66d220379737e15e4580adcaf7f297c5e1857c90a63d0",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "a07e00d9ee568b49992c24d4476dd0d933e9807a276a93dcbdcf7baa37cd1299",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "f34efc1899df4c9a06411fe479b6bf88984942f1feade74e3e9830dd0d1ab883",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "7ea1eabd12bac85d8352743b8ef8662093006d8f46d828bba00660c8f151c305",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "4c35147e1e45d9a142d110b3f6d53615fb10890b2495be05dcd8c51dd089963b",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0041.py": {
+      "expected_sha256": "4988e56a9afe80f3576c0b1a558ca8c09f19c155b7fec8e41d419d48c035b427",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "2a83eac5917ddda8bab70422bc62686796b8d3b6d0ef77d59566e997f4e17a12",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "dd2afaf4bf2338e8180ebad4e4b3c20861aacb62ab6394c1fd5cc54f2e191553",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -936,8 +952,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "87373a102d7398c6d76776563f99ba0cb39fdecfc6a36271fabdae1cc34b23b2",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
+      "expected_sha256": "1f3784a060b7830625d7fe2a47273fe0046356aa7e22fa05b75d54a5edadcf3d",
+      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

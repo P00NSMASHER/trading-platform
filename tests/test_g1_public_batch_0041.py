@@ -5,11 +5,11 @@ from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
 def rr(p):
     with p.open(newline="",encoding="utf-8") as h:return list(csv.DictReader(h))
-def test_batch_0040():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0040_evidence.json").read_text())
+def test_batch_0041():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0041_evidence.json").read_text())
     events={r["event_id"]:r for r in rr(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    exp={"HEJFE-977FEBE8CA3CFCB6":("MDU","2015-05-04T21:30:00Z",5580),"HEJFE-9DF82252ED78E41F":("CBT","2015-04-29T20:05:00Z",9120),"HEJFE-CFA461ED8BCCB889":("OSK","2015-04-28T11:00:00Z",55860)}
+    exp={"HEJFE-4FB44934BC5C5221":("DNDN","2011-08-03T20:01:00Z",300),"HEJFE-376286473ECFECB4":("CA","2011-07-20T20:05:00Z",1140),"HEJFE-2D81C70F59E076BA":("CA","2012-01-24T21:05:00Z",9180)}
     assert len(d["items"])==3
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
@@ -17,9 +17,10 @@ def test_batch_0040():
         assert e["historical_symbol"]==sym and tr<rel<=tr+timedelta(days=7) and int((rel-tr).total_seconds())==delta
         assert resolved[x["event_id"]]["public_announcement_ts"]==utc
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
-        assert x["corroboration_reference"].startswith("https://")
-def test_batch_0040_preserves_prior():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0040_evidence.json").read_text())
+        assert x["source_family"]=="official_newswire_archive" and x["source_grade"]=="A"
+        assert x["corroboration_reference"].startswith("https://www.sec.gov/")
+def test_batch_0041_preserves_prior():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0041_evidence.json").read_text())
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
