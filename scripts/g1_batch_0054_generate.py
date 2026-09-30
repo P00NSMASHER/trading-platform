@@ -133,7 +133,7 @@ t += """
 ### Batch 0054: VMware
 
 A timestamp-preserving public-wire recovery established VMware's exact first-public clock at 2013-07-23 16:01 EDT (20:01 UTC), 1,560 seconds after the frozen 2013-07-23 15:35 EDT trade. Yahoo Finance preserves the original Marketwired release, identifies the author as Marketwired, and exposes published_date 2013-07-23T20:01:00Z; SEC Exhibit 99.1 independently corroborates issuer, title, date, and second-quarter 2013 results. This advances G1 from 76 exact / 98 reviewed exclusions to 77 exact / 97 reviewed exclusions. The separately scheduled 5:00 p.m. ET conference call, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
-"""""";p.write_text(t)
+""";p.write_text(t)
 
 tp=Path("tests/test_g1_public_batch_0054.py")
 ts='''import csv,json,hashlib
@@ -165,7 +165,7 @@ def test_batch_0054_preserves_prior():
     for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
     ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==97
     assert all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in ex)
-''''''
+'''
 ast.parse(ts);tp.write_text(ts)
 assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 
