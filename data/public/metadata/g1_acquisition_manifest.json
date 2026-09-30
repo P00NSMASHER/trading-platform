@@ -1996,54 +1996,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-3BBEC23702C1A375",
       "event_date": "2013-07-23",
       "event_id": "HEJFE-3BBEC23702C1A375",
       "first_documented_illicit_trade_ts": "2013-07-23T19:35:00Z",
       "historical_symbol": "VMW",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2013-07-23T20:01:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-preserved-wire-pay-vmw-batch-0062",
+        "source_reference": "https://finance.yahoo.com/news/vmware-reports-second-quarter-2013-200100675.html",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2013-07-30",
-        "start_date": "2013-07-23"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -4436,54 +4406,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-873A37657E58A8CD",
       "event_date": "2015-03-10",
       "event_id": "HEJFE-873A37657E58A8CD",
       "first_documented_illicit_trade_ts": "2015-03-10T19:11:00Z",
       "historical_symbol": "PAY",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-03-10T20:01:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-preserved-wire-pay-vmw-batch-0062",
+        "source_reference": "https://www.streetinsider.com/Press+Releases/Verifone+Reports+Results+for+the+First+Quarter+of+Fiscal+2015/10358461.html",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-03-17",
-        "start_date": "2015-03-10"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -6252,7 +6192,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 92,
+    "request_event_count": 90,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -6286,19 +6226,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 92,
+    "acquisition_needed": 90,
     "event_count": 174,
-    "exact_resolved": 82,
-    "research_hint_exact_resolved": 82,
-    "research_hint_excluded": 92,
+    "exact_resolved": 84,
+    "research_hint_exact_resolved": 84,
+    "research_hint_excluded": 90,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
     "explicit_research_priorities": 5,
     "no_public_replication_candidate": 9,
-    "public_release_file_present_without_clock": 83,
-    "resolved_no_action": 82,
-    "routed_for_acquisition": 92
+    "public_release_file_present_without_clock": 81,
+    "resolved_no_action": 84,
+    "routed_for_acquisition": 90
   },
   "work_queue": [
     {
@@ -6605,19 +6545,6 @@
       "event_date": "2013-05-08",
       "event_id": "HEJFE-D7BD84C255F2273D",
       "historical_symbol": "GORO",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-3BBEC23702C1A375",
-      "event_date": "2013-07-23",
-      "event_id": "HEJFE-3BBEC23702C1A375",
-      "historical_symbol": "VMW",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
@@ -7060,19 +6987,6 @@
       "event_date": "2015-03-03",
       "event_id": "HEJFE-EBC49B9A024181AD",
       "historical_symbol": "VEEV",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-873A37657E58A8CD",
-      "event_date": "2015-03-10",
-      "event_id": "HEJFE-873A37657E58A8CD",
-      "historical_symbol": "PAY",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
