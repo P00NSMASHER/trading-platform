@@ -716,54 +716,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-7E8FA3E5E417B5E7",
       "event_date": "2012-01-23",
       "event_id": "HEJFE-7E8FA3E5E417B5E7",
       "first_documented_illicit_trade_ts": "2012-01-23T20:31:00Z",
       "historical_symbol": "IGT",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2012-01-24T11:30:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "A",
+        "source_id": "public-primary-var-igt-idxx-batch-0042",
+        "source_reference": "https://www.prnewswire.com/news/international-game-technology?page=3&pagesize=25",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2012-01-30",
-        "start_date": "2012-01-23"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -1196,54 +1166,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-99F3FC8CE022DEA1",
       "event_date": "2012-01-25",
       "event_id": "HEJFE-99F3FC8CE022DEA1",
       "first_documented_illicit_trade_ts": "2012-01-25T17:46:00Z",
       "historical_symbol": "VAR",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2012-01-25T21:01:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "A",
+        "source_id": "public-primary-var-igt-idxx-batch-0042",
+        "source_reference": "https://www.prnewswire.com/news/varian-medical-systems/?page=16&pagesize=25",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2012-02-01",
-        "start_date": "2012-01-25"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -1436,54 +1376,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-99CCB9D9BECE4E72",
       "event_date": "2012-01-26",
       "event_id": "HEJFE-99CCB9D9BECE4E72",
       "first_documented_illicit_trade_ts": "2012-01-26T18:47:00Z",
       "historical_symbol": "IDXX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2012-01-27T12:00:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "A",
+        "source_id": "public-primary-var-igt-idxx-batch-0042",
+        "source_reference": "https://ir.idexx.com/news-events/press-releases?page=27",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2012-02-02",
-        "start_date": "2012-01-26"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -7032,7 +6942,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 118,
+    "request_event_count": 115,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -7066,19 +6976,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 118,
+    "acquisition_needed": 115,
     "event_count": 174,
-    "exact_resolved": 56,
-    "research_hint_exact_resolved": 56,
-    "research_hint_excluded": 118,
+    "exact_resolved": 59,
+    "research_hint_exact_resolved": 59,
+    "research_hint_excluded": 115,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
     "explicit_research_priorities": 6,
     "no_public_replication_candidate": 10,
-    "public_release_file_present_without_clock": 108,
-    "resolved_no_action": 56,
-    "routed_for_acquisition": 118
+    "public_release_file_present_without_clock": 105,
+    "resolved_no_action": 59,
+    "routed_for_acquisition": 115
   },
   "work_queue": [
     {
@@ -7316,19 +7226,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-7E8FA3E5E417B5E7",
-      "event_date": "2012-01-23",
-      "event_id": "HEJFE-7E8FA3E5E417B5E7",
-      "historical_symbol": "IGT",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-2F14F138D09BCA76",
       "event_date": "2012-01-24",
       "event_id": "HEJFE-2F14F138D09BCA76",
@@ -7407,19 +7304,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-99F3FC8CE022DEA1",
-      "event_date": "2012-01-25",
-      "event_id": "HEJFE-99F3FC8CE022DEA1",
-      "historical_symbol": "VAR",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-D4E8CD312A2AA576",
       "event_date": "2012-01-25",
       "event_id": "HEJFE-D4E8CD312A2AA576",
@@ -7450,19 +7334,6 @@
       "event_date": "2012-01-26",
       "event_id": "HEJFE-830D52F9F7F1CEEB",
       "historical_symbol": "MSCC",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-99CCB9D9BECE4E72",
-      "event_date": "2012-01-26",
-      "event_id": "HEJFE-99CCB9D9BECE4E72",
-      "historical_symbol": "IDXX",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,

@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "57335f4cd231cc2ddeabdcc71ea72438796f7839",
+  "base_main_sha": "683eb6552b3a7cd6314647fe5dad62bf1ba68ce1",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 56,
-    "note": "The repository is at batch_0041; cumulative exact event records are 56 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 41,
+    "exact_resolved_event_records": 59,
+    "note": "The repository is at batch_0042; cumulative exact event records are 59 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 42,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 118
+    "reviewed_excluded_event_records": 115
   },
   "preferred_public_source_families": [
     {
@@ -850,6 +850,81 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news/ca-technologies/?page=5&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's Varian Medical Systems archive lists the exact target earnings release at Jan 25, 2012, 04:01 ET; SEC Exhibit 99.1 independently matches the issuer, release title, date and first-quarter fiscal 2012 results.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/203527/000114420412003901/v300264_ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0042",
+      "event_date": "2012-01-25",
+      "event_id": "HEJFE-99F3FC8CE022DEA1",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-25T16:01:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-25 12:46:00",
+      "historical_event_match": true,
+      "historical_symbol": "VAR",
+      "information_asymmetry_seconds": 11700,
+      "probe_id": "VAR-batch0042",
+      "public_announcement_ts": "2012-01-25T16:01:00-05:00",
+      "publisher_timestamp_text": "Jan 25, 2012, 04:01 ET",
+      "reason": "Promoted through direct primary publisher or issuer archive timestamp evidence with SEC corroboration.",
+      "release_title": "Varian Medical Systems Reports Results for First Quarter of Fiscal Year 2012",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/varian-medical-systems/?page=16&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's International Game Technology archive lists the exact target release at Jan 24, 2012, 06:30 ET; SEC Exhibit 99.1 independently matches the issuer, title, date and fiscal first-quarter results. The 5:00 a.m. PST conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/353944/000143774912000778/ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0042",
+      "event_date": "2012-01-23",
+      "event_id": "HEJFE-7E8FA3E5E417B5E7",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-24T06:30:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-23 15:31:00",
+      "historical_event_match": true,
+      "historical_symbol": "IGT",
+      "information_asymmetry_seconds": 53940,
+      "probe_id": "IGT-batch0042",
+      "public_announcement_ts": "2012-01-24T06:30:00-05:00",
+      "publisher_timestamp_text": "Jan 24, 2012, 06:30 ET",
+      "reason": "Promoted through direct primary publisher or issuer archive timestamp evidence with SEC corroboration.",
+      "release_title": "International Game Technology Reports First Quarter Fiscal Year 2012 Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/international-game-technology?page=3&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "IDEXX's issuer investor-relations archive lists the exact target release at Jan 27, 2012, 7:00 am EST; SEC Exhibit 99.1 independently matches IDEXX, the release title, date and fourth-quarter/full-year results.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/874716/000114420412004268/v300482_ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0042",
+      "event_date": "2012-01-26",
+      "event_id": "HEJFE-99CCB9D9BECE4E72",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-27T07:00:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-26 13:47:00",
+      "historical_event_match": true,
+      "historical_symbol": "IDXX",
+      "information_asymmetry_seconds": 61980,
+      "probe_id": "IDXX-batch0042",
+      "public_announcement_ts": "2012-01-27T07:00:00-05:00",
+      "publisher_timestamp_text": "Jan 27, 2012, 7:00 am EST",
+      "reason": "Promoted through direct primary publisher or issuer archive timestamp evidence with SEC corroboration.",
+      "release_title": "IDEXX Laboratories Announces Fourth Quarter and Full Year Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "issuer_investor_relations_archive",
+      "source_grade": "A",
+      "source_reference": "https://ir.idexx.com/news-events/press-releases?page=27",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
