@@ -40,6 +40,7 @@ specs=[
  "corroboration_reference":"https://www.sec.gov/Archives/edgar/data/23217/000119312515105916/d897973dex991.htm",
  "corroboration_basis":"StreetInsider preserves the Business Wire target release with an explicit March 26, 2015 7:30 AM EDT publication clock; SEC Exhibit 99.1 independently matches ConAgra Foods, Inc., the exact release title, the March 26 2015 date, and fiscal 2015 third-quarter results. The separately stated 9:30 a.m. EDT conference call is not used.",
  "expected_delta":58260}
+]
 items=[]
 hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
 hints=load(hints_path);trial=copy.deepcopy(hints)
