@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "cf5a70f07b54513c9f954e71289cc61d3d5aab4b",
+  "reserved_batch": "0060",
+  "worker_slot": 0,
+  "previous_exact_count": 86,
+  "expected_exact_count_after_batch": 87,
+  "expected_excluded_after_batch": 87,
+  "integration_constraints": [
+    "Do not open or finalize a canonical PR until issue #153 explicitly assigns the global integration token to Worker 0.",
+    "Before canonical generation, refresh main and regenerate all counts, receipts, allowlist hashes, audit artifacts, and regression expectations from the exact current base.",
+    "Do not use EDGAR acceptance, call/webcast time, scheduled release time, archive capture time, neighboring release timing, inference, or unsupported timezone conversion."
+  ],
+  "items": [
+    {
+      "event_id": "HEJFE-8167467EBF64AABE",
+      "historical_symbol": "PNRA",
+      "event_date": "2013-10-22",
+      "first_documented_illicit_trade_ts": "2013-10-22 15:20:00",
+      "public_announcement_ts": "2013-10-22T16:05:00-04:00",
+      "public_announcement_utc": "2013-10-22T20:05:00Z",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "source_family": "court_filing_based_contemporaneous_press_account",
+      "source_grade": "B",
+      "publisher_timestamp_text": "The preserved New York Times court-filing account establishes an Eastern Time chronology for the Panera event and states: at 4:05 p.m., Panera's earnings news release hit the wire.",
+      "release_title": "Panera Bread Company Reports Q3 2013 diluted EPS of $1.48, up 19% versus Q3 2012",
+      "public_distribution_explicit": true,
+      "timezone_basis": "The same preserved contemporaneous account explicitly establishes Eastern Time for the Oct. 22, 2013 Panera/Marketwired chronology before stating that the release hit the wire at 4:05 p.m.",
+      "source_reference": "https://smart-lab.ru/blog/271471.php",
+      "primary_corroboration_reference": "https://www.justice.gov/d9/press-releases/attachments/2016/02/18/dubovoy_arkadiy_indictment.pdf",
+      "sec_exhibit_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000031/a20130924ex991pressrelease.htm",
+      "issuer_ir_reference": "https://www.panerabread.com/content/dam/panerabread/documents/financial/2013/2013-third-quarter-earnings-release.pdf",
+      "corroboration_basis": "The DOJ indictment independently identifies PNRA, Oct. 22, 2013, Marketwired, the downward Q4 guidance revision, and public distribution after the close. SEC Exhibit 99.1 and Panera issuer IR independently match the exact Q3 2013 release title, date, symbol, guidance change, and body. The explicit 4:05 p.m. wire-hit clock comes from a preserved contemporaneous New York Times account describing the same court-filing chronology.",
+      "information_asymmetry_seconds": 2700,
+      "reviewed_on": "2026-09-30"
+    }
+  ],
+  "evidence_method": "Exact first-public wire-hit clock from a preserved contemporaneous court-filing-based account, independently corroborated for event identity and after-close publication semantics by a DOJ indictment, SEC Exhibit 99.1, and issuer IR. This is prep evidence only; canonical eligibility must be revalidated on the token-held current main.",
+  "prohibited_substitutes": [
+    "edgar_acceptance_time",
+    "scheduled_call_time",
+    "webcast_time",
+    "archive_capture_time",
+    "neighboring_release_time",
+    "inferred_clock",
+    "date_only",
+    "unsupported_timezone"
+  ]
+}
