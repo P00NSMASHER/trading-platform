@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **51 public exact-time batches / 76 exact-resolved
+The current repository state is **52 public exact-time batches / 77 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -181,3 +181,7 @@ A timestamp-preserving public-wire recovery established Anadarko Petroleum Corpo
 ### Batch 0051: Metals USA Holdings Corp.
 
 A direct primary-newswire recovery established Metals USA Holdings Corp.'s exact first-public clock at 2012-01-26 16:05 EST (21:05 UTC), 13,440 seconds after the frozen 2012-01-26 12:21 EST trade. PR Newswire's historical Metals USA archive preserves the exact publication clock, while SEC Exhibit 99.1 independently corroborates issuer, title, date, and fiscal-2011 results. This advances G1 from 75 exact / 99 reviewed exclusions to 76 exact / 98 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0052: RH
+
+RH's issuer investor-relations archive explicitly records the Business Wire fourth-quarter and fiscal-2014 results release at 2015-03-26 13:04 PDT (20:04 UTC), 1,380 seconds after the frozen 2015-03-26 15:41 EDT trade. SEC Exhibit 99.1 independently corroborates issuer, exact title, date, and reported results. This advances G1 from 76 exact / 98 reviewed exclusions to 77 exact / 97 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
