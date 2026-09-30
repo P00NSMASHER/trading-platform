@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **55 public exact-time batches / 82 exact-resolved
+The current repository state is **56 public exact-time batches / 84 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -197,3 +197,7 @@ RH's issuer investor-relations archive explicitly records the Business Wire four
 ### Batch 0063: National Instruments and Cree
 
 Timestamp-preserving MarketScreener mirrors of the original Business Wire releases establish National Instruments' exact first-public clock at 2015-01-29 16:01 EST (21:01 UTC), 600 seconds after the frozen 15:51 EST trade, and Cree's exact first-public clock at 2015-04-21 16:01 EDT (20:01 UTC), 1,920 seconds after the frozen 15:29 EDT trade. Matching SEC Exhibits 99.1 independently corroborate each issuer, title, date, reporting period, and release body. Each mirror explicitly distinguishes the publication clock from a later modification time. This advances G1 from 80 exact / 94 reviewed exclusions to 82 exact / 92 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, update, date-only, scheduled-release, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0062: VeriFone and VMware
+
+Timestamp-preserving public-wire mirrors establish VeriFone Systems, Inc.'s exact first-public clock at 2015-03-10 16:01 EDT (20:01 UTC), 3,000 seconds after the frozen 15:11 EDT trade, and VMware's exact first-public clock at 2013-07-23 16:01 EDT (20:01 UTC), 1,560 seconds after the frozen 15:35 EDT trade. StreetInsider preserves the Business Wire VeriFone publication clock; Yahoo Finance preserves the original Marketwired VMware publisher timestamp. Matching SEC Exhibits 99.1 independently corroborate issuer, title, date, reporting period, and release body for both events. This advances G1 from 82 exact / 92 reviewed exclusions to 84 exact / 90 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.

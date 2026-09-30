@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "48a11ff810cba68d53a8ef98466d057d00da6e23f07a845ce38994d5b979756b",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1dc40bd0352341d2e84faec3164c16c9e9ad663447acb3af9210db229f8a2c92",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "3553d904e67b23fbe341affeff25459715531a6b3ca09f1e7cbecc6b79c82ffd",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "979c2ae1b50713359f2606e52379cf61763e74a2147a81c866c0e892621018d3",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "4f6cdeebe9ef4cadc58647c89ded706f254511dcb971cff5b51730aabfca584d",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "eed55f9c8bc9171651c15b05e6fba975323e1dd998f931c4261945d3527b81ad",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -115,6 +115,10 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
+    ".github/workflows/g1-public-batch-0062-worker-2.yml": {
+      "expected_sha256": "99890e6dd434f85fc4f99448e882ee997eb65a33270f80ef94e62204244579af",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -152,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "b4c56128713547ddb4ae716ddabf2529b1962da71607fc6621cf23681b5c9498",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9618e7e3041e356b19255b09e0dfbd92f740aa1be9bc9d5da2ba2f7a5f34fdcf",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "ea80544a9184ab3c31918977f42ba57b9f65342a0ea13d85d2f1336c0a5aca0a",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d446e6ed0941f6b43acab6f6bbd847ca41875f7680ae9f99c7ac626d1cbbba4b",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "03db78e4c8fed217a42186942b4f4f0699494705d6ba2793f2d726bdb47fd045",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "db80a63ed4b381c1eaf5b53e483f6eb5ecf294290bed1517f218f2cf7da1ba1f",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "c8b489017be6d7be74f3c43876643438d1ccb0bd52e8b6802965b43daee926d6",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "04f212d09c871a52d5f4d154ef8cec9ef35a558f8cd3758323cd7d398a056b87",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "771c844e029e2946ec35e42228ef38fe9c01a50d4a75e9c761c8c393210615ac",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "913530a905a911fd07521126f2b69c5f7fc330269008d17b5951ba5f59ba790d",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "7649f6b4ca0f5003233438c029cebb6d51d294f7240652de816bc0b51650ddd9",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0c19367b66ff4a5ef4bce6fa9deed66eaa818aa7c1b7b70f01cd8ba7293f6f4d",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +296,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "210f61c05520bbf26c517fa67fc7cd465427f398945e0cfbab182124553f7f53",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d48f00943d29d16c776fdb0806632a7e3a23ea4a8fb10e831b2b36962d74b310",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "caafbe9180a679e0f60f0263b20cb25d416d338e707ce4dff3157eb370672270",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b2d5ecab164f68601bc06868935fb756b222a78c5ce810e85ff2a4d8b35ddfdd",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "a11080730d5bc40a65439074ad8558dcf767d2074eda7ccf4bb1e6deeb416efc",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ecd9cb463f60b7bee857db8078391eb48d267a121b9fb39c3a3105b48ebd6664",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +324,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "3d6f3bd76534d9484b549d1b446e5a8bed65f39eace7d724982f7e384945ddc0",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c7159776e0c02dd84471ec148da00a4bf1ace7803eed7faf46df9fef39054e27",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -543,6 +547,10 @@
       "expected_sha256": "202e37790f52ead422ab05932794ca474f8a9a6a43cd52bc0d2e548bef1e3710",
       "reason": "G1 batch 0061 issuer IR clock for RH; deterministic 80 exact / 94 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0062.csv": {
+      "expected_sha256": "ffde59b25c74c0f3928374da72e1f0115d37720272c40b4c15fd07a5d78d45c5",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_announcement_times_batch_0063.csv": {
       "expected_sha256": "d83672b1538fd6e721d1c6c5b50fadf932426d86dc461bdf0a7f5616a41b3a64",
       "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
@@ -635,13 +643,17 @@
       "expected_sha256": "87879ff78c571df0dc268345785913e6f8f4420aee358a20a0ee332ec1602f97",
       "reason": "G1 batch 0061 issuer IR clock for RH; deterministic 80 exact / 94 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0062_evidence.json": {
+      "expected_sha256": "277f0877022267b131c6b1fe84b84eb5d0077c2fd3092213c78af0ff308e0aac",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0063_evidence.json": {
       "expected_sha256": "5db17d3163af786944f2c12d3f8746209d1ea38cc80d6b73d3d2cf9dd0ec78bf",
       "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "a60e919c7ed29857da5a912edef9f297a21371b13758a1e436218e13ec18d3d5",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9e49077d0837c8c9a47dbf47dae88c11fa07c2be86ca331bbd567e0a8811c803",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -760,8 +772,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "8f007601fc7839ef06245250d67aeb2b2bde79ba980993fb2280e7da9e7ca676",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e99423494d09fd1a25cdc47a2ff11eadacad1bd87008a16955668f6846025a4e",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -882,6 +894,10 @@
     "scripts/g1_batch_0061_generate.py": {
       "expected_sha256": "2870fc88eddf111f230aa18fe84a6b1a82343a79671cb812d01eb602bad378d7",
       "reason": "G1 batch 0061 issuer IR clock for RH; deterministic 80 exact / 94 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0062_generate.py": {
+      "expected_sha256": "8d22cece2bfa7a8932d7492ed10b8837b58d4f2f02c0a2142635e7b15c484053",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_batch_0063_generate.py": {
       "expected_sha256": "06d5747b1557edf5bdf0e8b040af3921b494a0d912c886bfff40dbd17cc59b1d",
@@ -1044,112 +1060,116 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "d2612c318a1a0287583199b873fa2f62838e19dd635ebbbe3a46ab94ca8f7779",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8ac700fe83eda703b6804e8d576be11d6c110e9c3503b87b50a96c21f8575f5e",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "5c977a0b34819bec2a1308e6e0c4e36d758ca39e32e8dae98c67dc9da94149d0",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4f51e9a44eb08583c7ca4e3eb00eb44e5e696bbd1b23a369060b2f7819c08577",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "b3d95537a9d8329434a457f6517ac68efafb17e0e8967752562dce305037ae3c",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "db0f1d13768812c86f32719188d0614a20145663e2023d5f5c23bea3d889bcb6",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "8b08f768c1bd977eb29ff85dd5a7850db74f1c41ce8745537bb10bd0ce94a046",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bda661508d662480ccbecd9b697bd25ac08ff16efc016d8f8775c737547a2322",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "4607865b2e0012c3ad8ead87ea4f371ffa18983eecf67f94e0b69261378b3021",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "44e2d9a8532cb4bd1b04a8abb8ce05535725bdd1502610e7a8b2090c581ea562",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "eca290d1ce4d1642f40d6eea99757e035d9b94a1e6b2ec0dd5eb817d0f1aae3e",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f7a90053bd92063e3d48a3accb29b3dacb2f86fa592e895c67ee999a054c0373",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "1ed406b6b5271f5d27bec1ea520d983681de18c666d98c00446ccb1460fe926c",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4eca1352b7cd8f0db70825c49312394436ccb7efa42e03c2ad8977ee028ca739",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "26e3a637705ade1d74c6346ae57c42850f2e917d118918f6abc3f883c2fd8110",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3385c499bd0c7aab6cfd1543963727f79f75979690822dfa563235d6f093d4fe",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "1b76d7563e495e8a2970cb72f2203c8bbe1d5690e8ec237b7c0b3ca570a6aa8d",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e1ab5e8e415e4b4be3deb40c729a90de1e351e6bcae7dc53e3c43f6599b0d5dc",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "e95c4e0b3bd32b6d9599509a512e7f33bce8861e406357661222b4b92be99d45",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "10593cc23087d830c1fe405dc5f578a4af635d71f44c0f62828f3ed003d2962f",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "872652845bc45d144c56a3f0c82b45ab656929803a7d4565888b16d64dbe3639",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c6905c223b1b3b5055451ebdb3ec3924ec2ec1577865d1988e1e9ea3128c0879",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "0cfcaecbc588d46463c24f144e2a8c96320a0ed92c37d21d87ff2110d5f6485c",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "67bb8697562a684de6d99012de06d822aedc133f0899eeb53420ab22ddbc60e5",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "a122fdf61a4007a6677988b4c82b679824185f5abd059638263f5045880b6bc0",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "54300b5ac75537b0e31147bd253ba3e081b72e17a84616817032c72444467ed7",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "18e0475611de06ab368b7c077f445113768294ac1be691e0fb2726e38f586670",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "777e56c50808560559245aa1552d741ff04539693426b9eea7395acb6723ff32",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "6a46031d0bcded41ad1476199bd6ac333542e782cdaab005f3797ecfcca57723",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d290d9e3f98ba551b24e436693c41b0b677f728ad75b8732d78cdb549b1322f6",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "cd2f8e66f33815a45874208841822883e03827b47f55af5336f3a59f349e06f0",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8e9cc86c09f1c05b7ba82bc6be61b86a92cbe288d37dbb9feb3962b91074a970",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "6185d35a5cd59209b0be9895ef3f732fee8924291e67c29a85052bc2734e22ae",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3f411ee625e59f377e72e302138e80c7fb2f13f593e79d5cf949342ae8e4bc22",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "dca658b20868d73837615a58c347e5ad026c4cf1826dbbf92256f1c70b42cfd9",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a2c9ad89a9cdb9e075e49b85c65e6f7e269858612dfe4500876eb6589b8bd38f",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "8c0e3e367c438269ba3d05528ec52106793824a958959931e8337d16246cb041",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1c6074420edcc288ac091c81fa93afc51af4b8b38e3226936a3eb18a43711095",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "c72c7ac174fcc4a7ed88459e7ec632d85ee6a885bb6aa504e2fa7c3ef2daa230",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5fc987359eb13665ab2c1bb5654aac4975ae4d28e378ae64a6b4089d6af0b551",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "249869101df66fc7806fe3e1144c80eeeea7dbb7d18bcb025a7380d63f72eee8",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ecdfe697782342198f77b90b0b4d3125d13a519fdf81bb533f4d6ba9cde0673a",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "3ac5b249424be68fbd53b62af0dd7572c2a218a15a4950f41e9563d413cb65b8",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "adae5254df61b8f2a9bf4113860441645169863012c21ca2b7445a7008a106f7",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "259091ebda6fdbc5ac45d4621f6bc04fa807f5f3608eb71cba910d6d1a60c0e4",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6e117f9df77c5c672e81952177cee5e2ae79e4ec9f2a8d61d21ec6d9b7b7bc2f",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0062.py": {
+      "expected_sha256": "8946c4f8f7add0ce0d6dc6b8661c288f5496e68fcfc273cd40096fcefe195a63",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "c8f3635e484e899983f8b5f1e11022805fc03a39b60b75a4debcac1d178dfd21",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f121bf559ac882af45208ca73bb0a6569cadef0de9d117580c23a08b54d8ef66",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "08d098facab61ae3af341084fb99f1007c463d31cdba24e806a494c0645fed95",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "56fe76a0ab1382c864bf48c20426cc6eb9252264efd659c034771b2f92c374a9",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -1176,8 +1196,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "b8fb19084de0a0bd5c571054f84b7fe3114a9a19faa1d53c972f6706b8eaec72",
-      "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "efd1c7f617d484c029d2386b1106b6f68a0795a16f646b787949ebb4f276d43b",
+      "reason": "G1 batch 0062 timestamp-preserving Business Wire/Marketwired mirror clocks for VeriFone and VMware; deterministic 84 exact / 90 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
