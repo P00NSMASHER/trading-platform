@@ -124,7 +124,7 @@ for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifes
     t=t.replace("== (76,98)","== (77,97)").replace("len(excluded)==98","len(excluded)==97").replace("len(excluded) == 98","len(excluded) == 97").replace("len(ex)==98","len(ex)==97")
     t=t.replace('"76/174" in step9["evidence"] and "98" in step9["evidence"]','"77/174" in step9["evidence"] and "97" in step9["evidence"]')
     t=t.replace('updated["missing_exact_announcement_timestamps"] == 98','updated["missing_exact_announcement_timestamps"] == 97')
-    t=re.sub(r"== 76\\b","== 77",t);t=re.sub(r"== 98\\b","== 97",t)
+    t=re.sub(r"== 76\b","== 77",t);t=re.sub(r"== 98\b","== 97",t)
     if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 51','state["public_exact_batch_count"] == 52')
     ast.parse(t);p.write_text(t)
 
