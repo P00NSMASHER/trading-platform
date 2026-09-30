@@ -168,7 +168,7 @@ def test_batch_0055_preserves_prior():
     ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==97
     assert all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in ex)
 '''
-ast.parse(ts);tp.write_text(ts)'''
+ast.parse(ts);tp.write_text(ts)
 ast.parse(ts);tp.write_text(ts)
 assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 
