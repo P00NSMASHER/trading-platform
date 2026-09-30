@@ -99,7 +99,7 @@ save(contract_path,contract)
 hints["priority_events"]=[r for r in hints.get("priority_events",[]) if r.get("event_id") not in ids]
 hints["base_main_sha"]=BASE
 hints["current_g1_state"].update(public_exact_batch_count=56,exact_resolved_event_records=84,reviewed_excluded_event_records=90,
- note="The latest integrated recovery is batch_0062; cumulative public exact-time batches are 56 and cumulative exact event records are 84 because some batches resolve more than one historical event.")
+ note="The latest integrated recovery is batch_0062; cumulative public exact-time batches are 56 and cumulative exact event records are 84 because some public batches resolve more than one historical event.")
 for item in items:
     hints["validation_probes"].append(dict(item,probe_id=f"{item['historical_symbol']}-batch0062",historical_event_match=True,
       exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
@@ -152,6 +152,8 @@ for fn in test_files:
         pairs=[('updated["missing_exact_announcement_timestamps"] == 92','updated["missing_exact_announcement_timestamps"] == 90')]
     else:
         pairs=[
+          ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (82,92)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (84,90)'),
+          ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (82, 92)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (84, 90)'),
           ('len(excluded)==92','len(excluded)==90'),
           ('len(excluded) == 92','len(excluded) == 90'),
           ('len(ex)==92','len(ex)==90'),
