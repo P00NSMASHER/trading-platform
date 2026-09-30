@@ -1,0 +1,62 @@
+name: g1-public-batch-0054-worker-2
+
+on:
+  push:
+    branches:
+      - g1/public-batch--worker-2-0054-vmw
+    paths:
+      - scripts/g1_batch_0054_generate.py
+      - .github/workflows/g1-public-batch-0054-worker-2.yml
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    name: Generate deterministic VMW batch
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONPATH: src
+
+    steps:
+      - name: Checkout exact branch head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+
+      - name: Generate batch and canonical receipts
+        run: python scripts/g1_batch_0054_generate.py
+
+      - name: Focused regression and secret scan
+        run: |
+          python scripts/secret_scan.py --root .
+          python -m pytest -q             tests/test_g1_public_batch_0054.py             tests/test_g1_acquisition_manifest.py             tests/test_g1_source_research.py             tests/test_real_data_release_sprint.py
+          git diff --cached --check
+
+      - name: Commit generated candidate
+        run: |
+          if git diff --cached --quiet; then
+            echo "Generator produced no staged changes" >&2
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "G1 batch 0054: recover VMW exact public clock"
+          git push origin HEAD:${{ github.ref_name }}
