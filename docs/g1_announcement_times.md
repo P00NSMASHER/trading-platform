@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **40 public exact-time batches / 53 exact-resolved
+The current repository state is **41 public exact-time batches / 56 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -137,3 +137,7 @@ Pall Corporation is recovered at 2015-02-24 07:00 EST (12:00 UTC) from a MarketS
 ### Batch 0040: MDU Resources + Cabot + Oshkosh
 
 A clustered public-wire sweep recovered MDU Resources at 2015-05-04 17:30 EDT (21:30 UTC), Cabot at 2015-04-29 16:05 EDT (20:05 UTC), and Oshkosh at 2015-04-28 07:00 EDT (11:00 UTC). MarketScreener preserves the Business Wire publication clocks; original Business Wire, issuer IR, and SEC-filed evidence independently corroborate the releases. The clocks are 5,580, 9,120, and 55,860 seconds after their frozen first trades. This advances G1 from 50 exact / 124 reviewed exclusions to 53 exact / 121 reviewed exclusions. Scheduled calls, EDGAR acceptance and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0041: Dendreon + CA Technologies (three timestamps)
+
+A direct primary-newswire sweep recovered Dendreon at 2011-08-03 16:01 EDT (20:01 UTC), CA Technologies at 2011-07-20 16:05 EDT (20:05 UTC), and CA Technologies again at 2012-01-24 16:05 EST (21:05 UTC). PR Newswire's historical company archives preserve the exact publication clocks, while SEC-filed Exhibit 99.1 releases independently corroborate title, issuer, date, and reporting period. The clocks are 300, 1,140, and 9,180 seconds after their frozen first trades. This advances G1 from 53 exact / 121 reviewed exclusions to 56 exact / 118 reviewed exclusions. Scheduled calls, EDGAR acceptance and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
