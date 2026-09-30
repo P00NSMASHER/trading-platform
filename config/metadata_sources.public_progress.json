@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 68 exact release timestamps and 106 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 71 exact release timestamps and 103 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 106,
-    "expected_sha256": "05ec92a11ef85a3b0c4ebbcdc626d23af15053ceb8fe383fc99fc1fca1e5ad1f",
+    "expected_count": 103,
+    "expected_sha256": "e6479c66d5f691451650938604748560ed7113d99537d86bcc4f561713ccebe6",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public primary PR Newswire archive metadata for Amerigroup, Metals USA and Landstar with independent SEC Exhibit 99.1 corroboration. No licensed vendor data used.",
+      "notes": "AGP 2011-10-28 06:00 EDT; MUSA 2011-10-20 17:09 EDT; LSTR 2011-10-24 07:50 EDT. Scheduled conference calls and EDGAR acceptance times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0046.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-prnewswire-agp-musa-lstr-batch-0046",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {

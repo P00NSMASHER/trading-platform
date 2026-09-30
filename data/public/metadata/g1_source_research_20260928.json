@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "df5b2d716c4cf2e5eb483c26c93e25b2b9a1f702",
+  "base_main_sha": "c2aab1049e8699d8a1cfd75180edd1bd7602ef17",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 68,
-    "note": "The repository is at batch_0045; cumulative exact event records are 68 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 45,
+    "exact_resolved_event_records": 71,
+    "note": "The repository is at batch_0046; cumulative exact event records are 71 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 46,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 106
+    "reviewed_excluded_event_records": 103
   },
   "preferred_public_source_families": [
     {
@@ -1150,6 +1150,81 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news/tempur__pedic-international-inc./?page=2",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's Amerigroup archive shows the exact Oct. 28 2011 06:00 ET publication clock; SEC Exhibit 99.1 independently matches Amerigroup Corporation, the October 28 2011 release title, and third-quarter 2011 results. Scheduled earnings discussion timing is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1064863/000114420411059887/v238314_ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0046",
+      "event_date": "2011-10-27",
+      "event_id": "HEJFE-74011A906BCCABE9",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2011-10-28T06:00:00-04:00",
+      "first_documented_illicit_trade_ts": "2011-10-27 13:03:00",
+      "historical_event_match": true,
+      "historical_symbol": "AGP",
+      "information_asymmetry_seconds": 61020,
+      "probe_id": "AGP-batch0046",
+      "public_announcement_ts": "2011-10-28T06:00:00-04:00",
+      "publisher_timestamp_text": "Oct 28, 2011, 06:00 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "Amerigroup Reports Third Quarter 2011 Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/amerigroup-corporation/?page=2&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's Metals USA archive shows the exact Oct. 20 2011 05:09 ET publication clock; SEC Exhibit 99.1 independently matches Metals USA Holdings Corp., the October 20 2011 release title, and third-quarter 2011 results. The October 21 conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1362491/000119312511276774/d245605dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0046",
+      "event_date": "2011-10-20",
+      "event_id": "HEJFE-DC002D2C6C767277",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2011-10-20T17:09:00-04:00",
+      "first_documented_illicit_trade_ts": "2011-10-20 15:48:00",
+      "historical_event_match": true,
+      "historical_symbol": "MUSA",
+      "information_asymmetry_seconds": 4860,
+      "probe_id": "MUSA-batch0046",
+      "public_announcement_ts": "2011-10-20T17:09:00-04:00",
+      "publisher_timestamp_text": "Oct 20, 2011, 05:09 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "Metals USA Reports Third Quarter 2011 EPS of $0.45 on Revenues of $492 Million",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/metals-usa-holdings-corp./?page=1&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's Landstar archive shows the exact Oct. 24 2011 07:50 ET publication clock; SEC Exhibit 99.1 independently matches Landstar System, the October 24 2011 release title, and third-quarter 2011 results. Conference-call timing is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/853816/000119312511278182/d244961dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0046",
+      "event_date": "2011-10-21",
+      "event_id": "HEJFE-AA2597B95CFD2A2D",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2011-10-24T07:50:00-04:00",
+      "first_documented_illicit_trade_ts": "2011-10-21 15:48:00",
+      "historical_event_match": true,
+      "historical_symbol": "LSTR",
+      "information_asymmetry_seconds": 230520,
+      "probe_id": "LSTR-batch0046",
+      "public_announcement_ts": "2011-10-24T07:50:00-04:00",
+      "publisher_timestamp_text": "Oct 24, 2011, 07:50 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "Landstar System Reports 45 Percent Increase in Diluted Earnings Per Share to a Third Quarter Record of $0.64",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/landstar-system,-inc./?page=5&pagesize=25",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
