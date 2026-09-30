@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **47 public exact-time batches / 72 exact-resolved
+The current repository state is **48 public exact-time batches / 73 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -165,3 +165,7 @@ A primary-newswire sweep recovered three additional exact first-public clocks: A
 ### Batch 0047: World Acceptance Corporation
 
 A direct primary-newswire recovery established World Acceptance Corporation's exact first-public clock at 2012-01-25 06:30 EST (11:30 UTC), 52,620 seconds after the frozen 2012-01-24 15:53 EST trade. PR Newswire's historical release page preserves the exact publication clock, while SEC-filed Exhibit 99.1 independently corroborates issuer, title, date, and third-quarter fiscal 2012 results. This advances G1 from 71 exact / 103 reviewed exclusions to 72 exact / 102 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0048: RPC, Inc.
+
+A direct primary-newswire recovery established RPC, Inc.'s exact first-public clock at 2012-01-25 07:22 EST (12:22 UTC), 57,720 seconds after the frozen 2012-01-24 15:20 EST trade. PR Newswire's historical RPC archive preserves the exact publication clock, while the SEC-filed Exhibit 99 independently corroborates issuer, title, date, and fourth-quarter/full-year 2011 results. This advances G1 from 72 exact / 102 reviewed exclusions to 73 exact / 101 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.

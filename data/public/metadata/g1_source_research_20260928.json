@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "95ec30d6d153c4fcfabb0c13653fca08fe75b510",
+  "base_main_sha": "773369883cbdeab5c5c3feb711bf54a60d5cc4b4",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 72,
-    "note": "The repository is at batch_0047; cumulative exact event records are 72 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 47,
+    "exact_resolved_event_records": 73,
+    "note": "The repository is at batch_0048; cumulative exact event records are 73 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 48,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 102
+    "reviewed_excluded_event_records": 101
   },
   "preferred_public_source_families": [
     {
@@ -1250,6 +1250,31 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news-releases/world-acceptance-corporation-reports-record-third-quarter-138029893.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "PR Newswire's primary RPC archive shows the exact Jan. 25 2012 07:22 ET publication clock for the target earnings release; the SEC-filed Exhibit 99 independently matches RPC, Inc., the January 25 2012 release title, and fourth-quarter/full-year 2011 results. The separately scheduled conference-call time is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/742278/000118811212000165/ex99.htm",
+      "disposition": "RESOLVED_IN_BATCH_0048",
+      "event_date": "2012-01-24",
+      "event_id": "HEJFE-C85CE64DFF947CFD",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-25T07:22:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-24 15:20:00",
+      "historical_event_match": true,
+      "historical_symbol": "RES",
+      "information_asymmetry_seconds": 57720,
+      "probe_id": "RES-batch0048",
+      "public_announcement_ts": "2012-01-25T07:22:00-05:00",
+      "publisher_timestamp_text": "Jan 25, 2012, 07:22 ET",
+      "reason": "Promoted through direct primary PR Newswire timestamp evidence with SEC corroboration.",
+      "release_title": "RPC, Inc. Reports Fourth Quarter and Record 2011 Financial Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/rpc%2Cinc./?page=9&pagesize=25",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }

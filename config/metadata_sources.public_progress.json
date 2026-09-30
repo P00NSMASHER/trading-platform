@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 72 exact release timestamps and 102 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 73 exact release timestamps and 101 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 102,
-    "expected_sha256": "c0f963458f49ddd506d496c8b9c074e4664f442dc7ad06e2cdd7b77b9a1b79d0",
+    "expected_count": 101,
+    "expected_sha256": "24aa1da97950d17c447d6e93a69e0756af732079b9d8ce201995e01f3aec6652",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public primary PR Newswire publication metadata for RPC, Inc. with independent SEC Exhibit 99.1 corroboration. No licensed vendor data used.",
+      "notes": "RES 2012-01-25 07:22 EST. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0048.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-prnewswire-res-batch-0048",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {
