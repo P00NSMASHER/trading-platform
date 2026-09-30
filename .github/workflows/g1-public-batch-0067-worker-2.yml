@@ -7,7 +7,7 @@ permissions:
   contents: write
 concurrency:
   group: g1-public-batch-0067-worker-2
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   recover:
     if: github.repository == 'P00NSMASHER/trading-platform' && !contains(github.event.head_commit.message, '[g1-generated]')
