@@ -99,8 +99,8 @@ save(contract_path,contract)
 
 hints["priority_events"]=[r for r in hints.get("priority_events",[]) if r.get("event_id") not in ids]
 hints["base_main_sha"]=BASE
-hints["current_g1_state"].update(public_exact_batch_count=56,exact_resolved_event_records=84,reviewed_excluded_event_records=90,
- note="The latest integrated recovery is batch_0067; cumulative public exact-time batches are 56 and cumulative exact event records are 84 because some public batches resolve more than one historical event.")
+hints["current_g1_state"].update(public_exact_batch_count=57,exact_resolved_event_records=86,reviewed_excluded_event_records=88,
+ note="The latest integrated recovery is batch_0067; cumulative public exact-time batches are 57 and cumulative exact event records are 86 because some public batches resolve more than one historical event.")
 for item in items:
     hints["validation_probes"].append(dict(item,probe_id=f"{item['historical_symbol']}-batch0067",historical_event_match=True,
       exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
@@ -212,7 +212,7 @@ ast.parse(ts);tp.write_text(ts)
 assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 
 changed=set(subprocess.check_output(["git","diff","--name-only",BASE],text=True).splitlines());changed.update([str(batch),str(evidence_path),str(tp),SCRIPT])
-permitted={WORKFLOW,SCRIPT,"src/g1_source_research.py",str(contract_path),str(exclusion_path),str(hints_path),str(acq),str(batch),str(evidence_path),str(tp),
+permitted={WORKFLOW,SCRIPT,"src/g1_source_research.py","src/metadata_resolver.py","src/metadata_quality.py","tests/test_metadata_resolver.py",str(contract_path),str(exclusion_path),str(hints_path),str(acq),str(batch),str(evidence_path),str(tp),
 "docs/g1_announcement_times.md","tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
 str(cp),str(cp.parent/"unresolved_gates.csv"),str(sd/"step_status.json"),"data/processed/research_receipt_bundle.json",
 "data/processed/real_data_replay/real_data_replay_status.json"} | {str(x) for x in Path("tests").glob("test_g1_public_batch_*.py")} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
