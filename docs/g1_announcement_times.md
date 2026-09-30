@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **42 public exact-time batches / 59 exact-resolved
+The current repository state is **43 public exact-time batches / 62 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -145,3 +145,7 @@ A direct primary-newswire sweep recovered Dendreon at 2011-08-03 16:01 EDT (20:0
 ### Batch 0042: Foot Locker + Meredith + International Game Technology
 
 A direct primary-newswire sweep recovered Foot Locker at 2011-08-18 16:45 EDT (20:45 UTC), Meredith at 2012-01-24 09:15 EST (14:15 UTC), and International Game Technology at 2012-01-24 06:30 EST (11:30 UTC). PR Newswire historical company archives preserve the exact publication clocks, while SEC-filed exhibits independently corroborate issuer, release title, date, and reporting period. The clocks are 3,720, 66,960, and 53,940 seconds after their frozen first trades. This advances G1 from 56 exact / 118 reviewed exclusions to 59 exact / 115 reviewed exclusions. Scheduled calls, EDGAR acceptance and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0043: Astoria Financial + Symmetricom + Integrated Silicon Solution
+
+A direct primary-newswire sweep recovered Astoria Financial at 2012-01-25 16:30 EST (21:30 UTC), Symmetricom at 2012-01-25 16:18 EST (21:18 UTC), and Integrated Silicon Solution at 2012-01-25 16:10 EST (21:10 UTC). PR Newswire historical company archives preserve the exact publication clocks, while SEC-filed exhibits independently corroborate issuer, release title, date, and reporting period. The clocks are 4,320, 5,040, and 4,740 seconds after their frozen first trades. This advances G1 from 59 exact / 115 reviewed exclusions to 62 exact / 112 reviewed exclusions. Approximate schedules, conference calls, EDGAR acceptance and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.

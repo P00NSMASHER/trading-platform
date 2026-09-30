@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "dfcb7de073a844b2afb687a4b3584caa6e6be106f65903546b07021f8b1e888c",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "64390bc9240b954675d0cb664100f042961f54c45ee326e145e084a027ac79d3",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "ca55c16d3cf527c45f792b2917cdb5b884d662ec8e1c10fa9af5f62c74505607",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f1329427709ab25db9f1ae9ed6a64515d3c3f9c64351e4ef1b307b5d8d2313c6",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "1471db9bb94c08ff6f9e0d303d7913e88cded11412bff5df8d131365f8174237",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "905c479d31faf203a69a6ee8e1da33e788d4d8718d0323dd13196239835a2238",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -115,6 +115,10 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
+    ".github/workflows/g1-public-batch-0043.yml": {
+      "expected_sha256": "1b4ba4c78afca7e8e3f28004644960a2202a8a9e2ce56028c5667d6c229c669d",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -152,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "a5423c86f2ee415581b4ec9b2faa1cd1b61f80a1ef47d976bcd670e892cf2562",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c975044ac458177f211dc9961e5bbd5fab96fd9b43725efbf5c6d44346f4602c",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "0a64a6949ff1ee15cddc18f032f47023c2ee8575d00e23ed01a12d05a2175386",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3193d6ecaa06aefcd863f05cffef5391af9efa0b87bea4776282464c7e6cfad1",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "1fb929e5d4738282ec0ed780ba5a817b94f63575a4ca25b937a55a7ded7feaf2",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3a11f130a2e618ac32525158818a6042a6c8d28ab7bca0341e2824725fde6b12",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "3796c725f526f607732f5bd3dd8fe0fe1388336880b59f0f53dc065627dad56a",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "87bd27c70c6996b06238472a149e668533045d00bed49d909718cb0ec4ebfcb8",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "1ee9d6002e0e3f38630ef03913a85322625658516d6bb6f8d56e2a160830bf62",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "00dadc6a612e913235bf9d921c5356cf4e10136a8c574fd250b11771d8fed9a9",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "0b56cf542620e800aa851ea427351e24f13c9f16060394b493f063e46429ff84",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "56c0b99afa557598081c56b37597ba4b99c30064ef9fef0c9c360f827a71df3c",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +296,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "3d87eb50ab9cc29a3aa30155e6950c458a8ac8e0edd4e1273ae39990f55b27f1",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "51e8acabdb92f4a2d7b264a7cd3c70d6aa018aa06678dc36e026b09cc466ec25",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "d2b7b0191b9898f19c8169f5981a21dfa0c4dbf8acacd550abf288570e9ed502",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d346dd2bed83151da4e6e39761a1d062b9e363a4178a976d766fcc1a11bceea7",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "8f53f907e0d4a5ff594175fc26b86d3b3d648a9108b5ba116a7d9eeae3e70810",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "87423163256d091a4c0400600a669ea56674e195763ae8a4eb41506193c8f40a",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +324,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "dc326794d8587fccf82ab75df5edeaab9e2a249183320fe1053e55fb8051ecdf",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "554047098999215f890d64ab424b4c8d6c4eeb2dc1491698d7c151f4c3d91238",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -495,6 +499,10 @@
       "expected_sha256": "58dfb463b2370426cd8b9323094d32939d99f7b91f2520454ec23e2f3c2aa2c0",
       "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0043.csv": {
+      "expected_sha256": "41e5c349b912ddfaa22637295d920e782315104f3a14fa0667c7a5eccadc7dfc",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -535,9 +543,13 @@
       "expected_sha256": "09bd7ede014a60921df18c14dc734011d2b728575dd067a6774e2e35dd8b76b9",
       "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0043_evidence.json": {
+      "expected_sha256": "83b0eddd3f607a1996f959ef4f500392e6e2c0a06ae32185b5300f3669a629ca",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "ebe8e5813eae5d7e191f0fe599c8058be68b44b31aedb933e54ecbb6a5f900f1",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "007e75c369a5e23bab5cb5827c03f226cb3408469da99a9be7825919e4929e59",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -656,8 +668,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "ae630612917a2867ae3cc3c8f0fac8fc01335e84ab32502df087c2aa454b3f97",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fee8e33b6efe4f8d71e0adeca63b29319ef583e989904682e3f7ddea6a4433d2",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -730,6 +742,10 @@
     "scripts/g1_batch_0042_generate.py": {
       "expected_sha256": "5c12b951c87d1955f0ca4b7d18b238258a95954d62cf1bb4a4171a2eea64b570",
       "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0043_generate.py": {
+      "expected_sha256": "185772c00fc71e0ed2fa33f35c8e887b7760eb317ad07f839b074e36bec25e08",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -888,60 +904,64 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "454733cc5e0da401ed0054f5b21ce6154b1bcfd1d9a768f0ae67bf5459af9af1",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7665491f487645c2203a049ec16e8b34a6774c9d0fe9f16a07336a1b0add0ab6",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "285e4540978864d42fd28767e4e0823a7ae6745870743804c7fe6b7b06b486f6",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d83a76dbd6770a41906b883f9524b17e951140a302f83420281ed27769b0a25f",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "6bbf8aec92eeb106a572495aed531be0f8b5f802582eab7d4131775ece23a7f0",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c0a3183036784a1e50ae59daf893d6abfb6d649e2b2d6a7e9765f1c4baf6d223",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "2e401981582ae63ac758f399af14a4c2acdadb39f5a98207e08998ff19868468",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "cf2e608acf739e5c13409bc26b179a3736ae777e68b273556db5a878a8651734",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "8cad749437b2a41bab2262d4cf870fa46b6b14eba820acb2cda9720e910e7531",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f75f9cf4cb30ca815ccecfb6928aff366735be478cb6a27dae0944a4e3f8a50b",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "930e6f4954513b541228c15dfe43dde14d1916db48de4c7a9c29a6f7d3c80013",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "12b0f4e3238703aac2affe127859fb6933600fc71eaa3abf21ea7e734527fc04",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "a3dfc185cf84d9e13cb1c93d29e2f22b0ef7085c8b11b1b586c9050e99ee371e",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "87fc4530410d9d12c71f9a628793d480ec888acb5bfd3e2a8f80d551bb0ea64d",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "c573f45ebc60f1c8d7e2bf0429c39a105d78e199f5ee2088774e53013e5d8b51",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "860c6f979a0a6117c32716a04b47e3f9f25ba08a2f3bee4bab748d9dcf7d1d8a",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "667ac583c71ec5f7e6793d77904ece38759a65e47825b558d86a71ec5bd89b95",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0e9c5e1031179fc36dcfc01a5d3d3c543ea014ccc9482b9bc1e5b58a428e5654",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "db8d2117d12bbee1162a24b9e95de27789f9e5e1d41dedb429199e363f75b005",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "99f273989831ba3e41908bef79b48b82984992b5998b5f710cbcb9a070bba3c3",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "c02af19be136fe38d29c61d9384f759b8d7cdaa81efe6e09dc55e8d6b82eb333",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "06a313f90216f6e882a4dfd95ba2e3ce2ae436365af9c77d6c1529d46ceedea3",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0043.py": {
+      "expected_sha256": "e0800b10d275265efe5bb6bf44e649dabc9f34a8b32f768600178489f3dd2c41",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "74b7363c9dd134add469c265f6b7024fae7e89340fb33b2344cd18b06bd35e71",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ace01136842f02440af42ce018917366c4e9fed3708431a05c3cf6cd461bfe6f",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -968,8 +988,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "d231c3df6a418f78db8f9a1fe58ce56aac07892bb188dfa86f35ce6bf8081b00",
-      "reason": "G1 batch 0042 direct PR Newswire clocks for Foot Locker, Meredith and International Game Technology; deterministic 59 exact / 115 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "06afcd3c6c456de72a768d9ded2b59daaca94cdb8d631026b0aa491eb6da8d4b",
+      "reason": "G1 batch 0043 direct PR Newswire clocks for Astoria Financial, Symmetricom and Integrated Silicon Solution; deterministic 62 exact / 112 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

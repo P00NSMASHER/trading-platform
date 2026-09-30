@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 59 exact release timestamps and 115 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 62 exact release timestamps and 112 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 115,
-    "expected_sha256": "1fb929e5d4738282ec0ed780ba5a817b94f63575a4ca25b937a55a7ded7feaf2",
+    "expected_count": 112,
+    "expected_sha256": "3a11f130a2e618ac32525158818a6042a6c8d28ab7bca0341e2824725fde6b12",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public primary PR Newswire archive metadata for Astoria Financial, Symmetricom and Integrated Silicon Solution with independent SEC issuer-release corroboration. No licensed vendor data used.",
+      "notes": "AF 2012-01-25 16:30 EST; SYMM 2012-01-25 16:18 EST; ISSI 2012-01-25 16:10 EST. Approximate schedules, conference calls and EDGAR acceptance times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0043.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-prnewswire-af-symm-issi-batch-0043",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {

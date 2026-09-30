@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "683eb6552b3a7cd6314647fe5dad62bf1ba68ce1",
+  "base_main_sha": "b55f16eefab44cccab62a1c757d9f2ea13078bd7",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 59,
-    "note": "The repository is at batch_0042; cumulative exact event records are 59 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 42,
+    "exact_resolved_event_records": 62,
+    "note": "The repository is at batch_0043; cumulative exact event records are 62 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 43,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 115
+    "reviewed_excluded_event_records": 112
   },
   "preferred_public_source_families": [
     {
@@ -925,6 +925,81 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news/international-game-technology?page=3&pagesize=25",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The PR Newswire Astoria Financial archive lists the exact target release at Jan 25, 2012, 04:30 ET; SEC Exhibit 99.1 independently matches Astoria Financial, the January 25 2012 release title, and fourth-quarter/full-year 2011 results. The earlier approximately-4:45-p.m. schedule is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/910322/000114420412004067/v300361_ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0043",
+      "event_date": "2012-01-25",
+      "event_id": "HEJFE-89844B5980EB5339",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-25T16:30:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-25 15:18:00",
+      "historical_event_match": true,
+      "historical_symbol": "AF",
+      "information_asymmetry_seconds": 4320,
+      "probe_id": "AF-batch0043",
+      "public_announcement_ts": "2012-01-25T16:30:00-05:00",
+      "publisher_timestamp_text": "Jan 25, 2012, 04:30 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "Astoria Financial Corporation Reports Fourth Quarter and Full Year Earnings Per Share of $0.12 and $0.70, Respectively",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/astoria-financial-corporation/?page=4",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The PR Newswire Symmetricom archive lists the exact target release at Jan 25, 2012, 04:18 ET; SEC Exhibit 99.1 independently matches Symmetricom, the January 25 2012 release title, and fiscal second-quarter 2012 results. The later earnings-call time is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/82628/000119312512023357/d289991dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0043",
+      "event_date": "2012-01-25",
+      "event_id": "HEJFE-824BABBAD988A068",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-25T16:18:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-25 14:54:00",
+      "historical_event_match": true,
+      "historical_symbol": "SYMM",
+      "information_asymmetry_seconds": 5040,
+      "probe_id": "SYMM-batch0043",
+      "public_announcement_ts": "2012-01-25T16:18:00-05:00",
+      "publisher_timestamp_text": "Jan 25, 2012, 04:18 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "Symmetricom Reports Second Quarter Fiscal Year 2012 Financial Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/symmetricom%2C-inc./?page=4",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The PR Newswire Integrated Silicon Solution archive lists the exact target release at Jan 25, 2012, 04:10 ET; SEC Exhibit 99.1 independently matches ISSI, the January 25 2012 release title, and fiscal first-quarter 2012 results. The 4:30 p.m. Eastern conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/854701/000114420412003913/v300357_ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0043",
+      "event_date": "2012-01-25",
+      "event_id": "HEJFE-D4E8CD312A2AA576",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2012-01-25T16:10:00-05:00",
+      "first_documented_illicit_trade_ts": "2012-01-25 14:51:00",
+      "historical_event_match": true,
+      "historical_symbol": "ISSI",
+      "information_asymmetry_seconds": 4740,
+      "probe_id": "ISSI-batch0043",
+      "public_announcement_ts": "2012-01-25T16:10:00-05:00",
+      "publisher_timestamp_text": "Jan 25, 2012, 04:10 ET",
+      "reason": "Promoted through direct primary-newswire timestamp evidence with SEC corroboration.",
+      "release_title": "ISSI Announces First Fiscal Quarter 2012 Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/integrated-silicon-solution%2C-inc./?page=4&pagesize=25",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
