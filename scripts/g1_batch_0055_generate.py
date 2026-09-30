@@ -133,10 +133,12 @@ for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifes
     t=t.replace('"76/174" in step9["evidence"] and "98" in step9["evidence"]','"78/174" in step9["evidence"] and "96" in step9["evidence"]')
     t=t.replace('updated["missing_exact_announcement_timestamps"] == 98','updated["missing_exact_announcement_timestamps"] == 96')
     t=re.sub(r"== 76\b","== 78",t);t=re.sub(r"== 98\b","== 96",t)
-    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 51','state["public_exact_batch_count"] == 52')
+    if fn.endswith("test_g1_source_research.py"):
+        t=t.replace('state["public_exact_batch_count"] == 51','state["public_exact_batch_count"] == 52')
+        t=t.replace('report["priority_event_count"] == 6','report["priority_event_count"] == 5')
     if fn.endswith("test_g1_acquisition_manifest.py"):
         t=t.replace('manifest["work_queue"][:6]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI", "NATI"\n    ]','manifest["work_queue"][:5]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI"\n    ]')
-        t=t.replace('manifest["work_queue"][:6]] == [1, 2, 3, 4, 5, 6]','manifest["work_queue"][:5]] == [1, 2, 3, 4, 5]')
+        t=t.replace('manifest["work_queue"][:6]] == [1, 2, 3, 4, 5, 6]','manifest["work_queue"][:5]] == [1, 2, 3, 4, 6]')
     ast.parse(t);p.write_text(t)
 
 p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("51 public exact-time batches / 76 exact-resolved","52 public exact-time batches / 78 exact-resolved")
