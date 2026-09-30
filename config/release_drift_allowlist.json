@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0050-worker-0.yml": {
-      "expected_sha256": "278296d76702faa43eb8aa687765f8bf4e81f0741ccdb6f1d016c3c5b7a9597d",
-      "reason": "G1 batch 0050 timestamp-preserving Marketwired mirror clock for Anadarko Petroleum Corporation; deterministic 75 exact / 99 reviewed exclusions with SEC corroboration and prior evidence preserved."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
