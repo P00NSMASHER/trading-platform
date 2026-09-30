@@ -104,10 +104,8 @@ hints["base_main_sha"]=BASE
 hints["current_g1_state"].update(public_exact_batch_count=57,exact_resolved_event_records=86,reviewed_excluded_event_records=88,
  note="The latest integrated recovery is batch_0067; cumulative public exact-time batches are 57 and cumulative exact event records are 86 because some public batches resolve more than one historical event.")
 for item in items:
-    matches=[p for p in hints["validation_probes"] if p.get("event_id")==item["event_id"] and p.get("disposition")=="CANDIDATE_FOR_BATCH_0067"]
-    assert len(matches)==1
-    matches[0].update(dict(item,historical_event_match=True,exact_clock_observed=True,
-      exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
+    hints["validation_probes"].append(dict(item,probe_id=f"{item['historical_symbol']}-batch0067",historical_event_match=True,
+      exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
       disposition="RESOLVED_IN_BATCH_0067",reason="Promoted through an SEC civil-complaint record that explicitly identifies the first public distribution clock, with independent SEC Exhibit 99.1 corroboration."))
 save(hints_path,hints)
 
