@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0068-worker-4.yml": {
-      "expected_sha256": "9eecf4a9d300e06a133a4c1d38a3b6b7a4ea05d241062a214ee5a824eb21a343",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
