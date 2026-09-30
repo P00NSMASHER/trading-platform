@@ -1,5 +1,3 @@
-[Reading 59 lines from start (total: 59 lines, 0 remaining)]
-
 name: G1 public batch 0047
 on:
   push:
@@ -59,5 +57,3 @@ jobs:
           path: private_runtime/audit/g1-batch-0047
           if-no-files-found: warn
           retention-days: 30
-
-[executed on device: PAAM-L044 (c83a6c06-c0d3-4127-84de-311c7c6f1364)]
