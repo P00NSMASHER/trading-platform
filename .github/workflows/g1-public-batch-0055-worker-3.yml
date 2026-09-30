@@ -1,0 +1,33 @@
+name: G1 public batch 0055 worker 3 generator
+on:
+  push:
+    branches:
+      - 'g1/public-batch--worker-3-0055-nati'
+    paths:
+      - 'scripts/g1_batch_0055_generate.py'
+      - '.github/workflows/g1-public-batch-0055-worker-3.yml'
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generate deterministic G1 batch
+        env:
+          PYTHONPATH: scripts:src
+        run: python scripts/g1_batch_0055_generate.py
+      - name: Commit generated candidate
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --stat
+          git commit -m 'Generate G1 batch 0055 NATI exact clock'
+          git push origin HEAD:g1/public-batch--worker-3-0055-nati
