@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "d480c8dc4de9632521073f35ce4ae0d37ebdd5738711809c7c7198ea893aea3c",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9c45633c843fc2792aaa97fcb98fbebb0effaf8131fe55cc7fac09136e1def8e",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "03954e847c5fb9736f783841a094dc1feb37b855bd9791129dca441423a5e414",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "93d1765ed23c8a87911753fa5bd91e1b8e818f2cb18d83f45ee7598efefa0f0f",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "b2b6f6f0d803f74e3aa0f20874edf308cb21eb0103df299ef0b9e8b91dca8d76",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "62eae690217f00247f6a6b5f65989e1efbaf8b53e48073df27ac1ea0cc416447",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -115,6 +115,10 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
+    ".github/workflows/g1-public-batch-0049-worker-4.yml": {
+      "expected_sha256": "75b39bef5d71afd79c57ea208f6da9e5d1d7e89d1d33ac21de730219622c7b8d",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -152,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "f4a3c46bf9fdf442757c2b6fb9818cf01089a9f42cba010021462d183544dd4f",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "301499e9aa8299d9a6296ac522bb8ec5642c7ff1050b4f6c6a715deca9aa4d29",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "5eaeff3ad56c92534d91d5966d2d29409d03caaf60478a405fbffa41f3060910",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4954938e74cd9fe93129413e7c0481fe8e2084b1f703dd716122357cecfab3ae",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "1a98513b0d3a87d39159eb519ff4a389b544a7fc78d5647a13a9105203ee9ea6",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "64735852407e2818bf66b4f0bbf27020fd5d297ca402ff7f236be6eab2f3a954",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "01c782824a76d25e7dee238a216ef029b758a12826d3a348e3f469b15fe8eb2c",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7aa1dfdedac65aa84c507389c0c86c32f339f0e705d5b8ca2c92262ecf2880e7",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "3aeb0a94f7de0cb0f787f65d906f5e97f9b68d5c15fba36f27b41187771111b5",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7b08b79a683247f982660339e76675270c7c28756655653d711e7b5fc19b31c6",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "dc0c00944d98849a65de2ff300fe66305bb8081438ef25eed1cd4d251a622430",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "61cd94a837a50b9b8403fb11612171f3ac01debca893553854c101cd1f86014a",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +296,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "75a50749678c05200994253a338c8cfbb8e6fbd5bd7c60fd843119cd3b81c977",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4fd566702a1da3d82bfe0da316bdc27e49524eae90e7e2266dd4c1d96111ab9b",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "0f471b7ab1621835ebaf2c7124af87275570e1f1df3f2cdd69e6f5f374e8e552",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6cc823a9af085c19fcccf7a20560cd9e63e0c61842044f2234b31d1cb5df37c9",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "0748e058c72f52bb87bec01a776eb2579dac8005811d0f5f3ee73e0f82f0a49a",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5e82b088ee4ff259d75260a2e4e692ab4a34918a5445b8cf5d3b56cc1c42f884",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +324,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "939ab6b72ddb7466f33e7c579c8530fb4cad4b941c7a4f2984f5fac523ba4d0d",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "81254ae14b23b13c14cc99f60050c4b44a783b0ab9732ba2e467e0eafbf1d919",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -519,6 +523,10 @@
       "expected_sha256": "fa8705170a5a519c6750cf1492903170469f7dc32879893e5fb8fd024ada6a2d",
       "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0049.csv": {
+      "expected_sha256": "ddc16020b243f8fc6a97a563b50f619e0bbaeb8237933b3c8152ca4b6f86f2d8",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -583,9 +591,13 @@
       "expected_sha256": "545787756482ae671a6a4a6789adf12ab8f7ee42a5d566e86ef53d319792779b",
       "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0049_evidence.json": {
+      "expected_sha256": "46d755bf228408ef3e578ccbef21cab96311ba677df28e4bdd2f28813714c890",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "0e6ee4f03d5ecc05957a2d79769f6e560e1e11e4a49d8f20c4b22df6b54a213a",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "66ad85e9b11eb5de312994abbd5d4456c2a97f8adee2deb3d8909ed25944bdd3",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -704,8 +716,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "536643e4b71a5cbb3dc749bcb94e9e5b2a663628fb225e75b1cf464e2c1b3473",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0dda014273799cb4ea4d7411acb8efa7afc15486d46e54b4cda94c903c47bbcf",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -802,6 +814,10 @@
     "scripts/g1_batch_0048_generate.py": {
       "expected_sha256": "f689287b84c94f5e1fa67cf6a13e79171eaa155367abc671229f1e19a370cdf4",
       "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0049_generate.py": {
+      "expected_sha256": "a38fc4e874cd3a667f7dc31731ff4645e669672cbaafbb4bfc448cbcd50c18cd",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -960,84 +976,88 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "c6ad8dda75d1038931e2e02ffe97a663021573ab2b1dd86bc62029b16fd543e5",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bb02a08fa137e4cd9722319183ea8bb793dda2c1c39af76a54384fc095a98c44",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "718d1aad9d136b278bba8f9b2589fa58cb114424900c40fae5c57a8c0dce54c1",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f7a6090aa7af41498407e876023c84a50a3cfc61d3850969657182c2a27424c7",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "128d8934f160aedb8283ea245a79c9e427d3dc04e0f207dc05db9f9935b8bffd",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "68968422779aa825e7735ac9342eab241b03e06911b13b1a71561cf0e641a304",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "efb61c88f09a1e38dae3bf35c4dadac33aa47aa384009e989a60fb2a231d9cf0",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8da64f8a9d8ac0a6d7198ae2986d8efdb05319f28b64a4e28d3bd7d413ec8cef",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "d6421c0c96df762e77bcfe59d93b44c5b39983d399c290b938d9636cc14e2147",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ae0434345e5ffbf2ad12ea0c4b5a378fccf8a743d35fbbd53a9bbada73daf482",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "37375fbbb2bfbe25bb43c3db2220330a890aa56c50751486a0f0873b62a037e5",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ebd25861f5c0a2be0fcc33d4d14e8108f2e018aa95daf2026213ae12fcb6e50b",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "164051cc41380d41579f7a33390b5c601d5cf38ac8aecea9dae074cf3a4b70fe",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "769369437f7d820c956bc5e1dcc9903da793aab0561f65fd7d51ce30d1382f87",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "56b7d25488a92f91496fdb6d80c254a5f1beea7bf007f1bface7ee70c76b9e79",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8d0082d5785807877970f89660f956404ad3a4a4759dd0b68ebcf79067e9ff55",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "7b541dba5ef1ede37fc4b0f4a617ccb30d90a79bbbbc84f814bd6971875ee7a7",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4ff172f801534931a0ff7d25d630470830887646f0f48e40feb60086c7f410c5",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "827a7cf2b0e087d611aeeeb0032b73de203ebed235236cef60d3dfb7086b4429",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1d5aa64098e6cf6489e66ca859c65ec54fa5e0ed032530200c735709e0e23917",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "f525ae04f23d0381bf1631b71c6e9ae4bfb862d0aa4aea89af66105e694e4285",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "51021aefb5f4a4bcb64ce43171b193398d51c31f4a63d27d502b47dcb0d3e499",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "a19b7d29b75a7035a60ba40786112cdc89d3963dd4ed2a629805fe13bb9af9e6",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ec65698676c286e7a83bfc335cf61449fc34ccc25dc658d9dea2981ffce82089",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "1740f3db85694bbd8efd9a2805f60b26419a8a03ba0e537c9edbc191ef9931ab",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3ecfb14df6c46bf6205dc36e370b9e9495cc6154f1c63d69025ead199366d03d",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "0a3450a69556a27d81ee527db19698d647f8b3c26dd3b457401c6026c3c2963c",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7c88dc5a9c5f7eb2138274574db036b918bdc1bee88bfbb97135b7e6c4896d9e",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "eb98bde165ed73fc3a5205a0b42846f1f18ff0d4c4728fa400706baaea3602e7",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c244df55e68a1d674e7bfd2c24d34c898da5a5a1f7586cf353f76822b7dac47e",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "de97a111b0295ed9129048edf175775edba56326ccdf54b70a762dae50ca8908",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "54a56d8fec2b0990c337f9ba3ffa67b4d9f2643e7b5b011ece67c4d12ee94320",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "2657cdc6c5b32d54c03e24bc938e6c169157ebd0e9e0025ac5b84736783ebddb",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6035435e60ac059cb2ef99d476f7fa01b32c9cd3e3deff542427bab924707e60",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0049.py": {
+      "expected_sha256": "19203b563e680325aca6164218c7d71025abeaa8d1fc90c3fdcb20b78c3f356b",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "1c1271919e19b73f97a6436324f59e579d82723fa30f426459208435d6686af1",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2ae3b9ceebf8e81dc94822f8344cd38c538a8917a45c24bee9625518617547e0",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -1064,8 +1084,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "a21fdf85073e62cd827c657ef8901d6899b3930b44088052c68d26abd1d0dfeb",
-      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "329ef77c595141eed140ae6065475b2bdc553f5921f0372f8e9594ba1e6447df",
+      "reason": "G1 batch 0049 direct PR Newswire clock for RPC, Inc.; deterministic 74 exact / 100 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
