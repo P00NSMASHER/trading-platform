@@ -1,0 +1,32 @@
+name: G1 worker 1 batch 0050 publisher
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - scripts/g1_batch_0050_generate.py
+      - .github/workflows/g1-public-batch-0050-worker-1.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    if: github.event.pull_request.head.ref == 'g1/public-batch--worker-1-0050-musa'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate deterministic batch
+        run: PYTHONPATH=scripts python scripts/g1_batch_0050_generate.py
+      - name: Verify focused batch
+        run: pytest -q tests/test_g1_public_batch_0050.py tests/test_g1_source_research.py tests/test_g1_acquisition_manifest.py tests/test_real_data_release_sprint.py
+      - name: Commit generated artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Generate G1 batch 0050 MUSA artifacts" || exit 0
+          git push origin HEAD:g1/public-batch--worker-1-0050-musa
