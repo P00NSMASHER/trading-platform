@@ -1,5 +1,3 @@
-[Reading 186 lines from start (total: 186 lines, 0 remaining)]
-
 from __future__ import annotations
 import ast,copy,csv,hashlib,io,json,os,re,subprocess
 from datetime import datetime,timedelta
@@ -186,5 +184,3 @@ audit=Path("private_runtime/audit/g1-batch-0047");audit.mkdir(parents=True,exist
 save(audit/"verification.json",{"base_main_sha":BASE,"source_head_sha":os.environ["GITHUB_SHA"],"exact":72,"reviewed_excluded":102,
 "previous_exact_preserved":71,"new_events":items,"step9":"SOURCE_BLOCKED","evaluation_release_permitted":False,"deterministic_rebuild_matches":True})
 print(json.dumps({"exact":72,"reviewed_excluded":102,"new_events":[x["event_id"] for x in items]},indent=2))
-
-[executed on device: PAAM-L044 (c83a6c06-c0d3-4127-84de-311c7c6f1364)]
