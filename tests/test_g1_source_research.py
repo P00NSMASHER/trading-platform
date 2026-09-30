@@ -187,3 +187,38 @@ def test_no_public_one_stop_dataset_claim_is_preserved():
     assert report["public_one_stop_exact_timestamp_dataset_found"] is False
     assert report["licensed_complete_candidate"]["provider_family"] == "LSEG I/B/E/S Historical Estimates / Actuals"
     assert report["licensed_complete_candidate"]["lawful_access_only"] is True
+
+
+def test_sec_litigation_public_distribution_record_is_strict():
+    research = _load(RESEARCH_PATH)
+    exclusions = _load(EXCLUSIONS_PATH)
+    probe = _eligible_probe(exclusions)
+    probe.update({
+        "source_family": "sec_litigation_public_distribution_record",
+        "timestamp_evidence_kind": "explicit_release_clock",
+        "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/example.pdf",
+        "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1/example-ex99.htm",
+        "public_distribution_explicit": True,
+    })
+    research["validation_probes"].append(probe)
+    g1r.validate_research_map(research, exclusions)
+
+    bad_source = copy.deepcopy(research)
+    bad_source["validation_probes"][-1]["source_reference"] = "https://example.test/complaint.pdf"
+    with pytest.raises(g1r.G1SourceResearchError, match="SEC complaint source_reference"):
+        g1r.validate_research_map(bad_source, exclusions)
+
+    missing_corroboration = copy.deepcopy(research)
+    missing_corroboration["validation_probes"][-1]["corroboration_reference"] = ""
+    with pytest.raises(g1r.G1SourceResearchError, match="independent SEC Exhibit corroboration"):
+        g1r.validate_research_map(missing_corroboration, exclusions)
+
+    wrong_semantics = copy.deepcopy(research)
+    wrong_semantics["validation_probes"][-1]["timestamp_evidence_kind"] = "publisher_timestamp"
+    with pytest.raises(g1r.G1SourceResearchError, match="explicit_release_clock semantics"):
+        g1r.validate_research_map(wrong_semantics, exclusions)
+
+    not_explicit = copy.deepcopy(research)
+    not_explicit["validation_probes"][-1]["public_distribution_explicit"] = False
+    with pytest.raises(g1r.G1SourceResearchError, match="explicitly identify public distribution"):
+        g1r.validate_research_map(not_explicit, exclusions)
