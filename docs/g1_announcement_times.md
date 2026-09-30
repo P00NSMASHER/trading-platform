@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **53 public exact-time batches / 79 exact-resolved
+The current repository state is **54 public exact-time batches / 80 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -189,3 +189,7 @@ A timestamp-preserving public-wire mirror established ConAgra Foods, Inc.'s exac
 ### Batch 0053: Cornerstone OnDemand and Nordson Corporation
 
 Timestamp-preserving StreetInsider mirrors of the original Business Wire releases establish Cornerstone OnDemand's exact first-public clock at 2015-05-06 16:01 EDT (20:01 UTC), 1,920 seconds after the frozen 15:29 EDT trade, and Nordson Corporation's exact first-public clock at 2015-05-19 16:30 EDT (20:30 UTC), 3,300 seconds after the frozen 15:35 EDT trade. Matching SEC Exhibits 99.1 independently corroborate each issuer, title, date, quarter, and release body. This advances G1 from 77 exact / 97 reviewed exclusions to 79 exact / 95 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0061: RH
+
+RH's issuer investor-relations archive explicitly records the Business Wire fourth-quarter and fiscal-2014 results release at 2015-03-26 13:04 PDT (20:04 UTC), 1,380 seconds after the frozen 2015-03-26 15:41 EDT trade. SEC Exhibit 99.1 independently corroborates issuer, exact title, date, and reported results. This advances G1 from 79 exact / 95 reviewed exclusions to 80 exact / 94 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.

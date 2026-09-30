@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "e6975b225d99ef9df57157b4304d607621e6b6af",
+  "base_main_sha": "844db2085fdcdbda4f3d788def181b3f506a67d6",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 79,
-    "note": "The repository is at batch_0053; cumulative exact event records are 79 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 53,
+    "exact_resolved_event_records": 80,
+    "note": "The repository is at batch_0061; cumulative exact event records are 80 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 54,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 95
+    "reviewed_excluded_event_records": 94
   },
   "preferred_public_source_families": [
     {
@@ -1425,6 +1425,31 @@
       "source_family": "preserved_wire_mirror",
       "source_grade": "B",
       "source_reference": "https://www.streetinsider.com/Press+Releases/Nordson+Corporation+Reports+Fiscal+Year+2015+Second+Quarter+Results/10579158.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "RH's issuer investor-relations release page explicitly displays March 26, 2015 1:04 PM PDT for the target Business Wire earnings release; SEC Exhibit 99.1 independently matches issuer, exact release title, date, and fourth-quarter/fiscal-2014 results. No conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only, or inferred time is used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1528849/000119312515106973/d896261dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0061",
+      "event_date": "2015-03-26",
+      "event_id": "HEJFE-9B84208BA575EAC4",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-03-26T13:04:00-07:00",
+      "first_documented_illicit_trade_ts": "2015-03-26 15:41:00",
+      "historical_event_match": true,
+      "historical_symbol": "RH",
+      "information_asymmetry_seconds": 1380,
+      "probe_id": "RH-batch0061",
+      "public_announcement_ts": "2015-03-26T13:04:00-07:00",
+      "publisher_timestamp_text": "March 26, 2015 1:04 PM PDT",
+      "reason": "Promoted through direct issuer investor-relations publication timestamp evidence with SEC corroboration.",
+      "release_title": "RH Reports Record Fourth Quarter and Fiscal Year 2014 Financial Results",
+      "reviewed_on": "2026-09-30",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://ir.rh.com/news-events/detail/180/rh-reports-record-fourth-quarter-and-fiscal-year-2014-financial-results",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
