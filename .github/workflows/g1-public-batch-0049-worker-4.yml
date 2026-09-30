@@ -2,7 +2,7 @@ name: G1 public batch 0049 worker 4
 on:
   push:
     branches:
-      - g1/public-batch--worker-4-0049-res
+      - g1/public-batch-0049-worker-4-res
 permissions:
   contents: write
 concurrency:
@@ -42,7 +42,7 @@ jobs:
           python -m research_receipt_rebuild --check
       - name: Publish generated feature candidate
         run: |
-          test "$GITHUB_REF_NAME" = 'g1/public-batch--worker-4-0049-res'
+          test "$GITHUB_REF_NAME" = 'g1/public-batch-0049-worker-4-res'
           test "$(git ls-remote origin "refs/heads/$GITHUB_REF_NAME" | cut -f1)" = "$GITHUB_SHA"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
