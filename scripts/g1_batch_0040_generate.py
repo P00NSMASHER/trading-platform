@@ -133,16 +133,16 @@ status=sprint.build_status(requirements_manifest_path=sd/"requirements_manifest.
 step9=next(x for x in status["steps"] if x["step"]==9);assert step9["status"]=="SOURCE_BLOCKED" and "53/174" in step9["evidence"] and "121" in step9["evidence"]
 
 for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0039.py"]:
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py"]:
     p=Path(fn);t=p.read_text()
     t=t.replace("== (50,124)","== (53,121)").replace("len(excluded)==124","len(excluded)==121").replace("len(excluded) == 124","len(excluded) == 121").replace("len(ex)==124","len(ex)==121")
     t=t.replace('"50/174" in step9["evidence"] and "124" in step9["evidence"]','"53/174" in step9["evidence"] and "121" in step9["evidence"]')
-    t=t.replace('updated["missing_exact_announcement_timestamps"] == 121','updated["missing_exact_announcement_timestamps"] == 124')
+    t=t.replace('updated["missing_exact_announcement_timestamps"] == 124','updated["missing_exact_announcement_timestamps"] == 121')
     t=re.sub(r"== 50\\b","== 53",t);t=re.sub(r"== 124\\b","== 121",t)
-    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 40','state["public_exact_batch_count"] == 39')
+    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 39','state["public_exact_batch_count"] == 40')
     ast.parse(t);p.write_text(t)
 
-p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("38 public exact-time batches / 49 exact-resolved","40 public exact-time batches / 53 exact-resolved")
+p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("39 public exact-time batches / 50 exact-resolved","40 public exact-time batches / 53 exact-resolved")
 t += """
 ### Batch 0040: MDU Resources + Cabot + Oshkosh
 
@@ -184,7 +184,7 @@ assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 changed=set(subprocess.check_output(["git","diff","--name-only",BASE],text=True).splitlines());changed.update([str(batch),str(evidence_path),str(tp),SCRIPT])
 permitted={WORKFLOW,SCRIPT,str(contract_path),str(exclusion_path),str(hints_path),str(acq),str(batch),str(evidence_path),str(tp),
 "docs/g1_announcement_times.md","tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py",
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py",
 str(cp),str(cp.parent/"unresolved_gates.csv"),str(sd/"step_status.json"),"data/processed/research_receipt_bundle.json",
 "data/processed/real_data_replay/real_data_replay_status.json"} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
 assert changed<=permitted,f"Unexpected {changed-permitted}"
