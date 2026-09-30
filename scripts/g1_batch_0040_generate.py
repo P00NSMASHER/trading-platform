@@ -133,7 +133,7 @@ status=sprint.build_status(requirements_manifest_path=sd/"requirements_manifest.
 step9=next(x for x in status["steps"] if x["step"]==9);assert step9["status"]=="SOURCE_BLOCKED" and "53/174" in step9["evidence"] and "121" in step9["evidence"]
 
 for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0039.py"]:
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0039.py"]:
     p=Path(fn);t=p.read_text()
     t=t.replace("== (50,124)","== (53,121)").replace("len(excluded)==124","len(excluded)==121").replace("len(excluded) == 124","len(excluded) == 121").replace("len(ex)==124","len(ex)==121")
     t=t.replace('"50/174" in step9["evidence"] and "124" in step9["evidence"]','"53/174" in step9["evidence"] and "121" in step9["evidence"]')
