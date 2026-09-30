@@ -10,7 +10,7 @@ import real_data_release_sprint as sprint
 
 ROOT=Path.cwd()
 BASE="773369883cbdeab5c5c3feb711bf54a60d5cc4b4"
-WORKFLOW=".github/workflows/g1-public-batch-0048.yml"
+WORKFLOW=".github/workflows/g1-public-batch-0048-worker-4.yml"
 SCRIPT="scripts/g1_batch_0048_generate.py"
 def load(p): return json.loads(Path(p).read_text(encoding="utf-8"))
 def save(p,o): Path(p).write_text(json.dumps(o,indent=2,sort_keys=True)+"\n",encoding="utf-8")
@@ -37,7 +37,7 @@ specs=[
  "clock":"2012-01-25T07:22:00-05:00","publisher_timestamp_text":"Jan 25, 2012, 07:22 ET",
  "release_title":"RPC, Inc. Reports Fourth Quarter and Record 2011 Financial Results",
  "source_reference":"https://www.prnewswire.com/news/rpc%2Cinc./?page=9&pagesize=25",
- "corroboration_reference":"https://getfilings.com/sec-filings/120125/RPC-INC_8-K/ex99.htm",
+ "corroboration_reference":"https://www.sec.gov/Archives/edgar/data/742278/000118811212000165/ex99.htm",
  "corroboration_basis":"PR Newswire's primary RPC archive shows the exact Jan. 25 2012 07:22 ET publication clock for the target earnings release; the SEC-filed Exhibit 99 independently matches RPC, Inc., the January 25 2012 release title, and fourth-quarter/full-year 2011 results. The separately scheduled conference-call time is not used.",
  "expected_delta":57720}
 ]
@@ -83,15 +83,15 @@ contract_path=Path("config/metadata_sources.public_progress.json");contract=load
 contract["sources"].insert(0,{"source_id":"public-prnewswire-res-batch-0048","record_kind":"announcement_timestamp",
 "source_family":"official_newswire_archive","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
 "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{k:k for k in fields},
-"license_reference":"Public primary PR Newswire publication metadata for World Acceptance Corporation with independent SEC Exhibit 99.1 corroboration. No licensed vendor data used.",
-"notes":"RES 2012-01-25 06:30 EST. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used."})
+"license_reference":"Public primary PR Newswire publication metadata for RPC, Inc. with independent SEC Exhibit 99.1 corroboration. No licensed vendor data used.",
+"notes":"RES 2012-01-25 07:22 EST. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used."})
 contract["reviewed_announcement_exclusions"].update(expected_count=101,expected_sha256=sha(exclusion_path))
 contract["purpose"]="Cumulative public point-in-time metadata: G1 has 73 exact release timestamps and 101 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed."
 save(contract_path,contract)
 
 hints["base_main_sha"]=BASE
 hints["current_g1_state"].update(public_exact_batch_count=48,exact_resolved_event_records=73,reviewed_excluded_event_records=101,
- note="The repository is at batch_0048; cumulative exact event records are 72 because some public batches resolve more than one historical event.")
+ note="The repository is at batch_0048; cumulative exact event records are 73 because some public batches resolve more than one historical event.")
 for item in items:
     hints["validation_probes"].append(dict(item,probe_id=f"{item['historical_symbol']}-batch0048",historical_event_match=True,
       exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
@@ -119,16 +119,16 @@ status=sprint.build_status(requirements_manifest_path=sd/"requirements_manifest.
 step9=next(x for x in status["steps"] if x["step"]==9);assert step9["status"]=="SOURCE_BLOCKED" and "73/174" in step9["evidence"] and "101" in step9["evidence"]
 
 for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py"]:
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py","tests/test_g1_public_batch_0047.py"]:
     p=Path(fn);t=p.read_text()
     t=t.replace("== (72,102)","== (73,101)").replace("len(excluded)==102","len(excluded)==101").replace("len(excluded) == 102","len(excluded) == 101").replace("len(ex)==102","len(ex)==101")
     t=t.replace('"72/174" in step9["evidence"] and "102" in step9["evidence"]','"73/174" in step9["evidence"] and "101" in step9["evidence"]')
-    t=t.replace('updated["missing_exact_announcement_timestamps"] == 101','updated["missing_exact_announcement_timestamps"] == 102')
+    t=t.replace('updated["missing_exact_announcement_timestamps"] == 102','updated["missing_exact_announcement_timestamps"] == 101')
     t=re.sub(r"== 72\\b","== 73",t);t=re.sub(r"== 102\\b","== 101",t)
-    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 47','state["public_exact_batch_count"] == 47')
+    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 47','state["public_exact_batch_count"] == 48')
     ast.parse(t);p.write_text(t)
 
-p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("47 public exact-time batches / 72 exact-resolved","47 public exact-time batches / 72 exact-resolved")
+p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("47 public exact-time batches / 72 exact-resolved","48 public exact-time batches / 73 exact-resolved")
 t += """
 ### Batch 0048: RPC, Inc.
 
@@ -170,16 +170,16 @@ assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 changed=set(subprocess.check_output(["git","diff","--name-only",BASE],text=True).splitlines());changed.update([str(batch),str(evidence_path),str(tp),SCRIPT])
 permitted={WORKFLOW,SCRIPT,str(contract_path),str(exclusion_path),str(hints_path),str(acq),str(batch),str(evidence_path),str(tp),
 "docs/g1_announcement_times.md","tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py",
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py","tests/test_g1_public_batch_0047.py",
 str(cp),str(cp.parent/"unresolved_gates.csv"),str(sd/"step_status.json"),"data/processed/research_receipt_bundle.json",
 "data/processed/real_data_replay/real_data_replay_status.json"} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
 assert changed<=permitted,f"Unexpected {changed-permitted}"
-allowp=Path("config/release_drift_allowlist.json");allow=load(allowp);reason="G1 batch 0048 direct PR Newswire clock for RPC, Inc.; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+allowp=Path("config/release_drift_allowlist.json");allow=load(allowp);reason="G1 batch 0048 direct PR Newswire clock for RPC, Inc.; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
 for name in sorted(changed):
     sec="intentional_release_modifications" if name in allow["intentional_release_modifications"] else "repository_additions"
     allow[sec][name]={"expected_sha256":sha(name),"reason":reason}
 save(allowp,allow);changed.add(str(allowp));subprocess.run(["git","add","--",*sorted(changed)],check=True)
 audit=Path("private_runtime/audit/g1-batch-0048");audit.mkdir(parents=True,exist_ok=True)
-save(audit/"verification.json",{"base_main_sha":BASE,"source_head_sha":os.environ["GITHUB_SHA"],"exact":72,"reviewed_excluded":102,
-"previous_exact_preserved":71,"new_events":items,"step9":"SOURCE_BLOCKED","evaluation_release_permitted":False,"deterministic_rebuild_matches":True})
+save(audit/"verification.json",{"base_main_sha":BASE,"source_head_sha":os.environ["GITHUB_SHA"],"exact":73,"reviewed_excluded":101,
+"previous_exact_preserved":72,"new_events":items,"step9":"SOURCE_BLOCKED","evaluation_release_permitted":False,"deterministic_rebuild_matches":True})
 print(json.dumps({"exact":73,"reviewed_excluded":101,"new_events":[x["event_id"] for x in items]},indent=2))
