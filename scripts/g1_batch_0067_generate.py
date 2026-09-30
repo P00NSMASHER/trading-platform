@@ -51,6 +51,7 @@ specs=[
 items=[]
 hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
 hints=load(hints_path);trial=copy.deepcopy(hints)
+trial["validation_probes"]=[r for r in trial.get("validation_probes",[]) if r.get("event_id") not in {x["event_id"] for x in specs}]
 for spec in specs:
     e=next(r for r in events if r["event_id"]==spec["event_id"])
     assert e["historical_symbol"]==spec["historical_symbol"] and e["first_documented_illicit_trade_ts"]==spec["expected_trade"]
@@ -98,6 +99,7 @@ contract["purpose"]="Cumulative public point-in-time metadata: G1 has 86 exact r
 save(contract_path,contract)
 
 hints["priority_events"]=[r for r in hints.get("priority_events",[]) if r.get("event_id") not in ids]
+hints["validation_probes"]=[r for r in hints.get("validation_probes",[]) if r.get("event_id") not in ids]
 hints["base_main_sha"]=BASE
 hints["current_g1_state"].update(public_exact_batch_count=57,exact_resolved_event_records=86,reviewed_excluded_event_records=88,
  note="The latest integrated recovery is batch_0067; cumulative public exact-time batches are 57 and cumulative exact event records are 86 because some public batches resolve more than one historical event.")
