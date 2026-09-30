@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **56 public exact-time batches / 84 exact-resolved
+The current repository state is **57 public exact-time batches / 86 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -201,3 +201,7 @@ Timestamp-preserving MarketScreener mirrors of the original Business Wire releas
 ### Batch 0062: VeriFone and VMware
 
 Timestamp-preserving public-wire mirrors establish VeriFone Systems, Inc.'s exact first-public clock at 2015-03-10 16:01 EDT (20:01 UTC), 3,000 seconds after the frozen 15:11 EDT trade, and VMware's exact first-public clock at 2013-07-23 16:01 EDT (20:01 UTC), 1,560 seconds after the frozen 15:35 EDT trade. StreetInsider preserves the Business Wire VeriFone publication clock; Yahoo Finance preserves the original Marketwired VMware publisher timestamp. Matching SEC Exhibits 99.1 independently corroborate issuer, title, date, reporting period, and release body for both events. This advances G1 from 82 exact / 92 reviewed exclusions to 84 exact / 90 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0067: Edwards Lifesciences and TIBCO Software
+
+SEC civil complaints explicitly record the first public newswire distribution clocks for two hacked-release events. Edwards Lifesciences' April 23, 2013 first-quarter release was publicly distributed at 16:01 EDT (20:01 UTC), 9,180 seconds after the frozen 13:28 EDT illicit trade. TIBCO Software's September 19, 2013 third-quarter release was publicly distributed at 16:05 EDT (20:05 UTC), 2,160 seconds after the frozen 15:29 EDT illicit trade. Matching SEC Exhibits 99.1 independently corroborate issuer, title, release date, reporting period, and release content. The regulator source family is fail-closed: only SEC litigation complaint URLs with explicit public-distribution language, explicit_release_clock semantics, and independent SEC Exhibit corroboration are admissible. This advances G1 from 84 exact / 90 reviewed exclusions to 86 exact / 88 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
