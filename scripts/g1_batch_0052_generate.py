@@ -119,16 +119,16 @@ status=sprint.build_status(requirements_manifest_path=sd/"requirements_manifest.
 step9=next(x for x in status["steps"] if x["step"]==9);assert step9["status"]=="SOURCE_BLOCKED" and "77/174" in step9["evidence"] and "97" in step9["evidence"]
 
 for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py","tests/test_g1_public_batch_0047.py","tests/test_g1_public_batch_0048.py","tests/test_g1_public_batch_0049.py","tests/test_g1_public_batch_0050.py"]:
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py","tests/test_g1_public_batch_0047.py","tests/test_g1_public_batch_0048.py","tests/test_g1_public_batch_0049.py","tests/test_g1_public_batch_0050.py","tests/test_g1_public_batch_0051.py"]:
     p=Path(fn);t=p.read_text()
-    t=t.replace("== (75,99)","== (77,97)").replace("len(excluded)==99","len(excluded)==97").replace("len(excluded) == 99","len(excluded) == 97").replace("len(ex)==99","len(ex)==97")
-    t=t.replace('"75/174" in step9["evidence"] and "99" in step9["evidence"]','"77/174" in step9["evidence"] and "97" in step9["evidence"]')
-    t=t.replace('updated["missing_exact_announcement_timestamps"] == 99','updated["missing_exact_announcement_timestamps"] == 97')
-    t=re.sub(r"== 75\b","== 77",t);t=re.sub(r"== 99\b","== 97",t)
-    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 50','state["public_exact_batch_count"] == 52')
+    t=t.replace("== (76,98)","== (77,97)").replace("len(excluded)==98","len(excluded)==97").replace("len(excluded) == 98","len(excluded) == 97").replace("len(ex)==98","len(ex)==97")
+    t=t.replace('"76/174" in step9["evidence"] and "98" in step9["evidence"]','"77/174" in step9["evidence"] and "97" in step9["evidence"]')
+    t=t.replace('updated["missing_exact_announcement_timestamps"] == 98','updated["missing_exact_announcement_timestamps"] == 97')
+    t=re.sub(r"== 76\b","== 77",t);t=re.sub(r"== 98\b","== 97",t)
+    if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 51','state["public_exact_batch_count"] == 52')
     ast.parse(t);p.write_text(t)
 
-p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("50 public exact-time batches / 75 exact-resolved","52 public exact-time batches / 77 exact-resolved")
+p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("51 public exact-time batches / 76 exact-resolved","52 public exact-time batches / 77 exact-resolved")
 t += """
 ### Batch 0052: RH
 
@@ -170,7 +170,7 @@ assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 changed=set(subprocess.check_output(["git","diff","--name-only",BASE],text=True).splitlines());changed.update([str(batch),str(evidence_path),str(tp),SCRIPT])
 permitted={WORKFLOW,SCRIPT,str(contract_path),str(exclusion_path),str(hints_path),str(acq),str(batch),str(evidence_path),str(tp),
 "docs/g1_announcement_times.md","src/metadata_resolver.py","tests/test_metadata_resolver.py","tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
-"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py","tests/test_g1_public_batch_0047.py","tests/test_g1_public_batch_0048.py","tests/test_g1_public_batch_0049.py","tests/test_g1_public_batch_0050.py",
+"tests/test_g1_public_batch_0032.py","tests/test_g1_public_batch_0034.py","tests/test_g1_public_batch_0035.py","tests/test_g1_public_batch_0036.py","tests/test_g1_public_batch_0037.py","tests/test_g1_public_batch_0038.py","tests/test_g1_public_batch_0039.py","tests/test_g1_public_batch_0040.py","tests/test_g1_public_batch_0041.py","tests/test_g1_public_batch_0042.py","tests/test_g1_public_batch_0043.py","tests/test_g1_public_batch_0044.py","tests/test_g1_public_batch_0045.py","tests/test_g1_public_batch_0046.py","tests/test_g1_public_batch_0047.py","tests/test_g1_public_batch_0048.py","tests/test_g1_public_batch_0049.py","tests/test_g1_public_batch_0050.py","tests/test_g1_public_batch_0051.py",
 str(cp),str(cp.parent/"unresolved_gates.csv"),str(sd/"step_status.json"),"data/processed/research_receipt_bundle.json",
 "data/processed/real_data_replay/real_data_replay_status.json"} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
 assert changed<=permitted,f"Unexpected {changed-permitted}"
