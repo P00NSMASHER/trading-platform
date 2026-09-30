@@ -154,6 +154,7 @@ for fn in test_files:
         pairs=[
           ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (82,92)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (84,90)'),
           ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (82, 92)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (84, 90)'),
+          ('"82/174" in step9["evidence"] and "92" in step9["evidence"]','"84/174" in step9["evidence"] and "90" in step9["evidence"]'),
           ('len(excluded)==92','len(excluded)==90'),
           ('len(excluded) == 92','len(excluded) == 90'),
           ('len(ex)==92','len(ex)==90'),
