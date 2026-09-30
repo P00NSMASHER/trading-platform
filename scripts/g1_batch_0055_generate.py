@@ -136,6 +136,7 @@ for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifes
     if fn.endswith("test_g1_source_research.py"):
         t=t.replace('state["public_exact_batch_count"] == 51','state["public_exact_batch_count"] == 52')
         t=t.replace('report["priority_event_count"] == 6','report["priority_event_count"] == 5')
+        t=t.replace('assert [row["historical_symbol"] for row in report["queue"]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI", "NATI"\n    ]','assert [row["historical_symbol"] for row in report["queue"]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI"\n    ]')
     if fn.endswith("test_g1_acquisition_manifest.py"):
         t=t.replace('manifest["work_queue"][:6]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI", "NATI"\n    ]','manifest["work_queue"][:5]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI"\n    ]')
         t=t.replace('manifest["work_queue"][:6]] == [1, 2, 3, 4, 5, 6]','manifest["work_queue"][:5]] == [1, 2, 3, 4, 6]')
