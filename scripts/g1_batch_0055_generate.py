@@ -96,7 +96,7 @@ contract["reviewed_announcement_exclusions"].update(expected_count=96,expected_s
 contract["purpose"]="Cumulative public point-in-time metadata: G1 has 78 exact release timestamps and 96 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed."
 save(contract_path,contract)
 
-hints["base_main_sha"]=BASE
+hints["priority_events"]=[r for r in hints.get("priority_events",[]) if r.get("event_id") not in ids]\nhints["base_main_sha"]=BASE
 hints["current_g1_state"].update(public_exact_batch_count=52,exact_resolved_event_records=78,reviewed_excluded_event_records=96,
  note="This feature branch adds the 52nd public exact-time batch as batch_0055 because batch numbers 0052-0054 are concurrently claimed by other workers; cumulative exact event records are 78 because some public batches resolve more than one historical event.")
 for item in items:
@@ -133,6 +133,9 @@ for fn in ["tests/test_g1_source_research.py","tests/test_g1_acquisition_manifes
     t=t.replace('updated["missing_exact_announcement_timestamps"] == 98','updated["missing_exact_announcement_timestamps"] == 96')
     t=re.sub(r"== 76\b","== 78",t);t=re.sub(r"== 98\b","== 96",t)
     if fn.endswith("test_g1_source_research.py"):t=t.replace('state["public_exact_batch_count"] == 51','state["public_exact_batch_count"] == 52')
+    if fn.endswith("test_g1_acquisition_manifest.py"):
+        t=t.replace('manifest["work_queue"][:6]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI", "NATI"\n    ]','manifest["work_queue"][:5]] == [\n        "QLIK", "TNGO", "CAKE", "NKE", "NATI"\n    ]')
+        t=t.replace('manifest["work_queue"][:6]] == [1, 2, 3, 4, 5, 6]','manifest["work_queue"][:5]] == [1, 2, 3, 4, 5]')
     ast.parse(t);p.write_text(t)
 
 p=Path("docs/g1_announcement_times.md");t=p.read_text().replace("51 public exact-time batches / 76 exact-resolved","52 public exact-time batches / 78 exact-resolved")
