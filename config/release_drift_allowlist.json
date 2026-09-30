@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0043.yml": {
-      "expected_sha256": "700ed3c306b1bac150524435454966f4ad72ab9456f7ce88b27ecf361f0413b3",
-      "reason": "G1 batch 0043 direct PR Newswire clocks for Varian, Astoria Financial, Symmetricom, ISSI and Destination Maternity; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
