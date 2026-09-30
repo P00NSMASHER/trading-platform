@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "844db2085fdcdbda4f3d788def181b3f506a67d6",
+  "base_main_sha": "7a1ff5e583ef27f2fd20517d7bd0398f2f2bf7b8",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 80,
-    "note": "The repository is at batch_0061; cumulative exact event records are 80 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 54,
+    "exact_resolved_event_records": 82,
+    "note": "The repository is at batch_0063; cumulative exact event records are 82 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 55,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 94
+    "reviewed_excluded_event_records": 92
   },
   "preferred_public_source_families": [
     {
@@ -137,20 +137,6 @@
         "sec_exhibit_corroboration"
       ],
       "priority_rank": 4,
-      "research_signal": "strong_release_trail"
-    },
-    {
-      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
-      "event_id": "HEJFE-F9E72EEF6E5BD373",
-      "first_documented_illicit_trade_ts": "2015-01-29 15:51:00",
-      "historical_symbol": "NATI",
-      "next_source_families": [
-        "official_newswire_archive",
-        "issuer_investor_relations_archive",
-        "preserved_wire_mirror",
-        "sec_exhibit_corroboration"
-      ],
-      "priority_rank": 5,
       "research_signal": "strong_release_trail"
     },
     {
@@ -1450,6 +1436,56 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://ir.rh.com/news-events/detail/180/rh-reports-record-fourth-quarter-and-fiscal-year-2014-financial-results",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "MarketScreener's timestamp-preserving Business Wire mirror explicitly distinguishes Published on 01/29/2015 at 04:01 pm EST from a 04:03 pm modification time on the exact National Instruments 2014 results release; SEC Exhibit 99.1 independently matches National Instruments Corporation, the release title/date, reporting period, and results. The separately stated 4:00 p.m. CT conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/935494/000093549415000002/ex99-1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0063",
+      "event_date": "2015-01-29",
+      "event_id": "HEJFE-F9E72EEF6E5BD373",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-01-29T16:01:00-05:00",
+      "first_documented_illicit_trade_ts": "2015-01-29 15:51:00",
+      "historical_event_match": true,
+      "historical_symbol": "NATI",
+      "information_asymmetry_seconds": 600,
+      "probe_id": "NATI-batch0063",
+      "public_announcement_ts": "2015-01-29T16:01:00-05:00",
+      "publisher_timestamp_text": "Published on 01/29/2015 at 04:01 pm EST",
+      "reason": "Promoted through timestamp-preserving MarketScreener Business Wire mirror evidence with SEC corroboration.",
+      "release_title": "National Instruments Reports Record Revenue and Net Income for 2014",
+      "reviewed_on": "2026-09-30",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://www.marketscreener.com/quote/stock/NATIONAL-INSTRUMENTS-CORP-10156/news/National-Instruments-Reports-Record-Revenue-and-Net-Income-for-2014-19785765/",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "MarketScreener's timestamp-preserving Business Wire mirror explicitly distinguishes Published on 04/21/2015 at 04:01 pm EDT from a 04:02 pm modification time on the exact Cree fiscal-2015 third-quarter release; SEC Exhibit 99.1 independently matches Cree, Inc., the release title/date, reporting period, and results. The separately stated 5:00 p.m. conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/895419/000089541915000024/ex9913qfy2015.htm",
+      "disposition": "RESOLVED_IN_BATCH_0063",
+      "event_date": "2015-04-21",
+      "event_id": "HEJFE-D35C7804C2F5326C",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-04-21T16:01:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-04-21 15:29:00",
+      "historical_event_match": true,
+      "historical_symbol": "CREE",
+      "information_asymmetry_seconds": 1920,
+      "probe_id": "CREE-batch0063",
+      "public_announcement_ts": "2015-04-21T16:01:00-04:00",
+      "publisher_timestamp_text": "Published on 04/21/2015 at 04:01 pm EDT",
+      "reason": "Promoted through timestamp-preserving MarketScreener Business Wire mirror evidence with SEC corroboration.",
+      "release_title": "Cree Reports Financial Results for the Third Quarter of Fiscal Year 2015",
+      "reviewed_on": "2026-09-30",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://www.marketscreener.com/quote/stock/WOLFSPEED-INC-8892/news/Cree-Reports-Financial-Results-for-the-Third-Quarter-of-Fiscal-Year-2015-20231088/",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }

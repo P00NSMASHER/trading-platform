@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 80 exact release timestamps and 94 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 82 exact release timestamps and 92 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 94,
-    "expected_sha256": "0703a61ba43c6260f8893e89b29b689f2c961169be9f6b3817549a8792b4ed89",
+    "expected_count": 92,
+    "expected_sha256": "03db78e4c8fed217a42186942b4f4f0699494705d6ba2793f2d726bdb47fd045",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public timestamp-preserving MarketScreener mirrors of Business Wire publication clocks for National Instruments and Cree with independent SEC Exhibit 99.1 corroboration. No licensed vendor data used.",
+      "notes": "NATI 2015-01-29 16:01 EST; CREE 2015-04-21 16:01 EDT. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0063.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-marketscreener-businesswire-nati-cree-batch-0063",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {
