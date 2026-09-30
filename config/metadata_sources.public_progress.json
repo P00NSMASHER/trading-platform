@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 50 exact release timestamps and 124 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 53 exact release timestamps and 121 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 124,
-    "expected_sha256": "b411432402b498c490160d7a286587b1c5b800c0fb4607a0c57fd7161634e64a",
+    "expected_count": 121,
+    "expected_sha256": "deb2fc9a1c7caf4814290ccd81fac9da4a6ca2fd6c5b8fd1bbf769f2875a4e07",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public MarketScreener-preserved Business Wire publication metadata for MDU Resources, Cabot and Oshkosh with original Business Wire, issuer IR and SEC corroboration. No licensed vendor data used.",
+      "notes": "MDU 2015-05-04 17:30 EDT; CBT 2015-04-29 16:05 EDT; OSK 2015-04-28 07:00 EDT. Scheduled conference calls and EDGAR acceptance times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0040.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-businesswire-mdu-cbt-osk-batch-0040",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {

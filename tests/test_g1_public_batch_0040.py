@@ -5,19 +5,21 @@ from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
 def rr(p):
     with p.open(newline="",encoding="utf-8") as h:return list(csv.DictReader(h))
-def test_batch_0038():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0038_evidence.json").read_text())
+def test_batch_0040():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0040_evidence.json").read_text())
     events={r["event_id"]:r for r in rr(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    exp={"HEJFE-7CA38C1FDA5EA4D0":("CENX","2013-04-25T20:00:00Z",2280),"HEJFE-9527526FED86FA7D":("EHTH","2013-04-25T20:15:00Z",1140),"HEJFE-8536AD777ECEEACB":("GDI","2013-04-26T13:44:00Z",66420)}
+    exp={"HEJFE-977FEBE8CA3CFCB6":("MDU","2015-05-04T21:30:00Z",5580),"HEJFE-9DF82252ED78E41F":("CBT","2015-04-29T20:05:00Z",9120),"HEJFE-CFA461ED8BCCB889":("OSK","2015-04-28T11:00:00Z",55860)}
     assert len(d["items"])==3
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
         tr=datetime.fromisoformat(e["first_documented_illicit_trade_ts"]).replace(tzinfo=ZoneInfo("America/New_York"));rel=datetime.fromisoformat(x["public_announcement_ts"])
         assert e["historical_symbol"]==sym and tr<rel<=tr+timedelta(days=7) and int((rel-tr).total_seconds())==delta
-        assert resolved[x["event_id"]]["public_announcement_ts"]==utc and x["corroboration_reference"].startswith("https://")
-def test_batch_0038_preserves_prior():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0038_evidence.json").read_text())
+        assert resolved[x["event_id"]]["public_announcement_ts"]==utc
+        assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
+        assert x["corroboration_reference"].startswith("https://")
+def test_batch_0040_preserves_prior():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0040_evidence.json").read_text())
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
