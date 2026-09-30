@@ -95,7 +95,7 @@ hints["current_g1_state"].update(public_exact_batch_count=52,exact_resolved_even
 for item in items:
     hints["validation_probes"].append(dict(item,probe_id=f"{item['historical_symbol']}-batch0054",historical_event_match=True,
       exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
-      disposition="RESOLVED_IN_BATCH_0054",reason="Promoted through timestamp-preserving Yahoo Finance Marketwired publication metadata with SEC corroboration.")))
+      disposition="RESOLVED_IN_BATCH_0054",reason="Promoted through timestamp-preserving Yahoo Finance Marketwired publication metadata with SEC corroboration."))
 save(hints_path,hints)
 
 assert rebuild.rebuild(ROOT,publish=True)["after"]["up_to_date"]
