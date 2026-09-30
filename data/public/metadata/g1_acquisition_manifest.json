@@ -2886,54 +2886,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-F9E72EEF6E5BD373",
       "event_date": "2015-01-29",
       "event_id": "HEJFE-F9E72EEF6E5BD373",
       "first_documented_illicit_trade_ts": "2015-01-29T20:51:00Z",
       "historical_symbol": "NATI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": 5,
-      "research_signal": "strong_release_trail",
+      "public_announcement_ts": "2015-01-29T21:01:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-marketscreener-businesswire-nati-cree-batch-0063",
+        "source_reference": "https://www.marketscreener.com/quote/stock/NATIONAL-INSTRUMENTS-CORP-10156/news/National-Instruments-Reports-Record-Revenue-and-Net-Income-for-2014-19785765/",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-02-05",
-        "start_date": "2015-01-29"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -4836,54 +4806,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-D35C7804C2F5326C",
       "event_date": "2015-04-21",
       "event_id": "HEJFE-D35C7804C2F5326C",
       "first_documented_illicit_trade_ts": "2015-04-21T19:29:00Z",
       "historical_symbol": "CREE",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-04-21T20:01:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-marketscreener-businesswire-nati-cree-batch-0063",
+        "source_reference": "https://www.marketscreener.com/quote/stock/WOLFSPEED-INC-8892/news/Cree-Reports-Financial-Results-for-the-Third-Quarter-of-Fiscal-Year-2015-20231088/",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-04-28",
-        "start_date": "2015-04-21"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -6312,7 +6252,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 94,
+    "request_event_count": 92,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -6346,19 +6286,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 94,
+    "acquisition_needed": 92,
     "event_count": 174,
-    "exact_resolved": 80,
-    "research_hint_exact_resolved": 80,
-    "research_hint_excluded": 94,
+    "exact_resolved": 82,
+    "research_hint_exact_resolved": 82,
+    "research_hint_excluded": 92,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
-    "explicit_research_priorities": 6,
+    "explicit_research_priorities": 5,
     "no_public_replication_candidate": 9,
-    "public_release_file_present_without_clock": 85,
-    "resolved_no_action": 80,
-    "routed_for_acquisition": 94
+    "public_release_file_present_without_clock": 83,
+    "resolved_no_action": 82,
+    "routed_for_acquisition": 92
   },
   "work_queue": [
     {
@@ -6408,19 +6348,6 @@
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 4,
       "research_priority_rank": 4,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-F9E72EEF6E5BD373",
-      "event_date": "2015-01-29",
-      "event_id": "HEJFE-F9E72EEF6E5BD373",
-      "historical_symbol": "NATI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 5,
-      "research_priority_rank": 5,
       "route_order": [
         "public_exact_clock_recovery",
         "licensed_ibes_bulk"
@@ -7172,19 +7099,6 @@
       "event_date": "2015-04-21",
       "event_id": "HEJFE-45559DD90D876D39",
       "historical_symbol": "ILMN",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-D35C7804C2F5326C",
-      "event_date": "2015-04-21",
-      "event_id": "HEJFE-D35C7804C2F5326C",
-      "historical_symbol": "CREE",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
