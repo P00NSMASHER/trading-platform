@@ -1786,54 +1786,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-7B8A1A0CD3E2966F",
       "event_date": "2013-05-06",
       "event_id": "HEJFE-7B8A1A0CD3E2966F",
       "first_documented_illicit_trade_ts": "2013-05-06T17:27:00Z",
       "historical_symbol": "APC",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2013-05-06T22:15:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "B",
+        "source_id": "public-marketscreener-marketwired-apc-batch-0050",
+        "source_reference": "https://www.marketscreener.com/quote/stock/ANADARKO-PETROLEUM-11665/news/Anadarko-Petroleum-Corporation-Anadarko-Announces-First-Quarter-2013-Results-16829098/",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2013-05-13",
-        "start_date": "2013-05-06"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -6492,7 +6462,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 100,
+    "request_event_count": 99,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -6526,19 +6496,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 100,
+    "acquisition_needed": 99,
     "event_count": 174,
-    "exact_resolved": 74,
-    "research_hint_exact_resolved": 74,
-    "research_hint_excluded": 100,
+    "exact_resolved": 75,
+    "research_hint_exact_resolved": 75,
+    "research_hint_excluded": 99,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
     "explicit_research_priorities": 6,
     "no_public_replication_candidate": 9,
-    "public_release_file_present_without_clock": 91,
-    "resolved_no_action": 74,
-    "routed_for_acquisition": 100
+    "public_release_file_present_without_clock": 90,
+    "resolved_no_action": 75,
+    "routed_for_acquisition": 99
   },
   "work_queue": [
     {
@@ -6819,19 +6789,6 @@
       "event_date": "2013-04-25",
       "event_id": "HEJFE-C368B17FADFC15C7",
       "historical_symbol": "ECHO",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-7B8A1A0CD3E2966F",
-      "event_date": "2013-05-06",
-      "event_id": "HEJFE-7B8A1A0CD3E2966F",
-      "historical_symbol": "APC",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,

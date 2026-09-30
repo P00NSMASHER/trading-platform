@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **49 public exact-time batches / 74 exact-resolved
+The current repository state is **50 public exact-time batches / 75 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -173,3 +173,7 @@ A timestamp-preserving StreetInsider mirror of the Business Wire release establi
 ### Batch 0049: RPC, Inc.
 
 A direct primary-newswire recovery established RPC, Inc.'s exact first-public clock at 2012-01-25 07:22 EST (12:22 UTC), 57,720 seconds after the frozen 2012-01-24 15:20 EST trade. PR Newswire's historical RPC archive preserves the exact publication clock, while the SEC-filed Exhibit 99 independently corroborates issuer, title, date, and fourth-quarter/full-year 2011 results. This advances G1 from 73 exact / 101 reviewed exclusions to 74 exact / 100 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0050: Anadarko Petroleum Corporation
+
+A timestamp-preserving public-wire recovery established Anadarko Petroleum Corporation's exact first-public clock at 2013-05-06 18:15 EDT (22:15 UTC), 17,280 seconds after the frozen 2013-05-06 13:27 EDT trade. MarketScreener preserves the Marketwired release with an explicit 06:15 pm EDT publication clock, while SEC Exhibit 99 independently corroborates issuer, title, date, and first-quarter 2013 results. This advances G1 from 74 exact / 100 reviewed exclusions to 75 exact / 99 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
