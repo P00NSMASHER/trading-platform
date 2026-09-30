@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "dc19d78a8809a84f2bcc1818c9eeafe30f8044da3b9d5db637ee3948b05cdc1f",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7a25c296c212443b51887a6f988785bf185eae47c9f132e7ba8f44564cee3ccb",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "fd328cd4c2bd93766116a77681df57163396bdfc867f08f73c09db361b9f18c1",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c63224a170a5fb62b2de010efe9acb1c6758ed9c1395bf625e6924d907f99a72",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "8a00620d14c4f47e25289285907771655b8d5f4e0bee0db75f750cc47ddb9872",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0661b94bf6655a71f7bb5dbb8f4e994b97db52f54755e9e804eb8c914c7a64e4",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -115,6 +115,10 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
+    ".github/workflows/g1-public-batch-0042.yml": {
+      "expected_sha256": "d9c3c9d0af11517fe7fbdfe2bad61dc2838c2ed20c45142db2205681d70d7047",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -152,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "6451738bc50925cead77e05a6fdaa8cbf5dff9bdeddf678e5c78c03bd88ede4a",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ae30bd32ad7985d574cff7fa03332a28d724c9be77399cb89e08e9a8759691fa",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "e9a1763e3f6683666f7fb1999c02dd9b962a0b1a85f30ae6d7808a119492da1f",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e962d1283c0be7014a721c98fe7c0bc98415425e26f2df462c0a95ece1f2bcc3",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "2727c724b513623551d9e20df978b204b2ab77e53635732cc6ea02c14d23b062",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ea198eed919f21517606cf87a2c804029d1764623cfedf051fbc5c236560931e",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "c22da44d8d552f7e5b3723701c4b1f0c4ae3357a1b328db11e786437c86a5cb4",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "249b240e34a5cbfc091f730c9bdbc3ce3e1d9b4186d79f536243fb3baa720521",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "75120f4667ad6b1d3cdd8efef12a8f8ee7a411e0ec7f3129bc9f990c79f5817c",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "28193d545cfcb4f10b4ff48cbfad6f879f1513f05d9da44220ff3f8b6c729562",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "8b4f15ca13dde69a39d67d63c522b8ebccd3d5098722f3b167b9ad9a06c61873",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6e38d41418b385668da2cb50847574558ad9023f7488a64d0f09fd60430d887e",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +296,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "504dd08fe3d58799e42a24d3bc85c78ac4b602a35c5b02121bf2213094c262e6",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e61ee02aa74faaffe599af7ee43b904775b925a3ef68cb6954905c93e9d86388",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "c1d27598122c552a49a3d637008224812f2fff0520711d26e4999e63334fd171",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b020db5ae15bde564acdc9c08a66cbce7e9fdba923fc004a7b07782fb1dca769",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "6b3b6329699c0cd1f0893a4d0f5f605a0800e38a1058a26b953502cc67fd1b2b",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bdb771bdfd1ec34390c9e96497e47cc851621d81f4f5ede90ecc1dbe9aa0893e",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +324,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "f8c54b8f470bbd0f94761126a617509379ef2a4c725a21ba11754bcbd8f05a31",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "047aaa8abdea519699aa5f41c7142855b8e1913451f4690225435a2aef792c62",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -491,6 +495,10 @@
       "expected_sha256": "947451b66939990cde44fd2ebb0fabc967f02f2734ea5c7ab5fd808646312609",
       "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0042.csv": {
+      "expected_sha256": "4f7cf488a0a739702de6503bba2ea444c05b415c6e5c604505183a4d006cbc9d",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -527,9 +535,13 @@
       "expected_sha256": "295a3c0f45294ba75920d10c9563e0df15a0af31a39aecaef632bce06d58b6ed",
       "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0042_evidence.json": {
+      "expected_sha256": "4fc9dfd354223bbebbd8646c6d6378e2f68508311054988c03b6f7b728241423",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "25db296510d7fcf949072e9458d735cd7ae20bc5db426fee50779c4cb83acc00",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2fbfce7cffd60b664102535a1bb7e0545c386f4ec26fcb41d5758862a6ae606f",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -648,8 +660,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "489dddf6632b8a5481608631b8a2793d8e78db4ab6ba29e6c3214d7e820b887b",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "395b5b81e9540bf56df4f20090ffb238851a7c4d098c387a2a16593d3ee91370",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -718,6 +730,10 @@
     "scripts/g1_batch_0041_generate.py": {
       "expected_sha256": "3faa7a98fbafcf4aa7210b62743f0204c78ae9b3e92639bcadb7fdca490ebcaf",
       "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0042_generate.py": {
+      "expected_sha256": "819c6fe36bbe0b6b806d858ef6d7a8a573007f8aade3f955b930ef6df3bce2d4",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -876,56 +892,60 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "566ff7861736a3c86016174bacc145b65e0ea68bd73f3aaa7ff0bb9742c0ed02",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1955f4c6b4998cca9c18bec163d215e08e9aad89897ec502d5dc4a257921bddd",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "54f1f8563c7405839bfef3191730137af2a4ead32df525b1c8b1bdf2dfebe20e",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0a16c2940df44362821a2a63f28299cfd23037db6910929329746991493d149d",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "223576aa3917a5f7f5465ff17025012a6bd27872884b0c3237f9d1c8f2bfeaa5",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a7a3da4c44e4950141beb3453516dc31b9c29d85f81d67c9ef579701af9e2af4",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "e007731286372c6729c88155b3a72736883547f58c5848e8e7a75d5c8ba42544",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "086def2334cce7050af1d73e5983246d142f7d4cc54321440775e263c661df71",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "fe8fe855761f8ded473e99fdc6f2aa8ddd43da6ae20cc11ff057df08d9b7bf5f",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "65e6b2f04400e4d8d8b46d53f48be8d723f98cec543e61b579c2010ca6cdec5e",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "a6d2ba361fa1df83c0038e765c22f3e91c7e68141dc3dbed30b80372eb58ab20",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4f8688e967182fdaaa75251638ccfada6094be31efe8e8fed52e93ed039bb365",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "2c42a0ec42244cc410c66d220379737e15e4580adcaf7f297c5e1857c90a63d0",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0fb2d6877a6d9237582d7540acb296c379a0aa87050fc15ba37dd36082d2cd6f",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "f34efc1899df4c9a06411fe479b6bf88984942f1feade74e3e9830dd0d1ab883",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a82824c4c335bcafb82afbe95edf338fe7dbb28f4db7ce6399b8714f494f4829",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "4c35147e1e45d9a142d110b3f6d53615fb10890b2495be05dcd8c51dd089963b",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ed15e4730fda27fa586e2c51a261abeb3300596811a91aa24e8e7d2854f13adf",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "4988e56a9afe80f3576c0b1a558ca8c09f19c155b7fec8e41d419d48c035b427",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "991dc6ac0fe951dd161bda1ba6fece4ca1519ac64dd737909c4a6e2cd6f47e1a",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0042.py": {
+      "expected_sha256": "1be4fd5455a545f45df085224613cd565836260b97026aa6cd7622c70ba2d5a9",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "dd2afaf4bf2338e8180ebad4e4b3c20861aacb62ab6394c1fd5cc54f2e191553",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "65b870505bb4b652b6a1f4f9df6065c5c87425fa7a0eb15f5b2c450ad055820b",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -952,8 +972,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "1f3784a060b7830625d7fe2a47273fe0046356aa7e22fa05b75d54a5edadcf3d",
-      "reason": "G1 batch 0041 direct PR Newswire clocks for Dendreon and two CA Technologies events; deterministic 56 exact / 118 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "aa6f0fdfccb883ac42ba96be5e046df876e63614f53aabb735819d76efbf74ac",
+      "reason": "G1 batch 0042 eight direct PR Newswire exact clocks; deterministic 64 exact / 110 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "57335f4cd231cc2ddeabdcc71ea72438796f7839",
+  "base_main_sha": "683eb6552b3a7cd6314647fe5dad62bf1ba68ce1",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -115,13 +115,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-1950A4340036BB95",
-      "first_documented_illicit_trade_ts": "2011-08-18 15:43:00",
-      "historical_symbol": "FL",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-B704E62641681A73",
       "first_documented_illicit_trade_ts": "2011-07-27 15:59:00",
       "historical_symbol": "GT",
@@ -178,13 +171,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-99F3FC8CE022DEA1",
-      "first_documented_illicit_trade_ts": "2012-01-25 12:46:00",
-      "historical_symbol": "VAR",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-7CEFB3FE3D986464",
       "first_documented_illicit_trade_ts": "2015-02-17 15:44:00",
       "historical_symbol": "ROG",
@@ -220,13 +206,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-704E64D64C11C119",
-      "first_documented_illicit_trade_ts": "2012-01-23 14:39:00",
-      "historical_symbol": "MDP",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-9861757889227DD4",
       "first_documented_illicit_trade_ts": "2015-02-02 14:24:00",
       "historical_symbol": "IDTI",
@@ -237,13 +216,6 @@
       "event_id": "HEJFE-EFFA194386ABDD28",
       "first_documented_illicit_trade_ts": "2015-05-04 15:40:00",
       "historical_symbol": "IDTI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-7E8FA3E5E417B5E7",
-      "first_documented_illicit_trade_ts": "2012-01-23 15:31:00",
-      "historical_symbol": "IGT",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -335,13 +307,6 @@
       "event_id": "HEJFE-7B8A1A0CD3E2966F",
       "first_documented_illicit_trade_ts": "2013-05-06 13:27:00",
       "historical_symbol": "APC",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-824BABBAD988A068",
-      "first_documented_illicit_trade_ts": "2012-01-25 14:54:00",
-      "historical_symbol": "SYMM",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -458,13 +423,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-8596DDD6A535BD90",
-      "first_documented_illicit_trade_ts": "2012-01-25 15:34:00",
-      "historical_symbol": "DEST",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-D6BA56FA6D57427E",
       "first_documented_illicit_trade_ts": "2015-05-20 15:17:00",
       "historical_symbol": "SCVL",
@@ -482,20 +440,6 @@
       "event_id": "HEJFE-7482DE1CD44C1A00",
       "first_documented_illicit_trade_ts": "2015-02-04 14:07:00",
       "historical_symbol": "GMCR",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-89844B5980EB5339",
-      "first_documented_illicit_trade_ts": "2012-01-25 15:18:00",
-      "historical_symbol": "AF",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-D4E8CD312A2AA576",
-      "first_documented_illicit_trade_ts": "2012-01-25 14:51:00",
-      "historical_symbol": "ISSI",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -861,14 +805,14 @@
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 56,
-    "exact_timing_analysis_eligible": 56,
+    "exact_resolved": 64,
+    "exact_timing_analysis_eligible": 64,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 118,
+    "raw_exact_time_evidence_gaps": 110,
     "required": 174,
-    "reviewed_excluded": 118
+    "reviewed_excluded": 110
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
