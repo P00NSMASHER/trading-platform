@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0040.yml": {
-      "expected_sha256": "54fc914368dc10d86932050963a8353e19889b11dcfde51c50f77dfc5f759f66",
-      "reason": "G1 batch 0040 clustered MDU Resources, Cabot and Oshkosh Business Wire timestamps; deterministic 53 exact / 121 reviewed exclusions with independent corroboration and prior evidence preserved."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
