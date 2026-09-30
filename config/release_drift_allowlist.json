@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0052-worker-4.yml": {
-      "expected_sha256": "d21d807f5ae912cab011a63800abd9a51a3864f9c8e1963b9d4f6e4d90bd9c07",
-      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
-    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
