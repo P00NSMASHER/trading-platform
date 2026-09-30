@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **51 public exact-time batches / 76 exact-resolved
+The current repository state is **52 public exact-time batches / 77 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -181,3 +181,7 @@ A timestamp-preserving public-wire recovery established Anadarko Petroleum Corpo
 ### Batch 0051: Metals USA Holdings Corp.
 
 A direct primary-newswire recovery established Metals USA Holdings Corp.'s exact first-public clock at 2012-01-26 16:05 EST (21:05 UTC), 13,440 seconds after the frozen 2012-01-26 12:21 EST trade. PR Newswire's historical Metals USA archive preserves the exact publication clock, while SEC Exhibit 99.1 independently corroborates issuer, title, date, and fiscal-2011 results. This advances G1 from 75 exact / 99 reviewed exclusions to 76 exact / 98 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0060: Bruker Corporation
+
+A timestamp-preserving public-wire recovery establishes Bruker Corporation's exact first-public clock at 2015-05-06 16:01 EDT (20:01 UTC), 1,860 seconds after the frozen 2015-05-06 15:30 EDT trade. StreetInsider preserves the original Business Wire release and explicitly displays May 6, 2015 4:01 PM EDT; SEC Exhibit 99.1 independently corroborates issuer, title, date, first-quarter 2015 results, and $353.5 million revenue. This advances G1 from 76 exact / 98 reviewed exclusions to 77 exact / 97 reviewed exclusions. The separately scheduled 4:45 PM earnings call, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
