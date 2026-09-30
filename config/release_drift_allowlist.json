@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "864e14c10f9f9d4c867a82a6db16aad504d5bd4b7d32bbbee0cbeb8ff3a75332",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d14843885545daf443bf5a4a42ef3df66af60a66597e07f05d9c1cb2178c644c",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "213e04dc263e7b32d9d0d01863fe576180bdf988da49b39f02f2ea749633f6f6",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7e0ae1d7414125561f7068b2e55aeeab823cfd7c695af1d8e3a65161629770b5",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "a3ed6b1d9d639624baca5ab0819cc70fddda1d0682d008ed97d732a15b6ee6bd",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "99b659190667f1a665c5c49285e5ecf51bd1fa58d58af288eb61e3bc6a1f5c14",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -115,6 +115,10 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
+    ".github/workflows/g1-public-batch-0052-worker-4.yml": {
+      "expected_sha256": "d21d807f5ae912cab011a63800abd9a51a3864f9c8e1963b9d4f6e4d90bd9c07",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -152,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "4743c04cf9acbf6e47ce62f39e4acfbc015c079b6b62ddd07b8cc9858b46bd67",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b88fe59d2621ca37eb2de1233985ec0ae267cb3527c779dd1c4c67b3ec4ac0cd",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "cb4c2329b4e064b241446865de12119af3ff56c536a269a87404d7c4cf78f7bd",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c34382e0113c0421848b1fbd39576f3a5bcf93dd5611dffad900490cf609388c",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "488905b8440f380922fcacf8929c7e6c36bd764aef1cbbe824bf0e7783b40523",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "cbe6184b1a46e2a4da454a33821685423a6fa20bb535b944e961f54be85ea717",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "a46f7353ea6f50f0058bae498882d53ca4469f9958e13950b6025d46a50aa5a9",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6f1a3e16743e72ce597060a60a9c02f81f8d348c8d4a20fcc14e4a8b681b62e0",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "41350831fcd247938a5a6a24468a4fa6fc99f06476bc27d7c59d4a55add1cf68",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "433dd9ee3314949c01cd4894a548f905b349c46cac99887dfedbf28cc9105e91",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "83bfd404803d5920a1f0cc370ba7e1d9a2471db24895b7195600adf7b556a0d9",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e4ca48f4a9f02e3c87e75b2709d93fae3081609759542f68031521c4ace3a36e",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +296,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "137739f57c64dd19d7372ec43383a4d7167477c295423c2252267a45d98f0cf5",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8265be693a33e05e9e67aa0e16e8f4d15a99f7444739af0142a2b7bdaf824938",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "39742a099ac460e211c13c544be3e569c6348d3319e021890fef86a6592074cc",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "37ed4d4d163fa0323dd82691ad241a30b680dfb0ca20a2086c4b0a66b5293054",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "23958f75a077ab100d4cbcc12e4251d83cbb2ff06f4bfad8e970259bc1ad34e9",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d96571e4d7dc2ce7d0a898a9cd8231f44d18d6e385ce08be898978c3550c0b8a",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +324,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "0783b46236b5636104f99c5f91fa67863d6e622e3525970c5839235d63434b14",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c87724bcb97425d31c5ea1b575971939077186301eec1028796a8db0d8b80fac",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -531,6 +535,10 @@
       "expected_sha256": "eadaf9e4388f5c406dc6358d82bb4e82b599835e475763bc3e748ae733f4ae11",
       "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0052.csv": {
+      "expected_sha256": "794e8174b49499dbeb59c7811abc543df773565b7b5ba50f2d6906a2b9995613",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -607,9 +615,13 @@
       "expected_sha256": "687a0112269d68b670723a10fa5f78697586befd57f3782f9e70a5c492e53c4b",
       "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0052_evidence.json": {
+      "expected_sha256": "8acc5a74d3c9579289ea20aedff88ff760134629896bf0012bd09b754f719bd2",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "1860fad23e97bf532d7427f696f044a7f1744c3009bd9e5e33703e3716d0c83f",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7f3c3a8ba95157004191b5fc589acee4b831025eea857b5b627f3cabc1fd2b77",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -728,8 +740,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "0dea805511bfe384f7c3d3edc9d2c43b1456434f35d2551985382d61e5781b10",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2073b26acc35444f2515ef20aeba13abbd8a279bdbc04ea9bf2bb046cebd42fd",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -838,6 +850,10 @@
     "scripts/g1_batch_0051_generate.py": {
       "expected_sha256": "e1707d1628af7eb2173f4b6dc575e05052a854f59e3dd197ae30f511be5a21c8",
       "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0052_generate.py": {
+      "expected_sha256": "6dcd8c9b60c5ea8757b3cc4047bbee890f24f9371196e6d2c1236f0604f7704c",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -996,96 +1012,100 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "e847bc2a5a2b3372f5a3acd15db7f96c337885b110be523ffe37e0a4e234737e",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d7d5b7056ab4c9a3968dbbc69aaae579112624f6471db7efd446f398001069f0",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "c9511f3d747334ded4d679f4cb2ab3ec8bf16255eb72c200f4521ae08f8e7c27",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "90443b6736ee5878010e1bc134d2206708a7ffc9fad8688b265f900042adbfc0",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "bc1bea001e0ea4e083575bd8d80db805e78687087befe44221d4f510f0658e16",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6fbec16d202829f39457e3d46280050baab2a5fbbff00164be7dfb1fa1418fd2",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "05a561e5491e4cd0e35c280a5041f3700fac7c533630b0ff20a10ee457144b10",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0a0be90060e7668fa30f7e21b805c610d7aaba47177e3d8040636f7938a2e466",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "409b8f9d16100a97b3f5c60c161dfdd09af792b0213f6dc56341740690ef1bd5",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5bda0452ffc07571eda61a8907bcb655280d13de8c9ee6cc464986498c1e37ec",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "e0beb32f18b9ef8042847b989931caaa04b7e74cffc1c84440d826f6a78b9b03",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3dc85bb113d49b14b27467dd01da8f9a3a054bd3e300228cc4666a28b4f99b9a",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "cc64e4768d99737f8dfc0329530daaf9638e9d51bb2e2e5383eef58c5c9759b1",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9bb7f2b0aeb965fa8bb907a1488dc2e8f222cf0c13edf9f6be4444186c519001",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "ee2158efa652c75a015f397493ad1ee8943d76dd730a4f4941c13d2efca040cc",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "82fa7bd98a76d6b0532c4756dc172abaf325d75dc06ba3b548db796ab2e2a591",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "f1442618ce5e6cfb429ae84f026c09c134cd8053577b38a951ee170c92821bd4",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "effab9b102b113a60ac44947f8cd8c822692cbe7d032902f363c5f65202148a2",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "1f066817eabea922d4e2bd981f50048431618ae383b74644615ceaa160ee63a6",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d0a6f4bacf95eed0206c0ccf92d4be13fffa0d36bcba64c92f0cdbd5c467e29d",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "e0cb3e577db9f66eb7ebbd631a8a3b68eb01ffa42b6677e38fc62720759bb0c2",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "641b0e9f459c8e123193c476ce1794ad4244cc247e4eb6eb05660e62f539a776",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "9a1cf6af5b8807bd9a6ba195cf93ad7914254204eb2609098bef6abbe9c8c2f3",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5bbff264d423c1064c28083692b4cbed187ad69a33a4b7a3a82c4ad54f7a6a19",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "654a8b3e9f8c9ca2ad7c967a5e4c634c5b20f3cd004a156a55b6b143fb5d0f37",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fb926287df843d24a863ce4c6bd2ea573bb828c38f16a741c01312c65531e9ca",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "c4d8b3acfa74aea0fd4cc4686baf7ee6e0c1c073d213c8246c776a7284ade9b1",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e5f22b9cbf3407be79d0ac9a7038745255c2f662d6ead1f9324f4a6c99b0d3c6",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "3c9916f9f7405d821ce300c23636b52c08e84840efeede4c49885eb9c27a7813",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d9456709e859a6e2961b28cea002a5aa9fc334498583095dda7f113181b159ff",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "a139696d19bd6a26c775e3bcf7b8ccf45b99415a735468264df7045ef2ef199e",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "dc4a6a270f72c918fa62b8c302b57718ba4abd8f9aab2754365fb8583971a7ef",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "865f8a394b8e40d5c692031da91c33712180db3f57855335d18a8e0f32b2c0fb",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ab182de59becd7dd30fa5a8c48982b7e81c133a6b70b582e16b36b36f3ac2dc3",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "3ed976ab03673325bab26bb22c56f4542749eb9589d8b6180306694f716af409",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "01d67eef0034c9673a3fb73d9592e95241e663808bae9b8fedd0a0c84b7eb81d",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "ab31ab168b742416116333f0d39a6998ef46dada017d050fffb63ed782d8e0cb",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "41efe0dc951a0161c454c18904c5ae4225eecf78735473c21c32f63429d72a8c",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "135742dcff6823f475ece827538c114c5537ccd3c83c5244a52cb20daa6329f5",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "dada23e99fea8489d82d2f3f4255bbb2b3d58cd3d6e2cd5650e47761100f6fbe",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0052.py": {
+      "expected_sha256": "dfc7aff6bba0e4b7029b9e7bf5e11b03691bdd02da095a8bdd4785c6ebfe76a7",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "ef125548e80f748aea4c76091936b92aa5a77127d4614812d393ec269ca1c3bd",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c852dd76d026cf141173538642a51ff3f1e684914e5d4190e097b68a7430da69",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -1112,8 +1132,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "665f3ec2ec490c0e9ffbb533fa28818cad6885a6cf47a774fd798bb4329a32fb",
-      "reason": "G1 batch 0051 direct PR Newswire clock for Metals USA Holdings Corp.; deterministic 76 exact / 98 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2da58ca7a26b663329fece25353a1b1663f08f34e1fa709687f8b4af9833c4b5",
+      "reason": "G1 batch 0052 explicit issuer IR clock for World Fuel Services Corporation; deterministic 77 exact / 97 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
