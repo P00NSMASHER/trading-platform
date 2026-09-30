@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **50 public exact-time batches / 75 exact-resolved
+The current repository state is **51 public exact-time batches / 76 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -177,3 +177,7 @@ A direct primary-newswire recovery established RPC, Inc.'s exact first-public cl
 ### Batch 0050: Anadarko Petroleum Corporation
 
 A timestamp-preserving public-wire recovery established Anadarko Petroleum Corporation's exact first-public clock at 2013-05-06 18:15 EDT (22:15 UTC), 17,280 seconds after the frozen 2013-05-06 13:27 EDT trade. MarketScreener preserves the Marketwired release with an explicit 06:15 pm EDT publication clock, while SEC Exhibit 99 independently corroborates issuer, title, date, and first-quarter 2013 results. This advances G1 from 74 exact / 100 reviewed exclusions to 75 exact / 99 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0051: Metals USA Holdings Corp.
+
+A direct primary-newswire recovery established Metals USA Holdings Corp.'s exact first-public clock at 2012-01-26 16:05 EST (21:05 UTC), 13,440 seconds after the frozen 2012-01-26 12:21 EST trade. PR Newswire's historical Metals USA archive preserves the exact publication clock, while SEC Exhibit 99.1 independently corroborates issuer, title, date, and fiscal-2011 results. This advances G1 from 75 exact / 99 reviewed exclusions to 76 exact / 98 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
