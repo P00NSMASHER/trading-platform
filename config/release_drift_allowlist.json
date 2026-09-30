@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "1f4fdc30a0dad3355e0e8f0049af35ffdca87d1b8f2d7e660e3f3ce43997cb0a",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d480c8dc4de9632521073f35ce4ae0d37ebdd5738711809c7c7198ea893aea3c",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "85643c9c34ffdd902e78d0360f04d1845a7526226235720762e56c6979ac403b",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "03954e847c5fb9736f783841a094dc1feb37b855bd9791129dca441423a5e414",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "59b3f96f07da0ba707126d71d6e20af22b81e9da52d3b541861467e795755d86",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b2b6f6f0d803f74e3aa0f20874edf308cb21eb0103df299ef0b9e8b91dca8d76",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -115,6 +115,10 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
+    ".github/workflows/g1-public-batch-0048.yml": {
+      "expected_sha256": "b0bb5f9ea7b17a6a7d31e0cd778d23322f48e74b67a05b6a253c204bffae59aa",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
@@ -152,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "e3d153449ace3cb092582fc5ae291b4c37977d21def170754e09d7e8d5afca12",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f4a3c46bf9fdf442757c2b6fb9818cf01089a9f42cba010021462d183544dd4f",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "d1533695caae322baeff11c11e1fd27c2c70774577ff182fd675c72d7fa4d184",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5eaeff3ad56c92534d91d5966d2d29409d03caaf60478a405fbffa41f3060910",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "c0f963458f49ddd506d496c8b9c074e4664f442dc7ad06e2cdd7b77b9a1b79d0",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1a98513b0d3a87d39159eb519ff4a389b544a7fc78d5647a13a9105203ee9ea6",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "8caf8446b24531c94564cef02c59dedf36959d5d3bc70ce73744f82cbebc5199",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "01c782824a76d25e7dee238a216ef029b758a12826d3a348e3f469b15fe8eb2c",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "06cf6ad8d33626db7d773e0bb1aa9f7baa48d32d73ab76d5d2e9f376f7d69e1e",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3aeb0a94f7de0cb0f787f65d906f5e97f9b68d5c15fba36f27b41187771111b5",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "45f77bc413658feca2234a2cdef224e390209d4e46b7defe10b596bbdaf5a3d7",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "dc0c00944d98849a65de2ff300fe66305bb8081438ef25eed1cd4d251a622430",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -292,16 +296,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "fda12e131268acad6de2822f564dcba38e1165cc7c678be926ba710a1a9bc901",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "75a50749678c05200994253a338c8cfbb8e6fbd5bd7c60fd843119cd3b81c977",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "966858c2e7853b3fccbdc7cd6a2dab19e8c2c6bac5271eb78612a34670507c1a",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0f471b7ab1621835ebaf2c7124af87275570e1f1df3f2cdd69e6f5f374e8e552",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "8c6b16b62e38ac65ac48b28d253fd4b75099066e60046b34b9b57cf121760fcc",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0748e058c72f52bb87bec01a776eb2579dac8005811d0f5f3ee73e0f82f0a49a",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +324,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "2e63e71ca26914ee180bdebb57a9bcf691b99a9b4757bbd2c1e7370cb549b055",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "939ab6b72ddb7466f33e7c579c8530fb4cad4b941c7a4f2984f5fac523ba4d0d",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -515,6 +519,10 @@
       "expected_sha256": "048b5ecf44ee1454019ea156bed23f9baebb501f3025afae18dcb5b574d74e1c",
       "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0048.csv": {
+      "expected_sha256": "fa8705170a5a519c6750cf1492903170469f7dc32879893e5fb8fd024ada6a2d",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -575,9 +583,13 @@
       "expected_sha256": "73ff78d4818a794d88cc73a2b0f7063c2433a698933bc40f4dbdcfe801e9ee18",
       "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0048_evidence.json": {
+      "expected_sha256": "545787756482ae671a6a4a6789adf12ab8f7ee42a5d566e86ef53d319792779b",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "a244a1c81d5493878088dbf0d2def5c56c005a49448e612dc352038dad549e96",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0e6ee4f03d5ecc05957a2d79769f6e560e1e11e4a49d8f20c4b22df6b54a213a",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -696,8 +708,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "7dbe342a8eda13ab274a81bb806ba7786f16bce39dd1bb299a7ffd8ddc323742",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "536643e4b71a5cbb3dc749bcb94e9e5b2a663628fb225e75b1cf464e2c1b3473",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -790,6 +802,10 @@
     "scripts/g1_batch_0047_generate.py": {
       "expected_sha256": "524c49e6bd7e34dfbea696b3bbb837b107b454cd29c02b6e9376cdc6cfdc0b53",
       "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0048_generate.py": {
+      "expected_sha256": "f689287b84c94f5e1fa67cf6a13e79171eaa155367abc671229f1e19a370cdf4",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -948,80 +964,84 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "a4f8d9445ec0281606e77ebe4b6ea6c44a2663e95ed0fad79a6d8b5c5b802750",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c6ad8dda75d1038931e2e02ffe97a663021573ab2b1dd86bc62029b16fd543e5",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "fa0ac56ed3a9f9442525258ae24b1ddd89b7adeb33cf64aec8a4af9c3da38e0b",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "718d1aad9d136b278bba8f9b2589fa58cb114424900c40fae5c57a8c0dce54c1",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "460d94d048cff99ddf5f04464708705b3627995fb5399891f9eca11bf664ca96",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "128d8934f160aedb8283ea245a79c9e427d3dc04e0f207dc05db9f9935b8bffd",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "d5044be25c4a0a9d02ca8c3c7628180c4509df0d7b3c62f0bf98d87e84727c1c",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "efb61c88f09a1e38dae3bf35c4dadac33aa47aa384009e989a60fb2a231d9cf0",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "9fa4b2e5c1ca5e0c74595f38418c8505d689a4dea5d673af4e3ee284b3a0c866",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d6421c0c96df762e77bcfe59d93b44c5b39983d399c290b938d9636cc14e2147",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "9140db8ace73b33921ac4a8e5623ebe59271502bf81e3759aa9e42a0d53e21fe",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "37375fbbb2bfbe25bb43c3db2220330a890aa56c50751486a0f0873b62a037e5",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "1f1ec13f316e6e0314662e95707d6f2bc9713d955c2918f72ac59866d0230198",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "164051cc41380d41579f7a33390b5c601d5cf38ac8aecea9dae074cf3a4b70fe",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "25045395f2311c7fc781808cf2a622209b57a158c155f2f3c0b3aa4812b14518",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "56b7d25488a92f91496fdb6d80c254a5f1beea7bf007f1bface7ee70c76b9e79",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "7554157672e2ed73441dcf1ef054e0be908e029505738fbe55fd5e77038b8772",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7b541dba5ef1ede37fc4b0f4a617ccb30d90a79bbbbc84f814bd6971875ee7a7",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "96d5c6d57b16ad9fef22d92300a4c6768012d3e9ffebefa52e9929621111907c",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "827a7cf2b0e087d611aeeeb0032b73de203ebed235236cef60d3dfb7086b4429",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "d27bd13773f6e10dfcae78082ba50c541bfca70208e68ce7819a278e524faade",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f525ae04f23d0381bf1631b71c6e9ae4bfb862d0aa4aea89af66105e694e4285",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "6f2a73e0333171a590e991558280db230e0a9f94c9304fc695f1f06fc892d8ee",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a19b7d29b75a7035a60ba40786112cdc89d3963dd4ed2a629805fe13bb9af9e6",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "fc3140e5cf1273e2a3d78098e83a6ad0908555bad62146c711c3d3c884d4acd4",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1740f3db85694bbd8efd9a2805f60b26419a8a03ba0e537c9edbc191ef9931ab",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "c00dda9e1dfc7099310bdb8a701f9730a6403f496092b5bef345fa9864e808c7",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0a3450a69556a27d81ee527db19698d647f8b3c26dd3b457401c6026c3c2963c",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "2d2111c4cf5347f817242885c36e852b3147c118506a8841955c091d2c8c0bd5",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "eb98bde165ed73fc3a5205a0b42846f1f18ff0d4c4728fa400706baaea3602e7",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "327b823fa2dfc6191f152ea3bf0802ff0d414ce7dc9850bba8a7b1fb6f49eaa3",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "de97a111b0295ed9129048edf175775edba56326ccdf54b70a762dae50ca8908",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0048.py": {
+      "expected_sha256": "2657cdc6c5b32d54c03e24bc938e6c169157ebd0e9e0025ac5b84736783ebddb",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "36cd434fb7e38db2c506c64bdecc426131149354a3236fd61a983bd44888f8a5",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1c1271919e19b73f97a6436324f59e579d82723fa30f426459208435d6686af1",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -1048,8 +1068,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "274138ff72c873bc6a0ae50d8e8ccea334c64a8e6d65651beb71f3876d9f9f12",
-      "reason": "G1 batch 0047 direct PR Newswire clock for World Acceptance Corporation; deterministic 72 exact / 102 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a21fdf85073e62cd827c657ef8901d6899b3930b44088052c68d26abd1d0dfeb",
+      "reason": "G1 batch 0048 timestamp-preserving Business Wire mirror clock for SYNNEX Corporation; deterministic 73 exact / 101 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

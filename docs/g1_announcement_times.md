@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **47 public exact-time batches / 72 exact-resolved
+The current repository state is **48 public exact-time batches / 73 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -165,3 +165,7 @@ A primary-newswire sweep recovered three additional exact first-public clocks: A
 ### Batch 0047: World Acceptance Corporation
 
 A direct primary-newswire recovery established World Acceptance Corporation's exact first-public clock at 2012-01-25 06:30 EST (11:30 UTC), 52,620 seconds after the frozen 2012-01-24 15:53 EST trade. PR Newswire's historical release page preserves the exact publication clock, while SEC-filed Exhibit 99.1 independently corroborates issuer, title, date, and third-quarter fiscal 2012 results. This advances G1 from 71 exact / 103 reviewed exclusions to 72 exact / 102 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks remain prohibited substitutes. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0048: SYNNEX Corporation
+
+A timestamp-preserving StreetInsider mirror of the Business Wire release establishes SYNNEX Corporation's exact first-public clock at 2015-03-31 16:03 EDT (20:03 UTC), 540 seconds after the frozen 15:54 EDT trade. SEC Exhibit 99.1 independently corroborates issuer, title, date, and fiscal first-quarter 2015 results. This advances G1 from 72 exact / 102 reviewed exclusions to 73 exact / 101 reviewed exclusions. The separately stated conference-call time, EDGAR acceptance, archive-capture, date-only, scheduled-release, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
