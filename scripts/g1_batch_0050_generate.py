@@ -40,6 +40,7 @@ specs=[
  "corroboration_reference":"https://www.sec.gov/Archives/edgar/data/773910/000119312513201656/d528961dex99.htm",
  "corroboration_basis":"MarketScreener preserves the Marketwired target release with an explicit 06:15 pm EDT publication clock; SEC Exhibit 99 independently matches Anadarko Petroleum Corporation, the May 6 2013 release, and first-quarter 2013 results. The May 7 conference call is not used.",
  "expected_delta":17280}
+]
 items=[]
 hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
 hints=load(hints_path);trial=copy.deepcopy(hints)
