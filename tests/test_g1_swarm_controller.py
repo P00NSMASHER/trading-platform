@@ -203,3 +203,37 @@ def test_issue_comment_cannot_falsely_mark_event_resolved():
         now=datetime(2026, 10, 1, 7, 0, tzinfo=timezone.utc),
     )
     assert report["events"]["HEJFE-AAAAAAAAAAAAAAAA"]["state"] != "RESOLVED"
+
+
+def test_unrelated_pr_does_not_renew_token_lease():
+    comments = [
+        _comment(
+            1,
+            "2026-10-01T06:00:00Z",
+            "GLOBAL INTEGRATION TOKEN now advances to Worker 2 / AAA / reserved batch 0067.",
+        ),
+        _comment(
+            2,
+            "2026-10-01T06:10:00Z",
+            "WORKER 3 | HEJFE-BBBBBBBBBBBBBBBB/BBB | PREPARED | batch 0073 | source | next",
+        ),
+    ]
+    pulls = [
+        {
+            "title": "Unrelated Nasdaq vendor status",
+            "state": "open",
+            "updated_at": "2026-10-01T08:30:00Z",
+        }
+    ]
+    report = build_report(
+        _manifest(),
+        _exclusions(),
+        _step_status(),
+        comments,
+        pulls,
+        main_sha="cafebabe",
+        now=datetime(2026, 10, 1, 8, 31, tzinfo=timezone.utc),
+        lease_hours=2.0,
+    )
+    assert report["summary"]["token"]["state"] == "STALLED"
+    assert report["summary"]["token"]["stale"] is True
