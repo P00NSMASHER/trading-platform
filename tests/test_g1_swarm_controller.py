@@ -122,6 +122,69 @@ def test_worker_update_parser_ignores_next_target_event_ids() -> None:
     assert ctl.update_is_resolved(updates[0], m) is True
 
 
+def test_resolved_found_exact_event_is_not_reassigned_when_ticker_has_other_unresolved_event() -> None:
+    comments = [
+        comment(
+            5,
+            "2026-10-01T17:00:00Z",
+            "WORKER 2 | HEJFE-ED329F780A1085DA/EW | FOUND | recovered exact clock",
+        )
+    ]
+    updates = ctl.parse_worker_updates(comments)
+    m = manifest(unresolved_symbols={"EW": {"HEJFE-198DE6D99E934F32"}})
+    m["resolved_ids"] = {"HEJFE-ED329F780A1085DA"}
+
+    chosen = ctl.choose_found_candidate(
+        updates,
+        manifest=m,
+        used={worker: set() for worker in range(5)},
+        policy=policy(),
+    )
+
+    assert chosen is None
+
+
+def test_found_candidate_matching_released_token_is_not_immediately_reassigned() -> None:
+    comments = [
+        comment(
+            6,
+            "2026-10-01T17:00:00Z",
+            "WORKER 2 | HEJFE-ED329F780A1085DA/EW | FOUND | recovered exact clock",
+        ),
+        comment(
+            7,
+            "2026-10-01T17:01:00Z",
+            "WORKER 0 | HEJFE-760E36DA94752F1E/CAKE | FOUND | recovered exact clock",
+        ),
+    ]
+    updates = ctl.parse_worker_updates(comments)
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-ED329F780A1085DA"},
+            "CAKE": {"HEJFE-760E36DA94752F1E"},
+        }
+    )
+    token = ctl.TokenAssignment(
+        worker=2,
+        package="HEJFE-ED329F780A1085DA/EW",
+        batch=72,
+        assigned_at="2026-10-01T17:00:30Z",
+        comment_id=20,
+    )
+
+    chosen = ctl.choose_found_candidate(
+        updates,
+        manifest=m,
+        used={worker: set() for worker in range(5)},
+        policy=policy(),
+        token=token,
+    )
+
+    assert chosen is not None
+    assert chosen.worker == 0
+    assert chosen.package == "HEJFE-760E36DA94752F1E/CAKE"
+
+
 def test_batch_lane_is_deterministic() -> None:
     p = policy()
 
