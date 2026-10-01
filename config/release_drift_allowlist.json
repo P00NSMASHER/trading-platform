@@ -1250,6 +1250,22 @@
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
       "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
       "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
+    },
+    ".github/workflows/g1-swarm-controller.yml": {
+      "expected_sha256": "a2d17d971b2c0be6eaaf94ef39f3187de90fd6f3ad1d904c4701428923fe4d0c",
+      "reason": "Permanent GitHub-native G1 swarm coordinator: deterministic issue #153 state reconciliation, stale-token recovery, race-checked handoff, least-privilege issue write access, and immutable G1 evidence/merge gates."
+    },
+    "scripts/g1_swarm_controller.py": {
+      "expected_sha256": "935d55f744851bc6c0d006c81d01c4e1dc311a49ef3a3b0365c1f1c6246186bb",
+      "reason": "Permanent deterministic G1 swarm state machine for event deduplication, token lease recovery, prepared-before-found queueing, and fail-closed current-main truth."
+    },
+    "tests/test_g1_swarm_controller.py": {
+      "expected_sha256": "39e692ab06e27deb52ca9118c1153905f4ef8b5c2730c60386f4b7b0dc01ae10",
+      "reason": "Regression coverage for G1 swarm token resolution, lease expiry, prepared queue priority, unrelated-PR isolation, recent-CI renewal, and fail-closed resolution truth."
+    },
+    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
+      "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
+      "reason": "Nasdaq TotalView-ITCH vendor-contact provenance receipt: Client Success acknowledgement and Sales handoff only; preserves Step 8 SOURCE_BLOCKED with no unverified access, delivery, credentials, NDA, pricing, entitlement, or usable data claim."
     }
   },
   "schema_version": "2",

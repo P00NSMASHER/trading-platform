@@ -1,0 +1,121 @@
+name: G1 swarm controller
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+concurrency:
+  group: g1-swarm-controller
+  cancel-in-progress: false
+
+jobs:
+  coordinate:
+    name: Reconcile G1 swarm state
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout exact current main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Fetch coordination evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p private_runtime/g1-swarm
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/153/comments?per_page=100" \
+            | jq -s 'add' > private_runtime/g1-swarm/comments.json
+          gh api "repos/${GITHUB_REPOSITORY}/pulls?state=all&sort=updated&direction=desc&per_page=100" \
+            > private_runtime/g1-swarm/pulls.json
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/branches?per_page=100" \
+            | jq -s 'add | map(.name)' > private_runtime/g1-swarm/branches.json
+
+      - name: Build deterministic coordination state
+        run: |
+          set -euo pipefail
+          python scripts/g1_swarm_controller.py \
+            --comments private_runtime/g1-swarm/comments.json \
+            --pulls private_runtime/g1-swarm/pulls.json \
+            --branches private_runtime/g1-swarm/branches.json \
+            --main-sha "$(git rev-parse HEAD)" \
+            --output private_runtime/g1-swarm/report.json
+
+      - name: Sync canonical state comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          jq -r '.state_comment_body' private_runtime/g1-swarm/report.json \
+            > private_runtime/g1-swarm/state-body.txt
+          jq -n --rawfile body private_runtime/g1-swarm/state-body.txt '{body:$body}' \
+            > private_runtime/g1-swarm/state-payload.json
+          state_id="$(
+            jq -r '.[] | select(.body | startswith("<!-- G1_SWARM_STATE:v1 -->")) | .id' \
+              private_runtime/g1-swarm/comments.json | tail -n 1
+          )"
+          if [ -n "${state_id}" ] && [ "${state_id}" != "null" ]; then
+            gh api --method PATCH \
+              "repos/${GITHUB_REPOSITORY}/issues/comments/${state_id}" \
+              --input private_runtime/g1-swarm/state-payload.json >/dev/null
+          else
+            gh api --method POST \
+              "repos/${GITHUB_REPOSITORY}/issues/153/comments" \
+              --input private_runtime/g1-swarm/state-payload.json >/dev/null
+          fi
+
+      - name: Recheck before token mutation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/153/comments?per_page=100" \
+            | jq -s 'add' > private_runtime/g1-swarm/comments-fresh.json
+          gh api "repos/${GITHUB_REPOSITORY}/pulls?state=all&sort=updated&direction=desc&per_page=100" \
+            > private_runtime/g1-swarm/pulls-fresh.json
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/branches?per_page=100" \
+            | jq -s 'add | map(.name)' > private_runtime/g1-swarm/branches-fresh.json
+          python scripts/g1_swarm_controller.py \
+            --comments private_runtime/g1-swarm/comments-fresh.json \
+            --pulls private_runtime/g1-swarm/pulls-fresh.json \
+            --branches private_runtime/g1-swarm/branches-fresh.json \
+            --main-sha "$(git rev-parse HEAD)" \
+            --output private_runtime/g1-swarm/report-fresh.json
+
+      - name: Advance stale token when still warranted
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          token_body="$(jq -r '.token_comment_body // empty' private_runtime/g1-swarm/report-fresh.json)"
+          if [ -z "${token_body}" ]; then
+            echo "No token mutation required."
+            exit 0
+          fi
+          printf '%s\n' "${token_body}" > private_runtime/g1-swarm/token-body.txt
+          jq -n --rawfile body private_runtime/g1-swarm/token-body.txt '{body:$body}' \
+            > private_runtime/g1-swarm/token-payload.json
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/issues/153/comments" \
+            --input private_runtime/g1-swarm/token-payload.json >/dev/null
+
+      - name: Upload controller receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: g1-swarm-controller-${{ github.sha }}
+          path: private_runtime/g1-swarm
+          if-no-files-found: error
+          retention-days: 14
