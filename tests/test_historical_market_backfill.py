@@ -559,3 +559,67 @@ def test_stale_security_identity_manifest_is_rejected(tmp_path):
     contract = _write_contract_with_identity(tmp_path, [real], identity)
     with pytest.raises(ValueError, match="historical_events SHA-256 mismatch"):
         build(contract, events, tmp_path / "out", pre_minutes=0, post_minutes=0)
+
+
+def test_option_quotes_do_not_change_frozen_champion_trade_inputs(tmp_path):
+    events = tmp_path / "events.csv"
+    events.write_text(
+        "event_id,historical_symbol,first_documented_illicit_trade_ts,research_use_only\n"
+        "E1,TEST,2015-02-17 14:19:00,1\n",
+        encoding="utf-8",
+    )
+    base_sources = [
+        source(EX / "equity_trades.csv", source_id="eqt", family="synthetic_fixture", kind="equity_trade"),
+        source(EX / "equity_quotes.csv", source_id="eqq", family="synthetic_fixture", kind="equity_quote"),
+        source(EX / "option_trades.csv", source_id="opt", family="synthetic_fixture", kind="option_trade"),
+    ]
+    full_contract = write_contract(
+        tmp_path / "full_contract",
+        base_sources
+        + [source(EX / "option_quotes.csv", source_id="opq", family="synthetic_fixture", kind="option_quote")],
+    )
+    minimum_contract = write_contract(tmp_path / "minimum_contract", base_sources)
+
+    full_out = tmp_path / "full_out"
+    minimum_out = tmp_path / "minimum_out"
+    build(full_contract, events, full_out, pre_minutes=1, post_minutes=1)
+    build(minimum_contract, events, minimum_out, pre_minutes=1, post_minutes=1)
+
+    def keyed(path):
+        rows = list(csv.DictReader(path.open()))
+        return {(r.get("underlying_symbol") or r.get("minute_ts_utc"), r["minute_ts_utc"]): r for r in rows}
+
+    full_options = keyed(full_out / "option_minutes.csv")
+    minimum_options = keyed(minimum_out / "option_minutes.csv")
+    assert full_options.keys() == minimum_options.keys()
+    trade_derived_option_fields = {
+        "trade_count",
+        "contract_volume",
+        "dollar_volume",
+        "call_volume",
+        "put_volume",
+        "unique_contracts_traded",
+    }
+    for key in full_options:
+        assert {k: full_options[key][k] for k in trade_derived_option_fields} == {
+            k: minimum_options[key][k] for k in trade_derived_option_fields
+        }
+
+    full_panel = list(csv.DictReader((full_out / "event_minute_panel.csv").open()))
+    minimum_panel = list(csv.DictReader((minimum_out / "event_minute_panel.csv").open()))
+    champion_option_panel_fields = [
+        "event_id",
+        "minute_ts_utc",
+        "option_trade_count",
+        "option_contract_volume",
+        "log_option_volume",
+        "option_call_volume",
+        "option_put_volume",
+    ]
+    assert [
+        {k: row[k] for k in champion_option_panel_fields}
+        for row in full_panel
+    ] == [
+        {k: row[k] for k in champion_option_panel_fields}
+        for row in minimum_panel
+    ]
