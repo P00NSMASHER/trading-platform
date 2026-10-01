@@ -341,6 +341,8 @@ def choose_next_package(
             return (
                 tier,
                 -(int(package["batch"]) if package.get("batch") is not None else -1),
+                -len(package.get("event_ids", [])),
+                -len(str(package["label"])),
                 int(package["worker"]),
                 str(package["label"]),
             )
