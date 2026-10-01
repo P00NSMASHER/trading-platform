@@ -559,3 +559,156 @@ def test_stale_security_identity_manifest_is_rejected(tmp_path):
     contract = _write_contract_with_identity(tmp_path, [real], identity)
     with pytest.raises(ValueError, match="historical_events SHA-256 mismatch"):
         build(contract, events, tmp_path / "out", pre_minutes=0, post_minutes=0)
+
+
+def test_option_quotes_do_not_change_frozen_champion_trade_inputs(tmp_path):
+    events = tmp_path / "events.csv"
+    events.write_text(
+        "event_id,historical_symbol,first_documented_illicit_trade_ts,research_use_only\n"
+        "E1,TEST,2015-02-17 14:19:00,1\n",
+        encoding="utf-8",
+    )
+    base_sources = [
+        source(EX / "equity_trades.csv", source_id="eqt", family="synthetic_fixture", kind="equity_trade"),
+        source(EX / "equity_quotes.csv", source_id="eqq", family="synthetic_fixture", kind="equity_quote"),
+        source(EX / "option_trades.csv", source_id="opt", family="synthetic_fixture", kind="option_trade"),
+    ]
+    full_contract_dir = tmp_path / "full_contract"
+    minimum_contract_dir = tmp_path / "minimum_contract"
+    full_contract_dir.mkdir()
+    minimum_contract_dir.mkdir()
+    full_contract = write_contract(
+        full_contract_dir,
+        base_sources
+        + [source(EX / "option_quotes.csv", source_id="opq", family="synthetic_fixture", kind="option_quote")],
+    )
+    minimum_contract = write_contract(minimum_contract_dir, base_sources)
+
+    full_out = tmp_path / "full_out"
+    minimum_out = tmp_path / "minimum_out"
+    build(full_contract, events, full_out, pre_minutes=1, post_minutes=1)
+    build(minimum_contract, events, minimum_out, pre_minutes=1, post_minutes=1)
+
+    def keyed(path):
+        rows = list(csv.DictReader(path.open()))
+        return {(r.get("underlying_symbol") or r.get("minute_ts_utc"), r["minute_ts_utc"]): r for r in rows}
+
+    full_options = keyed(full_out / "option_minutes.csv")
+    minimum_options = keyed(minimum_out / "option_minutes.csv")
+    assert full_options.keys() == minimum_options.keys()
+    trade_derived_option_fields = {
+        "trade_count",
+        "contract_volume",
+        "dollar_volume",
+        "call_volume",
+        "put_volume",
+        "unique_contracts_traded",
+    }
+    for key in full_options:
+        assert {k: full_options[key][k] for k in trade_derived_option_fields} == {
+            k: minimum_options[key][k] for k in trade_derived_option_fields
+        }
+
+    full_panel = list(csv.DictReader((full_out / "event_minute_panel.csv").open()))
+    minimum_panel = list(csv.DictReader((minimum_out / "event_minute_panel.csv").open()))
+    champion_option_panel_fields = [
+        "event_id",
+        "minute_ts_utc",
+        "option_trade_count",
+        "option_contract_volume",
+        "log_option_volume",
+        "option_call_volume",
+        "option_put_volume",
+    ]
+    assert [
+        {k: row[k] for k in champion_option_panel_fields}
+        for row in full_panel
+    ] == [
+        {k: row[k] for k in champion_option_panel_fields}
+        for row in minimum_panel
+    ]
+
+
+    # Carry both variants through the actual baseline + feature engines and compare
+    # exactly the frozen champion-selected feature columns.
+    from baseline_engine import build as build_baseline
+    from feature_engine import build as build_features_file
+    from model_training_harness import DEFAULT_FEATURES
+
+    full_baseline_out = tmp_path / "full_baseline"
+    minimum_baseline_out = tmp_path / "minimum_baseline"
+    build_baseline(
+        equity_minutes=full_out / "equity_minutes.csv",
+        option_minutes=full_out / "option_minutes.csv",
+        output_dir=full_baseline_out,
+        min_history=1,
+    )
+    build_baseline(
+        equity_minutes=minimum_out / "equity_minutes.csv",
+        option_minutes=minimum_out / "option_minutes.csv",
+        output_dir=minimum_baseline_out,
+        min_history=1,
+    )
+
+    full_feature_out = tmp_path / "full_features"
+    minimum_feature_out = tmp_path / "minimum_features"
+    build_features_file(
+        baseline_metrics=full_baseline_out / "baseline_metrics.csv",
+        equity_minutes=full_out / "equity_minutes.csv",
+        option_minutes=full_out / "option_minutes.csv",
+        output_dir=full_feature_out,
+    )
+    build_features_file(
+        baseline_metrics=minimum_baseline_out / "baseline_metrics.csv",
+        equity_minutes=minimum_out / "equity_minutes.csv",
+        option_minutes=minimum_out / "option_minutes.csv",
+        output_dir=minimum_feature_out,
+    )
+
+    full_features = list(csv.DictReader((full_feature_out / "feature_vectors.csv").open()))
+    minimum_features = list(csv.DictReader((minimum_feature_out / "feature_vectors.csv").open()))
+    assert [(r["symbol"], r["minute_ts_utc"]) for r in full_features] == [
+        (r["symbol"], r["minute_ts_utc"]) for r in minimum_features
+    ]
+    assert [
+        {k: row[k] for k in DEFAULT_FEATURES}
+        for row in full_features
+    ] == [
+        {k: row[k] for k in DEFAULT_FEATURES}
+        for row in minimum_features
+    ]
+
+
+    # Final acceptance: score the exact frozen feature rows through the committed
+    # frozen champion bundle and require identical calibrated surveillance scores.
+    import joblib
+    import numpy as np
+
+    bundle = joblib.load(ROOT / "data/processed/model_demo/model_bundle.joblib")
+    selected = tuple(bundle["selected_features"])
+    assert selected == tuple(DEFAULT_FEATURES)
+
+    def matrix(rows):
+        return np.array([
+            [float(row[name]) if row[name] != "" else np.nan for name in selected]
+            for row in rows
+        ], dtype=float)
+
+    full_x = matrix(full_features)
+    minimum_x = matrix(minimum_features)
+    np.testing.assert_allclose(full_x, minimum_x, rtol=0.0, atol=0.0, equal_nan=True)
+
+    def frozen_scores(x):
+        w_elastic, w_boosted = bundle["blend_weights"]
+        raw = (
+            float(w_elastic) * bundle["elastic_net"].predict_proba(x)[:, 1]
+            + float(w_boosted) * bundle["boosted_model"].predict_proba(x)[:, 1]
+        )
+        return bundle["calibrator"].predict_proba(raw.reshape(-1, 1))[:, 1]
+
+    np.testing.assert_allclose(
+        frozen_scores(full_x),
+        frozen_scores(minimum_x),
+        rtol=0.0,
+        atol=0.0,
+    )
