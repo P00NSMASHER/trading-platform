@@ -872,8 +872,8 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "docs/real_data_release_sprint.md": {
-      "expected_sha256": "284fc520669ebc323c02d8851ff2165694163bcd84ced8e789b8d942818f077e",
-      "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
+      "expected_sha256": "5579e622e3e4fc0b1ba2c9aba6ec9a680d70353a4047aa5919cb04bb27d78157",
+      "reason": "G2 zero-purchase Databento OPRA cost-probe utility and tests; no download, purchase, credential storage, or G2 evidence-policy weakening."
     },
     "docs/real_data_replay.md": {
       "expected_sha256": "7c2ef27fec352875af69596a50cd4bece9d2abf6c33de8c34875405ff68817b8",
@@ -1366,6 +1366,14 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/g2_databento_probe.py": {
+      "expected_sha256": "1e476077b7d73e293362cf92b741f58e2a311128512b9486198603e862b68385",
+      "reason": "G2 zero-purchase Databento OPRA cost-probe utility and tests; no download, purchase, credential storage, or G2 evidence-policy weakening."
+    },
+    "tests/test_g2_databento_probe.py": {
+      "expected_sha256": "f55781a0458a7d002c642c9c9c6b5665ffb632f6c0d8fa20aa485a5977c6f58c",
+      "reason": "G2 zero-purchase Databento OPRA cost-probe utility and tests; no download, purchase, credential storage, or G2 evidence-policy weakening."
     }
   },
   "schema_version": "2",

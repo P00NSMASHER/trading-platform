@@ -60,3 +60,37 @@ The production ingestion code already validates declared dates, required symbols
 `DEPENDENCY_BLOCKED` means the step cannot truthfully run until earlier source-dependent steps clear.
 
 The system remains research-only and prohibits BUY/SELL, expected-return, target-price, position-size, order, and execution-instruction outputs.
+
+
+## Databento zero-purchase cost probe
+
+The repository includes a dry-run planner for the subset of frozen G2 option dates that fall inside Databento's OPRA historical window.
+
+Generate the request manifest without contacting Databento:
+
+```bash
+PYTHONPATH=src python -m g2_databento_probe \
+  --output /tmp/g2-databento-probe.json
+```
+
+Current frozen result:
+
+- 414 required option dates total
+- 226 dates on/after 2013-04-01 and therefore eligible for a Databento OPRA historical request
+- 188 dates precede Databento's OPRA history
+- 2,875 underlying/date pairs on the 226 eligible dates
+- 226 `option_trade` source-date rows are direct acquisition candidates
+- 226 `option_quote` rows remain **not counted** because the historical 2013-2023 Databento quote path is minute-sampled `CBBO-1m`, not tick-by-tick quote updates
+
+To ask Databento for cost estimates only, without downloading market data:
+
+```bash
+DATABENTO_API_KEY=... PYTHONPATH=src python -m g2_databento_probe \
+  --estimate-costs \
+  --budget-usd 125 \
+  --output /tmp/g2-databento-costs.json
+```
+
+Add `--include-quote-trial` only to price the minute-NBBO research path. Its presence never promotes those quote rows into strict G2 coverage.
+
+The API key is read only from the environment and is never written to the manifest. The cost-probe command calls Databento's metadata cost endpoint only; it does not submit a batch job, stream records, download files, or authorize spending.
