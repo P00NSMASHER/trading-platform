@@ -1,0 +1,36 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "canonical_write_permitted": false,
+  "worker": 3,
+  "reserved_batch": "0073",
+  "base_main_sha": "72506630f8822499b58eb7f3d8300c6dd2e0dd85",
+  "items": [
+    {
+      "event_id": "HEJFE-600696AB8463FFD8",
+      "historical_symbol": "PNRA",
+      "event_date": "2013-07-23",
+      "public_announcement_ts": "2013-07-23T16:00:00-04:00",
+      "source_family": "sec_litigation_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/comp-pr2015-163.pdf",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000025/a20130625ex991pressrelease.htm"
+    },
+    {
+      "event_id": "HEJFE-830337A8564B826E",
+      "historical_symbol": "ALGN",
+      "event_date": "2013-10-17",
+      "public_announcement_ts": "2013-10-17T16:00:00-04:00",
+      "source_family": "sec_litigation_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/comp-pr2015-163.pdf",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1097149/000110262413001252/aligntechnologyinc.htm"
+    }
+  ],
+  "integration_state": "PREPARED_AWAITING_LIVE_WORKER3_TOKEN",
+  "expected_if_integrated_from_this_base_only": {
+    "exact_resolved": 91,
+    "reviewed_fail_closed": 83,
+    "accounted_for": 174
+  }
+}
