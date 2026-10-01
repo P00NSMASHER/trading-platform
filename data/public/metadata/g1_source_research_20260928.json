@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "0e974d3e47bd96384afc5b6a2d2f2b2ed1573a79",
+  "base_main_sha": "5b1962d52688b32c10b886dab45114c193d03b10",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 88,
-    "note": "The latest integrated recovery is batch_0067; cumulative public exact-time batches are 58 and cumulative exact event records are 88 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 58,
+    "exact_resolved_event_records": 89,
+    "note": "The latest integrated recovery is batch_0074; cumulative public exact-time batches are 59 and cumulative exact event records are 89 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 59,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 86
+    "reviewed_excluded_event_records": 85
   },
   "preferred_public_source_families": [
     {
@@ -1639,6 +1639,31 @@
       "source_grade": "A",
       "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/comp-pr2015-163.pdf",
       "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "StreetInsider preserves the matching Business Wire release body and explicit 4:10 PM EDT timestamp. SEC Exhibit 99.1 independently matches Cloud Peak Energy, the April 30 2015 release title/date, first-quarter reporting period and release content. The separately scheduled 5:00 PM ET conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1441849/000110465915032539/a15-10077_1ex99d1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0074",
+      "event_date": "2015-04-30",
+      "event_id": "HEJFE-DB1E964E02F5921F",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-04-30T16:10:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-04-30 15:33:00",
+      "historical_event_match": true,
+      "historical_symbol": "CLD",
+      "information_asymmetry_seconds": 2220,
+      "probe_id": "CLD-batch0074",
+      "public_announcement_ts": "2015-04-30T16:10:00-04:00",
+      "publisher_timestamp_text": "StreetInsider preserved Business Wire release: April 30, 2015 4:10 PM EDT",
+      "reason": "Promoted through timestamp-preserving Business Wire mirror evidence with independent SEC Exhibit 99.1 corroboration.",
+      "release_title": "Cloud Peak Energy Inc. Announces Results for the First Quarter of 2015",
+      "reviewed_on": "2026-10-01",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "A",
+      "source_reference": "https://new.streetinsider.com/Press%2BReleases/Cloud%2BPeak%2BEnergy%2BInc.%2BAnnounces%2BResults%2Bfor%2Bthe%2BFirst%2BQuarter%2Bof%2B2015/10508802.html?classic=1",
+      "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
   ]
