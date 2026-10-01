@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 90 exact release timestamps and 84 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 91 exact release timestamps and 83 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 84,
-    "expected_sha256": "dd9336f119c2cefc77e97a6b73ce59899894ac664bb6ce5e6e6a7eecad0a32c3",
+    "expected_count": 83,
+    "expected_sha256": "a20ffad18e05c52f8ddecde704155808ec57fb462d70638c7084dae7c6089e02",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public timestamp-preserving Business Wire mirror for CAKE, corroborated by issuer IR and SEC 8-K/Exhibit 99.1 identity. No licensed vendor data used.",
+      "notes": "CAKE 2015-04-22 16:15 EDT. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0065.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "preserved_wire_mirror",
+      "source_id": "public-worker0-cake-batch-0065",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {
