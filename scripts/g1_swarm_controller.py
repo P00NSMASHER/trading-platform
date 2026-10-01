@@ -352,7 +352,9 @@ def update_matches_token(update: WorkerUpdate, token: TokenAssignment) -> bool:
         return True
     token_words = set(package_words(token.package))
     update_words = set(package_words(update.label))
-    return bool(token_words and update_words and token_words.issubset(update_words | token_words) and token_words & update_words)
+    # Package fallback matching must be exact enough to prevent an update for one
+    # symbol in a multi-event package from extending the whole package's lease.
+    return bool(token_words and update_words and token_words == update_words)
 
 
 def batch_merged(batch: int, pulls: list[dict[str, Any]], updates: list[WorkerUpdate]) -> bool:
@@ -383,6 +385,7 @@ def evaluate_token(
     age_minutes = None if assigned_at is None else max(0.0, (now - assigned_at).total_seconds() / 60.0)
 
     matching_open: int | None = None
+    matching_open_fresh = False
     matching_closed: int | None = None
     matching_merged: int | None = None
     for pr in pulls:
@@ -393,6 +396,11 @@ def evaluate_token(
             matching_merged = number
         elif str(pr.get("state") or "").lower() == "open":
             matching_open = number
+            # An open PR is material progress only while it still targets the
+            # exact current-main snapshot represented by this controller run.
+            # Callers normalize base.sha when reading live PRs.
+            base_sha = str((pr.get("base") or {}).get("sha") or pr.get("base_sha") or "")
+            matching_open_fresh = bool(base_sha and base_sha == manifest.get("main_sha"))
         else:
             matching_closed = number
 
@@ -426,7 +434,7 @@ def evaluate_token(
         )
 
     if candidates is not None:
-        live_support = matching_open is not None
+        live_support = matching_open is not None and matching_open_fresh
         if not live_support:
             for candidate in candidates:
                 # Only an exact-current-main prep branch is live prepared support.
@@ -455,7 +463,7 @@ def evaluate_token(
                 matching_closed,
             )
 
-    progress_after = matching_open is not None
+    progress_after = matching_open is not None and matching_open_fresh
     if assigned_at is not None:
         for update in updates:
             update_time = parse_time(update.created_at)
@@ -913,6 +921,9 @@ def controller_plan(
     now: datetime,
 ) -> dict[str, Any]:
     manifest = manifest_state(root, policy)
+    # Thread the exact main snapshot through token evaluation so open PRs based
+    # on older main commits cannot masquerade as live progress.
+    manifest["main_sha"] = str(compares.get("__main_sha__") or "")
     updates = parse_worker_updates(comments)
     token = parse_latest_token(comments)
 
@@ -1019,6 +1030,7 @@ def main() -> int:
     main = github_api(repo, api_token, "/branches/main")
     main_sha = str(((main or {}).get("commit") or {}).get("sha") or "")
     refs, compares = fetch_branch_fallbacks(repo, api_token, main_sha)
+    compares["__main_sha__"] = main_sha
 
     now = datetime.now(timezone.utc)
     plan = controller_plan(
@@ -1062,6 +1074,7 @@ def main() -> int:
             max_pages=3,
         )
         fresh_refs, fresh_compares = fetch_branch_fallbacks(repo, api_token, main_sha)
+        fresh_compares["__main_sha__"] = main_sha
         plan = controller_plan(
             root=root,
             policy=policy,
