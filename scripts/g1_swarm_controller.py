@@ -152,6 +152,7 @@ def parse_worker_history(
         at = _comment_time(comment)
         packages[(worker, _norm_label(label))] = {
             "worker": worker,
+            "source": "issue",
             "label": label,
             "status": status,
             "event_ids": sorted(set(event_ids)),
@@ -194,6 +195,7 @@ def parse_prep_branches(
                 "at": datetime.max.replace(tzinfo=timezone.utc),
                 "comment_id": None,
                 "branch": branch,
+                "source": "branch",
             }
         )
     return packages
@@ -317,7 +319,8 @@ def choose_next_package(
             continue
         if current_token and int(package["worker"]) == int(current_token["worker"]) and package.get("batch") == current_token.get("batch"):
             continue
-        candidates.append({**package, "event_ids": event_ids, "tier": 0})
+        tier = 0 if package.get("source", "issue") == "issue" else 1
+        candidates.append({**package, "event_ids": event_ids, "tier": tier})
     if not candidates:
         for row in catalog.values():
             if row["state"] == "FOUND":
@@ -328,15 +331,28 @@ def choose_next_package(
                     "event_ids": [row["event_id"]],
                     "batch": None,
                     "at": _parse_time(row["last_status_at"]),
-                    "tier": 1,
+                    "tier": 2,
                 })
     if not candidates:
         return None
-    candidates.sort(key=lambda p: (
-        int(p["tier"]), p["at"],
-        int(p["batch"]) if p.get("batch") is not None else 10**9,
-        int(p["worker"]), str(p["label"])
-    ))
+    def _candidate_key(package: dict[str, Any]) -> tuple[Any, ...]:
+        tier = int(package["tier"])
+        if tier == 1:
+            return (
+                tier,
+                -(int(package["batch"]) if package.get("batch") is not None else -1),
+                int(package["worker"]),
+                str(package["label"]),
+            )
+        return (
+            tier,
+            package["at"],
+            int(package["batch"]) if package.get("batch") is not None else 10**9,
+            int(package["worker"]),
+            str(package["label"]),
+        )
+
+    candidates.sort(key=_candidate_key)
     return candidates[0]
 
 
