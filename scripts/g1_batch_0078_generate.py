@@ -160,7 +160,7 @@ for fn in test_files:
           ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (91,83)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (92,82)'),
           ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (91, 83)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (92, 82)'),
           ('"91/174" in step9["evidence"] and "83" in step9["evidence"]','"92/174" in step9["evidence"] and "82" in step9["evidence"]'),
-          ('len(excluded)==84','len(excluded)==82'),
+          ('len(excluded)==83','len(excluded)==82'),
           ('len(excluded) == 83','len(excluded) == 82'),
           ('len(ex)==83','len(ex)==82'),
           ('len(ex) == 83','len(ex) == 82'),
