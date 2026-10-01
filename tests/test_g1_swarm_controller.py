@@ -680,3 +680,30 @@ def test_current_main_open_pr_counts_as_live_progress() -> None:
     )
     assert result.state == "ACTIVE"
     assert result.progress_after_assignment is True
+
+
+def test_same_batch_wrong_package_does_not_extend_token() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    update = ctl.WorkerUpdate(
+        worker=2,
+        label="OTHER",
+        status="BUILDING",
+        batch=67,
+        event_ids=(),
+        symbols=("OTHER",),
+        created_at="2026-10-01T11:00:00Z",
+        comment_id=11,
+        body="",
+    )
+    assert ctl.update_matches_token(update, token) is False
+
+
+def test_batch_number_without_worker_identity_does_not_match_token_pr() -> None:
+    pr = {
+        "number": 999,
+        "state": "open",
+        "title": "Maintenance batch 0067 cleanup",
+        "body": "",
+        "head": {"ref": "maintenance/batch-0067"},
+    }
+    assert ctl.pr_matches(2, "EW+TIBX", 67, pr) is False
