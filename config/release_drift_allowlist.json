@@ -940,8 +940,8 @@
       "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "b2bb1f9965593d8787ebc391b51a8388ebe6beb7ae2f76af5c86e4437a54d0f3",
-      "reason": "G1 swarm reliability hardening: invalidate stale prep, require exact-current-main support, exact package progress, fresh open-PR bases, and worker-qualified batch identity."
+      "expected_sha256": "40c4c7694f5e9ddccdc4b3487c74edfafda87681ef71228fe46d47fb9be3873b",
+      "reason": "G1 swarm reliability hardening: scope worker event identity to the update label so unrelated next-target event IDs cannot recycle resolved events."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -1220,8 +1220,8 @@
       "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "039eab04d5a63c66d0237bac48156aaf66f90a07e6422f377bce5d100e84e682",
-      "reason": "G1 swarm regressions for stale prep, false package progress, stale open PRs, same-batch wrong-package updates, and batch-number collisions."
+      "expected_sha256": "121899b0956cb982fb1a48b36c50fe7da63b3f0fdb50a423813161fa971d6bef",
+      "reason": "G1 swarm regression: next-target event IDs cannot contaminate a worker update's event identity or keep a resolved event eligible."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
