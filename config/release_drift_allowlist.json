@@ -104,14 +104,6 @@
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
-    },
-    "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "40c4c7694f5e9ddccdc4b3487c74edfafda87681ef71228fe46d47fb9be3873b",
-      "reason": "G1 swarm controller correctness: scope worker event IDs to the current update label so next-target IDs cannot contaminate package identity or recycle already-resolved events."
-    },
-    "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "121899b0956cb982fb1a48b36c50fe7da63b3f0fdb50a423813161fa971d6bef",
-      "reason": "Regression coverage proving next-target event IDs cannot contaminate the active worker package identity and resolved events remain ineligible."
     }
   },
   "repository_additions": {
@@ -949,7 +941,7 @@
     },
     "scripts/g1_swarm_controller.py": {
       "expected_sha256": "40c4c7694f5e9ddccdc4b3487c74edfafda87681ef71228fe46d47fb9be3873b",
-      "reason": "G1 swarm reliability hardening: scope worker event identity to the update label so unrelated next-target event IDs cannot recycle resolved events."
+      "reason": "G1 swarm controller correctness: scope worker event IDs to the current update label so next-target IDs cannot contaminate package identity or recycle already-resolved events."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -1229,7 +1221,7 @@
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "121899b0956cb982fb1a48b36c50fe7da63b3f0fdb50a423813161fa971d6bef",
-      "reason": "G1 swarm regression: next-target event IDs cannot contaminate a worker update's event identity or keep a resolved event eligible."
+      "reason": "Regression coverage proving next-target event IDs cannot contaminate the active worker package identity and resolved events remain ineligible."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
