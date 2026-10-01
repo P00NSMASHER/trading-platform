@@ -1256,11 +1256,11 @@
       "reason": "Permanent GitHub-native G1 swarm coordinator: deterministic issue #153 state reconciliation, stale-token recovery, race-checked handoff, least-privilege issue write access, and immutable G1 evidence/merge gates."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "f5404b03eba042663a969e5df67f1a7d13fc1a06e0574feff8eafd5a448fc56d",
+      "expected_sha256": "935d55f744851bc6c0d006c81d01c4e1dc311a49ef3a3b0365c1f1c6246186bb",
       "reason": "Permanent deterministic G1 swarm state machine for event deduplication, token lease recovery, prepared-before-found queueing, and fail-closed current-main truth."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "dce97343fbcf0fbd4657f73e83d24313682cd4d85150b1f622d578b600add384",
+      "expected_sha256": "39e692ab06e27deb52ca9118c1153905f4ef8b5c2730c60386f4b7b0dc01ae10",
       "reason": "Regression coverage for G1 swarm token resolution, lease expiry, prepared queue priority, unrelated-PR isolation, recent-CI renewal, and fail-closed resolution truth."
     },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
