@@ -214,7 +214,7 @@ def test_closed_matching_pr_releases_token() -> None:
     assert result.matching_closed_pr == 170
 
 
-def test_queue_hint_beats_branch_fallback() -> None:
+def test_uncorroborated_queue_hint_does_not_beat_live_branch_prep() -> None:
     p = policy()
     token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
     candidates = [
@@ -262,9 +262,88 @@ def test_queue_hint_beats_branch_fallback() -> None:
     )
 
     assert chosen is not None
-    assert chosen.worker == 3
-    assert chosen.batch == 73
+    assert chosen.worker == 1
+    assert chosen.batch == 66
 
+
+def test_controller_invalidates_token_backed_only_by_historical_queue_hint() -> None:
+    token = ctl.TokenAssignment(
+        worker=3,
+        package="PNRA+ALGN",
+        batch=73,
+        assigned_at="2026-10-01T10:00:00Z",
+        comment_id=10,
+    )
+    candidates = [
+        ctl.Candidate(
+            worker=3,
+            package="PNRA+ALGN",
+            batch=73,
+            event_ids=(),
+            symbols=("PNRA", "ALGN"),
+            created_at="2026-10-01T09:00:00Z",
+            source="queue_hint",
+            status="PREPARED",
+        )
+    ]
+    m = manifest(
+        unresolved_symbols={
+            "PNRA": {"HEJFE-AAAA000000000002"},
+            "ALGN": {"HEJFE-AAAA000000000003"},
+        }
+    )
+
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=[],
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 10, 5, tzinfo=timezone.utc),
+        candidates=candidates,
+    )
+
+    assert result.state == "INVALID"
+    assert result.progress_after_assignment is False
+
+
+def test_live_prepared_update_supports_active_token() -> None:
+    token = ctl.TokenAssignment(
+        worker=2,
+        package="EW+TIBX",
+        batch=67,
+        assigned_at="2026-10-01T10:00:00Z",
+        comment_id=10,
+    )
+    updates = ctl.parse_worker_updates(
+        [
+            comment(
+                9,
+                "2026-10-01T09:55:00Z",
+                "WORKER 2 | EW+TIBX | PREPARED | batch 0067 / prep branch g1/prep-batch-0067-worker-2-ew-tibx | source | next",
+            )
+        ]
+    )
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-AAAA000000000004"},
+            "TIBX": {"HEJFE-AAAA000000000005"},
+        }
+    )
+
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=[],
+        updates=updates,
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 10, 5, tzinfo=timezone.utc),
+        candidates=[],
+    )
+
+    assert result.state == "ACTIVE"
 
 def test_resolved_candidate_is_skipped() -> None:
     p = policy()
@@ -276,7 +355,7 @@ def test_resolved_candidate_is_skipped() -> None:
             event_ids=(),
             symbols=("BRKR",),
             created_at="2026-10-01T09:00:00Z",
-            source="queue_hint",
+            source="issue_prepared",
             status="PREPARED",
         ),
         ctl.Candidate(
@@ -286,7 +365,7 @@ def test_resolved_candidate_is_skipped() -> None:
             event_ids=(),
             symbols=("PNRA", "ALGN"),
             created_at="2026-10-01T10:00:00Z",
-            source="queue_hint",
+            source="issue_prepared",
             status="PREPARED",
         ),
     ]

@@ -374,6 +374,7 @@ def evaluate_token(
     manifest: dict[str, Any],
     lease_minutes: int,
     now: datetime,
+    candidates: list[Candidate] | None = None,
 ) -> TokenEvaluation:
     if token is None or token.worker is None or token.batch is None:
         return TokenEvaluation("UNASSIGNED", "no active token assignment", None, False, None, None)
@@ -423,6 +424,34 @@ def evaluate_token(
             matching_open,
             matching_closed,
         )
+
+    if candidates is not None:
+        live_support = matching_open is not None
+        if not live_support:
+            for candidate in candidates:
+                if candidate.source not in {"issue_prepared", "prep_branch_fallback"}:
+                    continue
+                if candidate.worker != token.worker or candidate.batch != token.batch:
+                    continue
+                if not candidate_is_resolved(candidate, manifest, pulls, updates):
+                    live_support = True
+                    break
+        if not live_support:
+            for update in updates:
+                if update.status not in {"FOUND", "BUILDING", "PREPARED", "CI"}:
+                    continue
+                if update_matches_token(update, token) and not update_is_resolved(update, manifest):
+                    live_support = True
+                    break
+        if not live_support:
+            return TokenEvaluation(
+                "INVALID",
+                "token assignment lacks live same-worker FOUND/PREPARED/CI, prep branch, or open PR support",
+                age_minutes,
+                False,
+                matching_open,
+                matching_closed,
+            )
 
     progress_after = matching_open is not None
     if assigned_at is not None:
@@ -544,8 +573,21 @@ def candidate_key(candidate: Candidate) -> tuple[int, int]:
     return candidate.worker, candidate.batch
 
 
+def require_live_prepared_support(candidates: list[Candidate]) -> list[Candidate]:
+    live_keys = {
+        candidate_key(candidate)
+        for candidate in candidates
+        if candidate.source in {"issue_prepared", "prep_branch_fallback"}
+    }
+    return [
+        candidate
+        for candidate in candidates
+        if candidate.source != "queue_hint" or candidate_key(candidate) in live_keys
+    ]
+
+
 def dedupe_candidates(candidates: list[Candidate]) -> list[Candidate]:
-    priority = {"queue_hint": 0, "issue_prepared": 1, "prep_branch_fallback": 2, "found": 3}
+    priority = {"issue_prepared": 0, "prep_branch_fallback": 1, "queue_hint": 2, "found": 3}
     best: dict[tuple[int, int], Candidate] = {}
     for candidate in candidates:
         key = candidate_key(candidate)
@@ -565,7 +607,7 @@ def choose_prepared_candidate(
     policy: dict[str, Any],
 ) -> Candidate | None:
     eligible: list[Candidate] = []
-    for candidate in dedupe_candidates(candidates):
+    for candidate in dedupe_candidates(require_live_prepared_support(candidates)):
         if token and token.worker == candidate.worker and token.batch == candidate.batch:
             continue
         if not lane_valid(candidate.worker, candidate.batch, policy):
@@ -574,7 +616,7 @@ def choose_prepared_candidate(
             continue
         eligible.append(candidate)
 
-    source_priority = {"queue_hint": 0, "issue_prepared": 1, "prep_branch_fallback": 2}
+    source_priority = {"issue_prepared": 0, "prep_branch_fallback": 1, "queue_hint": 2}
     eligible.sort(
         key=lambda c: (
             source_priority.get(c.source, 9),
@@ -863,6 +905,10 @@ def controller_plan(
     manifest = manifest_state(root, policy)
     updates = parse_worker_updates(comments)
     token = parse_latest_token(comments)
+
+    issue_candidates = collect_issue_candidates(comments, updates)
+    branch_rows = branch_candidates(refs, compares)
+    candidate_evidence = issue_candidates + branch_rows
     evaluation = evaluate_token(
         token,
         comments=comments,
@@ -871,11 +917,10 @@ def controller_plan(
         manifest=manifest,
         lease_minutes=int(policy["token_lease_minutes"]),
         now=now,
+        candidates=candidate_evidence,
     )
 
-    issue_candidates = collect_issue_candidates(comments, updates)
-    branch_rows = branch_candidates(refs, compares)
-    all_prepared = dedupe_candidates(issue_candidates + branch_rows)
+    all_prepared = dedupe_candidates(require_live_prepared_support(candidate_evidence))
     prepared = [
         c
         for c in all_prepared
@@ -885,7 +930,7 @@ def controller_plan(
     ]
     prepared.sort(
         key=lambda c: (
-            {"queue_hint": 0, "issue_prepared": 1, "prep_branch_fallback": 2}.get(c.source, 9),
+            {"issue_prepared": 0, "prep_branch_fallback": 1, "queue_hint": 2}.get(c.source, 9),
             parse_time(c.created_at) or datetime.max.replace(tzinfo=timezone.utc),
             c.batch,
         )
@@ -917,7 +962,7 @@ def controller_plan(
 
     action = "NONE"
     action_reason = ""
-    if evaluation.state in {"RESOLVED", "CLOSED_UNMERGED", "STALLED"}:
+    if evaluation.state in {"RESOLVED", "CLOSED_UNMERGED", "STALLED", "INVALID"}:
         action = "ADVANCE"
         action_reason = evaluation.reason
     elif evaluation.state == "UNASSIGNED" and next_candidate is not None:
