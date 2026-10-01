@@ -88,7 +88,7 @@ save(exclusion_path,exclusions)
 
 contract_path=Path("config/metadata_sources.public_progress.json");contract=load(contract_path)
 contract["sources"].insert(0,{"source_id":"public-worker4-cld-batch-0074","record_kind":"announcement_timestamp",
-"source_family":"official_newswire_archive","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
+"source_family":"preserved_wire_mirror","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
 "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{k:k for k in fields},
 "license_reference":"Public timestamp-preserving Business Wire mirror for CLD, independently corroborated by SEC Exhibit 99.1. No licensed vendor data used.",
 "notes":"CLD 2015-04-30 16:10 EDT. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used."})
