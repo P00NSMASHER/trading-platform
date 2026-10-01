@@ -429,7 +429,9 @@ def evaluate_token(
         live_support = matching_open is not None
         if not live_support:
             for candidate in candidates:
-                if candidate.source not in {"issue_prepared", "prep_branch_fallback"}:
+                # Only an exact-current-main prep branch is live prepared support.
+                # Historical PREPARED comments are advisory and cannot keep a token alive.
+                if candidate.source != "prep_branch_fallback" or candidate.behind_by != 0:
                     continue
                 if candidate.worker != token.worker or candidate.batch != token.batch:
                     continue
@@ -438,7 +440,7 @@ def evaluate_token(
                     break
         if not live_support:
             for update in updates:
-                if update.status not in {"FOUND", "BUILDING", "PREPARED", "CI"}:
+                if update.status not in {"FOUND", "BUILDING", "CI"}:
                     continue
                 if update_matches_token(update, token) and not update_is_resolved(update, manifest):
                     live_support = True
@@ -549,7 +551,10 @@ def branch_candidates(
         ahead = compare.get("ahead_by")
         if ahead is not None and int(ahead) < 1:
             continue
-        if behind is not None and int(behind) > 10:
+        # Prepared branches are disposable caches. Any divergence behind current
+        # main invalidates PREPARED state and requires regeneration from exact main.
+        # Do not let a stale branch consume or extend an integration-token lease.
+        if behind is None or int(behind) != 0:
             continue
         rows.append(
             Candidate(
@@ -574,15 +579,20 @@ def candidate_key(candidate: Candidate) -> tuple[int, int]:
 
 
 def require_live_prepared_support(candidates: list[Candidate]) -> list[Candidate]:
-    live_keys = {
+    # A PREPARED comment or queue hint is not durable evidence. The package must
+    # have a prep branch compared against *current* main with behind_by == 0.
+    # branch_candidates() already rejects stale/diverged prep branches.
+    live_branch_keys = {
         candidate_key(candidate)
         for candidate in candidates
-        if candidate.source in {"issue_prepared", "prep_branch_fallback"}
+        if candidate.source == "prep_branch_fallback"
+        and candidate.behind_by == 0
+        and (candidate.ahead_by or 0) >= 1
     }
     return [
         candidate
         for candidate in candidates
-        if candidate.source != "queue_hint" or candidate_key(candidate) in live_keys
+        if candidate_key(candidate) in live_branch_keys
     ]
 
 
@@ -616,7 +626,7 @@ def choose_prepared_candidate(
             continue
         eligible.append(candidate)
 
-    source_priority = {"issue_prepared": 0, "prep_branch_fallback": 1, "queue_hint": 2}
+    source_priority = {"prep_branch_fallback": 0, "issue_prepared": 1, "queue_hint": 2}
     eligible.sort(
         key=lambda c: (
             source_priority.get(c.source, 9),
