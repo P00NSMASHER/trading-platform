@@ -1250,6 +1250,22 @@
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
       "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
       "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
+    },
+    ".github/workflows/g1-swarm-controller.yml": {
+      "expected_sha256": "e8d1dd9de6b18172d542a68b30c343f5296a36995c968857e39e913d352844f5",
+      "reason": "G1 swarm reliability: GitHub-native read-mostly coordination workflow with issue-comment token handoff only; no G1 evidence or merge authority."
+    },
+    "data/public/metadata/g1_swarm_controller_policy.json": {
+      "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
+      "reason": "G1 swarm reliability: deterministic token lease, batch-lane, canonical-input and fail-closed controller policy."
+    },
+    "scripts/g1_swarm_controller.py": {
+      "expected_sha256": "dba721d5225c697135f1f3bef227ca3e7a52c32d8b33dd05c2ff2c774707686b",
+      "reason": "G1 swarm reliability: deterministic GitHub issue/PR/branch state reconciliation and token advancement without changing timestamp evidence."
+    },
+    "tests/test_g1_swarm_controller.py": {
+      "expected_sha256": "f38483a8d7f09b97c4a50ba56b4125a9d456840a610e2152a9c4304546a8854f",
+      "reason": "G1 swarm reliability: regression coverage for token precedence, leases, batch lanes, repair eligibility, and queue ordering."
     }
   },
   "schema_version": "2",
