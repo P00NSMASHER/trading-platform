@@ -1260,12 +1260,12 @@
       "reason": "G1 swarm reliability: deterministic token lease, batch-lane, canonical-input and fail-closed controller policy."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "b7a13a03aa59d9a76ab9a6df044f4400e294162cd117128b21ec1bc996479b01",
-      "reason": "G1 swarm reliability: deterministic GitHub state reconciliation with current-main guard and a fresh issue/PR/branch recheck immediately before token mutation."
+      "expected_sha256": "31398744aacd4b0fcdaa69e0d40afbddde7fda56ec5d0322b48631a01941d78e",
+      "reason": "G1 swarm reliability: strict batch-context PR matching plus closed-unmerged token handling that releases the lease without falsely resolving or rebatching the package."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "f38483a8d7f09b97c4a50ba56b4125a9d456840a610e2152a9c4304546a8854f",
-      "reason": "G1 swarm reliability: regression coverage for token precedence, leases, batch lanes, repair eligibility, and queue ordering."
+      "expected_sha256": "7205148a7bbbca0d4d22ad0308c54b464f46e52fb813f12086cd991d687f777e",
+      "reason": "G1 swarm reliability: regression coverage for closed-unmerged token semantics and rejection of incidental batch digits in unrelated PR text."
     },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
       "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
