@@ -1,0 +1,45 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "5b1962d52688b32c10b886dab45114c193d03b10",
+  "reserved_batch": "0074",
+  "worker_slot": 4,
+  "previous_exact_count": 88,
+  "expected_exact_count_after_batch": 89,
+  "expected_excluded_after_batch": 85,
+  "integration_constraints": [
+    "Canonical generation must start from exact current main and preserve all prior exact rows.",
+    "Do not substitute EDGAR acceptance, conference-call, archive-capture, scheduled-release, date-only, or inferred clocks.",
+    "Final merge requires exact-head CI and current-base verification."
+  ],
+  "items": [
+    {
+      "event_id": "HEJFE-DB1E964E02F5921F",
+      "historical_symbol": "CLD",
+      "event_date": "2015-04-30",
+      "first_documented_illicit_trade_ts": "2015-04-30 15:33:00",
+      "public_announcement_ts": "2015-04-30T16:10:00-04:00",
+      "public_announcement_utc": "2015-04-30T20:10:00Z",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "A",
+      "publisher_timestamp_text": "StreetInsider preserved Business Wire release: April 30, 2015 4:10 PM EDT",
+      "release_title": "Cloud Peak Energy Inc. Announces Results for the First Quarter of 2015",
+      "source_reference": "https://new.streetinsider.com/Press%2BReleases/Cloud%2BPeak%2BEnergy%2BInc.%2BAnnounces%2BResults%2Bfor%2Bthe%2BFirst%2BQuarter%2Bof%2B2015/10508802.html?classic=1",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1441849/000110465915032539/a15-10077_1ex99d1.htm",
+      "corroboration_basis": "StreetInsider preserves the matching Business Wire release body and explicit 4:10 PM EDT timestamp. SEC Exhibit 99.1 independently matches Cloud Peak Energy, the April 30 2015 release title/date, first-quarter reporting period and release content. The separately scheduled 5:00 PM ET conference call is not used.",
+      "information_asymmetry_seconds": 2220,
+      "reviewed_on": "2026-10-01"
+    }
+  ],
+  "evidence_method": "Timestamp-preserving Business Wire mirror with independent SEC Exhibit 99.1 corroboration. Prep evidence only; canonical eligibility is revalidated on token-held exact current main.",
+  "prohibited_substitutes": [
+    "edgar_acceptance_time",
+    "scheduled_call_time",
+    "archive_capture_time",
+    "inferred_clock",
+    "date_only"
+  ]
+}
