@@ -1100,8 +1100,8 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "src/real_data_release_sprint.py": {
-      "expected_sha256": "898ca321bcea4855fc9be28458669ebe25e84836520614d362d5debf54d7a17a",
-      "reason": "Release-sprint integration of the fail-closed stable security-identity gate: surface 3,654 unverified baseline dates and prevent Steps 11-12 from unlocking without dated stable-ID evidence."
+      "expected_sha256": "d85bef9465849f97bbe740d56de8ef621cede1434bef6dc19afc896a7ad77157",
+      "reason": "Adds deterministic G2_CHAMPION_MINIMUM requirement accounting only; canonical 1,656-row full-replication G2 contract and release gate remain unchanged."
     },
     "src/real_data_replay.py": {
       "expected_sha256": "438ef2f5b9cd5d986f74c974b3715524e7bf37a0ba4876b044d8cde58af0489d",
@@ -1328,8 +1328,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "e6df5b97bccf9b668c24e779984b9675837b8d3cfec9077e9f51263dfe40106d",
-      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "7a1b4886a430996f2006bd9c8e87c73bc9f456a4ce7591b4edfe511959fbf305",
+      "reason": "Adds deterministic G2_CHAMPION_MINIMUM requirement accounting only; canonical 1,656-row full-replication G2 contract and release gate remain unchanged."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
