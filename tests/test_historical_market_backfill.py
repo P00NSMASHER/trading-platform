@@ -627,3 +627,53 @@ def test_option_quotes_do_not_change_frozen_champion_trade_inputs(tmp_path):
         {k: row[k] for k in champion_option_panel_fields}
         for row in minimum_panel
     ]
+
+
+    # Carry both variants through the actual baseline + feature engines and compare
+    # exactly the frozen champion-selected feature columns.
+    from baseline_engine import build as build_baseline
+    from feature_engine import build as build_features_file
+    from model_training_harness import DEFAULT_FEATURES
+
+    full_baseline_out = tmp_path / "full_baseline"
+    minimum_baseline_out = tmp_path / "minimum_baseline"
+    build_baseline(
+        equity_minutes=full_out / "equity_minutes.csv",
+        option_minutes=full_out / "option_minutes.csv",
+        output_dir=full_baseline_out,
+        min_history=1,
+    )
+    build_baseline(
+        equity_minutes=minimum_out / "equity_minutes.csv",
+        option_minutes=minimum_out / "option_minutes.csv",
+        output_dir=minimum_baseline_out,
+        min_history=1,
+    )
+
+    full_feature_out = tmp_path / "full_features"
+    minimum_feature_out = tmp_path / "minimum_features"
+    build_features_file(
+        baseline_metrics=full_baseline_out / "baseline_metrics.csv",
+        equity_minutes=full_out / "equity_minutes.csv",
+        option_minutes=full_out / "option_minutes.csv",
+        output_dir=full_feature_out,
+    )
+    build_features_file(
+        baseline_metrics=minimum_baseline_out / "baseline_metrics.csv",
+        equity_minutes=minimum_out / "equity_minutes.csv",
+        option_minutes=minimum_out / "option_minutes.csv",
+        output_dir=minimum_feature_out,
+    )
+
+    full_features = list(csv.DictReader((full_feature_out / "feature_vectors.csv").open()))
+    minimum_features = list(csv.DictReader((minimum_feature_out / "feature_vectors.csv").open()))
+    assert [(r["symbol"], r["minute_ts_utc"]) for r in full_features] == [
+        (r["symbol"], r["minute_ts_utc"]) for r in minimum_features
+    ]
+    assert [
+        {k: row[k] for k in DEFAULT_FEATURES}
+        for row in full_features
+    ] == [
+        {k: row[k] for k in DEFAULT_FEATURES}
+        for row in minimum_features
+    ]
