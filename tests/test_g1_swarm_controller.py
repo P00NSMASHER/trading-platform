@@ -228,7 +228,7 @@ def test_uncorroborated_queue_hint_does_not_beat_live_branch_prep() -> None:
             source="prep_branch_fallback",
             status="PREPARED",
             branch="g1/prep-0066-worker-1-vdsi",
-            behind_by=1,
+            behind_by=0,
             ahead_by=1,
         ),
         ctl.Candidate(
@@ -308,7 +308,7 @@ def test_controller_invalidates_token_backed_only_by_historical_queue_hint() -> 
     assert result.progress_after_assignment is False
 
 
-def test_live_prepared_update_supports_active_token() -> None:
+def test_prepared_comment_without_fresh_branch_does_not_support_active_token() -> None:
     token = ctl.TokenAssignment(
         worker=2,
         package="EW+TIBX",
@@ -343,7 +343,44 @@ def test_live_prepared_update_supports_active_token() -> None:
         candidates=[],
     )
 
-    assert result.state == "ACTIVE"
+    assert result.state == "INVALID"
+
+def test_stale_prep_branch_is_rejected() -> None:
+    candidates = ctl.branch_candidates(
+        [
+            {
+                "ref": "refs/heads/g1/prep-batch-0067-worker-2-ew-tibx-deadbee",
+                "object": {"sha": "deadbeef"},
+            }
+        ],
+        {
+            "g1/prep-batch-0067-worker-2-ew-tibx-deadbee": {
+                "behind_by": 23,
+                "ahead_by": 1,
+            }
+        },
+    )
+    assert candidates == []
+
+
+def test_exact_current_main_prep_branch_is_live_support() -> None:
+    candidates = ctl.branch_candidates(
+        [
+            {
+                "ref": "refs/heads/g1/prep-batch-0067-worker-2-ew-tibx-deadbee",
+                "object": {"sha": "deadbeef"},
+            }
+        ],
+        {
+            "g1/prep-batch-0067-worker-2-ew-tibx-deadbee": {
+                "behind_by": 0,
+                "ahead_by": 1,
+            }
+        },
+    )
+    assert len(candidates) == 1
+    assert candidates[0].behind_by == 0
+
 
 def test_resolved_candidate_is_skipped() -> None:
     p = policy()
@@ -355,8 +392,11 @@ def test_resolved_candidate_is_skipped() -> None:
             event_ids=(),
             symbols=("BRKR",),
             created_at="2026-10-01T09:00:00Z",
-            source="issue_prepared",
+            source="prep_branch_fallback",
             status="PREPARED",
+            branch="g1/prep-0064-worker-4-brkr",
+            behind_by=0,
+            ahead_by=1,
         ),
         ctl.Candidate(
             worker=3,
@@ -365,8 +405,11 @@ def test_resolved_candidate_is_skipped() -> None:
             event_ids=(),
             symbols=("PNRA", "ALGN"),
             created_at="2026-10-01T10:00:00Z",
-            source="issue_prepared",
+            source="prep_branch_fallback",
             status="PREPARED",
+            branch="g1/prep-0073-worker-3-pnra-algn",
+            behind_by=0,
+            ahead_by=1,
         ),
     ]
     m = manifest(
