@@ -117,10 +117,8 @@ def test_worker_update_parser_ignores_next_target_event_ids() -> None:
     assert updates[0].event_ids == ("HEJFE-ED329F780A1085DA",)
     assert updates[0].symbols == ("EW",)
 
-    m = manifest(
-        unresolved_symbols={"PNRA": {"HEJFE-CCC7747CFBDE893E"}},
-        resolved_ids={"HEJFE-ED329F780A1085DA"},
-    )
+    m = manifest(unresolved_symbols={"PNRA": {"HEJFE-CCC7747CFBDE893E"}})
+    m["resolved_ids"] = {"HEJFE-ED329F780A1085DA"}
     assert ctl.update_is_resolved(updates[0], m) is True
 
 
