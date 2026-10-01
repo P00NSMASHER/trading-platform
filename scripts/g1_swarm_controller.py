@@ -958,6 +958,48 @@ def main() -> int:
     final_token = plan["token"]
     final_evaluation = plan["evaluation"]
 
+    # Token mutation is the only authority-changing action this controller can take.
+    # Re-read GitHub immediately before that write so a worker/PR update that landed
+    # during this run cannot be overwritten by a stale handoff decision.
+    if args.apply and plan["action"] == "ADVANCE":
+        fresh_main = github_api(repo, api_token, "/branches/main")
+        fresh_main_sha = str(((fresh_main or {}).get("commit") or {}).get("sha") or "")
+        if fresh_main_sha != main_sha:
+            print(
+                json.dumps(
+                    {
+                        "action": "ABORT_STALE_MAIN",
+                        "planned_main_sha": main_sha,
+                        "fresh_main_sha": fresh_main_sha,
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+            )
+            return 0
+
+        fresh_comments = paginated(repo, api_token, f"/issues/{issue}/comments")
+        fresh_pulls = paginated(
+            repo,
+            api_token,
+            "/pulls?state=all&sort=updated&direction=desc",
+            max_pages=3,
+        )
+        fresh_refs, fresh_compares = fetch_branch_fallbacks(repo, api_token, main_sha)
+        plan = controller_plan(
+            root=root,
+            policy=policy,
+            comments=fresh_comments,
+            pulls=fresh_pulls,
+            refs=fresh_refs,
+            compares=fresh_compares,
+            now=datetime.now(timezone.utc),
+        )
+        comments = fresh_comments
+        pulls = fresh_pulls
+        final_token = plan["token"]
+        final_evaluation = plan["evaluation"]
+
     if args.apply and plan["action"] == "ADVANCE":
         body = render_advance_comment(
             candidate=plan["next_candidate"],
