@@ -335,7 +335,12 @@ def pr_matches(worker: int | None, package: str, batch: int | None, pr: dict[str
         upper,
         re.IGNORECASE,
     ):
-        return True
+        # A batch hit alone is insufficient when worker identity is known.
+        # This prevents an unrelated PR mentioning the same number from being
+        # treated as the token holder's integration PR.
+        if worker is None:
+            return True
+        return bool(re.search(rf"\bWORKER[- _]*{worker}\b", upper))
     words = package_words(package)
     if words and all(re.search(rf"\b{re.escape(word)}\b", upper) for word in words):
         if worker is None:
@@ -348,10 +353,12 @@ def pr_matches(worker: int | None, package: str, batch: int | None, pr: dict[str
 def update_matches_token(update: WorkerUpdate, token: TokenAssignment) -> bool:
     if token.worker is None or update.worker != token.worker:
         return False
-    if token.batch is not None and update.batch == token.batch:
-        return True
     token_words = set(package_words(token.package))
     update_words = set(package_words(update.label))
+    if token.batch is not None and update.batch == token.batch:
+        # Same batch is necessary but not sufficient: require compatible package
+        # identity whenever both sides provide one.
+        return not token_words or not update_words or token_words == update_words
     # Package fallback matching must be exact enough to prevent an update for one
     # symbol in a multi-event package from extending the whole package's lease.
     return bool(token_words and update_words and token_words == update_words)
