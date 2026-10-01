@@ -1,0 +1,50 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "644c63937138ce0142bc06813a55d8c8c5a64574",
+  "reserved_batch": "0065",
+  "worker_slot": 0,
+  "previous_exact_count": 86,
+  "expected_exact_count_after_batch": 87,
+  "expected_excluded_after_batch": 87,
+  "integration_constraints": [
+    "Do not open or finalize a canonical PR until issue #153 explicitly assigns the global integration token to Worker 0.",
+    "Before canonical generation, refresh main and regenerate all counts, receipts, allowlist hashes, audit artifacts, and regression expectations from the exact current base.",
+    "Do not use EDGAR acceptance, call/webcast time, scheduled release time, archive capture time, neighboring release timing, inference, or unsupported timezone conversion."
+  ],
+  "items": [
+    {
+      "event_id": "HEJFE-760E36DA94752F1E",
+      "historical_symbol": "CAKE",
+      "event_date": "2015-04-22",
+      "first_documented_illicit_trade_ts": "2015-04-22 14:22:00",
+      "public_announcement_ts": "2015-04-22T16:15:00-04:00",
+      "public_announcement_utc": "2015-04-22T20:15:00Z",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "A",
+      "publisher_timestamp_text": "StreetInsider preserved Business Wire release: April 22, 2015 4:15 PM EDT",
+      "release_title": "The Cheesecake Factory Reports Results for First Quarter of Fiscal 2015",
+      "public_distribution_explicit": true,
+      "source_reference": "https://new.streetinsider.com/related.php?id=10481229&type=pr",
+      "issuer_ir_reference": "https://investors.thecheesecakefactory.com/news-and-events/news-releases/news-release-details/2015/The-Cheesecake-Factory-Reports-Results-for-First-Quarter-of-Fiscal-2015/default.aspx",
+      "sec_exhibit_reference": "https://www.sec.gov/Archives/edgar/data/887596/000110465915029365/a15-9600_18k.htm",
+      "corroboration_basis": "StreetInsider preserves the matching Business Wire release title/body and an explicit April 22, 2015 4:15 PM EDT publication clock. The issuer IR page independently matches the exact release date/title/body and Business Wire provenance. The SEC 8-K identifies the same April 22, 2015 first-quarter release as Exhibit 99.1. The separately scheduled 2:00 PM Pacific conference call and earlier approximate after-close release language are not used.",
+      "information_asymmetry_seconds": 6780,
+      "reviewed_on": "2026-10-01"
+    }
+  ],
+  "evidence_method": "Exact first-public clock from a timestamp-preserving StreetInsider Business Wire mirror, independently corroborated for release identity/date/body by issuer IR and the matching SEC 8-K/Exhibit 99.1. Prep evidence only; canonical eligibility must be revalidated on the token-held current main.",
+  "prohibited_substitutes": [
+    "edgar_acceptance_time",
+    "scheduled_call_time",
+    "webcast_time",
+    "archive_capture_time",
+    "neighboring_release_time",
+    "inferred_clock",
+    "date_only",
+    "unsupported_timezone"
+  ]
+}
