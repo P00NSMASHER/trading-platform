@@ -19,6 +19,9 @@ OPTION_KEYS = {
     ("cboe_option_trades", "option_trade"),
     ("cboe_option_quotes", "option_quote"),
 }
+CHAMPION_OPTION_KEYS = {
+    ("cboe_option_trades", "option_trade"),
+}
 ITCH_V4_FAMILY = "nasdaq_itch_4_1_decoded"
 ITCH_V5_FAMILY = "nasdaq_itch_5_0_decoded"
 ITCH_RECORD_KIND = "itch_decoded"
@@ -101,6 +104,11 @@ def freeze_requirements(
         if r.get("requirement") == "required_full_replication"
         and (r.get("source_family"), r.get("record_kind")) in OPTION_KEYS
     ]
+    champion_options = [
+        r for r in options
+        if (r.get("source_family"), r.get("record_kind")) in CHAMPION_OPTION_KEYS
+    ]
+    champion_minimum = core + champion_options
     legacy_itch = [
         r for r in reqs
         if r.get("requirement") == "conditional"
@@ -129,6 +137,10 @@ def freeze_requirements(
         raise ValueError(f"expected 828 core source-date rows, found {len(core)}")
     if len(options) != 828:
         raise ValueError(f"expected 828 option source-date rows, found {len(options)}")
+    if len(champion_options) != 414:
+        raise ValueError(f"expected 414 champion option-trade source-date rows, found {len(champion_options)}")
+    if len(champion_minimum) != 1242:
+        raise ValueError(f"expected 1242 champion-minimum source-date rows, found {len(champion_minimum)}")
     if len(legacy_itch) != 414:
         raise ValueError(f"expected 414 legacy conditional ITCH date rows, found {len(legacy_itch)}")
     if len(nasdaq_events) != 80:
@@ -137,6 +149,7 @@ def freeze_requirements(
     outdir.mkdir(parents=True, exist_ok=True)
     _write_csv(outdir / "g2_core_source_date_requirements.csv", core)
     _write_csv(outdir / "g2_option_source_date_requirements.csv", options)
+    _write_csv(outdir / "g2_champion_minimum_source_date_requirements.csv", champion_minimum)
     _write_csv(outdir / "g2_itch_event_requirements.csv", nasdaq_events)
 
     inventory = []
@@ -224,6 +237,8 @@ def freeze_requirements(
         "counts": {
             "core_equity_source_date_rows": len(core),
             "option_source_date_rows": len(options),
+            "champion_minimum_option_trade_rows": len(champion_options),
+            "champion_minimum_source_date_rows": len(champion_minimum),
             "total_required_g2_source_date_rows": len(core) + len(options),
             "legacy_conditional_itch_market_date_rows": len(legacy_itch),
             "g3_confirmed_nasdaq_event_rows": len(nasdaq_events),
@@ -234,6 +249,7 @@ def freeze_requirements(
         "artifacts": {
             "core": "g2_core_source_date_requirements.csv",
             "options": "g2_option_source_date_requirements.csv",
+            "champion_minimum": "g2_champion_minimum_source_date_requirements.csv",
             "itch_events": "g2_itch_event_requirements.csv",
             "inventory_template": "market_source_inventory.template.csv",
             "contract_blueprint": "production_source_contract_blueprint.json",

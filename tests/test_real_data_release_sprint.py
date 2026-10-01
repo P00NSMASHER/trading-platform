@@ -24,6 +24,8 @@ def test_freeze_real_repository_requirements(tmp_path: Path):
     )
     assert result["counts"]["core_equity_source_date_rows"] == 828
     assert result["counts"]["option_source_date_rows"] == 828
+    assert result["counts"]["champion_minimum_option_trade_rows"] == 414
+    assert result["counts"]["champion_minimum_source_date_rows"] == 1242
     assert result["counts"]["total_required_g2_source_date_rows"] == 1656
     assert result["counts"]["legacy_conditional_itch_market_date_rows"] == 414
     assert result["counts"]["g3_confirmed_nasdaq_event_rows"] == 80
@@ -33,6 +35,12 @@ def test_freeze_real_repository_requirements(tmp_path: Path):
     rows = list(csv.DictReader((out / "market_source_inventory.template.csv").open()))
     assert len(rows) == 1656
     assert {r["status"] for r in rows} == {"MISSING_SOURCE"}
+    champion = list(csv.DictReader((out / "g2_champion_minimum_source_date_requirements.csv").open()))
+    assert len(champion) == 1242
+    assert sum(r["record_kind"] == "equity_trade" for r in champion) == 414
+    assert sum(r["record_kind"] == "equity_quote" for r in champion) == 414
+    assert sum(r["record_kind"] == "option_trade" for r in champion) == 414
+    assert all(r["record_kind"] != "option_quote" for r in champion)
     itch = list(csv.DictReader((out / "g2_itch_event_requirements.csv").open()))
     assert len(itch) == 80
     assert sum(r["source_family"] == "nasdaq_itch_4_1_decoded" for r in itch) == 35
