@@ -1264,7 +1264,7 @@
       "reason": "G1 swarm reliability: require live same-worker preparation/support for token validity and ignore uncorroborated historical queue hints when choosing prepared work."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "eed867b539c3465c9997a3ccb2e22eca5f0c25b9ea08df3e1fd85e855d0a9a4e",
+      "expected_sha256": "da14c7b19702410ae6a5c5e13a074ae4169db44229ae4f8e0fc5760990222bfa",
       "reason": "G1 swarm reliability: regression coverage that stale queue hints cannot outrank live prep and unsupported token assignments invalidate immediately."
     },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
