@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-worker2-pnra-batch-0082",
+    "record_kind": "announcement_timestamp",
+    "source_family": "sec_litigation_public_distribution_record",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0082.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "7c193a6b2ee6de9f1d067129ac060c398d44cfed668bfebd46e07488b9b84ed5",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-worker3-cake-batch-0078",
     "record_kind": "announcement_timestamp",
     "source_family": "sec_litigation_public_distribution_record",

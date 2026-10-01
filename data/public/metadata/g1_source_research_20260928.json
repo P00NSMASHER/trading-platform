@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "ae62ac8fcda9f4b5704f6ee0943c4863c966c6d9",
+  "base_main_sha": "2dfc3e14a5459238974a29f53c8a6766506bae6d",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 92,
-    "note": "The latest integrated recovery is batch_0078; cumulative public exact-time batches are 62 and cumulative exact event records are 92 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 62,
+    "exact_resolved_event_records": 93,
+    "note": "The latest integrated recovery is batch_0082; cumulative public exact-time batches are 63 and cumulative exact event records are 93 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 63,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 82
+    "reviewed_excluded_event_records": 81
   },
   "preferred_public_source_families": [
     {
@@ -1721,6 +1721,32 @@
       "publisher_timestamp_text": "SEC complaint table: Newswire Service 1 distributes Align's 3Q earnings release to the public at 4:00 p.m. ET",
       "reason": "Promoted through an SEC civil-complaint record that explicitly identifies the first public distribution clock, with independent SEC Exhibit 99.1 corroboration.",
       "release_title": "Align Technology Announces Third Quarter 2013 Results",
+      "reviewed_on": "2026-10-01",
+      "source_family": "sec_litigation_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/comp-pr2015-163.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The SEC civil complaint explicitly identifies Panera Bread's July 23, 2013 earnings release and the 4:00 p.m. ET public-dissemination clock. Matching SEC Exhibit 99.1 independently corroborates the July 23 Q2 2013 release, $1.74 diluted EPS result, and revised FY2013 EPS target.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000025/a20130625ex991pressrelease.htm",
+      "disposition": "RESOLVED_IN_BATCH_0082",
+      "event_date": "2013-07-23",
+      "event_id": "HEJFE-600696AB8463FFD8",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-07-23T16:00:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-07-23 15:11:00",
+      "historical_event_match": true,
+      "historical_symbol": "PNRA",
+      "information_asymmetry_seconds": 2940,
+      "probe_id": "PNRA-batch0082",
+      "public_announcement_ts": "2013-07-23T16:00:00-04:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "SEC complaint Example 8/table: Newswire Service 1 publicly disseminates Panera's July 23 earnings release at 4:00 p.m. ET",
+      "reason": "Promoted through an SEC civil-complaint record that explicitly identifies the first public distribution clock, with independent SEC Exhibit 99.1 corroboration.",
+      "release_title": "Panera Bread Company Reports Q2 2013 diluted EPS of $1.74, up 16%",
       "reviewed_on": "2026-10-01",
       "source_family": "sec_litigation_public_distribution_record",
       "source_grade": "A",
