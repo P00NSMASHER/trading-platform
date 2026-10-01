@@ -355,7 +355,7 @@ def test_resolved_candidate_is_skipped() -> None:
             event_ids=(),
             symbols=("BRKR",),
             created_at="2026-10-01T09:00:00Z",
-            source="queue_hint",
+            source="issue_prepared",
             status="PREPARED",
         ),
         ctl.Candidate(
@@ -365,7 +365,7 @@ def test_resolved_candidate_is_skipped() -> None:
             event_ids=(),
             symbols=("PNRA", "ALGN"),
             created_at="2026-10-01T10:00:00Z",
-            source="queue_hint",
+            source="issue_prepared",
             status="PREPARED",
         ),
     ]
