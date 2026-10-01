@@ -696,6 +696,21 @@ def next_unused_batch(worker: int, used: dict[int, set[int]], policy: dict[str, 
     return batch
 
 
+def latest_updates_by_identity(updates: list[WorkerUpdate]) -> dict[tuple[int, tuple[str, ...], str], WorkerUpdate]:
+    latest: dict[tuple[int, tuple[str, ...], str], WorkerUpdate] = {}
+    for update in updates:
+        identity = (update.worker, update.event_ids, update.label.upper())
+        previous = latest.get(identity)
+        if previous is None:
+            latest[identity] = update
+            continue
+        ptime = parse_time(previous.created_at) or datetime.min.replace(tzinfo=timezone.utc)
+        utime = parse_time(update.created_at) or datetime.min.replace(tzinfo=timezone.utc)
+        if (utime, update.comment_id or 0) >= (ptime, previous.comment_id or 0):
+            latest[identity] = update
+    return latest
+
+
 def choose_found_candidate(
     updates: list[WorkerUpdate],
     *,
@@ -703,21 +718,9 @@ def choose_found_candidate(
     used: dict[int, set[int]],
     policy: dict[str, Any],
 ) -> Candidate | None:
-    latest_by_identity: dict[tuple[int, tuple[str, ...], str], WorkerUpdate] = {}
-    for update in updates:
-        identity = (update.worker, update.event_ids, update.label.upper())
-        previous = latest_by_identity.get(identity)
-        if previous is None:
-            latest_by_identity[identity] = update
-            continue
-        ptime = parse_time(previous.created_at) or datetime.min.replace(tzinfo=timezone.utc)
-        utime = parse_time(update.created_at) or datetime.min.replace(tzinfo=timezone.utc)
-        if utime >= ptime:
-            latest_by_identity[identity] = update
-
     found: list[WorkerUpdate] = [
         update
-        for update in latest_by_identity.values()
+        for update in latest_updates_by_identity(updates).values()
         if update.status == "FOUND" and not update_is_resolved(update, manifest)
     ]
     found.sort(key=lambda u: parse_time(u.created_at) or datetime.max.replace(tzinfo=timezone.utc))
@@ -966,7 +969,7 @@ def controller_plan(
 
     found_updates = [
         update
-        for update in updates
+        for update in latest_updates_by_identity(updates).values()
         if update.status == "FOUND" and not update_is_resolved(update, manifest)
     ]
     found_updates.sort(key=lambda u: parse_time(u.created_at) or datetime.max.replace(tzinfo=timezone.utc))
