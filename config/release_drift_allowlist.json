@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "1306b28f07a0296d0f79f91370d773eead815192a4d4e6e470346d1c9caedeaa",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a4de07579529a04e7a6dd864f321ec6e2fba5fc80440b5f68b899c7c148c847b",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "e72b44b03b7275c018c7d764b85566bf89cba36e009f03fd6a1f69bff72b3ece",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4034eda6a35588745e83367086ca1a4535cc7afbd09c708eac547e37f0fa1436",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "478fae7985d32464e265257e18878ff008b0576531f74be315139e98854727a1",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "64936fb15d8aa75e4d930ae99218e8ff19c9a639114b719491a749e1d2156829",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -58,12 +58,12 @@
       "reason": "Stable security-identity hardening: attach a hash-bound identity manifest to non-synthetic market backfills and keep real-feature readiness fail-closed while any required-date PERMNO/symbol identity remains unproven."
     },
     "src/metadata_quality.py": {
-      "expected_sha256": "9f7d38392dfe42ffb43e811ecb1adf84deb724cc17567516f73e1fa61aed9d33",
-      "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
+      "expected_sha256": "68905544acc92b0eb7545c3f004f062d02ab66ad4dda9d9a6040200976135e3c",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "src/metadata_resolver.py": {
-      "expected_sha256": "7aababf106632c171ba6be5e60fb1ad92e778b53c184c2d3d1b40395c26bca58",
-      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
+      "expected_sha256": "06d42ff76658f274b288d267248c3a76af0f98b386493b41de0fff33120adcd3",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "src/private_dashboard.py": {
       "expected_sha256": "16fd6f193f7c1e5721f0c145711aeb45e5a9fed38878f03ee73d64e046ebff1e",
@@ -98,8 +98,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "tests/test_metadata_resolver.py": {
-      "expected_sha256": "f6aab4bc7d5a32c3e215c8a4a47c218c2fb24a824acff924cc4a391adafc587c",
-      "reason": "G1 incremental exact-evidence recovery: reviewed G1/G5 exclusion sets may shrink only as admissible evidence resolves rows; stale exclusions still fail closed; CNMD gains verified exact public-release evidence."
+      "expected_sha256": "f0d047ecf4250462a6e0795d5d0a13d493fb9f6df0048c3dc138f61a6a9266fe",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
@@ -114,6 +114,10 @@
     ".github/dependabot.yml": {
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
+    },
+    ".github/workflows/g1-swarm-controller.yml": {
+      "expected_sha256": "8ecd630504d24780840f8124bcfc079eedfe80cc9015976df393c5aeaacf21b3",
+      "reason": "G1 swarm reliability: 15-minute plus push/PR-close reconciliation, live-state race recheck, issue-comment token handoff only, and immutable receipt artifact; no G1 evidence or merge authority."
     },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
@@ -152,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "f196f4bae12a5aec17fc61ed2b377deb303dbe8a4fb260ed0fa3e52453db123e",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6347a80f3c83fc7820df95c686166f2dbcf7c305e9c626beea9ac216081f5455",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -172,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "258872af95132e69c0ef0ab0dcb52c5b6bd508edad2d05a0f133c793f5983af1",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ed664f6c2c60d0c170a89027c4660138320157c85011d481199e18af7bd62130",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -184,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "24c7270ee1b5b2db8032ca44e3b1dfc69310e2ddd5306185587a8dfd90b05f4e",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "84662c1e45cf591e08f45e0254947f03af3bcffe1d14b86e3022b35400945b03",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -240,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "87a77ab0a45a5e9cdc8d2080dc2856ecd3818d289566e35682ef748e43bcc009",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6682704b668874875d1e3d8b1b89fc798268fb481409bc2e9311bff5698468ae",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -256,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "ea8cf277961b1670489aaeabeaf3708e5d6991554115cf02f4ad0304e0458568",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7ec17a173ff032a7532e34e80109b5dcb132cc56bc6fa7a72b27577687496c9d",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "ed489411f01b601d40f11309d3b1dcca9f0ae80fac0fffbe65a8de36456b4abf",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "33293fe3a5d60e34d16aac7a9cc6b080154e5cfa4ae9505baefa145b3ca399ae",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -283,6 +287,14 @@
       "expected_sha256": "b5cfbc9768b8b00a4e7c44cbd753f3d6bf3e87e9fc6e92c3b87685c28b1b7741",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
+    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
+      "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
+      "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
+    },
+    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
+      "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
+      "reason": "Nasdaq ITCH vendor-contact provenance receipt from PR #164; records acknowledgement and Sales handoff only while Step 8 remains SOURCE_BLOCKED with no verified entitlement or decoded files."
+    },
     "data/processed/real_data_release_sprint/production_source_contract_blueprint.json": {
       "expected_sha256": "965cbb2a151d9d3bed146912960f5ba3f5521cc21d600cfb7bba6bc6ed1cf382",
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
@@ -292,16 +304,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "5b0dfa5644e0dc566cbecbe25f1aa2fbd6d9131319c86013ed5f060b0295601d",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ba92ec6530b6a723e723622a6dd9967c26ccb61b279eb1b6a44f199766d75bf8",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "39211ce009394bf970f6cf3f80be3715fef275f46780ba5372bfb36b1069b691",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c099cc47f49d931f29dff7c88c37dd2efc4527d49a560ebf208912301135970e",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "6fcb379ace849590fcb15f7b689af1055ed4d5b1b9d815b7ac0a1b932113bbde",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d39e9d107858147f6356d9591f63237c2f8e0b0e31bfbfa24bc7584d2cb10837",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -320,8 +332,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "54dd0d31f11e7fdd87739f311dbd30adb750d7265d4079e03466da74d0d1b7bd",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c280bd06984fc69d1782659d84ddeb29b44b889f60e155a5e93f70c4b18e1984",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -551,6 +563,10 @@
       "expected_sha256": "d83672b1538fd6e721d1c6c5b50fadf932426d86dc461bdf0a7f5616a41b3a64",
       "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0067.csv": {
+      "expected_sha256": "cfd069a621796246580a55851cde9ba1231718d06971c2fb0accfbbe129c8806",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
+    },
     "data/public/metadata/g1_announcement_times_batch_0068.csv": {
       "expected_sha256": "4d356a3cdf098d23003d6bae079013b437c407dda410a16ec220be7454364050",
       "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
@@ -651,13 +667,21 @@
       "expected_sha256": "5db17d3163af786944f2c12d3f8746209d1ea38cc80d6b73d3d2cf9dd0ec78bf",
       "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0067_evidence.json": {
+      "expected_sha256": "2df25565c31ab9f93c711ffddfe421431386118d066c32ff635d5c4e762845d1",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0068_evidence.json": {
       "expected_sha256": "c64c8dbc9bfd9e4b5d1931d4f5680f86b81827d68f60cdbe20b0db8139b2ef55",
       "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "7366ea45935501ffd37a4de4bcdcf85679f90151f6984115e1234d47c4354ee2",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0687ce46370510fd514d00e1c3a2c10481ce28bcb4020c53a6038d31fbc9f295",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
+    },
+    "data/public/metadata/g1_swarm_controller_policy.json": {
+      "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
+      "reason": "G1 swarm reliability: deterministic token lease, batch-lane, canonical-input and fail-closed controller policy."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -776,8 +800,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "51e2d7b073bd0783652d7df3f5ca38192227302c4f4288b28c44df70f47db3f5",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8db91e40357bd5b295ada1c0a98f3ce84d329d0118eec447d941a0f49b9a5083",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -907,9 +931,17 @@
       "expected_sha256": "06d5747b1557edf5bdf0e8b040af3921b494a0d912c886bfff40dbd17cc59b1d",
       "reason": "G1 batch 0063 timestamp-preserving MarketScreener Business Wire mirror clocks for National Instruments and Cree; deterministic 82 exact / 92 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "scripts/g1_batch_0067_generate.py": {
+      "expected_sha256": "5f62d96806a03a8cc0159a2b1a87a705835fca6fbd96b29540ab682f5c8c7647",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
+    },
     "scripts/g1_batch_0068_generate.py": {
       "expected_sha256": "3515884ed578f4e46de84406d0ba20c798c70944faec98b79bd3f18c19797879",
       "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_swarm_controller.py": {
+      "expected_sha256": "b2bb1f9965593d8787ebc391b51a8388ebe6beb7ae2f76af5c86e4437a54d0f3",
+      "reason": "G1 swarm reliability hardening: invalidate stale prep, require exact-current-main support, exact package progress, fresh open-PR bases, and worker-qualified batch identity."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -984,8 +1016,8 @@
       "reason": "G1 hardening: strict authorized I/B/E/S actual-announcement timestamp normalization without raw licensed-row persistence"
     },
     "src/g1_source_research.py": {
-      "expected_sha256": "34dd8d8e07bdb10c82b30caba2145d6e30493d1f27ec9f68a68e1e937e086ed2",
-      "reason": "G1 research promotion hardening: independently validate event identity, timezone-aware first-public-release timestamp semantics, admissible source family, source reference, chronology, seven-calendar-day window, and mirror corroboration."
+      "expected_sha256": "0dd38def600f9a038da6530a66a0e953ecf3c243d20eb6581c11258079c82d13",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "src/g3_listing_evidence.py": {
       "expected_sha256": "819b5ff7257ca3662a6192e15d4c69079c54cd5458306a2a3a4570149bcb1476",
@@ -1068,120 +1100,128 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "a554efdb90554015be8cf2b4c7bf36510331a3dc4b647fca1c2781bd392d2a35",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "434d0a9c3ac74861be4952091a6755775b74317a4664956e08fb0d535644a7b5",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "e8a7e1c876d8d0f5e48ab10dc0cf52e05bb357cd6a3953eb866c1ce8e9ccc7b6",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "58d03a45e97fb14934172b6a1e702af2f35ffcc950e36cf218a3d2b0e5dd34bc",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "93230dfdb5d48e0c20563d6e82e266bec622a8cd76fd1fc727851a5a022083fb",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c47c0c0a30108f52ce90236da2b330f89ca40aa1322d486cb00a744977a8de85",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "8a7649ce35f144eaddfb55b9a0615dd0ac351f8cbc3e136712a4fd3d306b74a8",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2eb512d2e843ce1b4801fbab4460519b349355384a27e90ab4870cd6480ffde4",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "20a34c8526074cfaf2fe8ae49842c8479c0ddbcc7178e9b18ceacd3fcabe2488",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b80ca3b5a98886c9e2c645177b61db7e65c4245bb504a2d29f10fe5539088dec",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "bf81053a0168897dfc6e24547dd37888f82777f3b8bdc7421300d5c014a17b0e",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0098afcfefa296e17d2bb73de7dd36aeb2cc6da9257d38aacd68a80d25b9b5a7",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "92222d493189e676c9c8394b2a199359a3a2862b34602347cf66110a2afb19c7",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9c1870a5566a565f352584121a1944d834ed436832aa157c35fb4f52ababf1f7",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "7ea022053b0a455ddce6554e7ea5292fbd8a7fc56c6bc0eedff6feb1aa40512b",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ec286d758d150ffccbe6ff888f56a43acb6ec196385e0d65c4877ea6929b4db0",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "dfeda708d24e0ceeaf5d2bb675f432b87c12f5711e59176a14590ac1c3aa1018",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "efb0f028155b1bebaa32c864497c78cdaf254193a7dd46055cd7af352ad4e8bf",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "7b25c48eb81625d0c3c495d85d35e0151b4e91ac192cb8212c1120843511e0d8",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a0e737bbff3be1ceef092990733cac9f97258c8af1ffcc75bf59b262af810f34",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "1be10e31089e52f1207a767a44fd42556b65d67d481fdcd45fe53424729c878a",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "609e4a32b17530a93fd95208a3798105c1384c2497e6379faf13ca8644139acc",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "b0fcbe9683da245a8fd4ce1f4641fa036fc07f139683a16b0ee9f0921ae41e18",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f9aa114c0ce9db73c27abcecd8d80c3a0eead981ef46ce7a09ac2fc12bdc690c",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "ccb742b47c5c968c03fc0796f3e213a945f9a54f7900b2023a92d52887dc48a0",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a8dc90b715747a8ff136bea272978bd7637ae78a32da8d1338aa18f89e0d411e",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "eca29bc5eacb38be5abbdcae2c972b6d6f766cb863e5a83f2681f0a757c2be93",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b0419fe7fc410ce388bbeee02baf2c44e35795f9b82ab3569cf61525c393051d",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "f2aab81378729159055897dced25c54cf65ff9af3031a40f1cc570131d8dabf9",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "952b5c73868f46e874e5e2f5be2ea922b5e8b0bdfdd7283f057ceea8ca81cc78",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "a66059cc6fac3196c26554383ec9c641703ca4e6effd678cadcaf68c66330bc1",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "38644ebe6d310992b07139dbc85fb00ddc01003adf5d174107196e9e8f6f9763",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "7f5291b26e7bead66edb574289cf2526cfeba471e8e68661cc939a720f0ffa27",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c6f5bb3be897cbeb809c50932a2a88c063a09c0f9ec804d4c1454b7f75c08967",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "a7791292edd12038debae531670a9b96eafc9f9cd732cacd778f7bc2b467bf2d",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b0dd47fe491788b545421baa54e4d77f0465451b5c823785c4a80d3be90339a3",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "9dabb0383592ff72deeb3f53b1670984056b18912b4208b1595b0f54fee458e0",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7c32aadc538ee0070da4215730b2204442124d5b70b231b2600abd5fda5ad252",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "b309346a9e8d06c9094c6c461ad884fabee205fd1c4c8165e831b7367cf103ef",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "392dc5e9f7ad49123ae55cf40fde2eac05083d565c5b7615a8941a67334c0e1b",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "6baaa06dc01cbd173d2b649f7b285860745ac135b0b86238c59cc45a7e99fe49",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "04bd42e28028c06bddbe27f53f85291dafdc9cf1d3179587ba9689d28c455a31",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "47840879f55f58ec288afbab80bf865af701d9e545880303b86649669b7c3ce2",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d12435b1e070a155a10be7388c860f6320150befc7413026c58b05a382d0e7e4",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "5c5672f513b3278e177be11d9170b92fda7b1a8e0cece2893ecb10df5a42936d",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5da175de7e068c8249fef5980c70bbb0f1607f199c2c3a40ebafa1147f4e6f08",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "6674ddca954906c436d4d25aba4712f31ebdf039d187db7af9ae9e167252cfea",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d99145c73b1039276ed36906a15ec8286c1fa76d484ca56e0e6996ceeefa7ab1",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "d09bebba8575bc2819c859a86e893d683c986cf0ae6b35aea1c5609fdeeb56f5",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9d53da4b4710580c3bf162c9481d54eb9d7a4c128068ac6cdd5e0e2980d91168",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0067.py": {
+      "expected_sha256": "ff5adb3b7fa10610a61baa6c476eef1a86e66dabc0e46536da9158a45e779b80",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "b9beec4603b2074e3b9ff27c294f8ad346fd675cf72936dfe91a01aa3632b609",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d88a7b45b408f582e22a828a0fb18c86e4036a43c56a05b3b7e7c9590d484c53",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "d255de1d9a209b454544865052572c2466324c0db636b2b8344e00ce53ce3119",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "41c7af230b0453fddfcf9776f7322d4e8a0421d20454e794f3f3c0069f2f1bd8",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
+    },
+    "tests/test_g1_swarm_controller.py": {
+      "expected_sha256": "039eab04d5a63c66d0237bac48156aaf66f90a07e6422f377bce5d100e84e682",
+      "reason": "G1 swarm regressions for stale prep, false package progress, stale open PRs, same-batch wrong-package updates, and batch-number collisions."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -1208,8 +1248,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "f972270e1f3ef0ea2f25e23e09caeb66f69af712823276baf5ce3ad1dee43f78",
-      "reason": "G1 batch 0068 Worker-4 INT issuer-IR clock plus BRKR timestamp-preserving Business Wire mirror; deterministic 86 exact / 88 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e915601d5369b9d7a746b767d3c8971af3c2e2e750fb262040716ca71f8b13bf",
+      "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
@@ -1246,30 +1286,6 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
-    },
-    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
-      "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
-      "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
-    },
-    ".github/workflows/g1-swarm-controller.yml": {
-      "expected_sha256": "8ecd630504d24780840f8124bcfc079eedfe80cc9015976df393c5aeaacf21b3",
-      "reason": "G1 swarm reliability: 15-minute plus push/PR-close reconciliation, live-state race recheck, issue-comment token handoff only, and immutable receipt artifact; no G1 evidence or merge authority."
-    },
-    "data/public/metadata/g1_swarm_controller_policy.json": {
-      "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
-      "reason": "G1 swarm reliability: deterministic token lease, batch-lane, canonical-input and fail-closed controller policy."
-    },
-    "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "b2bb1f9965593d8787ebc391b51a8388ebe6beb7ae2f76af5c86e4437a54d0f3",
-      "reason": "G1 swarm reliability hardening: invalidate stale prep, require exact-current-main support, exact package progress, fresh open-PR bases, and worker-qualified batch identity."
-    },
-    "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "039eab04d5a63c66d0237bac48156aaf66f90a07e6422f377bce5d100e84e682",
-      "reason": "G1 swarm regressions for stale prep, false package progress, stale open PRs, same-batch wrong-package updates, and batch-number collisions."
-    },
-    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
-      "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
-      "reason": "Nasdaq ITCH vendor-contact provenance receipt from PR #164; records acknowledgement and Sales handoff only while Step 8 remains SOURCE_BLOCKED with no verified entitlement or decoded files."
     }
   },
   "schema_version": "2",

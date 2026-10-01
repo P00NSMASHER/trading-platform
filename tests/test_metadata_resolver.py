@@ -533,3 +533,18 @@ def test_reviewed_control_exclusion_receipt_hash_mismatch_fails_closed(tmp_path)
         _apply_reviewed_control_exclusions(
             rows, raw_contract=contract, root=tmp_path, events=event_rows
         )
+
+def test_contract_accepts_sec_litigation_public_distribution_family(tmp_path):
+    p=tmp_path/"c.json"
+    p.write_text(json.dumps({"schema_version":"1","sources":[{
+        "source_id":"sec-public-distribution","record_kind":"announcement_timestamp",
+        "source_family":"sec_litigation_public_distribution_record",
+        "path":"unused.csv","enabled":False,"authorized":True,
+        "data_classification":"public_official_data",
+        "license_reference":"SEC public litigation complaint",
+        "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{}
+    }]}),encoding="utf-8")
+    contracts,_=load_contract(p)
+    assert len(contracts)==1
+    assert contracts[0].source_family=="sec_litigation_public_distribution_record"
+
