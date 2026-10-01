@@ -16,6 +16,7 @@ _ALLOWED_EVIDENCE_SOURCE_FAMILIES = frozenset({
     "official_newswire_archive",
     "issuer_investor_relations_archive",
     "preserved_wire_mirror",
+    "sec_litigation_public_distribution_record",
     "ibes_announcement",
     "licensed_ibes_actuals",
 })
@@ -119,6 +120,30 @@ def _validate_evidence_eligible_probe(
         raise G1SourceResearchError(
             f"probe {probe_id} preserved_wire_mirror evidence requires corroboration_reference"
         )
+
+    if source_family == "sec_litigation_public_distribution_record":
+        source_reference = str(probe.get("source_reference", "")).strip()
+        corroboration_reference = str(probe.get("corroboration_reference", "")).strip()
+        if not source_reference.startswith(
+            "https://www.sec.gov/files/litigation/complaints/"
+        ):
+            raise G1SourceResearchError(
+                f"probe {probe_id} SEC litigation evidence requires an SEC complaint source_reference"
+            )
+        if not corroboration_reference.startswith(
+            "https://www.sec.gov/Archives/edgar/data/"
+        ):
+            raise G1SourceResearchError(
+                f"probe {probe_id} SEC litigation evidence requires independent SEC Exhibit corroboration"
+            )
+        if evidence_kind != "explicit_release_clock":
+            raise G1SourceResearchError(
+                f"probe {probe_id} SEC litigation evidence requires explicit_release_clock semantics"
+            )
+        if probe.get("public_distribution_explicit") is not True:
+            raise G1SourceResearchError(
+                f"probe {probe_id} SEC litigation evidence must explicitly identify public distribution"
+            )
 
     release_ts = _parse_exact_public_release_ts(
         probe.get("exact_public_release_ts"), probe_id=probe_id
