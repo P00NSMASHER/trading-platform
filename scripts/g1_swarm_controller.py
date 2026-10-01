@@ -298,7 +298,7 @@ def manifest_state(root: Path, policy: dict[str, Any]) -> dict[str, Any]:
 
 
 def candidate_is_resolved(candidate: Candidate, manifest: dict[str, Any], pulls: list[dict[str, Any]], updates: list[WorkerUpdate]) -> bool:
-    if batch_closed_or_merged(candidate.batch, pulls, updates):
+    if batch_merged(candidate.batch, pulls, updates):
         return True
     if candidate.event_ids and all(eid in manifest["resolved_ids"] for eid in candidate.event_ids):
         return True
@@ -346,12 +346,12 @@ def update_matches_token(update: WorkerUpdate, token: TokenAssignment) -> bool:
     return bool(token_words and update_words and token_words.issubset(update_words | token_words) and token_words & update_words)
 
 
-def batch_closed_or_merged(batch: int, pulls: list[dict[str, Any]], updates: list[WorkerUpdate]) -> bool:
+def batch_merged(batch: int, pulls: list[dict[str, Any]], updates: list[WorkerUpdate]) -> bool:
     for update in updates:
         if update.batch == batch and update.status == "MERGED":
             return True
     for pr in pulls:
-        if pr_matches(None, "", batch, pr) and str(pr.get("state") or "").lower() == "closed":
+        if pr_matches(None, "", batch, pr) and pr.get("merged_at"):
             return True
     return False
 
