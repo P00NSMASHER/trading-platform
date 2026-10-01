@@ -1,0 +1,39 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "preparation_status": "PREPARED_EVIDENCE_ONLY_NO_CANONICAL_MUTATION",
+  "base_main_sha": "cf5a70f07b54513c9f954e71289cc61d3d5aab4b",
+  "reserved_batch": "0073",
+  "previous_exact_count": 86,
+  "expected_exact_count_after_batch": 87,
+  "expected_excluded_after_batch": 87,
+  "prohibited_substitutes": [
+    "edgar_acceptance_time",
+    "scheduled_call_time",
+    "archive_capture_time",
+    "inferred_clock",
+    "date_only"
+  ],
+  "evidence_method": "SEC civil complaint explicitly records the first public dissemination clock for Panera Bread Company's July 23, 2013 Q2 release. Matching SEC Exhibit 99.1 independently corroborates issuer, release title/date, reporting period, results, and revised FY2013 EPS guidance. This prep branch intentionally does not mutate canonical readiness, exclusion receipts, source contracts, workflows, or publisher outputs until Worker 3 receives the global integration token.",
+  "items": [
+    {
+      "event_id": "HEJFE-600696AB8463FFD8",
+      "historical_symbol": "PNRA",
+      "event_date": "2013-07-23",
+      "first_documented_illicit_trade_ts": "2013-07-23 15:11:00",
+      "public_announcement_ts": "2013-07-23T16:00:00-04:00",
+      "information_asymmetry_seconds": 2940,
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "source_family": "sec_litigation_public_distribution_record",
+      "source_grade": "A",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "SEC complaint: Newswire Service 1 publicly disseminated Panera's press release at 4:00 p.m. ET on July 23, 2013.",
+      "release_title": "Panera Bread Company Reports Q2 2013 diluted EPS of $1.74, up 16%",
+      "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/comp-pr2015-163.pdf",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000025/a20130625ex991pressrelease.htm",
+      "corroboration_basis": "The SEC complaint states that Panera uploaded a press release to Newswire Service 1 at approximately 10:00 a.m. ET on July 23, 2013 and that Newswire Service 1 publicly disseminated it at 4:00 p.m. ET. Its table labels the time column ET and records the 4:00 p.m. public dissemination event. SEC Exhibit 99.1 independently matches Panera Bread Company, the July 23, 2013 Q2 2013 release title/results and revised FY2013 EPS target.",
+      "reviewed_on": "2026-10-01"
+    }
+  ]
+}
