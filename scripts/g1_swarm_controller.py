@@ -702,6 +702,7 @@ def choose_found_candidate(
     manifest: dict[str, Any],
     used: dict[int, set[int]],
     policy: dict[str, Any],
+    token: TokenAssignment | None = None,
 ) -> Candidate | None:
     latest_by_identity: dict[tuple[int, tuple[str, ...], str], WorkerUpdate] = {}
     for update in updates:
@@ -715,11 +716,36 @@ def choose_found_candidate(
         if utime >= ptime:
             latest_by_identity[identity] = update
 
-    found: list[WorkerUpdate] = [
-        update
-        for update in latest_by_identity.values()
-        if update.status == "FOUND" and not update_is_resolved(update, manifest)
-    ]
+    found: list[WorkerUpdate] = []
+    for update in latest_by_identity.values():
+        if update.status != "FOUND":
+            continue
+
+        # Exact event identity is authoritative when a FOUND line names one.
+        # Re-extract at selection time so a resolved historical event cannot be
+        # resurrected merely because the same ticker has another unresolved event.
+        label_event_ids = tuple(EVENT_ID_RE.findall(update.label))
+        if label_event_ids:
+            if not any(eid in manifest["unresolved_ids"] for eid in label_event_ids):
+                continue
+        elif update_is_resolved(update, manifest):
+            continue
+
+        # Never immediately hand the controller back to the exact package whose
+        # lease is being released. This prevents a resolved/invalid token from
+        # self-reassigning in a loop across concurrent controller runs.
+        if token is not None and token.worker == update.worker:
+            token_event_ids = set(EVENT_ID_RE.findall(token.package))
+            update_event_ids = set(label_event_ids)
+            same_identity = (
+                bool(token_event_ids and update_event_ids and token_event_ids == update_event_ids)
+                or normalized_package(token.package).upper()
+                == normalized_package(update.label).upper()
+            )
+            if same_identity:
+                continue
+
+        found.append(update)
     found.sort(key=lambda u: parse_time(u.created_at) or datetime.max.replace(tzinfo=timezone.utc))
     if not found:
         return None
@@ -986,6 +1012,7 @@ def controller_plan(
             manifest=manifest,
             used=used,
             policy=policy,
+            token=token,
         )
 
     action = "NONE"
