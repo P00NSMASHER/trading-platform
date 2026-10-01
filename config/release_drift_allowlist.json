@@ -90,8 +90,8 @@
       "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
     },
     "tests/test_historical_market_backfill.py": {
-      "expected_sha256": "a15e96fef99b26cf003b76242e7eaaeab2655a1c0c52b701462e8f87df515316",
-      "reason": "Audit-only regression proving whether removing option_quote rows changes trade-derived option inputs and frozen selected features; no release gate or source requirement change."
+      "expected_sha256": "24b1e98c1911ffd88bd62319144d7cc91402ae8489366aa598fe9216be4272bb",
+      "reason": "Audit-only regression proving option_quote removal leaves trade-derived option inputs, frozen selected features, and frozen calibrated model scores unchanged; no release gate or source requirement change."
     },
     "tests/test_metadata_quality.py": {
       "expected_sha256": "16c7b7c9af1300aefa6c0447326555c6423221027018be61b793db244fd8903e",
