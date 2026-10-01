@@ -102,6 +102,28 @@ def test_worker_update_parser_preserves_event_identity() -> None:
     assert updates[0].symbols == ("CAKE",)
 
 
+def test_worker_update_parser_ignores_next_target_event_ids() -> None:
+    comments = [
+        comment(
+            4,
+            "2026-10-01T13:11:00Z",
+            "WORKER 2 | HEJFE-ED329F780A1085DA/EW | FOUND | reserved 0067 prep | source | exact clock; next target: HEJFE-CCC7747CFBDE893E/PNRA",
+        )
+    ]
+
+    updates = ctl.parse_worker_updates(comments)
+
+    assert len(updates) == 1
+    assert updates[0].event_ids == ("HEJFE-ED329F780A1085DA",)
+    assert updates[0].symbols == ("EW",)
+
+    m = manifest(
+        unresolved_symbols={"PNRA": {"HEJFE-CCC7747CFBDE893E"}},
+        resolved_ids={"HEJFE-ED329F780A1085DA"},
+    )
+    assert ctl.update_is_resolved(updates[0], m) is True
+
+
 def test_batch_lane_is_deterministic() -> None:
     p = policy()
 
