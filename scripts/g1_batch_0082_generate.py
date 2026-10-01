@@ -166,8 +166,8 @@ for fn in test_files:
     ast.parse(txt);p.write_text(txt)
 
 p=Path("docs/g1_announcement_times.md");txt=p.read_text()
-assert "61 public exact-time batches / 91 exact-resolved" in txt
-txt=txt.replace("61 public exact-time batches / 91 exact-resolved","63 public exact-time batches / 93 exact-resolved",1)
+assert "62 public exact-time batches / 92 exact-resolved" in txt
+txt=txt.replace("62 public exact-time batches / 92 exact-resolved","63 public exact-time batches / 93 exact-resolved",1)
 txt += """
 ### Batch 0082: Panera Bread
 
