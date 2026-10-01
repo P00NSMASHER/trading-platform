@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **58 public exact-time batches / 88 exact-resolved
+The current repository state is **59 public exact-time batches / 89 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -209,3 +209,7 @@ Two previously verified Worker-4 clocks are rebased onto current main. World Fue
 ### Batch 0067: Edwards Lifesciences and TIBCO Software
 
 SEC civil complaints explicitly record the first public newswire distribution clocks for two hacked-release events. Edwards Lifesciences' April 23, 2013 first-quarter release was publicly distributed at 16:01 EDT (20:01 UTC), 9,180 seconds after the frozen 13:28 EDT illicit trade. TIBCO Software's September 19, 2013 third-quarter release was publicly distributed at 16:05 EDT (20:05 UTC), 2,160 seconds after the frozen 15:29 EDT illicit trade. Matching SEC Exhibits 99.1 independently corroborate issuer, title, release date, reporting period, and release content. The regulator source family is fail-closed: only SEC litigation complaint URLs with explicit public-distribution language, explicit_release_clock semantics, and independent SEC Exhibit corroboration are admissible. This advances G1 from 86 exact / 88 reviewed exclusions to 88 exact / 86 reviewed exclusions. Conference-call, scheduled-release, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0074: Cloud Peak Energy
+
+StreetInsider preserves the original Business Wire release for Cloud Peak Energy's first-quarter 2015 results with an explicit publication clock of 2015-04-30 16:10 EDT (20:10 UTC), 2,220 seconds after the frozen 15:33 EDT illicit trade. SEC Exhibit 99.1 independently corroborates issuer, release title/date, reporting period, and release content. This advances G1 from 88 exact / 86 reviewed exclusions to 89 exact / 85 reviewed exclusions. The separately scheduled 17:00 ET conference call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.

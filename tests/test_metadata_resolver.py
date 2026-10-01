@@ -33,6 +33,32 @@ def events():
         return list(csv.DictReader(f))
 
 
+def test_preserved_wire_mirror_contract_is_supported(tmp_path):
+    contract = {
+        "schema_version": "1",
+        "sources": [{
+            "source_id": "wire-mirror",
+            "record_kind": "announcement_timestamp",
+            "source_family": "preserved_wire_mirror",
+            "path": "data/examples/metadata/announcement_exact.csv",
+            "enabled": True,
+            "authorized": True,
+            "data_classification": "public_research_replication",
+            "license_reference": "public timestamp-preserving mirror",
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "timezone": "America/New_York",
+            "column_map": {},
+        }],
+    }
+    p = tmp_path / "contract.json"
+    p.write_text(json.dumps(contract), encoding="utf-8")
+
+    contracts, _ = load_contract(p)
+
+    assert contracts[0].source_family == "preserved_wire_mirror"
+
+
 def test_exact_release_resolves_and_asymmetry_positive():
     x=resolve_announcements(events(),load_demo_sources())[0]
     assert x.resolution_status=="resolved_exact_public_timestamp"
