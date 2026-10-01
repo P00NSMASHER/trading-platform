@@ -1260,12 +1260,12 @@
       "reason": "G1 swarm reliability: deterministic token lease, batch-lane, canonical-input and fail-closed controller policy."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "863bd79d02d7d38d82e5c5d549788f96773dddebe9d915c659716d44d54d8ecd",
-      "reason": "G1 swarm reliability: parse token packages containing event_id/SYMBOL slashes and recognize explicit executive correction assignments without losing token chronology."
+      "expected_sha256": "2cd3102220df3d3b2ec9a816d01470c7550db4b94c5504d13d4b571e406385d4",
+      "reason": "G1 swarm reliability: require live same-worker preparation/support for token validity and ignore uncorroborated historical queue hints when choosing prepared work."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "3ccd04c2931871315e9312330f2cb91233785b812c52327f01f1e30925df26cd",
-      "reason": "G1 swarm reliability: regression coverage for slash-bearing token packages and explicit correction precedence."
+      "expected_sha256": "eed867b539c3465c9997a3ccb2e22eca5f0c25b9ea08df3e1fd85e855d0a9a4e",
+      "reason": "G1 swarm reliability: regression coverage that stale queue hints cannot outrank live prep and unsupported token assignments invalidate immediately."
     },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
       "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
