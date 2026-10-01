@@ -10,7 +10,7 @@ on:
     types:
       - closed
   schedule:
-    - cron: "57 * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -45,7 +45,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          mkdir -p private_runtime/g1-swarm
           python scripts/g1_swarm_controller.py \
             --apply \
             --repository "$GITHUB_REPOSITORY" \
-            --controller-sha "$GITHUB_SHA"
+            --controller-sha "$GITHUB_SHA" \
+            | tee private_runtime/g1-swarm/controller-summary.json
+
+      - name: Upload controller receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: g1-swarm-controller-${{ github.sha }}
+          path: private_runtime/g1-swarm
+          if-no-files-found: error
+          retention-days: 14
