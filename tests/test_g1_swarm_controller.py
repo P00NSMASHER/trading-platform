@@ -365,3 +365,77 @@ def test_closed_unmerged_candidate_remains_eligible_for_later_repair() -> None:
 
     assert chosen is not None
     assert chosen.batch == 67
+
+
+def test_closed_unmerged_token_releases_lease_without_resolving_package() -> None:
+    token = ctl.TokenAssignment(
+        worker=2,
+        package="EW+TIBX",
+        batch=67,
+        assigned_at="2026-10-01T10:00:00Z",
+        comment_id=10,
+    )
+    pulls = [
+        {
+            "number": 170,
+            "state": "closed",
+            "merged_at": None,
+            "merged": False,
+            "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+            "body": "",
+            "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
+        }
+    ]
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-AAAA000000000004"},
+            "TIBX": {"HEJFE-AAAA000000000005"},
+        }
+    )
+
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=pulls,
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 10, 31, tzinfo=timezone.utc),
+    )
+
+    assert result.state == "CLOSED_UNMERGED"
+    assert result.matching_closed_pr == 170
+
+    candidate = ctl.Candidate(
+        worker=2,
+        package="EW+TIBX",
+        batch=67,
+        event_ids=(),
+        symbols=("EW", "TIBX"),
+        created_at="2026-10-01T10:00:00Z",
+        source="issue_prepared",
+        status="PREPARED",
+    )
+    assert ctl.candidate_is_resolved(candidate, m, pulls, []) is False
+
+
+def test_pr_batch_match_requires_batch_context_not_random_digits() -> None:
+    unrelated = {
+        "number": 999,
+        "state": "closed",
+        "merged_at": None,
+        "title": "Maintenance change",
+        "body": "receipt digest abc67def remains unchanged",
+        "head": {"ref": "maintenance/abc67def"},
+    }
+    assert ctl.pr_matches(2, "EW+TIBX", 67, unrelated) is False
+
+    related = {
+        "number": 1000,
+        "state": "open",
+        "merged_at": None,
+        "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+        "body": "",
+        "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
+    }
+    assert ctl.pr_matches(2, "EW+TIBX", 67, related) is True

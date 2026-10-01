@@ -325,7 +325,11 @@ def pr_matches(worker: int | None, package: str, batch: int | None, pr: dict[str
         )
     )
     upper = text.upper()
-    if batch is not None and re.search(rf"(?<!\d)0*{batch}(?!\d)", upper):
+    if batch is not None and re.search(
+        rf"\bBATCH(?:[- _:#]+)?0*{batch}\b",
+        upper,
+        re.IGNORECASE,
+    ):
         return True
     words = package_words(package)
     if words and all(re.search(rf"\b{re.escape(word)}\b", upper) for word in words):
@@ -374,11 +378,14 @@ def evaluate_token(
 
     matching_open: int | None = None
     matching_closed: int | None = None
+    matching_merged: int | None = None
     for pr in pulls:
         if not pr_matches(token.worker, token.package, token.batch, pr):
             continue
         number = int(pr.get("number") or 0) or None
-        if str(pr.get("state") or "").lower() == "open":
+        if pr.get("merged_at") or pr.get("merged") is True:
+            matching_merged = number
+        elif str(pr.get("state") or "").lower() == "open":
             matching_open = number
         else:
             matching_closed = number
@@ -393,10 +400,19 @@ def evaluate_token(
         source="token",
         status="IN_FLIGHT",
     )
-    if matching_closed is not None or candidate_is_resolved(token_candidate, manifest, pulls, updates):
+    if matching_merged is not None or candidate_is_resolved(token_candidate, manifest, pulls, updates):
         return TokenEvaluation(
             "RESOLVED",
-            "token package PR closed/merged or package no longer unresolved",
+            "token package merged or package no longer unresolved",
+            age_minutes,
+            True,
+            matching_open,
+            matching_merged,
+        )
+    if matching_closed is not None:
+        return TokenEvaluation(
+            "CLOSED_UNMERGED",
+            "matching token PR closed without merge; release token but keep package eligible for later repair",
             age_minutes,
             True,
             matching_open,
@@ -896,7 +912,7 @@ def controller_plan(
 
     action = "NONE"
     action_reason = ""
-    if evaluation.state in {"RESOLVED", "STALLED"}:
+    if evaluation.state in {"RESOLVED", "CLOSED_UNMERGED", "STALLED"}:
         action = "ADVANCE"
         action_reason = evaluation.reason
     elif evaluation.state == "UNASSIGNED" and next_candidate is not None:
