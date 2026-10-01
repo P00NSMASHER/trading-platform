@@ -52,6 +52,11 @@ jobs:
         run: |
           pytest -q tests/test_g1_public_batch_0067.py tests/test_g1_source_research.py tests/test_g1_acquisition_manifest.py tests/test_metadata_resolver.py tests/test_real_data_release_sprint.py
 
+      - name: Harden ephemeral runtime permissions
+        env:
+          PYTHONPATH: src
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+
       - name: Run full pytest
         env:
           PYTHONPATH: src
