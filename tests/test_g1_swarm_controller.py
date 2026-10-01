@@ -240,17 +240,19 @@ def test_unrelated_pr_does_not_renew_token_lease():
 
 
 def test_prep_branch_is_visible_when_issue_comment_is_missing():
+    event_id = "HEJFE-BBBBBBBBBBBBBBBB"
+    worker = owner_for_event(event_id)
     report = build_report(
         _manifest(),
         _exclusions(),
         _step_status(),
         [],
         [],
-        branches=["g1/prep-batch-0073-worker-3-bbb-deadbee"],
+        branches=[f"g1/prep-batch-0073-worker-{worker}-bbb-deadbee"],
         main_sha="cafebabe",
         now=datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc),
     )
     assert report["summary"]["next_package"]["status"] == "PREPARED"
     assert report["summary"]["next_package"]["batch"] == 73
-    assert report["summary"]["next_package"]["worker"] == 3
-    assert report["summary"]["next_package"]["event_ids"] == ["HEJFE-BBBBBBBBBBBBBBBB"]
+    assert report["summary"]["next_package"]["worker"] == worker
+    assert report["summary"]["next_package"]["event_ids"] == [event_id]
