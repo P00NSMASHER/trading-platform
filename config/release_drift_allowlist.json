@@ -1266,6 +1266,10 @@
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "f38483a8d7f09b97c4a50ba56b4125a9d456840a610e2152a9c4304546a8854f",
       "reason": "G1 swarm reliability: regression coverage for token precedence, leases, batch lanes, repair eligibility, and queue ordering."
+    },
+    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
+      "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
+      "reason": "Nasdaq ITCH vendor-contact provenance receipt from PR #164; records acknowledgement and Sales handoff only while Step 8 remains SOURCE_BLOCKED with no verified entitlement or decoded files."
     }
   },
   "schema_version": "2",
