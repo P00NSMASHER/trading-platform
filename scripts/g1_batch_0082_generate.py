@@ -153,13 +153,13 @@ for fn in test_files:
         pairs=[('updated["missing_exact_announcement_timestamps"] == 82','updated["missing_exact_announcement_timestamps"] == 81')]
     else:
         pairs=[
-          ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (93,81)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (93,81)'),
-          ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (93, 81)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (93, 81)'),
-          ('"93/174" in step9["evidence"] and "81" in step9["evidence"]','"93/174" in step9["evidence"] and "81" in step9["evidence"]'),
-          ('len(excluded)==81','len(excluded)==81'),
-          ('len(excluded) == 81','len(excluded) == 81'),
-          ('len(ex)==81','len(ex)==81'),
-          ('len(ex) == 81','len(ex) == 81'),
+          ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (92,82)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (93,81)'),
+          ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (92, 82)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (93, 81)'),
+          ('"92/174" in step9["evidence"] and "82" in step9["evidence"]','"93/174" in step9["evidence"] and "81" in step9["evidence"]'),
+          ('len(excluded)==82','len(excluded)==81'),
+          ('len(excluded) == 82','len(excluded) == 81'),
+          ('len(ex)==82','len(ex)==81'),
+          ('len(ex) == 82','len(ex) == 81'),
         ]
     for old,new in pairs:
         txt=txt.replace(old,new)
