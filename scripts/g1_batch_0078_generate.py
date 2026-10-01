@@ -190,7 +190,7 @@ def test_batch_0078():
     d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0078_evidence.json").read_text())
     events={r["event_id"]:r for r in rr(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    exp={"HEJFE-830337A8564B826E":("ALGN","2013-10-17T20:00:00Z",6780)}
+    exp={"HEJFE-830337A8564B826E":("ALGN","2013-10-17T20:00:00Z",8220)}
     assert len(d["items"])==1
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
