@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0074-worker-4.yml": {
-      "expected_sha256": "c66d5b9acfa7d131fc732877fe366419b09c80b33cf6fc86477204a13ed91773",
-      "reason": "G1 batch 0074 Worker-4 CLD timestamp-preserving Business Wire mirror; deterministic 89 exact / 85 reviewed exclusions with SEC corroboration and prior evidence preserved."
-    },
     ".github/workflows/g1-swarm-controller.yml": {
       "expected_sha256": "8ecd630504d24780840f8124bcfc079eedfe80cc9015976df393c5aeaacf21b3",
       "reason": "G1 swarm reliability: 15-minute plus push/PR-close reconciliation, live-state race recheck, issue-comment token handoff only, and immutable receipt artifact; no G1 evidence or merge authority."
