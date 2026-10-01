@@ -23,6 +23,11 @@ TOKEN_PACKAGE_RE = re.compile(
     re.IGNORECASE,
 )
 LEASE_HOURS_DEFAULT = 2.0
+PREP_BRANCH_RE = re.compile(
+    r"^g1/prep(?:-batch)?-(?:batch-)?0*(\d+)-worker-([0-4])-(.+)$",
+    re.IGNORECASE,
+)
+
 
 
 def _read_json(path: Path) -> Any:
@@ -96,7 +101,7 @@ def _unresolved_symbol_index(catalog: dict[str, dict[str, Any]]) -> dict[str, li
     return out
 
 
-def _infer_event_ids(label: str, catalog: dict[str, dict[str, Any]]) -> list[str]:
+def _infer_event_ids(label: str, catalog: dict[str, dict[str, Any]], worker: int | None = None) -> list[str]:
     ids = [match.upper() for match in EVENT_RE.findall(label)]
     if ids:
         return sorted(set(ids))
@@ -104,6 +109,8 @@ def _infer_event_ids(label: str, catalog: dict[str, dict[str, Any]]) -> list[str
     inferred: list[str] = []
     for symbol in _symbol_tokens(label):
         candidates = by_symbol.get(symbol, [])
+        if worker is not None:
+            candidates = [event_id for event_id in candidates if catalog[event_id]["owner"] == worker]
         if len(candidates) == 1:
             inferred.extend(candidates)
     return sorted(set(inferred))
@@ -139,7 +146,7 @@ def parse_worker_history(
         status = match.group(3).upper()
         event_ids = [x.upper() for x in EVENT_RE.findall(body)]
         if not event_ids:
-            event_ids = _infer_event_ids(label, catalog)
+            event_ids = _infer_event_ids(label, catalog, worker)
         batch_match = BATCH_RE.search(body)
         batch = int(batch_match.group(1)) if batch_match else None
         at = _comment_time(comment)
@@ -161,6 +168,35 @@ def parse_worker_history(
             row["last_status_at"] = at.isoformat()
             row["last_comment_id"] = comment.get("id")
     return catalog, list(packages.values())
+
+
+def parse_prep_branches(
+    branches: list[str],
+    catalog: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    packages: list[dict[str, Any]] = []
+    for branch in sorted(set(str(value) for value in branches)):
+        match = PREP_BRANCH_RE.match(branch)
+        if not match:
+            continue
+        batch = int(match.group(1))
+        worker = int(match.group(2))
+        label = match.group(3)
+        label = re.sub(r"-[0-9a-f]{7,40}(?:-v\d+)?$", "", label, flags=re.IGNORECASE)
+        event_ids = _infer_event_ids(label, catalog, worker)
+        packages.append(
+            {
+                "worker": worker,
+                "label": label.replace("-", "+").upper(),
+                "status": "PREPARED",
+                "event_ids": event_ids,
+                "batch": batch,
+                "at": datetime.max.replace(tzinfo=timezone.utc),
+                "comment_id": None,
+                "branch": branch,
+            }
+        )
+    return packages
 
 
 def parse_token(comments: list[dict[str, Any]]) -> dict[str, Any] | None:
@@ -193,7 +229,7 @@ def parse_token(comments: list[dict[str, Any]]) -> dict[str, Any] | None:
 
 
 def _package_event_ids(package: dict[str, Any], catalog: dict[str, dict[str, Any]]) -> list[str]:
-    return list(package.get("event_ids") or _infer_event_ids(str(package.get("label", "")), catalog))
+    return list(package.get("event_ids") or _infer_event_ids(str(package.get("label", "")), catalog, int(package["worker"])))
 
 
 def _pr_matches_token(pr: dict[str, Any], token: dict[str, Any]) -> bool:
@@ -245,7 +281,7 @@ def token_status(
 ) -> dict[str, Any]:
     if token is None:
         return {"state": "UNASSIGNED", "stale": True, "reason": "no token assignment"}
-    event_ids = _infer_event_ids(str(token.get("label", "")), catalog)
+    event_ids = _infer_event_ids(str(token.get("label", "")), catalog, int(token["worker"]))
     if event_ids and all(catalog.get(e, {}).get("state") == "RESOLVED" for e in event_ids):
         return {**token, "event_ids": event_ids, "state": "RESOLVED", "stale": True,
                 "reason": "all token events are resolved on current main"}
@@ -321,12 +357,19 @@ def build_report(
     comments: list[dict[str, Any]],
     pulls: list[dict[str, Any]],
     *,
+    branches: list[str] | None = None,
     main_sha: str,
     now: datetime,
     lease_hours: float = LEASE_HOURS_DEFAULT,
 ) -> dict[str, Any]:
     catalog = _base_catalog(manifest, exclusions)
     catalog, packages = parse_worker_history(comments, catalog)
+    branch_packages = parse_prep_branches(branches or [], catalog)
+    known = {(int(p["worker"]), p.get("batch"), _norm_label(str(p["label"]))) for p in packages}
+    for package in branch_packages:
+        key = (int(package["worker"]), package.get("batch"), _norm_label(str(package["label"])))
+        if key not in known:
+            packages.append(package)
     token = parse_token(comments)
     status = token_status(token, catalog, comments, pulls, now, lease_hours)
     next_package = choose_next_package(packages, catalog, token)
@@ -397,6 +440,7 @@ def main() -> int:
     parser.add_argument("--step-status", type=Path, default=Path("data/processed/real_data_release_sprint/step_status.json"))
     parser.add_argument("--comments", type=Path, required=True)
     parser.add_argument("--pulls", type=Path, required=True)
+    parser.add_argument("--branches", type=Path)
     parser.add_argument("--main-sha", required=True)
     parser.add_argument("--lease-hours", type=float, default=LEASE_HOURS_DEFAULT)
     parser.add_argument("--output", type=Path, required=True)
@@ -408,6 +452,7 @@ def main() -> int:
         _read_json(args.step_status),
         _read_json(args.comments),
         _read_json(args.pulls),
+        branches=_read_json(args.branches) if args.branches else [],
         main_sha=args.main_sha,
         now=datetime.now(timezone.utc),
         lease_hours=args.lease_hours,
