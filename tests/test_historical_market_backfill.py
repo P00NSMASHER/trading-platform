@@ -677,3 +677,38 @@ def test_option_quotes_do_not_change_frozen_champion_trade_inputs(tmp_path):
         {k: row[k] for k in DEFAULT_FEATURES}
         for row in minimum_features
     ]
+
+
+    # Final acceptance: score the exact frozen feature rows through the committed
+    # frozen champion bundle and require identical calibrated surveillance scores.
+    import joblib
+    import numpy as np
+
+    bundle = joblib.load(ROOT / "data/processed/model_demo/model_bundle.joblib")
+    selected = tuple(bundle["selected_features"])
+    assert selected == tuple(DEFAULT_FEATURES)
+
+    def matrix(rows):
+        return np.array([
+            [float(row[name]) if row[name] != "" else np.nan for name in selected]
+            for row in rows
+        ], dtype=float)
+
+    full_x = matrix(full_features)
+    minimum_x = matrix(minimum_features)
+    np.testing.assert_allclose(full_x, minimum_x, rtol=0.0, atol=0.0, equal_nan=True)
+
+    def frozen_scores(x):
+        w_elastic, w_boosted = bundle["blend_weights"]
+        raw = (
+            float(w_elastic) * bundle["elastic_net"].predict_proba(x)[:, 1]
+            + float(w_boosted) * bundle["boosted_model"].predict_proba(x)[:, 1]
+        )
+        return bundle["calibrator"].predict_proba(raw.reshape(-1, 1))[:, 1]
+
+    np.testing.assert_allclose(
+        frozen_scores(full_x),
+        frozen_scores(minimum_x),
+        rtol=0.0,
+        atol=0.0,
+    )
