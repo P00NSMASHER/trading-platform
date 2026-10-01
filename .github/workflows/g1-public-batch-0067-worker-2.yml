@@ -31,7 +31,9 @@ jobs:
           python-version: "3.11"
 
       - name: Install project and test dependencies
-        run: python -m pip install -e . pytest "scikit-learn==1.8.0"
+        run: |
+          python -m pip install -r requirements.lock -r requirements-dev.lock
+          python -m pip install -e . --no-deps
 
       - name: Verify exact current-main ancestry
         run: |
