@@ -208,6 +208,7 @@ def _pr_matches_token(pr: dict[str, Any], token: dict[str, Any]) -> bool:
 def _latest_holder_activity(
     worker: int,
     assigned_at: datetime,
+    token: dict[str, Any],
     comments: list[dict[str, Any]],
     pulls: list[dict[str, Any]],
 ) -> datetime:
@@ -226,6 +227,8 @@ def _latest_holder_activity(
         }:
             latest = max(latest, at)
     for pr in pulls:
+        if not _pr_matches_token(pr, token):
+            continue
         updated = _parse_time(pr.get("updated_at"))
         if updated >= assigned_at:
             latest = max(latest, updated)
@@ -252,7 +255,9 @@ def token_status(
         if bool(pr.get("merged_at")) or bool(pr.get("merged")) or str(pr.get("state", "")).lower() == "closed":
             return {**token, "event_ids": event_ids, "state": "RESOLVED", "stale": True,
                     "reason": "matching canonical PR is merged/closed"}
-    latest = _latest_holder_activity(int(token["worker"]), token["assigned_at"], comments, pulls)
+    latest = _latest_holder_activity(
+        int(token["worker"]), token["assigned_at"], token, comments, pulls
+    )
     if now > latest + timedelta(hours=lease_hours):
         return {**token, "event_ids": event_ids, "state": "STALLED", "stale": True,
                 "latest_activity_at": latest,
