@@ -28,6 +28,7 @@ CONTROL_NUMERIC_REL_TOL = 0.05
 
 SOURCE_PRIORITY = {
     "official_newswire_archive": 10,
+    "sec_litigation_public_distribution_record": 10,
     "ibes_announcement": 20,
     "nyse_daily_taq_master": 10,
     "nasdaq_daily_list": 10,
