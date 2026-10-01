@@ -458,6 +458,34 @@ def test_parse_prep_branch_strips_base_sha_suffix() -> None:
     assert parsed == (3, 73, "PNRA+ALGN")
 
 
+def test_latest_status_invalidates_older_found_for_same_event() -> None:
+    updates = ctl.parse_worker_updates([
+        comment(
+            30,
+            "2026-10-01T20:00:00Z",
+            "WORKER 0 | HEJFE-8167467EBF64AABE/PNRA | FOUND | no batch/PR | candidate clock",
+        ),
+        comment(
+            31,
+            "2026-10-01T20:05:00Z",
+            "WORKER 0 | HEJFE-8167467EBF64AABE/PNRA | PREP_INVALIDATED | stale prep must remain research-only",
+        ),
+    ])
+    latest = ctl.latest_updates_by_identity(updates)
+
+    assert len(latest) == 1
+    row = next(iter(latest.values()))
+    assert row.status == "PREP_INVALIDATED"
+
+    chosen = ctl.choose_found_candidate(
+        updates,
+        manifest=manifest(unresolved_symbols={"PNRA": {"HEJFE-8167467EBF64AABE"}}),
+        used={worker: set() for worker in range(5)},
+        policy=policy(),
+    )
+    assert chosen is None
+
+
 def test_next_unused_batch_respects_worker_lane() -> None:
     p = policy()
     used = {worker: set() for worker in range(5)}
