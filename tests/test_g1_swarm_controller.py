@@ -456,8 +456,11 @@ def test_closed_unmerged_candidate_remains_eligible_for_later_repair() -> None:
         event_ids=(),
         symbols=("EW", "TIBX"),
         created_at="2026-10-01T10:00:00Z",
-        source="issue_prepared",
+        source="prep_branch_fallback",
         status="PREPARED",
+        branch="g1/prep-batch-0067-worker-2-ew-tibx-current",
+        behind_by=0,
+        ahead_by=1,
     )
     pulls = [
         {
