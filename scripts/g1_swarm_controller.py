@@ -335,7 +335,12 @@ def pr_matches(worker: int | None, package: str, batch: int | None, pr: dict[str
         upper,
         re.IGNORECASE,
     ):
-        return True
+        # A batch hit alone is insufficient when worker identity is known.
+        # This prevents an unrelated PR mentioning the same number from being
+        # treated as the token holder's integration PR.
+        if worker is None:
+            return True
+        return bool(re.search(rf"\bWORKER[- _]*{worker}\b", upper))
     words = package_words(package)
     if words and all(re.search(rf"\b{re.escape(word)}\b", upper) for word in words):
         if worker is None:
@@ -348,11 +353,15 @@ def pr_matches(worker: int | None, package: str, batch: int | None, pr: dict[str
 def update_matches_token(update: WorkerUpdate, token: TokenAssignment) -> bool:
     if token.worker is None or update.worker != token.worker:
         return False
-    if token.batch is not None and update.batch == token.batch:
-        return True
     token_words = set(package_words(token.package))
     update_words = set(package_words(update.label))
-    return bool(token_words and update_words and token_words.issubset(update_words | token_words) and token_words & update_words)
+    if token.batch is not None and update.batch == token.batch:
+        # Same batch is necessary but not sufficient: require compatible package
+        # identity whenever both sides provide one.
+        return not token_words or not update_words or token_words == update_words
+    # Package fallback matching must be exact enough to prevent an update for one
+    # symbol in a multi-event package from extending the whole package's lease.
+    return bool(token_words and update_words and token_words == update_words)
 
 
 def batch_merged(batch: int, pulls: list[dict[str, Any]], updates: list[WorkerUpdate]) -> bool:
@@ -383,6 +392,7 @@ def evaluate_token(
     age_minutes = None if assigned_at is None else max(0.0, (now - assigned_at).total_seconds() / 60.0)
 
     matching_open: int | None = None
+    matching_open_fresh = False
     matching_closed: int | None = None
     matching_merged: int | None = None
     for pr in pulls:
@@ -393,6 +403,11 @@ def evaluate_token(
             matching_merged = number
         elif str(pr.get("state") or "").lower() == "open":
             matching_open = number
+            # An open PR is material progress only while it still targets the
+            # exact current-main snapshot represented by this controller run.
+            # Callers normalize base.sha when reading live PRs.
+            base_sha = str((pr.get("base") or {}).get("sha") or pr.get("base_sha") or "")
+            matching_open_fresh = bool(base_sha and base_sha == manifest.get("main_sha"))
         else:
             matching_closed = number
 
@@ -426,10 +441,12 @@ def evaluate_token(
         )
 
     if candidates is not None:
-        live_support = matching_open is not None
+        live_support = matching_open is not None and matching_open_fresh
         if not live_support:
             for candidate in candidates:
-                if candidate.source not in {"issue_prepared", "prep_branch_fallback"}:
+                # Only an exact-current-main prep branch is live prepared support.
+                # Historical PREPARED comments are advisory and cannot keep a token alive.
+                if candidate.source != "prep_branch_fallback" or candidate.behind_by != 0:
                     continue
                 if candidate.worker != token.worker or candidate.batch != token.batch:
                     continue
@@ -438,7 +455,7 @@ def evaluate_token(
                     break
         if not live_support:
             for update in updates:
-                if update.status not in {"FOUND", "BUILDING", "PREPARED", "CI"}:
+                if update.status not in {"FOUND", "BUILDING", "CI"}:
                     continue
                 if update_matches_token(update, token) and not update_is_resolved(update, manifest):
                     live_support = True
@@ -453,7 +470,7 @@ def evaluate_token(
                 matching_closed,
             )
 
-    progress_after = matching_open is not None
+    progress_after = matching_open is not None and matching_open_fresh
     if assigned_at is not None:
         for update in updates:
             update_time = parse_time(update.created_at)
@@ -549,7 +566,10 @@ def branch_candidates(
         ahead = compare.get("ahead_by")
         if ahead is not None and int(ahead) < 1:
             continue
-        if behind is not None and int(behind) > 10:
+        # Prepared branches are disposable caches. Any divergence behind current
+        # main invalidates PREPARED state and requires regeneration from exact main.
+        # Do not let a stale branch consume or extend an integration-token lease.
+        if behind is None or int(behind) != 0:
             continue
         rows.append(
             Candidate(
@@ -574,15 +594,20 @@ def candidate_key(candidate: Candidate) -> tuple[int, int]:
 
 
 def require_live_prepared_support(candidates: list[Candidate]) -> list[Candidate]:
-    live_keys = {
+    # A PREPARED comment or queue hint is not durable evidence. The package must
+    # have a prep branch compared against *current* main with behind_by == 0.
+    # branch_candidates() already rejects stale/diverged prep branches.
+    live_branch_keys = {
         candidate_key(candidate)
         for candidate in candidates
-        if candidate.source in {"issue_prepared", "prep_branch_fallback"}
+        if candidate.source == "prep_branch_fallback"
+        and candidate.behind_by == 0
+        and (candidate.ahead_by or 0) >= 1
     }
     return [
         candidate
         for candidate in candidates
-        if candidate.source != "queue_hint" or candidate_key(candidate) in live_keys
+        if candidate_key(candidate) in live_branch_keys
     ]
 
 
@@ -616,7 +641,7 @@ def choose_prepared_candidate(
             continue
         eligible.append(candidate)
 
-    source_priority = {"issue_prepared": 0, "prep_branch_fallback": 1, "queue_hint": 2}
+    source_priority = {"prep_branch_fallback": 0, "issue_prepared": 1, "queue_hint": 2}
     eligible.sort(
         key=lambda c: (
             source_priority.get(c.source, 9),
@@ -903,6 +928,9 @@ def controller_plan(
     now: datetime,
 ) -> dict[str, Any]:
     manifest = manifest_state(root, policy)
+    # Thread the exact main snapshot through token evaluation so open PRs based
+    # on older main commits cannot masquerade as live progress.
+    manifest["main_sha"] = str(compares.get("__main_sha__") or "")
     updates = parse_worker_updates(comments)
     token = parse_latest_token(comments)
 
@@ -1009,6 +1037,7 @@ def main() -> int:
     main = github_api(repo, api_token, "/branches/main")
     main_sha = str(((main or {}).get("commit") or {}).get("sha") or "")
     refs, compares = fetch_branch_fallbacks(repo, api_token, main_sha)
+    compares["__main_sha__"] = main_sha
 
     now = datetime.now(timezone.utc)
     plan = controller_plan(
@@ -1052,6 +1081,7 @@ def main() -> int:
             max_pages=3,
         )
         fresh_refs, fresh_compares = fetch_branch_fallbacks(repo, api_token, main_sha)
+        fresh_compares["__main_sha__"] = main_sha
         plan = controller_plan(
             root=root,
             policy=policy,

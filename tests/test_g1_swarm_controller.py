@@ -228,7 +228,7 @@ def test_uncorroborated_queue_hint_does_not_beat_live_branch_prep() -> None:
             source="prep_branch_fallback",
             status="PREPARED",
             branch="g1/prep-0066-worker-1-vdsi",
-            behind_by=1,
+            behind_by=0,
             ahead_by=1,
         ),
         ctl.Candidate(
@@ -308,7 +308,7 @@ def test_controller_invalidates_token_backed_only_by_historical_queue_hint() -> 
     assert result.progress_after_assignment is False
 
 
-def test_live_prepared_update_supports_active_token() -> None:
+def test_prepared_comment_without_fresh_branch_does_not_support_active_token() -> None:
     token = ctl.TokenAssignment(
         worker=2,
         package="EW+TIBX",
@@ -343,7 +343,44 @@ def test_live_prepared_update_supports_active_token() -> None:
         candidates=[],
     )
 
-    assert result.state == "ACTIVE"
+    assert result.state == "INVALID"
+
+def test_stale_prep_branch_is_rejected() -> None:
+    candidates = ctl.branch_candidates(
+        [
+            {
+                "ref": "refs/heads/g1/prep-batch-0067-worker-2-ew-tibx-deadbee",
+                "object": {"sha": "deadbeef"},
+            }
+        ],
+        {
+            "g1/prep-batch-0067-worker-2-ew-tibx-deadbee": {
+                "behind_by": 23,
+                "ahead_by": 1,
+            }
+        },
+    )
+    assert candidates == []
+
+
+def test_exact_current_main_prep_branch_is_live_support() -> None:
+    candidates = ctl.branch_candidates(
+        [
+            {
+                "ref": "refs/heads/g1/prep-batch-0067-worker-2-ew-tibx-deadbee",
+                "object": {"sha": "deadbeef"},
+            }
+        ],
+        {
+            "g1/prep-batch-0067-worker-2-ew-tibx-deadbee": {
+                "behind_by": 0,
+                "ahead_by": 1,
+            }
+        },
+    )
+    assert len(candidates) == 1
+    assert candidates[0].behind_by == 0
+
 
 def test_resolved_candidate_is_skipped() -> None:
     p = policy()
@@ -355,8 +392,11 @@ def test_resolved_candidate_is_skipped() -> None:
             event_ids=(),
             symbols=("BRKR",),
             created_at="2026-10-01T09:00:00Z",
-            source="issue_prepared",
+            source="prep_branch_fallback",
             status="PREPARED",
+            branch="g1/prep-0064-worker-4-brkr",
+            behind_by=0,
+            ahead_by=1,
         ),
         ctl.Candidate(
             worker=3,
@@ -365,8 +405,11 @@ def test_resolved_candidate_is_skipped() -> None:
             event_ids=(),
             symbols=("PNRA", "ALGN"),
             created_at="2026-10-01T10:00:00Z",
-            source="issue_prepared",
+            source="prep_branch_fallback",
             status="PREPARED",
+            branch="g1/prep-0073-worker-3-pnra-algn",
+            behind_by=0,
+            ahead_by=1,
         ),
     ]
     m = manifest(
@@ -413,8 +456,11 @@ def test_closed_unmerged_candidate_remains_eligible_for_later_repair() -> None:
         event_ids=(),
         symbols=("EW", "TIBX"),
         created_at="2026-10-01T10:00:00Z",
-        source="issue_prepared",
+        source="prep_branch_fallback",
         status="PREPARED",
+        branch="g1/prep-batch-0067-worker-2-ew-tibx-current",
+        behind_by=0,
+        ahead_by=1,
     )
     pulls = [
         {
@@ -554,3 +600,110 @@ def test_token_parser_accepts_explicit_correction_and_makes_it_latest() -> None:
     assert token.package == "EW+TIBX"
     assert token.batch == 67
     assert token.comment_id == 21
+
+
+def test_partial_package_update_cannot_extend_multi_event_token() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    update = ctl.WorkerUpdate(
+        worker=2,
+        label="EW",
+        status="BUILDING",
+        batch=None,
+        event_ids=(),
+        symbols=("EW",),
+        created_at="2026-10-01T11:00:00Z",
+        comment_id=11,
+        body="",
+    )
+    assert ctl.update_matches_token(update, token) is False
+
+
+def test_stale_open_pr_does_not_keep_token_live() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-AAAA000000000004"},
+            "TIBX": {"HEJFE-AAAA000000000005"},
+        }
+    )
+    m["main_sha"] = "new-main"
+    pulls = [{
+        "number": 170,
+        "state": "open",
+        "merged_at": None,
+        "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+        "body": "",
+        "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
+        "base": {"sha": "old-main"},
+    }]
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=pulls,
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 12, 1, tzinfo=timezone.utc),
+        candidates=[],
+    )
+    assert result.state == "INVALID"
+    assert result.progress_after_assignment is False
+
+
+def test_current_main_open_pr_counts_as_live_progress() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-AAAA000000000004"},
+            "TIBX": {"HEJFE-AAAA000000000005"},
+        }
+    )
+    m["main_sha"] = "current-main"
+    pulls = [{
+        "number": 170,
+        "state": "open",
+        "merged_at": None,
+        "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+        "body": "",
+        "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
+        "base": {"sha": "current-main"},
+    }]
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=pulls,
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 12, 1, tzinfo=timezone.utc),
+        candidates=[],
+    )
+    assert result.state == "ACTIVE"
+    assert result.progress_after_assignment is True
+
+
+def test_same_batch_wrong_package_does_not_extend_token() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    update = ctl.WorkerUpdate(
+        worker=2,
+        label="OTHER",
+        status="BUILDING",
+        batch=67,
+        event_ids=(),
+        symbols=("OTHER",),
+        created_at="2026-10-01T11:00:00Z",
+        comment_id=11,
+        body="",
+    )
+    assert ctl.update_matches_token(update, token) is False
+
+
+def test_batch_number_without_worker_identity_does_not_match_token_pr() -> None:
+    pr = {
+        "number": 999,
+        "state": "open",
+        "title": "Maintenance batch 0067 cleanup",
+        "body": "",
+        "head": {"ref": "maintenance/batch-0067"},
+    }
+    assert ctl.pr_matches(2, "EW+TIBX", 67, pr) is False
