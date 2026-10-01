@@ -439,3 +439,39 @@ def test_pr_batch_match_requires_batch_context_not_random_digits() -> None:
         "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
     }
     assert ctl.pr_matches(2, "EW+TIBX", 67, related) is True
+
+
+def test_token_parser_accepts_event_id_slash_symbol_package() -> None:
+    comments = [
+        comment(
+            20,
+            "2026-10-01T15:17:00Z",
+            "EXECUTIVE TOKEN ADVANCE\n- GLOBAL INTEGRATION TOKEN now advances to Worker 2 / HEJFE-ED329F780A1085DA/EW / reserved batch 0072.",
+        )
+    ]
+    token = ctl.parse_latest_token(comments)
+    assert token is not None
+    assert token.worker == 2
+    assert token.package == "HEJFE-ED329F780A1085DA/EW"
+    assert token.batch == 72
+
+
+def test_token_parser_accepts_explicit_correction_and_makes_it_latest() -> None:
+    comments = [
+        comment(
+            20,
+            "2026-10-01T15:17:00Z",
+            "GLOBAL INTEGRATION TOKEN now advances to Worker 2 / HEJFE-ED329F780A1085DA/EW / reserved batch 0072.",
+        ),
+        comment(
+            21,
+            "2026-10-01T15:17:33Z",
+            "GLOBAL INTEGRATION TOKEN is corrected back to Worker 2 / EW+TIBX / reserved batch 0067.",
+        ),
+    ]
+    token = ctl.parse_latest_token(comments)
+    assert token is not None
+    assert token.worker == 2
+    assert token.package == "EW+TIBX"
+    assert token.batch == 67
+    assert token.comment_id == 21
