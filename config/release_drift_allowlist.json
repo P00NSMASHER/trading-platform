@@ -1260,12 +1260,12 @@
       "reason": "G1 swarm reliability: deterministic token lease, batch-lane, canonical-input and fail-closed controller policy."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "3dd533044df19ba24b3653378a89c59a6b7563fa2120cd3d10cc4c4b911b2ea0",
-      "reason": "G1 swarm reliability hardening: invalidate any prep branch behind current main, require exact-current-main branch support for PREPARED state, reject partial-package progress, and prevent stale open PRs from extending token leases."
+      "expected_sha256": "b2bb1f9965593d8787ebc391b51a8388ebe6beb7ae2f76af5c86e4437a54d0f3",
+      "reason": "G1 swarm reliability hardening: invalidate stale prep, require exact-current-main support, exact package progress, fresh open-PR bases, and worker-qualified batch identity."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "48a420a295698cc8ddcccea5e049c23213869e47eb3c3220dd31ef5cd4d3e4bd",
-      "reason": "G1 swarm reliability regressions for stale prep invalidation, exact-current-main support, partial-package false progress, stale open-PR leases, and closed-unmerged package recovery."
+      "expected_sha256": "039eab04d5a63c66d0237bac48156aaf66f90a07e6422f377bce5d100e84e682",
+      "reason": "G1 swarm regressions for stale prep, false package progress, stale open PRs, same-batch wrong-package updates, and batch-number collisions."
     },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
       "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
