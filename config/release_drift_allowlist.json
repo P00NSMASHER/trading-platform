@@ -1262,6 +1262,10 @@
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "1e25b87ffcc4c42fd79d2200b22bdf7a144f767be3e9b915b6139bf760d10f53",
       "reason": "Regression coverage for G1 swarm token resolution, lease expiry, prepared queue priority, unrelated-PR isolation, recent-CI renewal, and fail-closed resolution truth."
+    },
+    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
+      "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
+      "reason": "Nasdaq TotalView-ITCH vendor-contact provenance receipt: Client Success acknowledgement and Sales handoff only; preserves Step 8 SOURCE_BLOCKED with no unverified access, delivery, credentials, NDA, pricing, entitlement, or usable data claim."
     }
   },
   "schema_version": "2",
