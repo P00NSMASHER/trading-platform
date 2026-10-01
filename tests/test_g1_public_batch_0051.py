@@ -23,5 +23,5 @@ def test_batch_0051_preserves_prior():
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
-    ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==88
+    ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==86
     assert all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in ex)

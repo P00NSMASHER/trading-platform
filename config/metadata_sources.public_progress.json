@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 86 exact release timestamps and 88 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 88 exact release timestamps and 86 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 88,
-    "expected_sha256": "24c7270ee1b5b2db8032ca44e3b1dfc69310e2ddd5306185587a8dfd90b05f4e",
+    "expected_count": 86,
+    "expected_sha256": "84662c1e45cf591e08f45e0254947f03af3bcffe1d14b86e3022b35400945b03",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public SEC civil complaints with explicit newswire public-distribution clocks, independently corroborated by matching SEC Exhibits 99.1. No licensed vendor data used.",
+      "notes": "EW 2013-04-23 16:01 EDT; TIBX 2013-09-19 16:05 EDT. The SEC litigation records explicitly identify public dissemination/distribution. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0067.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "sec_litigation_public_distribution_record",
+      "source_id": "public-sec-litigation-ew-tibx-batch-0067",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {
