@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "63d227c01041459a97548af17fb4a06951777a90c90e99a49e82459eae2fea5f",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "1e530f11ba464f51455c7840ad861b5716dde549b28053d9244046060236e7aa",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "5be8d2d6ade3903a533509ca720027e6fa6b89020865e1df02509c442ef43681",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "162f97ae5475a3ec71da42aa36ecca2085dec91592168e1089bfe3f78db04383",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "c80ad150cd77ea8e7d5c0441b5d398f0187af557b3861fd544bbd27a278aa9c4",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "f5ab429ad4cef8cf862b5cccfc12252695d50497cf376d2defef3b3c85bc0ac4",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -156,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "418cdfe655e3a49ca7abd3767f2eafdf4cef2cf7e0ded33833f1b14ecf675213",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "aa42fd6eb4b76b2cfa1f4bc4b9ec730f52499ce7f7f59050303e51aff0092cc8",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -176,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "3f14fc1db1952f405a3c2c74396cc650b77748fa690420a65843b8d42ac3bcb5",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "88c01896e7b990c2c20f3e6a5985706bdd962b43c1a87d37cbe590799321e95a",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -188,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "e596968fa013c9ec4b59ce36eeb29b27cd28ef90f0eaf3fdf049a0970d5a285e",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "e7053fed9c72e49c70fd49f28bc8c9ccb06f06ad85835af287dfaab8a747b0b1",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -244,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "422d016f3b5d56b5d09f00af6b0cb40edbaff7aec87e216f0a6d32dce672f5ac",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "425f40718dcd7e5ffab637a9c8f28ae01b90ac182e7dcf2c71ffaf6c192bdba2",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -260,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "8fe443c05b3cca8a2fdc3ac8c13b9e282fc055fbc6afa774a5de248afede54cc",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "17718449280a9bcfe98b5e26ad9209dc2d81727a4f255a10c8864ae55d43c56c",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "92f14ece236d44b3256ff8a4e5c0a62cefadc00015bba0cc26a4d61359a47a27",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "fc383e1c9436fa40a5690ff59d278f25ce36067aa7ff285105608cb446a94be1",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -304,16 +304,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "89cd812271595c8d832c48b9edd2c493aae0c8a4160ae7fa967287c86058d8c0",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "ca7b2981411d2668057d69b03ae4bab9c5b293f8723af5d423cc14a248b957c7",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "2d6e909bbd2ea891ef85bc71ff65ffce1637e9a0132f9ae76e09bcc065653dab",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "5dd666ca9f6d9a9d6b7838754a093b0294dc1750ef236b0106b091457d0a7004",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "47d6aaf9a1b8606f5843d9579b3ee1cc24a9d88d7185b257f9ca25bf1fe195bb",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "95721b4595380a26e5a6aac9ee051c74acb12b6eb6222f92c8c24a20903a5de6",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -332,8 +332,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "c11e194800b9a9df1c92c6d3be75d42a58c97681a3a2d1bae8e7d77620ef04f8",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "0fade5f78662e55d630bb5c6f4151729e9e81f9519632f713e52c4c8e6264d42",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -587,6 +587,10 @@
       "expected_sha256": "6e0a52fa010a2387b34cad6af202071072bca64e173fbc602e495fc345d1ab8c",
       "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0082.csv": {
+      "expected_sha256": "7c193a6b2ee6de9f1d067129ac060c398d44cfed668bfebd46e07488b9b84ed5",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -707,9 +711,13 @@
       "expected_sha256": "1a4572763d370732bae31ebbe93a5baafd83a2a349db058e78bc229205d1ef11",
       "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0082_evidence.json": {
+      "expected_sha256": "cf36e4a03e105377e63b3d9a5317bb26d2bf775eea860b6b6501cb2137cb4de3",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "869c7ef43a86f6af959496734f82975a419666791b9f37c3501c2a334c0bfe06",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "89684f3b8d5726a39d53c0255fe1344883c58a4b663609aa94fb695945215a4f",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
@@ -832,8 +840,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "0b121f2b4e5485da77952b93f20c236fd1c1003e66987494e503e34df631d510",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "2594b3f1fd1d7e7eb1827016c4a5239076157fcf62df3e6aeffeaa11b3fe4f70",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -986,6 +994,10 @@
     "scripts/g1_batch_0078_generate.py": {
       "expected_sha256": "68f2f3129d55df888d471ebd2bd8d69d3a8e6e695d46ac890973d94316dcafd6",
       "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0082_generate.py": {
+      "expected_sha256": "00490f0ab23bd25b295551c3ecbfbb98ad693badead37ded65ae88a98ccebc21",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
       "expected_sha256": "40c4c7694f5e9ddccdc4b3487c74edfafda87681ef71228fe46d47fb9be3873b",
@@ -1148,140 +1160,144 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "af382ccd54d06b5b004956792fd3900ee8989bfce02fe6d8bed71a7dc7eddcfc",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "4959914d39ab67ab15bd24141989a5317dbbbea2951f3ffc60bfa951718edec6",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "0fbfc52f381e8f364e74c6cb168d99b90cfec96864f72e76f8812001cc7cc824",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "7a369cd22839babd00669381721f1b1c4f390558c872b8cef952711734887439",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "4e1849b65d37ec6bf336b98e465e5a189a07b9f8e9be96086ce496c3fb35d8ac",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "ecfae62cb222e8538eb7da03e46a1b6623594d616e39e021081356e1ead3354c",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "49977e997ce1a3b0e0c885a997bd6bdb3ea4886daef37e7751981e5761583e19",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "53f34669ddeb89c5ffc5806dc342ed99620e41c1fb9025fc9ab4c1d5cf9eec40",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "e2292d3a91270aaa3212866a2d18eb56aa313b06f70b0fe3d790467bbb4c630b",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "96f2f60e8962732675a940cb6699718f5a5dd35efd3e139da589b334a55ee25f",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "9b40dfc6d4b665ffdd9200d0413ce8f4362270ab223d06c43cd200c5cd6e23a0",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "39a17845a90d45312998adb197e5d22123f35b6b90ba070a6360c86f7bf278d6",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "7c12f03f64e885eecfb97ba57c211da40d89b6eb8055eb3ec6533a054a8c02ab",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "33401d4e8c29ca0192e8970f67ce608a5bc7b5abeec5b6f586f650bb727eb9dd",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "a345c36a3fd78b7855f08d45252e7248c9679c3423981ce063eca895103b4a90",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "026b801539c06f3a7514b371c12d9e2cf0ff42f2d171d7e4c2567a344852f5ee",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "8c34daa7d29644969770a556174bc59d3c7c6bf54fab6f1cf7246d56f3e294c5",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "30484aa6ac0c537b6c8b07d8b0a1f4ee3e65c2f43222172847c2d3b313b6b9c6",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "5c4a68f1096b0205e4f0f4882cbf6aafd9efea350cebbc3013522f2a06b8c3d7",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "578625731b906ce59c0663164e83f431d4c36de50927e724ddbe54b05906f4ea",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "146d9e00cd6a2a289ec1258fbf2832266da39d4ff30e694b1078dd24d729d704",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "13edcad7eeb3eaa2573bb8024aa7b611df38ac1d572c649e7893ddbba90ae485",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "4ec0545894f3007d1398825d7291544c63caf8d8a1a56f3aace9fd73edf1e37f",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "1a19c429b0dc4d201c8fa81b52bb0fadab7b7620de92109b49e1737606586d76",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "7f35d9e8e64a5780188a6a3ec61d542466547f9c68ec6520739de05e076d7dcd",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "5ade3822267c66ab9c783aa75cbe81a8a446b8ad60502b8b8b7d21696a15d91d",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "595486a1e3d169ed65baddb7ebbf84b6198f88a1f99dba96fd81d37bc17b3bdc",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "f0b8463264b6809d245a2978ec7caf988ed3745f6a897e101a35de94f97a80cb",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "903428afed9e6a7e0b4f05a3068ef45fc38226a6598aa0b0140f188c5a4b510d",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "52fd1bfe1b9569f051063de6e34645d7ed632ef0a086447a4a3a96a1d744453c",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "15088b976097e72e7a192ba1014d7934618f6a711b3f0e4645d44229400a4edd",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "2717b1a1cb7bbbc8d2163278aa20758ef3569f7600db7c1f879666e84c2b3721",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "327092cecc0b23a29ec3b0d28139f2f4eb64cca52b35c62c24aad7dd08b5a4a9",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "219420cc8eb75e34d8e7095be5e58ca240e61c5bc9fb486506936435f2358280",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "e8f471e93ec2ac3e29fda93da5370924b86bebe87bdb073bbbdb25404cc35ad7",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "cb44f844066f6ef04978a68046d9ac69960bfff72cf3951031b324738aa1629c",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "5790112be8632aed4eb607fc0622cd62333dfdfb6b33bda7cc8dce115bf1d6d2",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "6dc909d4e947e1a8fe70e48abb6875cdd6cc73cc6f8d322fb492d75f3eb9ddca",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "48fdd086451246f61d74604bc7b2f0472a7766f48422426775e45947b855e3d7",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "c7769dfa2ee70cecbbb181c30022918bd1a4876d960cf1b37f71322bd91bd31d",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "285fe0ce1f09173ebf5f2262875baadab8e24620392fe1742121014e53af98c8",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "40dfaac444290f6b3b1e1837915f0e87dde92dca74fd4a86dcabb62b662a5f2a",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "255d5d30bc0e256f2041d633e59ba173e1c09a285f07449e453c811ffe763b72",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "adb9e8b6636bb918137c2f4602246b9763856a918116191511413ba3559f7f02",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "bd891cc777445647558876d732241a724a23733603b618570c8bfd7d08b1f811",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "a60a246b0d6ffb558d46a19ebfbbc2fbfd828b4a19562df83ab1c3291ef28226",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "61fa7b5629c164d2f424f6633297129c3e28bf775d8af70629528eeabca0a1d7",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "38acc0acb60409d0676c402588d5b4ad7d295c8389f4813c669daecf5895378c",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "448944792a79f62004e8d7a5d587de1472c2c98106812fc21d088cd041ebe97b",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "d572df2d9eb27d4db81a1c6be19281872b9cfe031bea09c567cf26a07262f9e9",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "d41e65752b57f00fe09962143427532a6b1c07483fd3fbe2a9d46f3a7fdd7244",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "eeb4cb276f065a3d1fef3c4c98efdd29cc27791ac1195f43bc7c97a2cde4c296",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "2912735deef2d38e56474758554c437534972da512759d46c3be88dcfc4792d3",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "721e96fee9241ecdd00c242a7961bed3c64d78d3ff9f3a2f98b9051ae30fd7bd",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "5772efba39b3423efffec43e66e1b220b8668dce8161cf8cca9753828f42af17",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "8b97a6fdb4c331b26ef0875344a83cb1cbc06c8681c5e92170afae655b9b8c4d",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "f29b654f9836c3c53e25f371dcdaf6746df94e4ac87d89805f98be4624c9a851",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "72c529b628c98936581777dc843a1f8edcd252c7d8dccd3a156d929b6c8dc255",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "0ace9b79377e47c059bee79b3773c373cf0d8777bf804cceedb9e733e88ce3fe",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "aa78f5b44f205fef2ce4a9d96240d3baaa6ccc0035c353c3c53317b6c9dffc66",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "6e307020006e27fdea64b6fc4602eeadeaf599552464cec6c5d195c447359daa",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "f6391dad4fc0583635ec3cae38faeb3b5ed7196db2694c9f50bbc287ccffeaf0",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0082.py": {
+      "expected_sha256": "dd19ea8b0ae999854b4c91d4890f4bd6bc607ab6af57873399aa02f19cd257de",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "20a365c24a2b742cad2f43112f6b76b659fe89d15223a1595d7e83ed6462f68d",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "18ef76cb0982e91ffc52591bcbb8596e7f971fdb0211d31dfdeb2f3c051e3724",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "121899b0956cb982fb1a48b36c50fe7da63b3f0fdb50a423813161fa971d6bef",
@@ -1312,8 +1328,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "8454e8f6ea53d0f7a3a25861c8e08a5166950a6739a0103a2ba36cfa443cbd52",
-      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "e6df5b97bccf9b668c24e779984b9675837b8d3cfec9077e9f51263dfe40106d",
+      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

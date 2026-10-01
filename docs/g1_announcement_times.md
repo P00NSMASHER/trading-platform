@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **62 public exact-time batches / 92 exact-resolved
+The current repository state is **63 public exact-time batches / 93 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -225,3 +225,7 @@ StreetInsider preserves the original Business Wire release for The Cheesecake Fa
 ### Batch 0078: Align Technology
 
 The official SEC civil complaint records Newswire Service 1 distributing Align Technology's Q3 2013 earnings release to the public at 2013-10-17 16:00 EDT (20:00 UTC), 8,220 seconds after the frozen 13:43 EDT illicit trade. SEC Exhibit 99.1 independently corroborates Align Technology, the October 17 release title/date and Q3 results. This advances G1 from 91 exact / 83 reviewed exclusions to 92 exact / 82 reviewed exclusions. EDGAR acceptance, conference-call, archive-capture, date-only, scheduled and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0082: Panera Bread
+
+The official SEC civil complaint records Newswire Service 1 publicly disseminating Panera Bread's Q2 2013 earnings release at 2013-07-23 16:00 EDT (20:00 UTC), 2,940 seconds after the frozen 15:11 EDT illicit trade. Matching SEC Exhibit 99.1 independently corroborates the July 23 Q2 release identity, $1.74 diluted EPS result, and revised FY2013 EPS target. This advances G1 from 92 exact / 82 reviewed exclusions to 93 exact / 81 reviewed exclusions. EDGAR acceptance, conference-call, archive-capture, date-only, scheduled and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
