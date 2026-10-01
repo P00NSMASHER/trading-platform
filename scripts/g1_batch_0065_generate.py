@@ -139,6 +139,8 @@ for fn in test_files:
           ('report["reviewed_excluded_event_records"] == 84','report["reviewed_excluded_event_records"] == 83'),
           ('state["public_exact_batch_count"] == 60','state["public_exact_batch_count"] == 61'),
           ('state["exact_resolved_event_records"] == 90','state["exact_resolved_event_records"] == 91'),
+          ('report["priority_event_count"] == 5','report["priority_event_count"] == 4'),
+          ('"QLIK", "TNGO", "CAKE", "NKE", "NATI"','"QLIK", "TNGO", "NKE", "NATI"'),
         ]
     elif fn.endswith("test_g1_acquisition_manifest.py"):
         pairs=[
@@ -148,6 +150,8 @@ for fn in test_files:
           ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 84','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 83'),
           ('len(resolved) == 90','len(resolved) == 91'),
           ('len(unresolved) == 84','len(unresolved) == 83'),
+          ('"QLIK", "TNGO", "CAKE", "NKE", "NATI"','"QLIK", "TNGO", "NKE", "NATI", "VMW"'),
+          ('[1, 2, 3, 4, 6]','[1, 2, 4, 6, 1000]'),
         ]
     elif fn.endswith("test_real_data_release_sprint.py"):
         pairs=[('updated["missing_exact_announcement_timestamps"] == 84','updated["missing_exact_announcement_timestamps"] == 83')]
