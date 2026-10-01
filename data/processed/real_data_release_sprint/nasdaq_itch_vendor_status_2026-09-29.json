@@ -1,0 +1,30 @@
+{
+  "schema_version": "1",
+  "source": "Nasdaq Data Client Success email thread",
+  "request_subject": "Historical TotalView-ITCH access request — exact 2011–2015 research footprint",
+  "request_scope": {
+    "nasdaq_listed_events": 80,
+    "event_dates": 46,
+    "itch_4_1_events": 35,
+    "itch_5_0_events": 45
+  },
+  "vendor_status": {
+    "as_of": "2026-09-29T14:23:53",
+    "client_success_acknowledged_request": true,
+    "sales_handoff": true,
+    "sales_contact": "datasales@nasdaq.com",
+    "confirmed_access": false,
+    "confirmed_file_delivery": false,
+    "confirmed_credentials": false,
+    "confirmed_nda_workflow": false,
+    "confirmed_pricing": false,
+    "confirmed_entitlement": false
+  },
+  "gate_effect": {
+    "step": 8,
+    "name": "Conditional Nasdaq ITCH",
+    "status": "SOURCE_BLOCKED",
+    "reason": "Vendor acknowledgement and Sales handoff do not establish authorized data availability or entitlement; decoded authorized ITCH files remain absent."
+  },
+  "provenance_note": "Receipt records vendor-contact status only. It must not be interpreted as evidence of access, delivery, credentials, NDA completion, pricing, entitlement, or usable market data."
+}
