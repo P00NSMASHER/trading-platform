@@ -597,3 +597,83 @@ def test_token_parser_accepts_explicit_correction_and_makes_it_latest() -> None:
     assert token.package == "EW+TIBX"
     assert token.batch == 67
     assert token.comment_id == 21
+
+
+def test_partial_package_update_cannot_extend_multi_event_token() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    update = ctl.WorkerUpdate(
+        worker=2,
+        label="EW",
+        status="BUILDING",
+        batch=None,
+        event_ids=(),
+        symbols=("EW",),
+        created_at="2026-10-01T11:00:00Z",
+        comment_id=11,
+        body="",
+    )
+    assert ctl.update_matches_token(update, token) is False
+
+
+def test_stale_open_pr_does_not_keep_token_live() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-AAAA000000000004"},
+            "TIBX": {"HEJFE-AAAA000000000005"},
+        }
+    )
+    m["main_sha"] = "new-main"
+    pulls = [{
+        "number": 170,
+        "state": "open",
+        "merged_at": None,
+        "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+        "body": "",
+        "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
+        "base": {"sha": "old-main"},
+    }]
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=pulls,
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 12, 1, tzinfo=timezone.utc),
+        candidates=[],
+    )
+    assert result.state == "INVALID"
+    assert result.progress_after_assignment is False
+
+
+def test_current_main_open_pr_counts_as_live_progress() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-AAAA000000000004"},
+            "TIBX": {"HEJFE-AAAA000000000005"},
+        }
+    )
+    m["main_sha"] = "current-main"
+    pulls = [{
+        "number": 170,
+        "state": "open",
+        "merged_at": None,
+        "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+        "body": "",
+        "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
+        "base": {"sha": "current-main"},
+    }]
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=pulls,
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 12, 1, tzinfo=timezone.utc),
+        candidates=[],
+    )
+    assert result.state == "ACTIVE"
+    assert result.progress_after_assignment is True
