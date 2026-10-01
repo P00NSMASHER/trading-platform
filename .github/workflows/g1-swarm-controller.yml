@@ -40,6 +40,8 @@ jobs:
             | jq -s 'add' > private_runtime/g1-swarm/comments.json
           gh api "repos/${GITHUB_REPOSITORY}/pulls?state=all&sort=updated&direction=desc&per_page=100" \
             > private_runtime/g1-swarm/pulls.json
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/branches?per_page=100" \
+            | jq -s 'add | map(.name)' > private_runtime/g1-swarm/branches.json
 
       - name: Build deterministic coordination state
         run: |
@@ -47,6 +49,7 @@ jobs:
           python scripts/g1_swarm_controller.py \
             --comments private_runtime/g1-swarm/comments.json \
             --pulls private_runtime/g1-swarm/pulls.json \
+            --branches private_runtime/g1-swarm/branches.json \
             --main-sha "$(git rev-parse HEAD)" \
             --output private_runtime/g1-swarm/report.json
 
@@ -82,9 +85,12 @@ jobs:
             | jq -s 'add' > private_runtime/g1-swarm/comments-fresh.json
           gh api "repos/${GITHUB_REPOSITORY}/pulls?state=all&sort=updated&direction=desc&per_page=100" \
             > private_runtime/g1-swarm/pulls-fresh.json
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/branches?per_page=100" \
+            | jq -s 'add | map(.name)' > private_runtime/g1-swarm/branches-fresh.json
           python scripts/g1_swarm_controller.py \
             --comments private_runtime/g1-swarm/comments-fresh.json \
             --pulls private_runtime/g1-swarm/pulls-fresh.json \
+            --branches private_runtime/g1-swarm/branches-fresh.json \
             --main-sha "$(git rev-parse HEAD)" \
             --output private_runtime/g1-swarm/report-fresh.json
 
