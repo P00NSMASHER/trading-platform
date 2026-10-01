@@ -1252,16 +1252,16 @@
       "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
     },
     ".github/workflows/g1-swarm-controller.yml": {
-      "expected_sha256": "e8d1dd9de6b18172d542a68b30c343f5296a36995c968857e39e913d352844f5",
-      "reason": "G1 swarm reliability: GitHub-native read-mostly coordination workflow with issue-comment token handoff only; no G1 evidence or merge authority."
+      "expected_sha256": "8ecd630504d24780840f8124bcfc079eedfe80cc9015976df393c5aeaacf21b3",
+      "reason": "G1 swarm reliability: 15-minute plus push/PR-close reconciliation, live-state race recheck, issue-comment token handoff only, and immutable receipt artifact; no G1 evidence or merge authority."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
       "reason": "G1 swarm reliability: deterministic token lease, batch-lane, canonical-input and fail-closed controller policy."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "dba721d5225c697135f1f3bef227ca3e7a52c32d8b33dd05c2ff2c774707686b",
-      "reason": "G1 swarm reliability: deterministic GitHub issue/PR/branch state reconciliation and token advancement without changing timestamp evidence."
+      "expected_sha256": "b7a13a03aa59d9a76ab9a6df044f4400e294162cd117128b21ec1bc996479b01",
+      "reason": "G1 swarm reliability: deterministic GitHub state reconciliation with current-main guard and a fresh issue/PR/branch recheck immediately before token mutation."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "f38483a8d7f09b97c4a50ba56b4125a9d456840a610e2152a9c4304546a8854f",
