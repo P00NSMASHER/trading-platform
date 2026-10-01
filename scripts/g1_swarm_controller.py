@@ -170,7 +170,7 @@ def parse_worker_updates(comments: Iterable[dict[str, Any]]) -> list[WorkerUpdat
             status = match.group(3).upper()
             batch_match = BATCH_RE.search(body)
             batch = int(batch_match.group(1)) if batch_match else None
-            event_ids = tuple(dict.fromkeys(EVENT_ID_RE.findall(body)))
+            event_ids = tuple(dict.fromkeys(EVENT_ID_RE.findall(label)))
             symbols = symbols_from_label(label)
             rows.append(
                 WorkerUpdate(
