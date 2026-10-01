@@ -275,3 +275,49 @@ def test_branch_only_fallback_prefers_newest_reserved_batch():
         now=datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc),
     )
     assert report["summary"]["next_package"]["batch"] == 73
+
+
+def test_branch_fallback_prefers_wider_same_batch_package():
+    first = "HEJFE-AAAAAAAAAAAAAAAA"
+    worker = owner_for_event(first)
+    second = None
+    for index in range(1000):
+        candidate = f"HEJFE-D{index:015X}"
+        if owner_for_event(candidate) == worker:
+            second = candidate
+            break
+    assert second is not None
+    manifest = {
+        "items": [
+            {
+                "event_id": first,
+                "historical_symbol": "AAA",
+                "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
+                "current_resolution_status": "excluded_fail_closed",
+            },
+            {
+                "event_id": second,
+                "historical_symbol": "BBB",
+                "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
+                "current_resolution_status": "excluded_fail_closed",
+            },
+        ]
+    }
+    exclusions = {
+        "g1_state": {"required": 2, "exact_resolved": 0, "reviewed_excluded": 2},
+        "exclusions": [{"event_id": first}, {"event_id": second}],
+    }
+    report = build_report(
+        manifest,
+        exclusions,
+        _step_status(),
+        [],
+        [],
+        branches=[
+            f"g1/prep-batch-0073-worker-{worker}-aaa-deadbee",
+            f"g1/prep-batch-0073-worker-{worker}-aaa-bbb-deadbee",
+        ],
+        main_sha="cafebabe",
+        now=datetime(2026, 10, 1, 8, 0, tzinfo=timezone.utc),
+    )
+    assert sorted(report["summary"]["next_package"]["event_ids"]) == sorted([first, second])
