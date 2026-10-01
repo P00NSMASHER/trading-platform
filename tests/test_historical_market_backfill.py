@@ -573,12 +573,16 @@ def test_option_quotes_do_not_change_frozen_champion_trade_inputs(tmp_path):
         source(EX / "equity_quotes.csv", source_id="eqq", family="synthetic_fixture", kind="equity_quote"),
         source(EX / "option_trades.csv", source_id="opt", family="synthetic_fixture", kind="option_trade"),
     ]
+    full_contract_dir = tmp_path / "full_contract"
+    minimum_contract_dir = tmp_path / "minimum_contract"
+    full_contract_dir.mkdir()
+    minimum_contract_dir.mkdir()
     full_contract = write_contract(
-        tmp_path / "full_contract",
+        full_contract_dir,
         base_sources
         + [source(EX / "option_quotes.csv", source_id="opq", family="synthetic_fixture", kind="option_quote")],
     )
-    minimum_contract = write_contract(tmp_path / "minimum_contract", base_sources)
+    minimum_contract = write_contract(minimum_contract_dir, base_sources)
 
     full_out = tmp_path / "full_out"
     minimum_out = tmp_path / "minimum_out"
