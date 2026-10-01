@@ -23,10 +23,10 @@ assert sha(corpus)=="43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f8
 md=Path("data/processed/authorized_input_real")
 events=rows(corpus)
 old_exact={r["event_id"]:r for r in rows(md/"announcement_resolutions.csv") if r["resolution_status"]=="resolved_exact_public_timestamp"}
-assert len(events)==174 and len(old_exact)==91
+assert len(events)==174 and len(old_exact)==92
 exclusion_path=md/"g1_final_timing_exclusions.json"
 exclusions=load(exclusion_path)
-assert len(exclusions["exclusions"])==83
+assert len(exclusions["exclusions"])==82
 
 batch=Path("data/public/metadata/g1_announcement_times_batch_0082.csv")
 evidence_path=Path("data/public/metadata/g1_public_batch_0082_evidence.json")
