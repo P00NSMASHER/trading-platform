@@ -172,6 +172,35 @@ def test_preserved_wire_mirror_requires_corroboration():
     g1r.validate_research_map(research, exclusions)
 
 
+
+def test_federal_court_distribution_record_is_strictly_guarded():
+    research = _load(RESEARCH_PATH)
+    exclusions = _load(EXCLUSIONS_PATH)
+    probe = _eligible_probe(exclusions)
+    probe.update({
+        "timestamp_evidence_kind": "explicit_release_clock",
+        "source_family": "federal_court_public_distribution_record",
+        "source_reference": "https://www.supremecourt.gov/DocketPDF/21/21-580/example.pdf",
+        "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/example.htm",
+        "public_distribution_explicit": True,
+    })
+    research["validation_probes"].append(probe)
+    g1r.validate_research_map(research, exclusions)
+
+    probe["source_reference"] = "https://example.test/not-a-federal-docket.pdf"
+    with pytest.raises(g1r.G1SourceResearchError, match="official Supreme Court docket"):
+        g1r.validate_research_map(research, exclusions)
+
+    probe["source_reference"] = "https://www.supremecourt.gov/DocketPDF/21/21-580/example.pdf"
+    probe["corroboration_reference"] = "https://example.test/not-sec.htm"
+    with pytest.raises(g1r.G1SourceResearchError, match="independent SEC Exhibit"):
+        g1r.validate_research_map(research, exclusions)
+
+    probe["corroboration_reference"] = "https://www.sec.gov/Archives/edgar/data/724606/example.htm"
+    probe["public_distribution_explicit"] = False
+    with pytest.raises(g1r.G1SourceResearchError, match="explicitly identify public distribution"):
+        g1r.validate_research_map(research, exclusions)
+
 def test_batch_count_and_event_count_are_explicitly_distinct():
     research = _load(RESEARCH_PATH)
     state = research["current_g1_state"]
