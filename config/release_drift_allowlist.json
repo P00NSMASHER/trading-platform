@@ -104,6 +104,14 @@
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
+    },
+    "scripts/g1_swarm_controller.py": {
+      "expected_sha256": "40c4c7694f5e9ddccdc4b3487c74edfafda87681ef71228fe46d47fb9be3873b",
+      "reason": "G1 swarm controller correctness: scope worker event IDs to the current update label so next-target IDs cannot contaminate package identity or recycle already-resolved events."
+    },
+    "tests/test_g1_swarm_controller.py": {
+      "expected_sha256": "121899b0956cb982fb1a48b36c50fe7da63b3f0fdb50a423813161fa971d6bef",
+      "reason": "Regression coverage proving next-target event IDs cannot contaminate the active worker package identity and resolved events remain ineligible."
     }
   },
   "repository_additions": {
