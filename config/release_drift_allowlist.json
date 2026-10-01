@@ -1246,6 +1246,18 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    ".github/workflows/g1-swarm-controller.yml": {
+      "expected_sha256": "647197ad856e52e46a6ff5364529f86608831e7e6d2c5aac005c545052a8259f",
+      "reason": "Permanent GitHub-native G1 swarm coordinator: deterministic issue #153 state reconciliation, stale-token recovery, race-checked handoff, least-privilege issue write access, and immutable G1 evidence/merge gates."
+    },
+    "scripts/g1_swarm_controller.py": {
+      "expected_sha256": "960fa34a9626ab2730f87361646cd3d0e8126b2c8b63556d3aab1c8cd376de86",
+      "reason": "Permanent deterministic G1 swarm state machine for event deduplication, token lease recovery, prepared-before-found queueing, and fail-closed current-main truth."
+    },
+    "tests/test_g1_swarm_controller.py": {
+      "expected_sha256": "44c19a0f61704486f847d18c517a9cd62f4982a72ce3ae14897f5ba99aee2a47",
+      "reason": "Regression coverage for G1 swarm token resolution, lease expiry, prepared queue priority, unrelated-PR isolation, recent-CI renewal, and fail-closed resolution truth."
     }
   },
   "schema_version": "2",
