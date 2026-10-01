@@ -323,3 +323,45 @@ def test_next_unused_batch_respects_worker_lane() -> None:
 
     assert ctl.next_unused_batch(0, used, p) == 70
     assert ctl.next_unused_batch(2, used, p) == 62
+
+
+def test_closed_unmerged_candidate_remains_eligible_for_later_repair() -> None:
+    p = policy()
+    candidate = ctl.Candidate(
+        worker=2,
+        package="EW+TIBX",
+        batch=67,
+        event_ids=(),
+        symbols=("EW", "TIBX"),
+        created_at="2026-10-01T10:00:00Z",
+        source="issue_prepared",
+        status="PREPARED",
+    )
+    pulls = [
+        {
+            "number": 170,
+            "state": "closed",
+            "merged_at": None,
+            "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+            "body": "",
+            "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
+        }
+    ]
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-AAAA000000000004"},
+            "TIBX": {"HEJFE-AAAA000000000005"},
+        }
+    )
+
+    chosen = ctl.choose_prepared_candidate(
+        [candidate],
+        token=None,
+        manifest=m,
+        pulls=pulls,
+        updates=[],
+        policy=p,
+    )
+
+    assert chosen is not None
+    assert chosen.batch == 67
