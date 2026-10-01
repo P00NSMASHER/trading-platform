@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "5b1962d52688b32c10b886dab45114c193d03b10",
+  "base_main_sha": "72506630f8822499b58eb7f3d8300c6dd2e0dd85",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -216,13 +216,6 @@
       "event_id": "HEJFE-5089F8E69B6BC646",
       "first_documented_illicit_trade_ts": "2013-05-07 15:49:00",
       "historical_symbol": "KELYA",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-66BA40A20548B7E3",
-      "first_documented_illicit_trade_ts": "2013-04-24 13:43:00",
-      "historical_symbol": "LRCX",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -630,14 +623,14 @@
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 89,
-    "exact_timing_analysis_eligible": 89,
+    "exact_resolved": 90,
+    "exact_timing_analysis_eligible": 90,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 85,
+    "raw_exact_time_evidence_gaps": 84,
     "required": 174,
-    "reviewed_excluded": 85
+    "reviewed_excluded": 84
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",

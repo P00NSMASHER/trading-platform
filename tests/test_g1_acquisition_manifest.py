@@ -35,12 +35,12 @@ def test_full_universe_and_queue_reconcile():
     manifest = g1a.build_manifest()
     assert manifest["state"]["event_count"] == 174
     assert manifest["state"]["accounted_for"] == 174
-    assert manifest["state"]["exact_resolved"] == 89
-    assert manifest["state"]["acquisition_needed"] == 85
+    assert manifest["state"]["exact_resolved"] == 90
+    assert manifest["state"]["acquisition_needed"] == 84
     assert len(manifest["items"]) == 174
-    assert len(manifest["work_queue"]) == 85
+    assert len(manifest["work_queue"]) == 84
     assert len({row["event_id"] for row in manifest["items"]}) == 174
-    assert len({row["dedupe_key"] for row in manifest["work_queue"]}) == 85
+    assert len({row["dedupe_key"] for row in manifest["work_queue"]}) == 84
 
 
 def test_resolved_rows_never_reenter_acquisition_queue():
@@ -50,7 +50,7 @@ def test_resolved_rows_never_reenter_acquisition_queue():
         row for row in manifest["items"]
         if row["acquisition_status"] == "RESOLVED_NO_ACTION"
     ]
-    assert len(resolved) == 89
+    assert len(resolved) == 90
     assert all(row["event_id"] not in queue_ids for row in resolved)
     assert all(row["routes"] == [] for row in resolved)
 
@@ -61,7 +61,7 @@ def test_unresolved_rows_have_public_and_lawful_licensed_routes():
         row for row in manifest["items"]
         if row["acquisition_status"] == "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK"
     ]
-    assert len(unresolved) == 85
+    assert len(unresolved) == 84
     for row in unresolved:
         assert row["routes"]["licensed_ibes"]["entitlement_required"] is True
         assert row["routes"]["licensed_ibes"]["lawful_access_only"] is True
@@ -102,8 +102,8 @@ def test_stale_research_counts_do_not_override_authoritative_resolution_state():
 
     manifest = g1a.build_manifest_from_data(rows, exclusions, tampered)
 
-    assert manifest["state"]["exact_resolved"] == 89
-    assert manifest["state"]["acquisition_needed"] == 85
+    assert manifest["state"]["exact_resolved"] == 90
+    assert manifest["state"]["acquisition_needed"] == 84
     assert manifest["state"]["research_hint_state_matches_authoritative"] is False
 
 

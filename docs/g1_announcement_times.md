@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **59 public exact-time batches / 89 exact-resolved
+The current repository state is **60 public exact-time batches / 90 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -213,3 +213,7 @@ SEC civil complaints explicitly record the first public newswire distribution cl
 ### Batch 0074: Cloud Peak Energy
 
 StreetInsider preserves the original Business Wire release for Cloud Peak Energy's first-quarter 2015 results with an explicit publication clock of 2015-04-30 16:10 EDT (20:10 UTC), 2,220 seconds after the frozen 15:33 EDT illicit trade. SEC Exhibit 99.1 independently corroborates issuer, release title/date, reporting period, and release content. This advances G1 from 88 exact / 86 reviewed exclusions to 89 exact / 85 reviewed exclusions. The separately scheduled 17:00 ET conference call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0071: Lam Research
+
+GlobeNewswire's historical archive preserves the Marketwired release for Lam Research's March 2013 quarter results with an explicit publication clock of 2013-04-24 16:05 EDT (20:05 UTC), 8,520 seconds after the frozen 13:43 EDT illicit trade. SEC Exhibit 99.1 independently corroborates issuer, release title/date, reporting period, and release content. This advances G1 from 89 exact / 85 reviewed exclusions to 90 exact / 84 reviewed exclusions. The Lam newsroom CMS ITEMDATE, scheduled conference call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
