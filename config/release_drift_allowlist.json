@@ -1260,7 +1260,7 @@
       "reason": "Permanent deterministic G1 swarm state machine for event deduplication, token lease recovery, prepared-before-found queueing, and fail-closed current-main truth."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "1e25b87ffcc4c42fd79d2200b22bdf7a144f767be3e9b915b6139bf760d10f53",
+      "expected_sha256": "8579ed6bcc409a6781ac14c84b6cd04639d4ac0ee41faf75dfff8ba7564ae109",
       "reason": "Regression coverage for G1 swarm token resolution, lease expiry, prepared queue priority, unrelated-PR isolation, recent-CI renewal, and fail-closed resolution truth."
     },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
