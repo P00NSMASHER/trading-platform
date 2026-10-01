@@ -5,23 +5,27 @@ from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
 def rr(p):
     with p.open(newline="",encoding="utf-8") as h:return list(csv.DictReader(h))
-def test_batch_0061():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0061_evidence.json").read_text())
+def test_batch_0067():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0067_evidence.json").read_text())
     events={r["event_id"]:r for r in rr(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    exp={"HEJFE-9B84208BA575EAC4":("RH","2015-03-26T20:04:00Z",1380)}
-    assert len(d["items"])==1
+    exp={"HEJFE-ED329F780A1085DA":("EW","2013-04-23T20:01:00Z",9180),"HEJFE-2C887DA6F617936F":("TIBX","2013-09-19T20:05:00Z",2160)}
+    assert len(d["items"])==2
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
         tr=datetime.fromisoformat(e["first_documented_illicit_trade_ts"]).replace(tzinfo=ZoneInfo("America/New_York"));rel=datetime.fromisoformat(x["public_announcement_ts"])
         assert e["historical_symbol"]==sym and tr<rel<=tr+timedelta(days=7) and int((rel-tr).total_seconds())==delta
         assert resolved[x["event_id"]]["public_announcement_ts"]==utc
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
-        assert x["source_family"]=="official_newswire_archive" and x["source_grade"]=="A"
-def test_batch_0061_preserves_prior():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0061_evidence.json").read_text())
+        assert x["source_family"]=="sec_litigation_public_distribution_record" and x["source_grade"]=="A"
+        assert x["timestamp_evidence_kind"]=="explicit_release_clock"
+        assert x["public_distribution_explicit"] is True
+        assert x["source_reference"].startswith("https://www.sec.gov/files/litigation/complaints/")
+        assert x["corroboration_reference"].startswith("https://www.sec.gov/Archives/edgar/data/")
+def test_batch_0067_preserves_prior():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0067_evidence.json").read_text())
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+    for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
     ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==86
     assert all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in ex)

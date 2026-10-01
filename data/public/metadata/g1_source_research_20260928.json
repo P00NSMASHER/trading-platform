@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "0b4739b3997494c28dfffbfe7fe45a8be84ca638",
+  "base_main_sha": "0adebc7d6f88fa272e514db637ce15b1d3a2f6d8",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 86,
-    "note": "The latest integrated recovery is batch_0068; cumulative public exact-time batches are 57 and cumulative exact event records are 86 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 57,
+    "exact_resolved_event_records": 88,
+    "note": "The latest integrated recovery is batch_0067; cumulative public exact-time batches are 58 and cumulative exact event records are 88 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 58,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 88
+    "reviewed_excluded_event_records": 86
   },
   "preferred_public_source_families": [
     {
@@ -1587,6 +1587,58 @@
       "source_grade": "B",
       "source_reference": "https://www.streetinsider.com/Press+Releases/Bruker+Reports+First+Quarter+2015+Financial+Results/10529926.html",
       "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The SEC civil complaint states that Marketwired publicly distributed Edwards Lifesciences' earnings release on April 23, 2013 at 4:01 p.m.; SEC Exhibit 99.1 independently matches Edwards Lifesciences Corporation (NYSE: EW), the April 23 2013 release title, reporting period and results. The separately stated 5:00 p.m. ET conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1099800/000110465913031633/a13-10613_1ex99d1.htm",
+      "disposition": "RESOLVED_IN_BATCH_0067",
+      "event_date": "2013-04-23",
+      "event_id": "HEJFE-ED329F780A1085DA",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-23T16:01:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-23 13:28:00",
+      "historical_event_match": true,
+      "historical_symbol": "EW",
+      "information_asymmetry_seconds": 9180,
+      "probe_id": "EW-batch0067",
+      "public_announcement_ts": "2013-04-23T16:01:00-04:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "SEC complaint: public distribution by Marketwired at 4:01 p.m. ET",
+      "reason": "Promoted through an SEC civil-complaint record that explicitly identifies the first public distribution clock, with independent SEC Exhibit 99.1 corroboration.",
+      "release_title": "EDWARDS LIFESCIENCES REPORTS FIRST QUARTER RESULTS",
+      "reviewed_on": "2026-09-30",
+      "source_family": "sec_litigation_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://www.sec.gov/files/litigation/complaints/2016/comp23471.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The SEC civil complaint states that Newswire Service 1 publicly disseminated TIBCO's third-quarter release on September 19, 2013 at 4:05 p.m. and its table labels the time column ET; SEC Exhibit 99.1 independently matches TIBCO Software Inc. (NASDAQ: TIBX), the September 19 2013 release title, reporting period and results. The separately scheduled 4:30 p.m. ET conference call is not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1085280/000119312513371732/d600328dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0067",
+      "event_date": "2013-09-19",
+      "event_id": "HEJFE-2C887DA6F617936F",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-09-19T16:05:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-09-19 15:29:00",
+      "historical_event_match": true,
+      "historical_symbol": "TIBX",
+      "information_asymmetry_seconds": 2160,
+      "probe_id": "TIBX-batch0067",
+      "public_announcement_ts": "2013-09-19T16:05:00-04:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "SEC complaint table: Newswire Service 1 distributes TIBCO's 3Q earnings release to the public at 4:05 p.m. ET",
+      "reason": "Promoted through an SEC civil-complaint record that explicitly identifies the first public distribution clock, with independent SEC Exhibit 99.1 corroboration.",
+      "release_title": "TIBCO SOFTWARE REPORTS THIRD QUARTER RESULTS",
+      "reviewed_on": "2026-09-30",
+      "source_family": "sec_litigation_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/comp-pr2015-163.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
       "timestamp_kind": "first_public_release"
     }
   ]

@@ -1246,54 +1246,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-ED329F780A1085DA",
       "event_date": "2013-04-23",
       "event_id": "HEJFE-ED329F780A1085DA",
       "first_documented_illicit_trade_ts": "2013-04-23T17:28:00Z",
       "historical_symbol": "EW",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2013-04-23T20:01:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "sec_litigation_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-sec-litigation-ew-tibx-batch-0067",
+        "source_reference": "https://www.sec.gov/files/litigation/complaints/2016/comp23471.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2013-04-30",
-        "start_date": "2013-04-23"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -2086,54 +2056,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-2C887DA6F617936F",
       "event_date": "2013-09-19",
       "event_id": "HEJFE-2C887DA6F617936F",
       "first_documented_illicit_trade_ts": "2013-09-19T19:29:00Z",
       "historical_symbol": "TIBX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2013-09-19T20:05:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "sec_litigation_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-sec-litigation-ew-tibx-batch-0067",
+        "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/comp-pr2015-163.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2013-09-26",
-        "start_date": "2013-09-19"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -6132,7 +6072,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 88,
+    "request_event_count": 86,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -6166,19 +6106,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 88,
+    "acquisition_needed": 86,
     "event_count": 174,
-    "exact_resolved": 86,
-    "research_hint_exact_resolved": 86,
-    "research_hint_excluded": 88,
+    "exact_resolved": 88,
+    "research_hint_exact_resolved": 88,
+    "research_hint_excluded": 86,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
     "explicit_research_priorities": 5,
     "no_public_replication_candidate": 9,
-    "public_release_file_present_without_clock": 79,
-    "resolved_no_action": 86,
-    "routed_for_acquisition": 88
+    "public_release_file_present_without_clock": 77,
+    "resolved_no_action": 88,
+    "routed_for_acquisition": 86
   },
   "work_queue": [
     {
@@ -6377,19 +6317,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-ED329F780A1085DA",
-      "event_date": "2013-04-23",
-      "event_id": "HEJFE-ED329F780A1085DA",
-      "historical_symbol": "EW",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-66BA40A20548B7E3",
       "event_date": "2013-04-24",
       "event_id": "HEJFE-66BA40A20548B7E3",
@@ -6498,19 +6425,6 @@
       "event_date": "2013-07-23",
       "event_id": "HEJFE-600696AB8463FFD8",
       "historical_symbol": "PNRA",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-2C887DA6F617936F",
-      "event_date": "2013-09-19",
-      "event_id": "HEJFE-2C887DA6F617936F",
-      "historical_symbol": "TIBX",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
