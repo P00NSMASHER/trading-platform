@@ -1,0 +1,46 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "2dfc3e14a5459238974a29f53c8a6766506bae6d",
+  "reserved_batch": "0082",
+  "worker_slot": 2,
+  "previous_exact_count": 92,
+  "expected_exact_count_after_batch": 93,
+  "expected_excluded_after_batch": 81,
+  "integration_constraints": [
+    "Canonical generation must start from exact current main and preserve all 92 prior exact rows.",
+    "Do not substitute EDGAR acceptance, conference-call, archive-capture, scheduled-release, date-only, or inferred clocks.",
+    "Final merge requires exact-head CI and current-base verification."
+  ],
+  "items": [
+    {
+      "event_id": "HEJFE-600696AB8463FFD8",
+      "historical_symbol": "PNRA",
+      "event_date": "2013-07-23",
+      "first_documented_illicit_trade_ts": "2013-07-23T19:11:00Z",
+      "public_announcement_ts": "2013-07-23T16:00:00-04:00",
+      "public_announcement_utc": "2013-07-23T20:00:00Z",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "source_family": "sec_litigation_public_distribution_record",
+      "source_grade": "A",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "SEC complaint Example 8/table: Newswire Service 1 publicly disseminates Panera's July 23 earnings release at 4:00 p.m. ET",
+      "release_title": "Panera Bread Company Reports Q2 2013 diluted EPS of $1.74, up 16%",
+      "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/comp-pr2015-163.pdf",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000025/a20130625ex991pressrelease.htm",
+      "corroboration_basis": "The SEC civil complaint explicitly identifies Panera Bread's July 23, 2013 earnings release and the 4:00 p.m. ET public-dissemination clock. Matching SEC Exhibit 99.1 independently corroborates the July 23 Q2 2013 release, $1.74 diluted EPS result, and revised FY2013 EPS target.",
+      "information_asymmetry_seconds": 2940,
+      "reviewed_on": "2026-10-01"
+    }
+  ],
+  "evidence_method": "Official SEC civil complaint exact public-distribution clock with independent SEC Exhibit 99.1 corroboration.",
+  "prohibited_substitutes": [
+    "edgar_acceptance_time",
+    "scheduled_call_time",
+    "archive_capture_time",
+    "inferred_clock",
+    "date_only"
+  ]
+}
