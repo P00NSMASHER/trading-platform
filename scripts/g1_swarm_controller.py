@@ -31,17 +31,22 @@ HEX_SUFFIX_RE = re.compile(r"^(?P<label>.+)-(?P<sha>[0-9a-f]{7,40})(?:-v\d+)?$",
 
 TOKEN_PATTERNS = [
     re.compile(
+        r"GLOBAL\s+INTEGRATION\s+TOKEN\s+(?:is\s+)?(?:corrected(?:\s+back)?|restored)\s+to\s+"
+        r"Worker\s+([0-4])\s*/\s*([^\n]+?)\s*/\s*(?:reserved\s+)?batch\s+0*(\d{2,4})",
+        re.IGNORECASE,
+    ),
+    re.compile(
         r"GLOBAL\s+INTEGRATION\s+TOKEN.*?(?:now\s+)?(?:advances|assigned)\s+to\s+"
-        r"Worker\s+([0-4])\s*/\s*([^/\n]+?)\s*/\s*(?:reserved\s+)?batch\s+0*(\d{2,4})",
+        r"Worker\s+([0-4])\s*/\s*([^\n]+?)\s*/\s*(?:reserved\s+)?batch\s+0*(\d{2,4})",
         re.IGNORECASE | re.DOTALL,
     ),
     re.compile(
-        r"Token\s+now\s+assigned\s+to\s+Worker\s+([0-4])\s*/\s*([^/\n]+?)\s*/\s*"
+        r"Token\s+now\s+assigned\s+to\s+Worker\s+([0-4])\s*/\s*([^\n]+?)\s*/\s*"
         r"(?:reserved\s+)?batch\s+0*(\d{2,4})",
         re.IGNORECASE,
     ),
     re.compile(
-        r"Current\s+token:\s*Worker\s+([0-4])\s*/\s*([^/\n]+?)\s*/\s*"
+        r"Current\s+token:\s*Worker\s+([0-4])\s*/\s*([^\n]+?)\s*/\s*"
         r"(?:reserved\s+)?batch\s+0*(\d{2,4})",
         re.IGNORECASE,
     ),
@@ -56,7 +61,7 @@ TOKEN_UNASSIGNED_RE = re.compile(
 
 QUEUE_HINT_PATTERNS = [
     re.compile(
-        r"Worker\s+([0-4])\s*/\s*([^/\n]+?)\s*/\s*(?:reserved\s+)?batch\s+0*(\d{2,4})"
+        r"Worker\s+([0-4])\s*/\s*([^\n]+?)\s*/\s*(?:reserved\s+)?batch\s+0*(\d{2,4})"
         r"(?:\s+remains\s+next\s+prepared\s+candidate)?",
         re.IGNORECASE,
     ),
