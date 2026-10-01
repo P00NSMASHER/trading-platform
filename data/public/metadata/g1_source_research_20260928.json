@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "4665f7261731492f88c91e65352b91e7d110a177",
+  "base_main_sha": "ae62ac8fcda9f4b5704f6ee0943c4863c966c6d9",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 91,
-    "note": "The latest integrated recovery is batch_0065; cumulative public exact-time batches are 61 and cumulative exact event records are 91 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 61,
+    "exact_resolved_event_records": 92,
+    "note": "The latest integrated recovery is batch_0078; cumulative public exact-time batches are 62 and cumulative exact event records are 92 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 62,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 83
+    "reviewed_excluded_event_records": 82
   },
   "preferred_public_source_families": [
     {
@@ -1700,6 +1700,32 @@
       "source_grade": "A",
       "source_reference": "https://new.streetinsider.com/related.php?id=10481229&type=pr",
       "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The SEC civil complaint explicitly records Newswire Service 1 distributing Align's third-quarter earnings release to the public on October 17, 2013 at 4:00 p.m. ET. SEC Exhibit 99.1 independently matches Align Technology, the October 17 release title/date, Q3 2013 results and 20.5% year-over-year revenue growth.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1097149/000110262413001252/aligntechnologyinc.htm",
+      "disposition": "RESOLVED_IN_BATCH_0078",
+      "event_date": "2013-10-17",
+      "event_id": "HEJFE-830337A8564B826E",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-10-17T16:00:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-10-17 13:43:00",
+      "historical_event_match": true,
+      "historical_symbol": "ALGN",
+      "information_asymmetry_seconds": 8220,
+      "probe_id": "ALGN-batch0078",
+      "public_announcement_ts": "2013-10-17T16:00:00-04:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "SEC complaint table: Newswire Service 1 distributes Align's 3Q earnings release to the public at 4:00 p.m. ET",
+      "reason": "Promoted through an SEC civil-complaint record that explicitly identifies the first public distribution clock, with independent SEC Exhibit 99.1 corroboration.",
+      "release_title": "Align Technology Announces Third Quarter 2013 Results",
+      "reviewed_on": "2026-10-01",
+      "source_family": "sec_litigation_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://www.sec.gov/files/litigation/complaints/2015/comp-pr2015-163.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
       "timestamp_kind": "first_public_release"
     }
   ]

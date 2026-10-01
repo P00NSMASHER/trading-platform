@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **61 public exact-time batches / 91 exact-resolved
+The current repository state is **62 public exact-time batches / 92 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -221,3 +221,7 @@ GlobeNewswire's historical archive preserves the Marketwired release for Lam Res
 ### Batch 0065: The Cheesecake Factory
 
 StreetInsider preserves the original Business Wire release for The Cheesecake Factory's first-quarter fiscal 2015 results with an explicit publication clock of 2015-04-22 16:15 EDT (20:15 UTC), 6,780 seconds after the frozen 14:22 EDT illicit trade. Issuer IR and the SEC 8-K/Exhibit 99.1 identity independently corroborate the release date/title/body. This advances G1 from 90 exact / 84 reviewed exclusions to 91 exact / 83 reviewed exclusions. The separately scheduled 14:00 PT conference call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0078: Align Technology
+
+The official SEC civil complaint records Newswire Service 1 distributing Align Technology's Q3 2013 earnings release to the public at 2013-10-17 16:00 EDT (20:00 UTC), 8,220 seconds after the frozen 13:43 EDT illicit trade. SEC Exhibit 99.1 independently corroborates Align Technology, the October 17 release title/date and Q3 results. This advances G1 from 91 exact / 83 reviewed exclusions to 92 exact / 82 reviewed exclusions. EDGAR acceptance, conference-call, archive-capture, date-only, scheduled and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
