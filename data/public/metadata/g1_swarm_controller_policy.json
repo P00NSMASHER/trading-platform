@@ -1,0 +1,33 @@
+{
+  "schema_version": "1",
+  "purpose": "Deterministic coordination policy for the G1 exact-public-release timestamp recovery swarm.",
+  "issue_number": 153,
+  "token_lease_minutes": 120,
+  "worker_count": 5,
+  "batch_lanes": {
+    "0": {"start": 60, "step": 5},
+    "1": {"start": 61, "step": 5},
+    "2": {"start": 62, "step": 5},
+    "3": {"start": 63, "step": 5},
+    "4": {"start": 64, "step": 5}
+  },
+  "state_comment_marker": "<!-- g1-swarm-controller-state -->",
+  "canonical_inputs": {
+    "acquisition_manifest": "data/public/metadata/g1_acquisition_manifest.json",
+    "final_exclusions": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
+    "metadata_readiness": "data/processed/authorized_input_real/metadata_readiness_summary.json",
+    "step_status": "data/processed/real_data_release_sprint/step_status.json"
+  },
+  "allowed_controller_mutations": [
+    "create_or_update_issue_153_state_comment",
+    "post_explicit_token_advance_comment"
+  ],
+  "forbidden_controller_mutations": [
+    "edit_g1_evidence",
+    "run_write_enabled_publisher",
+    "open_canonical_g1_pr",
+    "merge_pull_request",
+    "weaken_ci_or_release_gates"
+  ],
+  "fail_closed_until_exact_count": 174
+}
