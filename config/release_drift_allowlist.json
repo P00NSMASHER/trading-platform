@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "780d338aca544f9e8433c9d7a597f60e0d02f02f7f74f2851c6dff041c22a2a6",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "63d227c01041459a97548af17fb4a06951777a90c90e99a49e82459eae2fea5f",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "2cb5d06322016054b8d9016a6dc0741a67c26d68d1e159e9b467f77c556fafa9",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5be8d2d6ade3903a533509ca720027e6fa6b89020865e1df02509c442ef43681",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "346000dc51b0881082489bb1ced84ec28ce298d7ea25111d8cb93331da2e8a6e",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c80ad150cd77ea8e7d5c0441b5d398f0187af557b3861fd544bbd27a278aa9c4",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -156,8 +156,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "36ddf386cb4869da3cbe6a19ffb2f588e293dd54c245f58efcecbb96d7721f40",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "418cdfe655e3a49ca7abd3767f2eafdf4cef2cf7e0ded33833f1b14ecf675213",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -176,8 +176,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "9ff43055a16e8ded3868e252afbff32af5b6eaf1da38de264449e0945acd9517",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3f14fc1db1952f405a3c2c74396cc650b77748fa690420a65843b8d42ac3bcb5",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -188,8 +188,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "a20ffad18e05c52f8ddecde704155808ec57fb462d70638c7084dae7c6089e02",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e596968fa013c9ec4b59ce36eeb29b27cd28ef90f0eaf3fdf049a0970d5a285e",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -244,8 +244,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "acc5bb58041f8745a19bb4cbfde1d9f0d78051fe494e10092b406dc7b96cb4d6",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "422d016f3b5d56b5d09f00af6b0cb40edbaff7aec87e216f0a6d32dce672f5ac",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -260,12 +260,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "04a75454eed4bbaf8dce46e5add8a503dc27b3afb3235a2c5454b3aaa5da76d4",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8fe443c05b3cca8a2fdc3ac8c13b9e282fc055fbc6afa774a5de248afede54cc",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "d91d2005260ca774e23729c3d906640f6e316282e77973e7a11fb4a11d7554db",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "92f14ece236d44b3256ff8a4e5c0a62cefadc00015bba0cc26a4d61359a47a27",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -304,16 +304,16 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "99c73f4cd6163c62fe52ced556619e819da34bdf01e27a7062ee4432cf7c0e93",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "89cd812271595c8d832c48b9edd2c493aae0c8a4160ae7fa967287c86058d8c0",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "aebf5217d990b546d45f2d5aafdda7f5846e16857be8dedd11a92f5658309d50",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2d6e909bbd2ea891ef85bc71ff65ffce1637e9a0132f9ae76e09bcc065653dab",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "59f8792e0786095d774fd47e37a027fdb8f47fd7d06cf251222101db6cffd11a",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "47d6aaf9a1b8606f5843d9579b3ee1cc24a9d88d7185b257f9ca25bf1fe195bb",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -332,8 +332,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "b8ac7de625ec8d56615255239e98f7d0ed7819f6a1d0e04119ea9c87c690b648",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c11e194800b9a9df1c92c6d3be75d42a58c97681a3a2d1bae8e7d77620ef04f8",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -583,6 +583,10 @@
       "expected_sha256": "be45d24b1b7e3f53b3edd835346efccd724bb0616343cf09daa60e053e7bd46e",
       "reason": "G1 batch 0074 Worker-4 CLD timestamp-preserving Business Wire mirror; deterministic 89 exact / 85 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0078.csv": {
+      "expected_sha256": "6e0a52fa010a2387b34cad6af202071072bca64e173fbc602e495fc345d1ab8c",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -699,9 +703,13 @@
       "expected_sha256": "f6433d958e802c94bf3c1b4561c7d8a8a4f9242592a7864e75ab7a3f3898a528",
       "reason": "G1 batch 0074 Worker-4 CLD timestamp-preserving Business Wire mirror; deterministic 89 exact / 85 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0078_evidence.json": {
+      "expected_sha256": "1a4572763d370732bae31ebbe93a5baafd83a2a349db058e78bc229205d1ef11",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "1fcf6396219461faae5b3d421c998908e97cdbc3e761431e58af937dc3b05e52",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "869c7ef43a86f6af959496734f82975a419666791b9f37c3501c2a334c0bfe06",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
@@ -824,8 +832,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "e4d996baa834a94d0ec36b874f67a944edb2bfa75f22074b5d51d785a6663227",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0b121f2b4e5485da77952b93f20c236fd1c1003e66987494e503e34df631d510",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -974,6 +982,10 @@
     "scripts/g1_batch_0074_generate.py": {
       "expected_sha256": "bd391b71d189c21f85183c61fafacf5dc963daa44ec09d8f45c5d28156566266",
       "reason": "G1 batch 0074 Worker-4 CLD timestamp-preserving Business Wire mirror; deterministic 89 exact / 85 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0078_generate.py": {
+      "expected_sha256": "68f2f3129d55df888d471ebd2bd8d69d3a8e6e695d46ac890973d94316dcafd6",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
       "expected_sha256": "40c4c7694f5e9ddccdc4b3487c74edfafda87681ef71228fe46d47fb9be3873b",
@@ -1136,136 +1148,140 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "15ea15305aabc708adfd0925404e9af3e251191784fe581ee66e26179d8821a9",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "af382ccd54d06b5b004956792fd3900ee8989bfce02fe6d8bed71a7dc7eddcfc",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "9ca149c641dcb8f968f027fc244e65162bd75628be3a5737d788cbb82d938d0e",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0fbfc52f381e8f364e74c6cb168d99b90cfec96864f72e76f8812001cc7cc824",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "8708a354e7eb42b3088536395235f9cfa2af981848908cb45dfe18995504a586",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4e1849b65d37ec6bf336b98e465e5a189a07b9f8e9be96086ce496c3fb35d8ac",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "714d4227b951b67d180ff184d4c7b9dd413c65f6b1977c37631d2f6540bc7505",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "49977e997ce1a3b0e0c885a997bd6bdb3ea4886daef37e7751981e5761583e19",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "12de517dd7a41fa6f3a9a2bc5ffc4f498432602021df0553d1c083a24e77acb3",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e2292d3a91270aaa3212866a2d18eb56aa313b06f70b0fe3d790467bbb4c630b",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "bdc3a9c33c1169138343cf5de649aa1602c50f5a160898a10fb93ca61fc1d193",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9b40dfc6d4b665ffdd9200d0413ce8f4362270ab223d06c43cd200c5cd6e23a0",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "a0bd08d4fb6c7ef9b1193e642c78d622b6b78736a9a495e9ee6294693781b797",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7c12f03f64e885eecfb97ba57c211da40d89b6eb8055eb3ec6533a054a8c02ab",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "0d7b1c451a9d3ce5298ebf434f8a4d09e249d41a523f28b199321266524cf63e",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a345c36a3fd78b7855f08d45252e7248c9679c3423981ce063eca895103b4a90",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "74d639a8117c5f7c27d66d3487a079b498fbaf4ae3a10617265301909f789c43",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8c34daa7d29644969770a556174bc59d3c7c6bf54fab6f1cf7246d56f3e294c5",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "f18b0bfb03ce9f7a0e15400ae25d32d423548e86b331321c483acba490a6507f",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5c4a68f1096b0205e4f0f4882cbf6aafd9efea350cebbc3013522f2a06b8c3d7",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "17912e66ba739e394f2c7583b24549d8f93dc20923637cff181cac1459e0bac0",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "146d9e00cd6a2a289ec1258fbf2832266da39d4ff30e694b1078dd24d729d704",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "ff16dd964a432a31502e9931f3ede031cfb33e717507dd4f17af39e5de366134",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4ec0545894f3007d1398825d7291544c63caf8d8a1a56f3aace9fd73edf1e37f",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "20b5f884d3151d4906a0763efdbf1ad28864566aca962a4f6511878168f267a0",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7f35d9e8e64a5780188a6a3ec61d542466547f9c68ec6520739de05e076d7dcd",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "2c3b3624c7f62ad6e5452e28a0fb828b45258ea02ed4cfd0ce2afb672303eeb0",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "595486a1e3d169ed65baddb7ebbf84b6198f88a1f99dba96fd81d37bc17b3bdc",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "85c1987449fb47600308081126b7bcd737de441d77c61270347cfa41c1b4e0e5",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "903428afed9e6a7e0b4f05a3068ef45fc38226a6598aa0b0140f188c5a4b510d",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "0d3c2c43593613c159512c3ac4dd4f649faba19654af15b2fcf8be76691ebbd1",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "15088b976097e72e7a192ba1014d7934618f6a711b3f0e4645d44229400a4edd",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "a325d85b6ec3e2bc937943d5fb682adaa2728452076efae197ae0c7376a618cc",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "327092cecc0b23a29ec3b0d28139f2f4eb64cca52b35c62c24aad7dd08b5a4a9",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "eb2824b607ab100b0e985d1d78c0ca8110ee94fc5da377c3c11c3a810e949a7f",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e8f471e93ec2ac3e29fda93da5370924b86bebe87bdb073bbbdb25404cc35ad7",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "69c897af3441fadbe61f150b2272bf6fb8f142b029c48d5b569a385668a36602",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5790112be8632aed4eb607fc0622cd62333dfdfb6b33bda7cc8dce115bf1d6d2",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "fd831fbe5177b75b9e291c2b383446902fb2f29f060530f4da3a3b62c2077759",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "48fdd086451246f61d74604bc7b2f0472a7766f48422426775e45947b855e3d7",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "df27da8608355c53f737447a1404205e409b7124d1b7f46390e66b16e65a5ecb",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "285fe0ce1f09173ebf5f2262875baadab8e24620392fe1742121014e53af98c8",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "1ebf1c973b66b00e16f8651a5ac593424447c803bae85eab0109e232857f80fd",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "255d5d30bc0e256f2041d633e59ba173e1c09a285f07449e453c811ffe763b72",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "3e481fa74ca9fbd85d3e836b14c766540afe07fd9d36035261b2074dbf797e76",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bd891cc777445647558876d732241a724a23733603b618570c8bfd7d08b1f811",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "3fa8aab4019f1baa9edec745f2a81564f403e8076865e280cf60070988a285ac",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "61fa7b5629c164d2f424f6633297129c3e28bf775d8af70629528eeabca0a1d7",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "4b9832946bb48a7bbe91c2fcc6e42a16eace4c63476e06fc0093a72030e3d429",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "448944792a79f62004e8d7a5d587de1472c2c98106812fc21d088cd041ebe97b",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "8c7dacc686de31a4b6babf6a9522d5ad4b8313aabfe7d5afaf54974a5fac949f",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d41e65752b57f00fe09962143427532a6b1c07483fd3fbe2a9d46f3a7fdd7244",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "5cbd6586bbf99268f7ada6b672767f1a9c31c73a795eb27abb422aa675dda8d3",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2912735deef2d38e56474758554c437534972da512759d46c3be88dcfc4792d3",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "c65010f4c95b958238f6e7619a527bc4684b08d8d34582ef2ce942eb9890fa77",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5772efba39b3423efffec43e66e1b220b8668dce8161cf8cca9753828f42af17",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "09c6786a49366f2a3d4fb65f5aa52091638cc3a05b748251b8414e19f5a43ea2",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f29b654f9836c3c53e25f371dcdaf6746df94e4ac87d89805f98be4624c9a851",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "d2b26d18fbe7c6bc5e5593c3d6f094ff65888380e2bdbb58b7fa9251b4404d6e",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0ace9b79377e47c059bee79b3773c373cf0d8777bf804cceedb9e733e88ce3fe",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0078.py": {
+      "expected_sha256": "6e307020006e27fdea64b6fc4602eeadeaf599552464cec6c5d195c447359daa",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "8a8ebfacdda7555539e72a6b44fa7cb8ec5b7f2e8d0867a80bd2e93edf16e053",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "20a365c24a2b742cad2f43112f6b76b659fe89d15223a1595d7e83ed6462f68d",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "121899b0956cb982fb1a48b36c50fe7da63b3f0fdb50a423813161fa971d6bef",
@@ -1296,8 +1312,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "bfe42acefe5b78173ca4e0238f1c55b787b18cce8c7ef21accbf0d353c0a114b",
-      "reason": "G1 batch 0065 Worker-0 CAKE timestamp-preserving Business Wire mirror; deterministic 91 exact / 83 reviewed exclusions with issuer IR + SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8454e8f6ea53d0f7a3a25861c8e08a5166950a6739a0103a2ba36cfa443cbd52",
+      "reason": "G1 batch 0078 Worker-3 ALGN timestamp-preserving Business Wire mirror; deterministic 92 exact / 82 reviewed exclusions with SEC litigation clock + SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
