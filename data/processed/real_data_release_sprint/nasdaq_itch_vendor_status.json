@@ -1,0 +1,46 @@
+{
+  "schema_version": "1",
+  "purpose": "Vendor-status provenance receipt for Nasdaq Historical TotalView-ITCH acquisition without weakening the Step 8 fail-closed source gate.",
+  "vendor": "Nasdaq",
+  "product": "Historical TotalView-ITCH",
+  "status_as_of": "2026-10-01",
+  "request_scope": {
+    "nasdaq_listed_events": 80,
+    "unique_event_dates": 46,
+    "itch_4_1_events": 35,
+    "itch_5_0_events": 45
+  },
+  "source_evidence": {
+    "thread_subject": "Historical TotalView-ITCH access request — exact 2011–2015 research footprint",
+    "request_sent_utc": "2026-09-27T09:03:52Z",
+    "client_success_acknowledgement_utc": "2026-09-29T09:23:16Z",
+    "sales_handoff_utc": "2026-09-29T14:23:53Z",
+    "client_success_address": "clientsuccess@nasdaq.com",
+    "sales_address_added": "datasales@nasdaq.com",
+    "latest_verified_vendor_message": "Nasdaq Data Client Success added the Sales team to the existing request thread.",
+    "later_reply_verified_through": "2026-10-01"
+  },
+  "verified_vendor_state": {
+    "request_acknowledged": true,
+    "sales_handoff_confirmed": true,
+    "access_confirmed": false,
+    "file_delivery_confirmed": false,
+    "credentials_confirmed": false,
+    "nda_workflow_confirmed": false,
+    "pricing_confirmed": false,
+    "entitlement_confirmed": false
+  },
+  "release_gate": {
+    "step": 8,
+    "name": "Conditional Nasdaq ITCH",
+    "status": "SOURCE_BLOCKED",
+    "required_evidence": "authorized decoded ITCH files",
+    "current_evidence": "No authorized decoded ITCH files are present; a vendor acknowledgement or Sales handoff does not satisfy the source gate."
+  },
+  "provenance_policy": {
+    "email_body_committed": false,
+    "mailbox_identifiers_committed": false,
+    "credentials_committed": false,
+    "synthetic_or_unverified_data_may_satisfy_gate": false
+  }
+}
