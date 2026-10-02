@@ -61,3 +61,18 @@ def test_first_rate_residual_matches_are_disjoint_from_tickdata_residual():
         if symbol
     }
     assert first.isdisjoint(tick)
+
+
+def test_committed_combined_equity_outputs_match_generator():
+    import csv
+    import json
+
+    outputs, summary = plan.build(plan._read(RESIDUAL))
+    committed = ROOT / "data/processed/g2_vendor_requests/combined_equity_cheap_route"
+
+    for filename, expected in outputs.items():
+        with (committed / filename).open(newline="", encoding="utf-8") as handle:
+            actual = list(csv.DictReader(handle))
+        assert actual == expected
+
+    assert json.loads((committed / "summary.json").read_text(encoding="utf-8")) == summary
