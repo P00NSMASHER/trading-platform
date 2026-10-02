@@ -1600,12 +1600,12 @@
       "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
     },
     "src/g2_full_replication_option_quote_plan.py": {
-      "expected_sha256": "d5e61d61f82de5ba1ee4373d863a77cb23fa76cc8bd7443081c1aebc210830cf",
-      "reason": "Deterministic G2_FULL_REPLICATION option-quote candidate plan using current LSEG OPRA Tick History evidence; planning only, no purchase or coverage claim."
+      "expected_sha256": "ef6f7afcdd60ac9394f4fb7334fd14b0a5832769474f00e982a050d9de20ef6e",
+      "reason": "Deterministic cheap-first G2_FULL_REPLICATION option-quote split: LSEG for the 2011 residual and algoseek TANQ for 2012-2015, with conflicting public history copy kept fail-closed; planning only, no purchase or coverage claim."
     },
     "tests/test_g2_full_replication_option_quote_plan.py": {
-      "expected_sha256": "10e6f037d60eee1558b5092c6a68f2a5c05c2b0a0b968948910e2ae4ea8bb519",
-      "reason": "Deterministic G2_FULL_REPLICATION option-quote candidate plan using current LSEG OPRA Tick History evidence; planning only, no purchase or coverage claim."
+      "expected_sha256": "4bf8ff4c0cff43e27ebd0c0ca5ea6ed5b40b134cb9f7a917eea1fe1a10d93cc1",
+      "reason": "Regression coverage for the cheap-first LSEG 2011 + algoseek 2012-2015 option-quote split while preserving strict tick fidelity and fail-closed coverage semantics."
     }
   },
   "schema_version": "2",
