@@ -1518,6 +1518,18 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/g2_vendor_activation_blueprint.py": {
+      "expected_sha256": "6df1442b78de8a1da1f6f98017d0061423921f04d02a48c33bb121a6e7360993",
+      "reason": "Fail-closed G2 vendor activation blueprint: deterministic repo-relative request paths and sorted profiles with blank delivery/license values and authorized=false until local entitlement review."
+    },
+    "tests/test_g2_vendor_activation_blueprint.py": {
+      "expected_sha256": "a884d985684d632ec6e7ed9e9e6e7309fe3d2d42af9b67e6d565d14dce85f225",
+      "reason": "Fail-closed G2 vendor activation blueprint: exact request scope and canonical fields with blank delivery/license values and authorized=false until local entitlement review."
+    },
+    "data/processed/g2_vendor_requests/vendor_activation_blueprint.json": {
+      "expected_sha256": "79a94cc06020b8acba03d36ef3e549dabc0fda05132b588887b7974470947da5",
+      "reason": "Fail-closed G2 vendor activation blueprint: exact request scope and canonical fields with blank delivery/license values and authorized=false until local entitlement review."
     }
   },
   "schema_version": "2",
