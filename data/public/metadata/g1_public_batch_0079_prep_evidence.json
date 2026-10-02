@@ -1,0 +1,45 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "185d7cf90e0bf93c74af5e7ac36ff9327fcecdd4",
+  "reserved_batch": "0079",
+  "worker_slot": 4,
+  "previous_exact_count": 93,
+  "expected_exact_count_after_batch": 94,
+  "expected_excluded_after_batch": 80,
+  "integration_constraints": [
+    "Canonical generation must start from exact current main and preserve all prior exact rows.",
+    "Do not substitute EDGAR acceptance, conference-call, archive-capture, scheduled-release, date-only, or inferred clocks.",
+    "Final merge requires exact-head CI and current-base verification."
+  ],
+  "items": [
+    {
+      "event_id": "HEJFE-D7FD00AF94DD8F41",
+      "historical_symbol": "JNPR",
+      "event_date": "2011-04-19",
+      "first_documented_illicit_trade_ts": "2011-04-19 15:50:00",
+      "public_announcement_ts": "2011-04-19T16:12:00-04:00",
+      "public_announcement_utc": "2011-04-19T20:12:00Z",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "A",
+      "publisher_timestamp_text": "InvestorsHub/ADVFN preserved Marketwire release: Tuesday, April 19, 2011 16:12ET",
+      "release_title": "Juniper Networks Reports Preliminary First Quarter 2011 Financial Results",
+      "source_reference": "https://investorshub.advfn.com/Juniper-Networks-Inc-JNPR-4985?nextStart=110",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1043604/000095012311036828/f58994exv99w1.htm",
+      "corroboration_basis": "InvestorsHub/ADVFN preserves the matching Marketwire release title, body, Marketwire attribution/date, and explicit April 19 2011 16:12 ET timestamp. SEC Exhibit 99.1 independently matches Juniper Networks, the April 19 2011 Q1 release title/date, reported quarter, metrics, and release body. The separately scheduled 17:00 ET conference call and SEC filing timing are not used.",
+      "information_asymmetry_seconds": 1320,
+      "reviewed_on": "2026-10-02"
+    }
+  ],
+  "evidence_method": "Timestamp-preserving Marketwire mirror with independent SEC Exhibit 99.1 corroboration. Prep evidence only; canonical eligibility is revalidated on token-held exact current main.",
+  "prohibited_substitutes": [
+    "edgar_acceptance_time",
+    "scheduled_call_time",
+    "archive_capture_time",
+    "inferred_clock",
+    "date_only"
+  ]
+}
