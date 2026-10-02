@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0087-worker-2.yml": {
-      "expected_sha256": "202137ea0aa58b86a99e57c165be7c1eff7ea366ba6a210e54d48a2237642a18",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
-    },
     ".github/workflows/g1-swarm-controller.yml": {
       "expected_sha256": "5e4c3fcf2c5e4f528ba6703b4900220de5cd433dd813c98131ebc88217531df5",
       "reason": "G1 swarm coordination: preserve push/PR-close/15-minute/manual reconciliation and add immediate issue #153 WORKER-comment reconciliation; controller remains sole token authority and ignores its own controller comments."
@@ -801,10 +797,6 @@
     },
     "data/public/metadata/g1_public_batch_0087_evidence.json": {
       "expected_sha256": "3cfe154fbef1ed78f83af6f9720d9a64496aafa3932a8742fb52cc629ee5a16a",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
-    },
-    "data/public/metadata/g1_public_batch_0087_integration_spec.json": {
-      "expected_sha256": "f3fdd24bf6f41e94fd83c6b3c2348847c32ef669ae7d2a13ee33c64aec7bac8b",
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
