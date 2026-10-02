@@ -12,7 +12,12 @@
     "firstrate_10_plus_per_ticker_usd": 19.95,
     "firstrate_naive_146_ticker_cost_usd": 2912.7,
     "massive_individual_advanced_usd": 199,
-    "massive_business_usd": 2499
+    "massive_business_usd": 2499,
+    "tickdata_equity_unique_symbol_years": 193,
+    "tickdata_external_rate_card_source": "https://stockmarketstack.com/tools/tickdata",
+    "tickdata_external_rate_card_vendor_confirmed": false,
+    "tickdata_external_equity_symbol_year_usd": 32,
+    "tickdata_external_list_benchmark_usd": 6176
   },
   "priority": [
     {
@@ -42,7 +47,7 @@
       "public_new_client_minimum_order_usd": 1000,
       "exact_quote_status": "PENDING_EXTERNAL",
       "automatic_purchase_permitted": false,
-      "note": "Price the one-time Data Store subset before considering TickAPI. The public new-client minimum is materially below the current TickAPI first-year floor."
+      "note": "The $1,000 new-client amount is only a minimum order, not the exact quote. The frozen equity scope spans 193 unique symbol-years. An independent current rate-card review reports $32 per U.S. equity symbol-year before volume discounts, which implies a $6,176 list-price benchmark; this is not vendor-confirmed. Compare Tick Data's written custom quote against the TickAPI first-year floor before selecting either route."
     },
     {
       "rank": 4,
@@ -66,10 +71,11 @@
     "candidate_source_is_not_coverage": true,
     "do_not_activate_trials_automatically": true,
     "do_not_purchase_automatically": true,
-    "prefer_one_time_tickdata_store_quote_before_tickapi_subscription": true,
     "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": true,
     "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": true,
-    "do_not_count_equity_quote_source_without_bid_and_ask_sizes": true
+    "do_not_count_equity_quote_source_without_bid_and_ask_sizes": true,
+    "compare_tickdata_store_exact_quote_to_tickapi_floor_before_purchase": true,
+    "do_not_treat_tickdata_minimum_order_as_exact_quote": true
   },
   "screened_out_or_conditional_equity_routes": [
     {
