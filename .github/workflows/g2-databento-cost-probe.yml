@@ -1,0 +1,82 @@
+name: g2-databento-cost-probe
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/g2-databento-cost-probe.yml"
+      - "src/g2_databento_probe.py"
+      - "data/processed/real_data_release_sprint/g2_champion_minimum_source_date_requirements.csv"
+
+permissions:
+  contents: read
+
+jobs:
+  cost-probe:
+    name: Databento cost-only probe
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      PYTHONPATH: src
+
+    steps:
+      - name: Checkout exact main commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11"
+
+      - name: Check Databento key availability
+        id: key
+        env:
+          DATABENTO_API_KEY: ${{ secrets.DATABENTO_API_KEY }}
+        shell: bash
+        run: |
+          if [[ -n "$DATABENTO_API_KEY" ]]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+            echo "DATABENTO_API_KEY_CONFIGURED"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "DATABENTO_API_KEY_NOT_CONFIGURED"
+          fi
+
+      - name: Estimate Databento historical trade costs
+        if: steps.key.outputs.configured == 'true'
+        env:
+          DATABENTO_API_KEY: ${{ secrets.DATABENTO_API_KEY }}
+        shell: bash
+        run: |
+          python src/g2_databento_probe.py \
+            --requirements data/processed/real_data_release_sprint/g2_champion_minimum_source_date_requirements.csv \
+            --estimate-costs \
+            --budget-usd 125 \
+            --output "$RUNNER_TEMP/databento-cost-probe.json"
+
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          payload = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "databento-cost-probe.json").read_text()
+          )
+          cost = payload["cost_estimate"]
+          summary = {
+              "budget_usd": cost["budget_usd"],
+              "trade_total_usd": cost["trade_total_usd"],
+              "cheapest_first_trade_rows_within_budget": cost[
+                  "cheapest_first_trade_rows_within_budget"
+              ],
+              "estimated_budget_used_usd": cost["estimated_budget_used_usd"],
+              "cheapest_first_trade_dates_within_budget": cost[
+                  "cheapest_first_trade_dates_within_budget"
+              ],
+          }
+          print("DATABENTO_COST_PROBE_SUMMARY=" + json.dumps(summary, sort_keys=True))
+          PY
