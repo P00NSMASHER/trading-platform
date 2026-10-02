@@ -1000,8 +1000,8 @@
       "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "7a197b41a5aac48722e2088ee2ce6d79c3e4302ff55164668ef79ac27573a8bf",
-      "reason": "G1 swarm controller correctness: collapse worker state by latest exact package identity so superseded FOUND records cannot remain advertised after PREP_INVALIDATED or another later status."
+      "expected_sha256": "1b7bbb8f0242de265b84850111717034fd302c1064a663000caa741be96b96ca",
+      "reason": "G1 swarm controller liveness: retain matching stale prep branches for an existing token lease across unrelated main movement while keeping new assignment exact-main-only, and inspect all prep refs."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -1300,8 +1300,8 @@
       "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "bc0e895b816e810cd520cd7b4d3c449735d55fbcc2c372fa7f0d07592faa872a",
-      "reason": "Regression coverage proving a later PREP_INVALIDATED status supersedes an older FOUND record for the same exact event/package."
+      "expected_sha256": "eaed1d289eb42c0b872174e8581432e5174bdec56a54644b5b09faa7b0c745f4",
+      "reason": "Regression coverage proving stale prep branches cannot receive a new token but do preserve an already-assigned token until its lease expires."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
