@@ -1144,8 +1144,8 @@
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "83aef3b6b909327fde44cfd937c9f2a0d385b92af6ab2ac4757bdce891900ffc",
-      "reason": "G1 controller correctness: closed-unmerged PRs release fresh tokens only when they target current main and do not predate the token assignment."
+      "expected_sha256": "9b101f23bf6060140301a40a63b256a00798957aa11e262df6cc18498d7558f3",
+      "reason": "G1 controller throughput: retain a stale prep branch only when the latest issue state for the same worker+batch remains PREPARED/CI; exact-main regeneration is still required before canonical integration."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -1520,8 +1520,8 @@
       "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "e22427a2a69d6f410a071e53ddc803f8bab11fa205dc46f44bc187b462894fef",
-      "reason": "Regression coverage for stale-base and preassignment closed PRs, while preserving current-attempt closed-unmerged token release behavior."
+      "expected_sha256": "75e9f7c9f9e6b12fadb650dbab4c0516e223bd9b687c5a6583b468369d64607d",
+      "reason": "Regression coverage for stale prepared queue retention across unrelated main churn and PREP_INVALIDATED fail-closed rejection."
     },
     "tests/test_g2_candidate_route_matrix.py": {
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",

@@ -608,20 +608,40 @@ def candidate_key(candidate: Candidate) -> tuple[int, int]:
 
 
 def require_live_prepared_support(candidates: list[Candidate]) -> list[Candidate]:
-    # A PREPARED comment or queue hint is not durable evidence. The package must
-    # have a prep branch compared against *current* main with behind_by == 0.
-    # branch_candidates() already rejects stale/diverged prep branches.
-    live_branch_keys = {
+    # A current-main prep branch is sufficient durable support on its own.
+    #
+    # Unrelated main movement must not erase a package that was already explicitly
+    # PREPARED/CI. A stale prep branch may therefore keep that package queued only
+    # when the latest issue-derived candidate for the same worker+batch is still
+    # PREPARED/CI. This pairing prevents an old branch from reviving a package after
+    # PREP_INVALIDATED/EXHAUSTED while avoiding pointless rebases during unrelated
+    # main churn. The eventual token holder must still regenerate from exact current
+    # main before canonical publication or merge.
+    current_branch_keys = {
         candidate_key(candidate)
         for candidate in candidates
         if candidate.source == "prep_branch_fallback"
         and candidate.behind_by == 0
         and (candidate.ahead_by or 0) >= 1
     }
+    durable_branch_keys = {
+        candidate_key(candidate)
+        for candidate in candidates
+        if candidate.source == "prep_branch_fallback"
+        and candidate.behind_by is not None
+        and (candidate.ahead_by or 0) >= 1
+    }
+    issue_prepared_keys = {
+        candidate_key(candidate)
+        for candidate in candidates
+        if candidate.source == "issue_prepared"
+        and candidate.status in PREPARED_STATUSES
+    }
+    supported_keys = current_branch_keys | (durable_branch_keys & issue_prepared_keys)
     return [
         candidate
         for candidate in candidates
-        if candidate_key(candidate) in live_branch_keys
+        if candidate_key(candidate) in supported_keys
     ]
 
 
