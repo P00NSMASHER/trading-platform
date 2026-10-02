@@ -1392,8 +1392,8 @@
       "reason": "No-purchase Nasdaq U.S. Equity Tick History candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; current Jan-2014+ consolidated tick trades/quotes remain candidates pending license and content validation."
     },
     "tests/test_g2_vendor_request_manifests.py": {
-      "expected_sha256": "793be1b73ec10ea792d0eea08b30e13ffecf4c834262356a013db3ab9f6f1205",
-      "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
+      "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
@@ -1466,6 +1466,30 @@
     "tests/test_g2_tickapi_cost_estimator.py": {
       "expected_sha256": "2b7b302ea2d7d60fdedfeae63bb278f95b832a39a38df66bfbc66659a5de5627",
       "reason": "Planning-only TickAPI cost estimator tied to frozen G2 equity request manifests and current published TickAPI pricing; no API call, subscription, order, or coverage claim."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_trades.csv": {
+      "expected_sha256": "f6572714c3fd628f7e5e85670d7e85067e3992192f6bc0f71fd9cd792dc17496",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_nbbo_quotes.csv": {
+      "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/databento_opra_trades.csv": {
+      "expected_sha256": "29f408ccf695d7775a9b842556faa6cee9acef719e7732506f14a91d3186c452",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
+      "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
+      "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/vendor_request_summary.json": {
+      "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     }
   },
   "schema_version": "2",

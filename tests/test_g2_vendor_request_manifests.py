@@ -43,9 +43,15 @@ def test_vendor_request_manifests_match_frozen_scope(tmp_path: Path):
         },
     }
 
+    committed = ROOT / "data/processed/real_data_release_sprint/vendor_requests"
     for item in summary["routes"].values():
-        assert (tmp_path / item["file"]).exists()
-    assert (tmp_path / "vendor_request_summary.json").exists()
+        generated = tmp_path / item["file"]
+        assert generated.exists()
+        assert generated.read_bytes() == (committed / item["file"]).read_bytes()
+
+    generated_summary = tmp_path / "vendor_request_summary.json"
+    assert generated_summary.exists()
+    assert generated_summary.read_bytes() == (committed / "vendor_request_summary.json").read_bytes()
     committed_dir = ROOT / "data/processed/g2_vendor_requests"
     for item in summary["routes"].values():
         assert (tmp_path / item["file"]).read_bytes() == (
