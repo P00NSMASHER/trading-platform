@@ -1378,6 +1378,14 @@
     "data/processed/real_data_release_sprint/g2_champion_minimum_source_date_requirements.csv": {
       "expected_sha256": "1ae3379537da3f4f809ce960eeb59906dbe961bee9982d94f1a91db5620e999c",
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
+    },
+    "src/g2_cboe_equity_probe.py": {
+      "expected_sha256": "e5619af42b13dd55526169c230b07b9848d79f9c9baad6b6d0102acfe5531acb",
+      "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
+    },
+    "tests/test_g2_cboe_equity_probe.py": {
+      "expected_sha256": "065a041bfd46652ba0221e8f17cef257d6f6972389f5ab2cbfe54c44b9a7da69",
+      "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     }
   },
   "schema_version": "2",
