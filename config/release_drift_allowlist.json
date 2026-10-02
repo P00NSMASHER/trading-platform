@@ -1530,6 +1530,14 @@
     "data/processed/g2_vendor_requests/vendor_activation_blueprint.json": {
       "expected_sha256": "79a94cc06020b8acba03d36ef3e549dabc0fda05132b588887b7974470947da5",
       "reason": "Fail-closed G2 vendor activation blueprint: exact request scope and canonical fields with blank delivery/license values and authorized=false until local entitlement review."
+    },
+    "src/g2_vendor_delivery_preflight.py": {
+      "expected_sha256": "415c20c6b3e84792b92d44b237b62702b8e1b0395c37948363a0dccb8422a3ee",
+      "reason": "Fail-closed G2 vendor delivery preflight: reconcile delivered intake files to requested dates/family/kind without asserting authorization, symbol content coverage, or G2 completion."
+    },
+    "tests/test_g2_vendor_delivery_preflight.py": {
+      "expected_sha256": "20cf825243b229cc497603788a77282325d0cbe7d9781f06ceebad331e885b28",
+      "reason": "Fail-closed G2 vendor delivery preflight: reconcile delivered intake files to requested dates/family/kind without asserting authorization, symbol content coverage, or G2 completion."
     }
   },
   "schema_version": "2",
