@@ -1656,16 +1656,16 @@
       "reason": "Regression guard for the no-purchase Massive equity candidate plan, frozen 414+414 equity source-date rows / 3,828 pairs / 146 symbols, and explicit non-inference of individual non-professional eligibility."
     },
     "src/g2_equity_cost_alternatives.py": {
-      "expected_sha256": "5fd9e887fcf7f4e6bc3fd3344dd43f9d501c24ca60797e6bc7bd9c68020c3090",
-      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+      "expected_sha256": "5f3a1114840a4cf0420cb5c4ad1bf2ff2bc72951a58b1d6e4f26026b054c3aac",
+      "reason": "Correct ThetaData equity planning accounting to distinguish 291 post-history candidate dates from 230 non-empty XNAS request rows and 380 residual rows; pair counts remain conserved and all purchase/license/coverage gates remain fail-closed."
     },
     "tests/test_g2_equity_cost_alternatives.py": {
-      "expected_sha256": "f6a02f251fb264362efd3b6ffd186d7cf1a6b977e1dadb1df5f3318b879a0228",
-      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+      "expected_sha256": "9b97afabb407f1b6330767e047d463691908be83046e88094aa3f50e351afb47",
+      "reason": "Correct ThetaData equity planning accounting to distinguish 291 post-history candidate dates from 230 non-empty XNAS request rows and 380 residual rows; pair counts remain conserved and all purchase/license/coverage gates remain fail-closed."
     },
     "data/processed/g2_vendor_requests/equity_cost_alternatives.json": {
-      "expected_sha256": "b60cf437fd44e25da96bf2fb0e6bb8f0ee4136ef8cebcc12c49b37a6774a0d8c",
-      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+      "expected_sha256": "88313967eb92d974bee440097b86856f8f9d9c742a0588cd7d84d3b6e37e388b",
+      "reason": "Correct ThetaData equity planning accounting to distinguish 291 post-history candidate dates from 230 non-empty XNAS request rows and 380 residual rows; pair counts remain conserved and all purchase/license/coverage gates remain fail-closed."
     },
     "src/g2_options_cost_alternatives.py": {
       "expected_sha256": "c7b2ec4c319bcef91017cd981500cede8fb0411284d459b83906b1ffa47d62ce",
