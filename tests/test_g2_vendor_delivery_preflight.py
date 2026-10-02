@@ -168,3 +168,59 @@ def test_wrong_vendor_family_does_not_satisfy_request(tmp_path: Path):
     result = preflight.preflight(request, inventory)
     assert result["missing_delivery_rows"] == 1
     assert result["ready_for_entitlement_review"] is False
+
+
+def test_full_replication_option_quote_routes_are_supported(tmp_path: Path):
+    for index, route in enumerate(
+        (
+            "candidate_lseg_opra_tick_history_option_quotes",
+            "candidate_thetadata_options_pro_option_quotes",
+        )
+    ):
+        request = tmp_path / f"request_{index}.csv"
+        inventory = tmp_path / f"inventory_{index}.csv"
+        _write_csv(
+            request,
+            REQUEST_FIELDS,
+            [{
+                "trade_date": "2015-03-20",
+                "record_kind": "option_quote",
+                "historical_symbols": "AAA;BBB",
+                "unique_symbol_count": "2",
+                "symbol_date_pair_count": "2",
+                "route": route,
+            }],
+        )
+        _write_csv(
+            inventory,
+            INVENTORY_FIELDS,
+            [{
+                "path": f"/drop/option_quotes_{index}.csv",
+                "relative_path": f"option_quotes_{index}.csv",
+                "size_bytes": "100",
+                "sha256": "d" * 64,
+                "file_kind": "delimited_text",
+                "readable_header": "1",
+                "detected_trade_date": "2015-03-20",
+                "candidate_record_kind": "option_quote",
+                "candidate_source_family": "generic_authorized_market_data",
+                "candidate_format_version": "",
+                "confidence": "high",
+                "status": "PENDING_AUTHORIZATION_AND_REVIEW",
+                "reason": "fixture",
+                "header_fields": "",
+                "proposed_column_map": "{}",
+                "research_use_only": "1",
+            }],
+        )
+
+        result = preflight.preflight(request, inventory)
+
+        assert result["route"] == route
+        assert result["expected_record_kind"] == "option_quote"
+        assert result["expected_source_family"] == "generic_authorized_market_data"
+        assert result["requested_source_date_rows"] == 1
+        assert result["requested_symbol_date_pairs"] == 2
+        assert result["present_pending_authorization_rows"] == 1
+        assert result["ready_for_entitlement_review"] is True
+        assert result["coverage_policy"]["g2_coverage_counted"] is False
