@@ -1666,6 +1666,18 @@
     "data/processed/g2_vendor_requests/equity_cost_alternatives.json": {
       "expected_sha256": "0983a2d27f5125c4255422080f0e4837dd260ff685b273987875ef375c7e74f0",
       "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
+    },
+    "src/g2_options_cost_alternatives.py": {
+      "expected_sha256": "818cf066f84624180be26249c03f196ad923b321c0f80618d7fd6c3a78823bdb",
+      "reason": "Planning-only lower-cost G2 options alternatives with explicit history/license conflicts; no preferred-route replacement, purchase authority, or coverage claim."
+    },
+    "tests/test_g2_options_cost_alternatives.py": {
+      "expected_sha256": "7c6bb040724f5d6316703f63715bb490bb5d8308820e4dd4e78c0485c751bea0",
+      "reason": "Planning-only lower-cost G2 options alternatives with explicit history/license conflicts; no preferred-route replacement, purchase authority, or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/options_cost_alternatives.json": {
+      "expected_sha256": "8835146043a46277a1919621e6052409efc05071126f614dfd3277a724018598",
+      "reason": "Planning-only lower-cost G2 options alternatives with explicit history/license conflicts; no preferred-route replacement, purchase authority, or coverage claim."
     }
   },
   "schema_version": "2",
