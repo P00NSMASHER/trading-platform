@@ -23,6 +23,24 @@ def test_options_cost_alternatives_preserve_history_and_license_gates():
     assert current["Cboe DataShop Option Trades"]["source_date_rows"] == 83
     assert current["Databento OPRA.PILLAR Trades"]["source_date_rows"] == 226
 
+    cheapest = payload["conditional_cheapest_full_option_route"]
+    assert cheapest["status"] == "PREFERRED_IF_THETADATA_WRITTEN_LICENSE_CLEARANCE_IS_RECEIVED"
+    assert cheapest["expected_vendor_count"] == 2
+    assert cheapest["coverage_accounting"] == {
+        "source_date_rows_per_record_kind": 414,
+        "underlying_date_pairs_per_record_kind": 3828,
+        "record_kinds": ["option_trade", "option_quote"],
+    }
+    segments = {item["vendor"]: item for item in cheapest["segments"]}
+    assert segments["LSEG OPRA Tick History"]["source_date_rows_per_record_kind"] == 123
+    assert segments["LSEG OPRA Tick History"]["underlying_date_pairs_per_record_kind"] == 814
+    assert segments["ThetaData Options PRO"]["source_date_rows_per_record_kind"] == 291
+    assert segments["ThetaData Options PRO"]["underlying_date_pairs_per_record_kind"] == 3014
+    assert cheapest["replaces_if_cleared"] == [
+        "Cboe DataShop Option Trades",
+        "Databento OPRA.PILLAR Trades",
+    ]
+
     by_vendor = {item["vendor"]: item for item in payload["alternatives"]}
 
     theta = by_vendor["ThetaData Options PRO"]
