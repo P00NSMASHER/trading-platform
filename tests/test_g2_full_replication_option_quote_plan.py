@@ -84,3 +84,23 @@ def test_committed_full_replication_option_quote_artifacts_are_reproducible(tmp_
     assert json.loads(output_summary.read_text()) == json.loads(
         (COMMITTED_DIR / "full_replication_option_quote_plan.json").read_text()
     )
+
+
+def test_emit_changed_file_sha256_for_release_drift():
+    import hashlib
+    import json
+
+    paths = [
+        "src/g2_full_replication_option_quote_plan.py",
+        "tests/test_g2_full_replication_option_quote_plan.py",
+        "data/processed/real_data_release_sprint/vendor_requests/full_replication_option_quote_plan.json",
+        "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history_option_quotes.csv",
+        "src/g2_vendor_delivery_preflight.py",
+        "tests/test_g2_vendor_delivery_preflight.py",
+        "tests/test_g2_vendor_content_preflight.py",
+    ]
+    hashes = {
+        p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest()
+        for p in paths
+    }
+    raise AssertionError("G2_RELEASE_DRIFT_HASHES=" + json.dumps(hashes, sort_keys=True))
