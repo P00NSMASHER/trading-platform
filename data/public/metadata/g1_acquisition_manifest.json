@@ -356,54 +356,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-BFE8A42E0C19BA39",
       "event_date": "2011-10-26",
       "event_id": "HEJFE-BFE8A42E0C19BA39",
       "first_documented_illicit_trade_ts": "2011-10-26T18:26:00Z",
       "historical_symbol": "VDSI",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2011-10-27T07:00:00Z",
       "research_use_only": true,
-      "route_order": [
-        "licensed_ibes_bulk",
-        "public_release_discovery"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "release_discovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "official_newswire_archive",
+        "source_grade": "A",
+        "source_id": "public-worker1-vdsi-batch-0076",
+        "source_reference": "https://www.prnewswire.com/news-releases/vasco-reports-results-for-third-quarter-and-first-nine-months-of-2011-132678308.html",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2011-11-02",
-        "start_date": "2011-10-26"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -5832,7 +5802,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 78,
+    "request_event_count": 77,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -5866,19 +5836,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 78,
+    "acquisition_needed": 77,
     "event_count": 174,
-    "exact_resolved": 96,
-    "research_hint_exact_resolved": 96,
-    "research_hint_excluded": 78,
+    "exact_resolved": 97,
+    "research_hint_exact_resolved": 97,
+    "research_hint_excluded": 77,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
     "explicit_research_priorities": 4,
-    "no_public_replication_candidate": 9,
+    "no_public_replication_candidate": 8,
     "public_release_file_present_without_clock": 69,
-    "resolved_no_action": 96,
-    "routed_for_acquisition": 78
+    "resolved_no_action": 97,
+    "routed_for_acquisition": 77
   },
   "work_queue": [
     {
@@ -6776,19 +6746,6 @@
       "route_order": [
         "public_exact_clock_recovery",
         "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-BFE8A42E0C19BA39",
-      "event_date": "2011-10-26",
-      "event_id": "HEJFE-BFE8A42E0C19BA39",
-      "historical_symbol": "VDSI",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "queue_priority": 2000,
-      "research_priority_rank": null,
-      "route_order": [
-        "licensed_ibes_bulk",
-        "public_release_discovery"
       ]
     },
     {
