@@ -365,7 +365,7 @@ def test_prepared_comment_without_fresh_branch_does_not_support_active_token() -
 
     assert result.state == "INVALID"
 
-def test_stale_prep_branch_is_rejected() -> None:
+def test_stale_prep_branch_is_retained_but_not_new_assignment_eligible() -> None:
     candidates = ctl.branch_candidates(
         [
             {
@@ -380,7 +380,50 @@ def test_stale_prep_branch_is_rejected() -> None:
             }
         },
     )
-    assert candidates == []
+
+    assert len(candidates) == 1
+    assert candidates[0].behind_by == 23
+    assert ctl.require_live_prepared_support(candidates) == []
+
+
+def test_assigned_token_survives_unrelated_main_movement_until_lease_expires() -> None:
+    token = ctl.TokenAssignment(
+        worker=3,
+        package="BWA",
+        batch=83,
+        assigned_at="2026-10-02T07:00:00Z",
+        comment_id=10,
+    )
+    candidates = [
+        ctl.Candidate(
+            worker=3,
+            package="BWA",
+            batch=83,
+            event_ids=(),
+            symbols=("BWA",),
+            created_at="",
+            source="prep_branch_fallback",
+            status="PREPARED",
+            branch="g1/prep-0083-worker-3-bwa-oldmain",
+            behind_by=2,
+            ahead_by=1,
+        )
+    ]
+    m = manifest(unresolved_symbols={"BWA": {"HEJFE-5CB3223BB28A6F14"}})
+
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=[],
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 2, 7, 5, tzinfo=timezone.utc),
+        candidates=candidates,
+    )
+
+    assert result.state == "ACTIVE"
+    assert result.progress_after_assignment is False
 
 
 def test_exact_current_main_prep_branch_is_live_support() -> None:
