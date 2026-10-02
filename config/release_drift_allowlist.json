@@ -1550,6 +1550,18 @@
     "data/processed/g2_vendor_requests/vendor_quote_packets.json": {
       "expected_sha256": "0c35a8ed15b37b53eb3e7699d8020a01ecd71540ab0cbbbc182adc5829a410d5",
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
+    },
+    "src/g2_vendor_readiness.py": {
+      "expected_sha256": "3f29c9c6772f99e6fd14b10ba6af006a93550d95707f58e74a7fa3e891568901",
+      "reason": "G2 vendor acquisition readiness receipt: distinguish repository planning readiness from external pricing/licensing/delivery and unchanged validated full-G2 coverage."
+    },
+    "tests/test_g2_vendor_readiness.py": {
+      "expected_sha256": "623597fbe14cd550ac7fb3d16b587546f44258110e8a87575098343225487379",
+      "reason": "G2 vendor acquisition readiness receipt: distinguish repository planning readiness from external pricing/licensing/delivery and unchanged validated full-G2 coverage."
+    },
+    "data/processed/g2_vendor_requests/vendor_readiness.json": {
+      "expected_sha256": "0459613798b547fea5691d2cc6fb18025747d6b0fa70232b7b7844d9e890a98d",
+      "reason": "G2 vendor acquisition readiness receipt: distinguish repository planning readiness from external pricing/licensing/delivery and unchanged validated full-G2 coverage."
     }
   },
   "schema_version": "2",
