@@ -1,0 +1,95 @@
+name: G1 batch 0085 exact-main publisher
+
+on:
+  push:
+    branches:
+      - g1/public-batch-0085-worker-0-thc-main-28a180a
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: g1-batch-0085-exact-main
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: src
+    steps:
+      - name: Checkout exact branch head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: g1/public-batch-0085-worker-0-thc-main-28a180a
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+
+      - name: Verify exact current main
+        run: |
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "28a180acb353c6e1e7aebf2f6aa15694756785a2"
+          test "$(git merge-base HEAD origin/main)" = "28a180acb353c6e1e7aebf2f6aa15694756785a2"
+
+      - name: Generate canonical batch 0085 outputs
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        run: python scripts/g1_batch_0085_generate.py
+
+      - name: Run focused G1 regression
+        run: |
+          pytest -q tests/test_g1_public_batch_0085.py tests/test_g1_source_research.py tests/test_g1_acquisition_manifest.py tests/test_metadata_resolver.py tests/test_real_data_release_sprint.py
+
+      - name: Harden ephemeral runtime permissions
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+
+      - name: Run full pytest
+        run: pytest -q
+
+      - name: Commit generated canonical outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "G1: recover THC exact public clock, 97 exact / 77 excluded [g1-generated]"
+
+      - name: Remove temporary publisher, integration spec, and allowlist entries
+        run: |
+          git rm .github/workflows/g1-public-batch-0085-worker-0.yml
+          git rm data/public/metadata/g1_public_batch_0085_integration_spec.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("config/release_drift_allowlist.json")
+          d=json.loads(p.read_text())
+          keys=[
+              ".github/workflows/g1-public-batch-0085-worker-0.yml",
+              "data/public/metadata/g1_public_batch_0085_integration_spec.json",
+          ]
+          for key in keys:
+              for section in ("intentional_release_modifications","repository_additions"):
+                  if isinstance(d.get(section),dict):
+                      d[section].pop(key,None)
+          p.write_text(json.dumps(d,indent=2,sort_keys=True)+"\n")
+          PY
+          git add config/release_drift_allowlist.json
+          git commit -m "Remove temporary batch 0085 publisher workflow and integration spec"
+
+      - name: Push exact verified head
+        run: git push origin HEAD:g1/public-batch-0085-worker-0-thc-main-28a180a
