@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "72df14bea4ff290fc704811f00fde44016809a0a",
+  "base_main_sha": "e77e0c3708945fcce5ced532b91dcfbc3f351081",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -97,13 +97,6 @@
       "event_id": "HEJFE-EBC49B9A024181AD",
       "first_documented_illicit_trade_ts": "2015-03-03 13:31:00",
       "historical_symbol": "VEEV",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-B704E62641681A73",
-      "first_documented_illicit_trade_ts": "2011-07-27 15:59:00",
-      "historical_symbol": "GT",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -588,14 +581,14 @@
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 95,
-    "exact_timing_analysis_eligible": 95,
+    "exact_resolved": 96,
+    "exact_timing_analysis_eligible": 96,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 79,
+    "raw_exact_time_evidence_gaps": 78,
     "required": 174,
-    "reviewed_excluded": 79
+    "reviewed_excluded": 78
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
