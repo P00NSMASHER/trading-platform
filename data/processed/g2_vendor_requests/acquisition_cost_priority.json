@@ -1,0 +1,128 @@
+{
+  "schema_version": "1",
+  "purpose": "Planning-only cheap-first acquisition sequence for G2_CHAMPION_MINIMUM. It does not authorize purchase, trial activation, download, or G2 coverage.",
+  "pricing_as_of": "2026-10-02",
+  "champion_minimum_source_date_rows": 1242,
+  "canonical_full_g2_source_date_rows": 1656,
+  "known_public_cost_floors": {
+    "tickdata_datastore_new_client_minimum_usd": 1000,
+    "tickdata_datastore_source": "https://www.tickdata.com/tickdatastore",
+    "tickdata_fee_estimate_source": "https://www.tickdata.com/fee-estimate",
+    "tickapi_estimated_first_year_minimum_usd": 3821,
+    "firstrate_10_plus_per_ticker_usd": 19.95,
+    "firstrate_naive_146_ticker_cost_usd": 2912.7,
+    "massive_individual_advanced_usd": 199,
+    "massive_business_usd": 2499,
+    "tickdata_equity_unique_symbol_years": 193,
+    "tickdata_external_rate_card_source": "https://stockmarketstack.com/tools/tickdata",
+    "tickdata_external_rate_card_vendor_confirmed": false,
+    "tickdata_external_equity_symbol_year_usd": 32,
+    "tickdata_external_list_benchmark_usd": 6176
+  },
+  "priority": [
+    {
+      "rank": 1,
+      "route": "cboe_free_trial_capacity",
+      "scope_source_date_rows_upper_bound": 81,
+      "scope_symbol_date_pairs_upper_bound": 445,
+      "cost_status": "POTENTIALLY_ZERO_TRIAL_AWAITING_VENDOR_CONFIRMATION",
+      "blocking_state": "AWAITING_VENDOR_CONFIRMATION",
+      "automatic_activation_permitted": false,
+      "note": "Use only if Cboe confirms historical Option Trades are available on the 14-day trial and explicit user authorization is given. Pagination can reduce the optimistic 81-row capacity."
+    },
+    {
+      "rank": 2,
+      "route": "databento_opra_cost_probe",
+      "scope_source_date_rows": 226,
+      "scope_symbol_date_pairs": 2875,
+      "cost_status": "UNKNOWN_UNTIL_DATABENTO_API_KEY_CONFIGURED",
+      "automatic_purchase_permitted": false,
+      "note": "Run metadata.get_cost only. The existing workflow performs no download or purchase and fails closed when the API key is absent."
+    },
+    {
+      "rank": 3,
+      "route": "tickdata_one_time_datastore_equities",
+      "scope_source_date_rows": 828,
+      "scope_symbol_date_pairs": 7656,
+      "public_new_client_minimum_order_usd": 1000,
+      "exact_quote_status": "PENDING_EXTERNAL",
+      "automatic_purchase_permitted": false,
+      "note": "The $1,000 new-client amount is only a minimum order, not the exact quote. The frozen equity scope spans 193 unique symbol-years. An independent current rate-card review reports $32 per U.S. equity symbol-year before volume discounts, which implies a $6,176 list-price benchmark; this is not vendor-confirmed. Compare Tick Data's written custom quote against the TickAPI first-year floor before selecting either route."
+    },
+    {
+      "rank": 4,
+      "route": "lseg_2011_opra_tick_history",
+      "scope_source_date_rows": 105,
+      "scope_symbol_date_pairs": 464,
+      "exact_quote_status": "PENDING_EXTERNAL",
+      "automatic_purchase_permitted": false
+    },
+    {
+      "rank": 5,
+      "route": "cboe_paid_remainder_or_fallback",
+      "scope_source_date_rows_if_trial_capacity_holds": 2,
+      "scope_symbol_date_pairs_if_trial_capacity_holds": 44,
+      "scope_source_date_rows_if_trial_unavailable": 83,
+      "exact_quote_status": "PENDING_EXTERNAL",
+      "automatic_purchase_permitted": false
+    }
+  ],
+  "decision_rules": {
+    "candidate_source_is_not_coverage": true,
+    "do_not_activate_trials_automatically": true,
+    "do_not_purchase_automatically": true,
+    "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": true,
+    "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": true,
+    "do_not_count_equity_quote_source_without_bid_and_ask_sizes": true,
+    "compare_tickdata_store_exact_quote_to_tickapi_floor_before_purchase": true,
+    "do_not_treat_tickdata_minimum_order_as_exact_quote": true
+  },
+  "screened_out_or_conditional_equity_routes": [
+    {
+      "route": "firstrate_tick_history",
+      "status": "CONDITIONAL_NOT_CURRENT_FULL_SCOPE",
+      "sources": [
+        "https://firstratedata.com/a/2/tick-data-pricing",
+        "https://firstratedata.com/about/FAQ",
+        "https://firstratedata.com/about/license"
+      ],
+      "naive_all_146_ticker_cost_usd": 2912.7,
+      "reasons": [
+        "Public FAQ says standardized bundles only; no custom subset orders.",
+        "TickHistory FAQ says the current tick service carries active tickers only.",
+        "Quote schema must explicitly include bid_size and ask_size before G2 equity_quote coverage can be considered.",
+        "Buying all 146 tickers at the published 10+ per-ticker rate would exceed the Tick Data Store new-client minimum."
+      ],
+      "automatic_purchase_permitted": false
+    },
+    {
+      "route": "massive_stocks",
+      "status": "INDIVIDUAL_PLAN_NOT_BUSINESS_ELIGIBLE",
+      "sources": [
+        "https://massive.com/pricing?product=stocks",
+        "https://massive.com/business",
+        "https://massive.com/legal/market-data-terms-of-service"
+      ],
+      "individual_advanced_usd_per_month": 199,
+      "business_usd_per_month": 2499,
+      "reasons": [
+        "The $199 individual tier is for non-professional personal, non-business use.",
+        "The business-safe stock tier is $2,499/month, above the $1,000 Tick Data Store minimum."
+      ],
+      "automatic_purchase_permitted": false
+    },
+    {
+      "route": "kibot_tick_bid_ask",
+      "status": "FAILS_CURRENT_EQUITY_QUOTE_SCHEMA",
+      "sources": [
+        "https://www.kibot.com/quality/bid-ask-and-nbbo-quotes.html"
+      ],
+      "reasons": [
+        "Standard tick+bid/ask records NBBO only at trade timestamps rather than a continuous quote stream.",
+        "Standard files do not include top-of-book bid_size or ask_size.",
+        "The G2 equity_quote contract requires bid_size and ask_size."
+      ],
+      "automatic_purchase_permitted": false
+    }
+  ]
+}
