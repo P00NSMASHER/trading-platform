@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **63 public exact-time batches / 93 exact-resolved
+The current repository state is **64 public exact-time batches / 94 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -229,3 +229,7 @@ The official SEC civil complaint records Newswire Service 1 distributing Align T
 ### Batch 0082: Panera Bread
 
 The official SEC civil complaint records Newswire Service 1 publicly disseminating Panera Bread's Q2 2013 earnings release at 2013-07-23 16:00 EDT (20:00 UTC), 2,940 seconds after the frozen 15:11 EDT illicit trade. Matching SEC Exhibit 99.1 independently corroborates the July 23 Q2 release identity, $1.74 diluted EPS result, and revised FY2013 EPS target. This advances G1 from 92 exact / 82 reviewed exclusions to 93 exact / 81 reviewed exclusions. EDGAR acceptance, conference-call, archive-capture, date-only, scheduled and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0079: Juniper Networks
+
+InvestorsHub/ADVFN preserves the matching Marketwire release for Juniper Networks' preliminary first-quarter 2011 results with an explicit publication clock of 2011-04-19 16:12 EDT (20:12 UTC), 1,320 seconds after the frozen 15:50 EDT illicit trade. SEC Exhibit 99.1 independently corroborates issuer, release title/date, reporting period, and release content. This advances G1 from 93 exact / 81 reviewed exclusions to 94 exact / 80 reviewed exclusions. The separately scheduled 17:00 ET conference call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
