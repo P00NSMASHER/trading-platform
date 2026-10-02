@@ -1,0 +1,244 @@
+{
+  "schema_version": "1",
+  "purpose": "Fail-closed activation blueprint for G2_CHAMPION_MINIMUM vendor deliveries. This artifact is planning-only and cannot authorize, activate, or count coverage.",
+  "champion_minimum_source_date_rows": 1242,
+  "total_record_kind_symbol_date_pairs": 11484,
+  "profiles": [
+    {
+      "route": "candidate_cboe_option_trades",
+      "vendor": "Cboe DataShop",
+      "request_file": "data/processed/g2_vendor_requests/cboe_option_trades.csv",
+      "record_kind": "option_trade",
+      "source_family": "cboe_option_trades",
+      "source_date_rows": 83,
+      "symbol_date_pair_count": 489,
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "underlying_symbol",
+        "option_symbol",
+        "expiration",
+        "strike",
+        "option_type",
+        "price",
+        "size"
+      ],
+      "delivery": {
+        "path": "",
+        "license_reference": "",
+        "format_version": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York"
+      },
+      "entitlement_template": {
+        "sha256": "",
+        "authorized": false,
+        "license_reference": "",
+        "source_family": "cboe_option_trades",
+        "record_kind": "option_trade",
+        "trade_date": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York",
+        "format_version": ""
+      },
+      "activation_status": "PENDING_DELIVERY_LICENSE_SCHEMA_REVIEW",
+      "activation_rules": {
+        "exact_sha256_binding_required": true,
+        "authorized_must_be_explicitly_true_after_review": true,
+        "license_reference_required": true,
+        "intake_schema_must_match_entitlement": true,
+        "file_existence_alone_never_counts_as_coverage": true
+      }
+    },
+    {
+      "route": "candidate_databento_opra_trades",
+      "vendor": "Databento",
+      "request_file": "data/processed/g2_vendor_requests/databento_opra_trades.csv",
+      "record_kind": "option_trade",
+      "source_family": "generic_authorized_market_data",
+      "source_date_rows": 226,
+      "symbol_date_pair_count": 2875,
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "underlying_symbol",
+        "option_symbol",
+        "expiration",
+        "strike",
+        "option_type",
+        "price",
+        "size"
+      ],
+      "delivery": {
+        "path": "",
+        "license_reference": "",
+        "format_version": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York"
+      },
+      "entitlement_template": {
+        "sha256": "",
+        "authorized": false,
+        "license_reference": "",
+        "source_family": "generic_authorized_market_data",
+        "record_kind": "option_trade",
+        "trade_date": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York",
+        "format_version": ""
+      },
+      "activation_status": "PENDING_DELIVERY_LICENSE_SCHEMA_REVIEW",
+      "activation_rules": {
+        "exact_sha256_binding_required": true,
+        "authorized_must_be_explicitly_true_after_review": true,
+        "license_reference_required": true,
+        "intake_schema_must_match_entitlement": true,
+        "file_existence_alone_never_counts_as_coverage": true
+      }
+    },
+    {
+      "route": "candidate_lseg_opra_tick_history",
+      "vendor": "LSEG Tick History",
+      "request_file": "data/processed/g2_vendor_requests/lseg_opra_tick_history.csv",
+      "record_kind": "option_trade",
+      "source_family": "generic_authorized_market_data",
+      "source_date_rows": 105,
+      "symbol_date_pair_count": 464,
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "underlying_symbol",
+        "option_symbol",
+        "expiration",
+        "strike",
+        "option_type",
+        "price",
+        "size"
+      ],
+      "delivery": {
+        "path": "",
+        "license_reference": "",
+        "format_version": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York"
+      },
+      "entitlement_template": {
+        "sha256": "",
+        "authorized": false,
+        "license_reference": "",
+        "source_family": "generic_authorized_market_data",
+        "record_kind": "option_trade",
+        "trade_date": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York",
+        "format_version": ""
+      },
+      "activation_status": "PENDING_DELIVERY_LICENSE_SCHEMA_REVIEW",
+      "activation_rules": {
+        "exact_sha256_binding_required": true,
+        "authorized_must_be_explicitly_true_after_review": true,
+        "license_reference_required": true,
+        "intake_schema_must_match_entitlement": true,
+        "file_existence_alone_never_counts_as_coverage": true
+      }
+    },
+    {
+      "route": "candidate_tickdata_equity_nbbo_quotes",
+      "vendor": "Tick Data",
+      "request_file": "data/processed/g2_vendor_requests/tickdata_equity_nbbo_quotes.csv",
+      "record_kind": "equity_quote",
+      "source_family": "generic_authorized_market_data",
+      "source_date_rows": 414,
+      "symbol_date_pair_count": 3828,
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "symbol",
+        "bid",
+        "ask",
+        "bid_size",
+        "ask_size"
+      ],
+      "delivery": {
+        "path": "",
+        "license_reference": "",
+        "format_version": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York"
+      },
+      "entitlement_template": {
+        "sha256": "",
+        "authorized": false,
+        "license_reference": "",
+        "source_family": "generic_authorized_market_data",
+        "record_kind": "equity_quote",
+        "trade_date": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York",
+        "format_version": ""
+      },
+      "activation_status": "PENDING_DELIVERY_LICENSE_SCHEMA_REVIEW",
+      "activation_rules": {
+        "exact_sha256_binding_required": true,
+        "authorized_must_be_explicitly_true_after_review": true,
+        "license_reference_required": true,
+        "intake_schema_must_match_entitlement": true,
+        "file_existence_alone_never_counts_as_coverage": true
+      }
+    },
+    {
+      "route": "candidate_tickdata_equity_trades",
+      "vendor": "Tick Data",
+      "request_file": "data/processed/g2_vendor_requests/tickdata_equity_trades.csv",
+      "record_kind": "equity_trade",
+      "source_family": "generic_authorized_market_data",
+      "source_date_rows": 414,
+      "symbol_date_pair_count": 3828,
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "symbol",
+        "price",
+        "size"
+      ],
+      "delivery": {
+        "path": "",
+        "license_reference": "",
+        "format_version": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York"
+      },
+      "entitlement_template": {
+        "sha256": "",
+        "authorized": false,
+        "license_reference": "",
+        "source_family": "generic_authorized_market_data",
+        "record_kind": "equity_trade",
+        "trade_date": "",
+        "delimiter": "",
+        "encoding": "utf-8",
+        "timezone": "America/New_York",
+        "format_version": ""
+      },
+      "activation_status": "PENDING_DELIVERY_LICENSE_SCHEMA_REVIEW",
+      "activation_rules": {
+        "exact_sha256_binding_required": true,
+        "authorized_must_be_explicitly_true_after_review": true,
+        "license_reference_required": true,
+        "intake_schema_must_match_entitlement": true,
+        "file_existence_alone_never_counts_as_coverage": true
+      }
+    }
+  ],
+  "global_policy": {
+    "authorized_defaults_false": true,
+    "blank_delivery_path_required_until_file_exists": true,
+    "blank_license_reference_required_until_entitlement_is_known": true,
+    "credentials_prohibited": true,
+    "local_entitlement_manifest_not_committed_when_populated": true
+  }
+}
