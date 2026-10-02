@@ -7,8 +7,8 @@ import g2_cboe_acceptance_probe as probe
 def test_dry_run_is_two_requests_and_thirty_points():
     manifest = probe.dry_run_manifest()
 
-    assert manifest["sample_date"] == "2011-03-21"
-    assert manifest["sample_symbol"] == "JNPR"
+    assert manifest["sample_date"] == "2012-01-03"
+    assert manifest["sample_symbol"] == "BA"
     assert manifest["historical_points_per_request"] == 15
     assert manifest["total_probe_points"] == 30
     assert manifest["execute_requires"] == ["CBOE_CLIENT_ID", "CBOE_CLIENT_SECRET"]
@@ -24,12 +24,12 @@ def test_dry_run_is_two_requests_and_thirty_points():
 
     equity_qs = urllib.parse.parse_qs(urllib.parse.urlparse(equity_url).query, keep_blank_values=True)
     option_qs = urllib.parse.parse_qs(urllib.parse.urlparse(option_url).query, keep_blank_values=True)
-    assert equity_qs["date"] == ["2011-03-21"]
-    assert equity_qs["symbol"] == ["JNPR"]
+    assert equity_qs["date"] == ["2012-01-03"]
+    assert equity_qs["symbol"] == ["BA"]
     assert equity_qs["mode"] == ["ALL_QUOTES"]
     assert equity_qs["limit"] == ["100"]
-    assert option_qs["date"] == ["2011-03-21"]
-    assert option_qs["symbol"] == ["JNPR"]
+    assert option_qs["date"] == ["2012-01-03"]
+    assert option_qs["symbol"] == ["BA"]
     assert option_qs["seq_no"] == ["0"]
     assert option_qs["limit"] == ["100"]
 
@@ -37,10 +37,10 @@ def test_dry_run_is_two_requests_and_thirty_points():
 def test_assessment_requires_every_field_to_be_present_and_populated():
     good = {
         "timestamp": "09:30:00.001",
-        "security": "JNPR110319C00030000",
-        "root": "JNPR",
-        "expiry": "2011-03-19",
-        "strike": 30.0,
+        "security": "BA110319C00030000",
+        "root": "BA",
+        "expiry": "2012-01-21",
+        "strike": 75.0,
         "option_type": "C",
         "option_trade_price": 1.25,
         "option_trade_size": 3,
@@ -82,10 +82,10 @@ def test_execute_probe_uses_only_two_historical_requests(monkeypatch):
     option_payload = [
         {
             "timestamp": "09:30:00.002",
-            "security": "JNPR110319C00030000",
-            "root": "JNPR",
-            "expiry": "2011-03-19",
-            "strike": 30.0,
+            "security": "BA110319C00030000",
+            "root": "BA",
+            "expiry": "2012-01-21",
+            "strike": 75.0,
             "option_type": "C",
             "option_trade_price": 1.25,
             "option_trade_size": 3,
@@ -108,7 +108,7 @@ def test_execute_probe_uses_only_two_historical_requests(monkeypatch):
     assert result["accepted"] is True
     assert result["total_probe_points"] == 30
     assert len(calls) == 2
-    assert all("2011-03-21" in url and "JNPR" in url for url in calls)
+    assert all("2012-01-03" in url and "BA" in url for url in calls)
 
 
 def test_token_and_secret_never_appear_in_outputs(monkeypatch):
@@ -130,10 +130,10 @@ def test_token_and_secret_never_appear_in_outputs(monkeypatch):
                     }
                     if "trades-and-quotes" in url
                     else {
-                        "security": "JNPR110319C00030000",
-                        "root": "JNPR",
-                        "expiry": "2011-03-19",
-                        "strike": 30.0,
+                        "security": "BA110319C00030000",
+                        "root": "BA",
+                        "expiry": "2012-01-21",
+                        "strike": 75.0,
                         "option_type": "C",
                         "option_trade_price": 1.25,
                         "option_trade_size": 3,
