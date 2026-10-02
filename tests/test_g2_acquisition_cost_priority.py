@@ -16,6 +16,10 @@ def test_cheap_first_acquisition_priority_matches_current_scope():
     costs = payload["known_public_cost_floors"]
     assert costs["tickdata_datastore_new_client_minimum_usd"] == 1000.0
     assert costs["tickapi_estimated_first_year_minimum_usd"] == 3821.0
+    assert costs["tickdata_equity_unique_symbol_years"] == 193
+    assert costs["tickdata_external_rate_card_vendor_confirmed"] is False
+    assert costs["tickdata_external_equity_symbol_year_usd"] == 32.0
+    assert costs["tickdata_external_list_benchmark_usd"] == 6176.0
     assert costs["firstrate_10_plus_per_ticker_usd"] == 19.95
     assert costs["firstrate_naive_146_ticker_cost_usd"] == 2912.7
     assert costs["massive_individual_advanced_usd"] == 199.0
@@ -66,7 +70,8 @@ def test_cheap_first_acquisition_priority_matches_current_scope():
         "candidate_source_is_not_coverage": True,
         "do_not_activate_trials_automatically": True,
         "do_not_purchase_automatically": True,
-        "prefer_one_time_tickdata_store_quote_before_tickapi_subscription": True,
+        "compare_tickdata_store_exact_quote_to_tickapi_floor_before_purchase": True,
+        "do_not_treat_tickdata_minimum_order_as_exact_quote": True,
         "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": True,
         "do_not_count_equity_quote_source_without_bid_and_ask_sizes": True,
         "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": True,
