@@ -308,8 +308,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_readiness.json": {
-      "expected_sha256": "2f4c48d72d531ec47e2cf1a2b946a41ef39d767b99c2070508998d3a404979e3",
-      "reason": "Align Cboe All Access trial readiness with current documented historical Option Trades eligibility while preserving runtime verification and explicit user-authorization requirements."
+      "expected_sha256": "a360fe1597abc39743993a8f138e571cf7c2c130aeaf31649763a77f392386d5",
+      "reason": "Refresh G2 vendor external-state receipts for written vendor responses: Cboe custom full-universe quote received/out of scope and Tick Data written quote unavailable without a phone call; no private pricing committed."
     },
     "data/processed/g2_vendor_requests/vendor_request_summary.json": {
       "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
@@ -1260,8 +1260,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "src/g2_vendor_readiness.py": {
-      "expected_sha256": "9c9eb153ba853c5af48b35173e7ed8e17aa12f3a500990d415cf9995087092d3",
-      "reason": "Align Cboe All Access trial readiness with current documented historical Option Trades eligibility while preserving runtime verification and explicit user-authorization requirements."
+      "expected_sha256": "5fbe985c8b9aadbc5b96ee177025c76b01485b66890c76515cf94c6261cf8eba",
+      "reason": "Refresh G2 vendor external-state receipts for written vendor responses: Cboe custom full-universe quote received/out of scope and Tick Data written quote unavailable without a phone call; no private pricing committed."
     },
     "src/g2_vendor_request_manifests.py": {
       "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
@@ -1560,8 +1560,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "tests/test_g2_vendor_readiness.py": {
-      "expected_sha256": "3d2265b43f2d114b51a8f9e2e658d31eca5ac100a58313af1dd382ccc35595be",
-      "reason": "Align Cboe All Access trial readiness with current documented historical Option Trades eligibility while preserving runtime verification and explicit user-authorization requirements."
+      "expected_sha256": "e4c102fa0607ffb0f02d0191d7cca907408540cd32dbf084aa13b1a5b38db95a",
+      "reason": "Refresh G2 vendor external-state receipts for written vendor responses: Cboe custom full-universe quote received/out of scope and Tick Data written quote unavailable without a phone call; no private pricing committed."
     },
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",
