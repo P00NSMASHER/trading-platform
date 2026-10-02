@@ -94,3 +94,16 @@ Suggested subdirectories:
 - `controls/`
 
 The acquisition process must preserve original vendor filenames and produce SHA-256 receipts before any transformation.
+
+## October 2, 2026 G2 vendor-reply evidence
+
+Machine-readable evidence is recorded at:
+
+`data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json`
+
+Cboe Data Vantage (Dorraine Burrell, Director, Data Vantage Sales) confirmed that historical tick data is offered only for the full OPRA universe, not only the requested 137 historical underlyings. Rough pricing was **$40,000 for 2 years 5 months** and **$24,000 for one calendar year**; the requested **309 selected trading days across several years** would be a custom job and could cost more. The paid bulk route is therefore **out of scope for the current research** and must not be purchased or treated as G2 coverage.
+
+Tick Data did not provide written availability or pricing for the requested 2011–2015 OPRA tick-level scope. After the requester explicitly stated that a mandatory phone call would make the written quote unavailable, Tick Data again required a phone call. Record this route as **unpriced / written-quote unavailable**; do not infer availability from the exchange and do not count any coverage.
+
+The Cboe zero-cost historical acceptance probe from PR #258 is logically separate from the paid bulk quote. PR #258 was merged on October 2, 2026; the probe remains dry-run by default and cannot authorize a purchase, subscription, or coverage-count change. Only actual validated historical rows can change G2 coverage.
+
