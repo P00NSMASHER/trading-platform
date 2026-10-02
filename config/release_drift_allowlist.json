@@ -1654,6 +1654,18 @@
     "tests/test_g2_massive_equity_plan.py": {
       "expected_sha256": "2b04f365702f8affa0ad0adcbb6a32ba5b770b0b53fb78d965667b20bb641ab4",
       "reason": "Regression guard for the no-purchase Massive equity candidate plan, frozen 414+414 equity source-date rows / 3,828 pairs / 146 symbols, and explicit non-inference of individual non-professional eligibility."
+    },
+    "src/g2_equity_cost_alternatives.py": {
+      "expected_sha256": "9f06bef0bae9f574cda1a1e09f5cfe535159edaacf473bf8b95da0d45a7c0000",
+      "reason": "Planning-only lower-cost G2 equity alternatives with explicit licensing/coverage blockers; no preferred-route replacement, purchase authority, or coverage claim."
+    },
+    "tests/test_g2_equity_cost_alternatives.py": {
+      "expected_sha256": "14028fbbfb423c1ceb96b05285715d19d913e691e78e5fdd44a229a1b32511b3",
+      "reason": "Planning-only lower-cost G2 equity alternatives with explicit licensing/coverage blockers; no preferred-route replacement, purchase authority, or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/equity_cost_alternatives.json": {
+      "expected_sha256": "5fcc77f800cac6f05c7273653eb96fa412148c37f1e6528072381579f819b8a5",
+      "reason": "Planning-only lower-cost G2 equity alternatives with explicit licensing/coverage blockers; no preferred-route replacement, purchase authority, or coverage claim."
     }
   },
   "schema_version": "2",
