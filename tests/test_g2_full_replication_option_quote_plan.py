@@ -29,6 +29,21 @@ def test_full_replication_option_quote_plan_matches_frozen_scope():
         "unique_historical_underlyings": 137,
     }
 
+    assert summary["cost_aware_candidate_split"]["2011"] == {
+        "vendor": "LSEG",
+        "product": "OPRA Tick History",
+        "source_date_rows": 105,
+        "symbol_date_pair_count": 464,
+        "documented_history": "Tick History from 1997",
+        "status": "QUOTE_LICENSE_DELIVERY_PENDING",
+    }
+    assert summary["cost_aware_candidate_split"]["2012_2015"]["vendor"] == "algoseek"
+    assert summary["cost_aware_candidate_split"]["2012_2015"]["source_date_rows"] == 309
+    assert summary["cost_aware_candidate_split"]["2012_2015"]["symbol_date_pair_count"] == 3364
+    assert "generic algoseek marketing also states 2014" in summary[
+        "cost_aware_candidate_split"
+    ]["2012_2015"]["documented_history"]
+
     assert {row["record_kind"] for row in rows} == {"option_quote"}
     assert {row["route"] for row in rows} == {
         "candidate_lseg_opra_tick_history_option_quotes"
@@ -48,6 +63,7 @@ def test_full_replication_quote_plan_keeps_tick_fidelity_fail_closed():
     assert summary["policy"]["candidate_source_is_not_coverage"] is True
     assert summary["policy"]["purchase_not_authorized"] is True
     assert summary["policy"]["canonical_full_g2_gate_unchanged"] is True
+    assert summary["policy"]["cost_aware_split_is_not_authorization"] is True
 
 
 def test_committed_full_replication_option_quote_artifacts_are_reproducible(tmp_path: Path):
