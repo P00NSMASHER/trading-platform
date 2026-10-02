@@ -1108,8 +1108,8 @@
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "a334abcb53834820997e24ccc0e467ee3e10b8e6e81bc9ef73146c72e66f7b76",
-      "reason": "G1 swarm controller correctness: keep stale prep branches visible to an already-assigned holder for the bounded lease while still requiring exact-current-main prep for new assignment, and scan all prep branches rather than truncating after 30."
+      "expected_sha256": "83aef3b6b909327fde44cfd937c9f2a0d385b92af6ab2ac4757bdce891900ffc",
+      "reason": "G1 controller correctness: closed-unmerged PRs release fresh tokens only when they target current main and do not predate the token assignment."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -1464,8 +1464,8 @@
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "d2e4d632f6aa6067ed48efbc0264323f128b8833d3ae1310216473b2d5ec5de4",
-      "reason": "Regression coverage proving stale prep retains an existing bounded token lease without qualifying for a new assignment, expires normally after the lease, and prep discovery is not truncated after 30 branches."
+      "expected_sha256": "e22427a2a69d6f410a071e53ddc803f8bab11fa205dc46f44bc187b462894fef",
+      "reason": "Regression coverage for stale-base and preassignment closed PRs, while preserving current-attempt closed-unmerged token release behavior."
     },
     "tests/test_g2_candidate_route_matrix.py": {
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",
