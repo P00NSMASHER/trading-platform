@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **68 public exact-time batches / 98 exact-resolved
+The current repository state is **69 public exact-time batches / 99 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -249,3 +249,7 @@ PR Newswire's official archive records VASCO Data Security International's Q3 20
 ### Batch 0085: Tenet Healthcare
 
 The timestamp-preserving StreetInsider Business Wire mirror records Tenet Healthcare's Q1 2015 results at 2015-05-04 16:05 EDT (20:05 UTC), 1,020 seconds after the frozen 15:48 EDT illicit trade. Tenet issuer IR and SEC Exhibit 99.1 independently corroborate issuer, release title/date, reporting period, metrics, and release content. This advances G1 from 97 exact / 77 reviewed exclusions to 98 exact / 76 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0092: Maxim Integrated Products
+
+The official PR Newswire historical archive records Maxim Integrated Products' fiscal Q2 2012 results at 2012-01-26 16:00 EST (21:00 UTC), 15,360 seconds after the frozen 11:44 EST illicit trade. The matching SEC press-release exhibit independently corroborates issuer, release title/date, reporting period, metrics, and release content. This advances G1 from 98 exact / 76 reviewed exclusions to 99 exact / 75 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
