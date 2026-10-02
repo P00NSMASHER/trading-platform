@@ -1578,6 +1578,14 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/g2_cboe_free_trial_planner.py": {
+      "expected_sha256": "fa40c086574d6f46a3104fec9ce909f03d475dfad573f80fa67ec33155faa40b",
+      "reason": "Planning-only Cboe All Access free-trial estimator reconciled to Cboe Data Vantage's 2012 OPRA history floor, current historical/trial SIP documentation, 15-point pagination requests, and the 500-point daily cap; no API calls, purchases, subscriptions, or coverage claims."
+    },
+    "tests/test_g2_cboe_free_trial_planner.py": {
+      "expected_sha256": "eb04caf3d08486ef511b49261e53273e47c2882aeb93412039a6a39aeb8c5d69",
+      "reason": "Regression coverage for the reconciled 2012 OPRA provenance floor, documented historical trial eligibility without runtime verification, 15-point seq_no pagination, and 33-request/day trial ceiling; no coverage claim."
     }
   },
   "schema_version": "2",
