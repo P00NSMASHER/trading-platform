@@ -364,16 +364,16 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_release_sprint/vendor_requests/full_replication_option_quote_plan.json": {
-      "expected_sha256": "9c409aa29ecb1ad5a59c52a31e2830a944e5215f77bd5eb9f73c4bc592743e50",
-      "reason": "Materialize and byte-verify the deterministic 414-row G2_FULL_REPLICATION option-quote request plan; candidate source only, no purchase or coverage claim."
+      "expected_sha256": "e252c39710ed9b8f228ba0b339d24c4850000d200a10421bb23af0c319e919fe",
+      "reason": "Materialized cheap-first LSEG/ThetaData G2_FULL_REPLICATION option-quote plan; candidate sourcing only, no purchase or coverage claim."
     },
     "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
       "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history_option_quotes.csv": {
-      "expected_sha256": "55540b283ceec94e28ebe4255fb63dc8abdd7c46024760a0427323187f40b39d",
-      "reason": "Materialize and byte-verify the deterministic 414-row G2_FULL_REPLICATION option-quote request plan; candidate source only, no purchase or coverage claim."
+      "expected_sha256": "c2594bfdd987d6600c11f76edf0dc02f6e8d63f01f6b9a8a3732b2b6e2549924",
+      "reason": "Materialized full-replication option-quote request rows with deterministic per-date LSEG/ThetaData candidate routing; legacy artifact path retained for compatibility."
     },
     "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_nbbo_quotes.csv": {
       "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
@@ -1240,8 +1240,8 @@
       "reason": "Extend the no-purchase Databento OPRA probe to the canonical 1,242-row G2_CHAMPION_MINIMUM scope while preserving full-G2 accounting and evidence rules."
     },
     "src/g2_full_replication_option_quote_plan.py": {
-      "expected_sha256": "d5e61d61f82de5ba1ee4373d863a77cb23fa76cc8bd7443081c1aebc210830cf",
-      "reason": "Deterministic G2_FULL_REPLICATION option-quote candidate plan using current LSEG OPRA Tick History evidence; planning only, no purchase or coverage claim."
+      "expected_sha256": "05cd9c34e81ce526a412e7a3009ca992bf91667c0b7f3e86cd44ba9f7c009a0d",
+      "reason": "Cheap-first full G2 option-quote routing: LSEG before ThetaData history floor and ThetaData thereafter, with licensing/retention fail-closed and no purchase or coverage claim."
     },
     "src/g2_nasdaq_tick_history_probe.py": {
       "expected_sha256": "47dfa0e799ff15ee815920ad795736ad027ab5099ce361a5a1a615bcff75397f",
@@ -1264,8 +1264,8 @@
       "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
     },
     "src/g2_vendor_delivery_preflight.py": {
-      "expected_sha256": "415c20c6b3e84792b92d44b237b62702b8e1b0395c37948363a0dccb8422a3ee",
-      "reason": "Fail-closed G2 vendor delivery preflight: reconcile delivered intake files to requested dates/family/kind without asserting authorization, symbol content coverage, or G2 completion."
+      "expected_sha256": "936160ff87b46314178f5a69d87948f83ca411aac4dd4d4591b55c4a0406055d",
+      "reason": "Support fail-closed LSEG and ThetaData strict option-quote delivery preflight routes; file presence remains non-coverage."
     },
     "src/g2_vendor_quote_packets.py": {
       "expected_sha256": "207f60b76f4f723f1ed584b62ba5c7589d29676fd270e0d50a5ba233ffe0de4c",
@@ -1544,8 +1544,8 @@
       "reason": "Extend the no-purchase Databento OPRA probe to the canonical 1,242-row G2_CHAMPION_MINIMUM scope while preserving full-G2 accounting and evidence rules."
     },
     "tests/test_g2_full_replication_option_quote_plan.py": {
-      "expected_sha256": "c5148f18fd028ac4d957e7f374f18522fb36b6442079fa273b55d04924edc3a8",
-      "reason": "Materialize and byte-verify the deterministic 414-row G2_FULL_REPLICATION option-quote request plan; candidate source only, no purchase or coverage claim."
+      "expected_sha256": "1213f4597ade5ce0ea381d8c812cdb5dfb3f662f00b9ddc9ddb6e3b878256aa9",
+      "reason": "Regression coverage for the cheap-first LSEG/ThetaData full-replication option-quote split and unchanged strict tick-fidelity policy."
     },
     "tests/test_g2_nasdaq_tick_history_probe.py": {
       "expected_sha256": "c4fc6eb4046da7cf70176c1b8a2763d936fe8cbb0c9de5d8607b69df08e420de",
@@ -1564,12 +1564,12 @@
       "reason": "Fail-closed G2 vendor activation blueprint: exact request scope and canonical fields with blank delivery/license values and authorized=false until local entitlement review."
     },
     "tests/test_g2_vendor_content_preflight.py": {
-      "expected_sha256": "f27f57cd40d9a0855ec192383546be030c02b77fdb4d547389eea04bd8d50b96",
-      "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
+      "expected_sha256": "e0a5e1494ebaf82b10f3e012e7292a2ace4b621a5fcf929a9e0e7f5a401e70a2",
+      "reason": "Regression coverage that LSEG and ThetaData option-quote candidates pass only through the strict production option-quote parser and never count coverage at preflight."
     },
     "tests/test_g2_vendor_delivery_preflight.py": {
-      "expected_sha256": "20cf825243b229cc497603788a77282325d0cbe7d9781f06ceebad331e885b28",
-      "reason": "Fail-closed G2 vendor delivery preflight: reconcile delivered intake files to requested dates/family/kind without asserting authorization, symbol content coverage, or G2 completion."
+      "expected_sha256": "fecb04ed32628630235b17856cabaa1b4467ec2fed9de3dbcd7e666fa2ff11f0",
+      "reason": "Regression coverage for LSEG and ThetaData option-quote delivery routes while keeping authorization and G2 coverage false."
     },
     "tests/test_g2_vendor_quote_packets.py": {
       "expected_sha256": "6ee04ac8090816642831730a85ee770710e89b1b96c79fc38a14bf6ae06948c5",
