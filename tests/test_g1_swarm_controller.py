@@ -412,7 +412,7 @@ def test_prepared_comment_without_fresh_branch_does_not_support_active_token() -
 
     assert result.state == "INVALID"
 
-def test_stale_prep_branch_is_rejected() -> None:
+def test_stale_prep_branch_remains_visible_but_cannot_receive_new_token() -> None:
     candidates = ctl.branch_candidates(
         [
             {
@@ -427,7 +427,126 @@ def test_stale_prep_branch_is_rejected() -> None:
             }
         },
     )
-    assert candidates == []
+
+    assert len(candidates) == 1
+    assert candidates[0].behind_by == 23
+
+    chosen = ctl.choose_prepared_candidate(
+        candidates,
+        token=None,
+        manifest=manifest(
+            unresolved_symbols={
+                "EW": {"HEJFE-AAAA000000000004"},
+                "TIBX": {"HEJFE-AAAA000000000005"},
+            }
+        ),
+        pulls=[],
+        updates=[],
+        policy=policy(),
+    )
+    assert chosen is None
+
+
+def test_stale_prep_branch_keeps_existing_token_within_lease() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    candidates = [
+        ctl.Candidate(
+            worker=2,
+            package="EW+TIBX",
+            batch=67,
+            event_ids=(),
+            symbols=("EW", "TIBX"),
+            created_at="",
+            source="prep_branch_fallback",
+            status="PREPARED",
+            branch="g1/prep-batch-0067-worker-2-ew-tibx-deadbee",
+            behind_by=1,
+            ahead_by=1,
+        )
+    ]
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-AAAA000000000004"},
+            "TIBX": {"HEJFE-AAAA000000000005"},
+        }
+    )
+
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=[],
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 10, 5, tzinfo=timezone.utc),
+        candidates=candidates,
+    )
+
+    assert result.state == "ACTIVE"
+    assert result.progress_after_assignment is False
+
+
+def test_stale_prep_branch_does_not_extend_token_past_lease() -> None:
+    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    candidates = [
+        ctl.Candidate(
+            worker=2,
+            package="EW+TIBX",
+            batch=67,
+            event_ids=(),
+            symbols=("EW", "TIBX"),
+            created_at="",
+            source="prep_branch_fallback",
+            status="PREPARED",
+            branch="g1/prep-batch-0067-worker-2-ew-tibx-deadbee",
+            behind_by=1,
+            ahead_by=1,
+        )
+    ]
+    m = manifest(
+        unresolved_symbols={
+            "EW": {"HEJFE-AAAA000000000004"},
+            "TIBX": {"HEJFE-AAAA000000000005"},
+        }
+    )
+
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=[],
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 12, 1, tzinfo=timezone.utc),
+        candidates=candidates,
+    )
+
+    assert result.state == "STALLED"
+    assert result.progress_after_assignment is False
+
+
+def test_fetch_branch_fallbacks_does_not_truncate_after_30(monkeypatch) -> None:
+    refs = [
+        {
+            "ref": f"refs/heads/g1/prep-0067-worker-2-ew-tibx-dead{i:02x}",
+            "object": {"sha": f"{i:040x}"},
+        }
+        for i in range(35)
+    ]
+
+    def fake_github_api(repo: str, token: str, path: str, **kwargs):
+        if path == "/git/matching-refs/heads/g1/prep-":
+            return refs
+        if path.startswith("/compare/"):
+            return {"behind_by": 0, "ahead_by": 1}
+        raise AssertionError(path)
+
+    monkeypatch.setattr(ctl, "github_api", fake_github_api)
+
+    found_refs, compares = ctl.fetch_branch_fallbacks("owner/repo", "token", "main-sha")
+
+    assert len(found_refs) == 35
+    assert len(compares) == 35
 
 
 def test_exact_current_main_prep_branch_is_live_support() -> None:

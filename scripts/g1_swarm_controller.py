@@ -444,9 +444,13 @@ def evaluate_token(
         live_support = matching_open is not None and matching_open_fresh
         if not live_support:
             for candidate in candidates:
-                # Only an exact-current-main prep branch is live prepared support.
-                # Historical PREPARED comments are advisory and cannot keep a token alive.
-                if candidate.source != "prep_branch_fallback" or candidate.behind_by != 0:
+                # A matching prep branch keeps an existing token alive within its
+                # bounded lease even if unrelated main movement made the branch stale.
+                # The holder must still regenerate from exact current main before
+                # canonical PR/merge; stale branches cannot receive new assignments.
+                if candidate.source != "prep_branch_fallback":
+                    continue
+                if candidate.behind_by is None or (candidate.ahead_by or 0) < 1:
                     continue
                 if candidate.worker != token.worker or candidate.batch != token.batch:
                     continue
@@ -564,12 +568,13 @@ def branch_candidates(
         compare = compares.get(name) or {}
         behind = compare.get("behind_by")
         ahead = compare.get("ahead_by")
-        if ahead is not None and int(ahead) < 1:
+        if ahead is None or int(ahead) < 1:
             continue
-        # Prepared branches are disposable caches. Any divergence behind current
-        # main invalidates PREPARED state and requires regeneration from exact main.
-        # Do not let a stale branch consume or extend an integration-token lease.
-        if behind is None or int(behind) != 0:
+        # Keep diverged prep branches visible so an already-assigned token can
+        # retain its bounded lease while the holder regenerates from current main.
+        # Unknown compare state is not durable support. Freshness is still required
+        # by require_live_prepared_support() before a package can receive a new token.
+        if behind is None:
             continue
         rows.append(
             Candidate(
@@ -794,7 +799,9 @@ def fetch_branch_fallbacks(repo: str, token: str, main_sha: str) -> tuple[list[d
         return [], {}
 
     compares: dict[str, dict[str, Any]] = {}
-    for ref in refs[:30]:
+    # Do not cap prep-branch discovery: workers may legitimately accumulate
+    # more than 30 disposable prep branches between cleanup cycles.
+    for ref in refs:
         branch = str(ref.get("ref") or "").removeprefix("refs/heads/")
         parsed = parse_prep_branch(branch)
         if parsed is None:
