@@ -34,7 +34,9 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert payload["champion_minimum_validated_coverage"]["separately_measured"] is False
 
     assert payload["external_state"]["vendor_quotes_or_pricing"] == "PARTIAL_EXTERNAL_QUOTES_RECEIVED"
-    assert payload["external_state"]["license_or_entitlement_terms"] == "PENDING_EXTERNAL"
+    assert payload["external_state"]["license_or_entitlement_terms"] == "PARTIAL_WRITTEN_TERMS_RECEIVED"
+    assert payload["external_state"]["thetadata_written_terms"] == "PRIVATE_RESEARCH_ELIGIBLE_320_USD_COMBINED_ONE_MONTH_RAW_DELETE_30D_POST_BILLING_DERIVED_RETENTION_ALLOWED"
+    assert payload["external_state"]["thetadata_route_status"] == "WRITTEN_TERMS_RECEIVED_BOUNDED_RAW_RETENTION"
     assert payload["external_state"]["licensed_data_delivery"] == "PENDING_EXTERNAL"
     assert payload["external_state"]["production_content_validation"] == "BLOCKED_ON_DELIVERY"
     assert payload["external_state"]["databento_cost_probe"] == "BLOCKED_API_KEY_NOT_CONFIGURED"
@@ -62,6 +64,9 @@ def test_readiness_next_actions_cover_every_external_dependency():
     payload = readiness.build_readiness(VENDOR_DIR, COVERAGE)
     actions = "\n".join(payload["next_external_actions"])
 
+    assert "ThetaData written terms received" in actions
+    assert "bounded ThetaData raw-retention window" in actions
+    assert "$320 combined" in actions
     assert "DATABENTO_API_KEY" in actions
     assert "Tick Data" in actions
     assert "written quote as unavailable" in actions
