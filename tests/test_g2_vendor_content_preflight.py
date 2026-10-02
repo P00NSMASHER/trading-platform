@@ -172,3 +172,63 @@ def test_content_preflight_rejects_unexpected_declared_date(tmp_path: Path):
     assert result["content_complete_source_date_rows"] == 1
     assert result["unexpected_declared_dates"] == ["2015-02-18"]
     assert result["ready_for_coverage_audit"] is False
+
+
+def test_full_replication_option_quote_routes_use_strict_production_parser(tmp_path: Path):
+    for index, route in enumerate(
+        (
+            "candidate_lseg_opra_tick_history_option_quotes",
+            "candidate_thetadata_options_pro_option_quotes",
+        )
+    ):
+        request = tmp_path / f"option_request_{index}.csv"
+        with request.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, fieldnames=REQUEST_FIELDS)
+            writer.writeheader()
+            writer.writerow({
+                "trade_date": "2015-03-20",
+                "record_kind": "option_quote",
+                "historical_symbols": "AAA;BBB",
+                "unique_symbol_count": "2",
+                "symbol_date_pair_count": "2",
+                "route": route,
+            })
+
+        quotes = tmp_path / f"option_quotes_{index}.csv"
+        quotes.write_text(
+            "timestamp,underlying_symbol,option_symbol,expiration,strike,option_type,bid,ask,bid_size,ask_size\n"
+            "2015-03-20 09:30:00,AAA,AAA150418C00100000,2015-04-18,100,C,1.00,1.10,10,12\n"
+            "2015-03-20 09:31:00,BBB,BBB150418P00050000,2015-04-18,50,P,2.00,2.20,8,9\n",
+            encoding="utf-8",
+        )
+
+        contract = tmp_path / f"option_contract_{index}.json"
+        _write_contract(contract, [{
+            "source_id": f"option-quotes-{index}",
+            "source_family": "generic_authorized_market_data",
+            "record_kind": "option_quote",
+            "path": str(quotes),
+            "authorized": True,
+            "data_classification": "authorized_historical_market_data",
+            "license_reference": "OPTION-QUOTE-LICENSE-FIXTURE",
+            "trade_date": "2015-03-20",
+            "timezone": "America/New_York",
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "format_version": "fixture",
+            "column_map": {},
+        }])
+
+        result = content_preflight.preflight(request, contract)
+
+        assert result["route"] == route
+        assert result["expected_record_kind"] == "option_quote"
+        assert result["expected_source_family"] == "generic_authorized_market_data"
+        assert result["content_complete_source_date_rows"] == 1
+        assert result["content_complete_symbol_date_pairs"] == 2
+        assert result["missing_or_invalid_source_date_rows"] == 0
+        assert result["source_error_count"] == 0
+        assert result["dates"][0]["observed_required_symbol_count"] == 2
+        assert result["dates"][0]["missing_required_symbols"] == []
+        assert result["ready_for_coverage_audit"] is True
+        assert result["coverage_policy"]["g2_coverage_counted"] is False
