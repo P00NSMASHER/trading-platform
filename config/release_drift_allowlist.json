@@ -1000,8 +1000,8 @@
       "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "364aa1373eb4b7a88f4063c296694f289fa72b4f014f6519509de4a60a3044d8",
-      "reason": "G1 swarm controller correctness: preserve live branch support when choosing an UNASSIGNED prepared package so an exact-current-main PREPARED candidate can advance the token."
+      "expected_sha256": "a334abcb53834820997e24ccc0e467ee3e10b8e6e81bc9ef73146c72e66f7b76",
+      "reason": "G1 swarm controller correctness: keep stale prep branches visible to an already-assigned holder for the bounded lease while still requiring exact-current-main prep for new assignment, and scan all prep branches rather than truncating after 30."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -1300,8 +1300,8 @@
       "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "d5ff2b0ba61c6ea7c693e77d91056beaeab2f96c7217bae7a54b499e61c3f4b5",
-      "reason": "Regression coverage proving an UNASSIGNED token advances when a PREPARED issue update is backed by an exact-current-main prep branch."
+      "expected_sha256": "d2e4d632f6aa6067ed48efbc0264323f128b8833d3ae1310216473b2d5ec5de4",
+      "reason": "Regression coverage proving stale prep retains an existing bounded token lease without qualifying for a new assignment, expires normally after the lease, and prep discovery is not truncated after 30 branches."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
