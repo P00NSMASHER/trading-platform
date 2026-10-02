@@ -1,0 +1,73 @@
+{
+  "schema_version": "1",
+  "as_of": "2026-10-02",
+  "purpose": "Auditable G2 acquisition evidence from October 2, 2026 vendor replies. This artifact records vendor availability/pricing outcomes only; it does not authorize purchase, subscription, delivery, entitlement, or G2 coverage.",
+  "coverage_effect": "NONE_UNTIL_ACTUAL_VALIDATED_ROWS",
+  "purchase_authority": false,
+  "cboe_paid_bulk": {
+    "vendor": "Cboe Data Vantage",
+    "contact_name": "Dorraine Burrell",
+    "contact_role": "Director, Data Vantage Sales",
+    "source_date": "2026-10-02",
+    "requested_scope": {
+      "product": "historical tick-level OPRA consolidated option quotes",
+      "first_date": "2012-01-03",
+      "last_date": "2015-05-20",
+      "selected_trading_dates": 309,
+      "requested_historical_underlyings": 137,
+      "requested_underlying_date_pairs": 3364
+    },
+    "vendor_confirmation": {
+      "historical_tick_data_available": true,
+      "sale_scope": "FULL_OPRA_UNIVERSE_ONLY",
+      "requested_underlying_subset_purchasable": false,
+      "rough_price_usd_2_years_5_months": 40000,
+      "rough_price_usd_1_calendar_year": 24000,
+      "selected_309_days_across_years": "CUSTOM_JOB_POSSIBLY_MORE_EXPENSIVE"
+    },
+    "research_disposition": "OUT_OF_SCOPE_CURRENT_RESEARCH",
+    "reason": "The paid bulk route requires full-OPRA tick data and the quoted bulk pricing is outside the current research scope. The 309 selected dates would be a custom job and may cost more.",
+    "automatic_purchase_or_subscription": false
+  },
+  "tick_data_written_quote": {
+    "vendor": "Tick Data",
+    "contact_name": "Anthony Hoban",
+    "contact_role": "Global Sales Director",
+    "source_date": "2026-10-02",
+    "requested_scope": {
+      "product": "historical OPRA tick-level NBBO option quotes with bid/ask sizes",
+      "first_date": "2011-03-21",
+      "last_date": "2015-05-20",
+      "selected_trading_dates": 414,
+      "requested_historical_underlyings": 146,
+      "requested_underlying_date_pairs": 3828
+    },
+    "written_availability_confirmation": "NOT_PROVIDED",
+    "written_price_usd": null,
+    "vendor_response": "PHONE_CALL_REQUIRED",
+    "evidence_note": "After written availability and price were requested repeatedly and the requester stated that a mandatory phone call would make the written quote unavailable, Tick Data again required a phone call.",
+    "research_disposition": "UNPRICED_WRITTEN_QUOTE_UNAVAILABLE",
+    "availability_must_not_be_inferred": true,
+    "automatic_purchase_or_subscription": false
+  },
+  "cboe_zero_cost_acceptance_probe": {
+    "pull_request": 258,
+    "repository": "P00NSMASHER/trading-platform",
+    "state_as_of_recording": "MERGED",
+    "merged_at_utc": "2026-10-02T17:28:23Z",
+    "logical_separation": "SEPARATE_FROM_PAID_BULK_ACQUISITION",
+    "purpose": "Minimal dry-run-by-default historical acceptance probe using two sample historical requests; no signup, purchase, subscription, or bulk acquisition.",
+    "purchase_or_subscription_authorized": false,
+    "coverage_claimed": false,
+    "coverage_count_mutation_allowed": false,
+    "acceptance_requires_actual_rows": true
+  },
+  "guardrails": {
+    "do_not_purchase_data": true,
+    "do_not_start_subscription": true,
+    "do_not_change_g2_coverage_counts_without_actual_validated_rows": true,
+    "paid_quote_is_not_coverage": true,
+    "vendor_availability_claim_is_not_coverage": true,
+    "dry_run_or_sample_probe_is_not_coverage": true
+  }
+}
