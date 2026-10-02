@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "705b49cb72b165484bb629e0a22e121fade93b72",
+  "reserved_batch": "0090",
+  "worker_slot": 0,
+  "event_id": "HEJFE-4291CBF555CED6A9",
+  "historical_symbol": "PBI",
+  "public_announcement_ts": "2015-04-30T07:00:00-04:00",
+  "source_family": "preserved_wire_mirror",
+  "source_grade": "A",
+  "source_reference": "https://new.streetinsider.com/Press%2BReleases/Pitney%2BBowes%2BAnnounces%2BFirst%2BQuarter%2B2015%2BFinancial%2BResults/10505110.html",
+  "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/78814/000115752315001454/a51091229-ex991.htm",
+  "expected_state_after_batch": {
+    "exact_resolved": 100,
+    "reviewed_excluded": 74,
+    "step9": "SOURCE_BLOCKED"
+  }
+}
