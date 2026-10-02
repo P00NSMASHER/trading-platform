@@ -44,6 +44,8 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert evidence["coverage_effect"] == "NONE_UNTIL_ACTUAL_VALIDATED_ROWS"
     assert evidence["cboe_paid_bulk"] == {
         "research_disposition": "OUT_OF_SCOPE_CURRENT_RESEARCH",
+        "selected_trading_dates": 309,
+        "requested_underlying_date_pairs": 3364,
         "sale_scope": "FULL_OPRA_UNIVERSE_ONLY",
         "rough_price_usd_2_years_5_months": 40000,
         "rough_price_usd_1_calendar_year": 24000,
@@ -51,6 +53,8 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     }
     assert evidence["tick_data_written_quote"] == {
         "research_disposition": "UNPRICED_WRITTEN_QUOTE_UNAVAILABLE",
+        "selected_trading_dates": 414,
+        "requested_underlying_date_pairs": 3828,
         "written_availability_confirmation": "NOT_PROVIDED",
         "written_price_usd": None,
         "vendor_response": "PHONE_CALL_REQUIRED",
