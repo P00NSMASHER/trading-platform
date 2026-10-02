@@ -89,7 +89,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         },
         "external_state": {
             "vendor_quotes_or_pricing": "PARTIAL_EXTERNAL_QUOTES_RECEIVED",
-            "license_or_entitlement_terms": "PENDING_EXTERNAL",
+            "license_or_entitlement_terms": "PARTIAL_WRITTEN_TERMS_RECEIVED",
             "licensed_data_delivery": "PENDING_EXTERNAL",
             "local_entitlement_hash_binding": "PENDING_EXTERNAL",
             "production_content_validation": "BLOCKED_ON_DELIVERY",
@@ -102,6 +102,8 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "tickdata_written_quote": "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED",
             "lseg_2011_quote": "REQUEST_SENT_AWAITING_REPLY",
             "algoseek_quote_and_sandbox_terms": "REQUEST_SENT_AWAITING_REPLY",
+            "thetadata_written_terms": "PRIVATE_RESEARCH_ELIGIBLE_320_USD_COMBINED_ONE_MONTH_RAW_DELETE_30D_POST_BILLING_DERIVED_RETENTION_ALLOWED",
+            "thetadata_route_status": "WRITTEN_TERMS_RECEIVED_BOUNDED_RAW_RETENTION",
         },
         "canonical_full_g2_state": {
             "required_source_date_rows": full_required,
@@ -117,6 +119,8 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             ),
         },
         "next_external_actions": [
+            "ThetaData written terms received: private research is eligible; Options Pro and Stock Pro are $160/month each ($320 combined). Raw/unmodified data must be deleted within 30 days after the subscription billing period ends; modified/derived research data may be retained after raw deletion.",
+            "Decide whether the bounded ThetaData raw-retention window is acceptable for the research/audit workflow before any subscription. No subscription is authorized by this receipt.",
             "Configure DATABENTO_API_KEY if cost-only OPRA pricing is desired; the workflow performs no download or purchase.",
             "Tick Data requires a phone call before written pricing/availability; treat the written quote as unavailable unless the user explicitly chooses to call.",
             "Cboe confirmed the All Access trial should pull historical data and that the daily credit limit does not gate the trial when signup is set to Allow; the merged acceptance probe can test historical equity TAQ, 2012+ option trades, and one OSI-derived historical option NBBO quote, but execution still requires explicit user authorization.",
