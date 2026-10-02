@@ -141,5 +141,15 @@
     "2012-01-17",
     "2012-01-18",
     "2012-01-19"
-  ]
+  ],
+  "optimality_certificate": {
+    "objective": "maximize fully completed source-date rows under the optimistic one-request-per-underlying/date assumption",
+    "method": "sort source dates by required underlying/date requests ascending; the k cheapest dates minimize requests for any k-date solution",
+    "max_complete_source_date_rows": 81,
+    "selected_request_count": 445,
+    "next_complete_source_date_rows": 82,
+    "next_complete_request_floor": 467,
+    "next_complete_exceeds_budget": true,
+    "mathematically_optimal_under_assumption": true
+  }
 }
