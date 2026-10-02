@@ -26,7 +26,16 @@ ITCH_V4_FAMILY = "nasdaq_itch_4_1_decoded"
 ITCH_V5_FAMILY = "nasdaq_itch_5_0_decoded"
 ITCH_RECORD_KIND = "itch_decoded"
 ITCH_V5_START_DATE = "2014-04-08"
-DEFAULT_SECURITY_IDENTITY_PATH = Path(__file__).resolve().parents[1] / "data/processed/security_identity_real/security_identity_manifest.json"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_SECURITY_IDENTITY_PATH = REPO_ROOT / "data/processed/security_identity_real/security_identity_manifest.json"
+
+
+def _manifest_path(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(REPO_ROOT.resolve()).as_posix()
+    except ValueError:
+        return str(path)
 
 
 def _sha256(path: Path) -> str:
@@ -230,9 +239,9 @@ def freeze_requirements(
     manifest = {
         "schema_version": "1",
         "purpose": "Frozen real-data requirements receipt for Steps 1-12.",
-        "source_date_requirements_path": str(source_date_requirements),
+        "source_date_requirements_path": _manifest_path(source_date_requirements),
         "source_date_requirements_sha256": _sha256(source_date_requirements),
-        "event_exchange_resolutions_path": str(event_exchange_resolutions),
+        "event_exchange_resolutions_path": _manifest_path(event_exchange_resolutions),
         "event_exchange_resolutions_sha256": _sha256(event_exchange_resolutions),
         "counts": {
             "core_equity_source_date_rows": len(core),
