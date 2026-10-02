@@ -1,0 +1,8242 @@
+{
+  "schema_version": "1",
+  "purpose": "Planning-only FirstRate Data partial equity candidate analysis for G2_CHAMPION_MINIMUM. Direct active-ticker matches are counted only as sourcing candidates; no authorization, purchase, delivery, or G2 coverage is claimed.",
+  "status": "PARTIAL_CANDIDATE_ONLY",
+  "required_equity_source_date_rows": 828,
+  "required_equity_symbol_date_pairs_per_record_kind": 3828,
+  "direct_present_unique_symbols": 106,
+  "direct_absent_unique_symbols": 40,
+  "direct_symbol_date_pairs_per_record_kind": 2750,
+  "missing_symbol_date_pairs_per_record_kind": 1078,
+  "direct_record_kind_symbol_date_pairs": 5500,
+  "missing_record_kind_symbol_date_pairs": 2156,
+  "direct_pair_fraction": 0.7183908045977011,
+  "dates_with_any_direct_symbols": 363,
+  "fully_direct_dates": 118,
+  "dates_with_no_direct_symbols": 51,
+  "fully_direct_source_date_rows": 236,
+  "public_sample_schema_supports_required_quote_sizes": true,
+  "delisted_tickers_supported_by_tick_service": false,
+  "pricing_structure_fully_resolved": false,
+  "policy": {
+    "alias_inference_not_counted": true,
+    "missing_symbols_require_another_authorized_source": true,
+    "partial_files_do_not_count_as_complete_source_dates_by_themselves": true,
+    "license_and_production_validation_required": true
+  },
+  "per_date": [
+    {
+      "trade_date": "2011-03-21",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-03-22",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-03-23",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-03-24",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-03-25",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-03-28",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-03-29",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-03-30",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-03-31",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-01",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-04",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-05",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-06",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-07",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-08",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-11",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-12",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-13",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-14",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-15",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-18",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-19",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-20",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH",
+        "EW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-21",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-25",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-26",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD",
+        "EHTH"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-04-27",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CNMD"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-06-20",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-06-21",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-06-22",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-06-23",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-06-24",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-06-27",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-06-28",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-06-29",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-06-30",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-01",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-05",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-06",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-07",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-08",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-11",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-12",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-13",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-14",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-15",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-18",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-19",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-20",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BWA",
+        "FL",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "CA",
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-21",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "FL",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-22",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "FL",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-25",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "FL",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-26",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "FL",
+        "GT",
+        "TPX"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-27",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BWA",
+        "FL",
+        "GT"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-28",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-07-29",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-08-01",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-08-02",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-08-03",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [
+        "DNDN"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-08-04",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-05",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-08",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-09",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-10",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-11",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-12",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-15",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-16",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-17",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-08-18",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "FL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-09-21",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MUSA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-09-22",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-09-23",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-09-26",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2011-09-27",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-09-28",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-09-29",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-09-30",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-03",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-04",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-05",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-06",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-07",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-10",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-11",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-12",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-13",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-14",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-17",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-18",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-19",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-20",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-21",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "LSTR"
+      ],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-24",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-25",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-26",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "AGP",
+        "VDSI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-10-27",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "AGP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-12-20",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "IGT"
+      ],
+      "missing_symbols": [
+        "MDP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-12-21",
+      "required_symbol_count": 8,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 3,
+      "direct_present_symbols": [
+        "BA",
+        "IGT",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "CA",
+        "IBKC",
+        "MDP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-12-22",
+      "required_symbol_count": 15,
+      "direct_present_symbol_count": 7,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "IGT",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-12-23",
+      "required_symbol_count": 21,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-12-27",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-12-28",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-12-29",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2011-12-30",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-03",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-04",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-05",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-06",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-09",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-10",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-11",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-12",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-13",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-17",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-18",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-19",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-20",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-23",
+      "required_symbol_count": 22,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "IGT",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MDP",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-24",
+      "required_symbol_count": 20,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 9,
+      "direct_present_symbols": [
+        "BA",
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "MUSA",
+        "NVR",
+        "RES",
+        "ROL",
+        "WRLD"
+      ],
+      "missing_symbols": [
+        "AF",
+        "CA",
+        "DEST",
+        "IBKC",
+        "ISSI",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-25",
+      "required_symbol_count": 14,
+      "direct_present_symbol_count": 7,
+      "missing_symbol_count": 7,
+      "direct_present_symbols": [
+        "CAT",
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "MUSA",
+        "NVR"
+      ],
+      "missing_symbols": [
+        "AF",
+        "DEST",
+        "ISSI",
+        "MSCC",
+        "MXIM",
+        "SYMM",
+        "VAR"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-26",
+      "required_symbol_count": 7,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "CB",
+        "HAE",
+        "HON",
+        "IDXX",
+        "MUSA"
+      ],
+      "missing_symbols": [
+        "MSCC",
+        "MXIM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-01-27",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "HAE"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2012-06-29",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-02",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-03",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-05",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-06",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-09",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-10",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-11",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-12",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-13",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-16",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-17",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-18",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-19",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-20",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-23",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-24",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-25",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-26",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-27",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-30",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2012-07-31",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-01-17",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-01-18",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-01-22",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-01-23",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-01-24",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-01-25",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-01-28",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-01-29",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-01-30",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-01-31",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-01",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-04",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-05",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-06",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-07",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-08",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-11",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-12",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-13",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-14",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-15",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-19",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "AVA"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-02-28",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-01",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-04",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-05",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-06",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-07",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-08",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-11",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-12",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-13",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-14",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-15",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-18",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-19",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "LSCC",
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-20",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "LSCC",
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-21",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "LSCC",
+        "MKC"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-03-22",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "EW",
+        "JNPR",
+        "LSCC",
+        "MKC",
+        "MTH"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-03-25",
+      "required_symbol_count": 10,
+      "direct_present_symbol_count": 7,
+      "missing_symbol_count": 3,
+      "direct_present_symbols": [
+        "ECOL",
+        "EW",
+        "JNPR",
+        "LRCX",
+        "LSCC",
+        "MKC",
+        "MTH"
+      ],
+      "missing_symbols": [
+        "ISIL",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-03-26",
+      "required_symbol_count": 20,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MKC",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-03-27",
+      "required_symbol_count": 20,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MKC",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-03-28",
+      "required_symbol_count": 20,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MKC",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-01",
+      "required_symbol_count": 20,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MKC",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-02",
+      "required_symbol_count": 19,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-03",
+      "required_symbol_count": 19,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-04",
+      "required_symbol_count": 19,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-05",
+      "required_symbol_count": 20,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 9,
+      "direct_present_symbols": [
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-08",
+      "required_symbol_count": 23,
+      "direct_present_symbol_count": 13,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-09",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-10",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-11",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-12",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-15",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-16",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-17",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-18",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "LSCC",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-19",
+      "required_symbol_count": 23,
+      "direct_present_symbol_count": 13,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-22",
+      "required_symbol_count": 23,
+      "direct_present_symbol_count": 13,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-23",
+      "required_symbol_count": 23,
+      "direct_present_symbol_count": 13,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "EW",
+        "GORO",
+        "JNPR",
+        "KELYA",
+        "LRCX",
+        "MCRI",
+        "MTH",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "PNRA",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-24",
+      "required_symbol_count": 19,
+      "direct_present_symbol_count": 10,
+      "missing_symbol_count": 9,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "ECOL",
+        "EHTH",
+        "GORO",
+        "KELYA",
+        "LRCX",
+        "MCRI",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "ISIL",
+        "MCRL",
+        "PFPT",
+        "STMP"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-25",
+      "required_symbol_count": 15,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 7,
+      "direct_present_symbols": [
+        "BIO",
+        "CAMP",
+        "CENX",
+        "EHTH",
+        "GORO",
+        "KELYA",
+        "MCRI",
+        "VRSN"
+      ],
+      "missing_symbols": [
+        "ACO",
+        "APC",
+        "DGI",
+        "ECHO",
+        "GDI",
+        "MCRL",
+        "PFPT"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-26",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BIO",
+        "GORO",
+        "KELYA"
+      ],
+      "missing_symbols": [
+        "APC",
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-29",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BIO",
+        "GORO",
+        "KELYA"
+      ],
+      "missing_symbols": [
+        "APC",
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-04-30",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BIO",
+        "GORO",
+        "KELYA"
+      ],
+      "missing_symbols": [
+        "APC",
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-05-01",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BIO",
+        "GORO",
+        "KELYA"
+      ],
+      "missing_symbols": [
+        "APC",
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-05-02",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BIO",
+        "GORO",
+        "KELYA"
+      ],
+      "missing_symbols": [
+        "APC",
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-05-03",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BIO",
+        "GORO",
+        "KELYA"
+      ],
+      "missing_symbols": [
+        "APC",
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-05-06",
+      "required_symbol_count": 5,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "BIO",
+        "GORO",
+        "KELYA"
+      ],
+      "missing_symbols": [
+        "APC",
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-05-07",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "BIO",
+        "GORO",
+        "KELYA"
+      ],
+      "missing_symbols": [
+        "DGI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-05-08",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "GORO"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-06-20",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-06-21",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-06-24",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-06-25",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-06-26",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-06-27",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-06-28",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-01",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-02",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-05",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-08",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-09",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-10",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-11",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-12",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-15",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-16",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-17",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-18",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-19",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-22",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-07-23",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR",
+        "MTH",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-08-20",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-08-21",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-08-22",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-08-23",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-08-26",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-08-27",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-08-28",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-08-29",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-08-30",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-03",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-04",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-05",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-06",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-09",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-10",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-11",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-12",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-13",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-16",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-17",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-18",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD"
+      ],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-19",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD"
+      ],
+      "missing_symbols": [
+        "TIBX"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-20",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "VMW"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2013-09-23",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-24",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-25",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-26",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-27",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-09-30",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-01",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-02",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-03",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-04",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-07",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-08",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-09",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-10",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-11",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-14",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-15",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-16",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-17",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 5,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ALGN",
+        "AMD",
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-18",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-21",
+      "required_symbol_count": 4,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "GNTX",
+        "JNPR",
+        "VMW"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2013-10-22",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "JNPR"
+      ],
+      "missing_symbols": [
+        "PNRA"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-11-07",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-10",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-11",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-12",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-13",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-14",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-17",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-18",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-19",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-20",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-21",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-24",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-25",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-11-26",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-01",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-02",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-03",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-04",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-05",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-08",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-09",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-10",
+      "required_symbol_count": 2,
+      "direct_present_symbol_count": 2,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "CMTL",
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-11",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-12",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-15",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "PAY"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2014-12-16",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 0,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [],
+      "missing_symbols": [
+        "CREE"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-12-17",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "URI"
+      ],
+      "missing_symbols": [
+        "CREE",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-12-18",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "SBUX",
+        "STT",
+        "SWKS",
+        "URI"
+      ],
+      "missing_symbols": [
+        "CREE",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-12-19",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "SBUX",
+        "STT",
+        "SWKS",
+        "URI"
+      ],
+      "missing_symbols": [
+        "CREE",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-12-22",
+      "required_symbol_count": 6,
+      "direct_present_symbol_count": 4,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "SBUX",
+        "STT",
+        "SWKS",
+        "URI"
+      ],
+      "missing_symbols": [
+        "CREE",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-12-23",
+      "required_symbol_count": 8,
+      "direct_present_symbol_count": 6,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "EA",
+        "ILMN",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "URI"
+      ],
+      "missing_symbols": [
+        "CREE",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-12-26",
+      "required_symbol_count": 11,
+      "direct_present_symbol_count": 9,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "EA",
+        "F",
+        "ILMN",
+        "NOW",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "CREE",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-12-29",
+      "required_symbol_count": 14,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 3,
+      "direct_present_symbols": [
+        "EA",
+        "F",
+        "HBI",
+        "ILMN",
+        "NATI",
+        "NOW",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-12-30",
+      "required_symbol_count": 14,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 3,
+      "direct_present_symbols": [
+        "EA",
+        "F",
+        "HBI",
+        "ILMN",
+        "NATI",
+        "NOW",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2014-12-31",
+      "required_symbol_count": 17,
+      "direct_present_symbol_count": 13,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "EA",
+        "F",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "IDTI",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-02",
+      "required_symbol_count": 18,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "EA",
+        "F",
+        "GILD",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "IDTI",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-05",
+      "required_symbol_count": 19,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 5,
+      "direct_present_symbols": [
+        "EA",
+        "F",
+        "GILD",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-06",
+      "required_symbol_count": 21,
+      "direct_present_symbol_count": 15,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "EA",
+        "F",
+        "GILD",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "P",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-07",
+      "required_symbol_count": 21,
+      "direct_present_symbol_count": 15,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "EA",
+        "F",
+        "GILD",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "P",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-08",
+      "required_symbol_count": 21,
+      "direct_present_symbol_count": 15,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "EA",
+        "F",
+        "GILD",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "P",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-09",
+      "required_symbol_count": 23,
+      "direct_present_symbol_count": 17,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "CRL",
+        "EA",
+        "F",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "P",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-12",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 17,
+      "missing_symbol_count": 7,
+      "direct_present_symbols": [
+        "CRL",
+        "EA",
+        "F",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "P",
+        "PNRA",
+        "SNDK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-13",
+      "required_symbol_count": 30,
+      "direct_present_symbol_count": 20,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "ALNY",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "EA",
+        "F",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "SNDK",
+        "TNGO"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-14",
+      "required_symbol_count": 30,
+      "direct_present_symbol_count": 20,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "ALNY",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "EA",
+        "F",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "SNDK",
+        "TNGO"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-15",
+      "required_symbol_count": 35,
+      "direct_present_symbol_count": 24,
+      "missing_symbol_count": 11,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "EA",
+        "F",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "ROG",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CLD",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "SNDK",
+        "TNGO"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-16",
+      "required_symbol_count": 37,
+      "direct_present_symbol_count": 26,
+      "missing_symbol_count": 11,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "EA",
+        "F",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "MDU",
+        "MIC",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "ROG",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CLD",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "SNDK",
+        "TNGO"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-20",
+      "required_symbol_count": 39,
+      "direct_present_symbol_count": 28,
+      "missing_symbol_count": 11,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "EA",
+        "F",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "ROG",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CLD",
+        "CREE",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "SNDK",
+        "TNGO"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-21",
+      "required_symbol_count": 38,
+      "direct_present_symbol_count": 28,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "EA",
+        "F",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "R",
+        "ROG",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "URI",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CLD",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "SNDK",
+        "TNGO"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-22",
+      "required_symbol_count": 41,
+      "direct_present_symbol_count": 31,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "EA",
+        "F",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "PLL",
+        "R",
+        "ROG",
+        "SBUX",
+        "STT",
+        "SWKS",
+        "TER",
+        "THC",
+        "TXRH",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CLD",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-23",
+      "required_symbol_count": 38,
+      "direct_present_symbol_count": 28,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "EA",
+        "F",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "PLL",
+        "R",
+        "ROG",
+        "TER",
+        "THC",
+        "TXRH",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "BCR",
+        "CLD",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-26",
+      "required_symbol_count": 41,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 11,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "EA",
+        "F",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "PLL",
+        "R",
+        "ROG",
+        "TER",
+        "THC",
+        "TXRH",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "BCR",
+        "CLD",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-27",
+      "required_symbol_count": 42,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 12,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "EA",
+        "F",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "ILMN",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "PLL",
+        "R",
+        "ROG",
+        "TER",
+        "THC",
+        "TXRH",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "BCR",
+        "CLD",
+        "DGI",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-28",
+      "required_symbol_count": 40,
+      "direct_present_symbol_count": 28,
+      "missing_symbol_count": 12,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "F",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NATI",
+        "NOW",
+        "NUAN",
+        "PLL",
+        "R",
+        "ROG",
+        "TER",
+        "THC",
+        "TXRH",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "BCR",
+        "CLD",
+        "DGI",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-29",
+      "required_symbol_count": 37,
+      "direct_present_symbol_count": 25,
+      "missing_symbol_count": 12,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "HBI",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NATI",
+        "NUAN",
+        "PLL",
+        "R",
+        "ROG",
+        "THC",
+        "TXRH",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "BCR",
+        "CLD",
+        "DGI",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-01-30",
+      "required_symbol_count": 35,
+      "direct_present_symbol_count": 24,
+      "missing_symbol_count": 11,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NUAN",
+        "PLL",
+        "R",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-02",
+      "required_symbol_count": 35,
+      "direct_present_symbol_count": 24,
+      "missing_symbol_count": 11,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "JWN",
+        "MDU",
+        "MIC",
+        "NUAN",
+        "PLL",
+        "R",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "GMCR",
+        "IDTI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-03",
+      "required_symbol_count": 32,
+      "direct_present_symbol_count": 22,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "FLR",
+        "GILD",
+        "GNRC",
+        "JWN",
+        "MIC",
+        "NUAN",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "GMCR",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-04",
+      "required_symbol_count": 31,
+      "direct_present_symbol_count": 21,
+      "missing_symbol_count": 10,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "FLR",
+        "GNRC",
+        "JWN",
+        "MIC",
+        "NUAN",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "GMCR",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-05",
+      "required_symbol_count": 30,
+      "direct_present_symbol_count": 21,
+      "missing_symbol_count": 9,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "FLR",
+        "GNRC",
+        "JWN",
+        "MIC",
+        "NUAN",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "INWK",
+        "P",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-06",
+      "required_symbol_count": 30,
+      "direct_present_symbol_count": 22,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "FLR",
+        "GNRC",
+        "JWN",
+        "KOPN",
+        "MIC",
+        "PAY",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "INWK",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-09",
+      "required_symbol_count": 30,
+      "direct_present_symbol_count": 22,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "FLR",
+        "GNRC",
+        "JWN",
+        "KOPN",
+        "MIC",
+        "PAY",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "INWK",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-10",
+      "required_symbol_count": 30,
+      "direct_present_symbol_count": 22,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "CRL",
+        "DE",
+        "DXCM",
+        "FLR",
+        "GNRC",
+        "JWN",
+        "KOPN",
+        "MIC",
+        "PAY",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "INWK",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-11",
+      "required_symbol_count": 28,
+      "direct_present_symbol_count": 20,
+      "missing_symbol_count": 8,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "DE",
+        "DXCM",
+        "FLR",
+        "JWN",
+        "KOPN",
+        "MIC",
+        "PAY",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "INWK",
+        "PNRA",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-12",
+      "required_symbol_count": 27,
+      "direct_present_symbol_count": 20,
+      "missing_symbol_count": 7,
+      "direct_present_symbols": [
+        "ADI",
+        "ALNY",
+        "ATRC",
+        "CGNX",
+        "COLM",
+        "DE",
+        "DXCM",
+        "FLR",
+        "JWN",
+        "KOPN",
+        "MIC",
+        "PAY",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "INWK",
+        "QLIK",
+        "TNGO",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-13",
+      "required_symbol_count": 21,
+      "direct_present_symbol_count": 17,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ADI",
+        "ATRC",
+        "DE",
+        "DXCM",
+        "FLR",
+        "JWN",
+        "KOPN",
+        "MIC",
+        "PAY",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-17",
+      "required_symbol_count": 21,
+      "direct_present_symbol_count": 17,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ADI",
+        "ATRC",
+        "DE",
+        "DXCM",
+        "FLR",
+        "JWN",
+        "KOPN",
+        "MIC",
+        "PAY",
+        "PLL",
+        "ROG",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB",
+        "WTS"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "CLD",
+        "DGI",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-18",
+      "required_symbol_count": 18,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ATRC",
+        "DE",
+        "DXCM",
+        "JWN",
+        "KOPN",
+        "MIC",
+        "NKE",
+        "PAY",
+        "PLL",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL",
+        "WMB"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "DGI",
+        "MFRM",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-19",
+      "required_symbol_count": 16,
+      "direct_present_symbol_count": 12,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ATRC",
+        "DE",
+        "DXCM",
+        "JWN",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PLL",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "DGI",
+        "MFRM",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-20",
+      "required_symbol_count": 14,
+      "direct_present_symbol_count": 10,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ATRC",
+        "DXCM",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PLL",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "DGI",
+        "MFRM",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-23",
+      "required_symbol_count": 14,
+      "direct_present_symbol_count": 10,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ATRC",
+        "DXCM",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PLL",
+        "THC",
+        "TXRH",
+        "VEEV",
+        "WLL"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "DGI",
+        "MFRM",
+        "TRAK"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-24",
+      "required_symbol_count": 11,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 3,
+      "direct_present_symbols": [
+        "CAG",
+        "DXCM",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "VEEV",
+        "WLL"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "DGI",
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-25",
+      "required_symbol_count": 13,
+      "direct_present_symbol_count": 10,
+      "missing_symbol_count": 3,
+      "direct_present_symbols": [
+        "CAG",
+        "DXCM",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "VEEV",
+        "WLL"
+      ],
+      "missing_symbols": [
+        "AMSG",
+        "DGI",
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-26",
+      "required_symbol_count": 10,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "VEEV"
+      ],
+      "missing_symbols": [
+        "DGI",
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-02-27",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "VEEV"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-02",
+      "required_symbol_count": 10,
+      "direct_present_symbol_count": 9,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "SNX",
+        "VEEV"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-03",
+      "required_symbol_count": 10,
+      "direct_present_symbol_count": 9,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "SNX",
+        "VEEV"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-04",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-05",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-06",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-09",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-10",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "KOPN",
+        "NKE",
+        "PAY",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-11",
+      "required_symbol_count": 7,
+      "direct_present_symbol_count": 6,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "NKE",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-12",
+      "required_symbol_count": 7,
+      "direct_present_symbol_count": 6,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "NKE",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-13",
+      "required_symbol_count": 7,
+      "direct_present_symbol_count": 6,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "NKE",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-16",
+      "required_symbol_count": 7,
+      "direct_present_symbol_count": 6,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "NKE",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-17",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "MAT",
+        "NKE",
+        "NOW",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-18",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "MAT",
+        "NKE",
+        "NOW",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-19",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "MAT",
+        "NKE",
+        "NOW",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "MFRM"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-20",
+      "required_symbol_count": 9,
+      "direct_present_symbol_count": 8,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "CAG",
+        "GME",
+        "ILMN",
+        "MAT",
+        "NOW",
+        "PVH",
+        "RH",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "CREE"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-23",
+      "required_symbol_count": 13,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "AMP",
+        "CAG",
+        "CAKE",
+        "GME",
+        "ILMN",
+        "MAT",
+        "NOW",
+        "PVH",
+        "RH",
+        "SKX",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "COL",
+        "CREE"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-24",
+      "required_symbol_count": 13,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "AMP",
+        "CAG",
+        "CAKE",
+        "GME",
+        "ILMN",
+        "MAT",
+        "NOW",
+        "PVH",
+        "RH",
+        "SKX",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "COL",
+        "CREE"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-25",
+      "required_symbol_count": 13,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "AMP",
+        "CAG",
+        "CAKE",
+        "GME",
+        "ILMN",
+        "MAT",
+        "NOW",
+        "PVH",
+        "RH",
+        "SKX",
+        "SNX"
+      ],
+      "missing_symbols": [
+        "COL",
+        "CREE"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-26",
+      "required_symbol_count": 16,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "ALSN",
+        "AMP",
+        "CAKE",
+        "CMP",
+        "CR",
+        "GME",
+        "ILMN",
+        "MAT",
+        "NOW",
+        "OSK",
+        "RH",
+        "SKX",
+        "SNX",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "COL",
+        "CREE"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-27",
+      "required_symbol_count": 16,
+      "direct_present_symbol_count": 14,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "CAKE",
+        "CMP",
+        "CR",
+        "ILMN",
+        "MAT",
+        "NATI",
+        "NOW",
+        "OSK",
+        "SKX",
+        "SNX",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "COL",
+        "CREE"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-30",
+      "required_symbol_count": 21,
+      "direct_present_symbol_count": 19,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CMP",
+        "CR",
+        "ILMN",
+        "MAT",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "ROG",
+        "SKX",
+        "SNX",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "COL",
+        "CREE"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-03-31",
+      "required_symbol_count": 27,
+      "direct_present_symbol_count": 23,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CMP",
+        "COLM",
+        "CR",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SNX",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-01",
+      "required_symbol_count": 26,
+      "direct_present_symbol_count": 22,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CMP",
+        "COLM",
+        "CR",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-02",
+      "required_symbol_count": 31,
+      "direct_present_symbol_count": 26,
+      "missing_symbol_count": 5,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-06",
+      "required_symbol_count": 32,
+      "direct_present_symbol_count": 27,
+      "missing_symbol_count": 5,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-07",
+      "required_symbol_count": 36,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-08",
+      "required_symbol_count": 36,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-09",
+      "required_symbol_count": 36,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-10",
+      "required_symbol_count": 36,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-13",
+      "required_symbol_count": 36,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-14",
+      "required_symbol_count": 36,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-15",
+      "required_symbol_count": 36,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-16",
+      "required_symbol_count": 36,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MAT",
+        "MDU",
+        "NATI",
+        "NOW",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-17",
+      "required_symbol_count": 34,
+      "direct_present_symbol_count": 28,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MDU",
+        "NATI",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-20",
+      "required_symbol_count": 36,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ADI",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MDU",
+        "NATI",
+        "NDSN",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-21",
+      "required_symbol_count": 37,
+      "direct_present_symbol_count": 31,
+      "missing_symbol_count": 6,
+      "direct_present_symbols": [
+        "ACHC",
+        "ADI",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "ILMN",
+        "INT",
+        "MDU",
+        "NATI",
+        "NDSN",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SCVL",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CREE",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-22",
+      "required_symbol_count": 35,
+      "direct_present_symbol_count": 30,
+      "missing_symbol_count": 5,
+      "direct_present_symbols": [
+        "ACHC",
+        "ADI",
+        "ALSN",
+        "AMP",
+        "BRKR",
+        "CACI",
+        "CAKE",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "INT",
+        "MDU",
+        "NATI",
+        "NDSN",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SCVL",
+        "SGEN",
+        "SKX",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "COL",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-23",
+      "required_symbol_count": 31,
+      "direct_present_symbol_count": 27,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ACHC",
+        "ADI",
+        "ALSN",
+        "BRKR",
+        "CACI",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "INT",
+        "MDU",
+        "NATI",
+        "NDSN",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SCVL",
+        "SGEN",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-24",
+      "required_symbol_count": 31,
+      "direct_present_symbol_count": 27,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ACHC",
+        "ADI",
+        "ALSN",
+        "BRKR",
+        "CACI",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "INT",
+        "MDU",
+        "NATI",
+        "NDSN",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SCVL",
+        "SGEN",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-27",
+      "required_symbol_count": 31,
+      "direct_present_symbol_count": 27,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ACHC",
+        "ADI",
+        "ALSN",
+        "BRKR",
+        "CACI",
+        "CBT",
+        "CGNX",
+        "CMP",
+        "COLM",
+        "CR",
+        "DYN",
+        "FLT",
+        "INT",
+        "MDU",
+        "NATI",
+        "NDSN",
+        "OSK",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SCVL",
+        "SGEN",
+        "SM",
+        "THC",
+        "TW",
+        "TXT"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-28",
+      "required_symbol_count": 26,
+      "direct_present_symbol_count": 22,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ACHC",
+        "ADI",
+        "BRKR",
+        "CACI",
+        "CBT",
+        "CGNX",
+        "COLM",
+        "DYN",
+        "FLT",
+        "INT",
+        "MDU",
+        "NATI",
+        "NDSN",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SCVL",
+        "SGEN",
+        "SM",
+        "THC",
+        "TW"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-29",
+      "required_symbol_count": 24,
+      "direct_present_symbol_count": 20,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ADI",
+        "BRKR",
+        "CACI",
+        "CBT",
+        "CGNX",
+        "COLM",
+        "DYN",
+        "FLT",
+        "INT",
+        "MDU",
+        "NDSN",
+        "PBI",
+        "POWI",
+        "PRU",
+        "ROG",
+        "SCVL",
+        "SGEN",
+        "SM",
+        "THC",
+        "TW"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-04-30",
+      "required_symbol_count": 19,
+      "direct_present_symbol_count": 15,
+      "missing_symbol_count": 4,
+      "direct_present_symbols": [
+        "ADI",
+        "BRKR",
+        "CGNX",
+        "COLM",
+        "DYN",
+        "FLT",
+        "INT",
+        "MDU",
+        "NDSN",
+        "PRU",
+        "SCVL",
+        "SGEN",
+        "SM",
+        "THC",
+        "TW"
+      ],
+      "missing_symbols": [
+        "CLD",
+        "CSOD",
+        "IDTI",
+        "ROVI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-05-01",
+      "required_symbol_count": 13,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "ADI",
+        "BRKR",
+        "CGNX",
+        "DYN",
+        "MDU",
+        "NDSN",
+        "PRU",
+        "SCVL",
+        "SM",
+        "THC",
+        "TW"
+      ],
+      "missing_symbols": [
+        "CSOD",
+        "IDTI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-05-04",
+      "required_symbol_count": 13,
+      "direct_present_symbol_count": 11,
+      "missing_symbol_count": 2,
+      "direct_present_symbols": [
+        "ADI",
+        "BRKR",
+        "CGNX",
+        "DYN",
+        "MDU",
+        "NDSN",
+        "PRU",
+        "SCVL",
+        "SM",
+        "THC",
+        "TW"
+      ],
+      "missing_symbols": [
+        "CSOD",
+        "IDTI"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-05-05",
+      "required_symbol_count": 8,
+      "direct_present_symbol_count": 7,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ADI",
+        "BRKR",
+        "DYN",
+        "NDSN",
+        "PRU",
+        "SCVL",
+        "SM"
+      ],
+      "missing_symbols": [
+        "CSOD"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-05-06",
+      "required_symbol_count": 7,
+      "direct_present_symbol_count": 6,
+      "missing_symbol_count": 1,
+      "direct_present_symbols": [
+        "ADI",
+        "BRKR",
+        "DYN",
+        "NDSN",
+        "PRU",
+        "SCVL"
+      ],
+      "missing_symbols": [
+        "CSOD"
+      ],
+      "fully_direct": false
+    },
+    {
+      "trade_date": "2015-05-07",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ADI",
+        "NDSN",
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2015-05-08",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ADI",
+        "NDSN",
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2015-05-11",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ADI",
+        "NDSN",
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2015-05-12",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ADI",
+        "NDSN",
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2015-05-13",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ADI",
+        "NDSN",
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2015-05-14",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ADI",
+        "NDSN",
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2015-05-15",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ADI",
+        "NDSN",
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2015-05-18",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ADI",
+        "NDSN",
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2015-05-19",
+      "required_symbol_count": 3,
+      "direct_present_symbol_count": 3,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "ADI",
+        "NDSN",
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    },
+    {
+      "trade_date": "2015-05-20",
+      "required_symbol_count": 1,
+      "direct_present_symbol_count": 1,
+      "missing_symbol_count": 0,
+      "direct_present_symbols": [
+        "SCVL"
+      ],
+      "missing_symbols": [],
+      "fully_direct": true
+    }
+  ]
+}
