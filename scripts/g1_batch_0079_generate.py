@@ -52,6 +52,7 @@ hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
 hints=load(hints_path);trial=copy.deepcopy(hints)
 trial["validation_probes"]=[r for r in trial.get("validation_probes",[]) if r.get("event_id")!="HEJFE-D7FD00AF94DD8F41"]
 for spec in specs:
+    assert int(hashlib.sha256(spec["event_id"].encode("utf-8")).hexdigest(),16)%5==4
     e=next(r for r in events if r["event_id"]==spec["event_id"])
     assert e["historical_symbol"]==spec["historical_symbol"] and e["first_documented_illicit_trade_ts"]==spec["expected_trade"]
     assert spec["event_id"] not in old_exact and sum(r["event_id"]==spec["event_id"] for r in exclusions["exclusions"])==1
