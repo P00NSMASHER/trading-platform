@@ -1204,8 +1204,8 @@
       "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
     },
     "src/licensed_data_intake.py": {
-      "expected_sha256": "559f944ac53565e935fb2c361e2abdbf18a97603f95b158e2d96a77469579d3b",
-      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
+      "expected_sha256": "ee876ae9bfd63fb5a81c00a9f134953baf7ea308411c5ffca5c76c2a44a25599",
+      "reason": "G2 multi-vendor intake hardening: only explicit NYSE/TAQ or Cboe filenames get vendor-specific source families; Tick Data, Databento and LSEG remain generic authorized market data until entitlement review."
     },
     "src/model_artifact.py": {
       "expected_sha256": "1a1e5098581c9d4eb720f0a13824c2c9fe857558f2f5146c4386d42610d1716c",
@@ -1468,8 +1468,8 @@
       "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
     },
     "tests/test_licensed_data_intake.py": {
-      "expected_sha256": "7f5767209023d8144e041b25467a25673abd2b95ccf7895c643dea63070275fa",
-      "reason": "Licensed-data intake: fail-closed local inventory, schema triage, raw-ITCH decoder gating, and regression/documentation coverage. Generated contracts remain unauthorized until review."
+      "expected_sha256": "ddb4d8acab4d51585b0c57d22ad24925a702f7f49153a2a130f853d34b67ab02",
+      "reason": "G2 multi-vendor intake hardening: only explicit NYSE/TAQ or Cboe filenames get vendor-specific source families; Tick Data, Databento and LSEG remain generic authorized market data until entitlement review."
     },
     "tests/test_model_artifact.py": {
       "expected_sha256": "4bacac96671aeb57d5c0857949c88bf7b5b6cffec482cc9eae0ec2909e012819",
