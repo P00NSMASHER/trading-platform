@@ -1,0 +1,58 @@
+{
+  "schema_version": "1",
+  "purpose": "Planning-only break-even receipt for the full Tick Data equity route versus the conditional ThetaData + FirstRate + Tick Data residual route. Public minimums and sticker prices are not vendor quotes and do not authorize a purchase.",
+  "pricing_as_of": "2026-10-02",
+  "source_urls": {
+    "tickdata_data_store": "https://www.tickdata.com/tickdatastore",
+    "tickdata_fee_estimator": "https://www.tickdata.com/fee-estimate",
+    "firstrate_tick_pricing": "https://firstratedata.com/a/2/tick-data-pricing",
+    "theta_subscriptions": "https://www.thetadata.net/docs/Articles/Getting-Started/Subscriptions.html"
+  },
+  "scope": {
+    "full_tickdata": {
+      "unique_symbols": 146,
+      "symbol_years": 193
+    },
+    "combined_route_tickdata_residual": {
+      "unique_symbols": 61,
+      "symbol_years": 82
+    },
+    "firstrate_additional_tickers": 31
+  },
+  "public_price_inputs": {
+    "tickdata_new_client_minimum_usd": 1000,
+    "tickdata_returning_client_minimum_usd": 500,
+    "firstrate_10_plus_price_per_ticker_usd": 19.95,
+    "firstrate_31_ticker_indicative_cost_usd": 618.45,
+    "theta_stocks_incremental_bundle_cost_usd": null,
+    "tickdata_full_data_store_quote_usd": null,
+    "tickdata_residual_data_store_quote_usd": null
+  },
+  "tickapi_comparison": {
+    "full_scope_first_year_usd": 3821,
+    "residual_first_year_usd": 3338.66,
+    "residual_plus_firstrate_before_theta_usd": 3957.11,
+    "combined_minus_full_before_theta_usd": 136.11,
+    "combined_route_can_beat_full_tickapi_with_nonnegative_theta_cost": false,
+    "decision": "REJECT_COMBINED_ROUTE_FOR_TICKAPI_COST_OPTIMIZATION"
+  },
+  "data_store_break_even": {
+    "new_client_combined_known_floor_before_theta_delivery_tax_usd": 1618.45,
+    "returning_client_combined_known_floor_before_theta_delivery_tax_usd": 1118.45,
+    "new_client_full_route_public_floor_usd": 1000,
+    "returning_client_full_route_public_floor_usd": 500,
+    "exact_condition": "combined route is cheaper only when tickdata_residual_quote + firstrate_cost + theta_incremental_cost < tickdata_full_quote, after comparing like-for-like delivery fees and taxes",
+    "minimum_full_quote_to_beat_if_residual_hits_new_client_minimum_and_theta_is_free_usd": 1618.45,
+    "minimum_full_quote_to_beat_if_residual_hits_returning_minimum_and_theta_is_free_usd": 1118.45,
+    "status": "AWAIT_EXACT_TICKDATA_AND_THETADATA_QUOTES"
+  },
+  "policy": {
+    "public_minimum_is_not_quote": true,
+    "firstrate_sticker_price_is_not_license_clearance": true,
+    "theta_incremental_cost_not_assumed": true,
+    "delivery_support_fee_and_tax_not_assumed": true,
+    "do_not_switch_route_automatically": true,
+    "do_not_purchase_automatically": true,
+    "validated_g2_coverage_unchanged": true
+  }
+}
