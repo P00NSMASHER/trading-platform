@@ -1,0 +1,29 @@
+name: FNSPID G1 Worker 0 probe
+on:
+  push:
+    branches:
+      - g1/fnspid-worker0-probe-223fb68
+permissions:
+  contents: read
+concurrency:
+  group: fnspid-g1-worker0-probe
+  cancel-in-progress: true
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+      - name: Stream FNSPID and print Worker 0 discovery leads
+        shell: bash
+        run: |
+          set -o pipefail
+          curl -L --fail --retry 3 --retry-delay 2 \
+            'https://huggingface.co/datasets/khaihernlow/fnspid/resolve/main/Stock_news/All_external.jsonl?download=true' \
+            | python scripts/fnspid_g1_worker0_probe.py
