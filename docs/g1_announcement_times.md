@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **67 public exact-time batches / 97 exact-resolved
+The current repository state is **68 public exact-time batches / 98 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -245,3 +245,7 @@ The official PR Newswire Goodyear archive records the exact Q2 2011 release at 2
 ### Batch 0076: VASCO Data Security International
 
 PR Newswire's official archive records VASCO Data Security International's Q3 2011 results release at 2011-10-27 03:00 EDT (07:00 UTC), 45,240 seconds after the frozen 2011-10-26 14:26 EDT illicit trade. SEC Exhibit 99.1 independently corroborates issuer, release title/date, reporting period, metrics, and release content. This advances G1 from 96 exact / 78 reviewed exclusions to 97 exact / 77 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0085: Tenet Healthcare
+
+The timestamp-preserving StreetInsider Business Wire mirror records Tenet Healthcare's Q1 2015 results at 2015-05-04 16:05 EDT (20:05 UTC), 1,020 seconds after the frozen 15:48 EDT illicit trade. Tenet issuer IR and SEC Exhibit 99.1 independently corroborate issuer, release title/date, reporting period, metrics, and release content. This advances G1 from 97 exact / 77 reviewed exclusions to 98 exact / 76 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
