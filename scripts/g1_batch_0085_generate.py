@@ -173,7 +173,7 @@ txt += """
 ### Batch 0085: Tenet Healthcare
 
 A timestamp-preserving StreetInsider mirror of the Business Wire release records the exact Q1 2015 Tenet release at 2015-05-04 16:05 EDT (20:05 UTC), 1,020 seconds after the frozen 2015-05-04 15:48 EDT illicit trade. Tenet issuer IR and matching SEC Exhibit 99.1 independently corroborate issuer, release title/date, reporting period, metrics, and release body. This advances G1 from 96 exact / 78 reviewed exclusions to 97 exact / 77 reviewed exclusions. SEC filing timing, scheduled calls, archive-capture, date-only, scheduled, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
-"""""";p.write_text(txt)
+""";p.write_text(txt)
 
 tp=Path("tests/test_g1_public_batch_0085.py")
 ts='''import csv,json,hashlib
