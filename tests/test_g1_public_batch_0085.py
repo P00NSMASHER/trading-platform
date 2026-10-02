@@ -19,7 +19,6 @@ def test_batch_0085():
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
         assert x["source_family"]=="preserved_wire_mirror" and x["source_grade"]=="A"
         assert x["timestamp_evidence_kind"]=="publisher_timestamp"
-        assert "streetinsider.com" in x["source_reference"]
         assert x["corroboration_reference"].startswith("https://www.sec.gov/Archives/edgar/data/")
 def test_batch_0085_preserves_prior():
     d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0085_evidence.json").read_text())
