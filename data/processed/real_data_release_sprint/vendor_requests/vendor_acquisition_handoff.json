@@ -1,0 +1,209 @@
+{
+  "champion_minimum_source_date_rows": 1242,
+  "coverage_policy": "A delivered file counts only after authorization/license evidence and production date/symbol/schema/content validation pass.",
+  "credential_policy": "Credentials must never be stored in request manifests or source contracts.",
+  "handoffs": {
+    "candidate_cboe_option_trades": {
+      "acceptance_checks": {
+        "all_required_symbols_must_be_observed": true,
+        "declared_trade_date_must_match_parsed_rows": true,
+        "file_existence_is_not_coverage": true,
+        "production_parser_must_accept_required_fields": true,
+        "synthetic_rows_never_satisfy_G2": true
+      },
+      "delivery_contract": {
+        "authorized": true,
+        "column_map": "REQUIRED_WHEN_VENDOR_FIELDS_ARE_NOT_CANONICAL",
+        "credentials_in_contract": "PROHIBITED",
+        "data_classification": "authorized_historical_market_data",
+        "format_version": "REQUIRED",
+        "license_reference": "REQUIRED_NONEMPTY",
+        "timezone": "REQUIRED",
+        "trade_date": "REQUIRED_PER_SOURCE_FILE_OR_SHARD"
+      },
+      "distinct_historical_symbols": 44,
+      "fidelity_requirement": "trade-level option records with exact price and size",
+      "first_trade_date": "2012-01-03",
+      "last_trade_date": "2013-03-28",
+      "product": "Option Trades",
+      "record_kind": "option_trade",
+      "request_manifest": "cboe_option_trades.csv",
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "underlying_symbol",
+        "option_symbol",
+        "expiration",
+        "strike",
+        "option_type",
+        "price",
+        "size"
+      ],
+      "source_date_rows": 83,
+      "source_family_for_contract": "cboe_option_trades",
+      "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+      "symbol_date_pair_count": 489,
+      "vendor": "Cboe DataShop"
+    },
+    "candidate_databento_opra_trades": {
+      "acceptance_checks": {
+        "all_required_symbols_must_be_observed": true,
+        "declared_trade_date_must_match_parsed_rows": true,
+        "file_existence_is_not_coverage": true,
+        "production_parser_must_accept_required_fields": true,
+        "synthetic_rows_never_satisfy_G2": true
+      },
+      "delivery_contract": {
+        "authorized": true,
+        "column_map": "REQUIRED_WHEN_VENDOR_FIELDS_ARE_NOT_CANONICAL",
+        "credentials_in_contract": "PROHIBITED",
+        "data_classification": "authorized_historical_market_data",
+        "format_version": "REQUIRED",
+        "license_reference": "REQUIRED_NONEMPTY",
+        "timezone": "REQUIRED",
+        "trade_date": "REQUIRED_PER_SOURCE_FILE_OR_SHARD"
+      },
+      "distinct_historical_symbols": 114,
+      "fidelity_requirement": "trade-level OPRA records with exact price and size",
+      "first_trade_date": "2013-04-01",
+      "last_trade_date": "2015-05-20",
+      "product": "OPRA.PILLAR trades",
+      "record_kind": "option_trade",
+      "request_manifest": "databento_opra_trades.csv",
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "underlying_symbol",
+        "option_symbol",
+        "expiration",
+        "strike",
+        "option_type",
+        "price",
+        "size"
+      ],
+      "source_date_rows": 226,
+      "source_family_for_contract": "generic_authorized_market_data",
+      "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+      "symbol_date_pair_count": 2875,
+      "vendor": "Databento"
+    },
+    "candidate_lseg_opra_tick_history": {
+      "acceptance_checks": {
+        "all_required_symbols_must_be_observed": true,
+        "declared_trade_date_must_match_parsed_rows": true,
+        "file_existence_is_not_coverage": true,
+        "production_parser_must_accept_required_fields": true,
+        "synthetic_rows_never_satisfy_G2": true
+      },
+      "delivery_contract": {
+        "authorized": true,
+        "column_map": "REQUIRED_WHEN_VENDOR_FIELDS_ARE_NOT_CANONICAL",
+        "credentials_in_contract": "PROHIBITED",
+        "data_classification": "authorized_historical_market_data",
+        "format_version": "REQUIRED",
+        "license_reference": "REQUIRED_NONEMPTY",
+        "timezone": "REQUIRED",
+        "trade_date": "REQUIRED_PER_SOURCE_FILE_OR_SHARD"
+      },
+      "distinct_historical_symbols": 35,
+      "fidelity_requirement": "full-tick OPRA last-sale records with exact price and size",
+      "first_trade_date": "2011-03-21",
+      "last_trade_date": "2011-12-30",
+      "product": "OPRA Tick History",
+      "record_kind": "option_trade",
+      "request_manifest": "lseg_opra_tick_history.csv",
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "underlying_symbol",
+        "option_symbol",
+        "expiration",
+        "strike",
+        "option_type",
+        "price",
+        "size"
+      ],
+      "source_date_rows": 105,
+      "source_family_for_contract": "generic_authorized_market_data",
+      "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+      "symbol_date_pair_count": 464,
+      "vendor": "LSEG"
+    },
+    "candidate_tickdata_equity_nbbo_quotes": {
+      "acceptance_checks": {
+        "all_required_symbols_must_be_observed": true,
+        "declared_trade_date_must_match_parsed_rows": true,
+        "file_existence_is_not_coverage": true,
+        "production_parser_must_accept_required_fields": true,
+        "synthetic_rows_never_satisfy_G2": true
+      },
+      "delivery_contract": {
+        "authorized": true,
+        "column_map": "REQUIRED_WHEN_VENDOR_FIELDS_ARE_NOT_CANONICAL",
+        "credentials_in_contract": "PROHIBITED",
+        "data_classification": "authorized_historical_market_data",
+        "format_version": "REQUIRED",
+        "license_reference": "REQUIRED_NONEMPTY",
+        "timezone": "REQUIRED",
+        "trade_date": "REQUIRED_PER_SOURCE_FILE_OR_SHARD"
+      },
+      "distinct_historical_symbols": 146,
+      "fidelity_requirement": "tick-by-tick consolidated NBBO quote updates; interval snapshots do not satisfy the frozen equity-spread semantics",
+      "first_trade_date": "2011-03-21",
+      "last_trade_date": "2015-05-20",
+      "product": "NBBO for U.S. Equities",
+      "record_kind": "equity_quote",
+      "request_manifest": "tickdata_equity_nbbo_quotes.csv",
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "symbol",
+        "bid",
+        "ask",
+        "bid_size",
+        "ask_size"
+      ],
+      "source_date_rows": 414,
+      "source_family_for_contract": "generic_authorized_market_data",
+      "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+      "symbol_date_pair_count": 3828,
+      "vendor": "Tick Data"
+    },
+    "candidate_tickdata_equity_trades": {
+      "acceptance_checks": {
+        "all_required_symbols_must_be_observed": true,
+        "declared_trade_date_must_match_parsed_rows": true,
+        "file_existence_is_not_coverage": true,
+        "production_parser_must_accept_required_fields": true,
+        "synthetic_rows_never_satisfy_G2": true
+      },
+      "delivery_contract": {
+        "authorized": true,
+        "column_map": "REQUIRED_WHEN_VENDOR_FIELDS_ARE_NOT_CANONICAL",
+        "credentials_in_contract": "PROHIBITED",
+        "data_classification": "authorized_historical_market_data",
+        "format_version": "REQUIRED",
+        "license_reference": "REQUIRED_NONEMPTY",
+        "timezone": "REQUIRED",
+        "trade_date": "REQUIRED_PER_SOURCE_FILE_OR_SHARD"
+      },
+      "distinct_historical_symbols": 146,
+      "fidelity_requirement": "tick-by-tick U.S. equity trades; no aggregate-bar substitution",
+      "first_trade_date": "2011-03-21",
+      "last_trade_date": "2015-05-20",
+      "product": "U.S. Equities tick trades",
+      "record_kind": "equity_trade",
+      "request_manifest": "tickdata_equity_trades.csv",
+      "required_canonical_fields": [
+        "timestamp_or_date+time",
+        "symbol",
+        "price",
+        "size"
+      ],
+      "source_date_rows": 414,
+      "source_family_for_contract": "generic_authorized_market_data",
+      "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+      "symbol_date_pair_count": 3828,
+      "vendor": "Tick Data"
+    }
+  },
+  "purpose": "Vendor handoff contract for acquiring G2_CHAMPION_MINIMUM source files. Candidate availability is not a coverage claim.",
+  "schema_version": "1",
+  "total_record_kind_symbol_date_pairs": 11484
+}
