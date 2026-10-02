@@ -45,7 +45,7 @@ specs=[{
  "timestamp_evidence_kind":"publisher_timestamp",
  "source_family":"official_newswire_archive",
  "source_grade":"A",
- "expected_delta":18960
+ "expected_delta":15360
 }]
 items=[]
 hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
@@ -171,7 +171,7 @@ txt=txt.replace("68 public exact-time batches / 98 exact-resolved","69 public ex
 txt += """
 ### Batch 0092: Maxim Integrated Products
 
-The official PR Newswire historical archive records Maxim Integrated Products' fiscal Q2 2012 results at 2012-01-26 16:00 EST (21:00 UTC), 18,960 seconds after the frozen 11:44 EST illicit trade. The matching SEC press-release exhibit independently corroborates issuer, release title/date, reporting period, metrics, and release content. This advances G1 from 98 exact / 76 reviewed exclusions to 99 exact / 75 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+The official PR Newswire historical archive records Maxim Integrated Products' fiscal Q2 2012 results at 2012-01-26 16:00 EST (21:00 UTC), 15,360 seconds after the frozen 11:44 EST illicit trade. The matching SEC press-release exhibit independently corroborates issuer, release title/date, reporting period, metrics, and release content. This advances G1 from 98 exact / 76 reviewed exclusions to 99 exact / 75 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
 """;p.write_text(txt)
 
 tp=Path("tests/test_g1_public_batch_0092.py")
@@ -186,7 +186,7 @@ def test_batch_0092():
     d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0092_evidence.json").read_text())
     events={r["event_id"]:r for r in rr(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    exp={"HEJFE-EDFDC1213C9AF586":("MXIM","2012-01-26T21:00:00Z",18960)}
+    exp={"HEJFE-EDFDC1213C9AF586":("MXIM","2012-01-26T21:00:00Z",15360)}
     assert len(d["items"])==1
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
