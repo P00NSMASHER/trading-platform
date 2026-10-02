@@ -100,8 +100,8 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -m "G1: recover VDSI exact public clock, 97 exact / 77 excluded [g1-generated]"
 
-            git rm "$WORKFLOW"
-            git rm "$SPEC"
+            git rm -f --ignore-unmatch "$WORKFLOW"
+            git rm -f --ignore-unmatch "$SPEC"
             python - <<'PY'
           import json
           from pathlib import Path
