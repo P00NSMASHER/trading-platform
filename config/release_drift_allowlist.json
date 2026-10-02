@@ -308,16 +308,16 @@
       "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
     },
     "data/processed/g2_vendor_requests/equity_cost_alternatives.json": {
-      "expected_sha256": "b60cf437fd44e25da96bf2fb0e6bb8f0ee4136ef8cebcc12c49b37a6774a0d8c",
-      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+      "expected_sha256": "bd59e73d6dfbaead30deeab42e0b91213f580e80a8d170382e0b9a512fe7b2c2",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     },
     "data/processed/g2_vendor_requests/lseg_opra_tick_history.csv": {
       "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
       "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
     },
     "data/processed/g2_vendor_requests/options_cost_alternatives.json": {
-      "expected_sha256": "973ee357954f2081ee266e195f0ed401d1ff90032de5fbc5bf529fb0ca2258ff",
-      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+      "expected_sha256": "e07106962b15f0122f783140e2511107b3c55291eb230b11c562371bddbd847c",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     },
     "data/processed/g2_vendor_requests/tickdata_equity_nbbo_quotes.csv": {
       "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
@@ -336,8 +336,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_readiness.json": {
-      "expected_sha256": "23607a504009951534e0c908933a807c815a07bf746cb8a4421273a3eb055ab7",
-      "reason": "Cboe trial retention hardening: separate temporary historical API access from durable G2 evidence, require Order Form/written retention authority before bulk trial acquisition, and correct the OPRA planning floor to vendor-confirmed 2012 while keeping runtime quote access fail-closed."
+      "expected_sha256": "d399aeb895ed53fa65187272d0c731a7e48d06b86dff243f651f3a576482aff0",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     },
     "data/processed/g2_vendor_requests/vendor_request_summary.json": {
       "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
@@ -1304,8 +1304,8 @@
       "reason": "Extend the no-purchase Databento OPRA probe to the canonical 1,242-row G2_CHAMPION_MINIMUM scope while preserving full-G2 accounting and evidence rules."
     },
     "src/g2_equity_cost_alternatives.py": {
-      "expected_sha256": "5fd9e887fcf7f4e6bc3fd3344dd43f9d501c24ca60797e6bc7bd9c68020c3090",
-      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+      "expected_sha256": "93bf9a7f8b825b1dbb2f4b93e7ab6e88ab26604d3538e94b9dbb4f0d0a384daa",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     },
     "src/g2_full_replication_option_quote_plan.py": {
       "expected_sha256": "05cd9c34e81ce526a412e7a3009ca992bf91667c0b7f3e86cd44ba9f7c009a0d",
@@ -1320,8 +1320,8 @@
       "reason": "No-purchase Nasdaq U.S. Equity Tick History candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; current Jan-2014+ consolidated tick trades/quotes remain candidates pending license and content validation."
     },
     "src/g2_options_cost_alternatives.py": {
-      "expected_sha256": "c7b2ec4c319bcef91017cd981500cede8fb0411284d459b83906b1ffa47d62ce",
-      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+      "expected_sha256": "c89db3a11d633d6cb4bf29d48ab64079e1bf80ad89fd4cca816726bafd84ae41",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     },
     "src/g2_tickapi_cost_estimator.py": {
       "expected_sha256": "41a591e19b94808a8931b1786339574711f54405e4773bc0e49815237800a195",
@@ -1348,8 +1348,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "src/g2_vendor_readiness.py": {
-      "expected_sha256": "6721f65085c7b89fd719aa42ae4e21275bcabe78d6c88d69c7700bd3dd683191",
-      "reason": "Cboe trial retention hardening: separate temporary historical API access from durable G2 evidence, require Order Form/written retention authority before bulk trial acquisition, and correct the OPRA planning floor to vendor-confirmed 2012 while keeping runtime quote access fail-closed."
+      "expected_sha256": "356eba5270cf89601b847bd19bc225ade170705ad76c69d7de4c25de467f20f5",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     },
     "src/g2_vendor_request_manifests.py": {
       "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
@@ -1640,8 +1640,8 @@
       "reason": "Extend the no-purchase Databento OPRA probe to the canonical 1,242-row G2_CHAMPION_MINIMUM scope while preserving full-G2 accounting and evidence rules."
     },
     "tests/test_g2_equity_cost_alternatives.py": {
-      "expected_sha256": "f6a02f251fb264362efd3b6ffd186d7cf1a6b977e1dadb1df5f3318b879a0228",
-      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+      "expected_sha256": "be54e390625bfdea1e46db3729194945e972c8e62e6efb01e6e8298fa1f1d078",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     },
     "tests/test_g2_full_replication_option_quote_plan.py": {
       "expected_sha256": "1213f4597ade5ce0ea381d8c812cdb5dfb3f662f00b9ddc9ddb6e3b878256aa9",
@@ -1656,8 +1656,8 @@
       "reason": "No-purchase Nasdaq U.S. Equity Tick History candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; current Jan-2014+ consolidated tick trades/quotes remain candidates pending license and content validation."
     },
     "tests/test_g2_options_cost_alternatives.py": {
-      "expected_sha256": "2923484aa389eb3b26524ab86e4ad3d6f9b8e4b6cd705fa617f84c7096fe8df9",
-      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+      "expected_sha256": "ae2b923f2439be57d217693213c8fbf811e82ef18233aa2ef6edeb1be8a85171",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     },
     "tests/test_g2_tickapi_cost_estimator.py": {
       "expected_sha256": "2b7b302ea2d7d60fdedfeae63bb278f95b832a39a38df66bfbc66659a5de5627",
@@ -1684,8 +1684,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "tests/test_g2_vendor_readiness.py": {
-      "expected_sha256": "4d6aee779e6dd57d814902a48e4c22fb9dfabb3d3d069ecd4f92afd0ec8e9e44",
-      "reason": "Cboe trial retention hardening: separate temporary historical API access from durable G2 evidence, require Order Form/written retention authority before bulk trial acquisition, and correct the OPRA planning floor to vendor-confirmed 2012 while keeping runtime quote access fail-closed."
+      "expected_sha256": "bf197ab07f51779bf734aceaa4830aff860adbad6e2fed558f9d039c244efc58",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     },
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",
@@ -1796,8 +1796,12 @@
       "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
     },
     "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
-      "expected_sha256": "10caf7b4ecbf1e64ec452f865c6f48e49d187ff745aa357ef16868ce3072eacb",
-      "reason": "Vendor-reply evidence receipt recording current Cboe trial/history clarification; planning evidence only, not G2 coverage."
+      "expected_sha256": "45951b8152ab3dc09049d7bd5152728cbb237febed550f443c5acd8313193848",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
+    },
+    "tests/test_g2_thetadata_vendor_reply.py": {
+      "expected_sha256": "3a00325816a3f37e9faddcb4f2758c910008c4b280f131d27d48e503222d22d9",
+      "reason": "October 2 ThetaData written reply: private research eligible; Options Pro and Stock Pro $160/month each ($320 combined); raw data deletion required 30 days post-billing; derived research data retainable. No purchase or coverage claim."
     }
   },
   "schema_version": "2",
