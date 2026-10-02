@@ -79,7 +79,7 @@ def test_cboe_all_access_free_trial_acceptance_probe_is_minimal_and_non_purchase
 
 def test_cboe_all_access_capacity_keeps_validation_gates_explicit():
     payload = capacity.build_capacity(capacity.load_requirements(REQ))
-    assert len(payload["gates_before_purchase"]) == 4
+    assert len(payload["gates_before_purchase"]) == 5
     assert any("pagination" in gate.lower() for gate in payload["gates_before_purchase"])
     assert any("production" in gate.lower() for gate in payload["gates_before_purchase"])
     assert any("license" in gate.lower() for gate in payload["gates_before_purchase"])
