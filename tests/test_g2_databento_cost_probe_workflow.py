@@ -5,13 +5,13 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github/workflows/g2-databento-cost-probe.yml"
 
 
-def test_databento_cost_probe_workflow_is_main_push_only_and_non_purchase():
+def test_databento_cost_probe_workflow_is_main_push_or_manual_and_non_purchase():
     text = WORKFLOW.read_text(encoding="utf-8")
 
     assert "push:" in text
     assert "branches:" in text and "- main" in text
     assert "pull_request:" not in text
-    assert "workflow_dispatch:" not in text
+    assert "workflow_dispatch:" in text
     assert "permissions:\n  contents: read" in text
 
     assert "secrets.DATABENTO_API_KEY" in text
