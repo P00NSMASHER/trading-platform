@@ -85,3 +85,45 @@ def test_ambiguous_file_never_enters_pending_contract(tmp_path: Path):
     assert row["status"] == "UNCLASSIFIED"
     contract = json.loads((out / "market_contract.pending.json").read_text())
     assert contract["sources"] == []
+
+
+def test_generic_vendor_names_do_not_impersonate_nyse_or_cboe(tmp_path: Path):
+    cases = [
+        (
+            "tickdata_equity_trades_20150217.csv",
+            "timestamp,symbol,price,size\n2015-02-17 09:30:00,TEST,100,10\n",
+            "equity_trade",
+            "generic_authorized_market_data",
+        ),
+        (
+            "databento_opra_trades_20150217.csv",
+            "timestamp,underlying_symbol,option_symbol,expiration,strike,option_type,price,size\n"
+            "2015-02-17 09:30:00,TEST,TEST150220C00100000,2015-02-20,100,C,2.5,10\n",
+            "option_trade",
+            "generic_authorized_market_data",
+        ),
+        (
+            "lseg_opra_trades_20110321.csv",
+            "timestamp,underlying_symbol,option_symbol,expiration,strike,option_type,price,size\n"
+            "2011-03-21 09:30:00,TEST,TEST110416C00100000,2011-04-16,100,C,2.5,10\n",
+            "option_trade",
+            "generic_authorized_market_data",
+        ),
+        (
+            "cboe_option_trades_20150217.csv",
+            "timestamp,underlying_symbol,option_symbol,expiration,strike,option_type,price,size\n"
+            "2015-02-17 09:30:00,TEST,TEST150220C00100000,2015-02-20,100,C,2.5,10\n",
+            "option_trade",
+            "cboe_option_trades",
+        ),
+    ]
+
+    for filename, body, expected_kind, expected_family in cases:
+        drop = tmp_path / filename.replace(".csv", "")
+        out = tmp_path / (drop.name + "_out")
+        drop.mkdir()
+        (drop / filename).write_text(body, encoding="utf-8")
+        intake.scan(drop, out)
+        row = next(csv.DictReader((out / "intake_files.csv").open()))
+        assert row["candidate_record_kind"] == expected_kind
+        assert row["candidate_source_family"] == expected_family
