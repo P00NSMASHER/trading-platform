@@ -1656,16 +1656,16 @@
       "reason": "Regression guard for the no-purchase Massive equity candidate plan, frozen 414+414 equity source-date rows / 3,828 pairs / 146 symbols, and explicit non-inference of individual non-professional eligibility."
     },
     "src/g2_equity_cost_alternatives.py": {
-      "expected_sha256": "9f06bef0bae9f574cda1a1e09f5cfe535159edaacf473bf8b95da0d45a7c0000",
-      "reason": "Planning-only lower-cost G2 equity alternatives with explicit licensing/coverage blockers; no preferred-route replacement, purchase authority, or coverage claim."
+      "expected_sha256": "17deaa825260f8ae4768a74b219bbcdd30faa86ac5e8513d8da421b3b21206c5",
+      "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
     },
     "tests/test_g2_equity_cost_alternatives.py": {
-      "expected_sha256": "14028fbbfb423c1ceb96b05285715d19d913e691e78e5fdd44a229a1b32511b3",
-      "reason": "Planning-only lower-cost G2 equity alternatives with explicit licensing/coverage blockers; no preferred-route replacement, purchase authority, or coverage claim."
+      "expected_sha256": "4357998763d424ab8ca1140e335095f4ac239e548a85a48fd0c354168dd54386",
+      "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
     },
     "data/processed/g2_vendor_requests/equity_cost_alternatives.json": {
-      "expected_sha256": "5fcc77f800cac6f05c7273653eb96fa412148c37f1e6528072381579f819b8a5",
-      "reason": "Planning-only lower-cost G2 equity alternatives with explicit licensing/coverage blockers; no preferred-route replacement, purchase authority, or coverage claim."
+      "expected_sha256": "0983a2d27f5125c4255422080f0e4837dd260ff685b273987875ef375c7e74f0",
+      "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
     }
   },
   "schema_version": "2",
