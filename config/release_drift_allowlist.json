@@ -336,8 +336,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_readiness.json": {
-      "expected_sha256": "648607f10975dfd9780084fee101bfea26b16acb53e62bd63b5e2ded9c1a8338",
-      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
+      "expected_sha256": "23607a504009951534e0c908933a807c815a07bf746cb8a4421273a3eb055ab7",
+      "reason": "Cboe trial retention hardening: separate temporary historical API access from durable G2 evidence, require Order Form/written retention authority before bulk trial acquisition, and correct the OPRA planning floor to vendor-confirmed 2012 while keeping runtime quote access fail-closed."
     },
     "data/processed/g2_vendor_requests/vendor_request_summary.json": {
       "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
@@ -1024,8 +1024,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "docs/licensed_data_acquisition.md": {
-      "expected_sha256": "418b602a9ee8d0dd9ef24ed39daf3d21a98c80817b98b6fcc519d610e1d6398b",
-      "reason": "Refresh licensed-data acquisition guidance after vendor-reply evidence and Cboe 2012+ scope confirmation."
+      "expected_sha256": "feb3b5e708dfcb63520f8a1cbcbac87d4195135befc2b85580b879703ddf3a54",
+      "reason": "Cboe trial retention hardening: separate temporary historical API access from durable G2 evidence, require Order Form/written retention authority before bulk trial acquisition, and correct the OPRA planning floor to vendor-confirmed 2012 while keeping runtime quote access fail-closed."
     },
     "docs/licensed_data_drop_activation.md": {
       "expected_sha256": "328511247939f7bfe7b966758719b40fdf1c1d836bbc52b8b459e81313de25bf",
@@ -1348,8 +1348,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "src/g2_vendor_readiness.py": {
-      "expected_sha256": "c4a8b0e40086178470c5ea39fd521a8f33cd2475078900a5d0e838248c9678b7",
-      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
+      "expected_sha256": "6721f65085c7b89fd719aa42ae4e21275bcabe78d6c88d69c7700bd3dd683191",
+      "reason": "Cboe trial retention hardening: separate temporary historical API access from durable G2 evidence, require Order Form/written retention authority before bulk trial acquisition, and correct the OPRA planning floor to vendor-confirmed 2012 while keeping runtime quote access fail-closed."
     },
     "src/g2_vendor_request_manifests.py": {
       "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
@@ -1684,8 +1684,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "tests/test_g2_vendor_readiness.py": {
-      "expected_sha256": "bed0e20c5077866ea5a76cc05531a6d1b20b8aef0a8ae49efa1307e0b1eabed6",
-      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
+      "expected_sha256": "4d6aee779e6dd57d814902a48e4c22fb9dfabb3d3d069ecd4f92afd0ec8e9e44",
+      "reason": "Cboe trial retention hardening: separate temporary historical API access from durable G2 evidence, require Order Form/written retention authority before bulk trial acquisition, and correct the OPRA planning floor to vendor-confirmed 2012 while keeping runtime quote access fail-closed."
     },
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",

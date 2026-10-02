@@ -28,10 +28,21 @@ Product pages:
 - https://datashop.cboe.com/option-trades
 - https://datashop.cboe.com/option-quote-intervals
 
-Cboe's FAQ lists Option Trades and Option Quotes availability from January 2010, which covers the 2011-2015 research window. Some current individual product-page text advertises a later start date, so 2011 entitlements may require the legacy historical-order path or DataShop support rather than the default current UI.
+Cboe's public FAQ contains a generic January 2010 start date for Option Trades and Option Quotes, but direct vendor clarification for OPRA-related datasets states that the applicable OPRA history floor is **2012**. The repository therefore fails closed to 2012 for Cboe OPRA planning; the 2011 option requirement must use a separately verified pre-2012-capable provider.
 
 FAQ:
 - https://datashop.cboe.com/faqs
+
+All Access API historical endpoints are a separate candidate path from Cboe's expensive full-universe custom tick-file quote. Current API documentation exposes historical option trades, historical quotes, historical trades-and-quotes, and a date-specific option-reference endpoint. The merged acceptance probe is intentionally tiny and dry-run by default: it can test 2011 equity TAQ, a vendor-supported 2012 option-trade response, and one OSI-derived historical option NBBO quote. Passing that smoke would establish only sample API fidelity, not bulk completeness or G2 coverage.
+
+Before any bulk free-trial acquisition, retention rights must be resolved in writing. Cboe's default Data and Analytics Services Subscription Agreement states that, at termination, the license ends and Data must be deleted or returned unless the applicable Order Form expressly provides otherwise. Trial downloads therefore must not be treated as durable G2 evidence unless the trial Order Form or written vendor permission expressly allows retained internal research use after termination.
+
+Relevant pages:
+- https://datashop.cboe.com/cboe-all-access-api
+- https://api.livevol.com/v1/docs/Help?apiGroupName=allaccess
+- https://datashop.cboe.com/documents/Cboe_RMA_Subscription_Services_Agreement.pdf
+
+For strict option-quote completeness, do not enumerate contracts only from option trades. Use the historical `reference/options?date=&symbol=` endpoint to enumerate the full listed contract universe for each underlying/date, then retrieve and validate quote streams contract-by-contract with pagination and request-rate receipts.
 
 The importer can accept Cboe-native files or another lawfully licensed provider mapped through `generic_authorized_market_data`.
 
