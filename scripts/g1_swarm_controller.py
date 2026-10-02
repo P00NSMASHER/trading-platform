@@ -975,7 +975,7 @@ def controller_plan(
     found_updates.sort(key=lambda u: parse_time(u.created_at) or datetime.max.replace(tzinfo=timezone.utc))
 
     next_candidate = choose_prepared_candidate(
-        all_prepared,
+        candidate_evidence,
         token=token,
         manifest=manifest,
         pulls=pulls,
