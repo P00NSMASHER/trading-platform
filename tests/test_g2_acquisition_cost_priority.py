@@ -28,6 +28,18 @@ def test_cheap_first_acquisition_priority_matches_current_scope():
     assert costs["algoseek_individual_dataset_min_term_months"] == 12
     assert costs["algoseek_standard_lease_floor_usd"] == 18000.0
 
+    option_routes = {item["route"]: item for item in payload["conditional_option_routes"]}
+    theta = option_routes["thetadata_options_pro_or_historical_flat_file"]
+    assert theta["status"] == "LICENSE_AND_PRICE_CONFIRMATION_PENDING"
+    assert theta["retail_options_pro_usd_per_month"] == 160.0
+    assert theta["retail_license_scope"] == "INDIVIDUAL_USE"
+    assert theta["first_access_date"] == "2012-06-01"
+    assert theta["eligible_source_date_rows"] == 291
+    assert theta["eligible_symbol_date_pairs"] == 3014
+    assert theta["residual_source_date_rows"] == 123
+    assert theta["residual_symbol_date_pairs"] == 814
+    assert theta["automatic_purchase_permitted"] is False
+
     screened = {
         item["route"]: item for item in payload["screened_out_or_conditional_equity_routes"]
     }
@@ -80,6 +92,7 @@ def test_cheap_first_acquisition_priority_matches_current_scope():
         "do_not_treat_tickdata_minimum_order_as_exact_quote": True,
         "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": True,
         "compare_algoseek_historical_only_quote_to_tickdata_and_tickapi_before_purchase": True,
+        "do_not_assume_thetadata_retail_license_is_valid_for_product_use": True,
         "do_not_count_equity_quote_source_without_bid_and_ask_sizes": True,
         "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": True,
     }
