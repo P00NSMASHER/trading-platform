@@ -30,7 +30,7 @@ assert len(exclusions["exclusions"])==78
 
 batch=Path("data/public/metadata/g1_announcement_times_batch_0085.csv")
 evidence_path=Path("data/public/metadata/g1_public_batch_0085_evidence.json")
-# Staged batch/evidence skeletons may already exist; overwrite deterministically.
+assert not batch.exists() and not evidence_path.exists()
 
 specs=[{
  "event_id":"HEJFE-6C4EA140AD75FFE2",
