@@ -280,8 +280,8 @@
       "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
     },
     "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
-      "expected_sha256": "d65a352ce25e487860313437c5e7512e39d05167adbb23fc9f2f828991df49c7",
-      "reason": "Add a formal optimality certificate proving 81/83 is the maximum complete Cboe source-date coverage under the optimistic 462-request free-trial capacity model; no trial activation or coverage claim."
+      "expected_sha256": "a7bc31cb22e099d09cd2574d0ac231a3af11e2f2338c34f641c9da15566dd6f3",
+      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "data/processed/g2_vendor_requests/cheap_route_partitions/lseg_option_residual.csv": {
       "expected_sha256": "e3a1c6a9976abe59a2dfb5055096be802699a5c02f633c81fd4bb45b44d94be0",
@@ -336,8 +336,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_readiness.json": {
-      "expected_sha256": "66b1bd3b7356b36cf14de921b87c28f90e2913454c6b5c0ec2a6846a89f862c0",
-      "reason": "Refresh G2 vendor readiness from live vendor replies without publishing private quote details; no purchase, entitlement, or coverage claim."
+      "expected_sha256": "648607f10975dfd9780084fee101bfea26b16acb53e62bd63b5e2ded9c1a8338",
+      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "data/processed/g2_vendor_requests/vendor_request_summary.json": {
       "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
@@ -1292,8 +1292,8 @@
       "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
     },
     "src/g2_cboe_free_trial_planner.py": {
-      "expected_sha256": "2b7e699eae0bd2bb2f2e8b58f7a98993e316270b9db6ffe1b822341f6d6c88a6",
-      "reason": "Add a formal optimality certificate proving 81/83 is the maximum complete Cboe source-date coverage under the optimistic 462-request free-trial capacity model; no trial activation or coverage claim."
+      "expected_sha256": "e7175d429578d49e1fb1cec5ec3c2d4a94459ae4c86cf33879beeab8a2ceb300",
+      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "src/g2_cheap_route_partitions.py": {
       "expected_sha256": "d8aaa5557c1f52afa6b72c021822e7c80575b0549922c71dbc60d335e8f94cc4",
@@ -1348,8 +1348,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "src/g2_vendor_readiness.py": {
-      "expected_sha256": "8ad1e59249c5f9760f3b525fc16d542593af2a787cd72cba8f3fd47e6191823c",
-      "reason": "Refresh G2 vendor readiness from live vendor replies without publishing private quote details; no purchase, entitlement, or coverage claim."
+      "expected_sha256": "c4a8b0e40086178470c5ea39fd521a8f33cd2475078900a5d0e838248c9678b7",
+      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "src/g2_vendor_request_manifests.py": {
       "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
@@ -1624,8 +1624,8 @@
       "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
     },
     "tests/test_g2_cboe_free_trial_planner.py": {
-      "expected_sha256": "b99ea7e46f7eb363a28fc2b5195be1ea18c3cf76d6bd30654670099b956fa2fe",
-      "reason": "Add a formal optimality certificate proving 81/83 is the maximum complete Cboe source-date coverage under the optimistic 462-request free-trial capacity model; no trial activation or coverage claim."
+      "expected_sha256": "712b07ab62f9607d422ac44c63fc34f3824933704081d52ef016ac5527ed6e39",
+      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "tests/test_g2_cheap_route_partitions.py": {
       "expected_sha256": "4b444b9aea83f5efbeefcf6daaac95d97f27130fd934447867e9e0b2441850c1",
@@ -1684,8 +1684,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "tests/test_g2_vendor_readiness.py": {
-      "expected_sha256": "cad24c57b56e005b37266f894841cddd140d419355b04c3935ddd3e067c6a098",
-      "reason": "Refresh G2 vendor readiness from live vendor replies without publishing private quote details; no purchase, entitlement, or coverage claim."
+      "expected_sha256": "bed0e20c5077866ea5a76cc05531a6d1b20b8aef0a8ae49efa1307e0b1eabed6",
+      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",
