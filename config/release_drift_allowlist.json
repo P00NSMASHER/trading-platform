@@ -304,8 +304,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_readiness.json": {
-      "expected_sha256": "0459613798b547fea5691d2cc6fb18025747d6b0fa70232b7b7844d9e890a98d",
-      "reason": "G2 vendor acquisition readiness receipt: distinguish repository planning readiness from external pricing/licensing/delivery and unchanged validated full-G2 coverage."
+      "expected_sha256": "2dbe4b6ecd3c137c3c7ef8bf935e77c2dbd394b7ea2e745022e64b435f916727",
+      "reason": "Surface the fail-closed Cboe free-trial capacity plan in G2 vendor readiness as awaiting vendor confirmation; validated coverage and purchase authority remain unchanged."
     },
     "data/processed/g2_vendor_requests/vendor_request_summary.json": {
       "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
@@ -1224,8 +1224,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "src/g2_vendor_readiness.py": {
-      "expected_sha256": "3f29c9c6772f99e6fd14b10ba6af006a93550d95707f58e74a7fa3e891568901",
-      "reason": "G2 vendor acquisition readiness receipt: distinguish repository planning readiness from external pricing/licensing/delivery and unchanged validated full-G2 coverage."
+      "expected_sha256": "afd977df75305c444eefc47a637fb8c403f24a0407f795446ad5800a0ed91aa3",
+      "reason": "Surface the fail-closed Cboe free-trial capacity plan in G2 vendor readiness as awaiting vendor confirmation; validated coverage and purchase authority remain unchanged."
     },
     "src/g2_vendor_request_manifests.py": {
       "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
@@ -1508,8 +1508,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "tests/test_g2_vendor_readiness.py": {
-      "expected_sha256": "623597fbe14cd550ac7fb3d16b587546f44258110e8a87575098343225487379",
-      "reason": "G2 vendor acquisition readiness receipt: distinguish repository planning readiness from external pricing/licensing/delivery and unchanged validated full-G2 coverage."
+      "expected_sha256": "0a9f4eb657fc5e7e1d46b5c5693b93e91e9e79b7a279539c4d58e16a7a07aabb",
+      "reason": "Surface the fail-closed Cboe free-trial capacity plan in G2 vendor readiness as awaiting vendor confirmation; validated coverage and purchase authority remain unchanged."
     },
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",

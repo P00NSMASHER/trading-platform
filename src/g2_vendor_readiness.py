@@ -17,6 +17,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
     requests = _read_json(vendor_dir / "vendor_request_summary.json")
     activation = _read_json(vendor_dir / "vendor_activation_blueprint.json")
     quotes = _read_json(vendor_dir / "vendor_quote_packets.json")
+    cboe_trial = _read_json(vendor_dir / "cboe_trial_capacity_plan.json")
     coverage = _read_json(coverage_summary)
     audit = coverage.get("contract_audit") or {}
 
@@ -32,6 +33,15 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         quotes["total_record_kind_symbol_date_pairs"],
     } != {11484}:
         raise ValueError("vendor artifacts disagree on 11,484 request-pair footprint")
+    if (
+        cboe_trial["required_source_date_rows"] != 83
+        or cboe_trial["required_underlying_date_pairs"] != 489
+        or cboe_trial["optimistic_complete_source_date_rows"] != 81
+        or cboe_trial["optimistic_complete_underlying_date_pairs"] != 445
+        or cboe_trial["trial_historical_access_runtime_verified"] is not False
+        or cboe_trial["coverage_claimed"] is not False
+    ):
+        raise ValueError("Cboe trial capacity plan is inconsistent or not fail-closed")
 
     activation_profiles = activation["profiles"]
     all_fail_closed = all(
@@ -72,6 +82,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "fail_closed_activation_blueprint_ready": all_fail_closed,
             "delivery_preflight_tool_ready": delivery_preflight_present,
             "databento_cost_only_workflow_ready": cost_probe_workflow_present,
+            "cboe_trial_capacity_plan_ready": True,
         },
         "external_state": {
             "vendor_quotes_or_pricing": "PENDING_EXTERNAL",
@@ -80,6 +91,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "local_entitlement_hash_binding": "PENDING_EXTERNAL",
             "production_content_validation": "BLOCKED_ON_DELIVERY",
             "runtime_secret_state": "NOT_COMMITTED_TO_REPOSITORY",
+            "cboe_trial_historical_access": "AWAITING_VENDOR_CONFIRMATION",
         },
         "canonical_full_g2_state": {
             "required_source_date_rows": full_required,
@@ -97,7 +109,8 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         "next_external_actions": [
             "Configure DATABENTO_API_KEY if cost-only OPRA pricing is desired; the workflow performs no download or purchase.",
             "Request/confirm Tick Data equity trade + tick-level NBBO quote pricing/licensing for the frozen request manifests.",
-            "Request/confirm Cboe historical Option Trades pricing/licensing for the 2012-01-03 through 2013-03-28 request manifest.",
+            "Await Ryan Lusk confirmation that the 14-day All Access trial permits historical 2012-2013 Option Trades and that each seq_no page consumes another 15 points; do not activate the trial automatically.",
+            "Request/confirm Cboe historical Option Trades pricing/licensing for the 2012-01-03 through 2013-03-28 request manifest if the trial path is unavailable or incomplete.",
             "Request/confirm LSEG OPRA Tick History pricing/licensing for the 2011 request manifest.",
             "Place lawfully obtained vendor files in a local drop folder, run licensed-data intake + delivery preflight, then create a local hash-bound entitlement manifest.",
         ],
@@ -107,6 +120,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "delivery_is_not_authorization": True,
             "file_presence_is_not_content_coverage": True,
             "g2_release_gate_unchanged": True,
+            "free_trial_activation_requires_explicit_user_authorization": True,
         },
     }
 

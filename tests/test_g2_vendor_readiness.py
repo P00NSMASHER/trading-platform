@@ -22,6 +22,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
         "fail_closed_activation_blueprint_ready": True,
         "delivery_preflight_tool_ready": True,
         "databento_cost_only_workflow_ready": True,
+        "cboe_trial_capacity_plan_ready": True,
     }
 
     assert payload["canonical_full_g2_state"] == {
@@ -36,6 +37,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert payload["external_state"]["license_or_entitlement_terms"] == "PENDING_EXTERNAL"
     assert payload["external_state"]["licensed_data_delivery"] == "PENDING_EXTERNAL"
     assert payload["external_state"]["production_content_validation"] == "BLOCKED_ON_DELIVERY"
+    assert payload["external_state"]["cboe_trial_historical_access"] == "AWAITING_VENDOR_CONFIRMATION"
 
     assert payload["policy"] == {
         "candidate_source_is_not_coverage": True,
@@ -43,6 +45,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
         "delivery_is_not_authorization": True,
         "file_presence_is_not_content_coverage": True,
         "g2_release_gate_unchanged": True,
+        "free_trial_activation_requires_explicit_user_authorization": True,
     }
 
 
@@ -53,6 +56,8 @@ def test_readiness_next_actions_cover_every_external_dependency():
     assert "DATABENTO_API_KEY" in actions
     assert "Tick Data" in actions
     assert "Cboe" in actions
+    assert "Ryan Lusk" in actions
+    assert "do not activate the trial automatically" in actions
     assert "LSEG" in actions
     assert "local drop folder" in actions
     assert "entitlement manifest" in actions
