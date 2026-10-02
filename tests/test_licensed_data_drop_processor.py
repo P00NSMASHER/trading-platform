@@ -199,3 +199,42 @@ def test_unauthorized_entry_never_activates(tmp_path: Path):
     )
     assert receipt["activated_source_count"] == 0
     assert receipt["rejected_entries"][0]["reason"] == "authorized_must_be_true"
+
+
+def test_generic_option_vendor_file_activates_with_generic_family(tmp_path: Path):
+    drop_dir = tmp_path / "drop"
+    drop_dir.mkdir()
+    data = drop_dir / "databento_opra_trades_20150401.csv"
+    data.write_text(
+        "timestamp,underlying_symbol,option_symbol,expiration,strike,option_type,price,size\n"
+        "2015-04-01 09:30:00,TEST,TEST150417C00100000,2015-04-17,100,C,2.5,10\n",
+        encoding="utf-8",
+    )
+    ent = tmp_path / "entitlement.json"
+    _write_entitlement(ent, [{
+        "sha256": _sha256(data),
+        "authorized": True,
+        "license_reference": "DATABENTO-LICENSE-REF",
+        "source_family": "generic_authorized_market_data",
+        "record_kind": "option_trade",
+        "trade_date": "2015-04-01",
+        "delimiter": ",",
+        "format_version": "vendor-reviewed",
+    }])
+
+    contract = tmp_path / "real.json"
+    receipt = drop.activate(
+        drop_dir=drop_dir,
+        work_dir=tmp_path / "work",
+        entitlement_manifest=ent,
+        market_contract_out=contract,
+    )
+
+    assert receipt["activated_source_count"] == 1
+    assert receipt["rejected_entry_count"] == 0
+    source = json.loads(contract.read_text())["sources"][0]
+    assert source["source_family"] == "generic_authorized_market_data"
+    assert source["record_kind"] == "option_trade"
+    assert source["trade_date"] == "2015-04-01"
+    assert source["authorized"] is True
+    assert source["license_reference"] == "DATABENTO-LICENSE-REF"
