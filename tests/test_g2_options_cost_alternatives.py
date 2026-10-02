@@ -24,7 +24,7 @@ def test_options_cost_alternatives_preserve_history_and_license_gates():
     assert current["Databento OPRA.PILLAR Trades"]["source_date_rows"] == 226
 
     cheapest = payload["conditional_cheapest_full_option_route"]
-    assert cheapest["status"] == "PREFERRED_IF_THETADATA_WRITTEN_LICENSE_CLEARANCE_IS_RECEIVED"
+    assert cheapest["status"] == "PREFERRED_IF_LSEG_QUOTE_ACCEPTABLE_AND_BOUNDED_RAW_RETENTION_ACCEPTED"
     assert cheapest["expected_vendor_count"] == 2
     assert cheapest["coverage_accounting"] == {
         "source_date_rows_per_record_kind": 414,
@@ -36,6 +36,8 @@ def test_options_cost_alternatives_preserve_history_and_license_gates():
     assert segments["LSEG OPRA Tick History"]["underlying_date_pairs_per_record_kind"] == 814
     assert segments["ThetaData Options PRO"]["source_date_rows_per_record_kind"] == 291
     assert segments["ThetaData Options PRO"]["underlying_date_pairs_per_record_kind"] == 3014
+    assert segments["ThetaData Options PRO"]["pricing_status"] == "WRITTEN_PRIVATE_RESEARCH_ELIGIBLE_160_USD_MONTH"
+    assert segments["ThetaData Options PRO"]["written_monthly_price_usd"] == 160.00
     assert cheapest["replaces_if_cleared"] == [
         "Cboe DataShop Option Trades",
         "Databento OPRA.PILLAR Trades",
@@ -53,7 +55,10 @@ def test_options_cost_alternatives_preserve_history_and_license_gates():
     assert theta["eligible_quote_underlying_date_pairs"] == 3014
     assert theta["pre_history_residual_rows_per_record_kind"] == 123
     assert theta["pre_history_residual_pairs_per_record_kind"] == 814
-    assert theta["license_fit"] == "SALES_CLASSIFICATION_AND_RETENTION_TERMS_PENDING"
+    assert theta["license_fit"] == "PRIVATE_RESEARCH_CONFIRMED_BOUNDED_RAW_RETENTION"
+    assert theta["written_options_pro_monthly_price_usd"] == 160.00
+    assert theta["raw_unmodified_retention"] == "DELETE_WITHIN_30_DAYS_AFTER_SUBSCRIPTION_BILLING_PERIOD_ENDS"
+    assert theta["derived_research_retention"] == "ALLOWED_AFTER_RAW_DELETION"
 
     algo = by_vendor["algoseek Options Trade and NBBO Quote"]
     assert algo["conservative_frozen_eligible_rows_per_record_kind"] == 131
