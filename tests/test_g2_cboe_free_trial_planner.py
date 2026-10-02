@@ -53,6 +53,16 @@ def test_cboe_trial_planner_matches_frozen_scope_and_vendor_provenance():
     assert result["max_requests_per_day"] == 33
     assert result["daily_unused_points_at_request_cap"] == 5
     assert result["optimistic_request_budget"] == 462
+    assert result["optimality_certificate"] == {
+        "objective": "maximize fully completed source-date rows under the optimistic one-request-per-underlying/date assumption",
+        "method": "sort source dates by required underlying/date requests ascending; the k cheapest dates minimize requests for any k-date solution",
+        "max_complete_source_date_rows": 81,
+        "selected_request_count": 445,
+        "next_complete_source_date_rows": 82,
+        "next_complete_request_floor": 467,
+        "next_complete_exceeds_budget": True,
+        "mathematically_optimal_under_assumption": True,
+    }
     assert result["optimistic_complete_source_date_rows"] == 81
     assert result["optimistic_complete_underlying_date_pairs"] == 445
     assert result["optimistic_points_used"] == 6675
