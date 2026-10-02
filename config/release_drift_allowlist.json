@@ -1402,6 +1402,14 @@
     "tests/test_g2_candidate_route_matrix.py": {
       "expected_sha256": "eb026a1e9053074a34a28c31d111c9c8f4a70fc093a6678de1624b2a0714276f",
       "reason": "Conservative G2_CHAMPION_MINIMUM candidate-source matrix with explicit LSEG OPRA Tick History route for 2011; candidate does not mean covered and all license/content gates remain unchanged."
+    },
+    ".github/workflows/g2-databento-cost-probe.yml": {
+      "expected_sha256": "fd4b0ad3b23e5ad664468132348ed8c69c077e1af0dae505e1ea915de2f4fa28",
+      "reason": "Hardened Databento historical cost-only probe: main-push only, read-only permissions, secret-gated metadata cost estimates, no downloads, batch jobs, or purchases."
+    },
+    "tests/test_g2_databento_cost_probe_workflow.py": {
+      "expected_sha256": "a0e79396ce59ba2d2bb9086af8c35f2e7923f069571d0f02b186ec2ce4f567ac",
+      "reason": "Hardened Databento historical cost-only probe: main-push only, read-only permissions, secret-gated metadata cost estimates, no downloads, batch jobs, or purchases."
     }
   },
   "schema_version": "2",
