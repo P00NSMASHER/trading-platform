@@ -1396,12 +1396,12 @@
       "reason": "No-purchase Nasdaq U.S. Equity Tick History candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; current Jan-2014+ consolidated tick trades/quotes remain candidates pending license and content validation."
     },
     "src/g2_candidate_route_matrix.py": {
-      "expected_sha256": "6b4fa063896c0935e0cd1652898b0428c97865efc1b99807bf7bd78b70dc537d",
-      "reason": "Conservative G2_CHAMPION_MINIMUM candidate-source matrix with explicit LSEG OPRA Tick History route for 2011; candidate does not mean covered and all license/content gates remain unchanged."
+      "expected_sha256": "dfc12128d77ac492775f75ddec13f11db4a98b4fa9d2994dd067bf9b59f91cc6",
+      "reason": "Add exact symbol-date request-volume accounting to the G2_CHAMPION_MINIMUM candidate-source matrix; source availability only, no coverage claims or gate changes."
     },
     "tests/test_g2_candidate_route_matrix.py": {
-      "expected_sha256": "eb026a1e9053074a34a28c31d111c9c8f4a70fc093a6678de1624b2a0714276f",
-      "reason": "Conservative G2_CHAMPION_MINIMUM candidate-source matrix with explicit LSEG OPRA Tick History route for 2011; candidate does not mean covered and all license/content gates remain unchanged."
+      "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",
+      "reason": "Add exact symbol-date request-volume accounting to the G2_CHAMPION_MINIMUM candidate-source matrix; source availability only, no coverage claims or gate changes."
     },
     ".github/workflows/g2-databento-cost-probe.yml": {
       "expected_sha256": "fd4b0ad3b23e5ad664468132348ed8c69c077e1af0dae505e1ea915de2f4fa28",

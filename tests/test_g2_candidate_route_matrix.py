@@ -22,6 +22,13 @@ def test_conservative_candidate_route_matrix_matches_frozen_scope():
         "candidate_tickdata_equity_nbbo_quotes": 414,
         "candidate_tickdata_equity_trades": 414,
     }
+    assert manifest["route_symbol_date_pair_counts"] == {
+        "candidate_cboe_option_trades": 489,
+        "candidate_databento_opra_trades": 2875,
+        "candidate_lseg_opra_tick_history": 464,
+        "candidate_tickdata_equity_nbbo_quotes": 3828,
+        "candidate_tickdata_equity_trades": 3828,
+    }
     assert manifest["unresolved_by_record_kind"] == {}
 
 

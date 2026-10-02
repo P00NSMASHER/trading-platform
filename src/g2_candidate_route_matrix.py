@@ -14,7 +14,7 @@ DEFAULT_REQUIREMENTS = Path(
 def load_requirements(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
         rows = list(csv.DictReader(handle))
-    required = {"record_kind", "trade_date"}
+    required = {"record_kind", "trade_date", "symbol_date_pair_count"}
     if not rows:
         raise ValueError("requirements file is empty")
     missing = sorted(required - set(rows[0]))
@@ -68,10 +68,12 @@ def build_matrix(rows: list[dict[str, str]]) -> dict:
 
     classified = []
     counts = Counter()
+    pair_counts = Counter()
     unresolved = Counter()
     for row in rows:
         route, reason = classify(row)
         counts[route] += 1
+        pair_counts[route] += int(row["symbol_date_pair_count"])
         if route.startswith("unresolved_"):
             unresolved[row["record_kind"]] += 1
         classified.append(
@@ -79,6 +81,7 @@ def build_matrix(rows: list[dict[str, str]]) -> dict:
                 "trade_date": row["trade_date"],
                 "record_kind": row["record_kind"],
                 "route": route,
+                "symbol_date_pair_count": int(row["symbol_date_pair_count"]),
                 "reason": reason,
             }
         )
@@ -96,6 +99,7 @@ def build_matrix(rows: list[dict[str, str]]) -> dict:
         "candidate_fraction": candidate_rows / len(rows),
         "unresolved_rows": unresolved_rows,
         "route_counts": dict(sorted(counts.items())),
+        "route_symbol_date_pair_counts": dict(sorted(pair_counts.items())),
         "unresolved_by_record_kind": dict(sorted(unresolved.items())),
         "rows": classified,
     }
