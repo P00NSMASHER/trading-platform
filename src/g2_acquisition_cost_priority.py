@@ -11,6 +11,17 @@ PRICING_AS_OF = "2026-10-02"
 TICKDATA_DATASTORE_URL = "https://www.tickdata.com/tickdatastore"
 TICKDATA_FEE_ESTIMATE_URL = "https://www.tickdata.com/fee-estimate"
 TICKDATA_NEW_CLIENT_MINIMUM_USD = 1000.0
+FIRSTRATE_TICK_PRICING_URL = "https://firstratedata.com/a/2/tick-data-pricing"
+FIRSTRATE_FAQ_URL = "https://firstratedata.com/about/FAQ"
+FIRSTRATE_LICENSE_URL = "https://firstratedata.com/about/license"
+FIRSTRATE_TEN_PLUS_PER_TICKER_USD = 19.95
+FIRSTRATE_REQUIRED_UNIQUE_SYMBOLS = 146
+MASSIVE_STOCKS_PRICING_URL = "https://massive.com/pricing?product=stocks"
+MASSIVE_BUSINESS_PRICING_URL = "https://massive.com/business"
+MASSIVE_MARKET_DATA_TERMS_URL = "https://massive.com/legal/market-data-terms-of-service"
+MASSIVE_INDIVIDUAL_ADVANCED_USD = 199.0
+MASSIVE_BUSINESS_USD = 2499.0
+KIBOT_NBBO_DOC_URL = "https://www.kibot.com/quality/bid-ask-and-nbbo-quotes.html"
 
 
 def _read_json(path: Path) -> dict:
@@ -46,7 +57,61 @@ def build(vendor_dir: Path) -> dict:
             "tickdata_datastore_source": TICKDATA_DATASTORE_URL,
             "tickdata_fee_estimate_source": TICKDATA_FEE_ESTIMATE_URL,
             "tickapi_estimated_first_year_minimum_usd": tickapi_floor,
+            "firstrate_10_plus_per_ticker_usd": FIRSTRATE_TEN_PLUS_PER_TICKER_USD,
+            "firstrate_naive_146_ticker_cost_usd": round(
+                FIRSTRATE_REQUIRED_UNIQUE_SYMBOLS * FIRSTRATE_TEN_PLUS_PER_TICKER_USD, 2
+            ),
+            "massive_individual_advanced_usd": MASSIVE_INDIVIDUAL_ADVANCED_USD,
+            "massive_business_usd": MASSIVE_BUSINESS_USD,
         },
+        "screened_out_or_conditional_equity_routes": [
+            {
+                "route": "firstrate_tick_history",
+                "status": "CONDITIONAL_NOT_CURRENT_FULL_SCOPE",
+                "sources": [
+                    FIRSTRATE_TICK_PRICING_URL,
+                    FIRSTRATE_FAQ_URL,
+                    FIRSTRATE_LICENSE_URL,
+                ],
+                "naive_all_146_ticker_cost_usd": round(
+                    FIRSTRATE_REQUIRED_UNIQUE_SYMBOLS * FIRSTRATE_TEN_PLUS_PER_TICKER_USD, 2
+                ),
+                "reasons": [
+                    "Public FAQ says standardized bundles only; no custom subset orders.",
+                    "TickHistory FAQ says the current tick service carries active tickers only.",
+                    "Quote schema must explicitly include bid_size and ask_size before G2 equity_quote coverage can be considered.",
+                    "Buying all 146 tickers at the published 10+ per-ticker rate would exceed the Tick Data Store new-client minimum.",
+                ],
+                "automatic_purchase_permitted": False,
+            },
+            {
+                "route": "massive_stocks",
+                "status": "INDIVIDUAL_PLAN_NOT_BUSINESS_ELIGIBLE",
+                "sources": [
+                    MASSIVE_STOCKS_PRICING_URL,
+                    MASSIVE_BUSINESS_PRICING_URL,
+                    MASSIVE_MARKET_DATA_TERMS_URL,
+                ],
+                "individual_advanced_usd_per_month": MASSIVE_INDIVIDUAL_ADVANCED_USD,
+                "business_usd_per_month": MASSIVE_BUSINESS_USD,
+                "reasons": [
+                    "The $199 individual tier is for non-professional personal, non-business use.",
+                    "The business-safe stock tier is $2,499/month, above the $1,000 Tick Data Store minimum.",
+                ],
+                "automatic_purchase_permitted": False,
+            },
+            {
+                "route": "kibot_tick_bid_ask",
+                "status": "FAILS_CURRENT_EQUITY_QUOTE_SCHEMA",
+                "sources": [KIBOT_NBBO_DOC_URL],
+                "reasons": [
+                    "Standard tick+bid/ask records NBBO only at trade timestamps rather than a continuous quote stream.",
+                    "Standard files do not include top-of-book bid_size or ask_size.",
+                    "The G2 equity_quote contract requires bid_size and ask_size.",
+                ],
+                "automatic_purchase_permitted": False,
+            },
+        ],
         "priority": [
             {
                 "rank": 1,
@@ -122,6 +187,8 @@ def build(vendor_dir: Path) -> dict:
             "prefer_one_time_tickdata_store_quote_before_tickapi_subscription": (
                 TICKDATA_NEW_CLIENT_MINIMUM_USD < tickapi_floor
             ),
+            "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": True,
+            "do_not_count_equity_quote_source_without_bid_and_ask_sizes": True,
             "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": True,
         },
     }
