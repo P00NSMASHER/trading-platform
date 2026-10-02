@@ -1656,28 +1656,28 @@
       "reason": "Regression guard for the no-purchase Massive equity candidate plan, frozen 414+414 equity source-date rows / 3,828 pairs / 146 symbols, and explicit non-inference of individual non-professional eligibility."
     },
     "src/g2_equity_cost_alternatives.py": {
-      "expected_sha256": "17deaa825260f8ae4768a74b219bbcdd30faa86ac5e8513d8da421b3b21206c5",
-      "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
+      "expected_sha256": "5fd9e887fcf7f4e6bc3fd3344dd43f9d501c24ca60797e6bc7bd9c68020c3090",
+      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
     },
     "tests/test_g2_equity_cost_alternatives.py": {
-      "expected_sha256": "4357998763d424ab8ca1140e335095f4ac239e548a85a48fd0c354168dd54386",
-      "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
+      "expected_sha256": "f6a02f251fb264362efd3b6ffd186d7cf1a6b977e1dadb1df5f3318b879a0228",
+      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
     },
     "data/processed/g2_vendor_requests/equity_cost_alternatives.json": {
-      "expected_sha256": "0983a2d27f5125c4255422080f0e4837dd260ff685b273987875ef375c7e74f0",
-      "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
+      "expected_sha256": "b60cf437fd44e25da96bf2fb0e6bb8f0ee4136ef8cebcc12c49b37a6774a0d8c",
+      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
     },
     "src/g2_options_cost_alternatives.py": {
-      "expected_sha256": "818cf066f84624180be26249c03f196ad923b321c0f80618d7fd6c3a78823bdb",
-      "reason": "Planning-only lower-cost G2 options alternatives with explicit history/license conflicts; no preferred-route replacement, purchase authority, or coverage claim."
+      "expected_sha256": "c7b2ec4c319bcef91017cd981500cede8fb0411284d459b83906b1ffa47d62ce",
+      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
     },
     "tests/test_g2_options_cost_alternatives.py": {
-      "expected_sha256": "7c6bb040724f5d6316703f63715bb490bb5d8308820e4dd4e78c0485c751bea0",
-      "reason": "Planning-only lower-cost G2 options alternatives with explicit history/license conflicts; no preferred-route replacement, purchase authority, or coverage claim."
+      "expected_sha256": "2923484aa389eb3b26524ab86e4ad3d6f9b8e4b6cd705fa617f84c7096fe8df9",
+      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
     },
     "data/processed/g2_vendor_requests/options_cost_alternatives.json": {
-      "expected_sha256": "8835146043a46277a1919621e6052409efc05071126f614dfd3277a724018598",
-      "reason": "Planning-only lower-cost G2 options alternatives with explicit history/license conflicts; no preferred-route replacement, purchase authority, or coverage claim."
+      "expected_sha256": "973ee357954f2081ee266e195f0ed401d1ff90032de5fbc5bf529fb0ca2258ff",
+      "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
     }
   },
   "schema_version": "2",
