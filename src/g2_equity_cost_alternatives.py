@@ -6,8 +6,6 @@ from pathlib import Path
 
 PRICING_AS_OF = "2026-10-02"
 
-TICKDATA_ESTIMATE = Path("data/processed/g2_vendor_requests/tickapi_cost_estimate.json")
-
 
 def build_alternatives() -> dict:
     return {
@@ -28,7 +26,7 @@ def build_alternatives() -> dict:
             {
                 "vendor": "Tick Data",
                 "route_status": "CURRENT_PREFERRED_CANDIDATE",
-                "public_cost_reference": "data/processed/g2_vendor_requests/tickapi_cost_estimate.json",
+                "public_cost_reference": "src/g2_tickapi_cost_estimator.py",
                 "estimated_first_year_minimum_usd": 3821.00,
                 "coverage_fit": "FULL_SCOPE_CANDIDATE",
                 "license_fit": "PENDING_VENDOR_TERMS",
