@@ -1410,6 +1410,14 @@
     "tests/test_g2_databento_cost_probe_workflow.py": {
       "expected_sha256": "a0e79396ce59ba2d2bb9086af8c35f2e7923f069571d0f02b186ec2ce4f567ac",
       "reason": "Hardened Databento historical cost-only probe: main-push only, read-only permissions, secret-gated metadata cost estimates, no downloads, batch jobs, or purchases."
+    },
+    "src/g2_vendor_request_manifests.py": {
+      "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
+      "reason": "Generate deterministic vendor-specific request manifests for G2_CHAMPION_MINIMUM; acquisition planning only, no authorization or coverage claim."
+    },
+    "tests/test_g2_vendor_request_manifests.py": {
+      "expected_sha256": "e7a0f28b51dc33597910dd6aee7fa32ceb195b797d5529d8a7a1535534d48868",
+      "reason": "Generate deterministic vendor-specific request manifests for G2_CHAMPION_MINIMUM; acquisition planning only, no authorization or coverage claim."
     }
   },
   "schema_version": "2",
