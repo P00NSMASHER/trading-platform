@@ -22,7 +22,7 @@
     "production_content_validation": "BLOCKED_ON_DELIVERY",
     "runtime_secret_state": "NOT_COMMITTED_TO_REPOSITORY",
     "databento_cost_probe": "BLOCKED_API_KEY_NOT_CONFIGURED",
-    "cboe_trial_historical_access": "AWAITING_RYAN_LUSK_CONFIRMATION",
+    "cboe_trial_historical_access": "DOCUMENTED_ELIGIBLE_NOT_RUNTIME_VERIFIED",
     "cboe_custom_tick_quote": "ESCALATED_TO_DORRAINE_FOLLOWUP_PENDING",
     "tickdata_written_quote": "VENDOR_REQUESTED_PHONE_CALL_WRITTEN_QUOTE_PENDING",
     "lseg_2011_quote": "REQUEST_SENT_AWAITING_REPLY",
@@ -41,7 +41,7 @@
   "next_external_actions": [
     "Configure DATABENTO_API_KEY if cost-only OPRA pricing is desired; the workflow performs no download or purchase.",
     "Await Tick Data written scope/pricing confirmation; vendor requested a phone call, but written pricing remains pending.",
-    "Await Ryan Lusk confirmation that the 14-day All Access trial permits historical 2012-2013 Option Trades and that each seq_no page consumes another 15 points; do not activate the trial automatically.",
+    "Cboe All Access historical Option Trades are documented eligible at 15 points per request, but runtime access is not verified; activate the 14-day trial only with explicit user authorization, then verify historical access and seq_no pagination before relying on trial capacity.",
     "Await Dorraine/Cboe follow-up on the escalated custom historical tick-level OPRA quote request.",
     "Await LSEG pricing/availability reply for the exact 2011 OPRA request.",
     "Await algoseek pricing and sandbox-terms replies for the exact historical scopes.",
