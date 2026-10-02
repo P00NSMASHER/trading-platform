@@ -5,7 +5,7 @@
   "full_replication_source_date_rows": 1656,
   "additional_option_quote_source_date_rows": 414,
   "additional_option_quote_symbol_date_pairs": 3828,
-  "packet_count": 3,
+  "packet_count": 2,
   "packets": [
     {
       "route": "candidate_lseg_opra_tick_quotes_2011",
@@ -47,55 +47,16 @@
       }
     },
     {
-      "route": "candidate_cboe_custom_tick_quotes_2012_2013",
-      "vendor": "Cboe DataShop",
-      "product_request": "Custom historical tick-level OPRA option quotes",
-      "source_family": "cboe_option_quotes",
-      "record_kind": "option_quote",
-      "first_trade_date": "2012-01-03",
-      "last_trade_date": "2013-10-22",
-      "source_date_rows": 178,
-      "symbol_date_pair_count": 1186,
-      "unique_historical_symbols": 53,
-      "required_canonical_fields": [
-        "timestamp_or_date+time",
-        "underlying_symbol",
-        "option_symbol",
-        "expiration",
-        "strike",
-        "option_type",
-        "bid",
-        "ask",
-        "bid_size",
-        "ask_size"
-      ],
-      "fidelity_requirements": [
-        "tick-level quote updates",
-        "underlying and option contract identifiers",
-        "expiration, strike, and option type",
-        "bid and ask prices with bid_size and ask_size",
-        "all requested underlyings and dates",
-        "no minute-bar or interval-snapshot substitution"
-      ],
-      "acquisition_status": "QUOTE_REQUESTED_AVAILABILITY_PRICING_PENDING",
-      "request_policy": {
-        "quote_or_availability_request_only": true,
-        "do_not_purchase_automatically": true,
-        "license_terms_must_be_reviewed": true,
-        "delivery_does_not_count_as_g2_until_validated": true
-      }
-    },
-    {
-      "route": "candidate_algoseek_opra_tick_quotes_2014_2015",
+      "route": "candidate_algoseek_opra_tick_quotes_2012_2015",
       "vendor": "algoseek",
       "product_request": "US Options Trade and NBBO Quote tick data",
       "source_family": "generic_authorized_market_data",
       "record_kind": "option_quote",
-      "first_trade_date": "2014-11-07",
+      "first_trade_date": "2012-01-03",
       "last_trade_date": "2015-05-20",
-      "source_date_rows": 131,
-      "symbol_date_pair_count": 2178,
-      "unique_historical_symbols": 86,
+      "source_date_rows": 309,
+      "symbol_date_pair_count": 3364,
+      "unique_historical_symbols": 137,
       "required_canonical_fields": [
         "timestamp_or_date+time",
         "underlying_symbol",
