@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "881a60270ec5f7aa2b1e47a7876aa25f7b75a606",
+  "reserved_batch": "0072",
+  "worker_slot": 2,
+  "previous_exact_count": 100,
+  "expected_exact_count_after_batch": 101,
+  "expected_excluded_after_batch": 73,
+  "integration_constraints": [
+    "Canonical generation must start from exact current main and preserve all 100 prior exact rows.",
+    "Do not substitute EDGAR acceptance, conference-call, archive-capture, scheduled-release, date-only, neighboring-release, unsupported-timezone, or inferred clocks.",
+    "Final merge requires exact-head CI and current-base verification."
+  ],
+  "items": [
+    {
+      "event_id": "HEJFE-C368B17FADFC15C7",
+      "historical_symbol": "ECHO",
+      "event_date": "2013-04-25",
+      "first_documented_illicit_trade_ts": "2013-04-25T18:14:00Z",
+      "public_announcement_ts": "2013-04-25T16:00:00-04:00",
+      "public_announcement_utc": "2013-04-25T20:00:00Z",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "publisher_timestamp_text": "GlobeNewswire-hosted Marketwired archive: April 25, 2013 16:00 ET — Echo Global Logistics Announces First Quarter 2013 Results",
+      "release_title": "Echo Global Logistics Announces First Quarter 2013 Results",
+      "source_reference": "https://www.globenewswire.com/news-release/2013/04/25/1060653/0/en/echo-global-logistics-announces-first-quarter-2013-results.html",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1426945/000110465913033009/a13-10808_1ex99d1.htm",
+      "corroboration_basis": "GlobeNewswire's imported Marketwired archive preserves the exact Echo Global Logistics Q1 2013 release title and an explicit April 25, 2013 16:00 ET publication timestamp. SEC Exhibit 99.1 independently matches the same title, issuer, date, results, and release body. The scheduled 17:00 ET conference call and SEC filing timing are not used.",
+      "information_asymmetry_seconds": 6360,
+      "reviewed_on": "2026-10-02"
+    }
+  ],
+  "evidence_method": "Timestamp-preserving GlobeNewswire/Marketwired archive publisher clock with independent SEC Exhibit 99.1 corroboration. Prep evidence only; canonical eligibility is revalidated on token-held exact current main.",
+  "prohibited_substitutes": [
+    "edgar_acceptance_time",
+    "scheduled_call_time",
+    "archive_capture_time",
+    "neighboring_release_time",
+    "unsupported_timezone",
+    "inferred_clock",
+    "date_only"
+  ]
+}
