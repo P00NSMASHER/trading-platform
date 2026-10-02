@@ -6,6 +6,7 @@ import g2_databento_probe as probe
 
 ROOT = Path(__file__).resolve().parents[1]
 REQ = ROOT / "data/processed/real_data_release_sprint/g2_option_source_date_requirements.csv"
+CHAMPION_REQ = ROOT / "data/processed/real_data_release_sprint/g2_champion_minimum_source_date_requirements.csv"
 
 
 def test_databento_probe_matches_frozen_g2_requirements():
@@ -61,3 +62,17 @@ def test_day_bounds_preserve_new_york_timezone():
     start, end = probe._day_bounds(date(2014, 12, 18))
     assert start == "2014-12-18T00:00:00-05:00"
     assert end == "2014-12-19T00:00:00-05:00"
+
+
+def test_databento_probe_matches_champion_minimum_scope():
+    manifest = probe.build_probe_manifest(probe.load_requirements(CHAMPION_REQ))
+
+    assert manifest["total_required_option_dates"] == 414
+    assert manifest["eligible_option_dates"] == 226
+    assert manifest["ineligible_pre_databento_dates"] == 188
+    assert manifest["eligible_underlying_date_pairs"] == 2875
+    assert manifest["candidate_direct_g2_rows"] == 226
+    assert manifest["champion_minimum_total_rows"] == 1242
+    assert manifest["candidate_champion_minimum_rows"] == 226
+    assert manifest["remaining_champion_minimum_rows_after_all_eligible_option_trades"] == 1016
+    assert manifest["candidate_champion_minimum_fraction"] == 226 / 1242
