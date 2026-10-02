@@ -17,7 +17,10 @@
     "tickdata_external_rate_card_source": "https://stockmarketstack.com/tools/tickdata",
     "tickdata_external_rate_card_vendor_confirmed": false,
     "tickdata_external_equity_symbol_year_usd": 32,
-    "tickdata_external_list_benchmark_usd": 6176
+    "tickdata_external_list_benchmark_usd": 6176,
+    "algoseek_equity_taq_monthly_usd": 1500,
+    "algoseek_individual_dataset_min_term_months": 12,
+    "algoseek_standard_lease_floor_usd": 18000
   },
   "priority": [
     {
@@ -75,7 +78,8 @@
     "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": true,
     "do_not_count_equity_quote_source_without_bid_and_ask_sizes": true,
     "compare_tickdata_store_exact_quote_to_tickapi_floor_before_purchase": true,
-    "do_not_treat_tickdata_minimum_order_as_exact_quote": true
+    "do_not_treat_tickdata_minimum_order_as_exact_quote": true,
+    "compare_algoseek_historical_only_quote_to_tickdata_and_tickapi_before_purchase": true
   },
   "screened_out_or_conditional_equity_routes": [
     {
@@ -108,6 +112,25 @@
       "reasons": [
         "The $199 individual tier is for non-professional personal, non-business use.",
         "The business-safe stock tier is $2,499/month, above the $1,000 Tick Data Store minimum."
+      ],
+      "automatic_purchase_permitted": false
+    },
+    {
+      "route": "algoseek_equity_taq",
+      "status": "HISTORICAL_ONLY_BUY_QUOTE_PENDING",
+      "sources": [
+        "https://algoseek.com/pricing/",
+        "https://algoseek.com/dataset/us-equities-trade-and-quote/"
+      ],
+      "standard_monthly_usd": 1500,
+      "minimum_term_months": 12,
+      "standard_lease_floor_usd": 18000,
+      "fidelity_status": "CANDIDATE_MATCH",
+      "reasons": [
+        "Official TAQ documentation provides tick-level SIP trades plus bid/ask and NBBO quote events.",
+        "Quote events contain price and quantity, allowing canonical bid/ask and bid_size/ask_size mapping after schema validation.",
+        "The standard individual-dataset lease has a 12-month minimum term and is not the cheap route.",
+        "algoseek explicitly offers historical data without updates and perpetual one-time purchases by quote; exact historical-only pricing is pending."
       ],
       "automatic_purchase_permitted": false
     },
