@@ -26,11 +26,18 @@ def build_alternatives() -> dict:
             {
                 "vendor": "Tick Data",
                 "route_status": "CURRENT_PREFERRED_CANDIDATE",
-                "public_cost_reference": "src/g2_tickapi_cost_estimator.py",
-                "estimated_first_year_minimum_usd": 3821.00,
+                "public_data_store_minimum_new_client_usd": 1000.00,
+                "public_data_store_minimum_returning_client_usd": 500.00,
+                "data_store_pricing_source_url": "https://www.tickdata.com/tickdatastore",
+                "tickapi_cost_reference": "src/g2_tickapi_cost_estimator.py",
+                "tickapi_estimated_first_year_minimum_usd": 3821.00,
                 "coverage_fit": "FULL_SCOPE_CANDIDATE",
                 "license_fit": "PENDING_VENDOR_TERMS",
-                "blocking_fact": "Vendor requires a phone call before written pricing/availability.",
+                "blocking_fact": (
+                    "Vendor requires a phone call before written pricing/availability. Public Data "
+                    "Store pricing supports custom symbol/date ranges with a $1,000 new-client minimum, "
+                    "so price the one-time Data Store route before considering the 12-month TickAPI floor."
+                ),
             },
             {
                 "vendor": "Massive Stocks Advanced",
@@ -67,13 +74,23 @@ def build_alternatives() -> dict:
                 "coverage_start": "2010-01-01",
                 "coverage_fit": "INCOMPLETE_FROZEN_SYMBOL_UNIVERSE",
                 "license_fit": "RESEARCH_FRIENDLY",
+                "direct_frozen_symbol_matches": 106,
+                "missing_frozen_symbols": 40,
+                "covered_symbol_date_pairs_per_record_kind": 2750,
+                "required_symbol_date_pairs_per_record_kind": 3828,
+                "covered_fraction_per_record_kind": 2750 / 3828,
+                "fully_satisfied_market_dates_per_record_kind": 118,
                 "blocking_fact": (
-                    "Current TickHistory FAQ says delisted tickers are not available, so the service "
-                    "cannot satisfy the full historical-symbol requirement by itself."
+                    "Public tick-history scope is incomplete for the frozen universe: a direct ticker "
+                    "listing audit matches 106/146 historical symbols and 2,750/3,828 symbol-date pairs "
+                    "per equity record kind. FirstRate's general FAQ describes some delisted coverage, "
+                    "while its tick-history-specific FAQ remains more restrictive; do not infer the "
+                    "missing 40 symbols without exact confirmation."
                 ),
                 "source_urls": [
                     "https://firstratedata.com/tick-data",
                     "https://tick.firstratedata.com/about/FAQ",
+                    "https://firstratedata.com/about/FAQ",
                     "https://firstratedata.com/about/license",
                 ],
             },
