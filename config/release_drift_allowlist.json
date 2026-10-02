@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "de22a898963fda1ab68f279a3233e2f7314e89796edf49500c6c4ed81b6baf21",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4f2bb71b24c92ff73264a9b6f66b64a0eb780b085013a6d96a72ff1cb2beea3d",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "bcee95b4e49c74193e20c52fc58cd1fb2d9cc9080bb487f32807cc19906069eb",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8162e1d500ee5fdb05cde589e9bed77395a4e1b904a32dfacbfcaf3c5f5505f2",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "96f505a121909516ddf8e1ea03cf880a7860ed4c329e4c24513948d67e0b9d27",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4188c122112f905e70171db03b7e1cd07e9c0cffda015d798aabf2ed74a4c8db",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -160,8 +160,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "0e6125b789e8912a1460ca8e4dc0c836263ec486fa66a776e6bb22891b10f966",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c372802369c4312bbbaea711a81e8dab5cc1f940217f68c4608065ed61214d46",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -180,8 +180,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "a4478043ba7053996e91686d3bf0bd5fee5149f3165e68f7cd1c24fba82430de",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e91d7f04bb8c7a4500153b029f97a859cceb070d9d8da11b13e537db91c42bae",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -192,8 +192,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "72aa05cf04530a35d7dcfa24b06285f878fbc1379f27412e6e4410c5cfe41110",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "648aeac3e3580df0823d4a96ccbd58988a9767b1bb630a62368912c081dc9fbf",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -248,8 +248,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "2cc2d99e4b05d57ca97c03d0971e200dfbc15730a4afe144ac0cad37ef1d0219",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fd9c34c99af7e5a9620954a9da902df439a6ba7d673f2b36356991b5ffeeea67",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -264,12 +264,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "8ef87731ba488f9b6e59e2b8b1d8bf5771ce72bccead1e7821a42bf9023d6e70",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f8e794f940e51e64487a58cd4664dc9e326a0673ecb9d09f79a232100718623c",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "2d8277140b34df02d296ab41e7eee2a40451d6bc7227f7a068471e2872f7df64",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "54fd15c25e1dd195c4cc182690fdd012398f8eca0e3b2e38cb163d43bc3f18d9",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -352,8 +352,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "220b3df9670256b28f5c1bd656ff5d86fcdccdf46f7672f7bc162e038637e768",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "dd80035c3d539c5bc6cbb8d930ea0ad9d7daaabc7afa4c6c4b4f8ecdfc5add9f",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -392,12 +392,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "30a1b13efeecfe165f06414555621f5f59edc12245f59b03efe3d5291c2357d5",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "acf8eaf1620dc99664f5108dd08cb22d323c591d1f6544ad753af7ab555d06ca",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "b6cbcc55582a1aba6738e75652219b4678d98b647835007f1c47f8f0fabbaf9d",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "918be27f98f8feddd54523e3fea9f039a51e1a6ee09ad40b77b109d0dab918c8",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -416,8 +416,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "2c2efc71da29189a5c9fa62a48588c90d788b9def84b0ae773c192da528b6024",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d384e0bae0d9cb5f6dbd5154e787fb5589430327c54b9abf194886b13d881e18",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -687,6 +687,10 @@
       "expected_sha256": "df0f390966a95aa08a224aa4e5021cdd3934911919e0209b5253c002f115f03c",
       "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0085.csv": {
+      "expected_sha256": "ca33e223be42b0208caa949dd7f39c6ba5f7ed1cb7c1348276a357221270a4e7",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_announcement_times_batch_0087.csv": {
       "expected_sha256": "eaefb42b346e62311a54d5f45c6788ce47bc7059b8a853e6c0e9a0efc56cd273",
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
@@ -827,13 +831,17 @@
       "expected_sha256": "2975b8788d7ed2991b54a09a4177a04674203d9c4b1c1be2af7092bc75cd0816",
       "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0085_evidence.json": {
+      "expected_sha256": "ae5a735da4e8b0cfce1137f8851fa7493dc03b4b7cbc14e3ecdd4a8745c5ada0",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0087_evidence.json": {
       "expected_sha256": "0e4678c87e9077ce4c8ab9b67c0ff5c06a418e7bf7e9fa83d353fde840ad3801",
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "2df01841d3973a5d28099cf8812ef965f6fd49a34b26defaeebde8072f89f87b",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5b48d324ea2e6f7a86b26b3bc927f5ae9aa9afaf3bc694b98105f14d5271680d",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
@@ -956,8 +964,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "b490f5c54870800a2c0196d1e7df0011d1147452393041bb34629d3bf114234c",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3e5b707912869358766ca6979936fd9637c0ab03e3383659c492e11dc170e5c3",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1126,6 +1134,10 @@
     "scripts/g1_batch_0083_generate.py": {
       "expected_sha256": "fd9d50f0183c5a01d36be009bd3083643ec0366f570f2de96554e71f06b21e16",
       "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0085_generate.py": {
+      "expected_sha256": "890b8d9c224be2e70419c9ebc986ddcad74df24556ab908f5aa668351fc6e180",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_batch_0087_generate.py": {
       "expected_sha256": "e97c300e3b0812d8055f65f0d778620a91749fe84d742f701fe70a00c9badf0a",
@@ -1348,160 +1360,164 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "b99ac7f6270ae5bd66092f01660530a56874e9083ed269e3304f06ca06652f27",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1187d7bcbee971084e67e50d8c8a0489e5962c8c56c797a08a6513a96663d999",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "25fe82ebc1378443d5f42d35c8c8b7c52397d8a6ab9c5bb2398cc55cabdd589c",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6b900dbf670e85edc02a454085f2bc1a8be0f9065a2390b249dacef0011bba70",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "87d903436d8d1d1c0ed71862c71880c5a37151a84db9a99dcbfa539d087f64f2",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6f0a04925af26a4f54e8ba290ef6c8d7a1ea1f02490a7dfdbbfdff5f80f9f752",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "bab2f18c42b5ba153da693ac61cf1f930f70a7fa4b5c69feb3c818eca395a163",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c214ef93805a6188c1e7ecd86ce4c8063097fcd5527050a7b79bed4a5ed3631a",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "f47453c0165ebec142de2f82dd822558693859d954e1ca26feca21ec8c8a8676",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6899e01fed1169029a31e13774cdae01e090be9441cf15b3e06374c2cd7ecc6a",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "8489673a82b0b3831609d4b156fedbe83f8653dd6f3f95005614171c93b96bd0",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "348f976d2f66b648da5a9ac2668f0da6d6dc6a2d48813fb6286a6d5c95c0c9e1",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "d698a78d8d5ecf49baae4acdec062a37b966c2e7c53905d961a47893a01fe64f",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a76cb4554822668a207e375a7b6461615a8135a2cdc655e3a46b36da1f95e9e2",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "4cd9c31e34f1181ce953ffdad80b05075b58ebd9c7b54615f8fd6b223375c104",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "deea3423bb6d3e33bfccc7d8bc19ee53bf67c4e457e2532abc4933e2e6852084",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "1b19cb1308369487279fb8324a3c8d1f5c79a7e08f1ff293126385b6f51a5701",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "eb63eb8d1b51985a4df9a7616f5a892efcdc1402b16913c62053657277017d5a",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "974b30858da7c26169b4bb4cadbd353ede17a7296f1819c635d361934d4ba498",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c24334c4cb5cb20e5067867c8602376baf37241c7c0bfcaa1505b3d32a620df6",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "c00a70ae43b4cf6eb4c9636edaf6cfa3a17e17a4fca33195feaec41aece787fa",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3bf36f7b557210cea5f4dedb49a0ab4bb2604dc9baaf69bf9fcb2fdf7df332d3",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "b9073313124d73a3546dc10ed86a69b8bfe2c29facfc59f89a3a84acb411dc81",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e85e25d94912371588fdaf97a3f37dd1a463af83ecf276289ec4e1d5fdd209f8",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "dc14215a889887c7bd1e7913ea76e34e9222a8d8fe9d019b15b316d95a1d192b",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ca540ff18367e81fd5908e650feeb83cfc0c18b48089801aafc533f01d515033",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "f9e40bcadda15e38205f4f6c03bc0383735e22b2547f606acef8e3c8ed499bdf",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b937b84bd3369b470661f9b58e634b4572a76b34062b2199144186c1b820db7a",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "c846294eea55590200bcada860d6d7b963017f02950e5bb4b756cc111bd5e826",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "dc3cf2eedd5d327c131da15483472ffe6117dc963778dff92a17a928d14a759c",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "1ad9197732d0c849d68f47e28fcc7fd2d83ff0b66b02f7b84bd31c6bbf69374f",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1367d9bb9c6c5e7f24ee6ab2ee34ed200d9a76148910f0e768dda9f422cefdf5",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "bbc5e469142e373aecc7958607b60e2c0497dc4e5225b0a69af0f389d446549d",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0b7d3421e7c72a95bd6080049e0eaadceba0759cb006ef2ac8eba9cb96443da5",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "e22be6857555dc9b97e4435593400c028fc6634666c922eab9b4769af8b10f6f",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "78815ab4edd8244b77c3dc94eb0e8a97815c2bb065b14877fcb7839725affdbb",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "b6abd576cc3ffab0eb9078e982efeb9cc17c0ad17c9d43101178adb32cf6e64b",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f961bcda3d62996b4f1f5f625ae37feaa794128782caee91e86c9406f97aea59",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "8ded5ef21be200635419769cdaa11010a49dbd7532c921e55b4d935a3e90feeb",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6d4b69c3781fbe1d10156ab7843b63c558b77d6595fb5f9bb1f6c10c84bd550c",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "ab884178a9938287debc911b9fae59aa93e62b5dd5707e4494391c32670b0369",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "450be1901591a46fef4050780360a13ea126a0eb58c1ee304580d276214190a4",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "b08cb6a44109649d93e9b776ed6f2a1a64032a0f8a8b2af14a9f49ac03e8de8f",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a539ad3cd634f2688f0485b06816b2f350c0da67cab41d435e925f7784868bec",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "f15bd67f946b85d78865dfce9858e2bb4928813e931c8a2ef715bab23b735c0c",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e54694611e7e5842a19399ec9a95cae637f305bb30de5e029b7fea51675f8bb8",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "c2614a6b167e122895cb792054674fe9967646c3b25729605caaa6db517943b5",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fe0dd9ee4bb738e169501d23279765087e042b95dca1505b684e7d67daf7c1ee",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "3f7d8d7d01b7b0bd4c55942bf550448595f02156e9b008059b2821c267e9c119",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b204c925bd1352b8201bfc518ad4397928eb9f1001eadae78e3c3a2d51d2dad8",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "01210f396140fe21274df085456a09733cd1baee9003c274ea6e0c5ccda306fd",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e959d3429e478e14e42716e623e8b9cf527b03a27d308f874d89956efe6bd66c",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "5617cd31749ad7ec4749c8268d09d1abbd4c8e5812cce78cad14580b7c67b1e4",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0ddd6861aa62daac1b8d98a2b6604eb078cc3bb326b97491114074488c5f09e4",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "50ded7213a848cb28db822d0986fea206f4929d5733eb6dbeec4ffd1d07b76b6",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d56c455b955609d566037495530eadfb0f8e8e41a7e520151686eedba89d179e",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "0e6c0abfba627c99dad10c0850f27c90550914d2af2fe245ba6414ac5b193cfe",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e12290581412ea0b7cb53661b86e88f107c772dc498d2b361452c9cf36322236",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "78163c7598a559f9652db6c4ac7dd0a4aa45cf02bf78d41bd1a1f75a3f36e6aa",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0799da90cf7b06a43f65248a5c8b6e10877d7ea8bed53de8f18c2854e39cacc0",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0076.py": {
-      "expected_sha256": "663b609a37761fbdb7e0648f96882b583de5b4055a19fd49b51d921322aeed84",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f59ab61feca0598db249dc8c8fba9a94d5b5be04ff48fac7f919b31e9adfd398",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "89fcc10eb2041703d54361eacaa249e9e3cde47baeb6269aef205d12b849627f",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "595d7e5ea83c55dfb9cd30b9d0c5e15f208c9010f04bf4cc85b98857da08cafb",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "d288f8449910eac379780dd8d0e72d18ce85e35022d5237b4fb1c4ea93e0b99f",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8fcc81aced2ecf57d3b1d8d416dd4373aa67efc9d5d32c0d85d8ca07dc4ae97c",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "b2bbb85ad4995c17cb574b4417c61adf11c18c212cf82e099344717ca63c5808",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3b061e351d80728716fd6b2d88a908db81e3ad96bed19c8a270f1486e197280c",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0083.py": {
-      "expected_sha256": "f0391b222c883b148eab9095e88ac18bfa16a1b9ddc74f44b47e08c93109020c",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "48c07029266ac09e8a8ae6af93610dc89a8adc1a9b92c4fe6b8e1286953afc06",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0085.py": {
+      "expected_sha256": "822b8623bcc397811423853da7136414f08bb66f9ef87ae3c922457cf873daa4",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0087.py": {
-      "expected_sha256": "6e76e978b7d9dad1691fe8fd684fff705070449822449eb487d1920578020f8e",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3c7818e0df76f1a21db221a685122e667f918fb1d5874cb0da34451e0a6ee4a5",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "fd5bc8f3079ef373d8a496bae1ab76bcd7056ad8f9eec9f9d1f025f6280cadd5",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a0a06988af1a53bfa09b5f3c0fd96c44c34f9b70e4e352325219ea56f2fa5a9b",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "e22427a2a69d6f410a071e53ddc803f8bab11fa205dc46f44bc187b462894fef",
@@ -1592,8 +1608,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "d8143fe54f6b069065b9f90b34e0da32f27a161a123a3e359540164cd205cf7a",
-      "reason": "G1 batch 0076 Worker-1 VDSI official PR Newswire archive exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4f22b16d7ac934ddf6bf03bb768baec3b059daeb5ba7fcee6d0c100a66164e2d",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 98 exact / 76 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

@@ -83,7 +83,7 @@ def test_refresh_coverage_uses_current_metadata_subgates(tmp_path: Path):
     assert updated["security_identity_gate"]["baseline_identity_unverified_count"] == 3654
     assert "G5_MODEL_EVALUATION_CONTROLS" in updated["blocking_gates"]
     assert updated["g3_conditioned_itch_event_rows"] == 80
-    assert updated["missing_exact_announcement_timestamps"] == 77
+    assert updated["missing_exact_announcement_timestamps"] == 76
 
 
 def test_status_never_labels_missing_real_sources_complete(tmp_path: Path):
