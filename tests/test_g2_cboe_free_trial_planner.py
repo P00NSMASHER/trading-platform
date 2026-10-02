@@ -76,3 +76,17 @@ def test_cboe_trial_planner_respects_daily_point_cap():
     assert (result["max_requests_per_day"] + 1) * 15 > 500
     assert result["optimistic_request_budget"] == 14 * result["max_requests_per_day"]
     assert result["optimistic_points_used"] <= 14 * 500
+
+
+def test_committed_cboe_trial_capacity_plan_matches_planner():
+    import json
+
+    generated = planner.plan(planner._read(REQ))
+    committed = json.loads(
+        (ROOT / "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert generated == committed
+    assert committed["trial_historical_access_runtime_verified"] is False
+    assert committed["coverage_claimed"] is False

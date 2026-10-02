@@ -1584,8 +1584,12 @@
       "reason": "Planning-only Cboe All Access free-trial estimator reconciled to Cboe Data Vantage's 2012 OPRA history floor, current historical/trial SIP documentation, 15-point pagination requests, and the 500-point daily cap; no API calls, purchases, subscriptions, or coverage claims."
     },
     "tests/test_g2_cboe_free_trial_planner.py": {
-      "expected_sha256": "eb04caf3d08486ef511b49261e53273e47c2882aeb93412039a6a39aeb8c5d69",
-      "reason": "Regression coverage for the reconciled 2012 OPRA provenance floor, documented historical trial eligibility without runtime verification, 15-point seq_no pagination, and 33-request/day trial ceiling; no coverage claim."
+      "expected_sha256": "2d240156cbb327dd3c0a701042bccb70a646c82753c1fdc841187fef5a509750",
+      "reason": "Regression coverage for reconciled Cboe trial provenance plus exact reproduction of the planning-only capacity receipt."
+    },
+    "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
+      "expected_sha256": "ee4b2f0a0afcc0f19ac20c968522dcf40449c1fc183976de2048b1bdb328b628",
+      "reason": "Planning-only materialized Cboe All Access free-trial capacity receipt; awaits vendor confirmation and claims no G2 coverage."
     }
   },
   "schema_version": "2",
