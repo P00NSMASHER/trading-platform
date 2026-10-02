@@ -1646,6 +1646,14 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/g2_massive_equity_plan.py": {
+      "expected_sha256": "8f074ecf7605b9c91cf8bb22640fdea13d8279bb0cd1a197607e72f3a944eddb",
+      "reason": "No-purchase Massive G2 equity candidate plan: documents current historical trades/quotes coverage and published individual/business pricing while keeping license eligibility, entitlement, delivery, and G2 activation fail-closed."
+    },
+    "tests/test_g2_massive_equity_plan.py": {
+      "expected_sha256": "2b04f365702f8affa0ad0adcbb6a32ba5b770b0b53fb78d965667b20bb641ab4",
+      "reason": "Regression guard for the no-purchase Massive equity candidate plan, frozen 414+414 equity source-date rows / 3,828 pairs / 146 symbols, and explicit non-inference of individual non-professional eligibility."
     }
   },
   "schema_version": "2",
