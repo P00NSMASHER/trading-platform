@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0085-worker-0.yml": {
-      "expected_sha256": "8499533f14c952acfce3221d6838a68f8c4f6549230edf9752da428d6c7cff2a",
-      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
-    },
     ".github/workflows/g1-swarm-controller.yml": {
       "expected_sha256": "5e4c3fcf2c5e4f528ba6703b4900220de5cd433dd813c98131ebc88217531df5",
       "reason": "G1 swarm coordination: preserve push/PR-close/15-minute/manual reconciliation and add immediate issue #153 WORKER-comment reconciliation; controller remains sole token authority and ignores its own controller comments."
@@ -821,10 +817,6 @@
     },
     "data/public/metadata/g1_public_batch_0085_evidence.json": {
       "expected_sha256": "db3a981a9f8d22da1975ba5232e69f65fd09ab6972c12a90908356ed9fac4442",
-      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
-    },
-    "data/public/metadata/g1_public_batch_0085_integration_spec.json": {
-      "expected_sha256": "3bd4d7656e574903c4d20809db1d92b888af5c985e3337d9887e7bc0c2bd6013",
       "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_public_batch_0087_evidence.json": {
