@@ -1368,12 +1368,12 @@
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
     },
     "src/g2_databento_probe.py": {
-      "expected_sha256": "1e476077b7d73e293362cf92b741f58e2a311128512b9486198603e862b68385",
-      "reason": "G2 zero-purchase Databento OPRA cost-probe utility and tests; no download, purchase, credential storage, or G2 evidence-policy weakening."
+      "expected_sha256": "dbbcc056dce81e63b7c769128c2ac515fe10166b57386d912c265dd079c3b670",
+      "reason": "Extend the no-purchase Databento OPRA probe to the canonical 1,242-row G2_CHAMPION_MINIMUM scope while preserving full-G2 accounting and evidence rules."
     },
     "tests/test_g2_databento_probe.py": {
-      "expected_sha256": "f55781a0458a7d002c642c9c9c6b5665ffb632f6c0d8fa20aa485a5977c6f58c",
-      "reason": "G2 zero-purchase Databento OPRA cost-probe utility and tests; no download, purchase, credential storage, or G2 evidence-policy weakening."
+      "expected_sha256": "82c5049b01662ee2f1a2656e09b120ce02be25ba38c642f830397426e3682d06",
+      "reason": "Extend the no-purchase Databento OPRA probe to the canonical 1,242-row G2_CHAMPION_MINIMUM scope while preserving full-G2 accounting and evidence rules."
     },
     "data/processed/real_data_release_sprint/g2_champion_minimum_source_date_requirements.csv": {
       "expected_sha256": "1ae3379537da3f4f809ce960eeb59906dbe961bee9982d94f1a91db5620e999c",
