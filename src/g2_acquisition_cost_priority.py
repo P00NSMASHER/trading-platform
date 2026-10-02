@@ -24,6 +24,10 @@ MASSIVE_BUSINESS_USD = 2499.0
 KIBOT_NBBO_DOC_URL = "https://www.kibot.com/quality/bid-ask-and-nbbo-quotes.html"
 TICKDATA_EXTERNAL_RATE_CARD_URL = "https://stockmarketstack.com/tools/tickdata"
 TICKDATA_EXTERNAL_EQUITY_SYMBOL_YEAR_USD = 32.0
+ALGOSEEK_PRICING_URL = "https://algoseek.com/pricing/"
+ALGOSEEK_EQUITY_TAQ_URL = "https://algoseek.com/dataset/us-equities-trade-and-quote/"
+ALGOSEEK_EQUITY_TAQ_MONTHLY_USD = 1500.0
+ALGOSEEK_INDIVIDUAL_DATASET_MIN_TERM_MONTHS = 12
 
 
 def _read_json(path: Path) -> dict:
@@ -77,6 +81,14 @@ def build(vendor_dir: Path) -> dict:
             ),
             "massive_individual_advanced_usd": MASSIVE_INDIVIDUAL_ADVANCED_USD,
             "massive_business_usd": MASSIVE_BUSINESS_USD,
+            "algoseek_equity_taq_monthly_usd": ALGOSEEK_EQUITY_TAQ_MONTHLY_USD,
+            "algoseek_individual_dataset_min_term_months": (
+                ALGOSEEK_INDIVIDUAL_DATASET_MIN_TERM_MONTHS
+            ),
+            "algoseek_standard_lease_floor_usd": (
+                ALGOSEEK_EQUITY_TAQ_MONTHLY_USD
+                * ALGOSEEK_INDIVIDUAL_DATASET_MIN_TERM_MONTHS
+            ),
         },
         "screened_out_or_conditional_equity_routes": [
             {
@@ -111,6 +123,25 @@ def build(vendor_dir: Path) -> dict:
                 "reasons": [
                     "The $199 individual tier is for non-professional personal, non-business use.",
                     "The business-safe stock tier is $2,499/month, above the $1,000 Tick Data Store minimum.",
+                ],
+                "automatic_purchase_permitted": False,
+            },
+            {
+                "route": "algoseek_equity_taq",
+                "status": "HISTORICAL_ONLY_BUY_QUOTE_PENDING",
+                "sources": [ALGOSEEK_PRICING_URL, ALGOSEEK_EQUITY_TAQ_URL],
+                "standard_monthly_usd": ALGOSEEK_EQUITY_TAQ_MONTHLY_USD,
+                "minimum_term_months": ALGOSEEK_INDIVIDUAL_DATASET_MIN_TERM_MONTHS,
+                "standard_lease_floor_usd": (
+                    ALGOSEEK_EQUITY_TAQ_MONTHLY_USD
+                    * ALGOSEEK_INDIVIDUAL_DATASET_MIN_TERM_MONTHS
+                ),
+                "fidelity_status": "CANDIDATE_MATCH",
+                "reasons": [
+                    "Official TAQ documentation provides tick-level SIP trades plus bid/ask and NBBO quote events.",
+                    "Quote events contain price and quantity, allowing canonical bid/ask and bid_size/ask_size mapping after schema validation.",
+                    "The standard individual-dataset lease has a 12-month minimum term and is not the cheap route.",
+                    "algoseek explicitly offers historical data without updates and perpetual one-time purchases by quote; exact historical-only pricing is pending.",
                 ],
                 "automatic_purchase_permitted": False,
             },
@@ -205,6 +236,7 @@ def build(vendor_dir: Path) -> dict:
             "compare_tickdata_store_exact_quote_to_tickapi_floor_before_purchase": True,
             "do_not_treat_tickdata_minimum_order_as_exact_quote": True,
             "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": True,
+            "compare_algoseek_historical_only_quote_to_tickdata_and_tickapi_before_purchase": True,
             "do_not_count_equity_quote_source_without_bid_and_ask_sizes": True,
             "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": True,
         },
