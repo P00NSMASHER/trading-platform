@@ -5,11 +5,11 @@ from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
 def rr(p):
     with p.open(newline="",encoding="utf-8") as h:return list(csv.DictReader(h))
-def test_batch_0065():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0065_evidence.json").read_text())
+def test_batch_0090():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0090_evidence.json").read_text())
     events={r["event_id"]:r for r in rr(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    exp={"HEJFE-760E36DA94752F1E":("CAKE","2015-04-22T20:15:00Z",6780)}
+    exp={"HEJFE-4291CBF555CED6A9":("PBI","2015-04-30T11:00:00Z",58380)}
     assert len(d["items"])==1
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
@@ -19,10 +19,9 @@ def test_batch_0065():
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
         assert x["source_family"]=="preserved_wire_mirror" and x["source_grade"]=="A"
         assert x["timestamp_evidence_kind"]=="publisher_timestamp"
-        assert x["source_reference"].startswith("https://new.streetinsider.com/")
         assert x["corroboration_reference"].startswith("https://www.sec.gov/Archives/edgar/data/")
-def test_batch_0065_preserves_prior():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0065_evidence.json").read_text())
+def test_batch_0090_preserves_prior():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0090_evidence.json").read_text())
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp

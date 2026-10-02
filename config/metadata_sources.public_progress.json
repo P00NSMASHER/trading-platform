@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 99 exact release timestamps and 75 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 100 exact release timestamps and 74 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 75,
-    "expected_sha256": "b0c5c665e24754db73ee4ce0588c1657a9fcf0765796da33c2949f529d3a7868",
+    "expected_count": 74,
+    "expected_sha256": "49cf52809ee13fd73726e9f4bef41ba263ea5be5bd6e9f32373aacef612e4a6d",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Public timestamp-preserving Business Wire mirror for PBI, independently corroborated by Pitney Bowes investor relations and SEC Exhibit 99.1. No licensed vendor data used.",
+      "notes": "PBI 2015-04-30 07:00 EDT. Webcast, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0090.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "preserved_wire_mirror",
+      "source_id": "public-worker0-pbi-batch-0090",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {

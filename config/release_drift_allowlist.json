@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "5a0eceaf83e2cb7be44ef4d1f6e693d4ca644791ff722c2e129988836264778a",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6c7e678a1e94cb741e57e896b5929bf9abd895f49925eed8f2af3a76d2b3e73f",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "824fa407835672128c6f69c44693744cef87a74bfc92f3a9000ff5634b3eb861",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2025f1d97ad578776e51eb1a9fee686424c38630f026c54a0142fbb45e390517",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "b8a20689db90e2ed14f64e37bb08665a27f7275087a08acde94b547b9f9e2197",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a782164b3f291147aff92e0007fe406d99a4009cc9b6320d12e8da7d6a020a93",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -160,8 +160,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "4d2677e52543c5477f8c3447b5c836e9128e148a13d6f9721223efb13024e9ec",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6cf878ca99768b2e6a63453a26bdd189da9b3446a5629073fd534ae7ecfa05c1",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -180,8 +180,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "5a0a4a9deafcae30b0913621c2872eb5487416cc65bfd0f28194bb70452658d9",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "136100fe7e4ef9671a3adc1455a6c7ca179c12cdb2c37bbed251cc210f53e291",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -192,8 +192,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "b0c5c665e24754db73ee4ce0588c1657a9fcf0765796da33c2949f529d3a7868",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "49cf52809ee13fd73726e9f4bef41ba263ea5be5bd6e9f32373aacef612e4a6d",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -248,8 +248,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "0d84a73d650bbf180cadc1e464c1a27c300ed3267a1c2d1e44619119c0f5bb8f",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7acb6dec8c5bc44e9ab74498696dec0631a66f321293d78fb6abfe7ce1ede123",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -264,12 +264,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "edd8a35515e07126f87aa457ad808bc825bc401d19164cb5734cfaf4dd6decec",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "52280afeb751e9207405c885b055e82a4c36a1cd2e1cb8e822953d550586f150",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "5f627460fa7b7a9cc67ba423fc5161c83a29ca6a856e6cbc4e385135dfd8be28",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e7dded5a10181a11f1407148d95d3ad03cacde69b6db2acf8b3d7c4f0b27044a",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -380,8 +380,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "dfac0ce54c633ea551759e2acb6547c73724b7deab61d08a508a7d50f0cbc483",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "439eff9c187e45aedf03292f789b6004ef9d3e2f7eaa2f2bc6572e0714d43090",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -420,12 +420,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "7dbb09215fe6e07747e7e7037fd8c921f9d4bece68df05cf96795fc26bd9f168",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "42fcc883a982747a65e40239b101cb38e0b1a36e5b529fd7baf2cff8f3a9e920",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "e13aecbb5d6114ae2d47835ae38fa0ac16cdfbe66553bdbc6c8af46dc2e4a482",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "aac8ab0957acc9695edb0751bd817174605b96f75f9de986a8a7593627dd362e",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -444,8 +444,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "ccf32b2bc880d23ba18242ea7af95f2df920033426b1e2117a633fb8a56bcde2",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4c2ea45d9c1cbe3bc265e386083ae7ff4de26e34d5ebd9dc04b1e40c55c45477",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -723,6 +723,10 @@
       "expected_sha256": "eaefb42b346e62311a54d5f45c6788ce47bc7059b8a853e6c0e9a0efc56cd273",
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0090.csv": {
+      "expected_sha256": "660689b8eb9435659dcf7aad7065465a12cd2c504eaf87535600c509b436336e",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_announcement_times_batch_0092.csv": {
       "expected_sha256": "f297436cbf156009ff7c16e219ac8b715d690edd3ded60043fcc2559b9e4dbed",
       "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
@@ -871,13 +875,17 @@
       "expected_sha256": "0e4678c87e9077ce4c8ab9b67c0ff5c06a418e7bf7e9fa83d353fde840ad3801",
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0090_evidence.json": {
+      "expected_sha256": "9cb850c3cbd958d475cb36bc02495f0799963e2d2850bae930c6cce2571be56b",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0092_evidence.json": {
       "expected_sha256": "630e9a99e9874775329b15f1953ec23c885d07db09bb471bcca30e2b05a06f6d",
       "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "2a8aa0eec9d372094ad88a05da3150cf03d9f5a0bc053192307fedf701a4d622",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6f771ce21f245d4abff548119733588c172b13fb5c16a491a7ce0a656ad78fd7",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
@@ -1000,8 +1008,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "670ed62e7dfdbdf1262125ee75cf6b10e3f241ebcfaef9308c161e4c6fa322e8",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "aa398b664addd4aa76f8e8b9894dc343b82848146884a1356e85f5d962d90759",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1178,6 +1186,10 @@
     "scripts/g1_batch_0087_generate.py": {
       "expected_sha256": "e97c300e3b0812d8055f65f0d778620a91749fe84d742f701fe70a00c9badf0a",
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0090_generate.py": {
+      "expected_sha256": "4c5f19d67283d1a5d37bdd393812666757972e506c237a0f373bdd9153d327dd",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_batch_0092_generate.py": {
       "expected_sha256": "2e8d6aff6856ea81ce0c0b83d0307b169f8580a406a03059964be87dabae51fd",
@@ -1424,168 +1436,172 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "04d2a2c5612eab14b3a121e618779b0d2c72c03c85a77da530f1117c9f93b8ca",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1c8ede7d3c9fe4ceeaa5c677c374bf518cf98bd58a161eb5844c466d57c0c691",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "5a7c11d08561ed9fefd63896f061365b026c7e2b9af1bf6f3bcf0d88e1b437f1",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fcc8cde4ab518d07a8afde42b9815fe7a3fe7a3f2eace4b2d68b55972aeccccb",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "c108fd10cc5c6748d3f420ed325990a3a2d9c75b5cb63c662f0aebd14177b934",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6a9ca24226a1fe5c8141a9e65b15a87d1fc29598590db27b8207d9c5ca97aed7",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "ebcddee725b70fd96c705ba64b2af2232d33942ae464e56d6151537fbe085818",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b4aa793bb3c3ff30e85523df11092a2e1c1c4ae7c2b2836f1557e61947153b9e",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "7692441c2ca22734937a1cbcb505560d6cf96c87327807225d30bc4973b16fbc",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5ed054b9beaade2f1984e427cd8fb6bef463c0ceb24774cbadb6b455e32c8bfc",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "697d124200f92ef5962908efe8f67a9bce611308b2925116edc65d94ee759bb3",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6033a3c22ebf4140505320ce4daedc4f1b8926604f099ce8e40ab9b3613c0d4c",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "5a4406869e0c2131f273669dbcb1f76b5b8d12f00a38d9f2d85bb0fd67a0aa3e",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "736b780146b86108761bf977cd3243b03c20f316c04815bf266f3a72587fe416",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "e4d8e1b65d78f2b5fe39fc236aafa8fd6668328287f46815d85bf46657ac3167",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "003fc64ce789fb3b0d847032d5743ecdc0649ebf356594d7fa680b9e7c076961",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "78edfb9baf7af1dbe3144b60101fbf5bcc3a3693ed0d12c576ba885ad6cf601c",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "46ba8b155b0d2efad0c026ed298c71f56fce4a7d213176106d8bfc96ecb51e90",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "c239adba1cf5ce6c17f94966f3685f186b3bff061751adae475f80784bb30381",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "09ae19a0d182ac11a3b261951e7d1418a780495c5a67700ca797b0d7a7749f55",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "e0592356f605b01a17b4b1c1c6ff05b231509268d859199b10b3bdc53af6e98e",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5141848fc3f1db44009898ed0aa0abe793fa6d11d41b36720747891682c21dc2",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "e389ec1bcd1c86c27adbbfa5f6b36fbe46ee3bd804e22564f02041684a334afc",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "30aa743687369f9618a5ffa7bed3619858c9636283eb390a7042652b2e73f9ce",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "d211a63d7eeeccbaebbac196a3c73018ac8fc303806020151af2eaaf0e823282",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bb6216e9899be56ca04fb65bbbfdbc6c91dfec47eb1ecbcd41d2b7cbebfb4e68",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "d24cc1f1dde7f1387710112e5608c7b4860a10861b4c120103d38c2708d5e7b2",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7bcd7d3b47f6e1ba90c9d49ae4f7ee92d9b83e74a0999fa8ad1e158105c8ea42",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "e0acdcc3cd374c18b7e8248376c3fa8f89822466f2c6fdc8dbb5ad9c55652299",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c76dadee241f08daeee46e5263ba22e2e65f0e38c5d2657b9f355848b6ecc153",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "e252673d51b7b354d38ac3f749e975bcc018f1cb694b5ad795f1f38360d66f4d",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "241688fc2f6ba1aba641e15911cbd7f6410733d65878a2241a76fae198dadc43",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "300c7c430759898f6f2eaf5aca79862890bed25aad23fa16f9b436669011c80c",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "42f0f520a3d15e97f93e336add5b9367aaa15f1370b9ab0d7dab33080deed57b",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "6e3b0f92086020d0adc091a7ce4ed16e9c80c8711955d340b52d97ecbb78e33e",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "244fd327c4952b7a7f5be002ad3da2028e6fe7b5f8284eb804b7dd7462f535c5",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "4c667f9257696c630cc642efe5ae9f157b2e44d16bd64141c07df5bd0e5e3b12",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f61193683fdb5c061db87d293ef72051188478532d2d1bbd57dbb6a73ffc3b65",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "841b06974d1a0a68549de661854c8b04b2747280cdfe00429db2c8a287fb4240",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "afdb4adf95333a57aad1e29944d3323046c457a061336f0978d7160f1ea057eb",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "1e50a8432a6c57a01fe2d6810360f0df932974f0810aee713465cfb3f37bc85d",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8e0ca0bec9f1957642146e92574981cd3318f79d5ec2e14d1628b879cc3bcf51",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "885dc36b5de3fcfaa62b0d4aebb740ba88ddca2e0450aaac377ed943d1a14f2d",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "94f932d536693f146b27b330e929bea72abd82c998fab974fd57ef597bc9c5be",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "7a204bb1148bcbf63edc656f3aaee714f5722987f471174664691a96a36e0a96",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "cb52dd88083d941a815467438d48f57d3ff5d82a98c7ed5bdcbe154db78b63f0",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "4af6b53b34b1c78fb33228d696358b5713613aa4f9ab1f1b9fa14f67bbdbefe3",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2fb1e1060da6ce43a6fc426e37a112d5ead804b1dfb4f95d369d3b311f1c904f",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "94a491dada23cb260cc7859bbba1a86df078ce669766ce5237ae531d4ec7def3",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "86f7392c4d21c727a0a21449dfe39143739a6f3b861947cfa8493db3c35de311",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "2ce24ceea047f13a9e35786db4bc49a20eff621dc17d2a0d6c9990909414be8f",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f0ab6f5171e0df67608a5df0cce961415db06202c27b50a75d00a86f8bf53435",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "396cf8e411ca65a20698e3e7f486aab59e88fcb75326fbabe380eeadfd3303da",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "83be2b25776edeaf180b74afeb9cb81066fdc7d68a11061082f325a6f2feb824",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "20e000215866bf4fe889e548b9d5f7b8caa7368058a467b180bc421ddba1e3b9",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "02329a52773515702a798308f115b08018124cdb2aea76d8a0e19c2828e827ef",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "8be10dea18d32871593bfd1e10b7fc89808667dd9eaa7cd5106da4f32eb7bb72",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ab56d3834b9a19464908b51c2132975c3f7068c49aa89f6a492ca9bd090897aa",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "67f36c493b07bb0cc685a7a371c3272e44509d31fb609e0c43aa69b85eecd81c",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7f4be8391c723a6dbf16da28586df6680ebad4d8c174309e883b5c1eae3f02d6",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0076.py": {
-      "expected_sha256": "dd059609ee68d90f826c3f46a6e3944ca0cdfd9a7cbf22ab832b20a0e8b7cef2",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8cc4d27f0b52c2351c5a58452bf389a706c78c293fd3723ddc924b44edc84ddc",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "dc9c772a854b586683d1f1179c19297fb1367b9b30bc010526e11267345854be",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "95b9a193c5154a2149bd344f6a3c321196369fb9f5befc21374ad4bc1fdbb3e3",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "93cfcc0e07920689f6125af4152a15b49486926d20c30075e6d5c15da8ec2220",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1858a2a4f5b7871e3594a8f69dab87e8710ad04eafb72b16a91703fd1e97aff4",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "d201ef743749ef316eb4788f3865887d40e2eae07f671dd6b23314dd96fa1a9a",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "32d5fc4f42037f7f2e8f3aadcbdb9d32942892c87b8121f4bc953d06cc280cf8",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0083.py": {
-      "expected_sha256": "a1a312e546f249a122094dac3087a031229451dac91e0448001f931634228ac7",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f0b3192b30e6e002b5469e4a8ff471cf95bd293258eb54fc252dc73b37734de9",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0085.py": {
-      "expected_sha256": "55afb3e6254dbefed90e328a07ba9b5641cb628cbdcbb47fa979060406515cdb",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1b6e5c86568a4270d2c8181618065d5fb8b8ddf5c092e276b4bcccc3886f1b57",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0087.py": {
-      "expected_sha256": "91c6e8b0eeab30d2182ebee332984d07a71dc1324033c966a4cfa0473a9ce07f",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6d8ccd479df3ea7859c89ce5dbbd56844372055ad794e77661a70d2a383bd87a",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0090.py": {
+      "expected_sha256": "71ddba0e9356ddf4cf8537354770b500ed201a338d0117fcbb99eaf0069bf21d",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0092.py": {
-      "expected_sha256": "6760096649e9a3fefce11ca16489c7bb49dd9e787b217778d75773b38f3cc2bd",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0d408e8f557a66d13967773832b30f554301a034484a5b2078e7d9afd3f522ff",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "396109eafbd22682aa467c28a21280ea2ae1d58661b8fdd6b5eadc38de51be3b",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "915d1cb7b3de1107573448ee620201b8f48b66ed49741be89bbb8599f87b1c86",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "75e9f7c9f9e6b12fadb650dbab4c0516e223bd9b687c5a6583b468369d64607d",
@@ -1700,8 +1716,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "12cbef5d6648775b0f286ec060bce6bb2729de369ca0fbcf136681778d4582f1",
-      "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2ce4661b822ef35816513d1039d2c1b04ba297c5a2016dae59ed2cab2d92f2ec",
+      "reason": "G1 batch 0090 Worker-0 PBI timestamp-preserving Business Wire mirror exact clock; deterministic 100 exact / 74 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
