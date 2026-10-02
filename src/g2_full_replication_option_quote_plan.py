@@ -17,6 +17,13 @@ LSEG_TICK_HISTORY_URL = (
     "https://developers.lseg.com/en/article-catalog/article/"
     "options-tick-history-rest-api-python"
 )
+ALGOSEEK_OPTIONS_REFERENCE_URL = (
+    "https://algoseek.com/docs/rest-api/reference/equity-options"
+)
+ALGOSEEK_TANQ_DATASET_URL = (
+    "https://algoseek.com/dataset/us-options-trade-and-nbbo-quote/"
+)
+ALGOSEEK_TANQ_START = "2012-01-01"
 
 FIELDS = [
     "trade_date",
@@ -47,6 +54,18 @@ def load_requirements(path: Path) -> list[dict[str, str]]:
     return rows
 
 
+def _route_for_date(trade_date: str) -> tuple[str, str]:
+    if trade_date < ALGOSEEK_TANQ_START:
+        return (
+            "candidate_lseg_opra_tick_history_option_quotes",
+            "LSEG Tick History",
+        )
+    return (
+        "candidate_algoseek_us_options_tanq",
+        "algoseek US Options Trade and NBBO Quote",
+    )
+
+
 def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
     quotes = [row for row in rows if row["record_kind"] == "option_quote"]
     if len(quotes) != 414:
@@ -61,6 +80,7 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
                 f"{row['trade_date']}: unique_symbol_count does not match historical_symbols"
             )
         symbols.update(row_symbols)
+        route, _ = _route_for_date(row["trade_date"])
         planned.append(
             {
                 "trade_date": row["trade_date"],
@@ -68,7 +88,7 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
                 "historical_symbols": row["historical_symbols"],
                 "unique_symbol_count": row["unique_symbol_count"],
                 "symbol_date_pair_count": row["symbol_date_pair_count"],
-                "route": "candidate_lseg_opra_tick_history_option_quotes",
+                "route": route,
                 "candidate_source_family": "generic_authorized_market_data",
             }
         )
@@ -76,33 +96,63 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
     planned.sort(key=lambda row: row["trade_date"])
     pairs = sum(int(row["symbol_date_pair_count"]) for row in planned)
 
-    y2011 = [row for row in planned if row["trade_date"] < "2012-01-01"]
-    later = [row for row in planned if row["trade_date"] >= "2012-01-01"]
+    y2011 = [row for row in planned if row["trade_date"] < ALGOSEEK_TANQ_START]
+    later = [row for row in planned if row["trade_date"] >= ALGOSEEK_TANQ_START]
 
     summary = {
-        "schema_version": "1",
+        "schema_version": "2",
         "purpose": (
-            "Deterministic candidate-source plan for the 414 option_quote rows required only "
-            "by G2_FULL_REPLICATION. This does not alter G2_CHAMPION_MINIMUM or claim coverage."
+            "Deterministic cheap-first candidate-source plan for the 414 option_quote rows "
+            "required only by G2_FULL_REPLICATION. This does not alter G2_CHAMPION_MINIMUM "
+            "or claim coverage."
         ),
         "full_replication_option_quote_source_date_rows": len(planned),
         "full_replication_option_quote_symbol_date_pairs": pairs,
         "unique_historical_underlyings": len(symbols),
         "first_trade_date": planned[0]["trade_date"],
         "last_trade_date": planned[-1]["trade_date"],
-        "preferred_candidate": {
-            "vendor": "LSEG",
-            "product": "OPRA Tick History",
-            "route": "candidate_lseg_opra_tick_history_option_quotes",
-            "source_family": "generic_authorized_market_data",
-            "current_documented_history": "Tick History from 1997",
-            "content": "OPRA quotes/NBBO and full-tick workflows where licensed",
-            "product_url": LSEG_PRODUCT_URL,
-            "developer_reference_url": LSEG_TICK_HISTORY_URL,
-            "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
-        },
+        "preferred_candidate_split": [
+            {
+                "vendor": "LSEG",
+                "product": "OPRA Tick History",
+                "route": "candidate_lseg_opra_tick_history_option_quotes",
+                "first_trade_date": y2011[0]["trade_date"],
+                "last_trade_date": y2011[-1]["trade_date"],
+                "source_date_rows": len(y2011),
+                "symbol_date_pair_count": sum(
+                    int(row["symbol_date_pair_count"]) for row in y2011
+                ),
+                "source_family": "generic_authorized_market_data",
+                "history_basis": "Tick History covers the 2011 residual.",
+                "product_url": LSEG_PRODUCT_URL,
+                "developer_reference_url": LSEG_TICK_HISTORY_URL,
+                "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+            },
+            {
+                "vendor": "algoseek",
+                "product": "US Options Trade and NBBO Quote",
+                "route": "candidate_algoseek_us_options_tanq",
+                "first_trade_date": later[0]["trade_date"],
+                "last_trade_date": later[-1]["trade_date"],
+                "source_date_rows": len(later),
+                "symbol_date_pair_count": sum(
+                    int(row["symbol_date_pair_count"]) for row in later
+                ),
+                "source_family": "generic_authorized_market_data",
+                "history_basis": (
+                    "Dataset-specific algoseek options documentation and console list "
+                    "U.S. equity-options coverage and TANQ from 2012; generic marketing "
+                    "copy that says 2014 is treated as conflicting evidence requiring "
+                    "delivery validation."
+                ),
+                "product_url": ALGOSEEK_TANQ_DATASET_URL,
+                "reference_url": ALGOSEEK_OPTIONS_REFERENCE_URL,
+                "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+            },
+        ],
         "slices": {
             "2011": {
+                "route": "candidate_lseg_opra_tick_history_option_quotes",
                 "source_date_rows": len(y2011),
                 "symbol_date_pair_count": sum(
                     int(row["symbol_date_pair_count"]) for row in y2011
@@ -117,6 +167,7 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
                 ),
             },
             "2012_2015": {
+                "route": "candidate_algoseek_us_options_tanq",
                 "source_date_rows": len(later),
                 "symbol_date_pair_count": sum(
                     int(row["symbol_date_pair_count"]) for row in later
@@ -151,6 +202,7 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
             "candidate_source_is_not_coverage": True,
             "purchase_not_authorized": True,
             "license_and_delivery_validation_required": True,
+            "conflicting_public_history_copy_requires_runtime_date_validation": True,
             "canonical_full_g2_gate_unchanged": True,
         },
     }
