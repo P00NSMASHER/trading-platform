@@ -1598,6 +1598,14 @@
     "tests/test_g2_vendor_content_preflight.py": {
       "expected_sha256": "f27f57cd40d9a0855ec192383546be030c02b77fdb4d547389eea04bd8d50b96",
       "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
+    },
+    "src/g2_full_replication_option_quote_plan.py": {
+      "expected_sha256": "d5e61d61f82de5ba1ee4373d863a77cb23fa76cc8bd7443081c1aebc210830cf",
+      "reason": "Deterministic G2_FULL_REPLICATION option-quote candidate plan using current LSEG OPRA Tick History evidence; planning only, no purchase or coverage claim."
+    },
+    "tests/test_g2_full_replication_option_quote_plan.py": {
+      "expected_sha256": "10e6f037d60eee1558b5092c6a68f2a5c05c2b0a0b968948910e2ae4ea8bb519",
+      "reason": "Deterministic G2_FULL_REPLICATION option-quote candidate plan using current LSEG OPRA Tick History evidence; planning only, no purchase or coverage claim."
     }
   },
   "schema_version": "2",
