@@ -1394,6 +1394,14 @@
     "tests/test_g2_nasdaq_tick_history_probe.py": {
       "expected_sha256": "c4fc6eb4046da7cf70176c1b8a2763d936fe8cbb0c9de5d8607b69df08e420de",
       "reason": "No-purchase Nasdaq U.S. Equity Tick History candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; current Jan-2014+ consolidated tick trades/quotes remain candidates pending license and content validation."
+    },
+    "src/g2_candidate_route_matrix.py": {
+      "expected_sha256": "7379ddb3012ede533e5a5a3415aa242e0595027533a93e3e178fa9feaf60580a",
+      "reason": "Conservative no-purchase G2_CHAMPION_MINIMUM route matrix using current full-range Tick Data equities plus current Databento/Cboe option trade ranges; candidate does not mean covered."
+    },
+    "tests/test_g2_candidate_route_matrix.py": {
+      "expected_sha256": "da6366e4ed8e2950f494ba808403e321f9740752e0ed6774c7345318d059ba14",
+      "reason": "Conservative no-purchase G2_CHAMPION_MINIMUM route matrix using current full-range Tick Data equities plus current Databento/Cboe option trade ranges; candidate does not mean covered."
     }
   },
   "schema_version": "2",
