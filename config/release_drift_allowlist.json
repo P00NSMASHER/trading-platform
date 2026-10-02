@@ -1774,6 +1774,18 @@
     "data/processed/g2_vendor_requests/combined_equity_cheap_route/summary.json": {
       "expected_sha256": "1bb2966e3e169cbccd697bb1268f3a97dd4a72b3b7be2ff14b01ba848686fcf9",
       "reason": "Deterministic ThetaData + FirstRate cheap-equity union and exact Tick Data residual; planning only, no route activation, purchase, entitlement, or G2 coverage claim."
+    },
+    "src/g2_equity_route_break_even.py": {
+      "expected_sha256": "9593d866257cec56a3644c6e765106f51b40b83b0a476721902fc979d13b0b12",
+      "reason": "Fail-closed equity route break-even planner and receipt; compares full Tick Data against ThetaData + FirstRate + Tick Data residual without assuming quotes, licenses, or purchase authority."
+    },
+    "tests/test_g2_equity_route_break_even.py": {
+      "expected_sha256": "421d2f5709116786bc2a9b22a2d5715f39ab235b86700541afbba2207244c30e",
+      "reason": "Fail-closed equity route break-even planner and receipt; compares full Tick Data against ThetaData + FirstRate + Tick Data residual without assuming quotes, licenses, or purchase authority."
+    },
+    "data/processed/g2_vendor_requests/equity_route_break_even.json": {
+      "expected_sha256": "2e64f10d6483a972b9b4b4566d3f6d1ccbc7b1fb1565e1cc2a39485eafb107fb",
+      "reason": "Fail-closed equity route break-even planner and receipt; compares full Tick Data against ThetaData + FirstRate + Tick Data residual without assuming quotes, licenses, or purchase authority."
     }
   },
   "schema_version": "2",
