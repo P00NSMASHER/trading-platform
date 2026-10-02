@@ -14,6 +14,7 @@ TIER3_MONTHLY_POINTS = 1_250_000
 TIER3_MONTHLY_BASE_USD = 2_499
 PAGE_LIMIT_ROWS = 10_000
 HISTORICAL_START_YEAR = 2003
+OPRA_EARLIEST_YEAR = 2012
 
 FREE_TRIAL_POINTS_PER_DAY = 500
 FREE_TRIAL_DAYS = 14
@@ -38,6 +39,8 @@ def build_capacity(rows: list[dict[str, str]]) -> dict:
     equity_trades = [r for r in rows if r["record_kind"] == "equity_trade"]
     equity_quotes = [r for r in rows if r["record_kind"] == "equity_quote"]
     option_trades = [r for r in rows if r["record_kind"] == "option_trade"]
+    cboe_option_trades = [r for r in option_trades if r["trade_date"] >= "2012-01-01"]
+    unsupported_option_trades = [r for r in option_trades if r["trade_date"] < "2012-01-01"]
 
     if len(equity_trades) != 414 or len(equity_quotes) != 414 or len(option_trades) != 414:
         raise ValueError("unexpected champion-minimum record-kind counts")
@@ -45,28 +48,34 @@ def build_capacity(rows: list[dict[str, str]]) -> dict:
     equity_pairs = sum(int(r["symbol_date_pair_count"]) for r in equity_trades)
     equity_quote_pairs = sum(int(r["symbol_date_pair_count"]) for r in equity_quotes)
     option_pairs = sum(int(r["symbol_date_pair_count"]) for r in option_trades)
+    cboe_option_pairs = sum(int(r["symbol_date_pair_count"]) for r in cboe_option_trades)
+    unsupported_option_pairs = sum(
+        int(r["symbol_date_pair_count"]) for r in unsupported_option_trades
+    )
     if equity_pairs != equity_quote_pairs:
         raise ValueError("equity trade/quote pair counts do not reconcile")
 
     # One historical trades-and-quotes request per equity symbol/date can carry
     # both the equity_trade and equity_quote raw events needed downstream.
-    first_page_requests = equity_pairs + option_pairs
+    first_page_requests = equity_pairs + cboe_option_pairs
     first_page_points = first_page_requests * HISTORICAL_POINTS_PER_REQUEST
     max_tier3_requests = TIER3_MONTHLY_POINTS // HISTORICAL_POINTS_PER_REQUEST
     spare_requests = max_tier3_requests - first_page_requests
 
-    sample_date = "2011-03-21"
-    sample_symbol = "JNPR"
+    sample_date = "2012-01-03"
+    sample_symbol = "AF"
 
     return {
         "schema_version": "1",
         "purpose": (
             "Capacity model for using one Cboe All Access Tier 3 month as a candidate "
-            "single-vendor acquisition route for G2_CHAMPION_MINIMUM. This is not a "
-            "purchase, authorization claim, or G2 coverage receipt."
+            "Cboe-supported acquisition subset for G2_CHAMPION_MINIMUM. Cboe-confirmed "
+            "OPRA history begins in 2012, so 2011 option trades remain outside this model. "
+            "This is not a purchase, authorization claim, or G2 coverage receipt."
         ),
         "documented_vendor_facts": {
             "historical_start_year": HISTORICAL_START_YEAR,
+            "vendor_confirmed_opra_earliest_year": OPRA_EARLIEST_YEAR,
             "historical_points_per_request": HISTORICAL_POINTS_PER_REQUEST,
             "response_page_limit_rows": PAGE_LIMIT_ROWS,
             "tier3_monthly_points": TIER3_MONTHLY_POINTS,
@@ -78,8 +87,12 @@ def build_capacity(rows: list[dict[str, str]]) -> dict:
             "champion_minimum_source_date_rows": len(rows),
             "equity_source_date_rows": len(equity_trades) + len(equity_quotes),
             "option_trade_source_date_rows": len(option_trades),
+            "cboe_supported_option_trade_source_date_rows": len(cboe_option_trades),
+            "unsupported_2011_option_trade_source_date_rows": len(unsupported_option_trades),
             "equity_symbol_date_pairs": equity_pairs,
             "option_symbol_date_pairs": option_pairs,
+            "cboe_supported_option_symbol_date_pairs": cboe_option_pairs,
+            "unsupported_2011_option_symbol_date_pairs": unsupported_option_pairs,
         },
         "candidate_request_model": {
             "equity_endpoint": "time-and-sales/trades-and-quotes",
@@ -87,8 +100,8 @@ def build_capacity(rows: list[dict[str, str]]) -> dict:
             "equity_first_page_requests": equity_pairs,
             "equity_first_page_points": equity_pairs * HISTORICAL_POINTS_PER_REQUEST,
             "option_endpoint": "time-and-sales/option-trades",
-            "option_first_page_requests": option_pairs,
-            "option_first_page_points": option_pairs * HISTORICAL_POINTS_PER_REQUEST,
+            "option_first_page_requests": cboe_option_pairs,
+            "option_first_page_points": cboe_option_pairs * HISTORICAL_POINTS_PER_REQUEST,
             "total_first_page_requests": first_page_requests,
             "total_first_page_points": first_page_points,
             "tier3_first_page_point_fraction": first_page_points / TIER3_MONTHLY_POINTS,
@@ -132,11 +145,21 @@ def build_capacity(rows: list[dict[str, str]]) -> dict:
                 ],
             },
         },
+        "out_of_scope": {
+            "option_trade_source_date_rows": len(unsupported_option_trades),
+            "option_symbol_date_pairs": unsupported_option_pairs,
+            "historical_range": [
+                min(r["trade_date"] for r in unsupported_option_trades),
+                max(r["trade_date"] for r in unsupported_option_trades),
+            ],
+            "reason": "Cboe Data Vantage confirmed OPRA-related datasets begin in 2012.",
+        },
         "gates_before_purchase": [
             "Run the two-request free-trial acceptance probe and verify historical response fields are populated without live/delayed SIP entitlements.",
             "Verify pagination semantics and next-sequence handling on at least one response that reaches the 10,000-row limit.",
             "Map Cboe response types to the production historical_market_backfill canonical fields and pass content validation.",
             "Confirm the subscription/license_reference permits the intended internal historical research use.",
+            "Keep the 2011 option-trade slice on a separate source route; Cboe does not supply that OPRA period.",
         ],
         "warning": (
             "Point capacity alone does not establish completeness. High-volume symbol/dates may need "
