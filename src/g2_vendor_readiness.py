@@ -49,7 +49,9 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
 
     cboe_paid = vendor_replies.get("cboe_paid_bulk") or {}
     cboe_confirmation = cboe_paid.get("vendor_confirmation") or {}
+    cboe_scope = cboe_paid.get("requested_scope") or {}
     tickdata = vendor_replies.get("tick_data_written_quote") or {}
+    tickdata_scope = tickdata.get("requested_scope") or {}
     acceptance_probe = vendor_replies.get("cboe_zero_cost_acceptance_probe") or {}
     guardrails = vendor_replies.get("guardrails") or {}
     if (
@@ -57,11 +59,15 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         or vendor_replies.get("coverage_effect") != "NONE_UNTIL_ACTUAL_VALIDATED_ROWS"
         or vendor_replies.get("purchase_authority") is not False
         or cboe_paid.get("research_disposition") != "OUT_OF_SCOPE_CURRENT_RESEARCH"
+        or cboe_scope.get("selected_trading_dates") != 309
+        or cboe_scope.get("requested_underlying_date_pairs") != 3364
         or cboe_confirmation.get("sale_scope") != "FULL_OPRA_UNIVERSE_ONLY"
         or cboe_confirmation.get("rough_price_usd_2_years_5_months") != 40000
         or cboe_confirmation.get("rough_price_usd_1_calendar_year") != 24000
         or cboe_confirmation.get("selected_309_days_across_years") != "CUSTOM_JOB_POSSIBLY_MORE_EXPENSIVE"
         or tickdata.get("research_disposition") != "UNPRICED_WRITTEN_QUOTE_UNAVAILABLE"
+        or tickdata_scope.get("selected_trading_dates") != 414
+        or tickdata_scope.get("requested_underlying_date_pairs") != 3828
         or tickdata.get("written_availability_confirmation") != "NOT_PROVIDED"
         or tickdata.get("written_price_usd") is not None
         or tickdata.get("vendor_response") != "PHONE_CALL_REQUIRED"
@@ -133,6 +139,8 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "coverage_effect": vendor_replies["coverage_effect"],
             "cboe_paid_bulk": {
                 "research_disposition": cboe_paid["research_disposition"],
+                "selected_trading_dates": cboe_scope["selected_trading_dates"],
+                "requested_underlying_date_pairs": cboe_scope["requested_underlying_date_pairs"],
                 "sale_scope": cboe_confirmation["sale_scope"],
                 "rough_price_usd_2_years_5_months": cboe_confirmation["rough_price_usd_2_years_5_months"],
                 "rough_price_usd_1_calendar_year": cboe_confirmation["rough_price_usd_1_calendar_year"],
@@ -140,6 +148,8 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             },
             "tick_data_written_quote": {
                 "research_disposition": tickdata["research_disposition"],
+                "selected_trading_dates": tickdata_scope["selected_trading_dates"],
+                "requested_underlying_date_pairs": tickdata_scope["requested_underlying_date_pairs"],
                 "written_availability_confirmation": tickdata["written_availability_confirmation"],
                 "written_price_usd": tickdata["written_price_usd"],
                 "vendor_response": tickdata["vendor_response"],
