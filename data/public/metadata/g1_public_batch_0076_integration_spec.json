@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "ef1fda157e9f383c8518a04a7e7b21bedb1b63fc",
+  "reserved_batch": "0076",
+  "worker_slot": 1,
+  "event_id": "HEJFE-BFE8A42E0C19BA39",
+  "historical_symbol": "VDSI",
+  "public_announcement_ts": "2011-10-27T03:00:00-04:00",
+  "source_family": "official_newswire_archive",
+  "source_grade": "A",
+  "source_reference": "https://www.prnewswire.com/news-releases/vasco-reports-results-for-third-quarter-and-first-nine-months-of-2011-132678308.html",
+  "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1044777/000119312511292277/d249955dex991.htm",
+  "expected_state_after_batch": {
+    "exact_resolved": 97,
+    "reviewed_excluded": 77,
+    "step9": "SOURCE_BLOCKED"
+  }
+}
