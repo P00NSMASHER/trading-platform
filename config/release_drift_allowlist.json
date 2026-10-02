@@ -372,8 +372,8 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_release_sprint/vendor_requests/vendor_acquisition_handoff.json": {
-      "expected_sha256": "57eb85641c01d6ca189a45481a719dfdf9ca7f1ac146385080bdf66dccd9044e",
-      "reason": "Vendor acquisition handoff for G2_CHAMPION_MINIMUM: exact request scope, required canonical fields, license evidence, fidelity rules, and fail-closed production acceptance checks; no credentials or coverage claim."
+      "expected_sha256": "dec74412a43d8239460e31af54a61699bd3929c64ec408f396f9de280d954a50",
+      "reason": "Integrate the merged post-activation required-symbol content preflight into the deterministic G2 vendor acquisition handoff; no coverage or gate relaxation."
     },
     "data/processed/real_data_release_sprint/vendor_requests/vendor_request_summary.json": {
       "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
@@ -1208,8 +1208,8 @@
       "reason": "Planning-only TickAPI cost estimator tied to frozen G2 equity request manifests and current published TickAPI pricing; no API call, subscription, order, or coverage claim."
     },
     "src/g2_vendor_acquisition_handoff.py": {
-      "expected_sha256": "ea4f38057c75a0d9c4dec794d8b95d86f73b78bdac794a8b29bf130ae39f29a3",
-      "reason": "Vendor acquisition handoff for G2_CHAMPION_MINIMUM: exact request scope, required canonical fields, license evidence, fidelity rules, and fail-closed production acceptance checks; no credentials or coverage claim."
+      "expected_sha256": "5d04413f6abdbe5a24be31cacbed52911b2a79693245ccd1e6ed7ebcf7f92930",
+      "reason": "Integrate the merged post-activation required-symbol content preflight into the deterministic G2 vendor acquisition handoff; no coverage or gate relaxation."
     },
     "src/g2_vendor_activation_blueprint.py": {
       "expected_sha256": "6df1442b78de8a1da1f6f98017d0061423921f04d02a48c33bb121a6e7360993",
@@ -1492,8 +1492,8 @@
       "reason": "Planning-only TickAPI cost estimator tied to frozen G2 equity request manifests and current published TickAPI pricing; no API call, subscription, order, or coverage claim."
     },
     "tests/test_g2_vendor_acquisition_handoff.py": {
-      "expected_sha256": "573af8e7cb1ed637503d17e03a9cfbf9446151aa8336c0210146919edefeed7c",
-      "reason": "Vendor acquisition handoff for G2_CHAMPION_MINIMUM: exact request scope, required canonical fields, license evidence, fidelity rules, and fail-closed production acceptance checks; no credentials or coverage claim."
+      "expected_sha256": "d82eee929927c3aba9660a8e753999792b7fb0b0bccad524ff18fe1e05f7521d",
+      "reason": "Integrate the merged post-activation required-symbol content preflight into the deterministic G2 vendor acquisition handoff; no coverage or gate relaxation."
     },
     "tests/test_g2_vendor_activation_blueprint.py": {
       "expected_sha256": "a884d985684d632ec6e7ed9e9e6e7309fe3d2d42af9b67e6d565d14dce85f225",

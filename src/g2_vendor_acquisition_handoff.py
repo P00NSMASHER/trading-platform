@@ -116,6 +116,12 @@ def build_handoff(request_dir: Path, blueprint_path: Path) -> dict:
                 "format_version": "REQUIRED",
                 "column_map": "REQUIRED_WHEN_VENDOR_FIELDS_ARE_NOT_CANONICAL",
             },
+            "post_activation_content_preflight": {
+                "module": "g2_vendor_content_preflight",
+                "request_manifest": spec["request_file"],
+                "required_result": "ready_for_coverage_audit=true",
+                "g2_coverage_counted": False,
+            },
             "acceptance_checks": {
                 "file_existence_is_not_coverage": validation["file_existence_is_not_coverage"],
                 "declared_trade_date_must_match_parsed_rows": validation[
@@ -146,6 +152,33 @@ def build_handoff(request_dir: Path, blueprint_path: Path) -> dict:
             "A delivered file counts only after authorization/license evidence and production "
             "date/symbol/schema/content validation pass."
         ),
+        "operator_sequence": [
+            {
+                "step": 1,
+                "module": "licensed_data_intake",
+                "required_result": "delivery inventoried and schema-classified; authorization still false",
+            },
+            {
+                "step": 2,
+                "module": "g2_vendor_delivery_preflight",
+                "required_result": "ready_for_entitlement_review=true",
+            },
+            {
+                "step": 3,
+                "module": "licensed_data_drop_processor",
+                "required_result": "exact SHA-256 entitlement binding + nonblank license reference",
+            },
+            {
+                "step": 4,
+                "module": "g2_vendor_content_preflight",
+                "required_result": "ready_for_coverage_audit=true with every required symbol observed",
+            },
+            {
+                "step": 5,
+                "module": "historical_market_backfill / real_data_replay",
+                "required_result": "canonical coverage/replay gates evaluate activated sources; no preflight itself counts coverage",
+            },
+        ],
         "handoffs": handoffs,
     }
 
