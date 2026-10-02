@@ -21,7 +21,9 @@ def test_equity_cost_alternatives_preserve_license_gates():
 
     by_vendor = {item["vendor"]: item for item in payload["alternatives"]}
 
-    assert by_vendor["Tick Data"]["estimated_first_year_minimum_usd"] == 3821.00
+    assert by_vendor["Tick Data"]["public_data_store_minimum_new_client_usd"] == 1000.00
+    assert by_vendor["Tick Data"]["public_data_store_minimum_returning_client_usd"] == 500.00
+    assert by_vendor["Tick Data"]["tickapi_estimated_first_year_minimum_usd"] == 3821.00
     assert by_vendor["Tick Data"]["route_status"] == "CURRENT_PREFERRED_CANDIDATE"
 
     assert by_vendor["Massive Stocks Advanced"]["public_monthly_price_usd"] == 199.00
@@ -33,6 +35,11 @@ def test_equity_cost_alternatives_preserve_license_gates():
 
     assert by_vendor["FirstRate Data TickHistory"]["coverage_fit"] == "INCOMPLETE_FROZEN_SYMBOL_UNIVERSE"
     assert by_vendor["FirstRate Data TickHistory"]["license_fit"] == "RESEARCH_FRIENDLY"
+    assert by_vendor["FirstRate Data TickHistory"]["direct_frozen_symbol_matches"] == 106
+    assert by_vendor["FirstRate Data TickHistory"]["missing_frozen_symbols"] == 40
+    assert by_vendor["FirstRate Data TickHistory"]["covered_symbol_date_pairs_per_record_kind"] == 2750
+    assert by_vendor["FirstRate Data TickHistory"]["required_symbol_date_pairs_per_record_kind"] == 3828
+    assert by_vendor["FirstRate Data TickHistory"]["fully_satisfied_market_dates_per_record_kind"] == 118
 
     assert payload["policy"] == {
         "do_not_replace_preferred_route_without_license_clearance": True,
