@@ -11,28 +11,23 @@ def test_conservative_candidate_route_matrix_matches_frozen_scope():
     manifest = matrix.build_matrix(matrix.load_requirements(REQ))
 
     assert manifest["champion_minimum_rows"] == 1242
-    assert manifest["candidate_rows"] == 1137
-    assert manifest["unresolved_rows"] == 105
-    assert manifest["candidate_fraction"] == 1137 / 1242
+    assert manifest["candidate_rows"] == 1242
+    assert manifest["unresolved_rows"] == 0
+    assert manifest["candidate_fraction"] == 1.0
 
     assert manifest["route_counts"] == {
         "candidate_cboe_option_trades": 83,
         "candidate_databento_opra_trades": 226,
+        "candidate_lseg_opra_tick_history": 105,
         "candidate_tickdata_equity_nbbo_quotes": 414,
         "candidate_tickdata_equity_trades": 414,
-        "unresolved_2011_option_trade": 105,
     }
-    assert manifest["unresolved_by_record_kind"] == {
-        "option_trade": 105,
-    }
+    assert manifest["unresolved_by_record_kind"] == {}
 
 
-def test_matrix_never_counts_uncertain_rows_as_candidates():
+def test_matrix_has_candidate_source_for_every_champion_minimum_row():
     manifest = matrix.build_matrix(matrix.load_requirements(REQ))
 
     unresolved = [row for row in manifest["rows"] if row["route"].startswith("unresolved_")]
-    assert len(unresolved) == 105
-    assert all(
-        row["record_kind"] == "option_trade"
-        for row in unresolved
-    )
+    assert unresolved == []
+    assert all(row["route"].startswith("candidate_") for row in manifest["rows"])
