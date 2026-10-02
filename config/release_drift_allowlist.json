@@ -1598,6 +1598,18 @@
     "tests/test_g2_vendor_content_preflight.py": {
       "expected_sha256": "f27f57cd40d9a0855ec192383546be030c02b77fdb4d547389eea04bd8d50b96",
       "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
+    },
+    "src/g2_acquisition_cost_priority.py": {
+      "expected_sha256": "1bcba9fa33a6c61d04c65f3466cc86c709f1da467870ac0e5b89f23f4f13842d",
+      "reason": "Planning-only cheap-first G2 acquisition strategy prioritizing confirmed free/one-time routes before expensive subscriptions; no purchase, activation, or coverage claim."
+    },
+    "tests/test_g2_acquisition_cost_priority.py": {
+      "expected_sha256": "accd45195616eda6133288839d1260c0da97f9fb7b492e784d55397d78f77140",
+      "reason": "Planning-only cheap-first G2 acquisition strategy prioritizing confirmed free/one-time routes before expensive subscriptions; no purchase, activation, or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/acquisition_cost_priority.json": {
+      "expected_sha256": "75cec9dac82c64d95fa57de68371095d8752899ae47643a43470057cede1f82a",
+      "reason": "Planning-only cheap-first G2 acquisition strategy prioritizing confirmed free/one-time routes before expensive subscriptions; no purchase, activation, or coverage claim."
     }
   },
   "schema_version": "2",
