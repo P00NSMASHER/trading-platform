@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "72df14bea4ff290fc704811f00fde44016809a0a",
+  "base_main_sha": "32022c91e19a70462d7aa4f6bd396e4089e339eb",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 95,
-    "note": "The latest integrated recovery is batch_0083; cumulative public exact-time batches are 65 and cumulative exact event records are 95 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 65,
+    "exact_resolved_event_records": 96,
+    "note": "The latest integrated recovery is batch_0087; cumulative public exact-time batches are 66 and cumulative exact event records are 96 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 66,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 79
+    "reviewed_excluded_event_records": 78
   },
   "preferred_public_source_families": [
     {
@@ -1801,6 +1801,31 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news/borgwarner-inc./?page=13",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "The official PR Newswire Goodyear archive preserves the exact release title beside Jul 28, 2011, 08:00 ET. SEC Exhibit 99.1 independently matches Goodyear, the July 28 2011 Q2 release title/date, reported quarter, metrics, and release body. SEC filing timing, scheduled calls, archive-capture times, date-only evidence, and inferred clocks are not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/42582/000119312511199933/dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0087",
+      "event_date": "2011-07-27",
+      "event_id": "HEJFE-B704E62641681A73",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2011-07-28T08:00:00-04:00",
+      "first_documented_illicit_trade_ts": "2011-07-27 15:59:00",
+      "historical_event_match": true,
+      "historical_symbol": "GT",
+      "information_asymmetry_seconds": 57660,
+      "probe_id": "GT-batch0087",
+      "public_announcement_ts": "2011-07-28T08:00:00-04:00",
+      "publisher_timestamp_text": "PR Newswire organization archive page 33: Jul 28, 2011, 08:00 ET",
+      "reason": "Promoted through official PR Newswire exact-clock evidence with independent SEC Exhibit 99.1 corroboration.",
+      "release_title": "Goodyear Reports Higher Second Quarter Earnings on 24% Sales Growth",
+      "reviewed_on": "2026-10-02",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.prnewswire.com/news/the-goodyear-tire-%26-rubber-company/?page=33",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
