@@ -46,3 +46,13 @@ def test_vendor_request_manifests_match_frozen_scope(tmp_path: Path):
     for item in summary["routes"].values():
         assert (tmp_path / item["file"]).exists()
     assert (tmp_path / "vendor_request_summary.json").exists()
+    committed_dir = ROOT / "data/processed/g2_vendor_requests"
+    for item in summary["routes"].values():
+        assert (tmp_path / item["file"]).read_bytes() == (
+            committed_dir / item["file"]
+        ).read_bytes()
+
+    import json
+    assert json.loads((tmp_path / "vendor_request_summary.json").read_text()) == json.loads(
+        (committed_dir / "vendor_request_summary.json").read_text()
+    )
