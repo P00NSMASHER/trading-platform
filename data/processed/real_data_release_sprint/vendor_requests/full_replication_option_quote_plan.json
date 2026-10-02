@@ -1,0 +1,54 @@
+{
+  "fidelity_requirement": {
+    "minute_snapshot_substitution_allowed": false,
+    "required_fields": [
+      "timestamp_or_date+time",
+      "underlying_symbol",
+      "option_symbol",
+      "expiration",
+      "strike",
+      "option_type",
+      "bid",
+      "ask",
+      "bid_size",
+      "ask_size"
+    ],
+    "tick_level_option_quote_updates": true
+  },
+  "first_trade_date": "2011-03-21",
+  "full_replication_option_quote_source_date_rows": 414,
+  "full_replication_option_quote_symbol_date_pairs": 3828,
+  "last_trade_date": "2015-05-20",
+  "policy": {
+    "candidate_source_is_not_coverage": true,
+    "canonical_full_g2_gate_unchanged": true,
+    "license_and_delivery_validation_required": true,
+    "purchase_not_authorized": true
+  },
+  "preferred_candidate": {
+    "content": "OPRA quotes/NBBO and full-tick workflows where licensed",
+    "current_documented_history": "Tick History from 1997",
+    "developer_reference_url": "https://developers.lseg.com/en/article-catalog/article/options-tick-history-rest-api-python",
+    "product": "OPRA Tick History",
+    "product_url": "https://www.lseg.com/en/data-catalogue/derivatives/pricing/exchange-derivatives-options-price-reporting-authority-opra",
+    "route": "candidate_lseg_opra_tick_history_option_quotes",
+    "source_family": "generic_authorized_market_data",
+    "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+    "vendor": "LSEG"
+  },
+  "purpose": "Deterministic candidate-source plan for the 414 option_quote rows required only by G2_FULL_REPLICATION. This does not alter G2_CHAMPION_MINIMUM or claim coverage.",
+  "schema_version": "1",
+  "slices": {
+    "2011": {
+      "source_date_rows": 105,
+      "symbol_date_pair_count": 464,
+      "unique_historical_underlyings": 35
+    },
+    "2012_2015": {
+      "source_date_rows": 309,
+      "symbol_date_pair_count": 3364,
+      "unique_historical_underlyings": 137
+    }
+  },
+  "unique_historical_underlyings": 146
+}
