@@ -168,3 +168,52 @@ def test_wrong_vendor_family_does_not_satisfy_request(tmp_path: Path):
     result = preflight.preflight(request, inventory)
     assert result["missing_delivery_rows"] == 1
     assert result["ready_for_entitlement_review"] is False
+
+
+def test_full_replication_lseg_option_quote_delivery_route_is_supported(tmp_path: Path):
+    request = tmp_path / "request.csv"
+    inventory = tmp_path / "inventory.csv"
+    _write_csv(
+        request,
+        REQUEST_FIELDS,
+        [{
+            "trade_date": "2011-03-21",
+            "record_kind": "option_quote",
+            "historical_symbols": "AAA;BBB",
+            "unique_symbol_count": "2",
+            "symbol_date_pair_count": "2",
+            "route": "candidate_lseg_opra_tick_history_option_quotes",
+        }],
+    )
+    _write_csv(
+        inventory,
+        INVENTORY_FIELDS,
+        [{
+            "path": "/drop/lseg_opra_quotes_20110321.csv",
+            "relative_path": "lseg_opra_quotes_20110321.csv",
+            "size_bytes": "100",
+            "sha256": "d" * 64,
+            "file_kind": "delimited_text",
+            "readable_header": "1",
+            "detected_trade_date": "2011-03-21",
+            "candidate_record_kind": "option_quote",
+            "candidate_source_family": "generic_authorized_market_data",
+            "candidate_format_version": "",
+            "confidence": "high",
+            "status": "PENDING_AUTHORIZATION_AND_REVIEW",
+            "reason": "fixture",
+            "header_fields": "",
+            "proposed_column_map": "{}",
+            "research_use_only": "1",
+        }],
+    )
+
+    result = preflight.preflight(request, inventory)
+
+    assert result["expected_record_kind"] == "option_quote"
+    assert result["expected_source_family"] == "generic_authorized_market_data"
+    assert result["requested_source_date_rows"] == 1
+    assert result["requested_symbol_date_pairs"] == 2
+    assert result["present_pending_authorization_rows"] == 1
+    assert result["ready_for_entitlement_review"] is True
+    assert result["coverage_policy"]["g2_coverage_counted"] is False
