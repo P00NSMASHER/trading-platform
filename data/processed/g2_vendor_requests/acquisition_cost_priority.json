@@ -79,7 +79,8 @@
     "do_not_count_equity_quote_source_without_bid_and_ask_sizes": true,
     "compare_tickdata_store_exact_quote_to_tickapi_floor_before_purchase": true,
     "do_not_treat_tickdata_minimum_order_as_exact_quote": true,
-    "compare_algoseek_historical_only_quote_to_tickdata_and_tickapi_before_purchase": true
+    "compare_algoseek_historical_only_quote_to_tickdata_and_tickapi_before_purchase": true,
+    "do_not_assume_thetadata_retail_license_is_valid_for_product_use": true
   },
   "screened_out_or_conditional_equity_routes": [
     {
@@ -144,6 +145,30 @@
         "Standard tick+bid/ask records NBBO only at trade timestamps rather than a continuous quote stream.",
         "Standard files do not include top-of-book bid_size or ask_size.",
         "The G2 equity_quote contract requires bid_size and ask_size."
+      ],
+      "automatic_purchase_permitted": false
+    }
+  ],
+  "conditional_option_routes": [
+    {
+      "route": "thetadata_options_pro_or_historical_flat_file",
+      "status": "LICENSE_AND_PRICE_CONFIRMATION_PENDING",
+      "sources": [
+        "https://www.thetadata.net/pricing",
+        "https://thetadata.net/docs/Articles/Getting-Started/Subscriptions.html"
+      ],
+      "retail_options_pro_usd_per_month": 160,
+      "retail_license_scope": "INDIVIDUAL_USE",
+      "first_access_date": "2012-06-01",
+      "eligible_source_date_rows": 291,
+      "eligible_symbol_date_pairs": 3014,
+      "residual_source_date_rows": 123,
+      "residual_symbol_date_pairs": 814,
+      "reasons": [
+        "Options Pro documents tick-level historical options access from 2012-06-01.",
+        "The public $160/month price is explicitly Individual Use and is not assumed valid for this product.",
+        "A written licensing/price request is already pending for the exact 291-date / 3,014-pair slice.",
+        "If licensed affordably, only the pre-2012-06-01 residual needs LSEG/Cboe coverage."
       ],
       "automatic_purchase_permitted": false
     }
