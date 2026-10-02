@@ -1,0 +1,33 @@
+{
+  "champion_minimum_source_date_rows": 1242,
+  "purpose": "Deterministic vendor request manifests for G2_CHAMPION_MINIMUM candidate sources. These files do not claim authorization, purchase, delivery, or G2 coverage.",
+  "routes": {
+    "candidate_cboe_option_trades": {
+      "file": "cboe_option_trades.csv",
+      "source_date_rows": 83,
+      "symbol_date_pair_count": 489
+    },
+    "candidate_databento_opra_trades": {
+      "file": "databento_opra_trades.csv",
+      "source_date_rows": 226,
+      "symbol_date_pair_count": 2875
+    },
+    "candidate_lseg_opra_tick_history": {
+      "file": "lseg_opra_tick_history.csv",
+      "source_date_rows": 105,
+      "symbol_date_pair_count": 464
+    },
+    "candidate_tickdata_equity_nbbo_quotes": {
+      "file": "tickdata_equity_nbbo_quotes.csv",
+      "source_date_rows": 414,
+      "symbol_date_pair_count": 3828
+    },
+    "candidate_tickdata_equity_trades": {
+      "file": "tickdata_equity_trades.csv",
+      "source_date_rows": 414,
+      "symbol_date_pair_count": 3828
+    }
+  },
+  "schema_version": "1",
+  "total_record_kind_symbol_date_pairs": 11484
+}
