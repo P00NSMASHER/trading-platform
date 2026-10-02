@@ -15,6 +15,16 @@ def test_vendor_acquisition_handoff_matches_frozen_scope():
     assert payload["champion_minimum_source_date_rows"] == 1242
     assert payload["total_record_kind_symbol_date_pairs"] == 11484
     assert payload["credential_policy"].startswith("Credentials must never")
+    assert [step["module"] for step in payload["operator_sequence"]] == [
+        "licensed_data_intake",
+        "g2_vendor_delivery_preflight",
+        "licensed_data_drop_processor",
+        "g2_vendor_content_preflight",
+        "historical_market_backfill / real_data_replay",
+    ]
+    assert payload["operator_sequence"][3]["required_result"].startswith(
+        "ready_for_coverage_audit=true"
+    )
 
     routes = payload["handoffs"]
     assert routes["candidate_tickdata_equity_trades"]["source_date_rows"] == 414
@@ -49,6 +59,12 @@ def test_vendor_acquisition_handoff_matches_frozen_scope():
         assert route["delivery_contract"]["credentials_in_contract"] == "PROHIBITED"
         assert route["acceptance_checks"]["file_existence_is_not_coverage"] is True
         assert route["acceptance_checks"]["all_required_symbols_must_be_observed"] is True
+        assert route["post_activation_content_preflight"] == {
+            "module": "g2_vendor_content_preflight",
+            "request_manifest": route["request_manifest"],
+            "required_result": "ready_for_coverage_audit=true",
+            "g2_coverage_counted": False,
+        }
 
 
 def test_committed_vendor_handoff_is_reproducible():
