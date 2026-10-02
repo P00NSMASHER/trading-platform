@@ -1458,6 +1458,14 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/g2_tickapi_cost_estimator.py": {
+      "expected_sha256": "41a591e19b94808a8931b1786339574711f54405e4773bc0e49815237800a195",
+      "reason": "Planning-only TickAPI cost estimator tied to frozen G2 equity request manifests and current published TickAPI pricing; no API call, subscription, order, or coverage claim."
+    },
+    "tests/test_g2_tickapi_cost_estimator.py": {
+      "expected_sha256": "2b7b302ea2d7d60fdedfeae63bb278f95b832a39a38df66bfbc66659a5de5627",
+      "reason": "Planning-only TickAPI cost estimator tied to frozen G2 equity request manifests and current published TickAPI pricing; no API call, subscription, order, or coverage claim."
     }
   },
   "schema_version": "2",
