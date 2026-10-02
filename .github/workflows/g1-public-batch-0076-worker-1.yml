@@ -102,6 +102,7 @@ jobs:
 
             git rm -f --ignore-unmatch "$WORKFLOW"
             git rm -f --ignore-unmatch "$SPEC"
+            rm -f "$WORKFLOW" "$SPEC"
             python - <<'PY'
           import json
           from pathlib import Path
@@ -118,7 +119,9 @@ jobs:
           p.write_text(json.dumps(d, indent=2, sort_keys=True) + "\n")
           PY
             git add config/release_drift_allowlist.json
-            git commit -m "Remove temporary batch 0076 publisher workflow and integration spec"
+            if ! git diff --cached --quiet; then
+              git commit -m "Remove temporary batch 0076 publisher workflow and integration spec"
+            fi
 
             git fetch origin main
             if [ "$(git rev-parse origin/main)" != "$BASE" ]; then
