@@ -1464,8 +1464,8 @@
       "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
     },
     "tests/test_licensed_data_drop_processor.py": {
-      "expected_sha256": "7cd6430dac7fcd409bf88feb57194c06c7fb7c83bf63834fa3708d22f6979558",
-      "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
+      "expected_sha256": "c535f0e61d0587ad31bbcd6927448c3cfa0777212721f40ddfe8f524b6cc4167",
+      "reason": "G2 multi-vendor activation regression: generic authorized option-trade files must survive intake plus exact entitlement binding without vendor-family misclassification."
     },
     "tests/test_licensed_data_intake.py": {
       "expected_sha256": "ddb4d8acab4d51585b0c57d22ad24925a702f7f49153a2a130f853d34b67ab02",
