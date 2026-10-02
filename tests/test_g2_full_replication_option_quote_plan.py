@@ -5,6 +5,7 @@ import g2_full_replication_option_quote_plan as plan
 
 ROOT = Path(__file__).resolve().parents[1]
 REQ = ROOT / "data/processed/real_data_release_sprint/g2_option_source_date_requirements.csv"
+COMMITTED_DIR = ROOT / "data/processed/real_data_release_sprint/vendor_requests"
 
 
 def test_full_replication_option_quote_plan_matches_frozen_scope():
@@ -62,3 +63,24 @@ def test_full_replication_quote_plan_keeps_tick_fidelity_fail_closed():
     assert summary["policy"]["thetadata_retail_license_not_assumed"] is True
     assert summary["policy"]["retention_rights_not_assumed"] is True
     assert summary["policy"]["canonical_full_g2_gate_unchanged"] is True
+
+
+def test_committed_full_replication_option_quote_artifacts_are_reproducible(tmp_path: Path):
+    output_csv = tmp_path / "lseg_opra_tick_history_option_quotes.csv"
+    output_summary = tmp_path / "full_replication_option_quote_plan.json"
+
+    plan.write_plan(
+        plan.load_requirements(REQ),
+        output_csv,
+        output_summary,
+    )
+
+    assert output_csv.read_bytes() == (
+        COMMITTED_DIR / "lseg_opra_tick_history_option_quotes.csv"
+    ).read_bytes()
+
+    import json
+
+    assert json.loads(output_summary.read_text()) == json.loads(
+        (COMMITTED_DIR / "full_replication_option_quote_plan.json").read_text()
+    )

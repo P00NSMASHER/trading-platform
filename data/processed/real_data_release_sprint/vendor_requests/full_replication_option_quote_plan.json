@@ -1,4 +1,15 @@
 {
+  "fallback_candidates": [
+    {
+      "eligible_start": "2012-01-01",
+      "product": "US Options Trade and NBBO Quote",
+      "product_url": "https://algoseek.com/dataset/us-options-trade-and-nbbo-quote/",
+      "reason": "Dataset-specific coverage reaches 2012 and satisfies tick NBBO fidelity, but current published recurring pricing is materially higher than ThetaData and the free Sandbox is not assumed to expose a selectable 2011-2015 year.",
+      "route": "candidate_algoseek_us_options_tanq",
+      "status": "FALLBACK_QUOTE_REQUIRED_NOT_ACQUIRED",
+      "vendor": "algoseek"
+    }
+  ],
   "fidelity_requirement": {
     "minute_snapshot_substitution_allowed": false,
     "required_fields": [
@@ -23,31 +34,56 @@
     "candidate_source_is_not_coverage": true,
     "canonical_full_g2_gate_unchanged": true,
     "license_and_delivery_validation_required": true,
-    "purchase_not_authorized": true
+    "purchase_not_authorized": true,
+    "retention_rights_not_assumed": true,
+    "thetadata_retail_license_not_assumed": true
   },
-  "preferred_candidate": {
-    "content": "OPRA quotes/NBBO and full-tick workflows where licensed",
-    "current_documented_history": "Tick History from 1997",
-    "developer_reference_url": "https://developers.lseg.com/en/article-catalog/article/options-tick-history-rest-api-python",
-    "product": "OPRA Tick History",
-    "product_url": "https://www.lseg.com/en/data-catalogue/derivatives/pricing/exchange-derivatives-options-price-reporting-authority-opra",
-    "route": "candidate_lseg_opra_tick_history_option_quotes",
-    "source_family": "generic_authorized_market_data",
-    "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
-    "vendor": "LSEG"
-  },
-  "purpose": "Deterministic candidate-source plan for the 414 option_quote rows required only by G2_FULL_REPLICATION. This does not alter G2_CHAMPION_MINIMUM or claim coverage.",
-  "schema_version": "1",
-  "slices": {
-    "2011": {
-      "source_date_rows": 105,
-      "symbol_date_pair_count": 464,
-      "unique_historical_underlyings": 35
+  "preferred_candidate_split": [
+    {
+      "developer_reference_url": "https://developers.lseg.com/en/article-catalog/article/options-tick-history-rest-api-python",
+      "first_trade_date": "2011-03-21",
+      "history_basis": "LSEG Tick History is the residual candidate before ThetaData's documented 2012-06-01 tick-history floor.",
+      "last_trade_date": "2012-01-27",
+      "product": "OPRA Tick History",
+      "product_url": "https://www.lseg.com/en/data-catalogue/derivatives/pricing/exchange-derivatives-options-price-reporting-authority-opra",
+      "route": "candidate_lseg_opra_tick_history_option_quotes",
+      "source_date_rows": 123,
+      "source_family": "generic_authorized_market_data",
+      "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+      "symbol_date_pair_count": 814,
+      "vendor": "LSEG"
     },
-    "2012_2015": {
-      "source_date_rows": 309,
-      "symbol_date_pair_count": 3364,
-      "unique_historical_underlyings": 137
+    {
+      "first_trade_date": "2012-06-29",
+      "history_basis": "ThetaData documents Options PRO tick-level history from 2012-06-01; the historical Quote endpoint returns every OPRA NBBO quote with bid/ask prices and sizes.",
+      "last_trade_date": "2015-05-20",
+      "license_status": "PENDING_WRITTEN_USE_CLASSIFICATION_AND_RETENTION_TERMS",
+      "pricing_url": "https://thetadata.net/pricing",
+      "product": "Options Pro historical quote",
+      "quote_schema_url": "https://docs.thetadata.us/operations/option_history_quote.html",
+      "route": "candidate_thetadata_options_pro_option_quotes",
+      "source_date_rows": 291,
+      "source_family": "generic_authorized_market_data",
+      "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
+      "subscription_reference_url": "https://docs.thetadata.us/Articles/Getting-Started/Subscriptions.html",
+      "symbol_date_pair_count": 3014,
+      "vendor": "ThetaData"
+    }
+  ],
+  "purpose": "Deterministic cheap-first candidate-source plan for the 414 option_quote rows required only by G2_FULL_REPLICATION. This does not alter G2_CHAMPION_MINIMUM or claim coverage.",
+  "schema_version": "3",
+  "slices": {
+    "2012_06_01_onward": {
+      "route": "candidate_thetadata_options_pro_option_quotes",
+      "source_date_rows": 291,
+      "symbol_date_pair_count": 3014,
+      "unique_historical_underlyings": 115
+    },
+    "pre_2012_06_01": {
+      "route": "candidate_lseg_opra_tick_history_option_quotes",
+      "source_date_rows": 123,
+      "symbol_date_pair_count": 814,
+      "unique_historical_underlyings": 35
     }
   },
   "unique_historical_underlyings": 146
