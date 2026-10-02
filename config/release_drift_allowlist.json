@@ -1788,12 +1788,12 @@
       "reason": "Fail-closed equity route break-even planner and receipt; compares full Tick Data against ThetaData + FirstRate + Tick Data residual without assuming quotes, licenses, or purchase authority."
     },
     "src/g2_cboe_acceptance_probe.py": {
-      "expected_sha256": "2efa6e3580a2b074d5d9179f203557c73839b4afd9bb56fcefbbbd298e0a781c",
-      "reason": "Fail-closed Cboe historical acceptance probe: preserve 2011 equity TAQ smoke, move OPRA smoke to vendor-supported 2012, and derive one strict historical option-quote request from a returned OSI security; three requests / 45 points maximum, no signup, purchase, or bulk acquisition."
+      "expected_sha256": "535ff6e711228a7267ecce1be3e09b724fc00f9e762fdaa3aad8f2667ab85562",
+      "reason": "Fail-closed Cboe historical acceptance probe: preserve 2011 equity TAQ smoke, move OPRA smoke to vendor-supported 2012, derive one historical option-quote request from a returned OSI security, and validate non-SIP-annotated NBBO fields; three requests / 45 points maximum."
     },
     "tests/test_g2_cboe_acceptance_probe.py": {
-      "expected_sha256": "d377676b6da74dc5eca6d1a654ebf08113bcac8893ad8aa47a19fe1e5a21d73a",
-      "reason": "Regression coverage for the three-request maximum Cboe historical acceptance probe, including the 2012 OPRA floor, derived OSI quote request, fail-closed no-security behavior, and secret non-disclosure."
+      "expected_sha256": "55b03f891c1217768729036d53fc2e72ae916f0db930275a116462be5d355a24",
+      "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
     },
     "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
       "expected_sha256": "10caf7b4ecbf1e64ec452f865c6f48e49d187ff745aa357ef16868ce3072eacb",

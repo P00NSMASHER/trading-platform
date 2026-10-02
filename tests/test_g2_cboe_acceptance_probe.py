@@ -64,7 +64,7 @@ def test_derived_option_quote_request_uses_returned_osi_security():
     assert query["start_sequence_number"] == ["0"]
     assert query["limit"] == ["100"]
     assert request.required_fields == frozenset(
-        {"timestamp", "bid", "ask", "bid_size", "ask_size"}
+        {"timestamp", "nbbo_bid", "nbbo_ask", "nbbo_bid_size", "nbbo_ask_size"}
     )
 
 
@@ -131,12 +131,10 @@ def test_execute_probe_uses_only_three_historical_requests(monkeypatch):
     option_quote_payload = [
         {
             "timestamp": "09:30:00.003",
-            "bid": 1.20,
-            "ask": 1.30,
-            "bid_size": 12,
-            "ask_size": 15,
             "nbbo_bid": 1.20,
             "nbbo_ask": 1.30,
+            "nbbo_bid_size": 12,
+            "nbbo_ask_size": 15,
         }
     ]
 
@@ -247,10 +245,10 @@ def test_token_and_secret_never_appear_in_outputs(monkeypatch):
             return [
                 {
                     "timestamp": "09:30:00.003",
-                    "bid": 1.20,
-                    "ask": 1.30,
-                    "bid_size": 12,
-                    "ask_size": 15,
+                    "nbbo_bid": 1.20,
+                    "nbbo_ask": 1.30,
+                    "nbbo_bid_size": 12,
+                    "nbbo_ask_size": 15,
                 }
             ]
         raise AssertionError(url)

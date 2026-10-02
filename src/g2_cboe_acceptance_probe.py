@@ -42,10 +42,10 @@ OPTION_TRADE_REQUIRED_FIELDS = {
 }
 OPTION_QUOTE_REQUIRED_FIELDS = {
     "timestamp",
-    "bid",
-    "ask",
-    "bid_size",
-    "ask_size",
+    "nbbo_bid",
+    "nbbo_ask",
+    "nbbo_bid_size",
+    "nbbo_ask_size",
 }
 
 
