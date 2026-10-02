@@ -69,22 +69,27 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "G1: recover THC exact public clock, 97 exact / 77 excluded [g1-generated]"
 
-      - name: Remove temporary publisher and allowlist entry
+      - name: Remove temporary publisher, integration spec, and allowlist entries
         run: |
           git rm .github/workflows/g1-public-batch-0085-worker-0.yml
+          git rm data/public/metadata/g1_public_batch_0085_integration_spec.json
           python - <<'PY'
           import json
           from pathlib import Path
           p=Path("config/release_drift_allowlist.json")
           d=json.loads(p.read_text())
-          key=".github/workflows/g1-public-batch-0085-worker-0.yml"
-          for section in ("intentional_release_modifications","repository_additions"):
-              if isinstance(d.get(section),dict):
-                  d[section].pop(key,None)
+          keys=[
+              ".github/workflows/g1-public-batch-0085-worker-0.yml",
+              "data/public/metadata/g1_public_batch_0085_integration_spec.json",
+          ]
+          for key in keys:
+              for section in ("intentional_release_modifications","repository_additions"):
+                  if isinstance(d.get(section),dict):
+                      d[section].pop(key,None)
           p.write_text(json.dumps(d,indent=2,sort_keys=True)+"\n")
           PY
           git add config/release_drift_allowlist.json
-          git commit -m "Remove temporary batch 0085 publisher workflow"
+          git commit -m "Remove temporary batch 0085 publisher workflow and integration spec"
 
       - name: Push exact verified head
         run: git push origin HEAD:g1/public-batch-0085-worker-0-thc-main-2f230d9
