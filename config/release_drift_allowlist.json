@@ -1706,6 +1706,14 @@
     "data/processed/g2_vendor_requests/cheap_route_partitions/summary.json": {
       "expected_sha256": "558fd529b6678b56f9e94548e134109c78c223fd519d2fd2752eb4d01ae83f59",
       "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
+    },
+    "src/g2_cboe_all_access_capacity.py": {
+      "expected_sha256": "50388cb3a540a63146b070b6e5f0c14d2e382ea9fe32e3f3e5e6bcd0aba62467",
+      "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
+    },
+    "tests/test_g2_cboe_all_access_capacity.py": {
+      "expected_sha256": "44a62d7ee73e6ab9a4d024d95114e720d0a2ba600d1a25105d03a8524d4af49e",
+      "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
     }
   },
   "schema_version": "2",
