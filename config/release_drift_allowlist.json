@@ -1416,8 +1416,32 @@
       "reason": "Generate deterministic vendor-specific request manifests for G2_CHAMPION_MINIMUM; acquisition planning only, no authorization or coverage claim."
     },
     "tests/test_g2_vendor_request_manifests.py": {
-      "expected_sha256": "e7a0f28b51dc33597910dd6aee7fa32ceb195b797d5529d8a7a1535534d48868",
-      "reason": "Generate deterministic vendor-specific request manifests for G2_CHAMPION_MINIMUM; acquisition planning only, no authorization or coverage claim."
+      "expected_sha256": "793be1b73ec10ea792d0eea08b30e13ffecf4c834262356a013db3ab9f6f1205",
+      "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/tickdata_equity_trades.csv": {
+      "expected_sha256": "f6572714c3fd628f7e5e85670d7e85067e3992192f6bc0f71fd9cd792dc17496",
+      "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/tickdata_equity_nbbo_quotes.csv": {
+      "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
+      "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/databento_opra_trades.csv": {
+      "expected_sha256": "29f408ccf695d7775a9b842556faa6cee9acef719e7732506f14a91d3186c452",
+      "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/cboe_option_trades.csv": {
+      "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
+      "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/lseg_opra_tick_history.csv": {
+      "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
+      "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/vendor_request_summary.json": {
+      "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
+      "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
     }
   },
   "schema_version": "2",
