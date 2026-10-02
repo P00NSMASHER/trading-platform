@@ -1538,6 +1538,18 @@
     "tests/test_g2_vendor_delivery_preflight.py": {
       "expected_sha256": "20cf825243b229cc497603788a77282325d0cbe7d9781f06ceebad331e885b28",
       "reason": "Fail-closed G2 vendor delivery preflight: reconcile delivered intake files to requested dates/family/kind without asserting authorization, symbol content coverage, or G2 completion."
+    },
+    "src/g2_vendor_quote_packets.py": {
+      "expected_sha256": "207f60b76f4f723f1ed584b62ba5c7589d29676fd270e0d50a5ba233ffe0de4c",
+      "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
+    },
+    "tests/test_g2_vendor_quote_packets.py": {
+      "expected_sha256": "6ee04ac8090816642831730a85ee770710e89b1b96c79fc38a14bf6ae06948c5",
+      "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
+    },
+    "data/processed/g2_vendor_requests/vendor_quote_packets.json": {
+      "expected_sha256": "0c35a8ed15b37b53eb3e7699d8020a01ecd71540ab0cbbbc182adc5829a410d5",
+      "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     }
   },
   "schema_version": "2",
