@@ -49,6 +49,21 @@ def plan(rows: list[dict[str, str]]) -> dict:
         key=lambda row: (row["symbol_date_pair_count"], row["trade_date"]),
     )
 
+    prefix_request_counts = []
+    running_requests = 0
+    for row in ranked:
+        running_requests += row["symbol_date_pair_count"]
+        prefix_request_counts.append(running_requests)
+
+    max_complete_dates_by_budget = sum(
+        total <= request_budget for total in prefix_request_counts
+    )
+    next_complete_date_request_floor = (
+        prefix_request_counts[max_complete_dates_by_budget]
+        if max_complete_dates_by_budget < len(prefix_request_counts)
+        else None
+    )
+
     selected = []
     used_requests = 0
     for row in ranked:
@@ -137,6 +152,25 @@ def plan(rows: list[dict[str, str]]) -> dict:
             - per_day_request_budget * HISTORICAL_OPTION_TRADES_POINTS_PER_REQUEST
         ),
         "optimistic_request_budget": request_budget,
+        "optimality_certificate": {
+            "objective": "maximize fully completed source-date rows under the optimistic one-request-per-underlying/date assumption",
+            "method": "sort source dates by required underlying/date requests ascending; the k cheapest dates minimize requests for any k-date solution",
+            "max_complete_source_date_rows": max_complete_dates_by_budget,
+            "selected_request_count": prefix_request_counts[max_complete_dates_by_budget - 1],
+            "next_complete_source_date_rows": (
+                max_complete_dates_by_budget + 1
+                if max_complete_dates_by_budget < len(prefix_request_counts)
+                else None
+            ),
+            "next_complete_request_floor": next_complete_date_request_floor,
+            "next_complete_exceeds_budget": (
+                next_complete_date_request_floor is not None
+                and next_complete_date_request_floor > request_budget
+            ),
+            "mathematically_optimal_under_assumption": (
+                len(selected) == max_complete_dates_by_budget
+            ),
+        },
         "optimistic_complete_source_date_rows": len(selected),
         "optimistic_complete_underlying_date_pairs": used_requests,
         "optimistic_points_used": used_requests * HISTORICAL_OPTION_TRADES_POINTS_PER_REQUEST,
