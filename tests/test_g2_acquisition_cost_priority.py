@@ -16,6 +16,22 @@ def test_cheap_first_acquisition_priority_matches_current_scope():
     costs = payload["known_public_cost_floors"]
     assert costs["tickdata_datastore_new_client_minimum_usd"] == 1000.0
     assert costs["tickapi_estimated_first_year_minimum_usd"] == 3821.0
+    assert costs["firstrate_10_plus_per_ticker_usd"] == 19.95
+    assert costs["firstrate_naive_146_ticker_cost_usd"] == 2912.7
+    assert costs["massive_individual_advanced_usd"] == 199.0
+    assert costs["massive_business_usd"] == 2499.0
+
+    screened = {
+        item["route"]: item for item in payload["screened_out_or_conditional_equity_routes"]
+    }
+    assert screened["firstrate_tick_history"]["status"] == "CONDITIONAL_NOT_CURRENT_FULL_SCOPE"
+    assert screened["firstrate_tick_history"]["naive_all_146_ticker_cost_usd"] == 2912.7
+    assert screened["massive_stocks"]["status"] == "INDIVIDUAL_PLAN_NOT_BUSINESS_ELIGIBLE"
+    assert screened["kibot_tick_bid_ask"]["status"] == "FAILS_CURRENT_EQUITY_QUOTE_SCHEMA"
+    assert any(
+        "bid_size" in reason and "ask_size" in reason
+        for reason in screened["kibot_tick_bid_ask"]["reasons"]
+    )
 
     routes = {item["route"]: item for item in payload["priority"]}
     assert routes["cboe_free_trial_capacity"]["rank"] == 1
@@ -51,6 +67,8 @@ def test_cheap_first_acquisition_priority_matches_current_scope():
         "do_not_activate_trials_automatically": True,
         "do_not_purchase_automatically": True,
         "prefer_one_time_tickdata_store_quote_before_tickapi_subscription": True,
+        "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": True,
+        "do_not_count_equity_quote_source_without_bid_and_ask_sizes": True,
         "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": True,
     }
 
