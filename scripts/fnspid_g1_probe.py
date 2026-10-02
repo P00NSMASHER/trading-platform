@@ -225,6 +225,17 @@ def main() -> int:
         writer.writerows(result_rows)
 
     print(json.dumps(summary, indent=2, sort_keys=True))
+    release_like = []
+    for event in unresolved:
+        eid = str(event["event_id"])
+        rows = sorted(
+            candidates.get(eid, []),
+            key=lambda r: (-int(r["score"]), r["news_timestamp_utc"], r["url"]),
+        )
+        if rows and int(rows[0]["score"]) >= 7:
+            release_like.append(rows[0])
+    print("FNSPID_RELEASE_LIKE_TOP_CANDIDATES")
+    print(json.dumps(release_like, indent=2, sort_keys=True))
     return 0
 
 
