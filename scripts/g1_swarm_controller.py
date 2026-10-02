@@ -409,7 +409,12 @@ def evaluate_token(
             base_sha = str((pr.get("base") or {}).get("sha") or pr.get("base_sha") or "")
             matching_open_fresh = bool(base_sha and base_sha == manifest.get("main_sha"))
         else:
-            matching_closed = number
+            closed_at = parse_time(str(pr.get("closed_at") or ""))
+            # A PR closed before this token assignment belongs to an older
+            # integration attempt. It must not immediately release a newly
+            # reassigned token for the same worker/package/batch.
+            if assigned_at is None or closed_at is None or closed_at >= assigned_at:
+                matching_closed = number
 
     token_candidate = Candidate(
         worker=token.worker,
