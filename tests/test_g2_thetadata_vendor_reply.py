@@ -22,6 +22,10 @@ def test_thetadata_written_reply_preserves_price_license_and_retention_terms():
     assert confirmation["modified_or_derived_research_data_retention"] == (
         "MAY_BE_RETAINED_IF_UNDERLYING_RAW_DATA_IS_DELETED"
     )
-    assert confirmation["option_requests_estimate"] if "option_requests_estimate" in confirmation else True
+    scope = theta["requested_scope"]
+    assert scope["option_underlying_date_pairs_per_record_kind"] == 3014
+    assert scope["stock_symbol_date_pairs_per_record_kind"] == 1430
+    assert scope["option_requests_estimate"] == 6028
+    assert scope["stock_requests_estimate"] == 2860
     assert theta["coverage_effect"] == "NONE_UNTIL_ACTUAL_VALIDATED_ROWS"
     assert theta["automatic_purchase_or_subscription"] is False
