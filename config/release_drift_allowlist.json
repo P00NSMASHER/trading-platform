@@ -120,8 +120,8 @@
       "reason": "G1 swarm coordination: preserve push/PR-close/15-minute/manual reconciliation and add immediate issue #153 WORKER-comment reconciliation; controller remains sole token authority and ignores its own controller comments."
     },
     ".github/workflows/g2-databento-cost-probe.yml": {
-      "expected_sha256": "fd4b0ad3b23e5ad664468132348ed8c69c077e1af0dae505e1ea915de2f4fa28",
-      "reason": "Hardened Databento historical cost-only probe: main-push only, read-only permissions, secret-gated metadata cost estimates, no downloads, batch jobs, or purchases."
+      "expected_sha256": "bb38af2efd640671fecde59f3c18eee6056caf990a0ba561313f1ce4f50679e5",
+      "reason": "Hardened Databento historical cost-only probe: main-push plus explicit manual dispatch, read-only permissions, secret-gated metadata cost estimates, no downloads, batch jobs, or purchases."
     },
     ".github/workflows/pr-ci.yml": {
       "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
@@ -1476,8 +1476,8 @@
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     },
     "tests/test_g2_databento_cost_probe_workflow.py": {
-      "expected_sha256": "a0e79396ce59ba2d2bb9086af8c35f2e7923f069571d0f02b186ec2ce4f567ac",
-      "reason": "Hardened Databento historical cost-only probe: main-push only, read-only permissions, secret-gated metadata cost estimates, no downloads, batch jobs, or purchases."
+      "expected_sha256": "cf759c6f98b607fc45750397dda92b8b55e8db914e303e94641d129581f4fb25",
+      "reason": "Hardened Databento historical cost-only probe: regression permits explicit manual dispatch while retaining read-only permissions, secret-gated metadata cost estimates, and no downloads, batch jobs, or purchases."
     },
     "tests/test_g2_databento_probe.py": {
       "expected_sha256": "82c5049b01662ee2f1a2656e09b120ce02be25ba38c642f830397426e3682d06",
