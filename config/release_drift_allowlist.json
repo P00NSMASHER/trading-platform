@@ -104,6 +104,10 @@
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
+    },
+    "docs/licensed_data_acquisition.md": {
+      "expected_sha256": "418b602a9ee8d0dd9ef24ed39daf3d21a98c80817b98b6fcc519d610e1d6398b",
+      "reason": "Document Oct 2 G2 vendor quote/trial outcomes and acquisition planning state; no purchase or G2 coverage claim."
     }
   },
   "repository_additions": {
@@ -1797,7 +1801,7 @@
     },
     "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
       "expected_sha256": "10caf7b4ecbf1e64ec452f865c6f48e49d187ff745aa357ef16868ce3072eacb",
-      "reason": "Vendor-reply evidence receipt recording current Cboe trial/history clarification; planning evidence only, not G2 coverage."
+      "reason": "Record Oct 2 G2 vendor reply evidence as a planning-only external-state receipt; no purchase, entitlement, or coverage claim."
     }
   },
   "schema_version": "2",
