@@ -1714,6 +1714,14 @@
     "tests/test_g2_cboe_all_access_capacity.py": {
       "expected_sha256": "44a62d7ee73e6ab9a4d024d95114e720d0a2ba600d1a25105d03a8524d4af49e",
       "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
+    },
+    "src/g2_cboe_acceptance_probe.py": {
+      "expected_sha256": "388d19bad811dd8216e2fe957913c835fadf86ea3d9fa5632804a68d90a7acbb",
+      "reason": "Minimal dry-run-by-default Cboe All Access historical acceptance probe; explicit two-request execution only, no signup, purchase, or bulk acquisition."
+    },
+    "tests/test_g2_cboe_acceptance_probe.py": {
+      "expected_sha256": "0dd70944caaa5eebeff729250e775862faef968f0a167a74fcc528a93761add7",
+      "reason": "Minimal dry-run-by-default Cboe All Access historical acceptance probe; explicit two-request execution only, no signup, purchase, or bulk acquisition."
     }
   },
   "schema_version": "2",
