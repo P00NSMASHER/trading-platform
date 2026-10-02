@@ -1,0 +1,72 @@
+{
+  "accounting": {
+    "equity_quote_required_pairs": 3828,
+    "equity_trade_required_pairs": 3828,
+    "lseg_option_residual_pairs_per_record_kind": 814,
+    "option_quote_required_pairs": 3828,
+    "option_trade_required_pairs": 3828,
+    "residual_equity_pairs_per_record_kind": 2398,
+    "thetadata_equity_pairs_per_record_kind": 1430,
+    "thetadata_option_pairs_per_record_kind": 3014
+  },
+  "listing_evidence_policy": "Equity rows are ThetaData-eligible only when the frozen trade date is on/after 2012-06-01 and G3 point-in-time evidence resolves the historical symbol to XNAS.",
+  "partitions": {
+    "lseg_option_residual.csv": {
+      "option_quote": {
+        "source_date_rows": 123,
+        "symbol_date_pairs": 814,
+        "unique_historical_symbols": 35
+      },
+      "option_trade": {
+        "source_date_rows": 123,
+        "symbol_date_pairs": 814,
+        "unique_historical_symbols": 35
+      }
+    },
+    "residual_equity.csv": {
+      "equity_quote": {
+        "source_date_rows": 380,
+        "symbol_date_pairs": 2398,
+        "unique_historical_symbols": 92
+      },
+      "equity_trade": {
+        "source_date_rows": 380,
+        "symbol_date_pairs": 2398,
+        "unique_historical_symbols": 92
+      }
+    },
+    "thetadata_equity.csv": {
+      "equity_quote": {
+        "source_date_rows": 230,
+        "symbol_date_pairs": 1430,
+        "unique_historical_symbols": 55
+      },
+      "equity_trade": {
+        "source_date_rows": 230,
+        "symbol_date_pairs": 1430,
+        "unique_historical_symbols": 55
+      }
+    },
+    "thetadata_options.csv": {
+      "option_quote": {
+        "source_date_rows": 291,
+        "symbol_date_pairs": 3014,
+        "unique_historical_symbols": 115
+      },
+      "option_trade": {
+        "source_date_rows": 291,
+        "symbol_date_pairs": 3014,
+        "unique_historical_symbols": 115
+      }
+    }
+  },
+  "policy": {
+    "candidate_is_not_coverage": true,
+    "do_not_activate_routes_automatically": true,
+    "do_not_purchase_automatically": true,
+    "license_and_retention_clearance_required": true
+  },
+  "purpose": "Exact planning-only partition of frozen G2 market-data requirements for the conditional cheap route. No purchase, entitlement, delivery, or coverage is implied.",
+  "schema_version": "1",
+  "thetadata_history_start": "2012-06-01"
+}

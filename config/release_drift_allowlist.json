@@ -1678,6 +1678,34 @@
     "data/processed/g2_vendor_requests/options_cost_alternatives.json": {
       "expected_sha256": "973ee357954f2081ee266e195f0ed401d1ff90032de5fbc5bf529fb0ca2258ff",
       "reason": "Planning-only G2 cost-routing refinement: conditional ThetaData+LSEG option consolidation plus the verified point-in-time XNAS/UTP equity subset; all license, retention, purchase, entitlement, and coverage gates remain fail-closed."
+    },
+    "src/g2_cheap_route_partitions.py": {
+      "expected_sha256": "d8aaa5557c1f52afa6b72c021822e7c80575b0549922c71dbc60d335e8f94cc4",
+      "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
+    },
+    "tests/test_g2_cheap_route_partitions.py": {
+      "expected_sha256": "4b444b9aea83f5efbeefcf6daaac95d97f27130fd934447867e9e0b2441850c1",
+      "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
+    },
+    "data/processed/g2_vendor_requests/cheap_route_partitions/thetadata_equity.csv": {
+      "expected_sha256": "4d661ec3e87d4f68af30b8d3464901f2a268bee19da933f158582f8c51c818f2",
+      "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
+    },
+    "data/processed/g2_vendor_requests/cheap_route_partitions/residual_equity.csv": {
+      "expected_sha256": "d13f6035785ea782f323974aa966c0bb8ecb658a0e3e114eecf823b9f77772e3",
+      "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
+    },
+    "data/processed/g2_vendor_requests/cheap_route_partitions/thetadata_options.csv": {
+      "expected_sha256": "eb2acd16fafb888e4b3dc16837e52abecf0c915f5bd767ea6cbe6b4828cbd1a4",
+      "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
+    },
+    "data/processed/g2_vendor_requests/cheap_route_partitions/lseg_option_residual.csv": {
+      "expected_sha256": "e3a1c6a9976abe59a2dfb5055096be802699a5c02f633c81fd4bb45b44d94be0",
+      "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
+    },
+    "data/processed/g2_vendor_requests/cheap_route_partitions/summary.json": {
+      "expected_sha256": "558fd529b6678b56f9e94548e134109c78c223fd519d2fd2752eb4d01ae83f59",
+      "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
     }
   },
   "schema_version": "2",
