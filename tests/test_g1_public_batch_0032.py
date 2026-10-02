@@ -33,13 +33,13 @@ def test_batch_hash_and_primary_clock_semantics():
     assert all(r["corroboration_reference"].startswith("https://") for r in dossier["candidates"])
 def test_remaining_exclusions_stay_blank_and_step9_blocked():
     readiness=json.loads((META / "metadata_readiness_summary.json").read_text())
-    assert (readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (99,75)
+    assert (readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (100,74)
     assert readiness["ready_g1_exact_timing_analysis"] is False
     excluded=[r for r in rows(META / "announcement_resolutions.csv") if r["resolution_status"]=="excluded_fail_closed"]
-    assert len(excluded)==75
+    assert len(excluded)==74
     assert all(not r["public_announcement_ts"] and not r.get("information_asymmetry_seconds") for r in excluded)
     status=json.loads((ROOT / "data/processed/real_data_release_sprint/step_status.json").read_text())
     step9=next(r for r in status["steps"] if r["step"]==9)
     assert step9["status"] == "SOURCE_BLOCKED"
-    assert "99/174" in step9["evidence"] and "75" in step9["evidence"]
+    assert "100/174" in step9["evidence"] and "74" in step9["evidence"]
     assert status["all_12_genuinely_complete"] is False
