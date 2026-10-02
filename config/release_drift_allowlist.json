@@ -1024,8 +1024,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "docs/licensed_data_acquisition.md": {
-      "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "418b602a9ee8d0dd9ef24ed39daf3d21a98c80817b98b6fcc519d610e1d6398b",
+      "reason": "Refresh licensed-data acquisition guidance after vendor-reply evidence and Cboe 2012+ scope confirmation."
     },
     "docs/licensed_data_drop_activation.md": {
       "expected_sha256": "328511247939f7bfe7b966758719b40fdf1c1d836bbc52b8b459e81313de25bf",
@@ -1288,8 +1288,8 @@
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     },
     "src/g2_cboe_free_trial_plan.py": {
-      "expected_sha256": "fcb88419d58bca492c13b0fa343725de15cf1df6a596d96e35c21973ce40ca52",
-      "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
+      "expected_sha256": "8da902a9c5e8e200a64ee92e8ddd787f7a1cf82c4cade6b15e0f8a5749164847",
+      "reason": "Correct Cboe free-trial planning to honor the vendor-confirmed 2012 OPRA history floor, exclude all 2011 requests, and use the vendor's trial credit guidance without claiming coverage."
     },
     "src/g2_cboe_free_trial_planner.py": {
       "expected_sha256": "2b7e699eae0bd2bb2f2e8b58f7a98993e316270b9db6ffe1b822341f6d6c88a6",
@@ -1620,8 +1620,8 @@
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     },
     "tests/test_g2_cboe_free_trial_plan.py": {
-      "expected_sha256": "68555d2288269577bdb43178657bcd8a6cbedabd8d17b7d33814b54a2e0a157c",
-      "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
+      "expected_sha256": "c8d25b33252c65b0313821fcac58bd5fb6db03b70ecc3e9a9608c0c3c53d2752",
+      "reason": "Regression coverage for the vendor-confirmed 2012 Cboe OPRA history floor, exact 309-date/3,364-pair eligibility, and hard exclusion of all 2011 requests."
     },
     "tests/test_g2_cboe_free_trial_planner.py": {
       "expected_sha256": "b99ea7e46f7eb363a28fc2b5195be1ea18c3cf76d6bd30654670099b956fa2fe",
@@ -1794,6 +1794,10 @@
     "tests/test_g2_cboe_acceptance_probe.py": {
       "expected_sha256": "0dd70944caaa5eebeff729250e775862faef968f0a167a74fcc528a93761add7",
       "reason": "Minimal dry-run-by-default Cboe All Access historical acceptance probe; explicit two-request execution only, no signup, purchase, or bulk acquisition."
+    },
+    "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
+      "expected_sha256": "10caf7b4ecbf1e64ec452f865c6f48e49d187ff745aa357ef16868ce3072eacb",
+      "reason": "Vendor-reply evidence receipt recording current Cboe trial/history clarification; planning evidence only, not G2 coverage."
     }
   },
   "schema_version": "2",
