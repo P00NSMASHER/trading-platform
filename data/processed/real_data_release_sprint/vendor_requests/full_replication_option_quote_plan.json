@@ -23,7 +23,8 @@
     "candidate_source_is_not_coverage": true,
     "canonical_full_g2_gate_unchanged": true,
     "license_and_delivery_validation_required": true,
-    "purchase_not_authorized": true
+    "purchase_not_authorized": true,
+    "cost_aware_split_is_not_authorization": true
   },
   "preferred_candidate": {
     "content": "OPRA quotes/NBBO and full-tick workflows where licensed",
@@ -50,5 +51,24 @@
       "unique_historical_underlyings": 137
     }
   },
-  "unique_historical_underlyings": 146
+  "unique_historical_underlyings": 146,
+  "cost_aware_candidate_split": {
+    "2011": {
+      "vendor": "LSEG",
+      "product": "OPRA Tick History",
+      "source_date_rows": 105,
+      "symbol_date_pair_count": 464,
+      "documented_history": "Tick History from 1997",
+      "status": "QUOTE_LICENSE_DELIVERY_PENDING"
+    },
+    "2012_2015": {
+      "vendor": "algoseek",
+      "product": "US Options Trade and NBBO Quote",
+      "source_date_rows": 309,
+      "symbol_date_pair_count": 3364,
+      "documented_history": "Dataset-specific TANQ start recorded as 2012-01-01; generic algoseek marketing also states 2014 for lossless OPRA history, so delivered dates must be validated before any coverage claim.",
+      "status": "QUOTE_LICENSE_DELIVERY_PENDING"
+    },
+    "selection_policy": "Cost-aware acquisition preference only. LSEG remains the conservative all-years candidate above; neither split route counts as coverage until licensing, delivery, and content validation pass."
+  }
 }
