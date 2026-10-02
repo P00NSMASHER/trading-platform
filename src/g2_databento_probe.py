@@ -16,7 +16,7 @@ DATASET = "OPRA.PILLAR"
 HISTORICAL_START = date(2013, 4, 1)
 NY = ZoneInfo("America/New_York")
 DEFAULT_REQUIREMENTS = Path(
-    "data/processed/real_data_release_sprint/g2_option_source_date_requirements.csv"
+    "data/processed/real_data_release_sprint/g2_champion_minimum_source_date_requirements.csv"
 )
 COST_URL = "https://hist.databento.com/v0/metadata.get_cost"
 
@@ -47,8 +47,12 @@ def _day_bounds(day: date) -> tuple[str, str]:
 
 
 def build_probe_manifest(rows: list[dict[str, str]]) -> dict:
+    option_rows = [row for row in rows if row["record_kind"] in {"option_trade", "option_quote"}]
+    if not option_rows:
+        raise ValueError("requirements contain no option_trade/option_quote rows")
+
     grouped: dict[str, dict[str, dict[str, str]]] = defaultdict(dict)
-    for row in rows:
+    for row in option_rows:
         grouped[row["trade_date"]][row["record_kind"]] = row
 
     eligible = []
@@ -58,9 +62,9 @@ def build_probe_manifest(rows: list[dict[str, str]]) -> dict:
         kinds = grouped[day_text]
         trade = kinds.get("option_trade")
         quote = kinds.get("option_quote")
-        if trade is None or quote is None:
-            raise ValueError(f"{day_text}: expected both option_trade and option_quote requirements")
-        if trade["historical_symbols"] != quote["historical_symbols"]:
+        if trade is None:
+            raise ValueError(f"{day_text}: expected option_trade requirement")
+        if quote is not None and trade["historical_symbols"] != quote["historical_symbols"]:
             raise ValueError(f"{day_text}: option trade/quote symbol sets differ")
 
         symbols = [s for s in trade["historical_symbols"].split(";") if s]
@@ -119,6 +123,14 @@ def build_probe_manifest(rows: list[dict[str, str]]) -> dict:
         "ineligible_pre_databento_dates": len(ineligible),
         "eligible_underlying_date_pairs": sum(r["symbol_date_pair_count"] for r in eligible),
         "candidate_direct_g2_rows": len(eligible),
+        "champion_minimum_total_rows": 1242 if len(rows) == 1242 else None,
+        "candidate_champion_minimum_rows": len(eligible) if len(rows) == 1242 else None,
+        "remaining_champion_minimum_rows_after_all_eligible_option_trades": (
+            1242 - len(eligible) if len(rows) == 1242 else None
+        ),
+        "candidate_champion_minimum_fraction": (
+            len(eligible) / 1242 if len(rows) == 1242 else None
+        ),
         "quote_trial_rows_not_counted": len(eligible),
         "eligible": eligible,
         "ineligible_dates": [r["trade_date"] for r in ineligible],
