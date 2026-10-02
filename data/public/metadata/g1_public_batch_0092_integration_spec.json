@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "0e8b1aeb0c56fee80bdf1de959e46b68a6b33d75",
+  "reserved_batch": "0092",
+  "worker_slot": 2,
+  "event_id": "HEJFE-EDFDC1213C9AF586",
+  "historical_symbol": "MXIM",
+  "public_announcement_ts": "2012-01-26T16:00:00-05:00",
+  "source_family": "official_newswire_archive",
+  "source_grade": "A",
+  "source_reference": "https://www.prnewswire.com/news/maxim-integrated-products,-inc./?page=14&pagesize=25",
+  "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/743316/000144530512000149/maximq212epr.htm",
+  "expected_state_after_batch": {
+    "exact_resolved": 99,
+    "reviewed_excluded": 75,
+    "step9": "SOURCE_BLOCKED"
+  }
+}
