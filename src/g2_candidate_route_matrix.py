@@ -54,9 +54,10 @@ def classify(row: dict[str, str]) -> tuple[str, str]:
                 "still requires license and production content validation.",
             )
         return (
-            "unresolved_2011_option_trade",
-            "2011 option trades remain support-confirmation-required; the current self-service "
-            "product page does not promise this range.",
+            "candidate_lseg_opra_tick_history",
+            "LSEG OPRA currently documents Tick History from 1997 with last-sale content and "
+            "licensed full-tick workflows, covering the 2011 frozen dates; still requires "
+            "license and production content validation.",
         )
     raise ValueError(f"unsupported champion-minimum record_kind={kind!r}")
 

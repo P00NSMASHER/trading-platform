@@ -1396,12 +1396,12 @@
       "reason": "No-purchase Nasdaq U.S. Equity Tick History candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; current Jan-2014+ consolidated tick trades/quotes remain candidates pending license and content validation."
     },
     "src/g2_candidate_route_matrix.py": {
-      "expected_sha256": "7379ddb3012ede533e5a5a3415aa242e0595027533a93e3e178fa9feaf60580a",
-      "reason": "Conservative no-purchase G2_CHAMPION_MINIMUM route matrix using current full-range Tick Data equities plus current Databento/Cboe option trade ranges; candidate does not mean covered."
+      "expected_sha256": "6b4fa063896c0935e0cd1652898b0428c97865efc1b99807bf7bd78b70dc537d",
+      "reason": "Conservative G2_CHAMPION_MINIMUM candidate-source matrix with explicit LSEG OPRA Tick History route for 2011; candidate does not mean covered and all license/content gates remain unchanged."
     },
     "tests/test_g2_candidate_route_matrix.py": {
-      "expected_sha256": "da6366e4ed8e2950f494ba808403e321f9740752e0ed6774c7345318d059ba14",
-      "reason": "Conservative no-purchase G2_CHAMPION_MINIMUM route matrix using current full-range Tick Data equities plus current Databento/Cboe option trade ranges; candidate does not mean covered."
+      "expected_sha256": "eb026a1e9053074a34a28c31d111c9c8f4a70fc093a6678de1624b2a0714276f",
+      "reason": "Conservative G2_CHAMPION_MINIMUM candidate-source matrix with explicit LSEG OPRA Tick History route for 2011; candidate does not mean covered and all license/content gates remain unchanged."
     }
   },
   "schema_version": "2",
