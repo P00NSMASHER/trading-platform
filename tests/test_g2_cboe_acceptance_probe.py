@@ -108,7 +108,7 @@ def test_execute_probe_uses_only_two_historical_requests(monkeypatch):
     assert result["accepted"] is True
     assert result["total_probe_points"] == 30
     assert len(calls) == 2
-    assert all("2011-03-21" in url and "AF" in url for url in calls)
+    assert all("2012-01-03" in url and "AF" in url for url in calls)
 
 
 def test_token_and_secret_never_appear_in_outputs(monkeypatch):
