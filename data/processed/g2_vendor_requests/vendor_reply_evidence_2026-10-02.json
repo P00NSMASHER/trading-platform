@@ -69,5 +69,42 @@
     "paid_quote_is_not_coverage": true,
     "vendor_availability_claim_is_not_coverage": true,
     "dry_run_or_sample_probe_is_not_coverage": true
+  },
+  "thetadata_written_reply": {
+    "vendor": "Theta Data",
+    "contact_name": "Anthony",
+    "contact_role": "Support",
+    "source_date": "2026-10-02",
+    "requested_scope": {
+      "options_history_start": "2012-06-01",
+      "stocks_history_start": "2012-06-01",
+      "option_underlying_date_pairs_per_record_kind": 3014,
+      "stock_symbol_date_pairs_per_record_kind": 1430,
+      "option_requests_estimate": 6028,
+      "stock_requests_estimate": 2860
+    },
+    "vendor_confirmation": {
+      "options_pro_tick_level_opra_history_start": "2012-06-01",
+      "stocks_pro_tick_level_utp_history_start": "2012-06-01",
+      "option_quote_endpoint": "option/history/quote?interval=tick",
+      "option_trade_endpoint": "option/history/trade",
+      "stock_quote_endpoint": "stock/history/quote?interval=tick&venue=utp_cta",
+      "stock_trade_endpoint": "stock/history/trade",
+      "private_research_eligible_individual_options_pro": true,
+      "options_pro_one_month_usd": 160,
+      "stocks_pro_one_month_usd": 160,
+      "combined_one_month_usd": 320,
+      "raw_unmodified_retention": "DELETE_WITHIN_30_DAYS_AFTER_SUBSCRIPTION_BILLING_PERIOD_ENDS",
+      "modified_or_derived_research_data_retention": "MAY_BE_RETAINED_IF_UNDERLYING_RAW_DATA_IS_DELETED",
+      "concurrent_requests": 8
+    },
+    "research_disposition": "LOW_COST_CONDITIONAL_ROUTE_WITH_BOUNDED_RAW_RETENTION",
+    "remaining_blockers": [
+      "LSEG exact 2011 residual price/entitlement still pending.",
+      "Operational acceptance of mandatory raw-data deletion after the allowed retention window.",
+      "Actual delivery/API extraction and production content validation."
+    ],
+    "automatic_purchase_or_subscription": false,
+    "coverage_effect": "NONE_UNTIL_ACTUAL_VALIDATED_ROWS"
   }
 }

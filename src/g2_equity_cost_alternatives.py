@@ -41,7 +41,7 @@ def build_alternatives() -> dict:
             },
             {
                 "vendor": "ThetaData Stocks PRO (UTP subset)",
-                "route_status": "CHEAP_PARTIAL_BUNDLE_CANDIDATE",
+                "route_status": "CHEAP_PARTIAL_BUNDLE_WRITTEN_TERMS_RECEIVED",
                 "documented_utp_history_start": "2012-06-01",
                 "frozen_first_eligible_date": "2012-06-29",
                 "eligible_source_date_rows_per_record_kind": 291,
@@ -51,17 +51,22 @@ def build_alternatives() -> dict:
                 "residual_symbol_date_pairs_per_record_kind": 2398,
                 "coverage_fit": "PARTIAL_POINT_IN_TIME_XNAS_UTP_SLICE",
                 "fidelity_fit": "TICK_TRADES_AND_NBBO_QUOTES",
-                "license_fit": "SALES_CLASSIFICATION_RETENTION_AND_BUNDLE_QUOTE_PENDING",
-                "pricing_status": "BUNDLE_QUOTE_REQUEST_SENT_2026-10-02",
+                "license_fit": "PRIVATE_RESEARCH_CONFIRMED_BOUNDED_RAW_RETENTION",
+                "pricing_status": "WRITTEN_STOCK_PRO_160_USD_MONTH_COMBINED_WITH_OPTIONS_320_USD_MONTH",
+                "written_stock_pro_monthly_price_usd": 160.00,
+                "written_combined_options_stock_monthly_price_usd": 320.00,
+                "raw_unmodified_retention": "DELETE_WITHIN_30_DAYS_AFTER_SUBSCRIPTION_BILLING_PERIOD_ENDS",
+                "derived_research_retention": "ALLOWED_AFTER_RAW_DELETION",
                 "derivation_basis": (
                     "The frozen post-2012-06 equity requirements were joined to G3 point-in-time "
                     "primary-listing evidence. Exactly 55 XNAS symbols account for 1,430 of 3,828 "
                     "symbol/date pairs per equity record kind; no listing-evidence conflicts remain."
                 ),
                 "blocking_fact": (
-                    "ThetaData documents UTP tick history from 2012-06-01, but the pre-history and "
-                    "CTA/XASE residual still needs another source. Written license classification, "
-                    "retention terms, and the requested options+stocks bundle quote remain pending."
+                    "Written terms confirm private research eligibility for the requested scope and $160/month "
+                    "Stock Pro ($320/month combined with Options Pro). Raw/unmodified data must be "
+                    "deleted within 30 days after the billing period ends; derived research data may "
+                    "be retained. The pre-history/CTA-XASE residual still needs another source."
                 ),
                 "source_urls": [
                     "https://thetadata.net/pricing",
