@@ -1518,6 +1518,14 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/g2_vendor_delivery_preflight.py": {
+      "expected_sha256": "415c20c6b3e84792b92d44b237b62702b8e1b0395c37948363a0dccb8422a3ee",
+      "reason": "Fail-closed G2 vendor delivery preflight: reconcile delivered intake files to requested dates/family/kind without asserting authorization, symbol content coverage, or G2 completion."
+    },
+    "tests/test_g2_vendor_delivery_preflight.py": {
+      "expected_sha256": "20cf825243b229cc497603788a77282325d0cbe7d9781f06ceebad331e885b28",
+      "reason": "Fail-closed G2 vendor delivery preflight: reconcile delivered intake files to requested dates/family/kind without asserting authorization, symbol content coverage, or G2 completion."
     }
   },
   "schema_version": "2",
