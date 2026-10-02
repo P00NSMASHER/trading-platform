@@ -77,7 +77,7 @@ batch.write_text(s.getvalue(),encoding="utf-8")
 save(evidence_path,{"schema_version":"1","research_use_only":True,"base_main_sha":BASE,"batch_path":str(batch),"batch_sha256":sha(batch),
 "items":items,"previous_exact_count":96,"expected_exact_count_after_batch":97,"expected_excluded_after_batch":77,
 "previous_exact_timestamps":{k:r["public_announcement_ts"] for k,r in old_exact.items()},
-"evidence_method":"One timestamp-preserving PR Newswire official archive records Tenet Healvdsiare's exact first-public release clock at 4:05 PM EDT, independently corroborated by SEC Exhibit 99.1 and the matching SEC Exhibit 99.1. CI verifies chronology, event identity and deterministic receipts; conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
+"evidence_method":"PR Newswire's official archive records VASCO Data Security International's exact first-public release clock at 03:00 EDT on October 27, 2011, independently corroborated by the matching SEC Exhibit 99.1. CI verifies chronology, event identity and deterministic receipts; conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
 "prohibited_substitutes":["edgar_acceptance_time","scheduled_call_time","archive_capture_time","inferred_clock","date_only"]})
 
 ids={x["event_id"] for x in items}
