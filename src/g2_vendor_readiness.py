@@ -18,6 +18,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
     activation = _read_json(vendor_dir / "vendor_activation_blueprint.json")
     quotes = _read_json(vendor_dir / "vendor_quote_packets.json")
     cboe_trial = _read_json(vendor_dir / "cboe_trial_capacity_plan.json")
+    vendor_replies = _read_json(vendor_dir / "vendor_reply_evidence_2026-10-02.json")
     coverage = _read_json(coverage_summary)
     audit = coverage.get("contract_audit") or {}
 
@@ -45,6 +46,44 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         or cboe_trial["coverage_claimed"] is not False
     ):
         raise ValueError("Cboe trial capacity plan is inconsistent or not fail-closed")
+
+    cboe_paid = vendor_replies.get("cboe_paid_bulk") or {}
+    cboe_confirmation = cboe_paid.get("vendor_confirmation") or {}
+    tickdata = vendor_replies.get("tick_data_written_quote") or {}
+    acceptance_probe = vendor_replies.get("cboe_zero_cost_acceptance_probe") or {}
+    guardrails = vendor_replies.get("guardrails") or {}
+    if (
+        vendor_replies.get("as_of") != "2026-10-02"
+        or vendor_replies.get("coverage_effect") != "NONE_UNTIL_ACTUAL_VALIDATED_ROWS"
+        or vendor_replies.get("purchase_authority") is not False
+        or cboe_paid.get("research_disposition") != "OUT_OF_SCOPE_CURRENT_RESEARCH"
+        or cboe_confirmation.get("sale_scope") != "FULL_OPRA_UNIVERSE_ONLY"
+        or cboe_confirmation.get("rough_price_usd_2_years_5_months") != 40000
+        or cboe_confirmation.get("rough_price_usd_1_calendar_year") != 24000
+        or cboe_confirmation.get("selected_309_days_across_years") != "CUSTOM_JOB_POSSIBLY_MORE_EXPENSIVE"
+        or tickdata.get("research_disposition") != "UNPRICED_WRITTEN_QUOTE_UNAVAILABLE"
+        or tickdata.get("written_availability_confirmation") != "NOT_PROVIDED"
+        or tickdata.get("written_price_usd") is not None
+        or tickdata.get("vendor_response") != "PHONE_CALL_REQUIRED"
+        or tickdata.get("availability_must_not_be_inferred") is not True
+        or acceptance_probe.get("logical_separation") != "SEPARATE_FROM_PAID_BULK_ACQUISITION"
+        or acceptance_probe.get("purchase_or_subscription_authorized") is not False
+        or acceptance_probe.get("coverage_claimed") is not False
+        or acceptance_probe.get("coverage_count_mutation_allowed") is not False
+        or acceptance_probe.get("acceptance_requires_actual_rows") is not True
+        or not all(
+            guardrails.get(key) is True
+            for key in (
+                "do_not_purchase_data",
+                "do_not_start_subscription",
+                "do_not_change_g2_coverage_counts_without_actual_validated_rows",
+                "paid_quote_is_not_coverage",
+                "vendor_availability_claim_is_not_coverage",
+                "dry_run_or_sample_probe_is_not_coverage",
+            )
+        )
+    ):
+        raise ValueError("October 2 vendor reply evidence is inconsistent or not fail-closed")
 
     activation_profiles = activation["profiles"]
     all_fail_closed = all(
@@ -86,6 +125,32 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "delivery_preflight_tool_ready": delivery_preflight_present,
             "databento_cost_only_workflow_ready": cost_probe_workflow_present,
             "cboe_trial_capacity_plan_ready": True,
+            "vendor_reply_evidence_ready": True,
+        },
+        "vendor_reply_evidence": {
+            "source_path": "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json",
+            "as_of": vendor_replies["as_of"],
+            "coverage_effect": vendor_replies["coverage_effect"],
+            "cboe_paid_bulk": {
+                "research_disposition": cboe_paid["research_disposition"],
+                "sale_scope": cboe_confirmation["sale_scope"],
+                "rough_price_usd_2_years_5_months": cboe_confirmation["rough_price_usd_2_years_5_months"],
+                "rough_price_usd_1_calendar_year": cboe_confirmation["rough_price_usd_1_calendar_year"],
+                "selected_309_days_across_years": cboe_confirmation["selected_309_days_across_years"],
+            },
+            "tick_data_written_quote": {
+                "research_disposition": tickdata["research_disposition"],
+                "written_availability_confirmation": tickdata["written_availability_confirmation"],
+                "written_price_usd": tickdata["written_price_usd"],
+                "vendor_response": tickdata["vendor_response"],
+            },
+            "cboe_zero_cost_acceptance_probe": {
+                "pull_request": acceptance_probe["pull_request"],
+                "state_as_of_recording": acceptance_probe["state_as_of_recording"],
+                "logical_separation": acceptance_probe["logical_separation"],
+                "coverage_claimed": acceptance_probe["coverage_claimed"],
+                "coverage_count_mutation_allowed": acceptance_probe["coverage_count_mutation_allowed"],
+            },
         },
         "external_state": {
             "vendor_quotes_or_pricing": "PARTIAL_EXTERNAL_QUOTES_RECEIVED",
