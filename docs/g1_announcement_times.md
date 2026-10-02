@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **65 public exact-time batches / 95 exact-resolved
+The current repository state is **66 public exact-time batches / 96 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -237,3 +237,7 @@ A timestamp-preserving InvestorsHub/ADVFN copy of the original Marketwire releas
 ### Batch 0083: BorgWarner
 
 The official PR Newswire BorgWarner archive records the exact Q2 2011 release at 2011-07-28 08:00 EDT (12:00 UTC), 75,660 seconds after the frozen 2011-07-27 10:59 EDT illicit trade. Matching SEC Exhibit 99.1 independently corroborates issuer, release title/date, reporting period, metrics, and release body. This advances G1 from 94 exact / 80 reviewed exclusions to 95 exact / 79 reviewed exclusions. SEC filing timing, scheduled calls, archive-capture, date-only, scheduled, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0087: Goodyear
+
+The official PR Newswire Goodyear archive records the exact Q2 2011 release at 2011-07-28 08:00 EDT (12:00 UTC), 57,660 seconds after the frozen 2011-07-27 15:59 EDT illicit trade. Matching SEC Exhibit 99.1 independently corroborates issuer, release title/date, reporting period, metrics, and release body. This advances G1 from 95 exact / 79 reviewed exclusions to 96 exact / 78 reviewed exclusions. SEC filing timing, scheduled calls, archive-capture, date-only, scheduled, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
