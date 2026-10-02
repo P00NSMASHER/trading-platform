@@ -33,14 +33,14 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     }
     assert payload["champion_minimum_validated_coverage"]["separately_measured"] is False
 
-    assert payload["external_state"]["vendor_quotes_or_pricing"] == "PENDING_EXTERNAL"
+    assert payload["external_state"]["vendor_quotes_or_pricing"] == "PARTIAL_EXTERNAL_QUOTES_RECEIVED"
     assert payload["external_state"]["license_or_entitlement_terms"] == "PENDING_EXTERNAL"
     assert payload["external_state"]["licensed_data_delivery"] == "PENDING_EXTERNAL"
     assert payload["external_state"]["production_content_validation"] == "BLOCKED_ON_DELIVERY"
     assert payload["external_state"]["databento_cost_probe"] == "BLOCKED_API_KEY_NOT_CONFIGURED"
     assert payload["external_state"]["cboe_trial_historical_access"] == "DOCUMENTED_ELIGIBLE_NOT_RUNTIME_VERIFIED"
-    assert payload["external_state"]["cboe_custom_tick_quote"] == "ESCALATED_TO_DORRAINE_FOLLOWUP_PENDING"
-    assert payload["external_state"]["tickdata_written_quote"] == "VENDOR_REQUESTED_PHONE_CALL_WRITTEN_QUOTE_PENDING"
+    assert payload["external_state"]["cboe_custom_tick_quote"] == "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET"
+    assert payload["external_state"]["tickdata_written_quote"] == "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED"
     assert payload["external_state"]["lseg_2011_quote"] == "REQUEST_SENT_AWAITING_REPLY"
     assert payload["external_state"]["algoseek_quote_and_sandbox_terms"] == "REQUEST_SENT_AWAITING_REPLY"
 
@@ -60,9 +60,9 @@ def test_readiness_next_actions_cover_every_external_dependency():
 
     assert "DATABENTO_API_KEY" in actions
     assert "Tick Data" in actions
-    assert "written pricing remains pending" in actions
+    assert "written quote as unavailable" in actions
     assert "Cboe" in actions
-    assert "Dorraine" in actions
+    assert "outside the target budget" in actions
     assert "explicit user authorization" in actions
     assert "runtime access is not verified" in actions
     assert "seq_no pagination" in actions
