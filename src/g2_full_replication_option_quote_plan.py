@@ -131,6 +131,37 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
                 ),
             },
         },
+        "cost_aware_candidate_split": {
+            "2011": {
+                "vendor": "LSEG",
+                "product": "OPRA Tick History",
+                "source_date_rows": len(y2011),
+                "symbol_date_pair_count": sum(
+                    int(row["symbol_date_pair_count"]) for row in y2011
+                ),
+                "documented_history": "Tick History from 1997",
+                "status": "QUOTE_LICENSE_DELIVERY_PENDING",
+            },
+            "2012_2015": {
+                "vendor": "algoseek",
+                "product": "US Options Trade and NBBO Quote",
+                "source_date_rows": len(later),
+                "symbol_date_pair_count": sum(
+                    int(row["symbol_date_pair_count"]) for row in later
+                ),
+                "documented_history": (
+                    "Dataset-specific TANQ start recorded as 2012-01-01; generic algoseek "
+                    "marketing also states 2014 for lossless OPRA history, so delivered dates "
+                    "must be validated before any coverage claim."
+                ),
+                "status": "QUOTE_LICENSE_DELIVERY_PENDING",
+            },
+            "selection_policy": (
+                "Cost-aware acquisition preference only. LSEG remains the conservative all-years "
+                "candidate above; neither split route counts as coverage until licensing, delivery, "
+                "and content validation pass."
+            ),
+        },
         "fidelity_requirement": {
             "tick_level_option_quote_updates": True,
             "required_fields": [
@@ -152,6 +183,7 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
             "purchase_not_authorized": True,
             "license_and_delivery_validation_required": True,
             "canonical_full_g2_gate_unchanged": True,
+            "cost_aware_split_is_not_authorization": True,
         },
     }
     return planned, summary
