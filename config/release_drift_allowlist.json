@@ -300,12 +300,12 @@
       "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
     },
     "data/processed/real_data_release_sprint/requirements_manifest.json": {
-      "expected_sha256": "a797ac7a22ea8dfb7e81ad8d671e0f0913f2249fceb0189a4c1b49d6efbd7520",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "fa1d2a323f8e48441acc38bccdbfecb4f073a3a6d75090a182babc5af4f30991",
+      "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "ca7b2981411d2668057d69b03ae4bab9c5b293f8723af5d423cc14a248b957c7",
-      "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "3d25a9586c3150a196108f520c3cad095d2362d1d66a7dd45d577dc7aac0a031",
+      "reason": "Deterministic G2_CHAMPION_MINIMUM materialization and canonical-path normalization; full G2 remains 1,656 rows and release gates remain unchanged."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
       "expected_sha256": "5dd666ca9f6d9a9d6b7838754a093b0294dc1750ef236b0106b091457d0a7004",
@@ -1100,8 +1100,8 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "src/real_data_release_sprint.py": {
-      "expected_sha256": "d85bef9465849f97bbe740d56de8ef621cede1434bef6dc19afc896a7ad77157",
-      "reason": "Adds deterministic G2_CHAMPION_MINIMUM requirement accounting only; canonical 1,656-row full-replication G2 contract and release gate remain unchanged."
+      "expected_sha256": "79ae03008beaf4bc46c5839e225dd70c86f7ed45909075a2ef4e634302a2a8df",
+      "reason": "Deterministic G2_CHAMPION_MINIMUM materialization and canonical-path normalization; full G2 remains 1,656 rows and release gates remain unchanged."
     },
     "src/real_data_replay.py": {
       "expected_sha256": "438ef2f5b9cd5d986f74c974b3715524e7bf37a0ba4876b044d8cde58af0489d",
@@ -1328,8 +1328,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "7a1b4886a430996f2006bd9c8e87c73bc9f456a4ce7591b4edfe511959fbf305",
-      "reason": "Adds deterministic G2_CHAMPION_MINIMUM requirement accounting only; canonical 1,656-row full-replication G2 contract and release gate remain unchanged."
+      "expected_sha256": "fd2c42d002f1214e87b862a95f27d5eb1024c1237fdd0526b37bb2e9a8d02d1c",
+      "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
@@ -1374,6 +1374,10 @@
     "tests/test_g2_databento_probe.py": {
       "expected_sha256": "f55781a0458a7d002c642c9c9c6b5665ffb632f6c0d8fa20aa485a5977c6f58c",
       "reason": "G2 zero-purchase Databento OPRA cost-probe utility and tests; no download, purchase, credential storage, or G2 evidence-policy weakening."
+    },
+    "data/processed/real_data_release_sprint/g2_champion_minimum_source_date_requirements.csv": {
+      "expected_sha256": "1ae3379537da3f4f809ce960eeb59906dbe961bee9982d94f1a91db5620e999c",
+      "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     }
   },
   "schema_version": "2",
