@@ -13,7 +13,7 @@ dependencies = [
 
 [project.optional-dependencies]
 safer-model = [
-  "skops>=0.15,<0.16",
+  "skops>=0.15,<0.17",
 ]
 
 [tool.pytest.ini_options]
