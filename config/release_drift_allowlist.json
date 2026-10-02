@@ -1216,8 +1216,8 @@
       "reason": "Fail-closed G2 vendor activation blueprint: deterministic repo-relative request paths and sorted profiles with blank delivery/license values and authorized=false until local entitlement review."
     },
     "src/g2_vendor_delivery_preflight.py": {
-      "expected_sha256": "415c20c6b3e84792b92d44b237b62702b8e1b0395c37948363a0dccb8422a3ee",
-      "reason": "Fail-closed G2 vendor delivery preflight: reconcile delivered intake files to requested dates/family/kind without asserting authorization, symbol content coverage, or G2 completion."
+      "expected_sha256": "e2cc8c11958107bd52e7693dc8e0eca896d1c82b34795b97ce76c919b6e6cb06",
+      "reason": "Support strict G2_FULL_REPLICATION LSEG option-quote delivery/content preflight with production bid/ask-size parsing; no coverage or gate relaxation."
     },
     "src/g2_vendor_quote_packets.py": {
       "expected_sha256": "207f60b76f4f723f1ed584b62ba5c7589d29676fd270e0d50a5ba233ffe0de4c",
@@ -1500,8 +1500,8 @@
       "reason": "Fail-closed G2 vendor activation blueprint: exact request scope and canonical fields with blank delivery/license values and authorized=false until local entitlement review."
     },
     "tests/test_g2_vendor_delivery_preflight.py": {
-      "expected_sha256": "20cf825243b229cc497603788a77282325d0cbe7d9781f06ceebad331e885b28",
-      "reason": "Fail-closed G2 vendor delivery preflight: reconcile delivered intake files to requested dates/family/kind without asserting authorization, symbol content coverage, or G2 completion."
+      "expected_sha256": "dd810eae09ab2a9a8271372debc978dd8f4b39f2225d1a187826f04f42f0412e",
+      "reason": "Support strict G2_FULL_REPLICATION LSEG option-quote delivery/content preflight with production bid/ask-size parsing; no coverage or gate relaxation."
     },
     "tests/test_g2_vendor_quote_packets.py": {
       "expected_sha256": "6ee04ac8090816642831730a85ee770710e89b1b96c79fc38a14bf6ae06948c5",
@@ -1596,8 +1596,8 @@
       "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
     },
     "tests/test_g2_vendor_content_preflight.py": {
-      "expected_sha256": "f27f57cd40d9a0855ec192383546be030c02b77fdb4d547389eea04bd8d50b96",
-      "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
+      "expected_sha256": "46748309dd106f4e2a5e527e3b00abac1effeee3c71748d5f560bd28f67547b6",
+      "reason": "Support strict G2_FULL_REPLICATION LSEG option-quote delivery/content preflight with production bid/ask-size parsing; no coverage or gate relaxation."
     },
     "src/g2_full_replication_option_quote_plan.py": {
       "expected_sha256": "d5e61d61f82de5ba1ee4373d863a77cb23fa76cc8bd7443081c1aebc210830cf",
