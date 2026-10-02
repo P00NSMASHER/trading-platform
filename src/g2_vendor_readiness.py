@@ -92,7 +92,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "production_content_validation": "BLOCKED_ON_DELIVERY",
             "runtime_secret_state": "NOT_COMMITTED_TO_REPOSITORY",
             "databento_cost_probe": "BLOCKED_API_KEY_NOT_CONFIGURED",
-            "cboe_trial_historical_access": "DOCUMENTED_ELIGIBLE_NOT_RUNTIME_VERIFIED",
+            "cboe_trial_historical_access": "VENDOR_CONFIRMED_ELIGIBLE_NOT_RUNTIME_VERIFIED",
             "cboe_custom_tick_quote": "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET",
             "tickdata_written_quote": "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED",
             "lseg_2011_quote": "REQUEST_SENT_AWAITING_REPLY",
@@ -114,7 +114,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         "next_external_actions": [
             "Configure DATABENTO_API_KEY if cost-only OPRA pricing is desired; the workflow performs no download or purchase.",
             "Tick Data requires a phone call before written pricing/availability; treat the written quote as unavailable unless the user explicitly chooses to call.",
-            "Cboe All Access historical Option Trades are documented eligible at 15 points per request, but runtime access is not verified; activate the 14-day trial only with explicit user authorization, then verify historical access and seq_no pagination before relying on trial capacity.",
+            "Cboe Data Vantage confirmed the 14-day All Access trial should retrieve historical data via API; activation still requires explicit user authorization, and runtime fields/completeness plus seq_no pagination point behavior must be verified before relying on trial capacity.",
             "Cboe custom tick-level OPRA pricing was received for the full OPRA universe only and is outside the target budget; do not pursue that paid custom route without explicit user authorization.",
             "Await LSEG pricing/availability reply for the exact 2011 OPRA request.",
             "Await algoseek pricing and sandbox-terms replies for the exact historical scopes.",
