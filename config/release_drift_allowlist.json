@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "bdddec23deaea0eac80e99897391b0ad0be38f6e3df36681f769c2196c0eb78c",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "480c0e9e3159f0d3e6b1ed2afab4bc59a709b929b71f6345751678ecfcca0f73",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "a1ab822a0b79ac1eaf0054ba59d9d5e01d9b7607aa15eb33b57ea3d68d884bb1",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "0dc1a69e1f0bbe55ce1a50e14e84801f3c7260a333c9fd12dd337a69b95c32a1",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "2a1005e9c519eb5b429556098e7207901147fbd7620afb45a35381123c63abb6",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "1ff4f3ad166307df8d88e60aab5f8653e963d41c22bc6eca19716ddc5b1272d5",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -115,6 +115,10 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
+    ".github/workflows/g1-public-batch-0083-worker-3.yml": {
+      "expected_sha256": "82ebbebdf2d3fbed2f46c08d32d48d2c0ff2cf56c708b675afc0c6fe36f46ffb",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     ".github/workflows/g1-swarm-controller.yml": {
       "expected_sha256": "5e4c3fcf2c5e4f528ba6703b4900220de5cd433dd813c98131ebc88217531df5",
       "reason": "G1 swarm coordination: preserve push/PR-close/15-minute/manual reconciliation and add immediate issue #153 WORKER-comment reconciliation; controller remains sole token authority and ignores its own controller comments."
@@ -160,8 +164,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "ac7faf8a9b46591eb6f2672d7c5a23985cea3cbf522e92bd17e72cefbf58d575",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "8f229a4e4aa298d8014eb937c6e24d36b46635813a0842126f790101e0cc5689",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -180,8 +184,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "b182256b8f29a95b408e990bdca0ff6a41b4c5d215a2aca770a827de9956fa69",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "274f429e4df76d87cb06a624ac782bd72adac5962e3dbf5b191533ff5cf41328",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -192,8 +196,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "8bf85f79154cae5e5f24653955d9a3314c695f16a496ffe068cf1e763e8aad17",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "02a8f1e23de7d60c5142ed16c422f2c4320f9705ea5302afccb1ec10c902bd6e",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -248,8 +252,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "11369a020cd16c0ac1dee2cfad6bbcbcf62262d4a27d4a19d79139bcea227839",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "0c693cea93cff72062e880367716a02584b093ccd1fb6dbe6af44930407261b3",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -264,12 +268,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "716181d01dad08e99f712b2330d1b8244665dc3297758afe54d22a92bdf242eb",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "588118a2b53fab53f7643b9c597c45812bf075fa28e43807dc44ae62dc1fbc85",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "92d57ddf6d7f915e9765ef229a79642aa5d2e8c45fb879531047abf70ef685f0",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "d5cf51b6f2adb915f6825d1f0a9f58fe8c52a3c3d1e5bb415ec9d784eb946759",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -336,16 +340,44 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "295f75c902dde4fabc4a1af0546e1e475b3529a0484dc521d95ffc9050b2964b",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "c0996e9dcd12da614f7b0e251fff4f8c456447acb48d82d8845c06b87fc8e7da",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
+      "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/databento_opra_trades.csv": {
+      "expected_sha256": "29f408ccf695d7775a9b842556faa6cee9acef719e7732506f14a91d3186c452",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
+      "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_nbbo_quotes.csv": {
+      "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_trades.csv": {
+      "expected_sha256": "f6572714c3fd628f7e5e85670d7e85067e3992192f6bc0f71fd9cd792dc17496",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/vendor_acquisition_handoff.json": {
+      "expected_sha256": "57eb85641c01d6ca189a45481a719dfdf9ca7f1ac146385080bdf66dccd9044e",
+      "reason": "Vendor acquisition handoff for G2_CHAMPION_MINIMUM: exact request scope, required canonical fields, license evidence, fidelity rules, and fail-closed production acceptance checks; no credentials or coverage claim."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/vendor_request_summary.json": {
+      "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "2e1f9644972b3ba04343b63c42ae84f2e521e396dc3e67f86720b8644c6324c9",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "67ab36920ac4f97dd1b5e65b79642a13c55c6123cc7b4a1264a871acc4a5bbb9",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "3458c55a26768e75ac24901f1758a1ae92fc42ef7876b1d1d5b71ee70d92c50e",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "14ba1c031f51a9974333d575d9c287077a98d261741379119b00e0e8d5b706df",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -364,8 +396,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "e5fa9d70da86b4bed4f9a4d1802d8bf1c1bd3612778432bf780391271c75130f",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "32f743b78d3cf11a22ceb16605ab75689295591f9f3a88f98cd982f0857d38b5",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -627,6 +659,10 @@
       "expected_sha256": "7c193a6b2ee6de9f1d067129ac060c398d44cfed668bfebd46e07488b9b84ed5",
       "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0083.csv": {
+      "expected_sha256": "df0f390966a95aa08a224aa4e5021cdd3934911919e0209b5253c002f115f03c",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -755,9 +791,17 @@
       "expected_sha256": "cf36e4a03e105377e63b3d9a5317bb26d2bf775eea860b6b6501cb2137cb4de3",
       "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0083_evidence.json": {
+      "expected_sha256": "2975b8788d7ed2991b54a09a4177a04674203d9c4b1c1be2af7092bc75cd0816",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "data/public/metadata/g1_public_batch_0083_integration_spec.json": {
+      "expected_sha256": "c917000e826093229b382309e1c8d17954f7615f70806882c7ac8ba8284ca745",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "d6b6d9f55e30d94744239b56eabd535d89466dc9ce7fdfeb5f1a51dd4c242556",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "2e7a949da1c6dacd651ef6a210c4124852f1535d74dd19de8f55876aab3c4b59",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
@@ -880,8 +924,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "5a6e3bd14181dfed8207912fe578da72b43bfcd67b7ccc355f4521f5cc7d5a17",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "fafc46cc2105b673264707ae24f57fe460278d26363235cbf477bf5b4ee9ca1a",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1043,6 +1087,10 @@
       "expected_sha256": "00490f0ab23bd25b295551c3ecbfbb98ad693badead37ded65ae88a98ccebc21",
       "reason": "G1 batch 0082 Worker-2 PNRA official SEC litigation public-distribution clock; deterministic 93 exact / 81 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "scripts/g1_batch_0083_generate.py": {
+      "expected_sha256": "fd9d50f0183c5a01d36be009bd3083643ec0366f570f2de96554e71f06b21e16",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     "scripts/g1_swarm_controller.py": {
       "expected_sha256": "a334abcb53834820997e24ccc0e467ee3e10b8e6e81bc9ef73146c72e66f7b76",
       "reason": "G1 swarm controller correctness: keep stale prep branches visible to an already-assigned holder for the bounded lease while still requiring exact-current-main prep for new assignment, and scan all prep branches rather than truncating after 30."
@@ -1139,6 +1187,14 @@
       "expected_sha256": "47dfa0e799ff15ee815920ad795736ad027ab5099ce361a5a1a615bcff75397f",
       "reason": "No-purchase Nasdaq U.S. Equity Tick History candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; current Jan-2014+ consolidated tick trades/quotes remain candidates pending license and content validation."
     },
+    "src/g2_tickapi_cost_estimator.py": {
+      "expected_sha256": "41a591e19b94808a8931b1786339574711f54405e4773bc0e49815237800a195",
+      "reason": "Planning-only TickAPI cost estimator tied to frozen G2 equity request manifests and current published TickAPI pricing; no API call, subscription, order, or coverage claim."
+    },
+    "src/g2_vendor_acquisition_handoff.py": {
+      "expected_sha256": "ea4f38057c75a0d9c4dec794d8b95d86f73b78bdac794a8b29bf130ae39f29a3",
+      "reason": "Vendor acquisition handoff for G2_CHAMPION_MINIMUM: exact request scope, required canonical fields, license evidence, fidelity rules, and fail-closed production acceptance checks; no credentials or coverage claim."
+    },
     "src/g2_vendor_request_manifests.py": {
       "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
       "reason": "Generate deterministic vendor-specific request manifests for G2_CHAMPION_MINIMUM; acquisition planning only, no authorization or coverage claim."
@@ -1224,148 +1280,152 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "8ebd7d8ae9effdf4de22fabe8499d4d344fce100fcd69a78ab2bb5137ea164e1",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "28ada2bb1d76267c505f7993595bb8e48c5ae2ee2169d74c0c3fb997228db90b",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "f90b13b98918a63f1ab395031fc756634ea5ad7f834176b3b44f048a79de01e8",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "1ecb7f9f21db9959a16e0948904c96e2876bb4ff1e1748f2cb1d89b229935865",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "a2c5ea7c429278a779d7051e1db145fa57958c7ae2e581442328de78b74cc411",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "da997bd358cc2958827509fa7a0fb2036052c5ae88e50166332fd341092103ad",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "4023a86308ef5b2b9ca2f65b375954353f1aa3b605779cb8a19d2ebc3cf72a0c",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "1f50e07abb85a2e5686cfa021dbfd6ef6247f9af7ddf4edfa1df4f7c63af2c9b",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "955d041edd93cf105e7656f9b6ac83796bbf9195376dbe95665b43af780ded1a",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "eec6d2eb4b8707187dda8bf1301195ba0c5a5bfa33a7f68a92cb480e2b591a08",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "4290a6185fcb9c190f63271d22346870e9438cd415281b711996279c5c8d7221",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "1cefdf9c306757a331b933c7136f90acbee64a261ebb018275e2ab7a1bb6e6af",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "8fa288c104aaa4818c0ec330699d8a692ef727c369f969b8ec97ec37a5c98bb9",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "d61a5b3eeb2007f40db3bb633d6c3217b49995612df18517bc28c1da8895de04",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "fe8236322cb522231a700a2becba30af9bc10026502591f37569544601137362",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "57eafc8421a9cae6d550c74224f20495774994b28051b559dc85de07ef9732ae",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "299732dc5436b65e33f362353a45c74472ca62eae9cc2c86e535822b6989dbac",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "2199173fa4c96d5e62bdf5fd5dece29b05699bb2e48d98400afb4801a4f247a5",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "8bcdf4b72282944f631a22cd5c0a207f819972ed6f13c12aefbbef3a82101f68",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "08dfb0b0c214fbd45c1b07ec8bdf59cc086fadca7b52dca033ca948ef523365b",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "d2dc52679c4dba7d70bbd8c43132b13fe304c771ab4f61bcf6120f2f3efc06a6",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "a26a4f841615c0e751da49fdfe87cafe70d8fcbc55429f731ae1d6dd6a80ea2a",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "33f171444bdc36cfe2000795b0e42c92a986fed1503990660d6c430216f4f3a1",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "80075346f1e2a76dd2f0d8decc9fd865dfd06e37a376e0866fa7b35e829efcd9",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "ad9d3bfc9c319618f4f90712cb67eecf20e7d364dcaf68a114183bdce76915d3",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "9db1169f06e6136291b2946c753c09792a922c6f2d029ee7f115435c8b5ecf7d",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "94230e6866e00886c71721a5aabd4b0c98357488082f212780e0a9cc71eb3c30",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "32765a2d20bde283ecbb61348a8f3d855d6f14af429f7e99212b8564931b41c2",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "f2f023d04f684db440f80e8207caeba5d3845218d0f48ce2935f0324a7e0f2d6",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "0316fa19e45b730884891f8becb5dc4f6da2b84bb4a37ed881c9251479d83fa5",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "d0a2fb17d4c71347d9bae70a39e1f79d66e62f7f582366351e8553297f339aee",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "2ef2e5a70ed61fec74bfe70e5ad10abc3fecb26fbe08bd5bc88186021c728c96",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "fa1c94e351bd9aec470ffaf7ed542faa85d996264d5a79ebc83737d83c61d79b",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "79f747f6f828752b7be1c3e1a3138d7bc0a84481f2b7f071dbc776c5f0fe25a8",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "dfb0c7af66b54d32ab5b66d9a1dcf5a5bae86793e3a6d656f9f74e2f21bf6693",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "47a1d00659208ae569d8ed2c9723af479cea69065247178a84e1bf1f119bc488",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "c38fd4225d8f990d54b938e834c1d10f01a92c6b64b4ea33d4807f4271ce67b1",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "0ed240ca3cd6f5b60ff80052abfa867ef992b535777ab9e5d99338135da90e4c",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "877eb63f2926e11997b03a7b6b1edc9681b5f55589c2768410df9832f72ad73a",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "4cf464f0e144fb8a82c3abbe56425e70441518fc24f8bf3d4c604b98124fcc6f",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "8d0ab53ed8e01b96452947948d00e6c84c444f7270d3a9a2fbcb57a7ac58dd54",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "ad87fabcc5720af1c32b3072baed1107a5c67ee5667003876d67752c94f7aee8",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "e37e12a8bbfb0c6afbc681316193d3cc46cdbc1740636cc2df02ad8f79d2bbab",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "8167105abb95cd679f710dfa98a668fc93d930674466c77f35f1329ba44364cf",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "e5b765d6eafed78b6d3811f99ca04dbed28b52ad358547a34de1ea3af3a258aa",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "72329736af420e40ede092b54b09b454f93b28175d25515fe88f326c8170dd43",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "c7be35e291bbfe630bea53df0307de6d8649c099e1ad9518010fdcda7fa652c5",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "3094fb5766118605b965aa0a3ee4dc6bab34607cf7c986213c869a4a8486ea03",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "92f76e127c741c7f69889f1488833b07e07afaddab66620c6320e86587bfd39f",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "419ab3af33f57a4e44a7cdce692306dc8cc5f0bff2146442f0d525ebe02b2f56",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "45ab093e6f25757850a56278ae7f3c0bf82e6fcd0f392bae28811ffb4d510717",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "9c70d6d61f7c84096e17ee29e23d80c1f0fe3e40963879c76b67cc4fd219c725",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "5f0bfc1fd31551c26db6d074ee38427498e6f957b0bd2a3c5e4a9ea45f3aa346",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "ee3fe4b2bdcb3f63705ae393e39f33dc39b653a89e5e62e7da39db5dd3513238",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "46737314159c441f3fbff894372b7efb9dd12e584f7e3b99097521915fab33cf",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "9108f6ae609ef94bcb9ec6707017907227bae950639067450994da67a333f9cf",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "0ba0f233dc3cb986ebe9e0dfcc415ff4df5dc816f28c55a752f011d711f69532",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "f29053673d82a8e9b4648b6cd7d8a971878b371fad5906532563189fbad162c5",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "46553c66841ccddc8f9ccdb95629ec9fad2c25f9bdd157c44e6a6c3b57c0e742",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "8e32e9fc5dcbe825493162708aa9b587d41f170febe02ca4b5755a1f4b47e0db",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "6de1906950fe534fc7010d63d601f51beffb1e63e318ac947c88ed16a23e37de",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "5c4062d3c47b7cca82f9abbd02b01616c24717c1bae3a7e77375efbdf3017fef",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "172a0ff8d7f69dce1896760397746c2033cbc8131236066ceb3230d2a6784856",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "fc0f93dc23ce2ea78b82abe70b0c687c26b0723f1a56fb8dfd09e388affe9ee2",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "66f21de3af9df400bd4187357226067a94d2e06a34c1ea2822ef5d5825004fc3",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "12c0fcf3fa9b1889e0c5145e7ed05f2e5e651a6cb67f0601b88c736d9bb88a8a",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0083.py": {
+      "expected_sha256": "5adf0e047efa7593c3d0ff7affe2143a1a1a7cf34c56a826af8fe1bcb5c11fc0",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "90f595b7def931179f29f3268e2b116000c48ce5124f05e54dda25f49e67e0cd",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "927c25adea7cda329765d35d949740282b2d80ef53e7e09ebb88f81dee0051c2",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "d2e4d632f6aa6067ed48efbc0264323f128b8833d3ae1310216473b2d5ec5de4",
@@ -1390,6 +1450,14 @@
     "tests/test_g2_nasdaq_tick_history_probe.py": {
       "expected_sha256": "c4fc6eb4046da7cf70176c1b8a2763d936fe8cbb0c9de5d8607b69df08e420de",
       "reason": "No-purchase Nasdaq U.S. Equity Tick History candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; current Jan-2014+ consolidated tick trades/quotes remain candidates pending license and content validation."
+    },
+    "tests/test_g2_tickapi_cost_estimator.py": {
+      "expected_sha256": "2b7b302ea2d7d60fdedfeae63bb278f95b832a39a38df66bfbc66659a5de5627",
+      "reason": "Planning-only TickAPI cost estimator tied to frozen G2 equity request manifests and current published TickAPI pricing; no API call, subscription, order, or coverage claim."
+    },
+    "tests/test_g2_vendor_acquisition_handoff.py": {
+      "expected_sha256": "573af8e7cb1ed637503d17e03a9cfbf9446151aa8336c0210146919edefeed7c",
+      "reason": "Vendor acquisition handoff for G2_CHAMPION_MINIMUM: exact request scope, required canonical fields, license evidence, fidelity rules, and fail-closed production acceptance checks; no credentials or coverage claim."
     },
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",
@@ -1420,8 +1488,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "bcf77a176e57b875e4fc40f850bbc0e3c7747d0f491763cf284cf24ddedd3581",
-      "reason": "G1 batch 0079 Worker-4 JNPR timestamp-preserving Marketwire mirror; deterministic 94 exact / 80 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "42a2778dc311989e944338a3caf6b86346ee5abcdd8627e90c661e268d4760f3",
+      "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
@@ -1458,50 +1526,6 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
-    },
-    "src/g2_tickapi_cost_estimator.py": {
-      "expected_sha256": "41a591e19b94808a8931b1786339574711f54405e4773bc0e49815237800a195",
-      "reason": "Planning-only TickAPI cost estimator tied to frozen G2 equity request manifests and current published TickAPI pricing; no API call, subscription, order, or coverage claim."
-    },
-    "tests/test_g2_tickapi_cost_estimator.py": {
-      "expected_sha256": "2b7b302ea2d7d60fdedfeae63bb278f95b832a39a38df66bfbc66659a5de5627",
-      "reason": "Planning-only TickAPI cost estimator tied to frozen G2 equity request manifests and current published TickAPI pricing; no API call, subscription, order, or coverage claim."
-    },
-    "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_trades.csv": {
-      "expected_sha256": "f6572714c3fd628f7e5e85670d7e85067e3992192f6bc0f71fd9cd792dc17496",
-      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
-    },
-    "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_nbbo_quotes.csv": {
-      "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
-      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
-    },
-    "data/processed/real_data_release_sprint/vendor_requests/databento_opra_trades.csv": {
-      "expected_sha256": "29f408ccf695d7775a9b842556faa6cee9acef719e7732506f14a91d3186c452",
-      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
-    },
-    "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
-      "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
-      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
-    },
-    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
-      "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
-      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
-    },
-    "data/processed/real_data_release_sprint/vendor_requests/vendor_request_summary.json": {
-      "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
-      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
-    },
-    "src/g2_vendor_acquisition_handoff.py": {
-      "expected_sha256": "ea4f38057c75a0d9c4dec794d8b95d86f73b78bdac794a8b29bf130ae39f29a3",
-      "reason": "Vendor acquisition handoff for G2_CHAMPION_MINIMUM: exact request scope, required canonical fields, license evidence, fidelity rules, and fail-closed production acceptance checks; no credentials or coverage claim."
-    },
-    "tests/test_g2_vendor_acquisition_handoff.py": {
-      "expected_sha256": "573af8e7cb1ed637503d17e03a9cfbf9446151aa8336c0210146919edefeed7c",
-      "reason": "Vendor acquisition handoff for G2_CHAMPION_MINIMUM: exact request scope, required canonical fields, license evidence, fidelity rules, and fail-closed production acceptance checks; no credentials or coverage claim."
-    },
-    "data/processed/real_data_release_sprint/vendor_requests/vendor_acquisition_handoff.json": {
-      "expected_sha256": "57eb85641c01d6ca189a45481a719dfdf9ca7f1ac146385080bdf66dccd9044e",
-      "reason": "Vendor acquisition handoff for G2_CHAMPION_MINIMUM: exact request scope, required canonical fields, license evidence, fidelity rules, and fail-closed production acceptance checks; no credentials or coverage claim."
     }
   },
   "schema_version": "2",
