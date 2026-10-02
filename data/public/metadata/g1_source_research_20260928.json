@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "7ae61f47f9ac51a19ac2984af5ecf314afc35c12",
+  "base_main_sha": "dfab89f3803dcaa835117f0b478646a8bf5ec250",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 96,
-    "note": "The latest integrated recovery is batch_0087; cumulative public exact-time batches are 66 and cumulative exact event records are 96 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 66,
+    "exact_resolved_event_records": 97,
+    "note": "The latest integrated recovery is batch_0085; cumulative public exact-time batches are 67 and cumulative exact event records are 97 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 67,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 78
+    "reviewed_excluded_event_records": 77
   },
   "preferred_public_source_families": [
     {
@@ -1826,6 +1826,31 @@
       "source_family": "official_newswire_archive",
       "source_grade": "A",
       "source_reference": "https://www.prnewswire.com/news/the-goodyear-tire-%26-rubber-company/?page=33",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "StreetInsider preserves the matching Business Wire release title/body and explicit 4:05 PM EDT timestamp. Tenet issuer IR and SEC Exhibit 99.1 independently match the May 4 2015 Q1 release identity, reporting period, metrics, and release content. SEC filing timing and scheduled conference-call timing are not used.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/70318/000119312515169013/d918624dex991.htm",
+      "disposition": "RESOLVED_IN_BATCH_0085",
+      "event_date": "2015-05-04",
+      "event_id": "HEJFE-6C4EA140AD75FFE2",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-05-04T16:05:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-05-04 15:48:00",
+      "historical_event_match": true,
+      "historical_symbol": "THC",
+      "information_asymmetry_seconds": 1020,
+      "probe_id": "THC-batch0085",
+      "public_announcement_ts": "2015-05-04T16:05:00-04:00",
+      "publisher_timestamp_text": "StreetInsider preserved Business Wire release: May 4, 2015 4:05 PM EDT",
+      "reason": "Promoted through timestamp-preserving Business Wire mirror evidence with Tenet issuer IR and independent SEC Exhibit 99.1 corroboration.",
+      "release_title": "Tenet Reports Adjusted EBITDA of $529 Million for the Quarter Ended March 31, 2015",
+      "reviewed_on": "2026-10-02",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "A",
+      "source_reference": "https://www.streetinsider.com/related.php?id=10518254&type=si",
       "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
