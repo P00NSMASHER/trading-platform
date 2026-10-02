@@ -286,6 +286,53 @@ def test_uncorroborated_queue_hint_does_not_beat_live_branch_prep() -> None:
     assert chosen.batch == 66
 
 
+def test_controller_plan_advances_unassigned_live_prepared_candidate(monkeypatch) -> None:
+    p = policy()
+    comments = [
+        comment(
+            10,
+            "2026-10-02T01:00:00Z",
+            "GLOBAL INTEGRATION TOKEN is now UNASSIGNED because no eligible package exists.",
+        ),
+        comment(
+            11,
+            "2026-10-02T01:11:53Z",
+            "WORKER 4 | HEJFE-D7FD00AF94DD8F41/JNPR | PREPARED | batch 0079 / g1/prep-0079-worker-4-jnpr-deadbee | exact-current-main prep | next",
+        ),
+    ]
+    refs = [
+        {
+            "ref": "refs/heads/g1/prep-0079-worker-4-jnpr-deadbee",
+            "object": {"sha": "feedface"},
+        }
+    ]
+    compares = {
+        "__main_sha__": "current-main",
+        "g1/prep-0079-worker-4-jnpr-deadbee": {
+            "behind_by": 0,
+            "ahead_by": 1,
+        },
+    }
+    m = manifest(unresolved_symbols={"JNPR": {"HEJFE-D7FD00AF94DD8F41"}})
+    monkeypatch.setattr(ctl, "manifest_state", lambda root, policy: m)
+
+    plan = ctl.controller_plan(
+        root=ROOT,
+        policy=p,
+        comments=comments,
+        pulls=[],
+        refs=refs,
+        compares=compares,
+        now=datetime(2026, 10, 2, 1, 12, tzinfo=timezone.utc),
+    )
+
+    assert plan["next_candidate"] is not None
+    assert plan["next_candidate"].worker == 4
+    assert plan["next_candidate"].batch == 79
+    assert plan["next_candidate"].package == "HEJFE-D7FD00AF94DD8F41/JNPR"
+    assert plan["action"] == "ADVANCE"
+
+
 def test_controller_invalidates_token_backed_only_by_historical_queue_hint() -> None:
     token = ctl.TokenAssignment(
         worker=3,
