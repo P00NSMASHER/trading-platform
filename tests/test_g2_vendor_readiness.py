@@ -23,6 +23,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
         "delivery_preflight_tool_ready": True,
         "databento_cost_only_workflow_ready": True,
         "cboe_trial_capacity_plan_ready": True,
+        "vendor_reply_evidence_ready": True,
     }
 
     assert payload["canonical_full_g2_state"] == {
@@ -32,6 +33,28 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
         "ready_for_real_backfill": False,
     }
     assert payload["champion_minimum_validated_coverage"]["separately_measured"] is False
+
+    evidence = payload["vendor_reply_evidence"]
+    assert evidence["source_path"] == "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json"
+    assert evidence["as_of"] == "2026-10-02"
+    assert evidence["coverage_effect"] == "NONE_UNTIL_ACTUAL_VALIDATED_ROWS"
+    assert evidence["cboe_paid_bulk"] == {
+        "research_disposition": "OUT_OF_SCOPE_CURRENT_RESEARCH",
+        "sale_scope": "FULL_OPRA_UNIVERSE_ONLY",
+        "rough_price_usd_2_years_5_months": 40000,
+        "rough_price_usd_1_calendar_year": 24000,
+        "selected_309_days_across_years": "CUSTOM_JOB_POSSIBLY_MORE_EXPENSIVE",
+    }
+    assert evidence["tick_data_written_quote"] == {
+        "research_disposition": "UNPRICED_WRITTEN_QUOTE_UNAVAILABLE",
+        "written_availability_confirmation": "NOT_PROVIDED",
+        "written_price_usd": None,
+        "vendor_response": "PHONE_CALL_REQUIRED",
+    }
+    assert evidence["cboe_zero_cost_acceptance_probe"]["pull_request"] == 258
+    assert evidence["cboe_zero_cost_acceptance_probe"]["logical_separation"] == "SEPARATE_FROM_PAID_BULK_ACQUISITION"
+    assert evidence["cboe_zero_cost_acceptance_probe"]["coverage_claimed"] is False
+    assert evidence["cboe_zero_cost_acceptance_probe"]["coverage_count_mutation_allowed"] is False
 
     assert payload["external_state"]["vendor_quotes_or_pricing"] == "PARTIAL_EXTERNAL_QUOTES_RECEIVED"
     assert payload["external_state"]["license_or_entitlement_terms"] == "PENDING_EXTERNAL"
