@@ -1024,8 +1024,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "docs/licensed_data_acquisition.md": {
-      "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "418b602a9ee8d0dd9ef24ed39daf3d21a98c80817b98b6fcc519d610e1d6398b",
+      "reason": "Refresh licensed-data acquisition guidance after vendor-reply evidence and Cboe 2012+ scope confirmation."
     },
     "docs/licensed_data_drop_activation.md": {
       "expected_sha256": "328511247939f7bfe7b966758719b40fdf1c1d836bbc52b8b459e81313de25bf",
@@ -1612,8 +1612,8 @@
       "reason": "Add exact symbol-date request-volume accounting to the G2_CHAMPION_MINIMUM candidate-source matrix; source availability only, no coverage claims or gate changes."
     },
     "tests/test_g2_cboe_all_access_capacity.py": {
-      "expected_sha256": "88e191bf8dd60f1c29a5c56b4679e1d5cc07bb7f245510194b3e5a8000b23cee",
-      "reason": "Correct Cboe acceptance/capacity tooling to vendor-confirmed OPRA 2012+ history; 2011 option trades remain explicitly out of Cboe scope."
+      "expected_sha256": "fe693a23dc5aa613ef8ed93fc233d2e62d1201485ace6112c5d30bb430bb583e",
+      "reason": "Regression coverage for corrected Cboe 2012+ capacity scope and explicit pre-purchase gates."
     },
     "tests/test_g2_cboe_equity_probe.py": {
       "expected_sha256": "065a041bfd46652ba0221e8f17cef257d6f6972389f5ab2cbfe54c44b9a7da69",
@@ -1792,8 +1792,12 @@
       "reason": "Correct Cboe acceptance/capacity tooling to vendor-confirmed OPRA 2012+ history; 2011 option trades remain explicitly out of Cboe scope."
     },
     "tests/test_g2_cboe_acceptance_probe.py": {
-      "expected_sha256": "a741e802305007f428786d71d16fb0577daab8a5c90ea490939ef31ce7d2e403",
-      "reason": "Correct Cboe acceptance/capacity tooling to vendor-confirmed OPRA 2012+ history; 2011 option trades remain explicitly out of Cboe scope."
+      "expected_sha256": "7b1377fa42ea8e4a5dd6645d7a656526ffdcf0de0192245a9d09cd4682550e61",
+      "reason": "Regression coverage for the corrected 2012 Cboe acceptance probe sample and fail-closed acceptance semantics."
+    },
+    "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
+      "expected_sha256": "10caf7b4ecbf1e64ec452f865c6f48e49d187ff745aa357ef16868ce3072eacb",
+      "reason": "Vendor-reply evidence receipt recording current Cboe trial/history clarification; planning evidence only, not G2 coverage."
     }
   },
   "schema_version": "2",
