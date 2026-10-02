@@ -444,9 +444,13 @@ def evaluate_token(
         live_support = matching_open is not None and matching_open_fresh
         if not live_support:
             for candidate in candidates:
-                # Only an exact-current-main prep branch is live prepared support.
-                # Historical PREPARED comments are advisory and cannot keep a token alive.
-                if candidate.source != "prep_branch_fallback" or candidate.behind_by != 0:
+                # A known matching prep branch keeps an already-assigned token
+                # supported even after unrelated main movement. It still must be
+                # regenerated before canonical integration; stale branches remain
+                # ineligible for new assignment via require_live_prepared_support().
+                if candidate.source != "prep_branch_fallback":
+                    continue
+                if candidate.behind_by is None or (candidate.ahead_by or 0) < 1:
                     continue
                 if candidate.worker != token.worker or candidate.batch != token.batch:
                     continue
@@ -566,11 +570,10 @@ def branch_candidates(
         ahead = compare.get("ahead_by")
         if ahead is not None and int(ahead) < 1:
             continue
-        # Prepared branches are disposable caches. Any divergence behind current
-        # main invalidates PREPARED state and requires regeneration from exact main.
-        # Do not let a stale branch consume or extend an integration-token lease.
-        if behind is None or int(behind) != 0:
-            continue
+        # Preserve known prep branches even when they fall behind current main so
+        # an already-assigned token can survive unrelated main movement long enough
+        # to regenerate. New token assignment remains fail-closed in
+        # require_live_prepared_support(), which still requires behind_by == 0.
         rows.append(
             Candidate(
                 worker=worker,
@@ -794,7 +797,7 @@ def fetch_branch_fallbacks(repo: str, token: str, main_sha: str) -> tuple[list[d
         return [], {}
 
     compares: dict[str, dict[str, Any]] = {}
-    for ref in refs[:30]:
+    for ref in refs:
         branch = str(ref.get("ref") or "").removeprefix("refs/heads/")
         parsed = parse_prep_branch(branch)
         if parsed is None:
