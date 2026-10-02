@@ -280,8 +280,8 @@
       "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
     },
     "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
-      "expected_sha256": "ee4b2f0a0afcc0f19ac20c968522dcf40449c1fc183976de2048b1bdb328b628",
-      "reason": "Planning-only materialized Cboe All Access free-trial capacity receipt; awaits vendor confirmation and claims no G2 coverage."
+      "expected_sha256": "d65a352ce25e487860313437c5e7512e39d05167adbb23fc9f2f828991df49c7",
+      "reason": "Add a formal optimality certificate proving 81/83 is the maximum complete Cboe source-date coverage under the optimistic 462-request free-trial capacity model; no trial activation or coverage claim."
     },
     "data/processed/g2_vendor_requests/databento_opra_trades.csv": {
       "expected_sha256": "29f408ccf695d7775a9b842556faa6cee9acef719e7732506f14a91d3186c452",
@@ -1220,8 +1220,8 @@
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     },
     "src/g2_cboe_free_trial_planner.py": {
-      "expected_sha256": "fa40c086574d6f46a3104fec9ce909f03d475dfad573f80fa67ec33155faa40b",
-      "reason": "Planning-only Cboe All Access free-trial estimator reconciled to Cboe Data Vantage's 2012 OPRA history floor, current historical/trial SIP documentation, 15-point pagination requests, and the 500-point daily cap; no API calls, purchases, subscriptions, or coverage claims."
+      "expected_sha256": "2b7e699eae0bd2bb2f2e8b58f7a98993e316270b9db6ffe1b822341f6d6c88a6",
+      "reason": "Add a formal optimality certificate proving 81/83 is the maximum complete Cboe source-date coverage under the optimistic 462-request free-trial capacity model; no trial activation or coverage claim."
     },
     "src/g2_databento_probe.py": {
       "expected_sha256": "dbbcc056dce81e63b7c769128c2ac515fe10166b57386d912c265dd079c3b670",
@@ -1516,8 +1516,8 @@
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     },
     "tests/test_g2_cboe_free_trial_planner.py": {
-      "expected_sha256": "2d240156cbb327dd3c0a701042bccb70a646c82753c1fdc841187fef5a509750",
-      "reason": "Regression coverage for reconciled Cboe trial provenance plus exact reproduction of the planning-only capacity receipt."
+      "expected_sha256": "b99ea7e46f7eb363a28fc2b5195be1ea18c3cf76d6bd30654670099b956fa2fe",
+      "reason": "Add a formal optimality certificate proving 81/83 is the maximum complete Cboe source-date coverage under the optimistic 462-request free-trial capacity model; no trial activation or coverage claim."
     },
     "tests/test_g2_databento_cost_probe_workflow.py": {
       "expected_sha256": "cf759c6f98b607fc45750397dda92b8b55e8db914e303e94641d129581f4fb25",
