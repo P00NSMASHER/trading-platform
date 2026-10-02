@@ -165,11 +165,12 @@ def _coverage_set(mapping: dict[str, str]) -> set[str]:
 def _family_for(kind: str, filename: str, version: str) -> str:
     low = filename.lower()
     if kind in {"equity_trade", "equity_quote"}:
-        return "nyse_daily_taq" if any(x in low for x in ("taq", "ct", "cq", "trade", "quote")) else "generic_authorized_market_data"
+        explicit_nyse_taq = any(x in low for x in ("nyse", "daily_taq", "daily-taq", "taq_"))
+        return "nyse_daily_taq" if explicit_nyse_taq else "generic_authorized_market_data"
     if kind == "option_trade":
-        return "cboe_option_trades" if any(x in low for x in ("cboe", "option", "opra")) else "generic_authorized_market_data"
+        return "cboe_option_trades" if "cboe" in low else "generic_authorized_market_data"
     if kind == "option_quote":
-        return "cboe_option_quotes" if any(x in low for x in ("cboe", "option", "opra")) else "generic_authorized_market_data"
+        return "cboe_option_quotes" if "cboe" in low else "generic_authorized_market_data"
     if kind == "itch_decoded":
         return "nasdaq_itch_4_1_decoded" if version == "ITCH-4.1" else "nasdaq_itch_5_0_decoded"
     return "generic_authorized_market_data"
