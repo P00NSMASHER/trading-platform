@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "192bf8cc52f662536e88e49d7a8bfe6f05aa685b",
+  "reserved_batch": "0083",
+  "worker_slot": 3,
+  "event_id": "HEJFE-5CB3223BB28A6F14",
+  "historical_symbol": "BWA",
+  "public_announcement_ts": "2011-07-28T08:00:00-04:00",
+  "source_family": "official_newswire_archive",
+  "source_grade": "A",
+  "source_reference": "https://www.prnewswire.com/news/borgwarner-inc./?page=13",
+  "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/908255/000090825511000050/bwaexhibit991pressrelease6.htm",
+  "expected_state_after_batch": {
+    "exact_resolved": 94,
+    "reviewed_excluded": 80,
+    "step9": "SOURCE_BLOCKED"
+  }
+}
