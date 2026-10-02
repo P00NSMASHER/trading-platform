@@ -27,6 +27,10 @@ ROUTE_EXPECTATIONS = {
         "record_kind": "option_trade",
         "source_family": "generic_authorized_market_data",
     },
+    "candidate_lseg_opra_tick_history_option_quotes": {
+        "record_kind": "option_quote",
+        "source_family": "generic_authorized_market_data",
+    },
 }
 
 ACTIVATABLE_INTAKE_STATUS = "PENDING_AUTHORIZATION_AND_REVIEW"
