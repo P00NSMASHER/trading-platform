@@ -88,7 +88,7 @@ exclusions["g1_state"].update(exact_resolved=95,reviewed_excluded=79,raw_exact_t
 save(exclusion_path,exclusions)
 
 contract_path=Path("config/metadata_sources.public_progress.json");contract=load(contract_path)
-contract["sources"].insert(0,{"source_id":"public-worker3-jnpr-batch-0079","record_kind":"announcement_timestamp",
+contract["sources"].insert(0,{"source_id":"public-worker3-bwa-batch-0083","record_kind":"announcement_timestamp",
 "source_family":"official_newswire_archive","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
 "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{k:k for k in fields},
 "license_reference":"Official public PR Newswire archive for BWA, independently corroborated by matching SEC Exhibit 99.1. No licensed vendor data used.",
@@ -105,7 +105,7 @@ hints["current_g1_state"].update(public_exact_batch_count=65,exact_resolved_even
 for item in items:
     hints["validation_probes"].append(dict(item,probe_id="BWA-batch0083",historical_event_match=True,
       exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
-      disposition="RESOLVED_IN_BATCH_0079",reason="Promoted through official PR Newswire exact-clock evidence with independent SEC Exhibit 99.1 corroboration."))
+      disposition="RESOLVED_IN_BATCH_0083",reason="Promoted through official PR Newswire exact-clock evidence with independent SEC Exhibit 99.1 corroboration."))
 save(hints_path,hints)
 
 assert rebuild.rebuild(ROOT,publish=True)["after"]["up_to_date"]
@@ -156,7 +156,7 @@ for fn in test_files:
         pairs=[
           ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (94,80)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (95,79)'),
           ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (94, 80)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (95, 79)'),
-          ('"93/174" in step9["evidence"] and "81" in step9["evidence"]','"95/174" in step9["evidence"] and "79" in step9["evidence"]'),
+          ('"94/174" in step9["evidence"] and "80" in step9["evidence"]','"95/174" in step9["evidence"] and "79" in step9["evidence"]'),
           ('len(excluded)==80','len(excluded)==79'),
           ('len(excluded) == 80','len(excluded) == 79'),
           ('len(ex)==80','len(ex)==79'),
