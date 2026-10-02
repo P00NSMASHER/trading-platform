@@ -1024,8 +1024,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "docs/licensed_data_acquisition.md": {
-      "expected_sha256": "0959d4d8a147aaf56efa2d5be39845aca2c5d0f2300e4e28d48a992b5545143f",
-      "reason": "Licensed-data acquisition readiness: support Nasdaq ITCH 4.1 and 5.0, union split/sharded authorized vendor files for G2 date coverage, and regenerate exact acquisition receipts."
+      "expected_sha256": "418b602a9ee8d0dd9ef24ed39daf3d21a98c80817b98b6fcc519d610e1d6398b",
+      "reason": "Refresh licensed-data acquisition guidance after vendor-reply evidence and Cboe 2012+ scope confirmation."
     },
     "docs/licensed_data_drop_activation.md": {
       "expected_sha256": "328511247939f7bfe7b966758719b40fdf1c1d836bbc52b8b459e81313de25bf",
@@ -1794,6 +1794,10 @@
     "tests/test_g2_cboe_acceptance_probe.py": {
       "expected_sha256": "0dd70944caaa5eebeff729250e775862faef968f0a167a74fcc528a93761add7",
       "reason": "Minimal dry-run-by-default Cboe All Access historical acceptance probe; explicit two-request execution only, no signup, purchase, or bulk acquisition."
+    },
+    "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
+      "expected_sha256": "10caf7b4ecbf1e64ec452f865c6f48e49d187ff745aa357ef16868ce3072eacb",
+      "reason": "Vendor-reply evidence receipt recording current Cboe trial/history clarification; planning evidence only, not G2 coverage."
     }
   },
   "schema_version": "2",
