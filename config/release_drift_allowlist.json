@@ -1590,6 +1590,14 @@
     "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
       "expected_sha256": "ee4b2f0a0afcc0f19ac20c968522dcf40449c1fc183976de2048b1bdb328b628",
       "reason": "Planning-only materialized Cboe All Access free-trial capacity receipt; awaits vendor confirmation and claims no G2 coverage."
+    },
+    "src/g2_vendor_content_preflight.py": {
+      "expected_sha256": "50056470091cbddfcef9821af2f6e5b1600776724a01769751d91a903325a2ca",
+      "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
+    },
+    "tests/test_g2_vendor_content_preflight.py": {
+      "expected_sha256": "f27f57cd40d9a0855ec192383546be030c02b77fdb4d547389eea04bd8d50b96",
+      "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
     }
   },
   "schema_version": "2",
