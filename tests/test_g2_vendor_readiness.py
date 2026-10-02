@@ -38,7 +38,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert payload["external_state"]["licensed_data_delivery"] == "PENDING_EXTERNAL"
     assert payload["external_state"]["production_content_validation"] == "BLOCKED_ON_DELIVERY"
     assert payload["external_state"]["databento_cost_probe"] == "BLOCKED_API_KEY_NOT_CONFIGURED"
-    assert payload["external_state"]["cboe_trial_historical_access"] == "AWAITING_RYAN_LUSK_CONFIRMATION"
+    assert payload["external_state"]["cboe_trial_historical_access"] == "DOCUMENTED_ELIGIBLE_NOT_RUNTIME_VERIFIED"
     assert payload["external_state"]["cboe_custom_tick_quote"] == "ESCALATED_TO_DORRAINE_FOLLOWUP_PENDING"
     assert payload["external_state"]["tickdata_written_quote"] == "VENDOR_REQUESTED_PHONE_CALL_WRITTEN_QUOTE_PENDING"
     assert payload["external_state"]["lseg_2011_quote"] == "REQUEST_SENT_AWAITING_REPLY"
@@ -62,9 +62,10 @@ def test_readiness_next_actions_cover_every_external_dependency():
     assert "Tick Data" in actions
     assert "written pricing remains pending" in actions
     assert "Cboe" in actions
-    assert "Ryan Lusk" in actions
     assert "Dorraine" in actions
-    assert "do not activate the trial automatically" in actions
+    assert "explicit user authorization" in actions
+    assert "runtime access is not verified" in actions
+    assert "seq_no pagination" in actions
     assert "LSEG" in actions
     assert "algoseek" in actions
     assert "local drop folder" in actions
