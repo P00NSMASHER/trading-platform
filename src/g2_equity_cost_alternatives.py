@@ -44,10 +44,12 @@ def build_alternatives() -> dict:
                 "route_status": "CHEAP_PARTIAL_BUNDLE_CANDIDATE",
                 "documented_utp_history_start": "2012-06-01",
                 "frozen_first_eligible_date": "2012-06-29",
-                "eligible_source_date_rows_per_record_kind": 291,
+                "post_history_date_universe": 291,
+                "eligible_source_date_rows_per_record_kind": 230,
                 "eligible_symbol_date_pairs_per_record_kind": 1430,
                 "eligible_unique_symbols": 55,
                 "required_symbol_date_pairs_per_record_kind": 3828,
+                "residual_source_date_rows_per_record_kind": 380,
                 "residual_symbol_date_pairs_per_record_kind": 2398,
                 "coverage_fit": "PARTIAL_POINT_IN_TIME_XNAS_UTP_SLICE",
                 "fidelity_fit": "TICK_TRADES_AND_NBBO_QUOTES",
@@ -55,7 +57,7 @@ def build_alternatives() -> dict:
                 "pricing_status": "BUNDLE_QUOTE_REQUEST_SENT_2026-10-02",
                 "derivation_basis": (
                     "The frozen post-2012-06 equity requirements were joined to G3 point-in-time "
-                    "primary-listing evidence. Exactly 55 XNAS symbols account for 1,430 of 3,828 "
+                    "primary-listing evidence. Exactly 55 XNAS symbols across 230 non-empty request dates account for 1,430 of 3,828 "
                     "symbol/date pairs per equity record kind; no listing-evidence conflicts remain."
                 ),
                 "blocking_fact": (
@@ -137,7 +139,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     payload = build_alternatives()
-    rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"
+    rendered = json.dumps(payload, indent=2, sort_keys=True) + "\\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(rendered, encoding="utf-8")
