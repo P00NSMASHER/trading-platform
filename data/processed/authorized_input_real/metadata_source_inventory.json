@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-worker0-thc-batch-0085",
+    "record_kind": "announcement_timestamp",
+    "source_family": "preserved_wire_mirror",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0085.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "ca33e223be42b0208caa949dd7f39c6ba5f7ed1cb7c1348276a357221270a4e7",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-worker1-vdsi-batch-0076",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
