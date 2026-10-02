@@ -1288,8 +1288,8 @@
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     },
     "src/g2_cboe_free_trial_plan.py": {
-      "expected_sha256": "fcb88419d58bca492c13b0fa343725de15cf1df6a596d96e35c21973ce40ca52",
-      "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
+      "expected_sha256": "8925d0c53d7d3ee742d65bace97dbd35d2238eedbd6437dd9e7bc3e80fcff7fd",
+      "reason": "Fail-close the legacy 2011 Cboe trial planner because Cboe Data Vantage confirmed OPRA-related datasets begin in 2012; inventory 2011 scope but schedule zero requests."
     },
     "src/g2_cboe_free_trial_planner.py": {
       "expected_sha256": "2b7e699eae0bd2bb2f2e8b58f7a98993e316270b9db6ffe1b822341f6d6c88a6",
@@ -1620,8 +1620,8 @@
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     },
     "tests/test_g2_cboe_free_trial_plan.py": {
-      "expected_sha256": "68555d2288269577bdb43178657bcd8a6cbedabd8d17b7d33814b54a2e0a157c",
-      "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
+      "expected_sha256": "c3093eb2f5a00e0864ad21e6da16cb4a55619150ec516bb89f616d9ddcb23abc",
+      "reason": "Fail-close the legacy 2011 Cboe trial planner because Cboe Data Vantage confirmed OPRA-related datasets begin in 2012; inventory 2011 scope but schedule zero requests."
     },
     "tests/test_g2_cboe_free_trial_planner.py": {
       "expected_sha256": "b99ea7e46f7eb363a28fc2b5195be1ea18c3cf76d6bd30654670099b956fa2fe",
