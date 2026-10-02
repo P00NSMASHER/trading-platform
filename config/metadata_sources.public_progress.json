@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 95 exact release timestamps and 79 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 96 exact release timestamps and 78 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 79,
-    "expected_sha256": "02a8f1e23de7d60c5142ed16c422f2c4320f9705ea5302afccb1ec10c902bd6e",
+    "expected_count": 78,
+    "expected_sha256": "2bd61ad3a063390481232c5842b6d63e9739003f7c810350603e5a67a734baf3",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Official public PR Newswire archive for GT, independently corroborated by matching SEC Exhibit 99.1. No licensed vendor data used.",
+      "notes": "GT 2011-07-28 08:00 EDT. SEC filing, conference-call, archive-capture, scheduled-release, date-only and inferred times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0087.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-worker2-gt-batch-0087",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {
