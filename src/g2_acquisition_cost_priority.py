@@ -28,6 +28,12 @@ ALGOSEEK_PRICING_URL = "https://algoseek.com/pricing/"
 ALGOSEEK_EQUITY_TAQ_URL = "https://algoseek.com/dataset/us-equities-trade-and-quote/"
 ALGOSEEK_EQUITY_TAQ_MONTHLY_USD = 1500.0
 ALGOSEEK_INDIVIDUAL_DATASET_MIN_TERM_MONTHS = 12
+THETADATA_PRICING_URL = "https://www.thetadata.net/pricing"
+THETADATA_SUBSCRIPTIONS_URL = (
+    "https://thetadata.net/docs/Articles/Getting-Started/Subscriptions.html"
+)
+THETADATA_OPTIONS_PRO_RETAIL_USD = 160.0
+THETADATA_OPTIONS_PRO_FIRST_ACCESS_DATE = "2012-06-01"
 
 
 def _read_json(path: Path) -> dict:
@@ -46,6 +52,24 @@ def build(vendor_dir: Path) -> dict:
         for symbol in row["historical_symbols"].split(";")
         if symbol
     }
+
+    option_trade_rows = []
+    for name in (
+        "lseg_opra_tick_history.csv",
+        "cboe_option_trades.csv",
+        "databento_opra_trades.csv",
+    ):
+        option_trade_rows.extend(tickapi._read(vendor_dir / name))
+    theta_eligible = [
+        row
+        for row in option_trade_rows
+        if row["trade_date"] >= THETADATA_OPTIONS_PRO_FIRST_ACCESS_DATE
+    ]
+    theta_residual = [
+        row
+        for row in option_trade_rows
+        if row["trade_date"] < THETADATA_OPTIONS_PRO_FIRST_ACCESS_DATE
+    ]
 
     if summary["champion_minimum_source_date_rows"] != 1242:
         raise ValueError("vendor summary does not match champion-minimum scope")
@@ -90,6 +114,31 @@ def build(vendor_dir: Path) -> dict:
                 * ALGOSEEK_INDIVIDUAL_DATASET_MIN_TERM_MONTHS
             ),
         },
+        "conditional_option_routes": [
+            {
+                "route": "thetadata_options_pro_or_historical_flat_file",
+                "status": "LICENSE_AND_PRICE_CONFIRMATION_PENDING",
+                "sources": [THETADATA_PRICING_URL, THETADATA_SUBSCRIPTIONS_URL],
+                "retail_options_pro_usd_per_month": THETADATA_OPTIONS_PRO_RETAIL_USD,
+                "retail_license_scope": "INDIVIDUAL_USE",
+                "first_access_date": THETADATA_OPTIONS_PRO_FIRST_ACCESS_DATE,
+                "eligible_source_date_rows": len(theta_eligible),
+                "eligible_symbol_date_pairs": sum(
+                    int(row["symbol_date_pair_count"]) for row in theta_eligible
+                ),
+                "residual_source_date_rows": len(theta_residual),
+                "residual_symbol_date_pairs": sum(
+                    int(row["symbol_date_pair_count"]) for row in theta_residual
+                ),
+                "reasons": [
+                    "Options Pro documents tick-level historical options access from 2012-06-01.",
+                    "The public $160/month price is explicitly Individual Use and is not assumed valid for this product.",
+                    "A written licensing/price request is already pending for the exact 291-date / 3,014-pair slice.",
+                    "If licensed affordably, only the pre-2012-06-01 residual needs LSEG/Cboe coverage.",
+                ],
+                "automatic_purchase_permitted": False,
+            }
+        ],
         "screened_out_or_conditional_equity_routes": [
             {
                 "route": "firstrate_tick_history",
@@ -237,6 +286,7 @@ def build(vendor_dir: Path) -> dict:
             "do_not_treat_tickdata_minimum_order_as_exact_quote": True,
             "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": True,
             "compare_algoseek_historical_only_quote_to_tickdata_and_tickapi_before_purchase": True,
+            "do_not_assume_thetadata_retail_license_is_valid_for_product_use": True,
             "do_not_count_equity_quote_source_without_bid_and_ask_sizes": True,
             "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": True,
         },
