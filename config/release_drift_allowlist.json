@@ -1606,6 +1606,18 @@
     "tests/test_g2_full_replication_option_quote_plan.py": {
       "expected_sha256": "10e6f037d60eee1558b5092c6a68f2a5c05c2b0a0b968948910e2ae4ea8bb519",
       "reason": "Deterministic G2_FULL_REPLICATION option-quote candidate plan using current LSEG OPRA Tick History evidence; planning only, no purchase or coverage claim."
+    },
+    "src/g2_acquisition_cost_priority.py": {
+      "expected_sha256": "40257a173490b9d9072ce8bc7b7174bef8216825cd17adf2a68eff63e70601a3",
+      "reason": "Planning-only G2 acquisition cost priority: distinguishes vendor minimums from exact quotes, screens nonconforming low-cost equity routes, and keeps purchases/trials fail-closed."
+    },
+    "tests/test_g2_acquisition_cost_priority.py": {
+      "expected_sha256": "8279d13e34263d25dbb920287113a8a64e7b4f75515bc2cedcf87e8acf080b7b",
+      "reason": "Regression coverage for G2 cheap-first acquisition ordering, exact-quote guards, licensing/fidelity exclusions, and no-purchase policy."
+    },
+    "data/processed/g2_vendor_requests/acquisition_cost_priority.json": {
+      "expected_sha256": "2e647c8c322fdfad610d69598fef58c332c5ff6db83cb386b05c50c30eb1e07b",
+      "reason": "Materialized planning-only G2 acquisition priority with current public cost benchmarks, screened equity routes, and explicit unknown-cost blockers."
     }
   },
   "schema_version": "2",
