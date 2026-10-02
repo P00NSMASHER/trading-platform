@@ -25,6 +25,12 @@
       "fidelity_requirement": "trade-level option records with exact price and size",
       "first_trade_date": "2012-01-03",
       "last_trade_date": "2013-03-28",
+      "post_activation_content_preflight": {
+        "g2_coverage_counted": false,
+        "module": "g2_vendor_content_preflight",
+        "request_manifest": "cboe_option_trades.csv",
+        "required_result": "ready_for_coverage_audit=true"
+      },
       "product": "Option Trades",
       "record_kind": "option_trade",
       "request_manifest": "cboe_option_trades.csv",
@@ -66,6 +72,12 @@
       "fidelity_requirement": "trade-level OPRA records with exact price and size",
       "first_trade_date": "2013-04-01",
       "last_trade_date": "2015-05-20",
+      "post_activation_content_preflight": {
+        "g2_coverage_counted": false,
+        "module": "g2_vendor_content_preflight",
+        "request_manifest": "databento_opra_trades.csv",
+        "required_result": "ready_for_coverage_audit=true"
+      },
       "product": "OPRA.PILLAR trades",
       "record_kind": "option_trade",
       "request_manifest": "databento_opra_trades.csv",
@@ -107,6 +119,12 @@
       "fidelity_requirement": "full-tick OPRA last-sale records with exact price and size",
       "first_trade_date": "2011-03-21",
       "last_trade_date": "2011-12-30",
+      "post_activation_content_preflight": {
+        "g2_coverage_counted": false,
+        "module": "g2_vendor_content_preflight",
+        "request_manifest": "lseg_opra_tick_history.csv",
+        "required_result": "ready_for_coverage_audit=true"
+      },
       "product": "OPRA Tick History",
       "record_kind": "option_trade",
       "request_manifest": "lseg_opra_tick_history.csv",
@@ -148,6 +166,12 @@
       "fidelity_requirement": "tick-by-tick consolidated NBBO quote updates; interval snapshots do not satisfy the frozen equity-spread semantics",
       "first_trade_date": "2011-03-21",
       "last_trade_date": "2015-05-20",
+      "post_activation_content_preflight": {
+        "g2_coverage_counted": false,
+        "module": "g2_vendor_content_preflight",
+        "request_manifest": "tickdata_equity_nbbo_quotes.csv",
+        "required_result": "ready_for_coverage_audit=true"
+      },
       "product": "NBBO for U.S. Equities",
       "record_kind": "equity_quote",
       "request_manifest": "tickdata_equity_nbbo_quotes.csv",
@@ -187,6 +211,12 @@
       "fidelity_requirement": "tick-by-tick U.S. equity trades; no aggregate-bar substitution",
       "first_trade_date": "2011-03-21",
       "last_trade_date": "2015-05-20",
+      "post_activation_content_preflight": {
+        "g2_coverage_counted": false,
+        "module": "g2_vendor_content_preflight",
+        "request_manifest": "tickdata_equity_trades.csv",
+        "required_result": "ready_for_coverage_audit=true"
+      },
       "product": "U.S. Equities tick trades",
       "record_kind": "equity_trade",
       "request_manifest": "tickdata_equity_trades.csv",
@@ -203,6 +233,33 @@
       "vendor": "Tick Data"
     }
   },
+  "operator_sequence": [
+    {
+      "module": "licensed_data_intake",
+      "required_result": "delivery inventoried and schema-classified; authorization still false",
+      "step": 1
+    },
+    {
+      "module": "g2_vendor_delivery_preflight",
+      "required_result": "ready_for_entitlement_review=true",
+      "step": 2
+    },
+    {
+      "module": "licensed_data_drop_processor",
+      "required_result": "exact SHA-256 entitlement binding + nonblank license reference",
+      "step": 3
+    },
+    {
+      "module": "g2_vendor_content_preflight",
+      "required_result": "ready_for_coverage_audit=true with every required symbol observed",
+      "step": 4
+    },
+    {
+      "module": "historical_market_backfill / real_data_replay",
+      "required_result": "canonical coverage/replay gates evaluate activated sources; no preflight itself counts coverage",
+      "step": 5
+    }
+  ],
   "purpose": "Vendor handoff contract for acquiring G2_CHAMPION_MINIMUM source files. Candidate availability is not a coverage claim.",
   "schema_version": "1",
   "total_record_kind_symbol_date_pairs": 11484
