@@ -41,6 +41,12 @@ def test_freeze_real_repository_requirements(tmp_path: Path):
     assert sum(r["record_kind"] == "equity_quote" for r in champion) == 414
     assert sum(r["record_kind"] == "option_trade" for r in champion) == 414
     assert all(r["record_kind"] != "option_quote" for r in champion)
+    assert (out / "g2_champion_minimum_source_date_requirements.csv").read_bytes() == (
+        ROOT / "data/processed/real_data_release_sprint/g2_champion_minimum_source_date_requirements.csv"
+    ).read_bytes()
+    assert json.loads((out / "requirements_manifest.json").read_text()) == json.loads(
+        (ROOT / "data/processed/real_data_release_sprint/requirements_manifest.json").read_text()
+    )
     itch = list(csv.DictReader((out / "g2_itch_event_requirements.csv").open()))
     assert len(itch) == 80
     assert sum(r["source_family"] == "nasdaq_itch_4_1_decoded" for r in itch) == 35

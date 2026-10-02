@@ -1,5 +1,6 @@
 {
   "artifacts": {
+    "champion_minimum": "g2_champion_minimum_source_date_requirements.csv",
     "contract_blueprint": "production_source_contract_blueprint.json",
     "core": "g2_core_source_date_requirements.csv",
     "inventory_template": "market_source_inventory.template.csv",
@@ -7,6 +8,8 @@
     "options": "g2_option_source_date_requirements.csv"
   },
   "counts": {
+    "champion_minimum_option_trade_rows": 414,
+    "champion_minimum_source_date_rows": 1242,
     "core_equity_source_date_rows": 828,
     "g3_confirmed_nasdaq_event_rows": 80,
     "g3_confirmed_nasdaq_itch_4_1_event_rows": 35,
