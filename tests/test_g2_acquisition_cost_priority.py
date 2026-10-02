@@ -24,6 +24,9 @@ def test_cheap_first_acquisition_priority_matches_current_scope():
     assert costs["firstrate_naive_146_ticker_cost_usd"] == 2912.7
     assert costs["massive_individual_advanced_usd"] == 199.0
     assert costs["massive_business_usd"] == 2499.0
+    assert costs["algoseek_equity_taq_monthly_usd"] == 1500.0
+    assert costs["algoseek_individual_dataset_min_term_months"] == 12
+    assert costs["algoseek_standard_lease_floor_usd"] == 18000.0
 
     screened = {
         item["route"]: item for item in payload["screened_out_or_conditional_equity_routes"]
@@ -31,6 +34,9 @@ def test_cheap_first_acquisition_priority_matches_current_scope():
     assert screened["firstrate_tick_history"]["status"] == "CONDITIONAL_NOT_CURRENT_FULL_SCOPE"
     assert screened["firstrate_tick_history"]["naive_all_146_ticker_cost_usd"] == 2912.7
     assert screened["massive_stocks"]["status"] == "INDIVIDUAL_PLAN_NOT_BUSINESS_ELIGIBLE"
+    assert screened["algoseek_equity_taq"]["status"] == "HISTORICAL_ONLY_BUY_QUOTE_PENDING"
+    assert screened["algoseek_equity_taq"]["fidelity_status"] == "CANDIDATE_MATCH"
+    assert screened["algoseek_equity_taq"]["standard_lease_floor_usd"] == 18000.0
     assert screened["kibot_tick_bid_ask"]["status"] == "FAILS_CURRENT_EQUITY_QUOTE_SCHEMA"
     assert any(
         "bid_size" in reason and "ask_size" in reason
@@ -73,6 +79,7 @@ def test_cheap_first_acquisition_priority_matches_current_scope():
         "compare_tickdata_store_exact_quote_to_tickapi_floor_before_purchase": True,
         "do_not_treat_tickdata_minimum_order_as_exact_quote": True,
         "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": True,
+        "compare_algoseek_historical_only_quote_to_tickdata_and_tickapi_before_purchase": True,
         "do_not_count_equity_quote_source_without_bid_and_ask_sizes": True,
         "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": True,
     }
