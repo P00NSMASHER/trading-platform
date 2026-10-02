@@ -34,10 +34,13 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
     } != {11484}:
         raise ValueError("vendor artifacts disagree on 11,484 request-pair footprint")
     if (
-        cboe_trial["required_source_date_rows"] != 83
-        or cboe_trial["required_underlying_date_pairs"] != 489
-        or cboe_trial["optimistic_complete_source_date_rows"] != 81
-        or cboe_trial["optimistic_complete_underlying_date_pairs"] != 445
+        cboe_trial["required_source_date_rows"] != 309
+        or cboe_trial["required_underlying_date_pairs"] != 3364
+        or cboe_trial["candidate_complete_source_date_rows"] != 309
+        or cboe_trial["candidate_complete_underlying_date_pairs"] != 3364
+        or cboe_trial["remaining_source_date_rows"] != 0
+        or cboe_trial["remaining_underlying_date_pairs"] != 0
+        or cboe_trial["documented_trial"]["vendor_confirmed_daily_credit_limit_gates_trial"] is not False
         or cboe_trial["trial_historical_access_runtime_verified"] is not False
         or cboe_trial["coverage_claimed"] is not False
     ):
@@ -92,7 +95,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "production_content_validation": "BLOCKED_ON_DELIVERY",
             "runtime_secret_state": "NOT_COMMITTED_TO_REPOSITORY",
             "databento_cost_probe": "BLOCKED_API_KEY_NOT_CONFIGURED",
-            "cboe_trial_historical_access": "DOCUMENTED_ELIGIBLE_NOT_RUNTIME_VERIFIED",
+            "cboe_trial_historical_access": "VENDOR_CONFIRMED_ELIGIBLE_RUNTIME_NOT_VERIFIED",
             "cboe_custom_tick_quote": "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET",
             "tickdata_written_quote": "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED",
             "lseg_2011_quote": "REQUEST_SENT_AWAITING_REPLY",
@@ -114,7 +117,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         "next_external_actions": [
             "Configure DATABENTO_API_KEY if cost-only OPRA pricing is desired; the workflow performs no download or purchase.",
             "Tick Data requires a phone call before written pricing/availability; treat the written quote as unavailable unless the user explicitly chooses to call.",
-            "Cboe All Access historical Option Trades are documented eligible at 15 points per request, but runtime access is not verified; activate the 14-day trial only with explicit user authorization, then verify historical access and seq_no pagination before relying on trial capacity.",
+            "Cboe confirmed the All Access trial should pull historical Option Trades and that the daily credit limit does not gate the trial when signup is set to Allow; activate the trial only with explicit user authorization, then run the merged acceptance probe and verify seq_no pagination before relying on the 309-row candidate scope.",
             "Cboe custom tick-level OPRA pricing was received for the full OPRA universe only and is outside the target budget; do not pursue that paid custom route without explicit user authorization.",
             "Await LSEG pricing/availability reply for the exact 2011 OPRA request.",
             "Await algoseek pricing and sandbox-terms replies for the exact historical scopes.",
