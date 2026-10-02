@@ -1754,6 +1754,26 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/g2_combined_equity_cheap_route.py": {
+      "expected_sha256": "ab883b540bd94b3c16336d135f7ea298be4d4c312c2d748021152e85f0d35125",
+      "reason": "Deterministic ThetaData + FirstRate cheap-equity union and exact Tick Data residual; planning only, no route activation, purchase, entitlement, or G2 coverage claim."
+    },
+    "tests/test_g2_combined_equity_cheap_route.py": {
+      "expected_sha256": "28a7a481f0dc0d07a7a95024b0e03106385ab7c0963e91bbd1349e14ac5d6bdb",
+      "reason": "Deterministic ThetaData + FirstRate cheap-equity union and exact Tick Data residual; planning only, no route activation, purchase, entitlement, or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/combined_equity_cheap_route/firstrate_equity_additional.csv": {
+      "expected_sha256": "d5b3560f5b9cef1340a9b83e6f77f3eb4ee8766fb7e58bbd94220ef1b365c9e5",
+      "reason": "Deterministic ThetaData + FirstRate cheap-equity union and exact Tick Data residual; planning only, no route activation, purchase, entitlement, or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/combined_equity_cheap_route/tickdata_equity_residual.csv": {
+      "expected_sha256": "33bee8a43e7a0b2767e9d3ecd28520085c6db39dd9261bd73afae3b8f12d5aba",
+      "reason": "Deterministic ThetaData + FirstRate cheap-equity union and exact Tick Data residual; planning only, no route activation, purchase, entitlement, or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/combined_equity_cheap_route/summary.json": {
+      "expected_sha256": "1bb2966e3e169cbccd697bb1268f3a97dd4a72b3b7be2ff14b01ba848686fcf9",
+      "reason": "Deterministic ThetaData + FirstRate cheap-equity union and exact Tick Data residual; planning only, no route activation, purchase, entitlement, or G2 coverage claim."
     }
   },
   "schema_version": "2",
