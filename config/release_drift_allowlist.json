@@ -1530,6 +1530,18 @@
     "data/processed/g2_vendor_requests/vendor_activation_blueprint.json": {
       "expected_sha256": "79a94cc06020b8acba03d36ef3e549dabc0fda05132b588887b7974470947da5",
       "reason": "Fail-closed G2 vendor activation blueprint: exact request scope and canonical fields with blank delivery/license values and authorized=false until local entitlement review."
+    },
+    "src/g2_vendor_quote_packets.py": {
+      "expected_sha256": "207f60b76f4f723f1ed584b62ba5c7589d29676fd270e0d50a5ba233ffe0de4c",
+      "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
+    },
+    "tests/test_g2_vendor_quote_packets.py": {
+      "expected_sha256": "6ee04ac8090816642831730a85ee770710e89b1b96c79fc38a14bf6ae06948c5",
+      "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
+    },
+    "data/processed/g2_vendor_requests/vendor_quote_packets.json": {
+      "expected_sha256": "0c35a8ed15b37b53eb3e7699d8020a01ecd71540ab0cbbbc182adc5829a410d5",
+      "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     }
   },
   "schema_version": "2",
