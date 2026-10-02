@@ -49,6 +49,44 @@ def build_alternatives() -> dict:
                 "pricing_status": "COST_PROBE_BLOCKED_API_KEY_NOT_CONFIGURED",
             },
         ],
+        "conditional_cheapest_full_option_route": {
+            "status": "PREFERRED_IF_THETADATA_WRITTEN_LICENSE_CLEARANCE_IS_RECEIVED",
+            "expected_vendor_count": 2,
+            "segments": [
+                {
+                    "vendor": "LSEG OPRA Tick History",
+                    "historical_segment": ["2011-03-21", "2012-01-27"],
+                    "source_date_rows_per_record_kind": 123,
+                    "underlying_date_pairs_per_record_kind": 814,
+                    "record_kinds": ["option_trade", "option_quote"],
+                    "pricing_status": "QUOTE_AND_ENTITLEMENT_PENDING",
+                },
+                {
+                    "vendor": "ThetaData Options PRO",
+                    "historical_segment": ["2012-06-29", "2015-05-20"],
+                    "source_date_rows_per_record_kind": 291,
+                    "underlying_date_pairs_per_record_kind": 3014,
+                    "record_kinds": ["option_trade", "option_quote"],
+                    "pricing_status": "SALES_CLASSIFICATION_AND_RETENTION_TERMS_PENDING",
+                    "public_retail_monthly_price_usd": 160.00,
+                    "public_commercial_monthly_price_usd": 1600.00,
+                    "public_startup_monthly_price_as_low_as_usd": 500.00,
+                },
+            ],
+            "coverage_accounting": {
+                "source_date_rows_per_record_kind": 414,
+                "underlying_date_pairs_per_record_kind": 3828,
+                "record_kinds": ["option_trade", "option_quote"],
+            },
+            "replaces_if_cleared": [
+                "Cboe DataShop Option Trades",
+                "Databento OPRA.PILLAR Trades",
+            ],
+            "activation_rule": (
+                "Do not switch routes or purchase until written ThetaData license/retention "
+                "terms and LSEG price/entitlement are acceptable."
+            ),
+        },
         "alternatives": [
             {
                 "vendor": "ThetaData Options PRO",
