@@ -96,6 +96,8 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "runtime_secret_state": "NOT_COMMITTED_TO_REPOSITORY",
             "databento_cost_probe": "BLOCKED_API_KEY_NOT_CONFIGURED",
             "cboe_trial_historical_access": "VENDOR_CONFIRMED_ELIGIBLE_RUNTIME_NOT_VERIFIED",
+            "cboe_trial_option_quote_access": "DOCUMENTED_HISTORICAL_ENDPOINT_RUNTIME_TRIAL_ACCESS_UNVERIFIED",
+            "cboe_trial_retention_rights": "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES",
             "cboe_custom_tick_quote": "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET",
             "tickdata_written_quote": "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED",
             "lseg_2011_quote": "REQUEST_SENT_AWAITING_REPLY",
@@ -117,7 +119,9 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         "next_external_actions": [
             "Configure DATABENTO_API_KEY if cost-only OPRA pricing is desired; the workflow performs no download or purchase.",
             "Tick Data requires a phone call before written pricing/availability; treat the written quote as unavailable unless the user explicitly chooses to call.",
-            "Cboe confirmed the All Access trial should pull historical Option Trades and that the daily credit limit does not gate the trial when signup is set to Allow; activate the trial only with explicit user authorization, then run the merged acceptance probe and verify seq_no pagination before relying on the 309-row candidate scope.",
+            "Cboe confirmed the All Access trial should pull historical data and that the daily credit limit does not gate the trial when signup is set to Allow; the merged acceptance probe can test historical equity TAQ, 2012+ option trades, and one OSI-derived historical option NBBO quote, but execution still requires explicit user authorization.",
+            "Before any bulk Cboe trial acquisition, obtain written Order Form or vendor permission that permits retained internal research use after trial termination; the default Cboe subscription agreement requires Data to be deleted or returned at termination unless the applicable Order Form expressly provides otherwise.",
+            "If the Cboe quote smoke passes, use reference/options to enumerate the complete contract universe per underlying/date and verify option-quote pagination/request-rate feasibility before treating 2012+ strict option quotes as an acquisition candidate.",
             "Cboe custom tick-level OPRA pricing was received for the full OPRA universe only and is outside the target budget; do not pursue that paid custom route without explicit user authorization.",
             "Await LSEG pricing/availability reply for the exact 2011 OPRA request.",
             "Await algoseek pricing and sandbox-terms replies for the exact historical scopes.",
@@ -130,6 +134,8 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "file_presence_is_not_content_coverage": True,
             "g2_release_gate_unchanged": True,
             "free_trial_activation_requires_explicit_user_authorization": True,
+            "trial_download_is_not_retention_authority": True,
+            "retention_rights_required_before_bulk_acquisition": True,
         },
     }
 
