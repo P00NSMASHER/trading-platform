@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "754abc66facc279b90250a29772027132006c6c6747fe917b34852f276f596d8",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "844e7ed0716155d4aff1d56965b627059fcd3f4653f522055712d3e23f0465e3",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "d77552c9acff53b4009f10bf0fbb59523274968b88d619263ac32544c5470741",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "c3b54fd4c0e6c9181172058e50cc706142383a7a3243438aba1316b63fca33f6",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "61e279f99f92c44295b3d503281115fd996517f4718be4b0ce5b8f6f58715455",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "201c9932955d7b77a93d4cce914b54e6921345da21557b25fce77dd447a9e25b",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -115,6 +115,10 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
+    ".github/workflows/g1-public-batch-0085-worker-0.yml": {
+      "expected_sha256": "8499533f14c952acfce3221d6838a68f8c4f6549230edf9752da428d6c7cff2a",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     ".github/workflows/g1-swarm-controller.yml": {
       "expected_sha256": "5e4c3fcf2c5e4f528ba6703b4900220de5cd433dd813c98131ebc88217531df5",
       "reason": "G1 swarm coordination: preserve push/PR-close/15-minute/manual reconciliation and add immediate issue #153 WORKER-comment reconciliation; controller remains sole token authority and ignores its own controller comments."
@@ -160,8 +164,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "8f47201ccc391d2c1ab4476d16aba0413a5c4526b1f13f713fe4e2423aad0335",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "f187ab0d0155364714519048ace47f2c1490e8ad87fa42e19516525bbf13fbfd",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -180,8 +184,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "8d78c1f2b21b7a626667a3afa8a401fbce2f54674f710ccf55ff9350fb26995a",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "5d281224f7c288aa7f2f0e33bfe5143f14b3ae3fd12d666047f6fdd584697bf7",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -192,8 +196,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "25b28fd7e140632bcd3d01e2a1f8d9460f53203e2d3b2dc4923a0017bbb01157",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "7378eff8e756e84bf35ddbc14188191e9865f83cae63d95168bf9306705be9ba",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -248,8 +252,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "a2ec900176b5143ad55c49d6512f79675661fa3747865949585ccbea6bc726ed",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "2cc2d99e4b05d57ca97c03d0971e200dfbc15730a4afe144ac0cad37ef1d0219",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -264,12 +268,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "1db0c0755bbbc584a07c7678a12657c5812da8dd928d629c781b4c115fdd0378",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "acc5923b1d22f40205a57dcf6969c8bbeecee414235ec74925317ee5b917a904",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "449f5f04356f72165a7273f756800cc72e6100ecd171a1778bff91e13280e696",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "2d8277140b34df02d296ab41e7eee2a40451d6bc7227f7a068471e2872f7df64",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -278,6 +282,10 @@
     "data/processed/g2_vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
       "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
+      "expected_sha256": "ee4b2f0a0afcc0f19ac20c968522dcf40449c1fc183976de2048b1bdb328b628",
+      "reason": "Planning-only materialized Cboe All Access free-trial capacity receipt; awaits vendor confirmation and claims no G2 coverage."
     },
     "data/processed/g2_vendor_requests/databento_opra_trades.csv": {
       "expected_sha256": "29f408ccf695d7775a9b842556faa6cee9acef719e7732506f14a91d3186c452",
@@ -348,8 +356,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "0a50d9ef4307a1b1c9c563b528fd590ae2c480774afc9c84b5d92c0e0b3fd98f",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "2467f9818f7876a57087f9729376034d7e5b6c0c1bd976f15fe3eb059d5070bd",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -380,12 +388,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "19dbf0f8d239ae43285c2a072aebc8797a86875a0e45b6ae14dafe48d7c89ae1",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "c4b74129ada0fe3c5b565cc7680d917d4fb1d681fc31228f07fe03aa7d4ba749",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "791cf14ca0a35c0103549ff6d1bd42d26a153b4017b795604e07eadec4cafec9",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "b30dc430fae3b16ee83f72b793cdd2a87a8e01f4703f7d37f152dea7756c9a3d",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -404,8 +412,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "2b894bd4cd41a27be389236ddcfa3dd581e4600790ea7f2672752403eb66b7db",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "dd0c44b63de9de408cf6b77760cf7b96d7128411dd2a68920ff618619fe296a6",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -671,6 +679,10 @@
       "expected_sha256": "df0f390966a95aa08a224aa4e5021cdd3934911919e0209b5253c002f115f03c",
       "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0085.csv": {
+      "expected_sha256": "ca33e223be42b0208caa949dd7f39c6ba5f7ed1cb7c1348276a357221270a4e7",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_announcement_times_batch_0087.csv": {
       "expected_sha256": "eaefb42b346e62311a54d5f45c6788ce47bc7059b8a853e6c0e9a0efc56cd273",
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
@@ -807,13 +819,21 @@
       "expected_sha256": "2975b8788d7ed2991b54a09a4177a04674203d9c4b1c1be2af7092bc75cd0816",
       "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0085_evidence.json": {
+      "expected_sha256": "db3a981a9f8d22da1975ba5232e69f65fd09ab6972c12a90908356ed9fac4442",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "data/public/metadata/g1_public_batch_0085_integration_spec.json": {
+      "expected_sha256": "3bd4d7656e574903c4d20809db1d92b888af5c985e3337d9887e7bc0c2bd6013",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0087_evidence.json": {
       "expected_sha256": "0e4678c87e9077ce4c8ab9b67c0ff5c06a418e7bf7e9fa83d353fde840ad3801",
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "3e4223a8ff2d50d1cb0c2d745db7a1bf096f324865f105a44f98b92c7f4aa65c",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "64f517ce7ac8816c763fcb5b03d3a5b071d75074674ce726e8c09446b1a177e0",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
@@ -936,8 +956,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "5ddede79c65c21341bd264e844eb6485f578939e058cc05d923ead3f09ec3f73",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "98b55b4362fbf2612a14263f5fbf83522b62ffdb0c1f288b2dab81d35a1db208",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1103,6 +1123,10 @@
       "expected_sha256": "fd9d50f0183c5a01d36be009bd3083643ec0366f570f2de96554e71f06b21e16",
       "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
+    "scripts/g1_batch_0085_generate.py": {
+      "expected_sha256": "ab1a2f970017052ebc094e8f34921ed3856963597bf5ab2367102067535e2c75",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
     "scripts/g1_batch_0087_generate.py": {
       "expected_sha256": "e97c300e3b0812d8055f65f0d778620a91749fe84d742f701fe70a00c9badf0a",
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
@@ -1194,6 +1218,10 @@
     "src/g2_cboe_equity_probe.py": {
       "expected_sha256": "e5619af42b13dd55526169c230b07b9848d79f9c9baad6b6d0102acfe5531acb",
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
+    },
+    "src/g2_cboe_free_trial_planner.py": {
+      "expected_sha256": "fa40c086574d6f46a3104fec9ce909f03d475dfad573f80fa67ec33155faa40b",
+      "reason": "Planning-only Cboe All Access free-trial estimator reconciled to Cboe Data Vantage's 2012 OPRA history floor, current historical/trial SIP documentation, 15-point pagination requests, and the 500-point daily cap; no API calls, purchases, subscriptions, or coverage claims."
     },
     "src/g2_databento_probe.py": {
       "expected_sha256": "dbbcc056dce81e63b7c769128c2ac515fe10166b57386d912c265dd079c3b670",
@@ -1312,156 +1340,160 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "14a7f4d7a8fcf5b75ac4f4836ec97087f22cdfd405908ae2602b2c4fc950ecce",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "b99ac7f6270ae5bd66092f01660530a56874e9083ed269e3304f06ca06652f27",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "c0c1db72671f289cf5cbefae9f4284209ef05105762954d28a5ac9baf8e22de7",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "25fe82ebc1378443d5f42d35c8c8b7c52397d8a6ab9c5bb2398cc55cabdd589c",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "73de31e318f5ff86c0c4438e06e07d93ed8728b0d4c10cb5d5835e9498d73a64",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "87d903436d8d1d1c0ed71862c71880c5a37151a84db9a99dcbfa539d087f64f2",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "fb7a2714704daad0203af53d03c4170ea1961e174d708ef596ddd0c3d4b76be2",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "bab2f18c42b5ba153da693ac61cf1f930f70a7fa4b5c69feb3c818eca395a163",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "27f59aedda2eda5b95c4780c1eef2549dc28012d0b7ffba98ee12f4bbaadc114",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "f47453c0165ebec142de2f82dd822558693859d954e1ca26feca21ec8c8a8676",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "d806e0d601d30a1e5fcaf332e46f485efa90f8b73be681b4b6db2bdc9ff18dca",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "8489673a82b0b3831609d4b156fedbe83f8653dd6f3f95005614171c93b96bd0",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "8ec8accadc1316a35fa6ab02c38d39a8044f97f75560f8973de8dbc9d4b3e6eb",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "d698a78d8d5ecf49baae4acdec062a37b966c2e7c53905d961a47893a01fe64f",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "e48c353f9ebe83e651a67eb70c2568173db2eeaa5c2f91189fec3dc5a1391eb2",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "4cd9c31e34f1181ce953ffdad80b05075b58ebd9c7b54615f8fd6b223375c104",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "738d00838489faec5a5364f5b598ba91b68d52c7d99b96b40aef447280963636",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "1b19cb1308369487279fb8324a3c8d1f5c79a7e08f1ff293126385b6f51a5701",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "fb063f431ceca8f9f0d5fc971962f7a2d900d138274cc00425aa44abd9ef9777",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "974b30858da7c26169b4bb4cadbd353ede17a7296f1819c635d361934d4ba498",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "2b4ef5ab14ad0fda31bac499e50795313b268e661a81a79c3af61e99fb3add2a",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "c00a70ae43b4cf6eb4c9636edaf6cfa3a17e17a4fca33195feaec41aece787fa",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "1f8660b2accd8fcbdba91f64dd9a2c143c622402ce11f7b2701dbfc357d66088",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "b9073313124d73a3546dc10ed86a69b8bfe2c29facfc59f89a3a84acb411dc81",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "2cba001b5d68b4a4aac03a6f21e0a5e51e5644b90b8a3a9a0ac552a179bc884f",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "dc14215a889887c7bd1e7913ea76e34e9222a8d8fe9d019b15b316d95a1d192b",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "fd4a4ee38bb4076f0e3593a738c2d6a56bb7abb58f771cc050ef529dda532bae",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "f9e40bcadda15e38205f4f6c03bc0383735e22b2547f606acef8e3c8ed499bdf",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "bbe1a27e47b036ef98cfce624e4d8db09e6d354740375dd97862cd3a58d8b48b",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "c846294eea55590200bcada860d6d7b963017f02950e5bb4b756cc111bd5e826",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "df715f147f34c54a689c8f67bb8064f812d93e5be8fb5d98c3c97c382e014080",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "1ad9197732d0c849d68f47e28fcc7fd2d83ff0b66b02f7b84bd31c6bbf69374f",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "f822ee0725175337c44caae47313f3c6baa3b36450e6d6067b1b12cc696b3152",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "bbc5e469142e373aecc7958607b60e2c0497dc4e5225b0a69af0f389d446549d",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "1d6b43da840eeaebfb4742db8abc70009aa2d2779bc9de09b4922506fb433df9",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "e22be6857555dc9b97e4435593400c028fc6634666c922eab9b4769af8b10f6f",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "79631c405354dfb7cd9ba264e58ef44851782acda0065da34e7880fc6f7653af",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "b6abd576cc3ffab0eb9078e982efeb9cc17c0ad17c9d43101178adb32cf6e64b",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "87ae3522bd42111eab60ac864decf791a413a06d2b13c6e23b395b17b44b7383",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "8ded5ef21be200635419769cdaa11010a49dbd7532c921e55b4d935a3e90feeb",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "094736a4d05889527855719c368b932990d3d4f1f4438d003508a2fa15570958",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "ab884178a9938287debc911b9fae59aa93e62b5dd5707e4494391c32670b0369",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "86a88ea8a720c40f8874ed4cebb94b6b2c0189fb19df472c2a7d6760d96ee829",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "b08cb6a44109649d93e9b776ed6f2a1a64032a0f8a8b2af14a9f49ac03e8de8f",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "6ee3a00347d5d7e32c36fc1d82d6fce98cee5e8ce5e38ca3a44d8c07a60a2e95",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "f15bd67f946b85d78865dfce9858e2bb4928813e931c8a2ef715bab23b735c0c",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "0a8e9a205a85af6b5d4bc350f185fab1e71faac1cb1a30a3693052d1aeac6b43",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "c2614a6b167e122895cb792054674fe9967646c3b25729605caaa6db517943b5",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "26236ca21dc32e2045842e889a940002d91dfb8772e8623ace8339d85fb86906",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "3f7d8d7d01b7b0bd4c55942bf550448595f02156e9b008059b2821c267e9c119",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "882e5f40eb47e5a231d30fc9d0627481a3dafd68453d47cedd32937e58841d33",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "01210f396140fe21274df085456a09733cd1baee9003c274ea6e0c5ccda306fd",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "9185d34db2541a01f33fc68775ac2d5d15739550ce92a9576dbc7639785eb3c0",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "5617cd31749ad7ec4749c8268d09d1abbd4c8e5812cce78cad14580b7c67b1e4",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "0ffd746f0078c19591e89e953ce6b469329fbb39962666aa7d8ba606e76c94c1",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "50ded7213a848cb28db822d0986fea206f4929d5733eb6dbeec4ffd1d07b76b6",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "200869f6d3024a82f7465dce918dddfdbe279f7836cd64dd01eac9fcb96b09dc",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "0e6c0abfba627c99dad10c0850f27c90550914d2af2fe245ba6414ac5b193cfe",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "f2c042266f84f3705569b50a46ea0a20c71672684c9f06611d097cc520004ddb",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "78163c7598a559f9652db6c4ac7dd0a4aa45cf02bf78d41bd1a1f75a3f36e6aa",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "fcc7f7b0c582adaff9eda8af680e3db63785064e575e74d590c5e6e3d4bc3949",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "89fcc10eb2041703d54361eacaa249e9e3cde47baeb6269aef205d12b849627f",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "0456bf47aa9560c264595e92a6c6218dd8f2db00917f3387745810cf4cfcf14e",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "d288f8449910eac379780dd8d0e72d18ce85e35022d5237b4fb1c4ea93e0b99f",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "d52fa228b4a81af0db99fc17fbf85c6c561c1e4b5066132c57ddd071e674ece4",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "b2bbb85ad4995c17cb574b4417c61adf11c18c212cf82e099344717ca63c5808",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0083.py": {
-      "expected_sha256": "76c743adc8a5c8097fdb9c7674104e854e4fc41a9570bffcbb1d69046a02c8da",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "f0391b222c883b148eab9095e88ac18bfa16a1b9ddc74f44b47e08c93109020c",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0085.py": {
+      "expected_sha256": "39ca686858eed9325b732a7bfe81006fd988be1be9e8249203a008fe94d7c632",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0087.py": {
-      "expected_sha256": "4c58bfa1b047f62a2be65b9edfa358f9f70bbc1c000c68973c6408cf43b46619",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "6e76e978b7d9dad1691fe8fd684fff705070449822449eb487d1920578020f8e",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "6966ebfc29b44f5183c643167b3af61876b6690b6221aefbde546846dfd6347f",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "fd5bc8f3079ef373d8a496bae1ab76bcd7056ad8f9eec9f9d1f025f6280cadd5",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "d2e4d632f6aa6067ed48efbc0264323f128b8833d3ae1310216473b2d5ec5de4",
@@ -1474,6 +1506,10 @@
     "tests/test_g2_cboe_equity_probe.py": {
       "expected_sha256": "065a041bfd46652ba0221e8f17cef257d6f6972389f5ab2cbfe54c44b9a7da69",
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
+    },
+    "tests/test_g2_cboe_free_trial_planner.py": {
+      "expected_sha256": "2d240156cbb327dd3c0a701042bccb70a646c82753c1fdc841187fef5a509750",
+      "reason": "Regression coverage for reconciled Cboe trial provenance plus exact reproduction of the planning-only capacity receipt."
     },
     "tests/test_g2_databento_cost_probe_workflow.py": {
       "expected_sha256": "cf759c6f98b607fc45750397dda92b8b55e8db914e303e94641d129581f4fb25",
@@ -1540,8 +1576,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "d8bf652c85af410f1b2b433a5ced3f6c9cbd928f1a84c556a3eb52c0f3e9e061",
-      "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
+      "expected_sha256": "d8143fe54f6b069065b9f90b34e0da32f27a161a123a3e359540164cd205cf7a",
+      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
@@ -1578,18 +1614,6 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
-    },
-    "src/g2_cboe_free_trial_planner.py": {
-      "expected_sha256": "fa40c086574d6f46a3104fec9ce909f03d475dfad573f80fa67ec33155faa40b",
-      "reason": "Planning-only Cboe All Access free-trial estimator reconciled to Cboe Data Vantage's 2012 OPRA history floor, current historical/trial SIP documentation, 15-point pagination requests, and the 500-point daily cap; no API calls, purchases, subscriptions, or coverage claims."
-    },
-    "tests/test_g2_cboe_free_trial_planner.py": {
-      "expected_sha256": "2d240156cbb327dd3c0a701042bccb70a646c82753c1fdc841187fef5a509750",
-      "reason": "Regression coverage for reconciled Cboe trial provenance plus exact reproduction of the planning-only capacity receipt."
-    },
-    "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
-      "expected_sha256": "ee4b2f0a0afcc0f19ac20c968522dcf40449c1fc183976de2048b1bdb328b628",
-      "reason": "Planning-only materialized Cboe All Access free-trial capacity receipt; awaits vendor confirmation and claims no G2 coverage."
     }
   },
   "schema_version": "2",
