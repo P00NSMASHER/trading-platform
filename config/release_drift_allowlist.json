@@ -1280,8 +1280,8 @@
       "reason": "Add exact symbol-date request-volume accounting to the G2_CHAMPION_MINIMUM candidate-source matrix; source availability only, no coverage claims or gate changes."
     },
     "src/g2_cboe_all_access_capacity.py": {
-      "expected_sha256": "50388cb3a540a63146b070b6e5f0c14d2e382ea9fe32e3f3e5e6bcd0aba62467",
-      "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
+      "expected_sha256": "2eb9191ee892c89baaf0e343ab727240bee49e2d42860a62bc576823d5f6a20d",
+      "reason": "Correct Cboe acceptance/capacity tooling to vendor-confirmed OPRA 2012+ history; 2011 option trades remain explicitly out of Cboe scope."
     },
     "src/g2_cboe_equity_probe.py": {
       "expected_sha256": "e5619af42b13dd55526169c230b07b9848d79f9c9baad6b6d0102acfe5531acb",
@@ -1612,8 +1612,8 @@
       "reason": "Add exact symbol-date request-volume accounting to the G2_CHAMPION_MINIMUM candidate-source matrix; source availability only, no coverage claims or gate changes."
     },
     "tests/test_g2_cboe_all_access_capacity.py": {
-      "expected_sha256": "44a62d7ee73e6ab9a4d024d95114e720d0a2ba600d1a25105d03a8524d4af49e",
-      "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
+      "expected_sha256": "fe693a23dc5aa613ef8ed93fc233d2e62d1201485ace6112c5d30bb430bb583e",
+      "reason": "Regression coverage for corrected Cboe 2012+ capacity scope and explicit pre-purchase gates."
     },
     "tests/test_g2_cboe_equity_probe.py": {
       "expected_sha256": "065a041bfd46652ba0221e8f17cef257d6f6972389f5ab2cbfe54c44b9a7da69",
@@ -1788,12 +1788,12 @@
       "reason": "Fail-closed equity route break-even planner and receipt; compares full Tick Data against ThetaData + FirstRate + Tick Data residual without assuming quotes, licenses, or purchase authority."
     },
     "src/g2_cboe_acceptance_probe.py": {
-      "expected_sha256": "388d19bad811dd8216e2fe957913c835fadf86ea3d9fa5632804a68d90a7acbb",
-      "reason": "Minimal dry-run-by-default Cboe All Access historical acceptance probe; explicit two-request execution only, no signup, purchase, or bulk acquisition."
+      "expected_sha256": "8ae083eaeabe2b9196a2bc0ef7a525e66fd595d97c736ce0f31a0ec6c91492df",
+      "reason": "Correct Cboe acceptance/capacity tooling to vendor-confirmed OPRA 2012+ history; 2011 option trades remain explicitly out of Cboe scope."
     },
     "tests/test_g2_cboe_acceptance_probe.py": {
-      "expected_sha256": "0dd70944caaa5eebeff729250e775862faef968f0a167a74fcc528a93761add7",
-      "reason": "Minimal dry-run-by-default Cboe All Access historical acceptance probe; explicit two-request execution only, no signup, purchase, or bulk acquisition."
+      "expected_sha256": "7b1377fa42ea8e4a5dd6645d7a656526ffdcf0de0192245a9d09cd4682550e61",
+      "reason": "Regression coverage for the corrected 2012 Cboe acceptance probe sample and fail-closed acceptance semantics."
     },
     "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
       "expected_sha256": "10caf7b4ecbf1e64ec452f865c6f48e49d187ff745aa357ef16868ce3072eacb",
