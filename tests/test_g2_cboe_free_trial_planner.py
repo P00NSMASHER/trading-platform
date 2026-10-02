@@ -13,6 +13,7 @@ def test_cboe_trial_planner_matches_frozen_scope_and_vendor_provenance():
     assert result["provenance_reconciliation"] == {
         "vendor_confirmed_opra_earliest_year": 2012,
         "vendor_reply_date": "2026-09-30",
+        "vendor_trial_confirmation_date": "2026-10-02",
         "public_option_trades_reference_generic_earliest_year": 2003,
         "planner_earliest_year": 2012,
         "reason": (
@@ -28,11 +29,16 @@ def test_cboe_trial_planner_matches_frozen_scope_and_vendor_provenance():
         "credit_card_authorization_required": True,
         "trial_sip_access": False,
         "overage_available": False,
-        "historical_option_trades_access": "documented_eligible_not_runtime_verified",
+        "historical_option_trades_access": "vendor_confirmed_eligible_not_runtime_verified",
         "historical_access_basis": (
-            "The All Access product page says the trial is not eligible for SIP access, while "
-            "the Option Trades reference prices historical requests at 15 points and states that "
-            "SIP subscription is required for live or delayed requests. No trial was activated."
+            "Cboe Data Vantage confirmed by email on 2026-10-02 that the All Access trial should "
+            "be able to pull historical data via API. No trial was activated, so runtime response "
+            "fields, completeness, pagination behavior, and point consumption remain unverified."
+        ),
+        "trial_signup_overage_setting": "select_allow_per_vendor_confirmation",
+        "trial_signup_overage_setting_basis": (
+            "Vendor stated to select Allow for exceeding the daily credit limit and that it does "
+            "not matter during the trial phase; this is not treated as paid-overage authorization."
         ),
     }
     assert result["documented_historical_option_trades"] == {
