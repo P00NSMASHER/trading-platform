@@ -1714,6 +1714,14 @@
     "tests/test_g2_cboe_all_access_capacity.py": {
       "expected_sha256": "44a62d7ee73e6ab9a4d024d95114e720d0a2ba600d1a25105d03a8524d4af49e",
       "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
+    },
+    "src/g2_cboe_free_trial_plan.py": {
+      "expected_sha256": "fcb88419d58bca492c13b0fa343725de15cf1df6a596d96e35c21973ce40ca52",
+      "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
+    },
+    "tests/test_g2_cboe_free_trial_plan.py": {
+      "expected_sha256": "68555d2288269577bdb43178657bcd8a6cbedabd8d17b7d33814b54a2e0a157c",
+      "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
     }
   },
   "schema_version": "2",
