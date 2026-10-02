@@ -1706,6 +1706,14 @@
     "data/processed/g2_vendor_requests/cheap_route_partitions/summary.json": {
       "expected_sha256": "558fd529b6678b56f9e94548e134109c78c223fd519d2fd2752eb4d01ae83f59",
       "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
+    },
+    "src/g2_cboe_free_trial_plan.py": {
+      "expected_sha256": "fcb88419d58bca492c13b0fa343725de15cf1df6a596d96e35c21973ce40ca52",
+      "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
+    },
+    "tests/test_g2_cboe_free_trial_plan.py": {
+      "expected_sha256": "68555d2288269577bdb43178657bcd8a6cbedabd8d17b7d33814b54a2e0a157c",
+      "reason": "Cboe All Access 14-day free-trial planning for 2011 G2 option trades; planning only, pagination and authorization remain fail-closed."
     }
   },
   "schema_version": "2",
