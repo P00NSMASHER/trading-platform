@@ -1604,8 +1604,16 @@
       "reason": "Deterministic G2_FULL_REPLICATION option-quote candidate plan using current LSEG OPRA Tick History evidence; planning only, no purchase or coverage claim."
     },
     "tests/test_g2_full_replication_option_quote_plan.py": {
-      "expected_sha256": "10e6f037d60eee1558b5092c6a68f2a5c05c2b0a0b968948910e2ae4ea8bb519",
-      "reason": "Deterministic G2_FULL_REPLICATION option-quote candidate plan using current LSEG OPRA Tick History evidence; planning only, no purchase or coverage claim."
+      "expected_sha256": "c5148f18fd028ac4d957e7f374f18522fb36b6442079fa273b55d04924edc3a8",
+      "reason": "Materialize and byte-verify the deterministic 414-row G2_FULL_REPLICATION option-quote request plan; candidate source only, no purchase or coverage claim."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history_option_quotes.csv": {
+      "expected_sha256": "55540b283ceec94e28ebe4255fb63dc8abdd7c46024760a0427323187f40b39d",
+      "reason": "Materialize and byte-verify the deterministic 414-row G2_FULL_REPLICATION option-quote request plan; candidate source only, no purchase or coverage claim."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/full_replication_option_quote_plan.json": {
+      "expected_sha256": "9c409aa29ecb1ad5a59c52a31e2830a944e5215f77bd5eb9f73c4bc592743e50",
+      "reason": "Materialize and byte-verify the deterministic 414-row G2_FULL_REPLICATION option-quote request plan; candidate source only, no purchase or coverage claim."
     }
   },
   "schema_version": "2",
