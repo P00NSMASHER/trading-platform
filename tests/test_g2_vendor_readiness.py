@@ -123,6 +123,30 @@ def test_vendor_readiness_rejects_tampered_vendor_reply_evidence(tmp_path):
         readiness.build_readiness(vendor_dir, COVERAGE)
 
 
+def test_vendor_readiness_rejects_tampered_vendor_scope(tmp_path):
+    vendor_dir = tmp_path / "g2_vendor_requests"
+    shutil.copytree(VENDOR_DIR, vendor_dir)
+    evidence_path = vendor_dir / "vendor_reply_evidence_2026-10-02.json"
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+    evidence["cboe_paid_bulk"]["requested_scope"]["selected_trading_dates"] = 310
+    evidence_path.write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="October 2 vendor reply evidence"):
+        readiness.build_readiness(vendor_dir, COVERAGE)
+
+
+def test_vendor_readiness_rejects_probe_coverage_authority(tmp_path):
+    vendor_dir = tmp_path / "g2_vendor_requests"
+    shutil.copytree(VENDOR_DIR, vendor_dir)
+    evidence_path = vendor_dir / "vendor_reply_evidence_2026-10-02.json"
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+    evidence["cboe_zero_cost_acceptance_probe"]["coverage_count_mutation_allowed"] = True
+    evidence_path.write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="October 2 vendor reply evidence"):
+        readiness.build_readiness(vendor_dir, COVERAGE)
+
+
 def test_committed_vendor_readiness_matches_generator():
     generated = readiness.build_readiness(VENDOR_DIR, COVERAGE)
     committed = json.loads(
