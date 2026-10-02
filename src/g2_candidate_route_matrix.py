@@ -29,21 +29,16 @@ def classify(row: dict[str, str]) -> tuple[str, str]:
 
     if kind == "equity_trade":
         return (
-            "candidate_cboe_equity_trades",
-            "Cboe Equity & ETF Trades current product history starts in 2010; "
-            "still requires license and production content validation.",
+            "candidate_tickdata_equity_trades",
+            "Tick Data U.S. Equities currently provides tick-by-tick trades across the full "
+            "frozen date range; still requires license and production content validation.",
         )
     if kind == "equity_quote":
-        if day >= "2014-01-01":
-            return (
-                "candidate_nasdaq_equity_tick_history",
-                "Nasdaq U.S. Equity Tick History currently documents consolidated Level-1 "
-                "tick quotes/trades with high-quality history from Jan 2014; still requires "
-                "license and production content validation.",
-            )
         return (
-            "unresolved_exact_equity_quote",
-            "No current exact-semantics pre-2014 consolidated equity quote route is accepted.",
+            "candidate_tickdata_equity_nbbo_quotes",
+            "Tick Data NBBO for U.S. Equities currently provides tick-by-tick consolidated "
+            "NBBO quotes back to Jan 2004, covering the full frozen date range; still "
+            "requires license and production content validation.",
         )
     if kind == "option_trade":
         if day >= "2013-04-01":
