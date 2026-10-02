@@ -12,7 +12,8 @@
     "fail_closed_activation_blueprint_ready": true,
     "delivery_preflight_tool_ready": true,
     "databento_cost_only_workflow_ready": true,
-    "cboe_trial_capacity_plan_ready": true
+    "cboe_trial_capacity_plan_ready": true,
+    "vendor_reply_evidence_ready": true
   },
   "external_state": {
     "vendor_quotes_or_pricing": "PARTIAL_EXTERNAL_QUOTES_RECEIVED",
@@ -60,5 +61,30 @@
     "free_trial_activation_requires_explicit_user_authorization": true,
     "trial_download_is_not_retention_authority": true,
     "retention_rights_required_before_bulk_acquisition": true
+  },
+  "vendor_reply_evidence": {
+    "source_path": "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json",
+    "as_of": "2026-10-02",
+    "coverage_effect": "NONE_UNTIL_ACTUAL_VALIDATED_ROWS",
+    "cboe_paid_bulk": {
+      "research_disposition": "OUT_OF_SCOPE_CURRENT_RESEARCH",
+      "sale_scope": "FULL_OPRA_UNIVERSE_ONLY",
+      "rough_price_usd_2_years_5_months": 40000,
+      "rough_price_usd_1_calendar_year": 24000,
+      "selected_309_days_across_years": "CUSTOM_JOB_POSSIBLY_MORE_EXPENSIVE"
+    },
+    "tick_data_written_quote": {
+      "research_disposition": "UNPRICED_WRITTEN_QUOTE_UNAVAILABLE",
+      "written_availability_confirmation": "NOT_PROVIDED",
+      "written_price_usd": null,
+      "vendor_response": "PHONE_CALL_REQUIRED"
+    },
+    "cboe_zero_cost_acceptance_probe": {
+      "pull_request": 258,
+      "state_as_of_recording": "MERGED",
+      "logical_separation": "SEPARATE_FROM_PAID_BULK_ACQUISITION",
+      "coverage_claimed": false,
+      "coverage_count_mutation_allowed": false
+    }
   }
 }
