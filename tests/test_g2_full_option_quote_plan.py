@@ -17,7 +17,7 @@ def test_full_option_quote_plan_matches_frozen_full_replication_scope():
     assert payload["full_replication_source_date_rows"] == 1656
     assert payload["additional_option_quote_source_date_rows"] == 414
     assert payload["additional_option_quote_symbol_date_pairs"] == 3828
-    assert payload["packet_count"] == 3
+    assert payload["packet_count"] == 2
 
     by_route = {packet["route"]: packet for packet in payload["packets"]}
 
@@ -28,18 +28,11 @@ def test_full_option_quote_plan_matches_frozen_full_replication_scope():
     assert lseg["first_trade_date"] == "2011-03-21"
     assert lseg["last_trade_date"] == "2011-12-30"
 
-    cboe = by_route["candidate_cboe_custom_tick_quotes_2012_2013"]
-    assert cboe["source_date_rows"] == 178
-    assert cboe["symbol_date_pair_count"] == 1186
-    assert cboe["unique_historical_symbols"] == 53
-    assert cboe["first_trade_date"] == "2012-01-03"
-    assert cboe["last_trade_date"] == "2013-10-22"
-
-    algoseek = by_route["candidate_algoseek_opra_tick_quotes_2014_2015"]
-    assert algoseek["source_date_rows"] == 131
-    assert algoseek["symbol_date_pair_count"] == 2178
-    assert algoseek["unique_historical_symbols"] == 86
-    assert algoseek["first_trade_date"] == "2014-11-07"
+    algoseek = by_route["candidate_algoseek_opra_tick_quotes_2012_2015"]
+    assert algoseek["source_date_rows"] == 309
+    assert algoseek["symbol_date_pair_count"] == 3364
+    assert algoseek["unique_historical_symbols"] == 137
+    assert algoseek["first_trade_date"] == "2012-01-03"
     assert algoseek["last_trade_date"] == "2015-05-20"
 
     expected_fields = {
