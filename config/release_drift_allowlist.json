@@ -1608,16 +1608,16 @@
       "reason": "Deterministic G2_FULL_REPLICATION option-quote candidate plan using current LSEG OPRA Tick History evidence; planning only, no purchase or coverage claim."
     },
     "src/g2_acquisition_cost_priority.py": {
-      "expected_sha256": "40257a173490b9d9072ce8bc7b7174bef8216825cd17adf2a68eff63e70601a3",
-      "reason": "Planning-only G2 acquisition cost priority: distinguishes vendor minimums from exact quotes, screens nonconforming low-cost equity routes, and keeps purchases/trials fail-closed."
+      "expected_sha256": "2e95afe987b80754d5ccdd3945f05829ef3800842b90c614da9410a9daaec58d",
+      "reason": "Planning-only G2 acquisition cost priority: distinguishes vendor minimums from exact quotes, screens nonconforming low-cost equity routes, includes algoseek historical-only quote comparison, and keeps purchases/trials fail-closed."
     },
     "tests/test_g2_acquisition_cost_priority.py": {
-      "expected_sha256": "8279d13e34263d25dbb920287113a8a64e7b4f75515bc2cedcf87e8acf080b7b",
-      "reason": "Regression coverage for G2 cheap-first acquisition ordering, exact-quote guards, licensing/fidelity exclusions, and no-purchase policy."
+      "expected_sha256": "4c415d8e36bec9ce1dfd2eea52f13be2e7e7941d969a960696f881636fcbfaed",
+      "reason": "Regression coverage for G2 cheap-first acquisition ordering, exact-quote guards, licensing/fidelity exclusions, algoseek lease-vs-buy distinction, and no-purchase policy."
     },
     "data/processed/g2_vendor_requests/acquisition_cost_priority.json": {
-      "expected_sha256": "2e647c8c322fdfad610d69598fef58c332c5ff6db83cb386b05c50c30eb1e07b",
-      "reason": "Materialized planning-only G2 acquisition priority with current public cost benchmarks, screened equity routes, and explicit unknown-cost blockers."
+      "expected_sha256": "2965a174c9cd81d0d6602bdc3b87d0f76b0b523c9ce7094cec31314cfddc08a8",
+      "reason": "Materialized planning-only G2 acquisition priority with current public cost benchmarks, screened/conditional equity routes, and explicit unknown-cost blockers."
     }
   },
   "schema_version": "2",
