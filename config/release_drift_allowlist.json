@@ -1598,6 +1598,18 @@
     "tests/test_g2_vendor_content_preflight.py": {
       "expected_sha256": "f27f57cd40d9a0855ec192383546be030c02b77fdb4d547389eea04bd8d50b96",
       "reason": "Post-activation G2 vendor content preflight using the production parser to prove exact date and required-symbol presence before coverage audit; never counts G2 coverage."
+    },
+    "src/g2_full_option_quote_plan.py": {
+      "expected_sha256": "43841c26d1855a91475f46ce3e980734c495a0f9dbc822ccfce3cfff40879f3f",
+      "reason": "Planning-only G2 full-replication option-quote vendor split; preserves 1,242-row champion-minimum accounting and adds no purchase authority or coverage claim."
+    },
+    "tests/test_g2_full_option_quote_plan.py": {
+      "expected_sha256": "d1b36acdd230d029f54e5a01ea943759b7b0e5fed40732a233aa8432aa1583de",
+      "reason": "Regression guard for exact 414-row / 3,828-pair G2 full-replication option-quote scope and fail-closed vendor request policies."
+    },
+    "data/processed/g2_vendor_requests/full_replication_option_quote_plan.json": {
+      "expected_sha256": "743ad1730895ab95ac429c28f34b92976ce9dac33ebbe371ec5dc5d5e72bcb72",
+      "reason": "Materialized planning-only split of full-replication option quotes into 2011 LSEG and 2012-2015 algoseek candidate routes; no acquisition or coverage claim."
     }
   },
   "schema_version": "2",
