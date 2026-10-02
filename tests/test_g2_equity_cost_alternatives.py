@@ -27,10 +27,12 @@ def test_equity_cost_alternatives_preserve_license_gates():
     assert by_vendor["Tick Data"]["route_status"] == "CURRENT_PREFERRED_CANDIDATE"
 
     theta_equity = by_vendor["ThetaData Stocks PRO (UTP subset)"]
-    assert theta_equity["eligible_source_date_rows_per_record_kind"] == 291
+    assert theta_equity["post_history_date_universe"] == 291
+    assert theta_equity["eligible_source_date_rows_per_record_kind"] == 230
     assert theta_equity["eligible_symbol_date_pairs_per_record_kind"] == 1430
     assert theta_equity["eligible_unique_symbols"] == 55
     assert theta_equity["required_symbol_date_pairs_per_record_kind"] == 3828
+    assert theta_equity["residual_source_date_rows_per_record_kind"] == 380
     assert theta_equity["residual_symbol_date_pairs_per_record_kind"] == 2398
     assert theta_equity["coverage_fit"] == "PARTIAL_POINT_IN_TIME_XNAS_UTP_SLICE"
     assert theta_equity["license_fit"] == "SALES_CLASSIFICATION_RETENTION_AND_BUNDLE_QUOTE_PENDING"
