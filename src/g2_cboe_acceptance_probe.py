@@ -11,8 +11,8 @@ from typing import Any
 
 TOKEN_URL = "https://id.livevol.com/connect/token"
 API_BASE = "https://api.livevol.com/v1/live/allaccess"
-SAMPLE_DATE = "2011-03-21"
-SAMPLE_SYMBOL = "JNPR"
+SAMPLE_DATE = "2012-01-03"
+SAMPLE_SYMBOL = "BA"
 POINTS_PER_HISTORICAL_REQUEST = 15
 TOTAL_PROBE_POINTS = 2 * POINTS_PER_HISTORICAL_REQUEST
 
