@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "0b563f1fc56bcafc9558cd847e06bdcaf6eda37b",
+  "reserved_batch": "0085",
+  "worker_slot": 0,
+  "event_id": "HEJFE-6C4EA140AD75FFE2",
+  "historical_symbol": "THC",
+  "public_announcement_ts": "2015-05-04T16:05:00-04:00",
+  "source_family": "preserved_wire_mirror",
+  "source_grade": "A",
+  "source_reference": "https://www.streetinsider.com/related.php?id=10518254&type=si",
+  "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/70318/000119312515169013/d918624dex991.htm",
+  "expected_state_after_batch": {
+    "exact_resolved": 98,
+    "reviewed_excluded": 76,
+    "step9": "SOURCE_BLOCKED"
+  }
+}
