@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "purpose": "Repository-side readiness receipt for G2 vendor acquisition. Planning readiness is separate from licensed delivery and validated G2 coverage.",
+  "champion_minimum_scope": {
+    "source_date_rows": 1242,
+    "record_kind_symbol_date_pairs": 11484,
+    "candidate_route_count": 5
+  },
+  "repository_readiness": {
+    "vendor_request_manifests_ready": true,
+    "vendor_quote_packets_ready": true,
+    "fail_closed_activation_blueprint_ready": true,
+    "delivery_preflight_tool_ready": true,
+    "databento_cost_only_workflow_ready": true
+  },
+  "external_state": {
+    "vendor_quotes_or_pricing": "PENDING_EXTERNAL",
+    "license_or_entitlement_terms": "PENDING_EXTERNAL",
+    "licensed_data_delivery": "PENDING_EXTERNAL",
+    "local_entitlement_hash_binding": "PENDING_EXTERNAL",
+    "production_content_validation": "BLOCKED_ON_DELIVERY",
+    "runtime_secret_state": "NOT_COMMITTED_TO_REPOSITORY"
+  },
+  "canonical_full_g2_state": {
+    "required_source_date_rows": 1656,
+    "validated_authorized_source_date_rows": 0,
+    "missing_validated_authorized_source_date_rows": 1656,
+    "ready_for_real_backfill": false
+  },
+  "champion_minimum_validated_coverage": {
+    "separately_measured": false,
+    "note": "The 1,242-row champion-minimum scope is an acquisition optimization. It is not substituted for canonical G2_REAL_MARKET_DATA coverage."
+  },
+  "next_external_actions": [
+    "Configure DATABENTO_API_KEY if cost-only OPRA pricing is desired; the workflow performs no download or purchase.",
+    "Request/confirm Tick Data equity trade + tick-level NBBO quote pricing/licensing for the frozen request manifests.",
+    "Request/confirm Cboe historical Option Trades pricing/licensing for the 2012-01-03 through 2013-03-28 request manifest.",
+    "Request/confirm LSEG OPRA Tick History pricing/licensing for the 2011 request manifest.",
+    "Place lawfully obtained vendor files in a local drop folder, run licensed-data intake + delivery preflight, then create a local hash-bound entitlement manifest."
+  ],
+  "policy": {
+    "candidate_source_is_not_coverage": true,
+    "quote_packet_is_not_purchase_authority": true,
+    "delivery_is_not_authorization": true,
+    "file_presence_is_not_content_coverage": true,
+    "g2_release_gate_unchanged": true
+  }
+}
