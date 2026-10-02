@@ -1,7 +1,7 @@
 {
   "alternatives": [
     {
-      "blocking_fact": "Retail pricing is individual-use; business/non-display classification and retention rights for the research pipeline require written sales confirmation.",
+      "blocking_fact": "Written terms confirm private research eligibility and $160/month Options Pro. Raw/unmodified data must be deleted within 30 days after the subscription billing period ends; derived research data may be retained. The remaining route blockers are acceptance of bounded raw retention and the LSEG residual price/entitlement.",
       "documented_trade_history_start": "2012-06-01",
       "eligible_quote_rows": 291,
       "eligible_quote_underlying_date_pairs": 3014,
@@ -9,19 +9,22 @@
       "eligible_trade_underlying_date_pairs": 3014,
       "fidelity_fit": "TICK_TRADES_AND_EVERY_OPRA_NBBO_QUOTE",
       "frozen_first_eligible_date": "2012-06-29",
-      "license_fit": "SALES_CLASSIFICATION_AND_RETENTION_TERMS_PENDING",
+      "license_fit": "PRIVATE_RESEARCH_CONFIRMED_BOUNDED_RAW_RETENTION",
       "pre_history_residual_pairs_per_record_kind": 814,
       "pre_history_residual_rows_per_record_kind": 123,
       "public_commercial_monthly_price_usd": 1600,
       "public_retail_monthly_price_usd": 160,
       "public_startup_monthly_price_as_low_as_usd": 500,
-      "route_status": "CHEAP_CONDITIONAL_CONSOLIDATION",
+      "route_status": "CHEAP_CONDITIONAL_CONSOLIDATION_WRITTEN_TERMS_RECEIVED",
       "source_urls": [
         "https://thetadata.net/pricing",
         "https://www.thetadata.net/commercial-use",
         "https://thetadata.net/docs/Articles/Data-And-Requests/Making-Requests.html"
       ],
-      "vendor": "ThetaData Options PRO"
+      "vendor": "ThetaData Options PRO",
+      "written_options_pro_monthly_price_usd": 160,
+      "raw_unmodified_retention": "DELETE_WITHIN_30_DAYS_AFTER_SUBSCRIPTION_BILLING_PERIOD_ENDS",
+      "derived_research_retention": "ALLOWED_AFTER_RAW_DELETION"
     },
     {
       "blocking_fact": "Current algoseek pages conflict on whether strict tick OPRA history begins in 2012 or 2014. Until sales confirms the exact TANQ dataset/granularity, only the conservative 2014+ frozen slice is treated as proven.",
@@ -117,7 +120,7 @@
   "purpose": "Planning-only lower-cost alternatives for G2 option trades and the separate full-replication option-quote layer. Pricing/availability does not establish license suitability, delivery, or G2 coverage.",
   "schema_version": "1",
   "conditional_cheapest_full_option_route": {
-    "status": "PREFERRED_IF_THETADATA_WRITTEN_LICENSE_CLEARANCE_IS_RECEIVED",
+    "status": "PREFERRED_IF_LSEG_QUOTE_ACCEPTABLE_AND_BOUNDED_RAW_RETENTION_ACCEPTED",
     "expected_vendor_count": 2,
     "segments": [
       {
@@ -146,10 +149,13 @@
           "option_trade",
           "option_quote"
         ],
-        "pricing_status": "SALES_CLASSIFICATION_AND_RETENTION_TERMS_PENDING",
+        "pricing_status": "WRITTEN_PRIVATE_RESEARCH_ELIGIBLE_160_USD_MONTH",
         "public_retail_monthly_price_usd": 160,
         "public_commercial_monthly_price_usd": 1600,
-        "public_startup_monthly_price_as_low_as_usd": 500
+        "public_startup_monthly_price_as_low_as_usd": 500,
+        "written_monthly_price_usd": 160,
+        "raw_unmodified_retention": "DELETE_WITHIN_30_DAYS_AFTER_SUBSCRIPTION_BILLING_PERIOD_ENDS",
+        "derived_research_retention": "ALLOWED_AFTER_RAW_DELETION"
       }
     ],
     "coverage_accounting": {
@@ -164,6 +170,6 @@
       "Cboe DataShop Option Trades",
       "Databento OPRA.PILLAR Trades"
     ],
-    "activation_rule": "Do not switch routes or purchase until written ThetaData license/retention terms and LSEG price/entitlement are acceptable."
+    "activation_rule": "Do not switch routes or purchase until LSEG price/entitlement is acceptable and the bounded ThetaData raw-retention requirement is explicitly accepted for the research workflow."
   }
 }
