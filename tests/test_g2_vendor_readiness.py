@@ -39,6 +39,8 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert payload["external_state"]["production_content_validation"] == "BLOCKED_ON_DELIVERY"
     assert payload["external_state"]["databento_cost_probe"] == "BLOCKED_API_KEY_NOT_CONFIGURED"
     assert payload["external_state"]["cboe_trial_historical_access"] == "VENDOR_CONFIRMED_ELIGIBLE_RUNTIME_NOT_VERIFIED"
+    assert payload["external_state"]["cboe_trial_option_quote_access"] == "DOCUMENTED_HISTORICAL_ENDPOINT_RUNTIME_TRIAL_ACCESS_UNVERIFIED"
+    assert payload["external_state"]["cboe_trial_retention_rights"] == "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES"
     assert payload["external_state"]["cboe_custom_tick_quote"] == "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET"
     assert payload["external_state"]["tickdata_written_quote"] == "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED"
     assert payload["external_state"]["lseg_2011_quote"] == "REQUEST_SENT_AWAITING_REPLY"
@@ -51,6 +53,8 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
         "file_presence_is_not_content_coverage": True,
         "g2_release_gate_unchanged": True,
         "free_trial_activation_requires_explicit_user_authorization": True,
+        "trial_download_is_not_retention_authority": True,
+        "retention_rights_required_before_bulk_acquisition": True,
     }
 
 
@@ -66,7 +70,10 @@ def test_readiness_next_actions_cover_every_external_dependency():
     assert "explicit user authorization" in actions
     assert "daily credit limit does not gate the trial" in actions
     assert "acceptance probe" in actions
-    assert "seq_no pagination" in actions
+    assert "retained internal research use" in actions
+    assert "deleted or returned" in actions
+    assert "reference/options" in actions
+    assert "option-quote pagination" in actions
     assert "LSEG" in actions
     assert "algoseek" in actions
     assert "local drop folder" in actions
