@@ -52,6 +52,12 @@ def build_break_even() -> dict:
             "sticker prices are not vendor quotes and do not authorize a purchase."
         ),
         "pricing_as_of": PRICING_AS_OF,
+        "source_urls": {
+            "tickdata_data_store": "https://www.tickdata.com/tickdatastore",
+            "tickdata_fee_estimator": "https://www.tickdata.com/fee-estimate",
+            "firstrate_tick_pricing": "https://firstratedata.com/a/2/tick-data-pricing",
+            "theta_subscriptions": "https://www.thetadata.net/docs/Articles/Getting-Started/Subscriptions.html",
+        },
         "scope": {
             "full_tickdata": {
                 "unique_symbols": FULL_TICKDATA_SYMBOLS,
