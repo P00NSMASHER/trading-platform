@@ -1654,6 +1654,18 @@
     "tests/test_g2_massive_equity_plan.py": {
       "expected_sha256": "2b04f365702f8affa0ad0adcbb6a32ba5b770b0b53fb78d965667b20bb641ab4",
       "reason": "Regression guard for the no-purchase Massive equity candidate plan, frozen 414+414 equity source-date rows / 3,828 pairs / 146 symbols, and explicit non-inference of individual non-professional eligibility."
+    },
+    "src/g2_equity_cost_alternatives.py": {
+      "expected_sha256": "17deaa825260f8ae4768a74b219bbcdd30faa86ac5e8513d8da421b3b21206c5",
+      "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
+    },
+    "tests/test_g2_equity_cost_alternatives.py": {
+      "expected_sha256": "4357998763d424ab8ca1140e335095f4ac239e548a85a48fd0c354168dd54386",
+      "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/equity_cost_alternatives.json": {
+      "expected_sha256": "0983a2d27f5125c4255422080f0e4837dd260ff685b273987875ef375c7e74f0",
+      "reason": "Planning-only lower-cost G2 equity alternatives with refined Tick Data Data Store minimum and measured FirstRate partial coverage; no preferred-route replacement, purchase authority, or coverage claim."
     }
   },
   "schema_version": "2",
