@@ -1116,8 +1116,8 @@
       "reason": "G1 batch 0083 Worker-3 BWA official PR Newswire exact clock; deterministic 95 exact / 79 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "scripts/g1_batch_0085_generate.py": {
-      "expected_sha256": "32cdebdf4c9cdeca53ffe0d54525800145f63ddabe27e16220b7ad714bb77c39",
-      "reason": "G1 batch 0085 Worker-0 THC timestamp-preserving Business Wire mirror exact clock; deterministic 97 exact / 77 reviewed exclusions with issuer/SEC corroboration and prior evidence preserved."
+      "expected_sha256": "89d91d9b63076d7b55fed21238bc1b7534e69f4f1461cbe5ba058af6f9b811e0",
+      "reason": "G1 batch 0085 THC generator with fail-closed clean-start guard; deterministic 97 exact / 77 reviewed exclusions with preserved-wire exact clock and issuer/SEC corroboration."
     },
     "scripts/g1_batch_0087_generate.py": {
       "expected_sha256": "e97c300e3b0812d8055f65f0d778620a91749fe84d742f701fe70a00c9badf0a",
