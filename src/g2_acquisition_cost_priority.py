@@ -22,6 +22,8 @@ MASSIVE_MARKET_DATA_TERMS_URL = "https://massive.com/legal/market-data-terms-of-
 MASSIVE_INDIVIDUAL_ADVANCED_USD = 199.0
 MASSIVE_BUSINESS_USD = 2499.0
 KIBOT_NBBO_DOC_URL = "https://www.kibot.com/quality/bid-ask-and-nbbo-quotes.html"
+TICKDATA_EXTERNAL_RATE_CARD_URL = "https://stockmarketstack.com/tools/tickdata"
+TICKDATA_EXTERNAL_EQUITY_SYMBOL_YEAR_USD = 32.0
 
 
 def _read_json(path: Path) -> dict:
@@ -31,10 +33,15 @@ def _read_json(path: Path) -> dict:
 def build(vendor_dir: Path) -> dict:
     summary = _read_json(vendor_dir / "vendor_request_summary.json")
     trial = _read_json(vendor_dir / "cboe_trial_capacity_plan.json")
-    tickapi_estimate = tickapi.estimate(
-        tickapi._read(vendor_dir / "tickdata_equity_trades.csv"),
-        tickapi._read(vendor_dir / "tickdata_equity_nbbo_quotes.csv"),
-    )
+    equity_trade_rows = tickapi._read(vendor_dir / "tickdata_equity_trades.csv")
+    equity_quote_rows = tickapi._read(vendor_dir / "tickdata_equity_nbbo_quotes.csv")
+    tickapi_estimate = tickapi.estimate(equity_trade_rows, equity_quote_rows)
+    equity_symbol_years = {
+        (symbol, row["trade_date"][:4])
+        for row in equity_trade_rows
+        for symbol in row["historical_symbols"].split(";")
+        if symbol
+    }
 
     if summary["champion_minimum_source_date_rows"] != 1242:
         raise ValueError("vendor summary does not match champion-minimum scope")
@@ -56,6 +63,13 @@ def build(vendor_dir: Path) -> dict:
             "tickdata_datastore_new_client_minimum_usd": TICKDATA_NEW_CLIENT_MINIMUM_USD,
             "tickdata_datastore_source": TICKDATA_DATASTORE_URL,
             "tickdata_fee_estimate_source": TICKDATA_FEE_ESTIMATE_URL,
+            "tickdata_equity_unique_symbol_years": len(equity_symbol_years),
+            "tickdata_external_rate_card_source": TICKDATA_EXTERNAL_RATE_CARD_URL,
+            "tickdata_external_rate_card_vendor_confirmed": False,
+            "tickdata_external_equity_symbol_year_usd": TICKDATA_EXTERNAL_EQUITY_SYMBOL_YEAR_USD,
+            "tickdata_external_list_benchmark_usd": round(
+                len(equity_symbol_years) * TICKDATA_EXTERNAL_EQUITY_SYMBOL_YEAR_USD, 2
+            ),
             "tickapi_estimated_first_year_minimum_usd": tickapi_floor,
             "firstrate_10_plus_per_ticker_usd": FIRSTRATE_TEN_PLUS_PER_TICKER_USD,
             "firstrate_naive_146_ticker_cost_usd": round(
@@ -152,8 +166,12 @@ def build(vendor_dir: Path) -> dict:
                 "exact_quote_status": "PENDING_EXTERNAL",
                 "automatic_purchase_permitted": False,
                 "note": (
-                    "Price the one-time Data Store subset before considering TickAPI. The public "
-                    "new-client minimum is materially below the current TickAPI first-year floor."
+                    "The $1,000 new-client amount is only a minimum order, not the exact quote. "
+                    "The frozen equity scope spans 193 unique symbol-years. An independent current "
+                    "rate-card review reports $32 per U.S. equity symbol-year before volume discounts, "
+                    "which implies a $6,176 list-price benchmark; this is not vendor-confirmed. "
+                    "Compare Tick Data's written custom quote against the TickAPI first-year floor "
+                    "before selecting either route."
                 ),
             },
             {
@@ -184,9 +202,8 @@ def build(vendor_dir: Path) -> dict:
             "candidate_source_is_not_coverage": True,
             "do_not_activate_trials_automatically": True,
             "do_not_purchase_automatically": True,
-            "prefer_one_time_tickdata_store_quote_before_tickapi_subscription": (
-                TICKDATA_NEW_CLIENT_MINIMUM_USD < tickapi_floor
-            ),
+            "compare_tickdata_store_exact_quote_to_tickapi_floor_before_purchase": True,
+            "do_not_treat_tickdata_minimum_order_as_exact_quote": True,
             "do_not_use_massive_individual_for_business_use_without_vendor_confirmation": True,
             "do_not_count_equity_quote_source_without_bid_and_ask_sizes": True,
             "no_total_cost_claim_until_external_quotes_and_databento_cost_probe_exist": True,
