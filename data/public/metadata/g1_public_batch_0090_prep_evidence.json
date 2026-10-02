@@ -1,0 +1,45 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "5ea0a65b3b0837a55488a4d7969fca9050827491",
+  "reserved_batch": "0090",
+  "worker_slot": 0,
+  "previous_exact_count": 95,
+  "expected_exact_count_after_batch": 96,
+  "expected_excluded_after_batch": 78,
+  "items": [
+    {
+      "event_id": "HEJFE-4291CBF555CED6A9",
+      "historical_symbol": "PBI",
+      "event_date": "2015-04-29",
+      "first_documented_illicit_trade_ts": "2015-04-29T18:47:00Z",
+      "public_announcement_ts": "2015-04-30T07:00:00-04:00",
+      "public_announcement_utc": "2015-04-30T11:00:00Z",
+      "timestamp_kind": "first_public_release",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "A",
+      "publisher_timestamp_text": "StreetInsider preserved Business Wire release: April 30, 2015 7:00 AM EDT",
+      "release_title": "Pitney Bowes Announces First Quarter 2015 Financial Results",
+      "public_distribution_explicit": true,
+      "source_reference": "https://new.streetinsider.com/Press%2BReleases/Pitney%2BBowes%2BAnnounces%2BFirst%2BQuarter%2B2015%2BFinancial%2BResults/10505110.html",
+      "issuer_ir_reference": "https://www.investorrelations.pitneybowes.com/static-files/975ed868-dcf1-4825-94ab-a826f7916bc3",
+      "sec_exhibit_reference": "https://www.sec.gov/Archives/edgar/data/78814/000115752315001454/a51091229-ex991.htm",
+      "corroboration_basis": "Repository evidence commit e1d6f9feda0eebafed75ce190eda34acadf3814c preserves the StreetInsider Business Wire timestamp text. Pitney Bowes investor relations and SEC Exhibit 99.1 independently match the same April 30, 2015 release title/body. The separately scheduled 8:00 AM ET webcast is not used.",
+      "information_asymmetry_seconds": 58380,
+      "reviewed_on": "2026-10-02"
+    }
+  ],
+  "evidence_method": "Timestamp-preserving Business Wire mirror preserved in repository evidence commit e1d6f9feda0eebafed75ce190eda34acadf3814c with independent issuer and SEC release corroboration. Prep evidence only.",
+  "prohibited_substitutes": [
+    "edgar_acceptance_time",
+    "scheduled_call_time",
+    "webcast_time",
+    "archive_capture_time",
+    "neighboring_release_time",
+    "inferred_clock",
+    "date_only",
+    "unsupported_timezone"
+  ]
+}
