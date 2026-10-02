@@ -1108,8 +1108,8 @@
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "dcc35c76f92f968a82c228e69f8b9d87b2a7111ef3095aeac44079ba117527c0",
-      "reason": "G1 swarm controller correctness: stale-base closed-unmerged PRs no longer release freshly reassigned tokens; only current-main closed PRs release the lease."
+      "expected_sha256": "83aef3b6b909327fde44cfd937c9f2a0d385b92af6ab2ac4757bdce891900ffc",
+      "reason": "G1 controller correctness: closed-unmerged PRs release fresh tokens only when they target current main and do not predate the token assignment."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -1464,8 +1464,8 @@
       "reason": "G1 batch 0087 Worker-2 GT official PR Newswire exact clock; deterministic 96 exact / 78 reviewed exclusions with SEC Exhibit corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "cbad7e29fb06b0beb23f842ebe7014458d897a79ab360c85de353c49cc7a7e00",
-      "reason": "Regression coverage preserving current-main closed-unmerged release behavior while proving stale-base closed PRs cannot invalidate a fresh token."
+      "expected_sha256": "e22427a2a69d6f410a071e53ddc803f8bab11fa205dc46f44bc187b462894fef",
+      "reason": "Regression coverage for stale-base and preassignment closed PRs, while preserving current-attempt closed-unmerged token release behavior."
     },
     "tests/test_g2_candidate_route_matrix.py": {
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",

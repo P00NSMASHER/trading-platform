@@ -409,12 +409,15 @@ def evaluate_token(
             base_sha = str((pr.get("base") or {}).get("sha") or pr.get("base_sha") or "")
             matching_open_fresh = bool(base_sha and base_sha == manifest.get("main_sha"))
         else:
-            # A closed-unmerged PR should release a token only when that PR was
-            # built from the controller's exact current-main snapshot. Stale
-            # closed PRs from earlier main SHAs are historical evidence and must
-            # not immediately invalidate a freshly reassigned package.
+            # A closed-unmerged PR releases a token only when it belongs
+            # to this exact current-main integration attempt. Older-base PRs and
+            # PRs closed before the fresh token assignment are historical repair
+            # attempts and must not immediately invalidate a reassigned package.
             base_sha = str((pr.get("base") or {}).get("sha") or pr.get("base_sha") or "")
-            if base_sha and base_sha == manifest.get("main_sha"):
+            closed_at = parse_time(str(pr.get("closed_at") or ""))
+            current_base = bool(base_sha and base_sha == manifest.get("main_sha"))
+            not_preassignment = assigned_at is None or closed_at is None or closed_at >= assigned_at
+            if current_base and not_preassignment:
                 matching_closed = number
 
     token_candidate = Candidate(

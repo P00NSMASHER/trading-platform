@@ -813,6 +813,60 @@ def test_stale_closed_unmerged_pr_does_not_release_fresh_token() -> None:
     assert result.matching_closed_pr is None
 
 
+def test_preassignment_current_main_closed_pr_does_not_release_new_token() -> None:
+    token = ctl.TokenAssignment(
+        worker=0,
+        package="HEJFE-6C4EA140AD75FFE2/THC",
+        batch=85,
+        assigned_at="2026-10-02T13:35:00Z",
+        comment_id=20,
+    )
+    pulls = [
+        {
+            "number": 230,
+            "state": "closed",
+            "closed_at": "2026-10-02T13:33:58Z",
+            "merged_at": None,
+            "merged": False,
+            "title": "G1 batch 0085: recover THC exact public clock",
+            "body": "Worker 0 batch 0085",
+            "head": {"ref": "g1/public-batch-0085-worker-0-thc-main-current"},
+            "base": {"sha": "current-main"},
+        }
+    ]
+    m = manifest(unresolved_symbols={"THC": {"HEJFE-6C4EA140AD75FFE2"}})
+    m["main_sha"] = "current-main"
+    candidates = [
+        ctl.Candidate(
+            worker=0,
+            package="THC",
+            batch=85,
+            event_ids=("HEJFE-6C4EA140AD75FFE2",),
+            symbols=("THC",),
+            created_at="2026-10-02T13:34:17Z",
+            source="prep_branch_fallback",
+            status="PREPARED",
+            branch="g1/prep-0085-worker-0-thc-current",
+            behind_by=0,
+            ahead_by=1,
+        )
+    ]
+
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=pulls,
+        updates=[],
+        manifest=m,
+        lease_minutes=120,
+        now=datetime(2026, 10, 2, 13, 36, tzinfo=timezone.utc),
+        candidates=candidates,
+    )
+
+    assert result.state == "ACTIVE"
+    assert result.matching_closed_pr is None
+
+
 def test_pr_batch_match_requires_batch_context_not_random_digits() -> None:
     unrelated = {
         "number": 999,
