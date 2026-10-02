@@ -447,6 +447,96 @@ def test_stale_prep_branch_remains_visible_but_cannot_receive_new_token() -> Non
     assert chosen is None
 
 
+def test_stale_prep_branch_with_latest_prepared_comment_can_receive_new_token() -> None:
+    comments = [
+        comment(
+            11,
+            "2026-10-02T01:11:53Z",
+            "WORKER 0 | HEJFE-4291CBF555CED6A9/PBI | PREPARED | batch 0090 / g1/prep-0090-worker-0-pbi-deadbee | source | next",
+        )
+    ]
+    updates = ctl.parse_worker_updates(comments)
+    candidates = ctl.collect_issue_candidates(comments, updates)
+    candidates.extend(
+        ctl.branch_candidates(
+            [
+                {
+                    "ref": "refs/heads/g1/prep-0090-worker-0-pbi-deadbee",
+                    "object": {"sha": "deadbeef"},
+                }
+            ],
+            {
+                "g1/prep-0090-worker-0-pbi-deadbee": {
+                    "behind_by": 7,
+                    "ahead_by": 1,
+                }
+            },
+        )
+    )
+
+    chosen = ctl.choose_prepared_candidate(
+        candidates,
+        token=None,
+        manifest=manifest(
+            unresolved_symbols={"PBI": {"HEJFE-4291CBF555CED6A9"}}
+        ),
+        pulls=[],
+        updates=updates,
+        policy=policy(),
+    )
+
+    assert chosen is not None
+    assert chosen.worker == 0
+    assert chosen.batch == 90
+    assert chosen.package == "HEJFE-4291CBF555CED6A9/PBI"
+
+
+def test_stale_prep_branch_with_invalidated_latest_comment_stays_ineligible() -> None:
+    comments = [
+        comment(
+            11,
+            "2026-10-02T01:11:53Z",
+            "WORKER 0 | HEJFE-4291CBF555CED6A9/PBI | PREPARED | batch 0090 / g1/prep-0090-worker-0-pbi-deadbee | source | next",
+        ),
+        comment(
+            12,
+            "2026-10-02T01:12:53Z",
+            "WORKER 0 | HEJFE-4291CBF555CED6A9/PBI | PREP_INVALIDATED | batch 0090 / evidence withdrawn",
+        ),
+    ]
+    updates = ctl.parse_worker_updates(comments)
+    candidates = ctl.collect_issue_candidates(comments, updates)
+    candidates.extend(
+        ctl.branch_candidates(
+            [
+                {
+                    "ref": "refs/heads/g1/prep-0090-worker-0-pbi-deadbee",
+                    "object": {"sha": "deadbeef"},
+                }
+            ],
+            {
+                "g1/prep-0090-worker-0-pbi-deadbee": {
+                    "behind_by": 7,
+                    "ahead_by": 1,
+                }
+            },
+        )
+    )
+
+    chosen = ctl.choose_prepared_candidate(
+        candidates,
+        token=None,
+        manifest=manifest(
+            unresolved_symbols={"PBI": {"HEJFE-4291CBF555CED6A9"}}
+        ),
+        pulls=[],
+        updates=updates,
+        policy=policy(),
+    )
+
+    assert chosen is None
+
+
 def test_stale_prep_branch_keeps_existing_token_within_lease() -> None:
     token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
     candidates = [
