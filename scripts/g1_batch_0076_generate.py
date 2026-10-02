@@ -169,9 +169,9 @@ p=Path("docs/g1_announcement_times.md");txt=p.read_text()
 assert "66 public exact-time batches / 96 exact-resolved" in txt
 txt=txt.replace("66 public exact-time batches / 96 exact-resolved","67 public exact-time batches / 97 exact-resolved",1)
 txt += """
-### Batch 0076: Tenet Healvdsiare
+### Batch 0076: VASCO Data Security International
 
-The timestamp-preserving PR Newswire official archive records Tenet Healvdsiare's Q1 2015 results at 2015-05-04 16:05 EDT (20:05 UTC), 1,020 seconds after the frozen 15:48 EDT illicit trade. SEC Exhibit 99.1 and SEC Exhibit 99.1 independently corroborate issuer, release title/date, reporting period, metrics, and release content. This advances G1 from 96 exact / 78 reviewed exclusions to 97 exact / 77 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+PR Newswire's official archive records VASCO Data Security International's Q3 2011 results release at 2011-10-27 03:00 EDT (07:00 UTC), 45,240 seconds after the frozen 2011-10-26 14:26 EDT illicit trade. SEC Exhibit 99.1 independently corroborates issuer, release title/date, reporting period, metrics, and release content. This advances G1 from 96 exact / 78 reviewed exclusions to 97 exact / 77 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
 """;p.write_text(txt)
 
 tp=Path("tests/test_g1_public_batch_0076.py")
