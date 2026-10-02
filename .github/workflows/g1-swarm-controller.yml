@@ -9,6 +9,9 @@ on:
       - main
     types:
       - closed
+  issue_comment:
+    types:
+      - created
   schedule:
     - cron: "*/15 * * * *"
   workflow_dispatch:
@@ -26,6 +29,10 @@ concurrency:
 jobs:
   coordinate:
     name: Reconcile G1 swarm state
+    if: >-
+      github.event_name != 'issue_comment' ||
+      (github.event.issue.number == 153 &&
+       startsWith(github.event.comment.body, 'WORKER '))
     runs-on: ubuntu-24.04
     timeout-minutes: 5
 
