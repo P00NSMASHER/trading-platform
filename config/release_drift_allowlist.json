@@ -2070,6 +2070,14 @@
     "tests/test_g2_lseg_secondary_ric_evidence.py": {
       "expected_sha256": "51f2476d95276d55dad3748a489799620d5c558040aa384b5e1d85f0c219d1a1",
       "reason": "Regression coverage for the LSEG secondary-RIC evidence audit and fail-closed historical-date validation requirement."
+    },
+    "src/g2_lseg_datascope_client.py": {
+      "expected_sha256": "b94ff79c34cfb88a92a90ba87dd81caeb9e8440599f9e8664b1653152fd52447",
+      "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
+    },
+    "tests/test_g2_lseg_datascope_client.py": {
+      "expected_sha256": "41e864f55af6eb00f0858f173653c02eb2f90c338a2e9c517a77f4469958aca5",
+      "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
     }
   },
   "schema_version": "2",
