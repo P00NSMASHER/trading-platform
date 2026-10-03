@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 100 exact release timestamps and 74 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 101 exact release timestamps and 73 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 74,
-    "expected_sha256": "49cf52809ee13fd73726e9f4bef41ba263ea5be5bd6e9f32373aacef612e4a6d",
+    "expected_count": 73,
+    "expected_sha256": "035eab44c1639df4c0c5463d9319befe9dd3274cf61577ef2e45d38302a93fe9",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Official GlobeNewswire-hosted Marketwired archive timestamp for ECHO, independently corroborated by matching SEC Exhibit 99.1. No licensed vendor data used.",
+      "notes": "ECHO 2013-04-25 16:00 EDT. Conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0072.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "official_newswire_archive",
+      "source_id": "public-worker0-echo-batch-0072",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {
