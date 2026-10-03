@@ -14,7 +14,8 @@
     "databento_cost_only_workflow_ready": true,
     "cboe_trial_capacity_plan_ready": true,
     "vendor_reply_evidence_ready": true,
-    "thetadata_retention_plan_ready": true
+    "thetadata_retention_plan_ready": true,
+    "thetadata_dry_run_request_plan_ready": true
   },
   "external_state": {
     "vendor_quotes_or_pricing": "PARTIAL_EXTERNAL_QUOTES_RECEIVED",
@@ -32,7 +33,8 @@
     "cboe_trial_option_quote_access": "DOCUMENTED_HISTORICAL_ENDPOINT_RUNTIME_TRIAL_ACCESS_UNVERIFIED",
     "cboe_trial_retention_rights": "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES",
     "thetadata_written_terms": "WRITTEN_320_USD_ONE_MONTH_BUNDLE_RAW_DELETE_DERIVED_RETENTION_ALLOWED",
-    "thetadata_retention_plan": "READY_FAIL_CLOSED_PENDING_SUBSCRIPTION_START"
+    "thetadata_retention_plan": "READY_FAIL_CLOSED_PENDING_SUBSCRIPTION_START",
+    "thetadata_request_plan": "READY_DRY_RUN_8888_REQUESTS_NETWORK_DISABLED"
   },
   "canonical_full_g2_state": {
     "required_source_date_rows": 1656,
@@ -53,6 +55,7 @@
     "Cboe custom tick-level OPRA pricing was received for the full OPRA universe only and is outside the target budget; do not pursue that paid custom route without explicit user authorization.",
     "ThetaData confirmed a one-month $320 Options Pro + Stock Pro bundle for the requested scope. Private research is eligible for Options Pro; raw/unmodified historical data must be deleted within 30 days after the billing period ends, while derived/modified research data may be retained. Do not subscribe without explicit user authorization.",
     "If the user later authorizes ThetaData, record the actual billing-period end in the retention planner immediately, compute the deletion deadline, keep raw payloads local-only, and preserve only allowed derived/modified outputs plus hashes/license/deletion receipts after raw deletion.",
+    "The exact ThetaData dry-run plan is materialized as 8,888 per-symbol/date requests (6,028 options + 2,860 stocks) with network execution disabled. Do not execute those requests until explicit user authorization and local credentials are available.",
     "Await LSEG pricing/availability reply for the exact 2011 OPRA request.",
     "Await algoseek pricing and sandbox-terms replies for the exact historical scopes.",
     "Place lawfully obtained vendor files in a local drop folder, run licensed-data intake + delivery preflight, then create a local hash-bound entitlement manifest."
@@ -66,7 +69,8 @@
     "free_trial_activation_requires_explicit_user_authorization": true,
     "trial_download_is_not_retention_authority": true,
     "retention_rights_required_before_bulk_acquisition": true,
-    "thetadata_retention_plan_required_before_subscription": true
+    "thetadata_retention_plan_required_before_subscription": true,
+    "thetadata_request_plan_network_disabled_until_authorized": true
   },
   "vendor_reply_evidence": {
     "source_path": "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json",
