@@ -12,6 +12,7 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 import g2_lseg_datascope_execution_plan as execution
+import g2_lseg_historical_ric_validator as historical_ric_validator
 import g2_lseg_request_manifest as manifest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -463,6 +464,39 @@ def execute_validation_batch(
                 trade_date,
                 output_path,
             )
+            validation = historical_ric_validator.validate_file(
+                output_path,
+                trade_date=trade_date,
+            )
+            selected_validation = next(
+                (
+                    row
+                    for row in validation["results"]
+                    if str(row["historical_symbol"]) == symbol
+                ),
+                None,
+            )
+            if selected_validation is None:
+                raise RuntimeError(
+                    f"{symbol} {trade_date}: historical RIC validation result missing"
+                )
+            validation_path = destination / f"{stem}.ric-validation.json"
+            validation_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": validation["schema_version"],
+                        "trade_date": trade_date,
+                        "historical_symbol": symbol,
+                        "input_receipt": validation.get("input_receipt", {}),
+                        "result": selected_validation,
+                        "g2_coverage_change": False,
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
             completion_path.write_text(
                 json.dumps(
                     {
@@ -470,6 +504,11 @@ def execute_validation_batch(
                         "historical_symbol": symbol,
                         "candidate_rics": candidate_rics,
                         "receipt": receipt,
+                        "identifier_validation_path": str(validation_path),
+                        "identifier_validation_status": selected_validation[
+                            "validation_status"
+                        ],
+                        "g2_coverage_change": False,
                     },
                     indent=2,
                     sort_keys=True,
@@ -483,7 +522,12 @@ def execute_validation_batch(
                     "historical_symbol": symbol,
                     "status": "downloaded_pending_content_validation",
                     "completion_receipt": str(completion_path),
+                    "identifier_validation_path": str(validation_path),
+                    "identifier_validation_status": selected_validation[
+                        "validation_status"
+                    ],
                     "validation_promoted": False,
+                    "g2_coverage_change": False,
                     **receipt,
                 }
             )
