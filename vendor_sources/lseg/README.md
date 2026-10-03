@@ -45,3 +45,13 @@ The examined GitHub repositories contain query logic, identifier metadata, parsi
 Actual G2 coverage changes only after licensed LSEG rows are retrieved and pass the repository's existing content validators. Root-only and secondary RIC candidates must first be confirmed as valid for the relevant historical date.
 
 No credentials, passwords, or sample tokens are stored in this package.
+
+## Original research TRTH processing rules
+
+Charles Martineau's public fork of the companion research repository contains the original Python processing scripts used for TRTH trades and quotes. Their reusable rules are extracted into:
+
+- `data/processed/g2_vendor_requests/lseg_original_research_processing_contract.json`
+
+That contract records the raw TAS file structure, MD5 sidecar validation, exact trade/quote fields, historical timestamp reconstruction, trade/quote qualifier handling, relevant 2011–2015 early-close dates, and per-event filtering rules. Machine-specific drive paths and any credentials/token-like values are intentionally excluded.
+
+This strengthens the LSEG route from a generic API plan to the actual processing logic used in the source research workflow. It still does not constitute G2 coverage until licensed rows are retrieved and validated.
