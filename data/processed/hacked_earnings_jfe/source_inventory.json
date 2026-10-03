@@ -1,0 +1,422 @@
+{
+  "audit_date": "2026-10-03",
+  "source_repository": "vgreg/hacked_earnings_jfe",
+  "audited_branch": "main",
+  "audited_commit": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+  "source_history": {
+    "branches": [
+      "main"
+    ],
+    "commits": [
+      {
+        "sha": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+        "message": "Added DOI to README"
+      },
+      {
+        "sha": "558ffddc9b4ae5b2327fcbc6cf369c3b76631517",
+        "message": "Initial commit (data/code)"
+      },
+      {
+        "sha": "16104a8dcda6e145178fd58d2fa50afa15537ad2",
+        "message": "Initial commit (.gitignore/LICENSE)"
+      }
+    ],
+    "conclusion": "No additional source branches were found. Commit history adds the public data/code in one data commit and later only changes README DOI metadata."
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "size": 1799,
+      "sha": "b6e47617de110dea7ca47e087ff1347cc2646eda"
+    },
+    {
+      "path": "Data/Press releases/2010.zip",
+      "size": 27346855,
+      "sha": "b4b45ba8bb5e5bf4c502373914fdcaaae268d3aa"
+    },
+    {
+      "path": "Data/Press releases/2011.zip",
+      "size": 28136902,
+      "sha": "8f4b9b391e8e87649d2a5f5615a30371741c5e6a"
+    },
+    {
+      "path": "Data/Press releases/2012.zip",
+      "size": 26908193,
+      "sha": "afa44be02ab5aaea6e6105cbca247286bc892fd7"
+    },
+    {
+      "path": "Data/Press releases/2013.zip",
+      "size": 28229369,
+      "sha": "59e183f05e377ebd0ef2f581ba88522863663972"
+    },
+    {
+      "path": "Data/Press releases/2014.zip",
+      "size": 26563716,
+      "sha": "0e0e349b76318bb9558a790000c9cbe5ee933001"
+    },
+    {
+      "path": "Data/Press releases/2015.zip",
+      "size": 27696531,
+      "sha": "919ba9f271abdc06ba7c539ad278d5bb4fcb3715"
+    },
+    {
+      "path": "Data/Press releases/README.txt",
+      "size": 434,
+      "sha": "2bb97956c06b49c59dcbcc29e54593186ed8c07d"
+    },
+    {
+      "path": "Data/SampleFirms.csv",
+      "size": 2175660,
+      "sha": "bbb68de172f7ab2104714513a72547f3dad3b86c"
+    },
+    {
+      "path": "Data/SampleFirms.dta",
+      "size": 1617928,
+      "sha": "e4ccdbbf134725dacd0f21385001a85a15d85b3d"
+    },
+    {
+      "path": "Data/SampleFirms.parquet",
+      "size": 541465,
+      "sha": "6e79789b016af7e988d2802829b893b40442687d"
+    },
+    {
+      "path": "Data/SampleFirms.xlsx",
+      "size": 1751351,
+      "sha": "ed86d47a33027705785182c7627133a77bcf0f1c"
+    },
+    {
+      "path": "Data/TimeOfFirstTrade.csv",
+      "size": 6381,
+      "sha": "8e823995d45b0bb536809a8499d559cddd929c8b"
+    },
+    {
+      "path": "Data/TimeOfFirstTrade.dta",
+      "size": 4566,
+      "sha": "147023f82743ad8cd62aa41b663d0d92265f32c3"
+    },
+    {
+      "path": "Data/TimeOfFirstTrade.parquet",
+      "size": 7176,
+      "sha": "db64c54c7ff78254c2de74028414329146e84714"
+    },
+    {
+      "path": "Data/TimeOfFirstTrade.xlsx",
+      "size": 10492,
+      "sha": "2d292c8c348526ae69f4c0f86a92166cf9cfbcad"
+    },
+    {
+      "path": "LICENSE",
+      "size": 1074,
+      "sha": "18583f4a67c60dae620c700914a3532eef96ea26"
+    },
+    {
+      "path": "Main Analysis/Insider Trading Measures.ipynb",
+      "size": 37887,
+      "sha": "69b06eb1821ebf57ccd1a81e44dcf8280ec1bede"
+    },
+    {
+      "path": "Main Analysis/Main Analysis.ipynb",
+      "size": 227040,
+      "sha": "4b8bc4b356440a7d66d4ec6c7eb5a67f6d75696a"
+    },
+    {
+      "path": "README.md",
+      "size": 5480,
+      "sha": "8006a4cb3861a32322c93c44c8722d737ab64487"
+    },
+    {
+      "path": "Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet",
+      "size": 40084,
+      "sha": "72d66171f5eb28cd3ec629f13b0b1d15219cbf96"
+    },
+    {
+      "path": "Text Analysis/Wordcloud.ipynb",
+      "size": 1154677,
+      "sha": "c02a5b6bb6bd2f8580a94dae59490b69161f57d6"
+    },
+    {
+      "path": "Text Analysis/clean_pr_text.py",
+      "size": 2742,
+      "sha": "640cf652372734f0cf1768ef35acec2d30d0d7f9"
+    },
+    {
+      "path": "Text Analysis/pr sentiment.py",
+      "size": 1653,
+      "sha": "613ea91267da56837e2a8405640f886fd4ba3f90"
+    }
+  ],
+  "datasets_named_by_readme": [
+    "CRSP daily stock observations",
+    "I/B/E/S earnings announcements including announcement dates and times",
+    "TAQ intraday stock observations",
+    "RavenPack earnings announcement press releases",
+    "Markit controls",
+    "OptionMetrics controls",
+    "Thomson Reuters 13-F controls",
+    "Nasdaq ITCH order-level observations",
+    "CBOE Global Markets intraday option transactions",
+    "SEC EDGAR earnings press releases 2010-2015"
+  ],
+  "sample_firms": {
+    "rows": 43687,
+    "columns": [
+      "PERMNO",
+      "GVKEY",
+      "SYMBOL",
+      "date",
+      "Hacked",
+      "Actual",
+      "Soft"
+    ],
+    "unique_permno": 3202,
+    "unique_gvkey": 3198,
+    "unique_symbols": 3303,
+    "date_min": "2010-01-04",
+    "date_max": "2015-12-23",
+    "hacked_rows": 8980,
+    "hacked_unique_permno": 2274,
+    "actual_rows": 724,
+    "actual_unique_permno": 457,
+    "soft_nonmissing": 36750,
+    "soft_missing": 6937,
+    "rows_by_year": {
+      "2010": 7958,
+      "2011": 7810,
+      "2012": 7154,
+      "2013": 7260,
+      "2014": 6777,
+      "2015": 6728
+    },
+    "hacked_by_year": {
+      "2010": 2267,
+      "2011": 2452,
+      "2012": 1327,
+      "2013": 1355,
+      "2015": 1579
+    },
+    "actual_by_year": {
+      "2011": 204,
+      "2012": 183,
+      "2013": 166,
+      "2015": 171
+    }
+  },
+  "first_trade": {
+    "rows": 174,
+    "unique_permno": 146,
+    "unique_symbols": 146
+  },
+  "event_enrichment": {
+    "rows": 174,
+    "join_quality_counts": {
+      "HIGH_NEAREST_ACTUAL_0_1D": 162,
+      "SOURCE_LABEL_CONFLICT_NEAREST_NONACTUAL": 10,
+      "NEAREST_ACTUAL_GT1D": 2
+    },
+    "nearest_actual_rows": 164,
+    "nearest_same_day_rows": 133,
+    "nearest_actual_same_day_rows": 126,
+    "next_actual_found": 165,
+    "source_label_conflicts": [
+      {
+        "event_id": "HEJFE-87DDC59E7BB99A84",
+        "permno": "13284",
+        "symbol": "ALSN",
+        "first_trade": "2015-04-27 15:17:00",
+        "nearest_date": "2015-04-27",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "-0.0009531031670238386",
+        "next_actual_date": "",
+        "next_actual_gap_days": ""
+      },
+      {
+        "event_id": "HEJFE-A9D220DE2F7E7FC3",
+        "permno": "19350",
+        "symbol": "DE",
+        "first_trade": "2015-02-19 15:40:00",
+        "nearest_date": "2015-02-20",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "-0.0039065303016210026",
+        "next_actual_date": "",
+        "next_actual_gap_days": ""
+      },
+      {
+        "event_id": "HEJFE-E8C5063581BE7EB7",
+        "permno": "25785",
+        "symbol": "F",
+        "first_trade": "2015-01-28 15:59:00",
+        "nearest_date": "2015-01-29",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "-0.003554659999782982",
+        "next_actual_date": "",
+        "next_actual_gap_days": ""
+      },
+      {
+        "event_id": "HEJFE-7C93D3838E60926C",
+        "permno": "26201",
+        "symbol": "CMTL",
+        "first_trade": "2014-12-10 15:41:00",
+        "nearest_date": "2014-12-10",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "-0.011074848697397192",
+        "next_actual_date": "",
+        "next_actual_gap_days": ""
+      },
+      {
+        "event_id": "HEJFE-D1D8268651584B6A",
+        "permno": "52090",
+        "symbol": "MKC",
+        "first_trade": "2013-04-01 15:38:00",
+        "nearest_date": "2013-04-02",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "-0.0017182670522048228",
+        "next_actual_date": "",
+        "next_actual_gap_days": ""
+      },
+      {
+        "event_id": "HEJFE-4E643D38FFB3016E",
+        "permno": "76695",
+        "symbol": "PNRA",
+        "first_trade": "2015-02-11 14:58:00",
+        "nearest_date": "2015-02-11",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "0.0008328896100407573",
+        "next_actual_date": "",
+        "next_actual_gap_days": ""
+      },
+      {
+        "event_id": "HEJFE-F9E72EEF6E5BD373",
+        "permno": "81501",
+        "symbol": "NATI",
+        "first_trade": "2015-01-29 15:51:00",
+        "nearest_date": "2015-01-29",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "-0.0094500036489734",
+        "next_actual_date": "",
+        "next_actual_gap_days": ""
+      },
+      {
+        "event_id": "HEJFE-7F8218B15679F14D",
+        "permno": "81501",
+        "symbol": "NATI",
+        "first_trade": "2015-04-28 13:59:00",
+        "nearest_date": "2015-04-28",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "-0.024704854564278456",
+        "next_actual_date": "",
+        "next_actual_gap_days": ""
+      },
+      {
+        "event_id": "HEJFE-C926C41F03E66E82",
+        "permno": "90657",
+        "symbol": "PAY",
+        "first_trade": "2014-12-15 15:36:00",
+        "nearest_date": "2014-12-15",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "0.010039653676283802",
+        "next_actual_date": "2015-03-10",
+        "next_actual_gap_days": 85
+      },
+      {
+        "event_id": "HEJFE-A76C746507C0D9AF",
+        "permno": "92924",
+        "symbol": "DGI",
+        "first_trade": "2015-02-26 15:42:00",
+        "nearest_date": "2015-02-26",
+        "nearest_hacked": "0",
+        "nearest_actual": "0",
+        "nearest_soft": "-0.0020047813297830366",
+        "next_actual_date": "",
+        "next_actual_gap_days": ""
+      }
+    ]
+  },
+  "text_analysis": {
+    "soft_score_definition": "Predicted announcement return from earnings press-release content.",
+    "soft_training_observations": 36750,
+    "elastic_net_word_model_rows": 2393,
+    "word_model_visible_extremes": {
+      "most_negative_visible": [
+        [
+          "disappoint",
+          -0.027961
+        ],
+        [
+          "delay",
+          -0.006116
+        ],
+        [
+          "howev",
+          -0.004983
+        ],
+        [
+          "challeng",
+          -0.004463
+        ],
+        [
+          "slower",
+          -0.0032
+        ]
+      ],
+      "most_positive_visible": [
+        [
+          "pleas",
+          0.002737
+        ],
+        [
+          "momentum",
+          0.003291
+        ],
+        [
+          "exce",
+          0.003359
+        ],
+        [
+          "exceed",
+          0.00401
+        ],
+        [
+          "rais",
+          0.006816
+        ]
+      ]
+    },
+    "preprocessing": "lowercase alphabetic tokenization; English stop-word removal; Porter stemming; first 400 words; CountVectorizer min_df=0.005 and max_df=0.4; ElasticNetCV cv=5, l1_ratio=0.5, max_iter=10000",
+    "target": "LRet_12pm_OpenNext"
+  },
+  "binary_assets_not_decoded_in_this_connector": [
+    "Data/Press releases/2010.zip",
+    "Data/Press releases/2011.zip",
+    "Data/Press releases/2012.zip",
+    "Data/Press releases/2013.zip",
+    "Data/Press releases/2014.zip",
+    "Data/Press releases/2015.zip"
+  ],
+  "binary_note": "The unique 40,084-byte ElasticNet word-coefficient Parquet is preserved byte-for-byte as base64 text and verified against the source payload. The six ~26-28 MB press-release ZIPs exceed the connected GitHub file-content retrieval path; their paths, sizes, and source blob SHAs remain recorded. Their member texts were not unpacked in this pass.",
+  "preserved_exact_binary_payloads": [
+    {
+      "source_path": "Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet",
+      "source_blob_sha": "72d66171f5eb28cd3ec629f13b0b1d15219cbf96",
+      "preserved_path": "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet.b64",
+      "representation": "base64 text of the exact source bytes",
+      "verification": "base64 payload exactly matches source connector payload after whitespace normalization"
+    }
+  ],
+  "unretrieved_unique_binary_assets": [
+    "Data/Press releases/2010.zip",
+    "Data/Press releases/2011.zip",
+    "Data/Press releases/2012.zip",
+    "Data/Press releases/2013.zip",
+    "Data/Press releases/2014.zip",
+    "Data/Press releases/2015.zip"
+  ]
+}
