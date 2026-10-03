@@ -2026,6 +2026,14 @@
     "tests/test_g2_lseg_trth_event_pipeline.py": {
       "expected_sha256": "ee5400e369251e6f599aa6abddcc8dcc96c4638b36bb8342778ee2db56c6c4b8",
       "reason": "Exact-replication TRTH downstream event pipeline: UTC-day realignment, extended-hours filtering, quote validity cleaning, original event/open grids, asof resampling, and Form-T event-to-open selection; no credentials, downloads, or coverage claims."
+    },
+    "src/g2_lseg_datascope_client.py": {
+      "expected_sha256": "b94ff79c34cfb88a92a90ba87dd81caeb9e8440599f9e8664b1653152fd52447",
+      "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
+    },
+    "tests/test_g2_lseg_datascope_client.py": {
+      "expected_sha256": "41e864f55af6eb00f0858f173653c02eb2f90c338a2e9c517a77f4469958aca5",
+      "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
     }
   },
   "schema_version": "2",
