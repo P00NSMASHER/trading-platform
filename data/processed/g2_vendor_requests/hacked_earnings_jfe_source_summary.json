@@ -1,0 +1,406 @@
+{
+  "source_repository": "vgreg/hacked_earnings_jfe",
+  "source_commit": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+  "source_license": "MIT",
+  "extracted_at_utc": "2026-10-03T10:36:00Z",
+  "repository_tree": {
+    "entry_count": 28,
+    "truncated": false,
+    "paths": [
+      {
+        "path": ".gitignore",
+        "type": "blob",
+        "size": 1799,
+        "sha": "b6e47617de110dea7ca47e087ff1347cc2646eda"
+      },
+      {
+        "path": "Data",
+        "type": "tree",
+        "size": null,
+        "sha": "5606f841248188da6e6ddfebb9a223a10d082969"
+      },
+      {
+        "path": "Data/Press releases",
+        "type": "tree",
+        "size": null,
+        "sha": "3d2bf99bc268c537ab8bf021e7b100ffdfbc9579"
+      },
+      {
+        "path": "Data/Press releases/2010.zip",
+        "type": "blob",
+        "size": 27346855,
+        "sha": "b4b45ba8bb5e5bf4c502373914fdcaaae268d3aa"
+      },
+      {
+        "path": "Data/Press releases/2011.zip",
+        "type": "blob",
+        "size": 28136902,
+        "sha": "8f4b9b391e8e87649d2a5f5615a30371741c5e6a"
+      },
+      {
+        "path": "Data/Press releases/2012.zip",
+        "type": "blob",
+        "size": 26908193,
+        "sha": "afa44be02ab5aaea6e6105cbca247286bc892fd7"
+      },
+      {
+        "path": "Data/Press releases/2013.zip",
+        "type": "blob",
+        "size": 28229369,
+        "sha": "59e183f05e377ebd0ef2f581ba88522863663972"
+      },
+      {
+        "path": "Data/Press releases/2014.zip",
+        "type": "blob",
+        "size": 26563716,
+        "sha": "0e0e349b76318bb9558a790000c9cbe5ee933001"
+      },
+      {
+        "path": "Data/Press releases/2015.zip",
+        "type": "blob",
+        "size": 27696531,
+        "sha": "919ba9f271abdc06ba7c539ad278d5bb4fcb3715"
+      },
+      {
+        "path": "Data/Press releases/README.txt",
+        "type": "blob",
+        "size": 434,
+        "sha": "2bb97956c06b49c59dcbcc29e54593186ed8c07d"
+      },
+      {
+        "path": "Data/SampleFirms.csv",
+        "type": "blob",
+        "size": 2175660,
+        "sha": "bbb68de172f7ab2104714513a72547f3dad3b86c"
+      },
+      {
+        "path": "Data/SampleFirms.dta",
+        "type": "blob",
+        "size": 1617928,
+        "sha": "e4ccdbbf134725dacd0f21385001a85a15d85b3d"
+      },
+      {
+        "path": "Data/SampleFirms.parquet",
+        "type": "blob",
+        "size": 541465,
+        "sha": "6e79789b016af7e988d2802829b893b40442687d"
+      },
+      {
+        "path": "Data/SampleFirms.xlsx",
+        "type": "blob",
+        "size": 1751351,
+        "sha": "ed86d47a33027705785182c7627133a77bcf0f1c"
+      },
+      {
+        "path": "Data/TimeOfFirstTrade.csv",
+        "type": "blob",
+        "size": 6381,
+        "sha": "8e823995d45b0bb536809a8499d559cddd929c8b"
+      },
+      {
+        "path": "Data/TimeOfFirstTrade.dta",
+        "type": "blob",
+        "size": 4566,
+        "sha": "147023f82743ad8cd62aa41b663d0d92265f32c3"
+      },
+      {
+        "path": "Data/TimeOfFirstTrade.parquet",
+        "type": "blob",
+        "size": 7176,
+        "sha": "db64c54c7ff78254c2de74028414329146e84714"
+      },
+      {
+        "path": "Data/TimeOfFirstTrade.xlsx",
+        "type": "blob",
+        "size": 10492,
+        "sha": "2d292c8c348526ae69f4c0f86a92166cf9cfbcad"
+      },
+      {
+        "path": "LICENSE",
+        "type": "blob",
+        "size": 1074,
+        "sha": "18583f4a67c60dae620c700914a3532eef96ea26"
+      },
+      {
+        "path": "Main Analysis",
+        "type": "tree",
+        "size": null,
+        "sha": "6582fe8d0af78b715e3826472778413913475a1f"
+      },
+      {
+        "path": "Main Analysis/Insider Trading Measures.ipynb",
+        "type": "blob",
+        "size": 37887,
+        "sha": "69b06eb1821ebf57ccd1a81e44dcf8280ec1bede"
+      },
+      {
+        "path": "Main Analysis/Main Analysis.ipynb",
+        "type": "blob",
+        "size": 227040,
+        "sha": "4b8bc4b356440a7d66d4ec6c7eb5a67f6d75696a"
+      },
+      {
+        "path": "README.md",
+        "type": "blob",
+        "size": 5480,
+        "sha": "8006a4cb3861a32322c93c44c8722d737ab64487"
+      },
+      {
+        "path": "Text Analysis",
+        "type": "tree",
+        "size": null,
+        "sha": "d9485a8aaac7f3a47a423bd6bec7cf14f0500e12"
+      },
+      {
+        "path": "Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet",
+        "type": "blob",
+        "size": 40084,
+        "sha": "72d66171f5eb28cd3ec629f13b0b1d15219cbf96"
+      },
+      {
+        "path": "Text Analysis/Wordcloud.ipynb",
+        "type": "blob",
+        "size": 1154677,
+        "sha": "c02a5b6bb6bd2f8580a94dae59490b69161f57d6"
+      },
+      {
+        "path": "Text Analysis/clean_pr_text.py",
+        "type": "blob",
+        "size": 2742,
+        "sha": "640cf652372734f0cf1768ef35acec2d30d0d7f9"
+      },
+      {
+        "path": "Text Analysis/pr sentiment.py",
+        "type": "blob",
+        "size": 1653,
+        "sha": "613ea91267da56837e2a8405640f886fd4ba3f90"
+      }
+    ]
+  },
+  "sample_firms": {
+    "columns": [
+      "PERMNO",
+      "GVKEY",
+      "SYMBOL",
+      "date",
+      "Hacked",
+      "Actual",
+      "Soft"
+    ],
+    "row_count": 43687,
+    "date_min": "2010-01-04",
+    "date_max": "2015-12-23",
+    "unique_permnos": 3202,
+    "unique_symbols": 3303,
+    "hacked_rows": 8980,
+    "hacked_unique_permnos": 2274,
+    "hacked_unique_dates": 789,
+    "actual_rows": 724,
+    "actual_unique_permnos": 457,
+    "actual_unique_dates": 270,
+    "soft_nonmissing_rows": 36750
+  },
+  "time_of_first_trade": {
+    "row_count": 174,
+    "unique_permnos": 146
+  },
+  "reconciliation": {
+    "method": "For each TimeOfFirstTrade row, select the earliest SampleFirms observation for the same PERMNO on or after the first-trade calendar date.",
+    "mapped_rows": 174,
+    "mapped_within_3_calendar_days": 174,
+    "offset_days_distribution": {
+      "0": 133,
+      "1": 39,
+      "3": 2
+    },
+    "sample_hacked_1": 164,
+    "sample_actual_1": 164,
+    "sample_soft_nonmissing": 160,
+    "label_exceptions": [
+      {
+        "PERMNO": "13284",
+        "SYMBOL": "ALSN",
+        "TimeOfFirstTrade": "2015-04-27 15:17:00",
+        "SampleEarningsDate": "2015-04-27",
+        "SampleDateOffsetDays": 0,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "-0.0009531031670238386"
+      },
+      {
+        "PERMNO": "19350",
+        "SYMBOL": "DE",
+        "TimeOfFirstTrade": "2015-02-19 15:40:00",
+        "SampleEarningsDate": "2015-02-20",
+        "SampleDateOffsetDays": 1,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "-0.0039065303016210026"
+      },
+      {
+        "PERMNO": "25785",
+        "SYMBOL": "F",
+        "TimeOfFirstTrade": "2015-01-28 15:59:00",
+        "SampleEarningsDate": "2015-01-29",
+        "SampleDateOffsetDays": 1,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "-0.003554659999782982"
+      },
+      {
+        "PERMNO": "26201",
+        "SYMBOL": "CMTL",
+        "TimeOfFirstTrade": "2014-12-10 15:41:00",
+        "SampleEarningsDate": "2014-12-10",
+        "SampleDateOffsetDays": 0,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "-0.011074848697397192"
+      },
+      {
+        "PERMNO": "52090",
+        "SYMBOL": "MKC",
+        "TimeOfFirstTrade": "2013-04-01 15:38:00",
+        "SampleEarningsDate": "2013-04-02",
+        "SampleDateOffsetDays": 1,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "-0.0017182670522048228"
+      },
+      {
+        "PERMNO": "76695",
+        "SYMBOL": "PNRA",
+        "TimeOfFirstTrade": "2015-02-11 14:58:00",
+        "SampleEarningsDate": "2015-02-11",
+        "SampleDateOffsetDays": 0,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "0.0008328896100407573"
+      },
+      {
+        "PERMNO": "81501",
+        "SYMBOL": "NATI",
+        "TimeOfFirstTrade": "2015-01-29 15:51:00",
+        "SampleEarningsDate": "2015-01-29",
+        "SampleDateOffsetDays": 0,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "-0.0094500036489734"
+      },
+      {
+        "PERMNO": "81501",
+        "SYMBOL": "NATI",
+        "TimeOfFirstTrade": "2015-04-28 13:59:00",
+        "SampleEarningsDate": "2015-04-28",
+        "SampleDateOffsetDays": 0,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "-0.024704854564278456"
+      },
+      {
+        "PERMNO": "90657",
+        "SYMBOL": "PAY",
+        "TimeOfFirstTrade": "2014-12-15 15:36:00",
+        "SampleEarningsDate": "2014-12-15",
+        "SampleDateOffsetDays": 0,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "0.010039653676283802"
+      },
+      {
+        "PERMNO": "92924",
+        "SYMBOL": "DGI",
+        "TimeOfFirstTrade": "2015-02-26 15:42:00",
+        "SampleEarningsDate": "2015-02-26",
+        "SampleDateOffsetDays": 0,
+        "SampleHacked": "0",
+        "SampleActual": "0",
+        "SampleSoft": "-0.0020047813297830366"
+      }
+    ]
+  },
+  "source_only_references": {
+    "repository_readme_lists": [
+      "CRSP",
+      "I/B/E/S",
+      "TAQ",
+      "RavenPack",
+      "Markit",
+      "OptionMetrics",
+      "Thomson Reuters 13-F",
+      "Nasdaq ITCH",
+      "CBOE Global Markets intraday options",
+      "SEC EDGAR press releases"
+    ],
+    "unavailable_proprietary_panel_paths": [
+      "../Proprietary Data (cannot be shared)/MainPanel.h5",
+      "../Proprietary Data (cannot be shared)/BSI_Summaries_EA_merged.h5"
+    ],
+    "raw_licensed_market_payload_present_in_repository": false
+  },
+  "sample_firms_label_stratification": {
+    "interpretation": "Broader SampleFirms label universe; useful as auxiliary source labels but not a replacement for the 174 TimeOfFirstTrade records because these rows do not carry first-trade clock times.",
+    "crosstab": {
+      "H0_A0": {
+        "rows": 34707,
+        "soft_nonmissing": 29311,
+        "soft_coverage_ratio": 0.844527040654623,
+        "unique_permnos": 3092,
+        "unique_symbols": 3186,
+        "unique_dates": 1398,
+        "year_counts": {
+          "2010": 5691,
+          "2011": 5358,
+          "2012": 5827,
+          "2013": 5905,
+          "2014": 6777,
+          "2015": 5149
+        }
+      },
+      "H1_A0": {
+        "rows": 8256,
+        "soft_nonmissing": 6820,
+        "soft_coverage_ratio": 0.8260658914728682,
+        "unique_permnos": 2228,
+        "unique_symbols": 2251,
+        "unique_dates": 763,
+        "year_counts": {
+          "2010": 2267,
+          "2011": 2248,
+          "2012": 1144,
+          "2013": 1189,
+          "2015": 1408
+        }
+      },
+      "H1_A1": {
+        "rows": 724,
+        "soft_nonmissing": 619,
+        "soft_coverage_ratio": 0.8549723756906077,
+        "unique_permnos": 457,
+        "unique_symbols": 457,
+        "unique_dates": 270,
+        "year_counts": {
+          "2011": 204,
+          "2012": 183,
+          "2013": 166,
+          "2015": 171
+        }
+      }
+    },
+    "key_observations": {
+      "actual_implies_hacked_in_public_sample": true,
+      "actual_rows": 724,
+      "actual_unique_permnos": 457,
+      "actual_soft_nonmissing": 619,
+      "actual_year_counts": {
+        "2011": 204,
+        "2012": 183,
+        "2013": 166,
+        "2015": 171
+      },
+      "no_public_sample_hacked_rows_in_2014": true,
+      "timestamped_2014_first_trade_events": 2,
+      "note": "The two 2014 TimeOfFirstTrade records are among the preserved SampleFirms Hacked=0/Actual=0 source-label exceptions; do not overwrite either source."
+    }
+  }
+}

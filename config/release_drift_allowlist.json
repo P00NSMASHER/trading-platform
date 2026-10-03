@@ -2042,6 +2042,26 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "72b92a45dd2b1607dc880ffee222bef79751c3410f37809e820f81c508753083",
       "reason": "Update LSEG provenance documentation to include the extracted original TRTH research processing contract; no credentials, downloads, or coverage claims."
+    },
+    "vendor_sources/hacked_earnings_jfe/README.md": {
+      "expected_sha256": "ad946590010055d21b261fb8e60e307d37fd1419059696ba84108725744785ef",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit: repository history/forks, notebook outputs, text-model schema, 174-event analytics, broader label stratification, linked processing contracts, and published-source reproducibility caveats; no raw licensed vendor tick payload or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/hacked_earnings_jfe_event_reconciliation.csv": {
+      "expected_sha256": "8e23e4c1f54952975989973c8ef045a9eefa01e3c14ca29823abe80b9af567df",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit and deterministic 174-event reconciliation; public/source-derived evidence only, no raw licensed vendor tick payload or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/hacked_earnings_jfe_source_summary.json": {
+      "expected_sha256": "d54b2110686e0c3cdb2d05dee334fc72582cbd975f05fdd6dbd7e7d9a421851c",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit including deterministic 174-event reconciliation and broader SampleFirms label stratification; no raw licensed vendor tick payload or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/hacked_earnings_jfe_notebook_extraction.json": {
+      "expected_sha256": "1b2bb0988ac4986ed5e9b686fe0005848472387d562e282777f3952a42219435",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit: repository history/forks, notebook outputs, text-model schema, and 174-event source-derived analytics; no raw licensed vendor tick payload or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/hacked_earnings_jfe_event_analytics.json": {
+      "expected_sha256": "aead8e3cfab1426f0421bef239505995041b56198db78dbbce87ffa12c402995",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit: repository history/forks, notebook outputs, text-model schema, and 174-event source-derived analytics; no raw licensed vendor tick payload or G2 coverage claim."
     }
   },
   "schema_version": "2",
