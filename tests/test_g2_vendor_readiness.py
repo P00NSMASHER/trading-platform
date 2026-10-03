@@ -30,6 +30,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
         "vendor_reply_evidence_ready": True,
         "thetadata_retention_plan_ready": True,
         "thetadata_dry_run_request_plan_ready": True,
+        "thetadata_coverage_impact_ready": True,
     }
 
     assert payload["canonical_full_g2_state"] == {
@@ -91,6 +92,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert payload["external_state"]["thetadata_written_terms"] == "WRITTEN_320_USD_ONE_MONTH_BUNDLE_RAW_DELETE_DERIVED_RETENTION_ALLOWED"
     assert payload["external_state"]["thetadata_retention_plan"] == "READY_FAIL_CLOSED_PENDING_SUBSCRIPTION_START"
     assert payload["external_state"]["thetadata_request_plan"] == "READY_DRY_RUN_8888_REQUESTS_NETWORK_DISABLED"
+    assert payload["external_state"]["thetadata_coverage_impact"] == "PLANNING_ONLY_650_CANONICAL_FULL_392_PARTIAL"
     assert payload["external_state"]["lseg_2011_quote"] == "REQUEST_SENT_AWAITING_REPLY"
     assert payload["external_state"]["algoseek_quote_and_sandbox_terms"] == "REQUEST_SENT_AWAITING_REPLY"
 
@@ -105,6 +107,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
         "retention_rights_required_before_bulk_acquisition": True,
         "thetadata_retention_plan_required_before_subscription": True,
         "thetadata_request_plan_network_disabled_until_authorized": True,
+        "thetadata_coverage_impact_is_not_coverage": True,
     }
 
 
@@ -125,6 +128,8 @@ def test_readiness_next_actions_cover_every_external_dependency():
     assert "deletion deadline" in actions
     assert "8,888" in actions
     assert "network execution disabled" in actions.lower()
+    assert "650/1,656" in actions
+    assert "partially touch another 392" in actions
     assert "explicit user authorization" in actions
     assert "daily credit limit does not gate the trial" in actions
     assert "acceptance probe" in actions

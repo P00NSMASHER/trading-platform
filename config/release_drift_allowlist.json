@@ -352,8 +352,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_readiness.json": {
-      "expected_sha256": "e461e72c40792e2b3ed06deddd90ad5d11bb803f9d026ed689d86efedd7295aa",
-      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+      "expected_sha256": "b723f68968cae7d67513f9e6f70f19a597f4cb23a1037bb51efdc9849cf88c37",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
     },
     "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
       "expected_sha256": "565dc93ed7fa119f7c236bb7895da3d1b61c47b590798004e38a86c77db5f3f8",
@@ -1392,8 +1392,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "src/g2_vendor_readiness.py": {
-      "expected_sha256": "d809cee2a8b09379c013f23ee1a12aa521c50a525dea0661805b658eb5f41b9b",
-      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+      "expected_sha256": "717326d24deffaba4d549685859e4cf0fbab404d6b96cddee5bad6b19f1d4a1b",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
     },
     "src/g2_vendor_request_manifests.py": {
       "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
@@ -1744,8 +1744,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "tests/test_g2_vendor_readiness.py": {
-      "expected_sha256": "406fe5a560896623f2758799b407ae758b283ad04f086a85890428e389480538",
-      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+      "expected_sha256": "611fc268edb2842d1497c88dca556ddc14191b00e5c403e7d5404f6490ea8510",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
     },
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",
@@ -1846,6 +1846,22 @@
     "data/processed/g2_vendor_requests/thetadata_requests/thetadata_request_summary.json": {
       "expected_sha256": "a54795f7a944057439d83cfccdbb2ec3aede284698e33b1117753fe09e373513",
       "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+    },
+    "src/g2_thetadata_coverage_impact.py": {
+      "expected_sha256": "b635d03b36fd2b1a949ebca830fee6c2614da387900bd5827898190f5133abee",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
+    },
+    "tests/test_g2_thetadata_coverage_impact.py": {
+      "expected_sha256": "6f8f40598f9b3de276198708ce7c4d9625c91ac69c34937ff9bfa5a7c9f61936",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/thetadata_coverage_impact.json": {
+      "expected_sha256": "bc91c6eea96ff78b9f81b8a2766f58f949334fac2e781e47276be7d50a7c3577",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/thetadata_coverage_impact_rows.csv": {
+      "expected_sha256": "44c8730ad8aee6e0a273ee1b37e4d633bdf8c98cbbe1cc5201b5d5e5ede479ce",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
     }
   },
   "schema_version": "2",
