@@ -1,0 +1,74 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "3cfa3c7c402b9205b7fd2b305f371bcee0f49ccd",
+  "reserved_batch": "0100",
+  "worker_slot": 0,
+  "previous_exact_count": 106,
+  "expected_exact_count_after_batch": 111,
+  "expected_excluded_after_batch": 63,
+  "source_family": "federal_court_public_distribution_record",
+  "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+  "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+  "timestamp_evidence_kind": "explicit_release_clock",
+  "public_distribution_explicit": true,
+  "items": [
+    {
+      "event_id": "HEJFE-E4D3EE1A6CB984DB",
+      "historical_symbol": "EHTH",
+      "court_event_number": 939,
+      "court_page": 1,
+      "court_distribution_source": "MW",
+      "court_distribution_time": "4/26/11 16:15",
+      "public_announcement_ts": "2011-04-26T16:15:00-04:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1333493/000119312511109591/dex991.htm",
+      "headline": "eHealth, Inc. Announces First Quarter 2011 Results"
+    },
+    {
+      "event_id": "HEJFE-45E6DA32B37F83D4",
+      "historical_symbol": "BA",
+      "court_event_number": 1223,
+      "court_page": 1,
+      "court_distribution_source": "PR",
+      "court_distribution_time": "1/25/12 7:30",
+      "public_announcement_ts": "2012-01-25T07:30:00-05:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/12927/000119312512022591/d286838dex991.htm",
+      "headline": "Boeing Reports Strong Fourth-Quarter Results and Provides 2012 Guidance"
+    },
+    {
+      "event_id": "HEJFE-B7EFA7CF95262283",
+      "historical_symbol": "LSCC",
+      "court_event_number": 1651,
+      "court_page": 2,
+      "court_distribution_source": "MW",
+      "court_distribution_time": "4/18/2013 16:00",
+      "public_announcement_ts": "2013-04-18T16:00:00-04:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/855658/000085565813000046/a2013q1exh991earningsrelea.htm",
+      "headline": "Lattice Semiconductor Reports First Quarter 2013 Results"
+    },
+    {
+      "event_id": "HEJFE-D7BD84C255F2273D",
+      "historical_symbol": "GORO",
+      "court_event_number": 1706,
+      "court_page": 3,
+      "court_distribution_source": "MW",
+      "court_distribution_time": "5/8/13 17:27",
+      "public_announcement_ts": "2013-05-08T17:27:00-04:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1160791/000119312513207940/d535371dex991.htm",
+      "headline": "Gold Resource Corporation Reports First Quarter Results; Maintains 2013 Production Outlook"
+    },
+    {
+      "event_id": "HEJFE-7482DE1CD44C1A00",
+      "historical_symbol": "GMCR",
+      "court_event_number": 1846,
+      "court_page": 5,
+      "court_distribution_source": "BW",
+      "court_distribution_time": "2/4/15 16:00",
+      "public_announcement_ts": "2015-02-04T16:00:00-05:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/909954/000115752315000366/a51033184-ex991.htm",
+      "headline": "Keurig Green Mountain Announces Fiscal First Quarter 2015 Results"
+    }
+  ],
+  "evidence_method": "Filed federal-court table explicitly labels Press Release Distribution Time and gives event-specific wire clocks; exact release identities are independently corroborated by SEC press-release exhibits. Prep only."
+}
