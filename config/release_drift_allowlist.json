@@ -1814,6 +1814,34 @@
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "src/g2_wrds_taq_request_manifest.py": {
+      "expected_sha256": "d8a12f82d613d76d4daec0940219a836aa9db70bfa4b8ba0375b201aa418a8a3",
+      "reason": "Authorized G2 WRDS TAQ extraction path: preserve/adapt source logic and exact frozen request manifest without credentials, data download, or coverage claim."
+    },
+    "tests/test_g2_wrds_taq_request_manifest.py": {
+      "expected_sha256": "b2aa1c813078c830721da88c9a8e53ac880dc9c2edd087d4090dabed49236827",
+      "reason": "Authorized G2 WRDS TAQ extraction path: preserve/adapt source logic and exact frozen request manifest without credentials, data download, or coverage claim."
+    },
+    "vendor_sources/wrds/gen_li/README.md": {
+      "expected_sha256": "cfb851266ff17e8c99aab54d713100257265e95fb4106afda439d3485e40a097",
+      "reason": "Authorized G2 WRDS TAQ extraction path: preserve/adapt source logic and exact frozen request manifest without credentials, data download, or coverage claim."
+    },
+    "vendor_sources/wrds/gen_li/WRDS_batch_ticker_cq.sas": {
+      "expected_sha256": "e5e848ab6a88a5c68bed5d0113ef84a60a093851e9ff9005a48d431b4288f60b",
+      "reason": "Authorized G2 WRDS TAQ extraction path: preserve/adapt source logic and exact frozen request manifest without credentials, data download, or coverage claim."
+    },
+    "vendor_sources/wrds/gen_li/WRDS_batch_ticker_ct.sas": {
+      "expected_sha256": "a0e2fcac06547be9857b23a9f758ad3efa81c637c92a0697c8a58efa3c7e1de0",
+      "reason": "Authorized G2 WRDS TAQ extraction path: preserve/adapt source logic and exact frozen request manifest without credentials, data download, or coverage claim."
+    },
+    "vendor_sources/wrds/gen_li/g2_wrds_taq_legacy.sas": {
+      "expected_sha256": "d5dc9a636b32dced401cb4ef0f06b2df43865cb7aa8db4217b6f2e7bc398b538",
+      "reason": "Authorized G2 WRDS TAQ extraction path: preserve/adapt source logic and exact frozen request manifest without credentials, data download, or coverage claim."
+    },
+    "vendor_sources/wrds/gen_li/g2_wrds_taq_msec.sas": {
+      "expected_sha256": "a7e45cf200cd481eb329f71640764b876d225acbaf4a1333e0d0c3b0bd9b70e0",
+      "reason": "Authorized G2 WRDS TAQ extraction path: preserve/adapt source logic and exact frozen request manifest without credentials, data download, or coverage claim."
     }
   },
   "schema_version": "2",
