@@ -183,7 +183,13 @@ save(hints_path,hints)
 assert rebuild.rebuild(ROOT,publish=True)["after"]["up_to_date"]
 fresh=rows(md/"announcement_resolutions.csv");by={r["event_id"]:r for r in fresh};assert len(by)==174
 for eid,old in old_exact.items():assert by[eid]==old
-expected={"HEJFE-C368B17FADFC15C7":"2013-04-25T20:00:00Z"}
+expected={
+ "HEJFE-D346C6CFDFB6E581":"2015-02-17T21:30:00Z",
+ "HEJFE-0273F1BFCD285E7F":"2015-02-23T21:11:00Z",
+ "HEJFE-99F31DB35F001A44":"2015-02-25T21:01:00Z",
+ "HEJFE-BB62E8864F35DCD0":"2015-02-25T21:00:00Z",
+ "HEJFE-E1B57B6A71B06A7F":"2015-04-27T21:38:00Z"
+}
 for item in items:
     r=by[item["event_id"]];assert r["resolution_status"]=="resolved_exact_public_timestamp" and r["public_announcement_ts"]==expected[item["event_id"]]
 excluded=[r for r in fresh if r["resolution_status"]=="excluded_fail_closed"]
@@ -210,30 +216,30 @@ for fn in test_files:
         pairs=[
           ('report["exact_resolved_event_records"] == 101','report["exact_resolved_event_records"] == 106'),
           ('report["reviewed_excluded_event_records"] == 73','report["reviewed_excluded_event_records"] == 68'),
-          ('state["public_exact_batch_count"] == 71','state["public_exact_batch_count"] == 71'),
+          ('state["public_exact_batch_count"] == 71','state["public_exact_batch_count"] == 72'),
           ('state["exact_resolved_event_records"] == 101','state["exact_resolved_event_records"] == 106'),
         ]
     elif fn.endswith("test_g1_acquisition_manifest.py"):
         pairs=[
-          ('manifest["state"]["exact_resolved"] == 100','manifest["state"]["exact_resolved"] == 106'),
-          ('manifest["state"]["acquisition_needed"] == 74','manifest["state"]["acquisition_needed"] == 68'),
-          ('len(manifest["work_queue"]) == 74','len(manifest["work_queue"]) == 68'),
-          ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 74','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 68'),
-          ('len(resolved) == 100','len(resolved) == 106'),
-          ('len(unresolved) == 74','len(unresolved) == 68'),
+          ('manifest["state"]["exact_resolved"] == 101','manifest["state"]["exact_resolved"] == 106'),
+          ('manifest["state"]["acquisition_needed"] == 73','manifest["state"]["acquisition_needed"] == 68'),
+          ('len(manifest["work_queue"]) == 73','len(manifest["work_queue"]) == 68'),
+          ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 73','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 68'),
+          ('len(resolved) == 101','len(resolved) == 106'),
+          ('len(unresolved) == 73','len(unresolved) == 68'),
         ]
     elif fn.endswith("test_real_data_release_sprint.py"):
-        pairs=[('updated["missing_exact_announcement_timestamps"] == 74','updated["missing_exact_announcement_timestamps"] == 73')]
+        pairs=[('updated["missing_exact_announcement_timestamps"] == 73','updated["missing_exact_announcement_timestamps"] == 68')]
     else:
         pairs=[
-          ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (100,74)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (101,73)'),
-          ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (100, 74)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (101, 73)'),
+          ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (101,73)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (106,68)'),
+          ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (101, 73)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (106, 68)'),
           ('"99/174" in step9["evidence"] and "75" in step9["evidence"]','"106/174" in step9["evidence"] and "68" in step9["evidence"]'),
-          ('"100/174" in step9["evidence"] and "74" in step9["evidence"]','"106/174" in step9["evidence"] and "68" in step9["evidence"]'),
-          ('len(excluded)==74','len(excluded)==68'),
-          ('len(excluded) == 74','len(excluded) == 68'),
-          ('len(ex)==74','len(ex)==68'),
-          ('len(ex) == 74','len(ex) == 68'),
+          ('"101/174" in step9["evidence"] and "73" in step9["evidence"]','"106/174" in step9["evidence"] and "68" in step9["evidence"]'),
+          ('len(excluded)==73','len(excluded)==68'),
+          ('len(excluded) == 73','len(excluded) == 68'),
+          ('len(ex)==73','len(ex)==68'),
+          ('len(ex) == 73','len(ex) == 68'),
         ]
     for old,new in pairs:
         txt=txt.replace(old,new)
