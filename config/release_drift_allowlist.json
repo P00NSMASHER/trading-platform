@@ -1890,6 +1890,18 @@
     "tests/test_g2_lseg_request_manifest.py": {
       "expected_sha256": "eaecab2dc55fb58afc62d93cd28655c5fd401402be8ea22c927e2e6276828ad1",
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
+    },
+    "vendor_sources/hacked_earnings_jfe/README.md": {
+      "expected_sha256": "216d367c93071659bd4abaebdecc1d3e2b68aac2c7b93bd429469ccb9a882d9d",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit and deterministic 174-event reconciliation; public/source-derived evidence only, no raw licensed vendor tick payload or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/hacked_earnings_jfe_event_reconciliation.csv": {
+      "expected_sha256": "8e23e4c1f54952975989973c8ef045a9eefa01e3c14ca29823abe80b9af567df",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit and deterministic 174-event reconciliation; public/source-derived evidence only, no raw licensed vendor tick payload or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/hacked_earnings_jfe_source_summary.json": {
+      "expected_sha256": "9b7d5fd70c235f5d4349d9d2ae09add970a458faa5b87f10800167c8f706176b",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit and deterministic 174-event reconciliation; public/source-derived evidence only, no raw licensed vendor tick payload or G2 coverage claim."
     }
   },
   "schema_version": "2",
