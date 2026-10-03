@@ -161,7 +161,7 @@ def _rows_frame(rows: Sequence[Mapping[str, object]], value_columns: list[str]) 
             empty[column] = pd.Series(dtype="float64")
         return empty[["Timestamp", *value_columns]]
     frame = frame.copy()
-    frame["Timestamp"] = pd.to_datetime(frame["timestamp"])
+    frame["Timestamp"] = pd.to_datetime([_timestamp(value) for value in frame["timestamp"]])
     return frame[["Timestamp", *value_columns]].sort_values("Timestamp")
 
 
