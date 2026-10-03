@@ -1568,8 +1568,8 @@
       "reason": "Cheap-first full G2 option-quote routing: LSEG before ThetaData history floor and ThetaData thereafter, with licensing/retention fail-closed and no purchase or coverage claim."
     },
     "src/g2_lseg_datascope_client.py": {
-      "expected_sha256": "70459d08610c68269b3a385d4e3a420a8b94dc73493fc17af0bc10ccfcc989c9",
-      "reason": "Private-output LSEG DataScope validation batches now require and persist HistoricalChainResolution evidence for options, derive/deduplicate 0#ROOT*.U ChainRIC queries, and refuse legacy search-only outputs as complete; bounded/resumable zero-promotion/zero-coverage semantics remain fail-closed."
+      "expected_sha256": "b7850f32e5e4585a9311d963e7f0559c442bb070ce77cf4c10f6631f433fc79e",
+      "reason": "Private LSEG equity validation batches now attach a date-specific historical-RIC validation receipt and input hash after Time & Sales download, while preserving zero validation promotion and zero G2 coverage mutation; regression tests use fake transports/validator only."
     },
     "src/g2_lseg_datascope_execution_plan.py": {
       "expected_sha256": "944ac867da0832a6844dd6fe67f9962131cf440f2a9fc62418d9aecfafcf1441",
@@ -1988,8 +1988,8 @@
       "reason": "Regression coverage for the cheap-first LSEG/ThetaData full-replication option-quote split and unchanged strict tick-fidelity policy."
     },
     "tests/test_g2_lseg_datascope_client.py": {
-      "expected_sha256": "b516805a631db8207a5fc2c0601aecbff533f0bec51ec9a136c444a9670d6839",
-      "reason": "Private-output LSEG DataScope validation batches now require and persist HistoricalChainResolution evidence for options, derive/deduplicate 0#ROOT*.U ChainRIC queries, and refuse legacy search-only outputs as complete; bounded/resumable zero-promotion/zero-coverage semantics remain fail-closed."
+      "expected_sha256": "96302e42c520e5240f03342c3840b070bea8303246298e2b562b882ebf78b28f",
+      "reason": "Private LSEG equity validation batches now attach a date-specific historical-RIC validation receipt and input hash after Time & Sales download, while preserving zero validation promotion and zero G2 coverage mutation; regression tests use fake transports/validator only."
     },
     "tests/test_g2_lseg_datascope_execution_plan.py": {
       "expected_sha256": "9ee600ecd07f6cbd151b0313c9f28858d04c970e8813e9493b007ecee6ff9118",
