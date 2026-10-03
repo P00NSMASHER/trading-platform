@@ -2110,6 +2110,14 @@
     "tests/test_g2_lseg_result_adapter.py": {
       "expected_sha256": "55b83c2d6976a0e30dcd56d79d68f9426b54357fd0ac1ba2f8d784ce78011c14",
       "reason": "LSEG Tick History result adapter and regression coverage: convert only historically validated equity RICs and historical-chain option contracts into canonical G2 market-data CSV lanes; no credentials, downloads, or coverage claims."
+    },
+    "src/g2_lseg_source_contract.py": {
+      "expected_sha256": "829c8329e2290eb9b3894e8d70225b6fbe49789d9c1fa5de83bb86af30a5ab6e",
+      "reason": "LSEG source-contract generator and regression coverage: convert post-validation LSEG adaptation receipts into generic authorized historical market-data source entries validated by the production replay loader; license reference remains explicitly required."
+    },
+    "tests/test_g2_lseg_source_contract.py": {
+      "expected_sha256": "a0b92c9cff5d73c0c85c843390f8870dae5abfd43356a88796c1c37a885d09ab",
+      "reason": "LSEG source-contract generator and regression coverage: convert post-validation LSEG adaptation receipts into generic authorized historical market-data source entries validated by the production replay loader; license reference remains explicitly required."
     }
   },
   "schema_version": "2",
