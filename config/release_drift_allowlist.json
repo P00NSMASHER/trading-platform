@@ -1568,8 +1568,8 @@
       "reason": "Cheap-first full G2 option-quote routing: LSEG before ThetaData history floor and ThetaData thereafter, with licensing/retention fail-closed and no purchase or coverage claim."
     },
     "src/g2_lseg_datascope_client.py": {
-      "expected_sha256": "b7850f32e5e4585a9311d963e7f0559c442bb070ce77cf4c10f6631f433fc79e",
-      "reason": "Private LSEG equity validation batches now attach a date-specific historical-RIC validation receipt and input hash after Time & Sales download, while preserving zero validation promotion and zero G2 coverage mutation; regression tests use fake transports/validator only."
+      "expected_sha256": "a8beac1b3fd8ff6347146ad35383063abce8fc4f928c55ff01d9cafddb356d86",
+      "reason": "Thin LSEG option-day CLI delegates to the canonical historical-chain-validated option Time & Sales downloader, preserves manifest-hash resumability/private output, and checks requested symbol/date before any network call; tests use fake clients only."
     },
     "src/g2_lseg_datascope_execution_plan.py": {
       "expected_sha256": "944ac867da0832a6844dd6fe67f9962131cf440f2a9fc62418d9aecfafcf1441",
@@ -1988,8 +1988,8 @@
       "reason": "Regression coverage for the cheap-first LSEG/ThetaData full-replication option-quote split and unchanged strict tick-fidelity policy."
     },
     "tests/test_g2_lseg_datascope_client.py": {
-      "expected_sha256": "96302e42c520e5240f03342c3840b070bea8303246298e2b562b882ebf78b28f",
-      "reason": "Private LSEG equity validation batches now attach a date-specific historical-RIC validation receipt and input hash after Time & Sales download, while preserving zero validation promotion and zero G2 coverage mutation; regression tests use fake transports/validator only."
+      "expected_sha256": "dd65f335c87a3e5458e7a8e798c9604bbcc178134fc8ec4f75ee65c388528ced",
+      "reason": "Thin LSEG option-day CLI delegates to the canonical historical-chain-validated option Time & Sales downloader, preserves manifest-hash resumability/private output, and checks requested symbol/date before any network call; tests use fake clients only."
     },
     "tests/test_g2_lseg_datascope_execution_plan.py": {
       "expected_sha256": "9ee600ecd07f6cbd151b0313c9f28858d04c970e8813e9493b007ecee6ff9118",
