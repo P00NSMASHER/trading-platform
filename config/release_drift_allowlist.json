@@ -2206,6 +2206,14 @@
     "tests/test_g2_trth_taq_replication_contract.py": {
       "expected_sha256": "78cb9d34140370130cbbba9fc7be16539b992ee1d61c89a8ae466a2f31045da4",
       "reason": "Authoritative source-hierarchy clarification from the public companion repo: TRTH/LSEG is the paper's primary data source; TAQ is an after-hours replication fallback requiring explicit NBBO construction and documented trade/quote condition handling."
+    },
+    "src/g2_lseg_trth_event_slice.py": {
+      "expected_sha256": "8d43d192a2126b3cdfa49596fb872a5696557541250cab8409bcfe641582c2ae",
+      "reason": "Exact-replication TRTH AroundEarnings slice planner preserving the original quote/trade business-day windows, filename conventions, and per-RIC filtering; no credentials, downloads, or coverage claims."
+    },
+    "tests/test_g2_lseg_trth_event_slice.py": {
+      "expected_sha256": "08796e0b9cd521faa35f9f7643d9c2754e96017eaca18ec67cc63351a01afab4",
+      "reason": "Exact-replication TRTH AroundEarnings slice planner preserving the original quote/trade business-day windows, filename conventions, and per-RIC filtering; no credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
