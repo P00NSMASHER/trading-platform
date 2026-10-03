@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-worker0-courtlistener-batch-0095",
+    "record_kind": "announcement_timestamp",
+    "source_family": "federal_court_public_distribution_record",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0095.csv",
+    "exists": true,
+    "row_count": 2,
+    "sha256": "23852cb677b398a14ca82e7c23ce0b36f5e8ffbbe7f72f481cf94b3ba63a7626",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-worker3-rog-batch-0088",
     "record_kind": "announcement_timestamp",
     "source_family": "preserved_wire_mirror",
