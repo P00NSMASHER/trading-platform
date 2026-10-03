@@ -199,3 +199,111 @@ def test_download_job_writes_only_to_private_destination(tmp_path, monkeypatch):
     assert destination.read_bytes() == b"licensed-bytes"
     assert receipt["job_id"] == "job-123"
     assert receipt["size_bytes"] == len(b"licensed-bytes")
+
+
+def _write_contract_manifest(path, *, ready=True, symbol="ACHC", trade_date="2015-02-12"):
+    payload = {
+        "schema_version": "1",
+        "trade_date": trade_date,
+        "historical_symbol": symbol,
+        "summary": {
+            "historical_contract_set_ready_for_time_and_sales": ready,
+        },
+        "contracts": [
+            {
+                "source_ric": "ACHCC201505000.U",
+                "historical_symbol": symbol,
+                "trade_date": trade_date,
+                "historical_date_evidence": True,
+                "validation_status": "historical_chain_candidate",
+            },
+            {
+                "source_ric": "ACHCO201505000.U",
+                "historical_symbol": symbol,
+                "trade_date": trade_date,
+                "historical_date_evidence": True,
+                "validation_status": "historical_chain_candidate",
+            },
+            {
+                "source_ric": "ACHCD171505500.U",
+                "historical_symbol": symbol,
+                "trade_date": trade_date,
+                "historical_date_evidence": False,
+                "validation_status": "search_candidate_requires_historical_confirmation",
+            },
+        ],
+    }
+    path.write_text(json.dumps(payload), encoding="utf-8")
+
+
+def test_historical_option_manifest_returns_only_chain_validated_rics(tmp_path):
+    manifest = tmp_path / "contracts.json"
+    _write_contract_manifest(manifest)
+
+    rics, receipt = client.historical_option_rics_from_manifest(
+        manifest,
+        historical_symbol="ACHC",
+        trade_date="2015-02-12",
+    )
+
+    assert rics == ["ACHCC201505000.U", "ACHCO201505000.U"]
+    assert receipt["validated_contract_count"] == 2
+    assert receipt["path_name"] == "contracts.json"
+    assert len(receipt["sha256"]) == 64
+
+
+def test_historical_option_manifest_rejects_symbol_or_date_mismatch(tmp_path):
+    manifest = tmp_path / "contracts.json"
+    _write_contract_manifest(manifest)
+
+    with pytest.raises(ValueError, match="historical_symbol mismatch"):
+        client.historical_option_rics_from_manifest(
+            manifest,
+            historical_symbol="ALNY",
+            trade_date="2015-02-12",
+        )
+
+    with pytest.raises(ValueError, match="trade_date mismatch"):
+        client.historical_option_rics_from_manifest(
+            manifest,
+            historical_symbol="ACHC",
+            trade_date="2015-02-13",
+        )
+
+
+def test_historical_option_manifest_requires_historical_chain_readiness(tmp_path):
+    manifest = tmp_path / "contracts.json"
+    _write_contract_manifest(manifest, ready=False)
+
+    with pytest.raises(ValueError, match="not historical-chain validated"):
+        client.historical_option_rics_from_manifest(
+            manifest,
+            historical_symbol="ACHC",
+            trade_date="2015-02-12",
+        )
+
+
+def test_historical_option_manifest_rejects_ready_flag_without_validated_contracts(tmp_path):
+    manifest = tmp_path / "contracts.json"
+    payload = {
+        "trade_date": "2015-02-12",
+        "historical_symbol": "ACHC",
+        "summary": {"historical_contract_set_ready_for_time_and_sales": True},
+        "contracts": [
+            {
+                "source_ric": "ACHCC201505000.U",
+                "historical_symbol": "ACHC",
+                "trade_date": "2015-02-12",
+                "historical_date_evidence": False,
+                "validation_status": "search_candidate_requires_historical_confirmation",
+            }
+        ],
+    }
+    manifest.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="no validated historical RICs"):
+        client.historical_option_rics_from_manifest(
+            manifest,
+            historical_symbol="ACHC",
+            trade_date="2015-02-12",
+        )
