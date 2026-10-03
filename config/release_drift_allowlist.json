@@ -2126,6 +2126,14 @@
     "tests/test_g2_lseg_option_time_and_sales.py": {
       "expected_sha256": "96b29a48e7fd1c10b4af62fd52f6de15ad9e8e11e432272ba9ddd5c7ae5d4aa3",
       "reason": "Validated LSEG historical option-contract Time & Sales extractor: accepts only historical-chain contract manifests, enforces the 30,000 expanded-instrument ceiling, writes private resumable downloads bound to manifest SHA-256, and preserves zero-promotion/zero-coverage semantics; tests use fake clients only."
+    },
+    "src/g2_lseg_option_batch_pipeline.py": {
+      "expected_sha256": "dd3745cc17e2c33c37c1e8ce17c9c523d4ec2014d11dda4bec47d4bba6d9a9b6",
+      "reason": "Bounded LSEG historical option batch pipeline: validates combined search+HistoricalChainResolution outputs, writes public-safe contract manifests, optionally downloads only historical-chain-validated contracts in explicit credentialed mode, and preserves zero-promotion/zero-coverage semantics; tests use fake clients only."
+    },
+    "tests/test_g2_lseg_option_batch_pipeline.py": {
+      "expected_sha256": "ef76d060271221924ab4d31c9287becaff81712dc0bd9cf584fed31a67048a9b",
+      "reason": "Bounded LSEG historical option batch pipeline: validates combined search+HistoricalChainResolution outputs, writes public-safe contract manifests, optionally downloads only historical-chain-validated contracts in explicit credentialed mode, and preserves zero-promotion/zero-coverage semantics; tests use fake clients only."
     }
   },
   "schema_version": "2",
