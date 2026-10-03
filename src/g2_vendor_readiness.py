@@ -19,6 +19,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
     quotes = _read_json(vendor_dir / "vendor_quote_packets.json")
     cboe_trial = _read_json(vendor_dir / "cboe_trial_capacity_plan.json")
     vendor_replies = _read_json(vendor_dir / "vendor_reply_evidence_2026-10-02.json")
+    theta_retention = _read_json(vendor_dir / "thetadata_retention_plan.json")
     coverage = _read_json(coverage_summary)
     audit = coverage.get("contract_audit") or {}
 
@@ -109,6 +110,23 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
     ):
         raise ValueError("October 2 vendor reply evidence is inconsistent or not fail-closed")
 
+    if (
+        theta_retention.get("vendor") != "ThetaData"
+        or theta_retention.get("commercial_terms", {}).get("one_month_bundle_total_usd") != 320
+        or theta_retention.get("commercial_terms", {}).get("raw_unmodified_data_delete_days_after_billing_period_end") != 30
+        or theta_retention.get("commercial_terms", {}).get("derived_or_modified_research_data_retention_allowed") is not True
+        or theta_retention.get("activation", {}).get("subscription_authorized") is not False
+        or theta_retention.get("activation", {}).get("purchase_authority") is not False
+        or theta_retention.get("activation", {}).get("coverage_claimed") is not False
+        or theta_retention.get("activation", {}).get("deadline_status") != "PENDING_SUBSCRIPTION_START"
+        or theta_retention.get("storage_policy", {}).get("raw_vendor_payload_committed_to_repository") is not False
+        or theta_retention.get("storage_policy", {}).get("raw_vendor_payload_local_only") is not True
+        or theta_retention.get("storage_policy", {}).get("future_raw_replay_requires_reacquisition_under_valid_entitlement") is not True
+        or theta_retention.get("guardrails", {}).get("subscription_requires_explicit_user_authorization") is not True
+        or theta_retention.get("guardrails", {}).get("g2_release_gate_unchanged") is not True
+    ):
+        raise ValueError("ThetaData retention plan is inconsistent or not fail-closed")
+
     activation_profiles = activation["profiles"]
     all_fail_closed = all(
         profile["activation_status"] == "PENDING_DELIVERY_LICENSE_SCHEMA_REVIEW"
@@ -150,6 +168,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "databento_cost_only_workflow_ready": cost_probe_workflow_present,
             "cboe_trial_capacity_plan_ready": True,
             "vendor_reply_evidence_ready": True,
+            "thetadata_retention_plan_ready": True,
         },
         "vendor_reply_evidence": {
             "source_path": "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json",
@@ -206,6 +225,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "cboe_custom_tick_quote": "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET",
             "tickdata_written_quote": "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED",
             "thetadata_written_terms": "WRITTEN_320_USD_ONE_MONTH_BUNDLE_RAW_DELETE_DERIVED_RETENTION_ALLOWED",
+            "thetadata_retention_plan": "READY_FAIL_CLOSED_PENDING_SUBSCRIPTION_START",
             "lseg_2011_quote": "REQUEST_SENT_AWAITING_REPLY",
             "algoseek_quote_and_sandbox_terms": "REQUEST_SENT_AWAITING_REPLY",
         },
@@ -230,6 +250,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "If the Cboe quote smoke passes, use reference/options to enumerate the complete contract universe per underlying/date and verify option-quote pagination/request-rate feasibility before treating 2012+ strict option quotes as an acquisition candidate.",
             "Cboe custom tick-level OPRA pricing was received for the full OPRA universe only and is outside the target budget; do not pursue that paid custom route without explicit user authorization.",
             "ThetaData confirmed a one-month $320 Options Pro + Stock Pro bundle for the requested scope. Private research is eligible for Options Pro; raw/unmodified historical data must be deleted within 30 days after the billing period ends, while derived/modified research data may be retained. Do not subscribe without explicit user authorization.",
+            "If the user later authorizes ThetaData, record the actual billing-period end in the retention planner immediately, compute the deletion deadline, keep raw payloads local-only, and preserve only allowed derived/modified outputs plus hashes/license/deletion receipts after raw deletion.",
             "Await LSEG pricing/availability reply for the exact 2011 OPRA request.",
             "Await algoseek pricing and sandbox-terms replies for the exact historical scopes.",
             "Place lawfully obtained vendor files in a local drop folder, run licensed-data intake + delivery preflight, then create a local hash-bound entitlement manifest.",
@@ -243,6 +264,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "free_trial_activation_requires_explicit_user_authorization": True,
             "trial_download_is_not_retention_authority": True,
             "retention_rights_required_before_bulk_acquisition": True,
+            "thetadata_retention_plan_required_before_subscription": True,
         },
     }
 
