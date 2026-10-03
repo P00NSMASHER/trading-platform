@@ -19,23 +19,31 @@ jobs:
           set -euo pipefail
           url="https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf"
           curl --fail --location --retry 2 "$url" --output /tmp/court.pdf
-          pdftotext -layout /tmp/court.pdf /tmp/court.txt
+          python -m pip install --disable-pip-version-check --quiet pypdf
           python - <<'PY'
-          from pathlib import Path
+          from pypdf import PdfReader
           import re
-          lines = Path("/tmp/court.txt").read_text(encoding="utf-8", errors="replace").splitlines()
+
+          reader = PdfReader("/tmp/court.pdf")
+          lines = []
+          for page_no, page in enumerate(reader.pages, 1):
+              text = page.extract_text() or ""
+              for line in text.splitlines():
+                  lines.append((page_no, line))
+
           patterns = [
               re.compile(r"\bJNPR\b", re.I),
               re.compile(r"Juniper Networks", re.I),
               re.compile(r"10[/.-]22[/.-](?:13|2013)", re.I),
               re.compile(r"2013[/.-]10[/.-]22", re.I),
           ]
-          hits = sorted({i for i, line in enumerate(lines) if any(p.search(line) for p in patterns)})
-          print(f"PDF_LINES={len(lines)} HITS={len(hits)}")
+          hits = sorted({i for i, (_, line) in enumerate(lines) if any(p.search(line) for p in patterns)})
+          print(f"PDF_PAGES={len(reader.pages)} LINES={len(lines)} HITS={len(hits)}")
           for i in hits:
-              print(f"--- HIT LINE {i+1} ---")
-              for j in range(max(0, i-6), min(len(lines), i+7)):
-                  print(f"{j+1:05d}: {lines[j]}")
+              print(f"--- HIT PAGE {lines[i][0]} LINE {i+1} ---")
+              for j in range(max(0, i-8), min(len(lines), i+9)):
+                  page, line = lines[j]
+                  print(f"P{page:03d} L{j+1:05d}: {line}")
           if not hits:
               raise SystemExit("No JNPR/Juniper/2013-10-22 text found")
           PY
