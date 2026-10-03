@@ -1,11 +1,43 @@
-# Authorized WRDS TAQ source copies
+# WRDS TAQ extraction path
 
-These files preserve the relevant public extraction logic from `gen-li/Extract_TAQ_from_WRDS_Cloud` for the frozen G2 research workflow.
+This directory preserves and adapts the relevant extraction logic from `gen-li/Extract_TAQ_from_WRDS_Cloud` for the frozen G2 equity workflow.
 
-Current copied slice:
-- `WRDS_batch_ticker_ct.sas` — legacy consolidated trades (`taq.ct_YYYYMMDD`), upstream code targets dates before 2013.
-- `WRDS_batch_ticker_cq.sas` — legacy consolidated quotes (`taq.cq_YYYYMMDD`), upstream code targets dates before 2013.
+## Included source references
 
-The user has confirmed they hold the rights/licenses needed to copy and use the repository information. These archival copies do not include WRDS credentials or licensed market-data rows. Upstream hard-coded user paths are intentionally preserved in the source copy and must not be executed unchanged.
+- `WRDS_batch_ticker_ct.sas` — upstream legacy consolidated trades reference (`taq.ct_YYYYMMDD`).
+- `WRDS_batch_ticker_cq.sas` — upstream legacy consolidated quotes reference (`taq.cq_YYYYMMDD`).
+- `g2_wrds_taq_legacy.sas` — parameterized legacy extractor with no hard-coded user path.
+- `g2_wrds_taq_msec.sas` — parameterized millisecond extractor for `taqmsec.ctm_YYYYMMDD` / `taqmsec.cqm_YYYYMMDD`.
 
-Next adaptation step: generate the exact G2 symbol/date request file from the frozen 2011–2015 manifest, replace hard-coded paths with runtime parameters, and add the 2013+ millisecond TAQ source copies.
+The user has confirmed the rights/licenses needed to reuse the repository information. No WRDS credentials or licensed market-data rows are stored here.
+
+## Frozen G2 request generation
+
+Generate exact symbol/date request files without contacting a vendor or accessing WRDS:
+
+```bash
+python src/g2_wrds_taq_request_manifest.py \
+  --output-dir data/private/g2_wrds_requests
+```
+
+Expected frozen scope:
+
+- 414 source dates
+- 146 unique historical symbols
+- 3,828 symbol/date pairs
+- 836 legacy pairs before 2013-01-01
+- 2,992 millisecond pairs on/after 2013-01-01
+
+Generated files:
+
+- `legacy_symbol_dates.csv`
+- `millisecond_symbol_dates.csv`
+- `summary.json`
+
+The request generator is dry-run only. It does not log in to WRDS, execute queries, download data, or change G2 coverage.
+
+## Quote fidelity
+
+The copied/adapted quote path retrieves consolidated quote inputs. Strict G2 NBBO coverage remains fail-closed until NBBO construction or direct NBBO validation is proven from actual returned rows.
+
+No external outreach is required by this workflow.
