@@ -151,3 +151,25 @@ def test_after_hours_form_t_selection_runs_event_to_relevant_open():
     ]
     selected = event.after_hours_form_t_trades(rows, ts, ts.date())
     assert [row["price"] for row in selected] == [10.1, 10.3]
+
+
+def test_quote_resample_handles_empty_event_slice_without_merge_dtype_error():
+    ts = datetime(2015, 2, 12, 15, 0)
+    out = event.resample_quotes_original([], ts, ts.date())
+    assert set(out) == {
+        "announcement_1s",
+        "announcement_1m",
+        "opening_1s",
+        "opening_1m",
+    }
+    at_event = out["announcement_1s"][out["announcement_1s"]["SecondsAfter"] == 0].iloc[0]
+    assert pd.isna(at_event["bid"])
+    assert pd.isna(at_event["ask"])
+
+
+def test_trade_resample_handles_empty_event_slice_without_merge_dtype_error():
+    ts = datetime(2015, 2, 12, 15, 0)
+    out = event.resample_trades_original([], ts, ts.date())
+    at_event = out[out["MinutesAfter"] == 0].iloc[0]
+    assert pd.isna(at_event["price"])
+    assert out.iloc[-1]["MinutesAfterOpen"] == 30

@@ -149,7 +149,10 @@ def trade_event_grid(
 def _rows_frame(rows: Sequence[Mapping[str, object]], value_columns: list[str]) -> pd.DataFrame:
     frame = pd.DataFrame([dict(row) for row in rows])
     if frame.empty:
-        return pd.DataFrame(columns=["Timestamp", *value_columns])
+        empty = pd.DataFrame({"Timestamp": pd.Series(dtype="datetime64[ns]")})
+        for column in value_columns:
+            empty[column] = pd.Series(dtype="float64")
+        return empty[["Timestamp", *value_columns]]
     frame = frame.copy()
     frame["Timestamp"] = pd.to_datetime(frame["timestamp"])
     return frame[["Timestamp", *value_columns]].sort_values("Timestamp")
