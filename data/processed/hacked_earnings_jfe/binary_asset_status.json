@@ -1,0 +1,51 @@
+{
+  "source_repository": "vgreg/hacked_earnings_jfe",
+  "extraction_branch": "data/hacked-earnings-jfe-complete-extraction-20261003",
+  "status_as_of": "2026-10-03",
+  "small_binary_assets": {
+    "word_coefficient_parquet": {
+      "source_path": "Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet",
+      "source_blob_sha": "72d66171f5eb28cd3ec629f13b0b1d15219cbf96",
+      "source_size_bytes": 40084,
+      "preserved_losslessly": true,
+      "preserved_as": "base64",
+      "target_path": "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet.b64",
+      "decoded_rows": false,
+      "expected_rows_from_notebook_output": 2393
+    }
+  },
+  "remaining_large_binary_assets": [
+    {
+      "path": "Data/Press releases/2010.zip",
+      "size_bytes": 27346855,
+      "blob_sha": "b4b45ba8bb5e5bf4c502373914fdcaaae268d3aa"
+    },
+    {
+      "path": "Data/Press releases/2011.zip",
+      "size_bytes": 28136902,
+      "blob_sha": "8f4b9b391e8e87649d2a5f5615a30371741c5e6a"
+    },
+    {
+      "path": "Data/Press releases/2012.zip",
+      "size_bytes": 26908193,
+      "blob_sha": "afa44be02ab5aaea6e6105cbca247286bc892fd7"
+    },
+    {
+      "path": "Data/Press releases/2013.zip",
+      "size_bytes": 28229369,
+      "blob_sha": "59e183f05e377ebd0ef2f581ba88522863663972"
+    },
+    {
+      "path": "Data/Press releases/2014.zip",
+      "size_bytes": 26563716,
+      "blob_sha": "0e0e349b76318bb9558a790000c9cbe5ee933001"
+    },
+    {
+      "path": "Data/Press releases/2015.zip",
+      "size_bytes": 27696531,
+      "blob_sha": "919ba9f271abdc06ba7c539ad278d5bb4fcb3715"
+    }
+  ],
+  "blocker": "Connected GitHub path can Base64-fetch the 40 KB Parquet, but returns empty content for the 26–28 MB ZIPs; the authorized remote desktop is currently offline.",
+  "next_action": "When a raw-binary path is available, download and hash-verify the six ZIPs, enumerate all members, extract the full corpus, and build a 174-event press-release index."
+}
