@@ -60,6 +60,7 @@ jobs:
           git config user.name "g1-publisher"
           git config user.email "g1-publisher@users.noreply.github.com"
           git rm --ignore-unmatch .github/workflows/g1-public-batch-0077-worker-2.yml
+          git rm --ignore-unmatch data/processed/.research_receipt_rebuild.lock
           git add -A
           git commit -m "G1: recover WTS THC DXCM WLL CR exact public clocks, 106 exact / 68 excluded [g1-generated]"
-          git push origin HEAD:g1/public-batch-0077-worker-2-wts-thc-dxcm-wll-cr-main-f8324a9
+          git push origin HEAD:g1/public-batch-0077-worker-2-court5-main-5a2dae6
