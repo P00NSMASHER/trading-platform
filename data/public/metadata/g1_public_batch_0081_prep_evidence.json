@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "19d97733deca940600791de7b6e316b067abb1ed",
+  "reserved_batch": "0081",
+  "worker_slot": 1,
+  "previous_exact_count": 114,
+  "expected_exact_count_after_batch": 117,
+  "expected_excluded_after_batch": 57,
+  "source_family": "federal_court_public_distribution_record",
+  "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+  "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+  "source_discovery_comment": "https://github.com/P00NSMASHER/trading-platform/issues/153#issuecomment-5972980765",
+  "timestamp_evidence_kind": "explicit_release_clock",
+  "public_distribution_explicit": true,
+  "items": [
+    {
+      "event_id": "HEJFE-AF5106891E058D23",
+      "historical_symbol": "TNGO",
+      "court_distribution_source": "BW",
+      "court_distribution_time_text": "2015-02-12 16:05 EST",
+      "public_announcement_ts": "2015-02-12T16:05:00-05:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1182325/000110465915009489/a15-4435_1ex99d1.htm",
+      "headline": "Tangoe, Inc. Announces Fourth Quarter and Full Year 2014 Financial Results"
+    },
+    {
+      "event_id": "HEJFE-334BAA0D940A418A",
+      "historical_symbol": "TER",
+      "court_distribution_source": "BW",
+      "court_distribution_time_text": "2015-01-28 17:32 EST",
+      "public_announcement_ts": "2015-01-28T17:32:00-05:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/97210/000119312515024386/d860562dex991.htm",
+      "headline": "Teradyne Reports Fourth Quarter and Fiscal Year 2014 Results"
+    },
+    {
+      "event_id": "HEJFE-12CC8075D3F634CD",
+      "historical_symbol": "ECOL",
+      "court_distribution_source": "MW",
+      "court_distribution_time_text": "2013-04-25 06:00 EDT",
+      "public_announcement_ts": "2013-04-25T06:00:00-04:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/742126/000110262413000476/usecologyinc.htm",
+      "headline": "US Ecology Announces First Quarter 2013 Results"
+    }
+  ],
+  "evidence_method": "A newly identified filed federal-court public-distribution table is pinned as the exact-clock source. The exact TNGO, TER, and ECOL release headline/date identities were independently corroborated against SEC-hosted release text. This branch is prep-only and leaves canonical fail-closed state unchanged.",
+  "integration_guard": "Before canonical generation, the token holder must independently reopen the pinned filed court artifact and verify the three transcribed distribution rows; no EDGAR acceptance, conference-call, scheduled, inferred, or neighboring-release time may substitute."
+}
