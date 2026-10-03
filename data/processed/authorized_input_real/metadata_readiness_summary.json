@@ -7,7 +7,7 @@
   "symbol_date_requirements_path": "/home/runner/work/trading-platform/trading-platform/data/processed/coverage_plan_real/symbol_date_requirements.csv",
   "symbol_date_requirements_sha256": "58e05613603b95b806eedb49ede774fce763f5ca7519487bed66282e4fe0a3fb",
   "contract_path": "/home/runner/work/trading-platform/trading-platform/config/metadata_sources.public_progress.json",
-  "contract_sha256": "1f7a3541b9dc03e68075b94aa1f7fae747c740c1469705158c83a2cf517b072c",
+  "contract_sha256": "40f990c23a663112f2e2008972665473b0811a53d153a1066262f97aa48b3719",
   "contract_issues": [],
   "event_count": 174,
   "symbol_date_requirement_count": 3828,
@@ -21,7 +21,7 @@
     "enabled": true,
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
-    "sha256": "cee36ff2c2adadd9ecc26fe11e81954a02401388c248434a7ab21920ce0a76f3",
+    "sha256": "ba56a577f54da4c825b20a78c130a58810c83de41e6b1cb71c5373a5cc1eb6a0",
     "expected_count": 68,
     "applied_count": 68,
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis."
