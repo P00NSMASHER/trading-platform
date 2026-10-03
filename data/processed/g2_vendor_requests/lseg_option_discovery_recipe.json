@@ -1,0 +1,90 @@
+{
+  "schema_version": "1",
+  "purpose": "Sanitized repository-extracted recipes for resolving historical LSEG/Refinitiv option instruments before Tick History Time & Sales extraction.",
+  "provenance": [
+    {
+      "repo": "LSEG-API-Samples/Article.TickHistory.Python.AllOptions",
+      "path": "RTH_SPX_Options.py",
+      "use": "FuturesAndOptionsSearch pattern for enumerating options on an underlying"
+    },
+    {
+      "repo": "mgao6767/mktstructure",
+      "path": "mktstructure/trth.py",
+      "use": "HistoricalChainResolution endpoint and extraction flow"
+    },
+    {
+      "repo": "mgao6767/mktstructure",
+      "path": "mktstructure/request_templates.py",
+      "use": "TickHistoryTimeAndSales field template"
+    },
+    {
+      "repo": "hanlonlab/datascope-cli",
+      "path": "scripts/pipelines/options_pipeline.py",
+      "use": "Observed option chain RIC examples and option field parsing"
+    }
+  ],
+  "base_path": "/RestApi/v1",
+  "discovery_methods": [
+    {
+      "name": "futures_and_options_search",
+      "endpoint": "/Search/FuturesAndOptionsSearch",
+      "request_shape": {
+        "SearchRequest": {
+          "FuturesAndOptionsType": "Options",
+          "UnderlyingRic": "<UNDERLYING_RIC>",
+          "ExpirationDate": {
+            "ComparisonOperator": "<DATE_COMPARISON>",
+            "Value": "<DATE>"
+          }
+        }
+      },
+      "note": "Official LSEG sample demonstrates enumerating option RICs on an underlying. Date predicate must be set for the licensed historical request being performed."
+    },
+    {
+      "name": "historical_chain_resolution",
+      "endpoint": "/Search/HistoricalChainResolution",
+      "request_shape": {
+        "Request": {
+          "ChainRics": [
+            "<CHAIN_RIC>"
+          ],
+          "Range": {
+            "Start": "<START_ISO>",
+            "End": "<END_ISO>"
+          }
+        }
+      },
+      "chain_examples_from_repo_comments": [
+        "0#AAPL*.U",
+        "0#SPY*.U"
+      ],
+      "note": "Repository example uses HistoricalChainResolution for date-ranged chain membership. Validate the historical option-chain RIC pattern for each underlying before production use."
+    }
+  ],
+  "extraction": {
+    "endpoint": "/Extractions/ExtractRaw",
+    "request_type": "TickHistoryTimeAndSalesExtractionRequest",
+    "historical_instruments": true,
+    "fields": [
+      "#RIC",
+      "Date-Time",
+      "GMT Offset",
+      "Type",
+      "Ex/Cntrb.ID",
+      "Price",
+      "Volume",
+      "Bid Price",
+      "Bid Size",
+      "Ask Price",
+      "Ask Size",
+      "Qualifiers",
+      "Seq. No.",
+      "Exch Time"
+    ]
+  },
+  "security": {
+    "credentials_embedded": false,
+    "sample_tokens_copied": false,
+    "user_owned_credentials_required_for_live_execution": true
+  }
+}

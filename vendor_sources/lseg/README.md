@@ -1,14 +1,47 @@
-# LSEG Tick History G2 source plan
+# LSEG G2 repository extraction
 
-This directory records the sanitized extraction logic and provenance for the licensed LSEG Tick History route discovered through public GitHub repositories.
+This package contains repository-extracted information needed to drive the frozen G2 historical market-data acquisition through LSEG Tick History / DataScope Select.
 
-## What is extracted into this repository
+## Extracted assets
 
-- Exact-root candidate RIC mappings for the frozen 146-symbol G2 equity universe.
-- Tick History Time & Sales fields needed for G2 trades and quotes.
-- Historical/inactive-instrument validation requirements.
-- Historical option-universe resolution methods.
+- `data/processed/g2_vendor_requests/lseg_event_permno_ric_mapping.csv`
+  - Joins the exact 174-event `TimeOfFirstTrade.csv` to the companion study's PERMNO→RIC mapping.
+  - 111 of the 146 historical symbols have direct study-linked RIC candidates by PERMNO.
+- `data/processed/g2_vendor_requests/lseg_equity_ric_mapping.csv`
+  - Companion-study symbol/root candidates for all 146 frozen G2 symbols.
+  - One additional symbol, `MUSA`, has a companion root match but no event-PERMNO link.
+- `data/processed/g2_vendor_requests/lseg_secondary_ric_candidates.csv`
+  - 34 additional repository-backed RIC candidates.
+  - These require date-specific historical-instrument validation before use as evidence.
+- `data/processed/g2_vendor_requests/lseg_tick_history_contract.json`
+  - Tick History Time & Sales report type and exact equity/option trade+quote fields.
+- `data/processed/g2_vendor_requests/lseg_option_discovery_recipe.json`
+  - Sanitized FuturesAndOptionsSearch and HistoricalChainResolution recipes.
+- `src/g2_lseg_request_manifest.py`
+  - Converts the frozen G2 requirements into exact equity requests and option-underlying discovery requests.
+- `tests/test_g2_lseg_request_manifest.py`
+  - Locks the extracted plan to the current frozen G2 scope.
 
-No usernames, passwords, API tokens, or upstream token-like example values are copied.
+## Evidence tiers
 
-The candidate mapping is not itself market-data coverage. Each RIC must still be validated for the requested historical date, and actual returned rows must pass the existing G2 source-contract validation before coverage can move.
+Across the 146 G2 historical symbols:
+
+- **111** — direct event-PERMNO → companion-study RIC candidates.
+- **1** — companion-study root-only candidate: `MUSA`.
+- **34** — secondary repository-backed RIC candidates requiring historical-date validation.
+- **0** — without a repository-backed candidate.
+
+For each of the equity and option-underlying lanes (7,656 symbol-kind/date requests):
+
+- **5,764** use event-PERMNO-linked candidates.
+- **88** use the MUSA root-only candidate.
+- **1,804** use secondary repository candidates and require historical identifier validation.
+- **0** are unmapped.
+
+## Important distinction
+
+The examined GitHub repositories contain query logic, identifier metadata, parsing rules, research mappings, and option discovery patterns. They do **not** contain the licensed 2011–2015 LSEG tick payload itself.
+
+Actual G2 coverage changes only after licensed LSEG rows are retrieved and pass the repository's existing content validators. Root-only and secondary RIC candidates must first be confirmed as valid for the relevant historical date.
+
+No credentials, passwords, or sample tokens are stored in this package.

@@ -1,107 +1,150 @@
 {
   "schema_version": "1",
-  "purpose": "Sanitized LSEG Tick History extraction contract for the frozen G2 market-data lanes. Contains no credentials, tokens, purchases, downloads, or coverage claims.",
-  "sources": [
+  "purpose": "Repository-extracted LSEG Tick History Time & Sales contract for the frozen G2 market-data lanes. No credentials or market-data rows are included.",
+  "authorization_note": "User states all required LSEG/repository rights and licenses are verified.",
+  "provenance": [
     {
       "repo": "hanlonlab/datascope-cli",
-      "path": "config/datascope.conf",
-      "evidence": "TickHistoryTimeAndSales supports the listed trade/quote fields for equity and option pipelines and uses historical instrument validation."
-    },
-    {
-      "repo": "mgao6767/mktstructure",
-      "path": "mktstructure/request_templates.py",
-      "evidence": "TickHistoryTimeAndSales request template includes bid/ask prices and sizes plus trade price and volume."
+      "path": "config/datascope.conf"
     },
     {
       "repo": "LSEG-API-Samples/Article.TickHistory.Python.AllOptions",
-      "path": "RTH_SPX_Options.py",
-      "evidence": "Official LSEG sample demonstrates enumerating options on an underlying and extracting option timeseries. Credential material from upstream examples is intentionally excluded."
+      "path": "RTH_SPX_Options.py"
     },
     {
       "repo": "vgreg/earnings_news_jar",
-      "path": "Sample_Stocks/PERMNO_TRHT _Ticker.csv",
-      "evidence": "Companion research repository provides historical PERMNO-to-RIC candidates for the same research ecosystem."
+      "path": "Sample_Stocks/PERMNO_TRHT _Ticker.csv"
     }
   ],
-  "identifier_mapping": {
-    "frozen_g2_equity_symbols": 146,
-    "exact_root_candidate_mapped": 112,
-    "unresolved": 34,
-    "candidate_map_file": "data/processed/g2_vendor_requests/lseg_tick_history_ric_candidates.csv",
-    "caution": "Candidate RICs must be validated for the specific historical trade date. A root match alone is not a coverage claim.",
-    "unresolved_identifier_packet": "data/processed/g2_vendor_requests/lseg_tick_history_unresolved_identifiers.csv",
-    "permno_crosscheck": {
-      "source_repo": "vgreg/hacked_earnings_jfe",
-      "source_path": "Data/TimeOfFirstTrade.csv",
-      "unresolved_symbols_checked": 34,
-      "additional_rics_resolved": 0,
-      "result": "The 34 unresolved G2 securities have exact PERMNO/GVKEY/event identifiers, but their PERMNOs are absent from the public companion PERMNO-to-RIC table. Historical LSEG identifier resolution is still required."
-    }
-  },
-  "validation_options": {
+  "report": {
+    "canon_name": "time_and_sales",
+    "template_name": "TickHistoryTimeAndSales",
+    "report_name": "TickHistoryTimeAndSales",
     "allow_historical_instruments": true,
-    "allow_inactive_instruments": true,
-    "identifier_type": "Ric"
-  },
-  "time_and_sales": {
-    "report_type": "TickHistoryTimeAndSales",
-    "required_fields": [
-      "Quote - Bid Price",
-      "Quote - Bid Size",
-      "Quote - Ask Price",
-      "Quote - Ask Size",
-      "Trade - Price",
-      "Trade - Volume",
-      "Trade - Bid Price",
-      "Trade - Bid Size",
-      "Trade - Ask Price",
-      "Trade - Ask Size"
-    ],
-    "canonical_g2_projection": {
+    "minimal_g2_fields": {
       "equity_trade": [
-        "Date-Time",
         "#RIC",
-        "Trade - Price",
-        "Trade - Volume"
+        "Date-Time",
+        "Price",
+        "Volume"
       ],
       "equity_quote": [
-        "Date-Time",
         "#RIC",
-        "Quote - Bid Price",
-        "Quote - Ask Price",
-        "Quote - Bid Size",
-        "Quote - Ask Size"
+        "Date-Time",
+        "Bid Price",
+        "Bid Size",
+        "Ask Price",
+        "Ask Size"
       ],
       "option_trade": [
-        "Date-Time",
         "#RIC",
-        "Trade - Price",
-        "Trade - Volume"
+        "Date-Time",
+        "Price",
+        "Volume"
       ],
       "option_quote": [
-        "Date-Time",
         "#RIC",
-        "Quote - Bid Price",
-        "Quote - Ask Price",
-        "Quote - Bid Size",
-        "Quote - Ask Size"
+        "Date-Time",
+        "Bid Price",
+        "Bid Size",
+        "Ask Price",
+        "Ask Size"
       ]
-    }
-  },
-  "option_instrument_resolution": {
-    "required": true,
-    "method_candidates": [
-      "FuturesAndOptionsSearch by underlying",
-      "HistoricalChainResolution for historical constituents/options",
-      "historical/inactive RIC validation in the extraction request"
+    },
+    "upstream_equity_pipeline_out": [
+      "#RIC",
+      "Date-Time",
+      "GMT Offset",
+      "Type",
+      "Ex/Cntrb.ID",
+      "Price",
+      "Volume",
+      "Market VWAP",
+      "Buyer ID",
+      "Bid Price",
+      "Bid Size",
+      "Seller ID",
+      "Ask Price",
+      "Ask Size",
+      "Qualifiers",
+      "Seq. No.",
+      "Exch Time",
+      "UpLim Price",
+      "LoLim Price",
+      "Date",
+      "Tick Dir.",
+      "Open",
+      "High",
+      "Low",
+      "Acc. Volume",
+      "Turnover",
+      "Mid Price",
+      "Percentage Change",
+      "Original Price",
+      "Original Volume",
+      "Ask Market Maker Id",
+      "Bid Market Maker Id",
+      "Unique Trade Identification",
+      "LULD Indicator",
+      "Net Change",
+      "Short Sale Restriction Indicator"
     ],
-    "caution": "Enumerate the full listed option universe for each underlying/date before claiming strict option quote completeness."
+    "upstream_option_pipeline_out": [
+      "#RIC",
+      "Date-Time",
+      "GMT Offset",
+      "Type",
+      "Ex/Cntrb.ID",
+      "Price",
+      "Volume",
+      "Market VWAP",
+      "Buyer ID",
+      "Bid Price",
+      "Bid Size",
+      "Seller ID",
+      "Ask Price",
+      "Ask Size",
+      "Qualifiers",
+      "Seq. No.",
+      "Exch Time",
+      "UpLim Price",
+      "LoLim Price",
+      "Bid Imp. Vol",
+      "Ask Imp. Vol",
+      "Date",
+      "Tick Dir.",
+      "Open",
+      "High",
+      "Low",
+      "Acc. Volume",
+      "Turnover",
+      "Mid Price",
+      "Percentage Change",
+      "Original Price",
+      "Original Volume",
+      "Delta",
+      "Ask Market Maker Id",
+      "Bid Market Maker Id",
+      "Gamma",
+      "Theta",
+      "Unique Trade Identification",
+      "LULD Indicator",
+      "Net Change",
+      "Original Unique Trade Identification",
+      "Short Sale Restriction Indicator",
+      "Trading Status",
+      "Rho",
+      "Vega"
+    ]
+  },
+  "mapping_summary": {
+    "g2_unique_symbols": 146,
+    "exact_root_candidate_matches": 112,
+    "unresolved_symbols": 34
   },
   "safety": {
-    "credentials_in_repo": false,
-    "upstream_token_like_values_excluded": true,
-    "no_network_execution": true,
-    "no_data_download": true,
-    "no_g2_coverage_change": true
+    "credentials_in_repository": false,
+    "sample_token_not_copied": true,
+    "coverage_claim_requires_validated_rows": true
   }
 }
