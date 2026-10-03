@@ -50,7 +50,7 @@ def build_alternatives() -> dict:
             },
         ],
         "conditional_cheapest_full_option_route": {
-            "status": "PREFERRED_IF_THETADATA_WRITTEN_LICENSE_CLEARANCE_IS_RECEIVED",
+            "status": "PREFERRED_THETADATA_CLEARED_LSEG_PRICE_PENDING",
             "expected_vendor_count": 2,
             "segments": [
                 {
@@ -67,7 +67,11 @@ def build_alternatives() -> dict:
                     "source_date_rows_per_record_kind": 291,
                     "underlying_date_pairs_per_record_kind": 3014,
                     "record_kinds": ["option_trade", "option_quote"],
-                    "pricing_status": "SALES_CLASSIFICATION_AND_RETENTION_TERMS_PENDING",
+                    "pricing_status": "WRITTEN_160_USD_MONTH_PRIVATE_RESEARCH_ELIGIBLE_RETENTION_CONDITIONAL",
+                    "written_monthly_price_usd": 160.00,
+                    "private_research_eligible": True,
+                    "raw_data_delete_days_after_billing_period_end": 30,
+                    "derived_or_modified_data_retention_allowed": True,
                     "public_retail_monthly_price_usd": 160.00,
                     "public_commercial_monthly_price_usd": 1600.00,
                     "public_startup_monthly_price_as_low_as_usd": 500.00,
@@ -83,14 +87,16 @@ def build_alternatives() -> dict:
                 "Databento OPRA.PILLAR Trades",
             ],
             "activation_rule": (
-                "Do not switch routes or purchase until written ThetaData license/retention "
-                "terms and LSEG price/entitlement are acceptable."
+                "ThetaData written private-research pricing/retention terms are received, but do not "
+                "purchase without explicit user authorization. LSEG price/entitlement is still pending. "
+                "Any ThetaData acquisition must delete raw/unmodified data within 30 days after the "
+                "billing period ends; derived/modified research data may be retained."
             ),
         },
         "alternatives": [
             {
                 "vendor": "ThetaData Options PRO",
-                "route_status": "CHEAP_CONDITIONAL_CONSOLIDATION",
+                "route_status": "CHEAP_WRITTEN_ROUTE_RETENTION_CONDITIONAL",
                 "public_retail_monthly_price_usd": 160.00,
                 "public_commercial_monthly_price_usd": 1600.00,
                 "public_startup_monthly_price_as_low_as_usd": 500.00,
@@ -103,10 +109,15 @@ def build_alternatives() -> dict:
                 "pre_history_residual_rows_per_record_kind": 123,
                 "pre_history_residual_pairs_per_record_kind": 814,
                 "fidelity_fit": "TICK_TRADES_AND_EVERY_OPRA_NBBO_QUOTE",
-                "license_fit": "SALES_CLASSIFICATION_AND_RETENTION_TERMS_PENDING",
+                "written_monthly_price_usd": 160.00,
+                "private_research_eligible": True,
+                "raw_data_delete_days_after_billing_period_end": 30,
+                "derived_or_modified_data_retention_allowed": True,
+                "license_fit": "PRIVATE_RESEARCH_ELIGIBLE_RAW_DELETE_30_DAYS_AFTER_BILLING_DERIVED_RETENTION_ALLOWED",
                 "blocking_fact": (
-                    "Retail pricing is individual-use; business/non-display classification and "
-                    "retention rights for the research pipeline require written sales confirmation."
+                    "Vendor confirms individual Options Pro is eligible for private research at $160/month. "
+                    "Raw/unmodified historical data must be deleted within 30 days after the billing period "
+                    "ends, while derived/modified research data may be retained; purchase remains unauthorized."
                 ),
                 "source_urls": [
                     "https://thetadata.net/pricing",
