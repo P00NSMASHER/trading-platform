@@ -297,6 +297,15 @@ def test_batch_0077_preserves_prior():
 ast.parse(ts);tp.write_text(ts)
 assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 
+# Prep-only artifacts validate the package before publication but must not survive
+# canonical generation, where their fail-closed assertions are intentionally stale.
+for prep_only in (
+    Path("data/public/metadata/g1_public_batch_0077_prep_evidence.json"),
+    Path("tests/test_g1_public_batch_0077_prep.py"),
+):
+    if prep_only.exists():
+        prep_only.unlink()
+
 changed=set(subprocess.check_output(["git","diff","--name-only",BASE],text=True).splitlines());changed.update([str(batch),str(evidence_path),str(tp),SCRIPT])
 permitted={WORKFLOW,SCRIPT,str(contract_path),str(exclusion_path),str(hints_path),str(acq),str(batch),str(evidence_path),str(tp),
 "docs/g1_announcement_times.md","src/metadata_resolver.py","tests/test_metadata_resolver.py","tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
