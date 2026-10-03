@@ -2010,6 +2010,14 @@
     "docs/hacked_earnings_jfe_extraction_audit.md": {
       "expected_sha256": "0c0f0c9ffdf7c23dd0565c60bac54de2cf8e4709d7d397c4bf79a8ea174e051c",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
+    "src/g2_lseg_datascope_execution_plan.py": {
+      "expected_sha256": "0c3126a778925d2b2e3f5e2cb2241d3105c4f620d9f6a757680887520c9b3cf3",
+      "reason": "Credential-free LSEG DataScope execution planner that collapses duplicate trade/quote requirements into date-scoped Time & Sales jobs and historical option-discovery tasks while preserving all frozen G2 symbol-dates; no network calls, credentials, downloads, or coverage claims."
+    },
+    "tests/test_g2_lseg_datascope_execution_plan.py": {
+      "expected_sha256": "606b7242576b98ca59d567678b656be828b78cd3c08aa4294da824879adacd09",
+      "reason": "Credential-free LSEG DataScope execution planner that collapses duplicate trade/quote requirements into date-scoped Time & Sales jobs and historical option-discovery tasks while preserving all frozen G2 symbol-dates; no network calls, credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
