@@ -10,7 +10,7 @@ import real_data_release_sprint as sprint
 
 ROOT=Path.cwd()
 BASE="881a60270ec5f7aa2b1e47a7876aa25f7b75a606"
-WORKFLOW=".github/workflows/g1-public-batch-0072-worker-0.yml"
+WORKFLOW=".github/workflows/g1-public-batch-0072-worker-2.yml"
 SCRIPT="scripts/g1_batch_0072_generate.py"
 def load(p): return json.loads(Path(p).read_text(encoding="utf-8"))
 def save(p,o): Path(p).write_text(json.dumps(o,indent=2,sort_keys=True)+"\n",encoding="utf-8")
