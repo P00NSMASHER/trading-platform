@@ -301,7 +301,7 @@ changed=set(subprocess.check_output(["git","diff","--name-only",BASE],text=True)
 permitted={WORKFLOW,SCRIPT,str(contract_path),str(exclusion_path),str(hints_path),str(acq),str(batch),str(evidence_path),str(tp),
 "docs/g1_announcement_times.md","src/metadata_resolver.py","tests/test_metadata_resolver.py","tests/test_g1_source_research.py","tests/test_g1_acquisition_manifest.py","tests/test_real_data_release_sprint.py",
 str(cp),str(cp.parent/"unresolved_gates.csv"),str(sd/"step_status.json"),"data/processed/research_receipt_bundle.json",
-"data/processed/real_data_replay/real_data_replay_status.json","data/public/metadata/g1_public_batch_0077_integration_spec.json"} | {str(x) for x in Path("tests").glob("test_g1_public_batch_*.py")} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
+"data/processed/real_data_replay/real_data_replay_status.json","data/public/metadata/g1_public_batch_0077_integration_spec.json","data/public/metadata/g1_public_batch_0077_prep_evidence.json"} | {str(x) for x in Path("tests").glob("test_g1_public_batch_*.py")} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
 assert changed<=permitted,f"Unexpected {changed-permitted}"
 allowp=Path("config/release_drift_allowlist.json");allow=load(allowp);reason="G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
 for name in sorted(changed):
