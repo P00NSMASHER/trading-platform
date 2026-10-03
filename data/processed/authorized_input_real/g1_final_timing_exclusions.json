@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "5a2dae64561880c736cb9eeb16b65f67d5894d29",
+  "base_main_sha": "87ce85b2155ebb1abc12f9247d689a6a78e332ed",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
