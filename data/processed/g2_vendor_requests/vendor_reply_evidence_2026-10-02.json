@@ -69,5 +69,36 @@
     "paid_quote_is_not_coverage": true,
     "vendor_availability_claim_is_not_coverage": true,
     "dry_run_or_sample_probe_is_not_coverage": true
+  },
+  "theta_data_written_terms": {
+    "vendor": "ThetaData",
+    "contact_name": "Anthony",
+    "contact_role": "Support",
+    "source_date": "2026-10-02",
+    "source_email_received_at_utc": "2026-10-02T18:03:14Z",
+    "requested_scope": {
+      "options_underlying_date_pairs_per_record_kind": 3014,
+      "stock_symbol_date_pairs_per_record_kind": 1430,
+      "approximate_option_requests_trades_plus_quotes": 6028,
+      "approximate_stock_requests_trades_plus_quotes": 2860
+    },
+    "vendor_confirmation": {
+      "options_tick_opra_history_start": "2012-06-01",
+      "stock_utp_tick_history_start": "2012-06-01",
+      "option_quote_access": "option/history/quote interval=tick returns every OPRA NBBO quote",
+      "option_trade_access": "option/history/trade",
+      "stock_quote_access": "stock/history/quote interval=tick with venue=utp_cta for merged SIP",
+      "stock_trade_access": "stock/history/trade",
+      "pro_concurrent_requests": 8,
+      "private_research_options_pro_eligible": true,
+      "monthly_options_pro_usd": 160,
+      "monthly_stock_pro_usd": 160,
+      "monthly_bundle_total_usd": 320,
+      "raw_unmodified_data_delete_within_days_after_billing_period_end": 30,
+      "derived_or_modified_research_data_retention_allowed": true
+    },
+    "research_disposition": "CHEAP_WRITTEN_ROUTE_AVAILABLE_WITH_RAW_DELETE_CONSTRAINT",
+    "automatic_purchase_or_subscription": false,
+    "coverage_claimed": false
   }
 }
