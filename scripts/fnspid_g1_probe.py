@@ -251,10 +251,24 @@ def main() -> int:
         worker1_candidates.extend(rows[:15])
     print("FNSPID_WORKER1_CANDIDATES")
     print(json.dumps(worker1_candidates, indent=2, sort_keys=True))
+
+    worker2_candidates = []
+    for event in unresolved:
+        eid = str(event["event_id"])
+        slot = int(hashlib.sha256(eid.encode("ascii")).hexdigest(), 16) % 5
+        if slot != 2:
+            continue
+        rows = sorted(
+            candidates.get(eid, []),
+            key=lambda r: (-int(r["score"]), r["news_timestamp_utc"], r["url"]),
+        )
+        worker2_candidates.extend(rows[:15])
+    print("FNSPID_WORKER2_CANDIDATES")
+    print(json.dumps(worker2_candidates, indent=2, sort_keys=True))
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
 
-# trigger bulk probe
+# trigger bulk probe\n# worker2 candidate output
