@@ -1,0 +1,11 @@
+name: G1 0095 generator repair smoke
+on:
+  push:
+    branches: [g1/public-batch-0095-worker-0-jnpr-pnra-main-074be58]
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - run: python scripts/g1_batch_0095_patch.py
+      - run: python -m py_compile scripts/g1_batch_0095_generate.py
