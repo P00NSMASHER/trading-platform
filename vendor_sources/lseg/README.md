@@ -55,3 +55,23 @@ Charles Martineau's public fork of the companion research repository contains th
 That contract records the raw TAS file structure, MD5 sidecar validation, exact trade/quote fields, historical timestamp reconstruction, trade/quote qualifier handling, relevant 2011–2015 early-close dates, and per-event filtering rules. Machine-specific drive paths and any credentials/token-like values are intentionally excluded.
 
 This strengthens the LSEG route from a generic API plan to the actual processing logic used in the source research workflow. It still does not constitute G2 coverage until licensed rows are retrieved and validated.
+
+## Live Tick History normalization
+
+`src/g2_lseg_trth_normalizer.py` now handles both forms encountered in the repository evidence:
+
+- original research TRTH rows using `Date[G]`, `Time[G]`, `Quote Time`, `Exch Time`, and `GMT Offset`;
+- modern DataScope/Tick History rows using offset-aware `Date-Time`.
+
+It also decodes the historical OPRA RIC convention documented by `hanlonlab/datascope-cli` into:
+
+- underlying symbol,
+- option symbol,
+- expiration date,
+- strike,
+- call/put type.
+
+The decoder fails closed on unsupported exchange suffixes, malformed contract codes, invalid dates, and nonpositive strikes. Explicit validated option metadata can still be supplied and takes precedence; missing or blank fields are filled from the RIC.
+
+This removes a manual metadata step from the licensed LSEG ingestion path while preserving the existing rule that G2 coverage changes only after actual returned rows pass validation.
+
