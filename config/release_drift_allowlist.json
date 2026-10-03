@@ -2166,6 +2166,14 @@
     "tests/test_g2_lseg_trth_afterhours_features.py": {
       "expected_sha256": "01c52814ab4ae14cb6d0e0a398cb0b0cdf5ad59424f5bc326be50ef9aef9454a",
       "reason": "Exact-replication TRTH after-hours Form-T feature sequence and descriptive-stat distributions derived from the public research scripts; no credentials, downloads, or coverage claims."
+    },
+    "src/g2_lseg_secondary_validation_manifest.py": {
+      "expected_sha256": "57f2d610ef588630d9c200596f9ac0d5159c0e83ce4eef16019407a89d066828",
+      "reason": "Minimal date-specific LSEG historical identifier validation queue for the 34 repository-backed secondary RIC symbols; collapses duplicate lane/record-kind checks without changing source semantics or G2 coverage."
+    },
+    "tests/test_g2_lseg_secondary_validation_manifest.py": {
+      "expected_sha256": "a769892f8a78211869e0aa51075ae604f347b9d8426d8a2938191f8ac6dc1a87",
+      "reason": "Regression coverage locking the secondary LSEG validation queue to 902 unique symbol/date jobs, 1,804 lane checks, 3,608 record-kind checks, and fail-closed no-coverage behavior."
     }
   },
   "schema_version": "2",
