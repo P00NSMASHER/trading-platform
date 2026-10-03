@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BASE_URL = "https://selectapi.datascope.lseg.com/RestApi/v1"
 USERNAME_ENV = "LSEG_DATASCOPE_USERNAME"
 PASSWORD_ENV = "LSEG_DATASCOPE_PASSWORD"
+MAX_LIVE_VALIDATION_TASKS = 25
 
 PRIVATE_REPO_PREFIXES = (
     Path("data/private"),
@@ -329,6 +330,215 @@ def _execution_plan() -> dict:
     return execution.build_execution_plan(base)
 
 
+def build_validation_batch(
+    lane: str,
+    *,
+    start: int = 0,
+    limit: int = 25,
+) -> dict:
+    if lane not in {"equity", "option"}:
+        raise ValueError("lane must be equity or option")
+    if start < 0:
+        raise ValueError("start must be non-negative")
+    if limit <= 0:
+        raise ValueError("limit must be positive")
+
+    plan = _execution_plan()
+    key = (
+        "equity_historical_validation_queue"
+        if lane == "equity"
+        else "option_historical_validation_queue"
+    )
+    queue = list(plan[key])
+    selected = queue[start : start + limit]
+    return {
+        "schema_version": "1",
+        "lane": lane,
+        "queue_size": len(queue),
+        "start": start,
+        "requested_limit": limit,
+        "selected_count": len(selected),
+        "next_start": start + len(selected) if selected else None,
+        "tasks": selected,
+        "network_execution_enabled": False,
+    }
+
+
+def _completed_json_output(
+    path: Path,
+    *,
+    trade_date: str,
+    historical_symbol: str,
+    candidate_rics: list[str],
+) -> bool:
+    if not path.exists():
+        return False
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    return (
+        payload.get("trade_date") == trade_date
+        and payload.get("historical_symbol") == historical_symbol
+        and payload.get("candidate_rics") == candidate_rics
+    )
+
+
+def execute_validation_batch(
+    client: DataScopeClient,
+    batch: dict,
+    output_dir: Path,
+) -> dict:
+    lane = str(batch["lane"])
+    tasks = list(batch["tasks"])
+    if lane not in {"equity", "option"}:
+        raise ValueError("lane must be equity or option")
+    if len(tasks) > MAX_LIVE_VALIDATION_TASKS:
+        raise ValueError(
+            f"live validation is capped at {MAX_LIVE_VALIDATION_TASKS} tasks per invocation"
+        )
+
+    destination = ensure_private_output_path(output_dir)
+    destination.mkdir(parents=True, exist_ok=True)
+    receipts = []
+
+    for task in tasks:
+        trade_date = str(task["trade_date"])
+        symbol = str(task["historical_symbol"])
+        candidate_rics = [str(x) for x in task["candidate_rics"]]
+        stem = f"{trade_date}_{symbol}"
+
+        if lane == "equity":
+            output_path = destination / f"{stem}.csv.gz"
+            completion_path = destination / f"{stem}.receipt.json"
+            if (
+                output_path.exists()
+                and output_path.stat().st_size > 0
+                and _completed_json_output(
+                    completion_path,
+                    trade_date=trade_date,
+                    historical_symbol=symbol,
+                candidate_rics=candidate_rics,
+                )
+            ):
+                receipts.append(
+                    {
+                        "trade_date": trade_date,
+                        "historical_symbol": symbol,
+                        "status": "skipped_existing_download",
+                        "output_path": str(output_path),
+                        "completion_receipt": str(completion_path),
+                        "validation_promoted": False,
+                    }
+                )
+                continue
+            receipt = client.extract_time_and_sales(
+                candidate_rics,
+                trade_date,
+                output_path,
+            )
+            completion_path.write_text(
+                json.dumps(
+                    {
+                        "trade_date": trade_date,
+                        "historical_symbol": symbol,
+                        "candidate_rics": candidate_rics,
+                        "receipt": receipt,
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            receipts.append(
+                {
+                    "trade_date": trade_date,
+                    "historical_symbol": symbol,
+                    "status": "downloaded_pending_content_validation",
+                    "completion_receipt": str(completion_path),
+                    "validation_promoted": False,
+                    **receipt,
+                }
+            )
+            continue
+
+        output_path = destination / f"{stem}.json"
+        if _completed_json_output(
+            output_path,
+            trade_date=trade_date,
+            historical_symbol=symbol,
+        candidate_rics=candidate_rics,
+        ):
+            receipts.append(
+                {
+                    "trade_date": trade_date,
+                    "historical_symbol": symbol,
+                    "status": "skipped_existing_discovery",
+                    "output_path": str(output_path),
+                    "validation_promoted": False,
+                }
+            )
+            continue
+
+        discoveries = []
+        for ric in candidate_rics:
+            discoveries.append(
+                {
+                    "underlying_ric": ric,
+                    "results": client.futures_options_search(ric, trade_date),
+                }
+            )
+        output_path.write_text(
+            json.dumps(
+                {
+                    "trade_date": trade_date,
+                    "historical_symbol": symbol,
+                    "candidate_rics": candidate_rics,
+                    "discoveries": discoveries,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        receipts.append(
+            {
+                "trade_date": trade_date,
+                "historical_symbol": symbol,
+                "status": "discovery_completed_pending_review",
+                "output_path": str(output_path),
+                "candidate_count": len(candidate_rics),
+                "validation_promoted": False,
+                "discovered_contract_count": sum(
+                    len(item["results"]) for item in discoveries
+                ),
+            }
+        )
+
+    return {
+        "schema_version": "1",
+        "lane": lane,
+        "selected_count": len(tasks),
+        "network_tasks_completed": sum(
+            row["status"]
+            in {
+                "downloaded_pending_content_validation",
+                "discovery_completed_pending_review",
+            }
+            for row in receipts
+        ),
+        "skipped_existing_outputs": sum(
+            row["status"].startswith("skipped_existing")
+            for row in receipts
+        ),
+        "validation_promotions": 0,
+        "g2_coverage_change": 0,
+        "receipts": receipts,
+    }
+
+
 def _credentials_from_environment() -> tuple[str, str]:
     username = os.environ.get(USERNAME_ENV, "")
     password = os.environ.get(PASSWORD_ENV, "")
@@ -360,7 +570,36 @@ def main() -> None:
     chain.add_argument("--date", required=True)
     chain.add_argument("--output", type=Path, required=True)
 
+    validation = sub.add_parser("validate-batch")
+    validation.add_argument("--lane", choices=("equity", "option"), required=True)
+    validation.add_argument("--start", type=int, default=0)
+    validation.add_argument("--limit", type=int, default=25)
+    validation.add_argument("--execute", action="store_true")
+    validation.add_argument("--output-dir", type=Path)
+
     args = parser.parse_args()
+
+    if args.command == "validate-batch":
+        batch = build_validation_batch(
+            args.lane,
+            start=args.start,
+            limit=args.limit,
+        )
+        if not args.execute:
+            print(json.dumps(batch, indent=2, sort_keys=True))
+            return
+        if args.output_dir is None:
+            raise SystemExit("--output-dir is required with --execute")
+        if batch["selected_count"] > MAX_LIVE_VALIDATION_TASKS:
+            raise SystemExit(
+                f"--execute is capped at {MAX_LIVE_VALIDATION_TASKS} tasks per invocation"
+            )
+        username, password = _credentials_from_environment()
+        client = DataScopeClient(username, password)
+        receipt = execute_validation_batch(client, batch, args.output_dir)
+        print(json.dumps(receipt, indent=2, sort_keys=True))
+        return
+
     username, password = _credentials_from_environment()
     client = DataScopeClient(username, password)
 
