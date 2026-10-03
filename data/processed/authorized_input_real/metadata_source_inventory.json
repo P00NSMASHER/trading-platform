@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-worker2-courtlistener-batch-0077",
+    "record_kind": "announcement_timestamp",
+    "source_family": "federal_court_public_distribution_record",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0077.csv",
+    "exists": true,
+    "row_count": 5,
+    "sha256": "002f4daad03156d01048f5bbb2096d4a73000818a1290feae6054aea555d564a",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-worker0-echo-batch-0072",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
