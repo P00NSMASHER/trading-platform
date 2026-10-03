@@ -509,13 +509,15 @@ def execute_validation_batch(
             continue
 
         discoveries = []
+        historical_chains: dict[str, dict] = {}
         for ric in candidate_rics:
             chain_ric = option_chain_ric(ric)
             search_results = client.futures_options_search(ric, trade_date)
-            historical_chain = client.historical_chain_resolution(
-                chain_ric,
-                trade_date,
-            )
+            if chain_ric not in historical_chains:
+                historical_chains[chain_ric] = client.historical_chain_resolution(
+                    chain_ric,
+                    trade_date,
+                )
             discoveries.append(
                 {
                     "underlying_ric": ric,
@@ -523,7 +525,7 @@ def execute_validation_batch(
                     # Preserve the historical key for downstream compatibility.
                     "results": search_results,
                     "search_results": search_results,
-                    "historical_chain_result": historical_chain,
+                    "historical_chain_result": historical_chains[chain_ric],
                 }
             )
         output_path.write_text(
@@ -553,7 +555,7 @@ def execute_validation_batch(
                 "search_discovered_contract_count": sum(
                     len(item["search_results"]) for item in discoveries
                 ),
-                "historical_chain_query_count": len(discoveries),
+                "historical_chain_query_count": len(historical_chains),
             }
         )
 
