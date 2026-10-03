@@ -52,6 +52,9 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
     cboe_scope = cboe_paid.get("requested_scope") or {}
     tickdata = vendor_replies.get("tick_data_written_quote") or {}
     tickdata_scope = tickdata.get("requested_scope") or {}
+    theta = vendor_replies.get("theta_data_written_terms") or {}
+    theta_scope = theta.get("requested_scope") or {}
+    theta_confirmation = theta.get("vendor_confirmation") or {}
     acceptance_probe = vendor_replies.get("cboe_zero_cost_acceptance_probe") or {}
     guardrails = vendor_replies.get("guardrails") or {}
     if (
@@ -72,6 +75,21 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         or tickdata.get("written_price_usd") is not None
         or tickdata.get("vendor_response") != "PHONE_CALL_REQUIRED"
         or tickdata.get("availability_must_not_be_inferred") is not True
+        or theta.get("research_disposition") != "CHEAP_WRITTEN_ROUTE_AVAILABLE_WITH_RAW_DELETE_CONSTRAINT"
+        or theta_scope.get("options_underlying_date_pairs_per_record_kind") != 3014
+        or theta_scope.get("stock_symbol_date_pairs_per_record_kind") != 1430
+        or theta_scope.get("approximate_option_requests_trades_plus_quotes") != 6028
+        or theta_scope.get("approximate_stock_requests_trades_plus_quotes") != 2860
+        or theta_confirmation.get("options_tick_opra_history_start") != "2012-06-01"
+        or theta_confirmation.get("stock_utp_tick_history_start") != "2012-06-01"
+        or theta_confirmation.get("private_research_options_pro_eligible") is not True
+        or theta_confirmation.get("monthly_options_pro_usd") != 160
+        or theta_confirmation.get("monthly_stock_pro_usd") != 160
+        or theta_confirmation.get("monthly_bundle_total_usd") != 320
+        or theta_confirmation.get("raw_unmodified_data_delete_within_days_after_billing_period_end") != 30
+        or theta_confirmation.get("derived_or_modified_research_data_retention_allowed") is not True
+        or theta.get("automatic_purchase_or_subscription") is not False
+        or theta.get("coverage_claimed") is not False
         or acceptance_probe.get("logical_separation") != "SEPARATE_FROM_PAID_BULK_ACQUISITION"
         or acceptance_probe.get("purchase_or_subscription_authorized") is not False
         or acceptance_probe.get("coverage_claimed") is not False
@@ -154,6 +172,18 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
                 "written_price_usd": tickdata["written_price_usd"],
                 "vendor_response": tickdata["vendor_response"],
             },
+            "theta_data_written_terms": {
+                "research_disposition": theta["research_disposition"],
+                "options_underlying_date_pairs_per_record_kind": theta_scope["options_underlying_date_pairs_per_record_kind"],
+                "stock_symbol_date_pairs_per_record_kind": theta_scope["stock_symbol_date_pairs_per_record_kind"],
+                "monthly_options_pro_usd": theta_confirmation["monthly_options_pro_usd"],
+                "monthly_stock_pro_usd": theta_confirmation["monthly_stock_pro_usd"],
+                "monthly_bundle_total_usd": theta_confirmation["monthly_bundle_total_usd"],
+                "private_research_options_pro_eligible": theta_confirmation["private_research_options_pro_eligible"],
+                "raw_unmodified_data_delete_within_days_after_billing_period_end": theta_confirmation["raw_unmodified_data_delete_within_days_after_billing_period_end"],
+                "derived_or_modified_research_data_retention_allowed": theta_confirmation["derived_or_modified_research_data_retention_allowed"],
+                "coverage_claimed": theta["coverage_claimed"],
+            },
             "cboe_zero_cost_acceptance_probe": {
                 "pull_request": acceptance_probe["pull_request"],
                 "state_as_of_recording": acceptance_probe["state_as_of_recording"],
@@ -164,7 +194,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         },
         "external_state": {
             "vendor_quotes_or_pricing": "PARTIAL_EXTERNAL_QUOTES_RECEIVED",
-            "license_or_entitlement_terms": "PENDING_EXTERNAL",
+            "license_or_entitlement_terms": "PARTIAL_WRITTEN_TERMS_RECEIVED",
             "licensed_data_delivery": "PENDING_EXTERNAL",
             "local_entitlement_hash_binding": "PENDING_EXTERNAL",
             "production_content_validation": "BLOCKED_ON_DELIVERY",
@@ -175,6 +205,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "cboe_trial_retention_rights": "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES",
             "cboe_custom_tick_quote": "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET",
             "tickdata_written_quote": "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED",
+            "thetadata_written_terms": "WRITTEN_320_USD_ONE_MONTH_BUNDLE_RAW_DELETE_DERIVED_RETENTION_ALLOWED",
             "lseg_2011_quote": "REQUEST_SENT_AWAITING_REPLY",
             "algoseek_quote_and_sandbox_terms": "REQUEST_SENT_AWAITING_REPLY",
         },
@@ -198,6 +229,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "Before any bulk Cboe trial acquisition, obtain written Order Form or vendor permission that permits retained internal research use after trial termination; the default Cboe subscription agreement requires Data to be deleted or returned at termination unless the applicable Order Form expressly provides otherwise.",
             "If the Cboe quote smoke passes, use reference/options to enumerate the complete contract universe per underlying/date and verify option-quote pagination/request-rate feasibility before treating 2012+ strict option quotes as an acquisition candidate.",
             "Cboe custom tick-level OPRA pricing was received for the full OPRA universe only and is outside the target budget; do not pursue that paid custom route without explicit user authorization.",
+            "ThetaData confirmed a one-month $320 Options Pro + Stock Pro bundle for the requested scope. Private research is eligible for Options Pro; raw/unmodified historical data must be deleted within 30 days after the billing period ends, while derived/modified research data may be retained. Do not subscribe without explicit user authorization.",
             "Await LSEG pricing/availability reply for the exact 2011 OPRA request.",
             "Await algoseek pricing and sandbox-terms replies for the exact historical scopes.",
             "Place lawfully obtained vendor files in a local drop folder, run licensed-data intake + delivery preflight, then create a local hash-bound entitlement manifest.",
