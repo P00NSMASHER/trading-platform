@@ -1856,8 +1856,8 @@
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "vendor_sources/lseg/README.md": {
-      "expected_sha256": "1ae15e9d5e57498909717e43b0a27384593696c5a7daeb8da398e275da4b4963",
-      "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
+      "expected_sha256": "72b92a45dd2b1607dc880ffee222bef79751c3410f37809e820f81c508753083",
+      "reason": "Update LSEG provenance documentation to include the extracted original TRTH research processing contract; no credentials, downloads, or coverage claims."
     },
     "data/processed/g2_vendor_requests/lseg_tick_history_unresolved_identifiers.csv": {
       "expected_sha256": "e5fb94c0b8c032df756e07179ebb2fd2fbccf43135bda419b9eff0a5eab6e8a6",
@@ -1890,6 +1890,10 @@
     "tests/test_g2_lseg_request_manifest.py": {
       "expected_sha256": "eaecab2dc55fb58afc62d93cd28655c5fd401402be8ea22c927e2e6276828ad1",
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
+    },
+    "data/processed/g2_vendor_requests/lseg_original_research_processing_contract.json": {
+      "expected_sha256": "39eb7afe9f49d11098a9a61914458e1f03793d2f36c835130623850c534b0dd9",
+      "reason": "Extracted original TRTH research processing rules from the public companion fork: TAS layout, checksums, fields, timestamp rules, qualifier handling, event windows, and early-close dates; no credentials or licensed payloads."
     }
   },
   "schema_version": "2",
