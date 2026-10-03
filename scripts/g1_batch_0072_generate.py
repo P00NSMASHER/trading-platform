@@ -156,6 +156,7 @@ for fn in test_files:
           ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (100,74)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (101,73)'),
           ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (100, 74)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (101, 73)'),
           ('"99/174" in step9["evidence"] and "75" in step9["evidence"]','"101/174" in step9["evidence"] and "73" in step9["evidence"]'),
+          ('"100/174" in step9["evidence"] and "74" in step9["evidence"]','"101/174" in step9["evidence"] and "73" in step9["evidence"]'),
           ('len(excluded)==74','len(excluded)==73'),
           ('len(excluded) == 74','len(excluded) == 73'),
           ('len(ex)==74','len(ex)==73'),
