@@ -2102,6 +2102,14 @@
     "tests/test_g2_lseg_delivery_normalizer.py": {
       "expected_sha256": "6a093aec9b085867088cc64f1d444e92aabf40f6ccd523c4e8e6933b1f80e279",
       "reason": "Private raw LSEG/DataScope delivery normalization bridge into canonical intake-ready equity/option trade/quote CSVs with explicit rejects and zero-coverage semantics; tests use synthetic rows only."
+    },
+    "src/g2_lseg_equity_date_batch.py": {
+      "expected_sha256": "0ab731ed099c1f8fbc6726aa351ed710322cc1ce006224d7ee4714490075c60a",
+      "reason": "Dry-run-first bounded LSEG equity date acquisition across the frozen 414-date plan, capped at five live dates per invocation with private raw output, automatic canonical normalization, exact-candidate resumability, and zero entitlement/coverage promotion; tests use fake clients only."
+    },
+    "tests/test_g2_lseg_equity_date_batch.py": {
+      "expected_sha256": "b9f8f89332ef525e2fec63861b9669ae32235143763972c5ef630029130fb236",
+      "reason": "Dry-run-first bounded LSEG equity date acquisition across the frozen 414-date plan, capped at five live dates per invocation with private raw output, automatic canonical normalization, exact-candidate resumability, and zero entitlement/coverage promotion; tests use fake clients only."
     }
   },
   "schema_version": "2",
