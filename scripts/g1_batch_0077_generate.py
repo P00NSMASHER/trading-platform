@@ -9,7 +9,7 @@ import research_receipt_rebuild as rebuild
 import real_data_release_sprint as sprint
 
 ROOT=Path.cwd()
-BASE="5a2dae64561880c736cb9eeb16b65f67d5894d29"
+BASE="87ce85b2155ebb1abc12f9247d689a6a78e332ed"
 WORKFLOW=".github/workflows/g1-public-batch-0077-worker-2.yml"
 SCRIPT="scripts/g1_batch_0077_generate.py"
 def load(p): return json.loads(Path(p).read_text(encoding="utf-8"))
