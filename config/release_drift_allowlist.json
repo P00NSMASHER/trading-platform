@@ -2174,6 +2174,14 @@
     "tests/test_g2_lseg_secondary_validation_manifest.py": {
       "expected_sha256": "a769892f8a78211869e0aa51075ae604f347b9d8426d8a2938191f8ac6dc1a87",
       "reason": "Regression coverage locking the secondary LSEG validation queue to 902 unique symbol/date jobs, 1,804 lane checks, 3,608 record-kind checks, and fail-closed no-coverage behavior."
+    },
+    "src/g2_lseg_option_batch_pipeline.py": {
+      "expected_sha256": "dd3745cc17e2c33c37c1e8ce17c9c523d4ec2014d11dda4bec47d4bba6d9a9b6",
+      "reason": "Bounded LSEG historical option batch pipeline: validates combined search+HistoricalChainResolution outputs, writes public-safe contract manifests, optionally downloads only historical-chain-validated contracts in explicit credentialed mode, and preserves zero-promotion/zero-coverage semantics; tests use fake clients only."
+    },
+    "tests/test_g2_lseg_option_batch_pipeline.py": {
+      "expected_sha256": "d9669cf7395f34b211925e7cdab355dd5c1172160dd2ee1e0128b423f938c5d2",
+      "reason": "Bounded LSEG historical option batch pipeline: validates combined search+HistoricalChainResolution outputs, writes public-safe contract manifests, optionally downloads only historical-chain-validated contracts in explicit credentialed mode, and preserves zero-promotion/zero-coverage semantics; tests use fake clients only."
     }
   },
   "schema_version": "2",
