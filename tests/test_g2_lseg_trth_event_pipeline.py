@@ -151,3 +151,30 @@ def test_after_hours_form_t_selection_runs_event_to_relevant_open():
     ]
     selected = event.after_hours_form_t_trades(rows, ts, ts.date())
     assert [row["price"] for row in selected] == [10.1, 10.3]
+
+
+def test_offset_aware_tick_timestamp_is_compared_in_new_york_wall_time():
+    ts = datetime(2015, 2, 12, 10, 0)
+    rows = [
+        _quote("2015-02-12T14:59:58+00:00", bid=10.0, ask=10.2),
+        _quote("2015-02-12T15:00:02+00:00", bid=10.1, ask=10.3),
+    ]
+    out = event.resample_quotes_original(rows, ts, ts.date())["announcement_1s"]
+    at_event = out[out["SecondsAfter"] == 0].iloc[0]
+    assert at_event["bid"] == 10.0
+    assert at_event["ask"] == 10.2
+
+
+def test_empty_quote_window_returns_nan_samples_instead_of_crashing():
+    ts = datetime(2015, 2, 12, 10, 0)
+    out = event.resample_quotes_original([], ts, ts.date())["announcement_1s"]
+    assert len(out) == 601
+    assert out["bid"].isna().all()
+    assert out["ask"].isna().all()
+
+
+def test_empty_trade_window_returns_nan_samples_instead_of_crashing():
+    ts = datetime(2015, 2, 12, 10, 0)
+    out = event.resample_trades_original([], ts, ts.date())
+    assert len(out) > 0
+    assert out["price"].isna().all()
