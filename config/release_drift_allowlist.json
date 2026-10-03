@@ -1920,16 +1920,16 @@
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "vendor_sources/hacked_earnings_jfe/README.md": {
-      "expected_sha256": "6c0d5113d91f1373780cb973fa9d0020de496e41ba377284259fbeac0efa4fc3",
-      "reason": "Complete vgreg/hacked_earnings_jfe source audit: repository history/forks, notebook outputs, text-model schema, 174-event analytics, linked processing contracts, and published-source reproducibility caveats; no raw licensed vendor tick payload or G2 coverage claim."
+      "expected_sha256": "ad946590010055d21b261fb8e60e307d37fd1419059696ba84108725744785ef",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit: repository history/forks, notebook outputs, text-model schema, 174-event analytics, broader label stratification, linked processing contracts, and published-source reproducibility caveats; no raw licensed vendor tick payload or G2 coverage claim."
     },
     "data/processed/g2_vendor_requests/hacked_earnings_jfe_event_reconciliation.csv": {
       "expected_sha256": "8e23e4c1f54952975989973c8ef045a9eefa01e3c14ca29823abe80b9af567df",
       "reason": "Complete vgreg/hacked_earnings_jfe source audit and deterministic 174-event reconciliation; public/source-derived evidence only, no raw licensed vendor tick payload or G2 coverage claim."
     },
     "data/processed/g2_vendor_requests/hacked_earnings_jfe_source_summary.json": {
-      "expected_sha256": "9b7d5fd70c235f5d4349d9d2ae09add970a458faa5b87f10800167c8f706176b",
-      "reason": "Complete vgreg/hacked_earnings_jfe source audit and deterministic 174-event reconciliation; public/source-derived evidence only, no raw licensed vendor tick payload or G2 coverage claim."
+      "expected_sha256": "d54b2110686e0c3cdb2d05dee334fc72582cbd975f05fdd6dbd7e7d9a421851c",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit including deterministic 174-event reconciliation and broader SampleFirms label stratification; no raw licensed vendor tick payload or G2 coverage claim."
     },
     "data/processed/g2_vendor_requests/hacked_earnings_jfe_notebook_extraction.json": {
       "expected_sha256": "1b2bb0988ac4986ed5e9b686fe0005848472387d562e282777f3952a42219435",
