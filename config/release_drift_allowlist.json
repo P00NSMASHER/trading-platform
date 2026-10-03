@@ -2166,6 +2166,14 @@
     "tests/test_g2_lseg_trth_afterhours_features.py": {
       "expected_sha256": "01c52814ab4ae14cb6d0e0a398cb0b0cdf5ad59424f5bc326be50ef9aef9454a",
       "reason": "Exact-replication TRTH after-hours Form-T feature sequence and descriptive-stat distributions derived from the public research scripts; no credentials, downloads, or coverage claims."
+    },
+    "data/processed/g2_vendor_requests/trth_primary_taq_replication_contract.json": {
+      "expected_sha256": "9462f9ea6c761cb07b47874cadc51b3f1dd36f298971a3e9b271d32a5e8c938e",
+      "reason": "Authoritative source-hierarchy clarification from the public companion repo: TRTH/LSEG is the paper's primary data source; TAQ is an after-hours replication fallback requiring explicit NBBO construction and documented trade/quote condition handling."
+    },
+    "tests/test_g2_trth_taq_replication_contract.py": {
+      "expected_sha256": "78cb9d34140370130cbbba9fc7be16539b992ee1d61c89a8ae466a2f31045da4",
+      "reason": "Authoritative source-hierarchy clarification from the public companion repo: TRTH/LSEG is the paper's primary data source; TAQ is an after-hours replication fallback requiring explicit NBBO construction and documented trade/quote condition handling."
     }
   },
   "schema_version": "2",
