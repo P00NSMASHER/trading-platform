@@ -163,7 +163,7 @@ for fn in test_files:
         ]
     for old,new in pairs:
         txt=txt.replace(old,new)
-    ast.parse(txt);p.wrip=Path("docs/g1_announcement_times.md");txt=p.read_text()
+    ast.parse(txt);p.write_text(txt)\n\np=Path("docs/g1_announcement_times.md");txt=p.read_text()
 assert "72 public exact-time batches / 106 exact-resolved" in txt
 txt=txt.replace("72 public exact-time batches / 106 exact-resolved","73 public exact-time batches / 107 exact-resolved",1)
 txt += """
