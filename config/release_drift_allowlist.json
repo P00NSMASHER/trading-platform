@@ -160,8 +160,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "1f7a3541b9dc03e68075b94aa1f7fae747c740c1469705158c83a2cf517b072c",
-      "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7437514aa690957e3596b76117754324ce9190a29d15fed02aca8b99b8c963d4",
+      "reason": "G1 batch 0077 provenance repair: metadata contract now pins the corrected exact-base exclusion receipt; no timestamp values changed."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
