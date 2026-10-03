@@ -14,11 +14,11 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "700c69a2f9afb26483820517854f61ab29d8d1af5c07fec2f4d253e492bbeab7",
+      "expected_sha256": "a7c6e56749d3f450e8068766d9621aab0b7907ad652464ffed9703482d55bbe2",
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "810169d497c07467fdb5bd3583d73e7268d3301f32bef3b631f2d6271f6c9431",
+      "expected_sha256": "98f0039b42415230889037e438400b206ad22f87cf06284e1646b952ce34f783",
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
@@ -160,7 +160,7 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "1f7a3541b9dc03e68075b94aa1f7fae747c740c1469705158c83a2cf517b072c",
+      "expected_sha256": "40f990c23a663112f2e2008972665473b0811a53d153a1066262f97aa48b3719",
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
@@ -192,7 +192,7 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "cee36ff2c2adadd9ecc26fe11e81954a02401388c248434a7ab21920ce0a76f3",
+      "expected_sha256": "ba56a577f54da4c825b20a78c130a58810c83de41e6b1cb71c5373a5cc1eb6a0",
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
@@ -440,11 +440,11 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "9941ac11355c71bb083015d526a61cc280e9f302e28f77bcced73e180010d1ad",
+      "expected_sha256": "dcf1a00787a951735ff95c0c3714498a61fe26f7cedf48079bf33b38c8a8776b",
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "b19392768c82b2b0ebc8140e0120bf754b265ea42eb680c94f2b207183faa165",
+      "expected_sha256": "4deeba67c541be4d870f40881c267d210a494c6d6d1909e29c63a1b7950fe519",
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
@@ -912,7 +912,7 @@
       "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "058791458ea34cfe6dd224760429fcdd7d97d003b873390f48ff6f557fbe368f",
+      "expected_sha256": "b8c637e507c0b1ddc19561e3c3dcd2c1141fdc40063558696d127cef5454f6f7",
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
@@ -1908,16 +1908,16 @@
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_public_batch_0077_evidence.json": {
-      "expected_sha256": "4f2beeb85c15a784eadae237fb7a10b3c7f155122907c6c1ce3127e1a14c8ae0",
+      "expected_sha256": "fb05b5ef3ac9b7fe0ac81fd9ae35ba103bfbeae058c0eb64bd9c39e830ac860b",
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_batch_0077_generate.py": {
-      "expected_sha256": "2db9664ea1ce58f910489ff758593ab2b191501f95d0c6fe9a533c4f09a4ebe3",
+      "expected_sha256": "ab8e80c5fc6d85e2a5065a8a2b9a095bbcbdc0b01eeb76b338d946eeceb4fe9d",
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0077.py": {
-      "expected_sha256": "3f993bb0a9b03f0355f2920eca65632ffd6a52143d26df1db46694620cc52584",
-      "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7c5566553cb722047c9ddefc74dd3f998fa35d7dcb8c3326615b5474543d1b0e",
+      "reason": "G1 batch 0077 provenance repair: bind committed generator/evidence/receipts to exact integration base 87ce85b and guard against future stale base metadata; timestamp values unchanged."
     },
     "data/processed/hacked_earnings_jfe/binary_asset_status.json": {
       "expected_sha256": "799be4eb543a055335a0f0ab5cff978b566d961031eeea48d52d340cb21b5a93",
