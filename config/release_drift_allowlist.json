@@ -1532,8 +1532,8 @@
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "src/g2_lseg_trth_event_pipeline.py": {
-      "expected_sha256": "b70a81dda8e8c8e8a1b6b81361b34d305f7e7e3ab611882a59f82ba960abb91d",
-      "reason": "LSEG/TRTH event-pipeline timezone hardening: convert offset-aware Tick History timestamps to America/New_York wall time and support trailing Z before comparison with the original paper's local event timestamps."
+      "expected_sha256": "97e1f0ef486e1713be1b16d8798a1aa672438b207f1c5c1cddf593405bb8675f",
+      "reason": "LSEG/TRTH event-pipeline timezone hardening: convert offset-aware Tick History timestamps to America/New_York wall time before both eligibility filtering and merge-asof resampling, with trailing Z support."
     },
     "src/g2_lseg_trth_normalizer.py": {
       "expected_sha256": "0463e2ace528d4fa8132eaa5e77e51630b569d75a6f797d58d2b1700ee57dd38",
