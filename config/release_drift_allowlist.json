@@ -2072,12 +2072,12 @@
       "reason": "Regression coverage for the LSEG secondary-RIC evidence audit and fail-closed historical-date validation requirement."
     },
     "src/g2_lseg_datascope_client.py": {
-      "expected_sha256": "b94ff79c34cfb88a92a90ba87dd81caeb9e8440599f9e8664b1653152fd52447",
-      "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
+      "expected_sha256": "cd29f79ce4200e8afaff3f52cd1e4d5dc33cfd5bf5cf7b57d6448a87d7e6094b",
+      "reason": "LSEG DataScope option-day handoff: require a historical-chain-validated contract manifest, hash the manifest, select only date-specific historical option RICs, and feed them to the existing private Time & Sales extractor."
     },
     "tests/test_g2_lseg_datascope_client.py": {
-      "expected_sha256": "41e864f55af6eb00f0858f173653c02eb2f90c338a2e9c517a77f4469958aca5",
-      "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
+      "expected_sha256": "2001ef843e5081d6486b5cb9105153c505b96cac088ab8c2050c1d16bfc27111",
+      "reason": "LSEG DataScope option-day handoff: require a historical-chain-validated contract manifest, hash the manifest, select only date-specific historical option RICs, and feed them to the existing private Time & Sales extractor."
     },
     "src/g2_lseg_historical_ric_validator.py": {
       "expected_sha256": "850c5ad4725cc6f8670fee33f5d9ba3afc18d98f385de984555111279e264d6c",
