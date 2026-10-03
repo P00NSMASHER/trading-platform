@@ -2078,6 +2078,14 @@
     "tests/test_g2_lseg_datascope_client.py": {
       "expected_sha256": "41e864f55af6eb00f0858f173653c02eb2f90c338a2e9c517a77f4469958aca5",
       "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
+    },
+    "src/g2_lseg_historical_ric_validator.py": {
+      "expected_sha256": "850c5ad4725cc6f8670fee33f5d9ba3afc18d98f385de984555111279e264d6c",
+      "reason": "Public-safe post-download LSEG historical RIC validator: resolves candidate RICs per frozen symbol/date from authorized Time & Sales rows, records lane counts and input SHA-256, and does not expose raw licensed rows or claim G2 coverage."
+    },
+    "tests/test_g2_lseg_historical_ric_validator.py": {
+      "expected_sha256": "d825d543ae2a415f770d22111c44341c20a17fc964da97813ef980aa7d0b3508",
+      "reason": "Public-safe post-download LSEG historical RIC validator: resolves candidate RICs per frozen symbol/date from authorized Time & Sales rows, records lane counts and input SHA-256, and does not expose raw licensed rows or claim G2 coverage."
     }
   },
   "schema_version": "2",
