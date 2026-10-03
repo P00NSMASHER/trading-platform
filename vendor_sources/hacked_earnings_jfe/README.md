@@ -134,3 +134,15 @@ Six ZIP files contain the SEC-derived press-release text corpus:
 - 2015.zip — 27,696,531 bytes
 
 Their source README states that internal text files follow `PERMNO_YYYYMMDD_X.txt`, where PERMNO is the CRSP identifier, YYYYMMDD is the earnings date, and X disambiguates multiple quarterly-report appendices. The current GitHub connector can inventory these binary archives but does not expose their compressed contents as UTF-8 text, so no claim is made here that every internal text member has been enumerated. The public CSV/Notebook-derived information above is fully extracted from the connector-visible payload.
+
+
+### Direct reproducibility dependency: earnings_news_jar
+
+The source README explicitly says its I/B/E/S and RavenPack processing reused `vgreg/earnings_news_jar`. That linked repository adds concrete reproducibility clues:
+
+- I/B/E/S active announcement timestamp is constructed as `ANNDATS_ACT + ANNTIMS_ACT` into `IBES_Timestamp`.
+- The I/B/E/S processing notebook links `PERMNO` to I/B/E/S `TICKER` with effective start/end dates and retains fields including `FPEDATS`, `REVDATS`, `ANNDATS_ACT`, `ANNTIMS_ACT`, and `ACTUAL`.
+- The RavenPack notebook is specifically described as retrieving earnings-announcement timestamps and analyst-recommendation-revision news.
+- The companion repository contains a `PERMNO_TRHT _Ticker.csv` mapping from PERMNO to Thomson Reuters Tick History RIC and TRTH trade/quote extraction code.
+
+Those companion-repository clues are provenance/processing contracts, not additional raw vendor rows. The current trading-platform LSEG extraction artifacts already operationalize the reusable PERMNO/RIC information separately.
