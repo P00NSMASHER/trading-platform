@@ -2118,6 +2118,14 @@
     "tests/test_g2_lseg_source_contract.py": {
       "expected_sha256": "a0b92c9cff5d73c0c85c843390f8870dae5abfd43356a88796c1c37a885d09ab",
       "reason": "LSEG source-contract generator and regression coverage: convert post-validation LSEG adaptation receipts into generic authorized historical market-data source entries validated by the production replay loader; license reference remains explicitly required."
+    },
+    "src/g2_lseg_option_time_and_sales.py": {
+      "expected_sha256": "dfe2d8fd6abedd723c249e22f2c65b3a46e27df46895920b037b060a35ebff1b",
+      "reason": "Validated LSEG historical option-contract Time & Sales extractor: accepts only historical-chain contract manifests, enforces the 30,000 expanded-instrument ceiling, writes private resumable downloads bound to manifest SHA-256, and preserves zero-promotion/zero-coverage semantics; tests use fake clients only."
+    },
+    "tests/test_g2_lseg_option_time_and_sales.py": {
+      "expected_sha256": "96b29a48e7fd1c10b4af62fd52f6de15ad9e8e11e432272ba9ddd5c7ae5d4aa3",
+      "reason": "Validated LSEG historical option-contract Time & Sales extractor: accepts only historical-chain contract manifests, enforces the 30,000 expanded-instrument ceiling, writes private resumable downloads bound to manifest SHA-256, and preserves zero-promotion/zero-coverage semantics; tests use fake clients only."
     }
   },
   "schema_version": "2",
