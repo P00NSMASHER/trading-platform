@@ -1,0 +1,68 @@
+name: G1 public batch 0077 Worker 2 five-event publisher
+
+on:
+  push:
+    branches:
+      - g1/public-batch-0077-worker-2-court5-main-87ce85b
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: src
+    steps:
+      - name: Checkout exact publisher head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+
+      - name: Verify exact current-main ancestry
+        run: |
+          git fetch origin main
+          test "$(git merge-base HEAD origin/main)" = "87ce85b2155ebb1abc12f9247d689a6a78e332ed"
+          test "$(git rev-parse origin/main)" = "87ce85b2155ebb1abc12f9247d689a6a78e332ed"
+
+      - name: Generate canonical G1 batch
+        run: python scripts/g1_batch_0077_generate.py
+
+      - name: Run focused G1 regression
+        run: |
+          pytest -q tests/test_g1_public_batch_0077.py tests/test_g1_source_research.py tests/test_g1_acquisition_manifest.py tests/test_metadata_resolver.py tests/test_real_data_release_sprint.py
+
+      - name: Harden ephemeral runtime permissions
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+
+      - name: Run full pytest
+        run: pytest -q
+
+      - name: Commit generated canonical outputs and self-remove publisher
+        run: |
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "87ce85b2155ebb1abc12f9247d689a6a78e332ed"
+          git config user.name "g1-publisher"
+          git config user.email "g1-publisher@users.noreply.github.com"
+          git rm --ignore-unmatch .github/workflows/g1-public-batch-0077-worker-2.yml
+          rm -f data/processed/.research_receipt_rebuild.lock
+          git add -A
+          git commit -m "G1: recover WTS THC DXCM WLL CR exact public clocks, 106 exact / 68 excluded [g1-generated]"
+          git push origin HEAD:g1/public-batch-0077-worker-2-court5-main-87ce85b
