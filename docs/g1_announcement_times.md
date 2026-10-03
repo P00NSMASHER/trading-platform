@@ -261,3 +261,7 @@ The timestamp-preserving StreetInsider Business Wire mirror records Pitney Bowes
 ### Batch 0072: Echo Global Logistics
 
 The GlobeNewswire-hosted Marketwired archive records Echo Global Logistics first-quarter 2013 results at 2013-04-25 16:00 EDT (20:00 UTC), 6,360 seconds after the frozen 14:14 EDT illicit trade. SEC Exhibit 99.1 independently corroborates the matching release identity/content. This advances G1 from 100 exact / 74 reviewed exclusions to 101 exact / 73 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0077: Federal-court public-distribution recovery (WTS / THC / DXCM / WLL / CR)
+
+A filed federal-court event table preserved through CourtListener RECAP records exact public-distribution clocks for five independently corroborated earnings releases: WTS 2015-02-17 16:30 EST, THC 2015-02-23 16:11 EST, DXCM 2015-02-25 16:01 EST, WLL 2015-02-25 16:00 EST, and CR 2015-04-27 17:38 EDT. Matching SEC press-release exhibits independently corroborate each issuer, release date/title and content. The same court-table clock column reproduces already-validated JNPR 2011-04-19 16:12 ET and EW 2011-04-20 16:01 ET clocks. This advances G1 from 101 exact / 73 reviewed exclusions to 106 exact / 68 reviewed exclusions. Upload, scheduled call, EDGAR acceptance, archive-capture, date-only and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
