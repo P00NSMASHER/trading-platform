@@ -1,0 +1,59 @@
+{
+  "schema_version": "1",
+  "purpose": "Record the source hierarchy and exact TAQ replication modifications documented by the public companion repository for How Is Earnings News Transmitted to Stock Prices?.",
+  "provenance": {
+    "repo": "vgreg/earnings_news_jar",
+    "path": "README.md"
+  },
+  "source_hierarchy": {
+    "paper_primary_source": "Thomson Reuters Tick History (TRTH), now LSEG/Refinitiv Tick History",
+    "paper_used_taq": false,
+    "trth_dataset_description": "About 12 TB of gzip-compressed CSV data supplied by SIRCA, organized as daily Time and Sales files by listing exchange.",
+    "taq_role": "Replication substitute for researchers who have NYSE TAQ instead of TRTH.",
+    "equivalence_claim_from_companion_repo": "The authors state that because the study focuses on trades and NBBO quotes, TRTH and TAQ can both reproduce the required observations; they manually checked several events and reported matching trade and quote updates.",
+    "caution": "Treat the equivalence statement as author-reported replication evidence, not as a blanket vendor-data identity guarantee for every row."
+  },
+  "nbbo": {
+    "trth": "TRTH exposes the consolidated/SIP quote stream in a form the authors used directly for the NBBO-oriented analysis.",
+    "taq": "TAQ requires explicit NBBO construction by properly merging the quote and NBBO tables; consolidated quote rows alone are not sufficient evidence of strict NBBO parity.",
+    "g2_requirement": "Any TAQ fallback used for the equity_quote lane must either ingest a vendor NBBO product directly or deterministically construct NBBO from the required TAQ quote/NBBO inputs before coverage is counted."
+  },
+  "taq_after_hours_modifications": {
+    "trades": {
+      "exclude_conditions_under_tr_scon": [
+        "L",
+        "P",
+        "U",
+        "Z",
+        "4"
+      ],
+      "meanings": {
+        "4": "Derivatively Priced",
+        "L": "Sold Last / late reporting",
+        "P": "Prior Reference Price",
+        "U": "Extended Hours / Sold Out of Sequence",
+        "Z": "Sold Out of Sequence"
+      },
+      "identify_after_hours_condition": "T"
+    },
+    "quotes": {
+      "add_valid_qu_cond": [
+        "C"
+      ],
+      "preserve_empty_quotes": true,
+      "delete_no_quote_rows": false,
+      "skip_regular_hours_wide_spread_error_filter": true,
+      "delete_crossed_markets": false,
+      "delete_abnormal_spreads": false,
+      "delete_withdrawn_quotes": false,
+      "rationale": "In after-hours trading, liquidity is limited and empty/wide/crossed/withdrawn quote updates carry information about available liquidity. Removing them can incorrectly imply that stale prior quotes remain valid."
+    }
+  },
+  "implementation_policy": {
+    "lseg_route_status": "primary replication route",
+    "taq_route_status": "authorized fallback/independent parity route",
+    "taq_quote_lane_fail_closed_until_nbbo_proven": true,
+    "no_coverage_change_from_this_contract": true,
+    "no_credentials_or_market_data_rows_included": true
+  }
+}
