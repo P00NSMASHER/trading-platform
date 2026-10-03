@@ -38,3 +38,5 @@ s=s.replace('{"exact":106,"reviewed_excluded":68','{"exact":109,"reviewed_exclud
 s=s.replace('assert len(d["items"])==5','assert len(d["items"])==2')
 ast.parse(s)
 p.write_text(s)
+
+Path("scripts/g1_batch_0095_patch.py").unlink(missing_ok=True)

@@ -1,0 +1,683 @@
+{
+  "source_repository": "vgreg/hacked_earnings_jfe",
+  "source_commit": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+  "notebooks": {
+    "Main Analysis/Main Analysis.ipynb": {
+      "blob_sha": "4b8bc4b356440a7d66d4ec6c7eb5a67f6d75696a",
+      "referenced_fields": [
+        "$N$",
+        "$R^2$",
+        "$|$Surprise$|$",
+        "(",
+        ")",
+        ", ",
+        "AH_Ret",
+        "After-hours return",
+        "Analysts",
+        "Business Wire",
+        "Computer Modern",
+        "Controls",
+        "Date F.E.",
+        "Dependant variable return window",
+        "Entity",
+        "Firm F.E.",
+        "Hacked",
+        "High $|\\text{soft}|$",
+        "High $|\\text{surprise}|$",
+        "IO",
+        "Intercept",
+        "LRet_12pm_OpenNext",
+        "Ln MCAP",
+        "Ln Q-value",
+        "Log MCAP",
+        "Marketwired",
+        "Mean",
+        "Median",
+        "Month",
+        "N",
+        "N. analysts",
+        "Non-hacked",
+        "Option turn.",
+        "Option turnover",
+        "PR Newswire",
+        "Proportion of hacked obs.",
+        "Prosecuted",
+        "Quarter",
+        "Quoted spreads",
+        "R2",
+        "Reg",
+        "SOURCE_NAME",
+        "SUE_Med",
+        "SUE_Med_abs",
+        "SUE_Med_abs_cut",
+        "SUE_Med_qnt",
+        "Share turn.",
+        "Share turnover",
+        "Soft",
+        "Soft info quintile",
+        "Std. dev.",
+        "Surprise",
+        "Surprise quintile",
+        "Time",
+        "Year",
+        "Year-Quarter F.E.",
+        "actual_updated",
+        "count",
+        "count_hacked",
+        "date",
+        "hacked",
+        "lnMCAP",
+        "parameter",
+        "right",
+        "soft",
+        "soft_abs",
+        "soft_abs_cut",
+        "soft_qnt",
+        "std_error",
+        "top",
+        "tstat"
+      ],
+      "outputs": [
+        {
+          "cell_index": 8,
+          "source": "fig, ax = plt.subplots(figsize=(8, 5))\nax1 = df.plot(\n    kind=\"bar\",\n    width=0.75,\n    ax=ax,\n    alpha=0.7,\n    rot=45,\n    stacked=True,\n    fontsize=14,\n    edgecolor=\"k\",\n    colormap=\"bone\",\n)\nax2 = n.plot(\n    linestyle=\"\",\n    ax=ax1,\n    secondary_y=True,\n    legend=False,\n    rot=45,\n    fontsize=14,\n    color=\"r\",\n    marker=\"o\",\n    markerfacecolor=\"none\",\n    markeredgewidth=2,\n)\nticklabels = [\"\"] * len(dates)\nticklabels = [\n    str(item.year) + \"-Q\" + str(item.quarter) for item in dates\n]\nfor x in range(0, len(ticklabels), 2):\n    ticklabels[x] = \"\"\nax.xaxis.set_major_formatter(ticker.FixedFormatter(ticklabels))\nax1.spines[\"right\"].set_linewidth(0)\nax1.spines[\"top\"].set_linewidth(0)\nax2.spines[\"top\"].set_linewidth(0)\n\nax2.set_xlabel(\"\")\nax1.set_xlabel(\"\")\n\nax1.legend(frameon=False, loc=\"best\", bbox_to_anchor=(0.85, 1))\nax1.set_ylabel(\"Number of earnings news (bars)\", fontsize=16)\nax2.set_ylabel(\"Proportion of hacked earnings (dots)\", fontsize=16)\n\nplt.tight_layout()\n",
+          "outputs": [
+            {
+              "output_type": "display_data",
+              "text_plain": "<Figure size 576x360 with 2 Axes>"
+            }
+          ]
+        },
+        {
+          "cell_index": 14,
+          "source": "fig, axes = plt.subplots(4, 2, figsize=(8, 8))\nfor i in [\n    \"Log MCAP\",\n    \"Analysts\",\n    \"IO\",\n    \"Quoted spreads\",\n    \"Share turnover\",\n    \"Option turnover\",\n    \"Surprise\",\n]:\n    tmp = all_coeff[all_coeff.index == i]\n    tmp_se = all_se[all_se.index == i]\n\n    ax = tmp.T.plot.bar(\n        yerr=tmp_se.T,\n        capsize=6,\n        edgecolor=\"white\",\n        width=0.4,\n        color=\"grey\",\n        alpha=0.8,\n        fontsize=12,\n        rot=0,\n        ax=axes[axes_[i][0], axes_[i][1]],\n        legend=False,\n    )\n    ax.set_title(i, fontsize=14)\naxes[3, 1].axis(\"off\")\nplt.tight_layout()\n",
+          "outputs": [
+            {
+              "output_type": "display_data",
+              "text_plain": "<Figure size 576x576 with 8 Axes>"
+            }
+          ]
+        },
+        {
+          "cell_index": 22,
+          "source": "des = ea_df[\n    [\n        \"SUE_Med\",\n        \"SUE_Med_abs\",\n        \"lnMCAP\",\n        \"IO\",\n        \"numest\",\n        \"lnQvalue\",\n        \"Share_Turn\",\n        \"Option_Turnover\",\n    ]\n].describe()\ndes = des.loc[[\"mean\", \"50%\", \"std\", \"count\"]]\ndes.columns = [\n    \"Surprise\",\n    \"$|$Surprise$|$\",\n    \"Ln MCAP\",\n    \"IO\",\n    \"N. analysts\",\n    \"Ln Q-value\",\n    \"Share turn.\",\n    \"Option turn.\",\n]\ndes.index = [\"Mean\", \"Median\", \"Std. dev.\", \"N\"]\ndes = des.round(decimals=4)\ndes[\"IO\"] = np.round(des[\"IO\"], 2)\ndes[\"N. analysts\"] = np.round(des[\"N. analysts\"], 2)\ndes[\"Ln MCAP\"] = np.round(des[\"Ln MCAP\"], 2)\ndes[\"Share turn.\"] = np.round(des[\"Share turn.\"], 2)\ndes[\"Option turn.\"] = np.round(des[\"Option turn.\"], 2)\ndes[\"Ln Q-value\"] = np.round(des[\"Ln Q-value\"], 2)\ndes.loc[\"N\"] = [\"{0:,d}\".format(int(i)) for i in des.loc[\"N\"]]\ndes\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "          Surprise $|$Surprise$|$ Ln MCAP      IO N. analysts Ln Q-value  \\\nMean        0.0004          0.007   14.16   68.37        7.69       0.97   \nMedian      0.0006         0.0017    14.1   77.53         5.0        0.8   \nStd. dev.   0.0104         0.0373    1.77   28.82        6.92       1.53   \nN           43,687         43,687  43,687  43,687      43,687     35,273   \n\n          Share turn. Option turn.  \nMean             1.99          0.2  \nMedian           1.46         0.04  \nStd. dev.        2.11         0.47  \nN              43,687       43,687  "
+            }
+          ]
+        },
+        {
+          "cell_index": 26,
+          "source": "tab\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                               Surprise $|$Surprise$|$   Ln MCAP        IO  \\\n                                    (1)            (2)       (3)       (4)   \n$\\mathbf{1}_{[\\text{Hacked}]}$   -0.000          0.000  -0.195**  -3.119**   \n                                (0.000)        (0.001)   (0.079)   (1.336)   \n$N$                              43,687         43,687    43,687    43,687   \n$R^2$                             0.000          0.000     0.002     0.001   \nYear-Quarter F.E.                     Y              Y         Y         Y   \nFirm F.E.                             N              N         N         N   \n\n                               N. analysts Ln Q-value Share turn. Option turn.  \n                                       (5)        (6)         (7)          (8)  \n$\\mathbf{1}_{[\\text{Hacked}]}$      -0.153      0.045       0.051        0.003  \n                                   (0.221)    (0.055)     (0.061)      (0.014)  \n$N$                                 43,687     35,273      43,687       43,687  \n$R^2$                                0.000      0.000       0.000        0.000  \nYear-Quarter F.E.                        Y          Y           Y            Y  \nFirm F.E.                                N          N           N            N  "
+            }
+          ]
+        },
+        {
+          "cell_index": 30,
+          "source": "tab\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                               Surprise $|$Surprise$|$  Ln MCAP       IO  \\\n                                    (1)            (2)      (3)      (4)   \n$\\mathbf{1}_{[\\text{Hacked}]}$    0.000         -0.000    0.002    0.084   \n                                (0.000)        (0.001)  (0.011)  (0.293)   \n$N$                              43,687         43,687   43,687   43,687   \n$R^2$                             0.000          0.000    0.000    0.000   \nYear-Quarter F.E.                     Y              Y        Y        Y   \nFirm F.E.                             Y              Y        Y        Y   \n\n                               N. analysts Ln Q-value Share turn. Option turn.  \n                                       (5)        (6)         (7)          (8)  \n$\\mathbf{1}_{[\\text{Hacked}]}$       0.088     -0.021      -0.010       -0.004  \n                                   (0.078)    (0.019)     (0.032)      (0.006)  \n$N$                                 43,687     35,273      43,687       43,687  \n$R^2$                                0.000      0.000       0.000        0.000  \nYear-Quarter F.E.                        Y          Y           Y            Y  \nFirm F.E.                                Y          Y           Y            Y  "
+            }
+          ]
+        },
+        {
+          "cell_index": 34,
+          "source": "plt.figure(figsize=(6, 4))\nax1 = sns.heatmap(heat, cmap=cm.gray, label=\"big\", cbar=False)  # cmap='coolwarm'\nfor i in range(len(heat)):\n    for j in range(len(heat)):\n        if (\n            (i == 3 and j == 3)\n            or (i == 3 and j == 4)\n            or (i == 4 and j == 3)\n            or (i == 4 and j == 4)\n            or (i == 4 and j == 2)\n        ):\n            text = ax1.text(\n                j + 0.5,\n                i + 0.5,\n                \"{:.3f}\".format(heat.iloc[i, j]).replace(\"0.\", \".\").replace(\"nan\", \"\"),\n                ha=\"center\",\n                va=\"center\",\n                color=\"k\",\n                fontsize=18,\n                weight=\"bold\",\n            )\n        else:\n            text = ax1.text(\n                j + 0.5,\n                i + 0.5,\n                \"{:.3f}\".format(heat.iloc[i, j]).replace(\"0.\", \".\").replace(\"nan\", \"\"),\n                ha=\"center\",\n                va=\"center\",\n                color=\"w\",\n                fontsize=18,\n                weight=\"bold\",\n            )\nax1.set_ylabel(\"Earnings surprise\", fontsize=14)\nax1.set_xlabel(\"Soft information\", fontsize=14)\nax1.invert_yaxis()\n",
+          "outputs": [
+            {
+              "output_type": "display_data",
+              "text_plain": "<Figure size 432x288 with 1 Axes>"
+            }
+          ]
+        },
+        {
+          "cell_index": 37,
+          "source": "tab = getTableV2(\n    reg,\n    var_names,\n    regressor_order=[\"SUE_Med\", \"soft\", \"Intercept\"],\n    table_order=[\n        \"SUE_Med\",\n        \"se0\",\n        \"soft\",\n        \"se1\",\n        \"Intercept\",\n        \"se2\",\n        \"N\",\n        \"R2\",\n        \"Controls\",\n        \"Year-Quarter F.E.\",\n        \"Firm F.E.\",\n    ],\n)\ntab = tab[:-3]\ntab\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                  (1)        (2)        (3)\n$Surprise$   1.313***        NaN   1.184***\n              (0.048)        NaN    (0.051)\n$Soft$            NaN   1.201***   1.047***\n                  NaN    (0.036)    (0.035)\nIntercept   -0.002***  -0.002***  -0.003***\n              (0.000)    (0.000)    (0.000)\n$N$            43,687     36,750     36,750\n$R^2$           0.061      0.068      0.115"
+            }
+          ]
+        },
+        {
+          "cell_index": 42,
+          "source": "tab\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                                                   (1)       (2)       (3)  \\\n$Surprise$                                    1.364***  1.436***  1.443***   \n                                               (0.073)   (0.079)   (0.079)   \n$Surprise\\times\\mathbf{1}_{[\\text{Hacked}]}$  -0.212**  -0.234**  -0.241**   \n                                               (0.103)   (0.103)   (0.104)   \n$\\mathbf{1}_{[\\text{Hacked}]}$                  -0.001    -0.001    -0.001   \n                                               (0.001)   (0.001)   (0.001)   \n$N$                                             43,687    43,687    43,687   \n$R^2$                                            0.062     0.060     0.071   \nControls                                             N         N         Y   \nYear-Quarter F.E.                                    Y         Y         Y   \nFirm F.E.                                            N         Y         Y   \nDate F.E.                                            N         N         N   \n\n                                                   (4)  \n$Surprise$                                    1.426***  \n                                               (0.062)  \n$Surprise\\times\\mathbf{1}_{[\\text{Hacked}]}$  -0.215**  \n                                               (0.101)  \n$\\mathbf{1}_{[\\text{Hacked}]}$                  -0.000  \n                                               (0.001)  \n$N$                                             43,687  \n$R^2$                                            0.067  \nControls                                             Y  \nYear-Quarter F.E.                                    N  \nFirm F.E.                                            Y  \nDate F.E.                                            Y  "
+            }
+          ]
+        },
+        {
+          "cell_index": 45,
+          "source": "tab = getTable(\n    reg, var_names, regressor_order=[\"soft\", \"soft_Hacked\", \"hacked\"], controls=True\n)\ntab\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                                               (1)       (2)       (3)  \\\n$Soft$                                    1.246***  1.352***  1.345***   \n                                           (0.062)   (0.065)   (0.063)   \n$Soft\\times\\mathbf{1}_{[\\text{Hacked}]}$   -0.184*  -0.220**  -0.222**   \n                                           (0.097)   (0.099)   (0.100)   \n$\\mathbf{1}_{[\\text{Hacked}]}$              -0.001    -0.001    -0.001   \n                                           (0.001)   (0.001)   (0.001)   \n$N$                                         36,750    36,750    36,750   \n$R^2$                                        0.069     0.062     0.072   \nControls                                         N         N         Y   \nYear-Quarter F.E.                                Y         Y         Y   \nFirm F.E.                                        N         Y         Y   \nDate F.E.                                        N         N         N   \n\n                                               (4)  \n$Soft$                                    1.334***  \n                                           (0.045)  \n$Soft\\times\\mathbf{1}_{[\\text{Hacked}]}$  -0.210**  \n                                           (0.083)  \n$\\mathbf{1}_{[\\text{Hacked}]}$              -0.001  \n                                           (0.001)  \n$N$                                         36,750  \n$R^2$                                        0.068  \nControls                                         Y  \nYear-Quarter F.E.                                N  \nFirm F.E.                                        Y  \nDate F.E.                                        Y  "
+            }
+          ]
+        },
+        {
+          "cell_index": 47,
+          "source": "reg = {}\nreg_model = \"AH_Ret~soft+hacked+soft_Hacked+SUE_Med+SUE_Med_Hacked\"\n\nreg[0] = getReg2(ea_df_, reg_model, year_fe=True, cluster_entity_time=True)\nreg[1] = getReg2(ea_df_, reg_model, firm_year_fe=True, cluster_entity_time=True)\nreg[2] = getReg2(\n    ea_df_,\n    reg_model,\n    control_var=True,\n    control_var_names=[\"lnMCAP\", \"Beta_SPY_Overnight_RET\"],\n    firm_year_fe=True,\n    cluster_entity_time=True,\n)\nreg[3] = getReg2(\n    ea_df_,\n    reg_model,\n    control_var=True,\n    control_var_names=[\"lnMCAP\", \"Beta_SPY_Overnight_RET\"],\n    firm_date_fe=True,\n    cluster_entity_time=True,\n)\ntab = getTable(\n    reg,\n    var_names,\n    regressor_order=[\"SUE_Med\", \"soft\", \"SUE_Med_Hacked\", \"soft_Hacked\", \"hacked\"],\n    controls=True,\n)\ntab\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                                                   (1)       (2)       (3)  \\\n$Surprise$                                    1.225***  1.326***  1.336***   \n                                               (0.071)   (0.081)   (0.081)   \n$Soft$                                        1.090***  1.192***  1.183***   \n                                               (0.060)   (0.060)   (0.059)   \n$Surprise\\times\\mathbf{1}_{[\\text{Hacked}]}$    -0.174   -0.199*   -0.207*   \n                                               (0.111)   (0.111)   (0.112)   \n$Soft\\times\\mathbf{1}_{[\\text{Hacked}]}$      -0.179**  -0.202**  -0.202**   \n                                               (0.088)   (0.091)   (0.092)   \n$\\mathbf{1}_{[\\text{Hacked}]}$                  -0.001    -0.001    -0.001   \n                                               (0.001)   (0.001)   (0.001)   \n$N$                                             36,750    36,750    36,750   \n$R^2$                                            0.115     0.110     0.120   \nControls                                             N         N         Y   \nYear-Quarter F.E.                                    Y         Y         Y   \nFirm F.E.                                            N         Y         Y   \nDate F.E.                                            N         N         N   \n\n                                                   (4)  \n$Surprise$                                    1.308***  \n                                               (0.064)  \n$Soft$                                        1.176***  \n                                               (0.042)  \n$Surprise\\times\\mathbf{1}_{[\\text{Hacked}]}$    -0.144  \n                                               (0.113)  \n$Soft\\times\\mathbf{1}_{[\\text{Hacked}]}$      -0.193**  \n                                               (0.080)  \n$\\mathbf{1}_{[\\text{Hacked}]}$                  -0.001  \n                                               (0.001)  \n$N$                                             36,750  \n$R^2$                                            0.116  \nControls                                             Y  \nYear-Quarter F.E.                                    N  \nFirm F.E.                                            Y  \nDate F.E.                                            Y  "
+            }
+          ]
+        },
+        {
+          "cell_index": 50,
+          "source": "tab = getTable(\n    reg,\n    var_names,\n    regressor_order=[\"LRet_12pm_Close\", \"LRet_12pm_Close_Hacked\", \"hacked\"],\n    controls=True,\n)\ntab.drop(\"Date F.E.\", inplace=True)\ntab.columns = [\n    [\"Dependant variable return window\", \"\"],\n    [\"12 p.m.(t)-9:30 a.m.(t+1)\", \"12 p.m.(t)-4 p.m.(t+1)\"],\n    [\"(1)\", \"(2)\"],\n]\ntab\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                                                   Dependant variable return window  \\\n                                                          12 p.m.(t)-9:30 a.m.(t+1)   \n                                                                                (1)   \n$Return^{12-4PM}$                                                          0.776***   \n                                                                            (0.029)   \n$Return^{12-4PM}\\times\\mathbf{1}_{[\\text{Hacked...                         0.130***   \n                                                                            (0.044)   \n$\\mathbf{1}_{[\\text{Hacked}]}$                                               -0.001   \n                                                                            (0.001)   \n$N$                                                                          43,687   \n$R^2$                                                                         0.082   \nControls                                                                          Y   \nYear-Quarter F.E.                                                                 Y   \nFirm F.E.                                                                         Y   \n\n                                                                           \n                                                   12 p.m.(t)-4 p.m.(t+1)  \n                                                                      (2)  \n$Return^{12-4PM}$                                                0.591***  \n                                                                  (0.038)  \n$Return^{12-4PM}\\times\\mathbf{1}_{[\\text{Hacked...                0.142**  \n                                                                  (0.059)  \n$\\mathbf{1}_{[\\text{Hacked}]}$                                     -0.001  \n                                                                  (0.001)  \n$N$                                                                43,687  \n$R^2$                                                               0.057  \nControls                                                                Y  \nYear-Quarter F.E.                                                       Y  \nFirm F.E.                                                               Y  "
+            }
+          ]
+        },
+        {
+          "cell_index": 56,
+          "source": "tab = getTable(\n    reg,\n    var_names,\n    regressor_order=[\"SUE_Med\", \"SUE_Med_Hacked\", \"hacked\"],\n    controls=True,\n)\ntab = tab.drop(\"Date F.E.\")\ntab.columns = [[\"High $|\\text{soft}|$\", \"\", \"Low $|\\text{soft}|$\", \"\"], tab.columns]\ntab\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                                             High $|\\text{soft}|$            \\\n                                                              (1)       (2)   \n$Surprise$                                               1.759***  1.763***   \n                                                          (0.119)   (0.119)   \n$Surprise\\times\\mathbf{1}_{[\\text{Hacked}]}$             -0.334**  -0.329**   \n                                                          (0.164)   (0.162)   \n$\\mathbf{1}_{[\\text{Hacked}]}$                             -0.001    -0.001   \n                                                          (0.002)   (0.001)   \n$N$                                                        18,375    18,375   \n$R^2$                                                       0.076     0.087   \nControls                                                        N         Y   \nYear-Quarter F.E.                                               Y         Y   \nFirm F.E.                                                       Y         Y   \n\n                                             Low $|\\text{soft}|$            \n                                                             (3)       (4)  \n$Surprise$                                              1.291***  1.314***  \n                                                         (0.108)   (0.107)  \n$Surprise\\times\\mathbf{1}_{[\\text{Hacked}]}$              -0.215    -0.245  \n                                                         (0.150)   (0.153)  \n$\\mathbf{1}_{[\\text{Hacked}]}$                            -0.001    -0.001  \n                                                         (0.001)   (0.001)  \n$N$                                                       18,375    18,375  \n$R^2$                                                      0.048     0.061  \nControls                                                       N         Y  \nYear-Quarter F.E.                                              Y         Y  \nFirm F.E.                                                      Y         Y  "
+            }
+          ]
+        },
+        {
+          "cell_index": 59,
+          "source": "tab = getTable(\n    reg, var_names, regressor_order=[\"soft\", \"soft_Hacked\", \"hacked\"], controls=True\n)\ntab = tab.drop(\"Date F.E.\")\ntab.columns = [\n    [\"High $|\\text{surprise}|$\", \"\", \"Low $|\\text{surprise}|$\", \"\"],\n    tab.columns,\n]\ntab\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                                         High $|\\text{surprise}|$            \\\n                                                              (1)       (2)   \n$Soft$                                                   1.638***  1.630***   \n                                                          (0.091)   (0.090)   \n$Soft\\times\\mathbf{1}_{[\\text{Hacked}]}$                 -0.336**  -0.333**   \n                                                          (0.131)   (0.131)   \n$\\mathbf{1}_{[\\text{Hacked}]}$                             -0.001    -0.001   \n                                                          (0.002)   (0.002)   \n$N$                                                        18,375    18,375   \n$R^2$                                                       0.079     0.084   \nControls                                                        N         Y   \nYear-Quarter F.E.                                               Y         Y   \nFirm F.E.                                                       Y         Y   \n\n                                         Low $|\\text{surprise}|$            \n                                                             (3)       (4)  \n$Soft$                                                  0.934***  0.925***  \n                                                         (0.058)   (0.058)  \n$Soft\\times\\mathbf{1}_{[\\text{Hacked}]}$                  -0.126    -0.134  \n                                                         (0.122)   (0.123)  \n$\\mathbf{1}_{[\\text{Hacked}]}$                             0.000     0.000  \n                                                         (0.001)   (0.001)  \n$N$                                                       18,375    18,375  \n$R^2$                                                      0.037     0.064  \nControls                                                       N         Y  \nYear-Quarter F.E.                                              Y         Y  \nFirm F.E.                                                      Y         Y  "
+            }
+          ]
+        },
+        {
+          "cell_index": 65,
+          "source": "tmp2 = pd.concat([hacked_tmp, nonhacked_tmp], axis=1)\ntmp2.columns = [\"Hacked\", \"Prosecuted\", \"Non-hacked\"]\ntmp2 = tmp2[[\"Non-hacked\", \"Hacked\", \"Prosecuted\"]]\ntmp2.index.names = [\"Surprise quintile\"]\n\nax = tmp2.plot(kind=\"bar\", colormap=\"bone\", edgecolor=\"k\", rot=360)\nax.set_ylabel(\"Soft\", fontsize=14)\nax.set_xlabel(\"Surprise quintile\", fontsize=14)\n\nax.legend([\"Non-hacked\", \"Hacked (non prosecuted)\", \"Prosecuted\"], frameon=False)\nax.errorbar(\n    -0.15,\n    tmp2[\"Non-hacked\"].loc[0],\n    yerr=se_all[0],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    0, tmp2[\"Hacked\"].loc[0], yerr=se_all[1], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    0.175,\n    tmp2[\"Prosecuted\"].loc[0],\n    yerr=se_all[2],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    0.85, tmp2[\"Non-hacked\"].loc[1], yerr=se_all[3], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    1, tmp2[\"Hacked\"].loc[1], yerr=se_all[4], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    1.175,\n    tmp2[\"Prosecuted\"].loc[1],\n    yerr=se_all[5],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    1.85, tmp2[\"Non-hacked\"].loc[2], yerr=se_all[6], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    2, tmp2[\"Hacked\"].loc[2], yerr=se_all[7], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    2.175,\n    tmp2[\"Prosecuted\"].loc[2],\n    yerr=se_all[8],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    2.85, tmp2[\"Non-hacked\"].loc[3], yerr=se_all[9], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    3, tmp2[\"Hacked\"].loc[3], yerr=se_all[10], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    3.175,\n    tmp2[\"Prosecuted\"].loc[3],\n    yerr=se_all[11],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    3.85,\n    tmp2[\"Non-hacked\"].loc[4],\n    yerr=se_all[12],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    4, tmp2[\"Hacked\"].loc[4], yerr=se_all[13], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    4.175,\n    tmp2[\"Prosecuted\"].loc[4],\n    yerr=se_all[14],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nplt.tight_layout()\n",
+          "outputs": [
+            {
+              "output_type": "display_data",
+              "text_plain": "<Figure size 432x288 with 1 Axes>"
+            }
+          ]
+        },
+        {
+          "cell_index": 69,
+          "source": "tmp2 = pd.concat([hacked_tmp, nonhacked_tmp], axis=1)\ntmp2.columns = [\"Hacked\", \"Prosecuted\", \"Non-hacked\"]\ntmp2 = tmp2[[\"Non-hacked\", \"Hacked\", \"Prosecuted\"]]\ntmp2.index.names = [\"Soft info quintile\"]\n\nax = tmp2.plot(kind=\"bar\", colormap=\"bone\", edgecolor=\"k\", rot=360)\nax.set_ylabel(\"Earnings surprise\", fontsize=14)\nax.set_xlabel(\"Soft quintile\", fontsize=14)\n\nax.legend([\"Non-hacked\", \"Hacked (non prosecuted)\", \"Prosecuted\"], frameon=False)\nax.errorbar(\n    -0.15,\n    tmp2[\"Non-hacked\"].loc[0],\n    yerr=se_all[0],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    0, tmp2[\"Hacked\"].loc[0], yerr=se_all[1], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    0.175,\n    tmp2[\"Prosecuted\"].loc[0],\n    yerr=se_all[2],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    0.85, tmp2[\"Non-hacked\"].loc[1], yerr=se_all[3], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    1, tmp2[\"Hacked\"].loc[1], yerr=se_all[4], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    1.175,\n    tmp2[\"Prosecuted\"].loc[1],\n    yerr=se_all[5],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    1.85, tmp2[\"Non-hacked\"].loc[2], yerr=se_all[6], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    2, tmp2[\"Hacked\"].loc[2], yerr=se_all[7], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    2.175,\n    tmp2[\"Prosecuted\"].loc[2],\n    yerr=se_all[8],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    2.85, tmp2[\"Non-hacked\"].loc[3], yerr=se_all[9], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    3, tmp2[\"Hacked\"].loc[3], yerr=se_all[10], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    3.175,\n    tmp2[\"Prosecuted\"].loc[3],\n    yerr=se_all[11],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    3.85,\n    tmp2[\"Non-hacked\"].loc[4],\n    yerr=se_all[12],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    4, tmp2[\"Hacked\"].loc[4], yerr=se_all[13], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    4.175,\n    tmp2[\"Prosecuted\"].loc[4],\n    yerr=se_all[14],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nplt.tight_layout()\n",
+          "outputs": [
+            {
+              "output_type": "display_data",
+              "text_plain": "<Figure size 432x288 with 1 Axes>"
+            }
+          ]
+        },
+        {
+          "cell_index": 73,
+          "source": "sue_ret = pd.concat([hacked_tmp, nonhacked_tmp], axis=1)\nsue_ret.columns = [\"Hacked\", \"Prosecuted\", \"Non-hacked\"]\nsue_ret = sue_ret[[\"Non-hacked\", \"Hacked\", \"Prosecuted\"]]\nsue_ret.index.names = [\"Surprise quintile\"]\n\nax = sue_ret.plot(kind=\"bar\", colormap=\"bone\", edgecolor=\"k\", rot=360)\nax.set_ylabel(\"Return (12 p.m. to next day open)\", fontsize=14)\nax.set_xlabel(\"Surprise quintile\", fontsize=14)\n\nax.legend([\"Non-hacked\", \"Hacked (non prosecuted)\", \"Prosecuted\"], frameon=False)\nax.errorbar(\n    -0.15,\n    sue_ret[\"Non-hacked\"].loc[0],\n    yerr=se_sue_ret[0],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    0, sue_ret[\"Hacked\"].loc[0], yerr=se_sue_ret[1], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    0.175,\n    sue_ret[\"Prosecuted\"].loc[0],\n    yerr=se_sue_ret[2],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    0.85,\n    sue_ret[\"Non-hacked\"].loc[1],\n    yerr=se_sue_ret[3],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    1, sue_ret[\"Hacked\"].loc[1], yerr=se_sue_ret[4], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    1.175,\n    sue_ret[\"Prosecuted\"].loc[1],\n    yerr=se_sue_ret[5],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    1.85,\n    sue_ret[\"Non-hacked\"].loc[2],\n    yerr=se_sue_ret[6],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    2, sue_ret[\"Hacked\"].loc[2], yerr=se_sue_ret[7], color=\"k\", linewidth=1.5, capsize=3\n)\nax.errorbar(\n    2.175,\n    sue_ret[\"Prosecuted\"].loc[2],\n    yerr=se_sue_ret[8],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    2.85,\n    sue_ret[\"Non-hacked\"].loc[3],\n    yerr=se_sue_ret[9],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    3,\n    sue_ret[\"Hacked\"].loc[3],\n    yerr=se_sue_ret[10],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    3.175,\n    sue_ret[\"Prosecuted\"].loc[3],\n    yerr=se_sue_ret[11],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    3.85,\n    sue_ret[\"Non-hacked\"].loc[4],\n    yerr=se_sue_ret[12],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    4,\n    sue_ret[\"Hacked\"].loc[4],\n    yerr=se_sue_ret[13],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    4.175,\n    sue_ret[\"Prosecuted\"].loc[4],\n    yerr=se_sue_ret[14],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\n\nplt.tight_layout()\n",
+          "outputs": [
+            {
+              "output_type": "display_data",
+              "text_plain": "<Figure size 432x288 with 1 Axes>"
+            }
+          ]
+        },
+        {
+          "cell_index": 77,
+          "source": "soft_ret = pd.concat([hacked_tmp, nonhacked_tmp], axis=1)\nsoft_ret.columns = [\"Hacked\", \"Prosecuted\", \"Non-hacked\"]\nsoft_ret = soft_ret[[\"Non-hacked\", \"Hacked\", \"Prosecuted\"]]\nsoft_ret.index.names = [\"Soft info quintile\"]\n\nax = soft_ret.plot(kind=\"bar\", colormap=\"bone\", edgecolor=\"k\", rot=360)\nax.set_ylabel(\"Return (12 p.m. to next day open)\", fontsize=14)\nax.set_xlabel(\"Soft quintile\", fontsize=14)\nax.legend([\"Non-hacked\", \"Hacked (non prosecuted)\", \"Prosecuted\"], frameon=False)\nax.errorbar(\n    -0.15,\n    soft_ret[\"Non-hacked\"].loc[0],\n    yerr=se_soft_ret[0],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    0,\n    soft_ret[\"Hacked\"].loc[0],\n    yerr=se_soft_ret[1],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    0.175,\n    soft_ret[\"Prosecuted\"].loc[0],\n    yerr=se_soft_ret[2],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    0.85,\n    soft_ret[\"Non-hacked\"].loc[1],\n    yerr=se_soft_ret[3],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    1,\n    soft_ret[\"Hacked\"].loc[1],\n    yerr=se_soft_ret[4],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    1.175,\n    soft_ret[\"Prosecuted\"].loc[1],\n    yerr=se_soft_ret[5],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    1.85,\n    soft_ret[\"Non-hacked\"].loc[2],\n    yerr=se_soft_ret[6],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    2,\n    soft_ret[\"Hacked\"].loc[2],\n    yerr=se_soft_ret[7],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    2.175,\n    soft_ret[\"Prosecuted\"].loc[2],\n    yerr=se_soft_ret[8],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    2.85,\n    soft_ret[\"Non-hacked\"].loc[3],\n    yerr=se_soft_ret[9],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    3,\n    soft_ret[\"Hacked\"].loc[3],\n    yerr=se_soft_ret[10],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    3.175,\n    soft_ret[\"Prosecuted\"].loc[3],\n    yerr=se_soft_ret[11],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nax.errorbar(\n    3.85,\n    soft_ret[\"Non-hacked\"].loc[4],\n    yerr=se_soft_ret[12],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    4,\n    soft_ret[\"Hacked\"].loc[4],\n    yerr=se_soft_ret[13],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\nax.errorbar(\n    4.175,\n    soft_ret[\"Prosecuted\"].loc[4],\n    yerr=se_soft_ret[14],\n    color=\"k\",\n    linewidth=1.5,\n    capsize=3,\n)\n\nplt.tight_layout()\n",
+          "outputs": [
+            {
+              "output_type": "display_data",
+              "text_plain": "<Figure size 432x288 with 1 Axes>"
+            }
+          ]
+        }
+      ],
+      "identifier_like_strings": [
+        "AH_Ret",
+        "Analysts",
+        "Beta_SPY_Overnight_RET",
+        "Controls",
+        "Day_Beta_SPY_",
+        "Day_Beta_SPY_LRet_12pm_CloseNext",
+        "Day_Beta_SPY_LRet_12pm_OpenNext",
+        "EA_Date",
+        "Entity",
+        "HC1",
+        "Hacked",
+        "IO",
+        "Intercept",
+        "LRET",
+        "LRET_Hacked",
+        "LRet",
+        "LRet_12pm_Close",
+        "LRet_12pm_Close_Hacked",
+        "LRet_12pm_OpenNext",
+        "M",
+        "Marketwired",
+        "Mean",
+        "Median",
+        "Month",
+        "N",
+        "OTHER",
+        "Option_Turnover",
+        "PERMNO",
+        "Prosecuted",
+        "Q",
+        "Quarter",
+        "QuotedSpread_Percent",
+        "R2",
+        "Reg",
+        "SOURCE_NAME",
+        "SUE_Med",
+        "SUE_Med2",
+        "SUE_Med_Actual",
+        "SUE_Med_Hacked",
+        "SUE_Med_Hacked_Actual",
+        "SUE_Med_abs",
+        "SUE_Med_abs_cut",
+        "SUE_Med_qnt",
+        "Share_Turn",
+        "Soft",
+        "Surprise",
+        "Time",
+        "Y",
+        "YYYYQ",
+        "Year",
+        "_Hacked",
+        "actual_updated",
+        "bar",
+        "best",
+        "big",
+        "bold",
+        "bone",
+        "business_wire",
+        "center",
+        "clustered",
+        "coolwarm",
+        "count",
+        "count_hacked",
+        "date",
+        "family",
+        "font",
+        "grey",
+        "gsector",
+        "hacked",
+        "ignore",
+        "k",
+        "lnMCAP",
+        "lnQvalue",
+        "marketwired",
+        "match_gr",
+        "mean",
+        "nan",
+        "none",
+        "numest",
+        "o",
+        "off",
+        "parameter",
+        "pr_newswire",
+        "r",
+        "right",
+        "se",
+        "se0",
+        "se1",
+        "se2",
+        "serif",
+        "soft",
+        "soft_Hacked",
+        "soft_abs",
+        "soft_abs_cut",
+        "soft_qnt",
+        "std",
+        "std_error",
+        "text",
+        "top",
+        "tstat",
+        "w",
+        "white"
+      ],
+      "formula_strings": [
+        "AH_Ret~1+SUE_Med",
+        "AH_Ret~1+SUE_Med+soft",
+        "AH_Ret~1+soft",
+        "AH_Ret~SUE_Med+SUE_Med_Hacked+hacked",
+        "AH_Ret~SUE_Med+hacked+SUE_Med_Hacked",
+        "AH_Ret~soft+hacked+soft_Hacked",
+        "AH_Ret~soft+hacked+soft_Hacked+SUE_Med+SUE_Med_Hacked",
+        "AH_Ret~soft+soft_Hacked+hacked",
+        "LRet_12pm_CloseNext~LRet_12pm_Close+LRet_12pm_Close_Hacked+hacked",
+        "LRet_12pm_OpenNext~1",
+        "LRet_12pm_OpenNext~LRet_12pm_Close+LRet_12pm_Close_Hacked+hacked",
+        "SUE_Med~1",
+        "soft~1",
+        "~1",
+        "~hacked"
+      ],
+      "formula_variables": [
+        "AH_Ret",
+        "LRet_12pm_Close",
+        "LRet_12pm_CloseNext",
+        "LRet_12pm_Close_Hacked",
+        "LRet_12pm_OpenNext",
+        "SUE_Med",
+        "SUE_Med_Hacked",
+        "hacked",
+        "soft",
+        "soft_Hacked"
+      ],
+      "input_or_output_paths": [
+        "../Proprietary Data (cannot be shared)/MainPanel.h5"
+      ]
+    },
+    "Main Analysis/Insider Trading Measures.ipynb": {
+      "blob_sha": "69b06eb1821ebf57ccd1a81e44dcf8280ec1bede",
+      "referenced_fields": [
+        "$N$",
+        "$R^2$",
+        "(",
+        ")",
+        ", ",
+        "Computer Modern",
+        "Controls",
+        "DCBS",
+        "DCBS_pm",
+        "Date F.E.",
+        "Entity",
+        "Firm F.E.",
+        "IO",
+        "IO_pm",
+        "OptVol",
+        "Order flow measures",
+        "PERMNO",
+        "PERMNO_pm",
+        "Reg",
+        "SOURCE_NAME",
+        "Time",
+        "YYYYQ",
+        "YYYYQ_pm",
+        "Year-Quarter F.E.",
+        "hacked",
+        "hacked_pm",
+        "invPRC",
+        "invPRC_pm",
+        "lnMCAP",
+        "lnMCAP_pm",
+        "lnOptVol",
+        "ln_Story_Count_Relevant",
+        "ln_Story_Count_Relevant_pm",
+        "lnnumest",
+        "lnnumest_pm",
+        "parameter",
+        "pm",
+        "std_error",
+        "tstat"
+      ],
+      "outputs": [
+        {
+          "cell_index": 10,
+          "source": "tab_pm = getTable(\n    reg_all, var_names, regressor_order=[\"hacked\"], controls=True, format_=\"{:.4f}\"\n)\ntab_pm.drop(\"Date F.E.\", inplace=True)\nn_col = len(tab_pm.columns) + 1\ntab_pm.columns = [\n    [\"Order flow measures\", \"\", \"\", \"\", \"Spread measures\", \"\", \"\", \"\"],\n    [\n        \"Share turn\",\n        \"Log(share vol)\",\n        \"\\\\big|OI\\\\big|\",\n        \"Log(option vol)\",\n        \"Effective spread\",\n        \"Realized spread\",\n        \"Price impact\",\n        \"Quoted spread\",\n    ],\n    [\"(\" + str(i) + \")\" for i in range(1, n_col)],\n]\ntab_pm\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                               Order flow measures                 \\\n                                        Share turn Log(share vol)   \n                                               (1)            (2)   \n$\\mathbf{1}_{[\\text{Hacked}]}$           0.0490***       0.0350**   \n                                            (0.02)         (0.01)   \n$N$                                         43,687         43,687   \n$R^2$                                        0.021          0.038   \nControls                                         Y              Y   \nYear-Quarter F.E.                                Y              Y   \nFirm F.E.                                        Y              Y   \n\n                                                             Spread measures  \\\n                               \\big|OI\\big| Log(option vol) Effective spread   \n                                        (3)             (4)              (5)   \n$\\mathbf{1}_{[\\text{Hacked}]}$       0.0080        0.0721**        0.0312***   \n                                     (0.01)          (0.03)           (0.01)   \n$N$                                  43,687          43,687           43,687   \n$R^2$                                 0.013           0.054            0.153   \nControls                                  Y               Y                Y   \nYear-Quarter F.E.                         Y               Y                Y   \nFirm F.E.                                 Y               Y                Y   \n\n                                                                           \n                               Realized spread Price impact Quoted spread  \n                                           (6)          (7)           (8)  \n$\\mathbf{1}_{[\\text{Hacked}]}$       0.0445***       0.0153       -0.0140  \n                                        (0.02)       (0.01)        (0.02)  \n$N$                                     43,687       43,687        43,687  \n$R^2$                                    0.034        0.128         0.022  \nControls                                     Y            Y             Y  \nYear-Quarter F.E.                            Y            Y             Y  \nFirm F.E.                                    Y            Y             Y  "
+            }
+          ]
+        },
+        {
+          "cell_index": 13,
+          "source": "tab_am = getTable(\n    reg_all, var_names, regressor_order=[\"hacked\"], controls=True, format_=\"{:.4f}\"\n)\ntab_am.drop(\"Date F.E.\", inplace=True)\nn_col = len(tab_am.columns) + 1\ntab_am.columns = [\n    [\"Order flow measures\", \"\", \"\", \"\", \"Spread measures\", \"\", \"\", \"\"],\n    [\n        \"Share turn\",\n        \"Log(share vol)\",\n        \"\\\\big|OI\\\\big|\",\n        \"Log(option vol)\",\n        \"Effective spread\",\n        \"Realized spread\",\n        \"Price impact\",\n        \"Quoted spread\",\n    ],\n    [\"(\" + str(i) + \")\" for i in range(1, n_col)],\n]\ntab_am\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                               Order flow measures                 \\\n                                        Share turn Log(share vol)   \n                                               (1)            (2)   \n$\\mathbf{1}_{[\\text{Hacked}]}$             -0.0092        -0.0176   \n                                            (0.01)         (0.02)   \n$N$                                         43,687         43,687   \n$R^2$                                        0.017          0.033   \nControls                                         Y              Y   \nYear-Quarter F.E.                                Y              Y   \nFirm F.E.                                        Y              Y   \n\n                                                             Spread measures  \\\n                               \\big|OI\\big| Log(option vol) Effective spread   \n                                        (3)             (4)              (5)   \n$\\mathbf{1}_{[\\text{Hacked}]}$      -0.0099          0.0331           0.0063   \n                                     (0.01)          (0.03)           (0.01)   \n$N$                                  43,687          43,687           43,687   \n$R^2$                                 0.011           0.046            0.100   \nControls                                  Y               Y                Y   \nYear-Quarter F.E.                         Y               Y                Y   \nFirm F.E.                                 Y               Y                Y   \n\n                                                                           \n                               Realized spread Price impact Quoted spread  \n                                           (6)          (7)           (8)  \n$\\mathbf{1}_{[\\text{Hacked}]}$          0.0127      -0.0137       0.0178*  \n                                        (0.01)       (0.01)        (0.01)  \n$N$                                     43,687       43,687        43,687  \n$R^2$                                    0.030        0.024         0.101  \nControls                                     Y            Y             Y  \nYear-Quarter F.E.                            Y            Y             Y  \nFirm F.E.                                    Y            Y             Y  "
+            }
+          ]
+        },
+        {
+          "cell_index": 17,
+          "source": "diff\n",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "                  Order flow measures                           \\\n                             Turnover Log(volume) \\big|OI\\big|   \n                                  (1)         (2)          (3)   \nDifference                     0.0582      0.0526       0.0179   \nP-value                        0.0049      0.0123       0.3537   \n\n                                   Spread measures                  \\\n                  Log(option vol) Effective spread Realized spread   \n                              (4)              (5)             (6)   \nDifference                 0.0390           0.0249          0.0318   \nP-value                    0.3533           0.1201          0.1594   \n\n                                              \n                  Price impact Quoted spread  \n                           (7)           (8)  \nDifference             -0.0003       -0.0026  \nP-value                 0.9915        0.8545  "
+            }
+          ]
+        }
+      ],
+      "identifier_like_strings": [
+        "Controls",
+        "DCBS",
+        "DCBS_pm",
+        "EA_Date",
+        "EffectiveSpread_Percent_DW",
+        "EffectiveSpread_Percent_DW_am",
+        "EffectiveSpread_Percent_DW_pm",
+        "Entity",
+        "IBES_Timestamp",
+        "IO",
+        "IO_pm",
+        "Intercept",
+        "N",
+        "OIvol_LR_abs",
+        "OIvol_LR_abs_am",
+        "OIvol_LR_abs_pm",
+        "OIvol_LR_am_abs",
+        "OIvol_LR_pm_abs",
+        "OTHER",
+        "OptVol",
+        "OptVolAM",
+        "OptVolPM",
+        "OptVol_am",
+        "OptVol_pm",
+        "PERMNO",
+        "PERMNO_pm",
+        "PercentPriceImpact_LR_DW",
+        "PercentPriceImpact_LR_DW_am",
+        "PercentPriceImpact_LR_DW_pm",
+        "PercentRealizedSpread_LR_DW",
+        "PercentRealizedSpread_LR_DW_am",
+        "PercentRealizedSpread_LR_DW_pm",
+        "QuotedSpread_Percent",
+        "QuotedSpread_Percent_am",
+        "QuotedSpread_Percent_pm",
+        "RS_PI_Percent_DW_am",
+        "RS_PI_Percent_DW_pm",
+        "Reg",
+        "SOURCE_NAME",
+        "TURN",
+        "TURN_am",
+        "TURN_pm",
+        "Time",
+        "Turnover",
+        "Y",
+        "YYYYQ",
+        "YYYYQ_pm",
+        "_",
+        "_am",
+        "_pm",
+        "clustered",
+        "family",
+        "font",
+        "hacked",
+        "hacked_pm",
+        "ignore",
+        "invPRC",
+        "invPRC_pm",
+        "lnMCAP",
+        "lnMCAP_pm",
+        "lnOptVol",
+        "lnOptVolAM",
+        "lnOptVolPM",
+        "lnOptVolPM_OTM",
+        "lnVolume",
+        "lnVolume_am",
+        "lnVolume_pm",
+        "ln_Story_Count_Relevant",
+        "ln_Story_Count_Relevant_pm",
+        "lnnumest",
+        "lnnumest_pm",
+        "match_gr",
+        "parameter",
+        "pm",
+        "serif",
+        "std_error",
+        "text",
+        "tstat"
+      ],
+      "formula_strings": [
+        "lnOptVol~hacked+hacked_pm",
+        "~hacked",
+        "~hacked+hacked_pm"
+      ],
+      "formula_variables": [
+        "hacked",
+        "hacked_pm",
+        "lnOptVol"
+      ],
+      "input_or_output_paths": [
+        "../Proprietary Data (cannot be shared)/BSI_Summaries_EA_merged.h5"
+      ]
+    },
+    "Text Analysis/Wordcloud.ipynb": {
+      "blob_sha": "c02a5b6bb6bd2f8580a94dae59490b69161f57d6",
+      "referenced_fields": [
+        "coef"
+      ],
+      "outputs": [
+        {
+          "cell_index": 4,
+          "source": "df",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "            word      coef\n604   disappoint -0.027961\n558        delay -0.006116\n1012       howev -0.004983\n338     challeng -0.004463\n1978      slower -0.003200\n...          ...       ...\n1598       pleas  0.002737\n1369    momentum  0.003291\n755         exce  0.003359\n756       exceed  0.004010\n1709        rais  0.006816\n\n[2393 rows x 2 columns]"
+            }
+          ]
+        },
+        {
+          "cell_index": 5,
+          "source": "len(df)",
+          "outputs": [
+            {
+              "output_type": "execute_result",
+              "text_plain": "2393"
+            }
+          ]
+        },
+        {
+          "cell_index": 10,
+          "source": "# Generate a word cloud image\nwordcloud = WordCloud(\n    background_color=\"white\", width=400, height=300, scale=4.0\n).fit_words(neg_words)\n\n# Display the generated image:\n# the matplotlib way:\nplt.figure(figsize=(16, 12))\nplt.imshow(wordcloud, interpolation=\"bilinear\")\nplt.axis(\"off\")\nplt.savefig(\"neg_cloud.pdf\", bbox_inches=\"tight\")\n",
+          "outputs": [
+            {
+              "output_type": "display_data",
+              "text_plain": "<Figure size 1152x864 with 1 Axes>"
+            }
+          ]
+        },
+        {
+          "cell_index": 11,
+          "source": "# Generate a word cloud image\nwordcloud = WordCloud(\n    background_color=\"white\", width=400, height=300, scale=4.0\n).fit_words(pos_words)\n\n# Display the generated image:\n# the matplotlib way:\nplt.figure(figsize=(16, 12))\nplt.imshow(wordcloud, interpolation=\"bilinear\")\nplt.axis(\"off\")\nplt.savefig(\"pos_cloud.pdf\", bbox_inches=\"tight\")\n",
+          "outputs": [
+            {
+              "output_type": "display_data",
+              "text_plain": "<Figure size 1152x864 with 1 Axes>"
+            }
+          ]
+        }
+      ],
+      "identifier_like_strings": [
+        "bilinear",
+        "coef",
+        "off",
+        "tight",
+        "white",
+        "word"
+      ],
+      "formula_strings": [],
+      "formula_variables": [],
+      "input_or_output_paths": [
+        "PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet"
+      ]
+    }
+  },
+  "text_pipeline": {
+    "clean_script": "Text Analysis/clean_pr_text.py",
+    "sentiment_script": "Text Analysis/pr sentiment.py",
+    "tokenization": "lowercase; regexp [a-z]+",
+    "stopwords": "NLTK English stopwords removed",
+    "stemming": "NLTK PorterStemmer",
+    "word_limit": 400,
+    "vectorizer": "CountVectorizer",
+    "min_document_frequency_ratio": 0.005,
+    "max_document_frequency_ratio": 0.4,
+    "model": "ElasticNetCV",
+    "cv_folds": 5,
+    "l1_ratio": 0.5,
+    "max_iter": 10000,
+    "target": "LRet_12pm_OpenNext",
+    "fitted_vocabulary_size": 2393,
+    "notebook_extreme_coefficients": {
+      "negative": [
+        [
+          "disappoint",
+          -0.027961
+        ],
+        [
+          "delay",
+          -0.006116
+        ],
+        [
+          "howev",
+          -0.004983
+        ],
+        [
+          "challeng",
+          -0.004463
+        ],
+        [
+          "slower",
+          -0.0032
+        ]
+      ],
+      "positive": [
+        [
+          "pleas",
+          0.002737
+        ],
+        [
+          "momentum",
+          0.003291
+        ],
+        [
+          "exce",
+          0.003359
+        ],
+        [
+          "exceed",
+          0.00401
+        ],
+        [
+          "rais",
+          0.006816
+        ]
+      ]
+    }
+  }
+}

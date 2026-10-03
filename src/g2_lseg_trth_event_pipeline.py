@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime, time, timedelta
 import math
 from typing import Iterable, Mapping, Sequence
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 from pandas.tseries.holiday import USFederalHolidayCalendar
@@ -15,8 +16,14 @@ EXTENDED_CLOSE = time(20, 0)
 
 def _timestamp(value: object) -> datetime:
     if isinstance(value, datetime):
-        return value
-    return datetime.fromisoformat(str(value))
+        parsed = value
+    else:
+        raw = str(value)
+        normalized = raw[:-1] + "+00:00" if raw.endswith("Z") else raw
+        parsed = datetime.fromisoformat(normalized)
+    if parsed.tzinfo is not None:
+        parsed = parsed.astimezone(ZoneInfo("America/New_York")).replace(tzinfo=None)
+    return parsed
 
 
 def align_utc_partitioned_trade_rows(
@@ -149,9 +156,12 @@ def trade_event_grid(
 def _rows_frame(rows: Sequence[Mapping[str, object]], value_columns: list[str]) -> pd.DataFrame:
     frame = pd.DataFrame([dict(row) for row in rows])
     if frame.empty:
-        return pd.DataFrame(columns=["Timestamp", *value_columns])
+        empty = pd.DataFrame({"Timestamp": pd.Series(dtype="datetime64[ns]")})
+        for column in value_columns:
+            empty[column] = pd.Series(dtype="float64")
+        return empty[["Timestamp", *value_columns]]
     frame = frame.copy()
-    frame["Timestamp"] = pd.to_datetime(frame["timestamp"])
+    frame["Timestamp"] = pd.to_datetime([_timestamp(value) for value in frame["timestamp"]])
     return frame[["Timestamp", *value_columns]].sort_values("Timestamp")
 
 

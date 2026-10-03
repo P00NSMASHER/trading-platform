@@ -40,6 +40,25 @@ def test_collapses_frozen_trade_quote_requirements_without_losing_symbol_dates()
     assert summary["historical_validation_required_equity_symbol_dates"] == 946
     assert summary["historical_validation_required_option_underlying_dates"] == 946
 
+    assert len(plan["equity_historical_validation_queue"]) == 946
+    assert len(plan["option_historical_validation_queue"]) == 946
+    assert all(
+        row["historical_validation_required"] is True
+        for row in plan["equity_historical_validation_queue"]
+    )
+    assert all(
+        row["historical_validation_required"] is True
+        for row in plan["option_historical_validation_queue"]
+    )
+    assert len({
+        (row["trade_date"], row["historical_symbol"])
+        for row in plan["equity_historical_validation_queue"]
+    }) == 946
+    assert len({
+        (row["trade_date"], row["historical_symbol"])
+        for row in plan["option_historical_validation_queue"]
+    }) == 946
+
 
 def test_each_collapsed_symbol_date_preserves_both_required_record_kinds():
     plan = _plan()

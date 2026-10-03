@@ -167,3 +167,83 @@ def test_fail_closed_quote_validation():
     }
     with pytest.raises(ValueError, match="invalid quote economics"):
         trth.normalize_equity_quote(row, "CNMD")
+
+
+def test_parses_modern_tick_history_datetime_with_offset():
+    parsed = trth.parse_tick_history_timestamp("2011-04-27T15:22:00.250000-04:00")
+    assert parsed.isoformat(timespec="microseconds") == "2011-04-27T15:22:00.250000-04:00"
+
+
+def test_rejects_naive_modern_tick_history_datetime():
+    with pytest.raises(ValueError, match="timezone offset"):
+        trth.parse_tick_history_timestamp("2011-04-27T15:22:00.250000")
+
+
+def test_decodes_historical_opra_ric():
+    meta = trth.parse_opra_option_ric("CNMDD271102500.U")
+    assert meta == {
+        "underlying_symbol": "CNMD",
+        "option_symbol": "CNMDD271102500",
+        "expiration": "2011-04-27",
+        "strike": 25.0,
+        "option_type": "call",
+        "source_ric": "CNMDD271102500.U",
+    }
+
+
+def test_decodes_lowercase_high_strike_opra_ric():
+    meta = trth.parse_opra_option_ric("SPXa192312345.U")
+    assert meta["underlying_symbol"] == "SPX"
+    assert meta["expiration"] == "2023-01-19"
+    assert meta["strike"] == 1234.5
+    assert meta["option_type"] == "call"
+
+
+def test_live_equity_trade_prefers_modern_datetime():
+    row = {
+        "#RIC": "CNMD.O",
+        "Date-Time": "2011-04-27T15:22:00.250000-04:00",
+        "Type": "Trade",
+        "Price": "25.10",
+        "Volume": "200",
+        "Ex/Cntrb.ID": "Q",
+    }
+    out = trth.normalize_equity_trade(row, "CNMD")
+    assert out["timestamp"] == "2011-04-27T15:22:00.250000-04:00"
+    assert out["price"] == 25.10
+    assert out["size"] == 200.0
+
+
+def test_live_option_trade_decodes_metadata_from_ric():
+    row = {
+        "#RIC": "CNMDD271102500.U",
+        "Date-Time": "2011-04-27T15:22:00.250000-04:00",
+        "Type": "Trade",
+        "Price": "1.25",
+        "Volume": "10",
+    }
+    out = trth.normalize_option_trade(row)
+    assert out["symbol"] == "CNMDD271102500"
+    assert out["underlying_symbol"] == "CNMD"
+    assert out["expiration"] == "2011-04-27"
+    assert out["strike"] == 25.0
+    assert out["option_type"] == "call"
+
+
+def test_partial_option_metadata_is_completed_from_ric():
+    row = {
+        "#RIC": "CNMDP271102500.U",
+        "Date-Time": "2011-04-27T15:22:00.250000-04:00",
+        "Type": "Quote",
+        "Bid Price": "1.20",
+        "Ask Price": "1.30",
+        "Bid Size": "5",
+        "Ask Size": "7",
+    }
+    out = trth.normalize_option_quote(
+        row,
+        {"underlying_symbol": "CNMD", "option_symbol": "", "expiration": "", "strike": "", "option_type": ""},
+    )
+    assert out["symbol"] == "CNMDP271102500"
+    assert out["option_type"] == "put"
+    assert out["expiration"] == "2011-04-27"

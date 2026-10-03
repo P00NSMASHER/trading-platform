@@ -156,6 +156,14 @@ def build_execution_plan(plan: dict) -> dict:
     )
 
     equity_batches = _date_batches(equity_symbol_dates)
+    equity_validation_queue = [
+        row for row in equity_symbol_dates
+        if bool(row["historical_validation_required"])
+    ]
+    option_validation_queue = [
+        row for row in option_underlying_dates
+        if bool(row["historical_validation_required"])
+    ]
 
     option_discovery = []
     for row in option_underlying_dates:
@@ -229,18 +237,18 @@ def build_execution_plan(plan: dict) -> dict:
             "equity_time_and_sales_date_batches": len(equity_batches),
             "option_underlying_discovery_tasks": len(option_discovery),
             "option_time_and_sales_date_batches_after_discovery_max": len(equity_batches),
-            "historical_validation_required_equity_symbol_dates": sum(
-                bool(row["historical_validation_required"])
-                for row in equity_symbol_dates
+            "historical_validation_required_equity_symbol_dates": len(
+                equity_validation_queue
             ),
-            "historical_validation_required_option_underlying_dates": sum(
-                bool(row["historical_validation_required"])
-                for row in option_underlying_dates
+            "historical_validation_required_option_underlying_dates": len(
+                option_validation_queue
             ),
         },
         "equity_symbol_dates": equity_symbol_dates,
+        "equity_historical_validation_queue": equity_validation_queue,
         "equity_date_batches": equity_batches,
         "option_underlying_dates": option_underlying_dates,
+        "option_historical_validation_queue": option_validation_queue,
         "option_discovery_tasks": option_discovery,
         "private_output_policy": {
             "raw_licensed_rows": "write only to an ignored/private local destination",
@@ -328,6 +336,32 @@ def main() -> None:
     _write_csv(
         args.output_dir / "option_underlying_dates.csv",
         execution["option_underlying_dates"],
+        [
+            "trade_date",
+            "historical_symbol",
+            "candidate_rics",
+            "mapping_class",
+            "record_kinds",
+            "statuses",
+            "historical_validation_required",
+        ],
+    )
+    _write_csv(
+        args.output_dir / "equity_historical_validation_queue.csv",
+        execution["equity_historical_validation_queue"],
+        [
+            "trade_date",
+            "historical_symbol",
+            "candidate_rics",
+            "mapping_class",
+            "record_kinds",
+            "statuses",
+            "historical_validation_required",
+        ],
+    )
+    _write_csv(
+        args.output_dir / "option_historical_validation_queue.csv",
+        execution["option_historical_validation_queue"],
         [
             "trade_date",
             "historical_symbol",
