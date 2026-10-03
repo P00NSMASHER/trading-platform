@@ -1,0 +1,596 @@
+{
+  "schema_version": "1",
+  "purpose": "Reproducible audit that every repository-backed secondary LSEG RIC candidate appears in at least one cited GitHub source file. This validates source citation only, not historical-date instrument validity or G2 coverage.",
+  "source_candidate_table": {
+    "path": "data/processed/g2_vendor_requests/lseg_secondary_ric_candidates.csv",
+    "blob_sha": "f8cf561ddcced94635da2a9d1b2c2544e25030ed"
+  },
+  "source_files": [
+    {
+      "repo": "GregPichard/MasterThesis",
+      "path": "WRDS/US_RICs.txt",
+      "ref": "master",
+      "blob_sha": "5829aca4de1f4fe91a14c6f2607143c3fa427537"
+    },
+    {
+      "repo": "pkknb/ceo-list-scratch",
+      "path": "russell3000list.txt",
+      "ref": "master",
+      "blob_sha": "5e1921a631be5a1986ecff5482a889b20620aa96"
+    },
+    {
+      "repo": "luckytigre/ceiora-risk",
+      "path": "data/reference/security_master_seed.csv",
+      "ref": "main",
+      "blob_sha": "26c1bda0488dc6dfdaef9a762f45bd67668d0916"
+    },
+    {
+      "repo": "steve-o/Kigoron",
+      "path": "Config/NSQ.csv",
+      "ref": "master",
+      "blob_sha": "4531d8da014a90a60115e82e7789101c7066f60b"
+    },
+    {
+      "repo": "bansalrishi/MachineLearningWithPython_UD",
+      "path": "Data/NLP/808.txt",
+      "ref": "master",
+      "blob_sha": "e9023582a45884ee76656d6df985d92c13a4ec24"
+    },
+    {
+      "repo": "BangaloreSharks/SharkStock",
+      "path": "pickles/currnews/news/5/QLIK",
+      "ref": "master",
+      "blob_sha": "8893dbc0ce6bf0e43f60b2ad139ff11ca1241033"
+    }
+  ],
+  "summary": {
+    "historical_symbols": 34,
+    "candidate_rics": 43,
+    "candidate_rics_confirmed_in_cited_sources": 43,
+    "unconfirmed_candidate_rics": 0,
+    "historical_date_validation_still_required": true,
+    "g2_coverage_change": false
+  },
+  "confirmations": [
+    {
+      "historical_symbol": "ACHC",
+      "candidate_ric": "ACHC.O",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "ACHC",
+      "candidate_ric": "ACHC.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "ALNY",
+      "candidate_ric": "ALNY.O",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "ALNY",
+      "candidate_ric": "ALNY.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "ALSN",
+      "candidate_ric": "ALSN.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        },
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "ATRC",
+      "candidate_ric": "ATRC.O",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "ATRC",
+      "candidate_ric": "ATRC.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "BRKR",
+      "candidate_ric": "BRKR.O",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "BRKR",
+      "candidate_ric": "BRKR.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "COLM",
+      "candidate_ric": "COLM.O",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "COLM",
+      "candidate_ric": "COLM.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "CSOD",
+      "candidate_ric": "CSOD.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "DEST",
+      "candidate_ric": "DEST.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "DGI",
+      "candidate_ric": "DGI.N",
+      "evidence_type": "security_master_exact_symbol",
+      "confirmed_sources": [
+        {
+          "repo": "luckytigre/ceiora-risk",
+          "path": "data/reference/security_master_seed.csv"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "DNDN",
+      "candidate_ric": "DNDN.OQ",
+      "evidence_type": "security_master_exact_symbol",
+      "confirmed_sources": [
+        {
+          "repo": "luckytigre/ceiora-risk",
+          "path": "data/reference/security_master_seed.csv"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "DXCM",
+      "candidate_ric": "DXCM.O",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "DXCM",
+      "candidate_ric": "DXCM.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "FLT",
+      "candidate_ric": "FLT.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "GNRC",
+      "candidate_ric": "GNRC.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        },
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "GORO",
+      "candidate_ric": "GORO.A",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "IBKC",
+      "candidate_ric": "IBKC.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "ILMN",
+      "candidate_ric": "ILMN.O",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "ILMN",
+      "candidate_ric": "ILMN.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "INWK",
+      "candidate_ric": "INWK.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "ISSI",
+      "candidate_ric": "ISSI.O",
+      "evidence_type": "exchange_reference_exact_symbol",
+      "confirmed_sources": [
+        {
+          "repo": "steve-o/Kigoron",
+          "path": "Config/NSQ.csv"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "LSCC",
+      "candidate_ric": "LSCC.O",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "LSCC",
+      "candidate_ric": "LSCC.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "MFRM",
+      "candidate_ric": "MFRM.O",
+      "evidence_type": "exchange_reference_exact_symbol",
+      "confirmed_sources": [
+        {
+          "repo": "steve-o/Kigoron",
+          "path": "Config/NSQ.csv"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "MIC",
+      "candidate_ric": "MIC.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "MXIM",
+      "candidate_ric": "MXIM.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "NOW",
+      "candidate_ric": "NOW.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        },
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "NUAN",
+      "candidate_ric": "NUAN.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "P",
+      "candidate_ric": "P.N",
+      "evidence_type": "reuters_corpus_exact_ric",
+      "confirmed_sources": [
+        {
+          "repo": "bansalrishi/MachineLearningWithPython_UD",
+          "path": "Data/NLP/808.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "PFPT",
+      "candidate_ric": "PFPT.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "QLIK",
+      "candidate_ric": "QLIK.O",
+      "evidence_type": "reuters_corpus_exact_ric",
+      "confirmed_sources": [
+        {
+          "repo": "BangaloreSharks/SharkStock",
+          "path": "pickles/currnews/news/5/QLIK"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "RES",
+      "candidate_ric": "RES.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        },
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "RH",
+      "candidate_ric": "RH.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        },
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "SCVL",
+      "candidate_ric": "SCVL.O",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "SCVL",
+      "candidate_ric": "SCVL.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "SGEN",
+      "candidate_ric": "SGEN.OQ",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "VEEV",
+      "candidate_ric": "VEEV.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        },
+        {
+          "repo": "pkknb/ceo-list-scratch",
+          "path": "russell3000list.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "VMW",
+      "candidate_ric": "VMW.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    },
+    {
+      "historical_symbol": "WLL",
+      "candidate_ric": "WLL.N",
+      "evidence_type": "bulk_ric_list_root_match",
+      "confirmed_sources": [
+        {
+          "repo": "GregPichard/MasterThesis",
+          "path": "WRDS/US_RICs.txt"
+        }
+      ],
+      "validation_status": "historical_date_validation_required"
+    }
+  ]
+}

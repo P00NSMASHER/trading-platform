@@ -2062,6 +2062,14 @@
     "data/processed/g2_vendor_requests/hacked_earnings_jfe_event_analytics.json": {
       "expected_sha256": "aead8e3cfab1426f0421bef239505995041b56198db78dbbce87ffa12c402995",
       "reason": "Complete vgreg/hacked_earnings_jfe source audit: repository history/forks, notebook outputs, text-model schema, and 174-event source-derived analytics; no raw licensed vendor tick payload or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/lseg_secondary_ric_evidence_audit.json": {
+      "expected_sha256": "48be4a89b2603252cf41f73c284ab297b0922bec93138b6eae1c40d725237d26",
+      "reason": "Repository-backed LSEG secondary-RIC evidence audit: all 43 candidates across 34 symbols are confirmed in the cited source files with source blob SHAs pinned; historical-date validation remains required and G2 coverage remains unchanged."
+    },
+    "tests/test_g2_lseg_secondary_ric_evidence.py": {
+      "expected_sha256": "51f2476d95276d55dad3748a489799620d5c558040aa384b5e1d85f0c219d1a1",
+      "reason": "Regression coverage for the LSEG secondary-RIC evidence audit and fail-closed historical-date validation requirement."
     }
   },
   "schema_version": "2",
