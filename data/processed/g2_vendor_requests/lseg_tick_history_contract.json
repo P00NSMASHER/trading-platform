@@ -1,0 +1,99 @@
+{
+  "schema_version": "1",
+  "purpose": "Sanitized LSEG Tick History extraction contract for the frozen G2 market-data lanes. Contains no credentials, tokens, purchases, downloads, or coverage claims.",
+  "sources": [
+    {
+      "repo": "hanlonlab/datascope-cli",
+      "path": "config/datascope.conf",
+      "evidence": "TickHistoryTimeAndSales supports the listed trade/quote fields for equity and option pipelines and uses historical instrument validation."
+    },
+    {
+      "repo": "mgao6767/mktstructure",
+      "path": "mktstructure/request_templates.py",
+      "evidence": "TickHistoryTimeAndSales request template includes bid/ask prices and sizes plus trade price and volume."
+    },
+    {
+      "repo": "LSEG-API-Samples/Article.TickHistory.Python.AllOptions",
+      "path": "RTH_SPX_Options.py",
+      "evidence": "Official LSEG sample demonstrates enumerating options on an underlying and extracting option timeseries. Credential material from upstream examples is intentionally excluded."
+    },
+    {
+      "repo": "vgreg/earnings_news_jar",
+      "path": "Sample_Stocks/PERMNO_TRHT _Ticker.csv",
+      "evidence": "Companion research repository provides historical PERMNO-to-RIC candidates for the same research ecosystem."
+    }
+  ],
+  "identifier_mapping": {
+    "frozen_g2_equity_symbols": 146,
+    "exact_root_candidate_mapped": 112,
+    "unresolved": 34,
+    "candidate_map_file": "data/processed/g2_vendor_requests/lseg_tick_history_ric_candidates.csv",
+    "caution": "Candidate RICs must be validated for the specific historical trade date. A root match alone is not a coverage claim."
+  },
+  "validation_options": {
+    "allow_historical_instruments": true,
+    "allow_inactive_instruments": true,
+    "identifier_type": "Ric"
+  },
+  "time_and_sales": {
+    "report_type": "TickHistoryTimeAndSales",
+    "required_fields": [
+      "Quote - Bid Price",
+      "Quote - Bid Size",
+      "Quote - Ask Price",
+      "Quote - Ask Size",
+      "Trade - Price",
+      "Trade - Volume",
+      "Trade - Bid Price",
+      "Trade - Bid Size",
+      "Trade - Ask Price",
+      "Trade - Ask Size"
+    ],
+    "canonical_g2_projection": {
+      "equity_trade": [
+        "Date-Time",
+        "#RIC",
+        "Trade - Price",
+        "Trade - Volume"
+      ],
+      "equity_quote": [
+        "Date-Time",
+        "#RIC",
+        "Quote - Bid Price",
+        "Quote - Ask Price",
+        "Quote - Bid Size",
+        "Quote - Ask Size"
+      ],
+      "option_trade": [
+        "Date-Time",
+        "#RIC",
+        "Trade - Price",
+        "Trade - Volume"
+      ],
+      "option_quote": [
+        "Date-Time",
+        "#RIC",
+        "Quote - Bid Price",
+        "Quote - Ask Price",
+        "Quote - Bid Size",
+        "Quote - Ask Size"
+      ]
+    }
+  },
+  "option_instrument_resolution": {
+    "required": true,
+    "method_candidates": [
+      "FuturesAndOptionsSearch by underlying",
+      "HistoricalChainResolution for historical constituents/options",
+      "historical/inactive RIC validation in the extraction request"
+    ],
+    "caution": "Enumerate the full listed option universe for each underlying/date before claiming strict option quote completeness."
+  },
+  "safety": {
+    "credentials_in_repo": false,
+    "upstream_token_like_values_excluded": true,
+    "no_network_execution": true,
+    "no_data_download": true,
+    "no_g2_coverage_change": true
+  }
+}
