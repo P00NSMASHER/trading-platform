@@ -28,7 +28,15 @@
     "exact_root_candidate_mapped": 112,
     "unresolved": 34,
     "candidate_map_file": "data/processed/g2_vendor_requests/lseg_tick_history_ric_candidates.csv",
-    "caution": "Candidate RICs must be validated for the specific historical trade date. A root match alone is not a coverage claim."
+    "caution": "Candidate RICs must be validated for the specific historical trade date. A root match alone is not a coverage claim.",
+    "unresolved_identifier_packet": "data/processed/g2_vendor_requests/lseg_tick_history_unresolved_identifiers.csv",
+    "permno_crosscheck": {
+      "source_repo": "vgreg/hacked_earnings_jfe",
+      "source_path": "Data/TimeOfFirstTrade.csv",
+      "unresolved_symbols_checked": 34,
+      "additional_rics_resolved": 0,
+      "result": "The 34 unresolved G2 securities have exact PERMNO/GVKEY/event identifiers, but their PERMNOs are absent from the public companion PERMNO-to-RIC table. Historical LSEG identifier resolution is still required."
+    }
   },
   "validation_options": {
     "allow_historical_instruments": true,
