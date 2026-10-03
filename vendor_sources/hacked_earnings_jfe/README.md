@@ -146,3 +146,14 @@ The source README explicitly says its I/B/E/S and RavenPack processing reused `v
 - The companion repository contains a `PERMNO_TRHT _Ticker.csv` mapping from PERMNO to Thomson Reuters Tick History RIC and TRTH trade/quote extraction code.
 
 Those companion-repository clues are provenance/processing contracts, not additional raw vendor rows. The current trading-platform LSEG extraction artifacts already operationalize the reusable PERMNO/RIC information separately.
+
+### Published-source reproducibility caveats
+
+The audit also found several internal reproducibility inconsistencies that should be preserved rather than silently repaired:
+
+- The source README says the code was tested with Python 3.9.7 and packages listed in `requirements.txt`, but no `requirements.txt` exists in the current tree or any of the three repository commits.
+- `Text Analysis/clean_pr_text.py` reads `../Proprietary Data (cannot be shared)/MainPanel.hdf`, while `Main Analysis/Main Analysis.ipynb` reads `../Proprietary Data (cannot be shared)/MainPanel.h5`; neither proprietary panel is committed.
+- The committed `Text Analysis/pr sentiment.py` references `text_col` in its top-level parquet read before assigning it in the shown script, while the later fit call passes `["text_clean_stemmed"]`. Treat the file as a processing recipe unless its missing runtime context is restored.
+- That same script's coefficient-output expression appends `_WORDS.parquet` to `out_fn[:-8]`, while the supplied `out_fn` already ends in `_WORDS.parquet`. The committed coefficient artifact therefore should be treated as authoritative evidence of the fitted result, not assumed to be byte-for-byte reproducible from the script exactly as published.
+
+These caveats do not invalidate the public tables or notebook outputs extracted above; they define the boundary between recoverable evidence and missing execution environment/context.
