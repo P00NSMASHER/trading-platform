@@ -1852,12 +1852,16 @@
       "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract, candidate RIC mapping, and provenance only; no credentials, downloads, or coverage claims."
     },
     "data/processed/g2_vendor_requests/lseg_tick_history_contract.json": {
-      "expected_sha256": "5ddf2f8ca37ad280a84ad4b306e53d9ef718d0641a5f1243dd1881130a07643d",
-      "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract, candidate RIC mapping, and provenance only; no credentials, downloads, or coverage claims."
+      "expected_sha256": "0025b5a7d03e8295e39f0e8747f9d09812880257855c701e38a66b2e071f2e4e",
+      "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract and exact unresolved-identifier packet; no credentials, downloads, or coverage claims."
     },
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "605c180c7ff787d008f85eee2b03ae76dd914a71a9c81271c0aa154cc3418573",
       "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract, candidate RIC mapping, and provenance only; no credentials, downloads, or coverage claims."
+    },
+    "data/processed/g2_vendor_requests/lseg_tick_history_unresolved_identifiers.csv": {
+      "expected_sha256": "e5fb94c0b8c032df756e07179ebb2fd2fbccf43135bda419b9eff0a5eab6e8a6",
+      "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract and exact unresolved-identifier packet; no credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
