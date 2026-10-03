@@ -1,0 +1,41 @@
+name: G1 Worker 0 JNPR court evidence probe
+
+on:
+  push:
+    branches:
+      - g1/research-worker0-jnpr-court-87ce85b
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Extract JNPR court-table context
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf"
+          curl --fail --location --retry 2 "$url" --output /tmp/court.pdf
+          pdftotext -layout /tmp/court.pdf /tmp/court.txt
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          lines = Path("/tmp/court.txt").read_text(encoding="utf-8", errors="replace").splitlines()
+          patterns = [
+              re.compile(r"\bJNPR\b", re.I),
+              re.compile(r"Juniper Networks", re.I),
+              re.compile(r"10[/.-]22[/.-](?:13|2013)", re.I),
+              re.compile(r"2013[/.-]10[/.-]22", re.I),
+          ]
+          hits = sorted({i for i, line in enumerate(lines) if any(p.search(line) for p in patterns)})
+          print(f"PDF_LINES={len(lines)} HITS={len(hits)}")
+          for i in hits:
+              print(f"--- HIT LINE {i+1} ---")
+              for j in range(max(0, i-6), min(len(lines), i+7)):
+                  print(f"{j+1:05d}: {lines[j]}")
+          if not hits:
+              raise SystemExit("No JNPR/Juniper/2013-10-22 text found")
+          PY
