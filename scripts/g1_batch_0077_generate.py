@@ -197,6 +197,21 @@ for fn in test_files:
         txt=txt.replace(old,new)
     ast.parse(txt);p.write_text(txt)
 
+# Normalize all historical G1 preservation assertions to the new cumulative state.
+for fn in test_files:
+    p=Path(fn);txt=p.read_text()
+    pairs=[
+      ('len(excluded)==73','len(excluded)==68'),
+      ('len(excluded) == 73','len(excluded) == 68'),
+      ('len(ex)==73','len(ex)==68'),
+      ('len(ex) == 73','len(ex) == 68'),
+      ('"101/174" in step9["evidence"] and "73" in step9["evidence"]','"106/174" in step9["evidence"] and "68" in step9["evidence"]'),
+      ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (101,73)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (106,68)'),
+      ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (101, 73)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (106, 68)'),
+    ]
+    for old,new in pairs: txt=txt.replace(old,new)
+    ast.parse(txt);p.write_text(txt)
+
 p=Path("docs/g1_announcement_times.md");txt=p.read_text()
 txt += """
 ### Batch 0077: Federal-court public-distribution recovery (WTS / THC / DXCM / WLL / CR)
