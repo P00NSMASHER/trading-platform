@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "fb572c379ac819eaadb6abacc7fc737570f6532e",
+  "reserved_batch": "0088",
+  "worker_slot": 3,
+  "event_id": "HEJFE-33FC1D00348D7C59",
+  "historical_symbol": "ROG",
+  "public_announcement_ts": "2015-04-29T16:01:00-04:00",
+  "source_family": "preserved_wire_mirror",
+  "source_grade": "A",
+  "source_reference": "https://www.streetinsider.com/Press+Releases/Rogers+Corporation+Reports+Strong+Earnings+and+All-time+Record+Quarterly+Sales+for+the+First+Quarter+of+2015/10502614.html?classic=1",
+  "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/84748/000115752315001423/a51091526-ex991.htm",
+  "expected_state_after_batch": {
+    "exact_resolved": 107,
+    "reviewed_excluded": 67,
+    "step9": "SOURCE_BLOCKED"
+  }
+}
