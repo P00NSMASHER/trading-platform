@@ -2078,6 +2078,14 @@
     "tests/test_g2_lseg_datascope_client.py": {
       "expected_sha256": "41e864f55af6eb00f0858f173653c02eb2f90c338a2e9c517a77f4469958aca5",
       "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
+    },
+    "src/g2_lseg_option_contract_validator.py": {
+      "expected_sha256": "cc9fca6da1f26654b8550dc570735a39e58e7af4d50550a70d42e4946a4b9bbf",
+      "reason": "Public-safe LSEG option-discovery validator: parses OPRA RIC metadata, separates historical-chain evidence from search-only candidates, rejects expired/root-mismatched contracts, and emits hashes/contract metadata without raw licensed discovery payloads."
+    },
+    "tests/test_g2_lseg_option_contract_validator.py": {
+      "expected_sha256": "652cfbb50c9ad3c717fd63fa794e04432e1b68015a3965a31e48f0b30480321f",
+      "reason": "Public-safe LSEG option-discovery validator: parses OPRA RIC metadata, separates historical-chain evidence from search-only candidates, rejects expired/root-mismatched contracts, and emits hashes/contract metadata without raw licensed discovery payloads."
     }
   },
   "schema_version": "2",
