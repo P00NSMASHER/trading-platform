@@ -1846,6 +1846,18 @@
     "data/processed/g2_vendor_requests/thetadata_requests/thetadata_request_summary.json": {
       "expected_sha256": "a54795f7a944057439d83cfccdbb2ec3aede284698e33b1117753fe09e373513",
       "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+    },
+    "data/processed/g2_vendor_requests/lseg_tick_history_ric_candidates.csv": {
+      "expected_sha256": "a1df8c29283eb1fd84a4a3fdd8ef7d22950cab55b467c64e08af32fc21651aeb",
+      "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract, candidate RIC mapping, and provenance only; no credentials, downloads, or coverage claims."
+    },
+    "data/processed/g2_vendor_requests/lseg_tick_history_contract.json": {
+      "expected_sha256": "5ddf2f8ca37ad280a84ad4b306e53d9ef718d0641a5f1243dd1881130a07643d",
+      "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract, candidate RIC mapping, and provenance only; no credentials, downloads, or coverage claims."
+    },
+    "vendor_sources/lseg/README.md": {
+      "expected_sha256": "605c180c7ff787d008f85eee2b03ae76dd914a71a9c81271c0aa154cc3418573",
+      "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract, candidate RIC mapping, and provenance only; no credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
