@@ -2072,12 +2072,12 @@
       "reason": "Regression coverage for the LSEG secondary-RIC evidence audit and fail-closed historical-date validation requirement."
     },
     "src/g2_lseg_datascope_client.py": {
-      "expected_sha256": "1f17f354e5d60a8f372220f9efb8ab99cfb56d7906e81d46ce20a4609137f668",
-      "reason": "Private-output LSEG DataScope client with dry-run-first bounded validation batches, exact-candidate resumability receipts, and explicit zero-promotion/zero-coverage fail-closed semantics; tests use fake transports only."
+      "expected_sha256": "45e585e860f697a28f27cef8ff28a8b70afc4f0168e262ce7adb9c6beb50ff3f",
+      "reason": "Private LSEG validation batches now attach date-specific historical RIC/option-contract validation receipts, including HistoricalChainResolution evidence, while keeping validation promotions and G2 coverage changes at zero; tests use fake transports only."
     },
     "tests/test_g2_lseg_datascope_client.py": {
-      "expected_sha256": "2197590adfdd4b0cdd18b3d32c979cc0240b6b48292e670e1d9b5088d32fdf54",
-      "reason": "Private-output LSEG DataScope client with dry-run-first bounded validation batches, exact-candidate resumability receipts, and explicit zero-promotion/zero-coverage fail-closed semantics; tests use fake transports only."
+      "expected_sha256": "ef090a93d90cb021dea45abbbb1de623c16b2d0559f2189daa916a6e93f255ec",
+      "reason": "Private LSEG validation batches now attach date-specific historical RIC/option-contract validation receipts, including HistoricalChainResolution evidence, while keeping validation promotions and G2 coverage changes at zero; tests use fake transports only."
     },
     "src/g2_lseg_historical_ric_validator.py": {
       "expected_sha256": "850c5ad4725cc6f8670fee33f5d9ba3afc18d98f385de984555111279e264d6c",

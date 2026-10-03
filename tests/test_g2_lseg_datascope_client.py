@@ -224,8 +224,25 @@ def test_validation_batch_plan_is_exact_bounded_and_fail_closed():
         client.build_validation_batch("equity", limit=0)
 
 
-def test_execute_equity_validation_batch_is_resumable(tmp_path):
+def test_execute_equity_validation_batch_is_resumable(tmp_path, monkeypatch):
     calls = []
+
+    monkeypatch.setattr(
+        client.historical_ric_validator,
+        "validate_file",
+        lambda path, trade_date: {
+            "schema_version": "1",
+            "input_receipt": {"path_name": Path(path).name},
+            "results": [
+                {
+                    "trade_date": trade_date,
+                    "historical_symbol": "JNPR",
+                    "validation_status": "validated_single_candidate",
+                    "selected_ric": "JNPR.O",
+                }
+            ],
+        },
+    )
 
     class FakeClient:
         def extract_time_and_sales(self, candidate_rics, trade_date, output_path):
@@ -256,6 +273,10 @@ def test_execute_equity_validation_batch_is_resumable(tmp_path):
     assert first["skipped_existing_outputs"] == 0
     assert first["validation_promotions"] == 0
     assert first["g2_coverage_change"] == 0
+    assert first["receipts"][0]["identifier_validation_status"] == (
+        "validated_single_candidate"
+    )
+    assert Path(first["receipts"][0]["identifier_validation_path"]).exists()
     assert second["network_tasks_completed"] == 0
     assert second["skipped_existing_outputs"] == 1
     assert len(calls) == 1
@@ -288,13 +309,45 @@ def test_execute_equity_validation_batch_is_resumable(tmp_path):
     assert len(calls) == 3
 
 
-def test_execute_option_validation_batch_writes_private_discovery_result(tmp_path):
+def test_execute_option_validation_batch_writes_private_discovery_result(tmp_path, monkeypatch):
     calls = []
+
+    monkeypatch.setattr(
+        client.option_contract_validator,
+        "validate_discovery",
+        lambda **kwargs: {
+            "schema_version": "1",
+            "purpose": "test",
+            "trade_date": kwargs["trade_date"],
+            "historical_symbol": kwargs["historical_symbol"],
+            "underlying_candidate_rics": ["JNPR.O", "JNPR.OQ"],
+            "mapping_class": "test",
+            "summary": {
+                "parsed_contracts": 2,
+                "historical_chain_candidates": 2,
+                "search_only_candidates": 0,
+                "rejected_identifiers": 0,
+                "historical_contract_set_ready_for_time_and_sales": True,
+                "g2_coverage_change": False,
+            },
+            "contracts": [],
+            "rejected": [],
+        },
+    )
+    monkeypatch.setattr(
+        client.option_contract_validator,
+        "public_contract_manifest",
+        lambda payload: payload,
+    )
 
     class FakeClient:
         def futures_options_search(self, ric, trade_date):
-            calls.append((ric, trade_date))
+            calls.append(("search", ric, trade_date))
             return [{"Identifier": f"{ric}-OPT"}]
+
+        def historical_chain_resolution(self, chain_ric, trade_date):
+            calls.append(("chain", chain_ric, trade_date))
+            return {"value": [{"Identifier": f"{chain_ric}-OPT"}]}
 
     batch = {
         "lane": "option",
@@ -314,8 +367,10 @@ def test_execute_option_validation_batch_writes_private_discovery_result(tmp_pat
     assert result["g2_coverage_change"] == 0
     assert result["receipts"][0]["discovered_contract_count"] == 2
     assert calls == [
-        ("JNPR.O", "2011-03-21"),
-        ("JNPR.OQ", "2011-03-21"),
+        ("search", "JNPR.O", "2011-03-21"),
+        ("chain", "0#JNPR*.U", "2011-03-21"),
+        ("search", "JNPR.OQ", "2011-03-21"),
+        ("chain", "0#JNPR*.U", "2011-03-21"),
     ]
     payload = json.loads(
         (output_dir / "2011-03-21_JNPR.json").read_text(encoding="utf-8")
@@ -325,13 +380,17 @@ def test_execute_option_validation_batch_writes_private_discovery_result(tmp_pat
     second = client.execute_validation_batch(FakeClient(), batch, output_dir)
     assert second["network_tasks_completed"] == 0
     assert second["skipped_existing_outputs"] == 1
-    assert len(calls) == 2
+    assert len(calls) == 4
+    assert result["receipts"][0]["historical_chain_candidate_count"] == 2
+    assert result["receipts"][0][
+        "historical_contract_set_ready_for_time_and_sales"
+    ] is True
 
     # Corrupt/incomplete JSON is not accepted as a completion marker.
     (output_dir / "2011-03-21_JNPR.json").write_text("{", encoding="utf-8")
     third = client.execute_validation_batch(FakeClient(), batch, output_dir)
     assert third["network_tasks_completed"] == 1
-    assert len(calls) == 4
+    assert len(calls) == 8
 
 
 def test_live_validation_batch_hard_caps_network_tasks(tmp_path):
