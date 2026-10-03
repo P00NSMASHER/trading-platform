@@ -1532,8 +1532,8 @@
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "src/g2_lseg_trth_event_pipeline.py": {
-      "expected_sha256": "8a187273356e1638a85dcf297aa69492457120d858e8c82b87b5f58c4a57983d",
-      "reason": "Exact-replication TRTH downstream event pipeline: UTC-day realignment, extended-hours filtering, quote validity cleaning, original event/open grids, asof resampling, and Form-T event-to-open selection; no credentials, downloads, or coverage claims."
+      "expected_sha256": "7a51bd4715bbbaa501e52de7babcbb50123fe0148ffef66488c58306e3c8961d",
+      "reason": "Harden the merged LSEG/TRTH event pipeline for normal missing event slices by preserving datetime dtypes on empty quote/trade frames; regression-only, no source semantics or G2 coverage changes."
     },
     "src/g2_lseg_trth_normalizer.py": {
       "expected_sha256": "61873f1dcf6846ede5c8dfe32c8de8e15ea40e2b82fa45e8ad828db0a70f0383",
@@ -1916,8 +1916,8 @@
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "tests/test_g2_lseg_trth_event_pipeline.py": {
-      "expected_sha256": "ee5400e369251e6f599aa6abddcc8dcc96c4638b36bb8342778ee2db56c6c4b8",
-      "reason": "Exact-replication TRTH downstream event pipeline: UTC-day realignment, extended-hours filtering, quote validity cleaning, original event/open grids, asof resampling, and Form-T event-to-open selection; no credentials, downloads, or coverage claims."
+      "expected_sha256": "7f29b0d11312e4dca8ec837153e61d4e17abfc2de0d00e9482aed7134edf5514",
+      "reason": "Harden the merged LSEG/TRTH event pipeline for normal missing event slices by preserving datetime dtypes on empty quote/trade frames; regression-only, no source semantics or G2 coverage changes."
     },
     "tests/test_g2_lseg_trth_normalizer.py": {
       "expected_sha256": "3e1cd36c5a5c4d34781d8da51b68a7d042ba03a967040805dc48d89a0f034385",
