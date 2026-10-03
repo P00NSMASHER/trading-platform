@@ -13,6 +13,7 @@ from urllib.request import Request, urlopen
 
 import g2_lseg_datascope_execution_plan as execution
 import g2_lseg_historical_ric_validator as historical_ric_validator
+import g2_lseg_option_time_and_sales as option_ts
 import g2_lseg_request_manifest as manifest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -636,6 +637,39 @@ def _credentials_from_environment() -> tuple[str, str]:
     return username, password
 
 
+
+def execute_option_day(
+    client: DataScopeClient,
+    *,
+    contract_manifest_path: Path,
+    expected_symbol: str,
+    expected_date: str,
+    output_path: Path,
+) -> dict:
+    resolved = contract_manifest_path.expanduser().resolve()
+    payload = json.loads(resolved.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("option contract manifest root must be a JSON object")
+
+    manifest_symbol, manifest_date, _ = option_ts.validated_contract_rics(payload)
+    requested_symbol = str(expected_symbol).strip().upper()
+    if manifest_symbol != requested_symbol:
+        raise ValueError(
+            f"option contract manifest historical_symbol mismatch: "
+            f"{manifest_symbol} != {requested_symbol}"
+        )
+    if manifest_date != str(expected_date):
+        raise ValueError(
+            f"option contract manifest trade_date mismatch: "
+            f"{manifest_date} != {expected_date}"
+        )
+
+    return option_ts.extract_contract_time_and_sales(
+        client,
+        contract_manifest_path=resolved,
+        output_path=output_path,
+    )
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Execute licensed LSEG DataScope requests into a private/local output path."
@@ -655,6 +689,12 @@ def main() -> None:
     chain.add_argument("--chain-ric", required=True)
     chain.add_argument("--date", required=True)
     chain.add_argument("--output", type=Path, required=True)
+
+    option_day = sub.add_parser("option-day")
+    option_day.add_argument("--symbol", required=True)
+    option_day.add_argument("--date", required=True)
+    option_day.add_argument("--contracts", type=Path, required=True)
+    option_day.add_argument("--output", type=Path, required=True)
 
     validation = sub.add_parser("validate-batch")
     validation.add_argument("--lane", choices=("equity", "option"), required=True)
@@ -688,6 +728,17 @@ def main() -> None:
 
     username, password = _credentials_from_environment()
     client = DataScopeClient(username, password)
+
+    if args.command == "option-day":
+        receipt = execute_option_day(
+            client,
+            contract_manifest_path=args.contracts,
+            expected_symbol=args.symbol,
+            expected_date=args.date,
+            output_path=args.output,
+        )
+        print(json.dumps(receipt, indent=2, sort_keys=True))
+        return
 
     if args.command == "equity-day":
         plan = _execution_plan()
