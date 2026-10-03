@@ -1536,8 +1536,8 @@
       "reason": "Exact-replication TRTH downstream event pipeline: UTC-day realignment, extended-hours filtering, quote validity cleaning, original event/open grids, asof resampling, and Form-T event-to-open selection; no credentials, downloads, or coverage claims."
     },
     "src/g2_lseg_trth_normalizer.py": {
-      "expected_sha256": "61873f1dcf6846ede5c8dfe32c8de8e15ea40e2b82fa45e8ad828db0a70f0383",
-      "reason": "Executable G2 LSEG/TRTH normalizer and regression tests derived from the merged original-research processing contract; no credentials, downloads, or coverage claims."
+      "expected_sha256": "0463e2ace528d4fa8132eaa5e77e51630b569d75a6f797d58d2b1700ee57dd38",
+      "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
     },
     "src/g2_massive_equity_plan.py": {
       "expected_sha256": "8f074ecf7605b9c91cf8bb22640fdea13d8279bb0cd1a197607e72f3a944eddb",
@@ -1920,8 +1920,8 @@
       "reason": "Exact-replication TRTH downstream event pipeline: UTC-day realignment, extended-hours filtering, quote validity cleaning, original event/open grids, asof resampling, and Form-T event-to-open selection; no credentials, downloads, or coverage claims."
     },
     "tests/test_g2_lseg_trth_normalizer.py": {
-      "expected_sha256": "3e1cd36c5a5c4d34781d8da51b68a7d042ba03a967040805dc48d89a0f034385",
-      "reason": "Executable G2 LSEG/TRTH normalizer and regression tests derived from the merged original-research processing contract; no credentials, downloads, or coverage claims."
+      "expected_sha256": "3ec09071f2c61e6d735bc0bf3fb009bc6358bfdfb08d22a0582509c833422f9f",
+      "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
     },
     "tests/test_g2_massive_equity_plan.py": {
       "expected_sha256": "2b04f365702f8affa0ad0adcbb6a32ba5b770b0b53fb78d965667b20bb641ab4",
@@ -2040,8 +2040,8 @@
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
     },
     "vendor_sources/lseg/README.md": {
-      "expected_sha256": "72b92a45dd2b1607dc880ffee222bef79751c3410f37809e820f81c508753083",
-      "reason": "Update LSEG provenance documentation to include the extracted original TRTH research processing contract; no credentials, downloads, or coverage claims."
+      "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
+      "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
     },
     "vendor_sources/hacked_earnings_jfe/README.md": {
       "expected_sha256": "ad946590010055d21b261fb8e60e307d37fd1419059696ba84108725744785ef",
