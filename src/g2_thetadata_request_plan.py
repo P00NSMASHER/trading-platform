@@ -5,6 +5,8 @@ import csv
 import json
 from pathlib import Path
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 DEFAULT_OPTION_PARTITION = Path(
     "data/processed/g2_vendor_requests/cheap_route_partitions/thetadata_options.csv"
 )
@@ -22,6 +24,14 @@ FIELDS = [
     "contract_scope",
     "request_status",
 ]
+
+
+def _manifest_path(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(REPO_ROOT.resolve()).as_posix()
+    except ValueError:
+        return str(path)
 
 
 def _read_csv(path: Path) -> list[dict[str, str]]:
@@ -151,14 +161,14 @@ def build_plan(option_partition: Path, equity_partition: Path) -> dict:
             "trade_requests": option_counts["option_trade"],
             "quote_requests": option_counts["option_quote"],
             "total_requests": len(option_requests),
-            "source_partition": str(option_partition),
+            "source_partition": _manifest_path(option_partition),
             "output_file": "thetadata_option_requests.csv",
         },
         "stock_requests": {
             "trade_requests": stock_counts["equity_trade"],
             "quote_requests": stock_counts["equity_quote"],
             "total_requests": len(stock_requests),
-            "source_partition": str(equity_partition),
+            "source_partition": _manifest_path(equity_partition),
             "output_file": "thetadata_stock_requests.csv",
         },
         "total_requests": len(option_requests) + len(stock_requests),
