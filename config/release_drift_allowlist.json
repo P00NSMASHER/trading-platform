@@ -1864,19 +1864,23 @@
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "data/processed/g2_vendor_requests/lseg_extraction_summary.json": {
-      "expected_sha256": "9a66ecf6877731174e93c42d7b8ea4659fd79e36241ee020bd5efc5f9cf88851",
+      "expected_sha256": "b60afe556fe8fa6d6c0afafca298dd800004b32c353386208a025fef0e38ced0",
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "src/g2_lseg_request_manifest.py": {
-      "expected_sha256": "78ffd23169175f8b370c5710e508013ab975248919bd8dfa3598de49d2d94236",
+      "expected_sha256": "7283bf706131f152e501850e64e398378ef7af0082fa4e54a552ca4212b35c97",
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "tests/test_g2_lseg_request_manifest.py": {
-      "expected_sha256": "c1414fd2013109c7e7c145eec051917676fe10265cadc23aa47bc369904aab85",
+      "expected_sha256": "eaecab2dc55fb58afc62d93cd28655c5fd401402be8ea22c927e2e6276828ad1",
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "vendor_sources/lseg/README.md": {
-      "expected_sha256": "76ef4bb6d4397293ef4237f33964c7ff0dc77d943ca5ec0dd131555370b78975",
+      "expected_sha256": "1ae15e9d5e57498909717e43b0a27384593696c5a7daeb8da398e275da4b4963",
+      "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
+    },
+    "data/processed/g2_vendor_requests/lseg_event_permno_ric_mapping.csv": {
+      "expected_sha256": "ceb143a41d1b70db845df33d255eb9d51852524c8e2613abaf303b386dbb000a",
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     }
   },
