@@ -4,7 +4,32 @@
   "base_main_sha": "074be58b0f31b6aa2b757f7860e83db042b95581",
   "reserved_batch": "0095",
   "worker_slot": 0,
-  "event_ids": ["HEJFE-F20ECC0C09BBC89E", "HEJFE-8167467EBF64AABE"],
-  "historical_symbols": ["JNPR", "PNRA"],
-  "expected_state_after_batch": {"exact_resolved": 109, "reviewed_excluded": 65, "step9": "SOURCE_BLOCKED"}
+  "previous_exact_count": 107,
+  "expected_exact_count_after_batch": 109,
+  "expected_excluded_after_batch": 65,
+  "source_family": "federal_court_public_distribution_record",
+  "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+  "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+  "timestamp_evidence_kind": "explicit_release_clock",
+  "public_distribution_explicit": true,
+  "items": [
+    {
+      "event_id": "HEJFE-F20ECC0C09BBC89E",
+      "historical_symbol": "JNPR",
+      "expected_trade": "2013-10-22 13:58:00",
+      "clock": "2013-10-22T16:05:00-04:00",
+      "expected_delta": 7620,
+      "release_title": "Juniper Networks Reports Preliminary Third Quarter 2013 Financial Results",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1043604/000119312513406625/d615565dex991.htm"
+    },
+    {
+      "event_id": "HEJFE-8167467EBF64AABE",
+      "historical_symbol": "PNRA",
+      "expected_trade": "2013-10-22 15:20:00",
+      "clock": "2013-10-22T16:05:00-04:00",
+      "expected_delta": 2700,
+      "release_title": "Panera Bread Company Reports Q3 2013 diluted EPS of $1.48, up 19% versus Q3 2012",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000031/a20130924ex991pressrelease.htm"
+    }
+  ]
 }
