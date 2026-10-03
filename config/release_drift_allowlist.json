@@ -1894,6 +1894,14 @@
     "data/processed/g2_vendor_requests/lseg_original_research_processing_contract.json": {
       "expected_sha256": "39eb7afe9f49d11098a9a61914458e1f03793d2f36c835130623850c534b0dd9",
       "reason": "Extracted original TRTH research processing rules from the public companion fork: TAS layout, checksums, fields, timestamp rules, qualifier handling, event windows, and early-close dates; no credentials or licensed payloads."
+    },
+    "src/g2_lseg_trth_normalizer.py": {
+      "expected_sha256": "61873f1dcf6846ede5c8dfe32c8de8e15ea40e2b82fa45e8ad828db0a70f0383",
+      "reason": "Executable G2 LSEG/TRTH normalizer and regression tests derived from the merged original-research processing contract; no credentials, downloads, or coverage claims."
+    },
+    "tests/test_g2_lseg_trth_normalizer.py": {
+      "expected_sha256": "3e1cd36c5a5c4d34781d8da51b68a7d042ba03a967040805dc48d89a0f034385",
+      "reason": "Executable G2 LSEG/TRTH normalizer and regression tests derived from the merged original-research processing contract; no credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
