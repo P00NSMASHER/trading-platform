@@ -1,0 +1,42 @@
+{
+  "schema_version": "1",
+  "prep_only": true,
+  "research_use_only": true,
+  "worker_slot": 2,
+  "reserved_batch": "0077",
+  "merged_pr": 293,
+  "merged_main_sha": "b6683b423ccb36e5a070222d26011f39760ea5b1",
+  "integration_base_sha": "87ce85b2155ebb1abc12f9247d689a6a78e332ed",
+  "stale_provenance_sha": "5a2dae64561880c736cb9eeb16b65f67d5894d29",
+  "exact_count": 106,
+  "reviewed_fail_closed": 68,
+  "defects": [
+    {
+      "kind": "STALE_BASE_MAIN_SHA",
+      "paths": [
+        "data/public/metadata/g1_public_batch_0077_evidence.json",
+        "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
+        "data/public/metadata/g1_source_research_20260928.json",
+        "scripts/g1_batch_0077_generate.py"
+      ],
+      "repair": "Replace only batch-0077 provenance base 5a2dae64561880c736cb9eeb16b65f67d5894d29 with actual PR #293 integration base 87ce85b2155ebb1abc12f9247d689a6a78e332ed."
+    },
+    {
+      "kind": "RELEASE_DRIFT_HASH_STALE_AFTER_OWNERSHIP_TEST",
+      "failing_run_id": 37117894849,
+      "failing_job_id": 111188139923,
+      "failing_test": "tests/test_release_drift.py::test_repository_matches_reviewed_release_drift_policy",
+      "failed_path": "tests/test_g1_public_batch_0077.py",
+      "observed_summary": "1 failed, 660 passed",
+      "repair": "Recompute release-drift expected_sha256 after the ownership regression and after the provenance-only edits."
+    }
+  ],
+  "invariants": [
+    "Do not change any of the five release clocks.",
+    "Do not change G1 106/174 exact or 68 reviewed fail-closed counts.",
+    "Do not re-add the temporary batch-0077 publisher workflow.",
+    "Do not add a stale publisher-workflow allowlist entry.",
+    "Preserve the Worker-2 SHA256(event_id)%5==2 regression and four override-outs.",
+    "Do not open or merge a canonical repair PR unless the live controller explicitly assigns a token."
+  ]
+}
