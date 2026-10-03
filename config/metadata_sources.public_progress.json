@@ -1,10 +1,10 @@
 {
-  "purpose": "Cumulative public point-in-time metadata: G1 has 107 exact release timestamps and 67 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
+  "purpose": "Cumulative public point-in-time metadata: G1 has 109 exact release timestamps and 65 reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed.",
   "reviewed_announcement_exclusions": {
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
-    "expected_count": 67,
-    "expected_sha256": "6d56725b2548ec11a4d5382340f3f393062c064816615d8cef750a9b5fda449a",
+    "expected_count": 65,
+    "expected_sha256": "65f443545952a149ab9675523459f639a5559a8f4ba8a9b70afa80fcaf484ad4",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -29,6 +29,29 @@
   },
   "schema_version": "1",
   "sources": [
+    {
+      "authorized": true,
+      "column_map": {
+        "event_date": "event_date",
+        "event_id": "event_id",
+        "historical_symbol": "historical_symbol",
+        "public_announcement_ts": "public_announcement_ts",
+        "source_grade": "source_grade",
+        "source_reference": "source_reference",
+        "timestamp_kind": "timestamp_kind"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "Filed federal-court public-distribution clocks preserved by CourtListener RECAP, independently corroborated by matching SEC press-release exhibits. No licensed vendor data used.",
+      "notes": "JNPR/PNRA 2013-10-22 16:05 EDT exact Marketwired public-distribution clocks from filed federal-court record; prohibited substitute times are not used.",
+      "path": "data/public/metadata/g1_announcement_times_batch_0095.csv",
+      "record_kind": "announcement_timestamp",
+      "source_family": "federal_court_public_distribution_record",
+      "source_id": "public-worker0-courtlistener-batch-0095",
+      "timezone": "America/New_York"
+    },
     {
       "authorized": true,
       "column_map": {
