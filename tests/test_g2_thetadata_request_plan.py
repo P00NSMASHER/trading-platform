@@ -18,14 +18,14 @@ def test_thetadata_request_plan_matches_written_vendor_counts(tmp_path: Path):
         "trade_requests": 3014,
         "quote_requests": 3014,
         "total_requests": 6028,
-        "source_partition": str(OPTION_PARTITION),
+        "source_partition": "data/processed/g2_vendor_requests/cheap_route_partitions/thetadata_options.csv",
         "output_file": "thetadata_option_requests.csv",
     }
     assert payload["stock_requests"] == {
         "trade_requests": 1430,
         "quote_requests": 1430,
         "total_requests": 2860,
-        "source_partition": str(EQUITY_PARTITION),
+        "source_partition": "data/processed/g2_vendor_requests/cheap_route_partitions/thetadata_equity.csv",
         "output_file": "thetadata_stock_requests.csv",
     }
     assert payload["total_requests"] == 8888
