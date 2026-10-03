@@ -1,4 +1,4 @@
-name: G1 Worker 0 JNPR court evidence probe
+name: G1 Worker 0 court-table shard scan
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Extract JNPR court-table context
+      - name: Extract Worker-0 court-table rows
         shell: bash
         run: |
           set -euo pipefail
@@ -24,6 +24,10 @@ jobs:
           from pypdf import PdfReader
           import re
 
+          targets = {
+              "EHTH","BA","LSCC","GORO","GNTX","JNPR","PNRA","GMCR",
+              "INWK","CLD","MIC","ILMN","CMP","NATI","SGEN","TW",
+          }
           reader = PdfReader("/tmp/court.pdf")
           lines = []
           for page_no, page in enumerate(reader.pages, 1):
@@ -31,19 +35,20 @@ jobs:
               for line in text.splitlines():
                   lines.append((page_no, line))
 
-          patterns = [
-              re.compile(r"\bJNPR\b", re.I),
-              re.compile(r"Juniper Networks", re.I),
-              re.compile(r"10[/.-]22[/.-](?:13|2013)", re.I),
-              re.compile(r"2013[/.-]10[/.-]22", re.I),
-          ]
-          hits = sorted({i for i, (_, line) in enumerate(lines) if any(p.search(line) for p in patterns)})
-          print(f"PDF_PAGES={len(reader.pages)} LINES={len(lines)} HITS={len(hits)}")
-          for i in hits:
-              print(f"--- HIT PAGE {lines[i][0]} LINE {i+1} ---")
-              for j in range(max(0, i-8), min(len(lines), i+9)):
-                  page, line = lines[j]
-                  print(f"P{page:03d} L{j+1:05d}: {line}")
-          if not hits:
-              raise SystemExit("No JNPR/Juniper/2013-10-22 text found")
+          row_re = re.compile(
+              r"^\s*(?P<event>\d+)\s+(?P<symbol>[A-Z][A-Z0-9.-]*)\s+(?P<year>20\d{2})\s+"
+          )
+          hits = []
+          for i, (page, line) in enumerate(lines):
+              m = row_re.match(line)
+              if not m or m.group("symbol") not in targets:
+                  continue
+              hits.append((i, page, m.group("symbol"), m.group("event"), line))
+
+          print(f"PDF_PAGES={len(reader.pages)} TARGET_ROWS={len(hits)}")
+          for i, page, symbol, event, line in hits:
+              print(f"=== {symbol} COURT_EVENT={event} PAGE={page} LINE={i+1} ===")
+              for j in range(i, min(len(lines), i + 5)):
+                  p, value = lines[j]
+                  print(f"P{p:03d} L{j+1:05d}: {value}")
           PY
