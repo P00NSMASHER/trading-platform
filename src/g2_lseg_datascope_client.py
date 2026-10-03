@@ -364,12 +364,33 @@ def build_validation_batch(
     }
 
 
+def option_chain_ric(underlying_ric: str) -> str:
+    """
+    Build the OPRA ChainRIC shape used by public DataScope tooling.
+
+    Public LSEG/Refinitiv examples use values such as 0#AAPL*.U and
+    0#SPX*.U. Candidate underlying RICs can carry venue suffixes
+    (AAPL.O, ALSN.N, GORO.A); the historical option chain is keyed by
+    the root before that suffix.
+    """
+    raw = str(underlying_ric or "").strip()
+    if not raw:
+        raise ValueError("underlying RIC is required")
+    if raw.startswith("0#") and raw.endswith("*.U"):
+        return raw
+    root = raw.split(".", 1)[0].strip()
+    if not root or any(ch.isspace() for ch in root):
+        raise ValueError(f"cannot derive option chain root from {underlying_ric!r}")
+    return f"0#{root}*.U"
+
+
 def _completed_json_output(
     path: Path,
     *,
     trade_date: str,
     historical_symbol: str,
     candidate_rics: list[str],
+    required_flag: str | None = None,
 ) -> bool:
     if not path.exists():
         return False
@@ -377,11 +398,16 @@ def _completed_json_output(
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return False
-    return (
+    identity_matches = (
         payload.get("trade_date") == trade_date
         and payload.get("historical_symbol") == historical_symbol
         and payload.get("candidate_rics") == candidate_rics
     )
+    if not identity_matches:
+        return False
+    if required_flag is not None and payload.get(required_flag) is not True:
+        return False
+    return True
 
 
 def execute_validation_batch(
@@ -468,7 +494,8 @@ def execute_validation_batch(
             output_path,
             trade_date=trade_date,
             historical_symbol=symbol,
-        candidate_rics=candidate_rics,
+            candidate_rics=candidate_rics,
+            required_flag="historical_chain_resolution_completed",
         ):
             receipts.append(
                 {
@@ -483,18 +510,30 @@ def execute_validation_batch(
 
         discoveries = []
         for ric in candidate_rics:
+            chain_ric = option_chain_ric(ric)
+            search_results = client.futures_options_search(ric, trade_date)
+            historical_chain = client.historical_chain_resolution(
+                chain_ric,
+                trade_date,
+            )
             discoveries.append(
                 {
                     "underlying_ric": ric,
-                    "results": client.futures_options_search(ric, trade_date),
+                    "option_chain_ric": chain_ric,
+                    # Preserve the historical key for downstream compatibility.
+                    "results": search_results,
+                    "search_results": search_results,
+                    "historical_chain_result": historical_chain,
                 }
             )
         output_path.write_text(
             json.dumps(
                 {
+                    "schema_version": "2",
                     "trade_date": trade_date,
                     "historical_symbol": symbol,
                     "candidate_rics": candidate_rics,
+                    "historical_chain_resolution_completed": True,
                     "discoveries": discoveries,
                 },
                 indent=2,
@@ -507,13 +546,14 @@ def execute_validation_batch(
             {
                 "trade_date": trade_date,
                 "historical_symbol": symbol,
-                "status": "discovery_completed_pending_review",
+                "status": "discovery_and_historical_chain_completed_pending_review",
                 "output_path": str(output_path),
                 "candidate_count": len(candidate_rics),
                 "validation_promoted": False,
-                "discovered_contract_count": sum(
-                    len(item["results"]) for item in discoveries
+                "search_discovered_contract_count": sum(
+                    len(item["search_results"]) for item in discoveries
                 ),
+                "historical_chain_query_count": len(discoveries),
             }
         )
 
@@ -525,7 +565,7 @@ def execute_validation_batch(
             row["status"]
             in {
                 "downloaded_pending_content_validation",
-                "discovery_completed_pending_review",
+                "discovery_and_historical_chain_completed_pending_review",
             }
             for row in receipts
         ),
