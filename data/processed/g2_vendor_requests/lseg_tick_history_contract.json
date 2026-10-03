@@ -1,0 +1,150 @@
+{
+  "schema_version": "1",
+  "purpose": "Repository-extracted LSEG Tick History Time & Sales contract for the frozen G2 market-data lanes. No credentials or market-data rows are included.",
+  "authorization_note": "User states all required LSEG/repository rights and licenses are verified.",
+  "provenance": [
+    {
+      "repo": "hanlonlab/datascope-cli",
+      "path": "config/datascope.conf"
+    },
+    {
+      "repo": "LSEG-API-Samples/Article.TickHistory.Python.AllOptions",
+      "path": "RTH_SPX_Options.py"
+    },
+    {
+      "repo": "vgreg/earnings_news_jar",
+      "path": "Sample_Stocks/PERMNO_TRHT _Ticker.csv"
+    }
+  ],
+  "report": {
+    "canon_name": "time_and_sales",
+    "template_name": "TickHistoryTimeAndSales",
+    "report_name": "TickHistoryTimeAndSales",
+    "allow_historical_instruments": true,
+    "minimal_g2_fields": {
+      "equity_trade": [
+        "#RIC",
+        "Date-Time",
+        "Price",
+        "Volume"
+      ],
+      "equity_quote": [
+        "#RIC",
+        "Date-Time",
+        "Bid Price",
+        "Bid Size",
+        "Ask Price",
+        "Ask Size"
+      ],
+      "option_trade": [
+        "#RIC",
+        "Date-Time",
+        "Price",
+        "Volume"
+      ],
+      "option_quote": [
+        "#RIC",
+        "Date-Time",
+        "Bid Price",
+        "Bid Size",
+        "Ask Price",
+        "Ask Size"
+      ]
+    },
+    "upstream_equity_pipeline_out": [
+      "#RIC",
+      "Date-Time",
+      "GMT Offset",
+      "Type",
+      "Ex/Cntrb.ID",
+      "Price",
+      "Volume",
+      "Market VWAP",
+      "Buyer ID",
+      "Bid Price",
+      "Bid Size",
+      "Seller ID",
+      "Ask Price",
+      "Ask Size",
+      "Qualifiers",
+      "Seq. No.",
+      "Exch Time",
+      "UpLim Price",
+      "LoLim Price",
+      "Date",
+      "Tick Dir.",
+      "Open",
+      "High",
+      "Low",
+      "Acc. Volume",
+      "Turnover",
+      "Mid Price",
+      "Percentage Change",
+      "Original Price",
+      "Original Volume",
+      "Ask Market Maker Id",
+      "Bid Market Maker Id",
+      "Unique Trade Identification",
+      "LULD Indicator",
+      "Net Change",
+      "Short Sale Restriction Indicator"
+    ],
+    "upstream_option_pipeline_out": [
+      "#RIC",
+      "Date-Time",
+      "GMT Offset",
+      "Type",
+      "Ex/Cntrb.ID",
+      "Price",
+      "Volume",
+      "Market VWAP",
+      "Buyer ID",
+      "Bid Price",
+      "Bid Size",
+      "Seller ID",
+      "Ask Price",
+      "Ask Size",
+      "Qualifiers",
+      "Seq. No.",
+      "Exch Time",
+      "UpLim Price",
+      "LoLim Price",
+      "Bid Imp. Vol",
+      "Ask Imp. Vol",
+      "Date",
+      "Tick Dir.",
+      "Open",
+      "High",
+      "Low",
+      "Acc. Volume",
+      "Turnover",
+      "Mid Price",
+      "Percentage Change",
+      "Original Price",
+      "Original Volume",
+      "Delta",
+      "Ask Market Maker Id",
+      "Bid Market Maker Id",
+      "Gamma",
+      "Theta",
+      "Unique Trade Identification",
+      "LULD Indicator",
+      "Net Change",
+      "Original Unique Trade Identification",
+      "Short Sale Restriction Indicator",
+      "Trading Status",
+      "Rho",
+      "Vega"
+    ]
+  },
+  "mapping_summary": {
+    "g2_unique_symbols": 146,
+    "exact_root_candidate_matches": 112,
+    "unresolved_symbols": 34
+  },
+  "safety": {
+    "credentials_in_repository": false,
+    "sample_token_not_copied": true,
+    "coverage_claim_requires_validated_rows": true
+  }
+}
