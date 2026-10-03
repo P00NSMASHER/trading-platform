@@ -289,6 +289,126 @@ def validate_files(
     return payload
 
 
+
+def validate_batch_payload(
+    *,
+    plan: dict,
+    batch_payload: Mapping[str, object],
+) -> dict:
+    """
+    Validate the combined schema-v2 option discovery output emitted by the
+    bounded DataScope validation batch.
+
+    The file is accepted only when HistoricalChainResolution completed and its
+    frozen task identity (symbol/date/candidate RICs) still matches the current
+    execution plan. Search results remain corroborating only; historical-chain
+    membership is the date-specific evidence.
+    """
+    if str(batch_payload.get("schema_version") or "") != "2":
+        raise ValueError("combined option batch schema_version must equal '2'")
+    if batch_payload.get("historical_chain_resolution_completed") is not True:
+        raise ValueError(
+            "combined option batch is incomplete: HistoricalChainResolution "
+            "completion marker is required"
+        )
+
+    historical_symbol = str(batch_payload.get("historical_symbol") or "").strip()
+    trade_date = str(batch_payload.get("trade_date") or "").strip()
+    if not historical_symbol or not trade_date:
+        raise ValueError("combined option batch is missing historical_symbol/trade_date")
+
+    task = expected_task(
+        plan,
+        historical_symbol=historical_symbol,
+        trade_date=trade_date,
+    )
+    expected_rics = [str(value) for value in list(task["candidate_rics"])]
+    provided_rics = [
+        str(value) for value in list(batch_payload.get("candidate_rics") or [])
+    ]
+    if provided_rics != expected_rics:
+        raise ValueError(
+            f"{historical_symbol} {trade_date}: combined batch candidate RICs "
+            "do not match the frozen task"
+        )
+
+    discoveries = list(batch_payload.get("discoveries") or [])
+    if not discoveries:
+        raise ValueError("combined option batch has no discovery results")
+
+    search_payloads: list[object] = []
+    chain_payloads: list[object] = []
+    observed_underlyings: list[str] = []
+
+    for raw in discoveries:
+        if not isinstance(raw, Mapping):
+            raise ValueError("combined option batch discovery row must be an object")
+        underlying_ric = str(raw.get("underlying_ric") or "").strip()
+        chain_ric = str(raw.get("option_chain_ric") or "").strip()
+        if not underlying_ric or not chain_ric:
+            raise ValueError(
+                "combined option batch discovery is missing underlying_ric/option_chain_ric"
+            )
+        if underlying_ric not in expected_rics:
+            raise ValueError(
+                f"combined option batch contains unexpected underlying RIC {underlying_ric!r}"
+            )
+        if "search_results" not in raw or "historical_chain_result" not in raw:
+            raise ValueError(
+                "combined option batch discovery must contain search_results and "
+                "historical_chain_result"
+            )
+        observed_underlyings.append(underlying_ric)
+        search_payloads.append(raw["search_results"])
+        chain_payloads.append(raw["historical_chain_result"])
+
+    if sorted(observed_underlyings) != sorted(expected_rics):
+        raise ValueError(
+            f"{historical_symbol} {trade_date}: combined batch does not contain "
+            "exactly one discovery row for every frozen candidate RIC"
+        )
+
+    payload = validate_discovery(
+        plan=plan,
+        historical_symbol=historical_symbol,
+        trade_date=trade_date,
+        search_payload=search_payloads,
+        historical_chain_payload=chain_payloads,
+    )
+    payload["batch_evidence"] = {
+        "schema_version": "2",
+        "historical_chain_resolution_completed": True,
+        "candidate_rics": provided_rics,
+        "discovery_count": len(discoveries),
+    }
+    return payload
+
+
+def validate_batch_file(
+    path: Path,
+    *,
+    plan: dict | None = None,
+) -> dict:
+    resolved = path.expanduser().resolve()
+    batch_payload = json.loads(resolved.read_text(encoding="utf-8"))
+    if not isinstance(batch_payload, dict):
+        raise ValueError("combined option batch root must be a JSON object")
+
+    payload = validate_batch_payload(
+        plan=_plan() if plan is None else plan,
+        batch_payload=batch_payload,
+    )
+    payload["input_receipts"] = [
+        {
+            "kind": "combined_search_and_historical_chain",
+            "path_name": resolved.name,
+            "size_bytes": resolved.stat().st_size,
+            "sha256": sha256_file(resolved),
+        }
+    ]
+    return payload
+
+
 def public_contract_manifest(payload: dict) -> dict:
     return {
         "schema_version": payload["schema_version"],
@@ -299,6 +419,7 @@ def public_contract_manifest(payload: dict) -> dict:
         "mapping_class": payload["mapping_class"],
         "summary": payload["summary"],
         "input_receipts": payload.get("input_receipts", []),
+        "batch_evidence": payload.get("batch_evidence"),
         "contracts": payload["contracts"],
         "rejected": payload["rejected"],
     }
@@ -311,19 +432,35 @@ def main() -> None:
             "public-safe historical contract candidate manifest."
         )
     )
-    parser.add_argument("--symbol", required=True)
-    parser.add_argument("--date", required=True)
+    parser.add_argument("--symbol")
+    parser.add_argument("--date")
     parser.add_argument("--search-json", type=Path)
     parser.add_argument("--historical-chain-json", type=Path)
+    parser.add_argument("--batch-json", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
-    payload = validate_files(
-        search_path=args.search_json,
-        chain_path=args.historical_chain_json,
-        historical_symbol=args.symbol,
-        trade_date=args.date,
-    )
+    if args.batch_json is not None:
+        if args.search_json is not None or args.historical_chain_json is not None:
+            raise SystemExit(
+                "--batch-json cannot be combined with --search-json/--historical-chain-json"
+            )
+        payload = validate_batch_file(args.batch_json)
+        if args.symbol and args.symbol != payload["historical_symbol"]:
+            raise SystemExit("--symbol does not match combined batch historical_symbol")
+        if args.date and args.date != payload["trade_date"]:
+            raise SystemExit("--date does not match combined batch trade_date")
+    else:
+        if not args.symbol or not args.date:
+            raise SystemExit(
+                "--symbol and --date are required unless --batch-json is supplied"
+            )
+        payload = validate_files(
+            search_path=args.search_json,
+            chain_path=args.historical_chain_json,
+            historical_symbol=args.symbol,
+            trade_date=args.date,
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(public_contract_manifest(payload), indent=2, sort_keys=True) + "\n",
