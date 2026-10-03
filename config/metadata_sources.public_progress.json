@@ -4,7 +4,7 @@
     "downstream_policy": "Excluded events retain blank public_announcement_ts and information_asymmetry_seconds and may not participate in announcement-timing-dependent analysis.",
     "enabled": true,
     "expected_count": 68,
-    "expected_sha256": "cee36ff2c2adadd9ecc26fe11e81954a02401388c248434a7ab21920ce0a76f3",
+    "expected_sha256": "ba56a577f54da4c825b20a78c130a58810c83de41e6b1cb71c5373a5cc1eb6a0",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g1_final_timing_exclusions.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -1492,7 +1492,7 @@
       "delimiter": ",",
       "enabled": true,
       "encoding": "utf-8",
-      "license_reference": "SEC-hosted Avista earnings release explicitly states SPOKANE, Wash. \u2013 Feb. 20, 2013, 4:05 a.m. PT.",
+      "license_reference": "SEC-hosted Avista earnings release explicitly states SPOKANE, Wash. – Feb. 20, 2013, 4:05 a.m. PT.",
       "path": "data/public/metadata/g1_announcement_times_batch_0009.csv",
       "record_kind": "announcement_timestamp",
       "source_family": "official_newswire_archive",
