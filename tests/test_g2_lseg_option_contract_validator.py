@@ -1,3 +1,4 @@
+import json
 import g2_lseg_option_contract_validator as validator
 
 
@@ -145,3 +146,121 @@ def test_symbol_date_must_exist_in_frozen_plan():
         assert "expected exactly one frozen option-underlying task" in str(exc)
     else:
         raise AssertionError("expected fail-closed frozen-scope validation")
+
+
+def _combined_batch():
+    return {
+        "schema_version": "2",
+        "trade_date": "2015-02-12",
+        "historical_symbol": "ACHC",
+        "candidate_rics": ["ACHC.O", "ACHC.OQ"],
+        "historical_chain_resolution_completed": True,
+        "discoveries": [
+            {
+                "underlying_ric": "ACHC.O",
+                "option_chain_ric": "0#ACHC*.U",
+                "search_results": [
+                    {"Identifier": "ACHCC201505000.U"},
+                ],
+                "historical_chain_result": {
+                    "value": [
+                        {
+                            "Identifier": "0#ACHC*.U",
+                            "Constituents": [
+                                {"Identifier": "ACHCC201505000.U"},
+                                {"Identifier": "ACHCO201505000.U"},
+                            ],
+                        }
+                    ]
+                },
+            },
+            {
+                "underlying_ric": "ACHC.OQ",
+                "option_chain_ric": "0#ACHC*.U",
+                "search_results": [],
+                "historical_chain_result": {
+                    "value": [
+                        {
+                            "Identifier": "0#ACHC*.U",
+                            "Constituents": [
+                                {"Identifier": "ACHCC201505000.U"},
+                                {"Identifier": "ACHCO201505000.U"},
+                            ],
+                        }
+                    ]
+                },
+            },
+        ],
+    }
+
+
+def test_combined_batch_validates_directly_into_historical_contract_manifest():
+    out = validator.validate_batch_payload(
+        plan=_plan(),
+        batch_payload=_combined_batch(),
+    )
+
+    assert out["summary"]["historical_chain_candidates"] == 2
+    assert out["summary"]["historical_contract_set_ready_for_time_and_sales"] is True
+    assert out["batch_evidence"] == {
+        "schema_version": "2",
+        "historical_chain_resolution_completed": True,
+        "candidate_rics": ["ACHC.O", "ACHC.OQ"],
+        "discovery_count": 2,
+    }
+    by_ric = {row["source_ric"]: row for row in out["contracts"]}
+    assert by_ric["ACHCC201505000.U"]["historical_date_evidence"] is True
+    assert by_ric["ACHCO201505000.U"]["historical_date_evidence"] is True
+
+
+def test_combined_batch_file_adds_sha256_receipt(tmp_path):
+    path = tmp_path / "2015-02-12_ACHC.json"
+    path.write_text(json.dumps(_combined_batch()), encoding="utf-8")
+
+    out = validator.validate_batch_file(path, plan=_plan())
+
+    assert out["input_receipts"][0]["kind"] == (
+        "combined_search_and_historical_chain"
+    )
+    assert out["input_receipts"][0]["path_name"] == path.name
+    assert out["input_receipts"][0]["sha256"] == validator.sha256_file(path)
+
+    public = validator.public_contract_manifest(out)
+    assert public["batch_evidence"]["historical_chain_resolution_completed"] is True
+    assert public["input_receipts"][0]["sha256"] == validator.sha256_file(path)
+
+
+def test_combined_batch_rejects_legacy_search_only_completion():
+    payload = _combined_batch()
+    payload.pop("historical_chain_resolution_completed")
+
+    try:
+        validator.validate_batch_payload(plan=_plan(), batch_payload=payload)
+    except ValueError as exc:
+        assert "HistoricalChainResolution" in str(exc)
+    else:
+        raise AssertionError("legacy search-only batch must fail closed")
+
+
+def test_combined_batch_rejects_candidate_ric_drift():
+    payload = _combined_batch()
+    payload["candidate_rics"] = ["ACHC.O"]
+
+    try:
+        validator.validate_batch_payload(plan=_plan(), batch_payload=payload)
+    except ValueError as exc:
+        assert "do not match the frozen task" in str(exc)
+    else:
+        raise AssertionError("candidate RIC drift must fail closed")
+
+
+def test_combined_batch_requires_every_frozen_candidate_discovery_row():
+    payload = _combined_batch()
+    payload["discoveries"] = payload["discoveries"][:1]
+
+    try:
+        validator.validate_batch_payload(plan=_plan(), batch_payload=payload)
+    except ValueError as exc:
+        assert "exactly one discovery row" in str(exc)
+    else:
+        raise AssertionError("incomplete combined discovery must fail closed")
