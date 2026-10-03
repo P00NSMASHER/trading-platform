@@ -2072,12 +2072,12 @@
       "reason": "Regression coverage for the LSEG secondary-RIC evidence audit and fail-closed historical-date validation requirement."
     },
     "src/g2_lseg_datascope_client.py": {
-      "expected_sha256": "1f17f354e5d60a8f372220f9efb8ab99cfb56d7906e81d46ce20a4609137f668",
-      "reason": "Private-output LSEG DataScope client with dry-run-first bounded validation batches, exact-candidate resumability receipts, and explicit zero-promotion/zero-coverage fail-closed semantics; tests use fake transports only."
+      "expected_sha256": "70459d08610c68269b3a385d4e3a420a8b94dc73493fc17af0bc10ccfcc989c9",
+      "reason": "Private-output LSEG DataScope validation batches now require and persist HistoricalChainResolution evidence for options, derive/deduplicate 0#ROOT*.U ChainRIC queries, and refuse legacy search-only outputs as complete; bounded/resumable zero-promotion/zero-coverage semantics remain fail-closed."
     },
     "tests/test_g2_lseg_datascope_client.py": {
-      "expected_sha256": "2197590adfdd4b0cdd18b3d32c979cc0240b6b48292e670e1d9b5088d32fdf54",
-      "reason": "Private-output LSEG DataScope client with dry-run-first bounded validation batches, exact-candidate resumability receipts, and explicit zero-promotion/zero-coverage fail-closed semantics; tests use fake transports only."
+      "expected_sha256": "b516805a631db8207a5fc2c0601aecbff533f0bec51ec9a136c444a9670d6839",
+      "reason": "Private-output LSEG DataScope validation batches now require and persist HistoricalChainResolution evidence for options, derive/deduplicate 0#ROOT*.U ChainRIC queries, and refuse legacy search-only outputs as complete; bounded/resumable zero-promotion/zero-coverage semantics remain fail-closed."
     },
     "src/g2_lseg_historical_ric_validator.py": {
       "expected_sha256": "850c5ad4725cc6f8670fee33f5d9ba3afc18d98f385de984555111279e264d6c",
