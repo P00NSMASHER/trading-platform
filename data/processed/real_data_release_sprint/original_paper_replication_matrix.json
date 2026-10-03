@@ -1,0 +1,478 @@
+{
+  "schema_version": "1",
+  "target": {
+    "title": "Price Revelation from Insider Trading: Evidence from Hacked Earnings News",
+    "journal": "Journal of Financial Economics",
+    "publication_year": 2022,
+    "doi": "10.1016/j.jfineco.2021.12.006",
+    "canonical_sample_period": [
+      "2010-01-01",
+      "2015-12-31"
+    ],
+    "final_sample_earnings_announcements": 43687,
+    "final_sample_exposed_to_hacks": 8980,
+    "principle": "Reproduce the published JFE study with the authors' original data lineage and published processing rules. Alternative vendors may be used for validation only unless the original source is unavailable and the deviation is explicitly labeled."
+  },
+  "canonical_sample_construction": [
+    "Start from Compustat-reported earnings announcement dates during 2010-2015.",
+    "Require share price > $1 and market capitalization > $5 million.",
+    "Require NYSE, NYSE Amex/MKT, or NASDAQ listing and CRSP share code 10 or 11.",
+    "Require at least one I/B/E/S analyst forecast in the 90 days before the announcement.",
+    "Exclude announcements during regular trading hours.",
+    "Assign the earnings press release to its newswire using RavenPack Press Release and Dow Jones editions.",
+    "Drop announcements without an assigned press release.",
+    "Drop observations without prior-trading-day TAQ intraday returns or a following CRSP opening price.",
+    "Restrict the main analysis to the newswires that were hacked at some point.",
+    "Published final sample: 43,687 announcements, 8,980 exposed to hacks."
+  ],
+  "hack_access_evidence": {
+    "marketwired": {
+      "status": "high-confidence public legal evidence",
+      "intervals": [
+        [
+          "2010-02",
+          "2013-11"
+        ]
+      ],
+      "note": "SEC complaint states continuous Marketwired access from February 2010 through November 2013."
+    },
+    "pr_newswire": {
+      "status": "high-confidence public legal evidence",
+      "intervals": [
+        [
+          "2010-07",
+          "2011-01"
+        ],
+        [
+          "2011-07",
+          "2012-03"
+        ],
+        [
+          "2013-01",
+          "2013-03"
+        ]
+      ],
+      "note": "SEC complaint chart enumerates these three PRN access windows."
+    },
+    "business_wire": {
+      "status": "needs exact paper-treatment interval reconstruction",
+      "paper_description": "Hackers had access for half of 2015.",
+      "legal_background": "Other indictments describe Business Wire intrusions in 2012 and later access, but the exact daily treatment window used in the final JFE MainPanel.h5 has not been recovered from public code.",
+      "rule": "Do not invent exact treatment dates. Reconstruct from the paper's legal-evidence rule or recovered author intermediate."
+    }
+  },
+  "licenses_required": [
+    {
+      "source": "CRSP US Stock",
+      "canonical": true,
+      "required_period": "at least 2009-2016 around the 2010-2015 event sample",
+      "needed_for": [
+        "daily/overnight returns",
+        "prices and following opening prices",
+        "share codes and exchange codes",
+        "split adjustment factor CFACSHR",
+        "price five trading days before earnings",
+        "market controls and identifier linking"
+      ],
+      "current_product_family": "CRSP Stock",
+      "access_note": "WRDS/CRSP entitlement required."
+    },
+    {
+      "source": "S&P Compustat North America + CRSP/Compustat Merged",
+      "canonical": true,
+      "required_period": "historical fundamentals covering the sample and lags",
+      "needed_for": [
+        "earnings announcement/fundamental filters",
+        "quarterly fundamentals",
+        "GVKEY-PERMNO historical linkage",
+        "Q-value",
+        "market capitalization inputs",
+        "earnings-surprise construction following Livnat-Mendenhall",
+        "S&P 500/400/600/1500 membership used in matching/analysis"
+      ],
+      "current_product_family": "Compustat North America and CRSP/Compustat Merged",
+      "access_note": "Compustat and CCM entitlements required."
+    },
+    {
+      "source": "LSEG/Refinitiv I/B/E/S Historical Estimates (Global)",
+      "canonical": true,
+      "required_period": "forecast and actual history covering 2010-2015 plus 90-day pre-event windows",
+      "needed_for": [
+        "analyst detail history",
+        "ANNDATS_ACT",
+        "ANNTIMS_ACT",
+        "ACTUAL",
+        "consensus median forecasts",
+        "analyst count",
+        "earnings surprise"
+      ],
+      "current_wrds_schema": "tr_ibes",
+      "surviving_author_code": "vgreg/earnings_news_jar/IBES/IBES_Data_Processing_JAR.ipynb",
+      "access_note": "I/B/E/S Historical Detail entitlement is required; guidance/aggregates alone are not a faithful substitute."
+    },
+    {
+      "source": "RavenPack RPNA 4.0 legacy Press Release and Dow Jones editions",
+      "canonical": true,
+      "required_period": "2010-2015",
+      "needed_for": [
+        "assigning each earnings announcement to a newswire",
+        "earnings announcement timestamp cross-checks",
+        "newswire story control in the quarter leading to announcement",
+        "analyst-rating/news context used in companion preprocessing"
+      ],
+      "surviving_author_code": "vgreg/earnings_news_jar/Ravenpack/RavenPack.ipynb",
+      "current_product_family": "RavenPack legacy RPNA 4.0 / Dow Jones / Full Edition as contractually equivalent",
+      "exact_paper_rule": "Use DJ edition for releases missing from PR edition; paper notes Business Wire PR-edition gaps in 2014-2015.",
+      "unresolved": "The exact relevance threshold used to construct ln_Story_Count_Relevant has not been recovered. The final paper defines the control as the natural log of newswire stories about the firm in the quarter leading to the announcement."
+    },
+    {
+      "source": "NYSE TAQ Monthly and Daily",
+      "canonical": true,
+      "required_period": "2010-2015",
+      "needed_for": [
+        "intraday returns",
+        "equity volume",
+        "intraday turnover",
+        "Lee-Ready absolute order imbalance",
+        "NBBO midquotes",
+        "quoted spread",
+        "effective spread",
+        "realized spread",
+        "price impact",
+        "Figure 7 trade-level spread quantiles"
+      ],
+      "exact_paper_split": {
+        "2010-2013": "NYSE Monthly TAQ",
+        "2014-2015": "NYSE Daily TAQ"
+      },
+      "processing_lineage": "Holden and Jacobsen (2014) code plus authors' custom Python",
+      "important_time_windows": {
+        "order_flow": [
+          "09:30",
+          "12:00",
+          "16:00"
+        ],
+        "spread_morning_start": "09:45",
+        "spread_footnote": "Spread measures start at 09:45 because opening spreads are unusually large."
+      },
+      "access_note": "TAQ historical entitlement required. Daily TAQ alone is useful for validation, but exact reproduction should preserve the paper's Monthly-vs-Daily split and Holden-Jacobsen treatment."
+    },
+    {
+      "source": "OptionMetrics IvyDB US",
+      "canonical": true,
+      "required_period": "month before each 2010-2015 earnings announcement",
+      "needed_for": [
+        "monthly option trade volume",
+        "Table 1 option turnover"
+      ],
+      "exact_paper_definition": "monthly option trade volume divided by shares outstanding",
+      "current_wrds_schema": "optionm_all",
+      "access_note": "IvyDB US entitlement required."
+    },
+    {
+      "source": "Thomson Reuters Institutional Managers (13f) Holdings",
+      "canonical": true,
+      "required_period": "quarterly holdings spanning 2010-2015",
+      "needed_for": [
+        "institutional ownership fraction",
+        "Table 1 and Table 6 IO control"
+      ],
+      "current_wrds_schema": "tr_13f",
+      "legacy_lineage": "Thomson Reuters/Spectrum institutional holdings",
+      "access_note": "13F institutional holdings entitlement required. A newly parsed SEC-only 13F history is not the canonical source."
+    },
+    {
+      "source": "Markit Securities Finance - Analytics - Equity - America",
+      "canonical": true,
+      "required_period": "daily 2010-2015",
+      "needed_for": [
+        "Daily Cost of Borrow Score (DCBS) control in Table 6"
+      ],
+      "current_wrds_schema": "markit_msf_analytics_eqty_amer",
+      "definition": "Daily Cost of Borrow Score, 1-10; 1 cheapest/general collateral, 10 most expensive/special; based on proprietary benchmark fee / 7-day fees depending vintage documentation.",
+      "access_note": "Markit/S&P Securities Finance Analytics–Equity–America entitlement required."
+    },
+    {
+      "source": "Cboe/LiveVol historical U.S. option transaction data",
+      "canonical": true,
+      "required_period": "2010-2015",
+      "needed_for": [
+        "intraday option volume in Table 6",
+        "minute-level option volume in Figure 6 and prosecuted-event analysis"
+      ],
+      "historical_availability_evidence": "Current Cboe FAQ says Option Trades availability starts January 2010, while the current self-service Option Trades product page displays January 2012. Exact reproduction therefore requires legacy historical access that includes 2010-2011, not merely the modern self-service date range.",
+      "access_note": "Require Cboe DataShop/LiveVol historical Option Trades entitlement including the legacy 2010-2011 archive. Do not replace 2010-2011 with LSEG in a canonical replication."
+    },
+    {
+      "source": "NASDAQ Historical TotalView-ITCH",
+      "canonical": true,
+      "required_period": "case-study dates, not the full Table 6 panel",
+      "needed_for": [
+        "perfectly signed Nasdaq order-book/trade validation in the paper's case-study analysis"
+      ],
+      "versions": {
+        "4.1": "May 1, 2010 through September 26, 2014",
+        "5.0": "April 7/8, 2014 forward; parallel 4.1/5.0 transition during 2014"
+      },
+      "surviving_code": "vgreg/MeatPy supports ITCH 4.1 and 5.0 processing/OFI",
+      "access_note": "Historical TotalView-ITCH archive entitlement is required for the ITCH-based figures. It is not required to reproduce full-sample Table 6, which uses TAQ/Lee-Ready."
+    }
+  ],
+  "public_or_already_published_inputs": [
+    {
+      "source": "vgreg/hacked_earnings_jfe",
+      "contains": [
+        "TimeOfFirstTrade for 174 prosecuted events",
+        "SampleFirms",
+        "press-release archives 2010-2015",
+        "main analysis notebook",
+        "Table 6 notebook",
+        "text cleaning and ElasticNet code"
+      ],
+      "license_note": "Public repository materials; preserve repository license/provenance."
+    },
+    {
+      "source": "vgreg/earnings_news_jar",
+      "contains": [
+        "I/B/E/S preprocessing notebook",
+        "RavenPack preprocessing notebook",
+        "TRTH preprocessing code",
+        "PERMNO to Refinitiv RIC mapping"
+      ]
+    },
+    {
+      "source": "charlesmartineau/earnings_news_jar",
+      "contains": [
+        "original TRTH trade/quote extraction, timestamp, resampling, and qualifier code"
+      ]
+    },
+    {
+      "source": "vgreg/MeatPy",
+      "contains": [
+        "NASDAQ ITCH 4.1 and 5.0 parsers and order-book/OFI recorders"
+      ]
+    },
+    {
+      "source": "SEC/DOJ court filings",
+      "contains": [
+        "first-trade evidence and prosecution facts",
+        "newswire access windows for Marketwired and PR Newswire",
+        "support for treatment construction"
+      ],
+      "license_note": "Public government records."
+    }
+  ],
+  "table_figure_matrix": [
+    {
+      "output": "Table 1 / characteristic regressions",
+      "canonical_sources": [
+        "I/B/E/S",
+        "CRSP",
+        "Compustat/CCM",
+        "Thomson Reuters 13F",
+        "OptionMetrics IvyDB US",
+        "RavenPack"
+      ],
+      "key_variables": [
+        "SUE_Med",
+        "lnMCAP",
+        "IO",
+        "numest",
+        "lnQvalue",
+        "Share_Turn",
+        "Option_Turnover",
+        "hacked"
+      ],
+      "exact_status": "source lineage largely recovered; unpublished MainPanel.h5 construction still must be rebuilt"
+    },
+    {
+      "output": "Table 2 / soft information and Figure 3 word clouds",
+      "canonical_sources": [
+        "public press-release text archives",
+        "CRSP/TAQ returns"
+      ],
+      "public_code": [
+        "Text Analysis/clean_pr_text.py",
+        "Text Analysis/pr sentiment.py",
+        "Text Analysis/Wordcloud.ipynb"
+      ],
+      "exact_parameters": {
+        "max_words": 400,
+        "minimum_document_frequency": "0.5%",
+        "maximum_document_frequency": "40%",
+        "model": "ElasticNet"
+      },
+      "exact_status": "public code available; must reproduce training sample/return target exactly"
+    },
+    {
+      "output": "Figures 2 and 4 / prosecuted-stock selection",
+      "canonical_sources": [
+        "TimeOfFirstTrade/SEC prosecution sample",
+        "MainPanel controls",
+        "soft/hard information"
+      ],
+      "exact_status": "174-event public prosecution identifiers available; full comparison panel depends on rebuilt MainPanel"
+    },
+    {
+      "output": "Figure 5, Tables 3-5 / price revelation",
+      "canonical_sources": [
+        "CRSP",
+        "TAQ",
+        "I/B/E/S",
+        "press-release text",
+        "RavenPack treatment/newswire assignment",
+        "Compustat controls"
+      ],
+      "exact_status": "regression code public; proprietary MainPanel must be reconstructed"
+    },
+    {
+      "output": "Figure 6 / event-time abnormal stock and option volume",
+      "canonical_sources": [
+        "TAQ",
+        "Cboe historical option transactions",
+        "174 first-trade timestamps"
+      ],
+      "exact_rule": "abnormal log volume is event-minute log volume minus log average of the same minute over the prior 21 trading days; three matched non-hacked firms per event",
+      "exact_status": "first-trade times public; historical option/equity payloads licensed"
+    },
+    {
+      "output": "Table 6 / informed trading, order flow and spreads",
+      "canonical_sources": [
+        "NYSE TAQ",
+        "Cboe historical option transactions",
+        "CRSP",
+        "13F",
+        "I/B/E/S",
+        "RavenPack",
+        "Markit Securities Finance"
+      ],
+      "key_outcomes": [
+        "TURN_am/pm",
+        "lnVolume_am/pm",
+        "OIvol_LR_am/pm_abs",
+        "lnOptVolAM/PM",
+        "EffectiveSpread_Percent_DW_am/pm",
+        "PercentRealizedSpread_LR_DW_am/pm",
+        "PercentPriceImpact_LR_DW_am/pm",
+        "QuotedSpread_Percent_am/pm"
+      ],
+      "controls": [
+        "lnMCAP",
+        "IO",
+        "lnnumest",
+        "ln_Story_Count_Relevant",
+        "DCBS",
+        "invPRC"
+      ],
+      "exact_regression": "firm fixed effects + year-quarter fixed effects; standard errors clustered by firm and year-quarter; non-log outcomes standardized to unit sample standard deviation; missing outcome values filled with zero in the public final notebook",
+      "exact_status": "final regression code public; BSI_Summaries_EA_merged.h5 must be rebuilt"
+    },
+    {
+      "output": "Figure 7 / spread distribution shifts",
+      "canonical_sources": [
+        "NYSE TAQ",
+        "Table 6 controls"
+      ],
+      "exact_rule": "effective spread, realized spread and price impact estimated at each percentile; trade-level distributions are dollar-weighted; morning 09:45-12:00 and afternoon 12:00-16:00",
+      "exact_status": "published specification recovered; licensed TAQ payload required"
+    },
+    {
+      "output": "ITCH case-study validation",
+      "canonical_sources": [
+        "NASDAQ Historical TotalView-ITCH"
+      ],
+      "exact_status": "historical version windows identified; vgreg/MeatPy provides 4.1/5.0 processing code"
+    }
+  ],
+  "exact_measure_rules": {
+    "table6_sessions": {
+      "morning_order_flow": [
+        "09:30",
+        "12:00"
+      ],
+      "morning_spreads": [
+        "09:45",
+        "12:00"
+      ],
+      "afternoon": [
+        "12:00",
+        "16:00"
+      ]
+    },
+    "absolute_order_imbalance": "abs((buy market-order shares - sell market-order shares) / (buy market-order shares + sell market-order shares)); trade direction inferred using Lee-Ready for TAQ",
+    "quoted_spread": "NBBO quoted spread aggregated by time weighting; use log-price spread definition from the paper appendix/Holden-Jacobsen lineage",
+    "effective_spread": "2 * trade direction * (log trade price - log contemporaneous NBBO midpoint), dollar-volume weighted",
+    "realized_spread": "2 * trade direction * (log trade price - log NBBO midpoint five minutes later), dollar-volume weighted",
+    "price_impact": "2 * trade direction * (log NBBO midpoint five minutes later - log contemporaneous midpoint), dollar-volume weighted",
+    "monthly_share_turnover": "monthly dollar stock trade volume / market capitalization, month before earnings announcement",
+    "monthly_option_turnover": "monthly option trade volume / shares outstanding, month before earnings announcement",
+    "q_value": "(prcc_f * csho + dltt + dlc - act) / ppegt",
+    "earnings_surprise": "(actual EPS - median analyst forecast) / stock price five trading days before announcement",
+    "story_count_control": "natural log of newswire stories about the firm in the quarter leading to the earnings announcement; exact RavenPack relevance cutoff remains unresolved"
+  },
+  "unpublished_intermediates_to_rebuild": [
+    {
+      "file": "MainPanel.h5",
+      "used_by": "Main Analysis.ipynb",
+      "public_copy_found": false,
+      "build_script_found": false
+    },
+    {
+      "file": "BSI_Summaries_EA_merged.h5",
+      "used_by": "Insider Trading Measures.ipynb",
+      "public_copy_found": false,
+      "build_script_found": false
+    }
+  ],
+  "noncanonical_validation_sources": [
+    {
+      "source": "LSEG Tick History / DataScope Select",
+      "useful_for": [
+        "validating historical RICs",
+        "cross-checking trade/quote timestamps and fields",
+        "companion JAR/TRTH reconstruction",
+        "diagnosing missing Cboe/TAQ records"
+      ],
+      "not_canonical_for": [
+        "replacing NYSE TAQ in JFE Table 6",
+        "replacing Cboe option transactions in a paper-faithful replication"
+      ]
+    },
+    {
+      "source": "WRDS precomputed intraday indicators (wrds_iid)",
+      "useful_for": [
+        "cross-checking Holden-Jacobsen measures and column formulas"
+      ],
+      "not_canonical_for": [
+        "silently replacing the authors' Holden-Jacobsen + custom Python TAQ processing unless exact equivalence is demonstrated"
+      ]
+    }
+  ],
+  "unresolved_exactness": [
+    {
+      "item": "Business Wire exact daily hack-access interval used to construct final hacked dummy",
+      "priority": "critical",
+      "current_evidence": "paper states half of 2015; public legal sources found so far do not reproduce the exact final MainPanel treatment dates"
+    },
+    {
+      "item": "RavenPack relevance criterion for ln_Story_Count_Relevant",
+      "priority": "high",
+      "current_evidence": "final paper defines log newswire stories about the firm in prior quarter; public author code does not expose the exact relevance threshold"
+    },
+    {
+      "item": "Exact legacy Cboe/LiveVol 2010-2011 extraction interface/file specification used by authors",
+      "priority": "high",
+      "current_evidence": "Cboe FAQ says Option Trades data availability begins Jan 2010, while current self-service product page says Jan 2012; faithful replication requires legacy access for 2010-2011"
+    },
+    {
+      "item": "Author custom Python that transformed processed TAQ into BSI_Summaries_EA_merged.h5",
+      "priority": "critical",
+      "current_evidence": "not published in visible Git history; formulas and final regression names are recoverable"
+    },
+    {
+      "item": "Author merge script that constructed MainPanel.h5",
+      "priority": "critical",
+      "current_evidence": "not published in visible Git history; component preprocessing notebooks and final analysis code are public"
+    }
+  ]
+}

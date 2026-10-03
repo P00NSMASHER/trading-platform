@@ -2078,6 +2078,14 @@
     "tests/test_g2_lseg_datascope_client.py": {
       "expected_sha256": "41e864f55af6eb00f0858f173653c02eb2f90c338a2e9c517a77f4469958aca5",
       "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
+    },
+    "docs/original_paper_replication.md": {
+      "expected_sha256": "09540f6cc0514815f59f428a1bc358973fdd1ae616583f33a658179c09e41abb",
+      "reason": "Documents the canonical original-paper replication target, paid entitlement stack, fidelity rules, Table 6 timing nuance, and unpublished intermediates to rebuild."
+    },
+    "data/processed/real_data_release_sprint/original_paper_replication_matrix.json": {
+      "expected_sha256": "931d7191942319ad69096df3b95937776d2ea5105f8ccc4cb5608df2d2559515",
+      "reason": "Paper-faithful JFE replication matrix: canonical 43,687-observation sample, original vendor lineage, table/figure dependencies, exact known measure rules, license requirements, and unresolved fidelity gaps; explicitly separates validation substitutes from canonical sources."
     }
   },
   "schema_version": "2",
