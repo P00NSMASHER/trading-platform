@@ -2018,6 +2018,14 @@
     "tests/test_g2_lseg_datascope_execution_plan.py": {
       "expected_sha256": "606b7242576b98ca59d567678b656be828b78cd3c08aa4294da824879adacd09",
       "reason": "Credential-free LSEG DataScope execution planner that collapses duplicate trade/quote requirements into date-scoped Time & Sales jobs and historical option-discovery tasks while preserving all frozen G2 symbol-dates; no network calls, credentials, downloads, or coverage claims."
+    },
+    "src/g2_lseg_trth_event_pipeline.py": {
+      "expected_sha256": "8a187273356e1638a85dcf297aa69492457120d858e8c82b87b5f58c4a57983d",
+      "reason": "Exact-replication TRTH downstream event pipeline: UTC-day realignment, extended-hours filtering, quote validity cleaning, original event/open grids, asof resampling, and Form-T event-to-open selection; no credentials, downloads, or coverage claims."
+    },
+    "tests/test_g2_lseg_trth_event_pipeline.py": {
+      "expected_sha256": "ee5400e369251e6f599aa6abddcc8dcc96c4638b36bb8342778ee2db56c6c4b8",
+      "reason": "Exact-replication TRTH downstream event pipeline: UTC-day realignment, extended-hours filtering, quote validity cleaning, original event/open grids, asof resampling, and Form-T event-to-open selection; no credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
