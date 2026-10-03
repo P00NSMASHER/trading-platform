@@ -1,0 +1,299 @@
+{
+  "schema_version": "1",
+  "purpose": "Sanitized extraction of the original TRTH processing rules from Charles Martineau's public companion fork for the earnings-news research. No credentials, local drive paths, licensed payloads, or token values are included.",
+  "provenance": [
+    {
+      "repo": "charlesmartineau/earnings_news_jar",
+      "path": "TRTH/Quotes/ExtractQuotes.py"
+    },
+    {
+      "repo": "charlesmartineau/earnings_news_jar",
+      "path": "TRTH/Quotes/ExtractQuotesAroundEarnings.py"
+    },
+    {
+      "repo": "charlesmartineau/earnings_news_jar",
+      "path": "TRTH/Trades/ExtractTrades.py"
+    },
+    {
+      "repo": "charlesmartineau/earnings_news_jar",
+      "path": "TRTH/Trades/ExtractTradesAroundEarnings.py"
+    },
+    {
+      "repo": "charlesmartineau/earnings_news_jar",
+      "path": "TRTH/Trades/ClassifyTrades.py"
+    }
+  ],
+  "raw_tas_layout": {
+    "source_product": "TRTH Time and Sales (TAS)",
+    "storage_shape": "one exchange / year / month directory containing one or more gzipped TAS data parts per date",
+    "data_file_filter": "filename slice [15:23] == 'TAS-Data' and filename ends with .gz",
+    "date_parse": "filename slice [4:14] parsed as YYYY-MM-DD",
+    "checksum": {
+      "algorithm": "MD5",
+      "sidecar": "<data-file>.md5sum",
+      "behavior": "skip a raw part if the calculated MD5 does not equal the first 32 characters in the sidecar"
+    }
+  },
+  "quote_extraction": {
+    "type_filter": "Type == 'Quote'",
+    "raw_columns": [
+      "#RIC",
+      "Date[G]",
+      "Time[G]",
+      "GMT Offset",
+      "Type",
+      "Buyer ID",
+      "Bid Price",
+      "Bid Size",
+      "Seller ID",
+      "Ask Price",
+      "Ask Size",
+      "Qualifiers",
+      "Quote Time"
+    ],
+    "output_core_columns": [
+      "#RIC",
+      "Date",
+      "Time",
+      "Bid Price",
+      "Bid Size",
+      "Ask Price",
+      "Ask Size"
+    ],
+    "timestamp_rule": {
+      "source_time": "Quote Time when present; otherwise Time[G]",
+      "wrap_correction": "compute Time[G] - source_time; if >23h subtract 24h; if <-23h add 24h",
+      "canonical_time": "Date[G] + Time[G] - corrected_difference + GMT Offset hours"
+    },
+    "qualifier_flags": {
+      "Regular": {
+        "families": [
+          "PRC_QL_CD",
+          "PRC_QL3"
+        ],
+        "code": "R"
+      },
+      "Opening": {
+        "families": [
+          "PRC_QL_CD",
+          "PRC_QL3"
+        ],
+        "code": "OQ"
+      },
+      "Closing": {
+        "families": [
+          "PRC_QL_CD",
+          "PRC_QL3"
+        ],
+        "code": "CQ"
+      },
+      "NoQuote": {
+        "families": [
+          "PRC_QL_CD",
+          "PRC_QL3"
+        ],
+        "code": "NQ"
+      }
+    },
+    "original_chunk_rows": 1000000,
+    "original_sample_filter": "keep only #RIC values in the study earnings RIC universe"
+  },
+  "trade_extraction": {
+    "type_filter": "Type == 'Trade'",
+    "raw_columns": [
+      "#RIC",
+      "Date[G]",
+      "Time[G]",
+      "GMT Offset",
+      "Type",
+      "Ex/Cntrb.ID",
+      "Price",
+      "Volume",
+      "Market VWAP",
+      "Qualifiers",
+      "Seq. No.",
+      "Exch Time",
+      "Trd/Qte Date"
+    ],
+    "output_core_columns": [
+      "#RIC",
+      "Date",
+      "Time",
+      "Ex/Cntrb.ID",
+      "Price",
+      "Volume",
+      "Market VWAP"
+    ],
+    "timestamp_rule": {
+      "source_time": "Exch Time",
+      "source_date": "Trd/Qte Date when present; otherwise Date[G]",
+      "canonical_time": "source_date + Exch Time + GMT Offset hours"
+    },
+    "preprocessing": "drop rows with null or zero Volume before trade classification",
+    "qualifier_flags": {
+      "FormT": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "T"
+      },
+      "Opening": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND",
+          "CTS_QUAL"
+        ],
+        "codes": [
+          "O",
+          "O [CTS_QUAL]"
+        ]
+      },
+      "Closing": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "6"
+      },
+      "Cross": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "X"
+      },
+      "Sweep": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "F"
+      },
+      "NextDay": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "N"
+      },
+      "Bunched": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "B"
+      },
+      "PriorRefPrice": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "P"
+      },
+      "ExtendedHoursSOoS": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "U"
+      },
+      "DerivativelyPriced": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "4"
+      },
+      "AverageTradePrice": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "W"
+      },
+      "CashSale": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "C"
+      },
+      "SoldOutOfSequence": {
+        "families": [
+          "*_TEXT",
+          "LSTSALCOND"
+        ],
+        "contains": "Z"
+      },
+      "OddLot": {
+        "exact_codes": [
+          "ODT[IRGCOND]",
+          "ODD[IRGCOND]"
+        ]
+      }
+    },
+    "original_chunk_rows": 10000
+  },
+  "market_hours_quality_checks": {
+    "normal_open_check": "09:29:30 local",
+    "normal_close_check": "16:00:30 local",
+    "early_close_check": "13:00:30 local",
+    "relevant_early_close_dates_2011_2015": [
+      "2011-11-25",
+      "2012-07-03",
+      "2012-11-23",
+      "2012-12-24",
+      "2013-07-03",
+      "2013-11-29",
+      "2013-12-24",
+      "2014-07-03",
+      "2014-11-28",
+      "2014-12-24",
+      "2015-11-27",
+      "2015-12-24"
+    ],
+    "note": "The original classifier records suspicious out-of-hours trades rather than silently treating them as normal-session observations."
+  },
+  "event_window_logic": {
+    "quotes": "from one trading day before min(event timestamp, IBES timestamp) through two business days after max(event timestamp, IBES timestamp) in the original quote script",
+    "trades": "from one trading day before min(event timestamp, IBES timestamp) through one business day after max(event timestamp, IBES timestamp) in the original trade script",
+    "per_event_filter": "filter the staged daily file to the event security's #RIC"
+  },
+  "g2_projection": {
+    "equity_trade": {
+      "timestamp": "normalized trade timestamp",
+      "symbol": "#RIC resolved to historical G2 symbol",
+      "price": "Price",
+      "size": "Volume"
+    },
+    "equity_quote": {
+      "timestamp": "normalized quote timestamp",
+      "symbol": "#RIC resolved to historical G2 symbol",
+      "bid": "Bid Price",
+      "ask": "Ask Price",
+      "bid_size": "Bid Size",
+      "ask_size": "Ask Size"
+    },
+    "option_trade": {
+      "timestamp": "Tick History Time & Sales Date-Time for the option RIC",
+      "option_symbol": "#RIC plus historical option metadata resolution",
+      "price": "Price",
+      "size": "Volume"
+    },
+    "option_quote": {
+      "timestamp": "Tick History Time & Sales Date-Time for the option RIC",
+      "option_symbol": "#RIC plus historical option metadata resolution",
+      "bid": "Bid Price",
+      "ask": "Ask Price",
+      "bid_size": "Bid Size",
+      "ask_size": "Ask Size"
+    }
+  },
+  "adaptation_notes": [
+    "Do not copy original machine-specific drive letters into the production workflow.",
+    "Do not copy credentials or token-like values from any upstream LSEG sample.",
+    "The original ExtractTradesAroundEarnings.py contains a variable-reference typo (`task` inside process_event); preserve the research rule, not that implementation bug.",
+    "Actual G2 coverage remains fail-closed until licensed returned rows are validated by the existing source-contract/content validators."
+  ]
+}
