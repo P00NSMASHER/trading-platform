@@ -157,3 +157,14 @@ The audit also found several internal reproducibility inconsistencies that shoul
 - That same script's coefficient-output expression appends `_WORDS.parquet` to `out_fn[:-8]`, while the supplied `out_fn` already ends in `_WORDS.parquet`. The committed coefficient artifact therefore should be treated as authoritative evidence of the fitted result, not assumed to be byte-for-byte reproducible from the script exactly as published.
 
 These caveats do not invalidate the public tables or notebook outputs extracted above; they define the boundary between recoverable evidence and missing execution environment/context.
+
+### Broader public label universe
+
+`SampleFirms` contains a broader labeled universe than the 174 rows with exact first-trade clocks. Its label cross-tab is:
+
+- Hacked=0 / Actual=0: **34,707** rows; 29,311 have `Soft` (84.45%).
+- Hacked=1 / Actual=0: **8,256** rows; 6,820 have `Soft` (82.61%).
+- Hacked=1 / Actual=1: **724** rows; 619 have `Soft` (85.50%), covering 457 unique PERMNOs.
+- There are **zero Hacked=0 / Actual=1 rows** in the public table, so `Actual=1` implies `Hacked=1` there.
+
+The 724 `Actual=1` rows are useful as a broader auxiliary label set, but they must not be substituted for the 174 `TimeOfFirstTrade` events because they do not supply the exact first-trade clock. The public `SampleFirms` table has no Hacked=1 rows in 2014, while `TimeOfFirstTrade` has two 2014 events; both are among the ten preserved source-label exceptions. This is another reason to keep the two source tables distinct rather than forcing label agreement.
