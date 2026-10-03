@@ -1892,8 +1892,8 @@
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "vendor_sources/hacked_earnings_jfe/README.md": {
-      "expected_sha256": "216d367c93071659bd4abaebdecc1d3e2b68aac2c7b93bd429469ccb9a882d9d",
-      "reason": "Complete vgreg/hacked_earnings_jfe source audit and deterministic 174-event reconciliation; public/source-derived evidence only, no raw licensed vendor tick payload or G2 coverage claim."
+      "expected_sha256": "d408071f16e4bc16cb1e310527b9410049f2b38846de5b2b55cf2b66fd0deb33",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit: repository history/forks, notebook outputs, text-model schema, and 174-event source-derived analytics; no raw licensed vendor tick payload or G2 coverage claim."
     },
     "data/processed/g2_vendor_requests/hacked_earnings_jfe_event_reconciliation.csv": {
       "expected_sha256": "8e23e4c1f54952975989973c8ef045a9eefa01e3c14ca29823abe80b9af567df",
@@ -1902,6 +1902,14 @@
     "data/processed/g2_vendor_requests/hacked_earnings_jfe_source_summary.json": {
       "expected_sha256": "9b7d5fd70c235f5d4349d9d2ae09add970a458faa5b87f10800167c8f706176b",
       "reason": "Complete vgreg/hacked_earnings_jfe source audit and deterministic 174-event reconciliation; public/source-derived evidence only, no raw licensed vendor tick payload or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/hacked_earnings_jfe_notebook_extraction.json": {
+      "expected_sha256": "f67e83ae30911f8e63c5a9da1deb4b3000536edb17b92a7b7aab0462214a714c",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit: repository history/forks, notebook outputs, text-model schema, and 174-event source-derived analytics; no raw licensed vendor tick payload or G2 coverage claim."
+    },
+    "data/processed/g2_vendor_requests/hacked_earnings_jfe_event_analytics.json": {
+      "expected_sha256": "aead8e3cfab1426f0421bef239505995041b56198db78dbbce87ffa12c402995",
+      "reason": "Complete vgreg/hacked_earnings_jfe source audit: repository history/forks, notebook outputs, text-model schema, and 174-event source-derived analytics; no raw licensed vendor tick payload or G2 coverage claim."
     }
   },
   "schema_version": "2",
