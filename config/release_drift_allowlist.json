@@ -1848,20 +1848,24 @@
       "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
     },
     "data/processed/g2_vendor_requests/lseg_tick_history_ric_candidates.csv": {
-      "expected_sha256": "a1df8c29283eb1fd84a4a3fdd8ef7d22950cab55b467c64e08af32fc21651aeb",
-      "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract, candidate RIC mapping, and provenance only; no credentials, downloads, or coverage claims."
+      "expected_sha256": "35bf208aa6d6201ea55cce6b88e591470a5c7b0389c1dd134a07da150fb41552",
+      "reason": "LSEG/Reuters identifier-evidence upgrade for G2: candidate RIC/CUSIP evidence, reduced unresolved packet, and updated planning contract only; no credentials, downloads, or coverage claims."
     },
     "data/processed/g2_vendor_requests/lseg_tick_history_contract.json": {
-      "expected_sha256": "0025b5a7d03e8295e39f0e8747f9d09812880257855c701e38a66b2e071f2e4e",
-      "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract and exact unresolved-identifier packet; no credentials, downloads, or coverage claims."
+      "expected_sha256": "bdff64833137465ae8fbf5e160fd71ae948ccacbc170a4afce3843ba0a47e785",
+      "reason": "LSEG/Reuters identifier-evidence upgrade for G2: candidate RIC/CUSIP evidence, reduced unresolved packet, and updated planning contract only; no credentials, downloads, or coverage claims."
     },
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "605c180c7ff787d008f85eee2b03ae76dd914a71a9c81271c0aa154cc3418573",
       "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract, candidate RIC mapping, and provenance only; no credentials, downloads, or coverage claims."
     },
     "data/processed/g2_vendor_requests/lseg_tick_history_unresolved_identifiers.csv": {
-      "expected_sha256": "e5fb94c0b8c032df756e07179ebb2fd2fbccf43135bda419b9eff0a5eab6e8a6",
-      "reason": "Licensed LSEG Tick History G2 planning artifacts: sanitized field contract and exact unresolved-identifier packet; no credentials, downloads, or coverage claims."
+      "expected_sha256": "55de005fd6f84464976aae2db2e56d1ed09dba1ef79bdecd066c9ffce4802573",
+      "reason": "LSEG/Reuters identifier-evidence upgrade for G2: candidate RIC/CUSIP evidence, reduced unresolved packet, and updated planning contract only; no credentials, downloads, or coverage claims."
+    },
+    "data/processed/g2_vendor_requests/lseg_tick_history_reuters_config_evidence.csv": {
+      "expected_sha256": "fc6a582faa4eaf1ca202208d8ce7fd6ddc88f09f8f2dcfc0e562024c0f8d86dc",
+      "reason": "LSEG/Reuters identifier-evidence upgrade for G2: candidate RIC/CUSIP evidence, reduced unresolved packet, and updated planning contract only; no credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
