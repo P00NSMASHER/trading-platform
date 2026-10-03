@@ -224,8 +224,25 @@ def test_validation_batch_plan_is_exact_bounded_and_fail_closed():
         client.build_validation_batch("equity", limit=0)
 
 
-def test_execute_equity_validation_batch_is_resumable(tmp_path):
+def test_execute_equity_validation_batch_is_resumable(tmp_path, monkeypatch):
     calls = []
+
+    monkeypatch.setattr(
+        client.historical_ric_validator,
+        "validate_file",
+        lambda path, trade_date: {
+            "schema_version": "1",
+            "input_receipt": {"path_name": Path(path).name},
+            "results": [
+                {
+                    "trade_date": trade_date,
+                    "historical_symbol": "JNPR",
+                    "validation_status": "validated_single_candidate",
+                    "selected_ric": "JNPR.O",
+                }
+            ],
+        },
+    )
 
     class FakeClient:
         def extract_time_and_sales(self, candidate_rics, trade_date, output_path):
@@ -256,6 +273,10 @@ def test_execute_equity_validation_batch_is_resumable(tmp_path):
     assert first["skipped_existing_outputs"] == 0
     assert first["validation_promotions"] == 0
     assert first["g2_coverage_change"] == 0
+    assert first["receipts"][0]["identifier_validation_status"] == (
+        "validated_single_candidate"
+    )
+    assert Path(first["receipts"][0]["identifier_validation_path"]).exists()
     assert second["network_tasks_completed"] == 0
     assert second["skipped_existing_outputs"] == 1
     assert len(calls) == 1
