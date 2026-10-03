@@ -199,3 +199,160 @@ def test_download_job_writes_only_to_private_destination(tmp_path, monkeypatch):
     assert destination.read_bytes() == b"licensed-bytes"
     assert receipt["job_id"] == "job-123"
     assert receipt["size_bytes"] == len(b"licensed-bytes")
+
+
+
+def test_validation_batch_plan_is_exact_bounded_and_fail_closed():
+    batch = client.build_validation_batch("equity", start=0, limit=3)
+
+    assert batch["queue_size"] == 946
+    assert batch["selected_count"] == 3
+    assert batch["next_start"] == 3
+    assert batch["network_execution_enabled"] is False
+    assert all(row["historical_validation_required"] is True for row in batch["tasks"])
+
+    option = client.build_validation_batch("option", start=945, limit=3)
+    assert option["queue_size"] == 946
+    assert option["selected_count"] == 1
+    assert option["next_start"] == 946
+
+    with pytest.raises(ValueError):
+        client.build_validation_batch("bad-lane")
+    with pytest.raises(ValueError):
+        client.build_validation_batch("equity", start=-1)
+    with pytest.raises(ValueError):
+        client.build_validation_batch("equity", limit=0)
+
+
+def test_execute_equity_validation_batch_is_resumable(tmp_path):
+    calls = []
+
+    class FakeClient:
+        def extract_time_and_sales(self, candidate_rics, trade_date, output_path):
+            calls.append((candidate_rics, trade_date, output_path))
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_bytes(b"licensed-test-bytes")
+            return {
+                "job_id": "job-1",
+                "output_path": str(output_path),
+                "size_bytes": len(b"licensed-test-bytes"),
+            }
+
+    batch = {
+        "lane": "equity",
+        "tasks": [
+            {
+                "trade_date": "2011-03-21",
+                "historical_symbol": "JNPR",
+                "candidate_rics": ["JNPR.O"],
+            }
+        ],
+    }
+    output_dir = tmp_path / "external-validation"
+    first = client.execute_validation_batch(FakeClient(), batch, output_dir)
+    second = client.execute_validation_batch(FakeClient(), batch, output_dir)
+
+    assert first["network_tasks_completed"] == 1
+    assert first["skipped_existing_outputs"] == 0
+    assert first["validation_promotions"] == 0
+    assert first["g2_coverage_change"] == 0
+    assert second["network_tasks_completed"] == 0
+    assert second["skipped_existing_outputs"] == 1
+    assert len(calls) == 1
+    receipt_path = output_dir / "2011-03-21_JNPR.receipt.json"
+    assert receipt_path.exists()
+
+    # A receipt from a different candidate-RIC set must be retried.
+    receipt_path.write_text(
+        json.dumps(
+            {
+                "trade_date": "2011-03-21",
+                "historical_symbol": "JNPR",
+                "candidate_rics": ["JNPR.OQ"],
+            }
+        ),
+        encoding="utf-8",
+    )
+    candidate_changed = client.execute_validation_batch(
+        FakeClient(), batch, output_dir
+    )
+    assert candidate_changed["network_tasks_completed"] == 1
+    assert candidate_changed["skipped_existing_outputs"] == 0
+    assert len(calls) == 2
+
+    # A leftover raw file without a completion receipt must be retried, not skipped.
+    receipt_path.unlink()
+    third = client.execute_validation_batch(FakeClient(), batch, output_dir)
+    assert third["network_tasks_completed"] == 1
+    assert third["skipped_existing_outputs"] == 0
+    assert len(calls) == 3
+
+
+def test_execute_option_validation_batch_writes_private_discovery_result(tmp_path):
+    calls = []
+
+    class FakeClient:
+        def futures_options_search(self, ric, trade_date):
+            calls.append((ric, trade_date))
+            return [{"Identifier": f"{ric}-OPT"}]
+
+    batch = {
+        "lane": "option",
+        "tasks": [
+            {
+                "trade_date": "2011-03-21",
+                "historical_symbol": "JNPR",
+                "candidate_rics": ["JNPR.O", "JNPR.OQ"],
+            }
+        ],
+    }
+    output_dir = tmp_path / "external-option-validation"
+    result = client.execute_validation_batch(FakeClient(), batch, output_dir)
+
+    assert result["network_tasks_completed"] == 1
+    assert result["validation_promotions"] == 0
+    assert result["g2_coverage_change"] == 0
+    assert result["receipts"][0]["discovered_contract_count"] == 2
+    assert calls == [
+        ("JNPR.O", "2011-03-21"),
+        ("JNPR.OQ", "2011-03-21"),
+    ]
+    payload = json.loads(
+        (output_dir / "2011-03-21_JNPR.json").read_text(encoding="utf-8")
+    )
+    assert len(payload["discoveries"]) == 2
+
+    second = client.execute_validation_batch(FakeClient(), batch, output_dir)
+    assert second["network_tasks_completed"] == 0
+    assert second["skipped_existing_outputs"] == 1
+    assert len(calls) == 2
+
+    # Corrupt/incomplete JSON is not accepted as a completion marker.
+    (output_dir / "2011-03-21_JNPR.json").write_text("{", encoding="utf-8")
+    third = client.execute_validation_batch(FakeClient(), batch, output_dir)
+    assert third["network_tasks_completed"] == 1
+    assert len(calls) == 4
+
+
+def test_live_validation_batch_hard_caps_network_tasks(tmp_path):
+    class FakeClient:
+        pass
+
+    batch = {
+        "lane": "equity",
+        "tasks": [
+            {
+                "trade_date": "2011-03-21",
+                "historical_symbol": f"S{i}",
+                "candidate_rics": [f"S{i}.N"],
+            }
+            for i in range(client.MAX_LIVE_VALIDATION_TASKS + 1)
+        ],
+    }
+
+    with pytest.raises(ValueError, match="capped"):
+        client.execute_validation_batch(
+            FakeClient(),
+            batch,
+            tmp_path / "external-validation",
+        )

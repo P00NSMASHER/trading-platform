@@ -2072,12 +2072,12 @@
       "reason": "Regression coverage for the LSEG secondary-RIC evidence audit and fail-closed historical-date validation requirement."
     },
     "src/g2_lseg_datascope_client.py": {
-      "expected_sha256": "b94ff79c34cfb88a92a90ba87dd81caeb9e8440599f9e8664b1653152fd52447",
-      "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
+      "expected_sha256": "1f17f354e5d60a8f372220f9efb8ab99cfb56d7906e81d46ce20a4609137f668",
+      "reason": "Private-output LSEG DataScope client with dry-run-first bounded validation batches, exact-candidate resumability receipts, and explicit zero-promotion/zero-coverage fail-closed semantics; tests use fake transports only."
     },
     "tests/test_g2_lseg_datascope_client.py": {
-      "expected_sha256": "41e864f55af6eb00f0858f173653c02eb2f90c338a2e9c517a77f4469958aca5",
-      "reason": "Private-output licensed LSEG DataScope client with exact historical Time & Sales/search payloads, environment-only credentials, async polling, pagination, and private-path enforcement; tests use mocked HTTP only."
+      "expected_sha256": "2197590adfdd4b0cdd18b3d32c979cc0240b6b48292e670e1d9b5088d32fdf54",
+      "reason": "Private-output LSEG DataScope client with dry-run-first bounded validation batches, exact-candidate resumability receipts, and explicit zero-promotion/zero-coverage fail-closed semantics; tests use fake transports only."
     },
     "src/g2_lseg_historical_ric_validator.py": {
       "expected_sha256": "850c5ad4725cc6f8670fee33f5d9ba3afc18d98f385de984555111279e264d6c",
