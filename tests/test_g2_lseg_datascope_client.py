@@ -424,3 +424,92 @@ def test_live_validation_batch_hard_caps_network_tasks(tmp_path):
             batch,
             tmp_path / "external-validation",
         )
+
+
+def _option_contract_manifest(symbol="ACHC", trade_date="2015-04-28"):
+    return {
+        "schema_version": "1",
+        "trade_date": trade_date,
+        "historical_symbol": symbol,
+        "summary": {
+            "historical_contract_set_ready_for_time_and_sales": True,
+        },
+        "contracts": [
+            {
+                "source_ric": "ACHCE151505000.U",
+                "historical_symbol": symbol,
+                "trade_date": trade_date,
+                "historical_date_evidence": True,
+                "validation_status": "historical_chain_candidate",
+            },
+            {
+                "source_ric": "ACHCQ151505000.U",
+                "historical_symbol": symbol,
+                "trade_date": trade_date,
+                "historical_date_evidence": True,
+                "validation_status": "historical_chain_candidate",
+            },
+        ],
+    }
+
+
+def test_execute_option_day_delegates_to_canonical_downloader(tmp_path):
+    contract = tmp_path / "contracts.json"
+    contract.write_text(json.dumps(_option_contract_manifest()), encoding="utf-8")
+    output = tmp_path / "licensed-option.csv.gz"
+    calls = []
+
+    class FakeClient:
+        def extract_time_and_sales(self, rics, trade_date, output_path):
+            calls.append((list(rics), trade_date, output_path))
+            output_path.write_bytes(b"licensed-option-bytes")
+            return {"job_id": "job-1", "output_path": str(output_path)}
+
+    receipt = client.execute_option_day(
+        FakeClient(),
+        contract_manifest_path=contract,
+        expected_symbol="ACHC",
+        expected_date="2015-04-28",
+        output_path=output,
+    )
+
+    assert receipt["status"] == "downloaded_pending_content_validation"
+    assert receipt["historical_symbol"] == "ACHC"
+    assert receipt["trade_date"] == "2015-04-28"
+    assert receipt["contract_count"] == 2
+    assert receipt["validation_promoted"] is False
+    assert receipt["g2_coverage_change"] == 0
+    assert calls == [
+        (
+            ["ACHCE151505000.U", "ACHCQ151505000.U"],
+            "2015-04-28",
+            output,
+        )
+    ]
+
+
+def test_execute_option_day_checks_requested_identity_before_network(tmp_path):
+    contract = tmp_path / "contracts.json"
+    contract.write_text(json.dumps(_option_contract_manifest()), encoding="utf-8")
+
+    class FakeClient:
+        def extract_time_and_sales(self, *args, **kwargs):
+            raise AssertionError("network path must not run on identity mismatch")
+
+    with pytest.raises(ValueError, match="historical_symbol mismatch"):
+        client.execute_option_day(
+            FakeClient(),
+            contract_manifest_path=contract,
+            expected_symbol="ALNY",
+            expected_date="2015-04-28",
+            output_path=tmp_path / "never.csv.gz",
+        )
+
+    with pytest.raises(ValueError, match="trade_date mismatch"):
+        client.execute_option_day(
+            FakeClient(),
+            contract_manifest_path=contract,
+            expected_symbol="ACHC",
+            expected_date="2015-04-29",
+            output_path=tmp_path / "never.csv.gz",
+        )
