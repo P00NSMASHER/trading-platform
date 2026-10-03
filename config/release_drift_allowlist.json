@@ -2010,6 +2010,14 @@
     "docs/hacked_earnings_jfe_extraction_audit.md": {
       "expected_sha256": "0c0f0c9ffdf7c23dd0565c60bac54de2cf8e4709d7d397c4bf79a8ea174e051c",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
+    "data/processed/real_data_release_sprint/original_paper_replication_matrix.json": {
+      "expected_sha256": "931d7191942319ad69096df3b95937776d2ea5105f8ccc4cb5608df2d2559515",
+      "reason": "Paper-faithful JFE replication matrix: canonical 43,687-observation sample, original vendor lineage, table/figure dependencies, exact known measure rules, license requirements, and unresolved fidelity gaps; explicitly separates validation substitutes from canonical sources."
+    },
+    "docs/original_paper_replication.md": {
+      "expected_sha256": "09540f6cc0514815f59f428a1bc358973fdd1ae616583f33a658179c09e41abb",
+      "reason": "Documents the canonical original-paper replication target, paid entitlement stack, fidelity rules, Table 6 timing nuance, and unpublished intermediates to rebuild."
     }
   },
   "schema_version": "2",
