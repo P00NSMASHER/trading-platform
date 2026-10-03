@@ -24,7 +24,7 @@ def test_options_cost_alternatives_preserve_history_and_license_gates():
     assert current["Databento OPRA.PILLAR Trades"]["source_date_rows"] == 226
 
     cheapest = payload["conditional_cheapest_full_option_route"]
-    assert cheapest["status"] == "PREFERRED_IF_THETADATA_WRITTEN_LICENSE_CLEARANCE_IS_RECEIVED"
+    assert cheapest["status"] == "PREFERRED_THETADATA_CLEARED_LSEG_PRICE_PENDING"
     assert cheapest["expected_vendor_count"] == 2
     assert cheapest["coverage_accounting"] == {
         "source_date_rows_per_record_kind": 414,
@@ -36,6 +36,11 @@ def test_options_cost_alternatives_preserve_history_and_license_gates():
     assert segments["LSEG OPRA Tick History"]["underlying_date_pairs_per_record_kind"] == 814
     assert segments["ThetaData Options PRO"]["source_date_rows_per_record_kind"] == 291
     assert segments["ThetaData Options PRO"]["underlying_date_pairs_per_record_kind"] == 3014
+    assert segments["ThetaData Options PRO"]["pricing_status"] == "WRITTEN_160_USD_MONTH_PRIVATE_RESEARCH_ELIGIBLE_RETENTION_CONDITIONAL"
+    assert segments["ThetaData Options PRO"]["written_monthly_price_usd"] == 160.00
+    assert segments["ThetaData Options PRO"]["private_research_eligible"] is True
+    assert segments["ThetaData Options PRO"]["raw_data_delete_days_after_billing_period_end"] == 30
+    assert segments["ThetaData Options PRO"]["derived_or_modified_data_retention_allowed"] is True
     assert cheapest["replaces_if_cleared"] == [
         "Cboe DataShop Option Trades",
         "Databento OPRA.PILLAR Trades",
@@ -53,7 +58,11 @@ def test_options_cost_alternatives_preserve_history_and_license_gates():
     assert theta["eligible_quote_underlying_date_pairs"] == 3014
     assert theta["pre_history_residual_rows_per_record_kind"] == 123
     assert theta["pre_history_residual_pairs_per_record_kind"] == 814
-    assert theta["license_fit"] == "SALES_CLASSIFICATION_AND_RETENTION_TERMS_PENDING"
+    assert theta["license_fit"] == "PRIVATE_RESEARCH_ELIGIBLE_RAW_DELETE_30_DAYS_AFTER_BILLING_DERIVED_RETENTION_ALLOWED"
+    assert theta["written_monthly_price_usd"] == 160.00
+    assert theta["private_research_eligible"] is True
+    assert theta["raw_data_delete_days_after_billing_period_end"] == 30
+    assert theta["derived_or_modified_data_retention_allowed"] is True
 
     algo = by_vendor["algoseek Options Trade and NBBO Quote"]
     assert algo["conservative_frozen_eligible_rows_per_record_kind"] == 131

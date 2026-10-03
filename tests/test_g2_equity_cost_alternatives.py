@@ -33,7 +33,12 @@ def test_equity_cost_alternatives_preserve_license_gates():
     assert theta_equity["required_symbol_date_pairs_per_record_kind"] == 3828
     assert theta_equity["residual_symbol_date_pairs_per_record_kind"] == 2398
     assert theta_equity["coverage_fit"] == "PARTIAL_POINT_IN_TIME_XNAS_UTP_SLICE"
-    assert theta_equity["license_fit"] == "SALES_CLASSIFICATION_RETENTION_AND_BUNDLE_QUOTE_PENDING"
+    assert theta_equity["license_fit"] == "VENDOR_QUOTED_STOCK_PRO_FOR_SCOPE_RAW_DELETE_30_DAYS_AFTER_BILLING_DERIVED_RETENTION_ALLOWED"
+    assert theta_equity["pricing_status"] == "WRITTEN_160_USD_MONTH_AS_PART_OF_320_USD_BUNDLE"
+    assert theta_equity["written_monthly_price_usd"] == 160.00
+    assert theta_equity["written_options_plus_stocks_bundle_total_usd"] == 320.00
+    assert theta_equity["raw_data_delete_days_after_billing_period_end"] == 30
+    assert theta_equity["derived_or_modified_data_retention_allowed"] is True
 
     assert by_vendor["Massive Stocks Advanced"]["public_monthly_price_usd"] == 199.00
     assert by_vendor["Massive Stocks Advanced"]["coverage_fit"] == "FULL_SCOPE_TECHNICAL_FIT"

@@ -63,9 +63,21 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert evidence["cboe_zero_cost_acceptance_probe"]["logical_separation"] == "SEPARATE_FROM_PAID_BULK_ACQUISITION"
     assert evidence["cboe_zero_cost_acceptance_probe"]["coverage_claimed"] is False
     assert evidence["cboe_zero_cost_acceptance_probe"]["coverage_count_mutation_allowed"] is False
+    assert evidence["theta_data_written_terms"] == {
+        "research_disposition": "CHEAP_WRITTEN_ROUTE_AVAILABLE_WITH_RAW_DELETE_CONSTRAINT",
+        "options_underlying_date_pairs_per_record_kind": 3014,
+        "stock_symbol_date_pairs_per_record_kind": 1430,
+        "monthly_options_pro_usd": 160,
+        "monthly_stock_pro_usd": 160,
+        "monthly_bundle_total_usd": 320,
+        "private_research_options_pro_eligible": True,
+        "raw_unmodified_data_delete_within_days_after_billing_period_end": 30,
+        "derived_or_modified_research_data_retention_allowed": True,
+        "coverage_claimed": False,
+    }
 
     assert payload["external_state"]["vendor_quotes_or_pricing"] == "PARTIAL_EXTERNAL_QUOTES_RECEIVED"
-    assert payload["external_state"]["license_or_entitlement_terms"] == "PENDING_EXTERNAL"
+    assert payload["external_state"]["license_or_entitlement_terms"] == "PARTIAL_WRITTEN_TERMS_RECEIVED"
     assert payload["external_state"]["licensed_data_delivery"] == "PENDING_EXTERNAL"
     assert payload["external_state"]["production_content_validation"] == "BLOCKED_ON_DELIVERY"
     assert payload["external_state"]["databento_cost_probe"] == "BLOCKED_API_KEY_NOT_CONFIGURED"
@@ -74,6 +86,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert payload["external_state"]["cboe_trial_retention_rights"] == "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES"
     assert payload["external_state"]["cboe_custom_tick_quote"] == "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET"
     assert payload["external_state"]["tickdata_written_quote"] == "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED"
+    assert payload["external_state"]["thetadata_written_terms"] == "WRITTEN_320_USD_ONE_MONTH_BUNDLE_RAW_DELETE_DERIVED_RETENTION_ALLOWED"
     assert payload["external_state"]["lseg_2011_quote"] == "REQUEST_SENT_AWAITING_REPLY"
     assert payload["external_state"]["algoseek_quote_and_sandbox_terms"] == "REQUEST_SENT_AWAITING_REPLY"
 
@@ -98,6 +111,10 @@ def test_readiness_next_actions_cover_every_external_dependency():
     assert "written quote as unavailable" in actions
     assert "Cboe" in actions
     assert "outside the target budget" in actions
+    assert "ThetaData" in actions
+    assert "$320" in actions
+    assert "delete" in actions.lower()
+    assert "derived/modified" in actions
     assert "explicit user authorization" in actions
     assert "daily credit limit does not gate the trial" in actions
     assert "acceptance probe" in actions

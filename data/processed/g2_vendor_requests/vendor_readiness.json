@@ -17,7 +17,7 @@
   },
   "external_state": {
     "vendor_quotes_or_pricing": "PARTIAL_EXTERNAL_QUOTES_RECEIVED",
-    "license_or_entitlement_terms": "PENDING_EXTERNAL",
+    "license_or_entitlement_terms": "PARTIAL_WRITTEN_TERMS_RECEIVED",
     "licensed_data_delivery": "PENDING_EXTERNAL",
     "local_entitlement_hash_binding": "PENDING_EXTERNAL",
     "production_content_validation": "BLOCKED_ON_DELIVERY",
@@ -29,7 +29,8 @@
     "lseg_2011_quote": "REQUEST_SENT_AWAITING_REPLY",
     "algoseek_quote_and_sandbox_terms": "REQUEST_SENT_AWAITING_REPLY",
     "cboe_trial_option_quote_access": "DOCUMENTED_HISTORICAL_ENDPOINT_RUNTIME_TRIAL_ACCESS_UNVERIFIED",
-    "cboe_trial_retention_rights": "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES"
+    "cboe_trial_retention_rights": "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES",
+    "thetadata_written_terms": "WRITTEN_320_USD_ONE_MONTH_BUNDLE_RAW_DELETE_DERIVED_RETENTION_ALLOWED"
   },
   "canonical_full_g2_state": {
     "required_source_date_rows": 1656,
@@ -48,6 +49,7 @@
     "Before any bulk Cboe trial acquisition, obtain written Order Form or vendor permission that permits retained internal research use after trial termination; the default Cboe subscription agreement requires Data to be deleted or returned at termination unless the applicable Order Form expressly provides otherwise.",
     "If the Cboe quote smoke passes, use reference/options to enumerate the complete contract universe per underlying/date and verify option-quote pagination/request-rate feasibility before treating 2012+ strict option quotes as an acquisition candidate.",
     "Cboe custom tick-level OPRA pricing was received for the full OPRA universe only and is outside the target budget; do not pursue that paid custom route without explicit user authorization.",
+    "ThetaData confirmed a one-month $320 Options Pro + Stock Pro bundle for the requested scope. Private research is eligible for Options Pro; raw/unmodified historical data must be deleted within 30 days after the billing period ends, while derived/modified research data may be retained. Do not subscribe without explicit user authorization.",
     "Await LSEG pricing/availability reply for the exact 2011 OPRA request.",
     "Await algoseek pricing and sandbox-terms replies for the exact historical scopes.",
     "Place lawfully obtained vendor files in a local drop folder, run licensed-data intake + delivery preflight, then create a local hash-bound entitlement manifest."
@@ -89,6 +91,18 @@
       "logical_separation": "SEPARATE_FROM_PAID_BULK_ACQUISITION",
       "coverage_claimed": false,
       "coverage_count_mutation_allowed": false
+    },
+    "theta_data_written_terms": {
+      "research_disposition": "CHEAP_WRITTEN_ROUTE_AVAILABLE_WITH_RAW_DELETE_CONSTRAINT",
+      "options_underlying_date_pairs_per_record_kind": 3014,
+      "stock_symbol_date_pairs_per_record_kind": 1430,
+      "monthly_options_pro_usd": 160,
+      "monthly_stock_pro_usd": 160,
+      "monthly_bundle_total_usd": 320,
+      "private_research_options_pro_eligible": true,
+      "raw_unmodified_data_delete_within_days_after_billing_period_end": 30,
+      "derived_or_modified_research_data_retention_allowed": true,
+      "coverage_claimed": false
     }
   }
 }

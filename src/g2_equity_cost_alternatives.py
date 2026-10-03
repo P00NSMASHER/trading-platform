@@ -41,7 +41,7 @@ def build_alternatives() -> dict:
             },
             {
                 "vendor": "ThetaData Stocks PRO (UTP subset)",
-                "route_status": "CHEAP_PARTIAL_BUNDLE_CANDIDATE",
+                "route_status": "CHEAP_PARTIAL_WRITTEN_BUNDLE_ROUTE",
                 "documented_utp_history_start": "2012-06-01",
                 "frozen_first_eligible_date": "2012-06-29",
                 "eligible_source_date_rows_per_record_kind": 291,
@@ -51,17 +51,22 @@ def build_alternatives() -> dict:
                 "residual_symbol_date_pairs_per_record_kind": 2398,
                 "coverage_fit": "PARTIAL_POINT_IN_TIME_XNAS_UTP_SLICE",
                 "fidelity_fit": "TICK_TRADES_AND_NBBO_QUOTES",
-                "license_fit": "SALES_CLASSIFICATION_RETENTION_AND_BUNDLE_QUOTE_PENDING",
-                "pricing_status": "BUNDLE_QUOTE_REQUEST_SENT_2026-10-02",
+                "license_fit": "VENDOR_QUOTED_STOCK_PRO_FOR_SCOPE_RAW_DELETE_30_DAYS_AFTER_BILLING_DERIVED_RETENTION_ALLOWED",
+                "pricing_status": "WRITTEN_160_USD_MONTH_AS_PART_OF_320_USD_BUNDLE",
+                "written_monthly_price_usd": 160.00,
+                "written_options_plus_stocks_bundle_total_usd": 320.00,
+                "raw_data_delete_days_after_billing_period_end": 30,
+                "derived_or_modified_data_retention_allowed": True,
                 "derivation_basis": (
                     "The frozen post-2012-06 equity requirements were joined to G3 point-in-time "
                     "primary-listing evidence. Exactly 55 XNAS symbols account for 1,430 of 3,828 "
                     "symbol/date pairs per equity record kind; no listing-evidence conflicts remain."
                 ),
                 "blocking_fact": (
-                    "ThetaData documents UTP tick history from 2012-06-01, but the pre-history and "
-                    "CTA/XASE residual still needs another source. Written license classification, "
-                    "retention terms, and the requested options+stocks bundle quote remain pending."
+                    "ThetaData quoted Stock Pro at $160/month as part of the $320 one-month Options Pro + "
+                    "Stock Pro bundle for the requested scope. The pre-history and CTA/XASE residual still "
+                    "needs another source. Raw/unmodified historical data must be deleted within 30 days "
+                    "after the billing period ends; derived/modified research data may be retained."
                 ),
                 "source_urls": [
                     "https://thetadata.net/pricing",
