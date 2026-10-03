@@ -574,3 +574,19 @@ def test_contract_accepts_sec_litigation_public_distribution_family(tmp_path):
     assert len(contracts)==1
     assert contracts[0].source_family=="sec_litigation_public_distribution_record"
 
+
+
+
+def test_contract_accepts_federal_court_public_distribution_family(tmp_path):
+    p=tmp_path/"c.json"
+    p.write_text(json.dumps({"schema_version":"1","sources":[{
+        "source_id":"court-public-distribution","record_kind":"announcement_timestamp",
+        "source_family":"federal_court_public_distribution_record",
+        "path":"unused.csv","enabled":False,"authorized":True,
+        "data_classification":"public_official_data",
+        "license_reference":"Federal court filing via CourtListener RECAP",
+        "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{}
+    }]}),encoding="utf-8")
+    contracts,_=load_contract(p)
+    assert len(contracts)==1
+    assert contracts[0].source_family=="federal_court_public_distribution_record"
