@@ -161,7 +161,7 @@
     },
     "config/metadata_sources.public_progress.json": {
       "expected_sha256": "7437514aa690957e3596b76117754324ce9190a29d15fed02aca8b99b8c963d4",
-      "reason": "G1 batch 0077 provenance repair: metadata contract now pins the corrected exact-base exclusion receipt; no timestamp values changed."
+      "reason": "G1 batch 0077 provenance repair: bind committed generator/evidence/receipts to exact integration base 87ce85b and keep reviewed exclusion hash pin consistent; timestamp values unchanged."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
