@@ -1856,8 +1856,8 @@
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "vendor_sources/lseg/README.md": {
-      "expected_sha256": "72b92a45dd2b1607dc880ffee222bef79751c3410f37809e820f81c508753083",
-      "reason": "Update LSEG provenance documentation to include the extracted original TRTH research processing contract; no credentials, downloads, or coverage claims."
+      "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
+      "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
     },
     "data/processed/g2_vendor_requests/lseg_tick_history_unresolved_identifiers.csv": {
       "expected_sha256": "e5fb94c0b8c032df756e07179ebb2fd2fbccf43135bda419b9eff0a5eab6e8a6",
@@ -1896,12 +1896,12 @@
       "reason": "Extracted original TRTH research processing rules from the public companion fork: TAS layout, checksums, fields, timestamp rules, qualifier handling, event windows, and early-close dates; no credentials or licensed payloads."
     },
     "src/g2_lseg_trth_normalizer.py": {
-      "expected_sha256": "61873f1dcf6846ede5c8dfe32c8de8e15ea40e2b82fa45e8ad828db0a70f0383",
-      "reason": "Executable G2 LSEG/TRTH normalizer and regression tests derived from the merged original-research processing contract; no credentials, downloads, or coverage claims."
+      "expected_sha256": "0463e2ace528d4fa8132eaa5e77e51630b569d75a6f797d58d2b1700ee57dd38",
+      "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
     },
     "tests/test_g2_lseg_trth_normalizer.py": {
-      "expected_sha256": "3e1cd36c5a5c4d34781d8da51b68a7d042ba03a967040805dc48d89a0f034385",
-      "reason": "Executable G2 LSEG/TRTH normalizer and regression tests derived from the merged original-research processing contract; no credentials, downloads, or coverage claims."
+      "expected_sha256": "3ec09071f2c61e6d735bc0bf3fb009bc6358bfdfb08d22a0582509c833422f9f",
+      "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
     },
     "data/public/metadata/g1_announcement_times_batch_0077.csv": {
       "expected_sha256": "002f4daad03156d01048f5bbb2096d4a73000818a1290feae6054aea555d564a",
