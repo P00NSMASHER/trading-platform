@@ -23,7 +23,7 @@ jobs:
       - name: Checkout publisher source head
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: g1/public-batch-0097-worker-2-court7-main-986b70e-source
+          ref: g1/public-batch-0097-worker-2-court7-main-19d9773-source
           fetch-depth: 0
           persist-credentials: true
 
