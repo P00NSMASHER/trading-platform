@@ -1,0 +1,20 @@
+name: G1 Worker 0 batch 0100 prep check
+
+on:
+  push:
+    branches:
+      - g1/research-worker0-batch0100-test-aba72df
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Run batch 0100 prep regression
+        run: |
+          python -m pip install --disable-pip-version-check --quiet pytest
+          python -m pytest -q tests/test_g1_public_batch_0100_prep.py
