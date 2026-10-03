@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "c12b85e022873206b81178e9da05dda349192540e9c344854f6b4497e47e9c4b",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c8e5479e048b7573c671c10951fb5e5cd030b9f64c5bcb65fd365c5200685861",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "a74026ac2ae319919c844a95aaefa829667fa200840b47c83bb7c05a82a8c0fa",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "61a3aa0caaf157975b61ac0467cbb0653bdf4e78c60a63055473d3b01989fef2",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "59bc01b0a677a479e863abffccd57c3fc34e8670f181529f9af60bc7e8ff17f8",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "98b6ac57017d4ef94e0d78144d8b1ede0ab601096d627cb28902826336784afe",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -160,8 +160,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "1222cdd4fc631a75ee59f80f593d317a64205fa3c52eaff1cfb561b46519c2c4",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d44a4b97be2a9853951af461dcb6f48d2f65a3cf13bd68a91ef11864d09829ad",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -180,8 +180,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "a3f096ff11ed05b95fea0375360b277451c848ddd2681accd9a2e56b0bd56e2c",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a4e08b233d13467dbbe033863466afe0f75f725cd766c875905d65a2afe5b21c",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -192,8 +192,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "55f62df7f9b508df4bbd369eb7d5d0622b1f9fc7ff82349e96b7b6cac88ff157",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "81b86b3560b0b5e62220e27c692babc4ff58e57fd2a5ecb82218b04467223a4e",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -248,8 +248,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "032b3711937b6d856cd81652abd1a8634f1c33c46c78b2daedc657d463d42e14",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "909c1445639a8dfc6c2e069aa5b6f491f97145e9ca4fac91c885f3bebeff1a80",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -264,12 +264,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "f31553d4296bf61c5029b528a6ff29c5df27c6eb615cf827b5d19fb11e4211b6",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e431ca0c2b34d9f3c4b0f78a5998750246913dd2888c73560a076588efcffb50",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "0edb463b2183517944b02fd53fed78659e56a70ba4449d9a7f9eb4788ff58026",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4eaf756d89e746ac7e6dbc9570966bfc6476638a260f493732bacb3b7956a019",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -504,8 +504,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "350f88cb1be123fbad35756fe209d49a4680995dc9c34a5e90f49cb67ad5dc3a",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f034e5541aa8f08d74a393fca941fe7c8794062879a4f4e88b42913623852241",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -544,12 +544,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "ad3354f8f2c0213e0cadc74dd03852cb050e77f8d9136ec85808861e397b9337",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2a606f05fd3eacaae7c60fab040127f49c6eb3dd5555985c56337cf3c4d5bf06",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "e25ebc8244175a6ab13be9db996aab209e4aad9982c2ae85b8a582437b453612",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "57245b0b089682da64b2cd9c546f322b20e3728b6bc172ca1bfb8d83d6474dc2",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -568,8 +568,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "6cfb532745daf84aa40df9702b690d0c75088f578f2111c644b5f59701bee0bf",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c8b54bd81ab49afaa3160d601be6ea8f0c171fd8e7502a10b9e490dd5452d11d",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -871,6 +871,10 @@
       "expected_sha256": "23852cb677b398a14ca82e7c23ce0b36f5e8ffbbe7f72f481cf94b3ba63a7626",
       "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0100.csv": {
+      "expected_sha256": "e60370eeb8840dd78a3390bbd0ad7d089c42688a6c8aba036798a38f2d4e275a",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -1039,9 +1043,13 @@
       "expected_sha256": "2ef6906472a54dc13fde42709dbd4190f134c373147f75d51ea226f8c37aa531",
       "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0100_evidence.json": {
+      "expected_sha256": "17ac24731cbd53b8f420219404cbed47fb6899f9c4ff476469567798b91ddc2b",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "e25dab5bbefc11f4cfc88c8e0ced97e34026fa0d13d9c24485a913ff70320f41",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7ffa53f804d736f008336d37a7192b192868b0c4b60e18ef632d95a109a426ba",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
@@ -1220,8 +1228,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "0976b5cc1e09ceeaf150d2c6b99e75b64237d8a341c83b899b52d86067377fdc",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b336bf29fd85206eeeddb48e78520c07065de77073976cd22772582e99e2b8aa",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1426,6 +1434,10 @@
     "scripts/g1_batch_0095_generate.py": {
       "expected_sha256": "e7ba9205708f01741386d14e39bfefe152220aeb0a9a92a2dbcfaa23a0c59d09",
       "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0100_generate.py": {
+      "expected_sha256": "ef39b1a8810e4ddfe3a335c985d390d60ad2f467ce2159a214ec1bb813cda8dd",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
       "expected_sha256": "9b101f23bf6060140301a40a63b256a00798957aa11e262df6cc18498d7558f3",
@@ -1732,188 +1744,192 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "4ee6ae52004382e5f65c236452dbaf29eb2b67a9f4eb9b8d7960b241b5ed9e19",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d3404b8e455d682ba901891e61e49b9ad8e68f07717ae9c4e4cad469a65ef5f8",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "775dc3b58cbe9904064b9041def5a85ee3033f7840829926b9e44a76a420dad7",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "209d4357c9f3a7bf4794e117332e76923a290da3ea449f86a83c647bb5494675",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "a0d966f6993d8b45b3c63bead5924a6c84d05ae18f954e804de51bddf1d7008a",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c94b915d02e2278d4740b13a3b8b37c3e4c52f064ffe75e91d013abba0081f26",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "bb3217af802fd1b4070fe04ea712a7bc221f8363d445d2056a1fe9018ae5cbec",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f6ddbc9c601d97441b2d874ec4779a74e115d6e2a2e42fc53e9a902cb4a30a79",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "36d565c8e8acf364cbdaa27f3e160b811b73186388ad226d28672789046fd630",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6bfa8427fb424759d8fa027b9525a51d1e9f89069f9aee864e86c27ff4ef7ed6",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "7c8c997349ccf4df06c23b73a9e40e2472fffa7542a80fc50382219a013b70d0",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e3e8b3350768f9db8c8cde868095b69164408263a07735ee36e15b076cfa139a",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "e0b166c00cd7f81fcf61be6cb7cfc37fb1464ec51e3d905eca557e4ac9d51afd",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d0a871cea666f0eb8edc73cbe7eb25657536f4b5c9f29dee9b357fecfe8e3dd0",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "27dfd4944b6d059d5a14335fa1ec1f9b37dbcd4901bd52868f340bc11a54351a",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "449c57ce64631b9f65d455b188f30fec17cf60d559caab39a615f2d891167c15",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "2e6f7c3593348b096894c9fd987d2e3a1fffd9ad488b655becf692d4b6be8510",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "625dd9077a4e2e4ae0740662167f2232b83ac33180b0784579341959d94bf36e",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "b796e4fe19fd8f3fe81ecb0d816d95659e14d00ada60b9c630568ff7fc2c5109",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0e06c5c88a8a246a7454c9b53bcaeb72df36cce680d4a2b2344f8cd6a4734413",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "daa701ac5aa5ec75c5ef7bbc31554e64abddbb5b80cdcc141c89bf944e9cb9c1",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "25fb21134bd10c38a3efcdcd79d30c97259e66e1c37ff535cf68230cb94fff0c",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "8784b65b05d8d55d80b61a711e201b09aac496daf2a0862214158c54d94fb6e9",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "79c7d5f4db044ca8745d2d722860549712dc0c4caa6c49268eb0abacbec6345b",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "310f830bc640c34c0d2bce00acdd9174a3e0fe21402f6c92529b10526dc04fa7",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e3dc29ceb4b5ebd1c1f65082042accb255c3af23fd8df18e270130b611279c61",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "4ba69c1adf80f0d6d3eefd24a8af4d267f3f15a525df86b8b07fd6e78f3dfd48",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f3145bdf1e9f4a955d1ba1a904b2f8c15329abc06360aa531bb7b2d835bc1d43",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "e566d7d9b1a604b99d703de58278297bf00a2454dd2bbecd11b74647bffc508d",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bd559c08b59fb1c88e85ba85e9aa6991b4efc0700f17ef26b3e15b95b775cd9a",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "f524c9c166446893dbeb7bebd49f34bccad1c1dee72398e1d82e79a1567adb2e",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "85b9b644ab9edd3ac89609d6c06ec90efc01e036d2376935261698c49acd6139",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "1e507d3abe1171b04b68a91fc3b7853e599423e0707a85067b89b8147562cc0d",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9055b6771461d549b0f7e787b7a887829d719de4eb5c1acf03d72468267bce18",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "a721351d69a19cc0495b33859476f301229f756fc62323837b0cce8e9c9d0a9e",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "24f679befb169388c9ed1b391277e6915eff67478ce5d11a73df2d6c92face8c",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "971dd7b1239b4445c107ae71d5e7fcfc5cb84be211311bb45b69fccbc82f31c9",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9c7a788eca1982e559e380784a2ee2633fad036bd4ec2457bce74207fb7df5e2",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "e6e4e910f8067c0bd94eb4da4b4e48aa9b2ba56aac40421c32abf32d3c38e964",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d6e2dbae842f48f8a51b4396399be9384fe448fe7df6b3def90472235d9279cd",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "d8799caceced0833afe2449f9ff7b27b8d53123dd9df88a55c71c95f73b047a1",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9699910b64e2f2873b50b1f2eea75181ec4717697916799b72850c34847fa302",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "890ce121f087799ccd2a412484ca4941b026c7e6befdaed65d049ec74ca659b6",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1c6531162d4662f0fa3542bf7318f33a1e87a4c0ea7586dd764ee7238ac32eb2",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "772e0a4e09c5fb21f3e4e038fd2a0979aace7b52c38d9c53fc70cb9ca4ff8c2c",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5fd26bbb12554665b246cc970701a5284f0e4a230fb52d5cec5407b1f14c73ac",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "82a829c3ad62c2e5229731c39eb53210746d497962506a7360eb5b96a6f625c2",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3a403fe11b66b2b4101454b29bc09e76ac5db5bc00a8cdf343d937244b3a00cc",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "4c3aad0ca5cbef5d91dbb84ccf8131b9c1c98de264f7f456d11678c5a780fc6a",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8c5790d5d6b079701e71d4524cd6617915c0446d4eb4f984d45a67f70c521359",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "c4f1f31d9d21af1fb0f9b7870de7fc578890dc35ad1d6644ce2ab3f67b5a556f",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3d6658ec1fa3f98bcfbd26544fec6bc6bc8b4ad2d4392c6b69e6d38f101c5a72",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "cbd11665082158d1b29ac212b4eeeeae49f2d5075504a94fa43cc2cb87585280",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "968ffbd7261c6ba1ff4ff9ecfd0395be5561984fc4280a4d26bd8a00bac109cf",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "a07dd8ad611bc4d0b50d8be11c98501f771570d09632e0d2d065ba66601d0e12",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c7f56066085e1d396a472aba0b83cfc830551599a7d90885a3c1454cc3749e30",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "07f8354a039f4db57b214fc55b8db0f1656596177ac918394874693fe510a3c0",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "af4ffcac778a2cee462d8c01d72d08e734374069f204101bd3c6c31fa18b268c",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0072.py": {
-      "expected_sha256": "b6cf33c6d8d72196b73eab8a17eb82cd632cec4e2aa3ecc7e36d6be32ce15bc4",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "31b38df02aea70d093da68eee5a60b7f932ce92569a741550a27756c7c3134a6",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "848235bc41536aadd68b8b727e741d1f3c942345e835c8e660d96d6ff4540b34",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ceca1123ab4deb59180d942527ec1c4fe87bb913e9c9ade5c7a81eebf941db4c",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0076.py": {
-      "expected_sha256": "162f50893ee24d57e193238825411f5167d8904b436094eca288d4a986cd46ce",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "40ae81434286e98d741bcf5ffae9da25dff46001c74579933a836a9dd9b4ba89",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0077.py": {
-      "expected_sha256": "34eedcc5cb22bbeeb912352010acd865a16c110da066c4da37c154462a70c760",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ebdd66bc499c06d8352ef7df58ab3a6df75fdcf410abb4e098ea3bf7663e52e6",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "a4d47b8c49107ee786719c1d02b6c28e1f302ef81b8824096d2c2fd050206b24",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "86f1e116282555d892c94b06748448ed750a31a80f0491eaa85143411fdb096b",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "0561172eaa7551396f15adc156e19e9059e3b14c69337fd9ba312035f990b1e2",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7850c4303f389af07e31d434f04227a86715c945106d8f6c699925bd4521b580",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "15adb4ccbdc6b4d621e50af4d102b8b545ce8612eefda04afad6f94da126493c",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "96103eb90469c1a47cca63f44e73e58b6615b4caf3382bbaefd7cd7b7fef0f58",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0083.py": {
-      "expected_sha256": "2a8a29860480413d321eb16e0d79e3bd391bd3595ae8c423c8d8798e7c4fbd21",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6e1d08c804104129f4192a9f746112c1399b3d1716932150127221cdceaffddf",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0085.py": {
-      "expected_sha256": "ff6c75729a5482d486f180191fb529df4de1400d229aec3382e85331fa064999",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "da156ae3223ed4659b7c66fb774ead301932bcc4db18e25ff7db503703825a9d",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0087.py": {
-      "expected_sha256": "cf5b9ddc15cfbaaefca2f549452be9ab8cee9a78ea25801006a0e2f616672668",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "29f4f9d8ec5f2dfabb907654eaa2ce38bfdcda14d512d9ae69909caea66eda9e",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0088.py": {
-      "expected_sha256": "116381e72bc836b630ffd0afd3f34908865ed615b3d40eafddc65132311ec1c0",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ae70a49764c89e2c73386ed9c846ea374cf2124b3678cb846cb869f8e915e445",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0090.py": {
-      "expected_sha256": "c364fab58f5e66fb349a8ab0573815b28c1bffe075e61857550597c1ba4d13fb",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9af217585d836b5ef82b3f9b0777ab0710d00bbb1e940d9072fef4a8e62a5c44",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0092.py": {
-      "expected_sha256": "8df394ec1414ec31285501ebea53ca951df25d18ca675ac4dc5c4c5d77bcf717",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "30968cb9ea794daaa8483f009512c7083f540c781268dc85b41941db7fe2992c",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0095.py": {
-      "expected_sha256": "71dca470f7fab194a720242379cd86638e517cd575e4fa2598bc9a853dd1274c",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b04c3081f6ddd3783e4a809b8cecfecbfb47e56e9b7a0812d30c645d5fc6d7fa",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0100.py": {
+      "expected_sha256": "dfa67139dbf007ca9283fbe9b2a646e41d4b1558a234d097a0ec8254c77611f6",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "60dc3f31294a3331d68d30eb5ab21bd63488665fc81d43624ff223bd1380b46c",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4f7737e929517f6e137540550fe76abdf20f166913054534bdef621fc7cc5d31",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "75e9f7c9f9e6b12fadb650dbab4c0516e223bd9b687c5a6583b468369d64607d",
@@ -2096,8 +2112,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "bbd771961c5957c4a3a60eeba86a8318220974188a009adcd6f27fa4834d7dbc",
-      "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "04a40c904611196501860b634cafe38a0b1cb611c4ab45df143dbcb4d4d3cb2e",
+      "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

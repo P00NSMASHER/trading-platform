@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **74 public exact-time batches / 109 exact-resolved
+The current repository state is **75 public exact-time batches / 114 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -273,3 +273,7 @@ A timestamp-preserving StreetInsider mirror of the Business Wire release records
 ### Batch 0095: JNPR / PNRA
 
 A filed federal-court public-distribution table preserved by CourtListener RECAP records both exact Marketwired Q3 2013 releases at 2013-10-22 16:05 EDT (20:05 UTC): Juniper Networks and Panera Bread. Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. The frozen illicit trades were 13:58 EDT for JNPR and 15:20 EDT for PNRA, so the public releases followed by 7,620 and 2,700 seconds respectively. This advances G1 from 107 exact / 67 reviewed exclusions to 109 exact / 65 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0100: EHTH / BA / LSCC / GORO / GMCR
+
+A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for EHTH (2011-04-26 16:15 EDT), BA (2012-01-25 07:30 EST), LSCC (2013-04-18 16:00 EDT), GORO (2013-05-08 17:27 EDT), and GMCR (2015-02-04 16:00 EST). Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 109 exact / 65 reviewed exclusions to 114 exact / 60 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
