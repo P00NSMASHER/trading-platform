@@ -192,8 +192,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "cee36ff2c2adadd9ecc26fe11e81954a02401388c248434a7ab21920ce0a76f3",
-      "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ba56a577f54da4c825b20a78c130a58810c83de41e6b1cb71c5373a5cc1eb6a0",
+      "reason": "G1 batch 0077 provenance repair: bind committed generator/evidence/receipts to exact integration base 87ce85b and guard against future stale base metadata; timestamp values unchanged."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -912,8 +912,8 @@
       "reason": "G1 batch 0092 Worker-2 MXIM official PR Newswire archive exact clock; deterministic 99 exact / 75 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "058791458ea34cfe6dd224760429fcdd7d97d003b873390f48ff6f557fbe368f",
-      "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b8c637e507c0b1ddc19561e3c3dcd2c1141fdc40063558696d127cef5454f6f7",
+      "reason": "G1 batch 0077 provenance repair: bind committed generator/evidence/receipts to exact integration base 87ce85b and guard against future stale base metadata; timestamp values unchanged."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
@@ -1908,16 +1908,16 @@
       "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_public_batch_0077_evidence.json": {
-      "expected_sha256": "4f2beeb85c15a784eadae237fb7a10b3c7f155122907c6c1ce3127e1a14c8ae0",
-      "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fb05b5ef3ac9b7fe0ac81fd9ae35ba103bfbeae058c0eb64bd9c39e830ac860b",
+      "reason": "G1 batch 0077 provenance repair: bind committed generator/evidence/receipts to exact integration base 87ce85b and guard against future stale base metadata; timestamp values unchanged."
     },
     "scripts/g1_batch_0077_generate.py": {
-      "expected_sha256": "2db9664ea1ce58f910489ff758593ab2b191501f95d0c6fe9a533c4f09a4ebe3",
-      "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ab8e80c5fc6d85e2a5065a8a2b9a095bbcbdc0b01eeb76b338d946eeceb4fe9d",
+      "reason": "G1 batch 0077 provenance repair: bind committed generator/evidence/receipts to exact integration base 87ce85b and guard against future stale base metadata; timestamp values unchanged."
     },
     "tests/test_g1_public_batch_0077.py": {
-      "expected_sha256": "02fbf6907483e8804225826174279b61c842e305b15473f739f53fe02df19700",
-      "reason": "G1 batch 0077 Worker-2 filed federal-court exact public-distribution clocks for WTS/THC/DXCM/WLL/CR; deterministic 106 exact / 68 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7c5566553cb722047c9ddefc74dd3f998fa35d7dcb8c3326615b5474543d1b0e",
+      "reason": "G1 batch 0077 provenance repair: bind committed generator/evidence/receipts to exact integration base 87ce85b and guard against future stale base metadata; timestamp values unchanged."
     }
   },
   "schema_version": "2",
