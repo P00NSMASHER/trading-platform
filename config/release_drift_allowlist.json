@@ -336,8 +336,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_readiness.json": {
-      "expected_sha256": "9269683d9bf82703fcecd1c87fead6e9df13f75e9f2e14e66f30e54d560e5f17",
-      "reason": "October 2 G2 vendor-evidence binding: readiness generator, tests, and committed receipt now fail closed on Cboe paid-quote scope/pricing, Tick Data written-quote unavailability, exact request scopes, and zero coverage-count authority while preserving prior Cboe trial-retention hardening."
+      "expected_sha256": "81e44b52dbfe1a69de1d3194b4f79fb84a44e41bb6933bd7c064a3ab5e504a43",
+      "reason": "October 2 ThetaData written reply: private-research eligibility, tick coverage, $320 one-month Options Pro + Stock Pro pricing, and raw-delete/derived-retention terms; planning evidence only, no coverage claim or purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_request_summary.json": {
       "expected_sha256": "3b4c0243214500f0751ddadd771da0b9e39cbf3c3f539a723453b339a9dd688b",
@@ -1796,8 +1796,8 @@
       "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
     },
     "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
-      "expected_sha256": "10caf7b4ecbf1e64ec452f865c6f48e49d187ff745aa357ef16868ce3072eacb",
-      "reason": "Vendor-reply evidence receipt recording current Cboe trial/history clarification; planning evidence only, not G2 coverage."
+      "expected_sha256": "d071f636fe52cb581f282af9d441bd81dc0dc28bd203089d3aa061541c330d41",
+      "reason": "October 2 ThetaData written reply: private-research eligibility, tick coverage, $320 one-month Options Pro + Stock Pro pricing, and raw-delete/derived-retention terms; planning evidence only, no coverage claim or purchase authority."
     }
   },
   "schema_version": "2",
