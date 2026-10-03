@@ -152,7 +152,7 @@ def test_builds_four_lane_contract_and_validates_with_production_loader(tmp_path
     )
 
     assert len(payload["sources"]) == 4
-    assert payload["security_identity_manifest"] == "../../security_identity_manifest.json"
+    assert payload["security_identity_manifest"] == "../security_identity_manifest.json"
     assert {
         row["record_kind"] for row in payload["sources"]
     } == {
@@ -177,7 +177,7 @@ def test_builds_four_lane_contract_and_validates_with_production_loader(tmp_path
 
     loaded, raw = hmb.load_contract(output)
     assert len(loaded) == 4
-    assert raw["security_identity_manifest"] == "../../security_identity_manifest.json"
+    assert raw["security_identity_manifest"] == "../security_identity_manifest.json"
 
 
 def test_contract_paths_are_relative_to_contract_location(tmp_path: Path):
