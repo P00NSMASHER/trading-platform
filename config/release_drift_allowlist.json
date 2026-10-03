@@ -2158,6 +2158,14 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
+    },
+    "src/g2_lseg_trth_afterhours_features.py": {
+      "expected_sha256": "8b90e6f925d48e881ec986461e75154ba6660a3ee8a3ff76ae0032f73956a674",
+      "reason": "Exact-replication TRTH after-hours Form-T feature sequence and descriptive-stat distributions derived from the public research scripts; no credentials, downloads, or coverage claims."
+    },
+    "tests/test_g2_lseg_trth_afterhours_features.py": {
+      "expected_sha256": "01c52814ab4ae14cb6d0e0a398cb0b0cdf5ad59424f5bc326be50ef9aef9454a",
+      "reason": "Exact-replication TRTH after-hours Form-T feature sequence and descriptive-stat distributions derived from the public research scripts; no credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
