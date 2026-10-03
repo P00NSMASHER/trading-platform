@@ -337,5 +337,70 @@
       "../Proprietary Data (cannot be shared)/BSI_Summaries_EA_merged.h5"
     ],
     "raw_licensed_market_payload_present_in_repository": false
+  },
+  "sample_firms_label_stratification": {
+    "interpretation": "Broader SampleFirms label universe; useful as auxiliary source labels but not a replacement for the 174 TimeOfFirstTrade records because these rows do not carry first-trade clock times.",
+    "crosstab": {
+      "H0_A0": {
+        "rows": 34707,
+        "soft_nonmissing": 29311,
+        "soft_coverage_ratio": 0.844527040654623,
+        "unique_permnos": 3092,
+        "unique_symbols": 3186,
+        "unique_dates": 1398,
+        "year_counts": {
+          "2010": 5691,
+          "2011": 5358,
+          "2012": 5827,
+          "2013": 5905,
+          "2014": 6777,
+          "2015": 5149
+        }
+      },
+      "H1_A0": {
+        "rows": 8256,
+        "soft_nonmissing": 6820,
+        "soft_coverage_ratio": 0.8260658914728682,
+        "unique_permnos": 2228,
+        "unique_symbols": 2251,
+        "unique_dates": 763,
+        "year_counts": {
+          "2010": 2267,
+          "2011": 2248,
+          "2012": 1144,
+          "2013": 1189,
+          "2015": 1408
+        }
+      },
+      "H1_A1": {
+        "rows": 724,
+        "soft_nonmissing": 619,
+        "soft_coverage_ratio": 0.8549723756906077,
+        "unique_permnos": 457,
+        "unique_symbols": 457,
+        "unique_dates": 270,
+        "year_counts": {
+          "2011": 204,
+          "2012": 183,
+          "2013": 166,
+          "2015": 171
+        }
+      }
+    },
+    "key_observations": {
+      "actual_implies_hacked_in_public_sample": true,
+      "actual_rows": 724,
+      "actual_unique_permnos": 457,
+      "actual_soft_nonmissing": 619,
+      "actual_year_counts": {
+        "2011": 204,
+        "2012": 183,
+        "2013": 166,
+        "2015": 171
+      },
+      "no_public_sample_hacked_rows_in_2014": true,
+      "timestamped_2014_first_trade_events": 2,
+      "note": "The two 2014 TimeOfFirstTrade records are among the preserved SampleFirms Hacked=0/Actual=0 source-label exceptions; do not overwrite either source."
+    }
   }
 }
