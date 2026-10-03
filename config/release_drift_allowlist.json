@@ -948,11 +948,11 @@
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
     },
     ".github/workflows/fnspid-g1-bulk-probe.yml": {
-      "expected_sha256": "6baced466a6ed7058140db79af7cb7e063e683ab3e867995770bbe95d1451129",
+      "expected_sha256": "bff55ee3b2628b8e955fd7de44254152384f2e70ead49b4d5c3ba5185071955b",
       "reason": "Read-only FNSPID bulk G1 discovery probe: stream public historical news, filter only unresolved event windows, emit research leads for corroboration, and never mutate canonical G1 evidence or release gates."
     },
     "scripts/fnspid_g1_probe.py": {
-      "expected_sha256": "67d64af9bf6f42801a0d6d9a9a915797ef65b0fcc0705ce54b45e9f8b615f824",
+      "expected_sha256": "c859b240e39a2730d55da0e7774b0f38eae64dcb1253009fa335dd04f09ae384",
       "reason": "Read-only FNSPID bulk G1 discovery probe: stream public historical news, filter only unresolved event windows, emit research leads for corroboration, and never mutate canonical G1 evidence or release gates."
     }
   },
