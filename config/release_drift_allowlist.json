@@ -2190,6 +2190,14 @@
     "tests/test_g2_lseg_equity_date_batch.py": {
       "expected_sha256": "b9f8f89332ef525e2fec63861b9669ae32235143763972c5ef630029130fb236",
       "reason": "Dry-run-first bounded LSEG equity date acquisition across the frozen 414-date plan, capped at five live dates per invocation with private raw output, automatic canonical normalization, exact-candidate resumability, and zero entitlement/coverage promotion; tests use fake clients only."
+    },
+    "src/g2_lseg_trth_tas_loader.py": {
+      "expected_sha256": "9eb660388b67be864bddf822f5547dfb77ee2b07978f03465e2cc28e52ffcb65",
+      "reason": "Original-layout TRTH TAS archive loader with MD5 sidecar verification, fixed-position date parsing, trade/quote filtering, and non-authoritative receipts; no credentials, downloads, or coverage claims."
+    },
+    "tests/test_g2_lseg_trth_tas_loader.py": {
+      "expected_sha256": "a337643b40cadd3994560e77a098d27845213ce8891838090578a5f5ec5ec5a9",
+      "reason": "Original-layout TRTH TAS archive loader with MD5 sidecar verification, fixed-position date parsing, trade/quote filtering, and non-authoritative receipts; no credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
