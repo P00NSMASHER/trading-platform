@@ -16,6 +16,7 @@ def test_batch_0077():
       "HEJFE-BB62E8864F35DCD0":("WLL","2015-02-25T21:00:00Z",360),
       "HEJFE-E1B57B6A71B06A7F":("CR","2015-04-27T21:38:00Z",7140),
     }
+    assert d["base_main_sha"]=="87ce85b2155ebb1abc12f9247d689a6a78e332ed"
     assert len(d["items"])==5
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
