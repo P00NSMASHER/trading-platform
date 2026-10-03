@@ -112,7 +112,7 @@ hints["current_g1_state"].update(public_exact_batch_count=74,exact_resolved_even
 for item in items:
     hints["validation_probes"].append(dict(item,probe_id=f'{item["historical_symbol"]}-batch0095',historical_event_match=True,
       exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
-      disposition="RESOLVED_IN_BATCH_0100",reason="Promoted through the filed federal-court public-distribution record with independent matching SEC press-release corroboration."))
+      disposition="RESOLVED_IN_BATCH_0095",reason="Promoted through the filed federal-court public-distribution record with independent matching SEC press-release corroboration."))
 save(hints_path,hints)
 
 assert rebuild.rebuild(ROOT,publish=True)["after"]["up_to_date"]
@@ -125,7 +125,7 @@ expected={
 for item in items:
     r=by[item["event_id"]];assert r["resolution_status"]=="resolved_exact_public_timestamp" and r["public_announcement_ts"]==expected[item["event_id"]]
 excluded=[r for r in fresh if r["resolution_status"]=="excluded_fail_closed"]
-assert len(excluded)==62 and all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in excluded)
+assert len(excluded)==65 and all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in excluded)
 ready=load(md/"metadata_readiness_summary.json");assert ready["announcement_exact_resolved"]==109 and ready["announcement_events_excluded"]==65
 assert ready["ready_g1_exact_timing_analysis"] is False
 
@@ -164,8 +164,8 @@ for fn in test_files:
         pairs=[('updated["missing_exact_announcement_timestamps"] == 67','updated["missing_exact_announcement_timestamps"] == 65')]
     else:
         pairs=[
-          ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (107,67)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (112,62)'),
-          ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (107, 67)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (112, 62)'),
+          ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (107,67)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (109,65)'),
+          ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (107, 67)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (109, 65)'),
           ('"107/174" in step9["evidence"] and "67" in step9["evidence"]','"109/174" in step9["evidence"] and "65" in step9["evidence"]'),
           ('len(excluded)==67','len(excluded)==65'),
           ('len(excluded) == 67','len(excluded) == 65'),
