@@ -1976,104 +1976,44 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-8167467EBF64AABE",
       "event_date": "2013-10-22",
       "event_id": "HEJFE-8167467EBF64AABE",
       "first_documented_illicit_trade_ts": "2013-10-22T19:20:00Z",
       "historical_symbol": "PNRA",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2013-10-22T20:05:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker0-courtlistener-batch-0095",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2013-10-29",
-        "start_date": "2013-10-22"
-      }
+      "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-F20ECC0C09BBC89E",
       "event_date": "2013-10-22",
       "event_id": "HEJFE-F20ECC0C09BBC89E",
       "first_documented_illicit_trade_ts": "2013-10-22T17:58:00Z",
       "historical_symbol": "JNPR",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2013-10-22T20:05:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker0-courtlistener-batch-0095",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2013-10-29",
-        "start_date": "2013-10-22"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -5502,7 +5442,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 67,
+    "request_event_count": 65,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -5536,19 +5476,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 67,
+    "acquisition_needed": 65,
     "event_count": 174,
-    "exact_resolved": 107,
-    "research_hint_exact_resolved": 107,
-    "research_hint_excluded": 67,
+    "exact_resolved": 109,
+    "research_hint_exact_resolved": 109,
+    "research_hint_excluded": 65,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
     "explicit_research_priorities": 4,
     "no_public_replication_candidate": 7,
-    "public_release_file_present_without_clock": 60,
-    "resolved_no_action": 107,
-    "routed_for_acquisition": 67
+    "public_release_file_present_without_clock": 58,
+    "resolved_no_action": 109,
+    "routed_for_acquisition": 65
   },
   "work_queue": [
     {
@@ -5790,32 +5730,6 @@
       "event_date": "2013-10-21",
       "event_id": "HEJFE-BD3F577ADD90D512",
       "historical_symbol": "GNTX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-8167467EBF64AABE",
-      "event_date": "2013-10-22",
-      "event_id": "HEJFE-8167467EBF64AABE",
-      "historical_symbol": "PNRA",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-F20ECC0C09BBC89E",
-      "event_date": "2013-10-22",
-      "event_id": "HEJFE-F20ECC0C09BBC89E",
-      "historical_symbol": "JNPR",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,

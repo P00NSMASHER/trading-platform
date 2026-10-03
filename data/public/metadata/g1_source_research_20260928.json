@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "9d027e4165aa6b668d4a0545159bd39c80ffed66",
+  "base_main_sha": "82459130db0c0a29780c1abe4db7d798351f623a",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 107,
-    "note": "The latest integrated recovery is batch_0088; cumulative public exact-time batches are 73 and cumulative exact event records are 107 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 73,
+    "exact_resolved_event_records": 109,
+    "note": "The latest integrated recovery is batch_0095; cumulative public exact-time batches are 74 and cumulative exact event records are 109 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 74,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 67
+    "reviewed_excluded_event_records": 65
   },
   "preferred_public_source_families": [
     {
@@ -2112,6 +2112,60 @@
       "source_grade": "A",
       "source_reference": "https://www.streetinsider.com/Press+Releases/Rogers+Corporation+Reports+Strong+Earnings+and+All-time+Record+Quarterly+Sales+for+the+First+Quarter+of+2015/10502614.html?classic=1",
       "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Filed federal-court record explicitly identifies the exact JNPR public-distribution clock; matching SEC Exhibit 99.1 independently corroborates the issuer/release identity and date.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1043604/000119312513406625/d615565dex991.htm",
+      "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+      "disposition": "RESOLVED_IN_BATCH_0095",
+      "event_date": "2013-10-22",
+      "event_id": "HEJFE-F20ECC0C09BBC89E",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-10-22T16:05:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-10-22 13:58:00",
+      "historical_event_match": true,
+      "historical_symbol": "JNPR",
+      "information_asymmetry_seconds": 7620,
+      "probe_id": "JNPR-batch0095",
+      "public_announcement_ts": "2013-10-22T16:05:00-04:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "CourtListener RECAP federal filing page 4 records JNPR Marketwired press-release distribution at 2013-10-22 16:05 EDT",
+      "reason": "Promoted through the filed federal-court public-distribution record with independent matching SEC press-release corroboration.",
+      "release_title": "Juniper Networks Reports Preliminary Third Quarter 2013 Financial Results",
+      "reviewed_on": "2026-10-03",
+      "source_family": "federal_court_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Filed federal-court record explicitly identifies the exact PNRA public-distribution clock; matching SEC Exhibit 99.1 independently corroborates the issuer/release identity and date.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000031/a20130924ex991pressrelease.htm",
+      "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+      "disposition": "RESOLVED_IN_BATCH_0095",
+      "event_date": "2013-10-22",
+      "event_id": "HEJFE-8167467EBF64AABE",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-10-22T16:05:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-10-22 15:20:00",
+      "historical_event_match": true,
+      "historical_symbol": "PNRA",
+      "information_asymmetry_seconds": 2700,
+      "probe_id": "PNRA-batch0095",
+      "public_announcement_ts": "2013-10-22T16:05:00-04:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "CourtListener RECAP federal filing page 4 records PNRA Marketwired press-release distribution at 2013-10-22 16:05 EDT",
+      "reason": "Promoted through the filed federal-court public-distribution record with independent matching SEC press-release corroboration.",
+      "release_title": "Panera Bread Company Reports Q3 2013 diluted EPS of $1.48, up 19% versus Q3 2012",
+      "reviewed_on": "2026-10-03",
+      "source_family": "federal_court_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
       "timestamp_kind": "first_public_release"
     }
   ]

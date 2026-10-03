@@ -5,11 +5,14 @@ from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
 def rr(p):
     with p.open(newline="",encoding="utf-8") as h:return list(csv.DictReader(h))
-def test_batch_0068():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0068_evidence.json").read_text())
+def test_batch_0095():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0095_evidence.json").read_text())
     events={r["event_id"]:r for r in rr(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    exp={"HEJFE-D51AC412EDF93AA8":("INT","2015-05-01T00:09:00Z",16140),"HEJFE-3046057647A0FC5C":("BRKR","2015-05-06T20:01:00Z",1860)}
+    exp={
+      "HEJFE-F20ECC0C09BBC89E":("JNPR","2013-10-22T20:05:00Z",7620),
+      "HEJFE-8167467EBF64AABE":("PNRA","2013-10-22T20:05:00Z",2700),
+    }
     assert len(d["items"])==2
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
@@ -17,11 +20,14 @@ def test_batch_0068():
         assert e["historical_symbol"]==sym and tr<rel<=tr+timedelta(days=7) and int((rel-tr).total_seconds())==delta
         assert resolved[x["event_id"]]["public_announcement_ts"]==utc
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
-        assert x["source_family"] in {"issuer_investor_relations_archive","preserved_wire_mirror"}
-        assert x["source_grade"] in {"A","B"}
-        assert x["corroboration_reference"].startswith("https://www.sec.gov/")
-def test_batch_0068_preserves_prior():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0068_evidence.json").read_text())
+        assert x["source_family"]=="federal_court_public_distribution_record" and x["source_grade"]=="A"
+        assert x["timestamp_evidence_kind"]=="explicit_release_clock"
+        assert x["public_distribution_explicit"] is True
+        assert x["source_reference"].startswith("https://storage.courtlistener.com/recap/")
+        assert x["court_docket_reference"].startswith("https://www.courtlistener.com/docket/")
+        assert x["corroboration_reference"].startswith("https://www.sec.gov/Archives/edgar/data/")
+def test_batch_0095_preserves_prior():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0095_evidence.json").read_text())
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
