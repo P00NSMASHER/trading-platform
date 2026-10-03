@@ -352,8 +352,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_readiness.json": {
-      "expected_sha256": "38b0b78ef7377d7269d1d03772e1b4340640e90066935c63120223d44cff6ce7",
-      "reason": "ThetaData written-term compliance: fail-closed local-only raw retention plan, 30-day post-billing raw-delete deadline, derived-data retention guardrails, and central vendor-readiness enforcement; no subscription or G2 coverage."
+      "expected_sha256": "e461e72c40792e2b3ed06deddd90ad5d11bb803f9d026ed689d86efedd7295aa",
+      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
     },
     "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
       "expected_sha256": "565dc93ed7fa119f7c236bb7895da3d1b61c47b590798004e38a86c77db5f3f8",
@@ -1392,8 +1392,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "src/g2_vendor_readiness.py": {
-      "expected_sha256": "540b91de6aa5bfad9509a7d4045fd09e047c42996781c25d911c1ce33b59f42c",
-      "reason": "ThetaData written-term compliance: fail-closed local-only raw retention plan, 30-day post-billing raw-delete deadline, derived-data retention guardrails, and central vendor-readiness enforcement; no subscription or G2 coverage."
+      "expected_sha256": "d809cee2a8b09379c013f23ee1a12aa521c50a525dea0661805b658eb5f41b9b",
+      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
     },
     "src/g2_vendor_request_manifests.py": {
       "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
@@ -1744,8 +1744,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "tests/test_g2_vendor_readiness.py": {
-      "expected_sha256": "f8e0ae727b84be74b0688f47bf47ed7905fd6537990c20eaecf11e7bb6e14a7b",
-      "reason": "ThetaData written-term compliance: fail-closed local-only raw retention plan, 30-day post-billing raw-delete deadline, derived-data retention guardrails, and central vendor-readiness enforcement; no subscription or G2 coverage."
+      "expected_sha256": "406fe5a560896623f2758799b407ae758b283ad04f086a85890428e389480538",
+      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
     },
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",
@@ -1826,6 +1826,26 @@
     "data/processed/g2_vendor_requests/thetadata_retention_plan.json": {
       "expected_sha256": "7d62e5ef330b1bd5c65ab802951f490e4e70bd40ffbbae817dafea3a8d7ed8ce",
       "reason": "ThetaData written-term compliance: fail-closed local-only raw retention plan, 30-day post-billing raw-delete deadline, derived-data retention guardrails, and central vendor-readiness enforcement; no subscription or G2 coverage."
+    },
+    "src/g2_thetadata_request_plan.py": {
+      "expected_sha256": "4ebdb83978895bcffa7cffa59124ff5fab3140e3ef018da8f3429ea52dfb5f80",
+      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+    },
+    "tests/test_g2_thetadata_request_plan.py": {
+      "expected_sha256": "32302b4534a1b5ce96328d26b439fd627468a7380881c6e368b0fad4c86d4b49",
+      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+    },
+    "data/processed/g2_vendor_requests/thetadata_requests/thetadata_option_requests.csv": {
+      "expected_sha256": "a36c0c71ae2f04ff893e296bf3df2fa4445c2f417cc71c9862b66284ece8e303",
+      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+    },
+    "data/processed/g2_vendor_requests/thetadata_requests/thetadata_stock_requests.csv": {
+      "expected_sha256": "41b9802f4d6a906a4722829316e099abf7232818ab72aa42ab4b3e559e1dde59",
+      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+    },
+    "data/processed/g2_vendor_requests/thetadata_requests/thetadata_request_summary.json": {
+      "expected_sha256": "a54795f7a944057439d83cfccdbb2ec3aede284698e33b1117753fe09e373513",
+      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
     }
   },
   "schema_version": "2",

@@ -20,6 +20,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
     cboe_trial = _read_json(vendor_dir / "cboe_trial_capacity_plan.json")
     vendor_replies = _read_json(vendor_dir / "vendor_reply_evidence_2026-10-02.json")
     theta_retention = _read_json(vendor_dir / "thetadata_retention_plan.json")
+    theta_requests = _read_json(vendor_dir / "thetadata_requests/thetadata_request_summary.json")
     coverage = _read_json(coverage_summary)
     audit = coverage.get("contract_audit") or {}
 
@@ -127,6 +128,25 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
     ):
         raise ValueError("ThetaData retention plan is inconsistent or not fail-closed")
 
+    if (
+        theta_requests.get("vendor") != "ThetaData"
+        or theta_requests.get("total_requests") != 8888
+        or theta_requests.get("option_requests", {}).get("trade_requests") != 3014
+        or theta_requests.get("option_requests", {}).get("quote_requests") != 3014
+        or theta_requests.get("option_requests", {}).get("total_requests") != 6028
+        or theta_requests.get("stock_requests", {}).get("trade_requests") != 1430
+        or theta_requests.get("stock_requests", {}).get("quote_requests") != 1430
+        or theta_requests.get("stock_requests", {}).get("total_requests") != 2860
+        or theta_requests.get("execution", {}).get("network_execution_enabled") is not False
+        or theta_requests.get("execution", {}).get("max_concurrent_requests_vendor_confirmed") != 8
+        or theta_requests.get("subscription", {}).get("subscription_authorized") is not False
+        or theta_requests.get("subscription", {}).get("purchase_authority") is not False
+        or theta_requests.get("retention_plan") != "data/processed/g2_vendor_requests/thetadata_retention_plan.json"
+        or theta_requests.get("guardrails", {}).get("network_execution_requires_explicit_user_authorization") is not True
+        or theta_requests.get("guardrails", {}).get("g2_release_gate_unchanged") is not True
+    ):
+        raise ValueError("ThetaData dry-run request plan is inconsistent or not fail-closed")
+
     activation_profiles = activation["profiles"]
     all_fail_closed = all(
         profile["activation_status"] == "PENDING_DELIVERY_LICENSE_SCHEMA_REVIEW"
@@ -169,6 +189,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "cboe_trial_capacity_plan_ready": True,
             "vendor_reply_evidence_ready": True,
             "thetadata_retention_plan_ready": True,
+            "thetadata_dry_run_request_plan_ready": True,
         },
         "vendor_reply_evidence": {
             "source_path": "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json",
@@ -226,6 +247,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "tickdata_written_quote": "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED",
             "thetadata_written_terms": "WRITTEN_320_USD_ONE_MONTH_BUNDLE_RAW_DELETE_DERIVED_RETENTION_ALLOWED",
             "thetadata_retention_plan": "READY_FAIL_CLOSED_PENDING_SUBSCRIPTION_START",
+            "thetadata_request_plan": "READY_DRY_RUN_8888_REQUESTS_NETWORK_DISABLED",
             "lseg_2011_quote": "REQUEST_SENT_AWAITING_REPLY",
             "algoseek_quote_and_sandbox_terms": "REQUEST_SENT_AWAITING_REPLY",
         },
@@ -251,6 +273,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "Cboe custom tick-level OPRA pricing was received for the full OPRA universe only and is outside the target budget; do not pursue that paid custom route without explicit user authorization.",
             "ThetaData confirmed a one-month $320 Options Pro + Stock Pro bundle for the requested scope. Private research is eligible for Options Pro; raw/unmodified historical data must be deleted within 30 days after the billing period ends, while derived/modified research data may be retained. Do not subscribe without explicit user authorization.",
             "If the user later authorizes ThetaData, record the actual billing-period end in the retention planner immediately, compute the deletion deadline, keep raw payloads local-only, and preserve only allowed derived/modified outputs plus hashes/license/deletion receipts after raw deletion.",
+            "The exact ThetaData dry-run plan is materialized as 8,888 per-symbol/date requests (6,028 options + 2,860 stocks) with network execution disabled. Do not execute those requests until explicit user authorization and local credentials are available.",
             "Await LSEG pricing/availability reply for the exact 2011 OPRA request.",
             "Await algoseek pricing and sandbox-terms replies for the exact historical scopes.",
             "Place lawfully obtained vendor files in a local drop folder, run licensed-data intake + delivery preflight, then create a local hash-bound entitlement manifest.",
@@ -265,6 +288,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "trial_download_is_not_retention_authority": True,
             "retention_rights_required_before_bulk_acquisition": True,
             "thetadata_retention_plan_required_before_subscription": True,
+            "thetadata_request_plan_network_disabled_until_authorized": True,
         },
     }
 
