@@ -257,3 +257,7 @@ The official PR Newswire historical archive records Maxim Integrated Products' f
 ### Batch 0090: Pitney Bowes
 
 The timestamp-preserving StreetInsider Business Wire mirror records Pitney Bowes first-quarter 2015 results at 2015-04-30 07:00 EDT (11:00 UTC), 58,380 seconds after the frozen 2015-04-29 14:47 EDT illicit trade. Pitney Bowes investor relations and SEC Exhibit 99.1 independently corroborate the matching release identity/content. This advances G1 from 99 exact / 75 reviewed exclusions to 100 exact / 74 reviewed exclusions. Webcast, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0072: Echo Global Logistics
+
+The GlobeNewswire-hosted Marketwired archive records Echo Global Logistics first-quarter 2013 results at 2013-04-25 16:00 EDT (20:00 UTC), 6,360 seconds after the frozen 14:14 EDT illicit trade. SEC Exhibit 99.1 independently corroborates the matching release identity/content. This advances G1 from 100 exact / 74 reviewed exclusions to 101 exact / 73 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
