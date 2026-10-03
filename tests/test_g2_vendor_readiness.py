@@ -28,6 +28,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
         "databento_cost_only_workflow_ready": True,
         "cboe_trial_capacity_plan_ready": True,
         "vendor_reply_evidence_ready": True,
+        "thetadata_retention_plan_ready": True,
     }
 
     assert payload["canonical_full_g2_state"] == {
@@ -87,6 +88,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert payload["external_state"]["cboe_custom_tick_quote"] == "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET"
     assert payload["external_state"]["tickdata_written_quote"] == "WRITTEN_QUOTE_UNAVAILABLE_PHONE_CALL_REQUIRED"
     assert payload["external_state"]["thetadata_written_terms"] == "WRITTEN_320_USD_ONE_MONTH_BUNDLE_RAW_DELETE_DERIVED_RETENTION_ALLOWED"
+    assert payload["external_state"]["thetadata_retention_plan"] == "READY_FAIL_CLOSED_PENDING_SUBSCRIPTION_START"
     assert payload["external_state"]["lseg_2011_quote"] == "REQUEST_SENT_AWAITING_REPLY"
     assert payload["external_state"]["algoseek_quote_and_sandbox_terms"] == "REQUEST_SENT_AWAITING_REPLY"
 
@@ -99,6 +101,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
         "free_trial_activation_requires_explicit_user_authorization": True,
         "trial_download_is_not_retention_authority": True,
         "retention_rights_required_before_bulk_acquisition": True,
+        "thetadata_retention_plan_required_before_subscription": True,
     }
 
 
@@ -115,6 +118,8 @@ def test_readiness_next_actions_cover_every_external_dependency():
     assert "$320" in actions
     assert "delete" in actions.lower()
     assert "derived/modified" in actions
+    assert "retention planner" in actions
+    assert "deletion deadline" in actions
     assert "explicit user authorization" in actions
     assert "daily credit limit does not gate the trial" in actions
     assert "acceptance probe" in actions
