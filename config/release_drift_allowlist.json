@@ -1532,8 +1532,8 @@
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "src/g2_lseg_trth_event_pipeline.py": {
-      "expected_sha256": "7a51bd4715bbbaa501e52de7babcbb50123fe0148ffef66488c58306e3c8961d",
-      "reason": "Harden the merged LSEG/TRTH event pipeline for normal missing event slices by preserving datetime dtypes on empty quote/trade frames; regression-only, no source semantics or G2 coverage changes."
+      "expected_sha256": "b70a81dda8e8c8e8a1b6b81361b34d305f7e7e3ab611882a59f82ba960abb91d",
+      "reason": "LSEG/TRTH event-pipeline timezone hardening: convert offset-aware Tick History timestamps to America/New_York wall time and support trailing Z before comparison with the original paper's local event timestamps."
     },
     "src/g2_lseg_trth_normalizer.py": {
       "expected_sha256": "0463e2ace528d4fa8132eaa5e77e51630b569d75a6f797d58d2b1700ee57dd38",
@@ -1916,8 +1916,8 @@
       "reason": "Authorized LSEG G2 repository extraction: identifier mappings, field contracts, option-discovery recipes, dry-run request plan, and regression tests; no credentials or licensed tick payload."
     },
     "tests/test_g2_lseg_trth_event_pipeline.py": {
-      "expected_sha256": "7f29b0d11312e4dca8ec837153e61d4e17abfc2de0d00e9482aed7134edf5514",
-      "reason": "Harden the merged LSEG/TRTH event pipeline for normal missing event slices by preserving datetime dtypes on empty quote/trade frames; regression-only, no source semantics or G2 coverage changes."
+      "expected_sha256": "ef85216bdfc426c9478f41430f91edae6482f1157cc9dc204203913ae3dba1cc",
+      "reason": "LSEG/TRTH event-pipeline timezone hardening: convert offset-aware Tick History timestamps to America/New_York wall time and support trailing Z before comparison with the original paper's local event timestamps."
     },
     "tests/test_g2_lseg_trth_normalizer.py": {
       "expected_sha256": "3ec09071f2c61e6d735bc0bf3fb009bc6358bfdfb08d22a0582509c833422f9f",
