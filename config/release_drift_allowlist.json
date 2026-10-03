@@ -1524,8 +1524,8 @@
       "reason": "Cheap-first full G2 option-quote routing: LSEG before ThetaData history floor and ThetaData thereafter, with licensing/retention fail-closed and no purchase or coverage claim."
     },
     "src/g2_lseg_datascope_execution_plan.py": {
-      "expected_sha256": "0c3126a778925d2b2e3f5e2cb2241d3105c4f620d9f6a757680887520c9b3cf3",
-      "reason": "Credential-free LSEG DataScope execution planner that collapses duplicate trade/quote requirements into date-scoped Time & Sales jobs and historical option-discovery tasks while preserving all frozen G2 symbol-dates; no network calls, credentials, downloads, or coverage claims."
+      "expected_sha256": "944ac867da0832a6844dd6fe67f9962131cf440f2a9fc62418d9aecfafcf1441",
+      "reason": "LSEG DataScope execution planner now emits deterministic 946-row historical-identifier validation queues per lane while preserving the frozen 15,312 requirements; no network execution or coverage claim."
     },
     "src/g2_lseg_request_manifest.py": {
       "expected_sha256": "7283bf706131f152e501850e64e398378ef7af0082fa4e54a552ca4212b35c97",
@@ -1908,8 +1908,8 @@
       "reason": "Regression coverage for the cheap-first LSEG/ThetaData full-replication option-quote split and unchanged strict tick-fidelity policy."
     },
     "tests/test_g2_lseg_datascope_execution_plan.py": {
-      "expected_sha256": "606b7242576b98ca59d567678b656be828b78cd3c08aa4294da824879adacd09",
-      "reason": "Credential-free LSEG DataScope execution planner that collapses duplicate trade/quote requirements into date-scoped Time & Sales jobs and historical option-discovery tasks while preserving all frozen G2 symbol-dates; no network calls, credentials, downloads, or coverage claims."
+      "expected_sha256": "9ee600ecd07f6cbd151b0313c9f28858d04c970e8813e9493b007ecee6ff9118",
+      "reason": "LSEG DataScope execution planner now emits deterministic 946-row historical-identifier validation queues per lane while preserving the frozen 15,312 requirements; no network execution or coverage claim."
     },
     "tests/test_g2_lseg_request_manifest.py": {
       "expected_sha256": "eaecab2dc55fb58afc62d93cd28655c5fd401402be8ea22c927e2e6276828ad1",
