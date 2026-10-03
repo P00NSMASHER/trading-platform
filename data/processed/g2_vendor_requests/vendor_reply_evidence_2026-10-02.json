@@ -69,5 +69,43 @@
     "paid_quote_is_not_coverage": true,
     "vendor_availability_claim_is_not_coverage": true,
     "dry_run_or_sample_probe_is_not_coverage": true
+  },
+  "theta_data_written_reply": {
+    "vendor": "ThetaData",
+    "contact_name": "Anthony",
+    "contact_role": "Support",
+    "source_date": "2026-10-02",
+    "source_subject": "Re: Fwd: Historical-only options quote — 2012–2015 exact research dates",
+    "requested_scope": {
+      "options_nonempty_request_dates": 291,
+      "options_underlying_date_pairs_per_record_kind": 3014,
+      "stocks_nonempty_request_dates": 230,
+      "stocks_symbol_date_pairs_per_record_kind": 1430
+    },
+    "vendor_confirmation": {
+      "options_pro_tick_history_start": "2012-06-01",
+      "stocks_pro_utp_tick_history_start": "2012-06-01",
+      "private_research_eligible_for_individual_options_pro": true,
+      "required_subscriptions": [
+        "Options Pro",
+        "Stock Pro"
+      ],
+      "one_month_price_usd_each": 160,
+      "one_month_combined_price_usd": 320,
+      "option_nbbo_endpoint": "option/history/quote?interval=tick",
+      "option_trade_endpoint": "option/history/trade",
+      "stock_nbbo_endpoint": "stock/history/quote?interval=tick&venue=utp_cta",
+      "stock_trade_endpoint": "stock/history/trade",
+      "concurrency_limit": 8,
+      "estimated_option_requests_for_scope": 6028,
+      "estimated_stock_requests_for_scope": 2860
+    },
+    "retention_terms": {
+      "raw_unmodified_historical_data_delete_deadline": "30 days after the subscription billing period ends",
+      "modified_or_derived_research_data_may_be_retained": true
+    },
+    "research_disposition": "WRITTEN_PRICE_LICENSE_AND_RETENTION_TERMS_RECEIVED_CONDITIONAL_ROUTE",
+    "automatic_purchase_or_subscription": false,
+    "coverage_effect": "NONE_UNTIL_ACTUAL_VALIDATED_ROWS"
   }
 }
