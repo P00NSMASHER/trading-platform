@@ -15,7 +15,7 @@ import research_receipt_rebuild as rebuild
 def test_current_receipts_reproduce_from_canonical_inputs(tmp_path: Path):
     candidates = rebuild.build_candidate_receipts(ROOT, tmp_path / "stage")
     report = rebuild.compare_current(ROOT, candidates)
-    assert report["up_to_date"] is True, report
+    assert report["up_to_date"] is True
     assert report["changed"] == []
     assert report["missing"] == []
     assert rebuild.BUNDLE_MANIFEST_TARGET in candidates
