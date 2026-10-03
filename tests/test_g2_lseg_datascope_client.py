@@ -333,13 +333,12 @@ def test_execute_option_validation_batch_writes_search_and_historical_chain(tmp_
     assert result["validation_promotions"] == 0
     assert result["g2_coverage_change"] == 0
     assert result["receipts"][0]["search_discovered_contract_count"] == 2
-    assert result["receipts"][0]["historical_chain_query_count"] == 2
+    assert result["receipts"][0]["historical_chain_query_count"] == 1
     assert search_calls == [
         ("JNPR.O", "2011-03-21"),
         ("JNPR.OQ", "2011-03-21"),
     ]
     assert chain_calls == [
-        ("0#JNPR*.U", "2011-03-21"),
         ("0#JNPR*.U", "2011-03-21"),
     ]
 
@@ -355,7 +354,7 @@ def test_execute_option_validation_batch_writes_search_and_historical_chain(tmp_
     assert second["network_tasks_completed"] == 0
     assert second["skipped_existing_outputs"] == 1
     assert len(search_calls) == 2
-    assert len(chain_calls) == 2
+    assert len(chain_calls) == 1
 
     # A legacy search-only result with matching task identity is still incomplete.
     payload_path.write_text(
@@ -373,14 +372,14 @@ def test_execute_option_validation_batch_writes_search_and_historical_chain(tmp_
     assert legacy["network_tasks_completed"] == 1
     assert legacy["skipped_existing_outputs"] == 0
     assert len(search_calls) == 4
-    assert len(chain_calls) == 4
+    assert len(chain_calls) == 2
 
     # Corrupt/incomplete JSON is also not accepted as a completion marker.
     payload_path.write_text("{", encoding="utf-8")
     third = client.execute_validation_batch(FakeClient(), batch, output_dir)
     assert third["network_tasks_completed"] == 1
     assert len(search_calls) == 6
-    assert len(chain_calls) == 6
+    assert len(chain_calls) == 3
 
 def test_live_validation_batch_hard_caps_network_tasks(tmp_path):
     class FakeClient:
