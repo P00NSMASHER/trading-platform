@@ -2102,6 +2102,14 @@
     "tests/test_g2_lseg_delivery_normalizer.py": {
       "expected_sha256": "6a093aec9b085867088cc64f1d444e92aabf40f6ccd523c4e8e6933b1f80e279",
       "reason": "Private raw LSEG/DataScope delivery normalization bridge into canonical intake-ready equity/option trade/quote CSVs with explicit rejects and zero-coverage semantics; tests use synthetic rows only."
+    },
+    "src/g2_lseg_result_adapter.py": {
+      "expected_sha256": "9184f98d8cd14d5d72716edac83d796c25574d54924d505aef8a7260660db8ef",
+      "reason": "LSEG Tick History result adapter and regression coverage: convert only historically validated equity RICs and historical-chain option contracts into canonical G2 market-data CSV lanes; no credentials, downloads, or coverage claims."
+    },
+    "tests/test_g2_lseg_result_adapter.py": {
+      "expected_sha256": "55b83c2d6976a0e30dcd56d79d68f9426b54357fd0ac1ba2f8d784ce78011c14",
+      "reason": "LSEG Tick History result adapter and regression coverage: convert only historically validated equity RICs and historical-chain option contracts into canonical G2 market-data CSV lanes; no credentials, downloads, or coverage claims."
     }
   },
   "schema_version": "2",
