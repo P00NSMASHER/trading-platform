@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import sys
 from collections import defaultdict
@@ -236,6 +237,20 @@ def main() -> int:
             release_like.append(rows[0])
     print("FNSPID_RELEASE_LIKE_TOP_CANDIDATES")
     print(json.dumps(release_like, indent=2, sort_keys=True))
+
+    worker1_candidates = []
+    for event in unresolved:
+        eid = str(event["event_id"])
+        slot = int(hashlib.sha256(eid.encode("ascii")).hexdigest(), 16) % 5
+        if slot != 1:
+            continue
+        rows = sorted(
+            candidates.get(eid, []),
+            key=lambda r: (-int(r["score"]), r["news_timestamp_utc"], r["url"]),
+        )
+        worker1_candidates.extend(rows[:15])
+    print("FNSPID_WORKER1_CANDIDATES")
+    print(json.dumps(worker1_candidates, indent=2, sort_keys=True))
     return 0
 
 
