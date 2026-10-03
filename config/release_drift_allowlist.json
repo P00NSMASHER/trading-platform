@@ -2070,6 +2070,14 @@
     "tests/test_g2_lseg_secondary_ric_evidence.py": {
       "expected_sha256": "51f2476d95276d55dad3748a489799620d5c558040aa384b5e1d85f0c219d1a1",
       "reason": "Regression coverage for the LSEG secondary-RIC evidence audit and fail-closed historical-date validation requirement."
+    },
+    "src/g2_lseg_secondary_validation_manifest.py": {
+      "expected_sha256": "57f2d610ef588630d9c200596f9ac0d5159c0e83ce4eef16019407a89d066828",
+      "reason": "Minimal date-specific LSEG historical identifier validation queue for the 34 repository-backed secondary RIC symbols; collapses duplicate lane/record-kind checks without changing source semantics or G2 coverage."
+    },
+    "tests/test_g2_lseg_secondary_validation_manifest.py": {
+      "expected_sha256": "a769892f8a78211869e0aa51075ae604f347b9d8426d8a2938191f8ac6dc1a87",
+      "reason": "Regression coverage locking the secondary LSEG validation queue to 902 unique symbol/date jobs, 1,804 lane checks, 3,608 record-kind checks, and fail-closed no-coverage behavior."
     }
   },
   "schema_version": "2",
