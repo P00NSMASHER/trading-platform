@@ -7,6 +7,7 @@ from pathlib import Path
 
 DEFAULT_MAPPING = Path("data/processed/g2_vendor_requests/lseg_equity_ric_mapping.csv")
 DEFAULT_SECONDARY = Path("data/processed/g2_vendor_requests/lseg_secondary_ric_candidates.csv")
+DEFAULT_EVENT_MAPPING = Path("data/processed/g2_vendor_requests/lseg_event_permno_ric_mapping.csv")
 DEFAULT_CORE = Path("data/processed/real_data_release_sprint/g2_core_source_date_requirements.csv")
 DEFAULT_OPTIONS = Path("data/processed/real_data_release_sprint/g2_option_source_date_requirements.csv")
 
@@ -22,10 +23,16 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
 def _mapping(
     primary_rows: list[dict[str, str]],
     secondary_rows: list[dict[str, str]],
+    event_rows: list[dict[str, str]],
 ) -> dict[str, dict[str, object]]:
     secondary = {
         row["historical_symbol"]: [x for x in row["candidate_rics"].split(";") if x]
         for row in secondary_rows
+    }
+    event_linked_symbols = {
+        row["SYMBOL"]
+        for row in event_rows
+        if row["mapping_status"] == "study_permno_linked_candidate"
     }
 
     out: dict[str, dict[str, object]] = {}
@@ -35,9 +42,14 @@ def _mapping(
         if row["mapping_status"] == "candidate_exact_root_match":
             if not primary_rics:
                 raise ValueError(f"{symbol}: primary match without a RIC")
+            mapping_class = (
+                "study_permno_linked_companion_match"
+                if symbol in event_linked_symbols
+                else "companion_root_match_without_permno_link"
+            )
             out[symbol] = {
                 "rics": primary_rics,
-                "mapping_class": "primary_exact_companion_match",
+                "mapping_class": mapping_class,
             }
             continue
 
@@ -92,18 +104,19 @@ def _expand(
                 )
                 continue
 
+            strong = mapping_class == "study_permno_linked_companion_match"
             if lane == "equity":
                 status = (
                     "candidate_direct_time_and_sales"
-                    if mapping_class == "primary_exact_companion_match"
+                    if strong
                     else "candidate_time_and_sales_historical_identifier_validation_required"
                 )
                 request_type = "TickHistoryTimeAndSales"
             else:
                 status = (
                     "candidate_underlying_mapped_option_contract_resolution_required"
-                    if mapping_class == "primary_exact_companion_match"
-                    else "candidate_underlying_secondary_ric_validation_and_option_contract_resolution_required"
+                    if strong
+                    else "candidate_underlying_historical_ric_validation_and_option_contract_resolution_required"
                 )
                 request_type = "HistoricalOptionChainThenTickHistoryTimeAndSales"
 
@@ -126,34 +139,29 @@ def _expand(
 def build_plan(
     primary_mapping_rows: list[dict[str, str]],
     secondary_mapping_rows: list[dict[str, str]],
+    event_mapping_rows: list[dict[str, str]],
     core_rows: list[dict[str, str]],
     option_rows: list[dict[str, str]],
 ) -> dict:
-    symbol_map = _mapping(primary_mapping_rows, secondary_mapping_rows)
+    symbol_map = _mapping(primary_mapping_rows, secondary_mapping_rows, event_mapping_rows)
     equity, unresolved_equity = _expand(core_rows, symbol_map, lane="equity")
     options, unresolved_options = _expand(option_rows, symbol_map, lane="options")
 
-    primary_symbols = sorted(
-        k
-        for k, v in symbol_map.items()
-        if v["mapping_class"] == "primary_exact_companion_match"
-    )
-    secondary_symbols = sorted(
-        k
-        for k, v in symbol_map.items()
-        if v["mapping_class"] == "secondary_repository_candidate"
-    )
-    unresolved_symbols = sorted(
-        k
-        for k, v in symbol_map.items()
-        if v["mapping_class"] == "unresolved"
-    )
+    classes = {
+        name: sorted(k for k, v in symbol_map.items() if v["mapping_class"] == name)
+        for name in {
+            "study_permno_linked_companion_match",
+            "companion_root_match_without_permno_link",
+            "secondary_repository_candidate",
+            "unresolved",
+        }
+    }
 
     def count_mapping_class(rows: list[dict[str, str]], mapping_class: str) -> int:
         return sum(row["mapping_class"] == mapping_class for row in rows)
 
     return {
-        "schema_version": "2",
+        "schema_version": "3",
         "purpose": (
             "Deterministic LSEG Tick History acquisition plan derived only from repository-held "
             "G2 requirements and repository-extracted RIC metadata. No authentication, API call, "
@@ -189,24 +197,40 @@ def build_plan(
         },
         "mapping_summary": {
             "g2_unique_symbols": len(symbol_map),
-            "primary_exact_companion_symbols": len(primary_symbols),
-            "secondary_repository_candidate_symbols": len(secondary_symbols),
-            "unresolved_symbols": len(unresolved_symbols),
-            "secondary_validation_required": secondary_symbols,
-            "unresolved_symbol_list": unresolved_symbols,
+            "study_permno_linked_companion_symbols": len(
+                classes["study_permno_linked_companion_match"]
+            ),
+            "companion_root_only_symbols": len(
+                classes["companion_root_match_without_permno_link"]
+            ),
+            "secondary_repository_candidate_symbols": len(
+                classes["secondary_repository_candidate"]
+            ),
+            "unresolved_symbols": len(classes["unresolved"]),
+            "companion_root_only_symbol_list": classes[
+                "companion_root_match_without_permno_link"
+            ],
+            "secondary_validation_required": classes["secondary_repository_candidate"],
+            "unresolved_symbol_list": classes["unresolved"],
         },
         "request_summary": {
             "equity_total_candidate_symbol_kind_dates": len(equity),
-            "equity_primary_symbol_kind_dates": count_mapping_class(
-                equity, "primary_exact_companion_match"
+            "equity_study_permno_linked_symbol_kind_dates": count_mapping_class(
+                equity, "study_permno_linked_companion_match"
+            ),
+            "equity_companion_root_only_symbol_kind_dates": count_mapping_class(
+                equity, "companion_root_match_without_permno_link"
             ),
             "equity_secondary_symbol_kind_dates": count_mapping_class(
                 equity, "secondary_repository_candidate"
             ),
             "equity_unresolved_symbol_kind_dates": len(unresolved_equity),
             "option_total_candidate_underlying_kind_dates": len(options),
-            "option_primary_underlying_kind_dates": count_mapping_class(
-                options, "primary_exact_companion_match"
+            "option_study_permno_linked_underlying_kind_dates": count_mapping_class(
+                options, "study_permno_linked_companion_match"
+            ),
+            "option_companion_root_only_underlying_kind_dates": count_mapping_class(
+                options, "companion_root_match_without_permno_link"
             ),
             "option_secondary_underlying_kind_dates": count_mapping_class(
                 options, "secondary_repository_candidate"
@@ -231,6 +255,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build a dry-run LSEG G2 acquisition plan.")
     parser.add_argument("--mapping", type=Path, default=DEFAULT_MAPPING)
     parser.add_argument("--secondary-mapping", type=Path, default=DEFAULT_SECONDARY)
+    parser.add_argument("--event-mapping", type=Path, default=DEFAULT_EVENT_MAPPING)
     parser.add_argument("--core", type=Path, default=DEFAULT_CORE)
     parser.add_argument("--options", type=Path, default=DEFAULT_OPTIONS)
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -239,6 +264,7 @@ def main() -> None:
     plan = build_plan(
         _read_csv(args.mapping),
         _read_csv(args.secondary_mapping),
+        _read_csv(args.event_mapping),
         _read_csv(args.core),
         _read_csv(args.options),
     )
