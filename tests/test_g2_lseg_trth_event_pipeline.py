@@ -173,3 +173,19 @@ def test_trade_resample_handles_empty_event_slice_without_merge_dtype_error():
     at_event = out[out["MinutesAfter"] == 0].iloc[0]
     assert pd.isna(at_event["price"])
     assert out.iloc[-1]["MinutesAfterOpen"] == 30
+
+
+def test_offset_aware_tick_timestamp_is_compared_in_new_york_wall_time():
+    ts = datetime(2015, 2, 12, 10, 0)
+    rows = [
+        _quote("2015-02-12T14:59:58+00:00", bid=10.0, ask=10.2),
+        _quote("2015-02-12T15:00:02+00:00", bid=10.1, ask=10.3),
+    ]
+    out = event.resample_quotes_original(rows, ts, ts.date())["announcement_1s"]
+    at_event = out[out["SecondsAfter"] == 0].iloc[0]
+    assert at_event["bid"] == 10.0
+    assert at_event["ask"] == 10.2
+
+
+def test_trailing_z_tick_timestamp_is_supported():
+    assert event.in_extended_hours("2015-02-12T15:00:00Z") is True
