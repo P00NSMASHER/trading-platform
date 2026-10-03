@@ -21,12 +21,17 @@
       "repo": "vgreg/earnings_news_jar",
       "path": "Sample_Stocks/PERMNO_TRHT _Ticker.csv",
       "evidence": "Companion research repository provides historical PERMNO-to-RIC candidates for the same research ecosystem."
+    },
+    {
+      "repo": "steve-o/Kigoron",
+      "path": "Config/NSQ.csv",
+      "evidence": "Thomson Reuters instrument configuration rows provide RIC plus ISIN/CUSIP/SEDOL and company description for 18 previously unresolved G2 securities."
     }
   ],
   "identifier_mapping": {
     "frozen_g2_equity_symbols": 146,
     "exact_root_candidate_mapped": 112,
-    "unresolved": 34,
+    "unresolved": 16,
     "candidate_map_file": "data/processed/g2_vendor_requests/lseg_tick_history_ric_candidates.csv",
     "caution": "Candidate RICs must be validated for the specific historical trade date. A root match alone is not a coverage claim.",
     "unresolved_identifier_packet": "data/processed/g2_vendor_requests/lseg_tick_history_unresolved_identifiers.csv",
@@ -36,6 +41,17 @@
       "unresolved_symbols_checked": 34,
       "additional_rics_resolved": 0,
       "result": "The 34 unresolved G2 securities have exact PERMNO/GVKEY/event identifiers, but their PERMNOs are absent from the public companion PERMNO-to-RIC table. Historical LSEG identifier resolution is still required."
+    },
+    "reuters_config_candidate_mapped": 18,
+    "total_candidate_mapped": 130,
+    "reuters_config_evidence_file": "data/processed/g2_vendor_requests/lseg_tick_history_reuters_config_evidence.csv",
+    "reuters_config_crosscheck": {
+      "unresolved_symbols_checked": 34,
+      "additional_rics_resolved": 18,
+      "remaining_unresolved": 16,
+      "source_repo": "steve-o/Kigoron",
+      "source_path": "Config/NSQ.csv",
+      "caution": "These are evidence-backed Reuters instrument identifiers but still require date-specific validation before G2 coverage is claimed."
     }
   },
   "validation_options": {
