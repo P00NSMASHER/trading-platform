@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "074be58b0f31b6aa2b757f7860e83db042b95581",
+  "reserved_batch": "0095",
+  "worker_slot": 0,
+  "event_ids": ["HEJFE-F20ECC0C09BBC89E", "HEJFE-8167467EBF64AABE"],
+  "historical_symbols": ["JNPR", "PNRA"],
+  "expected_state_after_batch": {"exact_resolved": 109, "reviewed_excluded": 65, "step9": "SOURCE_BLOCKED"}
+}
