@@ -13,7 +13,6 @@ from urllib.request import Request, urlopen
 
 import g2_lseg_datascope_execution_plan as execution
 import g2_lseg_historical_ric_validator as historical_ric_validator
-import g2_lseg_option_time_and_sales as option_ts
 import g2_lseg_request_manifest as manifest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -646,6 +645,10 @@ def execute_option_day(
     expected_date: str,
     output_path: Path,
 ) -> dict:
+    # Local import avoids a circular module dependency: the canonical option
+    # downloader imports this DataScope client module for transport/private-path helpers.
+    import g2_lseg_option_time_and_sales as option_ts
+
     resolved = contract_manifest_path.expanduser().resolve()
     payload = json.loads(resolved.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
