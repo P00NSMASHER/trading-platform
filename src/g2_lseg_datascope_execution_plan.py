@@ -166,16 +166,19 @@ def build_execution_plan(plan: dict) -> dict:
                     {
                         "endpoint": FUTURES_OPTIONS_SEARCH_ENDPOINT,
                         "method": "futures_and_options_search",
-                        "request": {
-                            "SearchRequest": {
-                                "FuturesAndOptionsType": "Options",
-                                "UnderlyingRicCandidates": row["candidate_rics"],
-                                "ExpirationDate": {
-                                    "ComparisonOperator": "GreaterThanEquals",
-                                    "Value": row["trade_date"],
-                                },
+                        "requests": [
+                            {
+                                "SearchRequest": {
+                                    "FuturesAndOptionsType": "Options",
+                                    "UnderlyingRic": ric,
+                                    "ExpirationDate": {
+                                        "ComparisonOperator": "GreaterThanEquals",
+                                        "Value": row["trade_date"],
+                                    },
+                                }
                             }
-                        },
+                            for ric in row["candidate_rics"]
+                        ],
                     },
                     {
                         "endpoint": HISTORICAL_CHAIN_ENDPOINT,
