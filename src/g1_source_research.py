@@ -17,6 +17,7 @@ _ALLOWED_EVIDENCE_SOURCE_FAMILIES = frozenset({
     "issuer_investor_relations_archive",
     "preserved_wire_mirror",
     "sec_litigation_public_distribution_record",
+    "federal_court_public_distribution_record",
     "ibes_announcement",
     "licensed_ibes_actuals",
 })
@@ -143,6 +144,36 @@ def _validate_evidence_eligible_probe(
         if probe.get("public_distribution_explicit") is not True:
             raise G1SourceResearchError(
                 f"probe {probe_id} SEC litigation evidence must explicitly identify public distribution"
+            )
+
+    if source_family == "federal_court_public_distribution_record":
+        source_reference = str(probe.get("source_reference", "")).strip()
+        docket_reference = str(probe.get("court_docket_reference", "")).strip()
+        corroboration_reference = str(probe.get("corroboration_reference", "")).strip()
+        if not (
+            source_reference.startswith("https://storage.courtlistener.com/recap/")
+            and source_reference.endswith(".pdf")
+        ):
+            raise G1SourceResearchError(
+                f"probe {probe_id} federal court evidence requires a CourtListener RECAP PDF source_reference"
+            )
+        if not docket_reference.startswith("https://www.courtlistener.com/docket/"):
+            raise G1SourceResearchError(
+                f"probe {probe_id} federal court evidence requires a CourtListener docket reference"
+            )
+        if not corroboration_reference.startswith(
+            "https://www.sec.gov/Archives/edgar/data/"
+        ):
+            raise G1SourceResearchError(
+                f"probe {probe_id} federal court evidence requires independent SEC Exhibit corroboration"
+            )
+        if evidence_kind != "explicit_release_clock":
+            raise G1SourceResearchError(
+                f"probe {probe_id} federal court evidence requires explicit_release_clock semantics"
+            )
+        if probe.get("public_distribution_explicit") is not True:
+            raise G1SourceResearchError(
+                f"probe {probe_id} federal court evidence must explicitly identify public distribution"
             )
 
     release_ts = _parse_exact_public_release_ts(

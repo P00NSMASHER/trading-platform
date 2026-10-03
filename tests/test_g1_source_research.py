@@ -172,6 +172,52 @@ def test_preserved_wire_mirror_requires_corroboration():
     g1r.validate_research_map(research, exclusions)
 
 
+
+
+def test_federal_court_public_distribution_probe_requires_strict_court_evidence():
+    research = _load(RESEARCH_PATH)
+    exclusions = _load(EXCLUSIONS_PATH)
+    probe = _eligible_probe(exclusions)
+    probe.update({
+        "source_family": "federal_court_public_distribution_record",
+        "timestamp_evidence_kind": "explicit_release_clock",
+        "source_reference": (
+            "https://storage.courtlistener.com/recap/"
+            "gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf"
+        ),
+        "court_docket_reference": (
+            "https://www.courtlistener.com/docket/4324653/"
+            "united-states-v-korchevsky/"
+        ),
+        "corroboration_reference": (
+            "https://www.sec.gov/Archives/edgar/data/1208208/"
+            "000119312513204660/d496873dex991.htm"
+        ),
+        "public_distribution_explicit": True,
+    })
+    research["validation_probes"].append(probe)
+    g1r.validate_research_map(research, exclusions)
+
+    probe["source_reference"] = "https://example.test/not-a-court-record.pdf"
+    with pytest.raises(g1r.G1SourceResearchError, match="CourtListener RECAP PDF"):
+        g1r.validate_research_map(research, exclusions)
+
+    probe["source_reference"] = (
+        "https://storage.courtlistener.com/recap/"
+        "gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf"
+    )
+    probe["court_docket_reference"] = ""
+    with pytest.raises(g1r.G1SourceResearchError, match="docket reference"):
+        g1r.validate_research_map(research, exclusions)
+
+    probe["court_docket_reference"] = (
+        "https://www.courtlistener.com/docket/4324653/"
+        "united-states-v-korchevsky/"
+    )
+    probe["public_distribution_explicit"] = False
+    with pytest.raises(g1r.G1SourceResearchError, match="explicitly identify public distribution"):
+        g1r.validate_research_map(research, exclusions)
+
 def test_batch_count_and_event_count_are_explicitly_distinct():
     research = _load(RESEARCH_PATH)
     state = research["current_g1_state"]

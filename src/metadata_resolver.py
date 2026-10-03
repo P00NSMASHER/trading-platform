@@ -27,6 +27,7 @@ ALLOWED_SOURCE_FAMILIES = {
     "official_newswire_archive",
     "preserved_wire_mirror",
     "sec_litigation_public_distribution_record",
+    "federal_court_public_distribution_record",
     "sec_edgar_submission_header",
     "nyse_daily_taq_master",
     "nasdaq_daily_list",
