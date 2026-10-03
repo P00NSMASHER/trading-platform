@@ -288,13 +288,33 @@ def test_execute_equity_validation_batch_is_resumable(tmp_path):
     assert len(calls) == 3
 
 
-def test_execute_option_validation_batch_writes_private_discovery_result(tmp_path):
-    calls = []
+def test_option_chain_ric_derives_public_datascope_chain_shape():
+    assert client.option_chain_ric("JNPR.O") == "0#JNPR*.U"
+    assert client.option_chain_ric("ALSN.N") == "0#ALSN*.U"
+    assert client.option_chain_ric("GORO.A") == "0#GORO*.U"
+    assert client.option_chain_ric("0#SPX*.U") == "0#SPX*.U"
+    with pytest.raises(ValueError):
+        client.option_chain_ric("")
+
+
+def test_execute_option_validation_batch_writes_search_and_historical_chain(tmp_path):
+    search_calls = []
+    chain_calls = []
 
     class FakeClient:
         def futures_options_search(self, ric, trade_date):
-            calls.append((ric, trade_date))
+            search_calls.append((ric, trade_date))
             return [{"Identifier": f"{ric}-OPT"}]
+
+        def historical_chain_resolution(self, chain_ric, trade_date):
+            chain_calls.append((chain_ric, trade_date))
+            return {
+                "value": [
+                    {
+                        "Identifier": f"{chain_ric}-HIST",
+                    }
+                ]
+            }
 
     batch = {
         "lane": "option",
@@ -312,27 +332,54 @@ def test_execute_option_validation_batch_writes_private_discovery_result(tmp_pat
     assert result["network_tasks_completed"] == 1
     assert result["validation_promotions"] == 0
     assert result["g2_coverage_change"] == 0
-    assert result["receipts"][0]["discovered_contract_count"] == 2
-    assert calls == [
+    assert result["receipts"][0]["search_discovered_contract_count"] == 2
+    assert result["receipts"][0]["historical_chain_query_count"] == 1
+    assert search_calls == [
         ("JNPR.O", "2011-03-21"),
         ("JNPR.OQ", "2011-03-21"),
     ]
-    payload = json.loads(
-        (output_dir / "2011-03-21_JNPR.json").read_text(encoding="utf-8")
-    )
+    assert chain_calls == [
+        ("0#JNPR*.U", "2011-03-21"),
+    ]
+
+    payload_path = output_dir / "2011-03-21_JNPR.json"
+    payload = json.loads(payload_path.read_text(encoding="utf-8"))
+    assert payload["schema_version"] == "2"
+    assert payload["historical_chain_resolution_completed"] is True
     assert len(payload["discoveries"]) == 2
+    assert payload["discoveries"][0]["option_chain_ric"] == "0#JNPR*.U"
+    assert "historical_chain_result" in payload["discoveries"][0]
 
     second = client.execute_validation_batch(FakeClient(), batch, output_dir)
     assert second["network_tasks_completed"] == 0
     assert second["skipped_existing_outputs"] == 1
-    assert len(calls) == 2
+    assert len(search_calls) == 2
+    assert len(chain_calls) == 1
 
-    # Corrupt/incomplete JSON is not accepted as a completion marker.
-    (output_dir / "2011-03-21_JNPR.json").write_text("{", encoding="utf-8")
+    # A legacy search-only result with matching task identity is still incomplete.
+    payload_path.write_text(
+        json.dumps(
+            {
+                "trade_date": "2011-03-21",
+                "historical_symbol": "JNPR",
+                "candidate_rics": ["JNPR.O", "JNPR.OQ"],
+                "discoveries": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+    legacy = client.execute_validation_batch(FakeClient(), batch, output_dir)
+    assert legacy["network_tasks_completed"] == 1
+    assert legacy["skipped_existing_outputs"] == 0
+    assert len(search_calls) == 4
+    assert len(chain_calls) == 2
+
+    # Corrupt/incomplete JSON is also not accepted as a completion marker.
+    payload_path.write_text("{", encoding="utf-8")
     third = client.execute_validation_batch(FakeClient(), batch, output_dir)
     assert third["network_tasks_completed"] == 1
-    assert len(calls) == 4
-
+    assert len(search_calls) == 6
+    assert len(chain_calls) == 3
 
 def test_live_validation_batch_hard_caps_network_tasks(tmp_path):
     class FakeClient:
