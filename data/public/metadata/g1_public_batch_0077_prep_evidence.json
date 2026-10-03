@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "f8324a95101d8a0b742429d1de1c588e541c08f8",
+  "reserved_batch": "0077",
+  "worker_slot": 2,
+  "previous_exact_count": 101,
+  "expected_exact_count_after_batch": 106,
+  "expected_excluded_after_batch": 68,
+  "source_family": "federal_court_public_distribution_record",
+  "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+  "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+  "items": [
+    {
+      "event_id": "HEJFE-D346C6CFDFB6E581",
+      "historical_symbol": "WTS",
+      "public_announcement_ts": "2015-02-17T16:30:00-05:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/795403/000110465915011302/a15-4702_1ex99d1.htm"
+    },
+    {
+      "event_id": "HEJFE-0273F1BFCD285E7F",
+      "historical_symbol": "THC",
+      "public_announcement_ts": "2015-02-23T16:11:00-05:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/70318/000119312515058168/d878379dex991.htm"
+    },
+    {
+      "event_id": "HEJFE-99F31DB35F001A44",
+      "historical_symbol": "DXCM",
+      "public_announcement_ts": "2015-02-25T16:01:00-05:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1093557/000109355715000038/dxcmq4201499-1.htm"
+    },
+    {
+      "event_id": "HEJFE-BB62E8864F35DCD0",
+      "historical_symbol": "WLL",
+      "public_announcement_ts": "2015-02-25T16:00:00-05:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1255474/000125547415000002/exhibit99.htm"
+    },
+    {
+      "event_id": "HEJFE-E1B57B6A71B06A7F",
+      "historical_symbol": "CR",
+      "public_announcement_ts": "2015-04-27T17:38:00-04:00",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/25445/000162828015002968/ex991-pressreleasexq12015.htm"
+    }
+  ],
+  "evidence_method": "Filed federal-court exact public-distribution clocks with matching SEC press-release exhibits; prep only."
+}
