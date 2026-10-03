@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import shutil
@@ -103,6 +104,60 @@ def historical_chain_payload(chain_ric: str, trade_date: str) -> dict:
             },
         }
     }
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def historical_option_rics_from_manifest(
+    path: Path,
+    *,
+    historical_symbol: str,
+    trade_date: str,
+) -> tuple[list[str], dict]:
+    resolved = path.expanduser().resolve()
+    payload = json.loads(resolved.read_text(encoding="utf-8"))
+
+    if str(payload.get("historical_symbol") or "") != historical_symbol:
+        raise ValueError("option contract manifest historical_symbol mismatch")
+    if str(payload.get("trade_date") or "") != trade_date:
+        raise ValueError("option contract manifest trade_date mismatch")
+
+    summary = dict(payload.get("summary") or {})
+    if not bool(summary.get("historical_contract_set_ready_for_time_and_sales")):
+        raise ValueError(
+            "option contract manifest is not historical-chain validated for Time & Sales"
+        )
+
+    contracts = list(payload.get("contracts") or [])
+    rics = sorted(
+        {
+            str(row.get("source_ric") or "").strip()
+            for row in contracts
+            if bool(row.get("historical_date_evidence"))
+            and str(row.get("validation_status") or "") == "historical_chain_candidate"
+            and str(row.get("historical_symbol") or "") == historical_symbol
+            and str(row.get("trade_date") or "") == trade_date
+            and str(row.get("source_ric") or "").strip()
+        }
+    )
+    if not rics:
+        raise ValueError("option contract manifest contains no validated historical RICs")
+
+    receipt = {
+        "path_name": resolved.name,
+        "size_bytes": resolved.stat().st_size,
+        "sha256": _sha256_file(resolved),
+        "historical_symbol": historical_symbol,
+        "trade_date": trade_date,
+        "validated_contract_count": len(rics),
+    }
+    return rics, receipt
 
 
 def ensure_private_output_path(path: Path, *, repo_root: Path = ROOT) -> Path:
@@ -360,6 +415,12 @@ def main() -> None:
     chain.add_argument("--date", required=True)
     chain.add_argument("--output", type=Path, required=True)
 
+    option_day = sub.add_parser("option-day")
+    option_day.add_argument("--symbol", required=True)
+    option_day.add_argument("--date", required=True)
+    option_day.add_argument("--contracts", type=Path, required=True)
+    option_day.add_argument("--output", type=Path, required=True)
+
     args = parser.parse_args()
     username, password = _credentials_from_environment()
     client = DataScopeClient(username, password)
@@ -377,6 +438,22 @@ def main() -> None:
             args.date,
             args.output,
         )
+        print(json.dumps(receipt, indent=2, sort_keys=True))
+        return
+
+    if args.command == "option-day":
+        option_rics, manifest_receipt = historical_option_rics_from_manifest(
+            args.contracts,
+            historical_symbol=args.symbol,
+            trade_date=args.date,
+        )
+        receipt = client.extract_time_and_sales(
+            option_rics,
+            args.date,
+            args.output,
+        )
+        receipt["historical_symbol"] = args.symbol
+        receipt["contract_manifest"] = manifest_receipt
         print(json.dumps(receipt, indent=2, sort_keys=True))
         return
 
