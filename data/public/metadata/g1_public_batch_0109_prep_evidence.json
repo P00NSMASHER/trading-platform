@@ -1,0 +1,43 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
+  "reserved_batch": "0109",
+  "worker_slot": 4,
+  "ownership_rule": "SHA256(event_id)%5",
+  "ownership_audit": {
+    "event_id": "HEJFE-809E53BB4081FBAE",
+    "sha256": "6975c1ce6f6a735f25677ed6168dcc00b36c0ea74c660afc7cf0f76a1c626b04",
+    "sha256_mod_5": 4,
+    "worker_4_owned": true
+  },
+  "source_family": "timestamp_preserving_business_wire_mirror",
+  "source_reference": "https://www.streetinsider.com/Press%2BReleases/Rovi%2BCorporation%2BReports%2BFirst%2BQuarter%2B2015%2BFinancial%2BResults/10508598.html",
+  "source_discovery_comment": "https://github.com/P00NSMASHER/trading-platform/issues/153#issuecomment-5985734455",
+  "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1424454/000142445415000015/ex99-1x03312015earningsrel.htm",
+  "items": [
+    {
+      "event_id": "HEJFE-809E53BB4081FBAE",
+      "historical_symbol": "ROVI",
+      "headline": "Rovi Corporation Reports First Quarter 2015 Financial Results",
+      "wire_source": "Business Wire",
+      "mirror_clock_text": "April 30, 2015 4:02 PM EDT",
+      "public_announcement_ts": "2015-04-30T16:02:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-04-30T14:48:00-04:00",
+      "expected_information_asymmetry_seconds": 4440,
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "public_distribution_explicit": true,
+      "source_grade": "B"
+    }
+  ],
+  "live_validation": {
+    "canonical_exact_before": 121,
+    "canonical_excluded_before": 53,
+    "event_still_excluded_fail_closed": true,
+    "active_token_worker": null,
+    "active_token_state": "UNASSIGNED",
+    "unclaimed_by_active_package": true
+  },
+  "handoff": "When the controller assigns Worker 4, regenerate ROVI-only batch 0109 from exact live main and run all token gates. This prep file must not mutate canonical state."
+}
