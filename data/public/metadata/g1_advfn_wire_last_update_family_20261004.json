@@ -1,0 +1,40 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "canonical_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
+  "source_family": "historical_advfn_investorshub_wire_mirrors_with_last_update_timestamp",
+  "finding": "Public ADVFN/InvestorsHub historical news mirrors can preserve the full syndicated wire release plus a second-resolution 'Last update' timestamp. This is a distinct source family from FNSPID, MarketWatch/BZX, Sportmondo and MarketScreener.",
+  "verified_examples": [
+    {
+      "title": "Vanda Pharmaceuticals Reports Fourth Quarter 2014 and Full Year 2014 Financial Results",
+      "wire": "PR Newswire",
+      "wire_dateline": "WASHINGTON, Feb. 19, 2015",
+      "last_update": "2015-02-19 07:00:18 (displayed by mirror)",
+      "mirror": "https://investorshub.advfn.com/boards/read_msg.aspx?message_id=110957746",
+      "status": "FAMILY_PRECEDENT_ONLY"
+    },
+    {
+      "title": "Sagent Pharmaceuticals Reports Fourth-Quarter and Full-Year 2014 Results",
+      "wire": "GlobeNewswire",
+      "wire_dateline": "SCHAUMBURG, Ill., Feb. 19, 2015",
+      "last_update": "2015-02-19 07:00:06 (displayed by mirror)",
+      "mirror": "https://investorshub.advfn.com/boards/read_msg.aspx?message_id=110957782",
+      "status": "FAMILY_PRECEDENT_ONLY"
+    }
+  ],
+  "admissibility_guardrails": [
+    "Only a target-specific exact-release mirror may support FOUND.",
+    "Verify issuer/title/date against issuer or SEC exhibit.",
+    "Treat the mirror Last update field as candidate timestamp-preserving syndication metadata; require chronology and timezone/display semantics to be supportable before canonical promotion.",
+    "Do not use message-board post time, replies, conference-call time, EDGAR acceptance, scheduled time, or neighboring release timestamps.",
+    "Do not repeat events already checked in this family unless a new exact-release mirror is identified."
+  ],
+  "worker_strategy": [
+    "Search exact target release title plus ADVFN/InvestorsHub and 'Last update'.",
+    "Prefer mirrors that reproduce the named wire service and complete release text.",
+    "Preserve exact mirror URL and displayed Last update timestamp.",
+    "Cross-check against issuer/SEC release identity and first illicit trade chronology.",
+    "If timezone semantics cannot be defended, record CLUE_ONLY and keep fail-closed."
+  ],
+  "status": "NEW_SOURCE_FAMILY_CONFIRMED_NO_G1_TARGET_PROMOTED_YET"
+}
