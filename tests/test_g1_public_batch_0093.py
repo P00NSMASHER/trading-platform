@@ -32,7 +32,7 @@ def test_batch_0093_preserves_prior():
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
-    ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==57
+    ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==54
     assert all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in ex)
 def test_batch_0093_worker3_shard_ownership():
     event_ids={"HEJFE-47A3794D1C360650","HEJFE-5ED55A2EAC950921","HEJFE-ED8CFC03F1053B9A"}

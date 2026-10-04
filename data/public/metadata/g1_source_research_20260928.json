@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "3752e553ae10ae62f1d68720abe453db8cded079",
+  "base_main_sha": "ee05e86790e616d321fcec395d44cea46a44cfea",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 117,
-    "note": "The latest integrated recovery is batch_0093; cumulative public exact-time batches are 76 and cumulative exact event records are 117 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 76,
+    "exact_resolved_event_records": 120,
+    "note": "The latest integrated recovery is batch_0081; cumulative public exact-time batches are 77 and cumulative exact event records are 120 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 77,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 57
+    "reviewed_excluded_event_records": 54
   },
   "preferred_public_source_families": [
     {
@@ -95,20 +95,6 @@
         "sec_exhibit_corroboration"
       ],
       "priority_rank": 1,
-      "research_signal": "strong_release_trail"
-    },
-    {
-      "current_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME",
-      "event_id": "HEJFE-AF5106891E058D23",
-      "first_documented_illicit_trade_ts": "2015-02-12 15:10:00",
-      "historical_symbol": "TNGO",
-      "next_source_families": [
-        "official_newswire_archive",
-        "preserved_wire_mirror",
-        "issuer_investor_relations_archive",
-        "sec_exhibit_corroboration"
-      ],
-      "priority_rank": 2,
       "research_signal": "strong_release_trail"
     },
     {
@@ -2378,6 +2364,87 @@
       "reason": "Promoted through the filed federal-court public-distribution record with independent matching SEC press-release corroboration.",
       "release_title": "CalAmp Reports Fiscal 2013 Fourth Quarter and Full Year Results",
       "reviewed_on": "2026-10-03",
+      "source_family": "federal_court_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Filed court clock with matching SEC release.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1182325/000110465915009489/a15-4435_1ex99d1.htm",
+      "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+      "disposition": "RESOLVED_IN_BATCH_0081",
+      "event_date": "2015-02-12",
+      "event_id": "HEJFE-AF5106891E058D23",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-02-12T16:05:00-05:00",
+      "first_documented_illicit_trade_ts": "2015-02-12 15:10:00",
+      "historical_event_match": true,
+      "historical_symbol": "TNGO",
+      "information_asymmetry_seconds": 3300,
+      "probe_id": "TNGO-batch0081",
+      "public_announcement_ts": "2015-02-12T16:05:00-05:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "CourtListener filed record: TNGO public distribution 2015-02-12 16:05 EST",
+      "reason": "Promoted through the filed federal-court public-distribution record with independent matching SEC press-release corroboration.",
+      "release_title": "Tangoe, Inc. Announces Fourth Quarter and Full Year 2014 Financial Results",
+      "reviewed_on": "2026-10-04",
+      "source_family": "federal_court_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Filed court clock with matching SEC release.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/97210/000119312515024386/d860562dex991.htm",
+      "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+      "disposition": "RESOLVED_IN_BATCH_0081",
+      "event_date": "2015-01-28",
+      "event_id": "HEJFE-334BAA0D940A418A",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-01-28T17:32:00-05:00",
+      "first_documented_illicit_trade_ts": "2015-01-28 15:49:00",
+      "historical_event_match": true,
+      "historical_symbol": "TER",
+      "information_asymmetry_seconds": 6180,
+      "probe_id": "TER-batch0081",
+      "public_announcement_ts": "2015-01-28T17:32:00-05:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "CourtListener filed record: TER public distribution 2015-01-28 17:32 EST",
+      "reason": "Promoted through the filed federal-court public-distribution record with independent matching SEC press-release corroboration.",
+      "release_title": "Teradyne Reports Fourth Quarter and Fiscal Year 2014 Results",
+      "reviewed_on": "2026-10-04",
+      "source_family": "federal_court_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Filed court clock with matching SEC release.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/742126/000110262413000476/usecologyinc.htm",
+      "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+      "disposition": "RESOLVED_IN_BATCH_0081",
+      "event_date": "2013-04-24",
+      "event_id": "HEJFE-12CC8075D3F634CD",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-04-25T06:00:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-24 15:07:00",
+      "historical_event_match": true,
+      "historical_symbol": "ECOL",
+      "information_asymmetry_seconds": 53580,
+      "probe_id": "ECOL-batch0081",
+      "public_announcement_ts": "2013-04-25T06:00:00-04:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "CourtListener filed record: ECOL public distribution 2013-04-25 06:00 EDT",
+      "reason": "Promoted through the filed federal-court public-distribution record with independent matching SEC press-release corroboration.",
+      "release_title": "US Ecology Announces First Quarter 2013 Results",
+      "reviewed_on": "2026-10-04",
       "source_family": "federal_court_public_distribution_record",
       "source_grade": "A",
       "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
