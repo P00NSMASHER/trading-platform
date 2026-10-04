@@ -1052,8 +1052,8 @@
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
-      "expected_sha256": "c643c18ed02b0274838f6fc300bf910d18bb4044c4ee650d631f40bc3324f74f",
-      "reason": "G1 swarm reliability: deterministic token lease, batch-lane, canonical-input and fail-closed controller policy."
+      "expected_sha256": "fcf5f123d93ba1a449c9d37d340f3e6f3739d4acc2e19ab7ffcfc236f004d157",
+      "reason": "G1 controller ownership policy: SHA256(event_id)%5 with explicit BA/LRCX/KOPN overrides and fail-closed unassigned CREE override after consumed historical grandfathering."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -1440,8 +1440,8 @@
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "9b101f23bf6060140301a40a63b256a00798957aa11e262df6cc18498d7558f3",
-      "reason": "G1 controller throughput: retain a stale prep branch only when the latest issue state for the same worker+batch remains PREPARED/CI; exact-main regeneration is still required before canonical integration."
+      "expected_sha256": "4fecdb141daa8955d05ee79bb0381a9e71a007fbfa9db083f21d89b42a9b21f9",
+      "reason": "G1 controller reliability: reject explicit cross-shard token/candidate packages and expire tokens after 120 minutes without fresh matching progress while preserving exact-current-main open PR support."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -1932,8 +1932,8 @@
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "75e9f7c9f9e6b12fadb650dbab4c0516e223bd9b687c5a6583b468369d64607d",
-      "reason": "Regression coverage for stale prepared queue retention across unrelated main churn and PREP_INVALIDATED fail-closed rejection."
+      "expected_sha256": "a566bbcfb8400a65c25b7fcbe7deb2e83baa307b0d8276cf506b5ab5d9a6553f",
+      "reason": "Regression coverage for cross-shard token rejection, deterministic ownership overrides, and stale BUILDING progress that must not extend a token lease indefinitely."
     },
     "tests/test_g2_candidate_route_matrix.py": {
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",
