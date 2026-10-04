@@ -1,69 +1,67 @@
-name: G1 swarm controller
+name: G1 batch 0081 Worker 1 adaptive exact-main publisher
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
-    types:
-      - closed
-  issue_comment:
-    types:
-      - created
-  schedule:
-    - cron: "*/15 * * * *"
-  workflow_dispatch:
+      - g1/public-batch-0081-worker-1-court3-main-ee05e86-source
 
 permissions:
-  contents: read
-  issues: write
-  pull-requests: read
-  actions: read
+  contents: write
 
 concurrency:
-  group: g1-swarm-controller
+  group: g1-batch-0081-worker-1-exact-main
   cancel-in-progress: false
 
 jobs:
-  coordinate:
-    name: Reconcile G1 swarm state
-    if: >-
-      github.event_name != 'issue_comment' ||
-      (github.event.issue.number == 153 &&
-       startsWith(github.event.comment.body, 'WORKER '))
+  publish:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
-
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: src
     steps:
-      - name: Checkout current main
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Checkout source head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: main
-          persist-credentials: false
-
+          ref: g1/public-batch-0081-worker-1-court3-main-ee05e86-source
+          fetch-depth: 0
+          persist-credentials: true
       - name: Set up Python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: "3.11"
-
-      - name: Reconcile token and queue
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install locked dependencies
         run: |
-          mkdir -p private_runtime/g1-swarm
-          python scripts/g1_swarm_controller.py \
-            --apply \
-            --repository "$GITHUB_REPOSITORY" \
-            --controller-sha "$GITHUB_SHA" \
-            | tee private_runtime/g1-swarm/controller-summary.json
-
-      - name: Upload controller receipt
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: g1-swarm-controller-${{ github.sha }}
-          path: private_runtime/g1-swarm
-          if-no-files-found: error
-          retention-days: 14
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+      - name: Regenerate and validate exact main
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          BASE="$(git rev-parse origin/main)"
+          test "$BASE" = "ee05e86790e616d321fcec395d44cea46a44cfea"
+          git reset --hard "$BASE"
+          git clean -fd
+          git show "${SOURCE_SHA}:scripts/g1_batch_0100_generate.py" > scripts/g1_batch_0100_generate.py
+          BASE="$BASE" python - <<'PY'
+          import re
+          from pathlib import Path
+          p=Path("scripts/g1_batch_0100_generate.py")
+          t=p.read_text()
+          t,n=re.subn(r'^BASE="[^"]+"', 'BASE="ee05e86790e616d321fcec395d44cea46a44cfea"', t, count=1, flags=re.MULTILINE)
+          assert n==1
+          p.write_text(t)
+          PY
+          python scripts/g1_batch_0100_generate.py
+          pytest -q tests/test_g1_public_batch_0081.py tests/test_g1_source_research.py tests/test_g1_acquisition_manifest.py tests/test_metadata_resolver.py tests/test_real_data_release_sprint.py
+          python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+          pytest -q
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "$BASE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "G1: recover TNGO TER ECOL exact public clocks, 120 exact / 54 excluded [g1-generated]"
+          OUT_BRANCH="g1/public-batch-0081-worker-1-court3-main-${BASE:0:7}-r${GITHUB_RUN_ID}"
+          git push origin HEAD:"$OUT_BRANCH"
