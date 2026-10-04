@@ -59,7 +59,17 @@
       "secondary_alert_headline": "CACI Int'l Reports Q3 EPS $1.18 Vs Est $1.27",
       "github_source": "https://github.com/rzrizaldy/StockMatch/blob/14fd3fa139dfdce7c518fb222b139b675deefd1f/data/stock_sentiment/CACI.csv",
       "status": "CLUE_ONLY_NOT_ADMISSIBLE",
-      "next_probe": "Find timestamp-bearing primary wire/exact-title mirror at or before the 16:06 ET contemporaneous alert; do not promote the alert timestamp."
+      "next_probe": "Find direct issuer/Q4/Business Wire metadata proving the 2015 PDF filename suffix 1605 is the actual publication clock. Do not infer or promote from naming convention or 16:06 secondary alert alone.",
+      "issuer_release_file": "https://s21.q4cdn.com/708811725/files/doc_news/2015/04/1/CACI-Reports-Results-for-Its-Fiscal-2015-Third-Quarter-20150429-1605.pdf",
+      "release_file_clock_candidate": "2015-04-29T16:05:00-04:00",
+      "release_file_clock_candidate_status": "NOT_PROMOTED_REQUIRES_DIRECT_FILENAME_TIMESTAMP_SEMANTICS",
+      "corroborating_archive_alert_ts": "2015-04-29T16:06:00-04:00",
+      "convention_checks": [
+        "https://s21.q4cdn.com/708811725/files/doc_news/2016/04/1/CACI-Reports-Results-for-Its-Fiscal-2016-Third-Quarter-20160427-1615.pdf",
+        "https://s21.q4cdn.com/708811725/files/doc_news/2017/05/1/CACI-Reports-Results-for-Its-Fiscal-2017-Third-Quarter-20170503-1615.pdf",
+        "https://s21.q4cdn.com/708811725/files/doc_news/2018/05/1/CACI-Reports-Results-for-Its-Fiscal-2018-Third-Quarter-20180502-1615.pdf"
+      ],
+      "convention_direct_check": "CACI 2018 issuer advisory explicitly says results would issue at 4:15 pm ET; corresponding issuer PDF filename ends 20180502-1615.pdf."
     }
   ],
   "admissibility_guardrails": [
