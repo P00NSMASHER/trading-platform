@@ -30,6 +30,36 @@
       "exact_title": "Power Integrations Reports First-Quarter Financial Results",
       "status": "CLUE_ONLY_NOT_ADMISSIBLE",
       "next_probe": "Use the 16:04 ET contemporaneous alert to target timestamp-preserving Business Wire/public mirrors for the exact 2015 release. Do not promote the Benzinga timestamp itself."
+    },
+    {
+      "event_id": "HEJFE-FBFFFD99898188CF",
+      "historical_symbol": "COLM",
+      "event_date": "2015-02-12",
+      "secondary_alert_ts": "2015-02-12T16:00:00-05:00",
+      "secondary_alert_headline": "Columbia Sportswear Reports Q4 EPS $0.79 Vs Est $0.67, Sales $600.77M Vs Est $634.13M",
+      "github_source": "https://github.com/rzrizaldy/StockMatch/blob/14fd3fa139dfdce7c518fb222b139b675deefd1f/data/stock_sentiment/COLM.csv",
+      "status": "CLUE_ONLY_NOT_ADMISSIBLE",
+      "next_probe": "Find timestamp-bearing primary wire/exact-title mirror at or before the 16:00 ET contemporaneous alert; do not promote the alert timestamp."
+    },
+    {
+      "event_id": "HEJFE-EBC49B9A024181AD",
+      "historical_symbol": "VEEV",
+      "event_date": "2015-03-03",
+      "secondary_alert_ts": "2015-03-03T16:03:00-05:00",
+      "secondary_alert_headline": "Vevva Reports Q4 EPS $0.12 Vs Est $0.09, Sales $87M vs Est $85.41M",
+      "github_source": "https://github.com/rzrizaldy/StockMatch/blob/14fd3fa139dfdce7c518fb222b139b675deefd1f/data/stock_sentiment/VEEV.csv",
+      "status": "CLUE_ONLY_NOT_ADMISSIBLE",
+      "next_probe": "Find timestamp-bearing primary wire/exact-title mirror at or before the 16:03 ET contemporaneous alert; do not promote the alert timestamp."
+    },
+    {
+      "event_id": "HEJFE-B9C8B3D0EF3DCB5E",
+      "historical_symbol": "CACI",
+      "event_date": "2015-04-29",
+      "secondary_alert_ts": "2015-04-29T16:06:00-04:00",
+      "secondary_alert_headline": "CACI Int'l Reports Q3 EPS $1.18 Vs Est $1.27",
+      "github_source": "https://github.com/rzrizaldy/StockMatch/blob/14fd3fa139dfdce7c518fb222b139b675deefd1f/data/stock_sentiment/CACI.csv",
+      "status": "CLUE_ONLY_NOT_ADMISSIBLE",
+      "next_probe": "Find timestamp-bearing primary wire/exact-title mirror at or before the 16:06 ET contemporaneous alert; do not promote the alert timestamp."
     }
   ],
   "admissibility_guardrails": [
@@ -40,5 +70,13 @@
     "No neighboring-release inference",
     "No unsupported timezone",
     "No secondary alert timestamp promoted as first-public without explicit primary/mirror publication-clock evidence"
+  ],
+  "updated_at": "2026-10-04",
+  "priority_order": [
+    "HEJFE-FBFFFD99898188CF",
+    "HEJFE-EBC49B9A024181AD",
+    "HEJFE-B9C8B3D0EF3DCB5E",
+    "HEJFE-8A0517D50278EAE4",
+    "HEJFE-D6BA56FA6D57427E"
   ]
 }
