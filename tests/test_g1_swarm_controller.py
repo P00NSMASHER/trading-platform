@@ -57,7 +57,7 @@ def test_latest_explicit_token_assignment_wins() -> None:
         comment(
             2,
             "2026-10-01T13:00:00Z",
-            "EXECUTIVE TOKEN RECOVERY\n- GLOBAL INTEGRATION TOKEN now advances to Worker 2 / EW+TIBX / reserved batch 0067.",
+            "EXECUTIVE TOKEN RECOVERY\n- GLOBAL INTEGRATION TOKEN now advances to Worker 2 / EW+MXIM / reserved batch 0067.",
         ),
     ]
 
@@ -65,7 +65,7 @@ def test_latest_explicit_token_assignment_wins() -> None:
 
     assert token is not None
     assert token.worker == 2
-    assert token.package == "EW+TIBX"
+    assert token.package == "EW+MXIM"
     assert token.batch == 67
     assert token.comment_id == 2
 
@@ -75,7 +75,7 @@ def test_unassigned_token_supersedes_older_assignment() -> None:
         comment(
             1,
             "2026-10-01T12:00:00Z",
-            "GLOBAL INTEGRATION TOKEN now advances to Worker 2 / EW+TIBX / reserved batch 0067.",
+            "GLOBAL INTEGRATION TOKEN now advances to Worker 2 / EW+MXIM / reserved batch 0067.",
         ),
         comment(
             2,
@@ -143,7 +143,7 @@ def test_event_owner_uses_hard_shards_and_explicit_overrides() -> None:
 
     assert ctl.event_owner("HEJFE-AF5106891E058D23", p) == 1
     assert ctl.event_owner("HEJFE-47A3794D1C360650", p) == 3
-    assert ctl.event_owner("HEJFE-2C887DA6F617936F", p) == 2
+    assert ctl.event_owner("HEJFE-EDFDC1213C9AF586", p) == 2
     assert ctl.event_owner("HEJFE-1783DE88400AF6CC", p) == 4
     assert ctl.event_owner("HEJFE-45E6DA32B37F83D4", p) == 0
     assert ctl.event_owner("HEJFE-66BA40A20548B7E3", p) == 4
@@ -154,7 +154,7 @@ def test_event_owner_uses_hard_shards_and_explicit_overrides() -> None:
 def test_cross_shard_token_is_invalid_even_with_matching_progress() -> None:
     token = ctl.TokenAssignment(
         worker=2,
-        package="HEJFE-AF5106891E058D23/TNGO + HEJFE-2C887DA6F617936F/TIBX",
+        package="HEJFE-AF5106891E058D23/TNGO + HEJFE-EDFDC1213C9AF586/MXIM",
         batch=97,
         assigned_at="2026-10-01T10:00:00Z",
         comment_id=10,
@@ -164,7 +164,7 @@ def test_cross_shard_token_is_invalid_even_with_matching_progress() -> None:
             comment(
                 11,
                 "2026-10-01T10:30:00Z",
-                "WORKER 2 | HEJFE-AF5106891E058D23/TNGO + HEJFE-2C887DA6F617936F/TIBX | BUILDING | batch 0097 | source | next",
+                "WORKER 2 | HEJFE-AF5106891E058D23/TNGO + HEJFE-EDFDC1213C9AF586/MXIM | BUILDING | batch 0097 | source | next",
             )
         ]
     )
@@ -177,7 +177,7 @@ def test_cross_shard_token_is_invalid_even_with_matching_progress() -> None:
         manifest=manifest(
             unresolved_symbols={
                 "TNGO": {"HEJFE-AF5106891E058D23"},
-                "TIBX": {"HEJFE-2C887DA6F617936F"},
+                "MXIM": {"HEJFE-EDFDC1213C9AF586"},
             }
         ),
         lease_minutes=120,
@@ -192,7 +192,7 @@ def test_cross_shard_token_is_invalid_even_with_matching_progress() -> None:
 def test_token_stalls_after_lease_without_progress() -> None:
     token = ctl.TokenAssignment(
         worker=2,
-        package="EW+TIBX",
+        package="EW+MXIM",
         batch=67,
         assigned_at="2026-10-01T10:00:00Z",
         comment_id=10,
@@ -206,7 +206,7 @@ def test_token_stalls_after_lease_without_progress() -> None:
         manifest=manifest(
             unresolved_symbols={
                 "EW": {"HEJFE-ED329F780A1085DA"},
-                "TIBX": {"HEJFE-2C887DA6F617936F"},
+                "MXIM": {"HEJFE-EDFDC1213C9AF586"},
             }
         ),
         lease_minutes=120,
@@ -220,7 +220,7 @@ def test_token_stalls_after_lease_without_progress() -> None:
 def test_building_update_keeps_token_active_past_lease() -> None:
     token = ctl.TokenAssignment(
         worker=2,
-        package="EW+TIBX",
+        package="EW+MXIM",
         batch=67,
         assigned_at="2026-10-01T10:00:00Z",
         comment_id=10,
@@ -230,7 +230,7 @@ def test_building_update_keeps_token_active_past_lease() -> None:
             comment(
                 11,
                 "2026-10-01T11:30:00Z",
-                "WORKER 2 | EW+TIBX | BUILDING | batch 0067 / branch g1/public-batch-0067 | source | next",
+                "WORKER 2 | EW+MXIM | BUILDING | batch 0067 / branch g1/public-batch-0067 | source | next",
             )
         ]
     )
@@ -243,7 +243,7 @@ def test_building_update_keeps_token_active_past_lease() -> None:
         manifest=manifest(
             unresolved_symbols={
                 "EW": {"HEJFE-ED329F780A1085DA"},
-                "TIBX": {"HEJFE-2C887DA6F617936F"},
+                "MXIM": {"HEJFE-EDFDC1213C9AF586"},
             }
         ),
         lease_minutes=120,
@@ -257,7 +257,7 @@ def test_building_update_keeps_token_active_past_lease() -> None:
 def test_stale_building_update_does_not_extend_token_forever() -> None:
     token = ctl.TokenAssignment(
         worker=2,
-        package="HEJFE-2C887DA6F617936F/TIBX",
+        package="HEJFE-EDFDC1213C9AF586/MXIM",
         batch=97,
         assigned_at="2026-10-01T10:00:00Z",
         comment_id=10,
@@ -267,7 +267,7 @@ def test_stale_building_update_does_not_extend_token_forever() -> None:
             comment(
                 11,
                 "2026-10-01T10:30:00Z",
-                "WORKER 2 | HEJFE-2C887DA6F617936F/TIBX | BUILDING | batch 0097 | source | next",
+                "WORKER 2 | HEJFE-EDFDC1213C9AF586/MXIM | BUILDING | batch 0097 | source | next",
             )
         ]
     )
@@ -277,7 +277,7 @@ def test_stale_building_update_does_not_extend_token_forever() -> None:
         comments=[],
         pulls=[],
         updates=updates,
-        manifest=manifest(unresolved_symbols={"TIBX": {"HEJFE-2C887DA6F617936F"}}),
+        manifest=manifest(unresolved_symbols={"MXIM": {"HEJFE-EDFDC1213C9AF586"}}),
         lease_minutes=120,
         now=datetime(2026, 10, 1, 12, 31, tzinfo=timezone.utc),
         policy=policy(),
@@ -291,7 +291,7 @@ def test_stale_building_update_does_not_extend_token_forever() -> None:
 def test_closed_matching_pr_releases_token() -> None:
     token = ctl.TokenAssignment(
         worker=2,
-        package="EW+TIBX",
+        package="EW+MXIM",
         batch=67,
         assigned_at="2026-10-01T10:00:00Z",
         comment_id=10,
@@ -301,7 +301,7 @@ def test_closed_matching_pr_releases_token() -> None:
             "number": 170,
             "state": "closed",
             "merged_at": "2026-10-01T10:30:00Z",
-            "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+            "title": "G1 Worker 2 batch 0067: recover EW and MXIM",
             "body": "",
             "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
         }
@@ -315,7 +315,7 @@ def test_closed_matching_pr_releases_token() -> None:
         manifest=manifest(
             unresolved_symbols={
                 "EW": {"HEJFE-ED329F780A1085DA"},
-                "TIBX": {"HEJFE-2C887DA6F617936F"},
+                "MXIM": {"HEJFE-EDFDC1213C9AF586"},
             }
         ),
         lease_minutes=120,
@@ -328,7 +328,7 @@ def test_closed_matching_pr_releases_token() -> None:
 
 def test_uncorroborated_queue_hint_does_not_beat_live_branch_prep() -> None:
     p = policy()
-    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    token = ctl.TokenAssignment(2, "EW+MXIM", 67, "2026-10-01T10:00:00Z", 10)
     candidates = [
         ctl.Candidate(
             worker=1,
@@ -360,7 +360,7 @@ def test_uncorroborated_queue_hint_does_not_beat_live_branch_prep() -> None:
             "PNRA": {"HEJFE-AAAA000000000002"},
             "ALGN": {"HEJFE-AAAA000000000003"},
             "EW": {"HEJFE-AAAA000000000004"},
-            "TIBX": {"HEJFE-AAAA000000000005"},
+            "MXIM": {"HEJFE-AAAA000000000005"},
         }
     )
 
@@ -470,7 +470,7 @@ def test_controller_invalidates_token_backed_only_by_historical_queue_hint() -> 
 def test_prepared_comment_without_fresh_branch_does_not_support_active_token() -> None:
     token = ctl.TokenAssignment(
         worker=2,
-        package="EW+TIBX",
+        package="EW+MXIM",
         batch=67,
         assigned_at="2026-10-01T10:00:00Z",
         comment_id=10,
@@ -480,14 +480,14 @@ def test_prepared_comment_without_fresh_branch_does_not_support_active_token() -
             comment(
                 9,
                 "2026-10-01T09:55:00Z",
-                "WORKER 2 | EW+TIBX | PREPARED | batch 0067 / prep branch g1/prep-batch-0067-worker-2-ew-tibx | source | next",
+                "WORKER 2 | EW+MXIM | PREPARED | batch 0067 / prep branch g1/prep-batch-0067-worker-2-ew-tibx | source | next",
             )
         ]
     )
     m = manifest(
         unresolved_symbols={
             "EW": {"HEJFE-AAAA000000000004"},
-            "TIBX": {"HEJFE-AAAA000000000005"},
+            "MXIM": {"HEJFE-AAAA000000000005"},
         }
     )
 
@@ -529,7 +529,7 @@ def test_stale_prep_branch_remains_visible_but_cannot_receive_new_token() -> Non
         manifest=manifest(
             unresolved_symbols={
                 "EW": {"HEJFE-AAAA000000000004"},
-                "TIBX": {"HEJFE-AAAA000000000005"},
+                "MXIM": {"HEJFE-AAAA000000000005"},
             }
         ),
         pulls=[],
@@ -630,14 +630,14 @@ def test_stale_prep_branch_with_invalidated_latest_comment_stays_ineligible() ->
 
 
 def test_stale_prep_branch_keeps_existing_token_within_lease() -> None:
-    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    token = ctl.TokenAssignment(2, "EW+MXIM", 67, "2026-10-01T10:00:00Z", 10)
     candidates = [
         ctl.Candidate(
             worker=2,
-            package="EW+TIBX",
+            package="EW+MXIM",
             batch=67,
             event_ids=(),
-            symbols=("EW", "TIBX"),
+            symbols=("EW", "MXIM"),
             created_at="",
             source="prep_branch_fallback",
             status="PREPARED",
@@ -649,7 +649,7 @@ def test_stale_prep_branch_keeps_existing_token_within_lease() -> None:
     m = manifest(
         unresolved_symbols={
             "EW": {"HEJFE-AAAA000000000004"},
-            "TIBX": {"HEJFE-AAAA000000000005"},
+            "MXIM": {"HEJFE-AAAA000000000005"},
         }
     )
 
@@ -669,14 +669,14 @@ def test_stale_prep_branch_keeps_existing_token_within_lease() -> None:
 
 
 def test_stale_prep_branch_does_not_extend_token_past_lease() -> None:
-    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    token = ctl.TokenAssignment(2, "EW+MXIM", 67, "2026-10-01T10:00:00Z", 10)
     candidates = [
         ctl.Candidate(
             worker=2,
-            package="EW+TIBX",
+            package="EW+MXIM",
             batch=67,
             event_ids=(),
-            symbols=("EW", "TIBX"),
+            symbols=("EW", "MXIM"),
             created_at="",
             source="prep_branch_fallback",
             status="PREPARED",
@@ -688,7 +688,7 @@ def test_stale_prep_branch_does_not_extend_token_past_lease() -> None:
     m = manifest(
         unresolved_symbols={
             "EW": {"HEJFE-AAAA000000000004"},
-            "TIBX": {"HEJFE-AAAA000000000005"},
+            "MXIM": {"HEJFE-AAAA000000000005"},
         }
     )
 
@@ -847,10 +847,10 @@ def test_closed_unmerged_candidate_remains_eligible_for_later_repair() -> None:
     p = policy()
     candidate = ctl.Candidate(
         worker=2,
-        package="EW+TIBX",
+        package="EW+MXIM",
         batch=67,
         event_ids=(),
-        symbols=("EW", "TIBX"),
+        symbols=("EW", "MXIM"),
         created_at="2026-10-01T10:00:00Z",
         source="prep_branch_fallback",
         status="PREPARED",
@@ -863,7 +863,7 @@ def test_closed_unmerged_candidate_remains_eligible_for_later_repair() -> None:
             "number": 170,
             "state": "closed",
             "merged_at": None,
-            "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+            "title": "G1 Worker 2 batch 0067: recover EW and MXIM",
             "body": "",
             "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
         }
@@ -871,7 +871,7 @@ def test_closed_unmerged_candidate_remains_eligible_for_later_repair() -> None:
     m = manifest(
         unresolved_symbols={
             "EW": {"HEJFE-AAAA000000000004"},
-            "TIBX": {"HEJFE-AAAA000000000005"},
+            "MXIM": {"HEJFE-AAAA000000000005"},
         }
     )
 
@@ -891,7 +891,7 @@ def test_closed_unmerged_candidate_remains_eligible_for_later_repair() -> None:
 def test_closed_unmerged_token_releases_lease_without_resolving_package() -> None:
     token = ctl.TokenAssignment(
         worker=2,
-        package="EW+TIBX",
+        package="EW+MXIM",
         batch=67,
         assigned_at="2026-10-01T10:00:00Z",
         comment_id=10,
@@ -902,7 +902,7 @@ def test_closed_unmerged_token_releases_lease_without_resolving_package() -> Non
             "state": "closed",
             "merged_at": None,
             "merged": False,
-            "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+            "title": "G1 Worker 2 batch 0067: recover EW and MXIM",
             "body": "",
             "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
         }
@@ -910,7 +910,7 @@ def test_closed_unmerged_token_releases_lease_without_resolving_package() -> Non
     m = manifest(
         unresolved_symbols={
             "EW": {"HEJFE-AAAA000000000004"},
-            "TIBX": {"HEJFE-AAAA000000000005"},
+            "MXIM": {"HEJFE-AAAA000000000005"},
         }
     )
     m["main_sha"] = "current-main"
@@ -931,10 +931,10 @@ def test_closed_unmerged_token_releases_lease_without_resolving_package() -> Non
 
     candidate = ctl.Candidate(
         worker=2,
-        package="EW+TIBX",
+        package="EW+MXIM",
         batch=67,
         event_ids=(),
-        symbols=("EW", "TIBX"),
+        symbols=("EW", "MXIM"),
         created_at="2026-10-01T10:00:00Z",
         source="issue_prepared",
         status="PREPARED",
@@ -1058,17 +1058,17 @@ def test_pr_batch_match_requires_batch_context_not_random_digits() -> None:
         "body": "receipt digest abc67def remains unchanged",
         "head": {"ref": "maintenance/abc67def"},
     }
-    assert ctl.pr_matches(2, "EW+TIBX", 67, unrelated) is False
+    assert ctl.pr_matches(2, "EW+MXIM", 67, unrelated) is False
 
     related = {
         "number": 1000,
         "state": "open",
         "merged_at": None,
-        "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+        "title": "G1 Worker 2 batch 0067: recover EW and MXIM",
         "body": "",
         "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
     }
-    assert ctl.pr_matches(2, "EW+TIBX", 67, related) is True
+    assert ctl.pr_matches(2, "EW+MXIM", 67, related) is True
 
 
 def test_token_parser_accepts_event_id_slash_symbol_package() -> None:
@@ -1096,19 +1096,19 @@ def test_token_parser_accepts_explicit_correction_and_makes_it_latest() -> None:
         comment(
             21,
             "2026-10-01T15:17:33Z",
-            "GLOBAL INTEGRATION TOKEN is corrected back to Worker 2 / EW+TIBX / reserved batch 0067.",
+            "GLOBAL INTEGRATION TOKEN is corrected back to Worker 2 / EW+MXIM / reserved batch 0067.",
         ),
     ]
     token = ctl.parse_latest_token(comments)
     assert token is not None
     assert token.worker == 2
-    assert token.package == "EW+TIBX"
+    assert token.package == "EW+MXIM"
     assert token.batch == 67
     assert token.comment_id == 21
 
 
 def test_partial_package_update_cannot_extend_multi_event_token() -> None:
-    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    token = ctl.TokenAssignment(2, "EW+MXIM", 67, "2026-10-01T10:00:00Z", 10)
     update = ctl.WorkerUpdate(
         worker=2,
         label="EW",
@@ -1124,11 +1124,11 @@ def test_partial_package_update_cannot_extend_multi_event_token() -> None:
 
 
 def test_stale_open_pr_does_not_keep_token_live() -> None:
-    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    token = ctl.TokenAssignment(2, "EW+MXIM", 67, "2026-10-01T10:00:00Z", 10)
     m = manifest(
         unresolved_symbols={
             "EW": {"HEJFE-AAAA000000000004"},
-            "TIBX": {"HEJFE-AAAA000000000005"},
+            "MXIM": {"HEJFE-AAAA000000000005"},
         }
     )
     m["main_sha"] = "new-main"
@@ -1136,7 +1136,7 @@ def test_stale_open_pr_does_not_keep_token_live() -> None:
         "number": 170,
         "state": "open",
         "merged_at": None,
-        "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+        "title": "G1 Worker 2 batch 0067: recover EW and MXIM",
         "body": "",
         "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
         "base": {"sha": "old-main"},
@@ -1156,11 +1156,11 @@ def test_stale_open_pr_does_not_keep_token_live() -> None:
 
 
 def test_current_main_open_pr_counts_as_live_progress() -> None:
-    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    token = ctl.TokenAssignment(2, "EW+MXIM", 67, "2026-10-01T10:00:00Z", 10)
     m = manifest(
         unresolved_symbols={
             "EW": {"HEJFE-AAAA000000000004"},
-            "TIBX": {"HEJFE-AAAA000000000005"},
+            "MXIM": {"HEJFE-AAAA000000000005"},
         }
     )
     m["main_sha"] = "current-main"
@@ -1168,7 +1168,7 @@ def test_current_main_open_pr_counts_as_live_progress() -> None:
         "number": 170,
         "state": "open",
         "merged_at": None,
-        "title": "G1 Worker 2 batch 0067: recover EW and TIBX",
+        "title": "G1 Worker 2 batch 0067: recover EW and MXIM",
         "body": "",
         "head": {"ref": "g1/public-batch-0067-worker-2-ew-tibx"},
         "base": {"sha": "current-main"},
@@ -1188,7 +1188,7 @@ def test_current_main_open_pr_counts_as_live_progress() -> None:
 
 
 def test_same_batch_wrong_package_does_not_extend_token() -> None:
-    token = ctl.TokenAssignment(2, "EW+TIBX", 67, "2026-10-01T10:00:00Z", 10)
+    token = ctl.TokenAssignment(2, "EW+MXIM", 67, "2026-10-01T10:00:00Z", 10)
     update = ctl.WorkerUpdate(
         worker=2,
         label="OTHER",
@@ -1211,4 +1211,4 @@ def test_batch_number_without_worker_identity_does_not_match_token_pr() -> None:
         "body": "",
         "head": {"ref": "maintenance/batch-0067"},
     }
-    assert ctl.pr_matches(2, "EW+TIBX", 67, pr) is False
+    assert ctl.pr_matches(2, "EW+MXIM", 67, pr) is False
