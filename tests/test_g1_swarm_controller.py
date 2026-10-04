@@ -20,6 +20,13 @@ def policy() -> dict:
             "4": {"start": 64, "step": 5},
         },
         "token_lease_minutes": 120,
+        "worker_count": 5,
+        "event_owner_overrides": {
+            "HEJFE-45E6DA32B37F83D4": 0,
+            "HEJFE-66BA40A20548B7E3": 4,
+            "HEJFE-81F188C0D790FE70": None,
+            "HEJFE-8415E931D4314106": 4,
+        },
     }
 
 
@@ -131,6 +138,56 @@ def test_batch_lane_is_deterministic() -> None:
     assert not ctl.lane_valid(1, 67, p)
 
 
+def test_event_owner_uses_hard_shards_and_explicit_overrides() -> None:
+    p = policy()
+
+    assert ctl.event_owner("HEJFE-AF5106891E058D23", p) == 1
+    assert ctl.event_owner("HEJFE-47A3794D1C360650", p) == 3
+    assert ctl.event_owner("HEJFE-1783DE88400AF6CC", p) == 2
+    assert ctl.event_owner("HEJFE-45E6DA32B37F83D4", p) == 0
+    assert ctl.event_owner("HEJFE-66BA40A20548B7E3", p) == 4
+    assert ctl.event_owner("HEJFE-8415E931D4314106", p) == 4
+    assert ctl.event_owner("HEJFE-81F188C0D790FE70", p) is None
+
+
+def test_cross_shard_token_is_invalid_even_with_matching_progress() -> None:
+    token = ctl.TokenAssignment(
+        worker=2,
+        package="HEJFE-AF5106891E058D23/TNGO + HEJFE-1783DE88400AF6CC/WMB",
+        batch=97,
+        assigned_at="2026-10-01T10:00:00Z",
+        comment_id=10,
+    )
+    updates = ctl.parse_worker_updates(
+        [
+            comment(
+                11,
+                "2026-10-01T10:30:00Z",
+                "WORKER 2 | HEJFE-AF5106891E058D23/TNGO + HEJFE-1783DE88400AF6CC/WMB | BUILDING | batch 0097 | source | next",
+            )
+        ]
+    )
+
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=[],
+        updates=updates,
+        manifest=manifest(
+            unresolved_symbols={
+                "TNGO": {"HEJFE-AF5106891E058D23"},
+                "WMB": {"HEJFE-1783DE88400AF6CC"},
+            }
+        ),
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 11, 0, tzinfo=timezone.utc),
+        policy=policy(),
+    )
+
+    assert result.state == "INVALID"
+    assert "ownership shard" in result.reason
+
+
 def test_token_stalls_after_lease_without_progress() -> None:
     token = ctl.TokenAssignment(
         worker=2,
@@ -194,6 +251,40 @@ def test_building_update_keeps_token_active_past_lease() -> None:
 
     assert result.state == "ACTIVE"
     assert result.progress_after_assignment is True
+
+
+def test_stale_building_update_does_not_extend_token_forever() -> None:
+    token = ctl.TokenAssignment(
+        worker=2,
+        package="HEJFE-1783DE88400AF6CC/WMB",
+        batch=97,
+        assigned_at="2026-10-01T10:00:00Z",
+        comment_id=10,
+    )
+    updates = ctl.parse_worker_updates(
+        [
+            comment(
+                11,
+                "2026-10-01T10:30:00Z",
+                "WORKER 2 | HEJFE-1783DE88400AF6CC/WMB | BUILDING | batch 0097 | source | next",
+            )
+        ]
+    )
+
+    result = ctl.evaluate_token(
+        token,
+        comments=[],
+        pulls=[],
+        updates=updates,
+        manifest=manifest(unresolved_symbols={"WMB": {"HEJFE-1783DE88400AF6CC"}}),
+        lease_minutes=120,
+        now=datetime(2026, 10, 1, 12, 31, tzinfo=timezone.utc),
+        policy=policy(),
+    )
+
+    assert result.state == "STALLED"
+    assert result.progress_after_assignment is True
+    assert "without fresh" in result.reason
 
 
 def test_closed_matching_pr_releases_token() -> None:
