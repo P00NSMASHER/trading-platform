@@ -119,5 +119,34 @@
       ],
       "finding": "No indexed 2015 target page with explicit time recovered in this pass. Do not infer from modern MarketScreener behavior."
     }
+  },
+  "exact_title_mirror_pass_2": {
+    "status": "NO_ADMISSIBLE_CLOCK_RECOVERED",
+    "checked_at": "2026-10-04",
+    "findings": [
+      {
+        "symbol": "COLM",
+        "result": "Issuer release and issuer PDF preserve exact title/date but no explicit publication clock; prior Sportmondo 2014 precedent remains useful only as a family clue."
+      },
+      {
+        "symbol": "VEEV",
+        "result": "Issuer page and issuer PDF preserve exact title/date only; BioSpace syndication is dated March 4, 2015 and cannot establish March 3 first-public time."
+      },
+      {
+        "symbol": "POWI",
+        "result": "SEC Exhibit 99.1 preserves exact Business Wire release identity/date only; no explicit publication clock recovered."
+      },
+      {
+        "symbol": "SCVL",
+        "result": "Issuer Q4CDN PDF preserves exact Business Wire release identity/date only; original Business Wire ID 20150520006346 remains the highest-value unresolved primary target."
+      }
+    ],
+    "next_source_families": [
+      "Timestamp-preserving Sportmondo exact-title copies for 2015 targets",
+      "Timestamp-preserving MarketScreener Business Wire copies with explicit Published-on time",
+      "Other public wire syndicators that retain original Eastern-time publication headers",
+      "Public archive datasets containing Business Wire URL plus original publication timestamp metadata"
+    ],
+    "guardrail": "Do not promote issuer date-only pages, SEC/EDGAR acceptance, BioSpace next-day syndication, secondary Benzinga alerts, scheduled release times, or inferred filename times."
   }
 }
