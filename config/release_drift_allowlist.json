@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "e8a2dc87be357b527c053212a0b18e23af97c9dbb7e9ffc20cb85c46432c97c0",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3a20aa44281a68bb7a541cfa161c4e7e4d7f1893e4b75e086a6a0f04a183869b",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "c7538be5a4b3569395b85dec1e201489653f26aeeb0af9aecc556e074129fbf5",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3629044dc28bc84cf4ddb52d22d4ec7b0bf11a977ab9b3d92ec6dbeb9280fe3f",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "24dfea541144159c5b954c118c1b3d2f0ccfe365592a288bca02f8edf05d274f",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1343df46fe38da12d054392f41807c47474e4aa41d6be23c5977c3af7e131a5f",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -160,8 +160,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "0e0a5462ed3e75e31bf6f078ee8a9b6b1aff016cc5eab330eef894d9b635c079",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "17c1320916a7a4faaa90cd4106122a0fb0682eb2d6d29d7d810135802099dc70",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -180,8 +180,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "4d009f741fa914a294c73d7bd8caab3fe00173dbe544cfe03cc268c1e7b27883",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d976dc974d44fa94755a817c7be729fe66f375c7bf0101d44f0e738cae30dd16",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -192,8 +192,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "f64664a416a8f9165be272121b06759dccaa65e6c121895536ff959344a96e26",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "607638a0139c34cd2cb47dfb5ce98146a65138c6043c12a49092608f97eee622",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -248,8 +248,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "ddd3dab021fe2a4bffab99c84d74d6af6916626b81c0d80c4b84101d77f46b72",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d321de6d16e816c4d8f79b0e380351053c3e9edbc9c7d9898ad7e832d9b58c7f",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -264,12 +264,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "8fbd89d1ab07c55b1da10f7a51298d36feecf18af1a11a02f5b72159f4998234",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "993aac0fd6e9c2595e7b79f13c8dfe6846f9933864c4f89326725da7b39bae45",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "1c8733f36428c16875c784ec33cb5a56179ea871ad76f16bdbc918e3ca334ce0",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bf68c9f1fdfb63e1dc83ed4cddee0825b2578418ab286a5eb07709330d7991e9",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -508,8 +508,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "e1e00aa7c550c44374f99f5cdfecdd32b3dc5b1123c14f85ff9f7ba045ce1a48",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2494bfe09470604fad694d5d11ea359c3521282a3e25c695bedad6b55e531c72",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -548,12 +548,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "9d3d8a49e9d493815d68b1f3092f8d19f5ca899629dd76629c130fd73ba9760e",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3b500fc05e36889ce8938fc1b54d87e7d70f42791fffeb5305cc3198fb532d74",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "ba043d6e1cda8d17d860a503bdca0633681208e4a289588b83d9dff370f92b93",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ba598f0a4aa2def1d9f51651cbc16d959e92ec66479843ae02cae4269357b153",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -572,8 +572,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "4708be726db79bb569385ebfc12e75e22d0d3d7a209bfb821c0ecf6e36632c03",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2e2e9cc09167d658f84472dbdab037e834064c46f6864a9847f003875931157e",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -887,6 +887,10 @@
       "expected_sha256": "e60370eeb8840dd78a3390bbd0ad7d089c42688a6c8aba036798a38f2d4e275a",
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0104.csv": {
+      "expected_sha256": "bc3444a9f37a580cd027bc1bfb9e7480a9b2a0b45a40791a355a7cec99cb3c65",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -1067,9 +1071,13 @@
       "expected_sha256": "17ac24731cbd53b8f420219404cbed47fb6899f9c4ff476469567798b91ddc2b",
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0104_evidence.json": {
+      "expected_sha256": "53a559abbdd98cacdabfc22db111d80458d8d2ab379473c443765425e618d8b5",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "c324f51dd3d79abc262199ee46ceb33493909fb0d8aecf4cf77c853a1e6a319c",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a771a85f68b4210707e6286f3a7948554150ed5d0ee687213c396b373bb05e35",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "fcf5f123d93ba1a449c9d37d340f3e6f3739d4acc2e19ab7ffcfc236f004d157",
@@ -1248,8 +1256,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "f4f91cc8464338e2eb49765d2df14109e06604c20c6ab2c91a5e3009462a2f17",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e293cec2f002fdfa561e522fd08cd99f857051b17e7c54a0c982dab6c0f4f4f7",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1792,200 +1800,204 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "187d435a6dbcde73cc046f833638ff26eb1b5196c4a728d8e312d0e1293aca8d",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "761d6f2e395aa886e6641b9a61c898a102df99837473a0d8a63b7ceb72f6b759",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "b1bbc51e77e50dbe5478467a83fc58858be65075d5a0a78ea67e9ff6e24920a9",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5240da996618fce0a84921e6d4086c295b40e292b846944250f687c921ddf68b",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "28763ed1063ff0038a5184dee68be04c7de15822fd1060908a96a38609143ade",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "991dc67dec00ffe2c566d9eccdf8a03cdc97316abce48584944e46fd222844ab",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "fc228a3c670a50f0512675c458dfac7ea6d3c93620bb12a8cf91bd7ed3e09e55",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "4eff1dc4ad3a2312d5ce7853021af9d8feb43012b583ff53d5fa0a748b7d0262",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "1f5890582573e78fcf4e336ec5c0d301752d0ebcdc908f6b6c533abfa8ee452d",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "aee437f538d08fe8061a81eb1bb46d7ef17187a115470e9e4f9d2176d48e6f17",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "43a759c4df30fe32c90174e1908f51ed7fa8b2b47bf613abc24af5bd9805ae71",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c1b5326b77cd4095c775d2f072c8efbd06ac4d303e7ca9109c6841e30456d2a1",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "8118ea157ce2bca35a41a378456daa72367e544be3a73704445eb4b08b830e27",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8ca33af4ee17899bd1ffcc03b717cd6fa7d90776c6bdd7ecd972130bb3b10a06",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "2a41f084828115f99274deb49d08bb18b56dc5d42bb4eddc0b0f8ca52995fc5a",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "249a8f13b55723ee133ddd07a60ff03e2d616ebe639e95b459fb2cbd224bac0e",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "7ce1d6856ea22d4a078ad27d561cc365484a11de0af770b430611cc6e2dba44d",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9b4052ca10dad8f363c4f516b51a84aaa3ad4195e34309547da9b2236fae57bf",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "b4be2dc16c2b25501fdb13242e5fdb5a89b4b61a8ecd017903387865a06a0d52",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "02a46675510c900d17b8b4cdd0d95dcb702a2018ef8dd07e9978ae32405de2a2",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "9e906f65790edfbca39e2fd9d7ee24f8f5b95439ed61e0ab97bf89f83a19b9e2",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7a57b41a70150eef92a7447f9f3921bac15e01d0ff59dcd574b06800fae63cee",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "e0d8639e0c15e48f86c58ee6feeb62297bbe24625cc2ffc459ee3e0e070e6044",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1ce342aaad3d290b1c3fd73f3bd5f5d0418025e7f41a1595fdf84f2645309d27",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "e640785c9913ce0d914b1f600f063c639c7af93303d6ccc861fcd417181fbf57",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "caa5cc0449f99cd195e867e705b40109b7d721b3dcd2dad84c761de428ff0334",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "9670759d05948bb19f6b2ea9a2d376bc63fc80ca1392dc405ae3ef11e37f30dc",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d4a60ddfe6be7d321f69a895364dae45aacf01974904ee903b2281dc48aaa2c7",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "9f940e29eb83c238560b9d19a88720af0af31c0cf1f39d7c7fea71b333b296fd",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1375db1d7384006eda81b32dbfcc1f4413ac2fa97b5e4c7e5f00feb2cd4dd9a7",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "d73b4b7ad580815aea65f7c29ff31f1f99cacc9f9fad0aafd1e5354ee61ae3af",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a4fd0ff3c9781873ca9e88a3acdb86b919079535bb1753ebe512af19121086f3",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "8b8ed0a7ec2dc186dea5e0340fc6412ec4916ee4355633aaf719dd001f867816",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fe80ec6bfe175d15eeaba9713427c4c57a770aa665d6f8d02b486bd43d82aece",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "1beaf23d939c4e19fe1ca8e791c46914a0116e4611db268aeb95dd14144cab1b",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9eb343c94750417e10dc1b739fad57c01e92ba2167e2c2e68817f2c96b764297",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "454066d17d2c9d5281012ee1415fff9cbee9e404c698fa22443ff09a75f18eb8",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a7ad42ce5bf710e32f182fffc1ed9327e8a8d662a56abeda3b7db900bda59340",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "4e7f35c9e45d24386506fbae2a6d35ece8af49d53097d1ca422194cdd5f6014b",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "64c922e09a847a5edd709f3137e6c629e120b97c21618a591cadb03624e81d97",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "75ab62f866421e604b247ef727c3d7796b1a607014775bd6447eb7962b1a4531",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "cfa9a0527cd893576b902c6eec2779674796d392a5994c5f7f29230766923dc6",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "866e030dc333721e7c1fca13089b84e61de91cba253ee175f36a422d92db3d54",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "70d99e663fbdbb7b09bef2cc6cc4070042d8ee7d8ef081c306e57319c9726daa",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "3a53990798eb40c0f713dd789adb0154cfccde45c480d3a9bde0226cfcd6ba44",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ae0b9aae550e5057da3603c84f49bf5243867aa05c7d15e9dbf69b1ecf539ab0",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "ba69664f2b169cd32c95e4478a75a8d81a74e523184d2ec3752265085efd49a8",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "565d9fcd18ccde0aba5cefad5ade7393270b8fa72db32637da4abe82b6b748ae",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "694e8c0f3a7e28dac987491c6f78a181727b7c61edb4e0fd2a2f4fa5a08bd8b2",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0155fb5ec30769ef05e23336c9bfc0c54f56e9c48b643a38f9b9009e44ab311a",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "e0d5c09330e109e93075a0e4fce38b933ba8e0b4e095f5276c7521f27f733b29",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3ade4e8d3fc396a15852c5e814e124e30637fc43505b7a5af9bf7dd1ec9e8019",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "234ed67b5dabf220337ecb588d1b296f454d5bd3e41b12e22a54aa7cb1b75c9c",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "fb21223ea8d71d44fd39d2b8a0865f3267ecb16ba949dc2bf14066925e499b98",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "b60a8a95222492357ae1609e5e0e075b5052df55510237506d756056084f8dd6",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "078e1f2b4520d71462b5d77d45899d7867abd63d23a148cc73d20f66a0476f73",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "772d4bc1b52a27b2f45ecb4590e8e401c1d217554d971a906a45bb44ad1cd2c0",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "329738087a1785da6ebae177221f6875915fd827fa0978b3c33be1de3ab3efa5",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0072.py": {
-      "expected_sha256": "a0fd8778ac955cefb8cb95fb8bd34694e9ea709af656ac638bc0bedaaf2520a2",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ed1d9a4b2e86603d4fe9e0defdbf6b1b10c9bc0a135f7bff9f994eb9e42b1a02",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "001aea67ab7ca04f71a3ab854d7c2deeb028e2f3b5833058c6519cc1bdbe7434",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ef14e4400dda5876ee083981c6ecc019b239890551e76322be44cdd25b9d65e9",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0076.py": {
-      "expected_sha256": "8c76f8d879d9f5afaa1b1adf014a7d5766e87661b65acf1eb1562abeed48cd45",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "63f41dfa73beec5544f034b602a6894e3fbc9295c8b8a477df7846dc59b49572",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0077.py": {
-      "expected_sha256": "687b6c0a9aaa5fa87c9c9f148c7dea588eba8d7aef9852700ce3c2d709062448",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "14dc53ca039c5f436d8d66a2dacd18e71b920ef87098b00ce97f30c12b0e315d",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "5666df7fd61a150d55abe700b6155bed427ebcf21e70b9f1797e1383bd9a22d6",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7c48d3a95d65ebf1ad858bed879c4f45d59dd6541f102a9ecc2e9039af946f62",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "d25f3c1e7f8ab9b2ce070456b3f37dae6a16f095a7ad2a549aff55c05fb79530",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5565742d9a5845449e55f0261b44647d6fff374f45d37b5282de334163895c31",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0081.py": {
-      "expected_sha256": "fc42bf789cfccf6c3774d1d1ea3bc1b898fb5818e591c45df6822941b7ee4d92",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a10fcaf6fc6b5f924be604907b7740e5255223dee7ee96ebcb8cf930a31002bf",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "c87e5f7dbc1cf1c91a7f86a7fa92221cf3e439d445c5492e12a86b42b42cae74",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "87c8e5d7149fceb4161e5d496f69ad4dfaa1c3af50071edf5700d0807680ed06",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0083.py": {
-      "expected_sha256": "e193101cb930836237029f451759778f9ccd2c413349d983ba47355c57f6a0bd",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0c53940935bb186f381822df8574d03677a70435bf7bc2fe4ceab8730e22d569",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0085.py": {
-      "expected_sha256": "a69a32a71892437e1616a9947bfe7bba342bfa19b437c7ce4bafd150deecd0e9",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5c36856b52bde29bcd94612d7989c5b28b6b2c99a3234fbad5be8b5d77838672",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0087.py": {
-      "expected_sha256": "8c7260158506e59d414a7c60e3239c101e0415b6130057b8d6d90d07a265b433",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0beeee44e956921f86ec9327cab552c41ca5cf9634bae6e05dde9ab72129a542",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0088.py": {
-      "expected_sha256": "277c09e6c378841f072bf8af2b71defac3cf82dd354e06a59ccbdcfba0c425f7",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d80edaf8f5e463c62f303a53b714a2f16d5160f82a4b499b1588b22d90a09f5a",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0090.py": {
-      "expected_sha256": "0a0e53ac413ce29f890cafaa13587215dac3e6a60557f98b82019ce9c9ecfcc4",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8643406e21b2e1d0abcae8c8cf34c9f13ad266cf327019dcde220146687e72d7",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0092.py": {
-      "expected_sha256": "c7b602454271f31ac4568152fba2630b43397a42b657e0bfa5978832c883d86b",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "dda82cdff7f66aab2777484ed30183ec0c630967ed3f4d9cf09b7e925cec682b",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0093.py": {
-      "expected_sha256": "5c6f20e6d79f918edf3d2761745d00b0b298d5e2aa0fc5cec2087d239dadb24a",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0ac5a39b687864d9b3240b68e893a87b64de4269ded72aadb13a8ca870bab2b2",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0095.py": {
-      "expected_sha256": "5be88bb38fe3c8b9cfb03489c715fd0ad745b0fc152b9d1c8751fe8f2c210bdf",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "58c27508785eefee4cfc06183330535cbcf5b891de898fec614ada2cd5d4283a",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0100.py": {
-      "expected_sha256": "c08c0142b7a8ca7d931d1cbcd8157c56cc99e87dd009a9f13b2fc1b2f430610b",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "65e85c533f67a9e98213adc53e4db32b5e3885b2bce7b869c5f554b33b1dc2b9",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0104.py": {
+      "expected_sha256": "5b838524996e386eff67469466a80516ec652be92134296bc291178d0b17ded2",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "3420d94d560f7a6241d3099b4353145e1758f08f275c1068cbe07521b1f3ff62",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c49850860155c7a1a3432af02e70e66050fc8481e01a77da053636d4bf90e405",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "02f1827222c81347be1b25b1ddb608ca7509e584cd249e1897186d909434f027",
@@ -2196,8 +2208,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "85d9984bbaef96f83cf9cf68f470eaad867481e42455e35d235cdbe31775b7bc",
-      "reason": "G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "35d3d605ab0e31e533dd9ca747645c8a8d3fddd8ee31ab1d0b3d5dbcd6a819d2",
+      "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **77 public exact-time batches / 120 exact-resolved
+The current repository state is **78 public exact-time batches / 121 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -285,3 +285,7 @@ A filed federal-court public-distribution record preserved by CourtListener RECA
 ### Batch 0081: TNGO / TER / ECOL
 
 A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for TNGO (2015-02-12 16:05 EST), TER (2015-01-28 17:32 EST), and ECOL (2013-04-25 06:00 EDT). Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 117 exact / 57 reviewed exclusions to 120 exact / 54 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0104: WMB
+
+A filed federal-court public-distribution record preserved by CourtListener RECAP supplies the exact first-public clock for WMB (2015-02-18 16:05 EST). A matching SEC Exhibit 99.1 independently corroborates the issuer/release identity and date. This advances G1 from 120 exact / 54 reviewed exclusions to 121 exact / 53 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
