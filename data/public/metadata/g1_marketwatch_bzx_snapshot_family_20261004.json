@@ -1,0 +1,34 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "canonical_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
+  "source_family": "public_github_marketwatch_company_page_snapshots_with_wire_timestamp_metadata",
+  "repository": "GoatWang/companyEmbedding_Labeled",
+  "repository_commit": "8a1b621c1159f81010dcc012d6d3768793dd2707",
+  "finding": "Company-page snapshots preserve MarketWatch news-feed records as explicit local publication time + date + source, including BusinessWire - BZX. This is a genuinely new timestamp-bearing archive family suitable for bulk G1 discovery when a target release row is present.",
+  "admissibility": "A target-specific exact-title row with explicit time/date and BusinessWire or PR Newswire source may be used as timestamp-preserving public-mirror evidence after issuer/release identity matching and chronology checks. Same-company later precedents, unrelated rows, scheduled release notices, conference-call times, and inferred timestamps remain non-admissible.",
+  "verified_examples": [
+    {
+      "company": "Power Integrations",
+      "title": "Power Integrations Reports First-Quarter Financial Results",
+      "timestamp": "2017-04-27 16:01 ET",
+      "source": "BusinessWire - BZX",
+      "note": "Demonstrates exact-title wire rows and explicit timestamps are retained in this snapshot family."
+    }
+  ],
+  "target_2015_results": {
+    "POWI": "Exact 2015 target row not recovered in indexed snapshot; 2017 exact-title row proves family behavior only.",
+    "COLM": "No exact 2015 target row recovered in this pass.",
+    "VEEV": "No exact 2015 target row recovered in this pass.",
+    "SCVL": "No exact 2015 target row recovered in this pass.",
+    "CACI": "No exact 2015 target row recovered in this pass."
+  },
+  "worker_strategy": [
+    "For each unresolved event, search snapshot repository by issuer/company name plus event date/year, not only exact title.",
+    "Inspect candidate company snapshot files for a target-date row with explicit time and wire source marker.",
+    "Require exact release identity match against issuer/SEC exhibit before FOUND.",
+    "Preserve source repository commit and exact file path.",
+    "Do not repeat for events already checked in this family unless a new snapshot/file is identified."
+  ],
+  "status": "NEW_SOURCE_FAMILY_CONFIRMED_NO_TARGET_CLOCK_YET"
+}
