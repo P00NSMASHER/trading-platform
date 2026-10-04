@@ -2,24 +2,27 @@
   "schema_version": "1",
   "research_use_only": true,
   "prep_only": true,
+  "invalidated": true,
+  "disposition": "DO_NOT_INTEGRATE_CROSS_SHARD",
   "base_main_sha": "3752e553ae10ae62f1d68720abe453db8cded079",
   "reserved_batch": "0102",
-  "worker_slot": 2,
-  "ownership_rule": "SHA256(event_id)%5==2",
-  "previous_exact_count": 114,
-  "expected_exact_count_after_batch": 115,
-  "expected_excluded_after_batch": 59,
+  "claimed_worker_slot": 2,
+  "actual_worker_slot": 4,
+  "ownership_rule": "SHA256(event_id)%5",
+  "ownership_audit": {
+    "event_id": "HEJFE-1783DE88400AF6CC",
+    "sha256": "f4bf9ba13174680e8cc3694d7a56e6988e7e43f5bc33dd8c7c0a989b89504006",
+    "sha256_mod_5": 4,
+    "worker_2_owned": false
+  },
   "source_family": "federal_court_public_distribution_record",
   "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
   "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
   "source_discovery_comment": "https://github.com/P00NSMASHER/trading-platform/issues/153#issuecomment-5972980765",
-  "timestamp_evidence_kind": "explicit_release_clock",
-  "public_distribution_explicit": true,
   "items": [
     {
       "event_id": "HEJFE-1783DE88400AF6CC",
       "historical_symbol": "WMB",
-      "court_distribution_source": "BW",
       "court_distribution_time_text": "2015-02-18 16:05 EST",
       "public_announcement_ts": "2015-02-18T16:05:00-05:00",
       "first_documented_illicit_trade_ts": "2015-02-18T19:54:00Z",
@@ -28,6 +31,6 @@
       "headline": "Williams Reports Year-End 2014 Financial Results, Updates Guidance"
     }
   ],
-  "evidence_method": "A filed federal-court public-distribution table preserved by CourtListener RECAP supplies WMB's explicit first-public distribution clock. The exact issuer, release headline, and date are independently corroborated against the matching SEC Exhibit 99.1. WMB remains unresolved on the pinned base, satisfies SHA256(event_id)%5==2, and is not part of the active Worker-3 package. This branch is prep-only and leaves canonical fail-closed state unchanged.",
-  "integration_guard": "Before canonical generation, the Worker-2 token holder must independently reopen the pinned filed court artifact, verify the WMB row, recheck exact-current-main unresolved/unclaimed state and SHA256(event_id)%5==2 ownership, regenerate only WMB through reserved batch 0102, and remove all prep-only artifacts before final PR. No EDGAR acceptance, conference-call, scheduled, inferred, date-only, archive-capture, or neighboring-release time may substitute."
+  "invalidation_reason": "Independent full-shard recomputation shows WMB hashes to Worker 4, not Worker 2. The earlier Worker-2 PREPARED claim and batch 0102 reservation are invalid. This branch must remain prep-only and must never be integrated or selected as a Worker-2 token package.",
+  "handoff": "The source evidence may be re-prepared only by Worker 4 after verifying the live controller, current-main unresolved/unclaimed state, and absence of another Worker-4 claim. No canonical state is changed here."
 }
