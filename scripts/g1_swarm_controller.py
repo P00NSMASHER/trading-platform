@@ -275,6 +275,19 @@ def lane_valid(worker: int, batch: int, policy: dict[str, Any]) -> bool:
     return batch >= start and (batch - start) % step == 0
 
 
+def event_owner(event_id: str, policy: dict[str, Any]) -> int | None:
+    overrides = policy.get("event_owner_overrides") or {}
+    if event_id in overrides:
+        owner = overrides[event_id]
+        return None if owner is None else int(owner)
+    digest = hashlib.sha256(event_id.encode("utf-8")).hexdigest()
+    return int(digest, 16) % int(policy["worker_count"])
+
+
+def worker_owns_events(worker: int, event_ids: Iterable[str], policy: dict[str, Any]) -> bool:
+    return all(event_owner(event_id, policy) == worker for event_id in event_ids)
+
+
 def manifest_state(root: Path, policy: dict[str, Any]) -> dict[str, Any]:
     path = root / policy["canonical_inputs"]["acquisition_manifest"]
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -384,9 +397,12 @@ def evaluate_token(
     lease_minutes: int,
     now: datetime,
     candidates: list[Candidate] | None = None,
+    policy: dict[str, Any] | None = None,
 ) -> TokenEvaluation:
     if token is None or token.worker is None or token.batch is None:
         return TokenEvaluation("UNASSIGNED", "no active token assignment", None, False, None, None)
+    if policy is None:
+        policy = load_policy()
 
     assigned_at = parse_time(token.assigned_at)
     age_minutes = None if assigned_at is None else max(0.0, (now - assigned_at).total_seconds() / 60.0)
@@ -439,6 +455,17 @@ def evaluate_token(
             matching_open,
             matching_merged,
         )
+
+    token_event_ids = tuple(EVENT_ID_RE.findall(token.package.upper()))
+    if token_event_ids and not worker_owns_events(token.worker, token_event_ids, policy):
+        return TokenEvaluation(
+            "INVALID",
+            "token assignment contains event IDs outside the assigned worker ownership shard",
+            age_minutes,
+            False,
+            matching_open,
+            matching_closed,
+        )
     if matching_closed is not None:
         return TokenEvaluation(
             "CLOSED_UNMERGED",
@@ -484,6 +511,7 @@ def evaluate_token(
             )
 
     progress_after = matching_open is not None and matching_open_fresh
+    latest_progress_at = assigned_at
     if assigned_at is not None:
         for update in updates:
             update_time = parse_time(update.created_at)
@@ -491,14 +519,20 @@ def evaluate_token(
                 continue
             if update.status in MEANINGFUL_PROGRESS and update_matches_token(update, token):
                 progress_after = True
-                break
+                if latest_progress_at is None or update_time > latest_progress_at:
+                    latest_progress_at = update_time
 
-    if age_minutes is not None and age_minutes > lease_minutes and not progress_after:
+    idle_minutes = (
+        None
+        if latest_progress_at is None
+        else max(0.0, (now - latest_progress_at).total_seconds() / 60.0)
+    )
+    if idle_minutes is not None and idle_minutes > lease_minutes and not matching_open_fresh:
         return TokenEvaluation(
             "STALLED",
-            f"token lease exceeded {lease_minutes} minutes without BUILDING/CI/PR evidence",
+            f"token lease exceeded {lease_minutes} minutes without fresh BUILDING/CI/PR evidence",
             age_minutes,
-            False,
+            progress_after,
             matching_open,
             matching_closed,
         )
@@ -671,6 +705,8 @@ def choose_prepared_candidate(
             continue
         if not lane_valid(candidate.worker, candidate.batch, policy):
             continue
+        if candidate.event_ids and not worker_owns_events(candidate.worker, candidate.event_ids, policy):
+            continue
         if candidate_is_resolved(candidate, manifest, pulls, updates):
             continue
         eligible.append(candidate)
@@ -755,7 +791,9 @@ def choose_found_candidate(
     found: list[WorkerUpdate] = [
         update
         for update in latest_updates_by_identity(updates).values()
-        if update.status == "FOUND" and not update_is_resolved(update, manifest)
+        if update.status == "FOUND"
+        and not update_is_resolved(update, manifest)
+        and (not update.event_ids or worker_owns_events(update.worker, update.event_ids, policy))
     ]
     found.sort(key=lambda u: parse_time(u.created_at) or datetime.max.replace(tzinfo=timezone.utc))
     if not found:
@@ -985,6 +1023,7 @@ def controller_plan(
         lease_minutes=int(policy["token_lease_minutes"]),
         now=now,
         candidates=candidate_evidence,
+        policy=policy,
     )
 
     all_prepared = dedupe_candidates(require_live_prepared_support(candidate_evidence))
