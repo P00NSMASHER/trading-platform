@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **75 public exact-time batches / 114 exact-resolved
+The current repository state is **76 public exact-time batches / 117 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -277,3 +277,7 @@ A filed federal-court public-distribution table preserved by CourtListener RECAP
 ### Batch 0100: EHTH / BA / LSCC / GORO / GMCR
 
 A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for EHTH (2011-04-26 16:15 EDT), BA (2012-01-25 07:30 EST), LSCC (2013-04-18 16:00 EDT), GORO (2013-05-08 17:27 EDT), and GMCR (2015-02-04 16:00 EST). Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 109 exact / 65 reviewed exclusions to 114 exact / 60 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0093: NOW / AMP / CAMP
+
+A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for NOW (2015-04-16 16:06 EDT), AMP (2015-04-22 16:05 EDT), and CAMP (2013-04-25 16:01 EDT). Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 114 exact / 60 reviewed exclusions to 117 exact / 57 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
