@@ -128,6 +128,8 @@ for fn in test_files:
         pairs=[
           ('report["exact_resolved_event_records"] == 117','report["exact_resolved_event_records"] == 120'),
           ('report["reviewed_excluded_event_records"] == 57','report["reviewed_excluded_event_records"] == 54'),
+          ('report["priority_event_count"] == 4','report["priority_event_count"] == 3'),
+          ('"QLIK", "TNGO", "NKE", "NATI"','"QLIK", "NKE", "NATI"'),
           ('state["public_exact_batch_count"] == 76','state["public_exact_batch_count"] == 76'),
           ('state["public_exact_batch_count"] == 76','state["public_exact_batch_count"] == 77'),
           ('state["exact_resolved_event_records"] == 117','state["exact_resolved_event_records"] == 120'),
@@ -140,6 +142,8 @@ for fn in test_files:
           ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 57','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 54'),
           ('len(resolved) == 117','len(resolved) == 120'),
           ('len(unresolved) == 57','len(unresolved) == 54'),
+          ('"QLIK", "TNGO", "NKE", "NATI", "VMW"','"QLIK", "NKE", "NATI", "VMW", "EW"'),
+          ('[1, 2, 4, 6, 1000]','[1, 4, 6, 1000, 1000]'),
         ]
     elif fn.endswith("test_real_data_release_sprint.py"):
         pairs=[('updated["missing_exact_announcement_timestamps"] == 57','updated["missing_exact_announcement_timestamps"] == 54')]
