@@ -1932,7 +1932,7 @@
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "a566bbcfb8400a65c25b7fcbe7deb2e83baa307b0d8276cf506b5ab5d9a6553f",
+      "expected_sha256": "02f1827222c81347be1b25b1ddb608ca7509e584cd249e1897186d909434f027",
       "reason": "Regression coverage for cross-shard token rejection, deterministic ownership overrides, and stale BUILDING progress that must not extend a token lease indefinitely."
     },
     "tests/test_g2_candidate_route_matrix.py": {
