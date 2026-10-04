@@ -3,7 +3,7 @@ name: G1 batch 0093 adaptive exact-main publisher
 on:
   push:
     branches:
-      - g1/public-batch-0093-worker-3-court3-main-3752e55-source
+      - g1/public-batch-0093-worker-3-court3-main-3752e55-source-v2
   workflow_dispatch:
 
 permissions:
@@ -23,7 +23,7 @@ jobs:
       - name: Checkout publisher source head
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: g1/public-batch-0093-worker-3-court3-main-3752e55-source
+          ref: g1/public-batch-0093-worker-3-court3-main-3752e55-source-v2
           fetch-depth: 0
           persist-credentials: true
 
