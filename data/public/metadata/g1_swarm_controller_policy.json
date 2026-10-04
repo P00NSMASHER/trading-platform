@@ -5,11 +5,26 @@
   "token_lease_minutes": 120,
   "worker_count": 5,
   "batch_lanes": {
-    "0": {"start": 60, "step": 5},
-    "1": {"start": 61, "step": 5},
-    "2": {"start": 62, "step": 5},
-    "3": {"start": 63, "step": 5},
-    "4": {"start": 64, "step": 5}
+    "0": {
+      "start": 60,
+      "step": 5
+    },
+    "1": {
+      "start": 61,
+      "step": 5
+    },
+    "2": {
+      "start": 62,
+      "step": 5
+    },
+    "3": {
+      "start": 63,
+      "step": 5
+    },
+    "4": {
+      "start": 64,
+      "step": 5
+    }
   },
   "state_comment_marker": "<!-- g1-swarm-controller-state -->",
   "canonical_inputs": {
@@ -29,5 +44,11 @@
     "merge_pull_request",
     "weaken_ci_or_release_gates"
   ],
-  "fail_closed_until_exact_count": 174
+  "fail_closed_until_exact_count": 174,
+  "event_owner_overrides": {
+    "HEJFE-45E6DA32B37F83D4": 0,
+    "HEJFE-66BA40A20548B7E3": 4,
+    "HEJFE-81F188C0D790FE70": null,
+    "HEJFE-8415E931D4314106": 4
+  }
 }
