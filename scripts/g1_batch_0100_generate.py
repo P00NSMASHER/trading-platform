@@ -23,10 +23,10 @@ assert sha(corpus)=="43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f8
 md=Path("data/processed/authorized_input_real")
 events=rows(corpus)
 old_exact={r["event_id"]:r for r in rows(md/"announcement_resolutions.csv") if r["resolution_status"]=="resolved_exact_public_timestamp"}
-assert len(events)==174 and len(old_exact)==120
+assert len(events)==174 and len(old_exact)==117
 exclusion_path=md/"g1_final_timing_exclusions.json"
 exclusions=load(exclusion_path)
-assert len(exclusions["exclusions"])==54
+assert len(exclusions["exclusions"])==57
 
 batch=Path("data/public/metadata/g1_announcement_times_batch_0081.csv")
 evidence_path=Path("data/public/metadata/g1_public_batch_0081_evidence.json")
@@ -68,7 +68,7 @@ batch.write_text(s.getvalue(),encoding="utf-8")
 save(evidence_path,{"schema_version":"1","research_use_only":True,"base_main_sha":BASE,"batch_path":str(batch),"batch_sha256":sha(batch),
 "items":items,"previous_exact_count":117,"expected_exact_count_after_batch":120,"expected_excluded_after_batch":54,
 "previous_exact_timestamps":{k:r["public_announcement_ts"] for k,r in old_exact.items()},
-"evidence_method":"Filed federal-court CourtListener RECAP public-distribution record supplies explicit exact clocks for five releases, each independently corroborated by a matching SEC press-release exhibit. CI verifies chronology, event identity and deterministic receipts; conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
+"evidence_method":"Filed federal-court CourtListener RECAP public-distribution record supplies explicit exact clocks for three releases, each independently corroborated by a matching SEC press-release exhibit. CI verifies chronology, event identity and deterministic receipts; conference-call, EDGAR acceptance, archive-capture, scheduled-release, date-only and inferred times are not used.",
 "prohibited_substitutes":["edgar_acceptance_time","scheduled_call_time","archive_capture_time","inferred_clock","date_only"]})
 
 ids={x["event_id"] for x in items}
@@ -91,7 +91,7 @@ hints["priority_events"]=[r for r in hints.get("priority_events",[]) if r.get("e
 hints["validation_probes"]=[r for r in hints.get("validation_probes",[]) if r.get("event_id") not in ids]
 hints["base_main_sha"]=BASE
 hints["current_g1_state"].update(public_exact_batch_count=77,exact_resolved_event_records=120,reviewed_excluded_event_records=54,
- note="The latest integrated recovery is batch_0081; cumulative public exact-time batches are 76 and cumulative exact event records are 117 because some public batches resolve more than one historical event.")
+ note="The latest integrated recovery is batch_0081; cumulative public exact-time batches are 77 and cumulative exact event records are 120 because some public batches resolve more than one historical event.")
 for item in items:
     hints["validation_probes"].append(dict(item,probe_id=f'{item["historical_symbol"]}-batch0081',historical_event_match=True,
       exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
@@ -126,36 +126,36 @@ for fn in test_files:
     p=Path(fn);txt=p.read_text()
     if fn.endswith("test_g1_source_research.py"):
         pairs=[
-          ('report["exact_resolved_event_records"] == 114','report["exact_resolved_event_records"] == 120'),
-          ('report["reviewed_excluded_event_records"] == 60','report["reviewed_excluded_event_records"] == 54'),
-          ('state["public_exact_batch_count"] == 74','state["public_exact_batch_count"] == 76'),
-          ('state["public_exact_batch_count"] == 75','state["public_exact_batch_count"] == 76'),
-          ('state["exact_resolved_event_records"] == 114','state["exact_resolved_event_records"] == 120'),
+          ('report["exact_resolved_event_records"] == 117','report["exact_resolved_event_records"] == 120'),
+          ('report["reviewed_excluded_event_records"] == 57','report["reviewed_excluded_event_records"] == 54'),
+          ('state["public_exact_batch_count"] == 76','state["public_exact_batch_count"] == 76'),
+          ('state["public_exact_batch_count"] == 76','state["public_exact_batch_count"] == 77'),
+          ('state["exact_resolved_event_records"] == 117','state["exact_resolved_event_records"] == 120'),
         ]
     elif fn.endswith("test_g1_acquisition_manifest.py"):
         pairs=[
-          ('manifest["state"]["exact_resolved"] == 114','manifest["state"]["exact_resolved"] == 120'),
-          ('manifest["state"]["acquisition_needed"] == 60','manifest["state"]["acquisition_needed"] == 54'),
-          ('len(manifest["work_queue"]) == 60','len(manifest["work_queue"]) == 54'),
-          ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 60','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 54'),
-          ('len(resolved) == 114','len(resolved) == 120'),
-          ('len(unresolved) == 60','len(unresolved) == 54'),
+          ('manifest["state"]["exact_resolved"] == 117','manifest["state"]["exact_resolved"] == 120'),
+          ('manifest["state"]["acquisition_needed"] == 57','manifest["state"]["acquisition_needed"] == 54'),
+          ('len(manifest["work_queue"]) == 57','len(manifest["work_queue"]) == 54'),
+          ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 57','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 54'),
+          ('len(resolved) == 117','len(resolved) == 120'),
+          ('len(unresolved) == 57','len(unresolved) == 54'),
         ]
     elif fn.endswith("test_real_data_release_sprint.py"):
-        pairs=[('updated["missing_exact_announcement_timestamps"] == 60','updated["missing_exact_announcement_timestamps"] == 54')]
+        pairs=[('updated["missing_exact_announcement_timestamps"] == 57','updated["missing_exact_announcement_timestamps"] == 54')]
     else:
         pairs=[
-          ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (114,60)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (120,54)'),
-          ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (114, 60)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (120, 54)'),
-          ('"114/174" in step9["evidence"] and "60" in step9["evidence"]','"120/174" in step9["evidence"] and "54" in step9["evidence"]'),
-          ('len(excluded)==65','len(excluded)==54'),
-          ('len(excluded)==60','len(excluded)==54'),
-          ('len(excluded) == 65','len(excluded) == 54'),
-          ('len(excluded) == 60','len(excluded) == 54'),
-          ('len(ex)==65','len(ex)==54'),
-          ('len(ex)==60','len(ex)==54'),
-          ('len(ex) == 65','len(ex) == 54'),
-          ('len(ex) == 60','len(ex) == 54'),
+          ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (117,57)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (120,54)'),
+          ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (117, 57)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (120, 54)'),
+          ('"117/174" in step9["evidence"] and "57" in step9["evidence"]','"120/174" in step9["evidence"] and "54" in step9["evidence"]'),
+          ('len(excluded)==57','len(excluded)==54'),
+          ('len(excluded)==57','len(excluded)==54'),
+          ('len(excluded) == 57','len(excluded) == 54'),
+          ('len(excluded) == 57','len(excluded) == 54'),
+          ('len(ex)==57','len(ex)==54'),
+          ('len(ex)==57','len(ex)==54'),
+          ('len(ex) == 57','len(ex) == 54'),
+          ('len(ex) == 57','len(ex) == 54'),
         ]
     for old,new in pairs:
         txt=txt.replace(old,new)
@@ -163,11 +163,11 @@ for fn in test_files:
 
 p=Path("docs/g1_announcement_times.md");txt=p.read_text()
 assert "76 public exact-time batches / 117 exact-resolved" in txt
-txt=txt.replace("75 public exact-time batches / 114 exact-resolved","77 public exact-time batches / 120 exact-resolved",1)
+txt=txt.replace("76 public exact-time batches / 117 exact-resolved","77 public exact-time batches / 120 exact-resolved",1)
 txt += """
 ### Batch 0081: TNGO / TER / ECOL
 
-A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for NOW (2015-04-16 16:06 EDT), AMP (2015-04-22 16:05 EDT), and CAMP (2013-04-25 16:01 EDT). Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 114 exact / 60 reviewed exclusions to 117 exact / 57 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for TNGO (2015-02-12 16:05 EST), TER (2015-01-28 17:32 EST), and ECOL (2013-04-25 06:00 EDT). Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 117 exact / 57 reviewed exclusions to 120 exact / 54 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
 """;p.write_text(txt)
 
 tp=Path("tests/test_g1_public_batch_0081.py")
@@ -230,7 +230,7 @@ permitted={WORKFLOW,SCRIPT,str(contract_path),str(exclusion_path),str(hints_path
 str(cp),str(cp.parent/"unresolved_gates.csv"),str(sd/"step_status.json"),"data/processed/research_receipt_bundle.json",
 "data/processed/real_data_replay/real_data_replay_status.json","data/public/metadata/g1_public_batch_0081_integration_spec.json","data/public/metadata/g1_public_batch_0081_prep_evidence.json"} | {str(x) for x in Path("tests").glob("test_g1_public_batch_*.py")} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
 assert changed<=permitted,f"Unexpected {changed-permitted}"
-allowp=Path("config/release_drift_allowlist.json");allow=load(allowp);reason="G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 117 exact / 57 reviewed exclusions with SEC corroboration and prior evidence preserved."
+allowp=Path("config/release_drift_allowlist.json");allow=load(allowp);reason="G1 batch 0081 Worker-1 filed federal-court exact public-distribution clocks for TNGO/TER/ECOL; deterministic 120 exact / 54 reviewed exclusions with SEC corroboration and prior evidence preserved."
 for name in sorted(changed):
     sec="intentional_release_modifications" if name in allow["intentional_release_modifications"] else "repository_additions"
     allow[sec][name]={"expected_sha256":sha(name),"reason":reason}
