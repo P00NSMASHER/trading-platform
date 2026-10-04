@@ -101,8 +101,7 @@ save(hints_path,hints)
 assert rebuild.rebuild(ROOT,publish=True)["after"]["up_to_date"]
 fresh=rows(md/"announcement_resolutions.csv");by={r["event_id"]:r for r in fresh};assert len(by)==174
 for eid,old in old_exact.items():assert by[eid]==old
-expected={
-}
+expected={item["event_id"]: datetime.fromisoformat(item["public_announcement_ts"]).astimezone(ZoneInfo("UTC")).isoformat().replace("+00:00","Z") for item in items}
 for item in items:
     r=by[item["event_id"]];assert r["resolution_status"]=="resolved_exact_public_timestamp" and r["public_announcement_ts"]==expected[item["event_id"]]
 excluded=[r for r in fresh if r["resolution_status"]=="excluded_fail_closed"]
