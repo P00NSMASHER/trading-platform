@@ -1,0 +1,48 @@
+name: G1 bulk Reuters discovery
+
+on:
+  push:
+    branches:
+      - g1/bulk-ravenpack-reuters-53-51d8470
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: g1-bulk-reuters-discovery
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: g1/bulk-ravenpack-reuters-53-51d8470
+          persist-credentials: true
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+      - name: Probe all unresolved events against public Reuters archive
+        run: python scripts/g1_bulk_ravenpack_reuters_probe.py
+      - name: Validate fail-closed output
+        run: |
+          python - <<'PY'
+          import json
+          p="data/public/metadata/g1_bulk_ravenpack_reuters_candidates.json"
+          d=json.load(open(p))
+          assert d["research_use_only"] is True
+          assert d["unresolved_event_count"] == 53
+          assert all(x["status"].startswith("CLUE_ONLY") for x in d["reuters_candidates"])
+          assert d["ravenpack_candidate_count"] == 0
+          PY
+      - name: Commit research receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/public/metadata/g1_bulk_ravenpack_reuters_candidates.json
+          git diff --cached --quiet && exit 0
+          git commit -m "G1: record bulk Reuters discovery candidates"
+          git push
