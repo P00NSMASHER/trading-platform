@@ -1,0 +1,46 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "ee05e86790e616d321fcec395d44cea46a44cfea",
+  "reserved_batch": "0104",
+  "worker_slot": 4,
+  "ownership_rule": "SHA256(event_id)%5",
+  "ownership_audit": {
+    "event_id": "HEJFE-1783DE88400AF6CC",
+    "sha256": "f4bf9ba13174680e8cc3694d7a56e6988e7e43f5bc33dd8c7c0a989b89504006",
+    "sha256_mod_5": 4,
+    "worker_4_owned": true
+  },
+  "source_family": "federal_court_public_distribution_record",
+  "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+  "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+  "source_discovery_comment": "https://github.com/P00NSMASHER/trading-platform/issues/153#issuecomment-5972980765",
+  "ownership_correction_comment": "https://github.com/P00NSMASHER/trading-platform/issues/153#issuecomment-5984081924",
+  "supersedes_invalid_cross_shard_prep": "g1/prep-0102-worker-2-wmb-3752e55",
+  "items": [
+    {
+      "event_id": "HEJFE-1783DE88400AF6CC",
+      "historical_symbol": "WMB",
+      "court_distribution_time_text": "2015-02-18 16:05 EST",
+      "public_announcement_ts": "2015-02-18T16:05:00-05:00",
+      "first_documented_illicit_trade_ts": "2015-02-18T19:54:00Z",
+      "expected_information_asymmetry_seconds": 4260,
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/107263/000119312515052850/d875060dex991.htm",
+      "headline": "Williams Reports Year-End 2014 Financial Results, Updates Guidance"
+    }
+  ],
+  "live_validation": {
+    "canonical_exact_before": 117,
+    "canonical_excluded_before": 57,
+    "event_still_excluded_fail_closed": true,
+    "active_token_worker": 1,
+    "active_token_event_ids": [
+      "HEJFE-AF5106891E058D23",
+      "HEJFE-334BAA0D940A418A",
+      "HEJFE-12CC8075D3F634CD"
+    ],
+    "unclaimed_by_active_package": true
+  },
+  "handoff": "When the controller assigns Worker 4, regenerate WMB-only batch 0104 from exact live main and run all token gates. This prep file must not mutate canonical state."
+}
