@@ -17,31 +17,32 @@ def _rows(path: Path):
         return list(csv.DictReader(handle))
 
 
-def test_worker2_wmb_prep_is_owned_and_fail_closed():
+def test_worker2_wmb_prep_is_invalidated_cross_shard():
     prep = json.loads(PREP.read_text(encoding="utf-8"))
     assert prep["prep_only"] is True
     assert prep["research_use_only"] is True
-    assert prep["base_main_sha"] == "3752e553ae10ae62f1d68720abe453db8cded079"
-    assert prep["worker_slot"] == 2
+    assert prep["invalidated"] is True
+    assert prep["disposition"] == "DO_NOT_INTEGRATE_CROSS_SHARD"
+    assert prep["claimed_worker_slot"] == 2
+    assert prep["actual_worker_slot"] == 4
     assert int(prep["reserved_batch"]) % 5 == 2
-    assert prep["previous_exact_count"] == 114
-    assert prep["expected_exact_count_after_batch"] == 115
-    assert prep["expected_excluded_after_batch"] == 59
 
     assert len(prep["items"]) == 1
     item = prep["items"][0]
     assert item["event_id"] == "HEJFE-1783DE88400AF6CC"
     assert item["historical_symbol"] == "WMB"
     digest = hashlib.sha256(item["event_id"].encode("utf-8")).digest()
-    assert int.from_bytes(digest, "big") % 5 == 2
+    digest_hex = digest.hex()
+    owner = int.from_bytes(digest, "big") % 5
+    assert digest_hex == prep["ownership_audit"]["sha256"]
+    assert owner == prep["ownership_audit"]["sha256_mod_5"] == 4
+    assert prep["ownership_audit"]["worker_2_owned"] is False
 
     release = datetime.fromisoformat(item["public_announcement_ts"])
     trade = datetime.fromisoformat(item["first_documented_illicit_trade_ts"])
     assert int((release - trade).total_seconds()) == 4260
     assert item["expected_information_asymmetry_seconds"] == 4260
     assert prep["source_family"] == "federal_court_public_distribution_record"
-    assert prep["timestamp_evidence_kind"] == "explicit_release_clock"
-    assert prep["public_distribution_explicit"] is True
     assert prep["source_reference"].startswith(
         "https://storage.courtlistener.com/recap/"
     )
