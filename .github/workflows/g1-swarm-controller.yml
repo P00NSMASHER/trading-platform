@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - g1/public-batch-0081-worker-1-court3-main-ee05e86-source
+      - g1/public-batch-0081-worker-1-court3-main-ee05e86-source-v2
 
 permissions:
   contents: write
@@ -22,7 +23,7 @@ jobs:
       - name: Checkout source head
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: g1/public-batch-0081-worker-1-court3-main-ee05e86-source
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
           persist-credentials: true
       - name: Set up Python
