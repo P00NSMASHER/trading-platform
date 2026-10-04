@@ -88,5 +88,36 @@
     "HEJFE-B9C8B3D0EF3DCB5E",
     "HEJFE-8A0517D50278EAE4",
     "HEJFE-D6BA56FA6D57427E"
-  ]
+  ],
+  "source_family_followups": {
+    "caci_release_file_semantics": {
+      "status": "NO_DIRECT_PROOF_YET",
+      "checked": [
+        "Exact-title web search for 2015 CACI release + 4:05/16:05 publication time",
+        "Issuer Q4CDN 2015 PDF and 2016 comparison PDF",
+        "SEC Exhibit 99 exact release text",
+        "MarketScreener/Business Wire exact-title discovery",
+        "Public GitHub exact filename/timestamp searches"
+      ],
+      "finding": "No source found that directly states the 2015 Q4CDN filename suffix 1605 is the first-public publication clock. Keep fail-closed."
+    },
+    "colm_sportmondo_businesswire_family": {
+      "status": "TARGET_2015_MIRROR_NOT_FOUND_YET",
+      "precedent": "Sportmondo preserved Columbia's 2014-10-30 Business Wire release with explicit header 'October 30, 2014 04:00 PM Eastern Daylight Time'.",
+      "target_context": "Columbia issuer page states the 2015-02-12 FY2014 release was planned at approximately 4:00 p.m. ET; independent timestamped Benzinga archive reports results at 16:00 ET.",
+      "guardrail": "Schedule plus secondary alert is not admissible. Find the target 2015 Sportmondo/Business Wire exact-title copy with an explicit publication header before promotion."
+    },
+    "marketscreener_businesswire_family": {
+      "status": "SOURCE_FAMILY_CONFIRMED_TARGET_2015_COPIES_NOT_RECOVERED",
+      "precedent": "Current MarketScreener Business Wire stories preserve an explicit 'Published on ... at ... EDT' field.",
+      "target_searches": [
+        "CACI 2015 Q3",
+        "VEEV FY2015",
+        "COLM FY2014",
+        "POWI Q1 2015",
+        "SCVL Q1 2015"
+      ],
+      "finding": "No indexed 2015 target page with explicit time recovered in this pass. Do not infer from modern MarketScreener behavior."
+    }
+  }
 }
