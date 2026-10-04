@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "canonical_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
+  "purpose": "New source-family probe for exhausted Worker-1 G1 events. These timestamps are discovery clues only and MUST NOT be promoted as first-public clocks without a timestamp-bearing primary wire page or exact-title public mirror.",
+  "source_family": "public_github_timestamped_benzinga_archive_plus_preserved_businesswire_url_inventory",
+  "discoveries": [
+    {
+      "event_id": "HEJFE-D6BA56FA6D57427E",
+      "historical_symbol": "SCVL",
+      "event_date": "2015-05-20",
+      "first_documented_illicit_trade_ts_local": "2015-05-20T15:17:00-04:00",
+      "secondary_alert_ts": "2015-05-20T16:07:00-04:00",
+      "secondary_alert_headline": "Shoe Carnival Reports Q1 EPS $0.52, Inline, Sales $252.8M vs $254.6M Est.; Narrows FY EPS Outlook from $1.40-$1.48 to $1.42-$1.48 vs $1.47 Est.",
+      "github_source": "https://github.com/rzrizaldy/StockMatch/blob/14fd3fa139dfdce7c518fb222b139b675deefd1f/data/stock_sentiment/SCVL.csv",
+      "exact_title": "Shoe Carnival Reports First Quarter 2015 Results",
+      "preserved_primary_release": "http://www.businesswire.com/news/home/20150520006346/en/",
+      "primary_release_mirror": "https://s26.q4cdn.com/745852879/files/doc_financials/2015/q1/895eddea-ceed-4321-82de-5b3790e7c614.pdf",
+      "status": "CLUE_ONLY_NOT_ADMISSIBLE",
+      "next_probe": "Find a timestamp-bearing preserved copy of Business Wire release 20150520006346 or an exact-title mirror that explicitly preserves its publication clock. Do not infer the first-public clock from the 16:07 Benzinga alert."
+    },
+    {
+      "event_id": "HEJFE-8A0517D50278EAE4",
+      "historical_symbol": "POWI",
+      "event_date": "2015-04-29",
+      "first_documented_illicit_trade_ts_local": "2015-04-29T15:23:00-04:00",
+      "secondary_alert_ts": "2015-04-29T16:04:00-04:00",
+      "secondary_alert_headline": "Power Integrations Reports Q1 EPS $0.43 vs. Est. $0.45, Rev. $82.6M vs. Est. $84.55M",
+      "github_source": "https://github.com/rzrizaldy/StockMatch/blob/14fd3fa139dfdce7c518fb222b139b675deefd1f/data/stock_sentiment/POWI.csv",
+      "exact_title": "Power Integrations Reports First-Quarter Financial Results",
+      "status": "CLUE_ONLY_NOT_ADMISSIBLE",
+      "next_probe": "Use the 16:04 ET contemporaneous alert to target timestamp-preserving Business Wire/public mirrors for the exact 2015 release. Do not promote the Benzinga timestamp itself."
+    }
+  ],
+  "admissibility_guardrails": [
+    "No EDGAR acceptance time",
+    "No conference-call time",
+    "No scheduled or approximate time",
+    "No archive-capture time",
+    "No neighboring-release inference",
+    "No unsupported timezone",
+    "No secondary alert timestamp promoted as first-public without explicit primary/mirror publication-clock evidence"
+  ]
+}
