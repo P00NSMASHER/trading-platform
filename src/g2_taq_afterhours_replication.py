@@ -166,3 +166,84 @@ def replication_policy_summary() -> dict[str, object]:
         "nbbo_required_before_g2_quote_coverage": True,
         "g2_coverage_claim": False,
     }
+
+
+def _nbbo_number(value: object):
+    from decimal import Decimal, InvalidOperation
+    if value in (None, "", "."):
+        return None
+    try:
+        return Decimal(str(value))
+    except (InvalidOperation, ValueError):
+        return None
+
+
+def construct_strict_nbbo(rows: Iterable[Mapping[str, object]]) -> list[dict[str, object]]:
+    """Deterministic venue-state NBBO for the TAQ replication fallback.
+
+    Raw updates are always retained. Timestamp, integer sequence and venue are
+    mandatory. A missing/non-positive price or size withdraws that venue-side.
+    Crossed or incomplete states remain evidence but emit no NBBO.
+    """
+    prepared = []
+    seen = set()
+    for ordinal, raw in enumerate(rows):
+        row = dict(raw)
+        timestamp = row.get("timestamp")
+        sequence = row.get("sequence", row.get("seq"))
+        venue = row.get("venue", row.get("exchange", row.get("ex")))
+        if timestamp in (None, "") or sequence in (None, "") or venue in (None, ""):
+            raise ValueError("strict_nbbo_requires_timestamp_sequence_venue")
+        text = str(timestamp)
+        if text.endswith("Z"):
+            text = text[:-1] + "+00:00"
+        try:
+            parsed = datetime.fromisoformat(text)
+            seq = int(str(sequence))
+        except ValueError as exc:
+            raise ValueError("invalid_nbbo_ordering_key") from exc
+        key = (parsed, seq)
+        if key in seen:
+            raise ValueError("ambiguous_update_order")
+        seen.add(key)
+        prepared.append((parsed, seq, ordinal, str(venue), row))
+    prepared.sort(key=lambda item: (item[0], item[1], item[2]))
+
+    bids, asks, out = {}, {}, []
+    for _, seq, _, venue, row in prepared:
+        for book, price_key, size_key in ((bids, "Bid", "Bidsiz"), (asks, "Ask", "Asksiz")):
+            price, size = _nbbo_number(row.get(price_key)), _nbbo_number(row.get(size_key))
+            if price is None or size is None or price <= 0 or size <= 0:
+                book.pop(venue, None)
+            else:
+                book[venue] = (price, size, row.get(price_key), row.get(size_key))
+        best_bid = max(((v[0], venue, v) for venue, v in bids.items()), default=None)
+        best_ask = min(((v[0], venue, v) for venue, v in asks.items()), default=None)
+        nbbo, reason = None, None
+        if best_bid is None or best_ask is None:
+            reason = "strict_nbbo_incomplete"
+        elif best_bid[0] > best_ask[0]:
+            reason = "strict_nbbo_crossed"
+        else:
+            nbbo = {
+                "best_bid": best_bid[0], "best_bid_raw": best_bid[2][2],
+                "best_bid_size": best_bid[2][1], "best_bid_size_raw": best_bid[2][3],
+                "best_bid_venue": best_bid[1],
+                "best_ask": best_ask[0], "best_ask_raw": best_ask[2][2],
+                "best_ask_size": best_ask[2][1], "best_ask_size_raw": best_ask[2][3],
+                "best_ask_venue": best_ask[1],
+            }
+        out.append({
+            "timestamp": row["timestamp"], "sequence": seq, "venue": venue,
+            "raw_update": row, "taq_replication_flags": quote_replication_flags(row),
+            "nbbo": nbbo, "nbbo_rejection_reason": reason, "g2_coverage_claim": False,
+        })
+    return out
+
+
+def strict_nbbo_established(rows: Iterable[Mapping[str, object]]) -> bool:
+    try:
+        states = construct_strict_nbbo(rows)
+    except (TypeError, ValueError):
+        return False
+    return bool(states) and all(state["nbbo"] is not None for state in states)
