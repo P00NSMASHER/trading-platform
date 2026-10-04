@@ -1,0 +1,55 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "19d97733deca940600791de7b6e316b067abb1ed",
+  "reserved_batch": "0093",
+  "worker_slot": 3,
+  "ownership_rule": "SHA256(event_id)%5==3",
+  "previous_exact_count": 114,
+  "expected_exact_count_after_batch": 117,
+  "expected_excluded_after_batch": 57,
+  "source_family": "federal_court_public_distribution_record",
+  "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+  "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+  "source_discovery_comment": "https://github.com/P00NSMASHER/trading-platform/issues/153#issuecomment-5972980765",
+  "timestamp_evidence_kind": "explicit_release_clock",
+  "public_distribution_explicit": true,
+  "items": [
+    {
+      "event_id": "HEJFE-47A3794D1C360650",
+      "historical_symbol": "NOW",
+      "court_distribution_source": "BW",
+      "court_distribution_time_text": "2015-04-16 16:06 EDT",
+      "public_announcement_ts": "2015-04-16T16:06:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-04-16T18:33:00Z",
+      "expected_information_asymmetry_seconds": 5580,
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1373715/000115752315001170/a51080886ex99_1.htm",
+      "headline": "ServiceNow Reports Financial Results for First Quarter 2015"
+    },
+    {
+      "event_id": "HEJFE-5ED55A2EAC950921",
+      "historical_symbol": "AMP",
+      "court_distribution_source": "BW",
+      "court_distribution_time_text": "2015-04-22 16:05 EDT",
+      "public_announcement_ts": "2015-04-22T16:05:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-04-22T19:22:00Z",
+      "expected_information_asymmetry_seconds": 2580,
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/820027/000110465915029352/a15-9389_1ex99d1.htm",
+      "headline": "Ameriprise Financial Reports First Quarter 2015 Results"
+    },
+    {
+      "event_id": "HEJFE-ED8CFC03F1053B9A",
+      "historical_symbol": "CAMP",
+      "court_distribution_source": "MW",
+      "court_distribution_time_text": "2013-04-25 16:01 EDT",
+      "public_announcement_ts": "2013-04-25T16:01:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-04-25T19:48:00Z",
+      "expected_information_asymmetry_seconds": 780,
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/730255/000120677413001590/exhibit99-1.htm",
+      "headline": "CalAmp Reports Fiscal 2013 Fourth Quarter and Full Year Results"
+    }
+  ],
+  "evidence_method": "A newly identified filed federal-court public-distribution table is pinned as the exact-clock source. The exact NOW, AMP, and CAMP release headline/date identities are independently corroborated against SEC-hosted release text. Each event is unresolved on the pinned base and satisfies SHA256(event_id)%5==3. This branch is prep-only and leaves canonical fail-closed state unchanged.",
+  "integration_guard": "Before canonical generation, the token holder must independently reopen the pinned filed court artifact, verify the three transcribed distribution rows, recheck current-main unresolved/unclaimed state and Worker-3 ownership, and remove any foreign-owned event from the earlier seven-event Worker-2 package. No EDGAR acceptance, conference-call, scheduled, inferred, or neighboring-release time may substitute."
+}
