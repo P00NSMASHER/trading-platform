@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "be78472bd2860af9aad1bf74d013b58f5112f374",
+  "reserved_batch": "0104",
+  "worker_slot": 4,
+  "prep_branch": "g1/prep-0104-worker-4-wmb-ee05e86",
+  "prep_evidence_path": "data/public/metadata/g1_public_batch_0104_prep_evidence.json",
+  "event_ids": [
+    "HEJFE-1783DE88400AF6CC"
+  ],
+  "expected_exact_resolved": 121,
+  "expected_reviewed_excluded": 53,
+  "step9": "SOURCE_BLOCKED",
+  "publisher_trigger_revision": 1,
+  "publisher_trigger_reason": "Exact-main Worker-4 token validated; publish WMB only after complete exact-head gates."
+}
