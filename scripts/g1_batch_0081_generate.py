@@ -131,6 +131,8 @@ for fn in test_files:
           ('state["public_exact_batch_count"] == 74','state["public_exact_batch_count"] == 76'),
           ('state["public_exact_batch_count"] == 75','state["public_exact_batch_count"] == 76'),
           ('state["exact_resolved_event_records"] == 114','state["exact_resolved_event_records"] == 120'),
+          ('report["priority_event_count"] == 4','report["priority_event_count"] == 3'),
+          ('"QLIK", "TNGO", "NKE", "NATI"','"QLIK", "NKE", "NATI"'),
         ]
     elif fn.endswith("test_g1_acquisition_manifest.py"):
         pairs=[
@@ -140,6 +142,8 @@ for fn in test_files:
           ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 60','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 54'),
           ('len(resolved) == 114','len(resolved) == 120'),
           ('len(unresolved) == 60','len(unresolved) == 54'),
+          ('"QLIK", "TNGO", "NKE", "NATI", "VMW"','"QLIK", "NKE", "NATI", "VMW", "EW"'),
+          ('[1, 2, 4, 6, 1000]','[1, 4, 6, 1000, 1000]'),
         ]
     elif fn.endswith("test_real_data_release_sprint.py"):
         pairs=[('updated["missing_exact_announcement_timestamps"] == 60','updated["missing_exact_announcement_timestamps"] == 54')]
@@ -167,7 +171,7 @@ txt=txt.replace("75 public exact-time batches / 114 exact-resolved","77 public e
 txt += """
 ### Batch 0081: TNGO / TER / ECOL
 
-A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for TNGO (2015-02-12 16:05 EST), TER (2015-01-28 17:32 EST), and ECOL (2013-04-25 06:00 EDT). Matching SEC-hosted release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 120 exact / 54 reviewed exclusions to 120 exact / 54 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for TNGO (2015-02-12 16:05 EST), TER (2015-01-28 17:32 EST), and ECOL (2013-04-25 06:00 EDT). Matching SEC-hosted release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 117 exact / 57 reviewed exclusions to 120 exact / 54 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
 """;p.write_text(txt)
 
 tp=Path("tests/test_g1_public_batch_0081.py")
