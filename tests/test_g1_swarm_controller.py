@@ -143,7 +143,8 @@ def test_event_owner_uses_hard_shards_and_explicit_overrides() -> None:
 
     assert ctl.event_owner("HEJFE-AF5106891E058D23", p) == 1
     assert ctl.event_owner("HEJFE-47A3794D1C360650", p) == 3
-    assert ctl.event_owner("HEJFE-1783DE88400AF6CC", p) == 2
+    assert ctl.event_owner("HEJFE-2C887DA6F617936F", p) == 2
+    assert ctl.event_owner("HEJFE-1783DE88400AF6CC", p) == 4
     assert ctl.event_owner("HEJFE-45E6DA32B37F83D4", p) == 0
     assert ctl.event_owner("HEJFE-66BA40A20548B7E3", p) == 4
     assert ctl.event_owner("HEJFE-8415E931D4314106", p) == 4
@@ -153,7 +154,7 @@ def test_event_owner_uses_hard_shards_and_explicit_overrides() -> None:
 def test_cross_shard_token_is_invalid_even_with_matching_progress() -> None:
     token = ctl.TokenAssignment(
         worker=2,
-        package="HEJFE-AF5106891E058D23/TNGO + HEJFE-1783DE88400AF6CC/WMB",
+        package="HEJFE-AF5106891E058D23/TNGO + HEJFE-2C887DA6F617936F/TIBX",
         batch=97,
         assigned_at="2026-10-01T10:00:00Z",
         comment_id=10,
@@ -163,7 +164,7 @@ def test_cross_shard_token_is_invalid_even_with_matching_progress() -> None:
             comment(
                 11,
                 "2026-10-01T10:30:00Z",
-                "WORKER 2 | HEJFE-AF5106891E058D23/TNGO + HEJFE-1783DE88400AF6CC/WMB | BUILDING | batch 0097 | source | next",
+                "WORKER 2 | HEJFE-AF5106891E058D23/TNGO + HEJFE-2C887DA6F617936F/TIBX | BUILDING | batch 0097 | source | next",
             )
         ]
     )
@@ -176,7 +177,7 @@ def test_cross_shard_token_is_invalid_even_with_matching_progress() -> None:
         manifest=manifest(
             unresolved_symbols={
                 "TNGO": {"HEJFE-AF5106891E058D23"},
-                "WMB": {"HEJFE-1783DE88400AF6CC"},
+                "TIBX": {"HEJFE-2C887DA6F617936F"},
             }
         ),
         lease_minutes=120,
@@ -256,7 +257,7 @@ def test_building_update_keeps_token_active_past_lease() -> None:
 def test_stale_building_update_does_not_extend_token_forever() -> None:
     token = ctl.TokenAssignment(
         worker=2,
-        package="HEJFE-1783DE88400AF6CC/WMB",
+        package="HEJFE-2C887DA6F617936F/TIBX",
         batch=97,
         assigned_at="2026-10-01T10:00:00Z",
         comment_id=10,
@@ -266,7 +267,7 @@ def test_stale_building_update_does_not_extend_token_forever() -> None:
             comment(
                 11,
                 "2026-10-01T10:30:00Z",
-                "WORKER 2 | HEJFE-1783DE88400AF6CC/WMB | BUILDING | batch 0097 | source | next",
+                "WORKER 2 | HEJFE-2C887DA6F617936F/TIBX | BUILDING | batch 0097 | source | next",
             )
         ]
     )
@@ -276,7 +277,7 @@ def test_stale_building_update_does_not_extend_token_forever() -> None:
         comments=[],
         pulls=[],
         updates=updates,
-        manifest=manifest(unresolved_symbols={"WMB": {"HEJFE-1783DE88400AF6CC"}}),
+        manifest=manifest(unresolved_symbols={"TIBX": {"HEJFE-2C887DA6F617936F"}}),
         lease_minutes=120,
         now=datetime(2026, 10, 1, 12, 31, tzinfo=timezone.utc),
         policy=policy(),
