@@ -8,5 +8,7 @@
   "prep_evidence_path": "data/public/metadata/g1_public_batch_0093_prep_evidence.json",
   "expected_exact_resolved": 117,
   "expected_reviewed_excluded": 57,
-  "step9": "SOURCE_BLOCKED"
+  "step9": "SOURCE_BLOCKED",
+  "publisher_trigger_revision": 1,
+  "publisher_trigger_reason": "Workflow file now exists on the source branch; this follow-up push triggers adaptive exact-main generation."
 }
