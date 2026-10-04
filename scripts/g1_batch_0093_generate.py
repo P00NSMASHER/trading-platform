@@ -128,7 +128,7 @@ for fn in test_files:
         pairs=[
           ('report["exact_resolved_event_records"] == 114','report["exact_resolved_event_records"] == 117'),
           ('report["reviewed_excluded_event_records"] == 60','report["reviewed_excluded_event_records"] == 57'),
-          ('state["public_exact_batch_count"] == 74','state["public_exact_batch_count"] == 75'),
+          ('state["public_exact_batch_count"] == 74','state["public_exact_batch_count"] == 76'),
           ('state["exact_resolved_event_records"] == 114','state["exact_resolved_event_records"] == 117'),
         ]
     elif fn.endswith("test_g1_acquisition_manifest.py"):
