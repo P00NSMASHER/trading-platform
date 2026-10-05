@@ -166,6 +166,7 @@ for fn in test_files:
           ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 10','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 9'),
           ('len(resolved) == 164','len(resolved) == 165'),
           ('len(unresolved) == 10','len(unresolved) == 9'),
+          ('"EW", "PNRA", "BIO", "GNTX", "CREE"','"EW", "PNRA", "GNTX", "CREE", "NUAN"'),
         ]
     elif fn.endswith("test_real_data_release_sprint.py"):
         pairs=[('updated["missing_exact_announcement_timestamps"] == 10','updated["missing_exact_announcement_timestamps"] == 9')]
