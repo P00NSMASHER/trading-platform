@@ -1,0 +1,78 @@
+Attempt 1: syncing to latest main
+From https://github.com/P00NSMASHER/trading-platform
+ * branch              main       -> FETCH_HEAD
+HEAD is now at 8014585b Extract public hacked-earnings binary assets (#355)
+{
+  "exact": 137,
+  "reviewed_excluded": 37,
+  "new_events": [
+    "HEJFE-4080E04F012A7290",
+    "HEJFE-7CEFB3FE3D986464",
+    "HEJFE-9861757889227DD4",
+    "HEJFE-8EAA8616B1750B40",
+    "HEJFE-8415E931D4314106",
+    "HEJFE-0AA84E6E44ED02D8",
+    "HEJFE-947F50EBAFBA54DC",
+    "HEJFE-791693865584F9CB",
+    "HEJFE-22BF36BABB9D19D7",
+    "HEJFE-E28050410A1480C6",
+    "HEJFE-0704950C71CFAFB4",
+    "HEJFE-C926C41F03E66E82",
+    "HEJFE-826F68D9DA88B37C",
+    "HEJFE-A5AE76F13A48C40F"
+  ]
+}
+...F.................F.....................................              [100%]
+=================================== FAILURES ===================================
+_____________ test_research_map_builds_fail_closed_priority_queue ______________
+
+    def test_research_map_builds_fail_closed_priority_queue():
+        report = g1r.build_priority_queue(_load(RESEARCH_PATH), _load(EXCLUSIONS_PATH))
+    
+        assert report["status"] == "RESEARCH_PRIORITIES_READY"
+        assert report["research_use_only"] is True
+        assert report["required_event_count"] == 174
+        assert report["exact_resolved_event_records"] == 137
+        assert report["reviewed_excluded_event_records"] == 37
+>       assert report["priority_event_count"] == 3
+E       assert 2 == 3
+
+tests/test_g1_source_research.py:54: AssertionError
+_______________ test_explicit_research_priorities_head_the_queue _______________
+
+    def test_explicit_research_priorities_head_the_queue():
+        manifest = g1a.build_manifest()
+>       assert [row["historical_symbol"] for row in manifest["work_queue"][:5]] == [
+            "QLIK", "NKE", "NATI", "VMW", "EW"
+        ]
+E       AssertionError: assert ['NKE', 'NATI..., 'EW', 'DGI'] == ['QLIK', 'NKE..., 'VMW', 'EW']
+E         
+E         At index 0 diff: 'NKE' != 'QLIK'
+E         
+E         Full diff:
+E           [
+E         -     'QLIK',
+E               'NKE',
+E               'NATI',
+E               'VMW',
+E               'EW',
+E         +     'DGI',
+E           ]
+
+tests/test_g1_acquisition_manifest.py:91: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_g1_source_research.py::test_research_map_builds_fail_closed_priority_queue - assert 2 == 3
+FAILED tests/test_g1_acquisition_manifest.py::test_explicit_research_priorities_head_the_queue - AssertionError: assert ['NKE', 'NATI..., 'EW', 'DGI'] == ['QLIK', 'NKE..., 'VMW', 'EW']
+  
+  At index 0 diff: 'NKE' != 'QLIK'
+  
+  Full diff:
+    [
+  -     'QLIK',
+        'NKE',
+        'NATI',
+        'VMW',
+        'EW',
+  +     'DGI',
+    ]
+2 failed, 57 passed in 0.45s
