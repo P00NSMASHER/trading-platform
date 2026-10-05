@@ -242,8 +242,9 @@ for fn in test_files:
           ('len(manifest["work_queue"]) == 29','len(manifest["work_queue"]) == 24'),
           ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 29','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 24'),
           ('len(resolved) == 145','len(resolved) == 150'),('len(unresolved) == 29','len(unresolved) == 24'),
-          ('"QLIK", "NKE", "NATI", "VMW", "EW"','"NKE", "NATI", "VMW", "EW", "DGI"'),
-          ('[1, 4, 6, 1000, 1000]','[4, 6, 1000, 1000, 1000]')]
+          ('"QLIK", "NKE", "NATI", "VMW", "EW"','"NKE", "NATI", "EW", "DGI", "PNRA"'),
+          ('[1, 4, 6, 1000, 1000]','[4, 6, 1000, 1000, 1000]'),
+          ('"NKE", "VMW", "EW", "DGI", "PNRA"','"NKE", "EW", "DGI", "PNRA", "ACO"')]
     elif fn.endswith("test_real_data_release_sprint.py"):
         pairs=[('updated["missing_exact_announcement_timestamps"] == 29','updated["missing_exact_announcement_timestamps"] == 24')]
     else:
@@ -259,9 +260,9 @@ p=Path("docs/g1_announcement_times.md");txt=p.read_text()
 assert "82 public exact-time batches / 145 exact-resolved" in txt
 txt=txt.replace("82 public exact-time batches / 145 exact-resolved","83 public exact-time batches / 150 exact-resolved",1)
 txt += """
-### Batch 0113: QLIK, ROG, IDTI, CGNX, KOPN, AMSG, CRL, COL, ALNY, DYN, TXRH, PAY, ATRC, DGI
+### Batch 0113: MAT, IDTI, ISIL, VMW (2011), VMW (2013)
 
-Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for fourteen Worker-3 events. Exact release identity/date is corroborated by pinned public press-release archive members and official SEC Exhibits 99.x. This advances G1 from 145 exact / 29 reviewed exclusions to 150 exact / 24 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for five Worker-3 events. Exact release identity/date is corroborated by pinned public press-release archive members and official SEC Exhibits 99.x. This advances G1 from 145 exact / 29 reviewed exclusions to 150 exact / 24 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
 """;p.write_text(txt)
 
 tp=Path("tests/test_g1_public_batch_0113.py")
