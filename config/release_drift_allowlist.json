@@ -2594,6 +2594,14 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
+    },
+    "src/g5_control_identity_interval_requests.py": {
+      "expected_sha256": "bf118876bfa665765b8393a3a48d43fa3d9869ad75dd6d3836c54f74b25943c1",
+      "reason": "G5 identity acquisition optimization: compress unresolved control-history symbol/date requirements into one authorized stable-ID request per symbol while preserving every exact required date and refusing to assume continuous validity."
+    },
+    "tests/test_g5_control_identity_interval_requests.py": {
+      "expected_sha256": "07dcff6e946e1d1cfc673ccec050f46f08fbfabf289c349089fa72cfecd6071c",
+      "reason": "Regression coverage locks exact input/output symbol-date pair equality, uniqueness, symbol-level request accounting, rejection of conflicting hints, and no promotion of hints to identity evidence."
     }
   },
   "schema_version": "2",
