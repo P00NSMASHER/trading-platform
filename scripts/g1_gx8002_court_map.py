@@ -152,6 +152,9 @@ def main() -> None:
     print("GX8002_UNRESOLVED_MAPPED")
     for row in mapped:
         print(json.dumps({k:row[k] for k in ("event_id","symbol","gx8002_row_id","press_release_distribution_dt_unzoned","source_code","headline","chronology_unzoned_seconds")},ensure_ascii=False))
+    print("GX8002_UNMATCHED_SAME_SYMBOL_YEAR")
+    for row in unmatched:
+        print(json.dumps(row,ensure_ascii=False))
 
     print("GX8002_GNTX_2013_ROWS")
     for r in rows:
