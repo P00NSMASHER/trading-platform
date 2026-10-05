@@ -4,6 +4,7 @@ import argparse
 import csv
 import hashlib
 import json
+from datetime import date
 from pathlib import Path
 
 
@@ -12,6 +13,23 @@ DEFAULT_EVENTS = Path("data/processed/historical_events.csv")
 DEFAULT_REQUIREMENTS = Path("data/processed/coverage_plan_real/symbol_date_requirements.csv")
 DEFAULT_LISTING = Path("data/public/metadata/g3_primary_listing_history.csv")
 DEFAULT_OUTPUT = Path("data/processed/security_identity_real/security_identity_manifest.json")
+
+ALLOWED_IDENTITY_EVIDENCE_LANES = {
+    "LICENSED_STABLE_ID_MASTER",
+    "AUTHORIZED_MARKET_SECURITY_MASTER",
+}
+IDENTITY_EVIDENCE_FIELDS = [
+    "evidence_id",
+    "permno",
+    "historical_symbol",
+    "market_identifier",
+    "valid_from",
+    "valid_through",
+    "evidence_lane",
+    "source_reference",
+    "authorization_reference",
+    "research_use_only",
+]
 
 
 class SecurityIdentityError(ValueError):
@@ -38,12 +56,91 @@ def _event_ids(value: str) -> list[str]:
     return [item.strip() for item in (value or "").split(";") if item.strip()]
 
 
+def _parse_iso_date(value: str, *, label: str) -> str:
+    raw = (value or "").strip()
+    try:
+        parsed = date.fromisoformat(raw)
+    except ValueError as exc:
+        raise SecurityIdentityError(f"{label} must be a valid YYYY-MM-DD date") from exc
+    return parsed.isoformat()
+
+
+def _validate_identity_evidence(
+    rows: list[dict[str, str]],
+    *,
+    permno_to_symbols: dict[str, set[str]],
+) -> dict[str, list[dict[str, str]]]:
+    by_permno: dict[str, list[dict[str, str]]] = {}
+    seen_ids: set[str] = set()
+    for i, raw in enumerate(rows, 2):
+        row = {str(k): str(v or "").strip() for k, v in raw.items()}
+        evidence_id = row.get("evidence_id", "")
+        if not evidence_id or evidence_id in seen_ids:
+            raise SecurityIdentityError(
+                f"identity evidence row {i}: evidence_id must be unique and nonblank"
+            )
+        seen_ids.add(evidence_id)
+
+        missing = [field for field in IDENTITY_EVIDENCE_FIELDS if not row.get(field)]
+        if missing:
+            raise SecurityIdentityError(
+                f"identity evidence row {i}: missing required fields {missing}"
+            )
+        if row["research_use_only"] != "1":
+            raise SecurityIdentityError(
+                f"identity evidence row {i}: research_use_only must equal 1"
+            )
+        if row["evidence_lane"] not in ALLOWED_IDENTITY_EVIDENCE_LANES:
+            raise SecurityIdentityError(
+                f"identity evidence row {i}: evidence_lane is not closing-authorized"
+            )
+
+        permno = row["permno"]
+        symbol = row["historical_symbol"].upper()
+        expected_symbols = permno_to_symbols.get(permno)
+        if expected_symbols is None:
+            raise SecurityIdentityError(
+                f"identity evidence row {i}: unknown PERMNO {permno}"
+            )
+        if symbol not in expected_symbols:
+            raise SecurityIdentityError(
+                f"identity evidence row {i}: symbol {symbol} does not match PERMNO {permno}"
+            )
+
+        valid_from = _parse_iso_date(
+            row["valid_from"], label=f"identity evidence row {i} valid_from"
+        )
+        valid_through = _parse_iso_date(
+            row["valid_through"], label=f"identity evidence row {i} valid_through"
+        )
+        if valid_through < valid_from:
+            raise SecurityIdentityError(
+                f"identity evidence row {i}: valid_through precedes valid_from"
+            )
+        row["historical_symbol"] = symbol
+        row["valid_from"] = valid_from
+        row["valid_through"] = valid_through
+        by_permno.setdefault(permno, []).append(row)
+
+    for rows_for_permno in by_permno.values():
+        rows_for_permno.sort(
+            key=lambda row: (
+                row["valid_from"],
+                row["valid_through"],
+                row["market_identifier"],
+                row["evidence_id"],
+            )
+        )
+    return by_permno
+
+
 def build_manifest_from_rows(
     events: list[dict[str, str]],
     requirements: list[dict[str, str]],
     listings: list[dict[str, str]],
     *,
     source_sha256: dict[str, str] | None = None,
+    identity_evidence: list[dict[str, str]] | None = None,
 ) -> dict:
     if not events:
         raise SecurityIdentityError("historical events are empty")
@@ -91,6 +188,12 @@ def build_manifest_from_rows(
         raise SecurityIdentityError(
             f"PERMNO maps to multiple historical symbols without explicit dated alias evidence: {permno_aliases}"
         )
+
+    evidence_rows = identity_evidence if identity_evidence is not None else []
+    evidence_by_permno = _validate_identity_evidence(
+        evidence_rows,
+        permno_to_symbols=permno_to_symbols,
+    )
 
     listing_by_id: dict[str, dict[str, str]] = {}
     for i, row in enumerate(listings, 2):
@@ -165,10 +268,45 @@ def build_manifest_from_rows(
                 f"event {event_id}: event date {event['event_date']} is absent from requirements"
             )
         verified = [event["event_date"]]
-        unverified = [value for value in dates if value != event["event_date"]]
+        unverified: list[str] = []
+        baseline_evidence: dict[str, list[dict[str, str]]] = {}
+        for value in dates:
+            if value == event["event_date"]:
+                continue
+            matches = [
+                row
+                for row in evidence_by_permno.get(event["permno"], [])
+                if row["historical_symbol"] == event["historical_symbol"]
+                and row["valid_from"] <= value <= row["valid_through"]
+            ]
+            if not matches:
+                unverified.append(value)
+                continue
+
+            market_identifiers = {row["market_identifier"] for row in matches}
+            if len(market_identifiers) != 1:
+                raise SecurityIdentityError(
+                    f"conflicting market identifiers for PERMNO {event['permno']} on {value}: "
+                    f"{sorted(market_identifiers)}"
+                )
+            verified.append(value)
+            baseline_evidence[value] = [
+                {
+                    "evidence_id": row["evidence_id"],
+                    "market_identifier": row["market_identifier"],
+                    "valid_from": row["valid_from"],
+                    "valid_through": row["valid_through"],
+                    "evidence_lane": row["evidence_lane"],
+                    "source_reference": row["source_reference"],
+                    "authorization_reference": row["authorization_reference"],
+                }
+                for row in matches
+            ]
+
+        verified = sorted(set(verified))
         verified_date_count += len(verified)
         unverified_date_count += len(unverified)
-        event_records.append({
+        event_record = {
             "event_id": event_id,
             "permno": event["permno"],
             "gvkey": event["gvkey"],
@@ -189,10 +327,14 @@ def build_manifest_from_rows(
                 "source_reference": listing.get("source_reference", ""),
             },
             "research_use_only": True,
-        })
+        }
+        if identity_evidence is not None:
+            event_record["baseline_identity_evidence"] = baseline_evidence
+        event_records.append(event_record)
 
     ready = unverified_date_count == 0
-    return {
+    baseline_verified_count = verified_date_count - len(event_by_id)
+    result = {
         "schema_version": SCHEMA_VERSION,
         "purpose": (
             "Stable security-identity gate for historical market-data joins. "
@@ -247,23 +389,38 @@ def build_manifest_from_rows(
         },
         "events": event_records,
     }
+    if identity_evidence is not None:
+        result["state"]["baseline_identity_verified_count"] = baseline_verified_count
+        result["state"]["identity_evidence_row_count"] = len(identity_evidence)
+        result["sources"]["identity_evidence"] = "external_authorized_identity_evidence"
+    return result
 
 
 def build_manifest(
     events_path: Path = DEFAULT_EVENTS,
     requirements_path: Path = DEFAULT_REQUIREMENTS,
     listing_path: Path = DEFAULT_LISTING,
+    identity_evidence_path: Path | None = None,
 ) -> dict:
-    return build_manifest_from_rows(
+    source_sha256 = {
+        "historical_events": _sha256(events_path),
+        "symbol_date_requirements": _sha256(requirements_path),
+        "event_date_listing_evidence": _sha256(listing_path),
+    }
+    evidence_rows = None
+    if identity_evidence_path is not None:
+        source_sha256["identity_evidence"] = _sha256(identity_evidence_path)
+        evidence_rows = _read_csv(identity_evidence_path)
+    manifest = build_manifest_from_rows(
         _read_csv(events_path),
         _read_csv(requirements_path),
         _read_csv(listing_path),
-        source_sha256={
-            "historical_events": _sha256(events_path),
-            "symbol_date_requirements": _sha256(requirements_path),
-            "event_date_listing_evidence": _sha256(listing_path),
-        },
+        source_sha256=source_sha256,
+        identity_evidence=evidence_rows,
     )
+    if identity_evidence_path is not None:
+        manifest["sources"]["identity_evidence"] = str(identity_evidence_path)
+    return manifest
 
 
 def render_manifest(manifest: dict) -> str:
@@ -277,12 +434,25 @@ def main() -> int:
     parser.add_argument("--events", type=Path, default=DEFAULT_EVENTS)
     parser.add_argument("--requirements", type=Path, default=DEFAULT_REQUIREMENTS)
     parser.add_argument("--listing", type=Path, default=DEFAULT_LISTING)
+    parser.add_argument(
+        "--identity-evidence",
+        type=Path,
+        help=(
+            "Optional authorized dated stable-ID evidence CSV. The default build remains "
+            "fail-closed with no baseline identity promotion."
+        ),
+    )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
 
     rendered = render_manifest(
-        build_manifest(args.events, args.requirements, args.listing)
+        build_manifest(
+            args.events,
+            args.requirements,
+            args.listing,
+            args.identity_evidence,
+        )
     )
     if args.check:
         return 0 if args.output.exists() and args.output.read_text(encoding="utf-8") == rendered else 2

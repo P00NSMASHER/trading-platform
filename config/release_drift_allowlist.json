@@ -1872,8 +1872,8 @@
       "reason": "Deterministic fail-closed stable-ID acquisition planner for every unresolved PERMNO/date request, with lawful licensed/authorized source lanes and no ticker or corporate-action alias inference."
     },
     "src/security_identity_gate.py": {
-      "expected_sha256": "d9c8c80c2ec2843ab1d17b2182384e68ad8579751554e68fa2935aa26373d8c2",
-      "reason": "Fail-closed stable security-identity generator: bind event_id to PERMNO/historical symbol, verify event-date listing identity, expose baseline dates requiring point-in-time security-master evidence, and prohibit inferred aliases/current-ticker substitution."
+      "expected_sha256": "ff1f1904925ea32136d3da9802439cce3f06c5566ce58b1382acaefd0391bc08",
+      "reason": "Stable-ID evidence adapter: accept only explicit authorized dated evidence lanes, bind PERMNO/symbol/market identifier intervals to required dates, fail closed on conflicts or undated/unauthorized rows, and preserve the existing 3654-unresolved default when no evidence is supplied."
     },
     "src/software_readiness_certification.py": {
       "expected_sha256": "b472c49c8b88740ffea4c8639117390565b66395337dc1d02f5c76ad9a6511c2",
@@ -2404,8 +2404,8 @@
       "reason": "Regression coverage for deterministic acquisition outputs, exact 3,654/146 state, request identity uniqueness, fail-closed collisions/count drift, and prohibition of ticker/alias shortcuts."
     },
     "tests/test_security_identity_gate.py": {
-      "expected_sha256": "facbbba627fac27e0d358f08d56c5a2c433152a62ec2c2e8375a9dd5adc43002",
-      "reason": "Adversarial identity regressions for symbol reuse, PERMNO aliases, requirement mismatches, future dates, listing mismatches, and deterministic manifest reproduction."
+      "expected_sha256": "32f4beecd667b270fbe1f7e43d850e0042b4b4a0bb2876ae5bb00273c5a6e470",
+      "reason": "Regression coverage for one-date stable-ID promotion, unauthorized/undated rejection, conflicting market-identifier rejection, and unchanged fail-closed default identity state."
     },
     "tests/test_software_readiness_certification.py": {
       "expected_sha256": "81b0996abf82efb14b88427812dcfdbfa3bf56e5f037f05bc07ff62d0d3c3174",
@@ -2422,6 +2422,10 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
+    },
+    "config/security_identity_evidence.example.csv": {
+      "expected_sha256": "5a6e1f1f3ffb4e222e3504a644165a319503d8e60541e90152b2927e0ba77628",
+      "reason": "Header-only schema template for externally supplied authorized dated stable-ID evidence; contains no licensed data and changes no identity coverage."
     }
   },
   "schema_version": "2",

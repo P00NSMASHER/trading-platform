@@ -101,3 +101,115 @@ def test_no_current_ticker_or_inferred_alias_shortcut_is_allowed():
     assert "current_ticker_substitution" in prohibited
     assert "inferred_corporate_action_alias" in prohibited
     assert "symbol_only_join_when_stable_identity_is_unproven" in prohibited
+
+def _evidence_for(manifest: dict, event: dict, trade_date: str, **overrides) -> dict[str, str]:
+    row = {
+        "evidence_id": f"EVID-{event['permno']}-{trade_date}",
+        "permno": event["permno"],
+        "historical_symbol": event["historical_symbol"],
+        "market_identifier": event["historical_symbol"],
+        "valid_from": trade_date,
+        "valid_through": trade_date,
+        "evidence_lane": "LICENSED_STABLE_ID_MASTER",
+        "source_reference": "authorized://stable-id-master/test-record",
+        "authorization_reference": "TEST_AUTHORIZATION",
+        "research_use_only": "1",
+    }
+    row.update(overrides)
+    return row
+
+
+def test_authorized_dated_identity_evidence_closes_only_covered_baseline_date():
+    events, requirements, listings = _current()
+    baseline = sig.build_manifest_from_rows(events, requirements, listings)
+    event = next(row for row in baseline["events"] if row["unverified_required_dates"])
+    trade_date = event["unverified_required_dates"][0]
+    evidence = [_evidence_for(baseline, event, trade_date)]
+
+    manifest = sig.build_manifest_from_rows(
+        events,
+        requirements,
+        listings,
+        identity_evidence=evidence,
+    )
+    resolved = next(row for row in manifest["events"] if row["event_id"] == event["event_id"])
+
+    assert trade_date in resolved["verified_required_dates"]
+    assert trade_date not in resolved["unverified_required_dates"]
+    assert resolved["baseline_identity_evidence"][trade_date][0]["evidence_id"] == evidence[0]["evidence_id"]
+    assert manifest["state"]["baseline_identity_verified_count"] == 1
+    assert manifest["state"]["baseline_identity_unverified_count"] == 3653
+    assert manifest["state"]["identity_evidence_row_count"] == 1
+    assert manifest["state"]["ready_for_non_synthetic_market_join"] is False
+
+
+def test_undated_or_unauthorized_identity_evidence_fails_closed():
+    events, requirements, listings = _current()
+    baseline = sig.build_manifest_from_rows(events, requirements, listings)
+    event = next(row for row in baseline["events"] if row["unverified_required_dates"])
+    trade_date = event["unverified_required_dates"][0]
+
+    bad_undated = [_evidence_for(baseline, event, trade_date, valid_from="")]
+    with pytest.raises(sig.SecurityIdentityError, match="missing required fields"):
+        sig.build_manifest_from_rows(
+            events,
+            requirements,
+            listings,
+            identity_evidence=bad_undated,
+        )
+
+    bad_lane = [
+        _evidence_for(
+            baseline,
+            event,
+            trade_date,
+            evidence_lane="PUBLIC_CORPORATE_ACTION_CORROBORATION",
+        )
+    ]
+    with pytest.raises(sig.SecurityIdentityError, match="not closing-authorized"):
+        sig.build_manifest_from_rows(
+            events,
+            requirements,
+            listings,
+            identity_evidence=bad_lane,
+        )
+
+
+def test_conflicting_dated_market_identifiers_fail_closed():
+    events, requirements, listings = _current()
+    baseline = sig.build_manifest_from_rows(events, requirements, listings)
+    event = next(row for row in baseline["events"] if row["unverified_required_dates"])
+    trade_date = event["unverified_required_dates"][0]
+    evidence = [
+        _evidence_for(
+            baseline,
+            event,
+            trade_date,
+            evidence_id="EVID-A",
+            market_identifier="RIC.ONE",
+        ),
+        _evidence_for(
+            baseline,
+            event,
+            trade_date,
+            evidence_id="EVID-B",
+            market_identifier="RIC.TWO",
+            evidence_lane="AUTHORIZED_MARKET_SECURITY_MASTER",
+        ),
+    ]
+
+    with pytest.raises(sig.SecurityIdentityError, match="conflicting market identifiers"):
+        sig.build_manifest_from_rows(
+            events,
+            requirements,
+            listings,
+            identity_evidence=evidence,
+        )
+
+
+def test_default_manifest_remains_fail_closed_without_identity_evidence():
+    manifest = sig.build_manifest()
+    assert "identity_evidence" not in manifest["sources"]
+    assert "baseline_identity_verified_count" not in manifest["state"]
+    assert manifest["state"]["baseline_identity_unverified_count"] == 3654
+
