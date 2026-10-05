@@ -318,9 +318,47 @@ def build(
                     )
                 )
 
+    candidates_by_date: dict[str, list[CandidateSymbolDate]] = defaultdict(list)
+    for row in candidates:
+        candidates_by_date[row.event_date].append(row)
+
+    origin_priority = {
+        "FROZEN_G2_FOUR_KIND_INTERSECTION": 0,
+        "RETROSPECTIVE_SYMBOL_DATE_PLANNING_ONLY": 1,
+        "PRIOR_ONLY_RETROSPECTIVE_SYMBOL_OBSERVATION": 2,
+    }
+    primary_candidates: list[CandidateSymbolDate] = []
+    reserve_candidates: list[CandidateSymbolDate] = []
+    for event_date in sorted(positives_by_date):
+        ranked = sorted(
+            candidates_by_date.get(event_date, []),
+            key=lambda row: (
+                origin_priority.get(row.structural_origin, 99),
+                row.candidate_symbol,
+            ),
+        )
+        if len(ranked) < min_controls:
+            raise ValueError(
+                f"G5 acquisition plan has fewer than {min_controls} candidates for {event_date}"
+            )
+        primary_candidates.extend(ranked[:min_controls])
+        reserve_candidates.extend(ranked[min_controls:])
+
+    primary_keys = {
+        (row.event_date, row.candidate_symbol)
+        for row in primary_candidates
+    }
+    primary_fields = [
+        row for row in fields
+        if (row.event_date, row.candidate_symbol) in primary_keys
+    ]
+
     output_dir.mkdir(parents=True, exist_ok=True)
     candidate_path = output_dir / "g5_candidate_symbol_dates.csv"
+    primary_candidate_path = output_dir / "g5_primary_candidate_symbol_dates.csv"
+    reserve_candidate_path = output_dir / "g5_reserve_candidate_symbol_dates.csv"
     field_path = output_dir / "g5_candidate_field_requirements.csv"
+    primary_field_path = output_dir / "g5_primary_field_requirements.csv"
     market_path = output_dir / "g5_expansion_market_requirements.csv"
     summary_path = output_dir / "g5_control_acquisition_summary.json"
 
@@ -330,8 +368,23 @@ def build(
         list(CandidateSymbolDate.__dataclass_fields__),
     )
     _write_csv(
+        primary_candidate_path,
+        primary_candidates,
+        list(CandidateSymbolDate.__dataclass_fields__),
+    )
+    _write_csv(
+        reserve_candidate_path,
+        reserve_candidates,
+        list(CandidateSymbolDate.__dataclass_fields__),
+    )
+    _write_csv(
         field_path,
         fields,
+        list(FieldRequirement.__dataclass_fields__),
+    )
+    _write_csv(
+        primary_field_path,
+        primary_fields,
         list(FieldRequirement.__dataclass_fields__),
     )
     _write_csv(
@@ -342,6 +395,10 @@ def build(
 
     derived_requirements = sum(row.field_name in DERIVED_FIELDS for row in fields)
     external_requirements = len(fields) - derived_requirements
+    primary_derived_requirements = sum(
+        row.field_name in DERIVED_FIELDS for row in primary_fields
+    )
+    primary_external_requirements = len(primary_fields) - primary_derived_requirements
     existing_candidate_count = len(candidates) - expansion_candidate_count
     summary = {
         "schema_version": SCHEMA_VERSION,
@@ -382,10 +439,18 @@ def build(
         ),
         "residual_unfilled_symbol_date_slots": residual_unfilled_slots,
         "candidate_symbol_date_count": len(candidates),
+        "primary_candidate_symbol_date_count": len(primary_candidates),
+        "reserve_candidate_symbol_date_count": len(reserve_candidates),
+        "primary_complete_event_date_count": len({
+            row.event_date for row in primary_candidates
+        }),
         "control_field_count": len(CONTROL_COVARIATES),
         "field_requirement_count": len(fields),
+        "primary_field_requirement_count": len(primary_fields),
         "derived_field_requirement_count": derived_requirements,
         "external_field_requirement_count": external_requirements,
+        "primary_derived_field_requirement_count": primary_derived_requirements,
+        "primary_external_field_requirement_count": primary_external_requirements,
         "derived_fields": sorted(DERIVED_FIELDS),
         "external_fields": sorted(EXTERNAL_FIELDS),
         "dependencies": {
@@ -405,6 +470,16 @@ def build(
                 "borrow cost require admissible point-in-time sources available no later than cutoff."
             ),
         },
+        "primary_selection_policy": {
+            "controls_per_event_date": min_controls,
+            "origin_priority": [
+                "FROZEN_G2_FOUR_KIND_INTERSECTION",
+                "RETROSPECTIVE_SYMBOL_DATE_PLANNING_ONLY",
+                "PRIOR_ONLY_RETROSPECTIVE_SYMBOL_OBSERVATION",
+            ],
+            "reserve_candidates_retained_for_fallback": True,
+            "primary_rows_are_g5_evidence": False,
+        },
         "planning_policy": {
             "retrospective_sample_labels_used_for_selection": False,
             "retrospective_sample_labels_may_close_g5": False,
@@ -418,7 +493,10 @@ def build(
         "release_claimed": False,
         "outputs": {
             "candidate_symbol_dates": str(candidate_path),
+            "primary_candidate_symbol_dates": str(primary_candidate_path),
+            "reserve_candidate_symbol_dates": str(reserve_candidate_path),
             "field_requirements": str(field_path),
+            "primary_field_requirements": str(primary_field_path),
             "expansion_market_requirements": str(market_path),
             "summary": str(summary_path),
         },
