@@ -277,7 +277,7 @@ assert not unexpected, f"Unexpected changed files: {sorted(unexpected)}"
 
 allow_path = Path("config/release_drift_allowlist.json")
 allow = load(allow_path)
-reason = "G1 batch 0117 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 164 exact / 10 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+reason = "G1 batch 0117 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
 for filename in sorted(changed):
     section = "intentional_release_modifications" if filename in allow["intentional_release_modifications"] else "repository_additions"
     allow[section][filename] = {"expected_sha256": digest(filename), "reason": reason}
