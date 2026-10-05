@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
 
+import g5_match_quality_gate as g5_match_quality
 import graph_challenger_harness as gch
 import model_training_harness as mt
 
@@ -176,6 +177,80 @@ def _market_checks(checks: list[GateCheck], coverage: dict, market_manifest: dic
     ))
 
 
+def _g5_match_quality_checks(
+    checks: list[GateCheck],
+    *,
+    historical_events: Path,
+    matched_controls: Path,
+    match_events: Path | None,
+    match_balance: Path | None,
+    match_manifest: Path | None,
+    output_dir: Path,
+) -> Path | None:
+    supplied = {
+        "match_events": match_events,
+        "match_balance": match_balance,
+        "match_manifest": match_manifest,
+    }
+    missing = [
+        name
+        for name, path in supplied.items()
+        if path is None or not path.is_file()
+    ]
+    if missing:
+        checks.append(
+            GateCheck(
+                "G5_MATCH_QUALITY",
+                "matched_controls",
+                False,
+                "MISSING_EVIDENCE",
+                "required G5 match-quality inputs missing: " + ", ".join(missing),
+            )
+        )
+        return None
+
+    receipt = output_dir / "g5_match_quality_gate.json"
+    try:
+        result = g5_match_quality.build(
+            historical_events_path=historical_events,
+            matched_controls_path=matched_controls,
+            match_events_path=match_events,  # type: ignore[arg-type]
+            match_balance_path=match_balance,  # type: ignore[arg-type]
+            match_manifest_path=match_manifest,  # type: ignore[arg-type]
+            output_path=receipt,
+        )
+    except Exception as exc:
+        checks.append(
+            GateCheck(
+                "G5_MATCH_QUALITY",
+                "matched_controls",
+                False,
+                "AUDIT_ERROR",
+                str(exc),
+            )
+        )
+        return None
+
+    ready = bool(result.get("ready_for_g5_model_evaluation"))
+    checks.append(
+        GateCheck(
+            "G5_MATCH_QUALITY",
+            "matched_controls",
+            ready,
+            "READY" if ready else "BLOCKED",
+            (
+                f"events={result.get('event_count')}; "
+                f"matched_controls={result.get('matched_control_row_count')}; "
+                f"controls_per_event={result.get('controls_per_event')}; "
+                f"hard_abs_smd_max={result.get('hard_abs_smd_max')}; "
+                f"hard_balance_violations={result.get('hard_balance_violation_count')}; "
+                f"known_positive_violations={result.get('known_positive_control_violation_count')}"
+            ),
+        )
+    )
+    return receipt if ready else None
+
+
 def _temporal_feature_checks(checks: list[GateCheck], base_features: Path, graph_features: Path) -> None:
     base_rows = _read_csv(base_features)
     graph_rows = _read_csv(graph_features)
@@ -229,7 +304,9 @@ def assess_release(*, coverage_summary: Path, market_backfill_manifest: Path, ma
                    matched_controls: Path, base_features: Path, graph_features: Path,
                    champion_bundle: Path, champion_training_manifest: Path,
                    challenger_manifest: Path, challenger_cv_audit: Path, output_dir: Path,
-                   expected_champion_sha256: str = "", holdout_start_year: int = 2015) -> dict:
+                   expected_champion_sha256: str = "", holdout_start_year: int = 2015,
+                   match_events: Path | None = None, match_balance: Path | None = None,
+                   match_manifest: Path | None = None) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
     checks: list[GateCheck] = []
 
@@ -244,6 +321,18 @@ def assess_release(*, coverage_summary: Path, market_backfill_manifest: Path, ma
     # G1-G6: independent data/readiness gates.
     _metadata_checks(checks, readiness, quality)
     _market_checks(checks, coverage, market)
+
+    # G5 match-quality evidence is independently revalidated from the exact
+    # matched-control outputs rather than trusting readiness flags alone.
+    match_quality_receipt = _g5_match_quality_checks(
+        checks,
+        historical_events=historical_events,
+        matched_controls=matched_controls,
+        match_events=match_events,
+        match_balance=match_balance,
+        match_manifest=match_manifest,
+        output_dir=output_dir,
+    )
 
     # G7: no future/forensic feature leakage.
     _temporal_feature_checks(checks, base_features, graph_features)
@@ -319,6 +408,26 @@ def assess_release(*, coverage_summary: Path, market_backfill_manifest: Path, ma
             "challenger_manifest": _sha256(challenger_manifest),
             "challenger_cv_audit": _sha256(challenger_cv_audit),
             "matched_controls": _sha256(matched_controls),
+            "match_events": (
+                _sha256(match_events)
+                if match_events is not None and match_events.is_file()
+                else ""
+            ),
+            "match_balance": (
+                _sha256(match_balance)
+                if match_balance is not None and match_balance.is_file()
+                else ""
+            ),
+            "match_manifest": (
+                _sha256(match_manifest)
+                if match_manifest is not None and match_manifest.is_file()
+                else ""
+            ),
+            "g5_match_quality_receipt": (
+                _sha256(match_quality_receipt)
+                if match_quality_receipt is not None and match_quality_receipt.is_file()
+                else ""
+            ),
             "base_features": _sha256(base_features),
             "graph_features": _sha256(graph_features),
         },
@@ -418,6 +527,9 @@ def main() -> None:
     p.add_argument("--metadata-readiness", type=Path, required=True)
     p.add_argument("--metadata-quality", type=Path, required=True)
     p.add_argument("--matched-controls", type=Path, required=True)
+    p.add_argument("--match-events", type=Path, required=True)
+    p.add_argument("--match-balance", type=Path, required=True)
+    p.add_argument("--match-manifest", type=Path, required=True)
     p.add_argument("--base-features", type=Path, required=True)
     p.add_argument("--graph-features", type=Path, required=True)
     p.add_argument("--champion-bundle", type=Path, required=True)
@@ -432,7 +544,9 @@ def main() -> None:
         coverage_summary=a.coverage_summary, market_backfill_manifest=a.market_backfill_manifest,
         market_contract=a.market_contract, historical_events=a.historical_events,
         metadata_readiness=a.metadata_readiness, metadata_quality=a.metadata_quality,
-        matched_controls=a.matched_controls, base_features=a.base_features, graph_features=a.graph_features,
+        matched_controls=a.matched_controls, match_events=a.match_events,
+        match_balance=a.match_balance, match_manifest=a.match_manifest,
+        base_features=a.base_features, graph_features=a.graph_features,
         champion_bundle=a.champion_bundle, champion_training_manifest=a.champion_training_manifest,
         challenger_manifest=a.challenger_manifest, challenger_cv_audit=a.challenger_cv_audit,
         output_dir=a.output_dir, expected_champion_sha256=a.expected_champion_sha256,
