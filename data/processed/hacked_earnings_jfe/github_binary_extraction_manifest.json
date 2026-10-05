@@ -1,0 +1,89 @@
+{
+  "archive_count": 6,
+  "archive_integrity": [
+    {
+      "archive": "2010.zip",
+      "git_blob_sha": "b4b45ba8bb5e5bf4c502373914fdcaaae268d3aa",
+      "integrity": "verified",
+      "parsed_release_count": 6507,
+      "size_bytes": 27346855,
+      "source_path": "Data/Press releases/2010.zip",
+      "uncompressed_bytes": 99750251,
+      "zip_member_count": 6508
+    },
+    {
+      "archive": "2011.zip",
+      "git_blob_sha": "8f4b9b391e8e87649d2a5f5615a30371741c5e6a",
+      "integrity": "verified",
+      "parsed_release_count": 6484,
+      "size_bytes": 28136902,
+      "source_path": "Data/Press releases/2011.zip",
+      "uncompressed_bytes": 103990646,
+      "zip_member_count": 6485
+    },
+    {
+      "archive": "2012.zip",
+      "git_blob_sha": "afa44be02ab5aaea6e6105cbca247286bc892fd7",
+      "integrity": "verified",
+      "parsed_release_count": 6018,
+      "size_bytes": 26908193,
+      "source_path": "Data/Press releases/2012.zip",
+      "uncompressed_bytes": 99986024,
+      "zip_member_count": 6019
+    },
+    {
+      "archive": "2013.zip",
+      "git_blob_sha": "59e183f05e377ebd0ef2f581ba88522863663972",
+      "integrity": "verified",
+      "parsed_release_count": 6175,
+      "size_bytes": 28229369,
+      "source_path": "Data/Press releases/2013.zip",
+      "uncompressed_bytes": 105616864,
+      "zip_member_count": 6176
+    },
+    {
+      "archive": "2014.zip",
+      "git_blob_sha": "0e0e349b76318bb9558a790000c9cbe5ee933001",
+      "integrity": "verified",
+      "parsed_release_count": 5755,
+      "size_bytes": 26563716,
+      "source_path": "Data/Press releases/2014.zip",
+      "uncompressed_bytes": 100575152,
+      "zip_member_count": 5756
+    },
+    {
+      "archive": "2015.zip",
+      "git_blob_sha": "919ba9f271abdc06ba7c539ad278d5bb4fcb3715",
+      "integrity": "verified",
+      "parsed_release_count": 5811,
+      "size_bytes": 27696531,
+      "source_path": "Data/Press releases/2015.zip",
+      "uncompressed_bytes": 105276225,
+      "zip_member_count": 5812
+    }
+  ],
+  "archive_member_count": 36756,
+  "coverage_note": "These public GitHub assets contain research labels, SEC press releases, and text-model coefficients, not licensed TAQ/LSEG trade or quote payloads.",
+  "event_count": 174,
+  "event_index_path": "event_press_release_index.csv",
+  "events_with_release_match": 160,
+  "events_without_release_match": 14,
+  "g2_market_data_coverage_change": 0,
+  "manifest_path": "github_binary_extraction_manifest.json",
+  "parsed_release_count": 36750,
+  "schema_version": "1",
+  "source_commit": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+  "source_repository": "vgreg/hacked_earnings_jfe",
+  "word_coefficients": {
+    "maximum": {
+      "coef": 0.006815500110691692,
+      "word": "rais"
+    },
+    "minimum": {
+      "coef": -0.027960599263064642,
+      "word": "disappoint"
+    },
+    "output_path": "word_coefficients.csv",
+    "row_count": 2393
+  }
+}
