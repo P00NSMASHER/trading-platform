@@ -2576,7 +2576,7 @@
       "reason": "Diagnostic-only Cboe 2011 OPRA availability probe: independently test dated contract enumeration, option trades, and strict NBBO quotes under a three-request bound; explicit trial-active acknowledgement, no vendor-floor override and zero G2 coverage promotion."
     },
     "tests/test_g2_cboe_2011_option_diagnostic.py": {
-      "expected_sha256": "c866b9a96cdb62f51cb98b9faea3d827868945444cc2fde3d584505cf5c79946",
+      "expected_sha256": "4a704f55b6b5675f27407b46ae2803d42c17707154f10eef24c5aa67cf3f8b4a",
       "reason": "Regression coverage for independent 2011 contract enumeration, strict trade/NBBO probing, quote testing even without trade prints, fail-closed empty history, explicit non-coverage semantics, and bounded request behavior."
     }
   },
