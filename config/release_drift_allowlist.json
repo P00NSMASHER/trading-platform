@@ -2632,8 +2632,8 @@
       "reason": "G5 identity acquisition packet: group every routable dated control-identity request by reconciled PERMNO/symbol, emit exact date bounds and authorized CRSP-style Stocknames SQL, and preserve zero evidence/readiness promotion."
     },
     "tests/test_g5_control_identity_stocknames_request.py": {
-      "expected_sha256": "c73392ce9c003b2069dcd82909357bb4dda3ac889b5f285ebf8b4fcac8d10376",
-      "reason": "Regression coverage for G5 Stocknames request grouping, exact dated scope reconciliation, PERMNO collisions, duplicate rejection, no-ticker-substitution SQL semantics, and real-pipeline compatibility."
+      "expected_sha256": "c0ebec3e4910b9e7f2ebda115b86660592d515b724a17adcf5e2dc5fcd817748",
+      "reason": "Regression coverage locks all 2,707 G5 control-history identity dates as Stocknames-routable via 986 exact-date hints plus 1,721 reconciled symbol-level acquisition leads, with zero residual discovery rows, exact scope conservation, collision rejection, and zero readiness promotion."
     }
   },
   "schema_version": "2",
