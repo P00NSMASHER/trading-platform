@@ -2494,6 +2494,26 @@
     "tests/test_security_identity_publisher.py": {
       "expected_sha256": "a4154462a4ca9f6144480a57418fb8ec2ef412259a59a9e19ab2473973d198f2",
       "reason": "Regression coverage now includes rejection of staged candidates tied to a stale canonical identity manifest."
+    },
+    "src/security_identity_stocknames_request.py": {
+      "expected_sha256": "6341cece62b081942b3b29d8b4c9ed8361d50562c1e6a6adc0cfc67fe52fe8fc",
+      "reason": "Deterministic minimum authorized-source request generator for the unresolved stable-ID gate: validates that the source is still a non-ready 3654-request/146-PERMNO state and emits exact dated CRSP-style stocknames request CSV, SQL, and authorization contract without accessing licensed data."
+    },
+    "tests/test_security_identity_stocknames_request.py": {
+      "expected_sha256": "8de26dc4e3b7aeacfcb05447b133b78ea0fa30541367a0f770ee828586622c43",
+      "reason": "Regression coverage freezes the 146-PERMNO/3654-date scope, 2011-03-21 through 2015-05-19 bounds, dated PERMNO SQL semantics, authorization/no-bypass policy, and count/duplicate drift failures."
+    },
+    "data/processed/security_identity_real/security_identity_stocknames_request.csv": {
+      "expected_sha256": "1176cf7a727637c01edfc07c39ca7f110d9247fec5d347a5409c68d2475e1a4c",
+      "reason": "Frozen 146-security request scope derived deterministically from the canonical unresolved stable-ID acquisition summary; contains only research identifiers and date bounds, not licensed security-master data."
+    },
+    "data/processed/security_identity_real/security_identity_stocknames_request.sql": {
+      "expected_sha256": "728286bd21d8e64f2eddabcd2a25262f095464720f510d718ed873497fdb0f9a",
+      "reason": "Exact authorized CRSP stocknames query for only the 146 needed PERMNO/date ranges; joins by PERMNO and explicit name-history intervals and contains no credentials, authentication bypass, current-ticker substitution, or licensed payload."
+    },
+    "data/processed/security_identity_real/security_identity_stocknames_request_summary.json": {
+      "expected_sha256": "b66f622026c87153678e808be7b7ebe11a431dacaacefc2c5c137ea3df263a2c",
+      "reason": "Machine-readable request contract locking 3654 unresolved PERMNO/date requests, 146 securities, 2011-03-21 to 2015-05-19 bounds, required authorized-source policy, and prohibition on unverified mirrors or entitlement bypass."
     }
   },
   "schema_version": "2",

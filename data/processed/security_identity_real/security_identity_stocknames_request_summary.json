@@ -1,0 +1,29 @@
+{
+  "authorization_policy": {
+    "acceptable_examples": [
+      "CRSP/WRDS stocknames history",
+      "equivalent licensed dated stable-ID security master"
+    ],
+    "authentication_or_entitlement_bypass_prohibited": true,
+    "current_ticker_substitution_prohibited": true,
+    "public_or_unverified_mirror_may_not_close_gate": true,
+    "requires_authorized_source": true
+  },
+  "purpose": "Minimum authorized CRSP-style stocknames acquisition plan for the unresolved G2 stable-security-identity gate.",
+  "research_use_only": true,
+  "schema_version": "1",
+  "source_acquisition_summary": "data/processed/security_identity_real/security_identity_acquisition_summary.json",
+  "source_acquisition_summary_sha256": "f02d09b110bba5371e5bd28fe5f0d2b31081a12e0e89e74a281033f67924ee12",
+  "state": {
+    "expected_adapter_input_minimum_fields": [
+      "permno",
+      "ticker",
+      "namedt",
+      "nameenddt_or_nameendt"
+    ],
+    "first_required_date": "2011-03-21",
+    "last_required_date": "2015-05-19",
+    "unique_permno_count": 146,
+    "unresolved_permno_date_requests": 3654
+  }
+}
