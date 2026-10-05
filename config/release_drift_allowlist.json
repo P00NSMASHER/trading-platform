@@ -2462,6 +2462,14 @@
     "tests/test_g5_control_gap_planner.py": {
       "expected_sha256": "a56c70dd4189c515a39d59c156d88d588c20ed78f8c6632032786a935198570f",
       "reason": "Regression coverage freezes the current 49/72 structurally sufficient dates, 23 deficient dates, and 52 minimum additional candidate symbol-date lower bound while excluding same-day positives."
+    },
+    "src/g5_control_expansion_planner.py": {
+      "expected_sha256": "8471b26e8e163c8816fa0c903d7eb43a56960c90a5f25d9e74ff08ad9ee7f67b",
+      "reason": "G5 acquisition planning: use retrospective SampleFirms only as a symbol/date planning universe, ignore Hacked/Actual/Soft labels, and produce a fail-closed market-data expansion queue without promoting any row to genuine control evidence."
+    },
+    "tests/test_g5_control_expansion_planner.py": {
+      "expected_sha256": "231cee684cfa6cea2421ae1bf0b01c4e01f92b4943de99133314e3fb9468930c",
+      "reason": "Regression coverage locks the current G5 expansion plan at 51 of 52 structural deficit slots, proves retrospective labels do not affect selection, and prevents known positives or existing G2 candidates from being reselected."
     }
   },
   "schema_version": "2",
