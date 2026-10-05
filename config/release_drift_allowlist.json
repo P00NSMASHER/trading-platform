@@ -2626,6 +2626,14 @@
     "tests/test_g5_control_identity_stocknames_lead_expansion.py": {
       "expected_sha256": "123b25f7709235bc18993026ad9cea7918ab0acad7ec2979377db42146917329",
       "reason": "Regression coverage for exact date-scope conservation, symbol-level PERMNO acquisition leads, direct-hint precedence, conflict rejection, residual symbol discovery, and zero G5 readiness promotion."
+    },
+    "src/g5_control_identity_stocknames_request.py": {
+      "expected_sha256": "da31f477ac906a8c6fad7d7af03f25841bc3d24b586a316a845645a95de4b879",
+      "reason": "G5 identity acquisition packet: group every routable dated control-identity request by reconciled PERMNO/symbol, emit exact date bounds and authorized CRSP-style Stocknames SQL, and preserve zero evidence/readiness promotion."
+    },
+    "tests/test_g5_control_identity_stocknames_request.py": {
+      "expected_sha256": "c73392ce9c003b2069dcd82909357bb4dda3ac889b5f285ebf8b4fcac8d10376",
+      "reason": "Regression coverage for G5 Stocknames request grouping, exact dated scope reconciliation, PERMNO collisions, duplicate rejection, no-ticker-substitution SQL semantics, and real-pipeline compatibility."
     }
   },
   "schema_version": "2",
