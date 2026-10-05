@@ -1,0 +1,27 @@
+{
+  "schema_version": "1",
+  "status": "FOUND_NEEDS_OWNER_VALIDATION",
+  "event_id": "HEJFE-CCC7747CFBDE893E",
+  "historical_symbol": "PNRA",
+  "owner_worker": 4,
+  "canonical_first_documented_trade_ts": "2013-04-23T14:25:00",
+  "matched_earnings_date": "2013-04-23",
+  "release_title": "Panera Bread Company Reports Q1 2013 Diluted EPS of $1.64, up 17%",
+  "source_family_candidate": "federal_court_public_distribution_record",
+  "wire_family": "Marketwired",
+  "public_distribution_candidate_ts": "2013-04-23T16:00:00-04:00",
+  "chronology_seconds_from_canonical_trade": 5700,
+  "court_source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+  "court_exact_row_text": "1657 PNRA 2013 4/23/13 4/23/13 15:00 4/24/13 10:01 4/23/13 13:05 4/23/13 16:00 MW $282,751 $22,921 1 1 1 earnings",
+  "sec_corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000016/a20130326ex991pressrelease.htm",
+  "issuer_corroboration_reference": "https://www.panerabread.com/content/dam/panerabread/documents/press/2013/St-Louis-April-23-2013.pdf",
+  "mirror_reference": "https://www.franchising.com/news/20130424_panera_bread_company_reports_q1_2013_diluted_eps_o.html",
+  "validation_note": "Ticker, year, event date and exact release title identify the same PNRA Q1 2013 earnings release. The GX 8002 row has an internal 15:00 field whereas the canonical TimeOfFirstTrade.csv records 14:25, which is why the automatic exact-trade-minute mapper likely missed it. Do not promote solely from this receipt. Owner should confirm court-table field semantics / unique release identity, then use the explicit 16:00 MW public-distribution field under the already-approved court-family pattern if satisfied.",
+  "prohibited_inferences": [
+    "treating the 15:00 field as canonical first trade",
+    "using mirror publication date as clock",
+    "EDGAR acceptance",
+    "conference-call time"
+  ],
+  "next_action": "Worker 4 independently validate the mismatch and, if unique release identity suffices under existing court-family rules, PREP this event from live main."
+}
