@@ -411,6 +411,8 @@ for fn in test_files:
     if fn.endswith("test_g1_source_research.py"):
         pairs=[('report["exact_resolved_event_records"] == 123','report["exact_resolved_event_records"] == 137'),
           ('report["reviewed_excluded_event_records"] == 51','report["reviewed_excluded_event_records"] == 37'),
+          ('report["priority_event_count"] == 3','report["priority_event_count"] == 2'),
+          ('"QLIK", "NKE", "NATI"','"NKE", "NATI"'),
           ('state["public_exact_batch_count"] == 80','state["public_exact_batch_count"] == 81'),
           ('state["exact_resolved_event_records"] == 123','state["exact_resolved_event_records"] == 137')]
     elif fn.endswith("test_g1_acquisition_manifest.py"):
@@ -418,7 +420,9 @@ for fn in test_files:
           ('manifest["state"]["acquisition_needed"] == 51','manifest["state"]["acquisition_needed"] == 37'),
           ('len(manifest["work_queue"]) == 51','len(manifest["work_queue"]) == 37'),
           ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 51','len({row["dedupe_key"] for row in manifest["work_queue"]}) == 37'),
-          ('len(resolved) == 123','len(resolved) == 137'),('len(unresolved) == 51','len(unresolved) == 37')]
+          ('len(resolved) == 123','len(resolved) == 137'),('len(unresolved) == 51','len(unresolved) == 37'),
+          ('"QLIK", "NKE", "NATI", "VMW", "EW"','"NKE", "NATI", "VMW", "EW", "DGI"'),
+          ('[1, 4, 6, 1000, 1000]','[4, 6, 1000, 1000, 1000]')]
     elif fn.endswith("test_real_data_release_sprint.py"):
         pairs=[('updated["missing_exact_announcement_timestamps"] == 51','updated["missing_exact_announcement_timestamps"] == 37')]
     else:
