@@ -2568,7 +2568,7 @@
       "reason": "G5 control identity planning: reconcile the entire primary-control history footprint against canonical G2 verified/unverified identity, record exact-date public SampleFirms PERMNO/GVKEY mappings only as admission leads, and emit a fail-closed stable-ID acquisition queue."
     },
     "tests/test_g5_control_identity_requirements.py": {
-      "expected_sha256": "927acca624e666824648d8315777832f66d20503cdb40bc394592bfb53d4bec6",
+      "expected_sha256": "aaa5f4bf651f59266f52bba33ccaf063e2496599d5941af6c0c5a2017bfc25c3",
       "reason": "Regression coverage locks 216 primary controls, 51 unique exact-date SampleFirms identity leads, 165 primary mappings still missing exact-date public mapping, G2 identity reuse/overlap reconciliation, and zero automatic G5 readiness promotion."
     }
   },
