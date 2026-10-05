@@ -12,6 +12,6 @@
   "expected_exact_resolved": 123,
   "expected_reviewed_excluded": 51,
   "step9": "SOURCE_BLOCKED",
-  "publisher_trigger_revision": 1,
-  "publisher_trigger_reason": "Exact-main Worker-3 token validated; GitHub-native push trigger for SM exact-head gates."
+  "publisher_trigger_revision": 2,
+  "publisher_trigger_reason": "Exact-main Worker-3 token validated; second GitHub-native push trigger after publisher workflow landed."
 }
