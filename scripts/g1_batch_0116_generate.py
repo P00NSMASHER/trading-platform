@@ -292,7 +292,7 @@ docs.write_text(text, encoding="utf-8")
 test_text = PREP_TEST.read_text(encoding="utf-8")
 test_text = test_text.replace("g1_public_batch_0116_prep_evidence.json", "g1_public_batch_0116_evidence.json")
 test_text = test_text.replace("_prep_", "_")
-test_text = test_text.replace(\'        assert item["timestamp_evidence_kind"] == "federal_court_public_distribution_record"\\n\', \'        assert item["timestamp_evidence_kind"] == "explicit_release_clock"\\n\')
+test_text = test_text.replace('        assert item["timestamp_evidence_kind"] == "federal_court_public_distribution_record"\\n', '        assert item["timestamp_evidence_kind"] == "explicit_release_clock"\\n')
 test_text = test_text.replace('    assert evidence["prep_only"] is True\n', "")
 test_text = test_text.replace(
     '        assert resolutions[eid]["resolution_status"] == "excluded_fail_closed"\n',
