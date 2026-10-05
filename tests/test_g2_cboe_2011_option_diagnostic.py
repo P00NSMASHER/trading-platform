@@ -8,6 +8,12 @@ def test_dry_run_is_diagnostic_only_and_never_changes_coverage():
     assert manifest["sample_date"] == "2011-03-21"
     assert manifest["sample_underlying"] == "JNPR"
     assert manifest["max_requests"] == 3
+    assert manifest["max_points"] == 31
+    assert manifest["point_model"] == {
+        "reference/options": 1,
+        "historical_option_trades": 15,
+        "historical_option_quotes": 15,
+    }
     assert manifest["diagnostic_only"] is True
     assert manifest["changes_vendor_confirmed_floor"] is False
     assert manifest["coverage_claimed"] is False
@@ -88,6 +94,8 @@ def test_execute_passes_only_when_reference_trade_and_quote_fields_exist(monkeyp
     result = diag.execute_diagnostic("id", "secret")
     assert result["diagnostic_passed"] is True
     assert result["requests_executed"] == 3
+    assert result["points_executed"] == 31
+    assert result["max_points"] == 31
     assert result["derived_option_security"] == "JNPR110416C00020000"
     assert result["derived_option_security_source"] == "reference/options"
     assert result["coverage_claimed"] is False
@@ -121,6 +129,7 @@ def test_quote_is_still_probed_when_trade_rows_are_empty(monkeypatch):
     result = diag.execute_diagnostic("id", "secret")
     assert result["diagnostic_passed"] is False
     assert result["requests_executed"] == 3
+    assert result["points_executed"] == 31
     assert result["reference_assessment"]["accepted"] is True
     assert result["trade_assessment"]["accepted"] is False
     assert result["quote_assessment"]["accepted"] is True
@@ -133,6 +142,7 @@ def test_execute_fails_closed_when_no_2011_contract_or_trade_rows_exist(monkeypa
     result = diag.execute_diagnostic("id", "secret")
     assert result["diagnostic_passed"] is False
     assert result["requests_executed"] == 2
+    assert result["points_executed"] == 16
     assert result["reference_assessment"]["accepted"] is False
     assert result["trade_assessment"]["accepted"] is False
     assert result["quote_assessment"]["accepted"] is False
