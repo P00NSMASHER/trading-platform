@@ -236,7 +236,7 @@ for filename in test_files:
         pairs = [('updated["missing_exact_announcement_timestamps"] == 2', 'updated["missing_exact_announcement_timestamps"] == 1')]
     else:
         pairs = [
-            ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (172,8)', '(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (173,2)'),
+            ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (172,2)', '(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (173,1)'),
             ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (172, 2)', '(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (173, 1)'),
             ('"172/174" in step9["evidence"] and "2" in step9["evidence"]', '"173/174" in step9["evidence"] and "1" in step9["evidence"]'),
             ('len(excluded)==2', 'len(excluded)==1'),
