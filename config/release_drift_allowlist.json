@@ -1935,6 +1935,10 @@
       "expected_sha256": "13f63d26e1d98c373fc9479e5fc30ff63d5f50a221e1718cb9e98122b00ecc8e",
       "reason": "G5 master acquisition plan now executes and reconciles the merged identity interval/Stocknames routing, incremental market vendor routing, and exact control-shares reconciliation in one fail-closed plan."
     },
+    "src/g5_match_quality_gate.py": {
+      "expected_sha256": "ebd01d5fb33595130e90c166c59de52414715aaeface898a5fa5b209574e5a21",
+      "reason": "G5 fail-closed matched-control quality gate: require complete three-control coverage, exact rank/identity integrity, known-positive contamination exclusion, complete matching covariates, and post-match balance within the declared hard SMD limit."
+    },
     "src/g5_prior_fallback_planner.py": {
       "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",
       "reason": "G5 residual structural planning: fill only remaining candidate slots from strictly prior symbol observations, with retrospective labels ignored and all rows kept ineligible until date-specific identity, real four-kind market data, and pre-event metadata are proven."
@@ -2562,6 +2566,10 @@
     "tests/test_g5_master_acquisition_plan.py": {
       "expected_sha256": "f1bcec22930523475f320e1eeffd56ad73f18021dd2c959ae3723fd92a02cdc2",
       "reason": "Regression coverage locks full Stocknames routing, market-pair reconciliation, shares reuse-plus-gap accounting, and emitted component outputs in the real G5 master plan."
+    },
+    "tests/test_g5_match_quality_gate.py": {
+      "expected_sha256": "9fd579c64321ca886cbaaa98c68319c7255a99f4b3ee1e4caec46309b8232f2e",
+      "reason": "Mutation-sensitive regression coverage for G5 hard-SMD breaches, known-positive contamination, incomplete matching covariates, duplicate ranks, unmatched events, and valid balanced match sets."
     },
     "tests/test_g5_prior_fallback_planner.py": {
       "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
