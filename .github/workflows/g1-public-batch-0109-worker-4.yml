@@ -1,4 +1,4 @@
-name: G1 batch 0109 adaptive exact-main publisher r2
+name: G1 batch 0109 adaptive exact-main publisher r3 diagnostics
 
 on:
   push:
@@ -43,10 +43,13 @@ jobs:
           python -m pip install -r requirements-dev.lock
 
       - name: Regenerate against a stable current main
+        id: publish
+        continue-on-error: true
         env:
           SOURCE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
+          exec > >(tee "$RUNNER_TEMP/g1-batch-0109-publisher.log") 2>&1
           WORKFLOW=".github/workflows/g1-public-batch-0109-worker-4.yml"
           SCRIPT="scripts/g1_batch_0109_generate.py"
           SPEC="data/public/metadata/g1_public_batch_0109_integration_spec.json"
@@ -121,7 +124,25 @@ jobs:
           echo "Main moved during all three bounded attempts; fail closed."
           exit 1
 
+      - name: Publish fail-closed diagnostic
+        if: steps.publish.outcome == 'failure'
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git reset --hard "$SOURCE_SHA"
+          git clean -fd
+          mkdir -p data/public/metadata
+          cp "$RUNNER_TEMP/g1-batch-0109-publisher.log" data/public/metadata/g1_public_batch_0109_publisher_failure.log
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/public/metadata/g1_public_batch_0109_publisher_failure.log
+          git commit -m "G1: preserve ROVI batch 0109 publisher failure diagnostic"
+          git push --force origin HEAD:g1/diagnostic-batch-0109-worker-4-rovi
+          exit 1
+
       - name: Report exact output
+        if: steps.publish.outcome == 'success'
         run: |
           echo "OUTPUT_BRANCH=${OUTPUT_BRANCH}"
           echo "OUTPUT_HEAD=${OUTPUT_HEAD}"
