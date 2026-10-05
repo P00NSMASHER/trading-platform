@@ -1,4 +1,10 @@
 Traceback (most recent call last):
-  File "/home/runner/work/trading-platform/trading-platform/scripts/g1_batch_0105_generate.py", line 6, in <module>
-    import g1_source_research as research
-ModuleNotFoundError: No module named 'g1_source_research'
+  File "/home/runner/work/trading-platform/trading-platform/scripts/g1_batch_0105_generate.py", line 8, in <module>
+    import research_receipt_rebuild as rebuild
+  File "/home/runner/work/trading-platform/trading-platform/src/research_receipt_rebuild.py", line 14, in <module>
+    import real_data_replay
+  File "/home/runner/work/trading-platform/trading-platform/src/real_data_replay.py", line 11, in <module>
+    import coverage_planner as coverage_planner
+  File "/home/runner/work/trading-platform/trading-platform/src/coverage_planner.py", line 15, in <module>
+    import exchange_calendars as xcals
+ModuleNotFoundError: No module named 'exchange_calendars'
