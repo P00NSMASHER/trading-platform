@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/home/runner/work/trading-platform/trading-platform/scripts/g1_batch_0105_generate.py", line 223, in <module>
-    research.validate_research_map(trial,exclusions)
-  File "/home/runner/work/trading-platform/trading-platform/src/g1_source_research.py", line 228, in validate_research_map
-    _validate_evidence_eligible_probe(probe, exclusion_by_id)
-  File "/home/runner/work/trading-platform/trading-platform/src/g1_source_research.py", line 167, in _validate_evidence_eligible_probe
-    raise G1SourceResearchError(
-g1_source_research.G1SourceResearchError: probe NATI-batch0105 federal court evidence requires independent SEC Exhibit corroboration
