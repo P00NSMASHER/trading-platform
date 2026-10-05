@@ -1,0 +1,59 @@
+{
+  "schema_version": "1",
+  "main_sha": "8014585b043217da5d5774382eb79e6a8b0972cc",
+  "purpose": "G1 public repository source availability audit",
+  "repositories": [
+    {
+      "repository": "vgreg/earnings_news_jar",
+      "commit": "91561b8e3dc9a349e51102404e66b31e5f885431",
+      "ibes_notebook": "IBES/IBES_Data_Processing_JAR.ipynb",
+      "ibes_timestamp_construction": "ANNDATS_ACT + ANNTIMS_ACT -> IBES_Timestamp",
+      "ibes_output_reference": "Data/IBES/Earnings_Announcements_and_Surprises.h5",
+      "ibes_source_rows_present": false,
+      "ibes_output_present": false,
+      "ravenpack_notebook": "Ravenpack/RavenPack.ipynb",
+      "ravenpack_fields": [
+        "TIMESTAMP_UTC",
+        "RPNA_DATE_UTC",
+        "RP_ENTITY_ID",
+        "ENTITY_NAME",
+        "RELEVANCE",
+        "NEWS_TYPE",
+        "GROUP",
+        "TYPE",
+        "SUB_TYPE",
+        "CATEGORY",
+        "SOURCE",
+        "RP_STORY_EVENT_INDEX",
+        "RP_STORY_ID",
+        "EVENT_SIMILARITY_KEY"
+      ],
+      "ravenpack_selection": "GROUP=earnings; CATEGORY=earnings-per-share; notebook notes first after-hours item with RELEVANCE=100",
+      "ravenpack_source_rows_present": false
+    },
+    {
+      "repository": "kerryback/dynamic_disclosure_replication",
+      "commit": "14a0638659001c83542a5b2600f21ac92e442ff0",
+      "documented_ibes_fields": [
+        "TICKER",
+        "OFTIC",
+        "ANNDATS_ACT",
+        "ANNTIMS_ACT"
+      ],
+      "ibes_raw_file_present": false,
+      "processing_note": "ERC.do uses ANNDATS_ACT and ANNTIMS_ACT during processing, then excludes them from the downstream IBES_Prepped output used for firm-level datasets.",
+      "usable_g1_timestamp_rows_identified": false
+    }
+  ],
+  "github_code_search": {
+    "exact_data_filename_Earnings_Announcements_and_Surprises_h5": 0,
+    "exact_reference_Earnings_Announcements_and_Surprises_h5": 1,
+    "exact_reference_RPNA_DJEdition_2011_4_0_Equities_gz": 1,
+    "exact_reference_IBES_Detail_History_1970_2019_csv_gz": 1,
+    "result": "references occur in vgreg notebooks; source/output files are not committed"
+  },
+  "current_repo_readiness": {
+    "ibes_adapter": "src/g1_ibes_timestamp_adapter.py",
+    "ravenpack_adapter_present": false
+  }
+}
