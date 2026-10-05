@@ -176,7 +176,7 @@ def test_unknown_or_unrepresented_activation_date_fails_closed(tmp_path: Path):
     empty_date = tmp_path / "other.csv"
     _control_csv(empty_date, ["2015-01-20"])
     other_manifest = _manifest(tmp_path, empty_date)
-    with pytest.raises(activation.G5ControlActivationError, match="absent from all staged control sources"):
+    with pytest.raises(activation.G5ControlActivationError, match="still-excluded date"):
         activation.build_activation_contract(
             source_manifest=other_manifest,
             activate_dates=["2014-12-15"],
