@@ -184,6 +184,23 @@ for fn in test_files:
         txt=txt.replace(old,new)
     ast.parse(txt);p.write_text(txt)
 
+# Lock the acquisition-priority regression to the post-BIO queue using a
+# structure-sensitive replacement. A simple token replacement is too fragile
+# because this assertion is formatted as a multi-line list.
+p=Path("tests/test_g1_acquisition_manifest.py")
+txt=p.read_text()
+old_priority='''assert [row["historical_symbol"] for row in manifest["work_queue"][:5]] == [
+        "EW", "PNRA", "BIO", "GNTX", "CREE"
+    ]'''
+new_priority='''assert [row["historical_symbol"] for row in manifest["work_queue"][:5]] == [
+        "EW", "PNRA", "GNTX", "CREE", "NUAN"
+    ]'''
+if old_priority in txt:
+    txt=txt.replace(old_priority,new_priority,1)
+assert old_priority not in txt
+assert new_priority in txt
+ast.parse(txt);p.write_text(txt)
+
 p=Path("docs/g1_announcement_times.md");txt=p.read_text()
 assert "84 public exact-time batches / 164 exact-resolved" in txt
 txt=txt.replace("84 public exact-time batches / 164 exact-resolved","85 public exact-time batches / 165 exact-resolved",1)
