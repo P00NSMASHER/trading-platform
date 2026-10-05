@@ -19,6 +19,10 @@ def _build(tmp_path: Path):
         planning_universe_path=(
             ROOT / "data/raw/hacked_earnings_jfe/SampleFirms.csv"
         ),
+        canonical_g2_identity_manifest_path=(
+            ROOT
+            / "data/processed/security_identity_real/security_identity_manifest.json"
+        ),
         output_dir=tmp_path,
     )
 
@@ -48,6 +52,22 @@ def test_real_master_plan_has_complete_structural_scope(tmp_path: Path):
     assert summary["control_external_lane_request_count"] == 864
     assert summary["treated_external_lane_request_count"] == 696
     assert summary["total_external_lane_request_count"] == 1560
+
+    identity = summary["control_identity"]
+    assert identity["history_symbol_date_count"] == (
+        summary["control_history"]["unique_symbol_date_pairs"]
+    )
+    assert identity["primary_candidate_exact_sample_mapping"] == {
+        "unique": 51,
+        "ambiguous": 0,
+        "missing": 165,
+    }
+    assert identity["identity_acquisition_queue_count"] > 0
+    assert (
+        identity["canonical_g2_verified_reuse_count"]
+        + identity["canonical_g2_unverified_overlap_count"]
+    ) > 0
+    assert identity["new_g5_identity_evidence_required_count"] > 0
 
     structural = summary["structural_plan"]
     assert structural["dates_with_three_planned_controls"] == 72
@@ -104,6 +124,14 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     assert (
         tmp_path
         / "control_external_sources/g5_external_source_requests.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_identity/g5_control_identity_requirements.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_identity/g5_control_identity_acquisition_queue.csv"
     ).exists()
 
     saved = json.loads(

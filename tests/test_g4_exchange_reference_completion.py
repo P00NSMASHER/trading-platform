@@ -32,20 +32,20 @@ def _nasdaq_row(effective: str, symbol: str, tso: int, tso_date: str) -> str:
     return "|".join(fields)
 
 
-def test_completion_plan_exactly_replaces_the_18_reviewed_exclusions():
+def test_completion_plan_exactly_replaces_the_15_reviewed_exclusions():
     plan = g4.build_completion_plan(BLOCKERS)
 
     assert plan["current_g4"] == {
         "required": 3828,
-        "exact_resolved": 3810,
-        "reviewed_excluded": 18,
+        "exact_resolved": 3813,
+        "reviewed_excluded": 15,
         "target_exact_resolved": 3828,
         "target_reviewed_excluded": 0,
     }
-    assert len(plan["tasks"]) == 18
-    assert plan["routes"]["nyse_daily_taq_master"]["target_rows"] == 13
+    assert len(plan["tasks"]) == 15
+    assert plan["routes"]["nyse_daily_taq_master"]["target_rows"] == 10
     assert plan["routes"]["nasdaq_fundamental_data"]["target_rows"] == 5
-    assert plan["routes"]["nyse_daily_taq_master"]["symbols"] == ["ACO", "WLL"]
+    assert plan["routes"]["nyse_daily_taq_master"]["symbols"] == ["ACO"]
     assert plan["routes"]["nasdaq_fundamental_data"]["symbols"] == ["CGNX"]
     assert plan["coverage_claimed"] is False
 
@@ -108,7 +108,7 @@ def test_nasdaq_parser_fails_closed_without_effective_timestamp(tmp_path: Path):
         g4.parse_nasdaq_fundamental(path, symbol="CGNX")
 
 
-def test_full_private_materialization_produces_18_pre_cutoff_rows(tmp_path: Path):
+def test_full_private_materialization_produces_15_pre_cutoff_rows(tmp_path: Path):
     nyse = tmp_path / "nyse"
     nasdaq = tmp_path / "nasdaq"
     nyse.mkdir()
@@ -120,7 +120,7 @@ def test_full_private_materialization_produces_18_pre_cutoff_rows(tmp_path: Path
     for source_date, symbol in by_source:
         compact = source_date.replace("-", "")
         path = nyse / f"EQY_US_ALL_REF_MASTER_{compact}.txt"
-        shares = 32_200_000 if symbol == "ACO" else 166_900_000
+        shares = 32_200_000
         path.write_text(_fixed_width_master_row(symbol, shares) + "\n", encoding="ascii")
 
     for (_symbol, target), source_date in g4.NASDAQ_TARGETS.items():
@@ -143,10 +143,10 @@ def test_full_private_materialization_produces_18_pre_cutoff_rows(tmp_path: Path
         blockers_path=BLOCKERS,
     )
 
-    assert len(rows) == 18
+    assert len(rows) == 15
     assert summary["status"] == "READY_FOR_PRIVATE_G4_ACTIVATION"
-    assert summary["rows_materialized"] == 18
-    assert summary["nyse_rows"] == 13
+    assert summary["rows_materialized"] == 15
+    assert summary["nyse_rows"] == 10
     assert summary["nasdaq_rows"] == 5
     assert summary["g4_target_state"] == {
         "required": 3828,
@@ -185,7 +185,7 @@ def test_materialization_is_all_or_nothing(tmp_path: Path):
         )
 
 
-def test_blocker_receipt_is_locked_to_the_exact_current_18_rows():
+def test_blocker_receipt_is_locked_to_the_exact_current_15_rows():
     payload = json.loads(BLOCKERS.read_text(encoding="utf-8"))
     assert g4._canonical_blocker_targets(payload) == (
         set(g4.NYSE_TARGETS) | set(g4.NASDAQ_TARGETS)
