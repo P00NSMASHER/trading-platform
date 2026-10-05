@@ -1,12 +1,12 @@
 {
   "fallback_candidates": [
     {
-      "eligible_start": "2012-01-01",
+      "eligible_start": "2015-01-01",
       "product": "US Options Trade and NBBO Quote",
       "product_url": "https://algoseek.com/dataset/us-options-trade-and-nbbo-quote/",
-      "reason": "Dataset-specific coverage reaches 2012 and satisfies tick NBBO fidelity, but current published recurring pricing is materially higher than ThetaData and the free Sandbox is not assumed to expose a selectable 2011-2015 year.",
+      "reason": "2026-10-05 vendor reply states this OPRA Trade and NBBO Quote dataset is not in production prior to 2015. The free Sandbox is evaluation-only and is not a durable substitute for a Buy License.",
       "route": "candidate_algoseek_us_options_tanq",
-      "status": "FALLBACK_QUOTE_REQUIRED_NOT_ACQUIRED",
+      "status": "FALLBACK_2015_ONLY_NOT_ACQUIRED",
       "vendor": "algoseek"
     }
   ],
@@ -35,8 +35,9 @@
     "canonical_full_g2_gate_unchanged": true,
     "license_and_delivery_validation_required": true,
     "purchase_not_authorized": true,
-    "retention_rights_not_assumed": true,
-    "thetadata_retail_license_not_assumed": true
+    "thetadata_retail_license_not_assumed": false,
+    "thetadata_raw_retention_is_limited": true,
+    "zero_cash_evaluation_retention_not_assumed": true
   },
   "preferred_candidate_split": [
     {
@@ -57,7 +58,7 @@
       "first_trade_date": "2012-06-29",
       "history_basis": "ThetaData documents Options PRO tick-level history from 2012-06-01; the historical Quote endpoint returns every OPRA NBBO quote with bid/ask prices and sizes.",
       "last_trade_date": "2015-05-20",
-      "license_status": "PENDING_WRITTEN_USE_CLASSIFICATION_AND_RETENTION_TERMS",
+      "license_status": "WRITTEN_PRIVATE_RESEARCH_ELIGIBLE",
       "pricing_url": "https://thetadata.net/pricing",
       "product": "Options Pro historical quote",
       "quote_schema_url": "https://docs.thetadata.us/operations/option_history_quote.html",
@@ -67,7 +68,9 @@
       "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
       "subscription_reference_url": "https://docs.thetadata.us/Articles/Getting-Started/Subscriptions.html",
       "symbol_date_pair_count": 3014,
-      "vendor": "ThetaData"
+      "vendor": "ThetaData",
+      "retention_status": "Vendor written terms: raw/unmodified historical data must be deleted 30 days after the billing period ends; modified/derived research data may be retained.",
+      "written_price_reference": "2026-10-02 vendor reply: Options Pro is $160 for one month; purchase remains unauthorized."
     }
   ],
   "purpose": "Deterministic cheap-first candidate-source plan for the 414 option_quote rows required only by G2_FULL_REPLICATION. This does not alter G2_CHAMPION_MINIMUM or claim coverage.",
@@ -86,5 +89,27 @@
       "unique_historical_underlyings": 35
     }
   },
-  "unique_historical_underlyings": 146
+  "unique_historical_underlyings": 146,
+  "zero_cash_evaluation_candidates": [
+    {
+      "vendor": "Cboe",
+      "product": "LiveVol Pro",
+      "eligible_start": "2011-01-01",
+      "product_url": "https://datashop.cboe.com/livevol-pro",
+      "user_guide_url": "https://www.livevol.com/user-guide/",
+      "evidence": "Official product materials state LiveVol Pro provides 2011-present time-and-sales/tick data and offers a 15-day free trial. The user guide states Time and Sales and Historical Snapshots go back to 2011.",
+      "retention_status": "UNVERIFIED_TRIAL_EXPORT_AND_RETENTION",
+      "coverage_status": "EVALUATION_ONLY_NOT_G2_COVERAGE"
+    },
+    {
+      "vendor": "QuantHouse",
+      "product": "Historical Data On-Demand",
+      "eligible_start": "2005-01-01",
+      "product_url": "https://quanthouse.com/hod/",
+      "coverage_url": "https://www.quanthouse.com/docs/QuantHouse_coverage_list-Jul%202025.pdf",
+      "evidence": "Official materials advertise tick-by-tick history from 2005 with every trade/every quote and per-feed or per-instrument CSV delivery; the current coverage list includes OPRA NBBO feed 1081:OPA as normalized L1.",
+      "sample_status": "ZERO_COST_EVALUATION_NOT_YET_CONFIRMED",
+      "coverage_status": "EVALUATION_ONLY_NOT_G2_COVERAGE"
+    }
+  ]
 }
