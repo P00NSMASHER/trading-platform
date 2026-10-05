@@ -2496,8 +2496,8 @@
       "reason": "Regression coverage now includes rejection of staged candidates tied to a stale canonical identity manifest."
     },
     "src/security_identity_stocknames_request.py": {
-      "expected_sha256": "3d5f0a6ef855e2841d41f5ecb14e78897a324463d4a721ad48fc3708ea9d6711",
-      "reason": "Deterministic minimum authorized-source request generator for the unresolved stable-ID gate: validates the 3654-request/146-PERMNO acquisition state and emits exact dated CRSP-style stocknames request CSV, SQL, and authorization contract without accessing licensed data."
+      "expected_sha256": "6341cece62b081942b3b29d8b4c9ed8361d50562c1e6a6adc0cfc67fe52fe8fc",
+      "reason": "Deterministic minimum authorized-source request generator for the unresolved stable-ID gate: validates that the source is still a non-ready 3654-request/146-PERMNO state and emits exact dated CRSP-style stocknames request CSV, SQL, and authorization contract without accessing licensed data."
     },
     "tests/test_security_identity_stocknames_request.py": {
       "expected_sha256": "8de26dc4e3b7aeacfcb05447b133b78ea0fa30541367a0f770ee828586622c43",
