@@ -101,3 +101,60 @@ def test_no_current_ticker_or_inferred_alias_shortcut_is_allowed():
     assert "current_ticker_substitution" in prohibited
     assert "inferred_corporate_action_alias" in prohibited
     assert "symbol_only_join_when_stable_identity_is_unproven" in prohibited
+
+def _one_valid_dated_evidence():
+    events, requirements, listings = _current()
+    baseline = next(row for row in requirements if row["roles"] == "baseline")
+    event_id = baseline["event_ids"].split(";")[0]
+    event = next(row for row in events if row["event_id"] == event_id)
+    evidence = {
+        "permno": event["permno"],
+        "historical_symbol": event["historical_symbol"],
+        "trade_date": baseline["trade_date"],
+        "market_identifier": event["historical_symbol"] + ".TEST",
+        "source_family": "authorized_historical_lseg_timesales",
+        "source_reference": "lseg-timesales-receipt:test.csv",
+        "source_sha256": "a" * 64,
+        "validation_status": sig.DATED_EVIDENCE_STATUS,
+        "research_use_only": "1",
+    }
+    return events, requirements, listings, event, evidence
+
+
+def test_date_specific_stable_id_evidence_closes_exactly_one_baseline_date():
+    events, requirements, listings, event, evidence = _one_valid_dated_evidence()
+    manifest = sig.build_manifest_from_rows(
+        events, requirements, listings, dated_evidence=[evidence]
+    )
+    assert manifest["state"]["event_date_identity_verified_count"] == 174
+    assert manifest["state"]["baseline_identity_unverified_count"] == 3653
+    target = next(row for row in manifest["events"] if row["event_id"] == event["event_id"])
+    assert evidence["trade_date"] in target["verified_required_dates"]
+    assert evidence["trade_date"] not in target["unverified_required_dates"]
+
+
+def test_dated_identity_evidence_requires_exact_permno_symbol_and_required_date():
+    events, requirements, listings, event, evidence = _one_valid_dated_evidence()
+    bad = copy.deepcopy(evidence)
+    bad["historical_symbol"] = "WRONG"
+    with pytest.raises(sig.SecurityIdentityError, match="historical_symbol mismatch"):
+        sig.build_manifest_from_rows(events, requirements, listings, dated_evidence=[bad])
+
+    bad = copy.deepcopy(evidence)
+    bad["trade_date"] = "2000-01-01"
+    with pytest.raises(sig.SecurityIdentityError, match="not a required symbol-date"):
+        sig.build_manifest_from_rows(events, requirements, listings, dated_evidence=[bad])
+
+
+def test_dated_identity_evidence_rejects_undated_or_unvalidated_shortcuts():
+    events, requirements, listings, event, evidence = _one_valid_dated_evidence()
+    bad = copy.deepcopy(evidence)
+    bad["validation_status"] = "candidate_only"
+    with pytest.raises(sig.SecurityIdentityError, match="invalid validation_status"):
+        sig.build_manifest_from_rows(events, requirements, listings, dated_evidence=[bad])
+
+    with pytest.raises(sig.SecurityIdentityError, match="duplicate PERMNO/date evidence"):
+        sig.build_manifest_from_rows(
+            events, requirements, listings, dated_evidence=[evidence, copy.deepcopy(evidence)]
+        )
+
