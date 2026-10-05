@@ -32,11 +32,13 @@ def test_real_g5_acquisition_plan_combines_existing_and_expansion_queues(tmp_pat
     assert summary["dates_with_g2_structural_pool_3plus"] == 49
     assert summary["dates_with_g2_structural_pool_deficit"] == 23
     assert summary["initial_minimum_additional_candidate_symbol_dates"] == 52
-    assert summary["planned_expansion_candidate_symbol_date_count"] == 51
-    assert summary["generated_expansion_market_requirement_rows"] == 204
-    assert summary["fully_fillable_deficient_dates_from_planning_universe"] == 22
-    assert summary["dates_structurally_reaching_3_after_plan"] == 71
-    assert summary["residual_unfilled_symbol_date_slots"] == 1
+    assert summary["planned_expansion_candidate_symbol_date_count"] == 52
+    assert summary["exact_date_expansion_candidate_symbol_date_count"] == 51
+    assert summary["prior_only_expansion_candidate_symbol_date_count"] == 1
+    assert summary["generated_expansion_market_requirement_rows"] == 208
+    assert summary["fully_fillable_deficient_dates_from_planning_universe"] == 23
+    assert summary["dates_structurally_reaching_3_after_plan"] == 72
+    assert summary["residual_unfilled_symbol_date_slots"] == 0
     assert summary["candidate_symbol_date_count"] > 51
     assert summary["control_field_count"] == len(CONTROL_COVARIATES)
     assert summary["field_requirement_count"] == (
@@ -87,15 +89,20 @@ def test_candidate_rows_exclude_positives_and_remain_planning_only(tmp_path: Pat
         assert row["latest_acceptable_effective_ts_utc"].endswith("Z")
         assert row["eligible_g5_evidence"] == "0"
         assert row["research_use_only"] == "1"
-        if row["structural_origin"] == "RETROSPECTIVE_SYMBOL_DATE_PLANNING_ONLY":
+        if row["structural_origin"] in {
+            "RETROSPECTIVE_SYMBOL_DATE_PLANNING_ONLY",
+            "PRIOR_ONLY_RETROSPECTIVE_SYMBOL_OBSERVATION",
+        }:
             expansion.append(row)
             assert row["market_data_status"] == "EXPANSION_MARKET_ACQUISITION_REQUIRED"
         else:
             assert row["structural_origin"] == "FROZEN_G2_FOUR_KIND_INTERSECTION"
             assert row["market_data_status"] == "FROZEN_G2_REQUIREMENT_SCOPE_ONLY"
 
-    assert len(expansion) == 51
-    assert len(market_rows) == 204
+    assert len(expansion) == 52
+    assert len(market_rows) == 208
+    prior = [row for row in expansion if row["structural_origin"] == "PRIOR_ONLY_RETROSPECTIVE_SYMBOL_OBSERVATION"]
+    assert [(row["event_date"], row["candidate_symbol"]) for row in prior] == [("2014-12-15", "ADBE")]
     assert {row["record_kind"] for row in market_rows} == {
         "equity_trade",
         "equity_quote",
