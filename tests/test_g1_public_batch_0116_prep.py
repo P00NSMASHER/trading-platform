@@ -23,6 +23,23 @@ TARGETS = [
   {"event_id": "HEJFE-D6BA56FA6D57427E", "historical_symbol": "SCVL", "trade": "2015-05-20 15:17:00", "clock": "2015-05-20T16:05:00-04:00", "row": "1983", "delta": 2880}
 ]
 
+WIRE_CODES = {
+    "HEJFE-AC78A2434E4AE8FB": "MW",
+    "HEJFE-5089F8E69B6BC646": "MW",
+    "HEJFE-7C93D3838E60926C": "BW",
+    "HEJFE-EBC49B9A024181AD": "BW",
+    "HEJFE-B9C8B3D0EF3DCB5E": "BW",
+    "HEJFE-09EF6AD227D3AC5D": "MW",
+    "HEJFE-4DEF5FDB3210E91B": "BW",
+    "HEJFE-0BAF70D8CC8F1631": "BW",
+    "HEJFE-847F0EFE669B2440": "BW",
+    "HEJFE-FBFFFD99898188CF": "BW",
+    "HEJFE-A76C746507C0D9AF": "BW",
+    "HEJFE-8A0517D50278EAE4": "BW",
+    "HEJFE-4D7E68AD113380B3": "BW",
+    "HEJFE-D6BA56FA6D57427E": "BW",
+}
+
 def rows(path):
     with path.open(newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
@@ -44,6 +61,33 @@ def test_batch_0116_prep_evidence_is_exact_and_fail_closed():
         release = datetime.fromisoformat(spec["clock"])
         assert trade < release <= trade + timedelta(days=7)
         assert int((release - trade).total_seconds()) == spec["delta"]
+
+def test_batch_0116_rows_are_bound_to_evidence_and_csv():
+    evidence = json.loads(EVIDENCE.read_text(encoding="utf-8"))
+    expected = {item["event_id"]: item for item in TARGETS}
+    evidence_items = {item["event_id"]: item for item in evidence["items"]}
+    batch_rows = {item["event_id"]: item for item in rows(BATCH)}
+    assert set(evidence_items) == set(batch_rows) == set(expected)
+    for eid, spec in expected.items():
+        item = evidence_items[eid]
+        batch = batch_rows[eid]
+        assert item["historical_symbol"] == spec["historical_symbol"]
+        assert item["first_documented_illicit_trade_ts"] == spec["trade"]
+        assert item["public_announcement_ts"] == spec["clock"]
+        assert item["gx8002_row_id"] == spec["row"]
+        assert item["wire_source_code"] == WIRE_CODES[eid]
+        assert item["information_asymmetry_seconds"] == spec["delta"]
+        assert item["release_title"].strip()
+        if eid == "HEJFE-847F0EFE669B2440":
+            assert item["corroborating_release_member_path"] == ""
+            assert item["corroboration_reference"].startswith("https://www.sec.gov/")
+        else:
+            assert item["corroborating_release_member_path"].endswith(".txt")
+        assert batch["historical_symbol"] == spec["historical_symbol"]
+        assert batch["event_date"] == spec["trade"][:10]
+        assert batch["public_announcement_ts"] == spec["clock"]
+        assert batch["timestamp_kind"] == "first_public_release"
+        assert batch["source_grade"] == "A"
 
 def test_batch_0116_prep_evidence_uses_admissible_sources():
     evidence = json.loads(EVIDENCE.read_text(encoding="utf-8"))
