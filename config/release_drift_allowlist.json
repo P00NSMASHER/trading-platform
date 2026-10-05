@@ -2610,6 +2610,14 @@
     "tests/test_g5_control_identity_stocknames_handoff.py": {
       "expected_sha256": "f7073613486fcc25ddcacf6bba7123dd8884fdc42445c50b5b4f377d66b3b1dc",
       "reason": "Regression coverage for real G5 identity queue reconciliation, direct compatibility with the authorized stocknames adapter, PERMNO hint conflict rejection, no-hint fail-closed handling, and zero readiness/release promotion."
+    },
+    "src/g5_control_identity_evidence_stager.py": {
+      "expected_sha256": "732342594d62af98123d069a29a0749a4842283223226a2c6fa8ff3c1231b107",
+      "reason": "G5-only stable-ID evidence staging: validate authorized dated identity evidence against unresolved control requirements, route G2-overlap evidence back to the canonical G2 pipeline, and preserve zero canonical G5 readiness promotion."
+    },
+    "tests/test_g5_control_identity_evidence_stager.py": {
+      "expected_sha256": "84d9e3cd213b64833bbb1ae63132dfb79dbf311be63ec671fbda2d525ae548b4",
+      "reason": "Regression coverage for G5-only evidence staging, G2-overlap forwarding, no-hint PERMNO establishment from authorized evidence, hint conflicts, out-of-scope evidence, identifier conflicts, and interval coverage."
     }
   },
   "schema_version": "2",
