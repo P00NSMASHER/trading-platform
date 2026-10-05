@@ -31,7 +31,7 @@ def test_real_residual_structural_gap_is_filled_without_future_observation(tmp_p
     assert rows == [
         {
             "event_date": "2014-12-15",
-            "candidate_symbol": "NDSN",
+            "candidate_symbol": "ADBE",
             "prior_observation_date": "2014-12-11",
             "prior_observation_age_days": "4",
             "residual_slot_rank": "1",
