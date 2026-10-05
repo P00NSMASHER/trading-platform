@@ -1871,6 +1871,10 @@
       "expected_sha256": "ce08b1632f41dcf345924c5bf7b904f7ab78ad7493a272f3b7c9dd019a2d487f",
       "reason": "G5 acquisition planning now separates an exactly three-per-date 216-row primary queue from 766 reserve candidates, preserving every fallback while reducing first-pass point-in-time metadata acquisition without changing evidence eligibility."
     },
+    "src/g5_control_activation.py": {
+      "expected_sha256": "1ed79e5e16b3ddc695e8bbcd7aef26bb4dcd16d60132c60a38dde84497a46d9e",
+      "reason": "G5 control activation handoff: stage hash-bound authorized control sources only for canonical G5 candidate symbol-dates, retire explicitly selected reviewed exclusions in a noncanonical contract, and require canonical resolver/quality validation before any readiness claim."
+    },
     "src/g5_control_expansion_planner.py": {
       "expected_sha256": "8471b26e8e163c8816fa0c903d7eb43a56960c90a5f25d9e74ff08ad9ee7f67b",
       "reason": "G5 acquisition planning: use retrospective SampleFirms only as a symbol/date planning universe, ignore Hacked/Actual/Soft labels, and produce a fail-closed market-data expansion queue without promoting any row to genuine control evidence."
@@ -1883,9 +1887,37 @@
       "expected_sha256": "eb420645264d64efa72683cb3cb58eaffb091e869d87c8e07f9339b965f5ac16",
       "reason": "G5 control-history planning: expand each primary candidate to the event point, 21 eligible same-minute normalization sessions, 22 prior daily-close sessions, required point-in-time shares, and market source-date rows while measuring overlap with frozen G2."
     },
+    "src/g5_control_identity_evidence_stager.py": {
+      "expected_sha256": "732342594d62af98123d069a29a0749a4842283223226a2c6fa8ff3c1231b107",
+      "reason": "G5-only stable-ID evidence staging: validate authorized dated identity evidence against unresolved control requirements, route G2-overlap evidence back to the canonical G2 pipeline, and preserve zero canonical G5 readiness promotion."
+    },
+    "src/g5_control_identity_interval_requests.py": {
+      "expected_sha256": "bf118876bfa665765b8393a3a48d43fa3d9869ad75dd6d3836c54f74b25943c1",
+      "reason": "G5 identity acquisition optimization: compress unresolved control-history symbol/date requirements into one authorized stable-ID request per symbol while preserving every exact required date and refusing to assume continuous validity."
+    },
     "src/g5_control_identity_requirements.py": {
       "expected_sha256": "0c9977f983829de424fea94773bdd8f168cbea8f5fe19e9182dd1792d2e4d00a",
       "reason": "G5 control identity planning: reconcile the entire primary-control history footprint against canonical G2 verified/unverified identity, record exact-date public SampleFirms PERMNO/GVKEY mappings only as admission leads, and emit a fail-closed stable-ID acquisition queue."
+    },
+    "src/g5_control_identity_stocknames_handoff.py": {
+      "expected_sha256": "5b30c3ad89c517712c796c573117c7a95d9bb75c8dfa4dafe9f46aeedf1165de",
+      "reason": "G5 control identity handoff: convert unresolved rows with consistent canonical or exact-date SampleFirms PERMNO hints into the existing authorized stocknames adapter queue schema while keeping no-hint rows fail-closed and treating hints as non-evidence."
+    },
+    "src/g5_control_identity_stocknames_lead_expansion.py": {
+      "expected_sha256": "956accb8cdfdd59aa3d7e48de665532ff4f7fbaba6c216b7af7e1d7e09f87062",
+      "reason": "G5 identity acquisition optimization: reuse only already-reconciled symbol-level PERMNO hints as non-evidentiary Stocknames query leads for no-hint dates while preserving exact dated symbol validation and zero readiness promotion."
+    },
+    "src/g5_control_identity_stocknames_request.py": {
+      "expected_sha256": "da31f477ac906a8c6fad7d7af03f25841bc3d24b586a316a845645a95de4b879",
+      "reason": "G5 identity acquisition packet: group every routable dated control-identity request by reconciled PERMNO/symbol, emit exact date bounds and authorized CRSP-style Stocknames SQL, and preserve zero evidence/readiness promotion."
+    },
+    "src/g5_control_market_vendor_bridge.py": {
+      "expected_sha256": "89cab1fd461b281084fa02bf8531d5bb2ce817af99eae2a1112afc91b13869fa",
+      "reason": "G5 market acquisition bridge: subtract frozen G2 symbol/date pairs exactly from control-history requirements and route only incremental equity/option trade and tick-quote pairs through existing candidate vendor lanes without coverage or purchase claims."
+    },
+    "src/g5_control_shares_reconciliation.py": {
+      "expected_sha256": "f003ef2f77675b1b21f500577c7a31aa2845bb270f596c00b24be8a63e577568",
+      "reason": "G5 control-history shares reconciliation: reuse only exact pre-cutoff canonical G4 shares rows and emit a fail-closed incremental acquisition queue for every remaining shares requirement."
     },
     "src/g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "2d4f8205f188b29a1521f2a8e2f5cab65fa564e04f05669c741e001cd777ef73",
@@ -2467,6 +2499,10 @@
       "expected_sha256": "fdbc0dedd3cee5811b8bdcab61c542eb0bfb0cb90cdd96ff73b6f09b9529d445",
       "reason": "Regression coverage locks 216 primary candidate symbol-dates across all 72 dates, 766 reserves, 2,808 primary field requirements (1,728 derived and 1,080 external), disjoint primary/reserve coverage, and the ADBE/LBMH/WG primary set for 2014-12-15."
     },
+    "tests/test_g5_control_activation.py": {
+      "expected_sha256": "21603ec047e8a684d3e481db70192af732ca1a969a40198d2ee39aa04867943b",
+      "reason": "Regression coverage for candidate-plan binding, minimum three-control staging, source scope/hash/license/cutoff enforcement, exclusion shrinkage, and the distinction between accounted-for controls and 72/72 model-evaluation-ready controls."
+    },
     "tests/test_g5_control_expansion_planner.py": {
       "expected_sha256": "231cee684cfa6cea2421ae1bf0b01c4e01f92b4943de99133314e3fb9468930c",
       "reason": "Regression coverage locks the current G5 expansion plan at 51 of 52 structural deficit slots, proves retrospective labels do not affect selection, and prevents known positives or existing G2 candidates from being reselected."
@@ -2479,9 +2515,37 @@
       "expected_sha256": "f498f0944c6d16987af3f7263e5a4570ef97873d41eb1a916e107f31192415e1",
       "reason": "Regression coverage for event plus 21-session normalization and 22-session close history, market/share requirements, frozen-G2 overlap accounting, minute-role semantics, and the real 216-candidate queue."
     },
+    "tests/test_g5_control_identity_evidence_stager.py": {
+      "expected_sha256": "84d9e3cd213b64833bbb1ae63132dfb79dbf311be63ec671fbda2d525ae548b4",
+      "reason": "Regression coverage for G5-only evidence staging, G2-overlap forwarding, no-hint PERMNO establishment from authorized evidence, hint conflicts, out-of-scope evidence, identifier conflicts, and interval coverage."
+    },
+    "tests/test_g5_control_identity_interval_requests.py": {
+      "expected_sha256": "07dcff6e946e1d1cfc673ccec050f46f08fbfabf289c349089fa72cfecd6071c",
+      "reason": "Regression coverage locks exact input/output symbol-date pair equality, uniqueness, symbol-level request accounting, rejection of conflicting hints, and no promotion of hints to identity evidence."
+    },
     "tests/test_g5_control_identity_requirements.py": {
       "expected_sha256": "aaa5f4bf651f59266f52bba33ccaf063e2496599d5941af6c0c5a2017bfc25c3",
       "reason": "Regression coverage locks 216 primary controls, 51 unique exact-date SampleFirms identity leads, 165 primary mappings still missing exact-date public mapping, G2 identity reuse/overlap reconciliation, and zero automatic G5 readiness promotion."
+    },
+    "tests/test_g5_control_identity_stocknames_handoff.py": {
+      "expected_sha256": "f7073613486fcc25ddcacf6bba7123dd8884fdc42445c50b5b4f377d66b3b1dc",
+      "reason": "Regression coverage for real G5 identity queue reconciliation, direct compatibility with the authorized stocknames adapter, PERMNO hint conflict rejection, no-hint fail-closed handling, and zero readiness/release promotion."
+    },
+    "tests/test_g5_control_identity_stocknames_lead_expansion.py": {
+      "expected_sha256": "123b25f7709235bc18993026ad9cea7918ab0acad7ec2979377db42146917329",
+      "reason": "Regression coverage for exact date-scope conservation, symbol-level PERMNO acquisition leads, direct-hint precedence, conflict rejection, residual symbol discovery, and zero G5 readiness promotion."
+    },
+    "tests/test_g5_control_identity_stocknames_request.py": {
+      "expected_sha256": "c0ebec3e4910b9e7f2ebda115b86660592d515b724a17adcf5e2dc5fcd817748",
+      "reason": "Regression coverage locks all 2,707 G5 control-history identity dates as Stocknames-routable via 986 exact-date hints plus 1,721 reconciled symbol-level acquisition leads, with zero residual discovery rows, exact scope conservation, collision rejection, and zero readiness promotion."
+    },
+    "tests/test_g5_control_market_vendor_bridge.py": {
+      "expected_sha256": "a50ebaf9034dbf2f1b62ae7e58b9ec1e6c4ff04c99f8a39a098d849d8db3edb5",
+      "reason": "Regression coverage for exact frozen-G2 subtraction, all seven existing candidate vendor routes including option quotes, overlap/count drift rejection, and real G5 history reconciliation with zero readiness promotion."
+    },
+    "tests/test_g5_control_shares_reconciliation.py": {
+      "expected_sha256": "0a2cc9b167ecc63d19d65334ba0a64e69d52d3f48144cf95b6f54683434768aa",
+      "reason": "Regression coverage for exact G4 reuse, conservative G5 availability cutoffs, unresolved/late/missing shares routing, malformed canonical rows, and real control-history reconciliation."
     },
     "tests/test_g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "0d414cff9384f4b7b08548bee4ef8ef89210cf114d62445f8baaa6e049496f8c",
@@ -2594,62 +2658,6 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
-    },
-    "src/g5_control_identity_interval_requests.py": {
-      "expected_sha256": "bf118876bfa665765b8393a3a48d43fa3d9869ad75dd6d3836c54f74b25943c1",
-      "reason": "G5 identity acquisition optimization: compress unresolved control-history symbol/date requirements into one authorized stable-ID request per symbol while preserving every exact required date and refusing to assume continuous validity."
-    },
-    "tests/test_g5_control_identity_interval_requests.py": {
-      "expected_sha256": "07dcff6e946e1d1cfc673ccec050f46f08fbfabf289c349089fa72cfecd6071c",
-      "reason": "Regression coverage locks exact input/output symbol-date pair equality, uniqueness, symbol-level request accounting, rejection of conflicting hints, and no promotion of hints to identity evidence."
-    },
-    "src/g5_control_identity_stocknames_handoff.py": {
-      "expected_sha256": "5b30c3ad89c517712c796c573117c7a95d9bb75c8dfa4dafe9f46aeedf1165de",
-      "reason": "G5 control identity handoff: convert unresolved rows with consistent canonical or exact-date SampleFirms PERMNO hints into the existing authorized stocknames adapter queue schema while keeping no-hint rows fail-closed and treating hints as non-evidence."
-    },
-    "tests/test_g5_control_identity_stocknames_handoff.py": {
-      "expected_sha256": "f7073613486fcc25ddcacf6bba7123dd8884fdc42445c50b5b4f377d66b3b1dc",
-      "reason": "Regression coverage for real G5 identity queue reconciliation, direct compatibility with the authorized stocknames adapter, PERMNO hint conflict rejection, no-hint fail-closed handling, and zero readiness/release promotion."
-    },
-    "src/g5_control_identity_evidence_stager.py": {
-      "expected_sha256": "732342594d62af98123d069a29a0749a4842283223226a2c6fa8ff3c1231b107",
-      "reason": "G5-only stable-ID evidence staging: validate authorized dated identity evidence against unresolved control requirements, route G2-overlap evidence back to the canonical G2 pipeline, and preserve zero canonical G5 readiness promotion."
-    },
-    "tests/test_g5_control_identity_evidence_stager.py": {
-      "expected_sha256": "84d9e3cd213b64833bbb1ae63132dfb79dbf311be63ec671fbda2d525ae548b4",
-      "reason": "Regression coverage for G5-only evidence staging, G2-overlap forwarding, no-hint PERMNO establishment from authorized evidence, hint conflicts, out-of-scope evidence, identifier conflicts, and interval coverage."
-    },
-    "src/g5_control_identity_stocknames_lead_expansion.py": {
-      "expected_sha256": "956accb8cdfdd59aa3d7e48de665532ff4f7fbaba6c216b7af7e1d7e09f87062",
-      "reason": "G5 identity acquisition optimization: reuse only already-reconciled symbol-level PERMNO hints as non-evidentiary Stocknames query leads for no-hint dates while preserving exact dated symbol validation and zero readiness promotion."
-    },
-    "tests/test_g5_control_identity_stocknames_lead_expansion.py": {
-      "expected_sha256": "123b25f7709235bc18993026ad9cea7918ab0acad7ec2979377db42146917329",
-      "reason": "Regression coverage for exact date-scope conservation, symbol-level PERMNO acquisition leads, direct-hint precedence, conflict rejection, residual symbol discovery, and zero G5 readiness promotion."
-    },
-    "src/g5_control_activation.py": {
-      "expected_sha256": "1ed79e5e16b3ddc695e8bbcd7aef26bb4dcd16d60132c60a38dde84497a46d9e",
-      "reason": "G5 control activation handoff: stage hash-bound authorized control sources only for canonical G5 candidate symbol-dates, retire explicitly selected reviewed exclusions in a noncanonical contract, and require canonical resolver/quality validation before any readiness claim."
-    },
-    "tests/test_g5_control_activation.py": {
-      "expected_sha256": "21603ec047e8a684d3e481db70192af732ca1a969a40198d2ee39aa04867943b",
-      "reason": "Regression coverage for candidate-plan binding, minimum three-control staging, source scope/hash/license/cutoff enforcement, exclusion shrinkage, and the distinction between accounted-for controls and 72/72 model-evaluation-ready controls."
-    },
-    "src/g5_control_market_vendor_bridge.py": {
-      "expected_sha256": "89cab1fd461b281084fa02bf8531d5bb2ce817af99eae2a1112afc91b13869fa",
-      "reason": "G5 market acquisition bridge: subtract frozen G2 symbol/date pairs exactly from control-history requirements and route only incremental equity/option trade and tick-quote pairs through existing candidate vendor lanes without coverage or purchase claims."
-    },
-    "tests/test_g5_control_market_vendor_bridge.py": {
-      "expected_sha256": "a50ebaf9034dbf2f1b62ae7e58b9ec1e6c4ff04c99f8a39a098d849d8db3edb5",
-      "reason": "Regression coverage for exact frozen-G2 subtraction, all seven existing candidate vendor routes including option quotes, overlap/count drift rejection, and real G5 history reconciliation with zero readiness promotion."
-    },
-    "src/g5_control_identity_stocknames_request.py": {
-      "expected_sha256": "da31f477ac906a8c6fad7d7af03f25841bc3d24b586a316a845645a95de4b879",
-      "reason": "G5 identity acquisition packet: group every routable dated control-identity request by reconciled PERMNO/symbol, emit exact date bounds and authorized CRSP-style Stocknames SQL, and preserve zero evidence/readiness promotion."
-    },
-    "tests/test_g5_control_identity_stocknames_request.py": {
-      "expected_sha256": "c0ebec3e4910b9e7f2ebda115b86660592d515b724a17adcf5e2dc5fcd817748",
-      "reason": "Regression coverage locks all 2,707 G5 control-history identity dates as Stocknames-routable via 986 exact-date hints plus 1,721 reconciled symbol-level acquisition leads, with zero residual discovery rows, exact scope conservation, collision rejection, and zero readiness promotion."
     }
   },
   "schema_version": "2",
