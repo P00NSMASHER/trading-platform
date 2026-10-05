@@ -111,5 +111,13 @@ def test_every_date_level_requirement_appears_once_in_symbol_requests(tmp_path: 
 
     assert len(flattened) == identity_summary["identity_acquisition_queue_count"]
     assert len(flattened) == len(set(flattened))
+    with Path(summary["inputs"]["identity_queue_path"]).open(
+        encoding="utf-8", newline=""
+    ) as handle:
+        expected_pairs = {
+            (row["historical_symbol"], row["trade_date"])
+            for row in csv.DictReader(handle)
+        }
+    assert set(flattened) == expected_pairs
     assert summary["policy"]["continuous_validity_not_assumed"] is True
     assert summary["policy"]["request_rows_are_g5_evidence"] is False

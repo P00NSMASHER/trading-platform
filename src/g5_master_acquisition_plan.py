@@ -7,6 +7,7 @@ from pathlib import Path
 
 import g5_control_acquisition_planner as control_plan
 import g5_control_history_requirements as control_history
+import g5_control_identity_requirements as control_identity
 import g5_external_source_queue as external_queue
 import g5_treated_metadata_requirements as treated_plan
 
@@ -26,6 +27,7 @@ def build(
     events_path: Path,
     frozen_market_requirements_path: Path,
     planning_universe_path: Path,
+    canonical_g2_identity_manifest_path: Path,
     output_dir: Path,
 ) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -34,6 +36,7 @@ def build(
     treated_dir = output_dir / "treated"
     history_dir = output_dir / "control_history"
     external_dir = output_dir / "control_external_sources"
+    identity_dir = output_dir / "control_identity"
 
     control = control_plan.build(
         events_path=events_path,
@@ -53,6 +56,17 @@ def build(
     external = external_queue.build(
         candidate_path=control_dir / "g5_primary_candidate_symbol_dates.csv",
         output_dir=external_dir,
+    )
+    identity = control_identity.build(
+        control_history_path=(
+            history_dir / "g5_control_history_symbol_date_requirements.csv"
+        ),
+        primary_candidates_path=(
+            control_dir / "g5_primary_candidate_symbol_dates.csv"
+        ),
+        samplefirms_path=planning_universe_path,
+        canonical_g2_identity_manifest_path=canonical_g2_identity_manifest_path,
+        output_dir=identity_dir,
     )
 
     control_targets = int(control["primary_candidate_symbol_date_count"])
@@ -107,6 +121,34 @@ def build(
         "control_external_lane_request_count": control_lanes,
         "treated_external_lane_request_count": treated_lanes,
         "total_external_lane_request_count": control_lanes + treated_lanes,
+        "control_identity": {
+            "history_symbol_date_count": int(
+                identity["control_history_symbol_date_count"]
+            ),
+            "canonical_g2_verified_reuse_count": int(
+                identity["canonical_g2_verified_reuse_count"]
+            ),
+            "canonical_g2_unverified_overlap_count": int(
+                identity["canonical_g2_unverified_overlap_count"]
+            ),
+            "public_exact_mapping_available_requires_admission_count": int(
+                identity[
+                    "public_exact_mapping_available_requires_admission_count"
+                ]
+            ),
+            "new_g5_identity_evidence_required_count": int(
+                identity["new_g5_identity_evidence_required_count"]
+            ),
+            "ambiguous_public_mapping_count": int(
+                identity["ambiguous_public_mapping_count"]
+            ),
+            "identity_acquisition_queue_count": int(
+                identity["identity_acquisition_queue_count"]
+            ),
+            "primary_candidate_exact_sample_mapping": identity[
+                "primary_candidate_exact_sample_mapping"
+            ],
+        },
         "control_history": {
             "unique_symbol_date_pairs": int(
                 history["unique_control_history_symbol_date_pairs"]
@@ -170,12 +212,17 @@ def build(
                 "path": str(planning_universe_path),
                 "sha256": _sha256(planning_universe_path),
             },
+            "canonical_g2_identity_manifest": {
+                "path": str(canonical_g2_identity_manifest_path),
+                "sha256": _sha256(canonical_g2_identity_manifest_path),
+            },
         },
         "component_outputs": {
             "controls": str(control_dir),
             "treated": str(treated_dir),
             "control_history": str(history_dir),
             "control_external_sources": str(external_dir),
+            "control_identity": str(identity_dir),
         },
         "g5_model_evaluation_controls_ready": False,
         "canonical_g5_dates_resolved_change": 0,
@@ -202,6 +249,7 @@ def main() -> int:
     parser.add_argument("--events", type=Path, required=True)
     parser.add_argument("--frozen-market-requirements", type=Path, required=True)
     parser.add_argument("--planning-universe", type=Path, required=True)
+    parser.add_argument("--canonical-g2-identity-manifest", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -209,6 +257,7 @@ def main() -> int:
         events_path=args.events,
         frozen_market_requirements_path=args.frozen_market_requirements,
         planning_universe_path=args.planning_universe,
+        canonical_g2_identity_manifest_path=args.canonical_g2_identity_manifest,
         output_dir=args.output_dir,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
