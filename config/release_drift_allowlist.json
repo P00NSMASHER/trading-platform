@@ -1704,7 +1704,7 @@
       "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "src/g2_cboe_trial_bulk_runner.py": {
-      "expected_sha256": "5a87add66f012442941232846c67f14c925f2e7976e563361d3e09aeccd3e57c",
+      "expected_sha256": "b0d5453c241bb8e6ac7bbfc7696a9afa821755ef147a80c99d5c3a579485a084",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "src/g2_cheap_route_partitions.py": {
@@ -2272,7 +2272,7 @@
       "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "tests/test_g2_cboe_trial_bulk_runner.py": {
-      "expected_sha256": "85de7eb5bb27c951ba560c139455621bdc998b5dcf036965e3bfc38db627e158",
+      "expected_sha256": "0081dd6e489207cd9fc1fb1fc4b4d9ce846fcd35e411106b22e846c91dcb8cca",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "tests/test_g2_cheap_route_partitions.py": {
