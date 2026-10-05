@@ -1,0 +1,76 @@
+{
+  "schema_version": "g1-public-batch-evidence-v2",
+  "batch_id": "0119",
+  "lane": "worker-4",
+  "state": "PREPARED",
+  "base_main_sha": "55eb6e4c600d2e21bb4a26b616feb6a3ec9e6d00",
+  "expected_baseline": {
+    "exact": 166,
+    "fail_closed": 8,
+    "total": 174
+  },
+  "expected_after_gated_integration": {
+    "exact": 166,
+    "fail_closed": 8,
+    "total": 174
+  },
+  "publish_authorized": false,
+  "authority_note": "Preparation only. Canonical regeneration, final PR, and merge require a valid live controller token and all G1 gates.",
+  "primary_evidence": {
+    "family": "federal_court_public_distribution_record",
+    "court": "E.D.N.Y.",
+    "case": "United States v. Vitaly Korchevsky, No. 1:15-cr-00381",
+    "docket": "gov.uscourts.nyed.373762",
+    "document": "367-2",
+    "exhibit": "GX 8002",
+    "url": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+    "interpretation": "GX 8002 row 1657 supplies the exact Press Release / Distribution Time for PNRA's April 23, 2013 Q1 earnings release. The old exact-first-trade mapper left this event unmatched because the court row's Earliest Order Time is 15:00 while the broader canonical first documented illicit trade is 14:25. Exact release identity is independently established by ticker/year/date/headline and SEC Exhibit 99.1, so the order-time mismatch is a mapping-method limitation, not a release-identity ambiguity."
+  },
+  "extraction_provenance": {
+    "github_actions_run_id": 37268374589,
+    "artifact_name": "g1-gx8002-court-map-2592192e4fd38b14a021d36de7319db332379e38",
+    "artifact_id": 11326693734,
+    "artifact_sha256": "254e78dcb6218e3cd31cc9bf50a6ec639c966a037957629912af181432a6990e",
+    "unmatched_record": "1657 PNRA 2013 4/23/13 4/23/13 15:00 4/24/13 10:01 4/23/13 13:05 4/23/13 16:00 MW $282,751 $22,921 1 1 1 earnings Diluted EPS of $1.64, up 17%"
+  },
+  "identity_corroboration": {
+    "source_family": "official_sec_exhibit_99_1",
+    "url": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000016/a20130326ex991pressrelease.htm",
+    "exhibit_type": "EX-99.1",
+    "title": "Panera Bread Company Reports Q1 2013 diluted EPS of $1.64, up 17%",
+    "release_date": "2013-04-23",
+    "purpose": "Exact target release identity/date/content corroboration only; SEC filing or acceptance time is not used as a release clock."
+  },
+  "items": [
+    {
+      "event_id": "HEJFE-CCC7747CFBDE893E",
+      "historical_symbol": "PNRA",
+      "event_date": "2013-04-23",
+      "first_documented_illicit_trade_ts": "2013-04-23T14:25:00-04:00",
+      "court_earliest_order_ts": "2013-04-23T15:00:00-04:00",
+      "public_announcement_ts": "2013-04-23T16:00:00-04:00",
+      "gx8002_row": 1657,
+      "wire_code": "MW",
+      "press_release_submission_ts": "2013-04-23T13:05:00-04:00",
+      "gap_seconds": 5700,
+      "release_title": "Panera Bread Company Reports Q1 2013 diluted EPS of $1.64, up 17%",
+      "release_member": "2013/QTR2/76695_20130423_1.txt",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000016/a20130326ex991pressrelease.htm",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "source_family": "federal_court_public_distribution_record",
+      "explicit_clock_timezone": "America/New_York (EDT, UTC-04:00)",
+      "mapping_exception_reason": "The research mapper required exact equality with GX 8002 Earliest Order Time; the court row is still the unique PNRA 2013-04-23 earnings row and exactly matches the SEC release headline/date."
+    }
+  ],
+  "prohibited_substitutes": [
+    "EDGAR acceptance time",
+    "conference call time",
+    "scheduled or approximate release time",
+    "date-only evidence",
+    "archive capture time",
+    "neighboring release",
+    "filename inference",
+    "unsupported timezone"
+  ]
+}
