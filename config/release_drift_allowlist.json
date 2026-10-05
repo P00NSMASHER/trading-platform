@@ -1156,8 +1156,8 @@
       "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
-      "expected_sha256": "fcf5f123d93ba1a449c9d37d340f3e6f3739d4acc2e19ab7ffcfc236f004d157",
-      "reason": "G1 controller ownership policy: SHA256(event_id)%5 with explicit BA/LRCX/KOPN overrides and fail-closed unassigned CREE override after consumed historical grandfathering."
+      "expected_sha256": "f51b060b743ae9e988e1b8763fb37b23b1226ab85c0ea147b444bc3d4ecc1ea9",
+      "reason": "G1 controller ownership handoff: assign the retained CREE residual HEJFE-81F188C0D790FE70 to its natural Worker-2 shard while preserving all other ownership, token, lane and fail-closed rules."
     },
     "data/public/metadata/g3_listing_supplement.csv": {
       "expected_sha256": "f385d7c93197c4f8717962071e3d3fc3282a9a7e9d93535805f1b04b544e376b",
@@ -2116,8 +2116,8 @@
       "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "2a2dd3b2fe3a95a205b6fb7dc8e5e838b6feafbe626d9c7d815371dc93be4dc5",
-      "reason": "Regression coverage for G1 controller token safety plus newest-first prepared-branch discovery ordering under a large prep-ref backlog."
+      "expected_sha256": "a0fe64bcc210db357d61fa1569ccaf2614285679e802ccbdbb98d610562e0df3",
+      "reason": "G1 controller ownership handoff: assign the retained CREE residual HEJFE-81F188C0D790FE70 to its natural Worker-2 shard while preserving all other ownership, token, lane and fail-closed rules."
     },
     "tests/test_g2_candidate_route_matrix.py": {
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",
