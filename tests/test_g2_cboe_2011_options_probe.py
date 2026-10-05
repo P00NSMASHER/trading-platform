@@ -246,3 +246,22 @@ def test_wrapped_single_object_response_is_treated_as_one_row():
     )
     assert result["row_count"] == 1
     assert result["accepted"] is True
+
+
+def test_required_fields_split_across_rows_do_not_pass():
+    fields = probe.QUOTE_REQUIRED_FIELDS
+    first = {field: 1 for field in fields}
+    second = {field: 1 for field in fields}
+    first["nbbo_ask_size"] = None
+    second["nbbo_bid_size"] = None
+
+    result = probe._assess_rows(
+        "historical_option_quotes",
+        [first, second],
+        fields,
+    )
+
+    assert result["unpopulated_required_fields"] == []
+    assert result["complete_row_count"] == 0
+    assert result["accepted"] is False
+    assert "no single row is complete" in result["reason"]
