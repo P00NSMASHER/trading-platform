@@ -201,3 +201,45 @@ def test_secret_material_never_appears_in_probe_output(monkeypatch):
     assert "super-secret-token" not in rendered
     assert "client-secret" not in rendered
     assert "client-id" not in rendered
+
+
+def test_single_object_quote_response_is_treated_as_one_row():
+    payload = {
+        "timestamp": "09:30:00.002",
+        "exchange_id": 3,
+        "condition_id": 0,
+        "seq_no": 102,
+        "nbbo_bid": 1.20,
+        "nbbo_ask": 1.30,
+        "nbbo_bid_size": 12,
+        "nbbo_ask_size": 15,
+    }
+    result = probe._assess_rows(
+        "historical_option_quotes",
+        payload,
+        probe.QUOTE_REQUIRED_FIELDS,
+    )
+    assert result["row_count"] == 1
+    assert result["accepted"] is True
+
+
+def test_wrapped_single_object_response_is_treated_as_one_row():
+    payload = {
+        "data": {
+            "timestamp": "09:30:00.002",
+            "exchange_id": 3,
+            "condition_id": 0,
+            "seq_no": 102,
+            "nbbo_bid": 1.20,
+            "nbbo_ask": 1.30,
+            "nbbo_bid_size": 12,
+            "nbbo_ask_size": 15,
+        }
+    }
+    result = probe._assess_rows(
+        "historical_option_quotes",
+        payload,
+        probe.QUOTE_REQUIRED_FIELDS,
+    )
+    assert result["row_count"] == 1
+    assert result["accepted"] is True
