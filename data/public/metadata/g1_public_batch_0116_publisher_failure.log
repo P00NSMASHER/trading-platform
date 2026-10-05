@@ -1,0 +1,44 @@
+From https://github.com/P00NSMASHER/trading-platform
+ * branch              main       -> FETCH_HEAD
+HEAD is now at f5d983f6 G1: recover 5 court public-distribution clocks (batch 0113) (#359)
+{
+  "exact": 164,
+  "reviewed_excluded": 10,
+  "new_events": [
+    "HEJFE-09EF6AD227D3AC5D",
+    "HEJFE-0BAF70D8CC8F1631",
+    "HEJFE-4D7E68AD113380B3",
+    "HEJFE-4DEF5FDB3210E91B",
+    "HEJFE-5089F8E69B6BC646",
+    "HEJFE-7C93D3838E60926C",
+    "HEJFE-847F0EFE669B2440",
+    "HEJFE-8A0517D50278EAE4",
+    "HEJFE-A76C746507C0D9AF",
+    "HEJFE-AC78A2434E4AE8FB",
+    "HEJFE-B9C8B3D0EF3DCB5E",
+    "HEJFE-D6BA56FA6D57427E",
+    "HEJFE-EBC49B9A024181AD",
+    "HEJFE-FBFFFD99898188CF"
+  ]
+}
+..F..........................................................            [100%]
+=================================== FAILURES ===================================
+_______________ test_batch_0116_evidence_uses_admissible_sources _______________
+
+    def test_batch_0116_evidence_uses_admissible_sources():
+        evidence = json.loads(EVIDENCE.read_text(encoding="utf-8"))
+        for item in evidence["items"]:
+            assert item["timestamp_kind"] == "first_public_release"
+>           assert item["timestamp_evidence_kind"] == "federal_court_public_distribution_record"
+E           AssertionError: assert 'explicit_release_clock' == 'federal_cour...bution_record'
+E             
+E             - federal_court_public_distribution_record
+E             + explicit_release_clock
+
+tests/test_g1_public_batch_0116.py:96: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_g1_public_batch_0116.py::test_batch_0116_evidence_uses_admissible_sources - AssertionError: assert 'explicit_release_clock' == 'federal_cour...bution_record'
+  
+  - federal_court_public_distribution_record
+  + explicit_release_clock
+1 failed, 60 passed in 0.61s
