@@ -213,6 +213,14 @@ def verify_staged_bundle(
                 f"candidate core source hash mismatch for {key}"
             )
 
+    prior_canonical_sha = source_hashes.get("prior_canonical_identity_manifest")
+    if prior_canonical_sha is not None:
+        current_sha = _sha256_path(current_manifest_path)
+        if prior_canonical_sha != current_sha:
+            raise SecurityIdentityPublishError(
+                "staged bundle was built from a stale canonical identity manifest"
+            )
+
     evidence_rows = evidence_rows_from_manifest(candidate)
     rebuilt = gate.build_manifest_from_rows(
         gate._read_csv(events_path),
