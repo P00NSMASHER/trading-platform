@@ -120,6 +120,12 @@ def _extract_rows(payload: Any) -> list[dict[str, Any]]:
             rows = payload.get(key)
             if isinstance(rows, list):
                 return [row for row in rows if isinstance(row, dict)]
+            if isinstance(rows, dict):
+                return [rows]
+        # Cboe's quote API documentation shows a single-record JSON object as a
+        # valid response example. Accept that shape as one row rather than
+        # reporting a false-negative schema failure.
+        return [payload]
     raise ValueError("unexpected Cboe response shape")
 
 
