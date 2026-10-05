@@ -44,7 +44,7 @@ def test_real_data_validation_requires_replay_release_not_only_coarse_metadata(t
     assert state["validated"] is False
     assert state["gates"]["G3_PRIMARY_LISTING_HISTORY"] is True
     assert state["gates"]["G4_SHARES_OUTSTANDING"] is True
-    assert state["gates"]["G1_EXACT_TIMING_ANALYSIS"] is False
+    assert state["gates"]["G1_EXACT_TIMING_ANALYSIS"] is True
     assert state["gates"]["G2_REAL_MARKET_DATA"] is False
     assert state["gates"]["G5_MODEL_EVALUATION_CONTROLS"] is False
     assert state["gates"]["REAL_DATA_REPLAY"] is False

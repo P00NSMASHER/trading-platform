@@ -5,15 +5,16 @@
     2,
     3,
     4,
-    6
+    6,
+    9
   ],
-  "coverage_summary_sha256": "0a1a643a419ecdc306051d9e35754bc5fc83dc1e26437c927dd93e366afaad64",
+  "coverage_summary_sha256": "535b2ac4a2dd13e75b18010033f3ecf41d9a5e33d8d914d6f83b5f7fc1fded04",
   "dependency_blocked_steps": [
     11,
     12
   ],
-  "metadata_quality_sha256": "71cd2378fdcb747ddcbf1dc572ecd8545a661e66d468613d970e92c74844293f",
-  "metadata_readiness_sha256": "400e7012b7b748107ce1a319607d748849d0332c91c75521f5722fc6d5326eef",
+  "metadata_quality_sha256": "8fa6b9cf2745052c2ff00844b5cda5180bc97558ccdc80e3b5dd05752d8e990c",
+  "metadata_readiness_sha256": "166d7a5553b78649730207115115269b0d41494bc8767e4b1c0bbb5427a3bd28",
   "policy": {
     "future_data_or_lookahead_prohibited": true,
     "prohibited_outputs": [
@@ -44,7 +45,6 @@
     5,
     7,
     8,
-    9,
     10
   ],
   "steps": [
@@ -97,9 +97,9 @@
       "step": 8
     },
     {
-      "evidence": "exact timestamps=173/174; reviewed fail-closed exclusions=1; exclusions do not satisfy Step 9",
+      "evidence": "exact timestamps=174/174; reviewed fail-closed exclusions=0; exclusions do not satisfy Step 9",
       "name": "Replace G1 timing exclusions with exact clocks",
-      "status": "SOURCE_BLOCKED",
+      "status": "PASS",
       "step": 9
     },
     {

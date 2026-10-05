@@ -31,7 +31,7 @@
     },
     "metadata_contract": {
       "path": "/home/runner/work/trading-platform/trading-platform/config/metadata_sources.public_progress.json",
-      "sha256": "0713b314c3c56de3e624446a264889311aae347671e54e568de9ff20f952d7f4"
+      "sha256": "2a6f8c2e978dbbc5ea82b53c15fcfc2b1ef4822e513c6feeef66d8a29769c2f5"
     }
   },
   "prohibited_outputs": [
@@ -96,11 +96,11 @@
       "status": "DEPENDENCY_BLOCKED"
     },
     "metadata": {
-      "announcement_exact_resolved": 173,
+      "announcement_exact_resolved": 174,
       "announcement_required": 174,
       "control_dates_required": 72,
       "control_dates_resolved": 0,
-      "exact_timing_ready": false,
+      "exact_timing_ready": true,
       "model_controls_ready": false,
       "quality_ready": false,
       "status": "BLOCKED"

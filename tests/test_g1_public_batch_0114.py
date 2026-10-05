@@ -27,7 +27,7 @@ def test_batch_0114_preserves_prior():
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
-    ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==1
+    ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==0
     assert all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in ex)
 def test_batch_0114_worker4_shard_ownership():
     event_ids=set(["HEJFE-4080E04F012A7290","HEJFE-7CEFB3FE3D986464","HEJFE-9861757889227DD4","HEJFE-8EAA8616B1750B40","HEJFE-8415E931D4314106","HEJFE-0AA84E6E44ED02D8","HEJFE-947F50EBAFBA54DC","HEJFE-791693865584F9CB","HEJFE-22BF36BABB9D19D7","HEJFE-E28050410A1480C6","HEJFE-0704950C71CFAFB4","HEJFE-C926C41F03E66E82","HEJFE-826F68D9DA88B37C","HEJFE-A5AE76F13A48C40F"])

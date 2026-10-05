@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "a3fe4734237bbdc7ad79e75c34a6b3c513b2e1bf",
+  "base_main_sha": "e52e850577fe8b387a2f20169af37ae85174502f",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 173,
-    "note": "The latest integrated recovery is batch_0127; cumulative public exact-time batches are 88 and cumulative exact event records are 173 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 88,
+    "exact_resolved_event_records": 174,
+    "note": "The latest integrated recovery is batch_0130; cumulative public exact-time batches are 89 and all 174 required event records have exact first-public timestamps; some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 89,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 1
+    "reviewed_excluded_event_records": 0
   },
   "preferred_public_source_families": [
     {
@@ -3986,6 +3986,36 @@
       "timestamp_evidence_kind": "explicit_release_clock",
       "timestamp_kind": "first_public_release",
       "wire_source_code": "BW"
+    },
+    {
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/355811/000035581113000046/exhibit_991x093013.htm",
+      "disposition": "RESOLVED_IN_BATCH_0130",
+      "event_date": "2013-10-21",
+      "event_id": "HEJFE-BD3F577ADD90D512",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-10-22T08:03:00-04:00",
+      "first_documented_illicit_trade_ts": "2013-10-21T15:21:00-04:00",
+      "globenewswire_release_id": 930758,
+      "historical_event_match": true,
+      "historical_symbol": "GNTX",
+      "information_asymmetry_seconds": 60120,
+      "issuer_ir_reference": "https://ir.gentex.com/node/11061",
+      "press_release_distribution_date": "2013-10-22",
+      "probe_id": "GNTX-batch0130",
+      "public_announcement_ts": "2013-10-22T08:03:00-04:00",
+      "public_distribution_explicit": true,
+      "publisher_metadata_utc": "2013-10-22T12:03:00Z",
+      "reason": "Promoted from GlobeNewswire migrated Marketwired release ID 930758 exact publisher timestamp with issuer-IR and SEC Exhibit corroboration.",
+      "release_member": "2013/QTR4/38659_20131022_0.txt",
+      "release_title": "Gentex Reports Third Quarter 2013 Financial Results",
+      "source_code": "MW",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "source_reference": "https://www.globenewswire.com/news-release/2013/10/22/930758/0/en/Gentex-Reports-Third-Quarter-2013-Financial-Results.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release",
+      "wire_source_code": "MW"
     }
   ]
 }

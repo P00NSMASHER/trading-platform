@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **88 public exact-time batches / 173 exact-resolved
+The current repository state is **89 public exact-time batches / 174 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -332,3 +332,8 @@ Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-relea
 ### Batch 0127: TXT, CGNX, PNRA, NUAN, EW, PRU
 
 Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for one Worker-2 event. Every release identity/date is independently corroborated by an exact official SEC Exhibit 99.x, with pinned public press-release archive members used as additional identity cross-checks. This advances G1 from 172 exact / 2 reviewed exclusions to 173 exact / 1 reviewed exclusion. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+
+### Batch 0130: GNTX
+
+GlobeNewswire migrated Marketwired release ID 930758 exposes the exact first-public publisher timestamp for Gentex Q3 2013 results as October 22, 2013 08:03 ET, with machine metadata 2013-10-22T12:03:00Z. Gentex IR and SEC Exhibit 99.1 independently corroborate identity/date/content. Conference-call, EDGAR, archive-capture and inferred times are not used. This advances G1 from 173 exact / 1 reviewed exclusion to 174/174 exact / 0 exclusions. Step 9 passes.
