@@ -4,6 +4,7 @@
   "lane": "worker-4",
   "state": "PREPARED",
   "base_main_sha": "55eb6e4c600d2e21bb4a26b616feb6a3ec9e6d00",
+  "refresh_note": "Refreshed from exact post-BIO main; event remains fail-closed, owned, and unclaimed while the controller marker is stale.",
   "expected_baseline": {
     "exact": 165,
     "fail_closed": 9,
