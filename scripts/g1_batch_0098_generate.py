@@ -145,9 +145,9 @@ for fn in test_files:
           ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (122,52)','(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (123,51)'),
           ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (122, 52)','(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (123, 51)'),
           ('"122/174" in step9["evidence"] and "52" in step9["evidence"]','"123/174" in step9["evidence"] and "51" in step9["evidence"]'),
-          ('len(excluded)==51','len(excluded)==51'),
+          ('len(excluded)==52','len(excluded)==51'),
           ('len(excluded) == 52','len(excluded) == 51'),
-          ('len(ex)==51','len(ex)==51'),
+          ('len(ex)==52','len(ex)==51'),
           ('len(ex) == 52','len(ex) == 51'),
         ]
     for old,new in pairs:
