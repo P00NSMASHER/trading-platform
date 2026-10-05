@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+    "record_kind": "announcement_timestamp",
+    "source_family": "federal_court_public_distribution_record",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0114.csv",
+    "exists": true,
+    "row_count": 14,
+    "sha256": "fd314cfa7ae8beacb6f1b0919fdf4d770ea272ee3f928dfbf058b2dd43387c66",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-worker3-smenergy-businesswire-batch-0098",
     "record_kind": "announcement_timestamp",
     "source_family": "preserved_wire_mirror",

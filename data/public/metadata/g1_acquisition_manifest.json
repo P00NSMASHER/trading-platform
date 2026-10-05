@@ -1486,54 +1486,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-A5AE76F13A48C40F",
       "event_date": "2013-05-07",
       "event_id": "HEJFE-A5AE76F13A48C40F",
       "first_documented_illicit_trade_ts": "2013-05-07T18:29:00Z",
       "historical_symbol": "DGI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2013-05-07T20:02:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2013-05-14",
-        "start_date": "2013-05-07"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -1886,54 +1856,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-C926C41F03E66E82",
       "event_date": "2014-12-15",
       "event_id": "HEJFE-C926C41F03E66E82",
       "first_documented_illicit_trade_ts": "2014-12-15T20:36:00Z",
       "historical_symbol": "PAY",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2014-12-15T21:01:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2014-12-22",
-        "start_date": "2014-12-15"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -2296,54 +2236,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-9861757889227DD4",
       "event_date": "2015-02-02",
       "event_id": "HEJFE-9861757889227DD4",
       "first_documented_illicit_trade_ts": "2015-02-02T19:24:00Z",
       "historical_symbol": "IDTI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-02-02T21:05:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-02-09",
-        "start_date": "2015-02-02"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -2506,54 +2416,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-947F50EBAFBA54DC",
       "event_date": "2015-02-10",
       "event_id": "HEJFE-947F50EBAFBA54DC",
       "first_documented_illicit_trade_ts": "2015-02-10T20:55:00Z",
       "historical_symbol": "CRL",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-02-10T21:30:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-02-17",
-        "start_date": "2015-02-10"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -2676,104 +2556,44 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-22BF36BABB9D19D7",
       "event_date": "2015-02-12",
       "event_id": "HEJFE-22BF36BABB9D19D7",
       "first_documented_illicit_trade_ts": "2015-02-12T20:55:00Z",
       "historical_symbol": "ALNY",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-02-12T21:00:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-02-19",
-        "start_date": "2015-02-12"
-      }
+      "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-4080E04F012A7290",
       "event_date": "2015-02-12",
       "event_id": "HEJFE-4080E04F012A7290",
       "first_documented_illicit_trade_ts": "2015-02-12T20:39:00Z",
       "historical_symbol": "QLIK",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": 1,
-      "research_signal": "strong_release_trail",
+      "public_announcement_ts": "2015-02-12T21:05:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-02-19",
-        "start_date": "2015-02-12"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -2916,54 +2736,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-7CEFB3FE3D986464",
       "event_date": "2015-02-17",
       "event_id": "HEJFE-7CEFB3FE3D986464",
       "first_documented_illicit_trade_ts": "2015-02-17T20:44:00Z",
       "historical_symbol": "ROG",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-02-17T21:01:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-02-24",
-        "start_date": "2015-02-17"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
@@ -3186,54 +2976,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-0704950C71CFAFB4",
       "event_date": "2015-02-23",
       "event_id": "HEJFE-0704950C71CFAFB4",
       "first_documented_illicit_trade_ts": "2015-02-23T20:24:00Z",
       "historical_symbol": "TXRH",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-02-23T21:02:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-03-02",
-        "start_date": "2015-02-23"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -3306,104 +3066,44 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-826F68D9DA88B37C",
       "event_date": "2015-02-23",
       "event_id": "HEJFE-826F68D9DA88B37C",
       "first_documented_illicit_trade_ts": "2015-02-23T20:58:00Z",
       "historical_symbol": "ATRC",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-02-23T21:02:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-03-02",
-        "start_date": "2015-02-23"
-      }
+      "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-0AA84E6E44ED02D8",
       "event_date": "2015-02-25",
       "event_id": "HEJFE-0AA84E6E44ED02D8",
       "first_documented_illicit_trade_ts": "2015-02-25T20:57:00Z",
       "historical_symbol": "AMSG",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-02-25T21:00:00Z",
       "research_use_only": true,
-      "route_order": [
-        "licensed_ibes_bulk",
-        "public_release_discovery"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "release_discovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-03-04",
-        "start_date": "2015-02-25"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -3546,54 +3246,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-8415E931D4314106",
       "event_date": "2015-03-10",
       "event_id": "HEJFE-8415E931D4314106",
       "first_documented_illicit_trade_ts": "2015-03-10T18:58:00Z",
       "historical_symbol": "KOPN",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-03-10T20:05:00Z",
       "research_use_only": true,
-      "route_order": [
-        "licensed_ibes_bulk",
-        "public_release_discovery"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "release_discovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-03-17",
-        "start_date": "2015-03-10"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -3966,54 +3636,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-791693865584F9CB",
       "event_date": "2015-04-22",
       "event_id": "HEJFE-791693865584F9CB",
       "first_documented_illicit_trade_ts": "2015-04-22T18:29:00Z",
       "historical_symbol": "COL",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-04-23T11:30:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-04-29",
-        "start_date": "2015-04-22"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -4646,54 +4286,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-8EAA8616B1750B40",
       "event_date": "2015-05-04",
       "event_id": "HEJFE-8EAA8616B1750B40",
       "first_documented_illicit_trade_ts": "2015-05-04T19:09:00Z",
       "historical_symbol": "CGNX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-05-04T20:06:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-05-11",
-        "start_date": "2015-05-04"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -4876,54 +4486,24 @@
       }
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-E28050410A1480C6",
       "event_date": "2015-05-06",
       "event_id": "HEJFE-E28050410A1480C6",
       "first_documented_illicit_trade_ts": "2015-05-06T18:24:00Z",
       "historical_symbol": "DYN",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-05-06T20:07:00Z",
       "research_use_only": true,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "clock_recovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "federal_court_public_distribution_record",
+        "source_grade": "A",
+        "source_id": "public-worker4-federal-court-gx8002-batch-0114",
+        "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+        "timestamp_confidence": "A-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-05-13",
-        "start_date": "2015-05-06"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -5022,7 +4602,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 51,
+    "request_event_count": 37,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -5056,34 +4636,21 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 51,
+    "acquisition_needed": 37,
     "event_count": 174,
-    "exact_resolved": 123,
-    "research_hint_exact_resolved": 123,
-    "research_hint_excluded": 51,
+    "exact_resolved": 137,
+    "research_hint_exact_resolved": 137,
+    "research_hint_excluded": 37,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
-    "explicit_research_priorities": 3,
-    "no_public_replication_candidate": 4,
-    "public_release_file_present_without_clock": 47,
-    "resolved_no_action": 123,
-    "routed_for_acquisition": 51
+    "explicit_research_priorities": 2,
+    "no_public_replication_candidate": 2,
+    "public_release_file_present_without_clock": 35,
+    "resolved_no_action": 137,
+    "routed_for_acquisition": 37
   },
   "work_queue": [
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-4080E04F012A7290",
-      "event_date": "2015-02-12",
-      "event_id": "HEJFE-4080E04F012A7290",
-      "historical_symbol": "QLIK",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1,
-      "research_priority_rank": 1,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
     {
       "dedupe_key": "g1-exact-public-release:HEJFE-0BAF70D8CC8F1631",
       "event_date": "2015-03-19",
@@ -5215,19 +4782,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-A5AE76F13A48C40F",
-      "event_date": "2013-05-07",
-      "event_id": "HEJFE-A5AE76F13A48C40F",
-      "historical_symbol": "DGI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-350B3481A9CBBF0E",
       "event_date": "2013-10-21",
       "event_id": "HEJFE-350B3481A9CBBF0E",
@@ -5267,19 +4821,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-C926C41F03E66E82",
-      "event_date": "2014-12-15",
-      "event_id": "HEJFE-C926C41F03E66E82",
-      "historical_symbol": "PAY",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-81F188C0D790FE70",
       "event_date": "2015-01-20",
       "event_id": "HEJFE-81F188C0D790FE70",
@@ -5306,36 +4847,10 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-9861757889227DD4",
-      "event_date": "2015-02-02",
-      "event_id": "HEJFE-9861757889227DD4",
-      "historical_symbol": "IDTI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-54A5D1D8A5B593C8",
       "event_date": "2015-02-05",
       "event_id": "HEJFE-54A5D1D8A5B593C8",
       "historical_symbol": "NUAN",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-947F50EBAFBA54DC",
-      "event_date": "2015-02-10",
-      "event_id": "HEJFE-947F50EBAFBA54DC",
-      "historical_symbol": "CRL",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
@@ -5371,19 +4886,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-22BF36BABB9D19D7",
-      "event_date": "2015-02-12",
-      "event_id": "HEJFE-22BF36BABB9D19D7",
-      "historical_symbol": "ALNY",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-FBA59D82CEE8FD00",
       "event_date": "2015-02-12",
       "event_id": "HEJFE-FBA59D82CEE8FD00",
@@ -5401,19 +4903,6 @@
       "event_date": "2015-02-12",
       "event_id": "HEJFE-FBFFFD99898188CF",
       "historical_symbol": "COLM",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-7CEFB3FE3D986464",
-      "event_date": "2015-02-17",
-      "event_id": "HEJFE-7CEFB3FE3D986464",
-      "historical_symbol": "ROG",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
@@ -5449,36 +4938,10 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-0704950C71CFAFB4",
-      "event_date": "2015-02-23",
-      "event_id": "HEJFE-0704950C71CFAFB4",
-      "historical_symbol": "TXRH",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-4D7E68AD113380B3",
       "event_date": "2015-02-23",
       "event_id": "HEJFE-4D7E68AD113380B3",
       "historical_symbol": "TRAK",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-826F68D9DA88B37C",
-      "event_date": "2015-02-23",
-      "event_id": "HEJFE-826F68D9DA88B37C",
-      "historical_symbol": "ATRC",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
@@ -5518,19 +4981,6 @@
       "event_date": "2015-04-21",
       "event_id": "HEJFE-45559DD90D876D39",
       "historical_symbol": "ILMN",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-791693865584F9CB",
-      "event_date": "2015-04-22",
-      "event_id": "HEJFE-791693865584F9CB",
-      "historical_symbol": "COL",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "queue_priority": 1000,
       "research_priority_rank": null,
@@ -5618,19 +5068,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-8EAA8616B1750B40",
-      "event_date": "2015-05-04",
-      "event_id": "HEJFE-8EAA8616B1750B40",
-      "historical_symbol": "CGNX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-EFFA194386ABDD28",
       "event_date": "2015-05-04",
       "event_id": "HEJFE-EFFA194386ABDD28",
@@ -5657,19 +5094,6 @@
       ]
     },
     {
-      "dedupe_key": "g1-exact-public-release:HEJFE-E28050410A1480C6",
-      "event_date": "2015-05-06",
-      "event_id": "HEJFE-E28050410A1480C6",
-      "historical_symbol": "DYN",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "queue_priority": 1000,
-      "research_priority_rank": null,
-      "route_order": [
-        "public_exact_clock_recovery",
-        "licensed_ibes_bulk"
-      ]
-    },
-    {
       "dedupe_key": "g1-exact-public-release:HEJFE-D6BA56FA6D57427E",
       "event_date": "2015-05-20",
       "event_id": "HEJFE-D6BA56FA6D57427E",
@@ -5687,32 +5111,6 @@
       "event_date": "2015-02-05",
       "event_id": "HEJFE-847F0EFE669B2440",
       "historical_symbol": "P",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "queue_priority": 2000,
-      "research_priority_rank": null,
-      "route_order": [
-        "licensed_ibes_bulk",
-        "public_release_discovery"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-0AA84E6E44ED02D8",
-      "event_date": "2015-02-25",
-      "event_id": "HEJFE-0AA84E6E44ED02D8",
-      "historical_symbol": "AMSG",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "queue_priority": 2000,
-      "research_priority_rank": null,
-      "route_order": [
-        "licensed_ibes_bulk",
-        "public_release_discovery"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-8415E931D4314106",
-      "event_date": "2015-03-10",
-      "event_id": "HEJFE-8415E931D4314106",
-      "historical_symbol": "KOPN",
       "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
       "queue_priority": 2000,
       "research_priority_rank": null,
