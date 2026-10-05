@@ -2432,8 +2432,8 @@
       "reason": "Fail-closed bridge from authorized date-specific LSEG RIC validation to stable security-identity evidence; only direct study PERMNO-to-RIC mappings can emit one-day evidence, with symbol-only/root-only/secondary mappings prohibited from closing identity."
     },
     "tests/test_security_identity_lseg_bridge.py": {
-      "expected_sha256": "e75d7d7726ddf6c6be12622a5161b83732a3f8fc93e8348d178c910424ee7f70",
-      "reason": "Regression coverage for direct dated LSEG identity evidence, authorization requirement, rejection of root-only/secondary mappings, ambiguous validation, mapping conflicts, and out-of-queue rows."
+      "expected_sha256": "a3e7a47df1245def461123a0f6be3448f038807549807ff08e9a055b084191ba",
+      "reason": "Regression coverage for direct dated LSEG identity evidence, authorization requirement, rejection of root-only/secondary mappings, ambiguous validation, mapping conflicts, out-of-queue rows, and locked 111-security/2751-request direct-bridge capacity."
     }
   },
   "schema_version": "2",
