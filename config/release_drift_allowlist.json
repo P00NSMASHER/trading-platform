@@ -1543,10 +1543,6 @@
       "expected_sha256": "ef39b1a8810e4ddfe3a335c985d390d60ad2f467ce2159a214ec1bb813cda8dd",
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
-    "scripts/g1_batch_0118_generate.py": {
-      "expected_sha256": "5b8541d9b3f2bb18275b043835acb82e4eec99644f5b414a282444973f94232c",
-      "reason": "G1 batch 0118 Worker-3 filed federal-court public-distribution clock for BIO; deterministic 165 exact / 9 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
-    },
     "scripts/g1_swarm_controller.py": {
       "expected_sha256": "4fecdb141daa8955d05ee79bb0381a9e71a007fbfa9db083f21d89b42a9b21f9",
       "reason": "G1 controller reliability: reject explicit cross-shard token/candidate packages and expire tokens after 120 minutes without fresh matching progress while preserving exact-current-main open PR support."
