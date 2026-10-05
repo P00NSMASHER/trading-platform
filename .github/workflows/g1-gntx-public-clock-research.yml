@@ -1,0 +1,95 @@
+name: G1 GNTX public-clock research
+
+on:
+  push:
+    branches:
+      - g1/research-gntx-final-public-clock
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  research:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Search public archives for exact GNTX release clock
+        run: |
+          python - <<'PY'
+          import json, re, urllib.parse, urllib.request, sys, time
+          UA={"User-Agent":"Mozilla/5.0 G1-public-research/1.0"}
+          title="Gentex Reports Third Quarter 2013 Financial Results"
+          queries=[
+            "http://www.marketwired.com/press-release/gentex-*",
+            "https://www.marketwired.com/press-release/gentex-*",
+            "http://www.marketwire.com/press-release/gentex-*",
+            "https://www.marketwire.com/press-release/gentex-*",
+            "http://ir.gentex.com/*",
+            "https://ir.gentex.com/*",
+          ]
+          def get(url, timeout=30):
+            req=urllib.request.Request(url,headers=UA)
+            with urllib.request.urlopen(req,timeout=timeout) as r:
+              return r.read().decode("utf-8","replace")
+          found=[]
+          for pattern in queries:
+            q="https://web.archive.org/cdx/search/cdx?"+urllib.parse.urlencode({
+              "url":pattern,"from":"2013","to":"2014","output":"json",
+              "filter":"statuscode:200","collapse":"urlkey","fl":"timestamp,original,statuscode,mimetype"
+            })
+            try:
+              raw=get(q)
+              rows=json.loads(raw)
+              for row in rows[1:]:
+                ts,url,*_=row
+                if "gentex" not in url.lower(): continue
+                if any(k in url.lower() for k in ("third","quarter","financial","result","earn")):
+                  found.append((ts,url))
+            except Exception as e:
+              print("CDX_ERROR",pattern,repr(e))
+          print("CDX_CANDIDATES",len(found))
+          for x in found[:200]: print("CANDIDATE",*x)
+          checked=set()
+          for ts,url in found:
+            key=(ts,url)
+            if key in checked: continue
+            checked.add(key)
+            archived=f"https://web.archive.org/web/{ts}id_/{url}"
+            try:
+              html=get(archived)
+            except Exception as e:
+              print("FETCH_ERROR",archived,repr(e)); continue
+            txt=re.sub(r"<[^>]+>"," ",html)
+            txt=re.sub(r"\s+"," ",txt)
+            if title.lower() not in txt.lower() and not ("Gentex" in txt and "Third Quarter 2013" in txt):
+              continue
+            print("MATCH_URL",archived)
+            for pat in [
+              r'(?i)(?:published|posted|released|updated)?\s*(?:on\s*)?(?:oct(?:ober)?\s*22,?\s*2013|10/22/2013|10/22/13)?[^\n]{0,100}?\b([0-1]?\d:\d\d(?::\d\d)?\s*(?:a\.?m\.?|p\.?m\.?|AM|PM)?\s*(?:ET|EDT|EST)?)',
+              r'(?i)\b([0-1]?\d:\d\d(?::\d\d)?\s*(?:AM|PM)\s*(?:ET|EDT|EST)?)',
+              r'(?i)\b(\d\d:\d\d:\d\d\s*\(ET\))',
+            ]:
+              vals=re.findall(pat,txt)
+              if vals: print("CLOCK_MATCHES",pat,vals[:20])
+            i=txt.lower().find(title.lower())
+            print("CONTEXT",txt[max(0,i-500):i+1000])
+          # Try known current Gentex page and likely GlobeNewswire migrated search via public HTML.
+          urls=[
+            "https://ir.gentex.com/node/11061",
+            "https://www.globenewswire.com/en/search/keyword/Gentex",
+            "https://www.globenewswire.com/search/Gentex",
+          ]
+          for url in urls:
+            try:
+              html=get(url)
+              print("LIVE_URL",url,"LEN",len(html))
+              for token in ["datePublished","publish","08:","07:","09:",title]:
+                if token.lower() in html.lower():
+                  print("LIVE_TOKEN",url,token)
+              for m in re.finditer(r'(?i).{0,160}(?:datePublished|publish(?:ed)?|Gentex Reports Third Quarter 2013 Financial Results).{0,240}',html):
+                print("LIVE_CONTEXT",re.sub(r"\s+"," ",m.group(0))[:500])
+            except Exception as e:
+              print("LIVE_ERROR",url,repr(e))
+          PY
