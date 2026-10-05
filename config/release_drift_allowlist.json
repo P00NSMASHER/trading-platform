@@ -14,12 +14,12 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "8fa6b9cf2745052c2ff00844b5cda5180bc97558ccdc80e3b5dd05752d8e990c",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "9529f5818d4ddb85ddf512a7735522168e2f1a2492c979c728c3d9b6dd4192d0",
+      "reason": "G5 control-contract repair: readiness and matched-control generation now share the canonical point-in-time covariate schema; deterministic receipts regenerated with no synthetic or reviewed-exclusion promotion to genuine controls."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "166d7a5553b78649730207115115269b0d41494bc8767e4b1c0bbb5427a3bd28",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "4217f2b8ae3c4d549fa0d00e26799015322b01e58dff96b8245e789ecdee7c74",
+      "reason": "G5 control-contract repair: readiness and matched-control generation now share the canonical point-in-time covariate schema; deterministic receipts regenerated with no synthetic or reviewed-exclusion promotion to genuine controls."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
       "expected_sha256": "535b2ac4a2dd13e75b18010033f3ecf41d9a5e33d8d914d6f83b5f7fc1fded04",
@@ -62,8 +62,8 @@
       "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "src/metadata_resolver.py": {
-      "expected_sha256": "e62d82a406dd0594508ea19d5023632783b03c3240cae788125ad0cbac245895",
-      "reason": "G1 metadata source support for the strict federal-court public-distribution evidence family."
+      "expected_sha256": "7be1755c3c5145534e8883362f4263b5e8621a1a572d53b5b6efe56b02780da4",
+      "reason": "G5 control-contract hardening: readiness now uses the exact matched-control generator covariate names and accepts matcher-native effective_ts_utc point-in-time timestamps."
     },
     "src/private_dashboard.py": {
       "expected_sha256": "16fd6f193f7c1e5721f0c145711aeb45e5a9fed38878f03ee73d64e046ebff1e",
@@ -98,12 +98,16 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "tests/test_metadata_resolver.py": {
-      "expected_sha256": "e9c3c9b138bf461d1753d376e63a0d6ce9aa583df7dea695dec55269f6bc3761",
-      "reason": "Contract coverage for the federal-court public-distribution source family."
+      "expected_sha256": "0f536894d618ead5be959c86717bdabb45769f41e4923f9f5ca95b926954e2c3",
+      "reason": "G5 regression coverage locks readiness covariates to matched-control defaults and proves matcher-native effective timestamps close only valid point-in-time demo controls."
     },
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
+    },
+    "data/examples/metadata/control_universe.csv": {
+      "expected_sha256": "d8786f3028674e0ebc23eff1f363ed114ab3329e7ca1a0dd494dee45975d2060",
+      "reason": "G5 demo control fixture upgraded to the canonical matcher-native point-in-time metadata schema, including borrow cost and pre-event return."
     }
   },
   "repository_additions": {
@@ -524,8 +528,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "1e9db2f77b5546b4016f7b96147cb8608ccec12544c451f635c4cc78be0785bf",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "06826653ce0b2c7a320bda9dda6791ef94ad50df74ecdc2cbd04e69299449076",
+      "reason": "G5 control-contract repair: regenerate the truthful 12-step sprint receipt against the new canonical G5 readiness/quality hashes; Step 10 remains SOURCE_BLOCKED at 0/72 genuine controls."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -568,8 +572,8 @@
       "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "93a74fe25f9698499c641263c007e7d095dedf71ad0af71d066d00060b114cab",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "e8d84dbbd726b3b3d5aa7ce97496420dc48dee5570086ab13fd1d30b536ca3e2",
+      "reason": "G5 control-contract repair: readiness and matched-control generation now share the canonical point-in-time covariate schema; deterministic receipts regenerated with no synthetic or reviewed-exclusion promotion to genuine controls."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -2450,6 +2454,14 @@
     "tests/test_security_identity_evidence_stager.py": {
       "expected_sha256": "f851fbfc3c61c3a5325b8fefe1165a2691ed8e1f00f65e0a8fd6ed89303fb10f",
       "reason": "Regression coverage for one-date progress, synthetic full 3654-date completion, terminal empty queue, duplicate/conflicting evidence rejection, and staging-only output isolation."
+    },
+    "src/g5_control_gap_planner.py": {
+      "expected_sha256": "a58f0cc6ac2207f00e2c6beb7dae89467df454538fa84c8ce82414ec9a123947",
+      "reason": "G5 control acquisition planning: deterministic lower-bound measurement of same-day candidate coverage already present in the frozen G2 market-data scope; no control-readiness or release claim."
+    },
+    "tests/test_g5_control_gap_planner.py": {
+      "expected_sha256": "a56c70dd4189c515a39d59c156d88d588c20ed78f8c6632032786a935198570f",
+      "reason": "Regression coverage freezes the current 49/72 structurally sufficient dates, 23 deficient dates, and 52 minimum additional candidate symbol-date lower bound while excluding same-day positives."
     }
   },
   "schema_version": "2",
