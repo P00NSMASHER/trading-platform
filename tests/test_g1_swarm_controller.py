@@ -24,7 +24,7 @@ def policy() -> dict:
         "event_owner_overrides": {
             "HEJFE-45E6DA32B37F83D4": 0,
             "HEJFE-66BA40A20548B7E3": 4,
-            "HEJFE-81F188C0D790FE70": None,
+            "HEJFE-81F188C0D790FE70": 2,
             "HEJFE-8415E931D4314106": 4,
         },
     }
@@ -148,7 +148,7 @@ def test_event_owner_uses_hard_shards_and_explicit_overrides() -> None:
     assert ctl.event_owner("HEJFE-45E6DA32B37F83D4", p) == 0
     assert ctl.event_owner("HEJFE-66BA40A20548B7E3", p) == 4
     assert ctl.event_owner("HEJFE-8415E931D4314106", p) == 4
-    assert ctl.event_owner("HEJFE-81F188C0D790FE70", p) is None
+    assert ctl.event_owner("HEJFE-81F188C0D790FE70", p) == 2
 
 
 def test_cross_shard_token_is_invalid_even_with_matching_progress() -> None:
