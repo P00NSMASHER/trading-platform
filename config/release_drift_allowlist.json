@@ -2494,6 +2494,14 @@
     "tests/test_security_identity_publisher.py": {
       "expected_sha256": "a4154462a4ca9f6144480a57418fb8ec2ef412259a59a9e19ab2473973d198f2",
       "reason": "Regression coverage now includes rejection of staged candidates tied to a stale canonical identity manifest."
+    },
+    "src/g5_external_metadata_adapter.py": {
+      "expected_sha256": "ea6d3df9bf3e7e1805bebb64ca7ee5e597281d74cbca9678d73dea0f4cfae6a8",
+      "reason": "G5 external point-in-time metadata intake: strict source hash and authorization binding, primary-candidate scoping, pre-cutoff timestamp enforcement, alias normalization for classification/13F/IBES/borrow lanes, and explicit non-evidence output semantics."
+    },
+    "tests/test_g5_external_metadata_adapter.py": {
+      "expected_sha256": "80dff7eba574b409729141e387d36d94f0c98836408607992a10332dbfeaac6e",
+      "reason": "Regression coverage for G5 external metadata aliases, source hashes, point-in-time cutoffs, candidate scoping, prohibited retrospective/post-event columns, same-timestamp conflicts, and non-evidence receipts."
     }
   },
   "schema_version": "2",
