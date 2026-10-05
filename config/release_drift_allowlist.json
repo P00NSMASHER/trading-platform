@@ -276,7 +276,7 @@
       "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
     },
     "data/processed/g2_vendor_requests/cboe_trial_bulk_readiness.json": {
-      "expected_sha256": "5ce869805188c907322788cc2156b4041849a303abf8e062136a9b750df6e44d",
+      "expected_sha256": "e1af43a690b66f747ea5656bcbcbd9a4cbc4f0c4d83b3a2afdd77202b671bbd2",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
@@ -1679,6 +1679,10 @@
       "expected_sha256": "dfc12128d77ac492775f75ddec13f11db4a98b4fa9d2994dd067bf9b59f91cc6",
       "reason": "Add exact symbol-date request-volume accounting to the G2_CHAMPION_MINIMUM candidate-source matrix; source availability only, no coverage claims or gate changes."
     },
+    "src/g2_cboe_2011_options_probe.py": {
+      "expected_sha256": "c8a8dd10d0076e2db8f0c99880b5d71e3c6d51f94c6d0c50089bced754273936",
+      "reason": "Bounded fail-closed runtime probe for the unresolved 2011 Cboe OPRA entitlement discrepancy; tests one frozen JNPR/date reference, option-trade, and NBBO quote path with explicit trial acknowledgement, no coverage promotion, and no change to the vendor-confirmed 2012 bulk-planning floor."
+    },
     "src/g2_cboe_acceptance_probe.py": {
       "expected_sha256": "535ff6e711228a7267ecce1be3e09b724fc00f9e762fdaa3aad8f2667ab85562",
       "reason": "Fail-closed Cboe historical acceptance probe: preserve 2011 equity TAQ smoke, move OPRA smoke to vendor-supported 2012, derive one historical option-quote request from a returned OSI security, and validate non-SIP-annotated NBBO fields; three requests / 45 points maximum."
@@ -1700,7 +1704,7 @@
       "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "src/g2_cboe_trial_bulk_runner.py": {
-      "expected_sha256": "aae7c7b273ea3de69fd00807a417cff35ba3f3bede57dbc9255db53f51eef652",
+      "expected_sha256": "b0d5453c241bb8e6ac7bbfc7696a9afa821755ef147a80c99d5c3a579485a084",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "src/g2_cheap_route_partitions.py": {
@@ -1850,6 +1854,10 @@
     "src/g3_listing_evidence.py": {
       "expected_sha256": "819b5ff7257ca3662a6192e15d4c69079c54cd5458306a2a3a4570149bcb1476",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "src/g4_exact_activation.py": {
+      "expected_sha256": "4280f02a4a1f5ca049b7da5b4f77635b7862a6f4a0225a2670c1e176d8c19f42",
+      "reason": "G4 residual exact-completion activation handoff: validates the current 10 ACO NYSE + 5 CGNX Nasdaq private rows, requires explicit entitlement references, atomically disables the 15 reviewed exclusions only after complete delivery, and verifies exact 3,828/3,828 resolver output."
     },
     "src/g4_exchange_reference_completion.py": {
       "expected_sha256": "51020004cbb30f7981e7b7507f10fafd551ead31f89bb8ee93752ec145d4a09a",
@@ -2267,6 +2275,10 @@
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",
       "reason": "Add exact symbol-date request-volume accounting to the G2_CHAMPION_MINIMUM candidate-source matrix; source availability only, no coverage claims or gate changes."
     },
+    "tests/test_g2_cboe_2011_options_probe.py": {
+      "expected_sha256": "03bc58031a207f3b83a59f38c0a41e8cc9fbb0684c44ae6aa308b90d1343b868",
+      "reason": "Regression coverage for the bounded 2011 Cboe OPRA entitlement probe: exact frozen sample, OSI derivation, three-request/31-point ceiling, fail-closed missing-reference behavior, and secret non-disclosure."
+    },
     "tests/test_g2_cboe_acceptance_probe.py": {
       "expected_sha256": "55b03f891c1217768729036d53fc2e72ae916f0db930275a116462be5d355a24",
       "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
@@ -2288,7 +2300,7 @@
       "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "tests/test_g2_cboe_trial_bulk_runner.py": {
-      "expected_sha256": "230b5ba0d645165f5a0bf747ebcfc0fd0a19a10e22f239052837f202117fbd81",
+      "expected_sha256": "0081dd6e489207cd9fc1fb1fc4b4d9ce846fcd35e411106b22e846c91dcb8cca",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "tests/test_g2_cheap_route_partitions.py": {
@@ -2450,6 +2462,10 @@
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "tests/test_g4_exact_activation.py": {
+      "expected_sha256": "162231f6ca7aba9935592eb0bf3657fd9ee2bcf7f2cbc808cd0181348f314f95",
+      "reason": "Regression coverage for the current 15-row G4 exact activation handoff, including residual-scope locking, partial-delivery rejection, pre-cutoff checks, entitlement requirements, and exact 3,828/3,828 verification."
     },
     "tests/test_g4_exchange_reference_completion.py": {
       "expected_sha256": "da2ec876de40979e98b188bb3f73107ff30052f85cdf36a80d7b28d31b14b941",
