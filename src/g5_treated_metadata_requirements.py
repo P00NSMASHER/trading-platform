@@ -42,6 +42,17 @@ class TreatedFieldRequirement:
 
 
 @dataclass(frozen=True)
+class TreatedTarget:
+    event_id: str
+    event_date: str
+    candidate_symbol: str
+    latest_acceptable_effective_ts_utc: str
+    target_kind: str = "treated"
+    eligible_g5_evidence: int = 0
+    research_use_only: int = 1
+
+
+@dataclass(frozen=True)
 class TreatedExternalLaneRequest:
     request_id: str
     event_id: str
@@ -116,6 +127,7 @@ def load_events(path: Path) -> list[dict[str, str]]:
 def build(*, events_path: Path, output_dir: Path) -> dict:
     events = load_events(events_path)
     requirements: list[TreatedFieldRequirement] = []
+    targets: list[TreatedTarget] = []
     lane_requests: list[TreatedExternalLaneRequest] = []
 
     for event in events:
@@ -125,6 +137,15 @@ def build(*, events_path: Path, output_dir: Path) -> dict:
         cutoff = _parse_event_ts(raw_ts)
         event_date = cutoff.astimezone(NY).date().isoformat()
         cutoff_key = _fmt_utc(cutoff)
+
+        targets.append(
+            TreatedTarget(
+                event_id=event_id,
+                event_date=event_date,
+                candidate_symbol=symbol,
+                latest_acceptable_effective_ts_utc=cutoff_key,
+            )
+        )
 
         for field_name in CONTROL_COVARIATES:
             external = field_name in EXTERNAL_FIELDS
@@ -159,8 +180,18 @@ def build(*, events_path: Path, output_dir: Path) -> dict:
             )
 
     output_dir.mkdir(parents=True, exist_ok=True)
+    target_path = output_dir / "g5_treated_targets.csv"
     field_path = output_dir / "g5_treated_field_requirements.csv"
     lane_path = output_dir / "g5_treated_external_lane_requests.csv"
+
+    with target_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=list(TreatedTarget.__dataclass_fields__),
+        )
+        writer.writeheader()
+        for row in targets:
+            writer.writerow(asdict(row))
 
     with field_path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(
@@ -193,6 +224,7 @@ def build(*, events_path: Path, output_dir: Path) -> dict:
         "research_use_only": True,
         "event_count": len(events),
         "event_date_count": len(event_dates),
+        "treated_target_count": len(targets),
         "treated_field_requirement_count": len(requirements),
         "treated_derived_field_requirement_count": derived_rows,
         "treated_external_field_requirement_count": external_rows,
@@ -209,11 +241,13 @@ def build(*, events_path: Path, output_dir: Path) -> dict:
             "events_sha256": _sha256(events_path),
         },
         "outputs": {
+            "treated_targets": str(target_path),
             "treated_field_requirements": str(field_path),
             "treated_external_lane_requests": str(lane_path),
         },
         "policy": {
             "treated_metadata_is_required_for_actual_matching": True,
+            "treated_targets_use_candidate_symbol_alias_for_shared_intake_adapters": True,
             "requirement_rows_are_g5_evidence": False,
             "all_values_must_be_effective_no_later_than_event_cutoff": True,
             "future_or_post_event_values_may_not_close_g5": True,
