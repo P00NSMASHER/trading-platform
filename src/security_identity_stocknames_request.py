@@ -118,6 +118,13 @@ def _normalize_security(raw: dict, index: int) -> dict[str, object]:
 def build_request(summary: dict, *, source_sha256: str | None = None) -> tuple[list[dict[str, object]], dict]:
     state = summary.get("state") or {}
     raw_securities = summary.get("securities") or []
+    unresolved = int(state.get("unique_permno_date_requests", -1))
+    unique_permnos = int(state.get("unique_permno_count", -1))
+    ready = bool(state.get("ready_for_non_synthetic_market_join"))
+    if unresolved <= 0 or unique_permnos <= 0 or ready or not raw_securities:
+        raise StocknamesRequestError(
+            "stocknames acquisition request requires a non-ready unresolved identity state"
+        )
     securities = [
         _normalize_security(raw, index)
         for index, raw in enumerate(raw_securities, 1)
@@ -131,13 +138,11 @@ def build_request(summary: dict, *, source_sha256: str | None = None) -> tuple[l
     if len(set(symbols)) != len(symbols):
         raise StocknamesRequestError("duplicate historical_symbol in acquisition summary")
 
-    unresolved = int(state.get("unique_permno_date_requests", -1))
     summed = sum(int(row["request_count"]) for row in securities)
     if summed != unresolved:
         raise StocknamesRequestError(
             f"request_count sum mismatch: state={unresolved} computed={summed}"
         )
-    unique_permnos = int(state.get("unique_permno_count", -1))
     if unique_permnos != len(securities):
         raise StocknamesRequestError(
             f"unique_permno_count mismatch: state={unique_permnos} computed={len(securities)}"
