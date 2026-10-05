@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **85 public exact-time batches / 165 exact-resolved
+The current repository state is **86 public exact-time batches / 166 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -318,3 +318,7 @@ Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-relea
 ### Batch 0118: BIO
 
 Filed E.D.N.Y. GX 8002 Document 367-2 supplies the explicit first-public press-release distribution clock for Bio-Rad on 2013-05-07 at 16:15 EDT. Official SEC Exhibit 99.1 independently corroborates the exact release identity, content and date. This advances G1 from 164 exact / 10 reviewed exclusions to 165 exact / 9 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0119: PNRA 2013
+
+Filed E.D.N.Y. GX 8002 Document 367-2 row 1657 supplies the explicit first-public press-release distribution clock for Panera Bread on 2013-04-23 at 16:00 EDT. Official SEC Exhibit 99.1 independently corroborates the exact release identity, headline, content and date. The canonical first documented illicit trade at 14:25 EDT predates the court row's 15:00 Earliest Order Time; the latter was used only by the original research mapper and is not substituted for the canonical trade timestamp. This advances G1 from 165 exact / 9 reviewed exclusions to 166 exact / 8 reviewed exclusions. Step 9 remains SOURCE_BLOCKED.
