@@ -28,6 +28,12 @@ THETADATA_FIRST_ACCESS = "2012-06-01"
 ALGOSEEK_TANQ_DATASET_URL = (
     "https://algoseek.com/dataset/us-options-trade-and-nbbo-quote/"
 )
+LIVEVOL_PRO_URL = "https://datashop.cboe.com/livevol-pro"
+LIVEVOL_USER_GUIDE_URL = "https://www.livevol.com/user-guide/"
+QUANTHOUSE_HOD_URL = "https://quanthouse.com/hod/"
+QUANTHOUSE_COVERAGE_URL = (
+    "https://www.quanthouse.com/docs/QuantHouse_coverage_list-Jul%202025.pdf"
+)
 
 FIELDS = [
     "trade_date",
@@ -147,7 +153,16 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
                 "subscription_reference_url": THETADATA_OPTIONS_DOC_URL,
                 "quote_schema_url": THETADATA_QUOTE_DOC_URL,
                 "pricing_url": THETADATA_PRICING_URL,
-                "license_status": "PENDING_WRITTEN_USE_CLASSIFICATION_AND_RETENTION_TERMS",
+                "license_status": "WRITTEN_PRIVATE_RESEARCH_ELIGIBLE",
+                "retention_status": (
+                    "Vendor written terms: raw/unmodified historical data must be deleted "
+                    "30 days after the billing period ends; modified/derived research data "
+                    "may be retained."
+                ),
+                "written_price_reference": (
+                    "2026-10-02 vendor reply: Options Pro is $160 for one month; "
+                    "purchase remains unauthorized."
+                ),
                 "status": "CANDIDATE_SOURCE_AVAILABLE_NOT_ACQUIRED",
             },
         ],
@@ -156,15 +171,45 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
                 "vendor": "algoseek",
                 "product": "US Options Trade and NBBO Quote",
                 "route": "candidate_algoseek_us_options_tanq",
-                "eligible_start": "2012-01-01",
+                "eligible_start": "2015-01-01",
                 "product_url": ALGOSEEK_TANQ_DATASET_URL,
                 "reason": (
-                    "Dataset-specific coverage reaches 2012 and satisfies tick NBBO fidelity, "
-                    "but current published recurring pricing is materially higher than ThetaData "
-                    "and the free Sandbox is not assumed to expose a selectable 2011-2015 year."
+                    "2026-10-05 vendor reply states this OPRA Trade and NBBO Quote dataset "
+                    "is not in production prior to 2015. The free Sandbox is evaluation-only "
+                    "and is not a durable substitute for a Buy License."
                 ),
-                "status": "FALLBACK_QUOTE_REQUIRED_NOT_ACQUIRED",
+                "status": "FALLBACK_2015_ONLY_NOT_ACQUIRED",
             }
+        ],
+        "zero_cash_evaluation_candidates": [
+            {
+                "vendor": "Cboe",
+                "product": "LiveVol Pro",
+                "eligible_start": "2011-01-01",
+                "product_url": LIVEVOL_PRO_URL,
+                "user_guide_url": LIVEVOL_USER_GUIDE_URL,
+                "evidence": (
+                    "Official product materials state LiveVol Pro provides 2011-present "
+                    "time-and-sales/tick data and offers a 15-day free trial. The user guide "
+                    "states Time and Sales and Historical Snapshots go back to 2011."
+                ),
+                "retention_status": "UNVERIFIED_TRIAL_EXPORT_AND_RETENTION",
+                "coverage_status": "EVALUATION_ONLY_NOT_G2_COVERAGE",
+            },
+            {
+                "vendor": "QuantHouse",
+                "product": "Historical Data On-Demand",
+                "eligible_start": "2005-01-01",
+                "product_url": QUANTHOUSE_HOD_URL,
+                "coverage_url": QUANTHOUSE_COVERAGE_URL,
+                "evidence": (
+                    "Official materials advertise tick-by-tick history from 2005 with every "
+                    "trade/every quote and per-feed or per-instrument CSV delivery; the current "
+                    "coverage list includes OPRA NBBO feed 1081:OPA as normalized L1."
+                ),
+                "sample_status": "ZERO_COST_EVALUATION_NOT_YET_CONFIRMED",
+                "coverage_status": "EVALUATION_ONLY_NOT_G2_COVERAGE",
+            },
         ],
         "slices": {
             "pre_2012_06_01": {
@@ -218,8 +263,9 @@ def build_plan(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict]:
             "candidate_source_is_not_coverage": True,
             "purchase_not_authorized": True,
             "license_and_delivery_validation_required": True,
-            "thetadata_retail_license_not_assumed": True,
-            "retention_rights_not_assumed": True,
+            "thetadata_retail_license_not_assumed": False,
+            "thetadata_raw_retention_is_limited": True,
+            "zero_cash_evaluation_retention_not_assumed": True,
             "canonical_full_g2_gate_unchanged": True,
         },
     }
