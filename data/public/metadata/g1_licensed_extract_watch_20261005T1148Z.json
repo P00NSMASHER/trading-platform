@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "base_main_sha": "f5d983f6c5d7dbd84ccbf15271a874366cd42888",
+  "observed_exact_count": 150,
+  "observed_unresolved_count": 24,
+  "authorized_ibes_extract": "not_present",
+  "authorized_ravenpack_extract": "not_present",
+  "adapter_gap_event_identity": "I/B/E/S matching currently uses symbol plus a seven-day post-trade window without binding to canonical event_date or fiscal-period identity; repair before bulk promotion.",
+  "adapter_gap_timezone": "I/B/E/S timestamp normalization currently hard-codes America/New_York without a repository-recorded authoritative source convention; require explicit source-contract/vendor timezone evidence before bulk promotion.",
+  "policy": "Public visibility alone is not entitlement; no public academic binary or licensed-source row was promoted in this run."
+}
