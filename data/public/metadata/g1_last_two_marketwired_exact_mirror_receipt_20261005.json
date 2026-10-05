@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "base_main_sha": "8014585b043217da5d5774382eb79e6a8b0972cc",
+  "status": "CLUE_ONLY_TIMEZONE_UNPROVEN",
+  "findings": [
+    {
+      "event_id": "HEJFE-BD3F577ADD90D512",
+      "symbol": "GNTX",
+      "exact_target": "Gentex Reports Third Quarter 2013 Financial Results",
+      "mirror": "businesspress24 pressrelease1274764",
+      "raw_timestamp_text": "22.10.2013 - 06:03 Uhr",
+      "source_label": "Marketwired",
+      "mirror_news_id": "1274764",
+      "admissible_clock": false,
+      "reason": "mirror timezone/source semantics not stated"
+    },
+    {
+      "event_id": "HEJFE-CCC7747CFBDE893E",
+      "symbol": "PNRA",
+      "exact_target": "Panera Bread Company Reports Q1 2013 diluted EPS of $1.64, up 17%",
+      "mirror": "firmenpresse pressrelease252102",
+      "raw_timestamp_text": "23.04.2013 - 20:00 Uhr",
+      "source_label": "Marketwired",
+      "mirror_news_id": "252102",
+      "admissible_clock": false,
+      "reason": "mirror timezone/source semantics not stated"
+    }
+  ],
+  "controls": {
+    "gntx_q1": "businesspress24 06:04 vs independent Marketwire 08:04 ET",
+    "gntx_q2": "businesspress24 06:01 vs independent GlobeNewswire 08:01 ET",
+    "interpretation": "Do not infer target timezone or clock from neighboring controls."
+  },
+  "next": "Recover independent exact-target Marketwire/COMTEX/ADVFN record or documented mirror timezone semantics."
+}
