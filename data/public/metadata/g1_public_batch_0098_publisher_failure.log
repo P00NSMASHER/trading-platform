@@ -1,0 +1,776 @@
+Attempt 1: syncing to latest main
+From https://github.com/P00NSMASHER/trading-platform
+ * branch            main       -> FETCH_HEAD
+HEAD is now at 8e1ad89 G1 batch 0109: add ROVI exact public clock (#354)
+{
+  "exact": 123,
+  "reviewed_excluded": 51,
+  "new_events": [
+    "HEJFE-5B6F87699FF5093E"
+  ]
+}
+...........................................................              [100%]
+59 passed in 0.57s
+{
+  "directories": {
+    "/home/runner/work/trading-platform/trading-platform/private_runtime/audit": {
+      "mode": "0o700",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/private_runtime/backups": {
+      "mode": "0o700",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/private_runtime/exports": {
+      "mode": "0o700",
+      "ok": true
+    }
+  },
+  "files": {
+    "/home/runner/work/trading-platform/trading-platform/config/runtime.demo.toml": {
+      "mode": "0o600",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/data/processed/case_demo/cases.sqlite": {
+      "mode": "0o600",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/data/processed/model_demo/model_bundle.joblib": {
+      "mode": "0o600",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/data/processed/model_demo/training_manifest.json": {
+      "mode": "0o600",
+      "ok": true
+    }
+  },
+  "ok": true
+}
+........................................................................ [  8%]
+........................................................................ [ 17%]
+..................................................................F...F. [ 26%]
+F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F.F..F.F.F..F.F. [ 35%]
+F.F.F.F.F.F..F....F..F..F............................................... [ 44%]
+........................................................................ [ 53%]
+........................................................................ [ 62%]
+........................................................................ [ 71%]
+........................................................................ [ 80%]
+........................................................................ [ 88%]
+........................................................................ [ 97%]
+..................                                                       [100%]
+=================================== FAILURES ===================================
+____________ test_remaining_exclusions_stay_blank_and_step9_blocked ____________
+
+    def test_remaining_exclusions_stay_blank_and_step9_blocked():
+        readiness=json.loads((META / "metadata_readiness_summary.json").read_text())
+        assert (readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (123,51)
+        assert readiness["ready_g1_exact_timing_analysis"] is False
+        excluded=[r for r in rows(META / "announcement_resolutions.csv") if r["resolution_status"]=="excluded_fail_closed"]
+>       assert len(excluded)==52
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0032.py:39: AssertionError
+________ test_batch_0034_hash_prior_evidence_and_fail_closed_remainder _________
+
+    def test_batch_0034_hash_prior_evidence_and_fail_closed_remainder():
+        dossier=json.loads((ROOT/"data/public/metadata/g1_public_batch_0034_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/dossier["batch_path"]).read_bytes()).hexdigest()==dossier["batch_sha256"]
+        by_id={r["event_id"]:r for r in read_rows(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        assert len(by_id)==174
+        for eid,timestamp in dossier["previous_exact_timestamps"].items():
+            assert by_id[eid]["public_announcement_ts"]==timestamp
+            assert by_id[eid]["resolution_status"]=="resolved_exact_public_timestamp"
+        excluded=[r for r in by_id.values() if r["resolution_status"]=="excluded_fail_closed"]
+>       assert len(excluded)==52
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0034.py:44: AssertionError
+________ test_batch_0035_hash_prior_evidence_and_fail_closed_remainder _________
+
+    def test_batch_0035_hash_prior_evidence_and_fail_closed_remainder():
+        dossier=json.loads((ROOT/"data/public/metadata/g1_public_batch_0035_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/dossier["batch_path"]).read_bytes()).hexdigest()==dossier["batch_sha256"]
+        by_id={r["event_id"]:r for r in read_rows(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        assert len(by_id)==174
+        for eid,timestamp in dossier["previous_exact_timestamps"].items():
+            assert by_id[eid]["public_announcement_ts"]==timestamp
+            assert by_id[eid]["resolution_status"]=="resolved_exact_public_timestamp"
+        excluded=[r for r in by_id.values() if r["resolution_status"]=="excluded_fail_closed"]
+>       assert len(excluded)==52
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0035.py:44: AssertionError
+________ test_batch_0036_hash_prior_evidence_and_fail_closed_remainder _________
+
+    def test_batch_0036_hash_prior_evidence_and_fail_closed_remainder():
+        dossier=json.loads((ROOT/"data/public/metadata/g1_public_batch_0036_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/dossier["batch_path"]).read_bytes()).hexdigest()==dossier["batch_sha256"]
+        by_id={r["event_id"]:r for r in read_rows(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        assert len(by_id)==174
+        for eid,timestamp in dossier["previous_exact_timestamps"].items():
+            assert by_id[eid]["public_announcement_ts"]==timestamp
+            assert by_id[eid]["resolution_status"]=="resolved_exact_public_timestamp"
+        excluded=[r for r in by_id.values() if r["resolution_status"]=="excluded_fail_closed"]
+>       assert len(excluded)==52
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0036.py:43: AssertionError
+_______________________ test_batch_0037_preserves_prior ________________________
+
+    def test_batch_0037_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0037_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0037.py:24: AssertionError
+_______________________ test_batch_0038_preserves_prior ________________________
+
+    def test_batch_0038_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0038_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0038.py:24: AssertionError
+_______________________ test_batch_0039_preserves_prior ________________________
+
+    def test_batch_0039_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0039_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0039.py:27: AssertionError
+_______________________ test_batch_0040_preserves_prior ________________________
+
+    def test_batch_0040_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0040_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0040.py:26: AssertionError
+_______________________ test_batch_0041_preserves_prior ________________________
+
+    def test_batch_0041_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0041_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0041.py:27: AssertionError
+_______________________ test_batch_0042_preserves_prior ________________________
+
+    def test_batch_0042_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0042_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0042.py:27: AssertionError
+_______________________ test_batch_0043_preserves_prior ________________________
+
+    def test_batch_0043_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0043_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0043.py:27: AssertionError
+_______________________ test_batch_0044_preserves_prior ________________________
+
+    def test_batch_0044_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0044_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0044.py:27: AssertionError
+_______________________ test_batch_0045_preserves_prior ________________________
+
+    def test_batch_0045_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0045_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0045.py:27: AssertionError
+_______________________ test_batch_0046_preserves_prior ________________________
+
+    def test_batch_0046_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0046_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0046.py:27: AssertionError
+_______________________ test_batch_0047_preserves_prior ________________________
+
+    def test_batch_0047_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0047_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0047.py:27: AssertionError
+_______________________ test_batch_0048_preserves_prior ________________________
+
+    def test_batch_0048_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0048_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0048.py:27: AssertionError
+_______________________ test_batch_0049_preserves_prior ________________________
+
+    def test_batch_0049_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0049_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0049.py:26: AssertionError
+_______________________ test_batch_0050_preserves_prior ________________________
+
+    def test_batch_0050_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0050_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0050.py:27: AssertionError
+_______________________ test_batch_0051_preserves_prior ________________________
+
+    def test_batch_0051_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0051_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0051.py:26: AssertionError
+_______________________ test_batch_0052_preserves_prior ________________________
+
+    def test_batch_0052_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0052_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0052.py:27: AssertionError
+_______________________ test_batch_0053_preserves_prior ________________________
+
+    def test_batch_0053_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0053_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0053.py:27: AssertionError
+_______________________ test_batch_0061_preserves_prior ________________________
+
+    def test_batch_0061_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0061_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0061.py:26: AssertionError
+_______________________ test_batch_0062_preserves_prior ________________________
+
+    def test_batch_0062_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0062_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0062.py:27: AssertionError
+_______________________ test_batch_0063_preserves_prior ________________________
+
+    def test_batch_0063_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0063_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0063.py:27: AssertionError
+_______________________ test_batch_0065_preserves_prior ________________________
+
+    def test_batch_0065_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0065_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0065.py:29: AssertionError
+_______________________ test_batch_0067_preserves_prior ________________________
+
+    def test_batch_0067_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0067_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0067.py:30: AssertionError
+_______________________ test_batch_0068_preserves_prior ________________________
+
+    def test_batch_0068_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0068_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0068.py:28: AssertionError
+_______________________ test_batch_0071_preserves_prior ________________________
+
+    def test_batch_0071_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0071_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0071.py:29: AssertionError
+_______________________ test_batch_0072_preserves_prior ________________________
+
+    def test_batch_0072_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0072_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0072.py:28: AssertionError
+_______________________ test_batch_0074_preserves_prior ________________________
+
+    def test_batch_0074_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0074_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0074.py:28: AssertionError
+_______________________ test_batch_0076_preserves_prior ________________________
+
+    def test_batch_0076_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0076_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0076.py:28: AssertionError
+_______________________ test_batch_0077_preserves_prior ________________________
+
+    def test_batch_0077_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0077_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0077.py:37: AssertionError
+_______________________ test_batch_0078_preserves_prior ________________________
+
+    def test_batch_0078_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0078_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0078.py:30: AssertionError
+_______________________ test_batch_0079_preserves_prior ________________________
+
+    def test_batch_0079_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0079_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0079.py:29: AssertionError
+_______________________ test_batch_0081_preserves_prior ________________________
+
+    def test_batch_0081_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0081_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0081.py:35: AssertionError
+_______________________ test_batch_0082_preserves_prior ________________________
+
+    def test_batch_0082_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0082_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0082.py:30: AssertionError
+_______________________ test_batch_0083_preserves_prior ________________________
+
+    def test_batch_0083_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0083_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0083.py:29: AssertionError
+_______________________ test_batch_0085_preserves_prior ________________________
+
+    def test_batch_0085_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0085_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0085.py:28: AssertionError
+_______________________ test_batch_0087_preserves_prior ________________________
+
+    def test_batch_0087_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0087_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0087.py:29: AssertionError
+_______________________ test_batch_0088_preserves_prior ________________________
+
+    def test_batch_0088_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0088_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0088.py:28: AssertionError
+_______________________ test_batch_0090_preserves_prior ________________________
+
+    def test_batch_0090_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0090_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0090.py:28: AssertionError
+_______________________ test_batch_0092_preserves_prior ________________________
+
+    def test_batch_0092_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0092_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0092.py:28: AssertionError
+_______________________ test_batch_0093_preserves_prior ________________________
+
+    def test_batch_0093_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0093_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0093.py:35: AssertionError
+_______________________ test_batch_0095_preserves_prior ________________________
+
+    def test_batch_0095_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0095_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0095.py:34: AssertionError
+_______________________ test_batch_0100_preserves_prior ________________________
+
+    def test_batch_0100_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0100_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0100.py:37: AssertionError
+_______________________ test_batch_0104_preserves_prior ________________________
+
+    def test_batch_0104_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0104_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0104.py:31: AssertionError
+_______________________ test_batch_0109_preserves_prior ________________________
+
+    def test_batch_0109_preserves_prior():
+        d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0109_evidence.json").read_text())
+        assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
+        by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
+        for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
+>       ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
+                                                                                      ^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 51 == 52
+E        +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+
+tests/test_g1_public_batch_0109.py:30: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_g1_public_batch_0032.py::test_remaining_exclusions_stay_blank_and_step9_blocked - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0034.py::test_batch_0034_hash_prior_evidence_and_fail_closed_remainder - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0035.py::test_batch_0035_hash_prior_evidence_and_fail_closed_remainder - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0036.py::test_batch_0036_hash_prior_evidence_and_fail_closed_remainder - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0037.py::test_batch_0037_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0038.py::test_batch_0038_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0039.py::test_batch_0039_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0040.py::test_batch_0040_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0041.py::test_batch_0041_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0042.py::test_batch_0042_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0043.py::test_batch_0043_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0044.py::test_batch_0044_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0045.py::test_batch_0045_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0046.py::test_batch_0046_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0047.py::test_batch_0047_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0048.py::test_batch_0048_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0049.py::test_batch_0049_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0050.py::test_batch_0050_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0051.py::test_batch_0051_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0052.py::test_batch_0052_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0053.py::test_batch_0053_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0061.py::test_batch_0061_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0062.py::test_batch_0062_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0063.py::test_batch_0063_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0065.py::test_batch_0065_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0067.py::test_batch_0067_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0068.py::test_batch_0068_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0071.py::test_batch_0071_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0072.py::test_batch_0072_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0074.py::test_batch_0074_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0076.py::test_batch_0076_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0077.py::test_batch_0077_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0078.py::test_batch_0078_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0079.py::test_batch_0079_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0081.py::test_batch_0081_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0082.py::test_batch_0082_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0083.py::test_batch_0083_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0085.py::test_batch_0085_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0087.py::test_batch_0087_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0088.py::test_batch_0088_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0090.py::test_batch_0090_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0092.py::test_batch_0092_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0093.py::test_batch_0093_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0095.py::test_batch_0095_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0100.py::test_batch_0100_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0104.py::test_batch_0104_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+FAILED tests/test_g1_public_batch_0109.py::test_batch_0109_preserves_prior - AssertionError: assert 51 == 52
+ +  where 51 = len([{'event_date': '2013-04-25', 'event_id': 'HEJFE-AC78A2434E4AE8FB', 'first_documented_illicit_trade_ts': '2013-04-25T1...-B5A8A297D14CD19D', 'first_documented_illicit_trade_ts': '2015-04-27T19:34:00Z', 'historical_symbol': 'TXT', ...}, ...])
+47 failed, 763 passed in 77.60s (0:01:17)
