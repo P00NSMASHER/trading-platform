@@ -35,12 +35,12 @@ def test_full_universe_and_queue_reconcile():
     manifest = g1a.build_manifest()
     assert manifest["state"]["event_count"] == 174
     assert manifest["state"]["accounted_for"] == 174
-    assert manifest["state"]["exact_resolved"] == 145
-    assert manifest["state"]["acquisition_needed"] == 29
+    assert manifest["state"]["exact_resolved"] == 150
+    assert manifest["state"]["acquisition_needed"] == 24
     assert len(manifest["items"]) == 174
-    assert len(manifest["work_queue"]) == 29
+    assert len(manifest["work_queue"]) == 24
     assert len({row["event_id"] for row in manifest["items"]}) == 174
-    assert len({row["dedupe_key"] for row in manifest["work_queue"]}) == 29
+    assert len({row["dedupe_key"] for row in manifest["work_queue"]}) == 24
 
 
 def test_resolved_rows_never_reenter_acquisition_queue():
@@ -50,7 +50,7 @@ def test_resolved_rows_never_reenter_acquisition_queue():
         row for row in manifest["items"]
         if row["acquisition_status"] == "RESOLVED_NO_ACTION"
     ]
-    assert len(resolved) == 145
+    assert len(resolved) == 150
     assert all(row["event_id"] not in queue_ids for row in resolved)
     assert all(row["routes"] == [] for row in resolved)
 
@@ -61,7 +61,7 @@ def test_unresolved_rows_have_public_and_lawful_licensed_routes():
         row for row in manifest["items"]
         if row["acquisition_status"] == "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK"
     ]
-    assert len(unresolved) == 29
+    assert len(unresolved) == 24
     for row in unresolved:
         assert row["routes"]["licensed_ibes"]["entitlement_required"] is True
         assert row["routes"]["licensed_ibes"]["lawful_access_only"] is True
@@ -89,7 +89,7 @@ def test_routing_prioritizes_clock_recovery_vs_release_discovery():
 def test_explicit_research_priorities_head_the_queue():
     manifest = g1a.build_manifest()
     assert [row["historical_symbol"] for row in manifest["work_queue"][:5]] == [
-        "NKE", "VMW", "EW", "DGI", "PNRA"
+        "NKE", "EW", "DGI", "PNRA", "ACO"
     ]
     assert [row["queue_priority"] for row in manifest["work_queue"][:5]] == [4, 1000, 1000, 1000, 1000]
 
@@ -102,8 +102,8 @@ def test_stale_research_counts_do_not_override_authoritative_resolution_state():
 
     manifest = g1a.build_manifest_from_data(rows, exclusions, tampered)
 
-    assert manifest["state"]["exact_resolved"] == 145
-    assert manifest["state"]["acquisition_needed"] == 29
+    assert manifest["state"]["exact_resolved"] == 150
+    assert manifest["state"]["acquisition_needed"] == 24
     assert manifest["state"]["research_hint_state_matches_authoritative"] is False
 
 

@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "41e07137b5aeb3b4765b5d8d350fb4f66aa4ce28",
+  "base_main_sha": "828810d4e168a08498c7087075d91a9406f3cd6f",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -76,20 +76,6 @@
       "event_id": "HEJFE-BD3F577ADD90D512",
       "first_documented_illicit_trade_ts": "2013-10-21 15:21:00",
       "historical_symbol": "GNTX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-263620F13A6443DD",
-      "first_documented_illicit_trade_ts": "2015-04-16 14:39:00",
-      "historical_symbol": "MAT",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-EFFA194386ABDD28",
-      "first_documented_illicit_trade_ts": "2015-05-04 15:40:00",
-      "historical_symbol": "IDTI",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -178,13 +164,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-E575622C8FDAB71F",
-      "first_documented_illicit_trade_ts": "2013-04-24 14:57:00",
-      "historical_symbol": "ISIL",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-198DE6D99E934F32",
       "first_documented_illicit_trade_ts": "2011-04-20 14:29:00",
       "historical_symbol": "EW",
@@ -202,20 +181,6 @@
       "event_id": "HEJFE-4D7E68AD113380B3",
       "first_documented_illicit_trade_ts": "2015-02-23 15:41:00",
       "historical_symbol": "TRAK",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-749FFC4028DF7B1C",
-      "first_documented_illicit_trade_ts": "2011-04-19 14:56:00",
-      "historical_symbol": "VMW",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-350B3481A9CBBF0E",
-      "first_documented_illicit_trade_ts": "2013-10-21 15:49:00",
-      "historical_symbol": "VMW",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -238,14 +203,14 @@
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 145,
-    "exact_timing_analysis_eligible": 145,
+    "exact_resolved": 150,
+    "exact_timing_analysis_eligible": 150,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 29,
+    "raw_exact_time_evidence_gaps": 24,
     "required": 174,
-    "reviewed_excluded": 29
+    "reviewed_excluded": 24
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
