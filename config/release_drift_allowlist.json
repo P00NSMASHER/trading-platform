@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "06c655a84d3c175ba88b9ee6cffdca502b839789de8b23d741ad32305d519131",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "765ec2c4b271bf9d8a6cfc8285f7a0c1c5603f194913c7b0cbb138cb1c1c740d",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "9018212d6d26eac311653e2d0ee9ebf854ef06e8623af897bd677030f7fbb2ce",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "d0d1d843a527ffd4684a9c07e24b91c94cbf235cd03889cd459a06803b8b7de4",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "a6fb30f1b384bd3db7bcabad51e481409648eac2ff3dcc8694e97e3a4ab97e43",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "730052a8936d9dd345361482bb87e6376291f00c83f7272ccb0511aa27d8a31a",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -160,8 +160,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "69a7481bcadd71881933dede51fb30556639ed5e6c13ca3366a38bd549645d07",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "dca820314f6d6df2565f6f87270a98c7cf6c972b2ed3dfa4fa71cfa64a8de45b",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -180,8 +180,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "83acd46ad0483852dd309782ec8fda689c7691ca8bbd2cf5b157c0439cf1e7af",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "aa0e61840cc0d0ee8b4b2756932c8ce5efb10e37e0d9637e9e0c5c71d4f2b601",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -192,8 +192,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "b705f9f64c5ea476860dd9d42a1840af92d60ac26d978ec1f5f555a26eb93054",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "42fda5396795efad9461db67fd29c9d17f563f0c220498d2290606e2397ab889",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -248,8 +248,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "d98577d943428d9495b925806c9fcf70aad07cb8e471e890081d3e273844a05a",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "44ae2f4487ac9c0d4361ce6369b3882e33f369cabd6d442aa65832b896204609",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -264,12 +264,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "522cdd7801ab93d5928ac18f3bf5d2a26b8e716425e3239cf95eff5a117ea3ae",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "50cac424a0857fc2fbf686f7c8b1efe11f7b337eaf0cab19138d5c7e1f229104",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "804e5781c2241dedd7350e5a90abe68d51d8aafe96ec072e10009157f7ac5ff4",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "72b0e2f4492e7f003ac0a188bef788d83b90e84ae0136e14db2f742349a7d015",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -520,8 +520,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "fc2c81d7a60d3d4d23c106b91128bcf253572e99eab28b8620c5f37f66dfc53b",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "f57a5a062cd5e417a5451082831f3c340fd831e167994df1e0ee2e549adaf224",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -560,12 +560,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "b2f818e6b86df9366a0ce2e95ea44e4daac8745717d9c65b62ebcd3e0514a9b1",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "c6616623aaca4a8a2a9e1e52ea915dfa560f05d24b5bacad45cf39fd7eeb9094",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "e76f89b3027d0b6f68ace78a5dd0113fa17460545605b92b64814776767062ea",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "704cb798c971b1155cac9876d1b554f5ac4e3e6a83500e3c73327434ac7573ad",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -584,8 +584,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "81c851224b4720f9e693d45b85467a74c27591a585129569ab75c61a7b251ff5",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "5e7e8efe152bfd36a38f1ae16b307069b220852490fa728efdf547b45f85dd62",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -935,6 +935,10 @@
       "expected_sha256": "6df170d4221845fd5e023caec130a0d763bf3ac4330709535d624073d174a32a",
       "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0122.csv": {
+      "expected_sha256": "999b11d9c9c7359fe7980ae57d450579bad771b0f74613f42859479de0da5bc7",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -1151,9 +1155,13 @@
       "expected_sha256": "f14c45297f9afe2bfb39c1c4823dd45af8fe731f8dc2a235d07fd66e9e76e7b8",
       "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0122_evidence.json": {
+      "expected_sha256": "48121750bdb8fd57008fe4ddecc7d9c1d9383cffd4019eca3f8af597fa3e36f5",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "f4aa9f1661f93be05785c1cbaf2f9603bf5fd513da2f2cc4abfeee02b9b012d0",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "20a4812217d8c0237ab41dc2da6602a00a35273bf31db55121764c062d6a0350",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "fcf5f123d93ba1a449c9d37d340f3e6f3739d4acc2e19ab7ffcfc236f004d157",
@@ -1332,8 +1340,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "399c88f5153b4d0843424878cc39e969acf28b69c78c71f004a7e3bba998f633",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "b59f8cd8cbae967fd896ba7d292eb4905735ec03b9c908e8d32fd66882039140",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1884,236 +1892,240 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "e43b32175c23eb5e1adc9e8edb8d3841a2cc002f0a5b765d2fa769892ddf53e4",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a7c7c106707b6f83a79fa805831c1ee8b73d3986c46494e678f85771770b63c2",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "80be95dbc572648efd6ff03ae288af509e4e60112f618b61e990e59c6939ce7b",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "be95552290d79177247211ae0a8445941aa4aa00ad1a23e81cf04370a0c5f9df",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "b2fda3090a98401b15396b21ee54c4f63d73fe4ca4ad9e90c7d9d758b83c3977",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "8f098fff806f9800aef41f72e7682a53b76e53736b8cd591295733e0a07c7d58",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "3536189f7a60b2562ed1f7aa48914925b358e5050103cfa913277597deb9b800",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "fc3baf00f2215c6fd364ad57f01e7dad95f2c2ea3f960ed827b235b3434a73a4",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "24dc4c00bdb7c0db0ac40281e596255f143c904e1ca3d759af42405c81c3c85c",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "791f0cfd4a38870c6ac6314fd95dae7b16a3cd5271b316fb3e4d9dbd5dcded95",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "a5324aac0a475a847113db068f354d7a9f12f25bdbc7bed1baa4a563e714a27a",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "75bb698696079ad5aed3c1049b47993b48b2689055d6f6e5ad7a7fca2a05e75e",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "c215beae147eb5fc8eb07022c9a9ac14a1e8d379701c351ad1cc2c4488942379",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "532a2930f4926ed0c5b1c4c7a0a1ccd61848c81ea8d7956f92060368f35bcc7a",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "d006b49ec236484a508b54b992b138d975ab520396d20eb1723306238c46e4eb",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "26bcd7114477f1e1cf14572b8c6f40ac89b588fa041ef31613c7b97783b961ee",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "ee9f015d683837fd249863c21cb6bd23b0c613f28f0a4caec57c25c114837f86",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "e2ba821df897d5e240b59947bc39098648084ab34407c99842220052ab849236",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "735e232bc3885dd58ec378b7f0865d3aacda60a799dfceefa33ec8cb0c9adad7",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "70fa8498bfff753f5aa7f403824a91e98fe1ee599d4d2312e529c621c5896507",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "b5dc4af5a0af71c7a8b4547df23a3120aa3333626d79c26d89136764b87e2c6b",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a53d0b41bc13530fefbd4b4be7eda35ba63a92d6189535c8ff7a50769c97f740",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "40926c9d113ab08667506ef35d65d01d3bdf3fdaee1951cf8a64c88c744ac4fe",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "5bfb8acc65652b9c114658ee1704f58cd450c817afb4df52574e7f71021e71e7",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "ffa4bda57abf576fa211dde8b11c99dd6ab0c61a21f0e766e2017837da9132d6",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "f27c06502d2305a4ea0ae7d1a9cbc3307c7ee575a21fc72d5bc3ff4091368cfa",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "ed14ff157a6bd9274da855ae1433e567fa3ccfa47efaeed17d34f4e1730e8e3e",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "b5fc74b4208f65432ef99a38c6a2be9819863586d48a920e0c30bbcd7ae981f0",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "834de5f9e8bc5bed9949c09a8ed49285d2b5c2dd735e1f3b06fbc8d7126bb9ff",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "b521128a69faf8a5c6e92ae71c575217fb7574669f8b72fc780a219762d875b9",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "f92f13cbbf511d41c682ec58c412c0570bc3322a0cc199e90b83a432d4e1d83d",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "1a5015c0019e2cf7fa7401b2859a5bb70bde905791988648174aca019aab49e5",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "b48be7b33d55a003a8e6c1271c28fada03cc508238d65f2ce6f121f260ae93f1",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a1276380ca18623344345a84148402be65918a8b2f5e35aa532ed219da25c894",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "0e8a3f5154e0367edfd1b2615c3b0050ab7a8f4ac7373f7f9f3e5ce0f7d10d97",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "8ed6c291f5c324a9a8e3d036876084420070f92f122e064f550ad195c0669588",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "4add5b83aa6c32a154fbc0ff3750a3503ff457d3dcaeb5ddc5dc9afbd56e773d",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "93c29d7ce5dcd61cf59fbd33338a673321332870204582b539987f31fc62a537",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "e19bd705a2c00e71222daebdb4ae3ae14ebfdc4842c0909103ca9397170e9ed4",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "26cfbe9b2cdc54c373b10fb5ca719542e8a4bcd3b1d3f268826906c2acff9221",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "8b7dc415d7e1e8a52340a498606c9d2a2254decef5063c851cbbff0719e364a4",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "179ba0ba16968f979afbce6a16da17918605f1ff306bdd08178c9a84b6b9a98e",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "18593635b8125712f2fdf77f04d212a88c023a5fcbc98ce1ee276fdd07a736d2",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "877760443f16b0ccf7435ccd45ed754e59c53c4ea80201986c60e4452630e8f9",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "9720844053b0ca18de1bac86b38db85df15d105b43e61b67d408399af53d8b39",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "b4be457282bcb907d7bd993727dded78c4e36caf1fb67d72a8f0516673dfefc3",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "e74543ff0d51886bf73b8eb29262cd5778dd900589bf09cc69f3e76471beff80",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "b18110bf789d45ce3b0877152b9c1bc5790bff21afc895a210299e1a3a86cff6",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "fbb59a97fe72947334f43f2b737192972366268d139fc99fddc4e617d4ea0acc",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "cba7f924cd9c19e23f990201c6e734c6a8680b74192edd0af486f5a13aec2170",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "ef90397988bae30f33d2ab999fedc98f934ee57ce00ba5db80bb8df359868c9a",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "9ec4f5f19ca1d56222b13ef7ce42d1cf5726fe3019ea06c77d7b06d5a9193745",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "220625e28c3434748c91a90b28c74420e02033e8883db8176bca79bb4b810755",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "e0a97cb44f1c22894f2effdab75007eef2e42b268ecbeca9ba26b3848369d3d8",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "0670e2bc4090b8a14be8d9b5e16273b577775fd4e47fedef766fe0758dbc3aef",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "896bc252aa79e05a3ef265b2e40aec596fc1bf23037b985f9d45812c956feea5",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "65cbcb7de1ffd0ce012445fb3feb6f439df711a5b649a5fd856422b76ab53588",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "0027ed434f16f7dfd56cce44a3cbf6290c6b4d8d9822a38699d5d42a49931271",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0072.py": {
-      "expected_sha256": "2da18ba003c983a2ab1cad62861a5b037d76cf7828a1bc162f631c6a89c6a642",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "38b04c6b4e118bd37e86b4a65c10f05bae206d47e5234302bf4d54d2fa33afd7",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "f31e7a75c1a61bb1680dd5998e0ac2094f254a0947223300b124ba3d48da76b3",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "f31244a4eaa7ce6e64f3a044fc2be9725ca882c905e591c48186b3f44e76450d",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0076.py": {
-      "expected_sha256": "cf8723877355919ea9fe4d97b72e9415deb96798009c202c866154d83e386ff8",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "fec7680d0042e6fc6dd9e4b18cf002d175a7e67af2df66dd2736e04b844ed1a7",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0077.py": {
-      "expected_sha256": "f0a5a738b4bfe23ad9f112b77a5d418ebb34b64e0602d542bed7afec01a2bc74",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "4fc64c0e6002e244c72ea131bbb24290eb1bdf84175872afd2ce627ae32f84a9",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "bec9f8a05e272882baf4b7e0529ded46408e57b7bdb1a3a9dfce453939fcae9f",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "2cd68d67535b74e886ddee29333348f68391202d2cb5f77817bd00acb20d49d0",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "72cf9a133dc0f4d9c2c7020074430966646fad159287409ea22538a1af37c312",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "0cad3a0fe0caa75f109f13fe8fe72515209c0c64cf3a21576fae899547acb9f0",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0081.py": {
-      "expected_sha256": "39871007c782731468dea0096d159c587ea7fba2d211cf1fa7a34c8b54966385",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "75f1e5f0185119a7c755cdf7112df08f9ddfaf920b1c353d6a22e4bf4144e61e",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "fbdf9f0edc1b8a6699f4ccfcb9a7745bf099f12bb5e352707b54b5de83ec6d48",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "35d8715be20a48102558e5b67331cc7d9d26e1b93af4d4dec8f0bd5dd6ad1ad7",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0083.py": {
-      "expected_sha256": "d6ea2dfe558cde20a85cb63cf043539cd0a95678de74a595d10245117f509c9b",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "b05ab5ea867c5c51e3b224748298b7e396bd5aaba6733352d9b3470e3aeb6bc0",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0085.py": {
-      "expected_sha256": "5b9d8a31164654e44ceb5c781a2635c3e6d73bbd3b3ef1b380cf2b53a8a2b52c",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "b5426d44deaeb1f95ef7a62a33e19f746966cb9c7b617043ac1d4804c4726a93",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0087.py": {
-      "expected_sha256": "4e06d0801685263c76325686d066f1b72087334b42e9f5a6df1b7452e2ed9d06",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "4bedea2f07b5799be3651730351221251ed708a405fa28e786c8993a4f8f01fc",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0088.py": {
-      "expected_sha256": "f0b01261be22b849ffee04afe727ea646f7cb232fede12f95dcd5b14835103cd",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "fc8f17591d90dfa5ce5e4a95e2248a77dac5ee8da7b9c4574da8acaa5ce0f0e9",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0090.py": {
-      "expected_sha256": "4e35895b023eb99bffc59c45971d7785e235d90f5b23eb61b3183a724844fe33",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "ff9d0447f52fa75189368f8772c1d14804ec3506696acbda962d020828244d76",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0092.py": {
-      "expected_sha256": "9f87bc23de9c62ee2aa418d3e48684f29a3bbc8032c1e662b6f40de35ed52876",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "73d42fda83de7cce25738c2dfdd2877214a90d90c8192391197b143ab98e9925",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0093.py": {
-      "expected_sha256": "fd1a53b7f483d6e7546f996dcd2498a8ff664c8e2c72fbf10b9ee0981d98cdd2",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "0e493161f35429eeb7c28705ebbb38dbe77b654d861aa4346db1568b67d7a734",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0095.py": {
-      "expected_sha256": "08eb740f0092878009bc053e5815073d673da9ae60d94ae5a51c83ccb4f4affc",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "8b37e7de930de6270664cae7fad06d9e15d90df06568360863abec5e2e182592",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0098.py": {
-      "expected_sha256": "a30d5c43c8e2f1caf9378032f5a384523c89e308b3ce27f98b136ce7771e62f9",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "272c0e591a04b22d55988df2874c48ebe8896047e20f6d9ad5bf17b53b0a5127",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0100.py": {
-      "expected_sha256": "4b0bb58c8b8609f1caee73f64c9cb231ffde685432148c172d5b44217b142271",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "00aa65f8d483ee47ca125614a9194118a6fef7d022784659110419b2e287f6f3",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0104.py": {
-      "expected_sha256": "e6433671065c77f12ae1e491135e28d623a955fb04d68a5c4c5468912b451029",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "4240aea43eeb3eee7c938ca2ae41d196ad31b6a19e27a932ffe83d32a86c6981",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0105.py": {
-      "expected_sha256": "62b93e4ae3c11b61c46629a3cd93070c528a78cba274e83eaef287286aabc55d",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "86d008fb25adc294412d57f1daf4fcb302f3701a9dbf2821b6bd1111f5a86f12",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0109.py": {
-      "expected_sha256": "61c0926db5b158ed667bf0710eb9b2796747532b3d22a8c3f2f411336175695b",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a925c15692f9d2f25ef02103a1eb0ec65c7ed2acd1a396fdb6f1317a9b63e9dc",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0113.py": {
-      "expected_sha256": "4f1580c5a9920cf743527936687216af4be06640a6f70137a52871bc189fd6ab",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "b94086f55895e72da2aaa0463b7f274fe58c34c6b3dfc48fb93b1d0e13d599c1",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0114.py": {
-      "expected_sha256": "8091cb949d6c1487f3f6f4e38f101b4bf4225f11f5c04b2d582985f0418984f3",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "ae32abd74360a14fd33925f4d7b6aad7574c9473bdc3fc7cca14dc81af5a567b",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0116.py": {
       "expected_sha256": "23f80f2ccda4335a56f2a0fd6020e55434a7ebc454f9fe7b56608193aff3a039",
       "reason": "G1 batch 0116 Worker-1 filed federal-court public-distribution clocks for fourteen events; deterministic 164 exact / 10 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0118.py": {
-      "expected_sha256": "618fb1de66ebfbc208d6e29f6d59f7bf7a5ebe311c23f2d8b3c3fb01b625aab5",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "d1e0363e9ed301431473d0aa0a76f719ed0cf3d1bbfe795a68b119a396f9deda",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0119.py": {
-      "expected_sha256": "84ebc913685b36f5c173008a1e4f12ed54f4e12500c0a816b6884379f092122d",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "d39327288c3cf0859a8d5e51a9c864b45353aa64c7028486c9a731a65b84abc2",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0122.py": {
+      "expected_sha256": "90a14d68002ac67c0090ab9758f8ad32338d2e68f5f7863b283d3aca2fd32468",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "73554183512de02c224eb799ae222f66a53b4b62444280db1e5aa3bc616db530",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "59852b97ebc99a6b3ca96c797552a218fae46ea5fad7a0565f47e243b5202fb4",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "2a2dd3b2fe3a95a205b6fb7dc8e5e838b6feafbe626d9c7d815371dc93be4dc5",
@@ -2328,8 +2340,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "504e79f23b3b74872443a7543965eff7f54a96b08d41fbbc4fdc2d991f1cc61a",
-      "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "6071d486eb07aa808cd10d2f83c4a0b77db32e5b9da60c992bec8b82c6691bdc",
+      "reason": "G1 batch 0122 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 172 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
