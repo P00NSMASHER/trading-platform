@@ -14,7 +14,7 @@ from zoneinfo import ZoneInfo
 
 from matched_control_generator import DEFAULT_NUMERIC_COVARIATES
 
-SCHEMA_VERSION = "0.17.5"
+SCHEMA_VERSION = "0.17.6"
 NY = ZoneInfo("America/New_York")
 UTC = timezone.utc
 
@@ -699,46 +699,121 @@ CONTROL_CATEGORICAL_COVARIATES = ("sector", "index_bucket")
 CONTROL_COVARIATES = [*CONTROL_CATEGORICAL_COVARIATES, *DEFAULT_NUMERIC_COVARIATES]
 
 
+def _fuse_control_candidate_rows(
+    control_sources,
+    *,
+    event_date: str,
+    cutoff: datetime,
+) -> dict[str, dict]:
+    """Fuse pre-cutoff control metadata across authorized sources, fail-closed.
+
+    Real G5 metadata is naturally multi-source: market-derived covariates, reference
+    data, ownership/analyst data, and borrow data may arrive independently.  The
+    readiness gate therefore evaluates the latest admissible value for each
+    covariate rather than requiring every field to live on one source row.
+
+    A candidate is never made live by an undated row.  Equal-timestamp conflicting
+    values for the same covariate are marked conflicted and cannot close G5.
+    """
+    candidates: dict[str, dict] = {}
+    for src, rows, _path in control_sources:
+        for row in rows:
+            row_date = _get(row, src, "event_date") or _get(row, src, "trade_date")
+            if row_date != event_date:
+                continue
+            sym = (_get(row, src, "historical_symbol") or _get(row, src, "symbol")).upper()
+            if not sym:
+                continue
+            bucket = candidates.setdefault(
+                sym,
+                {
+                    "source_ids": set(),
+                    "timestamped_rows": 0,
+                    "latest": {},
+                    "conflicted_covariates": set(),
+                },
+            )
+            bucket["source_ids"].add(src.source_id)
+
+            avail = _get(row, src, "effective_ts_utc") or _get(row, src, "available_at")
+            if not avail:
+                # Retrospective/undated universe rows can enumerate a candidate but
+                # cannot supply genuine point-in-time values.
+                continue
+            try:
+                available_dt = _parse_aware(
+                    avail,
+                    field="effective_ts_utc",
+                    default_timezone=src.timezone,
+                )
+            except ValueError:
+                continue
+            if available_dt > cutoff:
+                continue
+
+            bucket["timestamped_rows"] += 1
+            for covariate in CONTROL_COVARIATES:
+                value = _get(row, src, covariate)
+                if not value:
+                    continue
+                previous = bucket["latest"].get(covariate)
+                if previous is None or available_dt > previous["available_dt"]:
+                    bucket["latest"][covariate] = {
+                        "available_dt": available_dt,
+                        "value": value,
+                        "source_id": src.source_id,
+                    }
+                    bucket["conflicted_covariates"].discard(covariate)
+                elif available_dt == previous["available_dt"] and value != previous["value"]:
+                    bucket["conflicted_covariates"].add(covariate)
+    return candidates
+
+
 def resolve_control_readiness(events: list[dict[str,str]], sources) -> list[ControlDateReadiness]:
     event_dates=defaultdict(list)
-    for e in events: event_dates[e["first_documented_illicit_trade_ts"][:10]].append(e)
+    for e in events:
+        event_dates[e["first_documented_illicit_trade_ts"][:10]].append(e)
     control_sources=[x for x in sources if x[0].record_kind=="control_universe"]
     out=[]
     for d, evs in sorted(event_dates.items()):
-        candidates={}
-        source_ids=set()
         first_cutoff=min(_event_trade_dt(e["first_documented_illicit_trade_ts"]) for e in evs)
-        for src, rows, path in control_sources:
-            for row in rows:
-                if (_get(row, src, "event_date") or _get(row, src, "trade_date")) != d: continue
-                sym=(_get(row, src, "historical_symbol") or _get(row, src, "symbol")).upper()
-                if not sym: continue
-                # Must be a point-in-time candidate universe for model evaluation.
-                avail=_get(row, src, "effective_ts_utc") or _get(row, src, "available_at")
-                if avail:
-                    try:
-                        if _parse_aware(avail, field="available_at", default_timezone=src.timezone) > first_cutoff: continue
-                    except ValueError: continue
-                elif src.source_family == "samplefirms_research_universe":
-                    # Useful for retrospective research candidate enumeration but not enough to close live-model gate.
-                    pass
-                candidates[sym]=(src,row)
-                source_ids.add(src.source_id)
+        candidates=_fuse_control_candidate_rows(
+            control_sources,
+            event_date=d,
+            cutoff=first_cutoff,
+        )
+        source_ids=set()
         pre=0
         live_candidate_count=0
-        for sym,(src,row) in candidates.items():
-            if src.source_family != "samplefirms_research_universe" or _get(row, src, "available_at"):
+        for candidate in candidates.values():
+            source_ids.update(candidate["source_ids"])
+            if candidate["timestamped_rows"] > 0:
                 live_candidate_count += 1
-            if all(_get(row, src, c) for c in CONTROL_COVARIATES): pre += 1
+            values=candidate["latest"]
+            conflicted=candidate["conflicted_covariates"]
+            if (
+                candidate["timestamped_rows"] > 0
+                and not conflicted.intersection(CONTROL_COVARIATES)
+                and all(c in values and values[c]["value"] for c in CONTROL_COVARIATES)
+            ):
+                pre += 1
         if live_candidate_count >= 3 and pre >= 3:
             status="resolved_for_point_in_time_matching"
         elif candidates:
             status="partial_candidate_universe_missing_pre_event_covariates_or_availability"
         else:
             status="unresolved"
-        out.append(ControlDateReadiness(d,len(evs),len(candidates),pre,status,";".join(sorted(source_ids))))
+        out.append(
+            ControlDateReadiness(
+                d,
+                len(evs),
+                len(candidates),
+                pre,
+                status,
+                ";".join(sorted(source_ids)),
+            )
+        )
     return out
-
 
 def _load_reviewed_control_exclusions(
     raw_contract: dict,
