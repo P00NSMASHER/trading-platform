@@ -2478,6 +2478,14 @@
     "tests/test_g5_control_acquisition_planner.py": {
       "expected_sha256": "61d56e09e5289863285f234199621dd39887e8c515dc96d06ffb8609afb59bd1",
       "reason": "Regression coverage for integrated G5 acquisition planning: freezes the 49/23 structural split, 52-slot deficit, 51 planned expansion candidates, 204 expansion market rows, one residual slot, exact readiness-field routing, anti-lookahead cutoffs, and zero evidence/release claims."
+    },
+    "src/g5_prior_fallback_planner.py": {
+      "expected_sha256": "179c3cec5b76097adc7d4e67455e502f509323feb624a1ca3aa312e977000657",
+      "reason": "G5 residual structural planning: fill only remaining candidate slots from strictly prior symbol observations, with retrospective labels ignored and all rows kept ineligible until date-specific identity, real four-kind market data, and pre-event metadata are proven."
+    },
+    "tests/test_g5_prior_fallback_planner.py": {
+      "expected_sha256": "ed1980967f6b13e8007258d569535a9de7892e8417f8e03c9c77515bd8d444c9",
+      "reason": "Regression coverage locks the final structural planning slot to NDSN from a 2014-12-11 prior observation for the 2014-12-15 gap and proves future-only symbols are never selected."
     }
   },
   "schema_version": "2",
