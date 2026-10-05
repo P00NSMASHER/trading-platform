@@ -218,7 +218,7 @@ for filename in test_files:
         pairs = [
             ('report["exact_resolved_event_records"] == 172', 'report["exact_resolved_event_records"] == 173'),
             ('report["reviewed_excluded_event_records"] == 2', 'report["reviewed_excluded_event_records"] == 1'),
-            ('state["public_exact_batch_count"] == 86', 'state["public_exact_batch_count"] == 87'),
+            ('state["public_exact_batch_count"] == 87', 'state["public_exact_batch_count"] == 88'),
             ('state["exact_resolved_event_records"] == 172', 'state["exact_resolved_event_records"] == 173'),
         ]
     elif filename.endswith("test_g1_acquisition_manifest.py"):
@@ -229,8 +229,8 @@ for filename in test_files:
             ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 2', 'len({row["dedupe_key"] for row in manifest["work_queue"]}) == 1'),
             ('len(resolved) == 172', 'len(resolved) == 173'),
             ('len(unresolved) == 2', 'len(unresolved) == 1'),
-            ('"EW", "GNTX", "CREE", "NUAN", "PNRA"', '"GNTX", "CREE"'),
-            ('[1000, 1000, 1000, 1000, 1000]', '[1000, 1000]'),
+            ('"GNTX", "CREE"', '"GNTX"'),
+            ('[1000, 1000]', '[1000]'),
         ]
     elif filename.endswith("test_real_data_release_sprint.py"):
         pairs = [('updated["missing_exact_announcement_timestamps"] == 2', 'updated["missing_exact_announcement_timestamps"] == 1')]
