@@ -98,8 +98,10 @@ def load_identity(path: Path = DEFAULT_IDENTITY) -> dict:
     if not isinstance(events, list) or not events:
         raise IdentityAcquisitionError("identity manifest events are empty")
     state = payload.get("state") or {}
-    if state.get("ready_for_non_synthetic_market_join") is True:
-        raise IdentityAcquisitionError("identity manifest is already ready; no acquisition queue required")
+    if "ready_for_non_synthetic_market_join" not in state:
+        raise IdentityAcquisitionError(
+            "identity manifest is missing ready_for_non_synthetic_market_join"
+        )
     return payload
 
 
@@ -181,6 +183,8 @@ def build_acquisition(identity: dict, *, identity_sha256: str | None = None) -> 
     for permno in sorted(security_map):
         sec = security_map[permno]
         dates = sorted(sec["dates"])
+        if not dates:
+            continue
         securities.append({
             "permno": permno,
             "gvkey": sec["gvkey"],
@@ -191,6 +195,13 @@ def build_acquisition(identity: dict, *, identity_sha256: str | None = None) -> 
             "event_count": len(sec["event_ids"]),
             "event_ids": sorted(sec["event_ids"]),
         })
+
+    source_ready = bool(state.get("ready_for_non_synthetic_market_join"))
+    computed_ready = raw_instances == 0
+    if source_ready != computed_ready:
+        raise IdentityAcquisitionError(
+            "identity readiness disagrees with unresolved acquisition instances"
+        )
 
     summary = {
         "schema_version": SCHEMA_VERSION,
@@ -206,8 +217,12 @@ def build_acquisition(identity: dict, *, identity_sha256: str | None = None) -> 
             "unique_permno_date_requests": len(queue),
             "duplicate_request_instances_removed": raw_instances - len(queue),
             "unique_permno_count": len(securities),
-            "ready_for_non_synthetic_market_join": False,
-            "reasons": ["stable_id_acquisition_queue_unresolved"],
+            "ready_for_non_synthetic_market_join": computed_ready,
+            "reasons": (
+                []
+                if computed_ready
+                else ["stable_id_acquisition_queue_unresolved"]
+            ),
         },
         "acquisition_lanes": ACQUISITION_LANES,
         "completion_contract": {

@@ -1868,8 +1868,8 @@
       "reason": "Permanent deterministic research receipt rebuild: stage, reconcile, hash, compare, and transactionally publish metadata/quality/replay receipts with manifest-last rollback semantics."
     },
     "src/security_identity_acquisition.py": {
-      "expected_sha256": "abde5e36ccb418c6bb35f98ad1ce2c1c798e16c52095f20ca245063eccec5cde",
-      "reason": "Deterministic fail-closed stable-ID acquisition planner for every unresolved PERMNO/date request, with lawful licensed/authorized source lanes and no ticker or corporate-action alias inference."
+      "expected_sha256": "591917afd7bad95df82ae017845bb0f9a26cd5c5fbc82115dc3ba3c7ebc15d82",
+      "reason": "Stable-ID acquisition terminal-state support: a genuinely complete identity manifest now deterministically emits an empty acquisition queue and ready summary instead of crashing, while readiness/count mismatches remain fail-closed and the current unresolved outputs remain byte-identical."
     },
     "src/security_identity_gate.py": {
       "expected_sha256": "78ea186718daf51ce3a9211027716d48dea8da609b8143100cb96d00978d23e8",
@@ -2400,8 +2400,8 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "tests/test_security_identity_acquisition.py": {
-      "expected_sha256": "0febef36a5e0b64878d0b21f8e04b57f4c1dd6a62d6f8752f568673e5acb9417",
-      "reason": "Regression coverage for deterministic acquisition outputs, exact 3,654/146 state, request identity uniqueness, fail-closed collisions/count drift, and prohibition of ticker/alias shortcuts."
+      "expected_sha256": "1858f65294e83a025c64b655126f3590efc113bab8ffa1ea1df6b48c68b74d5d",
+      "reason": "Regression coverage for the terminal empty stable-ID queue, completed readiness, readiness/unresolved mismatch rejection, and unchanged current acquisition artifacts."
     },
     "tests/test_security_identity_gate.py": {
       "expected_sha256": "d9895c167b5ccd6c02948c26ad434076fe152f474fd8a6d557f3c25b86135fc8",
