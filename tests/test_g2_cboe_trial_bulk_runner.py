@@ -25,6 +25,18 @@ def test_trial_task_plan_covers_full_vendor_confirmed_2012_2015_scope():
     assert manifest["page_limit"] == 10000
     assert manifest["coverage_claimed"] is False
     assert manifest["runtime_safety"]["execute_requires_explicit_ack"] == "--ack-trial-active"
+    assert (
+        manifest["runtime_safety"]["execute_requires_retention_ack"]
+        == "--ack-retention-authorized"
+    )
+    assert manifest["runtime_safety"]["retention_authority"] == {
+        "required": True,
+        "state": "PENDING_WRITTEN_VENDOR_CONFIRMATION",
+        "definition": (
+            "Written Cboe Order Form or vendor permission allowing retained "
+            "internal research use after trial termination."
+        ),
+    }
     assert manifest["runtime_safety"]["no_coverage_promotion"] is True
 
 
