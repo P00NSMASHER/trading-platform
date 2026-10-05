@@ -235,8 +235,7 @@ def test_execute_slice_is_bounded_and_never_promotes_coverage(monkeypatch, tmp_p
     ]
     seen = []
 
-    def fake_download(client, task, output_root, *, retention_authority):
-        assert retention_authority["verified"] is True
+    def fake_download(client, task, output_root):
         seen.append((task.trade_date, task.historical_symbol))
         return {
             "status": "fake",
@@ -246,17 +245,21 @@ def test_execute_slice_is_bounded_and_never_promotes_coverage(monkeypatch, tmp_p
         }
 
     monkeypatch.setattr(runner, "download_task", fake_download)
+    monkeypatch.setattr(
+        runner,
+        "require_retention_authority",
+        lambda: {
+            "verified": True,
+            "state": runner.REQUIRED_RETENTION_STATE,
+            "source_path": str(runner.DEFAULT_VENDOR_READINESS),
+        },
+    )
     result = runner.execute_slice(
         object(),
         tasks,
         tmp_path,
         start=1,
         limit=1,
-        retention_authority={
-            "verified": True,
-            "state": runner.REQUIRED_RETENTION_STATE,
-            "source_path": "test-readiness.json",
-        },
     )
 
     assert seen == [("2012-01-04", "AF")]
@@ -266,8 +269,13 @@ def test_execute_slice_is_bounded_and_never_promotes_coverage(monkeypatch, tmp_p
     assert result["g2_coverage_change"] == 0
 
 
-def test_execute_slice_rejects_missing_retention_authority(tmp_path: Path):
+def test_execute_slice_rejects_missing_retention_authority(monkeypatch, tmp_path: Path):
     tasks = [runner.TrialTask("2012-01-03", "AF")]
+
+    def blocked():
+        raise PermissionError("bulk Cboe acquisition blocked")
+
+    monkeypatch.setattr(runner, "require_retention_authority", blocked)
     try:
         runner.execute_slice(
             object(),
@@ -275,13 +283,9 @@ def test_execute_slice_rejects_missing_retention_authority(tmp_path: Path):
             tmp_path,
             start=0,
             limit=1,
-            retention_authority={
-                "verified": False,
-                "state": "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES",
-            },
         )
     except PermissionError as exc:
-        assert "requires verified retention authority" in str(exc)
+        assert "bulk Cboe acquisition blocked" in str(exc)
     else:
         raise AssertionError("expected retention authority failure")
 
