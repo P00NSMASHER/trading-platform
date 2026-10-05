@@ -344,18 +344,21 @@ def execute_probe(client_id: str, client_secret: str) -> dict[str, Any]:
         "probe": {
             "date": PROBE_DATE,
             "underlying_symbol": PROBE_UNDERLYING,
-            "derived_option_security": security,
+            "derived_option_security_present": bool(security),
         },
         "requests_executed": requests_executed,
         "points_consumed": points_consumed,
         "max_probe_points": MAX_PROBE_POINTS,
         "accepted": accepted,
         "assessments": assessments,
+        "raw_market_rows_persisted": False,
+        "market_values_persisted_in_receipt": False,
         "interpretation": (
             "A pass proves only that this entitlement returns the required 2011 reference, "
             "trade, and NBBO quote fields for this sample. It does not change the canonical "
             "2012 vendor floor, establish retention/license rights, prove complete pagination "
-            "or contract coverage, or promote any G2 row."
+            "or contract coverage, or promote any G2 row. The receipt intentionally persists "
+            "only schema/count/pass-fail metadata, not returned market values or contract IDs."
         ),
         "g2_coverage_change": 0,
     }
