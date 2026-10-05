@@ -1679,13 +1679,13 @@
       "expected_sha256": "dfc12128d77ac492775f75ddec13f11db4a98b4fa9d2994dd067bf9b59f91cc6",
       "reason": "Add exact symbol-date request-volume accounting to the G2_CHAMPION_MINIMUM candidate-source matrix; source availability only, no coverage claims or gate changes."
     },
-    "src/g2_cboe_acceptance_probe.py": {
-      "expected_sha256": "535ff6e711228a7267ecce1be3e09b724fc00f9e762fdaa3aad8f2667ab85562",
-      "reason": "Fail-closed Cboe historical acceptance probe: preserve 2011 equity TAQ smoke, move OPRA smoke to vendor-supported 2012, derive one historical option-quote request from a returned OSI security, and validate non-SIP-annotated NBBO fields; three requests / 45 points maximum."
-    },
     "src/g2_cboe_2011_options_probe.py": {
       "expected_sha256": "c8a8dd10d0076e2db8f0c99880b5d71e3c6d51f94c6d0c50089bced754273936",
       "reason": "Bounded fail-closed runtime probe for the unresolved 2011 Cboe OPRA entitlement discrepancy; tests one frozen JNPR/date reference, option-trade, and NBBO quote path with explicit trial acknowledgement, no coverage promotion, and no change to the vendor-confirmed 2012 bulk-planning floor."
+    },
+    "src/g2_cboe_acceptance_probe.py": {
+      "expected_sha256": "535ff6e711228a7267ecce1be3e09b724fc00f9e762fdaa3aad8f2667ab85562",
+      "reason": "Fail-closed Cboe historical acceptance probe: preserve 2011 equity TAQ smoke, move OPRA smoke to vendor-supported 2012, derive one historical option-quote request from a returned OSI security, and validate non-SIP-annotated NBBO fields; three requests / 45 points maximum."
     },
     "src/g2_cboe_all_access_capacity.py": {
       "expected_sha256": "50388cb3a540a63146b070b6e5f0c14d2e382ea9fe32e3f3e5e6bcd0aba62467",
@@ -1900,8 +1900,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "bb8d214893eaf539aea5b345f7fd675b981bc750244ee11795b599e8f241dbbe",
-      "reason": "G5 master acquisition planner: unify the 216 primary controls, 174 treated targets, 5,070 matching-field requirements, 1,560 external source-lane requests, and expanded control-history market/shares footprint into one deterministic fail-closed plan."
+      "expected_sha256": "23439ae6d883b0db831290cb25b22e9a50e1cc308db07c2c186d940a5db50503",
+      "reason": "G5 master acquisition planner now incorporates stable-security-identity requirements and acquisition gaps for the full primary-control history footprint alongside market, shares, external metadata, and treated-event requirements."
     },
     "src/g5_prior_fallback_planner.py": {
       "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",
@@ -2263,13 +2263,13 @@
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",
       "reason": "Add exact symbol-date request-volume accounting to the G2_CHAMPION_MINIMUM candidate-source matrix; source availability only, no coverage claims or gate changes."
     },
-    "tests/test_g2_cboe_acceptance_probe.py": {
-      "expected_sha256": "55b03f891c1217768729036d53fc2e72ae916f0db930275a116462be5d355a24",
-      "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
-    },
     "tests/test_g2_cboe_2011_options_probe.py": {
       "expected_sha256": "03bc58031a207f3b83a59f38c0a41e8cc9fbb0684c44ae6aa308b90d1343b868",
       "reason": "Regression coverage for the bounded 2011 Cboe OPRA entitlement probe: exact frozen sample, OSI derivation, three-request/31-point ceiling, fail-closed missing-reference behavior, and secret non-disclosure."
+    },
+    "tests/test_g2_cboe_acceptance_probe.py": {
+      "expected_sha256": "55b03f891c1217768729036d53fc2e72ae916f0db930275a116462be5d355a24",
+      "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
     },
     "tests/test_g2_cboe_all_access_capacity.py": {
       "expected_sha256": "44a62d7ee73e6ab9a4d024d95114e720d0a2ba600d1a25105d03a8524d4af49e",
@@ -2496,8 +2496,8 @@
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
     },
     "tests/test_g5_master_acquisition_plan.py": {
-      "expected_sha256": "7ef45f162a7226eca25033aa5ad6a40fda5c913d5e55067f4a4ce287957ee930",
-      "reason": "Regression coverage locks the 390 total matching targets, 5,070 field requirements (3,120 derived and 1,950 external), 1,560 external lane requests, 72-date structural coverage, history-overlap reconciliation, and zero canonical G5 readiness/release claims."
+      "expected_sha256": "404a8ed1c27537de32dc5765a59cb829ccd84a5f419173be581dcf48a446e8c2",
+      "reason": "Regression coverage locks the master plan's identity reconciliation, including the full history footprint, 51 unique exact-date public SampleFirms leads, 165 primary controls without exact-date public mapping, and nonzero remaining stable-ID acquisition work."
     },
     "tests/test_g5_prior_fallback_planner.py": {
       "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
