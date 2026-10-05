@@ -1212,3 +1212,25 @@ def test_batch_number_without_worker_identity_does_not_match_token_pr() -> None:
         "head": {"ref": "maintenance/batch-0067"},
     }
     assert ctl.pr_matches(2, "EW+MXIM", 67, pr) is False
+
+
+def test_fetch_branch_fallbacks_probes_newest_batches_first(monkeypatch) -> None:
+    refs = [
+        {"ref": "refs/heads/g1/prep-0060-worker-0-old-aaaaaaa", "object": {"sha": "oldsha"}},
+        {"ref": "refs/heads/g1/prep-0117-worker-2-seven-bbbbbbb", "object": {"sha": "newsha"}},
+    ]
+    compare_paths = []
+
+    def fake_api(repo, token, path, **kwargs):
+        if path == "/git/matching-refs/heads/g1/prep-":
+            return refs
+        if path.startswith("/compare/"):
+            compare_paths.append(path)
+            return {"ahead_by": 1, "behind_by": 0}
+        raise AssertionError(path)
+
+    monkeypatch.setattr(ctl, "github_api", fake_api)
+    found, compares = ctl.fetch_branch_fallbacks("owner/repo", "token", "mainsha")
+    assert found == refs
+    assert compare_paths[0].endswith("...newsha")
+    assert "g1/prep-0117-worker-2-seven-bbbbbbb" in compares

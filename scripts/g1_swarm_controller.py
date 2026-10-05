@@ -868,7 +868,18 @@ def fetch_branch_fallbacks(repo: str, token: str, main_sha: str) -> tuple[list[d
     compares: dict[str, dict[str, Any]] = {}
     # Do not cap prep-branch discovery: workers may legitimately accumulate
     # more than 30 disposable prep branches between cleanup cycles.
-    for ref in refs:
+    # Probe newest batch numbers first so current prepared work remains visible
+    # even when GitHub's compare endpoint throttles a repository with a large
+    # backlog of disposable prep refs.
+    def prep_priority(ref: dict[str, Any]) -> tuple[int, int, str]:
+        branch = str(ref.get("ref") or "").removeprefix("refs/heads/")
+        parsed = parse_prep_branch(branch)
+        if parsed is None:
+            return (-1, -1, branch)
+        worker, batch, _package = parsed
+        return (batch, worker, branch)
+
+    for ref in sorted(refs, key=prep_priority, reverse=True):
         branch = str(ref.get("ref") or "").removeprefix("refs/heads/")
         parsed = parse_prep_branch(branch)
         if parsed is None:

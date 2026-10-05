@@ -1552,8 +1552,8 @@
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "4fecdb141daa8955d05ee79bb0381a9e71a007fbfa9db083f21d89b42a9b21f9",
-      "reason": "G1 controller reliability: reject explicit cross-shard token/candidate packages and expire tokens after 120 minutes without fresh matching progress while preserving exact-current-main open PR support."
+      "expected_sha256": "8b755a38c654c904ea3397c549b537854d622c94bf7a528dbf96bbf1531995df",
+      "reason": "G1 controller reliability: prioritize newest prepared batch refs during fallback compare discovery so current exact-base packages are not starved by accumulated disposable prep branches; existing ownership, lease, and fail-closed token gates remain unchanged."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -2116,8 +2116,8 @@
       "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "02f1827222c81347be1b25b1ddb608ca7509e584cd249e1897186d909434f027",
-      "reason": "Regression coverage for cross-shard token rejection, deterministic ownership overrides, and stale BUILDING progress that must not extend a token lease indefinitely."
+      "expected_sha256": "2a2dd3b2fe3a95a205b6fb7dc8e5e838b6feafbe626d9c7d815371dc93be4dc5",
+      "reason": "Regression coverage for G1 controller token safety plus newest-first prepared-branch discovery ordering under a large prep-ref backlog."
     },
     "tests/test_g2_candidate_route_matrix.py": {
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",
