@@ -34,9 +34,6 @@ NYSE_TARGETS = {
     ("ACO", "2013-04-05"): "2013-04-04",
     ("ACO", "2013-04-08"): "2013-04-05",
     ("ACO", "2013-04-09"): "2013-04-08",
-    ("WLL", "2015-02-23"): "2015-02-20",
-    ("WLL", "2015-02-24"): "2015-02-23",
-    ("WLL", "2015-02-25"): "2015-02-24",
 }
 
 # Nasdaq Fundamental Data is a start-of-day T+1 reference product.  For
@@ -53,8 +50,7 @@ NASDAQ_TARGETS = {
 TARGET_CUTOFFS = {
     "ACO": time(14, 10),
     "CGNX": time(13, 34),
-    "WLL": time(15, 24),
-}
+    }
 
 NYSE_LISTED_EXCHANGE_CODE = "00"
 
@@ -100,10 +96,10 @@ def load_and_verify_blockers(path: Path = DEFAULT_BLOCKERS) -> dict:
 
     if int(state.get("required", -1)) != 3828:
         raise ValueError("G4 blocker receipt no longer has the canonical 3,828-row scope")
-    if int(state.get("exact_resolved", -1)) != 3810:
-        raise ValueError("G4 exact-resolved baseline drifted from 3,810")
-    if int(state.get("reviewed_excluded", -1)) != 18:
-        raise ValueError("G4 reviewed-exclusion baseline drifted from 18")
+    if int(state.get("exact_resolved", -1)) != 3813:
+        raise ValueError("G4 exact-resolved baseline drifted from 3,813")
+    if int(state.get("reviewed_excluded", -1)) != 15:
+        raise ValueError("G4 reviewed-exclusion baseline drifted from 15")
     if int(state.get("blocking_unresolved", -1)) != 0:
         raise ValueError("G4 blocker receipt contains unreviewed unresolved rows")
     actual = _canonical_blocker_targets(payload)
@@ -134,14 +130,14 @@ def build_completion_plan(blockers_path: Path = DEFAULT_BLOCKERS) -> dict:
     return {
         "schema_version": "1",
         "purpose": (
-            "Exact G4 completion plan that replaces all 18 reviewed share exclusions "
+            "Exact G4 completion plan that replaces all 15 reviewed share exclusions "
             "with admissible pre-cutoff exchange-reference shares evidence. "
             "Planning is public-safe; licensed payloads remain private."
         ),
         "current_g4": {
             "required": 3828,
-            "exact_resolved": 3810,
-            "reviewed_excluded": 18,
+            "exact_resolved": 3813,
+            "reviewed_excluded": 15,
             "target_exact_resolved": 3828,
             "target_reviewed_excluded": 0,
         },
@@ -192,7 +188,7 @@ def build_completion_plan(blockers_path: Path = DEFAULT_BLOCKERS) -> dict:
             for task in tasks
         ],
         "activation_rule": (
-            "All 18 rows must materialize with positive exact shares, admissible "
+            "All 15 rows must materialize with positive exact shares, admissible "
             "fact dates, and pre-cutoff availability. Partial activation is prohibited."
         ),
         "coverage_claimed": False,
@@ -402,14 +398,14 @@ def materialize_exact_rows(
 
     keys = {(row["historical_symbol"], row["target_trade_date"]) for row in rows}
     expected = set(NYSE_TARGETS) | set(NASDAQ_TARGETS)
-    if len(rows) != 18 or keys != expected:
+    if len(rows) != 15 or keys != expected:
         raise ValueError("exact G4 materialization did not produce all 18 required rows")
 
     summary = {
         "schema_version": "1",
         "status": "READY_FOR_PRIVATE_G4_ACTIVATION",
         "rows_materialized": len(rows),
-        "nyse_rows": sum(row["historical_symbol"] in {"ACO", "WLL"} for row in rows),
+        "nyse_rows": sum(row["historical_symbol"] == "ACO" for row in rows),
         "nasdaq_rows": sum(row["historical_symbol"] == "CGNX" for row in rows),
         "input_receipts": input_receipts,
         "g4_target_state": {
@@ -454,7 +450,7 @@ def write_private_outputs(
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Build the exact 18-row G4 exchange-reference completion plan or "
+            "Build the exact 15-row G4 exchange-reference completion plan or "
             "materialize it from private licensed NYSE/Nasdaq files."
         )
     )
