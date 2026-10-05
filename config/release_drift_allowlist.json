@@ -2518,6 +2518,14 @@
     "tests/test_g5_staged_readiness_preview.py": {
       "expected_sha256": "727734d5d4cb77ae4a18a350f416a464749d417ae1d17da6f01f7d800e7e5577",
       "reason": "Regression coverage for split-source G5 completeness, missing fields, equal-timestamp conflicts, unknown candidates, late rows, and explicit zero canonical-readiness/release change."
+    },
+    "src/g5_external_source_queue.py": {
+      "expected_sha256": "f5d2818b61bf81c6f59137be91d450ac338793dd5f6b8c6ec601ad9d38749f37",
+      "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
+    },
+    "tests/test_g5_external_source_queue.py": {
+      "expected_sha256": "0bfdb2b439db11dbb686f95e78bb423b4668e0af0a24fe71ae12e2286c8421e6",
+      "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
     }
   },
   "schema_version": "2",
