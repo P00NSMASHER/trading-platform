@@ -1,0 +1,47 @@
+name: G1 unresolved release classifier
+
+on:
+  push:
+    branches:
+      - g1/research-unresolved-release-classifier-8014585
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  classify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout classifier branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+
+      - name: Download pinned public press-release archives
+        run: |
+          set -euo pipefail
+          mkdir -p "/tmp/he/Data/Press releases"
+          base="https://raw.githubusercontent.com/vgreg/hacked_earnings_jfe/c23c7d79d067a79d70cf20e31b072d3703497eae/Data/Press%20releases"
+          for year in 2011 2012 2013 2014 2015; do
+            curl -L --fail --retry 3 --retry-delay 2               "$base/$year.zip"               -o "/tmp/he/Data/Press releases/$year.zip"
+          done
+
+      - name: Classify unresolved release members
+        run: |
+          set -euo pipefail
+          python scripts/g1_unresolved_release_classifier.py
+
+      - name: Upload research-only classifier output
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: g1-unresolved-release-classifier-${{ github.sha }}
+          path: private_runtime/audit/g1-unresolved-release-classifier
+          if-no-files-found: error
+          retention-days: 7
