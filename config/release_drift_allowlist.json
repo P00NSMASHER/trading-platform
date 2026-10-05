@@ -540,8 +540,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "06826653ce0b2c7a320bda9dda6791ef94ad50df74ecdc2cbd04e69299449076",
-      "reason": "G5 control-contract repair: regenerate the truthful 12-step sprint receipt against the new canonical G5 readiness/quality hashes; Step 10 remains SOURCE_BLOCKED at 0/72 genuine controls."
+      "expected_sha256": "bf257fd5a3f9d7e3c58ad4d110f1524e02504e94f4a88aab68b03bed0a2aed7f",
+      "reason": "G4 WLL exact public SEC repair: refresh real-data sprint status hash bindings after canonical metadata receipts move to 3,813 exact shares rows / 15 reviewed exclusions; no G2/G5 release gate is relaxed."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
