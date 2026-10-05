@@ -35,12 +35,12 @@ def test_full_universe_and_queue_reconcile():
     manifest = g1a.build_manifest()
     assert manifest["state"]["event_count"] == 174
     assert manifest["state"]["accounted_for"] == 174
-    assert manifest["state"]["exact_resolved"] == 150
-    assert manifest["state"]["acquisition_needed"] == 24
+    assert manifest["state"]["exact_resolved"] == 164
+    assert manifest["state"]["acquisition_needed"] == 10
     assert len(manifest["items"]) == 174
-    assert len(manifest["work_queue"]) == 24
+    assert len(manifest["work_queue"]) == 10
     assert len({row["event_id"] for row in manifest["items"]}) == 174
-    assert len({row["dedupe_key"] for row in manifest["work_queue"]}) == 24
+    assert len({row["dedupe_key"] for row in manifest["work_queue"]}) == 10
 
 
 def test_resolved_rows_never_reenter_acquisition_queue():
@@ -50,7 +50,7 @@ def test_resolved_rows_never_reenter_acquisition_queue():
         row for row in manifest["items"]
         if row["acquisition_status"] == "RESOLVED_NO_ACTION"
     ]
-    assert len(resolved) == 150
+    assert len(resolved) == 164
     assert all(row["event_id"] not in queue_ids for row in resolved)
     assert all(row["routes"] == [] for row in resolved)
 
@@ -61,7 +61,7 @@ def test_unresolved_rows_have_public_and_lawful_licensed_routes():
         row for row in manifest["items"]
         if row["acquisition_status"] == "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK"
     ]
-    assert len(unresolved) == 24
+    assert len(unresolved) == 10
     for row in unresolved:
         assert row["routes"]["licensed_ibes"]["entitlement_required"] is True
         assert row["routes"]["licensed_ibes"]["lawful_access_only"] is True
@@ -78,20 +78,30 @@ def test_routing_prioritizes_clock_recovery_vs_release_discovery():
         row for row in manifest["work_queue"]
         if "PUBLIC_RELEASE_FILE_PRESENT" in row["public_release_file_status"]
     )
-    missing = next(
+    missing = [
         row for row in manifest["work_queue"]
         if row["public_release_file_status"] == "NO_PUBLIC_REPLICATION_CANDIDATE_FILE"
-    )
+    ]
     assert by_id[present["event_id"]]["route_order"][0] == "public_exact_clock_recovery"
-    assert by_id[missing["event_id"]]["route_order"][0] == "licensed_ibes_bulk"
+    if missing:
+        assert all(by_id[row["event_id"]]["route_order"][0] == "licensed_ibes_bulk" for row in missing)
+    else:
+        assert all(
+            "PUBLIC_RELEASE_FILE_PRESENT" in row["public_release_file_status"]
+            for row in manifest["work_queue"]
+        )
+        assert all(
+            by_id[row["event_id"]]["route_order"][0] == "public_exact_clock_recovery"
+            for row in manifest["work_queue"]
+        )
 
 
 def test_explicit_research_priorities_head_the_queue():
     manifest = g1a.build_manifest()
     assert [row["historical_symbol"] for row in manifest["work_queue"][:5]] == [
-        "NKE", "EW", "DGI", "PNRA", "ACO"
+        "EW", "PNRA", "BIO", "GNTX", "CREE"
     ]
-    assert [row["queue_priority"] for row in manifest["work_queue"][:5]] == [4, 1000, 1000, 1000, 1000]
+    assert [row["queue_priority"] for row in manifest["work_queue"][:5]] == [1000, 1000, 1000, 1000, 1000]
 
 
 def test_stale_research_counts_do_not_override_authoritative_resolution_state():
@@ -102,8 +112,8 @@ def test_stale_research_counts_do_not_override_authoritative_resolution_state():
 
     manifest = g1a.build_manifest_from_data(rows, exclusions, tampered)
 
-    assert manifest["state"]["exact_resolved"] == 150
-    assert manifest["state"]["acquisition_needed"] == 24
+    assert manifest["state"]["exact_resolved"] == 164
+    assert manifest["state"]["acquisition_needed"] == 10
     assert manifest["state"]["research_hint_state_matches_authoritative"] is False
 
 
