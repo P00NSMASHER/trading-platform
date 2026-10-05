@@ -276,7 +276,7 @@
       "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
     },
     "data/processed/g2_vendor_requests/cboe_trial_bulk_readiness.json": {
-      "expected_sha256": "5ce869805188c907322788cc2156b4041849a303abf8e062136a9b750df6e44d",
+      "expected_sha256": "e1af43a690b66f747ea5656bcbcbd9a4cbc4f0c4d83b3a2afdd77202b671bbd2",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
@@ -1704,7 +1704,7 @@
       "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "src/g2_cboe_trial_bulk_runner.py": {
-      "expected_sha256": "aae7c7b273ea3de69fd00807a417cff35ba3f3bede57dbc9255db53f51eef652",
+      "expected_sha256": "b0d5453c241bb8e6ac7bbfc7696a9afa821755ef147a80c99d5c3a579485a084",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "src/g2_cheap_route_partitions.py": {
@@ -2288,7 +2288,7 @@
       "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
     },
     "tests/test_g2_cboe_trial_bulk_runner.py": {
-      "expected_sha256": "230b5ba0d645165f5a0bf747ebcfc0fd0a19a10e22f239052837f202117fbd81",
+      "expected_sha256": "0081dd6e489207cd9fc1fb1fc4b4d9ce846fcd35e411106b22e846c91dcb8cca",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "tests/test_g2_cheap_route_partitions.py": {
