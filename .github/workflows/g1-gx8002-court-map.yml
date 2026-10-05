@@ -33,8 +33,20 @@ jobs:
       - name: Extract PDF text layer
         run: |
           set -euo pipefail
-          command -v pdftotext
-          pdftotext -layout /tmp/gx8002.pdf /tmp/gx8002.txt
+          python -m pip install "pypdf==6.1.1"
+          python - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          reader=PdfReader("/tmp/gx8002.pdf")
+          chunks=[]
+          for page in reader.pages:
+              try:
+                  chunks.append(page.extract_text(extraction_mode="layout") or "")
+              except TypeError:
+                  chunks.append(page.extract_text() or "")
+          Path("/tmp/gx8002.txt").write_text("\n\f\n".join(chunks),encoding="utf-8")
+          print("pages",len(reader.pages),"chars",sum(map(len,chunks)))
+          PY
           test -s /tmp/gx8002.txt
           grep -F "Press Release" /tmp/gx8002.txt | head -20 || true
 
