@@ -20,7 +20,19 @@ jobs:
           python-version: '3.12'
       - name: Generate deterministic G1 batch 0105
         run: |
-          python scripts/g1_batch_0105_generate.py
+          set +e
+          python scripts/g1_batch_0105_generate.py > /tmp/g1-output.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            cp /tmp/g1-output.log g1_batch_0105_failure.log
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add g1_batch_0105_failure.log
+            git commit -m "ci(g1): preserve batch 0105 publisher failure"
+            git push origin HEAD:g1/integrate-0105-worker-0-41e0713
+            exit "$status"
+          fi
+          cat /tmp/g1-output.log
       - name: Commit generated canonical candidate
         run: |
           git config user.name "github-actions[bot]"
