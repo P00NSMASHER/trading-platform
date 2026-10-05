@@ -1,0 +1,52 @@
+name: G1 GX8002 court map
+
+on:
+  push:
+    branches:
+      - g1/research-gx8002-court-map-8014585
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  map:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout research branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+
+      - name: Download filed federal-court exhibit
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 --retry-delay 2             "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf"             -o /tmp/gx8002.pdf
+          sha256sum /tmp/gx8002.pdf
+
+      - name: Extract PDF text layer
+        run: |
+          set -euo pipefail
+          command -v pdftotext
+          pdftotext -layout /tmp/gx8002.pdf /tmp/gx8002.txt
+          test -s /tmp/gx8002.txt
+          grep -F "Press Release" /tmp/gx8002.txt | head -20 || true
+
+      - name: Map unresolved G1 events
+        run: |
+          set -euo pipefail
+          python scripts/g1_gx8002_court_map.py
+
+      - name: Upload research-only mapping
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: g1-gx8002-court-map-${{ github.sha }}
+          path: private_runtime/audit/g1-gx8002-court-map
+          if-no-files-found: error
+          retention-days: 7
