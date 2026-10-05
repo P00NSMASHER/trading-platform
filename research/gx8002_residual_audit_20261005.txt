@@ -1,0 +1,15 @@
+GX8002 residual audit
+Research run: 37310404911
+Research head: 58a7bb505d3f744645f06c101fef27c656409217
+
+GNTX / HEJFE-BD3F577ADD90D512:
+- Canonical first-trade minute: 2013-10-21 15:21.
+- Fresh parser output: same_symbol_year_rows=[].
+- Conclusion: Document 367-2 contains no parsed GNTX 2013 row, so relaxed same-symbol/year row matching cannot recover this event from GX 8002.
+
+PNRA / HEJFE-CCC7747CFBDE893E:
+- Fresh parser output independently reproduces row 1657 for 2013-04-23.
+- This row is already represented by the existing Worker 4 batch 0119 prep; do not duplicate it.
+
+Timezone:
+- This lane has not located a new explicit statement defining the GX 8002 timezone convention. Do not promote any newly discovered unzoned court time from this receipt.
