@@ -140,3 +140,19 @@ def test_validated_direct_mapping_not_in_queue_does_not_create_new_request():
 
     assert rows == []
     assert summary["counts"]["not_in_identity_queue"] == 1
+
+def test_current_repository_direct_bridge_capacity_is_locked():
+    mapping = bridge.read_csv(ROOT / bridge.DEFAULT_EVENT_MAPPING)
+    queue = bridge.read_csv(ROOT / bridge.DEFAULT_QUEUE)
+    index = bridge.build_direct_bridge_index(mapping)
+
+    direct_permnos = set(index.values())
+    eligible_requests = sum(
+        row["permno"] in direct_permnos
+        for row in queue
+    )
+
+    assert len(direct_permnos) == 111
+    assert eligible_requests == 2751
+    assert len(queue) == 3654
+
