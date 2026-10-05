@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
+  "reserved_batch": "0109",
+  "worker_slot": 4,
+  "prep_branch": "g1/prep-0109-worker-4-rovi-51d8470",
+  "prep_evidence_path": "data/public/metadata/g1_public_batch_0109_prep_evidence.json",
+  "event_ids": [
+    "HEJFE-809E53BB4081FBAE"
+  ],
+  "expected_exact_resolved": 122,
+  "expected_reviewed_excluded": 52,
+  "step9": "SOURCE_BLOCKED",
+  "publisher_trigger_revision": 1,
+  "publisher_trigger_reason": "Exact-main Worker-4 token validated; publish ROVI only after complete exact-head gates."
+}
