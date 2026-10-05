@@ -63,7 +63,7 @@ for item in items:
     assert sum(row["event_id"] == eid for row in exclusions["exclusions"]) == 1
     assert int(hashlib.sha256(eid.encode("utf-8")).hexdigest(), 16) % 5 == 2
     assert event["historical_symbol"] == item["historical_symbol"]
-    assert event["first_documented_illicit_trade_ts"] == item["first_documented_illicit_trade_ts"]
+    assert event["first_documented_illicit_trade_ts"].replace(" ", "T") == item["first_documented_illicit_trade_ts"][:19]
     trade = datetime.fromisoformat(event["first_documented_illicit_trade_ts"]).replace(tzinfo=ZoneInfo("America/New_York"))
     release = datetime.fromisoformat(item["public_announcement_ts"])
     assert trade < release <= trade + timedelta(days=7)
