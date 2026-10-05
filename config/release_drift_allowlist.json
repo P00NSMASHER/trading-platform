@@ -2426,6 +2426,14 @@
     "config/security_identity_evidence.example.csv": {
       "expected_sha256": "5a6e1f1f3ffb4e222e3504a644165a319503d8e60541e90152b2927e0ba77628",
       "reason": "Header-only schema template for externally supplied authorized dated stable-ID evidence; contains no licensed data and changes no identity coverage."
+    },
+    "src/security_identity_evidence_builder.py": {
+      "expected_sha256": "0388d6f9c2eb8b934f5d7f878f84b767f54a6567708b1d23e46c6b0384fbe511",
+      "reason": "Fail-closed builder that converts an explicitly authorized dated stock-name history extract into minimal stable-ID evidence intervals for the 3,654-request acquisition queue; requires nonblank authorization/source references and rejects uncovered, ambiguous, symbol-mismatched, or non-closing evidence."
+    },
+    "tests/test_security_identity_evidence_builder.py": {
+      "expected_sha256": "0768ee21d4f4def1820c19f051b478968871e14e80f58b46c3a3476c4e501d7d",
+      "reason": "Regression coverage for stable-ID evidence interval compression, uncovered dates, symbol mismatches, overlapping ambiguity, authorization requirements, and closing-lane enforcement."
     }
   },
   "schema_version": "2",
