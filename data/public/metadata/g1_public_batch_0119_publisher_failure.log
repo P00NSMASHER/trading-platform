@@ -1,0 +1,8 @@
+Attempt 1: syncing to latest main
+From https://github.com/P00NSMASHER/trading-platform
+ * branch              main       -> FETCH_HEAD
+HEAD is now at 55eb6e4c G1 batch 0118: recover BIO exact court public-distribution clock (#361)
+  File "/home/runner/work/trading-platform/trading-platform/scripts/g1_batch_0119_generate.py", line 35
+    specs=[
+          ^
+SyntaxError: '[' was never closed
