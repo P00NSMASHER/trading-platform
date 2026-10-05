@@ -106,7 +106,10 @@ def test_execute_probe_uses_three_bounded_requests_and_validates_2011_fields(mon
     assert result["requests_executed"] == 3
     assert result["points_consumed"] == 31
     assert result["g2_coverage_change"] == 0
-    assert result["probe"]["derived_option_security"] == "JNPR110416C00040000"
+    assert result["probe"]["derived_option_security_present"] is True
+    assert "derived_option_security" not in result["probe"]
+    assert result["raw_market_rows_persisted"] is False
+    assert result["market_values_persisted_in_receipt"] is False
     assert all("date=2011-03-21" in url for url in calls)
     assert "symbol=JNPR110416C00040000" in calls[-1]
 
