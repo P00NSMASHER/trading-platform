@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "status": "FOUND_RESEARCH_HANDOFF",
+  "event_id": "HEJFE-AC78A2434E4AE8FB",
+  "historical_symbol": "ACO",
+  "owner_worker": 0,
+  "source_family": "federal_court_public_distribution_record",
+  "wire_family": "Marketwired",
+  "public_distribution_ts": "2013-04-26T07:00:00-04:00",
+  "chronology_seconds": 58800,
+  "release_title": "AMCOL International Corporation (NYSE: ACO) Reports First Quarter Results",
+  "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+  "exact_row_text": "1665 ACO 2013 4/26/13 4/25/13 14:40 4/26/13 11:55 4/25/13 12:54 4/26/13 7:00 MW",
+  "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/813621/000110262413000483/exh99_1.htm",
+  "corroboration_note": "SEC Exhibit 99.1 matches the exact title and identifies the release as Marketwired. Direct legacy Marketwired mirror search did not recover an independent timestamp-preserving page, so no mirror clock is claimed.",
+  "next_action": "Worker 0 should perform live unresolved/duplicate checks and PREP using the already-approved court-source family pattern."
+}
