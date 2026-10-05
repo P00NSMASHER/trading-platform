@@ -53,6 +53,7 @@ specs=[
     "wire_source_code": "MW",
     "corroborating_release_member_path": "2013/QTR2/76695_20130423_1.txt"
   }
+]
 items=[]
 hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
 hints=load(hints_path);trial=copy.deepcopy(hints)
