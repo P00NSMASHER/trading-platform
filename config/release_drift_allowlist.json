@@ -135,26 +135,6 @@
       "expected_sha256": "bd147ed763d528638df579a364c706ed2ed4784a98eb931dffd356c44b76c047",
       "reason": "Control-plane Step 8: exact dispatched-commit checkout and externally authenticated release audit-pack generation"
     },
-    "FROZEN_CHAMPION.md": {
-      "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
-    "RELEASE_MANIFEST.json": {
-      "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
-    "SECURITY.md": {
-      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
-      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
-    },
-    "SHA256SUMS": {
-      "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
-    "STEP21_IMPORT_PROVENANCE.md": {
-      "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
     "config/licensed_entitlement_manifest.example.json": {
       "expected_sha256": "ea2e663dfb257da11ac8cf4257c33bb0fc8634ed425c8c17e8e207f70aee4050",
       "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
@@ -174,6 +154,10 @@
     "config/real_data_replay.software_proof.json": {
       "expected_sha256": "03a6165b68d2ca3857ee0d92693af72f6527ec374dce99a1b6fac38516562532",
       "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
+    },
+    "config/security_identity_evidence.example.csv": {
+      "expected_sha256": "5a6e1f1f3ffb4e222e3504a644165a319503d8e60541e90152b2927e0ba77628",
+      "reason": "Header-only schema template for externally supplied authorized dated stable-ID evidence; contains no licensed data and changes no identity coverage."
     },
     "config/skops_trusted_types.example.json": {
       "expected_sha256": "4c5595773d3ff4c72588ea3bea57af0be7d96a00366d698e20c43f5a1e0b5881",
@@ -206,6 +190,10 @@
     "data/processed/authorized_input_real/g4_aco_20130410_evidence.json": {
       "expected_sha256": "0cfae43b46407d18676209698bb8b0f907629c01144e3a91708edf6ce0fddf2d",
       "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+    },
+    "data/processed/authorized_input_real/g4_exact_completion_plan.json": {
+      "expected_sha256": "3f372406d02ba85e4c39b91c34e5babff6640d3d5eb8b1fac9acc24be027ffca",
+      "reason": "Public-safe machine-readable G4 exact completion plan: 13 NYSE Daily TAQ Master rows plus 5 Nasdaq Fundamental Data rows to move 3810 exact + 18 exclusions to 3828 exact + 0 exclusions without publishing licensed values."
     },
     "data/processed/authorized_input_real/g4_final_blockers.json": {
       "expected_sha256": "ce36e5cb2839f5f8dc22b2d955954231ddeb32838c97a487b1c482f7279096ed",
@@ -511,13 +499,13 @@
       "expected_sha256": "b5cfbc9768b8b00a4e7c44cbd753f3d6bf3e87e9fc6e92c3b87685c28b1b7741",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
-    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
-      "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
-      "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
-    },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
       "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
       "reason": "Nasdaq ITCH vendor-contact provenance receipt from PR #164; records acknowledgement and Sales handoff only while Step 8 remains SOURCE_BLOCKED with no verified entitlement or decoded files."
+    },
+    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
+      "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
+      "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
     },
     "data/processed/real_data_release_sprint/production_source_contract_blueprint.json": {
       "expected_sha256": "965cbb2a151d9d3bed146912960f5ba3f5521cc21d600cfb7bba6bc6ed1cf382",
@@ -543,13 +531,13 @@
       "expected_sha256": "e252c39710ed9b8f228ba0b339d24c4850000d200a10421bb23af0c319e919fe",
       "reason": "Materialized cheap-first LSEG/ThetaData G2_FULL_REPLICATION option-quote plan; candidate sourcing only, no purchase or coverage claim."
     },
-    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
-      "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
-      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
-    },
     "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history_option_quotes.csv": {
       "expected_sha256": "c2594bfdd987d6600c11f76edf0dc02f6e8d63f01f6b9a8a3732b2b6e2549924",
       "reason": "Materialized full-replication option-quote request rows with deterministic per-date LSEG/ThetaData candidate routing; legacy artifact path retained for compatibility."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
+      "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_nbbo_quotes.csv": {
       "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
@@ -719,12 +707,12 @@
       "expected_sha256": "5c997dcc805c9e5df65bac36213726c1550d852492cd26271288688ceb528491",
       "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
     },
-    "data/public/metadata/g1_announcement_times_batch_0032.csv": {
-      "expected_sha256": "82f9caa85fc930fc2b955c3dc2d16fab8d17b7f676cba99f3b2c747dcf41013d",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
     "data/public/metadata/g1_announcement_times_batch_0032_evidence.json": {
       "expected_sha256": "e023876cf0580d0caaf5d7385604b5d9ca128bcbbc598169009dc7f3815d2999",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0032.csv": {
+      "expected_sha256": "82f9caa85fc930fc2b955c3dc2d16fab8d17b7f676cba99f3b2c747dcf41013d",
       "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/public/metadata/g1_announcement_times_batch_0033.csv": {
@@ -1271,10 +1259,6 @@
       "expected_sha256": "2c7f0880436d5ef7dc526be8c2f9dfa68174e403cdb21e1302590ba21c7d4355",
       "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
-    "data/raw/hacked_earnings_jfe/SampleFirms.csv": {
-      "expected_sha256": "7a9927a84dd9532bd5a4a8157ed3e40bc1b50c7b1be51374feca17b29a65f5df",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
-    },
     "data/raw/hacked_earnings_jfe/SampleFirms_actual.csv": {
       "expected_sha256": "c9684e2f6f419533dd438e66c3beefa624cca419109259d07ac5eb615d872308",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
@@ -1283,8 +1267,8 @@
       "expected_sha256": "bd40f28b7c2d7889303ebb4a9b4d604cee330e351232361789f42ba1f96c2fcf",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/TimeOfFirstTrade.csv": {
-      "expected_sha256": "e723e9e2a0e0a616915f3146fdea40ef429d90586ac4699853b047c536568f55",
+    "data/raw/hacked_earnings_jfe/SampleFirms.csv": {
+      "expected_sha256": "7a9927a84dd9532bd5a4a8157ed3e40bc1b50c7b1be51374feca17b29a65f5df",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
     "data/raw/hacked_earnings_jfe/source_snapshot/.gitignore": {
@@ -1311,6 +1295,14 @@
       "expected_sha256": "f19127ed0b019c959ed82e33b06607558567b9a82e38207d7ea0ef17c32d6f77",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
+    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/clean_pr_text.py": {
+      "expected_sha256": "314cdb95f1ff9d338fa4aa21a8dee2d66c31d5d1d92e58957cde21151b4b5633",
+      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
+    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/pr sentiment.py": {
+      "expected_sha256": "f3ef14e2b5efdd12f0ede8df3a67b71222959db7fcc6df82637ada98fcbf0f6a",
+      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
     "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet.b64": {
       "expected_sha256": "167d49f786dffddefce7cbc94253ffae5f974b8b8dfbcc2c732a48b48eed014b",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
@@ -1319,12 +1311,8 @@
       "expected_sha256": "f1dbfd9368057e1ea45fc7abc1561799142074d2043544237a91dfb79c3857fc",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/clean_pr_text.py": {
-      "expected_sha256": "314cdb95f1ff9d338fa4aa21a8dee2d66c31d5d1d92e58957cde21151b4b5633",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
-    },
-    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/pr sentiment.py": {
-      "expected_sha256": "f3ef14e2b5efdd12f0ede8df3a67b71222959db7fcc6df82637ada98fcbf0f6a",
+    "data/raw/hacked_earnings_jfe/TimeOfFirstTrade.csv": {
+      "expected_sha256": "e723e9e2a0e0a616915f3146fdea40ef429d90586ac4699853b047c536568f55",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
     "docs/control_plane_implementation_baseline.md": {
@@ -1422,6 +1410,14 @@
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "FROZEN_CHAMPION.md": {
+      "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "RELEASE_MANIFEST.json": {
+      "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "requirements-skops.lock": {
       "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
@@ -1598,6 +1594,14 @@
     "scripts/verify_release_drift.py": {
       "expected_sha256": "241605c6377d451bbaee1f94d8fccefa6f9c10aadc05aca81967b31db161b6f4",
       "reason": "Intentional post-Step21 repository hardening addition; SHA-256 drift identities and externally authenticated allowlist"
+    },
+    "SECURITY.md": {
+      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
+      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
+    },
+    "SHA256SUMS": {
+      "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "src/control_plane/__init__.py": {
       "expected_sha256": "9c85c627406ac58621635d1394cabe5a32c066093d28e8cdaf44752ed88da358",
@@ -1839,9 +1843,49 @@
       "expected_sha256": "819b5ff7257ca3662a6192e15d4c69079c54cd5458306a2a3a4570149bcb1476",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
+    "src/g4_exchange_reference_completion.py": {
+      "expected_sha256": "ebfc17787a1e793e5f4ada78926eafc5ddab9ce8fa23fca4e8e36f23926a572f",
+      "reason": "Exact G4 exchange-reference completion path for the final 18 share exclusions: private NYSE Daily TAQ Master parsing for 13 ACO/WLL rows plus Nasdaq Fundamental Data TSO parsing for 5 CGNX rows, strict pre-cutoff/staleness validation, all-or-nothing activation, and no licensed payload committed."
+    },
     "src/g4_materialize_batch.py": {
       "expected_sha256": "0d35b9cdff610500a035a14d5086f785fefecc217ff6a608ad0032f567464a4c",
       "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "src/g5_control_acquisition_planner.py": {
+      "expected_sha256": "ce08b1632f41dcf345924c5bf7b904f7ab78ad7493a272f3b7c9dd019a2d487f",
+      "reason": "G5 acquisition planning now separates an exactly three-per-date 216-row primary queue from 766 reserve candidates, preserving every fallback while reducing first-pass point-in-time metadata acquisition without changing evidence eligibility."
+    },
+    "src/g5_control_expansion_planner.py": {
+      "expected_sha256": "8471b26e8e163c8816fa0c903d7eb43a56960c90a5f25d9e74ff08ad9ee7f67b",
+      "reason": "G5 acquisition planning: use retrospective SampleFirms only as a symbol/date planning universe, ignore Hacked/Actual/Soft labels, and produce a fail-closed market-data expansion queue without promoting any row to genuine control evidence."
+    },
+    "src/g5_control_gap_planner.py": {
+      "expected_sha256": "a58f0cc6ac2207f00e2c6beb7dae89467df454538fa84c8ce82414ec9a123947",
+      "reason": "G5 control acquisition planning: deterministic lower-bound measurement of same-day candidate coverage already present in the frozen G2 market-data scope; no control-readiness or release claim."
+    },
+    "src/g5_derived_market_metadata_adapter.py": {
+      "expected_sha256": "2d4f8205f188b29a1521f2a8e2f5cab65fa564e04f05669c741e001cd777ef73",
+      "reason": "G5 derived market metadata intake: compute only strictly pre-cutoff price, market cap, 21-prior-day volatility, same-minute baseline volume/turnover/spread, option contract-volume liquidity, and pre-event return from real G2/G4 inputs while keeping outputs non-evidence until canonical resolver gates pass."
+    },
+    "src/g5_external_metadata_adapter.py": {
+      "expected_sha256": "ea6d3df9bf3e7e1805bebb64ca7ee5e597281d74cbca9678d73dea0f4cfae6a8",
+      "reason": "G5 external point-in-time metadata intake: strict source hash and authorization binding, primary-candidate scoping, pre-cutoff timestamp enforcement, alias normalization for classification/13F/IBES/borrow lanes, and explicit non-evidence output semantics."
+    },
+    "src/g5_external_source_queue.py": {
+      "expected_sha256": "f5d2818b61bf81c6f59137be91d450ac338793dd5f6b8c6ec601ad9d38749f37",
+      "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
+    },
+    "src/g5_prior_fallback_planner.py": {
+      "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",
+      "reason": "G5 residual structural planning: fill only remaining candidate slots from strictly prior symbol observations, with retrospective labels ignored and all rows kept ineligible until date-specific identity, real four-kind market data, and pre-event metadata are proven."
+    },
+    "src/g5_staged_readiness_preview.py": {
+      "expected_sha256": "5cae6770ae9872536a5ceae5eaff69ae15e9cc33a5c0234aa4d2a0a37f5ff7b7",
+      "reason": "G5 staged-readiness preview: fuse normalized control metadata across files using latest pre-cutoff values, fail closed on equal-timestamp conflicts and unknown candidates, and report completeness without changing canonical G5 readiness."
+    },
+    "src/g5_treated_metadata_requirements.py": {
+      "expected_sha256": "ea8e33cbd8464480687b8e54e3001c27cc0534bbe813d36751ec15b91ef7bf62",
+      "reason": "G5 treated-event metadata planning: explicitly require the same 13 matching fields for all 174 treated events at event-specific pre-trade cutoffs, including 1,392 derived and 870 external field requirements, because control candidates alone cannot make matching genuine."
     },
     "src/hacked_earnings_github_extractor.py": {
       "expected_sha256": "24d5da4f23bd26238afb5ec8d45840cbde73a0e187de415a094cfefc806f2dd3",
@@ -1875,9 +1919,25 @@
       "expected_sha256": "591917afd7bad95df82ae017845bb0f9a26cd5c5fbc82115dc3ba3c7ebc15d82",
       "reason": "Stable-ID acquisition terminal-state support: a genuinely complete identity manifest now deterministically emits an empty acquisition queue and ready summary instead of crashing, while readiness/count mismatches remain fail-closed and the current unresolved outputs remain byte-identical."
     },
+    "src/security_identity_evidence_stager.py": {
+      "expected_sha256": "4a56909bcdd581821f2f634a2ea8f0053dce2f8da57e9e318ae4ddf509ee2291",
+      "reason": "Cumulative stable-ID staging: automatically carry forward previously promoted embedded canonical evidence, deduplicate by evidence_id, bind the candidate to the exact prior canonical manifest hash, and stage only monotonic additions without canonical writes."
+    },
     "src/security_identity_gate.py": {
       "expected_sha256": "78ea186718daf51ce3a9211027716d48dea8da609b8143100cb96d00978d23e8",
       "reason": "Stable-ID progress accounting: keep event-date identity verified_count fixed at the 174 events while tracking baseline identity progress separately, so authorized evidence can move from 0 to 3654 baseline dates without corrupting event-count semantics."
+    },
+    "src/security_identity_lseg_bridge.py": {
+      "expected_sha256": "f124aaa6c12c42b5d1274dd5e136ceb1d2fd169911c4d6c7065c1a5a37bb41ee",
+      "reason": "Fail-closed bridge from authorized date-specific LSEG RIC validation to stable security-identity evidence; only direct study PERMNO-to-RIC mappings can emit one-day evidence, with symbol-only/root-only/secondary mappings prohibited from closing identity."
+    },
+    "src/security_identity_publisher.py": {
+      "expected_sha256": "55e14cd3b531c0117ae8f1d33b74ccc2b874d58577906ed8389069a8fa99edb3",
+      "reason": "Verified stable-ID publisher additionally rejects staging bundles built from a stale prior canonical identity manifest while preserving exact evidence/source/queue reproduction and SHA-approved promotion."
+    },
+    "src/security_identity_stocknames_adapter.py": {
+      "expected_sha256": "0827415530de10e90e69b0b43b9a57609fbca8f99434408e6ab4fc0a3f9f4e5f",
+      "reason": "Fail-closed adapter for explicitly authorized dated PERMNO/ticker name-history evidence: exact PERMNO and historical-symbol matching on each requested date, source SHA and authorization binding, no current-ticker substitution or interval inference, and no coverage change until canonical evidence is applied."
     },
     "src/software_readiness_certification.py": {
       "expected_sha256": "b472c49c8b88740ffea4c8639117390565b66395337dc1d02f5c76ad9a6511c2",
@@ -1886,6 +1946,10 @@
     "src/surveillance_feature_diagnostics.py": {
       "expected_sha256": "d9f8459d35bc7e99c941af00187b96ccd3ded2d9b33913f37b4310ebc24c59a8",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "STEP21_IMPORT_PROVENANCE.md": {
+      "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "tests/test_control_plane_adversarial.py": {
       "expected_sha256": "28773c33814d97a730a8e5ba42e2493328d3e890fd3113953d3d96f8e6e7e598",
@@ -2355,9 +2419,49 @@
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
+    "tests/test_g4_exchange_reference_completion.py": {
+      "expected_sha256": "576350c0ed5f1d082c611525d60cad301b07cc53e4d42e1df64fa81404cea0e1",
+      "reason": "Regression coverage for the exact 18-row G4 completion scope, documented NYSE fixed-width offsets and NYSE-only share field, Nasdaq TSO timestamps, cutoff enforcement, private materialization, tamper-resistant source receipts, and fail-closed partial delivery."
+    },
     "tests/test_g4_materialize_batch.py": {
       "expected_sha256": "90b4d870c209f7e71f70a5ef6533b0b921ccf253e1c7efde9e69c1531cfcfba2",
       "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "tests/test_g5_control_acquisition_planner.py": {
+      "expected_sha256": "fdbc0dedd3cee5811b8bdcab61c542eb0bfb0cb90cdd96ff73b6f09b9529d445",
+      "reason": "Regression coverage locks 216 primary candidate symbol-dates across all 72 dates, 766 reserves, 2,808 primary field requirements (1,728 derived and 1,080 external), disjoint primary/reserve coverage, and the ADBE/LBMH/WG primary set for 2014-12-15."
+    },
+    "tests/test_g5_control_expansion_planner.py": {
+      "expected_sha256": "231cee684cfa6cea2421ae1bf0b01c4e01f92b4943de99133314e3fb9468930c",
+      "reason": "Regression coverage locks the current G5 expansion plan at 51 of 52 structural deficit slots, proves retrospective labels do not affect selection, and prevents known positives or existing G2 candidates from being reselected."
+    },
+    "tests/test_g5_control_gap_planner.py": {
+      "expected_sha256": "a56c70dd4189c515a39d59c156d88d588c20ed78f8c6632032786a935198570f",
+      "reason": "Regression coverage freezes the current 49/72 structurally sufficient dates, 23 deficient dates, and 52 minimum additional candidate symbol-date lower bound while excluding same-day positives."
+    },
+    "tests/test_g5_derived_market_metadata_adapter.py": {
+      "expected_sha256": "0d414cff9384f4b7b08548bee4ef8ef89210cf114d62445f8baaa6e049496f8c",
+      "reason": "Regression coverage for completed-minute anti-lookahead, prior-day volatility, point-in-time shares availability, baseline-history requirements, option-liquidity definition, and zero G5 readiness/release claims."
+    },
+    "tests/test_g5_external_metadata_adapter.py": {
+      "expected_sha256": "80dff7eba574b409729141e387d36d94f0c98836408607992a10332dbfeaac6e",
+      "reason": "Regression coverage for G5 external metadata aliases, source hashes, point-in-time cutoffs, candidate scoping, prohibited retrospective/post-event columns, same-timestamp conflicts, and non-evidence receipts."
+    },
+    "tests/test_g5_external_source_queue.py": {
+      "expected_sha256": "0bfdb2b439db11dbb686f95e78bb423b4668e0af0a24fe71ae12e2286c8421e6",
+      "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
+    },
+    "tests/test_g5_prior_fallback_planner.py": {
+      "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
+      "reason": "Regression coverage locks the final structural planning slot to deterministic prior-only candidate ADBE from a 2014-12-11 observation for the 2014-12-15 gap and proves future-only symbols are never selected."
+    },
+    "tests/test_g5_staged_readiness_preview.py": {
+      "expected_sha256": "727734d5d4cb77ae4a18a350f416a464749d417ae1d17da6f01f7d800e7e5577",
+      "reason": "Regression coverage for split-source G5 completeness, missing fields, equal-timestamp conflicts, unknown candidates, late rows, and explicit zero canonical-readiness/release change."
+    },
+    "tests/test_g5_treated_metadata_requirements.py": {
+      "expected_sha256": "52b4802b4b898f19c44a45699060806ac0fa7b4354c38e17cce56c83ee9cb21f",
+      "reason": "Regression coverage locks 174 treated events, 72 dates, 2,262 treated field requirements, 696 external lane requests, exact event-specific cutoffs, and zero evidence/release claims."
     },
     "tests/test_hacked_earnings_github_extractor.py": {
       "expected_sha256": "3c7d5d37e782f345c6e9c9559d60ce484b62a7701cfd9e57d3885970f59ce2d9",
@@ -2407,9 +2511,25 @@
       "expected_sha256": "1858f65294e83a025c64b655126f3590efc113bab8ffa1ea1df6b48c68b74d5d",
       "reason": "Regression coverage for the terminal empty stable-ID queue, completed readiness, readiness/unresolved mismatch rejection, and unchanged current acquisition artifacts."
     },
+    "tests/test_security_identity_evidence_stager.py": {
+      "expected_sha256": "83f5f3cde1c4e4bb6af04d8c083c6c243b705b6bc66ce77489cc2527357dc150",
+      "reason": "Regression coverage for cumulative prior+new identity evidence, evidence-id conflict rejection, required embedded proof for promoted state, receipt accounting of prior versus new evidence, and JSON fixture mutation handling."
+    },
     "tests/test_security_identity_gate.py": {
       "expected_sha256": "d9895c167b5ccd6c02948c26ad434076fe152f474fd8a6d557f3c25b86135fc8",
       "reason": "Regression coverage locks event-date identity at 174 while one authorized baseline evidence row increments baseline verified progress and decrements unresolved progress by exactly one."
+    },
+    "tests/test_security_identity_lseg_bridge.py": {
+      "expected_sha256": "a3e7a47df1245def461123a0f6be3448f038807549807ff08e9a055b084191ba",
+      "reason": "Regression coverage for direct dated LSEG identity evidence, authorization requirement, rejection of root-only/secondary mappings, ambiguous validation, mapping conflicts, out-of-queue rows, and locked 111-security/2751-request direct-bridge capacity."
+    },
+    "tests/test_security_identity_publisher.py": {
+      "expected_sha256": "a4154462a4ca9f6144480a57418fb8ec2ef412259a59a9e19ab2473973d198f2",
+      "reason": "Regression coverage now includes rejection of staged candidates tied to a stale canonical identity manifest."
+    },
+    "tests/test_security_identity_stocknames_adapter.py": {
+      "expected_sha256": "259a2fa81148f452e055b08a707462a674ccb7b75bed379ed19a13beefe3a634",
+      "reason": "Regression coverage for exact dated stocknames identity evidence, symbol/date mismatches, active-identifier ambiguity, duplicate same-ticker rows, open-ended histories, malformed intervals, authorization/hash requirements, and the current 3654-request/146-PERMNO queue shape."
     },
     "tests/test_software_readiness_certification.py": {
       "expected_sha256": "81b0996abf82efb14b88427812dcfdbfa3bf56e5f037f05bc07ff62d0d3c3174",
@@ -2426,114 +2546,6 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
-    },
-    "config/security_identity_evidence.example.csv": {
-      "expected_sha256": "5a6e1f1f3ffb4e222e3504a644165a319503d8e60541e90152b2927e0ba77628",
-      "reason": "Header-only schema template for externally supplied authorized dated stable-ID evidence; contains no licensed data and changes no identity coverage."
-    },
-    "src/security_identity_lseg_bridge.py": {
-      "expected_sha256": "f124aaa6c12c42b5d1274dd5e136ceb1d2fd169911c4d6c7065c1a5a37bb41ee",
-      "reason": "Fail-closed bridge from authorized date-specific LSEG RIC validation to stable security-identity evidence; only direct study PERMNO-to-RIC mappings can emit one-day evidence, with symbol-only/root-only/secondary mappings prohibited from closing identity."
-    },
-    "tests/test_security_identity_lseg_bridge.py": {
-      "expected_sha256": "a3e7a47df1245def461123a0f6be3448f038807549807ff08e9a055b084191ba",
-      "reason": "Regression coverage for direct dated LSEG identity evidence, authorization requirement, rejection of root-only/secondary mappings, ambiguous validation, mapping conflicts, out-of-queue rows, and locked 111-security/2751-request direct-bridge capacity."
-    },
-    "src/security_identity_stocknames_adapter.py": {
-      "expected_sha256": "0827415530de10e90e69b0b43b9a57609fbca8f99434408e6ab4fc0a3f9f4e5f",
-      "reason": "Fail-closed adapter for explicitly authorized dated PERMNO/ticker name-history evidence: exact PERMNO and historical-symbol matching on each requested date, source SHA and authorization binding, no current-ticker substitution or interval inference, and no coverage change until canonical evidence is applied."
-    },
-    "tests/test_security_identity_stocknames_adapter.py": {
-      "expected_sha256": "259a2fa81148f452e055b08a707462a674ccb7b75bed379ed19a13beefe3a634",
-      "reason": "Regression coverage for exact dated stocknames identity evidence, symbol/date mismatches, active-identifier ambiguity, duplicate same-ticker rows, open-ended histories, malformed intervals, authorization/hash requirements, and the current 3654-request/146-PERMNO queue shape."
-    },
-    "src/security_identity_evidence_stager.py": {
-      "expected_sha256": "4a56909bcdd581821f2f634a2ea8f0053dce2f8da57e9e318ae4ddf509ee2291",
-      "reason": "Cumulative stable-ID staging: automatically carry forward previously promoted embedded canonical evidence, deduplicate by evidence_id, bind the candidate to the exact prior canonical manifest hash, and stage only monotonic additions without canonical writes."
-    },
-    "tests/test_security_identity_evidence_stager.py": {
-      "expected_sha256": "83f5f3cde1c4e4bb6af04d8c083c6c243b705b6bc66ce77489cc2527357dc150",
-      "reason": "Regression coverage for cumulative prior+new identity evidence, evidence-id conflict rejection, required embedded proof for promoted state, receipt accounting of prior versus new evidence, and JSON fixture mutation handling."
-    },
-    "src/g5_control_gap_planner.py": {
-      "expected_sha256": "a58f0cc6ac2207f00e2c6beb7dae89467df454538fa84c8ce82414ec9a123947",
-      "reason": "G5 control acquisition planning: deterministic lower-bound measurement of same-day candidate coverage already present in the frozen G2 market-data scope; no control-readiness or release claim."
-    },
-    "tests/test_g5_control_gap_planner.py": {
-      "expected_sha256": "a56c70dd4189c515a39d59c156d88d588c20ed78f8c6632032786a935198570f",
-      "reason": "Regression coverage freezes the current 49/72 structurally sufficient dates, 23 deficient dates, and 52 minimum additional candidate symbol-date lower bound while excluding same-day positives."
-    },
-    "src/g5_control_expansion_planner.py": {
-      "expected_sha256": "8471b26e8e163c8816fa0c903d7eb43a56960c90a5f25d9e74ff08ad9ee7f67b",
-      "reason": "G5 acquisition planning: use retrospective SampleFirms only as a symbol/date planning universe, ignore Hacked/Actual/Soft labels, and produce a fail-closed market-data expansion queue without promoting any row to genuine control evidence."
-    },
-    "tests/test_g5_control_expansion_planner.py": {
-      "expected_sha256": "231cee684cfa6cea2421ae1bf0b01c4e01f92b4943de99133314e3fb9468930c",
-      "reason": "Regression coverage locks the current G5 expansion plan at 51 of 52 structural deficit slots, proves retrospective labels do not affect selection, and prevents known positives or existing G2 candidates from being reselected."
-    },
-    "src/g5_control_acquisition_planner.py": {
-      "expected_sha256": "ce08b1632f41dcf345924c5bf7b904f7ab78ad7493a272f3b7c9dd019a2d487f",
-      "reason": "G5 acquisition planning now separates an exactly three-per-date 216-row primary queue from 766 reserve candidates, preserving every fallback while reducing first-pass point-in-time metadata acquisition without changing evidence eligibility."
-    },
-    "tests/test_g5_control_acquisition_planner.py": {
-      "expected_sha256": "fdbc0dedd3cee5811b8bdcab61c542eb0bfb0cb90cdd96ff73b6f09b9529d445",
-      "reason": "Regression coverage locks 216 primary candidate symbol-dates across all 72 dates, 766 reserves, 2,808 primary field requirements (1,728 derived and 1,080 external), disjoint primary/reserve coverage, and the ADBE/LBMH/WG primary set for 2014-12-15."
-    },
-    "src/g5_prior_fallback_planner.py": {
-      "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",
-      "reason": "G5 residual structural planning: fill only remaining candidate slots from strictly prior symbol observations, with retrospective labels ignored and all rows kept ineligible until date-specific identity, real four-kind market data, and pre-event metadata are proven."
-    },
-    "tests/test_g5_prior_fallback_planner.py": {
-      "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
-      "reason": "Regression coverage locks the final structural planning slot to deterministic prior-only candidate ADBE from a 2014-12-11 observation for the 2014-12-15 gap and proves future-only symbols are never selected."
-    },
-    "src/security_identity_publisher.py": {
-      "expected_sha256": "55e14cd3b531c0117ae8f1d33b74ccc2b874d58577906ed8389069a8fa99edb3",
-      "reason": "Verified stable-ID publisher additionally rejects staging bundles built from a stale prior canonical identity manifest while preserving exact evidence/source/queue reproduction and SHA-approved promotion."
-    },
-    "tests/test_security_identity_publisher.py": {
-      "expected_sha256": "a4154462a4ca9f6144480a57418fb8ec2ef412259a59a9e19ab2473973d198f2",
-      "reason": "Regression coverage now includes rejection of staged candidates tied to a stale canonical identity manifest."
-    },
-    "src/g5_external_metadata_adapter.py": {
-      "expected_sha256": "ea6d3df9bf3e7e1805bebb64ca7ee5e597281d74cbca9678d73dea0f4cfae6a8",
-      "reason": "G5 external point-in-time metadata intake: strict source hash and authorization binding, primary-candidate scoping, pre-cutoff timestamp enforcement, alias normalization for classification/13F/IBES/borrow lanes, and explicit non-evidence output semantics."
-    },
-    "tests/test_g5_external_metadata_adapter.py": {
-      "expected_sha256": "80dff7eba574b409729141e387d36d94f0c98836408607992a10332dbfeaac6e",
-      "reason": "Regression coverage for G5 external metadata aliases, source hashes, point-in-time cutoffs, candidate scoping, prohibited retrospective/post-event columns, same-timestamp conflicts, and non-evidence receipts."
-    },
-    "src/g5_derived_market_metadata_adapter.py": {
-      "expected_sha256": "2d4f8205f188b29a1521f2a8e2f5cab65fa564e04f05669c741e001cd777ef73",
-      "reason": "G5 derived market metadata intake: compute only strictly pre-cutoff price, market cap, 21-prior-day volatility, same-minute baseline volume/turnover/spread, option contract-volume liquidity, and pre-event return from real G2/G4 inputs while keeping outputs non-evidence until canonical resolver gates pass."
-    },
-    "tests/test_g5_derived_market_metadata_adapter.py": {
-      "expected_sha256": "0d414cff9384f4b7b08548bee4ef8ef89210cf114d62445f8baaa6e049496f8c",
-      "reason": "Regression coverage for completed-minute anti-lookahead, prior-day volatility, point-in-time shares availability, baseline-history requirements, option-liquidity definition, and zero G5 readiness/release claims."
-    },
-    "src/g5_staged_readiness_preview.py": {
-      "expected_sha256": "5cae6770ae9872536a5ceae5eaff69ae15e9cc33a5c0234aa4d2a0a37f5ff7b7",
-      "reason": "G5 staged-readiness preview: fuse normalized control metadata across files using latest pre-cutoff values, fail closed on equal-timestamp conflicts and unknown candidates, and report completeness without changing canonical G5 readiness."
-    },
-    "tests/test_g5_staged_readiness_preview.py": {
-      "expected_sha256": "727734d5d4cb77ae4a18a350f416a464749d417ae1d17da6f01f7d800e7e5577",
-      "reason": "Regression coverage for split-source G5 completeness, missing fields, equal-timestamp conflicts, unknown candidates, late rows, and explicit zero canonical-readiness/release change."
-    },
-    "src/g5_external_source_queue.py": {
-      "expected_sha256": "f5d2818b61bf81c6f59137be91d450ac338793dd5f6b8c6ec601ad9d38749f37",
-      "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
-    },
-    "tests/test_g5_external_source_queue.py": {
-      "expected_sha256": "0bfdb2b439db11dbb686f95e78bb423b4668e0af0a24fe71ae12e2286c8421e6",
-      "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
-    },
-    "src/g5_treated_metadata_requirements.py": {
-      "expected_sha256": "ea8e33cbd8464480687b8e54e3001c27cc0534bbe813d36751ec15b91ef7bf62",
-      "reason": "G5 treated-event metadata planning: explicitly require the same 13 matching fields for all 174 treated events at event-specific pre-trade cutoffs, including 1,392 derived and 870 external field requirements, because control candidates alone cannot make matching genuine."
-    },
-    "tests/test_g5_treated_metadata_requirements.py": {
-      "expected_sha256": "52b4802b4b898f19c44a45699060806ac0fa7b4354c38e17cce56c83ee9cb21f",
-      "reason": "Regression coverage locks 174 treated events, 72 dates, 2,262 treated field requirements, 696 external lane requests, exact event-specific cutoffs, and zero evidence/release claims."
     }
   },
   "schema_version": "2",

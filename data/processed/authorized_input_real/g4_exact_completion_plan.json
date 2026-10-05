@@ -1,0 +1,85 @@
+{
+  "schema_version": "1",
+  "purpose": "Public-safe exact G4 completion plan for the 18 currently reviewed share exclusions. No licensed payload or shares value is stored here.",
+  "current_state": {
+    "required": 3828,
+    "exact_resolved": 3810,
+    "reviewed_excluded": 18,
+    "blocking_unresolved": 0,
+    "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS"
+  },
+  "target_state": {
+    "required": 3828,
+    "exact_resolved": 3828,
+    "reviewed_excluded": 0,
+    "blocking_unresolved": 0,
+    "gate_status": "READY"
+  },
+  "routes": [
+    {
+      "source": "NYSE Daily TAQ Master",
+      "source_family": "nyse_daily_taq_master",
+      "symbols": [
+        "ACO",
+        "WLL"
+      ],
+      "target_rows": 13,
+      "exact_source_dates": [
+        "2013-03-25",
+        "2013-03-26",
+        "2013-03-27",
+        "2013-03-28",
+        "2013-04-01",
+        "2013-04-02",
+        "2013-04-03",
+        "2013-04-04",
+        "2013-04-05",
+        "2013-04-08",
+        "2015-02-20",
+        "2015-02-23",
+        "2015-02-24"
+      ],
+      "required_fields": [
+        "Symbol Compressed",
+        "Source - Listed Exchange",
+        "Shares Outstanding"
+      ],
+      "status": "REQUESTED_UNDER_EXISTING_NYSE_CASE_CC65304066",
+      "private_payload_required": true
+    },
+    {
+      "source": "Nasdaq Fundamental Data",
+      "source_family": "generic_authorized_reference_data",
+      "symbols": [
+        "CGNX"
+      ],
+      "target_rows": 5,
+      "exact_source_dates": [
+        "2015-02-06",
+        "2015-02-09",
+        "2015-02-10",
+        "2015-02-11",
+        "2015-02-12"
+      ],
+      "required_fields": [
+        "Effective Date",
+        "Symbol",
+        "TSO",
+        "TSO Date"
+      ],
+      "status": "NO_COST_EVALUATION_REQUEST_SENT_TO_NASDAQ_GLOBAL_DATA_PRODUCTS",
+      "private_payload_required": true
+    }
+  ],
+  "activation_requirements": [
+    "All 18 exact rows materialized from authorized exchange-reference files.",
+    "Every fact date is on or before its target date and within the 130-day hard ceiling.",
+    "Every source is provably available before the target intraday cutoff.",
+    "No arithmetic reconstruction or future-filed fact is permitted.",
+    "Private licensed source files and values are not committed to the public repository.",
+    "After private activation, rerun metadata resolver, metadata quality, coverage planner, release receipts, and require exact_resolved=3828 and reviewed_excluded=0."
+  ],
+  "code_path": "src/g4_exchange_reference_completion.py",
+  "test_path": "tests/test_g4_exchange_reference_completion.py",
+  "coverage_claimed": false
+}
