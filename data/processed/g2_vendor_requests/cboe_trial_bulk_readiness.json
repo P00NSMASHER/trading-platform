@@ -19,10 +19,13 @@
   "execute_requires": [
     "CBOE_CLIENT_ID",
     "CBOE_CLIENT_SECRET",
-    "--ack-trial-active"
+    "--ack-trial-active",
+    "--ack-retention-authorized"
   ],
   "trial_activated": false,
   "vendor_network_calls_made": false,
   "coverage_claimed": false,
-  "g2_coverage_change": 0
+  "g2_coverage_change": 0,
+  "retention_authority_required_before_bulk": true,
+  "retention_authority_state": "PENDING_WRITTEN_VENDOR_CONFIRMATION"
 }
