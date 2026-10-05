@@ -1884,8 +1884,8 @@
       "reason": "G5 staged-readiness preview: fuse normalized control metadata across files using latest pre-cutoff values, fail closed on equal-timestamp conflicts and unknown candidates, and report completeness without changing canonical G5 readiness."
     },
     "src/g5_treated_metadata_requirements.py": {
-      "expected_sha256": "ea8e33cbd8464480687b8e54e3001c27cc0534bbe813d36751ec15b91ef7bf62",
-      "reason": "G5 treated-event metadata planning: explicitly require the same 13 matching fields for all 174 treated events at event-specific pre-trade cutoffs, including 1,392 derived and 870 external field requirements, because control candidates alone cannot make matching genuine."
+      "expected_sha256": "9cabf3838a12ea70df01694811c0048b7ed051de3bd94f865fb5c786e5b74c74",
+      "reason": "G5 treated-event metadata planning now also emits 174 adapter-compatible treated target rows with candidate_symbol aliases and event-specific cutoffs so the same strict external/derived intake adapters can populate treated metadata without weakening evidence rules."
     },
     "src/hacked_earnings_github_extractor.py": {
       "expected_sha256": "24d5da4f23bd26238afb5ec8d45840cbde73a0e187de415a094cfefc806f2dd3",
@@ -2460,8 +2460,8 @@
       "reason": "Regression coverage for split-source G5 completeness, missing fields, equal-timestamp conflicts, unknown candidates, late rows, and explicit zero canonical-readiness/release change."
     },
     "tests/test_g5_treated_metadata_requirements.py": {
-      "expected_sha256": "52b4802b4b898f19c44a45699060806ac0fa7b4354c38e17cce56c83ee9cb21f",
-      "reason": "Regression coverage locks 174 treated events, 72 dates, 2,262 treated field requirements, 696 external lane requests, exact event-specific cutoffs, and zero evidence/release claims."
+      "expected_sha256": "234a57cbc74cfc9469ff0572b830e28131134e25e4cd1bb52ce2dc69f8e3f4a8",
+      "reason": "Regression coverage for 174 adapter-compatible treated targets, preserved event IDs/cutoffs, shared external/derived intake compatibility, and unchanged non-evidence semantics."
     },
     "tests/test_hacked_earnings_github_extractor.py": {
       "expected_sha256": "3c7d5d37e782f345c6e9c9559d60ce484b62a7701cfd9e57d3885970f59ce2d9",
