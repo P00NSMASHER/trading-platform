@@ -315,6 +315,15 @@ def manifest_state(root: Path, policy: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def g1_is_complete(manifest: dict[str, Any], policy: dict[str, Any]) -> bool:
+    target = int(policy["fail_closed_until_exact_count"])
+    return (
+        int(manifest["total"]) == target
+        and int(manifest["exact"]) == target
+        and int(manifest["unresolved"]) == 0
+    )
+
+
 def candidate_is_resolved(candidate: Candidate, manifest: dict[str, Any], pulls: list[dict[str, Any]], updates: list[WorkerUpdate]) -> bool:
     if batch_merged(candidate.batch, pulls, updates):
         return True
@@ -1019,6 +1028,27 @@ def controller_plan(
     # Thread the exact main snapshot through token evaluation so open PRs based
     # on older main commits cannot masquerade as live progress.
     manifest["main_sha"] = str(compares.get("__main_sha__") or "")
+
+    if g1_is_complete(manifest, policy):
+        return {
+            "manifest": manifest,
+            "updates": [],
+            "token": None,
+            "evaluation": TokenEvaluation(
+                "COMPLETE",
+                "G1 exact timing is 174/174 with zero unresolved events; swarm retired",
+                None,
+                False,
+                None,
+                None,
+            ),
+            "prepared": [],
+            "found_updates": [],
+            "next_candidate": None,
+            "action": "NONE",
+            "action_reason": "G1 exact timing complete; no timestamp-recovery work remains",
+        }
+
     updates = parse_worker_updates(comments)
     token = parse_latest_token(comments)
 
@@ -1125,8 +1155,13 @@ def main() -> int:
     pulls = paginated(repo, api_token, "/pulls?state=all&sort=updated&direction=desc", max_pages=3)
     main = github_api(repo, api_token, "/branches/main")
     main_sha = str(((main or {}).get("commit") or {}).get("sha") or "")
-    refs, compares = fetch_branch_fallbacks(repo, api_token, main_sha)
-    compares["__main_sha__"] = main_sha
+    pre_manifest = manifest_state(root, policy)
+    if g1_is_complete(pre_manifest, policy):
+        refs: list[dict[str, Any]] = []
+        compares: dict[str, dict[str, Any] | str] = {"__main_sha__": main_sha}
+    else:
+        refs, compares = fetch_branch_fallbacks(repo, api_token, main_sha)
+        compares["__main_sha__"] = main_sha
 
     now = datetime.now(timezone.utc)
     plan = controller_plan(
