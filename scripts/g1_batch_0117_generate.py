@@ -228,8 +228,8 @@ for filename in test_files:
             ('len({row["dedupe_key"] for row in manifest["work_queue"]}) == 8', 'len({row["dedupe_key"] for row in manifest["work_queue"]}) == 2'),
             ('len(resolved) == 166', 'len(resolved) == 172'),
             ('len(unresolved) == 8', 'len(unresolved) == 2'),
-            ('"NKE", "EW", "DGI", "PNRA", "ACO"', '"EW", "PNRA", "BIO", "GNTX", "CREE"'),
-            ('[4, 1000, 1000, 1000, 1000]', '[1000, 1000, 1000, 1000, 1000]'),
+            ('"EW", "GNTX", "CREE", "NUAN", "PNRA"', '"GNTX", "CREE"'),
+            ('[1000, 1000, 1000, 1000, 1000]', '[1000, 1000]'),
         ]
     elif filename.endswith("test_real_data_release_sprint.py"):
         pairs = [('updated["missing_exact_announcement_timestamps"] == 8', 'updated["missing_exact_announcement_timestamps"] == 2')]
