@@ -1,0 +1,23 @@
+{
+  "schema_version": "1",
+  "worker": 3,
+  "batch": 113,
+  "base_main_sha": "828810d4e168a08498c7087075d91a9406f3cd6f",
+  "source_branch": "g1/public-batch-0113-worker-3-court6-main-828810d-source",
+  "source_prep_head": "6f5710726eb4e0b89e0e86778610d6953d880486",
+  "expected_exact_resolved": 151,
+  "expected_reviewed_excluded": 23,
+  "event_ids": [
+    "HEJFE-263620F13A6443DD",
+    "HEJFE-EFFA194386ABDD28",
+    "HEJFE-2FD552B9358078C6",
+    "HEJFE-E575622C8FDAB71F",
+    "HEJFE-749FFC4028DF7B1C",
+    "HEJFE-350B3481A9CBBF0E"
+  ],
+  "court_artifact_id": 11326693734,
+  "court_artifact_sha256": "254e78dcb6218e3cd31cc9bf50a6ec639c966a037957629912af181432a6990e",
+  "token_comment_id": 5991943202,
+  "publisher_triggered_at": "2026-10-05T09:50:00Z",
+  "publisher_trigger_nonce": "worker3-20261005T0950Z"
+}
