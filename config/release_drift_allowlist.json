@@ -1552,8 +1552,8 @@
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "8b755a38c654c904ea3397c549b537854d622c94bf7a528dbf96bbf1531995df",
-      "reason": "G1 controller reliability: prioritize newest prepared batch refs during fallback compare discovery so current exact-base packages are not starved by accumulated disposable prep branches; existing ownership, lease, and fail-closed token gates remain unchanged."
+      "expected_sha256": "14ff366a294d52984681c3c477bfb75d8732f3b2b663d7e99a762efddee8d47d",
+      "reason": "G1 controller reliability: paginate all prepared refs, then prioritize newest batches so current exact-base packages cannot be hidden by GitHub's default matching-refs page; ownership, lease, and fail-closed token gates remain unchanged."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -2116,8 +2116,8 @@
       "reason": "G1 batch 0119 Worker-4 filed federal-court public-distribution clock for PNRA 2013; deterministic 166 exact / 8 reviewed exclusions with SEC identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "2a2dd3b2fe3a95a205b6fb7dc8e5e838b6feafbe626d9c7d815371dc93be4dc5",
-      "reason": "Regression coverage for G1 controller token safety plus newest-first prepared-branch discovery ordering under a large prep-ref backlog."
+      "expected_sha256": "5db6d5b08e19537e2be67fde73bee0df7e9c071b9e16ff84658473a69afca5a6",
+      "reason": "Regression coverage for G1 controller token safety, full prep-ref pagination, and newest-first prepared-branch discovery across page boundaries."
     },
     "tests/test_g2_candidate_route_matrix.py": {
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",
