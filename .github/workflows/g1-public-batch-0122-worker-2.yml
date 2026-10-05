@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 30
     env:
       PYTHONPATH: src
-      EXPECTED_BASE: 8b2622d6c5d7dbd84ccbf15271a874366cd42888
+      EXPECTED_BASE: 8b2622df3b4641606e5de6a80eda88244a8af49d
     steps:
       - name: Checkout publisher source head
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
