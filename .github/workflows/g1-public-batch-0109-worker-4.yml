@@ -1,0 +1,128 @@
+name: G1 batch 0109 adaptive exact-main publisher
+
+on:
+  push:
+    branches:
+      - g1/public-batch-0109-worker-4-rovi-main-51d8470-source
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: g1-batch-0109-adaptive-exact-main
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: src
+    steps:
+      - name: Checkout publisher source head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: g1/public-batch-0109-worker-4-rovi-main-51d8470-source
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+
+      - name: Regenerate against a stable current main
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          WORKFLOW=".github/workflows/g1-public-batch-0109-worker-4.yml"
+          SCRIPT="scripts/g1_batch_0109_generate.py"
+          SPEC="data/public/metadata/g1_public_batch_0109_integration_spec.json"
+
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt: syncing to latest main"
+            git fetch origin main
+            BASE="$(git rev-parse origin/main)"
+            git reset --hard "$BASE"
+            git clean -fd
+
+            mkdir -p "$(dirname "$WORKFLOW")" "$(dirname "$SCRIPT")" "$(dirname "$SPEC")"
+            git show "${SOURCE_SHA}:${WORKFLOW}" > "$WORKFLOW"
+            git show "${SOURCE_SHA}:${SCRIPT}" > "$SCRIPT"
+            git show "${SOURCE_SHA}:${SPEC}" > "$SPEC"
+
+            BASE="$BASE" python - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          base = os.environ["BASE"]
+          script = Path("scripts/g1_batch_0109_generate.py")
+          text = script.read_text(encoding="utf-8")
+          text, n = re.subn(r'^BASE="[^"]+"$', f'BASE="{base}"', text, count=1, flags=re.MULTILINE)
+          if n != 1:
+              raise SystemExit("Could not patch generator BASE")
+          script.write_text(text, encoding="utf-8")
+
+          spec_path = Path("data/public/metadata/g1_public_batch_0109_integration_spec.json")
+          spec = json.loads(spec_path.read_text(encoding="utf-8"))
+          spec["base_main_sha"] = base
+          spec["expected_exact_resolved"] = 122
+          spec["expected_reviewed_excluded"] = 52
+          spec_path.write_text(json.dumps(spec, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
+
+            python "$SCRIPT"
+            pytest -q tests/test_g1_public_batch_0109.py tests/test_g1_source_research.py tests/test_g1_acquisition_manifest.py tests/test_metadata_resolver.py tests/test_real_data_release_sprint.py
+            python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+            pytest -q
+
+            git fetch origin main
+            if [ "$(git rev-parse origin/main)" != "$BASE" ]; then
+              echo "Main moved during validation; retrying from the newer main."
+              continue
+            fi
+
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "G1: recover ROVI exact public clock, 122 exact / 52 excluded [g1-generated]"
+
+            rm -f "$WORKFLOW" "$SPEC"
+            test ! -e "$WORKFLOW"
+            test ! -e "$SPEC"
+
+            git fetch origin main
+            if [ "$(git rev-parse origin/main)" != "$BASE" ]; then
+              echo "Main moved after verification; retrying from the newer main."
+              continue
+            fi
+
+            OUT_BRANCH="g1/public-batch-0109-worker-4-rovi-main-${BASE:0:7}-r${GITHUB_RUN_ID}"
+            git push origin HEAD:"$OUT_BRANCH"
+            echo "OUTPUT_BRANCH=$OUT_BRANCH" >> "$GITHUB_ENV"
+            echo "OUTPUT_HEAD=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+            echo "OUTPUT_BASE=$BASE" >> "$GITHUB_ENV"
+            exit 0
+          done
+
+          echo "Main moved during all three bounded attempts; fail closed."
+          exit 1
+
+      - name: Report exact output
+        run: |
+          echo "OUTPUT_BRANCH=${OUTPUT_BRANCH}"
+          echo "OUTPUT_HEAD=${OUTPUT_HEAD}"
+          echo "OUTPUT_BASE=${OUTPUT_BASE}"
