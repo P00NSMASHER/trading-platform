@@ -2562,6 +2562,14 @@
     "tests/test_g5_master_acquisition_plan.py": {
       "expected_sha256": "7ef45f162a7226eca25033aa5ad6a40fda5c913d5e55067f4a4ce287957ee930",
       "reason": "Regression coverage locks the 390 total matching targets, 5,070 field requirements (3,120 derived and 1,950 external), 1,560 external lane requests, 72-date structural coverage, history-overlap reconciliation, and zero canonical G5 readiness/release claims."
+    },
+    "src/g5_control_identity_requirements.py": {
+      "expected_sha256": "0c9977f983829de424fea94773bdd8f168cbea8f5fe19e9182dd1792d2e4d00a",
+      "reason": "G5 control identity planning: reconcile the entire primary-control history footprint against canonical G2 verified/unverified identity, record exact-date public SampleFirms PERMNO/GVKEY mappings only as admission leads, and emit a fail-closed stable-ID acquisition queue."
+    },
+    "tests/test_g5_control_identity_requirements.py": {
+      "expected_sha256": "927acca624e666824648d8315777832f66d20503cdb40bc394592bfb53d4bec6",
+      "reason": "Regression coverage locks 216 primary controls, 51 unique exact-date SampleFirms identity leads, 165 primary mappings still missing exact-date public mapping, G2 identity reuse/overlap reconciliation, and zero automatic G5 readiness promotion."
     }
   },
   "schema_version": "2",
