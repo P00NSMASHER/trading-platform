@@ -23,26 +23,41 @@ def test_cboe_free_trial_plan_respects_vendor_confirmed_2012_history_floor():
     assert out["ineligible_pre_2012_last_date"] == "2011-12-30"
 
 
-def test_cboe_free_trial_plan_never_emits_a_2011_request():
+def test_cboe_candidate_universe_never_emits_a_2011_request():
     out = plan.build_plan(plan.load_option_trade_requirements(REQ))
 
-    assert len(out["requests"]) == 3364
-    assert all(row["trade_date"] >= "2012-01-01" for row in out["requests"])
-    assert not any(row["trade_date"].startswith("2011-") for row in out["requests"])
+    requests = out["candidate_request_universe"]
+    assert out["candidate_request_universe_count"] == 3364
+    assert len(requests) == 3364
+    assert all(row["trade_date"] >= "2012-01-01" for row in requests)
+    assert not any(row["trade_date"].startswith("2011-") for row in requests)
     assert all(
         row["points_per_historical_request"] == 15
         and row["limit"] == 10000
         and row["seq_no"] == 0
-        for row in out["requests"]
+        for row in requests
     )
 
 
-def test_cboe_free_trial_plan_uses_vendor_trial_credit_guidance_fail_closed():
+def test_cboe_free_trial_plan_uses_published_cap_fail_closed():
     out = plan.build_plan(plan.load_option_trade_requirements(REQ))
 
     assert out["free_trial_days"] == 14
-    assert out["daily_credit_limit_enforced_for_plan"] is False
+    assert out["published_trial_points_per_day"] == 500
+    assert out["published_trial_overage_available"] is False
+    assert out["daily_credit_limit_enforced_for_plan"] is True
+    assert out["max_first_page_requests_per_day"] == 33
+    assert out["max_first_page_requests_over_trial"] == 462
     assert "Ryan Lusk" in out["daily_credit_limit_basis"]
+    assert "not treated as proof" in out["daily_credit_limit_basis"]
+
+    optimum = out["free_trial_trade_only_optimum"]
+    assert optimum["complete_source_dates"] == 180
+    assert optimum["underlying_date_pairs"] == 460
+    assert optimum["remaining_source_dates"] == 129
+    assert optimum["remaining_underlying_date_pairs"] == 2904
+    assert len(optimum["selected_dates"]) == 180
+
     assert "no 2011 request is emitted" in out["warning"]
-    assert "acceptance probe" in out["warning"]
-    assert "rate limits" in out["warning"]
+    assert "462" in out["warning"]
+    assert "retention rights" in out["warning"]
