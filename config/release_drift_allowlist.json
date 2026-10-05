@@ -2634,6 +2634,14 @@
     "tests/test_g5_control_activation.py": {
       "expected_sha256": "21603ec047e8a684d3e481db70192af732ca1a969a40198d2ee39aa04867943b",
       "reason": "Regression coverage for candidate-plan binding, minimum three-control staging, source scope/hash/license/cutoff enforcement, exclusion shrinkage, and the distinction between accounted-for controls and 72/72 model-evaluation-ready controls."
+    },
+    "src/g5_external_master_acquisition.py": {
+      "expected_sha256": "9d553acfc643c2d5932069248c7c344daa789d37d5fe6b60f23cd35b4def6018",
+      "reason": "G5 external acquisition consolidation: unify the four point-in-time metadata lanes across all 216 control and 174 treated targets while preserving target-specific cutoffs, source routes, authorization requirements, and zero evidence promotion."
+    },
+    "tests/test_g5_external_master_acquisition.py": {
+      "expected_sha256": "61e6d7f503d1af7bcbc27dce8f8f2d89de8d3d47067f8efaa4ca80e2ca55554f",
+      "reason": "Regression coverage locks the unified external queue at 390 targets, 1,560 lane requests, 1,950 external field requirements, four 390-target lanes, globally unique request IDs, and fail-closed source/admission semantics."
     }
   },
   "schema_version": "2",
