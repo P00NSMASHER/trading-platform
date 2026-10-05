@@ -1856,8 +1856,8 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "src/real_data_release_sprint.py": {
-      "expected_sha256": "79ae03008beaf4bc46c5839e225dd70c86f7ed45909075a2ef4e634302a2a8df",
-      "reason": "Deterministic G2_CHAMPION_MINIMUM materialization and canonical-path normalization; full G2 remains 1,656 rows and release gates remain unchanged."
+      "expected_sha256": "e4cf6e496d4a166d667ec755833fbba5b6d80790ddaff5e80bc646707d01d0a5",
+      "reason": "Real-data sprint stable-ID reconciliation now accepts optional baseline_identity_verified_count, requires event-date count to remain 174, and verifies event + baseline verified + baseline unresolved equals the 3828 required symbol-dates."
     },
     "src/real_data_replay.py": {
       "expected_sha256": "438ef2f5b9cd5d986f74c974b3715524e7bf37a0ba4876b044d8cde58af0489d",
@@ -1872,8 +1872,8 @@
       "reason": "Deterministic fail-closed stable-ID acquisition planner for every unresolved PERMNO/date request, with lawful licensed/authorized source lanes and no ticker or corporate-action alias inference."
     },
     "src/security_identity_gate.py": {
-      "expected_sha256": "ff1f1904925ea32136d3da9802439cce3f06c5566ce58b1382acaefd0391bc08",
-      "reason": "Stable-ID evidence adapter: accept only explicit authorized dated evidence lanes, bind PERMNO/symbol/market identifier intervals to required dates, fail closed on conflicts or undated/unauthorized rows, and preserve the existing 3654-unresolved default when no evidence is supplied."
+      "expected_sha256": "78ea186718daf51ce3a9211027716d48dea8da609b8143100cb96d00978d23e8",
+      "reason": "Stable-ID progress accounting: keep event-date identity verified_count fixed at the 174 events while tracking baseline identity progress separately, so authorized evidence can move from 0 to 3654 baseline dates without corrupting event-count semantics."
     },
     "src/software_readiness_certification.py": {
       "expected_sha256": "b472c49c8b88740ffea4c8639117390565b66395337dc1d02f5c76ad9a6511c2",
@@ -2376,8 +2376,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "d7ff752fe7cef8f80dcf3760a78dcc5b40bd44e5789104b31a87a23e1bebf1a4",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "dab6850ab0773a53f248abc601c9d1f1f61bcf7bdf411b1c16ed70ab0e8f37f0",
+      "reason": "Regression coverage for partial stable-ID progress, fully completed 3828/3828 identity, fail-closed rejection of non-reconciling identity counts, and explicit pytest exception assertions."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
@@ -2404,8 +2404,8 @@
       "reason": "Regression coverage for deterministic acquisition outputs, exact 3,654/146 state, request identity uniqueness, fail-closed collisions/count drift, and prohibition of ticker/alias shortcuts."
     },
     "tests/test_security_identity_gate.py": {
-      "expected_sha256": "32f4beecd667b270fbe1f7e43d850e0042b4b4a0bb2876ae5bb00273c5a6e470",
-      "reason": "Regression coverage for one-date stable-ID promotion, unauthorized/undated rejection, conflicting market-identifier rejection, and unchanged fail-closed default identity state."
+      "expected_sha256": "d9895c167b5ccd6c02948c26ad434076fe152f474fd8a6d557f3c25b86135fc8",
+      "reason": "Regression coverage locks event-date identity at 174 while one authorized baseline evidence row increments baseline verified progress and decrements unresolved progress by exactly one."
     },
     "tests/test_software_readiness_certification.py": {
       "expected_sha256": "81b0996abf82efb14b88427812dcfdbfa3bf56e5f037f05bc07ff62d0d3c3174",

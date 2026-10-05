@@ -352,7 +352,7 @@ def build_manifest_from_rows(
             "unique_permno_count": len(permno_to_symbols),
             "unique_historical_symbol_count": len(symbol_to_permnos),
             "required_symbol_date_count": requirement_rows,
-            "event_date_identity_verified_count": verified_date_count,
+            "event_date_identity_verified_count": len(event_by_id),
             "baseline_identity_unverified_count": unverified_date_count,
             "symbol_to_multiple_permno_collision_count": 0,
             "permno_to_multiple_symbol_collision_count": 0,
@@ -391,6 +391,9 @@ def build_manifest_from_rows(
     }
     if identity_evidence is not None:
         result["state"]["baseline_identity_verified_count"] = baseline_verified_count
+        result["state"]["total_identity_verified_count"] = (
+            len(event_by_id) + baseline_verified_count
+        )
         result["state"]["identity_evidence_row_count"] = len(identity_evidence)
         result["sources"]["identity_evidence"] = "external_authorized_identity_evidence"
     return result

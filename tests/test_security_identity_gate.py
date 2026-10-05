@@ -137,7 +137,9 @@ def test_authorized_dated_identity_evidence_closes_only_covered_baseline_date():
     assert trade_date in resolved["verified_required_dates"]
     assert trade_date not in resolved["unverified_required_dates"]
     assert resolved["baseline_identity_evidence"][trade_date][0]["evidence_id"] == evidence[0]["evidence_id"]
+    assert manifest["state"]["event_date_identity_verified_count"] == 174
     assert manifest["state"]["baseline_identity_verified_count"] == 1
+    assert manifest["state"]["total_identity_verified_count"] == 175
     assert manifest["state"]["baseline_identity_unverified_count"] == 3653
     assert manifest["state"]["identity_evidence_row_count"] == 1
     assert manifest["state"]["ready_for_non_synthetic_market_join"] is False

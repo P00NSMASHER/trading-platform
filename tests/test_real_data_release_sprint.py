@@ -5,6 +5,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
@@ -238,3 +240,68 @@ def test_security_identity_gate_prevents_release_unlock_when_other_inputs_are_re
     assert by_step[11]["status"] == "DEPENDENCY_BLOCKED"
     assert by_step[12]["status"] == "DEPENDENCY_BLOCKED"
     assert "baseline identity unverified=3654/3828" in by_step[11]["evidence"]
+
+def test_security_identity_status_accepts_partial_baseline_progress(tmp_path: Path):
+    identity = tmp_path / "identity-partial.json"
+    _write_json(identity, {
+        "schema_version": "1",
+        "state": {
+            "event_count": 174,
+            "event_date_identity_verified_count": 174,
+            "baseline_identity_verified_count": 100,
+            "total_identity_verified_count": 274,
+            "required_symbol_date_count": 3828,
+            "baseline_identity_unverified_count": 3554,
+            "ready_for_non_synthetic_market_join": False,
+        },
+    })
+
+    status = sprint._security_identity_status(identity)
+
+    assert status["event_date_identity_verified_count"] == 174
+    assert status["baseline_identity_verified_count"] == 100
+    assert status["total_identity_verified_count"] == 274
+    assert status["baseline_identity_unverified_count"] == 3554
+    assert status["ready_for_non_synthetic_market_join"] is False
+
+
+def test_security_identity_status_accepts_completed_baseline_identity(tmp_path: Path):
+    identity = tmp_path / "identity-complete.json"
+    _write_json(identity, {
+        "schema_version": "1",
+        "state": {
+            "event_count": 174,
+            "event_date_identity_verified_count": 174,
+            "baseline_identity_verified_count": 3654,
+            "total_identity_verified_count": 3828,
+            "required_symbol_date_count": 3828,
+            "baseline_identity_unverified_count": 0,
+            "ready_for_non_synthetic_market_join": True,
+        },
+    })
+
+    status = sprint._security_identity_status(identity)
+
+    assert status["baseline_identity_verified_count"] == 3654
+    assert status["total_identity_verified_count"] == 3828
+    assert status["baseline_identity_unverified_count"] == 0
+    assert status["ready_for_non_synthetic_market_join"] is True
+
+
+def test_security_identity_status_rejects_nonreconciling_partial_progress(tmp_path: Path):
+    identity = tmp_path / "identity-bad.json"
+    _write_json(identity, {
+        "schema_version": "1",
+        "state": {
+            "event_count": 174,
+            "event_date_identity_verified_count": 174,
+            "baseline_identity_verified_count": 100,
+            "required_symbol_date_count": 3828,
+            "baseline_identity_unverified_count": 3553,
+            "ready_for_non_synthetic_market_join": False,
+        },
+    })
+
+    with pytest.raises(ValueError, match="do not reconcile"):
+        sprint._security_identity_status(identity)
+
