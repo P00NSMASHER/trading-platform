@@ -2426,6 +2426,14 @@
     "config/security_identity_evidence.example.csv": {
       "expected_sha256": "5a6e1f1f3ffb4e222e3504a644165a319503d8e60541e90152b2927e0ba77628",
       "reason": "Header-only schema template for externally supplied authorized dated stable-ID evidence; contains no licensed data and changes no identity coverage."
+    },
+    "src/security_identity_lseg_bridge.py": {
+      "expected_sha256": "f124aaa6c12c42b5d1274dd5e136ceb1d2fd169911c4d6c7065c1a5a37bb41ee",
+      "reason": "Fail-closed bridge from authorized date-specific LSEG RIC validation to stable security-identity evidence; only direct study PERMNO-to-RIC mappings can emit one-day evidence, with symbol-only/root-only/secondary mappings prohibited from closing identity."
+    },
+    "tests/test_security_identity_lseg_bridge.py": {
+      "expected_sha256": "e75d7d7726ddf6c6be12622a5161b83732a3f8fc93e8348d178c910424ee7f70",
+      "reason": "Regression coverage for direct dated LSEG identity evidence, authorization requirement, rejection of root-only/secondary mappings, ambiguous validation, mapping conflicts, and out-of-queue rows."
     }
   },
   "schema_version": "2",
