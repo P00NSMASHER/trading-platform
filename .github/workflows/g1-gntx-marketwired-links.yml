@@ -13,7 +13,7 @@ jobs:
         run: |
           python - <<'PY'
           import urllib.request,gzip,re,html
-          fn="crawl-data/CC-MAIN-2013-48/segments/1386164039245.10/warc/CC-MAIN-20131204133359-00010-ip-10-33-133-15.ec2.internal.warc.gz"
+          fn="crawl-data/CC-MAIN-2013-48/segments/1386164039245/warc/CC-MAIN-20131204133359-00010-ip-10-33-133-15.ec2.internal.warc.gz"
           off=444354174;ln=11999
           req=urllib.request.Request("https://data.commoncrawl.org/"+fn,headers={"Range":f"bytes={off}-{off+ln-1}","User-Agent":"G1-public-research/1.0"})
           data=urllib.request.urlopen(req,timeout=30).read()
