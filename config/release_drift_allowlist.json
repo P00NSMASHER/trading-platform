@@ -1851,6 +1851,10 @@
       "expected_sha256": "0d35b9cdff610500a035a14d5086f785fefecc217ff6a608ad0032f567464a4c",
       "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
     },
+    "src/g4_taq_master_shares.py": {
+      "expected_sha256": "7778c2e927e106247d187b5c8f6fc92bf4fab22a3ced5324cd70b20544c35fcb",
+      "reason": "G4 exact-completion preparation: deterministic historical NYSE Daily TAQ fixed-width Master Shares Outstanding extractor with NYSE-only field semantics, SHA-256 provenance, private/local input, and no coverage promotion."
+    },
     "src/g5_control_acquisition_planner.py": {
       "expected_sha256": "ce08b1632f41dcf345924c5bf7b904f7ab78ad7493a272f3b7c9dd019a2d487f",
       "reason": "G5 acquisition planning now separates an exactly three-per-date 216-row primary queue from 766 reserve candidates, preserving every fallback while reducing first-pass point-in-time metadata acquisition without changing evidence eligibility."
@@ -2426,6 +2430,10 @@
     "tests/test_g4_materialize_batch.py": {
       "expected_sha256": "90b4d870c209f7e71f70a5ef6533b0b921ccf253e1c7efde9e69c1531cfcfba2",
       "reason": "G4 integrity repair: remove staleness exceptions, enforce unconditional 130-day hard limit, regenerate affected AMCOL rows, and recompute canonical receipts."
+    },
+    "tests/test_g4_taq_master_shares.py": {
+      "expected_sha256": "c60b4d8e18607573e2dff72bd956f6edfb735cc796941938e5072494e252d45d",
+      "reason": "Regression coverage for historical Daily TAQ Master field offsets, NYSE-only shares semantics, ZIP extraction, hash provenance, and strict prior-day accepted/same-day rejected point-in-time timing."
     },
     "tests/test_g5_control_acquisition_planner.py": {
       "expected_sha256": "fdbc0dedd3cee5811b8bdcab61c542eb0bfb0cb90cdd96ff73b6f09b9529d445",
