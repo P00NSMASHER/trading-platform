@@ -399,7 +399,7 @@ def materialize_exact_rows(
     keys = {(row["historical_symbol"], row["target_trade_date"]) for row in rows}
     expected = set(NYSE_TARGETS) | set(NASDAQ_TARGETS)
     if len(rows) != 15 or keys != expected:
-        raise ValueError("exact G4 materialization did not produce all 18 required rows")
+        raise ValueError("exact G4 materialization did not produce all 15 required rows")
 
     summary = {
         "schema_version": "1",
