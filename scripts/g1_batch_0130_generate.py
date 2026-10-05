@@ -265,6 +265,16 @@ for filename in test_files:
     ast.parse(text)
     path.write_text(text, encoding="utf-8")
 
+software_test = Path("tests/test_software_readiness_certification.py")
+software_text = software_test.read_text(encoding="utf-8")
+software_text = software_text.replace(
+    'assert state["gates"]["G1_EXACT_TIMING_ANALYSIS"] is False',
+    'assert state["gates"]["G1_EXACT_TIMING_ANALYSIS"] is True',
+    1,
+)
+ast.parse(software_text)
+software_test.write_text(software_text, encoding="utf-8")
+
 docs = Path("docs/g1_announcement_times.md")
 text = docs.read_text(encoding="utf-8")
 assert "88 public exact-time batches / 173 exact-resolved" in text
@@ -285,7 +295,7 @@ changed.update({str(BATCH), str(EVIDENCE), str(FINAL_TEST)})
 permitted = {
     str(contract_path), str(exclusion_path), str(hints_path), str(acq), str(BATCH), str(EVIDENCE), str(FINAL_TEST),
     "docs/g1_announcement_times.md", "src/metadata_resolver.py", "tests/test_metadata_resolver.py",
-    "tests/test_g1_source_research.py", "tests/test_g1_acquisition_manifest.py", "tests/test_real_data_release_sprint.py",
+    "tests/test_g1_source_research.py", "tests/test_g1_acquisition_manifest.py", "tests/test_real_data_release_sprint.py", "tests/test_software_readiness_certification.py",
     str(coverage), str(coverage.parent / "unresolved_gates.csv"), str(sprint_dir / "step_status.json"),
     "data/processed/research_receipt_bundle.json", "data/processed/real_data_replay/real_data_replay_status.json",
 } | {str(path) for path in Path("tests").glob("test_g1_public_batch_*.py")} | {str(md / name) for name in rebuild.METADATA_RECEIPTS}
@@ -294,6 +304,16 @@ assert not unexpected, f"Unexpected changed files: {sorted(unexpected)}"
 
 allow_path = Path("config/release_drift_allowlist.json")
 allow = load(allow_path)
+g2_bookkeeping_reason = "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
+for filename in (
+    "data/processed/g2_vendor_requests/cboe_trial_bulk_readiness.json",
+    "src/g2_cboe_trial_bulk_runner.py",
+    "tests/test_g2_cboe_trial_bulk_runner.py",
+):
+    allow["repository_additions"][filename] = {
+        "expected_sha256": digest(filename),
+        "reason": g2_bookkeeping_reason,
+    }
 reason = "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
 for filename in sorted(changed):
     section = "intentional_release_modifications" if filename in allow["intentional_release_modifications"] else "repository_additions"
