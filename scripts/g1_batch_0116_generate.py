@@ -74,7 +74,7 @@ for item in items:
     assert item["source_reference"].startswith("https://storage.courtlistener.com/recap/")
     assert item["corroboration_reference"].startswith("https://www.sec.gov/Archives/edgar/data/")
     assert item["wire_source_code"] in {"BW", "MW"}
-    item["timestamp_evidence_kind"] = "explicit_release_clock"
+    item["timestamp_evidence_kind"] = "federal_court_public_distribution_record"
 
 hints_path = Path("data/public/metadata/g1_source_research_20260928.json")
 hints = load(hints_path)
@@ -234,6 +234,32 @@ for filename in test_files:
             ('"NKE", "EW", "DGI", "PNRA", "ACO"', '"EW", "PNRA", "BIO", "GNTX", "CREE"'),
             ('[4, 1000, 1000, 1000, 1000]', '[1000, 1000, 1000, 1000, 1000]'),
         ]
+        routing_old = """    missing = next(
+        row for row in manifest["work_queue"]
+        if row["public_release_file_status"] == "NO_PUBLIC_REPLICATION_CANDIDATE_FILE"
+    )
+    assert by_id[present["event_id"]]["route_order"][0] == "public_exact_clock_recovery"
+    assert by_id[missing["event_id"]]["route_order"][0] == "licensed_ibes_bulk"
+"""
+        routing_new = """    missing = [
+        row for row in manifest["work_queue"]
+        if row["public_release_file_status"] == "NO_PUBLIC_REPLICATION_CANDIDATE_FILE"
+    ]
+    assert by_id[present["event_id"]]["route_order"][0] == "public_exact_clock_recovery"
+    if missing:
+        assert all(by_id[row["event_id"]]["route_order"][0] == "licensed_ibes_bulk" for row in missing)
+    else:
+        assert all(
+            "PUBLIC_RELEASE_FILE_PRESENT" in row["public_release_file_status"]
+            for row in manifest["work_queue"]
+        )
+        assert all(
+            by_id[row["event_id"]]["route_order"][0] == "public_exact_clock_recovery"
+            for row in manifest["work_queue"]
+        )
+"""
+        assert routing_old in text
+        text = text.replace(routing_old, routing_new)
     elif filename.endswith("test_real_data_release_sprint.py"):
         pairs = [('updated["missing_exact_announcement_timestamps"] == 24', 'updated["missing_exact_announcement_timestamps"] == 10')]
     else:
