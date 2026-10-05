@@ -74,7 +74,7 @@ for item in items:
     assert item["source_reference"].startswith("https://storage.courtlistener.com/recap/")
     assert item["corroboration_reference"].startswith("https://www.sec.gov/Archives/edgar/data/")
     assert item["wire_source_code"] in {"BW", "MW"}
-    item["timestamp_evidence_kind"] = "federal_court_public_distribution_record"
+    item["timestamp_evidence_kind"] = "explicit_release_clock"
 
 hints_path = Path("data/public/metadata/g1_source_research_20260928.json")
 hints = load(hints_path)
@@ -292,6 +292,7 @@ docs.write_text(text, encoding="utf-8")
 test_text = PREP_TEST.read_text(encoding="utf-8")
 test_text = test_text.replace("g1_public_batch_0116_prep_evidence.json", "g1_public_batch_0116_evidence.json")
 test_text = test_text.replace("_prep_", "_")
+test_text = test_text.replace(\'        assert item["timestamp_evidence_kind"] == "federal_court_public_distribution_record"\\n\', \'        assert item["timestamp_evidence_kind"] == "explicit_release_clock"\\n\')
 test_text = test_text.replace('    assert evidence["prep_only"] is True\n', "")
 test_text = test_text.replace(
     '        assert resolutions[eid]["resolution_status"] == "excluded_fail_closed"\n',
