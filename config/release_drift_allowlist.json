@@ -62,8 +62,8 @@
       "reason": "G1 batch 0067 SEC civil-complaint explicit public-distribution clocks for Edwards Lifesciences and TIBCO; deterministic 88 exact / 86 reviewed exclusions, independent SEC Exhibit corroboration, strict regulator-source validation, and prior evidence preserved."
     },
     "src/metadata_resolver.py": {
-      "expected_sha256": "7be1755c3c5145534e8883362f4263b5e8621a1a572d53b5b6efe56b02780da4",
-      "reason": "G5 control-contract hardening: readiness now uses the exact matched-control generator covariate names and accepts matcher-native effective_ts_utc point-in-time timestamps."
+      "expected_sha256": "bfd40e86b8c0418eb15f45ebc2da12660b14c1aace60bedf3d522471184614a4",
+      "reason": "G5 point-in-time control fusion: combine latest admissible pre-cutoff covariates across authorized sources, ignore late/undated non-retrospective rows, and fail closed on equal-timestamp field conflicts."
     },
     "src/private_dashboard.py": {
       "expected_sha256": "16fd6f193f7c1e5721f0c145711aeb45e5a9fed38878f03ee73d64e046ebff1e",
@@ -98,8 +98,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "tests/test_metadata_resolver.py": {
-      "expected_sha256": "0f536894d618ead5be959c86717bdabb45769f41e4923f9f5ca95b926954e2c3",
-      "reason": "G5 regression coverage locks readiness covariates to matched-control defaults and proves matcher-native effective timestamps close only valid point-in-time demo controls."
+      "expected_sha256": "7d44e7a7303cad9a85cfbcf40bebe76dc5ca260f9dfeb1a1c6229b64ec1280f4",
+      "reason": "Regression coverage for G5 multi-source covariate fusion, equal-timestamp conflicts, undated rows, late-row exclusion, and unchanged reviewed-exclusion fail-closed behavior."
     },
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
