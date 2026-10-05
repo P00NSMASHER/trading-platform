@@ -717,7 +717,7 @@ def test_fetch_branch_fallbacks_does_not_truncate_after_30(monkeypatch) -> None:
     ]
 
     def fake_github_api(repo: str, token: str, path: str, **kwargs):
-        if path == "/git/matching-refs/heads/g1/prep-":
+        if path.startswith("/git/matching-refs/heads/g1/prep-"):
             return refs
         if path.startswith("/compare/"):
             return {"behind_by": 0, "ahead_by": 1}
@@ -1222,7 +1222,7 @@ def test_fetch_branch_fallbacks_probes_newest_batches_first(monkeypatch) -> None
     compare_paths = []
 
     def fake_api(repo, token, path, **kwargs):
-        if path == "/git/matching-refs/heads/g1/prep-":
+        if path.startswith("/git/matching-refs/heads/g1/prep-"):
             return refs
         if path.startswith("/compare/"):
             compare_paths.append(path)
@@ -1234,3 +1234,35 @@ def test_fetch_branch_fallbacks_probes_newest_batches_first(monkeypatch) -> None
     assert found == refs
     assert compare_paths[0].endswith("...newsha")
     assert "g1/prep-0117-worker-2-seven-bbbbbbb" in compares
+
+def test_fetch_branch_fallbacks_paginates_matching_refs_before_priority_sort(monkeypatch) -> None:
+    older = [
+        {
+            "ref": f"refs/heads/g1/prep-0060-worker-0-old-{i:07x}",
+            "object": {"sha": f"{i + 1:040x}"},
+        }
+        for i in range(100)
+    ]
+    newest = {
+        "ref": "refs/heads/g1/prep-0117-worker-2-current-bbbbbbb",
+        "object": {"sha": "f" * 40},
+    }
+    compare_paths = []
+
+    def fake_api(repo, token, path, **kwargs):
+        if path == "/git/matching-refs/heads/g1/prep-?per_page=100&page=1":
+            return older
+        if path == "/git/matching-refs/heads/g1/prep-?per_page=100&page=2":
+            return [newest]
+        if path.startswith("/compare/"):
+            compare_paths.append(path)
+            return {"ahead_by": 1, "behind_by": 0}
+        raise AssertionError(path)
+
+    monkeypatch.setattr(ctl, "github_api", fake_api)
+    found, compares = ctl.fetch_branch_fallbacks("owner/repo", "token", "mainsha")
+
+    assert len(found) == 101
+    assert compare_paths[0].endswith("..." + "f" * 40)
+    assert "g1/prep-0117-worker-2-current-bbbbbbb" in compares
+
