@@ -96,6 +96,7 @@ save(evidence_path,{"schema_version":"1","research_use_only":True,"base_main_sha
 },
 "evidence_method":"Filed federal-court GX 8002 explicitly records the press-release/public-distribution date and clock. Exact target identity/date is corroborated by PR #355's pinned public press-release archive mapping and official SEC Exhibit 99.x where available. Eastern offsets follow America/New_York date rules; BW/MW provider codes are not treated as timezones. CI verifies chronology, ownership, unresolved state and deterministic receipts. EDGAR acceptance, call/webcast, schedule, approximation, date-only, capture, neighboring-release and inferred clocks are not used.",
 "prohibited_substitutes":["edgar_acceptance_time","scheduled_call_time","webcast_time","archive_capture_time","inferred_clock","date_only","neighboring_release"]})
+evidence_snapshot=evidence_path.read_bytes()
 
 ids={x["event_id"] for x in items}
 exclusions["exclusions"]=[r for r in exclusions["exclusions"] if r["event_id"] not in ids]
@@ -231,6 +232,7 @@ def test_batch_0118_worker3_shard_ownership():
 '''
 ast.parse(ts);tp.write_text(ts)
 assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
+if not evidence_path.exists(): evidence_path.write_bytes(evidence_snapshot)
 
 for prep_only in (Path("data/public/metadata/g1_public_batch_0118_prep_evidence.json"),Path("tests/test_g1_public_batch_0118_prep.py")):
     if prep_only.exists():prep_only.unlink()
