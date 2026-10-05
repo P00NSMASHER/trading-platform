@@ -2526,6 +2526,14 @@
     "tests/test_g5_external_source_queue.py": {
       "expected_sha256": "0bfdb2b439db11dbb686f95e78bb423b4668e0af0a24fe71ae12e2286c8421e6",
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
+    },
+    "src/g5_treated_metadata_requirements.py": {
+      "expected_sha256": "ea8e33cbd8464480687b8e54e3001c27cc0534bbe813d36751ec15b91ef7bf62",
+      "reason": "G5 treated-event metadata planning: explicitly require the same 13 matching fields for all 174 treated events at event-specific pre-trade cutoffs, including 1,392 derived and 870 external field requirements, because control candidates alone cannot make matching genuine."
+    },
+    "tests/test_g5_treated_metadata_requirements.py": {
+      "expected_sha256": "52b4802b4b898f19c44a45699060806ac0fa7b4354c38e17cce56c83ee9cb21f",
+      "reason": "Regression coverage locks 174 treated events, 72 dates, 2,262 treated field requirements, 696 external lane requests, exact event-specific cutoffs, and zero evidence/release claims."
     }
   },
   "schema_version": "2",
