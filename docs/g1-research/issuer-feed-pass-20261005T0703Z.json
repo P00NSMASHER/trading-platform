@@ -1,0 +1,104 @@
+{
+  "schema_version": "1",
+  "research_lane": "issuer_feed_structured_metadata",
+  "base_main_sha": "8014585b043217da5d5774382eb79e6a8b0972cc",
+  "g1_exact_before": "123/174",
+  "unresolved_before": 51,
+  "token_state": "UNASSIGNED",
+  "generated_at_utc": "2026-10-05T07:03:11Z",
+  "result": "NO_FOUND",
+  "evidence_rule": "Only direct issuer-origin RSS/Atom/JSON/schema/OpenGraph publication clock with defensible timezone may qualify; search-engine normalized timestamps, crawler/import/update times, conference-call schedules, EDGAR acceptance, archive capture, and inference are rejected.",
+  "events": [
+    {
+      "event_id": "HEJFE-947F50EBAFBA54DC",
+      "symbol": "CRL",
+      "trade": "2015-02-10 15:55:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "Charles River Laboratories Announces Fourth-Quarter and Full-Year 2014 Results from Continuing Operations and Provides 2015 Guidance",
+      "issuer_url": "https://ir.criver.com/news-releases/news-release-details/charles-river-laboratories-announces-fourth-quarter-and-full-3",
+      "finding": "Official issuer page recovered. It exposes an RSS toolkit link, but the retrievable target page contains no publication clock/datePublished. RSS-feeds surface returned 403 in public fetch. 9:00 a.m. ET is next-day webcast and rejected."
+    },
+    {
+      "event_id": "HEJFE-22BF36BABB9D19D7",
+      "symbol": "ALNY",
+      "trade": "2015-02-12 15:55:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "Alnylam Pharmaceuticals Reports Fourth Quarter and Full Year 2014 Financial Results and Highlights Recent Period Progress",
+      "issuer_url": "https://investors.alnylam.com/press-release?id=15321",
+      "finding": "Official issuer page recovered; visible/retrievable metadata is date-only (Feb 12, 2015). No RSS/datePublished clock surfaced. 4:30 p.m. ET is conference call and rejected."
+    },
+    {
+      "event_id": "HEJFE-7C93D3838E60926C",
+      "symbol": "CMTL",
+      "trade": "2014-12-10 15:41:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "Comtech Telecommunications Corp. Announces Results for the First Quarter of Fiscal 2015 and Provides Updated Fiscal 2015 Guidance",
+      "corroboration_url": "https://www.sec.gov/Archives/edgar/data/23197/000002319714000036/exhibit991q1fy15.htm",
+      "finding": "Exact release identity/date reconfirmed. No retrievable issuer-origin RSS/Atom/JSON/schema/OpenGraph item with explicit clock+timezone located."
+    },
+    {
+      "event_id": "HEJFE-B9C8B3D0EF3DCB5E",
+      "symbol": "CACI",
+      "trade": "2015-04-29 14:54:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "CACI Reports Results for Its Fiscal 2015 Third Quarter",
+      "corroboration_url": "https://www.sec.gov/Archives/edgar/data/16058/000115752315001429/a51091480_ex99.htm",
+      "finding": "Exact Business Wire-family release identity/date reconfirmed. No retrievable issuer-origin feed/item publication clock+timezone located."
+    },
+    {
+      "event_id": "HEJFE-7CEFB3FE3D986464",
+      "symbol": "ROG",
+      "trade": "2015-02-17 15:44:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "Rogers Corporation Reports 2014 Fourth Quarter and Year-End Results",
+      "corroboration_url": "https://www.sec.gov/Archives/edgar/data/84748/000115752315000594/a51041844ex99_1.htm",
+      "finding": "Exact Business Wire-family release identity/date reconfirmed. No retrievable issuer-origin feed/item publication clock+timezone located."
+    },
+    {
+      "event_id": "HEJFE-93A7D27EF425EDF0",
+      "symbol": "MIC",
+      "trade": "2015-02-18 15:58:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "Macquarie Infrastructure Company Reports Fourth Quarter and Full-Year 2014 Financial Results, Increases Quarterly Cash Dividend",
+      "corroboration_url": "https://www.sec.gov/Archives/edgar/data/1289790/000115752315000634/a51043090ex99_1.htm",
+      "finding": "Exact Business Wire-family release identity/date reconfirmed. No retrievable issuer-origin feed/item clock+timezone located. Conference-call schedule is not publication evidence."
+    },
+    {
+      "event_id": "HEJFE-20EC97300E6205B9",
+      "symbol": "INWK",
+      "trade": "2015-02-12 14:01:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "InnerWorkings Announces Fourth Quarter and Full Year 2014 Results",
+      "corroboration_url": "https://www.sec.gov/Archives/edgar/data/1350381/000110465915009525/a15-4458_1ex99d1.htm",
+      "finding": "Exact release identity/date reconfirmed. Current/successor issuer surfaces did not expose a historical target feed timestamp."
+    },
+    {
+      "event_id": "HEJFE-B04F1AF8B6E30A43",
+      "symbol": "CLD",
+      "trade": "2015-02-17 15:35:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "Cloud Peak Energy Inc. Announces Results for Fourth Quarter and Full Year 2014",
+      "corroboration_url": "https://www.sec.gov/Archives/edgar/data/1441849/000110465915011271/a15-1789_4ex99d1.htm",
+      "finding": "Exact release identity/date reconfirmed. Defunct issuer surfaces yielded no historical issuer-origin feed clock+timezone."
+    },
+    {
+      "event_id": "HEJFE-AC78A2434E4AE8FB",
+      "symbol": "ACO",
+      "trade": "2013-04-25 14:40:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "AMCOL International Corporation Reports First Quarter Results",
+      "corroboration_url": "https://www.sec.gov/Archives/edgar/data/813621/000110262413000483/exh99_1.htm",
+      "finding": "Exact release identity/date reconfirmed; source family is Marketwired. Acquired/defunct issuer surfaces yielded no raw issuer-origin feed clock+timezone. 11 a.m. ET is conference-call time and rejected."
+    },
+    {
+      "event_id": "HEJFE-D6BA56FA6D57427E",
+      "symbol": "SCVL",
+      "trade": "2015-05-20 15:17:00",
+      "status": "EXHAUSTED_FOR_NOW",
+      "target": "Shoe Carnival Reports First Quarter 2015 Results",
+      "issuer_cdn_url": "https://s26.q4cdn.com/745852879/files/doc_financials/2015/q1/895eddea-ceed-4321-82de-5b3790e7c614.pdf",
+      "finding": "Issuer-hosted Q4 CDN exact release recovered, but it is date-only (May 20, 2015). 4:30 p.m. ET is conference call and rejected."
+    }
+  ],
+  "next_action": "Do not repeat these ten in the current issuer-feed/structured-metadata family unless a new raw issuer feed/API artifact appears. Rotate to untested unresolved GCS/Q4/Notified issuers; hand any direct issuer-origin clock to owning Worker 0-4 for immediate validation/PREP."
+}
