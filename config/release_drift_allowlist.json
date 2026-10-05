@@ -2626,6 +2626,14 @@
     "tests/test_g5_control_identity_stocknames_lead_expansion.py": {
       "expected_sha256": "123b25f7709235bc18993026ad9cea7918ab0acad7ec2979377db42146917329",
       "reason": "Regression coverage for exact date-scope conservation, symbol-level PERMNO acquisition leads, direct-hint precedence, conflict rejection, residual symbol discovery, and zero G5 readiness promotion."
+    },
+    "src/g5_control_market_vendor_bridge.py": {
+      "expected_sha256": "89cab1fd461b281084fa02bf8531d5bb2ce817af99eae2a1112afc91b13869fa",
+      "reason": "G5 market acquisition bridge: subtract frozen G2 symbol/date pairs exactly from control-history requirements and route only incremental equity/option trade and tick-quote pairs through existing candidate vendor lanes without coverage or purchase claims."
+    },
+    "tests/test_g5_control_market_vendor_bridge.py": {
+      "expected_sha256": "a50ebaf9034dbf2f1b62ae7e58b9ec1e6c4ff04c99f8a39a098d849d8db3edb5",
+      "reason": "Regression coverage for exact frozen-G2 subtraction, all seven existing candidate vendor routes including option quotes, overlap/count drift rejection, and real G5 history reconciliation with zero readiness promotion."
     }
   },
   "schema_version": "2",
