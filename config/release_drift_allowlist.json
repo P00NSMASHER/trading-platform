@@ -2431,6 +2431,14 @@
       "expected_sha256": "5a6e1f1f3ffb4e222e3504a644165a319503d8e60541e90152b2927e0ba77628",
       "reason": "Header-only schema template for externally supplied authorized dated stable-ID evidence; contains no licensed data and changes no identity coverage."
     },
+    "src/security_identity_lseg_bridge.py": {
+      "expected_sha256": "f124aaa6c12c42b5d1274dd5e136ceb1d2fd169911c4d6c7065c1a5a37bb41ee",
+      "reason": "Fail-closed bridge from authorized date-specific LSEG RIC validation to stable security-identity evidence; only direct study PERMNO-to-RIC mappings can emit one-day evidence, with symbol-only/root-only/secondary mappings prohibited from closing identity."
+    },
+    "tests/test_security_identity_lseg_bridge.py": {
+      "expected_sha256": "a3e7a47df1245def461123a0f6be3448f038807549807ff08e9a055b084191ba",
+      "reason": "Regression coverage for direct dated LSEG identity evidence, authorization requirement, rejection of root-only/secondary mappings, ambiguous validation, mapping conflicts, out-of-queue rows, and locked 111-security/2751-request direct-bridge capacity."
+    },
     "src/g5_control_gap_planner.py": {
       "expected_sha256": "a58f0cc6ac2207f00e2c6beb7dae89467df454538fa84c8ce82414ec9a123947",
       "reason": "G5 control acquisition planning: deterministic lower-bound measurement of same-day candidate coverage already present in the frozen G2 market-data scope; no control-readiness or release claim."
