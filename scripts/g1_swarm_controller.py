@@ -859,7 +859,7 @@ def paginated(repo: str, token: str, path: str, *, max_pages: int = 10) -> list[
 
 def fetch_branch_fallbacks(repo: str, token: str, main_sha: str) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
     try:
-        refs = github_api(repo, token, "/git/matching-refs/heads/g1/prep-")
+        refs = paginated(repo, token, "/git/matching-refs/heads/g1/prep-", max_pages=10)
     except RuntimeError:
         return [], {}
     if not isinstance(refs, list):
