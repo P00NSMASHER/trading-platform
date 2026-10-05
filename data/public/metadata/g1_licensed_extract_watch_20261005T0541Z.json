@@ -1,0 +1,59 @@
+{
+  "schema_version": "1",
+  "purpose": "G1 licensed-data readiness and lawful public-derived-source discovery receipt",
+  "base_main_sha": "8014585b043217da5d5774382eb79e6a8b0972cc",
+  "observed_exact_count": 123,
+  "observed_unresolved_count": 51,
+  "authorized_extract_status": {
+    "ibes": "not_present",
+    "ravenpack": "not_present"
+  },
+  "ibes_adapter": {
+    "path": "src/g1_ibes_timestamp_adapter.py",
+    "required_fields": [
+      "TICKER or OFTIC",
+      "ANNDATS_ACT",
+      "ANNTIMS_ACT"
+    ],
+    "entitlement_reference_required": true
+  },
+  "public_github_findings": [
+    {
+      "repository": "vgreg/earnings_news_jar",
+      "ref": "91561b8e3dc9a349e51102404e66b31e5f885431",
+      "finding": "RavenPack notebook documents TIMESTAMP_UTC/GROUP/CATEGORY/RELEVANCE/SOURCE/story fields and a 2011 source-file name; pinned Ravenpack directory contains the notebook only, not source rows.",
+      "usable_as_g1_data": false
+    },
+    {
+      "repository": "kerryback/dynamic_disclosure_replication",
+      "ref": "14a0638659001c83542a5b2600f21ac92e442ff0",
+      "finding": "Repository documentation describes I/B/E/S ANNDATS_ACT/ANNTIMS_ACT inputs, but explicitly states proprietary empirical inputs/intermediate data are excluded because of licensing restrictions.",
+      "usable_as_g1_data": false
+    }
+  ],
+  "no_row_searches": [
+    "ANNDATS_ACT ANNTIMS_ACT GNTX 2013",
+    "ANNDATS_ACT ANNTIMS_ACT PNRA 2013",
+    "TIMESTAMP_UTC GNTX earnings 2013",
+    "TIMESTAMP_UTC PNRA earnings 2013"
+  ],
+  "court_map_handoff": {
+    "source_run_id": 37268374589,
+    "mapped_current_exclusions": 49,
+    "ambiguous_matches": 0,
+    "residual_event_ids": [
+      "HEJFE-BD3F577ADD90D512",
+      "HEJFE-CCC7747CFBDE893E"
+    ],
+    "residual_symbols": [
+      "GNTX",
+      "PNRA"
+    ],
+    "note": "The licensed-data lane is now highest-value as a bulk-extract watch plus residual fallback for the two court-unmapped events while core workers prepare the 49 court-mapped rows."
+  },
+  "policy": {
+    "public_visibility_is_not_entitlement": true,
+    "do_not_use_licensing_restricted_academic_binaries_without_explicit_authorization": true,
+    "no_inferred_timestamps": true
+  }
+}
