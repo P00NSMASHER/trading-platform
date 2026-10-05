@@ -1,0 +1,31 @@
+name: G1 GNTX Common Crawl 2014
+on:
+  push:
+    branches: [g1/research-gntx-commoncrawl-2014]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Search 2014 crawls for 2013 GNTX Marketwired page
+        run: |
+          python - <<'PY'
+          import urllib.request,urllib.parse,json
+          ua={"User-Agent":"G1-public-research/1.0"}
+          cols=json.loads(urllib.request.urlopen(urllib.request.Request("https://index.commoncrawl.org/collinfo.json",headers=ua),timeout=20).read())
+          ids=[x["id"] for x in cols if "2014" in x["id"]][:8]
+          print("INDEXES",ids)
+          for idx in ids:
+            q=f"https://index.commoncrawl.org/{idx}-index?"+urllib.parse.urlencode({"url":"www.marketwired.com/press-release/gentex-","matchType":"prefix","output":"json"})
+            try:
+              req=urllib.request.Request(q,headers=ua);txt=urllib.request.urlopen(req,timeout=12).read().decode()
+            except Exception as e: print("ERR",idx,repr(e));continue
+            for line in txt.splitlines():
+              try:r=json.loads(line)
+              except:continue
+              u=r.get("url","").lower()
+              if "third-quarter-2013" in u or ("third-quarter" in u and "gentex" in u):
+                print("FOUND",idx,r.get("timestamp"),r.get("url"),r.get("filename"),r.get("offset"),r.get("length"))
+          PY
