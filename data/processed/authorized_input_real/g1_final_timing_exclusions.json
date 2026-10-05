@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "be78472bd2860af9aad1bf74d013b58f5112f374",
+  "base_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -213,13 +213,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-809E53BB4081FBAE",
-      "first_documented_illicit_trade_ts": "2015-04-30 14:48:00",
-      "historical_symbol": "ROVI",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-0AA84E6E44ED02D8",
       "first_documented_illicit_trade_ts": "2015-02-25 15:57:00",
       "historical_symbol": "AMSG",
@@ -406,14 +399,14 @@
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 121,
-    "exact_timing_analysis_eligible": 121,
+    "exact_resolved": 122,
+    "exact_timing_analysis_eligible": 122,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 53,
+    "raw_exact_time_evidence_gaps": 52,
     "required": 174,
-    "reviewed_excluded": 53
+    "reviewed_excluded": 52
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",

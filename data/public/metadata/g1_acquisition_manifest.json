@@ -4446,54 +4446,24 @@
       "routes": []
     },
     {
-      "acquisition_status": "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK",
-      "current_resolution_status": "excluded_fail_closed",
+      "acquisition_status": "RESOLVED_NO_ACTION",
+      "current_resolution_status": "resolved_exact_public_timestamp",
       "dedupe_key": "g1-exact-public-release:HEJFE-809E53BB4081FBAE",
       "event_date": "2015-04-30",
       "event_id": "HEJFE-809E53BB4081FBAE",
       "first_documented_illicit_trade_ts": "2015-04-30T18:48:00Z",
       "historical_symbol": "ROVI",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "research_priority_rank": null,
-      "research_signal": null,
+      "public_announcement_ts": "2015-04-30T20:02:00Z",
       "research_use_only": true,
-      "route_order": [
-        "licensed_ibes_bulk",
-        "public_release_discovery"
-      ],
-      "routes": {
-        "licensed_ibes": {
-          "adapter": "src/g1_ibes_timestamp_adapter.py",
-          "entitlement_required": true,
-          "lawful_access_only": true,
-          "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-          "required_fields": [
-            "TICKER or OFTIC",
-            "ANNDATS_ACT",
-            "ANNTIMS_ACT"
-          ]
-        },
-        "public_archive": {
-          "exact_first_public_clock_required": true,
-          "mode": "release_discovery",
-          "prohibited_timestamp_substitutes": [
-            "archive_capture_time",
-            "edgar_acceptance_time",
-            "inferred_time",
-            "scheduled_release_time"
-          ],
-          "source_families": [
-            "official_newswire_archive",
-            "issuer_investor_relations_archive",
-            "preserved_wire_mirror",
-            "sec_exhibit_corroboration"
-          ]
-        }
+      "resolved_source": {
+        "source_family": "preserved_wire_mirror",
+        "source_grade": "B",
+        "source_id": "public-worker4-streetinsider-businesswire-batch-0109",
+        "source_reference": "https://www.streetinsider.com/Press%2BReleases/Rovi%2BCorporation%2BReports%2BFirst%2BQuarter%2B2015%2BFinancial%2BResults/10508598.html",
+        "timestamp_confidence": "B-EXACT",
+        "timestamp_kind": "first_public_release"
       },
-      "search_window": {
-        "end_date": "2015-05-07",
-        "start_date": "2015-04-30"
-      }
+      "routes": []
     },
     {
       "acquisition_status": "RESOLVED_NO_ACTION",
@@ -5082,7 +5052,7 @@
     "lawful_access_only": true,
     "likely_full_universe_path": true,
     "provider_family": "LSEG I/B/E/S Historical Estimates / Actuals",
-    "request_event_count": 53,
+    "request_event_count": 52,
     "required_fields": [
       "TICKER or OFTIC",
       "ANNDATS_ACT",
@@ -5116,19 +5086,19 @@
   "schema_version": "1",
   "state": {
     "accounted_for": 174,
-    "acquisition_needed": 53,
+    "acquisition_needed": 52,
     "event_count": 174,
-    "exact_resolved": 121,
-    "research_hint_exact_resolved": 121,
-    "research_hint_excluded": 53,
+    "exact_resolved": 122,
+    "research_hint_exact_resolved": 122,
+    "research_hint_excluded": 52,
     "research_hint_state_matches_authoritative": true
   },
   "summary": {
     "explicit_research_priorities": 3,
-    "no_public_replication_candidate": 5,
+    "no_public_replication_candidate": 4,
     "public_release_file_present_without_clock": 48,
-    "resolved_no_action": 121,
-    "routed_for_acquisition": 53
+    "resolved_no_action": 122,
+    "routed_for_acquisition": 52
   },
   "work_queue": [
     {
@@ -5799,19 +5769,6 @@
       "event_date": "2015-04-16",
       "event_id": "HEJFE-263620F13A6443DD",
       "historical_symbol": "MAT",
-      "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "queue_priority": 2000,
-      "research_priority_rank": null,
-      "route_order": [
-        "licensed_ibes_bulk",
-        "public_release_discovery"
-      ]
-    },
-    {
-      "dedupe_key": "g1-exact-public-release:HEJFE-809E53BB4081FBAE",
-      "event_date": "2015-04-30",
-      "event_id": "HEJFE-809E53BB4081FBAE",
-      "historical_symbol": "ROVI",
       "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
       "queue_priority": 2000,
       "research_priority_rank": null,

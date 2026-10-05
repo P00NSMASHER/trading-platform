@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "be78472bd2860af9aad1bf74d013b58f5112f374",
+  "base_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 121,
-    "note": "The latest integrated recovery is batch_0104; cumulative public exact-time batches are 78 and cumulative exact event records are 121 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 78,
+    "exact_resolved_event_records": 122,
+    "note": "The latest integrated recovery is batch_0109; cumulative public exact-time batches are 79 and cumulative exact event records are 122 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 79,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 53
+    "reviewed_excluded_event_records": 52
   },
   "preferred_public_source_families": [
     {
@@ -2476,6 +2476,32 @@
       "source_grade": "A",
       "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
       "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "Timestamp-preserving StreetInsider mirror identifies the exact Business Wire release and explicit 4:02 PM EDT clock; matching SEC Exhibit 99.1 independently corroborates issuer/release identity and date.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1424454/000142445415000015/ex99-1x03312015earningsrel.htm",
+      "disposition": "RESOLVED_IN_BATCH_0109",
+      "event_date": "2015-04-30",
+      "event_id": "HEJFE-809E53BB4081FBAE",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-04-30T16:02:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-04-30 14:48:00",
+      "historical_event_match": true,
+      "historical_symbol": "ROVI",
+      "information_asymmetry_seconds": 4440,
+      "probe_id": "ROVI-batch0109",
+      "public_announcement_ts": "2015-04-30T16:02:00-04:00",
+      "public_distribution_explicit": true,
+      "publisher_timestamp_text": "StreetInsider preserves the exact-title Business Wire release at April 30, 2015 4:02 PM EDT",
+      "reason": "Promoted through an exact-title timestamp-preserving Business Wire mirror with independent matching SEC press-release corroboration.",
+      "release_title": "Rovi Corporation Reports First Quarter 2015 Financial Results",
+      "reviewed_on": "2026-10-05",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "B",
+      "source_reference": "https://www.streetinsider.com/Press%2BReleases/Rovi%2BCorporation%2BReports%2BFirst%2BQuarter%2B2015%2BFinancial%2BResults/10508598.html",
+      "timestamp_evidence_kind": "publisher_timestamp",
       "timestamp_kind": "first_public_release"
     }
   ]

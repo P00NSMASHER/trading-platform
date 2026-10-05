@@ -5,24 +5,31 @@ from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
 def rr(p):
     with p.open(newline="",encoding="utf-8") as h:return list(csv.DictReader(h))
-def test_batch_0046():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0046_evidence.json").read_text())
+def test_batch_0109():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0109_evidence.json").read_text())
     events={r["event_id"]:r for r in rr(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    exp={"HEJFE-74011A906BCCABE9":("AGP","2011-10-28T10:00:00Z",61020),"HEJFE-DC002D2C6C767277":("MUSA","2011-10-20T21:09:00Z",4860),"HEJFE-AA2597B95CFD2A2D":("LSTR","2011-10-24T11:50:00Z",230520)}
-    assert len(d["items"])==3
+    exp={"HEJFE-809E53BB4081FBAE":("ROVI","2015-04-30T20:02:00Z",4440)}
+    assert len(d["items"])==1
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
         tr=datetime.fromisoformat(e["first_documented_illicit_trade_ts"]).replace(tzinfo=ZoneInfo("America/New_York"));rel=datetime.fromisoformat(x["public_announcement_ts"])
         assert e["historical_symbol"]==sym and tr<rel<=tr+timedelta(days=7) and int((rel-tr).total_seconds())==delta
         assert resolved[x["event_id"]]["public_announcement_ts"]==utc
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
-        assert x["source_family"]=="official_newswire_archive" and x["source_grade"]=="A"
-        assert x["corroboration_reference"].startswith("https://www.sec.gov/")
-def test_batch_0046_preserves_prior():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0046_evidence.json").read_text())
+        assert x["source_family"]=="preserved_wire_mirror" and x["source_grade"]=="B"
+        assert x["timestamp_evidence_kind"]=="publisher_timestamp"
+        assert x["public_distribution_explicit"] is True
+        assert x["source_reference"].startswith("https://www.streetinsider.com/Press%2BReleases/")
+        assert x["corroboration_reference"].startswith("https://www.sec.gov/Archives/edgar/data/")
+def test_batch_0109_preserves_prior():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0109_evidence.json").read_text())
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    for eid,ts in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==ts
+    for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
     ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==52
     assert all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in ex)
+def test_batch_0109_worker4_shard_ownership():
+    event_ids={"HEJFE-809E53BB4081FBAE"}
+    assert 109 >= 60 and (109-60) % 5 == 4
+    assert all(int(hashlib.sha256(eid.encode("utf-8")).hexdigest(),16) % 5 == 4 for eid in event_ids)
