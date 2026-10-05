@@ -9,6 +9,7 @@ import research_receipt_rebuild as rebuild
 import real_data_release_sprint as sprint
 
 ROOT=Path.cwd()
+Path("g1_batch_0105_failure.log").unlink(missing_ok=True)
 BASE="41e07137b5aeb3b4765b5d8d350fb4f66aa4ce28"
 WORKFLOW=".github/workflows/g1-public-batch-0105-worker-0.yml"
 SCRIPT="scripts/g1_batch_0105_generate.py"
