@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "55eb6e4c600d2e21bb4a26b616feb6a3ec9e6d00",
+  "base_main_sha": "8b2622df3b4641606e5de6a80eda88244a8af49d",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -31,30 +31,9 @@
   },
   "exclusions": [
     {
-      "event_id": "HEJFE-B5A8A297D14CD19D",
-      "first_documented_illicit_trade_ts": "2015-04-27 15:34:00",
-      "historical_symbol": "TXT",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-BD3F577ADD90D512",
       "first_documented_illicit_trade_ts": "2013-10-21 15:21:00",
       "historical_symbol": "GNTX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-FBA59D82CEE8FD00",
-      "first_documented_illicit_trade_ts": "2015-02-12 14:04:00",
-      "historical_symbol": "CGNX",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-4E643D38FFB3016E",
-      "first_documented_illicit_trade_ts": "2015-02-11 14:58:00",
-      "historical_symbol": "PNRA",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -64,41 +43,20 @@
       "historical_symbol": "CREE",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-54A5D1D8A5B593C8",
-      "first_documented_illicit_trade_ts": "2015-02-05 15:33:00",
-      "historical_symbol": "NUAN",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-198DE6D99E934F32",
-      "first_documented_illicit_trade_ts": "2011-04-20 14:29:00",
-      "historical_symbol": "EW",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-A3C5C43F6AC75C44",
-      "first_documented_illicit_trade_ts": "2015-05-06 15:47:00",
-      "historical_symbol": "PRU",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     }
   ],
   "g1_state": {
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 166,
-    "exact_timing_analysis_eligible": 166,
+    "exact_resolved": 172,
+    "exact_timing_analysis_eligible": 172,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 8,
+    "raw_exact_time_evidence_gaps": 2,
     "required": 174,
-    "reviewed_excluded": 8
+    "reviewed_excluded": 2
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
