@@ -2470,6 +2470,14 @@
     "tests/test_g5_control_expansion_planner.py": {
       "expected_sha256": "231cee684cfa6cea2421ae1bf0b01c4e01f92b4943de99133314e3fb9468930c",
       "reason": "Regression coverage locks the current G5 expansion plan at 51 of 52 structural deficit slots, proves retrospective labels do not affect selection, and prevents known positives or existing G2 candidates from being reselected."
+    },
+    "src/g5_control_acquisition_planner.py": {
+      "expected_sha256": "acb9193e9c795257c2a6bf19cb3baf3ffc1d2dc67187b72304657c94915af066",
+      "reason": "G5 genuine-control acquisition planner: combines existing four-kind G2 candidate scope with the planning-only expansion queue, emits exact field-level pre-event metadata requirements and market acquisition prerequisites, and never promotes planning rows to genuine G5 evidence."
+    },
+    "tests/test_g5_control_acquisition_planner.py": {
+      "expected_sha256": "61d56e09e5289863285f234199621dd39887e8c515dc96d06ffb8609afb59bd1",
+      "reason": "Regression coverage for integrated G5 acquisition planning: freezes the 49/23 structural split, 52-slot deficit, 51 planned expansion candidates, 204 expansion market rows, one residual slot, exact readiness-field routing, anti-lookahead cutoffs, and zero evidence/release claims."
     }
   },
   "schema_version": "2",
