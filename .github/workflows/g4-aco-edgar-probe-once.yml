@@ -1,0 +1,45 @@
+name: G4 ACO EDGAR 13D probe
+on:
+  push:
+    branches: [g4/aco-edgar-13d-probe]
+    paths: [.github/workflows/g4-aco-edgar-probe-once.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Fetch official SEC daily index and locate Audrey Weaver 13D
+        shell: bash
+        run: |
+          set -euo pipefail
+          UA='G4 historical research probe contact jayp19386@gmail.com'
+          URL='https://www.sec.gov/Archives/edgar/daily-index/2013/QTR1/master.20130319.idx.gz'
+          curl --fail --retry 4 --retry-delay 2 -A "$UA" -o /tmp/master.gz "$URL"
+          gzip -dc /tmp/master.gz > /tmp/master.idx
+          echo '=== exact CIK/name candidates ==='
+          grep -Ei '(^|[| ])1189753([| ]|$)|WEAVER.*AUDREY|AUDREY.*WEAVER' /tmp/master.idx || true
+          LINE="$(grep -Ei '(^|[| ])1189753([| ]|$)|WEAVER.*AUDREY|AUDREY.*WEAVER' /tmp/master.idx | grep -Ei '13D' | head -1 || true)"
+          if [ -z "$LINE" ]; then
+            echo 'NO_13D_MATCH'
+            exit 0
+          fi
+          echo "MATCH=$LINE"
+          FILE="$(printf '%s\n' "$LINE" | awk -F'|' '{print $5}' | xargs)"
+          if [ -z "$FILE" ]; then
+            # Fixed-column master index fallback: final whitespace-delimited field.
+            FILE="$(printf '%s\n' "$LINE" | awk '{print $NF}')"
+          fi
+          echo "FILING_PATH=$FILE"
+          case "$FILE" in
+            edgar/data/*) ;;
+            *) echo "Unexpected SEC filing path: $FILE"; exit 1 ;;
+          esac
+          FILING_URL="https://www.sec.gov/Archives/$FILE"
+          echo "FILING_URL=$FILING_URL"
+          curl --fail --retry 4 --retry-delay 2 -A "$UA" -o /tmp/filing.txt "$FILING_URL"
+          echo '=== filing header ==='
+          grep -E '^(ACCESSION NUMBER:|ACCEPTANCE-DATETIME:|CONFORMED SUBMISSION TYPE:|FILED AS OF DATE:|COMPANY CONFORMED NAME:|CENTRAL INDEX KEY:)' /tmp/filing.txt | head -30 || true
+          echo '=== shares/percent/outstanding evidence ==='
+          grep -Ein -C 3 'shares outstanding|outstanding shares|percent of (the )?class|percentage of (the )?class|Item 5|aggregate amount beneficially owned|1,836,584|1836584|5\.68' /tmp/filing.txt | head -240 || true
