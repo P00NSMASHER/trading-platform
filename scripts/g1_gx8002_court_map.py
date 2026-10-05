@@ -153,5 +153,16 @@ def main() -> None:
     for row in mapped:
         print(json.dumps({k:row[k] for k in ("event_id","symbol","gx8002_row_id","press_release_distribution_dt_unzoned","source_code","headline","chronology_unzoned_seconds")},ensure_ascii=False))
 
+    print("GX8002_GNTX_2013_ROWS")
+    for r in rows:
+        if r["ticker"] == "GNTX" and r["year"] == "2013":
+            print(json.dumps({k:r.get(k) for k in ("row_id","ticker","year","distribution_date","earliest_order_dt","submission_dt","public_distribution_dt_unzoned","source","headline","raw_line","line_number")},ensure_ascii=False,sort_keys=True))
+    print("GX8002_GNTX_TEXT_CONTEXT")
+    lines=text.splitlines()
+    for i,line in enumerate(lines):
+        if "GNTX" in line or "Gentex" in line:
+            lo=max(0,i-2); hi=min(len(lines),i+5)
+            print(json.dumps({"line_number":i+1,"context":[re.sub(r"\\s+"," ",x).strip() for x in lines[lo:hi]]},ensure_ascii=False))
+
 if __name__ == "__main__":
     main()
