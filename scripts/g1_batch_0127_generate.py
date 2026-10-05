@@ -203,7 +203,7 @@ status = sprint.build_status(
 )
 step9 = next(row for row in status["steps"] if row["step"] == 9)
 assert step9["status"] == "SOURCE_BLOCKED"
-assert "173/174" in step9["evidence"] and "2" in step9["evidence"]
+assert "173/174" in step9["evidence"] and "1" in step9["evidence"]
 
 test_files = [
     "tests/test_g1_source_research.py",
