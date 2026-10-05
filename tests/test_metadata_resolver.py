@@ -615,3 +615,151 @@ def test_contract_accepts_federal_court_public_distribution_family(tmp_path):
     contracts,_=load_contract(p)
     assert len(contracts)==1
     assert contracts[0].source_family=="federal_court_public_distribution_record"
+
+
+def _write_split_g5_fixture(*, include_conflict: bool = False):
+    base = ROOT / "data/examples/metadata"
+    files = {
+        "identity": base / "_g5_split_identity.csv",
+        "market": base / "_g5_split_market.csv",
+        "reference": base / "_g5_split_reference.csv",
+    }
+    symbols = ("C1", "C2", "C3")
+    files["identity"].write_text(
+        "event_date,symbol,effective_ts_utc,sector,index_bucket,market_cap,price\n"
+        + "".join(
+            f"2015-02-17,{s},2015-02-17T12:00:00-05:00,Tech,SP500,{1000000000+i*100000000},{20+i}\n"
+            for i, s in enumerate(symbols)
+        ),
+        encoding="utf-8",
+    )
+    files["market"].write_text(
+        "event_date,symbol,effective_ts_utc,trailing_21d_vol,normal_minute_volume,normal_minute_turnover,normal_relative_spread,option_liquidity\n"
+        + "".join(
+            f"2015-02-17,{s},2015-02-17T12:05:00-05:00,{0.02+i*0.001},{100000+i*10000},{0.01+i*0.001},{0.001+i*0.0001},{5000+i*100}\n"
+            for i, s in enumerate(symbols)
+        ),
+        encoding="utf-8",
+    )
+    files["reference"].write_text(
+        "event_date,symbol,effective_ts_utc,institutional_ownership,analyst_coverage,borrow_cost,pre_event_return\n"
+        + "".join(
+            f"2015-02-17,{s},2015-02-17T12:10:00-05:00,{0.60+i*0.01},{10+i},{0.01+i*0.001},{0.002-i*0.001}\n"
+            for i, s in enumerate(symbols)
+        ),
+        encoding="utf-8",
+    )
+    sources = []
+    for source_id, key in [
+        ("g5-split-identity", "identity"),
+        ("g5-split-market", "market"),
+        ("g5-split-reference", "reference"),
+    ]:
+        sources.append({
+            "source_id": source_id,
+            "record_kind": "control_universe",
+            "source_family": "synthetic_fixture",
+            "path": f"data/examples/metadata/{files[key].name}",
+            "enabled": True,
+            "authorized": True,
+            "data_classification": "synthetic_fixture",
+            "license_reference": "fixture",
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "timezone": "America/New_York",
+            "column_map": {},
+        })
+    if include_conflict:
+        files["conflict"] = base / "_g5_split_conflict.csv"
+        files["conflict"].write_text(
+            "event_date,symbol,effective_ts_utc,market_cap\n"
+            "2015-02-17,C1,2015-02-17T12:00:00-05:00,9999999999\n",
+            encoding="utf-8",
+        )
+        sources.append({
+            "source_id": "g5-split-conflict",
+            "record_kind": "control_universe",
+            "source_family": "synthetic_fixture",
+            "path": f"data/examples/metadata/{files['conflict'].name}",
+            "enabled": True,
+            "authorized": True,
+            "data_classification": "synthetic_fixture",
+            "license_reference": "fixture",
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "timezone": "America/New_York",
+            "column_map": {},
+        })
+    contract = ROOT / "config/_tmp_g5_split.json"
+    contract.write_text(json.dumps({"schema_version": "1", "sources": sources}), encoding="utf-8")
+    return contract, list(files.values())
+
+
+def test_g5_fuses_pre_cutoff_covariates_across_multiple_sources():
+    contract, files = _write_split_g5_fixture()
+    try:
+        result = resolve_control_readiness(events(), load_demo_sources(contract))[0]
+        assert result.candidate_count == 3
+        assert result.candidates_with_pre_event_covariates == 3
+        assert result.readiness_status == "resolved_for_point_in_time_matching"
+        assert set(result.source_ids.split(";")) == {
+            "g5-split-identity",
+            "g5-split-market",
+            "g5-split-reference",
+        }
+    finally:
+        contract.unlink(missing_ok=True)
+        for path in files:
+            path.unlink(missing_ok=True)
+
+
+def test_g5_equal_timestamp_covariate_conflict_fails_closed():
+    contract, files = _write_split_g5_fixture(include_conflict=True)
+    try:
+        result = resolve_control_readiness(events(), load_demo_sources(contract))[0]
+        assert result.candidate_count == 3
+        assert result.candidates_with_pre_event_covariates == 2
+        assert result.readiness_status == "partial_candidate_universe_missing_pre_event_covariates_or_availability"
+        assert "g5-split-conflict" in result.source_ids
+    finally:
+        contract.unlink(missing_ok=True)
+        for path in files:
+            path.unlink(missing_ok=True)
+
+
+def test_g5_undated_rows_cannot_close_point_in_time_readiness():
+    p = ROOT / "data/examples/metadata/_g5_undated.csv"
+    p.write_text(
+        "event_date,symbol,sector,index_bucket,market_cap,price,trailing_21d_vol,normal_minute_volume,normal_minute_turnover,normal_relative_spread,option_liquidity,institutional_ownership,analyst_coverage,borrow_cost,pre_event_return\n"
+        "2015-02-17,C1,Tech,SP500,1000000000,20,0.02,100000,0.01,0.001,5000,0.6,10,0.01,0.002\n"
+        "2015-02-17,C2,Tech,SP500,1100000000,21,0.02,100000,0.01,0.001,5000,0.6,10,0.01,0.002\n"
+        "2015-02-17,C3,Tech,SP500,1200000000,22,0.02,100000,0.01,0.001,5000,0.6,10,0.01,0.002\n",
+        encoding="utf-8",
+    )
+    c = {
+        "schema_version": "1",
+        "sources": [{
+            "source_id": "undated-controls",
+            "record_kind": "control_universe",
+            "source_family": "samplefirms_research_universe",
+            "path": "data/examples/metadata/_g5_undated.csv",
+            "enabled": True,
+            "authorized": True,
+            "data_classification": "public_research_replication",
+            "license_reference": "retrospective fixture",
+            "delimiter": ",",
+            "encoding": "utf-8",
+            "timezone": "America/New_York",
+            "column_map": {},
+        }],
+    }
+    q = ROOT / "config/_tmp_g5_undated.json"
+    q.write_text(json.dumps(c), encoding="utf-8")
+    try:
+        result = resolve_control_readiness(events(), load_demo_sources(q))[0]
+        assert result.candidate_count == 3
+        assert result.candidates_with_pre_event_covariates == 0
+        assert result.readiness_status == "partial_candidate_universe_missing_pre_event_covariates_or_availability"
+    finally:
+        p.unlink(missing_ok=True)
+        q.unlink(missing_ok=True)
