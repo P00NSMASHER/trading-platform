@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "073f5d85d1234d16b91c13b011af851d4224b221",
+  "base_main_sha": "a3fe4734237bbdc7ad79e75c34a6b3c513b2e1bf",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -36,27 +36,20 @@
       "historical_symbol": "GNTX",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-81F188C0D790FE70",
-      "first_documented_illicit_trade_ts": "2015-01-20 15:39:00",
-      "historical_symbol": "CREE",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     }
   ],
   "g1_state": {
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 172,
-    "exact_timing_analysis_eligible": 172,
+    "exact_resolved": 173,
+    "exact_timing_analysis_eligible": 173,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 2,
+    "raw_exact_time_evidence_gaps": 1,
     "required": 174,
-    "reviewed_excluded": 2
+    "reviewed_excluded": 1
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
