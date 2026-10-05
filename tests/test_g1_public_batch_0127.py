@@ -26,7 +26,7 @@ def test_batch_0127_preserves_172_and_leaves_one_fail_closed():
     assert hashlib.sha256(BATCH.read_bytes()).hexdigest()==evidence["batch_sha256"]
     for eid,stamp in evidence["previous_exact_timestamps"].items(): assert resolved[eid]["public_announcement_ts"]==stamp
     excluded=[x for x in resolved.values() if x["resolution_status"]=="excluded_fail_closed"]
-    assert len(excluded)==1 and all(not x["public_announcement_ts"] and not x["information_asymmetry_seconds"] for x in excluded)
+    assert len(excluded)==0 and all(not x["public_announcement_ts"] and not x["information_asymmetry_seconds"] for x in excluded)
 def test_batch_0127_worker2_ownership_and_lane():
     assert 127>=62 and (127-62)%5==0
     assert int(hashlib.sha256(EID.encode("utf-8")).hexdigest(),16)%5==2

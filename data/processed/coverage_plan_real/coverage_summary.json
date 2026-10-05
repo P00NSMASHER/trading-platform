@@ -3,7 +3,6 @@
   "blocking_gates": [
     "G2_REAL_MARKET_DATA",
     "G2_STABLE_SECURITY_IDENTITY",
-    "G1_EXACT_TIMING_ANALYSIS",
     "G5_MODEL_EVALUATION_CONTROLS",
     "G6_METADATA_QUALITY"
   ],
@@ -70,7 +69,7 @@
   "market_date_min": "2011-03-21",
   "metadata_gate_overlay": {
     "G1_ANNOUNCEMENT_TIMES": "READY_WITH_REVIEWED_EXCLUSIONS",
-    "G1_EXACT_TIMING_ANALYSIS": "BLOCKING",
+    "G1_EXACT_TIMING_ANALYSIS": "READY",
     "G2_STABLE_SECURITY_IDENTITY": "BLOCKING",
     "G3_PRIMARY_LISTING_HISTORY": "READY",
     "G4_SHARES_OUTSTANDING": "READY_WITH_REVIEWED_EXCLUSIONS",
@@ -78,9 +77,9 @@
     "G5_MODEL_EVALUATION_CONTROLS": "BLOCKING",
     "G6_METADATA_QUALITY": "BLOCKING"
   },
-  "metadata_quality_sha256": "71cd2378fdcb747ddcbf1dc572ecd8545a661e66d468613d970e92c74844293f",
-  "metadata_readiness_sha256": "400e7012b7b748107ce1a319607d748849d0332c91c75521f5722fc6d5326eef",
-  "missing_exact_announcement_timestamps": 1,
+  "metadata_quality_sha256": "8fa6b9cf2745052c2ff00844b5cda5180bc97558ccdc80e3b5dd05752d8e990c",
+  "metadata_readiness_sha256": "166d7a5553b78649730207115115269b0d41494bc8767e4b1c0bbb5427a3bd28",
+  "missing_exact_announcement_timestamps": 0,
   "prohibited_outputs": [
     "BUY",
     "SELL",

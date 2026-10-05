@@ -35,12 +35,12 @@ def test_full_universe_and_queue_reconcile():
     manifest = g1a.build_manifest()
     assert manifest["state"]["event_count"] == 174
     assert manifest["state"]["accounted_for"] == 174
-    assert manifest["state"]["exact_resolved"] == 173
-    assert manifest["state"]["acquisition_needed"] == 1
+    assert manifest["state"]["exact_resolved"] == 174
+    assert manifest["state"]["acquisition_needed"] == 0
     assert len(manifest["items"]) == 174
-    assert len(manifest["work_queue"]) == 1
+    assert len(manifest["work_queue"]) == 0
     assert len({row["event_id"] for row in manifest["items"]}) == 174
-    assert len({row["dedupe_key"] for row in manifest["work_queue"]}) == 1
+    assert len({row["dedupe_key"] for row in manifest["work_queue"]}) == 0
 
 
 def test_resolved_rows_never_reenter_acquisition_queue():
@@ -50,7 +50,7 @@ def test_resolved_rows_never_reenter_acquisition_queue():
         row for row in manifest["items"]
         if row["acquisition_status"] == "RESOLVED_NO_ACTION"
     ]
-    assert len(resolved) == 173
+    assert len(resolved) == 174
     assert all(row["event_id"] not in queue_ids for row in resolved)
     assert all(row["routes"] == [] for row in resolved)
 
@@ -61,7 +61,7 @@ def test_unresolved_rows_have_public_and_lawful_licensed_routes():
         row for row in manifest["items"]
         if row["acquisition_status"] == "NEEDS_EXACT_PUBLIC_RELEASE_CLOCK"
     ]
-    assert len(unresolved) == 1
+    assert len(unresolved) == 0
     for row in unresolved:
         assert row["routes"]["licensed_ibes"]["entitlement_required"] is True
         assert row["routes"]["licensed_ibes"]["lawful_access_only"] is True
@@ -74,6 +74,9 @@ def test_unresolved_rows_have_public_and_lawful_licensed_routes():
 def test_routing_prioritizes_clock_recovery_vs_release_discovery():
     manifest = g1a.build_manifest()
     by_id = {row["event_id"]: row for row in manifest["items"]}
+    if not manifest["work_queue"]:
+        assert manifest["state"]["acquisition_needed"] == 0
+        return
     present = next(
         row for row in manifest["work_queue"]
         if "PUBLIC_RELEASE_FILE_PRESENT" in row["public_release_file_status"]
@@ -99,9 +102,9 @@ def test_routing_prioritizes_clock_recovery_vs_release_discovery():
 def test_explicit_research_priorities_head_the_queue():
     manifest = g1a.build_manifest()
     assert [row["historical_symbol"] for row in manifest["work_queue"][:5]] == [
-        "GNTX"
+        
     ]
-    assert [row["queue_priority"] for row in manifest["work_queue"][:5]] == [1000]
+    assert [row["queue_priority"] for row in manifest["work_queue"][:5]] == []
 
 
 def test_stale_research_counts_do_not_override_authoritative_resolution_state():
@@ -112,8 +115,8 @@ def test_stale_research_counts_do_not_override_authoritative_resolution_state():
 
     manifest = g1a.build_manifest_from_data(rows, exclusions, tampered)
 
-    assert manifest["state"]["exact_resolved"] == 173
-    assert manifest["state"]["acquisition_needed"] == 1
+    assert manifest["state"]["exact_resolved"] == 174
+    assert manifest["state"]["acquisition_needed"] == 0
     assert manifest["state"]["research_hint_state_matches_authoritative"] is False
 
 

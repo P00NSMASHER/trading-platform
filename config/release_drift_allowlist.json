@@ -14,20 +14,20 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "71cd2378fdcb747ddcbf1dc572ecd8545a661e66d468613d970e92c74844293f",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "8fa6b9cf2745052c2ff00844b5cda5180bc97558ccdc80e3b5dd05752d8e990c",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "400e7012b7b748107ce1a319607d748849d0332c91c75521f5722fc6d5326eef",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "166d7a5553b78649730207115115269b0d41494bc8767e4b1c0bbb5427a3bd28",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "0a1a643a419ecdc306051d9e35754bc5fc83dc1e26437c927dd93e366afaad64",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "535b2ac4a2dd13e75b18010033f3ecf41d9a5e33d8d914d6f83b5f7fc1fded04",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
-      "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+      "expected_sha256": "187d58dba8965d6fd666c269255c1f1b211492d3c97ccd716b3fb2935edb1afb",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "pyproject.toml": {
       "expected_sha256": "a94ea697e62d4d2e3ffa3f19676a3fc29e3d0157124d84b31a557627e51f3bc9",
@@ -131,6 +131,26 @@
       "expected_sha256": "bd147ed763d528638df579a364c706ed2ed4784a98eb931dffd356c44b76c047",
       "reason": "Control-plane Step 8: exact dispatched-commit checkout and externally authenticated release audit-pack generation"
     },
+    "FROZEN_CHAMPION.md": {
+      "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "RELEASE_MANIFEST.json": {
+      "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "SECURITY.md": {
+      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
+      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
+    },
+    "SHA256SUMS": {
+      "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "STEP21_IMPORT_PROVENANCE.md": {
+      "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
     "config/licensed_entitlement_manifest.example.json": {
       "expected_sha256": "ea2e663dfb257da11ac8cf4257c33bb0fc8634ed425c8c17e8e207f70aee4050",
       "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
@@ -140,8 +160,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "0713b314c3c56de3e624446a264889311aae347671e54e568de9ff20f952d7f4",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "2a6f8c2e978dbbc5ea82b53c15fcfc2b1ef4822e513c6feeef66d8a29769c2f5",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -160,8 +180,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "5aa311c99efb5c41de7071707174e5a5b3ed0a642095650e7b7aabadee00b721",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "211625ae2679341b1d787ff057f5a711ea7c4d73539212797d35eeee0337a52a",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -172,8 +192,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "12d774d11e39b827b5fe43fd0651f8503cf7e6db4d15ea837696b02cacee27e9",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "d5f4fcd90b48f0aef28dda94e56020066632eb17332b0cb57353d47405484ede",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -228,8 +248,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "8987253d830d89c65a37ecd3382c2a3e6671e7a8f35b37873f5fa4f1935dceab",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "8c00e75f498d657be538721241a458cd68ebdd1580f5fa1c68eb1a7b03a73877",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -244,12 +264,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "adc25b24fb58ebb387deb548dddd5d11d13e1960a4b2175ebc5d1a35b72dff66",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "396a61e43865c014d685fff6fa468b1f4c872d461a79cad85e0acd5cae00d7c3",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "dbdf843295c2e2add2bb9a1f4912686641df6fa18824d3b2f044b9a521abb668",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "9d4563b22f6e7ba9b4938597c84fda9b420fda39fa205e790bef677129631883",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -261,7 +281,7 @@
     },
     "data/processed/g2_vendor_requests/cboe_trial_bulk_readiness.json": {
       "expected_sha256": "5ce869805188c907322788cc2156b4041849a303abf8e062136a9b750df6e44d",
-      "reason": "Cboe All Access 2012-2015 zero-cash trial readiness receipt: exact 309 source dates / 3,364 underlying-date tasks, full historical contract enumeration, bounded resumable acquisition, and zero G2 coverage promotion."
+      "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
       "expected_sha256": "a7bc31cb22e099d09cd2574d0ac231a3af11e2f2338c34f641c9da15566dd6f3",
@@ -487,13 +507,13 @@
       "expected_sha256": "b5cfbc9768b8b00a4e7c44cbd753f3d6bf3e87e9fc6e92c3b87685c28b1b7741",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
-    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
-      "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
-      "reason": "Nasdaq ITCH vendor-contact provenance receipt from PR #164; records acknowledgement and Sales handoff only while Step 8 remains SOURCE_BLOCKED with no verified entitlement or decoded files."
-    },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
       "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
       "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
+    },
+    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
+      "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
+      "reason": "Nasdaq ITCH vendor-contact provenance receipt from PR #164; records acknowledgement and Sales handoff only while Step 8 remains SOURCE_BLOCKED with no verified entitlement or decoded files."
     },
     "data/processed/real_data_release_sprint/production_source_contract_blueprint.json": {
       "expected_sha256": "965cbb2a151d9d3bed146912960f5ba3f5521cc21d600cfb7bba6bc6ed1cf382",
@@ -504,8 +524,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "309cffbb9d35a258391f6d3f46a629526a7c66e81647681e45cd8e0874745626",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "1e9db2f77b5546b4016f7b96147cb8608ccec12544c451f635c4cc78be0785bf",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -519,13 +539,13 @@
       "expected_sha256": "e252c39710ed9b8f228ba0b339d24c4850000d200a10421bb23af0c319e919fe",
       "reason": "Materialized cheap-first LSEG/ThetaData G2_FULL_REPLICATION option-quote plan; candidate sourcing only, no purchase or coverage claim."
     },
-    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history_option_quotes.csv": {
-      "expected_sha256": "c2594bfdd987d6600c11f76edf0dc02f6e8d63f01f6b9a8a3732b2b6e2549924",
-      "reason": "Materialized full-replication option-quote request rows with deterministic per-date LSEG/ThetaData candidate routing; legacy artifact path retained for compatibility."
-    },
     "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
       "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history_option_quotes.csv": {
+      "expected_sha256": "c2594bfdd987d6600c11f76edf0dc02f6e8d63f01f6b9a8a3732b2b6e2549924",
+      "reason": "Materialized full-replication option-quote request rows with deterministic per-date LSEG/ThetaData candidate routing; legacy artifact path retained for compatibility."
     },
     "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_nbbo_quotes.csv": {
       "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
@@ -544,12 +564,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "096638a027e37a61b539c62a42af018c3a9c34534c5e2988c21166f96d792a7e",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "02f515580b0089e35e3d26b22203ad563399f10ca4537ee6f39267703c7b3980",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "7761ce166a6f254e4263f37bc2cb7a5d9d2f553d234dc7541586448c9ebbbd04",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "93a74fe25f9698499c641263c007e7d095dedf71ad0af71d066d00060b114cab",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -568,8 +588,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "b398d826785818939c5462f7e15f0a9b712187ad4f08d0d28cabaf5f14a87678",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "c113af372dc05978ca7baadef8236654cab5dd99da21986fe39915993af66dce",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -695,12 +715,12 @@
       "expected_sha256": "5c997dcc805c9e5df65bac36213726c1550d852492cd26271288688ceb528491",
       "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
     },
-    "data/public/metadata/g1_announcement_times_batch_0032_evidence.json": {
-      "expected_sha256": "e023876cf0580d0caaf5d7385604b5d9ca128bcbbc598169009dc7f3815d2999",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
     "data/public/metadata/g1_announcement_times_batch_0032.csv": {
       "expected_sha256": "82f9caa85fc930fc2b955c3dc2d16fab8d17b7f676cba99f3b2c747dcf41013d",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0032_evidence.json": {
+      "expected_sha256": "e023876cf0580d0caaf5d7385604b5d9ca128bcbbc598169009dc7f3815d2999",
       "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/public/metadata/g1_announcement_times_batch_0033.csv": {
@@ -927,6 +947,10 @@
       "expected_sha256": "6fd193859e4f37aebbe611df093178bcafb16f4581ea0a2d6f2e47e46ab6162f",
       "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0130.csv": {
+      "expected_sha256": "dd631004a0b05784a89aae86700922e079cf3883da6a3bf3a74841ed567f23ef",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0033_evidence.json": {
       "expected_sha256": "6465123fe92dff4e78b89629c3df751f55c3f1c3baacccb7aeac0bdeab920bae",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
@@ -1151,9 +1175,13 @@
       "expected_sha256": "07b18034ddb0683684e8b8328446269abc858f7e49153cb5ca2e788422e3d1d5",
       "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0130_evidence.json": {
+      "expected_sha256": "623e6efff9e7d798027c6ef32777f8c92bc9807011af690e525eb44793fd5a10",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+    },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "48732cf26847dedad548d460ced6ea3e5fd4503bb613277ec0fca3149867f3b0",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "e4984a464d8ff9fc89e1b31d1cb208fd69426e321047d8164ee9c35cfd1300ee",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "f51b060b743ae9e988e1b8763fb37b23b1226ab85c0ea147b444bc3d4ecc1ea9",
@@ -1239,6 +1267,10 @@
       "expected_sha256": "2c7f0880436d5ef7dc526be8c2f9dfa68174e403cdb21e1302590ba21c7d4355",
       "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
+    "data/raw/hacked_earnings_jfe/SampleFirms.csv": {
+      "expected_sha256": "7a9927a84dd9532bd5a4a8157ed3e40bc1b50c7b1be51374feca17b29a65f5df",
+      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
     "data/raw/hacked_earnings_jfe/SampleFirms_actual.csv": {
       "expected_sha256": "c9684e2f6f419533dd438e66c3beefa624cca419109259d07ac5eb615d872308",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
@@ -1247,8 +1279,8 @@
       "expected_sha256": "bd40f28b7c2d7889303ebb4a9b4d604cee330e351232361789f42ba1f96c2fcf",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/SampleFirms.csv": {
-      "expected_sha256": "7a9927a84dd9532bd5a4a8157ed3e40bc1b50c7b1be51374feca17b29a65f5df",
+    "data/raw/hacked_earnings_jfe/TimeOfFirstTrade.csv": {
+      "expected_sha256": "e723e9e2a0e0a616915f3146fdea40ef429d90586ac4699853b047c536568f55",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
     "data/raw/hacked_earnings_jfe/source_snapshot/.gitignore": {
@@ -1275,14 +1307,6 @@
       "expected_sha256": "f19127ed0b019c959ed82e33b06607558567b9a82e38207d7ea0ef17c32d6f77",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/clean_pr_text.py": {
-      "expected_sha256": "314cdb95f1ff9d338fa4aa21a8dee2d66c31d5d1d92e58957cde21151b4b5633",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
-    },
-    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/pr sentiment.py": {
-      "expected_sha256": "f3ef14e2b5efdd12f0ede8df3a67b71222959db7fcc6df82637ada98fcbf0f6a",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
-    },
     "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet.b64": {
       "expected_sha256": "167d49f786dffddefce7cbc94253ffae5f974b8b8dfbcc2c732a48b48eed014b",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
@@ -1291,8 +1315,12 @@
       "expected_sha256": "f1dbfd9368057e1ea45fc7abc1561799142074d2043544237a91dfb79c3857fc",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/TimeOfFirstTrade.csv": {
-      "expected_sha256": "e723e9e2a0e0a616915f3146fdea40ef429d90586ac4699853b047c536568f55",
+    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/clean_pr_text.py": {
+      "expected_sha256": "314cdb95f1ff9d338fa4aa21a8dee2d66c31d5d1d92e58957cde21151b4b5633",
+      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
+    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/pr sentiment.py": {
+      "expected_sha256": "f3ef14e2b5efdd12f0ede8df3a67b71222959db7fcc6df82637ada98fcbf0f6a",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
     "docs/control_plane_implementation_baseline.md": {
@@ -1332,8 +1360,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "0cb555c3061a0a366b78c3d5e072047539b3d8a6e10586ab8476f83209f5ac4b",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "5e8e9d073340579f0ae53dac2b9ad12213b3b792fff54e12234d7ca0014aec9d",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1390,14 +1418,6 @@
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
-    },
-    "FROZEN_CHAMPION.md": {
-      "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
-    "RELEASE_MANIFEST.json": {
-      "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "requirements-skops.lock": {
       "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
@@ -1575,14 +1595,6 @@
       "expected_sha256": "241605c6377d451bbaee1f94d8fccefa6f9c10aadc05aca81967b31db161b6f4",
       "reason": "Intentional post-Step21 repository hardening addition; SHA-256 drift identities and externally authenticated allowlist"
     },
-    "SECURITY.md": {
-      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
-      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
-    },
-    "SHA256SUMS": {
-      "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
     "src/control_plane/__init__.py": {
       "expected_sha256": "9c85c627406ac58621635d1394cabe5a32c066093d28e8cdaf44752ed88da358",
       "reason": "Control-plane Step 2 foundation"
@@ -1673,7 +1685,7 @@
     },
     "src/g2_cboe_trial_bulk_runner.py": {
       "expected_sha256": "aae7c7b273ea3de69fd00807a417cff35ba3f3bede57dbc9255db53f51eef652",
-      "reason": "Dry-run-first Cboe All Access bulk runner for exact 2012-2015 G2 option trades and strict tick quotes with full reference/options contract enumeration, sequence pagination, bounded retries, private SHA-256 receipts, and zero coverage promotion."
+      "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "src/g2_cheap_route_partitions.py": {
       "expected_sha256": "d8aaa5557c1f52afa6b72c021822e7c80575b0549922c71dbc60d335e8f94cc4",
@@ -1871,10 +1883,6 @@
       "expected_sha256": "d9f8459d35bc7e99c941af00187b96ccd3ded2d9b33913f37b4310ebc24c59a8",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
     },
-    "STEP21_IMPORT_PROVENANCE.md": {
-      "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
     "tests/test_control_plane_adversarial.py": {
       "expected_sha256": "28773c33814d97a730a8e5ba42e2493328d3e890fd3113953d3d96f8e6e7e598",
       "reason": "Control-plane Step 8: adversarial fail-closed suite across ingestion, publicity, lineage, authority, account, dashboard, secret, drift, and champion boundaries"
@@ -1908,244 +1916,248 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "efdcfe355995528aee32dfe1a44e344e315258e7bbf2d9fad9f87220109374dc",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "ecde013d5d3178a492bfd08664fd23cb2cc55f9095b4a1d0d3bdf2b66b916f0a",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "a8b0f5c68f07f377f489921a11022ae6ea04d4a43dd0c5188b6dedbcedd30384",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "4bd2c0b95ef3dc74d3c1a55d44174e20498fffe9ef5cd7d32a93886e27b4eb27",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "4f48c33d2739da78905af3ec375cec07eb7a298aeb7b475994a4bd9bfb223a1e",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "6c9f1ef3476628206dfcdc11d85ff6d8a174ef1e4d539ef0b6c9a0ff72ba4a0a",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "f73f847f940850ab7b992faa9871d1a13e7ca497f592b7b76b28927e06b597d2",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "0ef0769e00e4b35faf50d3746b966b4f38c9c657d0b01057123b12a6bf3ebc18",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "b3afd16cc730d2fafd03e4b7a8e5fb840ef3a7c7f89d3a0a61bb5aee2eeb8f53",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "0cd8b182a199abffec0d2bde50461962c654f573f36a253d97582cacf80b7be0",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "bf6495ea3ca6a69f84cfb2318ef2886faa763be5412354448d09456174075f3d",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "f1aef655070160c831818f7cb629ff2250fe3ff4d2023242bbf71744427c984f",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "c0932ae9a8239a61295fac0fc537411058c9f7320e01f6d42e7b640bfab2970b",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "3a43e2d682974a87b2ac702b877216f9c0b4a5d600a1949cf959cca6e98d3d7a",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "dcd4ec7c9f3785a371725324ddec8f2d64bda60056c8e9f350734533eb442a1e",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "7e371e66a8e491e5507806b13ff3675c95f2e38004d6eefc288cfa8988b1bccc",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "a18966f2b49216dd35fec35294d31a88065f424f4e99c02a0522eaa82fe3ea51",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "18814bfcd0e6a23f0562e8e443cf518bde4d1a582263e8d1294646ed854d9a21",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "bf940a96e91f4a9952b1fdcda3e317031864f018658603b092b47e42b4c39db4",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "ab50c741ac2688c88d726624ed675c0906e4475a6c51a1dd116576573542c0fe",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "d2c1546f51c6ebf7caebe3933f81fe34d051ed6d0e40f2b670bce8cfcb1d36df",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "c4d6dd4fdc1be587ef49eb364a971bfe19a399d0972c7a0a5767e8852d52f8d4",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "df38726ea9949179b1a9abee9fec9e602619d67375e35ba1f4442dbcf66be044",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "6148456a845980a23c3f16c34f6a2e2385375f1da8ff60d79bd921d4fdd8dc1e",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "5a1bdf95618ecf3e6b8a2d2e6498dcf455c4aed0d020828416fb16a999a54e75",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "f4ef5bd9bd01e7981fcac38f2222b925abac1975567331fc60eeea94097995c4",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "5cf4ea6f22218f315a8742336e3661a75c73068e5c4b3138266b4d0c67278b55",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "8e7c6a1243208ab195482b575c4e6add6e363d4667915d0bf86cc4e5db40d686",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "ff9a3b9b3931bd98047ad4d9e2eff5a5f6504736a512db8184f04e46fd093ab1",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "5c2aca8b1331e7516d663046c3758bef3e34406780299d1880fc3080b11ed56b",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "9bfc8fc64497e4b8e620f495378e62013bdc5200bf0b645231b5d87676c9ca87",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "95f1fdcac56d267910d352e2ece4fdcec82e9ad25566c6f05f891930159430fb",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "8a4f7e6f1cc60d9ef25595cd0de7bf2eb876975275eadcc40c9aa273030efd00",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "86d3ba8709d8454f46b040bf1d3e9df722340a579093dab2d597514e2ebb605a",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "234f1a841ab0dbadf7e89ebafe25c0845e7cc5897abe453c9717914c3a1e4f07",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "0ff701fbaf922a88a8beaec788c500da1347713a0fa61efe3daf2d2b6c371760",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "c2f72191ccb418907b358558b4b52974a449ac2d3a91d2c0c92f3282d1d858ee",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "6aba80567a5f75af5d08911f2cb49d8b869ebfb58cb50eb4d31c117b8dd60945",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "f1e1fa040a7ac95d9be26d2d89f49da284a5974264ab6220d0de90be44486b00",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "594be9fcad959c50d60a85fbb0c641c32d1a82281839ee06f1dbca7a9d1faefa",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "7d1df8b0c1a02ea7be6637fb6465a2043c90955b82269ae085266bf11b9a4572",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "b4e33da71dfc2fa604c6f066f555761190cc011428f8912fdc0c39c0de1fbec6",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "e2fb143636d4d3c0b831f6216d3b40df5b22ca611da168d691e1a1cf64e430a0",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "402dbb1b6e7f559ad6d67661e79f157f3ff3ac2de60c631994c54d56e872a237",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "2c913709a96656669b27a2baa1ac6dadf35996364df112a31e13291da5d8019c",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "5d3d01153e1fd2fe8b3a1d7e407281759477776a50da2822202d15b02b0d64bc",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "7e3c0949e1dd681d1e36030b7e61eab6fb412a77c13a37f8d48fd5959a7d89a4",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "012c8056fcd761058348f3b08f63bc3b96f318e7455774748d954d8a9970c105",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "027319bd64aff48719f259df493e1e435b694c68e69bc732cb126ed18d7964e7",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "66ade1a175c65a127449d3f371a8cc4c2f90ba90e3f584e4f6308eb9e697582e",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "74c9b45709fb8eeb4ad7945ef854ded9bcd801dc49f05c2dcc872410497216ba",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "a7e805bc9255541cb2c7a80fc8872d5917afec2e052ca3678feadb8598f6589c",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "ce70b4254fb0da816bc4e55b2c3d1c2e705579c51636fa84a0a3fc121480668f",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "93cae04a6503556096305868013f41fae311e1e33bfd6918bb22e4af31136122",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "f9069e748b19bd8aaedf14da6fb1cdaac823be21d634ad2b5182011abb89df96",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "10d0fdd22e229f50f751771ce901764bf5150d45dd824e3d226ac7b37be34135",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "28610e78b09349e38ba5b257008b3bc389bd34872bcb632608ac2b628bd08f24",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "c9af4514a927a28852e7e24236152ef0dc780443f4e50e4da2b04b2cc678c54b",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0072.py": {
-      "expected_sha256": "679e73f128d81c0d4283484fd1c76b4d014c3f26e1ea8278e4c05d91a6b3e5ae",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "ef7dca6f506d95317b84856fea982432c573be9423a79b19aa21bbbba624b112",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "b8bf60b2d150616380461a8365cf9f4284a86ea5c4c9a2a6675e9ba51390fe88",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "8071cb6c5df1a3276a721ea05b9ca24cfcbcb0cdde1e1ebff6f7436fe0dcc1d2",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0076.py": {
-      "expected_sha256": "62c922eaa9c7d561a3f8c438f5955d7b7416e5485f33d8bebade6167699ee991",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "65b333ee09e611ca32f103465292f91761b99688005e08d46c78a87eaa2eda90",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0077.py": {
-      "expected_sha256": "5561358199e06fdd34e0a34d72cd9d0d8d989864e88593659d726a98f707639a",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "f372eaf17543dd565f986a3b3158af1050a780682f1b72691637e05428365498",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "45303c1de79d46b90439555fddfe1d79e231b518428bb08d4fb4400025fa9935",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "ee5be63bb7c1dd4014afa71748319f4a67b7a87ba3eee05f73f59e3b51a84c1a",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "bd8180e8e63d5b490eb0d1504e3e30b646e894b3f537120446493cd96565bfa1",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "2cbd2fa93ecdeed52eb7e8473b1b9544d91333344086f2e6e4861121b4fa0e58",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0081.py": {
-      "expected_sha256": "9458211b371e0d4fc4778e719b94eb5bb120d0363e9dd19a19689a816aa2c428",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "0eb1cf5488b054e173520e39ef68c85f1548607d561c58f160504a92c949c824",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "a53f80b6087eaa93b1e1f4652898f4771c0b43a5dba04af78672df091d463f7f",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "3aaaa1c5a1f06837e7e41752876359f85314a517cee8149550be908bbb7ed398",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0083.py": {
-      "expected_sha256": "4074a89f1da02840ea61fd42d81dda03982ed391d8127e799a1d83236022f8a2",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "71c91bec669862bbf967db956113bd70ddb2e0b3d8dc04258d3ffdb6afa639f1",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0085.py": {
-      "expected_sha256": "71419a518c5b22475da5aae219ef997b771528a03ddde1837658241179f24322",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "33aa7edf4a0c357472160dc0f4e7c099d9eb0f9cd6293fbfd0d048dba8a37f26",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0087.py": {
-      "expected_sha256": "12334b1bdbdc0e1dad4540259832665776288753672335f1df111925bc374be8",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "97ef379f8f48ebfe10395534e200b96a34e9957811256511753a106685a4c103",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0088.py": {
-      "expected_sha256": "1fa407004bb24dbb90dca10c9ea59fafb9ef1181f499a1e34d28569b81a71e02",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "beaf85ca3eb9b3943cbc39ae932d553421a42f2907bf3d1557074419d8a5f97a",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0090.py": {
-      "expected_sha256": "8cd979d58db845334788a70d49e9ce9b7339ba2646f5850a7ea53890e16c13bc",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "796f838b5c36da9b58997e5fefb677d713a39b73d01f299b8693e2df202b264f",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0092.py": {
-      "expected_sha256": "ff51b7e630d8bccfe7c1b186fdf373f2b9547b912b53ef821bdf8073c9279245",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "71c691d68428b0debcff3845884d0ce904ffff67a1effc7cb74cc00f3e572209",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0093.py": {
-      "expected_sha256": "bb4c7a3aea957e8314b5785e359832d18a908b06db671afc495462f1e8f66b35",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "fe33bc9b110d808f89bea71b3e1239d2098f23e53a4ee0095dbd4157075cfe5a",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0095.py": {
-      "expected_sha256": "5b5473b5def5cc47e73a9a918be0f69993e9b8db47460729eac0735ebd6e5a9d",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "a2805819ed02d8acfff15c488ce21bba39d978fec10bd600b4905956e5090579",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0098.py": {
-      "expected_sha256": "0bfba276f5528499298bb7c234d4c51b7dde3c50d8f72356b7ec9b199e6956db",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "ab027f4f5e4fd655b07207e413ac1cfe15be4bf1199ba68164024ae13eec57eb",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0100.py": {
-      "expected_sha256": "32e6dd9905826f540b540e5585ba787a769200522839ff423a895b38696c7877",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "332af8a0d61f94b485abd44391e2980f2898ef36ddc82f0627839fead8ab6bfc",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0104.py": {
-      "expected_sha256": "d4e5770da6ee31ca53a089371a37c9d31613f88183f726daef22112912e4afea",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "c1535856cd2dd05c505069350c774e86c7f85ce08171c6b37fa6228442c751cd",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0105.py": {
-      "expected_sha256": "27a2d9ea362ce12ec21223437a8a3ad7778ec6bebbd61d0a2184a139c6d37f99",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "7662179f6e566ec4f56ac1833d1d242d6e6dfdbc0a56cd04479e8d91578a7313",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0109.py": {
-      "expected_sha256": "0e26605983b1f1d57af483d9a771aa5fde1e94475370eed3b5427ac72f048599",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "4d09d950a7210ebcf989f30dabd081c520398a0ed8e0af2beda140f388081a64",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0113.py": {
-      "expected_sha256": "3898a0791c8512edb39036a3504b85d0ea3df901b3bf1169156a453599cbc449",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "1661b55237c0e27d0467bcb9d2cba4574a3faab94d3ae7174ccf5fc61fd020ef",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0114.py": {
-      "expected_sha256": "59d3e9413535c3b1edf37c1bbc9fb669fca93a2f9817970d03364a89641012aa",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "ad4aa51e9a58d0379c4a7eb91a22227f17099245275b745f11d7a1ff9622854a",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0116.py": {
       "expected_sha256": "23f80f2ccda4335a56f2a0fd6020e55434a7ebc454f9fe7b56608193aff3a039",
       "reason": "G1 batch 0116 Worker-1 filed federal-court public-distribution clocks for fourteen events; deterministic 164 exact / 10 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0118.py": {
-      "expected_sha256": "97d9924eb5d789fa86d9ba6868550b2b1d7fabb96ca0524bee2933dcfc9161dc",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "59933049a6fcf5d4fab842d7cfde1d7d85b041d40b725a5161a15a259d7f7849",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0119.py": {
-      "expected_sha256": "a6226733684ff6d5972013db784124a3c60bad7a9e2fe32b7ed6fcf683d1f7bd",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "6da131cafc9daaf49cbd9cde8d391691111b32c286de453adc44fcd265565b29",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0122.py": {
-      "expected_sha256": "08ff3fea5863f0e02417fd09f0c6f2d971c8c1ad51d59d531d59c2cebe1bed1e",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "0b5962e96acc2cf40a574bd54c4d078307b0e8c20ebe10b500df41b1ff6199f8",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_public_batch_0127.py": {
-      "expected_sha256": "99637253db61d47b58a2df69a2196ed1d59491107dcaca33054d5831b9b48acd",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "0e5b49956fad74c82ddcb361f5d1a1f863f988531ccb4cf65398cfb7dbe6ddb2",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0130.py": {
+      "expected_sha256": "82c6d610fb709c247488e1cbdef6c6df9fac7c9ea972d5b32dd9e022c1dc68f2",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "0fb986b74bc666d9ccb0061fc75a5e52b4dcba5fa6ac40dfd2d0e59e1efd4beb",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "50ed38676dfbd4b3fea2575f175e50307237175ded8b7d011742ac1b0254347c",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "72a796340d0ec8ffb3dd291eeb8970ccc80106f6c982b14baf30988094f02fa1",
@@ -2177,7 +2189,7 @@
     },
     "tests/test_g2_cboe_trial_bulk_runner.py": {
       "expected_sha256": "230b5ba0d645165f5a0bf747ebcfc0fd0a19a10e22f239052837f202117fbd81",
-      "reason": "Regression coverage for exact 309-date / 3,364-pair Cboe trial scope, historical option-chain enumeration, OSI formatting, pagination, private resumability, hash-tamper detection, and fail-closed zero-coverage behavior."
+      "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "tests/test_g2_cheap_route_partitions.py": {
       "expected_sha256": "4b444b9aea83f5efbeefcf6daaac95d97f27130fd934447867e9e0b2441850c1",
@@ -2364,8 +2376,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "1f89cecd604de909dfd7bb9a11b5e8e2f25b1ac39664eadec29f8d924db5617e",
-      "reason": "G1 batch 0127 Worker-2 filed federal-court public-distribution clocks for six events; deterministic 173 exact / 2 reviewed exclusions with exact SEC Exhibit identity corroboration and prior evidence preserved."
+      "expected_sha256": "d7ff752fe7cef8f80dcf3760a78dcc5b40bd44e5789104b31a87a23e1bebf1a4",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
@@ -2396,8 +2408,8 @@
       "reason": "Adversarial identity regressions for symbol reuse, PERMNO aliases, requirement mismatches, future dates, listing mismatches, and deterministic manifest reproduction."
     },
     "tests/test_software_readiness_certification.py": {
-      "expected_sha256": "19abafff3563f52f5f5770a16ee43f31171623c2956d1d078af95e9996cfcb9e",
-      "reason": "Software-readiness certification: machine-readable separation of software readiness from real-data validation, backed by expanded hostile regression, dashboard security, and private-runtime integrity checks."
+      "expected_sha256": "81b0996abf82efb14b88427812dcfdbfa3bf56e5f037f05bc07ff62d0d3c3174",
+      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",

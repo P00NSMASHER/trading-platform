@@ -78,12 +78,12 @@ def test_refresh_coverage_uses_current_metadata_subgates(tmp_path: Path):
     assert updated["metadata_gate_overlay"]["G4_SHARES_OUTSTANDING"] == "READY_WITH_REVIEWED_EXCLUSIONS"
     assert updated["metadata_gate_overlay"]["G5_MATCHED_CONTROL_UNIVERSE"] == "READY_WITH_REVIEWED_EXCLUSIONS"
     assert "G2_REAL_MARKET_DATA" in updated["blocking_gates"]
-    assert "G1_EXACT_TIMING_ANALYSIS" in updated["blocking_gates"]
+    assert "G1_EXACT_TIMING_ANALYSIS" not in updated["blocking_gates"]
     assert "G2_STABLE_SECURITY_IDENTITY" in updated["blocking_gates"]
     assert updated["security_identity_gate"]["baseline_identity_unverified_count"] == 3654
     assert "G5_MODEL_EVALUATION_CONTROLS" in updated["blocking_gates"]
     assert updated["g3_conditioned_itch_event_rows"] == 80
-    assert updated["missing_exact_announcement_timestamps"] == 1
+    assert updated["missing_exact_announcement_timestamps"] == 0
 
 
 def test_status_never_labels_missing_real_sources_complete(tmp_path: Path):

@@ -1,5 +1,18 @@
 [
   {
+    "source_id": "public-worker0-globenewswire-marketwired-batch-0130",
+    "record_kind": "announcement_timestamp",
+    "source_family": "official_newswire_archive",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_research_replication",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g1_announcement_times_batch_0130.csv",
+    "exists": true,
+    "row_count": 1,
+    "sha256": "dd631004a0b05784a89aae86700922e079cf3883da6a3bf3a74841ed567f23ef",
+    "license_reference_present": true
+  },
+  {
     "source_id": "public-worker2-federal-court-gx8002-batch-0127",
     "record_kind": "announcement_timestamp",
     "source_family": "federal_court_public_distribution_record",
