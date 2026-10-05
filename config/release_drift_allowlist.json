@@ -2510,6 +2510,14 @@
     "tests/test_g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "0d414cff9384f4b7b08548bee4ef8ef89210cf114d62445f8baaa6e049496f8c",
       "reason": "Regression coverage for completed-minute anti-lookahead, prior-day volatility, point-in-time shares availability, baseline-history requirements, option-liquidity definition, and zero G5 readiness/release claims."
+    },
+    "src/g5_staged_readiness_preview.py": {
+      "expected_sha256": "5cae6770ae9872536a5ceae5eaff69ae15e9cc33a5c0234aa4d2a0a37f5ff7b7",
+      "reason": "G5 staged-readiness preview: fuse normalized control metadata across files using latest pre-cutoff values, fail closed on equal-timestamp conflicts and unknown candidates, and report completeness without changing canonical G5 readiness."
+    },
+    "tests/test_g5_staged_readiness_preview.py": {
+      "expected_sha256": "727734d5d4cb77ae4a18a350f416a464749d417ae1d17da6f01f7d800e7e5577",
+      "reason": "Regression coverage for split-source G5 completeness, missing fields, equal-timestamp conflicts, unknown candidates, late rows, and explicit zero canonical-readiness/release change."
     }
   },
   "schema_version": "2",
