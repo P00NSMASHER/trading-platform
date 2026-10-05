@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "integration_only": true,
+  "base_main_sha": "8e1ad89fc8557ebb8efb78eb9db08f7499eef8fc",
+  "reserved_batch": "0098",
+  "worker_slot": 3,
+  "prep_branch": "g1/prep-0098-worker-3-sm-51d8470",
+  "prep_evidence_path": "data/public/metadata/g1_public_batch_0098_prep_evidence.json",
+  "event_ids": [
+    "HEJFE-5B6F87699FF5093E"
+  ],
+  "expected_exact_resolved": 123,
+  "expected_reviewed_excluded": 51,
+  "step9": "SOURCE_BLOCKED",
+  "publisher_trigger_revision": 1,
+  "publisher_trigger_reason": "Exact-main Worker-3 token validated; GitHub-native push trigger for SM exact-head gates."
+}
