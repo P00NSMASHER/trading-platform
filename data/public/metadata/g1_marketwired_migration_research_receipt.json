@@ -84,5 +84,79 @@
     "target_clock_status": "NOT_RECOVERED",
     "note": "Franchising mirror and SEC/Panera sources establish exact identity/date but no first-public time."
   },
-  "handoff": "Concentrate Marketwired Legacy / Legacy Mirror / URL inventory lanes on the exact GNTX and PNRA targets only. Recover an exact migrated GlobeNewswire page, archived Marketwired numeric URL, ADVFN/COMTEX item, or other timestamp-preserving exact target mirror. A clock is admissible only from an exact target page with explicit publication clock and defensible timezone."
+  "handoff": "Concentrate Marketwired Legacy / Legacy Mirror / URL inventory lanes on the exact GNTX and PNRA targets only. Recover an exact migrated GlobeNewswire page, archived Marketwired numeric URL, ADVFN/COMTEX item, or other timestamp-preserving exact target mirror. A clock is admissible only from an exact target page with explicit publication clock and defensible timezone.",
+  "last_one_url_miner_update": {
+    "observed_main_sha": "828810d4e168a08498c7087075d91a9406f3cd6f",
+    "observed_canonical_state": {
+      "exact": 145,
+      "total": 174,
+      "unresolved": 29
+    },
+    "gntx_event_id": "HEJFE-BD3F577ADD90D512",
+    "gntx_status": "UNRESOLVED_CLOCK_NOT_RECOVERED",
+    "exact_target": {
+      "title": "Gentex Reports Third Quarter 2013 Financial Results",
+      "date": "2013-10-22",
+      "issuer_url": "https://ir.gentex.com/node/11061",
+      "issuer_source_marker": "Marketwired - Oct 22, 2013",
+      "exact_identity_fragments": [
+        "net sales were $288.6 million",
+        "Net income for the third quarter of 2013 increased 33% to $55.5 million"
+      ]
+    },
+    "new_persisted_findings": [
+      {
+        "family": "ADVFN/InvestorsHub Marketwire/COMTEX history",
+        "status": "STRONG_TIMESTAMP_PRESERVING_FAMILY_PROOF_TARGET_ABSENT",
+        "url": "https://au.advfn.com/stock-market/NASDAQ/GNTX/news",
+        "details": [
+          "GNTX board/history preserves same-issuer Marketwire result clocks, including Q1 2013 at 8:04 AM ET on 2013-04-23.",
+          "It also preserves Marketwired-via-COMTEX full timestamps such as the Q1 2013 call announcement at 06:02:28 ET and older 2012 issuer releases.",
+          "The indexed GNTX discussion jumps from July 2013 to December 2013 and contains no post for the exact October 22 Q3 target, so this surface does not currently supply the target clock."
+        ]
+      },
+      {
+        "family": "Yahoo Finance historical Marketwired syndication",
+        "status": "VALID_FAMILY_PROOF_TARGET_NOT_INDEXED",
+        "example_url": "https://finance.yahoo.com/news/gentex-completes-acquisition-homelink-r-190000580.html",
+        "details": [
+          "Yahoo preserves a Gentex Marketwired item from September 27, 2013, proving same-era syndication.",
+          "Exact-title and distinctive-fragment searches did not recover the October 22 Q3 target."
+        ]
+      },
+      {
+        "family": "GlobeNewswire Marketwired migration",
+        "status": "VALID_FAMILY_PROOF_TARGET_NOT_RECOVERED",
+        "details": [
+          "Searches by exact target title/date and issuer across GlobeNewswire did not recover a migrated target page.",
+          "Neighboring Gentex IDs/times remain discovery proof only and are explicitly prohibited for inference."
+        ]
+      }
+    ],
+    "bounded_no_hit_families": [
+      "public GitHub code search exact title/slug/distinctive fragments",
+      "Marketwired/Marketwire exact-title web index",
+      "ADVFN localized exact-title index",
+      "Yahoo exact target index",
+      "MarketScreener exact target index",
+      "StreetInsider exact target index",
+      "FinancialContent exact target index",
+      "marketwirenews.com exact target index",
+      "GlobeNewswire exact target/date index"
+    ],
+    "prohibitions_reaffirmed": [
+      "no neighboring-release clock inference",
+      "no sequential-ID URL/time inference",
+      "no EDGAR acceptance",
+      "no conference-call or scheduled time",
+      "no crawler/archive/import timestamp",
+      "no unsupported timezone"
+    ],
+    "next_high_value_paths": [
+      "recover exact ADVFN article numeric ID or archived Marketwire numeric URL from a public URL inventory/crawl-derived table",
+      "recover exact Yahoo/legacy syndicator target URL if publicly indexed",
+      "search public Common-Crawl-derived datasets/URL inventories for exact title or distinctive target fragments"
+    ],
+    "pnra_status": "MONITOR_ONLY_GX8002_ROW_1657_DEDICATED_VALIDATOR_OWNS_ADMISSIBILITY"
+  }
 }
