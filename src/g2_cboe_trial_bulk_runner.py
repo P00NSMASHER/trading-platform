@@ -170,6 +170,8 @@ def build_dry_run_manifest(tasks: list[TrialTask]) -> dict[str, Any]:
         "runtime_safety": {
             "execute_requires_credentials": ["CBOE_CLIENT_ID", "CBOE_CLIENT_SECRET"],
             "execute_requires_explicit_ack": "--ack-trial-active",
+            "execute_requires_retention_ack": "--ack-retention-authorized",
+            "retention_authority_required_before_bulk": True,
             "private_output_required": True,
             "retry_429_and_5xx": True,
             "no_coverage_promotion": True,
@@ -569,6 +571,7 @@ def main() -> None:
     parser.add_argument("--output-root", type=Path)
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--ack-trial-active", action="store_true")
+    parser.add_argument("--ack-retention-authorized", action="store_true")
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--limit", type=int, default=1)
     parser.add_argument("--manifest-output", type=Path)
@@ -581,6 +584,11 @@ def main() -> None:
     else:
         if not args.ack_trial_active:
             raise SystemExit("--execute requires --ack-trial-active")
+        if not args.ack_retention_authorized:
+            raise SystemExit(
+                "--execute requires --ack-retention-authorized after written Cboe "
+                "Order Form or vendor permission allows retained internal research use"
+            )
         if args.output_root is None:
             raise SystemExit("--execute requires --output-root")
         client_id = os.environ.get("CBOE_CLIENT_ID", "").strip()
