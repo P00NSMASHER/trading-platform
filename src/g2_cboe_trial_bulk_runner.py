@@ -20,6 +20,8 @@ from typing import Any, Callable, Iterable
 DEFAULT_REQUIREMENTS = Path(
     "data/processed/real_data_release_sprint/g2_option_source_date_requirements.csv"
 )
+DEFAULT_VENDOR_READINESS = Path("data/processed/g2_vendor_requests/vendor_readiness.json")
+REQUIRED_RETENTION_STATE = "WRITTEN_RETENTION_AUTHORITY_VERIFIED"
 TOKEN_URL = "https://id.livevol.com/connect/token"
 API_BASE = "https://api.livevol.com/v1/live/allaccess"
 CBOE_EARLIEST_VENDOR_CONFIRMED_OPRA_DATE = "2012-01-01"
@@ -170,6 +172,8 @@ def build_dry_run_manifest(tasks: list[TrialTask]) -> dict[str, Any]:
         "runtime_safety": {
             "execute_requires_credentials": ["CBOE_CLIENT_ID", "CBOE_CLIENT_SECRET"],
             "execute_requires_explicit_ack": "--ack-trial-active",
+            "execute_requires_retention_readiness": str(DEFAULT_VENDOR_READINESS),
+            "required_retention_state": REQUIRED_RETENTION_STATE,
             "private_output_required": True,
             "retry_429_and_5xx": True,
             "no_coverage_promotion": True,
@@ -340,6 +344,35 @@ def _write_jsonl_gz(path: Path, rows: Iterable[dict[str, Any]]) -> None:
                 gz.write(line.encode("utf-8"))
 
 
+def require_retention_authority(path: Path) -> dict[str, Any]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    policy = payload.get("policy") or {}
+    external = payload.get("external_state") or {}
+    if policy.get("retention_rights_required_before_bulk_acquisition") is not True:
+        raise PermissionError(
+            "vendor readiness does not enforce retention rights before bulk acquisition"
+        )
+    state = str(external.get("cboe_trial_retention_rights") or "")
+    if state != REQUIRED_RETENTION_STATE:
+        raise PermissionError(
+            "bulk Cboe acquisition blocked: written retention authority is not verified "
+            f"(state={state or 'MISSING'})"
+        )
+    return {
+        "verified": True,
+        "state": state,
+        "source_path": str(path),
+    }
+
+
+def _require_verified_retention(retention_authority: dict[str, Any]) -> None:
+    if (
+        retention_authority.get("verified") is not True
+        or retention_authority.get("state") != REQUIRED_RETENTION_STATE
+    ):
+        raise PermissionError("bulk Cboe acquisition requires verified retention authority")
+
+
 def ensure_private_output_path(path: Path, *, repo_root: Path | None = None) -> Path:
     resolved = path.expanduser().resolve()
     if repo_root is None:
@@ -458,7 +491,10 @@ def download_task(
     client: CboeClient,
     task: TrialTask,
     output_root: Path,
+    *,
+    retention_authority: dict[str, Any],
 ) -> dict[str, Any]:
+    _require_verified_retention(retention_authority)
     output_root = ensure_private_output_path(output_root)
     task_dir = _task_dir(output_root, task)
     if _receipt_valid(task_dir, task):
@@ -539,13 +575,23 @@ def execute_slice(
     *,
     start: int,
     limit: int,
+    retention_authority: dict[str, Any],
 ) -> dict[str, Any]:
     if start < 0:
         raise ValueError("start must be non-negative")
     if limit <= 0:
         raise ValueError("limit must be positive")
+    _require_verified_retention(retention_authority)
     selected = tasks[start : start + limit]
-    receipts = [download_task(client, task, output_root) for task in selected]
+    receipts = [
+        download_task(
+            client,
+            task,
+            output_root,
+            retention_authority=retention_authority,
+        )
+        for task in selected
+    ]
     return {
         "schema_version": "1",
         "selected_start": start,
@@ -553,6 +599,11 @@ def execute_slice(
         "tasks_selected": len(selected),
         "tasks_total": len(tasks),
         "receipts": receipts,
+        "retention_authority": {
+            "verified": True,
+            "state": retention_authority["state"],
+            "source_path": retention_authority.get("source_path"),
+        },
         "validation_promoted": False,
         "g2_coverage_change": 0,
     }
@@ -569,6 +620,7 @@ def main() -> None:
     parser.add_argument("--output-root", type=Path)
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--ack-trial-active", action="store_true")
+    parser.add_argument("--retention-readiness", type=Path, default=DEFAULT_VENDOR_READINESS)
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--limit", type=int, default=1)
     parser.add_argument("--manifest-output", type=Path)
@@ -583,6 +635,10 @@ def main() -> None:
             raise SystemExit("--execute requires --ack-trial-active")
         if args.output_root is None:
             raise SystemExit("--execute requires --output-root")
+        try:
+            retention_authority = require_retention_authority(args.retention_readiness)
+        except (OSError, ValueError, PermissionError) as exc:
+            raise SystemExit(str(exc)) from exc
         client_id = os.environ.get("CBOE_CLIENT_ID", "").strip()
         client_secret = os.environ.get("CBOE_CLIENT_SECRET", "").strip()
         if not client_id or not client_secret:
@@ -594,6 +650,7 @@ def main() -> None:
             args.output_root,
             start=args.start,
             limit=args.limit,
+            retention_authority=retention_authority,
         )
 
     rendered = json.dumps(result, indent=2, sort_keys=True) + "\n"
