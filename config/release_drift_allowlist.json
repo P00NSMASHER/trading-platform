@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "2488a274549842096056c27f83282f801c28b7e31ec6165e5093cf6d26e1ad87",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "69d096cc27e0a7ec9706dd99ac8273f83997e80e26f98576aa4ccd1354d93284",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "7fdee2b3374026393b70208f610fda5f7eb2842ea8c763aa729b6acf0da23a0e",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a101b80d0a3ebd9472035712474fb13a1d000b69c04b7f8c70687b5112ca6b5b",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "068205927ceb68c478ee81a43adc709bad1454fe27c9fbdda7429082271b20d0",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "665b5ae41834a5e349867f8027e6a459d52d74402854cd8c9b46bf93b8efb430",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -160,8 +160,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "7ba087fddb0af062d15451c89cf02c5aec4b0c6b7eec0b300f52ea08ee4df4d4",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "dd362c47692eeb7b4b0cec88f21c3940738f757bf11ea3e981360b2a5124fe7a",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -180,8 +180,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "68dfac06a91783e4c09ece80158191bc86c71a3ce21268d713f3972acc63b8f8",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "3f96eea8d014ecdaa2bceef439d3dd64bd3ce0878953c56d0e5b46a0a374b9ff",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -192,8 +192,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "61f9774cdf7d7806e6ad8559e3e32f2099bf0a8153e02a870b39a3976f0e4cba",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a2a4ff3ce409f40e18941fa023fe0f6e0394fc74d2d29907ff77feab949cb7dd",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -248,8 +248,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "bf53a50e1a9fb68e4cb14e771e3374ab648e38f00316fa1e8cbbeddca4ef7fc9",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "28fed6b170b8fa4a0e7b570cbd59a9b39ab759608db0874e7d6c4d8379c62b7f",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -264,12 +264,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "5e241826d73f144650b0f796d45c3290a726f861b5b2cd03a6400060fbaf9536",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "c3ad784e3491db75fda98b66daa1acf8e07ba756540eba3c8775cdf468bb19c9",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "8283359fa517c921086ebb2f6b12e746594a5ae34a2dffee56bae05f49ec54aa",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "88f502f95f9e56d5068d2f8888a6e449bede8623264c0bcfa35f212a58ee334a",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -520,8 +520,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "4dde504e80b9c9b2fd4119fde8d0c17a32e9e6511b5fc72e3f26e66873074af5",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "c06032e4aa3038f937d3eb347d21abb9ee5e454c20b3886bb7462cb416623d78",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -560,12 +560,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "7835066f86dad2dc730ce86377149b2854b16d42989971b0806e0a4da85b7394",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "cb47a56e59b47d15281bedb492e8d17e0764e606b3c2ff774a0e01823771d0b0",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "02f9aabfe8550179b9f88f07996dbb4b180701a7e75df325678e425693596a88",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "709736768fd82a8cf83adccb6b5fe716b168e0ab07304c31ef32eafd5a011d99",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -584,8 +584,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "9f14e5c7a650d2ba943a5063bb6f2d1318a3b43bff9c75f009fd9d2d647d0a79",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "239fb4bfec7ff8e0044fafc3fabc7c6f335748be5d1b3e0f29089767eed17409",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -907,6 +907,10 @@
       "expected_sha256": "bc3444a9f37a580cd027bc1bfb9e7480a9b2a0b45a40791a355a7cec99cb3c65",
       "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0105.csv": {
+      "expected_sha256": "2a704eab23aecf7e8df92b4500182b98eef740c3ea6310da19ec2317761d96bf",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_announcement_times_batch_0109.csv": {
       "expected_sha256": "219fd48bf8b00ac9215fb64e9d8b1c201c01efdf212cdfa154e4979f4861cb8d",
       "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
@@ -1103,6 +1107,10 @@
       "expected_sha256": "53a559abbdd98cacdabfc22db111d80458d8d2ab379473c443765425e618d8b5",
       "reason": "G1 batch 0104 Worker-4 filed federal-court exact public-distribution clock for WMB; deterministic 121 exact / 53 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0105_evidence.json": {
+      "expected_sha256": "aacb2a5e60946aa85f54398e7ac759d56302f736ef1aba679f58cf5a265f1c71",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0109_evidence.json": {
       "expected_sha256": "021e7ccefabb0b4be724c12121ce1bde6d7a2f27b6b9600ffdf840cfa190dc6c",
       "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
@@ -1112,8 +1120,8 @@
       "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "e4098972c55b9602f20054744e30be9d1e2fa72f9338592eb813cc2fc891aa79",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "628bb8dc26dcf9be331bc94f6b2cea334e5c33936c56ca01d633463d49083b7f",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "fcf5f123d93ba1a449c9d37d340f3e6f3739d4acc2e19ab7ffcfc236f004d157",
@@ -1292,8 +1300,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "4eaa4230d3041612098c7d2d6392db8e14a886727ac217584698f85d7d6f8141",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "031d6f40b4b8a8b407fb6fa41a9028917f11a8c62b0f27e5286e83d184682b79",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1844,216 +1852,220 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "6385c7c2b6848bc3608901ca1f9203df4086dd6181b2fb865bb3f39cf114de8f",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a97debc53d2c6104349ee0dde64f51c76687db5d1e98a9c29273ec396ed56a52",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "a600558a42c461dd41cdc26f8e73405a53998c3ef97e21aca0b1f877e99791f7",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "5995222137ae85c3473b2b8a91cfa571f9f452cfa86b62a53fdf9fb0cb4b0921",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "e1538ea056d8c4b70e8dc2f3238475eccc15761978cf7577c6763317aa68e591",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "7d77a01c9879bc434fa3e6ef877826e8e86cefd97b63a766fe3d1f31d109bd0d",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "3771f5b31e63274de403f73aed87af598d5ccf959d3ebe0757943d00401169e0",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "7b19862753d860883608d19145d1039e77cf0ca4fe68b7f7351e6ea6e1ab1287",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "f7a934072041bcd4a1f32910bf25e763d25a814187484e5e95037ba7f26664ee",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "e73e476e412eb4790d49060810f04ad05d782b1938e731f1c8681249b404f6fd",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "1760d7500d4cd3faaee8f5c9340ab52319ba1fe1628bc0abbe006da7691421dc",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "e64d8a4c360ade751c53d41ca3deefd76e9ce4ffd992c834fa715d7b40731b8a",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "da1eaee16149b7e3fea799cd95e4216d2f1fbd09cc91fc1e18653453f29dff2c",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "426106d55a9d8d85192dd619e0bb38975515d79784089391cd3ac5101f178c46",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "5825175fac5958ec1fa3d5eaae44f1889a17ccb7076c9129e497377ea0fba494",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "d7a19b25afbf2325a868fde7c6e8725f6aacffbcbbba9a967ec78d91c9e6e456",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "6d274be0e9bc87f5296cc3fd1296a03575a46a28b03f93973ff494bdfa7a5a91",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "4c855ec75d5d7814a6ef383b87470fe0946edadeb16f0ad01f69435f8dca2387",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "e954e7b08e22ecc1003f9402acf9a9f6eda99b88e2b3809d920abfdc418054b2",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "742f840c0846b390a2b843267ae34c510d03217354b97238835c18aa07c82354",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "2fc1058354e7f28af9e63d141e0e3ef59051d78b9ae9edb61e67f909c13b92fa",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "25c89ee7f4093192b65660d99b059703d092e360d8dd8ed6e0d9ad2e13a00c08",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "8946480f8e72deb138f3a3709ebbb29d2e5ff459f60d0df00f2e9d65121f5617",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "e240422edd35b5516633f458b3c7bd54b89e397d2e4f10ebd8baba44130a86bb",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "bdc620cf635ad512c4508a6d1ed922606d8b001565df1dc11660345ed920460d",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "12d2fc5600a397d4ffdd1c0b54e239b11219379401883bca9fd36d16087d135c",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "dc71d061f2f025d0c2c297844491995c2e07883279f8e001b518723061c38560",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "331d85f9e63c44cfbe776affc7ef865d568df4989b14ef014527d308f7713cff",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "e548106e5f28e926965275f27f68d86d5e99f382c9bb1e947f52b3155796660f",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "06ee102c5a047d20154956b1835382b1e9824f5a3429c1f4bb186be91f22480a",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "886c8c1c16202d0ff54b6242012c7f777493b1a34b674094e3e4e7bb58d344cf",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a9050fd1100a89ebe7bda4d0535aadc7c8a2d61718e6de7ab49aab41961fdbfb",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "e59754cf5f05df61a969266991505cb217e01f717de365f6e2e2632968a9c3bf",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "f4371a82e266a28ac7f86fba9c1d6d949eff1915c6ec424d2717cec74a3d0e7b",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "b4ab41aa9ff6f9cf62a801d74b2f26867dee1996202ff94ca70a36bfedad9dbc",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "624e5abbea193b98fed1b4418ebab6f9f8f78675f003cbbe6c0ddb2c3364e79a",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "f6e351f694ea14545eb82c8d81b62173c9c2896c339f12ae70870e10062fb80e",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "9b3be58d62c4c9fa1acef15567fe656ec4734717d1ee83a4adee1a63bc3fc263",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "7f4d3476524bcc3895109e02da39604d5ae19960edcd26342c02082bbd1c74bb",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "5675f456b4a72b2f96d7ff0737e4ebd5c4f99f0f3765a8a1daa0451c73f1b648",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "ed9f98caa7c05d3698858984126db47186d542e3a282dca6fcba94aad8852fc1",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "c35e78e04486b51c0e82869dddf052abd305f58c4b4ef1901f4095809d34314d",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "85dbb3d5bc4bffe1b101e544626bb782f6e63eb012850bdf3c8bb0131b819afd",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a96e769c463a2372cb3ace37b5d310692e545c9baad098ba821e4779e34f56af",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "40c0f43c63e2f12604cb99ef89236f291943c9cba672e8829dc00fe9df9fdb12",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "eab252f9e627c1f52a0b8246d5926a7ebe0fb69ab098c1d852c54912f8ab7a8a",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "f3de0600df926370f85b55e780d09296fea7e03f8d7001bba897ea3c93a98d82",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "1987437d46a182e552f2f97504445801ceccb9e1e5fc2c148cb5ae812c641b1c",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "d486e893c6daa858bf24eb63daab5e7fd100aec039472d9c27e291b0ce8bb5f3",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "f4de8e949bcf518d32979079a99fed25b9112382dfbd22de907e4d8bc80918bb",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "ecf0aca3e5b553a93e286c8da388a5c7245e0e17a580d4796f60fc18205b6ffe",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "7434b1341de216c2fabfdc8019b7d042007ccba1aac1f3ef5ad52864160efb41",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "ee13e66893eeaf1f1df00dde2fe6f38c6fb339feabc91011c2abeae443ffe4b9",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "1986c1a076ff1b5c132068e87652c1f02d39136456bb5c6cdb714ead5b7908ab",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "5c9941c9a3401ece7177b4bdcd997146f0ddee2329cf13225abc55cc21ca4f55",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "25fbddc89bf39d4fef255ef1374c465b6edfb9f9531f64d1fc9f29ad7cf0d906",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "01f0615c7925acc5e52b517b9a423971e7a79726c37c190a616cafda2238a209",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "e264a5084a3b27679abeb73363774e5cba1e53ccbda849340f180719b47722c7",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0072.py": {
-      "expected_sha256": "da03276ec362a87176e30884d412e6ab09910e5ef1fe4f7c99bd01e07f8c1680",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a09a09c23b753ffdb5b0f4435c861764e0c9d0443871ecc9b12e8c93f3794aa0",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "c6c70bbacb5d628eb0161c9d51ba08820f95e8561b9dd50701b1c2f15d4821f4",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "4d9d93457641eeb8a6287ebe0664e2d66aef3661595f1d25d96a424a4c2076bf",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0076.py": {
-      "expected_sha256": "7f8cf794642badea7744aeaea72bf63f583eaad1147a0c52f80423ccf7e08702",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "524c81c1347bfcd2dc13ccef83ec63f683587254937647feade871bea3efb849",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0077.py": {
-      "expected_sha256": "d233e7e6e33650eb7494b0dbc8bad9ac57e488b03fb31ab520abde33812761a7",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "68759684e4d00b4c79430c1d27314b605fb8d5a742462008bc5c3aa6d8970d3b",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "f4949fb7a1e36523d8d9cb0bb13387d6521446d3c241d81179edff46aebe0938",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "ed8ea6a5f3cdb9980b7335db9f5b63b2335815c2a541faa7eaa4f4d7f5dbff06",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "5cb70675eace135767dada7e19a2a3bc7559d96a3132e7486d50d600fa78eea6",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "a353bbfc8d46929f9db03c44111063862f23797f19cc4f7ca197a91193e0adc0",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0081.py": {
-      "expected_sha256": "c6211aacd6b96b0b5d31e1c4c08d67b0898e958944e67dd86ed565c294463614",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "4ec74c0294ede3d1d7c970a44c3c5854865c302f248b4382452196dfc8dda12f",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "720f6f4e78bf7967b47d7dd3c82a9e2fd91538e21a496e829cf968cb97bc9681",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "10ffa0de227be5ee43404cc7758d90c815cc2d90afa65ade4ff47c75e4f776e1",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0083.py": {
-      "expected_sha256": "a381dba3d53b8a6d00e39c3a360a7717a561f3d5ede386c8983ca9f69c11759c",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "fc819dbd090f6be0787b4d090cf6323f87f100cbe72f77cbe3c6233e319eb95c",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0085.py": {
-      "expected_sha256": "79c411dc18cda08fa5fe5a6706243363db0660cc3df25b4a18f79835c37e29fd",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "45955a3c0fc1e6e32f7d98c32ed044a225d5b7aafa852a9557ea849252b48e0d",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0087.py": {
-      "expected_sha256": "56f36f23d65b8708ec67733a89c02764a2a162a9da80539fe4dbee7dd6387626",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "bbf5df1c01e323c899637abb954f53c65eb986172f501cad1f848a90a7a06b8b",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0088.py": {
-      "expected_sha256": "ac5f79a667d756277704f7ca8f17ffc4dca31d4dcba47841f16c1c024d893586",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "c354a9ec88f3ffe74ffb96c5afdd1b31bd696d83a81f6a8f36ccd051ab39aa3a",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0090.py": {
-      "expected_sha256": "8d40dc50c773a839ef3157aa02ada3a4ec93276bf0e430a26c60391ee240256c",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "ff561c645d1343c18aa06ea1f9894b6ca2cf25c22c2f77438b2813a83dfb5c72",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0092.py": {
-      "expected_sha256": "1e628674541e8e236ed2b61825832ccd193655c2c33e2f5139e2928e3ee0de42",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "912bb1f4b1ca967e8eedc9878b9366eedb05dc71635904fb69ad252dfbf663fe",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0093.py": {
-      "expected_sha256": "fbf00ac34e642ce6060e284d8300fdc1ca1ede5a5e8abdb6b8a955fc752b5d00",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "c64dd584aa5bc84a8fcc02dc14f4dbbdc929d4df579adce7d384b97c3afd6606",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0095.py": {
-      "expected_sha256": "e71ffbc2ce8fbad51f17ab7e493ef71193925f29145fddb78ccd9c8bd409d945",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "dcb9653310f7a1ae2816834fe6fc14a3a534c242814be681cfaf8e42f2ee2750",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0098.py": {
-      "expected_sha256": "96dd11c1cf5df9b164426b467a7e94ef91fa46570d108bb932de045d9a4020ff",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "03d921593766fc58e0f6b09ef21114382e6a59e6d3104c56af0e27eb6fca8f4c",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0100.py": {
-      "expected_sha256": "c1a24f141b9c0e596edbb81b2ccf2385445e7655781d41b52b0a056494a477c8",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "2959742f69a0c5627967070281beb5baa263b012babdde4d47384ba855df72d1",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0104.py": {
-      "expected_sha256": "845fa143f6ed7575f9a4dafd1c6a09dd56abc77d2c4ff64a184be137607212ee",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "4c8ba8a974e96a7406a0654f02d5aed83ef3ff0e73f65ddf9cc77e2d87618104",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0105.py": {
+      "expected_sha256": "76af626f187fef6824a9922b324e0609f82d54143d19d4202c0559bc709d503f",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0109.py": {
-      "expected_sha256": "a7ea385636cd5a3e5ff1573c6b881b0e49b63a499d51d519b8283c24886e943d",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "cabed290698b2dccf2e8dcdc5129441ab317c3ff162cb2ae5707079e076fda08",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0114.py": {
-      "expected_sha256": "c91af68e21ac61f6999d9d82be31d38585801c350d0d7c570c9e0a9537c5e925",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "bffae22ca0ae081060c1193e7ea94c16ea5c2e510c5e7e56a8fcc90e66f3462e",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "1d2d4e15b01aa4ca309bd24ce3a1e861fd7d2a4a0bb6fe60c053751b21c8605a",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "d468f53093710bbceb38dcb8adca8c0413377b260ecd2f2f55ada6ed985ee047",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "02f1827222c81347be1b25b1ddb608ca7509e584cd249e1897186d909434f027",
@@ -2268,8 +2280,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "5aa9d29bcb1f202f645fa1e58cb9e8a7d50741814758284aa56e346969d8dd7c",
-      "reason": "G1 batch 0114 Worker-4 filed federal-court public-distribution clocks for fourteen events; deterministic 137 exact / 37 reviewed exclusions with press-release/SEC identity corroboration and prior evidence preserved."
+      "expected_sha256": "ef7d9735b1053f60582f5a267577c92221138d4b27465f0de00bfd6be8d085f5",
+      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

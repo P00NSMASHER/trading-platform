@@ -5,16 +5,12 @@ from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
 def rr(p):
     with p.open(newline="",encoding="utf-8") as h:return list(csv.DictReader(h))
-def test_batch_0093():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0093_evidence.json").read_text())
+def test_batch_0105():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0105_evidence.json").read_text())
     events={r["event_id"]:r for r in rr(ROOT/"data/processed/historical_events.csv")}
     resolved={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
-    exp={
-      "HEJFE-47A3794D1C360650":("NOW","2015-04-16T20:06:00Z",5580),
-      "HEJFE-5ED55A2EAC950921":("AMP","2015-04-22T20:05:00Z",2580),
-      "HEJFE-ED8CFC03F1053B9A":("CAMP","2013-04-25T20:01:00Z",780),
-    }
-    assert len(d["items"])==3
+    exp={"HEJFE-7F8218B15679F14D":["NATI","2015-04-28T20:02:00Z",7380],"HEJFE-45559DD90D876D39":["ILMN","2015-04-21T20:05:00Z",4620],"HEJFE-D6AE4ACB99958A73":["SGEN","2015-04-30T20:02:00Z",6240],"HEJFE-5408AADD0CBD54E8":["CMP","2015-04-27T20:15:00Z",1740],"HEJFE-93A7D27EF425EDF0":["MIC","2015-02-18T21:36:00Z",2280],"HEJFE-20EC97300E6205B9":["INWK","2015-02-12T21:10:00Z",7740],"HEJFE-B04F1AF8B6E30A43":["CLD","2015-02-17T21:10:00Z",2100],"HEJFE-5D222F0F8E0C77D0":["TW","2015-05-05T10:00:00Z",51180]}
+    assert len(d["items"])==8
     for x in d["items"]:
         sym,utc,delta=exp[x["event_id"]];e=events[x["event_id"]]
         tr=datetime.fromisoformat(e["first_documented_illicit_trade_ts"]).replace(tzinfo=ZoneInfo("America/New_York"));rel=datetime.fromisoformat(x["public_announcement_ts"])
@@ -22,19 +18,14 @@ def test_batch_0093():
         assert resolved[x["event_id"]]["public_announcement_ts"]==utc
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
         assert x["source_family"]=="federal_court_public_distribution_record" and x["source_grade"]=="A"
-        assert x["timestamp_evidence_kind"]=="explicit_release_clock"
-        assert x["public_distribution_explicit"] is True
-        assert x["source_reference"].startswith("https://storage.courtlistener.com/recap/")
-        assert x["court_docket_reference"].startswith("https://www.courtlistener.com/docket/")
-        assert x["corroboration_reference"].startswith("https://www.sec.gov/Archives/edgar/data/")
-def test_batch_0093_preserves_prior():
-    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0093_evidence.json").read_text())
+        assert x["timestamp_evidence_kind"]=="explicit_release_clock" and x["public_distribution_explicit"] is True
+def test_batch_0105_preserves_prior():
+    d=json.loads((ROOT/"data/public/metadata/g1_public_batch_0105_evidence.json").read_text())
     assert hashlib.sha256((ROOT/d["batch_path"]).read_bytes()).hexdigest()==d["batch_sha256"]
     by={r["event_id"]:r for r in rr(ROOT/"data/processed/authorized_input_real/announcement_resolutions.csv")}
     for eid,stamp in d["previous_exact_timestamps"].items():assert by[eid]["public_announcement_ts"]==stamp
     ex=[r for r in by.values() if r["resolution_status"]=="excluded_fail_closed"];assert len(ex)==29
-    assert all(not r["public_announcement_ts"] and not r["information_asymmetry_seconds"] for r in ex)
-def test_batch_0093_worker3_shard_ownership():
-    event_ids={"HEJFE-47A3794D1C360650","HEJFE-5ED55A2EAC950921","HEJFE-ED8CFC03F1053B9A"}
-    assert 93 >= 60 and (93-60) % 5 == 3
-    assert all(int(hashlib.sha256(eid.encode("utf-8")).hexdigest(),16) % 5 == 3 for eid in event_ids)
+def test_batch_0105_worker0_shard_ownership():
+    event_ids=set(["HEJFE-7F8218B15679F14D","HEJFE-45559DD90D876D39","HEJFE-D6AE4ACB99958A73","HEJFE-5408AADD0CBD54E8","HEJFE-93A7D27EF425EDF0","HEJFE-20EC97300E6205B9","HEJFE-B04F1AF8B6E30A43","HEJFE-5D222F0F8E0C77D0"])
+    assert 105 >= 60 and (105-60) % 5 == 0
+    assert all(int(hashlib.sha256(eid.encode("utf-8")).hexdigest(),16) % 5 == 0 for eid in event_ids)

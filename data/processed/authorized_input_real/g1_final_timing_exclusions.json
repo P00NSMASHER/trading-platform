@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "8014585b043217da5d5774382eb79e6a8b0972cc",
+  "base_main_sha": "41e07137b5aeb3b4765b5d8d350fb4f66aa4ce28",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -157,13 +157,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-7F8218B15679F14D",
-      "first_documented_illicit_trade_ts": "2015-04-28 13:59:00",
-      "historical_symbol": "NATI",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-54A5D1D8A5B593C8",
       "first_documented_illicit_trade_ts": "2015-02-05 15:33:00",
       "historical_symbol": "NUAN",
@@ -199,20 +192,6 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-45559DD90D876D39",
-      "first_documented_illicit_trade_ts": "2015-04-21 14:48:00",
-      "historical_symbol": "ILMN",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-D6AE4ACB99958A73",
-      "first_documented_illicit_trade_ts": "2015-04-30 14:18:00",
-      "historical_symbol": "SGEN",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-A3C5C43F6AC75C44",
       "first_documented_illicit_trade_ts": "2015-05-06 15:47:00",
       "historical_symbol": "PRU",
@@ -220,30 +199,9 @@
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
-      "event_id": "HEJFE-5408AADD0CBD54E8",
-      "first_documented_illicit_trade_ts": "2015-04-27 15:46:00",
-      "historical_symbol": "CMP",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-93A7D27EF425EDF0",
-      "first_documented_illicit_trade_ts": "2015-02-18 15:58:00",
-      "historical_symbol": "MIC",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
       "event_id": "HEJFE-4D7E68AD113380B3",
       "first_documented_illicit_trade_ts": "2015-02-23 15:41:00",
       "historical_symbol": "TRAK",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-20EC97300E6205B9",
-      "first_documented_illicit_trade_ts": "2015-02-12 14:01:00",
-      "historical_symbol": "INWK",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
@@ -274,34 +232,20 @@
       "historical_symbol": "DGI",
       "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-B04F1AF8B6E30A43",
-      "first_documented_illicit_trade_ts": "2015-02-17 15:35:00",
-      "historical_symbol": "CLD",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-5D222F0F8E0C77D0",
-      "first_documented_illicit_trade_ts": "2015-05-04 15:47:00",
-      "historical_symbol": "TW",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     }
   ],
   "g1_state": {
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 137,
-    "exact_timing_analysis_eligible": 137,
+    "exact_resolved": 145,
+    "exact_timing_analysis_eligible": 145,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 37,
+    "raw_exact_time_evidence_gaps": 29,
     "required": 174,
-    "reviewed_excluded": 37
+    "reviewed_excluded": 29
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",
