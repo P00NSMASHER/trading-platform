@@ -69,12 +69,40 @@ def test_real_master_plan_has_complete_structural_scope(tmp_path: Path):
     ) > 0
     assert identity["new_g5_identity_evidence_required_count"] > 0
 
+    routing = summary["control_identity_routing"]
+    assert routing["date_level_unresolved_count"] == identity[
+        "identity_acquisition_queue_count"
+    ]
+    assert routing["symbol_level_interval_request_count"] == 88
+    assert routing["stocknames_routable_date_count"] == routing[
+        "date_level_unresolved_count"
+    ]
+    assert routing["residual_symbol_discovery_date_count"] == 0
+    assert routing["grouped_stocknames_request_count"] == 88
+
     structural = summary["structural_plan"]
     assert structural["dates_with_three_planned_controls"] == 72
     assert structural["expansion_candidate_symbol_dates"] == 52
     assert structural["exact_date_expansion_candidate_symbol_dates"] == 51
     assert structural["prior_only_expansion_candidate_symbol_dates"] == 1
     assert structural["residual_unfilled_symbol_date_slots"] == 0
+
+    market = summary["control_market_acquisition"]
+    assert market["incremental_pair_count"] == sum(
+        summary["control_history"]["additional_g5_market_pair_counts"].values()
+    )
+    assert market["incremental_pair_count"] > 0
+
+    shares = summary["control_shares_acquisition"]
+    assert shares["required_symbol_date_count"] == summary[
+        "control_history"
+    ]["shares_symbol_date_pair_count"]
+    assert (
+        shares["canonical_g4_reuse_count"]
+        + shares["incremental_acquisition_count"]
+        == shares["required_symbol_date_count"]
+    )
+    assert shares["incremental_acquisition_count"] > 0
 
     assert summary["g5_model_evaluation_controls_ready"] is False
     assert summary["canonical_g5_dates_resolved_change"] == 0
@@ -132,6 +160,28 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     assert (
         tmp_path
         / "control_identity/g5_control_identity_acquisition_queue.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_identity_intervals/g5_control_identity_interval_requests.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_identity_stocknames_leads/"
+        "g5_control_identity_stocknames_expanded_ready_queue.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_identity_stocknames_request/"
+        "g5_control_identity_stocknames_request.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_market_vendor_bridge/g5_control_market_vendor_bridge_summary.json"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_shares/g5_control_shares_reconciliation_summary.json"
     ).exists()
 
     saved = json.loads(
