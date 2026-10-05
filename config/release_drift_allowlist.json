@@ -2434,6 +2434,14 @@
     "tests/test_security_identity_lseg_bridge.py": {
       "expected_sha256": "a3e7a47df1245def461123a0f6be3448f038807549807ff08e9a055b084191ba",
       "reason": "Regression coverage for direct dated LSEG identity evidence, authorization requirement, rejection of root-only/secondary mappings, ambiguous validation, mapping conflicts, out-of-queue rows, and locked 111-security/2751-request direct-bridge capacity."
+    },
+    "src/security_identity_stocknames_adapter.py": {
+      "expected_sha256": "0827415530de10e90e69b0b43b9a57609fbca8f99434408e6ab4fc0a3f9f4e5f",
+      "reason": "Fail-closed adapter for explicitly authorized dated PERMNO/ticker name-history evidence: exact PERMNO and historical-symbol matching on each requested date, source SHA and authorization binding, no current-ticker substitution or interval inference, and no coverage change until canonical evidence is applied."
+    },
+    "tests/test_security_identity_stocknames_adapter.py": {
+      "expected_sha256": "259a2fa81148f452e055b08a707462a674ccb7b75bed379ed19a13beefe3a634",
+      "reason": "Regression coverage for exact dated stocknames identity evidence, symbol/date mismatches, active-identifier ambiguity, duplicate same-ticker rows, open-ended histories, malformed intervals, authorization/hash requirements, and the current 3654-request/146-PERMNO queue shape."
     }
   },
   "schema_version": "2",
