@@ -25,10 +25,10 @@ EQUITY_REQUIRED_FIELDS = {
     "timestamp",
     "underlying_trade_price",
     "underlying_trade_size",
-    "bid",
-    "ask",
-    "bid_size",
-    "ask_size",
+    "nbbo_bid",
+    "nbbo_ask",
+    "nbbo_bid_size",
+    "nbbo_ask_size",
 }
 OPTION_TRADE_REQUIRED_FIELDS = {
     "timestamp",
@@ -62,7 +62,7 @@ def build_probe_requests() -> list[ProbeRequest]:
             "condition_id": "",
             "quote_condition_id": "",
             "trade_condition_id": "",
-            "mode": "ALL_QUOTES",
+            "mode": "NBBO_CHANGES",
             "start_sequence_number": 0,
             "exchange_id": "",
             "limit": 100,
@@ -240,7 +240,7 @@ def dry_run_manifest() -> dict:
         "schema_version": "2",
         "purpose": (
             "Three-request maximum Cboe All Access historical acceptance probe for G2. "
-            "It separately tests 2011 equity TAQ, 2012 option trades, and one strict "
+            "It separately tests 2011 equity trade + strict NBBO history, 2012 option trades, and one strict "
             "historical option-quote stream derived from an OSI contract returned by the "
             "option-trade response. Dry-run by default; no subscription signup, purchase, "
             "or bulk acquisition."
@@ -270,7 +270,7 @@ def dry_run_manifest() -> dict:
         },
         "execute_requires": ["CBOE_CLIENT_ID", "CBOE_CLIENT_SECRET"],
         "acceptance_rule": (
-            "2011 equity TAQ, 2012 option trades, and the derived historical option quote "
+            "2011 equity trade + strict NBBO fields, 2012 option trades, and the derived historical option quote "
             "response must each contain rows with every required probe field populated"
         ),
         "scope_limit": (
