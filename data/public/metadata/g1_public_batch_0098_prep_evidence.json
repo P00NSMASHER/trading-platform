@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "prep_only": true,
+  "base_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
+  "reserved_batch": "0098",
+  "worker_slot": 3,
+  "ownership_rule": "SHA256(event_id)%5",
+  "ownership_audit": {
+    "event_id": "HEJFE-5B6F87699FF5093E",
+    "sha256": "74a71119656764b24085db60c9527e425287deaef87f8480a7b11c60c6ca83a7",
+    "sha256_mod_5": 3,
+    "worker_3_owned": true
+  },
+  "source_family": "official_issuer_release_archive",
+  "source_reference": "https://www.sm-energy.com/investors/news-events/press-releases?page=24",
+  "release_detail_reference": "https://www.sm-energy.com/investors/news-events/press-releases/detail/168/sm-energy-reports-results-for-the-first-quarter-of-2015-announces-agreements-to-divest-mid-continent-assets-increases-production-guidance-on-retained-properties",
+  "corroboration_reference": "https://d1io3yog0oux5.cloudfront.net/_9cfc361e29a3bead1e60c7ec61921e8c/smenergy/news/2015-05-05_SM_Energy_Reports_Results_for_the_First_Quarter_168.pdf",
+  "items": [
+    {
+      "event_id": "HEJFE-5B6F87699FF5093E",
+      "historical_symbol": "SM",
+      "headline": "SM Energy Reports Results for the First Quarter of 2015; Announces Agreements to Divest Mid-Continent Assets; Increases Production Guidance on Retained Properties",
+      "wire_source": "Business Wire",
+      "issuer_archive_clock_text": "May 5, 2015 5:30 pm ET",
+      "public_announcement_ts": "2015-05-05T17:30:00-04:00",
+      "first_documented_illicit_trade_ts": "2015-05-05T15:08:00-04:00",
+      "expected_information_asymmetry_seconds": 8520,
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "public_distribution_explicit": true,
+      "source_grade": "A"
+    }
+  ],
+  "live_validation": {
+    "canonical_exact_before": 121,
+    "canonical_excluded_before": 53,
+    "event_still_excluded_fail_closed": true,
+    "active_token_worker": 4,
+    "active_token_state": "ASSIGNED_OTHER_WORKER",
+    "active_token_event_id": "HEJFE-809E53BB4081FBAE",
+    "unclaimed_by_active_package": true
+  },
+  "handoff": "When the controller assigns Worker 3, regenerate SM-only batch 0098 from exact live main and run all token gates. This prep file must not mutate canonical state."
+}
