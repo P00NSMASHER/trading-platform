@@ -115,10 +115,6 @@
       "expected_sha256": "31390fbb9313efba88293c329bec2f7e68afe0b26d04af86cdad40638b346bb4",
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
-    ".github/workflows/g1-public-batch-0105-worker-0.yml": {
-      "expected_sha256": "45bf6cbd434107e414e357864dc549af8c8200dfcf5e59b2f149a555cfb6ecad",
-      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
-    },
     ".github/workflows/g1-swarm-controller.yml": {
       "expected_sha256": "5e4c3fcf2c5e4f528ba6703b4900220de5cd433dd813c98131ebc88217531df5",
       "reason": "G1 swarm coordination: preserve push/PR-close/15-minute/manual reconciliation and add immediate issue #153 WORKER-comment reconciliation; controller remains sole token authority and ignores its own controller comments."
@@ -1522,10 +1518,6 @@
     "scripts/g1_batch_0100_generate.py": {
       "expected_sha256": "ef39b1a8810e4ddfe3a335c985d390d60ad2f467ce2159a214ec1bb813cda8dd",
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
-    },
-    "scripts/g1_batch_0105_generate.py": {
-      "expected_sha256": "f2e206163ea4ed48e2230296dbd9a1be42ffb915c0c9d6a6055b4e72edfd83dc",
-      "reason": "G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
       "expected_sha256": "4fecdb141daa8955d05ee79bb0381a9e71a007fbfa9db083f21d89b42a9b21f9",
