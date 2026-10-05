@@ -24,7 +24,7 @@ def policy() -> dict:
         "event_owner_overrides": {
             "HEJFE-45E6DA32B37F83D4": 0,
             "HEJFE-66BA40A20548B7E3": 4,
-            "HEJFE-81F188C0D790FE70": None,
+            "HEJFE-81F188C0D790FE70": 2,
             "HEJFE-8415E931D4314106": 4,
         },
     }
