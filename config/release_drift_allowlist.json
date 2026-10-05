@@ -2642,6 +2642,14 @@
     "tests/test_g5_control_market_vendor_bridge.py": {
       "expected_sha256": "a50ebaf9034dbf2f1b62ae7e58b9ec1e6c4ff04c99f8a39a098d849d8db3edb5",
       "reason": "Regression coverage for exact frozen-G2 subtraction, all seven existing candidate vendor routes including option quotes, overlap/count drift rejection, and real G5 history reconciliation with zero readiness promotion."
+    },
+    "src/g5_control_identity_stocknames_request.py": {
+      "expected_sha256": "da31f477ac906a8c6fad7d7af03f25841bc3d24b586a316a845645a95de4b879",
+      "reason": "G5 identity acquisition packet: group every routable dated control-identity request by reconciled PERMNO/symbol, emit exact date bounds and authorized CRSP-style Stocknames SQL, and preserve zero evidence/readiness promotion."
+    },
+    "tests/test_g5_control_identity_stocknames_request.py": {
+      "expected_sha256": "c0ebec3e4910b9e7f2ebda115b86660592d515b724a17adcf5e2dc5fcd817748",
+      "reason": "Regression coverage locks all 2,707 G5 control-history identity dates as Stocknames-routable via 986 exact-date hints plus 1,721 reconciled symbol-level acquisition leads, with zero residual discovery rows, exact scope conservation, collision rejection, and zero readiness promotion."
     }
   },
   "schema_version": "2",
