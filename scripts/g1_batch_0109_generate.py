@@ -33,7 +33,7 @@ evidence_path=Path("data/public/metadata/g1_public_batch_0109_evidence.json")
 assert not batch.exists() and not evidence_path.exists()
 
 specs=[
-{"event_id":"HEJFE-809E53BB4081FBAE","historical_symbol":"ROVI","expected_trade":"2015-04-30 14:48:00","clock":"2015-04-30T16:02:00-04:00","publisher_timestamp_text":"StreetInsider preserves the exact-title Business Wire release at April 30, 2015 4:02 PM EDT","release_title":"Rovi Corporation Reports First Quarter 2015 Financial Results","source_reference":"https://www.streetinsider.com/Press%2BReleases/Rovi%2BCorporation%2BReports%2BFirst%2BQuarter%2B2015%2BFinancial%2BResults/10508598.html","corroboration_reference":"https://www.sec.gov/Archives/edgar/data/1424454/000142445415000015/ex99-1x03312015earningsrel.htm","corroboration_basis":"Timestamp-preserving StreetInsider mirror identifies the exact Business Wire release and explicit 4:02 PM EDT clock; matching SEC Exhibit 99.1 independently corroborates issuer/release identity and date.","timestamp_evidence_kind":"explicit_release_clock","source_family":"timestamp_preserving_business_wire_mirror","source_grade":"B","public_distribution_explicit":True,"expected_delta":4440}
+{"event_id":"HEJFE-809E53BB4081FBAE","historical_symbol":"ROVI","expected_trade":"2015-04-30 14:48:00","clock":"2015-04-30T16:02:00-04:00","publisher_timestamp_text":"StreetInsider preserves the exact-title Business Wire release at April 30, 2015 4:02 PM EDT","release_title":"Rovi Corporation Reports First Quarter 2015 Financial Results","source_reference":"https://www.streetinsider.com/Press%2BReleases/Rovi%2BCorporation%2BReports%2BFirst%2BQuarter%2B2015%2BFinancial%2BResults/10508598.html","corroboration_reference":"https://www.sec.gov/Archives/edgar/data/1424454/000142445415000015/ex99-1x03312015earningsrel.htm","corroboration_basis":"Timestamp-preserving StreetInsider mirror identifies the exact Business Wire release and explicit 4:02 PM EDT clock; matching SEC Exhibit 99.1 independently corroborates issuer/release identity and date.","timestamp_evidence_kind":"publisher_timestamp","source_family":"preserved_wire_mirror","source_grade":"B","public_distribution_explicit":True,"expected_delta":4440}
 ]
 items=[]
 hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
@@ -77,7 +77,7 @@ save(exclusion_path,exclusions)
 
 contract_path=Path("config/metadata_sources.public_progress.json");contract=load(contract_path)
 contract["sources"].insert(0,{"source_id":"public-worker4-streetinsider-businesswire-batch-0109","record_kind":"announcement_timestamp",
-"source_family":"timestamp_preserving_business_wire_mirror","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
+"source_family":"preserved_wire_mirror","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
 "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{k:k for k in fields},
 "license_reference":"Public exact-title timestamp-preserving StreetInsider mirror of a Business Wire release, independently corroborated by a matching SEC press-release exhibit. No licensed vendor data used.",
 "notes":"ROVI exact first-public Business Wire release clock from timestamp-preserving mirror; prohibited substitute times are not used."})
@@ -183,8 +183,8 @@ def test_batch_0109():
         assert e["historical_symbol"]==sym and tr<rel<=tr+timedelta(days=7) and int((rel-tr).total_seconds())==delta
         assert resolved[x["event_id"]]["public_announcement_ts"]==utc
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
-        assert x["source_family"]=="timestamp_preserving_business_wire_mirror" and x["source_grade"]=="B"
-        assert x["timestamp_evidence_kind"]=="explicit_release_clock"
+        assert x["source_family"]=="preserved_wire_mirror" and x["source_grade"]=="B"
+        assert x["timestamp_evidence_kind"]=="publisher_timestamp"
         assert x["public_distribution_explicit"] is True
         assert x["source_reference"].startswith("https://www.streetinsider.com/Press%2BReleases/")
         assert x["corroboration_reference"].startswith("https://www.sec.gov/Archives/edgar/data/")
