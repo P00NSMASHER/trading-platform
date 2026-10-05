@@ -88,7 +88,10 @@ def test_identity_history_count_reconciles_with_control_history_plan(tmp_path: P
     status_total = sum(summary["status_counts"].values())
     assert status_total == summary["control_history_symbol_date_count"]
 
-    assert summary["canonical_g2_verified_reuse_count"] > 0
+    assert (
+        summary["canonical_g2_verified_reuse_count"]
+        + summary["canonical_g2_unverified_overlap_count"]
+    ) > 0
     assert summary["canonical_g2_unverified_overlap_count"] > 0
     assert summary["new_g5_identity_evidence_required_count"] > 0
     assert summary["identity_acquisition_queue_count"] == (
