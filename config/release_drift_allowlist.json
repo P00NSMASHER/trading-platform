@@ -1684,7 +1684,7 @@
       "reason": "Fail-closed Cboe historical acceptance probe: preserve 2011 equity TAQ smoke, move OPRA smoke to vendor-supported 2012, derive one historical option-quote request from a returned OSI security, and validate non-SIP-annotated NBBO fields; three requests / 45 points maximum."
     },
     "src/g2_cboe_2011_options_probe.py": {
-      "expected_sha256": "aa84ad9a9bce0c692badc3f6098bc75702312695b124544311989769b3f3c35e",
+      "expected_sha256": "c8a8dd10d0076e2db8f0c99880b5d71e3c6d51f94c6d0c50089bced754273936",
       "reason": "Bounded fail-closed runtime probe for the unresolved 2011 Cboe OPRA entitlement discrepancy; tests one frozen JNPR/date reference, option-trade, and NBBO quote path with explicit trial acknowledgement, no coverage promotion, and no change to the vendor-confirmed 2012 bulk-planning floor."
     },
     "src/g2_cboe_all_access_capacity.py": {
@@ -2264,7 +2264,7 @@
       "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
     },
     "tests/test_g2_cboe_2011_options_probe.py": {
-      "expected_sha256": "41094fee9891857cfd2d7ee164e6be827b666780610df4797b3d4f1ec82243d9",
+      "expected_sha256": "03bc58031a207f3b83a59f38c0a41e8cc9fbb0684c44ae6aa308b90d1343b868",
       "reason": "Regression coverage for the bounded 2011 Cboe OPRA entitlement probe: exact frozen sample, OSI derivation, three-request/31-point ceiling, fail-closed missing-reference behavior, and secret non-disclosure."
     },
     "tests/test_g2_cboe_all_access_capacity.py": {
