@@ -152,17 +152,28 @@ def _assess_rows(
         if any(row.get(field) not in (None, "") for row in rows)
     }
     missing = required_fields - populated
+    complete_row_count = sum(
+        1
+        for row in rows
+        if all(row.get(field) not in (None, "") for field in required_fields)
+    )
+    accepted = not missing and complete_row_count > 0
     return {
         "name": name,
         "row_count": len(rows),
+        "complete_row_count": complete_row_count,
         "required_fields": sorted(required_fields),
         "populated_required_fields": sorted(populated),
         "unpopulated_required_fields": sorted(missing),
-        "accepted": not missing,
+        "accepted": accepted,
         "reason": (
-            "required historical fields populated"
-            if not missing
-            else "required historical fields missing or null"
+            "at least one historical row has every required field populated"
+            if accepted
+            else (
+                "required historical fields missing or null"
+                if missing
+                else "required fields exist across the response but no single row is complete"
+            )
         ),
     }
 
