@@ -57,6 +57,7 @@ assert len(items) == len(ids) == 6
 assert ids == set(load(SPEC)["event_ids"])
 
 for item in items:
+    item.setdefault("source_reference", prep["primary_evidence"]["url"])
     eid = item["event_id"]
     event = events[eid]
     assert eid not in old_exact
