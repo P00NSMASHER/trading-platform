@@ -7,11 +7,19 @@ from pathlib import Path
 
 import g5_control_acquisition_planner as control_plan
 import g5_control_history_requirements as control_history
+import g5_control_identity_interval_requests as identity_intervals
 import g5_control_identity_requirements as control_identity
+import g5_control_identity_stocknames_lead_expansion as identity_leads
+import g5_control_identity_stocknames_request as identity_stocknames
+import g5_control_market_vendor_bridge as market_bridge
+import g5_control_shares_reconciliation as control_shares
 import g5_external_source_queue as external_queue
 import g5_treated_metadata_requirements as treated_plan
 
 SCHEMA_VERSION = "1"
+DEFAULT_CANONICAL_G4_SHARES = Path(
+    "data/processed/authorized_input_real/shares_outstanding_resolutions.csv"
+)
 
 
 def _sha256(path: Path) -> str:
@@ -29,6 +37,7 @@ def build(
     planning_universe_path: Path,
     canonical_g2_identity_manifest_path: Path,
     output_dir: Path,
+    canonical_g4_shares_path: Path = DEFAULT_CANONICAL_G4_SHARES,
 ) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -37,6 +46,11 @@ def build(
     history_dir = output_dir / "control_history"
     external_dir = output_dir / "control_external_sources"
     identity_dir = output_dir / "control_identity"
+    identity_interval_dir = output_dir / "control_identity_intervals"
+    identity_lead_dir = output_dir / "control_identity_stocknames_leads"
+    identity_stocknames_dir = output_dir / "control_identity_stocknames_request"
+    market_bridge_dir = output_dir / "control_market_vendor_bridge"
+    shares_dir = output_dir / "control_shares"
 
     control = control_plan.build(
         events_path=events_path,
@@ -69,6 +83,43 @@ def build(
         output_dir=identity_dir,
     )
 
+    intervals = identity_intervals.build(
+        identity_queue_path=(
+            identity_dir / "g5_control_identity_acquisition_queue.csv"
+        ),
+        output_dir=identity_interval_dir,
+    )
+    leads = identity_leads.build(
+        identity_queue_path=(
+            identity_dir / "g5_control_identity_acquisition_queue.csv"
+        ),
+        interval_requests_path=(
+            identity_interval_dir / "g5_control_identity_interval_requests.csv"
+        ),
+        output_dir=identity_lead_dir,
+    )
+    stocknames = identity_stocknames.build(
+        expanded_queue_path=(
+            identity_lead_dir
+            / "g5_control_identity_stocknames_expanded_ready_queue.csv"
+        ),
+        output_dir=identity_stocknames_dir,
+    )
+    market = market_bridge.build(
+        g5_source_requirements_path=(
+            history_dir / "g5_control_history_source_date_requirements.csv"
+        ),
+        frozen_g2_requirements_path=frozen_market_requirements_path,
+        output_dir=market_bridge_dir,
+    )
+    shares = control_shares.build(
+        control_history_path=(
+            history_dir / "g5_control_history_symbol_date_requirements.csv"
+        ),
+        canonical_g4_shares_path=canonical_g4_shares_path,
+        output_dir=shares_dir,
+    )
+
     control_targets = int(control["primary_candidate_symbol_date_count"])
     treated_targets = int(treated["treated_target_count"])
     control_fields = int(control["primary_field_requirement_count"])
@@ -92,6 +143,38 @@ def build(
         raise ValueError("primary control queue does not cover all 72 event dates")
     if control["residual_unfilled_symbol_date_slots"] != 0:
         raise ValueError("control acquisition plan still has structural gaps")
+    if int(intervals["date_level_identity_requirement_count"]) != int(
+        identity["identity_acquisition_queue_count"]
+    ):
+        raise ValueError("identity interval scope does not match the master identity queue")
+    if int(leads["identity_queue_count"]) != int(
+        identity["identity_acquisition_queue_count"]
+    ):
+        raise ValueError("Stocknames lead expansion does not match the identity queue")
+    if (
+        int(leads["expanded_stocknames_ready_request_count"])
+        + int(leads["residual_symbol_discovery_request_count"])
+        != int(identity["identity_acquisition_queue_count"])
+    ):
+        raise ValueError("Stocknames routing does not account for every identity gap")
+    if int(stocknames["state"]["date_level_request_count"]) != int(
+        leads["expanded_stocknames_ready_request_count"]
+    ):
+        raise ValueError("grouped Stocknames request does not reconcile to routed dates")
+    if int(market["incremental_g5_pair_count"]) != sum(
+        int(value) for value in history["additional_g5_market_pair_counts"].values()
+    ):
+        raise ValueError("market vendor bridge does not reconcile to incremental G5 pairs")
+    if int(shares["required_shares_symbol_date_count"]) != int(
+        history["shares_symbol_date_pair_count"]
+    ):
+        raise ValueError("shares reconciliation does not match the control-history plan")
+    if (
+        int(shares["canonical_g4_reuse_count"])
+        + int(shares["incremental_g5_shares_acquisition_count"])
+        != int(shares["required_shares_symbol_date_count"])
+    ):
+        raise ValueError("shares reconciliation does not account for every requirement")
 
     summary = {
         "schema_version": SCHEMA_VERSION,
@@ -148,6 +231,44 @@ def build(
             "primary_candidate_exact_sample_mapping": identity[
                 "primary_candidate_exact_sample_mapping"
             ],
+        },
+        "control_identity_routing": {
+            "date_level_unresolved_count": int(
+                intervals["date_level_identity_requirement_count"]
+            ),
+            "symbol_level_interval_request_count": int(
+                intervals["symbol_level_interval_request_count"]
+            ),
+            "stocknames_routable_date_count": int(
+                leads["expanded_stocknames_ready_request_count"]
+            ),
+            "residual_symbol_discovery_date_count": int(
+                leads["residual_symbol_discovery_request_count"]
+            ),
+            "grouped_stocknames_request_count": int(
+                stocknames["state"]["grouped_permno_symbol_request_count"]
+            ),
+        },
+        "control_market_acquisition": {
+            "incremental_pair_count": int(market["incremental_g5_pair_count"]),
+            "incremental_pair_count_by_record_kind": market[
+                "incremental_pair_count_by_record_kind"
+            ],
+            "route_symbol_date_pair_counts": market[
+                "route_symbol_date_pair_counts"
+            ],
+        },
+        "control_shares_acquisition": {
+            "required_symbol_date_count": int(
+                shares["required_shares_symbol_date_count"]
+            ),
+            "canonical_g4_reuse_count": int(
+                shares["canonical_g4_reuse_count"]
+            ),
+            "incremental_acquisition_count": int(
+                shares["incremental_g5_shares_acquisition_count"]
+            ),
+            "gap_reason_counts": shares["gap_reason_counts"],
         },
         "control_history": {
             "unique_symbol_date_pairs": int(
@@ -216,6 +337,10 @@ def build(
                 "path": str(canonical_g2_identity_manifest_path),
                 "sha256": _sha256(canonical_g2_identity_manifest_path),
             },
+            "canonical_g4_shares": {
+                "path": str(canonical_g4_shares_path),
+                "sha256": _sha256(canonical_g4_shares_path),
+            },
         },
         "component_outputs": {
             "controls": str(control_dir),
@@ -223,6 +348,11 @@ def build(
             "control_history": str(history_dir),
             "control_external_sources": str(external_dir),
             "control_identity": str(identity_dir),
+            "control_identity_intervals": str(identity_interval_dir),
+            "control_identity_stocknames_leads": str(identity_lead_dir),
+            "control_identity_stocknames_request": str(identity_stocknames_dir),
+            "control_market_vendor_bridge": str(market_bridge_dir),
+            "control_shares": str(shares_dir),
         },
         "g5_model_evaluation_controls_ready": False,
         "canonical_g5_dates_resolved_change": 0,
@@ -250,6 +380,11 @@ def main() -> int:
     parser.add_argument("--frozen-market-requirements", type=Path, required=True)
     parser.add_argument("--planning-universe", type=Path, required=True)
     parser.add_argument("--canonical-g2-identity-manifest", type=Path, required=True)
+    parser.add_argument(
+        "--canonical-g4-shares",
+        type=Path,
+        default=DEFAULT_CANONICAL_G4_SHARES,
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -258,6 +393,7 @@ def main() -> int:
         frozen_market_requirements_path=args.frozen_market_requirements,
         planning_universe_path=args.planning_universe,
         canonical_g2_identity_manifest_path=args.canonical_g2_identity_manifest,
+        canonical_g4_shares_path=args.canonical_g4_shares,
         output_dir=args.output_dir,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
