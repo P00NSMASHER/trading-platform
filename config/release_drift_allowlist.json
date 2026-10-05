@@ -2398,6 +2398,18 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
+    },
+    "data/processed/g2_vendor_requests/cboe_trial_bulk_readiness.json": {
+      "expected_sha256": "5ce869805188c907322788cc2156b4041849a303abf8e062136a9b750df6e44d",
+      "reason": "Baseline repair for already-merged G2 Cboe trial bulk-runner files; hash propagation only, with no behavior or G1 data change."
+    },
+    "src/g2_cboe_trial_bulk_runner.py": {
+      "expected_sha256": "aae7c7b273ea3de69fd00807a417cff35ba3f3bede57dbc9255db53f51eef652",
+      "reason": "Baseline repair for already-merged G2 Cboe trial bulk-runner files; hash propagation only, with no behavior or G1 data change."
+    },
+    "tests/test_g2_cboe_trial_bulk_runner.py": {
+      "expected_sha256": "230b5ba0d645165f5a0bf747ebcfc0fd0a19a10e22f239052837f202117fbd81",
+      "reason": "Baseline repair for already-merged G2 Cboe trial bulk-runner files; hash propagation only, with no behavior or G1 data change."
     }
   },
   "schema_version": "2",
