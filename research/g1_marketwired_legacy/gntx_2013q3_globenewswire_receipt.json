@@ -1,0 +1,41 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "base_main_sha": "f5d983f6c5d7dbd84ccbf15271a874366cd42888",
+  "event_id": "HEJFE-BD3F577ADD90D512",
+  "historical_symbol": "GNTX",
+  "owner_worker": 0,
+  "first_documented_trade_local": "2013-10-21 15:21:00",
+  "exact_release_title": "Gentex Reports Third Quarter 2013 Financial Results",
+  "source_family": "timestamp_preserving_migrated_marketwired_archive",
+  "archive_provider": "GlobeNewswire",
+  "archive_release_id": "930758",
+  "archive_url": "https://www.globenewswire.com/news-release/2013/10/22/930758/0/en/gentex-reports-third-quarter-2013-financial-results.html",
+  "displayed_timestamp_raw": "October 22, 2013 08:03 ET",
+  "normalized_public_timestamp": "2013-10-22T08:03:00-04:00",
+  "original_wire_attribution": "Marketwired",
+  "issuer_corroboration_url": "https://ir.gentex.com/node/11061",
+  "official_exhibit_corroboration_url": "https://gentex.gcs-web.com/static-files/cbfdedb8-97f9-48ef-a881-36cc402f5a44",
+  "chronology_seconds": 60120,
+  "admissibility_notes": [
+    "Exact target title/date match.",
+    "GlobeNewswire historical page itself displays 08:03 ET and the exact release body attributes the item to Marketwired.",
+    "Clock is not inferred from neighboring releases.",
+    "Issuer page independently corroborates exact release identity and Marketwired attribution.",
+    "Release occurs after the documented trade."
+  ],
+  "related_family_validation": [
+    {
+      "title": "Gentex Reports First Quarter Financial Results",
+      "url": "https://www.globenewswire.com/news-release/2013/04/23/930748/0/en/Gentex-Reports-First-Quarter-Financial-Results.html",
+      "displayed_timestamp": "April 23, 2013 08:04 ET"
+    },
+    {
+      "title": "Gentex Reports Second Quarter 2013 Financial Results",
+      "url": "https://www.globenewswire.com/news-release/2013/07/24/930753/0/en/Gentex-Reports-Second-Quarter-2013-Financial-Results.html",
+      "displayed_timestamp": "July 24, 2013 08:01 ET"
+    }
+  ],
+  "disposition": "FOUND_PREP_READY_HANDOFF_WORKER_0",
+  "caveat": "Re-verify live unresolved/unclaimed status before PREP; this research lane does not integrate, merge, or advance the controller token."
+}
