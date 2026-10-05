@@ -1,0 +1,117 @@
+{
+  "schema_version": "g1-public-batch-evidence-v1",
+  "batch_id": "0105",
+  "lane": "worker-0",
+  "state": "PREPARED",
+  "base_main_sha": "41e07137b5aeb3b4765b5d8d350fb4f66aa4ce28",
+  "expected_baseline": {
+    "exact": 137,
+    "fail_closed": 37,
+    "total": 174
+  },
+  "expected_after_gated_integration": {
+    "exact": 145,
+    "fail_closed": 29,
+    "total": 174
+  },
+  "authority_note": "Preparation only. Canonical regeneration, final PR, and merge require a valid live controller token and all G1 gates.",
+  "primary_evidence": {
+    "family": "filed_federal_court_public_distribution_table",
+    "court": "E.D.N.Y.",
+    "docket": "gov.uscourts.nyed.373762",
+    "document": "367-2",
+    "exhibit": "GX 8002",
+    "url": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+    "interpretation": "Explicit public-release timestamps printed in the filed exhibit; prior batches 0077, 0081, 0093, and 0100 establish this accepted source family and method."
+  },
+  "extraction_provenance": {
+    "github_actions_run_id": 37268374589,
+    "artifact_name": "g1-gx8002-court-map-2592192e4fd38b14a021d36de7319db332379e38",
+    "artifact_id": 11326693734,
+    "artifact_sha256": "254e78dcb6218e3cd31cc9bf50a6ec639c966a037957629912af181432a6990e",
+    "match_rule": "Exact event ticker/year and first illicit-trade minute; zero ambiguous matches in the 49-of-51 unresolved-event map."
+  },
+  "identity_corroboration": {
+    "repository": "vgreg/hacked_earnings_jfe",
+    "commit": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+    "canonical_index": "data/processed/hacked_earnings_jfe/event_press_release_index.csv",
+    "purpose": "Exact target release identity/date corroboration only; not used as a substitute timestamp source."
+  },
+  "items": [
+    {
+      "event_id": "HEJFE-7F8218B15679F14D",
+      "historical_symbol": "NATI",
+      "event_date": "2015-04-28",
+      "public_announcement_ts": "2015-04-28T16:02:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "release_member": "2015/QTR2/81501_20150428_0.txt"
+    },
+    {
+      "event_id": "HEJFE-45559DD90D876D39",
+      "historical_symbol": "ILMN",
+      "event_date": "2015-04-21",
+      "public_announcement_ts": "2015-04-21T16:05:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "release_member": "2015/QTR2/88446_20150421_0.txt"
+    },
+    {
+      "event_id": "HEJFE-D6AE4ACB99958A73",
+      "historical_symbol": "SGEN",
+      "event_date": "2015-04-30",
+      "public_announcement_ts": "2015-04-30T16:02:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "release_member": "2015/QTR2/88949_20150430_0.txt"
+    },
+    {
+      "event_id": "HEJFE-5408AADD0CBD54E8",
+      "historical_symbol": "CMP",
+      "event_date": "2015-04-27",
+      "public_announcement_ts": "2015-04-27T16:15:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "release_member": "2015/QTR2/89952_20150427_0.txt"
+    },
+    {
+      "event_id": "HEJFE-93A7D27EF425EDF0",
+      "historical_symbol": "MIC",
+      "event_date": "2015-02-18",
+      "public_announcement_ts": "2015-02-18T16:36:00-05:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "release_member": "2015/QTR1/90507_20150218_0.txt"
+    },
+    {
+      "event_id": "HEJFE-20EC97300E6205B9",
+      "historical_symbol": "INWK",
+      "event_date": "2015-02-12",
+      "public_announcement_ts": "2015-02-12T16:10:00-05:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "release_member": "2015/QTR1/91432_20150212_0.txt"
+    },
+    {
+      "event_id": "HEJFE-B04F1AF8B6E30A43",
+      "historical_symbol": "CLD",
+      "event_date": "2015-02-17",
+      "public_announcement_ts": "2015-02-17T16:10:00-05:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "release_member": "2015/QTR1/93095_20150217_0.txt"
+    },
+    {
+      "event_id": "HEJFE-5D222F0F8E0C77D0",
+      "historical_symbol": "TW",
+      "event_date": "2015-05-04",
+      "public_announcement_ts": "2015-05-05T06:00:00-04:00",
+      "timestamp_kind": "first_public_release",
+      "source_grade": "A",
+      "release_member": "2015/QTR2/93223_20150505_0.txt"
+    }
+  ],
+  "exclusions": [
+    "HEJFE-BD3F577ADD90D512 (GNTX) did not map in GX 8002 and remains discovery-only."
+  ]
+}
