@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **79 public exact-time batches / 122 exact-resolved
+The current repository state is **80 public exact-time batches / 123 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -293,3 +293,7 @@ A filed federal-court public-distribution record preserved by CourtListener RECA
 ### Batch 0109: ROVI
 
 An exact-title timestamp-preserving StreetInsider mirror supplies the explicit Business Wire first-public release clock for ROVI (2015-04-30 16:02 EDT). A matching SEC Exhibit 99.1 independently corroborates the issuer/release identity, content and date. This advances G1 from 121 exact / 53 reviewed exclusions to 122 exact / 52 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0098: SM
+
+SM Energy's official historical press-release index supplies the explicit exact-title Business Wire first-public release clock for SM (2015-05-05 17:30 EDT). The issuer-hosted preserved release PDF independently corroborates issuer/release identity, content and date. This advances G1 from 122 exact / 52 reviewed exclusions to 123 exact / 51 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.

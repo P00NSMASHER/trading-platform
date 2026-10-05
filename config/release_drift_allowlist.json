@@ -14,16 +14,16 @@
       "reason": "Intentional post-Step21 security hardening"
     },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "cd9915c45e63773993a361eecaad8fb9356512cce0c2db3ba5319b499b45a049",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "d8ca1abf1ef32060d9e3f204bfeb319226566d346492ecc7207cf2f04c55fd92",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "b40271774d0662297b856bd2e5cac0a74e2116975d487085f7edfecc21a6cc00",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "efc0cea2a3f3a78e4d9f4b991badc72b28b5f8e3db52e2b2150f636365ed48c2",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
-      "expected_sha256": "76b33342fc4cf7c9769a29ab0e3aaa9f809454a62565e9a46bafbaa9a60ed480",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9c3a53ce718dc9b72b524cd7655a6d6474dfea863e7e33c11d9198aa578970b4",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/coverage_plan_real/unresolved_gates.csv": {
       "expected_sha256": "d63f924e3e9d114c42f80bcb92f1796baa2dbb3fa888f4d535c9613ba3ddfd04",
@@ -160,8 +160,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "ea017e7339935c4c80523db872d14d4632ba86c47d7bdfef47c15cf27adfdfc2",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "03ccf466492620e191dbadc30c5cf0d336b7f0000823fcfb28e2c04570b69150",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -180,8 +180,8 @@
       "reason": "Mobile research control center prioritizes blockers from verified repository receipts, provides copyable workflows and evidence-learning guides, and preserves fail-closed public-safe telemetry."
     },
     "data/processed/authorized_input_real/announcement_resolutions.csv": {
-      "expected_sha256": "9206f8d4f71f2eddf32cbe99ee9b8ee4aa2b210cbf004b4401d8bd8a7c164b2d",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5a1519cd4139d560e03c1b338940a11e0950b349f617abfc366382ea3b05bd5e",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/control_universe_readiness.csv": {
       "expected_sha256": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
@@ -192,8 +192,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/g1_final_timing_exclusions.json": {
-      "expected_sha256": "41fcab42d2bd7a10b866454e7f7a7c30f97b10c47f4e94f89c1e6ddf19faef1b",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7d875e0df025e6c5bff7a67297564d63453fd3d9cc82135d5f5956a3a29043a6",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/g3_listing_evidence_report.json": {
       "expected_sha256": "d5ce2db7e85086d9685d9c312a50a65c9dc93e00f108f46dabbb8b82f4950514",
@@ -248,8 +248,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "02c9f63eb7e5938f245543cc77a21e625cdba990cce7c76a4553a6ef67e99b7a",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "983dcce990491dfdcc1b32351f5160cbfeca5c9dbe733d9fefba3a95dd2c737e",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
@@ -264,12 +264,12 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "ed5d084acd366fb7cb00fbecdb76508429e00917a7cb75631e3a439746aca077",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e5b68397d4ebdcf991a7fc4a0818b7611b5662288593c819559bc546d43b0c37",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "6bd339789049278ae0da724c850fdc90fe946fcf9afa5f2072fc5133367113e1",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "04cb1a2467313cc4972f02692ff719fb511285622685f309588aa3e15b3c4664",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
       "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
@@ -508,8 +508,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "8e07a4bc994299060e680148c6f372aa873a74b0890c8469569bca99a3329a56",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f0f5d00c8e146e882faed63434d6b9c6b8131dfecfebc2e80fc4e9ddc443b1d6",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -548,12 +548,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "9e53c75a43745a2bee00093d88966c094643ad668ddde342710bac3714be0ff4",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "dee8f2709c770b116f05b95d4baf46228009099297ddea5070d6c80265ae1e06",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "1db39ffcbf32225c3746f8f8c75e4bbf1ae99a25c38ac9d0aa5e520aef058bfa",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "b2cf4344bd035c0642593d0aeedc739a41c31e1f4a570af2fb8e5b3eceefce0c",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -572,8 +572,8 @@
       "reason": "Authoritative receipt regeneration from main source commit e5f509920b90b8af3346b03011218b19b065d408 after G1 Ryder batch 0030."
     },
     "data/public/metadata/g1_acquisition_manifest.json": {
-      "expected_sha256": "e2b0daf99de3534f49d4653b443a4fd5c23e115dec1ca5cafe2f4f8a4a498a40",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f857843ae65025479fb6cc818878b756e31fdb449c72435936ece91533baec5e",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_announcement_times_batch_0001.csv": {
       "expected_sha256": "01c7fded2c111ea253b068b7e9519bda5d3cfdf38a534334f9ec813686de7d80",
@@ -883,6 +883,10 @@
       "expected_sha256": "23852cb677b398a14ca82e7c23ce0b36f5e8ffbbe7f72f481cf94b3ba63a7626",
       "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_announcement_times_batch_0098.csv": {
+      "expected_sha256": "2bc29ac0a0b3a62e59a7f86a70c7e265aa76e05a23110920bdc2e861bb0385e8",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_announcement_times_batch_0100.csv": {
       "expected_sha256": "e60370eeb8840dd78a3390bbd0ad7d089c42688a6c8aba036798a38f2d4e275a",
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
@@ -1071,6 +1075,10 @@
       "expected_sha256": "2ef6906472a54dc13fde42709dbd4190f134c373147f75d51ea226f8c37aa531",
       "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
+    "data/public/metadata/g1_public_batch_0098_evidence.json": {
+      "expected_sha256": "b311412277e313bb55644edc1956908679e311398850af9f9bfacdd826b27259",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
+    },
     "data/public/metadata/g1_public_batch_0100_evidence.json": {
       "expected_sha256": "17ac24731cbd53b8f420219404cbed47fb6899f9c4ff476469567798b91ddc2b",
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
@@ -1084,8 +1092,8 @@
       "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_source_research_20260928.json": {
-      "expected_sha256": "828525a7f4242929ab3a7d5d3941c40a52090f19ee70f0a5e9404a0e671178e3",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1568e2f24086e153924a8673f1fad9add0b8462f540bbe05ea1f1b6ec897c32a",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "data/public/metadata/g1_swarm_controller_policy.json": {
       "expected_sha256": "fcf5f123d93ba1a449c9d37d340f3e6f3739d4acc2e19ab7ffcfc236f004d157",
@@ -1264,8 +1272,8 @@
       "reason": "Intentional post-Step21 repository hardening addition; documents one-time authentication and connection-exhaustion controls"
     },
     "docs/g1_announcement_times.md": {
-      "expected_sha256": "56d82c2fef44611aae6f4ec830e9e701a3716ebacbbb39c85373a5fb9f676aca",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2bedc957ecfd464fe90e5b516a3ae94eaa878da145d380c3cb1bab270069f679",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "docs/g1_final_timing_exclusions.md": {
       "expected_sha256": "442772f09fddae503eb8f3da4eaec411db30e3f33eee829d8baecc96d92eb6cb",
@@ -1474,6 +1482,10 @@
     "scripts/g1_batch_0095_generate.py": {
       "expected_sha256": "e7ba9205708f01741386d14e39bfefe152220aeb0a9a92a2dbcfaa23a0c59d09",
       "reason": "G1 batch 0095 Worker-0 filed federal-court exact public-distribution clocks for JNPR/PNRA; deterministic 109 exact / 65 reviewed exclusions with SEC corroboration and prior evidence preserved."
+    },
+    "scripts/g1_batch_0098_generate.py": {
+      "expected_sha256": "b2c40b8cf442c9bd0748b7fed756485bd9b624fbc719c1d4261fde66e3f1a24e",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "scripts/g1_batch_0100_generate.py": {
       "expected_sha256": "ef39b1a8810e4ddfe3a335c985d390d60ad2f467ce2159a214ec1bb813cda8dd",
@@ -1808,208 +1820,212 @@
       "reason": "Regression coverage for microsecond cutoff boundaries, same-millisecond ordering, timezone equivalence, unsupported precision, and deterministic replay outputs."
     },
     "tests/test_g1_acquisition_manifest.py": {
-      "expected_sha256": "1d447a8843ca27f3d11ea0e2e555751ed6926f4829e42ba1eefa033aaae05bfd",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "f57effa106b6788cd10063c229899e8ee43a9de4d97f243c1880ac2d1571aab1",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_ibes_timestamp_adapter.py": {
       "expected_sha256": "dd4a56f4b3b60cb37392d197ecfcd9f5e5ba0d1118f2de9fe15db7a2269a7948",
       "reason": "G1 regression coverage for exact-time normalization, ambiguity rejection, temporal ordering, gzip input, entitlement requirement, and production gate closure"
     },
     "tests/test_g1_public_batch_0032.py": {
-      "expected_sha256": "3048d6748d5a0e8de0805a15037e6d201e5e989fbffea45f354e073741e3bedc",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "588eb7cea972d29a4833fc56212cd9981fa638664562cbdc40d17a0462536730",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0033.py": {
       "expected_sha256": "15a374d61ef39ce69d325cf15ed22ccb47190af60e8e9854eaa0b64fe1ea5066",
       "reason": "G1 NVR primary-newswire batch 0033; deterministic 36 exact / 138 reviewed exclusions with all prior exact evidence preserved and release gates unchanged."
     },
     "tests/test_g1_public_batch_0034.py": {
-      "expected_sha256": "fc8a1f5a91f7fd99daf366ddde0aee4607c7c72fee8a26ac6fe45c151b00bd5c",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6d531d469c0b125d7fe6bd788284c2cb17f2990956b94fb382447dfd9ddba055",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0035.py": {
-      "expected_sha256": "a8ec205f7a066a9ba60aa27ad2ffe79bd1b49182c872c3b9792194de859b54c4",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "3915d3abdce67504dedbe4994141004b3d34d368f55ec89d91c6bae20fcf4a6c",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0036.py": {
-      "expected_sha256": "454dc49f1ebe785f0d56c64fc382c40634d0c613cad0415f21c86a348a00a39e",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "7b952210b264393638e0da60a6aed364e9c07ab8d949cadc413991bad989453a",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0037.py": {
-      "expected_sha256": "8feb42c0850724cc0eb16d7bdbf3936822bc4495c1a33accf35cd95fb2789c2a",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ac9f9d87975cd501cedf174965e2ce3d4660af28ab4468aef01f7eeb636d476f",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0038.py": {
-      "expected_sha256": "9f1c336b9f466e8d8eabe4a83f580a1ce919526e93a1492f2a9ea3f7cef4d954",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5dfa3bb45c2ddf7adb348c1614dac22552a9cc90d4555adafc6ebad75f660790",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0039.py": {
-      "expected_sha256": "dcff5e4a8a5be9bd546ef9112d4fd1f15fce9a4f8fef6d68e004ae1fe82b7c81",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5cd5e5ba1f3e183772e507f7eed5efa234dc06b8f5a6b2c0e50d7d4547341013",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0040.py": {
-      "expected_sha256": "5cadeda9227d17e6de1912b0b6cbd3592866714854ef284e0a74409ecdef737e",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ffd967b9f998ab3180ca9bc876ebfe6172ec4b2df236cd86da0cd9cf9ab89bac",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0041.py": {
-      "expected_sha256": "1b5e56f5f370e957afb522e04d144610db1cf34f838814c699ae840321b83159",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "0ef40f645c7c3af1a73a0b81381259b406e691d2e858103dc923b4429b05e824",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0042.py": {
-      "expected_sha256": "4d13abbc98c70f5cddf9a4718e9b775691d5cda23ce5a5c3d7821e53a02c6872",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "aff5d54d7ae48445dfeb955c7c782735f4ddafaf4c50b071c9ef2ad292d236c4",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0043.py": {
-      "expected_sha256": "b0992a500b1793d9a7dd9a2530bcda22cd18b34d13810c9dcb574e8270e74e45",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "27bf97e07ed05d605e720459ff7c6bc48a6d1d23f6e350327b9832320e7f965b",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0044.py": {
-      "expected_sha256": "2019b6f8fe2cfda58da5cdab1aedcaa2152c5d1a3ecf9631815f0530394f8ba3",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "c8d13380463ff1cc9cf26a1d9f0b3cdf103de11c8c5a7f672ea79d322a180189",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0045.py": {
-      "expected_sha256": "c36791b4b0ef1b3227383917e9529c5557f2f831d026f5e17a1909acc5bc4a00",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "2ddfd87fcff839b46baf537f79d4601b4c842d3a664b289740fcf44924fed669",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0046.py": {
-      "expected_sha256": "77b4802451d6f0d797f18fffc4729cce8ea5c1f3e4c32b0dbd73fda05c4331ea",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a86fbf55949c834cde4aea0b36d62ea0d3b3eee40c3d1d481630179466c4e525",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0047.py": {
-      "expected_sha256": "272b37e0a86f090db7c8ccef8442c651b17a15b06f36d14b9a85f090f1809072",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9a4a214a5cd699906263c7d36f709ea730c4ea9f12265e6617c0a3f55cf4b898",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0048.py": {
-      "expected_sha256": "bae4c3109a3d86d165bcbbbf585435bac4fa73727b9b7b8146fef10c18e6dca5",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a32f5e6e7f39029b0bf63081774e05c5cfccd14611b7cce1215f9bf2ebd29ea8",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0049.py": {
-      "expected_sha256": "7559bc07235c7a769e1b7fb4563caa92b94cf05dfc6ce4db50501281a97fd187",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6463f79dd4cf6e8f6af4b96eaea3f5fdd021a67d3a9e89a7d91d4507ff2c2829",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0050.py": {
-      "expected_sha256": "7968f3de9f171e723502683e817ba8d799418a7f9480ab262338a4f9dba7c689",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a0156e67ea331645a19cc5467f9a436de0802251f791149ea3c4f45e65550c52",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0051.py": {
-      "expected_sha256": "68e2c99eeaa64a57607cd8740dd62fd853a7f5401992abf32e90a0cc30cefe39",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "38d5b4d7335b43ce0c1254318eda7a6df65cce1156fbb893f621fad0eaa312d0",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0052.py": {
-      "expected_sha256": "02e2a1efb2fd82c6e98a91ba586c40b77cae0d31a8d71113e0a617c4c05082ce",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "674a21881cf4c634f2afac61e94a1df0055b200ebeeeaf2e68a966a1b62abdd3",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0053.py": {
-      "expected_sha256": "18e8b51a583bf7a3cf8becd2e444aa9b40128a583de1e3329634ccadb3125b87",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "1c651962545f7d0c2cdcfa9841441cc41306f78acf36e379c0f815363a5627e8",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0061.py": {
-      "expected_sha256": "325a18dba0a79c10b1428ec5c7d52c3d7472deba12e92ac61d533701ab6e289e",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6a16b96ee2b53a5ebf89b2b31fd64f9160396303d7d7076a91509c5c5af9c32f",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0062.py": {
-      "expected_sha256": "a5d68a94fd65588b87891705657c81c46a896d635a451324801f4204ce33169c",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "a2978857a2d5324f9ddc6e76e9980a18e74a4313fa50b9bfff5506cc839b3b39",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0063.py": {
-      "expected_sha256": "2f7b613ddb383d0fa0f3d632cb57c6a07355cf5123ae2fd1e11fd7dfd5f129d9",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "eb7c7347f7c0488a9fae677fb3bd2ff7869c068f8d4295f0301e8d662cb2a7a1",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0065.py": {
-      "expected_sha256": "262a188908b7a2413a5b06b4ad215eac4184f2edd9a3f1713fbf2547eac4508c",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6de0a36e9bab9e7fedfbd8441d329fe62c5ba13e404da6dc770591cf7c58ccee",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0067.py": {
-      "expected_sha256": "8cbeca70abd70491f153434529ac4f68a9c4b75b6075a22c48535c450fe5cd3e",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "95cb4be62c72481a90d917cf2fbd428c0ac69ec2b8928607711da6cb797c097d",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0068.py": {
-      "expected_sha256": "74b878a91871f61b9f4be7a488b07e6369ca32a6d41844c3741a4f0ccb672447",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "af653f3d55722ce9b5f147011b8fbf0e11b4032e46afabfc009c77575d81dd31",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0071.py": {
-      "expected_sha256": "ef83d76a518d83b7377fb06285ce823d51398e51acb013b7db21adfe35950480",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "bd5f3db6ce283c01a50d8af97d394f42e6492070538781ce073c1ed6b784fa1a",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0072.py": {
-      "expected_sha256": "9086f7d29ba327f47c14b6ef112ddafeac2c2a925c11614dddeabcbd62d74830",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "dfef1f367b9331d023b6d113f6d0eebd5a19d95039081f69b3980fb0317a25af",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0074.py": {
-      "expected_sha256": "0926129b566da5af795de474a38931a8cd74c3d50899328223a50fffd3e390b0",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "881bb9b0e0f73bf1b19439c11cf6f8c9a356c49d8f25cc85b9b0f42ff92546e0",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0076.py": {
-      "expected_sha256": "cd9116d4348d9de6dbecfe3b05eee2aead06dc245b8e5390fdadc609cd3fe0ee",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6cf4ccaac643f2311b71b266c0da587c7fdf4ed9e543df2d34a6fce6b06325af",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0077.py": {
-      "expected_sha256": "cf1f7975306e41c453f07ee3bdd1c78b21604f30e42603e48ea5bf0a729ab01a",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "37b6eb5f44248f7a263784b524ec430eacfc3caf071948fb65a4205b94361190",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0078.py": {
-      "expected_sha256": "0be8e2ff8e9d15b9c1f9f4b1fd69249c1e077ddf3947f171ed675a17b60e3420",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "6ce400aa34be2af8867de23eebc927964c4b12083a8c16cbd9618b53545efb1a",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0079.py": {
-      "expected_sha256": "2094f37d969d402a5439ecaee9727916761ee42d2c383233575828c62688a63d",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "ab7e0dcd847c40e76a2fc01cdd551c3bbacddbde3b0d68cd5720d28b1c1e0523",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0081.py": {
-      "expected_sha256": "9ec634174e20293b5ef308b829a4b68ee663d088fa0cb05bab9c43d988b1c2bd",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "cdf61b7d7d12e2f43bb070583f137a6c016bec248435b481b56ee55279982e87",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0082.py": {
-      "expected_sha256": "18ab8568d8ee0e2685469fb127318d2573f97ef93aa9a4e43f6da16f6c8680d8",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "745583e8e461652813ff37432e89094f29195b71ef5e20ca55bb143d70a90f8e",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0083.py": {
-      "expected_sha256": "56e8a6e028617d03dc98d9d77a0114ac48d930d2487f4cef812e30d0661733c6",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "cfd7353ab3f60541a4453976d138287c95ad25b8097a026f505ce892ca61111d",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0085.py": {
-      "expected_sha256": "98274eef22eab97a99f3b545b295e5ed99dcb122220fe8f17d88d2d62f162a64",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "8ce49c68acbf2941d57f97e5f9374329cd60ccce5e94d9a5d5598e331738cfff",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0087.py": {
-      "expected_sha256": "dfd903c24144abfc47ae41a210ebbb1237e5b9b8eb8c4bf797c03e7acff73140",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "e55a563b7855ac92943ece259da0c031a671d919be9aeb51d7038af7088a605f",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0088.py": {
-      "expected_sha256": "f0357302f01b31553f1e25f88e88c4888afff8c64a48e66e9a0b49b6c71d110a",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9a00df0ab3942659bc9c3ba6d59a3eba723bbf7fc9f4a1c08ec0c64764d1f5ea",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0090.py": {
-      "expected_sha256": "7022369802439b1d1e091e862acb7c06e263f971a6f3f44ceeb5be1adfa42fdb",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9d5addbda98e116dde4159bb18bb4ac182906dad2a8ff69780241a4900c774a0",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0092.py": {
-      "expected_sha256": "3019d0d7e64764a336fc69c72c6b01bd692ccc236857967eaa862082e24fef2f",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9f9226b2041b5011b5ee234fb2f0c120b8ca7dc19643162d67e8a914ddcf8851",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0093.py": {
-      "expected_sha256": "bc82d033244ffbc2020d242cc2af0a6ec9d0624b4b219ee18aa5d55e8c1bc104",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "57bef25b635e6a6064acc194babb33972ab5a30e898ef641003a47b3048cd281",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0095.py": {
-      "expected_sha256": "cc01835e97dd2f45cc4fbe890b0378f229381ccacb3c8be23607f308f4fbbf7c",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "92ee9306a0e3f71b1d49a021f6f77adbf7fc3d165357c1d12bf51702d27d26e8",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
+    },
+    "tests/test_g1_public_batch_0098.py": {
+      "expected_sha256": "4803dcce73a149acb2bbf7e7b570a68bcde2361d32e4f64643ea503ad8158030",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0100.py": {
-      "expected_sha256": "46800d9e753a5aecf9fe1f47881b68b57d560a31aee7a38bbc15e4d64114cdbb",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "eab43a670b6be99499f3ffeb9264e7dfa1e5ed83cb221fdf3011b5175ebe9a2f",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0104.py": {
-      "expected_sha256": "064509840bd83beed32b4ca45bff71172a4e53ef6c882d5c10e1491b9e432a96",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "35bb464c6315c7ef9546c969521a9238527cef8351f645e643ae3aab22c94357",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_public_batch_0109.py": {
-      "expected_sha256": "1a9a88e512471f14ceb5b85d674a477de9367c21eca7daa75e601064ffb8a475",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "73769837f33980d8345db4e48d3f68c6a47a302bab40fba133b51e9657f6304e",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_source_research.py": {
-      "expected_sha256": "d1c0c683825b66103e74218325999ae5208dde5969460c107adce347ddca3646",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "5918c28bf1e0d4fb78d7cad4c22c2ef81c939729ae530ece1bb351027df25f11",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
       "expected_sha256": "02f1827222c81347be1b25b1ddb608ca7509e584cd249e1897186d909434f027",
@@ -2220,8 +2236,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "9936b0fa41755a8f64ddce68aef8d7872c3079139cb6a88121e5a5c63d344006",
-      "reason": "G1 batch 0109 Worker-4 timestamp-preserving Business Wire mirror exact public clock for ROVI; deterministic 122 exact / 52 reviewed exclusions with SEC corroboration and prior evidence preserved."
+      "expected_sha256": "9c6584fda194dea46ec104659f92312edf45564c1013118fd89b5ffe87f580de",
+      "reason": "G1 batch 0098 Worker-3 official issuer archive exact public clock for SM; deterministic 123 exact / 51 reviewed exclusions with issuer-PDF corroboration and prior evidence preserved."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

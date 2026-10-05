@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
+  "base_main_sha": "8e1ad89fc8557ebb8efb78eb9db08f7499eef8fc",
   "completion_rule": "G1 is complete only when every event is either resolved by an authoritative/authorized exact first-public release timestamp or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded events must retain blank public announcement timestamps and blank information-asymmetry intervals, and may not participate in announcement-timing-dependent analysis. Any future admissible exact timestamp makes the corresponding exclusion stale and must fail closed.",
   "events_without_public_candidate_file": [
     "HEJFE-06AE65B9C8FB0395",
@@ -175,13 +175,6 @@
       "first_documented_illicit_trade_ts": "2015-03-10 14:58:00",
       "historical_symbol": "KOPN",
       "public_release_file_status": "NO_PUBLIC_REPLICATION_CANDIDATE_FILE",
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
-    },
-    {
-      "event_id": "HEJFE-5B6F87699FF5093E",
-      "first_documented_illicit_trade_ts": "2015-05-05 15:08:00",
-      "historical_symbol": "SM",
-      "public_release_file_status": "PUBLIC_RELEASE_FILE_PRESENT_BUT_NO_CLOCK_TIME_TOKEN",
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
     },
     {
@@ -399,14 +392,14 @@
     "accounted_for": 174,
     "blocking_unresolved": 0,
     "edgar_acceptance_as_exact_release_prohibited": true,
-    "exact_resolved": 122,
-    "exact_timing_analysis_eligible": 122,
+    "exact_resolved": 123,
+    "exact_timing_analysis_eligible": 123,
     "excluded_event_asymmetry_prohibited": true,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "inferred_clock_times_prohibited": true,
-    "raw_exact_time_evidence_gaps": 52,
+    "raw_exact_time_evidence_gaps": 51,
     "required": 174,
-    "reviewed_excluded": 52
+    "reviewed_excluded": 51
   },
   "original_research_source_semantics": {
     "companion_path": "IBES/IBES_Data_Processing_JAR.ipynb",

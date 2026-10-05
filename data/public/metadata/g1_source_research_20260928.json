@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "51d847052f163a0c61b3d9e2d74003d321a511a1",
+  "base_main_sha": "8e1ad89fc8557ebb8efb78eb9db08f7499eef8fc",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 122,
-    "note": "The latest integrated recovery is batch_0109; cumulative public exact-time batches are 79 and cumulative exact event records are 122 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 79,
+    "exact_resolved_event_records": 123,
+    "note": "The latest integrated recovery is batch_0098; cumulative public exact-time batches are 80 and cumulative exact event records are 123 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 80,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 52
+    "reviewed_excluded_event_records": 51
   },
   "preferred_public_source_families": [
     {
@@ -2502,6 +2502,32 @@
       "source_grade": "B",
       "source_reference": "https://www.streetinsider.com/Press%2BReleases/Rovi%2BCorporation%2BReports%2BFirst%2BQuarter%2B2015%2BFinancial%2BResults/10508598.html",
       "timestamp_evidence_kind": "publisher_timestamp",
+      "timestamp_kind": "first_public_release"
+    },
+    {
+      "corroboration_basis": "SM Energy's official historical press-release index identifies the exact Business Wire release and explicit 5:30 pm ET clock; the issuer-hosted preserved release PDF independently corroborates issuer/release identity and date.",
+      "corroboration_reference": "https://d1io3yog0oux5.cloudfront.net/_9cfc361e29a3bead1e60c7ec61921e8c/smenergy/news/2015-05-05_SM_Energy_Reports_Results_for_the_First_Quarter_168.pdf",
+      "disposition": "RESOLVED_IN_BATCH_0098",
+      "event_date": "2015-05-05",
+      "event_id": "HEJFE-5B6F87699FF5093E",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2015-05-05T17:30:00-04:00",
+      "explicit_release_clock_text": "SM Energy official historical press-release index explicitly preserves the exact Business Wire release at May 5, 2015 5:30 pm ET",
+      "first_documented_illicit_trade_ts": "2015-05-05 15:08:00",
+      "historical_event_match": true,
+      "historical_symbol": "SM",
+      "information_asymmetry_seconds": 8520,
+      "probe_id": "SM-batch0098",
+      "public_announcement_ts": "2015-05-05T17:30:00-04:00",
+      "public_distribution_explicit": true,
+      "reason": "Promoted through SM Energy's official exact-title historical release index with an explicit clock and issuer-hosted preserved release PDF corroboration.",
+      "release_title": "SM Energy Reports Results for the First Quarter of 2015; Announces Agreements to Divest Mid-Continent Assets; Increases Production Guidance on Retained Properties",
+      "reviewed_on": "2026-10-05",
+      "source_family": "preserved_wire_mirror",
+      "source_grade": "A",
+      "source_reference": "https://www.sm-energy.com/investors/news-events/press-releases?page=24",
+      "timestamp_evidence_kind": "explicit_release_clock",
       "timestamp_kind": "first_public_release"
     }
   ]
