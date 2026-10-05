@@ -1860,7 +1860,7 @@
       "reason": "G4 residual exact-completion activation handoff: validates the current 10 ACO NYSE + 5 CGNX Nasdaq private rows, requires explicit entitlement references, atomically disables the 15 reviewed exclusions only after complete delivery, and verifies exact 3,828/3,828 resolver output."
     },
     "src/g4_exchange_reference_completion.py": {
-      "expected_sha256": "51020004cbb30f7981e7b7507f10fafd551ead31f89bb8ee93752ec145d4a09a",
+      "expected_sha256": "d701b3e25bf3a382e6c51d097d10cf6d5c0b38c723d36c9ef6560acaaa05d37c",
       "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "src/g4_materialize_batch.py": {
