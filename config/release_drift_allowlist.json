@@ -135,26 +135,6 @@
       "expected_sha256": "bd147ed763d528638df579a364c706ed2ed4784a98eb931dffd356c44b76c047",
       "reason": "Control-plane Step 8: exact dispatched-commit checkout and externally authenticated release audit-pack generation"
     },
-    "FROZEN_CHAMPION.md": {
-      "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
-    "RELEASE_MANIFEST.json": {
-      "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
-    "SECURITY.md": {
-      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
-      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
-    },
-    "SHA256SUMS": {
-      "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
-    "STEP21_IMPORT_PROVENANCE.md": {
-      "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
     "config/licensed_entitlement_manifest.example.json": {
       "expected_sha256": "ea2e663dfb257da11ac8cf4257c33bb0fc8634ed425c8c17e8e207f70aee4050",
       "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
@@ -523,13 +503,13 @@
       "expected_sha256": "b5cfbc9768b8b00a4e7c44cbd753f3d6bf3e87e9fc6e92c3b87685c28b1b7741",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
-    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
-      "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
-      "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
-    },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
       "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
       "reason": "Nasdaq ITCH vendor-contact provenance receipt from PR #164; records acknowledgement and Sales handoff only while Step 8 remains SOURCE_BLOCKED with no verified entitlement or decoded files."
+    },
+    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
+      "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
+      "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
     },
     "data/processed/real_data_release_sprint/production_source_contract_blueprint.json": {
       "expected_sha256": "965cbb2a151d9d3bed146912960f5ba3f5521cc21d600cfb7bba6bc6ed1cf382",
@@ -555,13 +535,13 @@
       "expected_sha256": "e252c39710ed9b8f228ba0b339d24c4850000d200a10421bb23af0c319e919fe",
       "reason": "Materialized cheap-first LSEG/ThetaData G2_FULL_REPLICATION option-quote plan; candidate sourcing only, no purchase or coverage claim."
     },
-    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
-      "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
-      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
-    },
     "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history_option_quotes.csv": {
       "expected_sha256": "c2594bfdd987d6600c11f76edf0dc02f6e8d63f01f6b9a8a3732b2b6e2549924",
       "reason": "Materialized full-replication option-quote request rows with deterministic per-date LSEG/ThetaData candidate routing; legacy artifact path retained for compatibility."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
+      "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
+      "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_nbbo_quotes.csv": {
       "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
@@ -731,12 +711,12 @@
       "expected_sha256": "5c997dcc805c9e5df65bac36213726c1550d852492cd26271288688ceb528491",
       "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
     },
-    "data/public/metadata/g1_announcement_times_batch_0032.csv": {
-      "expected_sha256": "82f9caa85fc930fc2b955c3dc2d16fab8d17b7f676cba99f3b2c747dcf41013d",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
     "data/public/metadata/g1_announcement_times_batch_0032_evidence.json": {
       "expected_sha256": "e023876cf0580d0caaf5d7385604b5d9ca128bcbbc598169009dc7f3815d2999",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0032.csv": {
+      "expected_sha256": "82f9caa85fc930fc2b955c3dc2d16fab8d17b7f676cba99f3b2c747dcf41013d",
       "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/public/metadata/g1_announcement_times_batch_0033.csv": {
@@ -1287,10 +1267,6 @@
       "expected_sha256": "963b83b5bc7a824cd7550b8e52a62513d28b113bef56be9b83b6e265519f0d2e",
       "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
-    "data/raw/hacked_earnings_jfe/SampleFirms.csv": {
-      "expected_sha256": "7a9927a84dd9532bd5a4a8157ed3e40bc1b50c7b1be51374feca17b29a65f5df",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
-    },
     "data/raw/hacked_earnings_jfe/SampleFirms_actual.csv": {
       "expected_sha256": "c9684e2f6f419533dd438e66c3beefa624cca419109259d07ac5eb615d872308",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
@@ -1299,8 +1275,8 @@
       "expected_sha256": "bd40f28b7c2d7889303ebb4a9b4d604cee330e351232361789f42ba1f96c2fcf",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/TimeOfFirstTrade.csv": {
-      "expected_sha256": "e723e9e2a0e0a616915f3146fdea40ef429d90586ac4699853b047c536568f55",
+    "data/raw/hacked_earnings_jfe/SampleFirms.csv": {
+      "expected_sha256": "7a9927a84dd9532bd5a4a8157ed3e40bc1b50c7b1be51374feca17b29a65f5df",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
     "data/raw/hacked_earnings_jfe/source_snapshot/.gitignore": {
@@ -1327,6 +1303,14 @@
       "expected_sha256": "f19127ed0b019c959ed82e33b06607558567b9a82e38207d7ea0ef17c32d6f77",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
+    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/clean_pr_text.py": {
+      "expected_sha256": "314cdb95f1ff9d338fa4aa21a8dee2d66c31d5d1d92e58957cde21151b4b5633",
+      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
+    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/pr sentiment.py": {
+      "expected_sha256": "f3ef14e2b5efdd12f0ede8df3a67b71222959db7fcc6df82637ada98fcbf0f6a",
+      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
     "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet.b64": {
       "expected_sha256": "167d49f786dffddefce7cbc94253ffae5f974b8b8dfbcc2c732a48b48eed014b",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
@@ -1335,12 +1319,8 @@
       "expected_sha256": "f1dbfd9368057e1ea45fc7abc1561799142074d2043544237a91dfb79c3857fc",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/clean_pr_text.py": {
-      "expected_sha256": "314cdb95f1ff9d338fa4aa21a8dee2d66c31d5d1d92e58957cde21151b4b5633",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
-    },
-    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/pr sentiment.py": {
-      "expected_sha256": "f3ef14e2b5efdd12f0ede8df3a67b71222959db7fcc6df82637ada98fcbf0f6a",
+    "data/raw/hacked_earnings_jfe/TimeOfFirstTrade.csv": {
+      "expected_sha256": "e723e9e2a0e0a616915f3146fdea40ef429d90586ac4699853b047c536568f55",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
     "docs/control_plane_implementation_baseline.md": {
@@ -1438,6 +1418,14 @@
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "FROZEN_CHAMPION.md": {
+      "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "RELEASE_MANIFEST.json": {
+      "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "requirements-skops.lock": {
       "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
@@ -1614,6 +1602,14 @@
     "scripts/verify_release_drift.py": {
       "expected_sha256": "241605c6377d451bbaee1f94d8fccefa6f9c10aadc05aca81967b31db161b6f4",
       "reason": "Intentional post-Step21 repository hardening addition; SHA-256 drift identities and externally authenticated allowlist"
+    },
+    "SECURITY.md": {
+      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
+      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
+    },
+    "SHA256SUMS": {
+      "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "src/control_plane/__init__.py": {
       "expected_sha256": "9c85c627406ac58621635d1394cabe5a32c066093d28e8cdaf44752ed88da358",
@@ -1855,6 +1851,10 @@
       "expected_sha256": "819b5ff7257ca3662a6192e15d4c69079c54cd5458306a2a3a4570149bcb1476",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
+    "src/g4_exact_activation.py": {
+      "expected_sha256": "4280f02a4a1f5ca049b7da5b4f77635b7862a6f4a0225a2670c1e176d8c19f42",
+      "reason": "G4 residual exact-completion activation handoff: validates the current 10 ACO NYSE + 5 CGNX Nasdaq private rows, requires explicit entitlement references, atomically disables the 15 reviewed exclusions only after complete delivery, and verifies exact 3,828/3,828 resolver output."
+    },
     "src/g4_exchange_reference_completion.py": {
       "expected_sha256": "51020004cbb30f7981e7b7507f10fafd551ead31f89bb8ee93752ec145d4a09a",
       "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
@@ -1966,6 +1966,10 @@
     "src/surveillance_feature_diagnostics.py": {
       "expected_sha256": "d9f8459d35bc7e99c941af00187b96ccd3ded2d9b33913f37b4310ebc24c59a8",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
+    },
+    "STEP21_IMPORT_PROVENANCE.md": {
+      "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "tests/test_control_plane_adversarial.py": {
       "expected_sha256": "28773c33814d97a730a8e5ba42e2493328d3e890fd3113953d3d96f8e6e7e598",
@@ -2434,6 +2438,10 @@
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
+    },
+    "tests/test_g4_exact_activation.py": {
+      "expected_sha256": "162231f6ca7aba9935592eb0bf3657fd9ee2bcf7f2cbc808cd0181348f314f95",
+      "reason": "Regression coverage for the current 15-row G4 exact activation handoff, including residual-scope locking, partial-delivery rejection, pre-cutoff checks, entitlement requirements, and exact 3,828/3,828 verification."
     },
     "tests/test_g4_exchange_reference_completion.py": {
       "expected_sha256": "da2ec876de40979e98b188bb3f73107ff30052f85cdf36a80d7b28d31b14b941",
