@@ -13,13 +13,17 @@
       "expected_sha256": "f7e649876841dc7e42dd5550a43c9903224fa8800e32caa60ccd2873824685cf",
       "reason": "Intentional post-Step21 security hardening"
     },
+    "data/examples/metadata/control_universe.csv": {
+      "expected_sha256": "d8786f3028674e0ebc23eff1f363ed114ab3329e7ca1a0dd494dee45975d2060",
+      "reason": "G5 demo control fixture upgraded to the canonical matcher-native point-in-time metadata schema, including borrow cost and pre-event return."
+    },
     "data/processed/authorized_input_real/metadata_quality_summary.json": {
-      "expected_sha256": "9529f5818d4ddb85ddf512a7735522168e2f1a2492c979c728c3d9b6dd4192d0",
-      "reason": "G5 control-contract repair: readiness and matched-control generation now share the canonical point-in-time covariate schema; deterministic receipts regenerated with no synthetic or reviewed-exclusion promotion to genuine controls."
+      "expected_sha256": "e515cf1cb7be77c1f78f94e464abddfd10277154c2c46902f4b1dd8fa7276e4c",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/authorized_input_real/metadata_readiness_summary.json": {
-      "expected_sha256": "4217f2b8ae3c4d549fa0d00e26799015322b01e58dff96b8245e789ecdee7c74",
-      "reason": "G5 control-contract repair: readiness and matched-control generation now share the canonical point-in-time covariate schema; deterministic receipts regenerated with no synthetic or reviewed-exclusion promotion to genuine controls."
+      "expected_sha256": "5f46fa11b903830941116810e576c339119007bd394958d9c35f7289d8d20885",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/coverage_plan_real/coverage_summary.json": {
       "expected_sha256": "535b2ac4a2dd13e75b18010033f3ecf41d9a5e33d8d914d6f83b5f7fc1fded04",
@@ -104,10 +108,6 @@
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
-    },
-    "data/examples/metadata/control_universe.csv": {
-      "expected_sha256": "d8786f3028674e0ebc23eff1f363ed114ab3329e7ca1a0dd494dee45975d2060",
-      "reason": "G5 demo control fixture upgraded to the canonical matcher-native point-in-time metadata schema, including borrow cost and pre-event return."
     }
   },
   "repository_additions": {
@@ -135,6 +135,26 @@
       "expected_sha256": "bd147ed763d528638df579a364c706ed2ed4784a98eb931dffd356c44b76c047",
       "reason": "Control-plane Step 8: exact dispatched-commit checkout and externally authenticated release audit-pack generation"
     },
+    "FROZEN_CHAMPION.md": {
+      "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "RELEASE_MANIFEST.json": {
+      "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "SECURITY.md": {
+      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
+      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
+    },
+    "SHA256SUMS": {
+      "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
+    "STEP21_IMPORT_PROVENANCE.md": {
+      "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
+      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
+    },
     "config/licensed_entitlement_manifest.example.json": {
       "expected_sha256": "ea2e663dfb257da11ac8cf4257c33bb0fc8634ed425c8c17e8e207f70aee4050",
       "reason": "Licensed-data private-drop activation: exact SHA-256 entitlement binding, fail-closed authorization activation, bounded watcher, replay handoff, hostile tests, and software-readiness certification."
@@ -144,8 +164,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "config/metadata_sources.public_progress.json": {
-      "expected_sha256": "2a6f8c2e978dbbc5ea82b53c15fcfc2b1ef4822e513c6feeef66d8a29769c2f5",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "938074ab4489094f099a7a3ef782323db1eeaab90b786039eac6da6f2b662dc1",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "config/real_data_replay.example.json": {
       "expected_sha256": "269f19551b9cfff177f8ed89d8273868cd0d68a8c5bca405ffa2e505997c8cda",
@@ -192,12 +212,12 @@
       "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
     },
     "data/processed/authorized_input_real/g4_exact_completion_plan.json": {
-      "expected_sha256": "3f372406d02ba85e4c39b91c34e5babff6640d3d5eb8b1fac9acc24be027ffca",
-      "reason": "Public-safe machine-readable G4 exact completion plan: 13 NYSE Daily TAQ Master rows plus 5 Nasdaq Fundamental Data rows to move 3810 exact + 18 exclusions to 3828 exact + 0 exclusions without publishing licensed values."
+      "expected_sha256": "4bb6b3129609b8498eb499fb669c155dcf0ccf7402784c64f7dff30a138f38c5",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/authorized_input_real/g4_final_blockers.json": {
-      "expected_sha256": "ce36e5cb2839f5f8dc22b2d955954231ddeb32838c97a487b1c482f7279096ed",
-      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
+      "expected_sha256": "bc2014a117e4932f9052582a46086601215d4b408c5fcd83a7468446efbd67e3",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/authorized_input_real/g4_shares_batch_0001_report.json": {
       "expected_sha256": "60af4d83dae1232a71901f40f8e017954a1f5f914f77f2c4f7ad28af483b938d",
@@ -235,37 +255,41 @@
       "expected_sha256": "50ebb59f5a6839e9eb17802b2d5d4ac09a36e9b9de3926383d569e3842dd3a91",
       "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
+    "data/processed/authorized_input_real/g4_wll_20150204_25_evidence.json": {
+      "expected_sha256": "8105aff370cad7150a3782e2687205ec004635ef0b9d5646f7bae4b4f8fd8d14",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
+    },
     "data/processed/authorized_input_real/g5_final_control_exclusions.json": {
       "expected_sha256": "a1225e8583b02541ca29f6d722fcf2b3c65f0f342be7b3781783ac6eec91638d",
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "data/processed/authorized_input_real/metadata_domain_quality.csv": {
-      "expected_sha256": "8c00e75f498d657be538721241a458cd68ebdd1580f5fa1c68eb1a7b03a73877",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "312196de54d9189cac48bf1d300a0feac1f28d9df754d97e17a3cee0330a6702",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/authorized_input_real/metadata_quality_gate.csv": {
       "expected_sha256": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_quality_issues.csv": {
-      "expected_sha256": "51739ea6e3752a946b249895cd3770342c10c4125fb19f89986cc5df6cd8007e",
-      "reason": "G4 final ACO repair: exact SEC EDGAR acceptance 2013-04-10 12:56:12 precedes 14:10 cutoff; exact 32,287,200 shares fact as of 2013-03-27; one row closed without inference or staleness exception."
+      "expected_sha256": "72066cfb2b18e47df6013d5db02787114cfa41593ab48be7f35dce995d1342cf",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/authorized_input_real/metadata_quarantine.csv": {
       "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "data/processed/authorized_input_real/metadata_source_inventory.json": {
-      "expected_sha256": "396a61e43865c014d685fff6fa468b1f4c872d461a79cad85e0acd5cae00d7c3",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "ed63dfdbed5253a0b7550a897b5e928e6f4cada3a1ce0a73d0c9e45e2946fbfc",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/authorized_input_real/metadata_unresolved_gates.csv": {
-      "expected_sha256": "9d4563b22f6e7ba9b4938597c84fda9b420fda39fa205e790bef677129631883",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "dcaa4d71712cde2f4054cc4705c7fdd7c82441968fe0f916aeded1be5d3b426e",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": {
-      "expected_sha256": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
-      "reason": "G4 completion: 3,810 exact point-in-time shares resolutions plus 18 immutable reviewed fail-closed exclusions account for all 3,828 required symbol-dates without fabricating shares or allowing excluded-row turnover."
+      "expected_sha256": "61da7f69b4aa3c489b8f70023623acc879b4222152d0ac1055a2d50139739582",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/g2_vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -499,13 +523,13 @@
       "expected_sha256": "b5cfbc9768b8b00a4e7c44cbd753f3d6bf3e87e9fc6e92c3b87685c28b1b7741",
       "reason": "Real-data Steps 1-12 sprint: freeze exact G2 requirements, install a production source-contract blueprint, verify ingestion pipelines, condition ITCH on G3-confirmed Nasdaq events, refresh stale top-level gates, and record source-dependent steps fail-closed without synthetic substitution."
     },
-    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
-      "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
-      "reason": "Nasdaq ITCH vendor-contact provenance receipt from PR #164; records acknowledgement and Sales handoff only while Step 8 remains SOURCE_BLOCKED with no verified entitlement or decoded files."
-    },
     "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status.json": {
       "expected_sha256": "322ac754733e71ddbbfc4cd756478186eab3fe5bce8933c70859f6fd82751b58",
       "reason": "Nasdaq Historical TotalView-ITCH vendor-status provenance: September 29 Client Success acknowledgement and Sales handoff recorded without claiming access, delivery, credentials, NDA workflow, pricing, or entitlement; Step 8 remains fail-closed until authorized decoded ITCH files exist."
+    },
+    "data/processed/real_data_release_sprint/nasdaq_itch_vendor_status_2026-09-29.json": {
+      "expected_sha256": "e0bbff89ddbbf2164b5796b694495b1e41e4d32f85491364a55c123d70ef499b",
+      "reason": "Nasdaq ITCH vendor-contact provenance receipt from PR #164; records acknowledgement and Sales handoff only while Step 8 remains SOURCE_BLOCKED with no verified entitlement or decoded files."
     },
     "data/processed/real_data_release_sprint/production_source_contract_blueprint.json": {
       "expected_sha256": "965cbb2a151d9d3bed146912960f5ba3f5521cc21d600cfb7bba6bc6ed1cf382",
@@ -516,8 +540,8 @@
       "reason": "Materializes and verifies the deterministic 1,242-row G2_CHAMPION_MINIMUM requirements artifact while preserving canonical G2_FULL_REPLICATION at 1,656 rows and leaving release gates unchanged."
     },
     "data/processed/real_data_release_sprint/step_status.json": {
-      "expected_sha256": "06826653ce0b2c7a320bda9dda6791ef94ad50df74ecdc2cbd04e69299449076",
-      "reason": "G5 control-contract repair: regenerate the truthful 12-step sprint receipt against the new canonical G5 readiness/quality hashes; Step 10 remains SOURCE_BLOCKED at 0/72 genuine controls."
+      "expected_sha256": "bf257fd5a3f9d7e3c58ad4d110f1524e02504e94f4a88aab68b03bed0a2aed7f",
+      "reason": "G4 WLL exact public SEC repair: refresh real-data sprint status hash bindings after canonical metadata receipts move to 3,813 exact shares rows / 15 reviewed exclusions; no G2/G5 release gate is relaxed."
     },
     "data/processed/real_data_release_sprint/vendor_requests/cboe_option_trades.csv": {
       "expected_sha256": "0e2206a796373dcf4f39224afb6b09e860d34008e71cf02be2dcb04d7b5aa3e5",
@@ -531,13 +555,13 @@
       "expected_sha256": "e252c39710ed9b8f228ba0b339d24c4850000d200a10421bb23af0c319e919fe",
       "reason": "Materialized cheap-first LSEG/ThetaData G2_FULL_REPLICATION option-quote plan; candidate sourcing only, no purchase or coverage claim."
     },
-    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history_option_quotes.csv": {
-      "expected_sha256": "c2594bfdd987d6600c11f76edf0dc02f6e8d63f01f6b9a8a3732b2b6e2549924",
-      "reason": "Materialized full-replication option-quote request rows with deterministic per-date LSEG/ThetaData candidate routing; legacy artifact path retained for compatibility."
-    },
     "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history.csv": {
       "expected_sha256": "6eb8fef1bbefedcb818efb89e6be1cc9b40a819e9eaecfc26b645b9f8a5e82b1",
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "data/processed/real_data_release_sprint/vendor_requests/lseg_opra_tick_history_option_quotes.csv": {
+      "expected_sha256": "c2594bfdd987d6600c11f76edf0dc02f6e8d63f01f6b9a8a3732b2b6e2549924",
+      "reason": "Materialized full-replication option-quote request rows with deterministic per-date LSEG/ThetaData candidate routing; legacy artifact path retained for compatibility."
     },
     "data/processed/real_data_release_sprint/vendor_requests/tickdata_equity_nbbo_quotes.csv": {
       "expected_sha256": "3fe12ff48fbd7c9d19fc31928079448cde7a4abf436e1c63cfe93ce593ce5bdc",
@@ -556,12 +580,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "02f515580b0089e35e3d26b22203ad563399f10ca4537ee6f39267703c7b3980",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "ffe7090fc2a35384f78b7dc5f008637a27fa369b631902fe5a711f49a6e6fdb7",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "e8d84dbbd726b3b3d5aa7ce97496420dc48dee5570086ab13fd1d30b536ca3e2",
-      "reason": "G5 control-contract repair: readiness and matched-control generation now share the canonical point-in-time covariate schema; deterministic receipts regenerated with no synthetic or reviewed-exclusion promotion to genuine controls."
+      "expected_sha256": "87e67f3c169f4f9c6ab86f70bc53b9eb91d28134371a1bd6699ff4be9c961d7b",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
@@ -707,12 +731,12 @@
       "expected_sha256": "5c997dcc805c9e5df65bac36213726c1550d852492cd26271288688ceb528491",
       "reason": "G1 Acadia Healthcare batch 0031: preserve exact 2015-04-28 16:00 EDT Business Wire mirror evidence, SEC corroboration, research-map state, and 33/141 fail-closed accounting."
     },
-    "data/public/metadata/g1_announcement_times_batch_0032_evidence.json": {
-      "expected_sha256": "e023876cf0580d0caaf5d7385604b5d9ca128bcbbc598169009dc7f3815d2999",
-      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
-    },
     "data/public/metadata/g1_announcement_times_batch_0032.csv": {
       "expected_sha256": "82f9caa85fc930fc2b955c3dc2d16fab8d17b7f676cba99f3b2c747dcf41013d",
+      "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
+    },
+    "data/public/metadata/g1_announcement_times_batch_0032_evidence.json": {
+      "expected_sha256": "e023876cf0580d0caaf5d7385604b5d9ca128bcbbc598169009dc7f3815d2999",
       "reason": "Reviewed public batch 0032: AMD original Marketwired and Haemonetics SEC issuer release-header exact clocks; deterministic 35 exact / 139 reviewed-exclusion receipts, routing and focused regressions. No release gate is relaxed."
     },
     "data/public/metadata/g1_announcement_times_batch_0033.csv": {
@@ -1259,6 +1283,14 @@
       "expected_sha256": "2c7f0880436d5ef7dc526be8c2f9dfa68174e403cdb21e1302590ba21c7d4355",
       "reason": "G4 batch 0008: reviewed public point-in-time shares evidence for observations 3501-3828 under the hard 130-day staleness limit and cumulative readiness/quality receipts"
     },
+    "data/public/metadata/g4_shares_wll_20150204_25.csv": {
+      "expected_sha256": "963b83b5bc7a824cd7550b8e52a62513d28b113bef56be9b83b6e265519f0d2e",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
+    },
+    "data/raw/hacked_earnings_jfe/SampleFirms.csv": {
+      "expected_sha256": "7a9927a84dd9532bd5a4a8157ed3e40bc1b50c7b1be51374feca17b29a65f5df",
+      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
     "data/raw/hacked_earnings_jfe/SampleFirms_actual.csv": {
       "expected_sha256": "c9684e2f6f419533dd438e66c3beefa624cca419109259d07ac5eb615d872308",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
@@ -1267,8 +1299,8 @@
       "expected_sha256": "bd40f28b7c2d7889303ebb4a9b4d604cee330e351232361789f42ba1f96c2fcf",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/SampleFirms.csv": {
-      "expected_sha256": "7a9927a84dd9532bd5a4a8157ed3e40bc1b50c7b1be51374feca17b29a65f5df",
+    "data/raw/hacked_earnings_jfe/TimeOfFirstTrade.csv": {
+      "expected_sha256": "e723e9e2a0e0a616915f3146fdea40ef429d90586ac4699853b047c536568f55",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
     "data/raw/hacked_earnings_jfe/source_snapshot/.gitignore": {
@@ -1295,14 +1327,6 @@
       "expected_sha256": "f19127ed0b019c959ed82e33b06607558567b9a82e38207d7ea0ef17c32d6f77",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/clean_pr_text.py": {
-      "expected_sha256": "314cdb95f1ff9d338fa4aa21a8dee2d66c31d5d1d92e58957cde21151b4b5633",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
-    },
-    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/pr sentiment.py": {
-      "expected_sha256": "f3ef14e2b5efdd12f0ede8df3a67b71222959db7fcc6df82637ada98fcbf0f6a",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
-    },
     "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet.b64": {
       "expected_sha256": "167d49f786dffddefce7cbc94253ffae5f974b8b8dfbcc2c732a48b48eed014b",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
@@ -1311,8 +1335,12 @@
       "expected_sha256": "f1dbfd9368057e1ea45fc7abc1561799142074d2043544237a91dfb79c3857fc",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
-    "data/raw/hacked_earnings_jfe/TimeOfFirstTrade.csv": {
-      "expected_sha256": "e723e9e2a0e0a616915f3146fdea40ef429d90586ac4699853b047c536568f55",
+    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/clean_pr_text.py": {
+      "expected_sha256": "314cdb95f1ff9d338fa4aa21a8dee2d66c31d5d1d92e58957cde21151b4b5633",
+      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
+    "data/raw/hacked_earnings_jfe/source_snapshot/Text Analysis/pr sentiment.py": {
+      "expected_sha256": "f3ef14e2b5efdd12f0ede8df3a67b71222959db7fcc6df82637ada98fcbf0f6a",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
     },
     "docs/control_plane_implementation_baseline.md": {
@@ -1410,14 +1438,6 @@
     "docs/surveillance_analytics_upgrade.md": {
       "expected_sha256": "ad41dbe5d5cb3ae0f742dc92fb52a19ea66894298c890283f30401a018b73632",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
-    },
-    "FROZEN_CHAMPION.md": {
-      "expected_sha256": "a5c7c9e9373c75e175dc3b98b4bd612ae8853157d486841b5647cb4fbd2f7267",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
-    },
-    "RELEASE_MANIFEST.json": {
-      "expected_sha256": "d3bd4740dda281e477b1135748691e6bc673adbe6a305b13c0efa521ad9d3162",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "requirements-skops.lock": {
       "expected_sha256": "3a6d77659883b309e3c1a047dddf703662d119b90ae3240889f34d63b52987be",
@@ -1594,14 +1614,6 @@
     "scripts/verify_release_drift.py": {
       "expected_sha256": "241605c6377d451bbaee1f94d8fccefa6f9c10aadc05aca81967b31db161b6f4",
       "reason": "Intentional post-Step21 repository hardening addition; SHA-256 drift identities and externally authenticated allowlist"
-    },
-    "SECURITY.md": {
-      "expected_sha256": "cdfef41e86193a61a2db62214cd834edd393c4360656f149ace46117a55ed0ff",
-      "reason": "Intentional post-Step21 repository hardening addition; public-repository security policy and current merge/release validation guidance"
-    },
-    "SHA256SUMS": {
-      "expected_sha256": "190f2d90492bdb083ce23567c3181c5aed2c0792de151c9e8ceb59d3c61f49bb",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "src/control_plane/__init__.py": {
       "expected_sha256": "9c85c627406ac58621635d1394cabe5a32c066093d28e8cdaf44752ed88da358",
@@ -1844,8 +1856,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "src/g4_exchange_reference_completion.py": {
-      "expected_sha256": "ebfc17787a1e793e5f4ada78926eafc5ddab9ce8fa23fca4e8e36f23926a572f",
-      "reason": "Exact G4 exchange-reference completion path for the final 18 share exclusions: private NYSE Daily TAQ Master parsing for 13 ACO/WLL rows plus Nasdaq Fundamental Data TSO parsing for 5 CGNX rows, strict pre-cutoff/staleness validation, all-or-nothing activation, and no licensed payload committed."
+      "expected_sha256": "51020004cbb30f7981e7b7507f10fafd551ead31f89bb8ee93752ec145d4a09a",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "src/g4_materialize_batch.py": {
       "expected_sha256": "0d35b9cdff610500a035a14d5086f785fefecc217ff6a608ad0032f567464a4c",
@@ -1863,6 +1875,10 @@
       "expected_sha256": "a58f0cc6ac2207f00e2c6beb7dae89467df454538fa84c8ce82414ec9a123947",
       "reason": "G5 control acquisition planning: deterministic lower-bound measurement of same-day candidate coverage already present in the frozen G2 market-data scope; no control-readiness or release claim."
     },
+    "src/g5_control_history_requirements.py": {
+      "expected_sha256": "eb420645264d64efa72683cb3cb58eaffb091e869d87c8e07f9339b965f5ac16",
+      "reason": "G5 control-history planning: expand each primary candidate to the event point, 21 eligible same-minute normalization sessions, 22 prior daily-close sessions, required point-in-time shares, and market source-date rows while measuring overlap with frozen G2."
+    },
     "src/g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "2d4f8205f188b29a1521f2a8e2f5cab65fa564e04f05669c741e001cd777ef73",
       "reason": "G5 derived market metadata intake: compute only strictly pre-cutoff price, market cap, 21-prior-day volatility, same-minute baseline volume/turnover/spread, option contract-volume liquidity, and pre-event return from real G2/G4 inputs while keeping outputs non-evidence until canonical resolver gates pass."
@@ -1874,6 +1890,10 @@
     "src/g5_external_source_queue.py": {
       "expected_sha256": "f5d2818b61bf81c6f59137be91d450ac338793dd5f6b8c6ec601ad9d38749f37",
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
+    },
+    "src/g5_master_acquisition_plan.py": {
+      "expected_sha256": "bb8d214893eaf539aea5b345f7fd675b981bc750244ee11795b599e8f241dbbe",
+      "reason": "G5 master acquisition planner: unify the 216 primary controls, 174 treated targets, 5,070 matching-field requirements, 1,560 external source-lane requests, and expanded control-history market/shares footprint into one deterministic fail-closed plan."
     },
     "src/g5_prior_fallback_planner.py": {
       "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",
@@ -1946,10 +1966,6 @@
     "src/surveillance_feature_diagnostics.py": {
       "expected_sha256": "d9f8459d35bc7e99c941af00187b96ccd3ded2d9b33913f37b4310ebc24c59a8",
       "reason": "Surveillance analytics upgrade: add deterministic point-in-time event replay and offline feature diagnostics inspired by mature research-engine concepts, with no trading execution and no third-party source copied or vendored."
-    },
-    "STEP21_IMPORT_PROVENANCE.md": {
-      "expected_sha256": "49f504e8c1cf9966b339e4fa02c0998a0baf042f6edcbe029f615d9ef7e321a2",
-      "reason": "Step21 repository import/integrity metadata outside the packaged release manifest"
     },
     "tests/test_control_plane_adversarial.py": {
       "expected_sha256": "28773c33814d97a730a8e5ba42e2493328d3e890fd3113953d3d96f8e6e7e598",
@@ -2420,8 +2436,8 @@
       "reason": "G3 primary-listing-history completion: event-bound public evidence, resolver/quality hardening, canonical readiness receipts, or regression coverage"
     },
     "tests/test_g4_exchange_reference_completion.py": {
-      "expected_sha256": "576350c0ed5f1d082c611525d60cad301b07cc53e4d42e1df64fa81404cea0e1",
-      "reason": "Regression coverage for the exact 18-row G4 completion scope, documented NYSE fixed-width offsets and NYSE-only share field, Nasdaq TSO timestamps, cutoff enforcement, private materialization, tamper-resistant source receipts, and fail-closed partial delivery."
+      "expected_sha256": "da2ec876de40979e98b188bb3f73107ff30052f85cdf36a80d7b28d31b14b941",
+      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
     },
     "tests/test_g4_materialize_batch.py": {
       "expected_sha256": "90b4d870c209f7e71f70a5ef6533b0b921ccf253e1c7efde9e69c1531cfcfba2",
@@ -2439,6 +2455,10 @@
       "expected_sha256": "a56c70dd4189c515a39d59c156d88d588c20ed78f8c6632032786a935198570f",
       "reason": "Regression coverage freezes the current 49/72 structurally sufficient dates, 23 deficient dates, and 52 minimum additional candidate symbol-date lower bound while excluding same-day positives."
     },
+    "tests/test_g5_control_history_requirements.py": {
+      "expected_sha256": "f498f0944c6d16987af3f7263e5a4570ef97873d41eb1a916e107f31192415e1",
+      "reason": "Regression coverage for event plus 21-session normalization and 22-session close history, market/share requirements, frozen-G2 overlap accounting, minute-role semantics, and the real 216-candidate queue."
+    },
     "tests/test_g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "0d414cff9384f4b7b08548bee4ef8ef89210cf114d62445f8baaa6e049496f8c",
       "reason": "Regression coverage for completed-minute anti-lookahead, prior-day volatility, point-in-time shares availability, baseline-history requirements, option-liquidity definition, and zero G5 readiness/release claims."
@@ -2450,6 +2470,10 @@
     "tests/test_g5_external_source_queue.py": {
       "expected_sha256": "0bfdb2b439db11dbb686f95e78bb423b4668e0af0a24fe71ae12e2286c8421e6",
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
+    },
+    "tests/test_g5_master_acquisition_plan.py": {
+      "expected_sha256": "7ef45f162a7226eca25033aa5ad6a40fda5c913d5e55067f4a4ce287957ee930",
+      "reason": "Regression coverage locks the 390 total matching targets, 5,070 field requirements (3,120 derived and 1,950 external), 1,560 external lane requests, 72-date structural coverage, history-overlap reconciliation, and zero canonical G5 readiness/release claims."
     },
     "tests/test_g5_prior_fallback_planner.py": {
       "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
@@ -2546,22 +2570,6 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
-    },
-    "src/g5_control_history_requirements.py": {
-      "expected_sha256": "eb420645264d64efa72683cb3cb58eaffb091e869d87c8e07f9339b965f5ac16",
-      "reason": "G5 control-history planning: expand each primary candidate to the event point, 21 eligible same-minute normalization sessions, 22 prior daily-close sessions, required point-in-time shares, and market source-date rows while measuring overlap with frozen G2."
-    },
-    "tests/test_g5_control_history_requirements.py": {
-      "expected_sha256": "f498f0944c6d16987af3f7263e5a4570ef97873d41eb1a916e107f31192415e1",
-      "reason": "Regression coverage for event plus 21-session normalization and 22-session close history, market/share requirements, frozen-G2 overlap accounting, minute-role semantics, and the real 216-candidate queue."
-    },
-    "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "bb8d214893eaf539aea5b345f7fd675b981bc750244ee11795b599e8f241dbbe",
-      "reason": "G5 master acquisition planner: unify the 216 primary controls, 174 treated targets, 5,070 matching-field requirements, 1,560 external source-lane requests, and expanded control-history market/shares footprint into one deterministic fail-closed plan."
-    },
-    "tests/test_g5_master_acquisition_plan.py": {
-      "expected_sha256": "7ef45f162a7226eca25033aa5ad6a40fda5c913d5e55067f4a4ce287957ee930",
-      "reason": "Regression coverage locks the 390 total matching targets, 5,070 field requirements (3,120 derived and 1,950 external), 1,560 external lane requests, 72-date structural coverage, history-overlap reconciliation, and zero canonical G5 readiness/release claims."
     }
   },
   "schema_version": "2",

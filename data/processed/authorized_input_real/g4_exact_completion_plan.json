@@ -1,10 +1,10 @@
 {
   "schema_version": "1",
-  "purpose": "Public-safe exact G4 completion plan for the 18 currently reviewed share exclusions. No licensed payload or shares value is stored here.",
+  "purpose": "Public-safe exact G4 completion plan for the 15 remaining reviewed share exclusions after the public SEC WLL repair. No licensed payload or shares value is stored here.",
   "current_state": {
     "required": 3828,
-    "exact_resolved": 3810,
-    "reviewed_excluded": 18,
+    "exact_resolved": 3813,
+    "reviewed_excluded": 15,
     "blocking_unresolved": 0,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS"
   },
@@ -20,10 +20,9 @@
       "source": "NYSE Daily TAQ Master",
       "source_family": "nyse_daily_taq_master",
       "symbols": [
-        "ACO",
-        "WLL"
+        "ACO"
       ],
-      "target_rows": 13,
+      "target_rows": 10,
       "exact_source_dates": [
         "2013-03-25",
         "2013-03-26",
@@ -34,10 +33,7 @@
         "2013-04-03",
         "2013-04-04",
         "2013-04-05",
-        "2013-04-08",
-        "2015-02-20",
-        "2015-02-23",
-        "2015-02-24"
+        "2013-04-08"
       ],
       "required_fields": [
         "Symbol Compressed",
@@ -72,7 +68,7 @@
     }
   ],
   "activation_requirements": [
-    "All 18 exact rows materialized from authorized exchange-reference files.",
+    "All 15 exact rows materialized from authorized exchange-reference files.",
     "Every fact date is on or before its target date and within the 130-day hard ceiling.",
     "Every source is provably available before the target intraday cutoff.",
     "No arithmetic reconstruction or future-filed fact is permitted.",

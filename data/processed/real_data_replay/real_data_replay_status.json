@@ -31,7 +31,7 @@
     },
     "metadata_contract": {
       "path": "/home/runner/work/trading-platform/trading-platform/config/metadata_sources.public_progress.json",
-      "sha256": "2a6f8c2e978dbbc5ea82b53c15fcfc2b1ef4822e513c6feeef66d8a29769c2f5"
+      "sha256": "938074ab4489094f099a7a3ef782323db1eeaab90b786039eac6da6f2b662dc1"
     }
   },
   "prohibited_outputs": [
@@ -50,8 +50,8 @@
   "shares_materialization": {
     "excluded_rows_not_materialized": true,
     "path": "/home/runner/work/trading-platform/trading-platform/data/processed/real_data_replay/derived/shares_for_baselines.csv",
-    "resolved_rows": 3810,
-    "sha256": "1f32992070b3d8344ad689b771c2d94e4032178b322058383ef21c12766a1048"
+    "resolved_rows": 3813,
+    "sha256": "75780374c6c398ee2fd40fa8452bdc8cd2d89faf7a7c9be38106172b996c85fa"
   },
   "stages": {
     "baselines": {
