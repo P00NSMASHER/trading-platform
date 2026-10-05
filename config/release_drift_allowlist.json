@@ -2434,6 +2434,14 @@
     "tests/test_security_identity_lseg_bridge.py": {
       "expected_sha256": "a3e7a47df1245def461123a0f6be3448f038807549807ff08e9a055b084191ba",
       "reason": "Regression coverage for direct dated LSEG identity evidence, authorization requirement, rejection of root-only/secondary mappings, ambiguous validation, mapping conflicts, out-of-queue rows, and locked 111-security/2751-request direct-bridge capacity."
+    },
+    "src/security_identity_evidence_builder.py": {
+      "expected_sha256": "0388d6f9c2eb8b934f5d7f878f84b767f54a6567708b1d23e46c6b0384fbe511",
+      "reason": "Fail-closed builder that converts an explicitly authorized dated stock-name history extract into minimal stable-ID evidence intervals for the 3,654-request acquisition queue; requires nonblank authorization/source references and rejects uncovered, ambiguous, symbol-mismatched, or non-closing evidence."
+    },
+    "tests/test_security_identity_evidence_builder.py": {
+      "expected_sha256": "0768ee21d4f4def1820c19f051b478968871e14e80f58b46c3a3476c4e501d7d",
+      "reason": "Regression coverage for stable-ID evidence interval compression, uncovered dates, symbol mismatches, overlapping ambiguity, authorization requirements, and closing-lane enforcement."
     }
   },
   "schema_version": "2",
