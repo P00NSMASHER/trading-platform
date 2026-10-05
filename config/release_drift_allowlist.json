@@ -2546,6 +2546,14 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
+    },
+    "src/g5_control_history_requirements.py": {
+      "expected_sha256": "eb420645264d64efa72683cb3cb58eaffb091e869d87c8e07f9339b965f5ac16",
+      "reason": "G5 control-history planning: expand each primary candidate to the event point, 21 eligible same-minute normalization sessions, 22 prior daily-close sessions, required point-in-time shares, and market source-date rows while measuring overlap with frozen G2."
+    },
+    "tests/test_g5_control_history_requirements.py": {
+      "expected_sha256": "f498f0944c6d16987af3f7263e5a4570ef97873d41eb1a916e107f31192415e1",
+      "reason": "Regression coverage for event plus 21-session normalization and 22-session close history, market/share requirements, frozen-G2 overlap accounting, minute-role semantics, and the real 216-candidate queue."
     }
   },
   "schema_version": "2",
