@@ -1,0 +1,78 @@
+{
+  "schema_version": "g1-public-batch-evidence-v2",
+  "batch_id": "0128",
+  "state": "PREPARED",
+  "base_main_sha": "268c842b26a696a111f89b1c88b3e92eb227672b",
+  "expected_baseline": {
+    "exact": 173,
+    "fail_closed": 1,
+    "total": 174
+  },
+  "expected_after_gated_integration": {
+    "exact": 174,
+    "fail_closed": 0,
+    "total": 174
+  },
+  "publish_authorized": false,
+  "authority_note": "Preparation only. Canonical publication requires deterministic regeneration from exact current main and the complete exact-head gate set.",
+  "primary_evidence": {
+    "family": "official_newswire_archive",
+    "provider": "GlobeNewswire",
+    "release_id": 930758,
+    "url": "https://www.globenewswire.com/news-release/2013/10/22/930758/0/en/x.html",
+    "title": "Gentex Reports Third Quarter 2013 Financial Results",
+    "displayed_publication_clock": "2013-10-22 08:03 ET",
+    "embedded_article_published_time": "2013-10-22T12:03:00Z",
+    "interpretation": "Direct official-newswire archive page supplies the exact first-public distribution clock. Deterministic sequence probe enumerated adjacent release IDs and only 930758 matched the target title."
+  },
+  "corroboration": {
+    "sec_exhibit": "https://www.sec.gov/Archives/edgar/data/355811/000035581113000046/exhibit_991x093013.htm",
+    "pinned_release_member": "2013/QTR4/38659_20131022_0.txt",
+    "note": "SEC Exhibit and pinned release member corroborate identity/date only. SEC acceptance 08:00:11 and conference-call time 10:30 are not release-clock evidence."
+  },
+  "items": [
+    {
+      "event_id": "HEJFE-BD3F577ADD90D512",
+      "historical_symbol": "GNTX",
+      "event_date": "2013-10-21",
+      "first_documented_illicit_trade_ts": "2013-10-21T15:21:00-04:00",
+      "public_announcement_ts": "2013-10-22T08:03:00-04:00",
+      "information_asymmetry_seconds": 60120,
+      "release_title": "Gentex Reports Third Quarter 2013 Financial Results",
+      "release_member": "2013/QTR4/38659_20131022_0.txt",
+      "source_family": "official_newswire_archive",
+      "source_grade": "A",
+      "public_distribution_explicit": true,
+      "source_reference": "https://www.globenewswire.com/news-release/2013/10/22/930758/0/en/x.html",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/355811/000035581113000046/exhibit_991x093013.htm"
+    }
+  ],
+  "prohibited_substitutes": [
+    "sec_edgar_acceptance_time",
+    "conference_call_time",
+    "scheduled_release_time",
+    "archive_capture_time",
+    "inferred_clock",
+    "date_only",
+    "neighboring_release"
+  ],
+  "prep_only": true,
+  "source_probe": {
+    "workflow_run_id": 37326419003,
+    "release_id": 930758,
+    "adjacent_release_ids_checked": [
+      930755,
+      930756,
+      930757,
+      930758,
+      930759,
+      930760,
+      930761,
+      930762,
+      930763,
+      930764,
+      930765
+    ],
+    "target_title_match_unique": true
+  }
+}
