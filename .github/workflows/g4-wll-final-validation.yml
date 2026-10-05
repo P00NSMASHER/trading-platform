@@ -1,0 +1,43 @@
+name: g4-wll-final-validation
+
+on:
+  push:
+    branches:
+      - g4/wll-exact-rebased
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: src
+    steps:
+      - name: Checkout exact branch head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: g4/wll-exact-rebased
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-dev.lock
+      - name: Install locked dependencies
+        run: |
+          python -m pip install --upgrade "pip==26.2.1"
+          python -m pip install -r requirements.lock
+          python -m pip install -r requirements-dev.lock
+      - name: Harden permissions
+        run: python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+      - name: Full suite
+        run: python -m pytest -q
+      - name: Receipt reproducibility
+        run: python -m research_receipt_rebuild --check
+      - name: Secret scan
+        run: python scripts/secret_scan.py --root .
