@@ -440,8 +440,12 @@
       "reason": "Materialized deterministic G2_CHAMPION_MINIMUM vendor request manifests and reproduction guard; acquisition planning only, no authorization or coverage claim."
     },
     "data/processed/hacked_earnings_jfe/binary_asset_status.json": {
-      "expected_sha256": "799be4eb543a055335a0f0ab5cff978b566d961031eeea48d52d340cb21b5a93",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+      "expected_sha256": "6b7698307c8244d22581e47e65230e4a1db50f45c6d1db3e76139933357d94d7",
+      "reason": "Completed direct GitHub binary extraction from pinned vgreg/hacked_earnings_jfe commit c23c7d79d067a79d70cf20e31b072d3703497eae; all six press-release ZIP blobs and members verified, with no release-gate or G2 market-data coverage claim."
+    },
+    "data/processed/hacked_earnings_jfe/event_press_release_index.csv": {
+      "expected_sha256": "a8f992d841532c3ee4968ed2b7f58546295a675584f598a132e4bbbec8b88f44",
+      "reason": "Deterministic index matching the repository's 174 historical events to GitHub-hosted press releases by issuer and earnings date; text evidence only, with no trade/quote observations or G2 coverage claim."
     },
     "data/processed/hacked_earnings_jfe/event_enrichment_174.csv": {
       "expected_sha256": "b2ef285985c1791ec008856f6b5444337a82a81e201e4a0a9a0eeb0cfc9660b4",
@@ -454,6 +458,10 @@
     "data/processed/hacked_earnings_jfe/first_trade_to_sample_firms.csv": {
       "expected_sha256": "fea3b42047c637a899c6fc60b01e59cee815e15d92d7aea9ded83a723761cc44",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
+    "data/processed/hacked_earnings_jfe/github_binary_extraction_manifest.json": {
+      "expected_sha256": "6ac784effeb55643da15b0e8ce67c28bc6e9130fb401531070f6b914b85790b4",
+      "reason": "Content-addressed receipt for direct GitHub extraction of six press-release ZIPs and the word-coefficient parquet at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; no G2 market-data coverage claim."
     },
     "data/processed/hacked_earnings_jfe/inferred_dependencies.json": {
       "expected_sha256": "481a47461df7bec2305592da15181db347addb6c109fdaef68ea2fe23620608e",
@@ -470,6 +478,10 @@
     "data/processed/hacked_earnings_jfe/source_inventory.json": {
       "expected_sha256": "d7ccc0d84b8457a68bdd88c184292852685f9a1493694332ad927ddf5c3e16a6",
       "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+    },
+    "data/processed/hacked_earnings_jfe/word_coefficients.csv": {
+      "expected_sha256": "02ca6fef7ae35237dea90353c649f2255c17f5c31312f4c47ceaef408de723ae",
+      "reason": "Deterministic CSV decoding of the 2,393 GitHub-hosted research word coefficients at the pinned source commit; model metadata only, with no market observation or G2 coverage claim."
     },
     "data/processed/real_data_release_sprint/g2_champion_minimum_source_date_requirements.csv": {
       "expected_sha256": "1ae3379537da3f4f809ce960eeb59906dbe961bee9982d94f1a91db5620e999c",
@@ -1280,8 +1292,8 @@
       "reason": "G5 completion: 72 immutable reviewed fail-closed control-date exclusions account for all event dates without fabricating matched controls; model-evaluation control eligibility remains separately locked."
     },
     "docs/hacked_earnings_jfe_extraction_audit.md": {
-      "expected_sha256": "0c0f0c9ffdf7c23dd0565c60bac54de2cf8e4709d7d397c4bf79a8ea174e051c",
-      "reason": "Reviewed extraction of licensed/public replication assets from vgreg/hacked_earnings_jfe at pinned source commit c23c7d79d067a79d70cf20e31b072d3703497eae; exact source/blob validation where applicable; no release gate, trading execution, or G2 market-data coverage claim."
+      "expected_sha256": "cc31e95bd68dc70a6d244c26e9eec3def5645fce5df67ec438a379359973286c",
+      "reason": "Audit updated after direct GitHub binary extraction verified 36,756 ZIP members, parsed 36,750 press releases, matched 160 of 174 events, and decoded 2,393 word coefficients without claiming G2 market-data coverage."
     },
     "docs/licensed_data_acquisition.md": {
       "expected_sha256": "feb3b5e708dfcb63520f8a1cbcbac87d4195135befc2b85580b879703ddf3a54",
@@ -1602,6 +1614,10 @@
     "src/g2_equity_route_break_even.py": {
       "expected_sha256": "9593d866257cec56a3644c6e765106f51b40b83b0a476721902fc979d13b0b12",
       "reason": "Fail-closed equity route break-even planner and receipt; compares full Tick Data against ThetaData + FirstRate + Tick Data residual without assuming quotes, licenses, or purchase authority."
+    },
+    "src/hacked_earnings_github_extractor.py": {
+      "expected_sha256": "24d5da4f23bd26238afb5ec8d45840cbde73a0e187de415a094cfefc806f2dd3",
+      "reason": "Reproducible offline extractor for the pinned GitHub press-release archives and coefficient parquet, with Git blob/ZIP CRC verification and explicit zero-change G2 coverage semantics."
     },
     "src/g2_full_replication_option_quote_plan.py": {
       "expected_sha256": "05cd9c34e81ce526a412e7a3009ca992bf91667c0b7f3e86cd44ba9f7c009a0d",
@@ -2194,6 +2210,10 @@
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
+    },
+    "tests/test_hacked_earnings_github_extractor.py": {
+      "expected_sha256": "3c7d5d37e782f345c6e9c9559d60ce484b62a7701cfd9e57d3885970f59ce2d9",
+      "reason": "Regression coverage for direct GitHub blob verification, ZIP extraction/indexing, coefficient decoding, and explicit separation from G2 trade/quote coverage."
     },
     "tests/test_g3_listing_evidence.py": {
       "expected_sha256": "f9bd313134d553b187cec02884326c3c5feea6d5f619342933fa825ffe69eb3c",
