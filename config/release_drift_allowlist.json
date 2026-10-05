@@ -2554,6 +2554,14 @@
     "tests/test_g5_control_history_requirements.py": {
       "expected_sha256": "f498f0944c6d16987af3f7263e5a4570ef97873d41eb1a916e107f31192415e1",
       "reason": "Regression coverage for event plus 21-session normalization and 22-session close history, market/share requirements, frozen-G2 overlap accounting, minute-role semantics, and the real 216-candidate queue."
+    },
+    "src/g5_master_acquisition_plan.py": {
+      "expected_sha256": "bb8d214893eaf539aea5b345f7fd675b981bc750244ee11795b599e8f241dbbe",
+      "reason": "G5 master acquisition planner: unify the 216 primary controls, 174 treated targets, 5,070 matching-field requirements, 1,560 external source-lane requests, and expanded control-history market/shares footprint into one deterministic fail-closed plan."
+    },
+    "tests/test_g5_master_acquisition_plan.py": {
+      "expected_sha256": "7ef45f162a7226eca25033aa5ad6a40fda5c913d5e55067f4a4ce287957ee930",
+      "reason": "Regression coverage locks the 390 total matching targets, 5,070 field requirements (3,120 derived and 1,950 external), 1,560 external lane requests, 72-date structural coverage, history-overlap reconciliation, and zero canonical G5 readiness/release claims."
     }
   },
   "schema_version": "2",
