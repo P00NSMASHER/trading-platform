@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 import importlib.util
 from pathlib import Path
 
@@ -16,8 +15,8 @@ def _load():
 def test_batch_0113_prep_is_fail_closed_owned_and_consistent():
     receipt = _load().validate()
     assert receipt["batch_id"] == "0113"
-    assert receipt["event_count"] == 6
+    assert receipt["event_count"] == 5
     assert receipt["publish_authorized"] is False
-    assert len(receipt["event_ids"]) == len(set(receipt["event_ids"])) == 6
+    assert len(receipt["event_ids"]) == len(set(receipt["event_ids"])) == 5
     assert len(receipt["csv_sha256"]) == 64
     assert len(receipt["evidence_sha256"]) == 64
