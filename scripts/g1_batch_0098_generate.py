@@ -33,7 +33,7 @@ evidence_path=Path("data/public/metadata/g1_public_batch_0098_evidence.json")
 assert not batch.exists() and not evidence_path.exists()
 
 specs=[
-{"event_id":"HEJFE-5B6F87699FF5093E","historical_symbol":"SM","expected_trade":"2015-05-05 15:08:00","clock":"2015-05-05T17:30:00-04:00","explicit_release_clock_text":"SM Energy official historical press-release index explicitly preserves the exact Business Wire release at May 5, 2015 5:30 pm ET","release_title":"SM Energy Reports Results for the First Quarter of 2015; Announces Agreements to Divest Mid-Continent Assets; Increases Production Guidance on Retained Properties","source_reference":"https://www.sm-energy.com/investors/news-events/press-releases?page=24","corroboration_reference":"https://d1io3yog0oux5.cloudfront.net/_9cfc361e29a3bead1e60c7ec61921e8c/smenergy/news/2015-05-05_SM_Energy_Reports_Results_for_the_First_Quarter_168.pdf","corroboration_basis":"SM Energy's official historical press-release index identifies the exact Business Wire release and explicit 5:30 pm ET clock; the issuer-hosted preserved release PDF independently corroborates issuer/release identity and date.","timestamp_evidence_kind":"explicit_release_clock","source_family":"issuer_investor_relations_archive","source_grade":"A","public_distribution_explicit":True,"expected_delta":8520}
+{"event_id":"HEJFE-5B6F87699FF5093E","historical_symbol":"SM","expected_trade":"2015-05-05 15:08:00","clock":"2015-05-05T17:30:00-04:00","explicit_release_clock_text":"SM Energy official historical press-release index explicitly preserves the exact Business Wire release at May 5, 2015 5:30 pm ET","release_title":"SM Energy Reports Results for the First Quarter of 2015; Announces Agreements to Divest Mid-Continent Assets; Increases Production Guidance on Retained Properties","source_reference":"https://www.sm-energy.com/investors/news-events/press-releases?page=24","corroboration_reference":"https://d1io3yog0oux5.cloudfront.net/_9cfc361e29a3bead1e60c7ec61921e8c/smenergy/news/2015-05-05_SM_Energy_Reports_Results_for_the_First_Quarter_168.pdf","corroboration_basis":"SM Energy's official historical press-release index identifies the exact Business Wire release and explicit 5:30 pm ET clock; the issuer-hosted preserved release PDF independently corroborates issuer/release identity and date.","timestamp_evidence_kind":"explicit_release_clock","source_family":"preserved_wire_mirror","source_grade":"A","public_distribution_explicit":True,"expected_delta":8520}
 ]
 items=[]
 hints_path=Path("data/public/metadata/g1_source_research_20260928.json")
@@ -77,7 +77,7 @@ save(exclusion_path,exclusions)
 
 contract_path=Path("config/metadata_sources.public_progress.json");contract=load(contract_path)
 contract["sources"].insert(0,{"source_id":"public-worker3-smenergy-businesswire-batch-0098","record_kind":"announcement_timestamp",
-"source_family":"issuer_investor_relations_archive","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
+"source_family":"preserved_wire_mirror","path":str(batch),"enabled":True,"authorized":True,"data_classification":"public_official_data",
 "delimiter":",","encoding":"utf-8","timezone":"America/New_York","column_map":{k:k for k in fields},
 "license_reference":"Official SM Energy historical press-release index with explicit time for the exact Business Wire release, corroborated by the issuer-hosted preserved release PDF. No licensed vendor data used.",
 "notes":"SM exact first-public Business Wire release clock from official issuer archive; prohibited substitute times are not used."})
@@ -183,7 +183,7 @@ def test_batch_0098():
         assert e["historical_symbol"]==sym and tr<rel<=tr+timedelta(days=7) and int((rel-tr).total_seconds())==delta
         assert resolved[x["event_id"]]["public_announcement_ts"]==utc
         assert resolved[x["event_id"]]["resolution_status"]=="resolved_exact_public_timestamp"
-        assert x["source_family"]=="issuer_investor_relations_archive" and x["source_grade"]=="A"
+        assert x["source_family"]=="preserved_wire_mirror" and x["source_grade"]=="A"
         assert x["timestamp_evidence_kind"]=="explicit_release_clock"
         assert x["public_distribution_explicit"] is True
         assert x["source_reference"].startswith("https://www.sm-energy.com/investors/news-events/press-releases")
