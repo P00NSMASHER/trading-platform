@@ -1,16 +1,16 @@
 {
   "schema_version": "1",
-  "purpose": "Final fail-closed evidence dossier for the 18 symbol-dates without admissible exact pre-cutoff shares evidence; these rows are immutable reviewed exclusions and do not block the completed G4 gate.",
+  "purpose": "Final fail-closed evidence dossier for the 15 symbol-dates without admissible exact pre-cutoff shares evidence; these rows remain reviewed exclusions while WLL is now resolved by exact public SEC evidence.",
   "research_use_only": true,
-  "base_main_sha": "c68a25cd9d79db0fef67da332fc2ccfd39dcca2e",
+  "base_main_sha": "87af616c0603e15e292dcbb79307e28100ac0f45",
   "g4_state": {
     "required": 3828,
-    "exact_resolved": 3810,
-    "reviewed_excluded": 18,
+    "exact_resolved": 3813,
+    "reviewed_excluded": 15,
     "accounted_for": 3828,
     "blocking_unresolved": 0,
-    "raw_exact_evidence_gaps": 18,
-    "quality_clear_exact_rows": 3810,
+    "raw_exact_evidence_gaps": 15,
+    "quality_clear_exact_rows": 3813,
     "quarantined": 0,
     "gate_status": "READY_WITH_REVIEWED_EXCLUSIONS",
     "hard_max_staleness_days": 130,
@@ -20,8 +20,7 @@
   },
   "unresolved_by_symbol": {
     "ACO": 10,
-    "CGNX": 5,
-    "WLL": 3
+    "CGNX": 5
   },
   "blockers": [
     {
@@ -148,65 +147,8 @@
         }
       ],
       "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL"
-    },
-    {
-      "historical_symbol": "WLL",
-      "target_trade_dates": [
-        "2015-02-23",
-        "2015-02-24",
-        "2015-02-25"
-      ],
-      "target_cutoff_local": "15:24 America/New_York",
-      "prior_exact_fact": {
-        "fact_date": "2014-10-15",
-        "shares_outstanding": 119060513,
-        "filed_date": "2014-10-30",
-        "blocker": "Exceeds the hard staleness ceiling by the target dates and the December 2014 Kodiak acquisition materially changed the share base."
-      },
-      "intervening_event": {
-        "date": "2014-12-08",
-        "description": "Kodiak acquisition closed. Public pro forma material states 47,546,139 Whiting shares issued to Kodiak holders plus 257,601 shares for Kodiak equity awards, but using these to reconstruct a total would be inference."
-      },
-      "next_exact_fact": {
-        "fact_date": "2015-02-13",
-        "shares_outstanding": 167041054,
-        "accession": "0001255474-15-000004",
-        "filed_date": "2015-02-27",
-        "blocker": "Exact total was not public before the target dates."
-      },
-      "pre_cutoff_sources_checked": [
-        {
-          "accession": "0000932471-15-004275",
-          "form": "SC 13G/A",
-          "filed_date": "2015-02-10",
-          "accepted_local": "2015-02-10T14:03:06-05:00",
-          "result": "No explicit issuer-wide shares-outstanding denominator."
-        },
-        {
-          "accession": "0001011438-15-000136",
-          "form": "SC 13G/A",
-          "filed_date": "2015-02-17",
-          "accepted_local": "2015-02-17T16:44:16-05:00",
-          "result": "No explicit issuer-wide shares-outstanding denominator."
-        },
-        {
-          "accession": "0001193125-15-054393",
-          "form": "8-K/A",
-          "filed_date": "2015-02-19",
-          "accepted_local": "2015-02-19T17:20:07-05:00",
-          "result": "Public before all target dates, but pro forma exhibits disclose shares issued in the transaction rather than exact total Whiting shares outstanding; arithmetic reconstruction is prohibited."
-        },
-        {
-          "accession": "0001255474-15-000002",
-          "form": "8-K",
-          "filed_date": "2015-02-25",
-          "accepted_local": "2015-02-25T16:32:37-05:00",
-          "result": "Accepted after the 15:24 cutoff."
-        }
-      ],
-      "resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL"
     }
   ],
   "completion_rule": "G4 is complete only when every required symbol-date is either resolved by admissible exact point-in-time shares evidence or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded rows must remain blank and may not contribute shares outstanding or turnover. The exact-resolved count may increase only if new admissible pre-cutoff evidence is found.",
-  "completion_base_main_sha": "8db2e9c009b3e37723bd1c12f37b612f4ee7aaa8"
+  "completion_base_main_sha": "87af616c0603e15e292dcbb79307e28100ac0f45"
 }
