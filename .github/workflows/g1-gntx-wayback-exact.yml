@@ -1,0 +1,24 @@
+name: G1 GNTX Wayback exact
+on:
+  push:
+    branches: [g1/research-gntx-wayback-exact]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Query exact archived Marketwired release
+        run: |
+          set -euo pipefail
+          for P in \
+            'www.marketwired.com/press-release/gentex-reports-third-quarter-2013-financial-results*' \
+            'www.marketwired.com/press-release/gentex-reports-third-quarter-2013*' \
+            'www.marketwired.com/press-release/gentex-reports-third-quarter-financial-results*'; do
+            echo "QUERY $P"
+            curl -L --max-time 20 --fail --get \
+              --data-urlencode "url=$P" --data-urlencode "from=2013" --data-urlencode "to=2014" \
+              --data-urlencode "output=json" --data-urlencode "filter=statuscode:200" --data-urlencode "collapse=urlkey" \
+              "https://web.archive.org/cdx/search/cdx" || true
+          done
