@@ -1,0 +1,8 @@
+From https://github.com/P00NSMASHER/trading-platform
+ * branch              main       -> FETCH_HEAD
+HEAD is now at 8b2622df Prioritize newest G1 prep branches during controller discovery (#365)
+Traceback (most recent call last):
+  File "/home/runner/work/trading-platform/trading-platform/scripts/g1_batch_0122_generate.py", line 73, in <module>
+    assert item["source_reference"].startswith("https://storage.courtlistener.com/recap/")
+           ~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'source_reference'
