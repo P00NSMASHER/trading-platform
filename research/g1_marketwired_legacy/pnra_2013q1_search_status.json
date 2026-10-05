@@ -1,0 +1,35 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "base_main_sha": "f5d983f6c5d7dbd84ccbf15271a874366cd42888",
+  "event_id": "HEJFE-CCC7747CFBDE893E",
+  "historical_symbol": "PNRA",
+  "owner_worker": 4,
+  "first_documented_trade_local": "2013-04-23 14:25:00",
+  "exact_release_title": "Panera Bread Company Reports Q1 2013 Diluted EPS of $1.64, up 17%",
+  "confirmed_wire_family": "Marketwired",
+  "exact_identity_sources": [
+    "https://www.franchising.com/news/20130424_panera_bread_company_reports_q1_2013_diluted_eps_o.html",
+    "https://www.sec.gov/Archives/edgar/data/724606/000072460613000016/a20130326ex991pressrelease.htm",
+    "https://www.panerabread.com/content/dam/panerabread/documents/press/2013/St-Louis-April-23-2013.pdf"
+  ],
+  "search_families_checked": [
+    "GlobeNewswire migrated Marketwired archive exact-title/date searches",
+    "Franchising.com Marketwired mirror",
+    "official Panera historical PDF",
+    "SEC Exhibit 99.1"
+  ],
+  "exact_publication_clock_status": "NOT_FOUND_THIS_RUN",
+  "rejected_times": [
+    {
+      "value": "2013-04-24 08:30 ET",
+      "reason": "next-day conference call, not publication time"
+    },
+    {
+      "value": "Franchising.com April 24, 2013",
+      "reason": "secondary publication date, not original wire clock"
+    }
+  ],
+  "disposition": "CONTINUE_LEGACY_ARCHIVE_SEARCH",
+  "note": "Do not infer a clock. Marketwired family is confirmed; exact original publication time remains unresolved."
+}
