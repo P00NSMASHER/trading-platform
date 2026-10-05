@@ -2618,6 +2618,14 @@
     "tests/test_g5_control_identity_evidence_stager.py": {
       "expected_sha256": "84d9e3cd213b64833bbb1ae63132dfb79dbf311be63ec671fbda2d525ae548b4",
       "reason": "Regression coverage for G5-only evidence staging, G2-overlap forwarding, no-hint PERMNO establishment from authorized evidence, hint conflicts, out-of-scope evidence, identifier conflicts, and interval coverage."
+    },
+    "src/g5_control_identity_stocknames_lead_expansion.py": {
+      "expected_sha256": "956accb8cdfdd59aa3d7e48de665532ff4f7fbaba6c216b7af7e1d7e09f87062",
+      "reason": "G5 identity acquisition optimization: reuse only already-reconciled symbol-level PERMNO hints as non-evidentiary Stocknames query leads for no-hint dates while preserving exact dated symbol validation and zero readiness promotion."
+    },
+    "tests/test_g5_control_identity_stocknames_lead_expansion.py": {
+      "expected_sha256": "123b25f7709235bc18993026ad9cea7918ab0acad7ec2979377db42146917329",
+      "reason": "Regression coverage for exact date-scope conservation, symbol-level PERMNO acquisition leads, direct-hint precedence, conflict rejection, residual symbol discovery, and zero G5 readiness promotion."
     }
   },
   "schema_version": "2",
