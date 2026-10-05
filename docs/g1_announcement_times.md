@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **84 public exact-time batches / 164 exact-resolved
+The current repository state is **85 public exact-time batches / 165 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -314,3 +314,7 @@ Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-relea
 ### Batch 0116: ACO, KELYA, CMTL, VEEV, CACI, DGI, SWKS, NKE, P, COLM, DGI, POWI, TRAK, SCVL
 
 Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for fourteen Worker-1 events. Every release identity/date is independently corroborated by an exact official SEC Exhibit 99.x, with pinned public press-release archive members used as additional identity cross-checks where available. This advances G1 from 150 exact / 24 reviewed exclusions to 164 exact / 10 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0118: BIO
+
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies the explicit first-public press-release distribution clock for Bio-Rad on 2013-05-07 at 16:15 EDT. Official SEC Exhibit 99.1 independently corroborates the exact release identity, content and date. This advances G1 from 164 exact / 10 reviewed exclusions to 165 exact / 9 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
