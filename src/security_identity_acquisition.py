@@ -97,9 +97,6 @@ def load_identity(path: Path = DEFAULT_IDENTITY) -> dict:
     events = payload.get("events")
     if not isinstance(events, list) or not events:
         raise IdentityAcquisitionError("identity manifest events are empty")
-    state = payload.get("state") or {}
-    if state.get("ready_for_non_synthetic_market_join") is True:
-        raise IdentityAcquisitionError("identity manifest is already ready; no acquisition queue required")
     return payload
 
 
@@ -119,25 +116,28 @@ def build_acquisition(identity: dict, *, identity_sha256: str | None = None) -> 
         if not event_id or not permno or not gvkey or not symbol:
             raise IdentityAcquisitionError(f"event {i}: identity fields are incomplete")
 
-        sec = security_map.setdefault(
-            permno,
-            {
-                "permno": permno,
-                "gvkey": gvkey,
-                "historical_symbol": symbol,
-                "dates": set(),
-                "event_ids": set(),
-            },
-        )
-        if sec["gvkey"] != gvkey or sec["historical_symbol"] != symbol:
-            raise IdentityAcquisitionError(
-                f"PERMNO {permno} maps to conflicting GVKEY/symbol values in the identity manifest"
+        sec = None
+        if unverified:
+            sec = security_map.setdefault(
+                permno,
+                {
+                    "permno": permno,
+                    "gvkey": gvkey,
+                    "historical_symbol": symbol,
+                    "dates": set(),
+                    "event_ids": set(),
+                },
             )
+            if sec["gvkey"] != gvkey or sec["historical_symbol"] != symbol:
+                raise IdentityAcquisitionError(
+                    f"PERMNO {permno} maps to conflicting GVKEY/symbol values in the identity manifest"
+                )
 
         for trade_date in unverified:
             raw_instances += 1
             if not isinstance(trade_date, str) or len(trade_date) != 10:
                 raise IdentityAcquisitionError(f"event {event_id}: invalid unverified trade date")
+            assert sec is not None
             sec["dates"].add(trade_date)
             sec["event_ids"].add(event_id)
 
@@ -206,8 +206,12 @@ def build_acquisition(identity: dict, *, identity_sha256: str | None = None) -> 
             "unique_permno_date_requests": len(queue),
             "duplicate_request_instances_removed": raw_instances - len(queue),
             "unique_permno_count": len(securities),
-            "ready_for_non_synthetic_market_join": False,
-            "reasons": ["stable_id_acquisition_queue_unresolved"],
+            "ready_for_non_synthetic_market_join": len(queue) == 0,
+            "reasons": (
+                []
+                if len(queue) == 0
+                else ["stable_id_acquisition_queue_unresolved"]
+            ),
         },
         "acquisition_lanes": ACQUISITION_LANES,
         "completion_contract": {
