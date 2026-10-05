@@ -3,7 +3,7 @@ name: G1 batch 0098 adaptive exact-main publisher r3 diagnostics
 on:
   push:
     branches:
-      - g1/public-batch-0098-worker-3-sm-main-51d8470-source
+      - g1/public-batch-0098-worker-3-sm-main-8e1ad89-source
   workflow_dispatch:
 
 permissions:
@@ -23,7 +23,7 @@ jobs:
       - name: Checkout publisher source head
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: g1/public-batch-0098-worker-3-sm-main-51d8470-source
+          ref: g1/public-batch-0098-worker-3-sm-main-8e1ad89-source
           fetch-depth: 0
           persist-credentials: true
 
