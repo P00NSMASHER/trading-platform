@@ -148,5 +148,50 @@
       "Public archive datasets containing Business Wire URL plus original publication timestamp metadata"
     ],
     "guardrail": "Do not promote issuer date-only pages, SEC/EDGAR acceptance, BioSpace next-day syndication, secondary Benzinga alerts, scheduled release times, or inferred filename times."
+  },
+  "new_source_family_pass_advfn_marketwatch": {
+    "status": "NO_ADMISSIBLE_CLOCK_RECOVERED",
+    "checked_at": "2026-10-04",
+    "family": "ADVFN/InvestorsHub wire mirrors with second-resolution Last update metadata plus public GitHub MarketWatch/BusinessWire-BZX company snapshots",
+    "targets": [
+      {
+        "event_id": "HEJFE-0BAF70D8CC8F1631",
+        "historical_symbol": "NKE",
+        "event_date": "2015-03-19",
+        "exact_title": "NIKE, Inc. Reports Fiscal 2015 Third Quarter Results",
+        "result": "Exact Business Wire article recovered at ADVFN article 65964543 with matching full release text, but the accessible historical page exposes no explicit publication clock or defensible Last update timestamp. Issuer's approximately 1:15 p.m. PT planned time remains prohibited and is not promoted.",
+        "source": "https://br.advfn.com/noticias/BW/2015/artigo/65964543"
+      },
+      {
+        "event_id": "HEJFE-4DEF5FDB3210E91B",
+        "historical_symbol": "SWKS",
+        "event_date": "2015-01-22",
+        "exact_title": "Skyworks Exceeds Q1 FY15 Revenue and EPS Guidance",
+        "result": "Exact-title ADVFN/InvestorsHub and MarketWatch/BZX searches recovered no target-specific mirror carrying an explicit publication clock. SEC Exhibit 99.1 and date-only MarketScreener history corroborate identity/date only."
+      },
+      {
+        "event_id": "HEJFE-7C93D3838E60926C",
+        "historical_symbol": "CMTL",
+        "event_date": "2014-12-10",
+        "exact_title": "Comtech Telecommunications Corp. Reports First Quarter Fiscal 2015 Results",
+        "result": "Exact-title ADVFN/InvestorsHub and MarketWatch/BZX searches recovered no target-specific timestamp-bearing mirror. SEC exhibits corroborate the December 10, 2014 release identity/date only."
+      },
+      {
+        "event_id": "HEJFE-847F0EFE669B2440",
+        "historical_symbol": "P",
+        "event_date": "2015-02-05",
+        "exact_title": "Pandora Reports Q4 and Full Year 2014 Financial Results",
+        "result": "Exact-title ADVFN/InvestorsHub and MarketWatch/BZX searches recovered no target-specific timestamp-bearing mirror. SEC Exhibit 99.1 corroborates identity/date only; conference-call and filing times remain rejected."
+      },
+      {
+        "event_id": "HEJFE-09EF6AD227D3AC5D",
+        "historical_symbol": "DGI",
+        "event_date": "2012-07-31",
+        "exact_title": "DigitalGlobe Announces Second Quarter 2012 Results",
+        "result": "Exact-title ADVFN/InvestorsHub and MarketWatch/BZX searches recovered no target-specific timestamp-bearing mirror. Existing issuer/SEC evidence remains date-only; conference-call and filing times remain rejected."
+      }
+    ],
+    "guardrail": "An ADVFN article body without an explicit Last update/publication clock is not admissible. No scheduled/approximate release time, secondary alert, EDGAR acceptance, neighboring-release precedent, archive capture time, or inferred timezone is promoted.",
+    "next": "Do not repeat these five against the identified ADVFN/MarketWatch files. Continue only if a new snapshot/file or another genuinely new timestamp-bearing source family appears."
   }
 }
