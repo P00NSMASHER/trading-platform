@@ -84,8 +84,8 @@ jobs:
           spec_path = Path("data/public/metadata/g1_public_batch_0113_integration_spec.json")
           spec = json.loads(spec_path.read_text(encoding="utf-8"))
           spec["base_main_sha"] = base
-          spec["expected_exact_resolved"] = 137
-          spec["expected_reviewed_excluded"] = 37
+          spec["expected_exact_resolved"] = 150
+          spec["expected_reviewed_excluded"] = 24
           spec_path.write_text(json.dumps(spec, indent=2, sort_keys=True) + "\n", encoding="utf-8")
           PY
 
