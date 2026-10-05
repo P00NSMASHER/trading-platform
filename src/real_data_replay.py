@@ -11,6 +11,7 @@ import baseline_engine as baseline
 import coverage_planner as coverage_planner
 import evaluation_release_controller as release_controller
 import feature_engine as feature_engine
+import g5_match_quality_gate as g5_match_quality
 import graph_challenger_harness as challenger_harness
 import graph_feature_engine as graph_features
 import historical_market_backfill as market_backfill
@@ -281,6 +282,7 @@ def run_replay(
     feature_manifest: dict[str, Any] | None = None
     graph_manifest: dict[str, Any] | None = None
     match_manifest: dict[str, Any] | None = None
+    match_quality_ready = False
     challenger_manifest: dict[str, Any] | None = None
     release_assessment: dict[str, Any] | None = None
 
@@ -339,10 +341,43 @@ def run_replay(
             output_dir=match_dir,
         )
         stages["matched_controls"] = _stage("READY", outputs=match_manifest.get("outputs") or {})
+        try:
+            match_quality = g5_match_quality.build(
+                historical_events_path=events,
+                matched_controls_path=match_dir / "matched_controls.csv",
+                match_events_path=match_dir / "match_events.csv",
+                match_balance_path=match_dir / "match_balance.csv",
+                match_manifest_path=match_dir / "match_manifest.json",
+                output_path=match_dir / "g5_match_quality_gate.json",
+            )
+            match_quality_ready = bool(
+                match_quality.get("ready_for_g5_model_evaluation")
+            )
+            stages["match_quality"] = _stage(
+                "READY" if match_quality_ready else "BLOCKED",
+                event_count=match_quality.get("event_count"),
+                matched_control_row_count=match_quality.get(
+                    "matched_control_row_count"
+                ),
+                hard_abs_smd_max=match_quality.get("hard_abs_smd_max"),
+                preferred_smd_violation_covariates=match_quality.get(
+                    "preferred_smd_violation_covariates"
+                ),
+            )
+        except Exception as exc:
+            stages["match_quality"] = _stage(
+                "BLOCKED",
+                reason="g5_match_quality_gate_failed",
+                detail=str(exc),
+            )
     else:
         stages["matched_controls"] = _stage(
             "DEPENDENCY_BLOCKED",
             reason="control_metadata_not_supplied" if control_metadata is None else "features_not_ready",
+        )
+        stages["match_quality"] = _stage(
+            "DEPENDENCY_BLOCKED",
+            reason="matched_controls_not_ready",
         )
 
     market_release = _market_release_readiness(market_manifest)
@@ -353,6 +388,7 @@ def run_replay(
         and bool(readiness.get("ready_g5_model_evaluation_controls"))
         and bool(quality.get("quality_cleared_for_non_synthetic_model_evaluation"))
         and match_manifest is not None
+        and match_quality_ready
         and graph_manifest is not None
         and champion_bundle is not None and champion_bundle.exists()
         and champion_training_manifest is not None and champion_training_manifest.exists()
@@ -378,6 +414,9 @@ def run_replay(
             metadata_readiness=metadata_dir / "metadata_readiness_summary.json",
             metadata_quality=metadata_dir / "metadata_quality_summary.json",
             matched_controls=output_dir / "matches" / "matched_controls.csv",
+            match_events=output_dir / "matches" / "match_events.csv",
+            match_balance=output_dir / "matches" / "match_balance.csv",
+            match_manifest=output_dir / "matches" / "match_manifest.json",
             base_features=output_dir / "features" / "feature_vectors.csv",
             graph_features=output_dir / "graph_features" / "graph_feature_vectors.csv",
             champion_bundle=champion_bundle,
