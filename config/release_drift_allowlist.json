@@ -2570,6 +2570,14 @@
     "tests/test_g5_control_identity_requirements.py": {
       "expected_sha256": "aaa5f4bf651f59266f52bba33ccaf063e2496599d5941af6c0c5a2017bfc25c3",
       "reason": "Regression coverage locks 216 primary controls, 51 unique exact-date SampleFirms identity leads, 165 primary mappings still missing exact-date public mapping, G2 identity reuse/overlap reconciliation, and zero automatic G5 readiness promotion."
+    },
+    "src/g5_control_identity_stocknames_handoff.py": {
+      "expected_sha256": "5b30c3ad89c517712c796c573117c7a95d9bb75c8dfa4dafe9f46aeedf1165de",
+      "reason": "G5 control identity handoff: convert unresolved rows with consistent canonical or exact-date SampleFirms PERMNO hints into the existing authorized stocknames adapter queue schema while keeping no-hint rows fail-closed and treating hints as non-evidence."
+    },
+    "tests/test_g5_control_identity_stocknames_handoff.py": {
+      "expected_sha256": "f7073613486fcc25ddcacf6bba7123dd8884fdc42445c50b5b4f377d66b3b1dc",
+      "reason": "Regression coverage for real G5 identity queue reconciliation, direct compatibility with the authorized stocknames adapter, PERMNO hint conflict rejection, no-hint fail-closed handling, and zero readiness/release promotion."
     }
   },
   "schema_version": "2",
