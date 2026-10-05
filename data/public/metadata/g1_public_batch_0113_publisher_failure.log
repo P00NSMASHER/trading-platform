@@ -1,0 +1,54 @@
+Attempt 1: syncing to latest main
+From https://github.com/P00NSMASHER/trading-platform
+ * branch              main       -> FETCH_HEAD
+HEAD is now at 828810d4 G1: recover 8 court public-distribution clocks (batch 0105) (#358)
+{
+  "exact": 150,
+  "reviewed_excluded": 24,
+  "new_events": [
+    "HEJFE-263620F13A6443DD",
+    "HEJFE-EFFA194386ABDD28",
+    "HEJFE-E575622C8FDAB71F",
+    "HEJFE-749FFC4028DF7B1C",
+    "HEJFE-350B3481A9CBBF0E"
+  ]
+}
+.....................F.....................................              [100%]
+=================================== FAILURES ===================================
+_______________ test_explicit_research_priorities_head_the_queue _______________
+
+    def test_explicit_research_priorities_head_the_queue():
+        manifest = g1a.build_manifest()
+>       assert [row["historical_symbol"] for row in manifest["work_queue"][:5]] == [
+            "NKE", "VMW", "EW", "DGI", "PNRA"
+        ]
+E       AssertionError: assert ['NKE', 'EW',...'PNRA', 'ACO'] == ['NKE', 'VMW'...'DGI', 'PNRA']
+E         
+E         At index 1 diff: 'EW' != 'VMW'
+E         
+E         Full diff:
+E           [
+E               'NKE',
+E         -     'VMW',
+E               'EW',
+E               'DGI',
+E               'PNRA',
+E         +     'ACO',
+E           ]
+
+tests/test_g1_acquisition_manifest.py:91: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_g1_acquisition_manifest.py::test_explicit_research_priorities_head_the_queue - AssertionError: assert ['NKE', 'EW',...'PNRA', 'ACO'] == ['NKE', 'VMW'...'DGI', 'PNRA']
+  
+  At index 1 diff: 'EW' != 'VMW'
+  
+  Full diff:
+    [
+        'NKE',
+  -     'VMW',
+        'EW',
+        'DGI',
+        'PNRA',
+  +     'ACO',
+    ]
+1 failed, 58 passed in 0.59s
