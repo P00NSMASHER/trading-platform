@@ -48,20 +48,25 @@ def _parse_date(value: str, *, label: str) -> str:
         ) from exc
 
 
-def _event_counts(events_path: Path) -> dict[str, int]:
+def _event_context(events_path: Path) -> tuple[dict[str, int], dict[str, Any]]:
     fields, rows = _read_csv(events_path)
     if "first_documented_illicit_trade_ts" not in fields:
         raise G5ControlActivationError(
             "historical events missing first_documented_illicit_trade_ts"
         )
     counts: dict[str, int] = {}
+    cutoffs: dict[str, Any] = {}
     for row_no, row in enumerate(rows, 2):
-        value = row["first_documented_illicit_trade_ts"][:10]
-        trade_date = _parse_date(value, label=f"historical event row {row_no}")
+        raw_ts = row["first_documented_illicit_trade_ts"]
+        trade_date = _parse_date(raw_ts[:10], label=f"historical event row {row_no}")
+        cutoff = resolver._event_trade_dt(raw_ts)
         counts[trade_date] = counts.get(trade_date, 0) + 1
+        prior = cutoffs.get(trade_date)
+        if prior is None or cutoff < prior:
+            cutoffs[trade_date] = cutoff
     if not counts:
         raise G5ControlActivationError("historical events contain no event dates")
-    return counts
+    return counts, cutoffs
 
 
 def _load_current_exclusions(
@@ -133,6 +138,7 @@ def _load_source_manifest(
     manifest_path: Path,
     *,
     required_event_dates: set[str],
+    event_cutoffs: dict[str, Any],
     currently_excluded_dates: set[str],
     activated_dates: set[str],
     existing_source_ids: set[str],
@@ -210,12 +216,19 @@ def _load_source_manifest(
 
         delim = resolver._delim(delimiter)
         fields, rows = _read_csv(source_path, delimiter=delim, encoding=encoding)
-        mapped_required = [
-            str(column_map["event_date"]),
-            str(column_map["historical_symbol"]),
-            str(column_map.get("effective_ts_utc") or column_map.get("available_at")),
+        date_column = str(column_map["event_date"])
+        symbol_column = str(column_map["historical_symbol"])
+        availability_column = str(
+            column_map.get("effective_ts_utc") or column_map.get("available_at")
+        )
+        declared_covariates = [
+            covariate
+            for covariate in resolver.CONTROL_COVARIATES
+            if covariate in column_map
         ]
-        missing_columns = [name for name in mapped_required if name not in fields]
+        mapped_required = [date_column, symbol_column, availability_column]
+        mapped_required.extend(str(column_map[covariate]) for covariate in declared_covariates)
+        missing_columns = sorted({name for name in mapped_required if name not in fields})
         if missing_columns:
             raise G5ControlActivationError(
                 f"control source {source_id}: data file missing mapped columns {missing_columns}"
@@ -223,7 +236,6 @@ def _load_source_manifest(
         if not rows:
             raise G5ControlActivationError(f"control source {source_id}: data file is empty")
 
-        date_column = str(column_map["event_date"])
         source_dates: set[str] = set()
         for row_no, row in enumerate(rows, 2):
             event_date = _parse_date(
@@ -237,6 +249,23 @@ def _load_source_manifest(
             if event_date in currently_excluded_dates and event_date not in activated_dates:
                 raise G5ControlActivationError(
                     f"control source {source_id}: contains evidence for still-excluded date {event_date}"
+                )
+            symbol = str(row.get(symbol_column, "")).strip().upper()
+            if not symbol:
+                raise G5ControlActivationError(
+                    f"control source {source_id} row {row_no}: historical symbol is blank"
+                )
+            try:
+                available = resolver._parse_aware(
+                    row.get(availability_column, ""),
+                    field=f"control source {source_id} row {row_no} availability",
+                    default_timezone=timezone,
+                )
+            except ValueError as exc:
+                raise G5ControlActivationError(str(exc)) from exc
+            if available > event_cutoffs[event_date]:
+                raise G5ControlActivationError(
+                    f"control source {source_id} row {row_no}: availability is after first event cutoff"
                 )
             source_dates.add(event_date)
         observed_dates.update(source_dates)
@@ -287,7 +316,7 @@ def build_activation_contract(
     base_contract: Path = DEFAULT_BASE_CONTRACT,
     events_path: Path = DEFAULT_EVENTS,
 ) -> dict[str, Any]:
-    event_counts = _event_counts(events_path)
+    event_counts, event_cutoffs = _event_context(events_path)
     required_dates = set(event_counts)
     raw, exclusion_spec, current_receipt_path, current_exclusions = _load_current_exclusions(
         base_contract,
@@ -312,6 +341,7 @@ def build_activation_contract(
     staged_sources, source_audit, _ = _load_source_manifest(
         source_manifest,
         required_event_dates=required_dates,
+        event_cutoffs=event_cutoffs,
         currently_excluded_dates=set(current_exclusions),
         activated_dates=activated,
         existing_source_ids=existing_source_ids,

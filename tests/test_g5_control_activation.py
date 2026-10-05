@@ -277,3 +277,30 @@ def test_quality_validation_requires_zero_control_quarantine(tmp_path: Path):
             tmp_path,
             remaining_excluded_date_count=71,
         )
+
+
+def test_source_availability_after_first_event_cutoff_fails_closed(tmp_path: Path):
+    data = tmp_path / "late-control.csv"
+    fields = ["event_date", "historical_symbol", "available_at", "sector"]
+    with data.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        writer.writerow(
+            {
+                "event_date": "2014-12-15",
+                "historical_symbol": "LATE",
+                "available_at": "2014-12-15T23:59:59-05:00",
+                "sector": "TECH",
+            }
+        )
+    manifest = _manifest(tmp_path, data)
+
+    with pytest.raises(activation.G5ControlActivationError, match="after first event cutoff"):
+        activation.build_activation_contract(
+            source_manifest=manifest,
+            activate_dates=["2014-12-15"],
+            output_contract=tmp_path / "active-late.json",
+            replacement_exclusions_output=tmp_path / "remaining-late.json",
+            base_contract=ROOT / "config/metadata_sources.public_progress.json",
+            events_path=ROOT / "data/processed/historical_events.csv",
+        )

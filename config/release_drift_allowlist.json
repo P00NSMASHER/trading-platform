@@ -2620,11 +2620,11 @@
       "reason": "Regression coverage for G5-only evidence staging, G2-overlap forwarding, no-hint PERMNO establishment from authorized evidence, hint conflicts, out-of-scope evidence, identifier conflicts, and interval coverage."
     },
     "src/g5_control_activation.py": {
-      "expected_sha256": "6a4bf320a89ef0006070bb47d1ac12bc7450f1f75307daa900d6acebe6114c91",
+      "expected_sha256": "a1c805c150054e57570dd59f88920e3c1fa6a0742998b47564b959eb784f5710",
       "reason": "G5 control activation handoff: stage hash-bound authorized control sources, retire only explicitly selected reviewed exclusions in a noncanonical contract, and require canonical resolver/quality validation before any control or model-evaluation readiness claim."
     },
     "tests/test_g5_control_activation.py": {
-      "expected_sha256": "86561d271146c3d8e2857824b7f3aec96408e44fd43e32776aa74e3870eefe50",
+      "expected_sha256": "9b2ac7822acfccb7fc025a51f8e8d87c7b61d096b1cbd92a836ffc9e08f3111a",
       "reason": "Regression coverage for staged partial/exact G5 activation, source scope/hash/license enforcement, exclusion shrinkage, and the distinction between accounted-for controls and 72/72 model-evaluation-ready controls."
     }
   },
