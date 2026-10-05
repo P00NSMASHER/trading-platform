@@ -724,21 +724,23 @@ def _fuse_control_candidate_rows(
             sym = (_get(row, src, "historical_symbol") or _get(row, src, "symbol")).upper()
             if not sym:
                 continue
-            bucket = candidates.setdefault(
-                sym,
-                {
-                    "source_ids": set(),
-                    "timestamped_rows": 0,
-                    "latest": {},
-                    "conflicted_covariates": set(),
-                },
-            )
-            bucket["source_ids"].add(src.source_id)
-
             avail = _get(row, src, "effective_ts_utc") or _get(row, src, "available_at")
             if not avail:
-                # Retrospective/undated universe rows can enumerate a candidate but
-                # cannot supply genuine point-in-time values.
+                # Only the explicitly retrospective SampleFirms universe may
+                # enumerate an undated candidate.  Other undated control rows are
+                # inadmissible, rather than accidentally inflating candidate counts.
+                if src.source_family != "samplefirms_research_universe":
+                    continue
+                bucket = candidates.setdefault(
+                    sym,
+                    {
+                        "source_ids": set(),
+                        "timestamped_rows": 0,
+                        "latest": {},
+                        "conflicted_covariates": set(),
+                    },
+                )
+                bucket["source_ids"].add(src.source_id)
                 continue
             try:
                 available_dt = _parse_aware(
@@ -751,6 +753,16 @@ def _fuse_control_candidate_rows(
             if available_dt > cutoff:
                 continue
 
+            bucket = candidates.setdefault(
+                sym,
+                {
+                    "source_ids": set(),
+                    "timestamped_rows": 0,
+                    "latest": {},
+                    "conflicted_covariates": set(),
+                },
+            )
+            bucket["source_ids"].add(src.source_id)
             bucket["timestamped_rows"] += 1
             for covariate in CONTROL_COVARIATES:
                 value = _get(row, src, covariate)
