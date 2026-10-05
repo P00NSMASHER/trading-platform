@@ -9,6 +9,7 @@
     "features",
     "graph_features",
     "matched_controls",
+    "match_quality",
     "challenger",
     "release"
   ],
@@ -90,6 +91,10 @@
       ],
       "status": "BLOCKED_SYNTHETIC_SOURCE_PRESENT",
       "synthetic_source_count": 5
+    },
+    "match_quality": {
+      "reason": "matched_controls_not_ready",
+      "status": "DEPENDENCY_BLOCKED"
     },
     "matched_controls": {
       "reason": "control_metadata_not_supplied",

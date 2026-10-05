@@ -560,12 +560,12 @@
       "reason": "Materialize and byte-verify deterministic vendor-specific G2_CHAMPION_MINIMUM request artifacts; planning only, no vendor call, purchase, authorization claim, or G2 coverage change."
     },
     "data/processed/real_data_replay/real_data_replay_status.json": {
-      "expected_sha256": "ffe7090fc2a35384f78b7dc5f008637a27fa369b631902fe5a711f49a6e6fdb7",
-      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
+      "expected_sha256": "5a0c89563d7866b52e79ea48b91d54fc76156e08b882560b3d9c931dfd54b497",
+      "reason": "G5 release hardening: deterministic real-data replay receipt regenerated after adding the fail-closed match-quality stage; release remains blocked while real G2/G5 evidence is incomplete."
     },
     "data/processed/research_receipt_bundle.json": {
-      "expected_sha256": "87e67f3c169f4f9c6ab86f70bc53b9eb91d28134371a1bd6699ff4be9c961d7b",
-      "reason": "G4 exact WLL repair: official SEC Form 8-K accession 0001193125-15-001735 supplies 166,889,152 post-Kodiak shares outstanding as of 2014-12-31, public 2015-01-05 16:02:59 ET; canonical receipts regenerated, residual exact-completion scope reduced to ACO x10 + CGNX x5, with no lookahead or inferred totals."
+      "expected_sha256": "fef223f512bd26a743654f2ffff43c3ea50604abafd2dede28d8395341ab7b97",
+      "reason": "G5 release hardening: deterministic research receipt bundle regenerated to bind the updated real-data replay receipt after match-quality gating, with no evidence or release-readiness promotion."
     },
     "data/processed/security_identity_real/security_identity_acquisition_queue.csv": {
       "expected_sha256": "30b57766be7fd24d92d1332876118d22c542d54b4db6d2259b156eae66daa139",
