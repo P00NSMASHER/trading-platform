@@ -1883,6 +1883,10 @@
       "expected_sha256": "eb420645264d64efa72683cb3cb58eaffb091e869d87c8e07f9339b965f5ac16",
       "reason": "G5 control-history planning: expand each primary candidate to the event point, 21 eligible same-minute normalization sessions, 22 prior daily-close sessions, required point-in-time shares, and market source-date rows while measuring overlap with frozen G2."
     },
+    "src/g5_control_identity_requirements.py": {
+      "expected_sha256": "0c9977f983829de424fea94773bdd8f168cbea8f5fe19e9182dd1792d2e4d00a",
+      "reason": "G5 control identity planning: reconcile the entire primary-control history footprint against canonical G2 verified/unverified identity, record exact-date public SampleFirms PERMNO/GVKEY mappings only as admission leads, and emit a fail-closed stable-ID acquisition queue."
+    },
     "src/g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "2d4f8205f188b29a1521f2a8e2f5cab65fa564e04f05669c741e001cd777ef73",
       "reason": "G5 derived market metadata intake: compute only strictly pre-cutoff price, market cap, 21-prior-day volatility, same-minute baseline volume/turnover/spread, option contract-volume liquidity, and pre-event return from real G2/G4 inputs while keeping outputs non-evidence until canonical resolver gates pass."
@@ -2474,6 +2478,10 @@
     "tests/test_g5_control_history_requirements.py": {
       "expected_sha256": "f498f0944c6d16987af3f7263e5a4570ef97873d41eb1a916e107f31192415e1",
       "reason": "Regression coverage for event plus 21-session normalization and 22-session close history, market/share requirements, frozen-G2 overlap accounting, minute-role semantics, and the real 216-candidate queue."
+    },
+    "tests/test_g5_control_identity_requirements.py": {
+      "expected_sha256": "aaa5f4bf651f59266f52bba33ccaf063e2496599d5941af6c0c5a2017bfc25c3",
+      "reason": "Regression coverage locks 216 primary controls, 51 unique exact-date SampleFirms identity leads, 165 primary mappings still missing exact-date public mapping, G2 identity reuse/overlap reconciliation, and zero automatic G5 readiness promotion."
     },
     "tests/test_g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "0d414cff9384f4b7b08548bee4ef8ef89210cf114d62445f8baaa6e049496f8c",
