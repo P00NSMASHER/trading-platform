@@ -1,0 +1,63 @@
+{
+  "schema_version": "1",
+  "reviewed_on": "2026-10-05",
+  "base_main_sha": "f5d983f6c5d7dbd84ccbf15271a874366cd42888",
+  "source": {
+    "court_case": "United States v. Vitaly Korchevsky, 1:15-cr-00381 (E.D.N.Y.)",
+    "court_document": "367-2",
+    "gx8002_artifact_id": 11326693734,
+    "gx8002_artifact_sha256": "254e78dcb6218e3cd31cc9bf50a6ec639c966a037957629912af181432a6990e",
+    "gx8002_workflow_run_id": 37268374589,
+    "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+    "normalization_reference": "Reuse the same GX 8002 Eastern EST/EDT normalization already merged in canonical batches 0100, 0113, and 0114; provider codes BW/MW are not timezones."
+  },
+  "findings": [
+    {
+      "event_id": "HEJFE-81F188C0D790FE70",
+      "symbol": "CREE",
+      "owner_worker": 2,
+      "status": "valid_prep_ready",
+      "gx8002_row_id": "1811",
+      "raw_row": "1811 CREE 2015 1/20/15 1/20/15 15:39 1/21/15 9:34 1/20/15 11:52 1/20/15 16:01 BW",
+      "court_distribution_local": "2015-01-20T16:01:00-05:00",
+      "canonical_first_event_time": "2015-01-20T15:39:00-05:00",
+      "gap_seconds": 1320,
+      "wire_source_code": "BW",
+      "release_title": "Cree Reports Financial Results for the Second Quarter of Fiscal Year 2015",
+      "sec_exhibit": "https://www.sec.gov/Archives/edgar/data/895419/000089541915000004/ex9912qfy2015.htm",
+      "hacked_earnings_member": "2015/QTR1/78875_20150120_0.txt",
+      "notes": "Mapper convenience headline is a neighboring layout fragment and must not be used. Court row keys plus SEC exhibit and pinned release member uniquely identify the release."
+    },
+    {
+      "event_id": "HEJFE-CCC7747CFBDE893E",
+      "symbol": "PNRA",
+      "owner_worker": 4,
+      "status": "valid_special_candidate",
+      "gx8002_row_id": "1657",
+      "raw_row": "1657 PNRA 2013 4/23/13 4/23/13 15:00 4/24/13 10:01 4/23/13 13:05 4/23/13 16:00 MW ... earnings Diluted EPS of $1.64, up 17%",
+      "court_distribution_local": "2013-04-23T16:00:00-04:00",
+      "canonical_first_event_time": "2013-04-23T14:25:00-04:00",
+      "gap_seconds": 5700,
+      "wire_source_code": "MW",
+      "release_title": "Panera Bread Company Reports Q1 2013 diluted EPS of $1.64, up 17%",
+      "sec_exhibit": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000016/a20130326ex991pressrelease.htm",
+      "issuer_pdf": "https://www.panerabread.com/content/dam/panerabread/documents/press/2013/St-Louis-April-23-2013.pdf",
+      "hacked_earnings_member": "2013/QTR2/76695_20130423_1.txt",
+      "notes": "The court row first-order field is 15:00 while the canonical event's first time is 14:25. The mismatch is confined to the order field. Ticker, exact release date, exact title/content, SEC exhibit, and pinned release member uniquely identify the same press release. Use the court row only for release-level distribution time and the canonical event's own time only for chronology. Add focused regression coverage for this intentional mismatch."
+    },
+    {
+      "event_id": "HEJFE-BD3F577ADD90D512",
+      "symbol": "GNTX",
+      "owner_worker": 0,
+      "status": "court_path_unavailable",
+      "hacked_earnings_member": "2013/QTR4/38659_20131022_0.txt",
+      "release_title": "Gentex Reports Third Quarter 2013 Financial Results",
+      "notes": "GX 8002 artifact contains zero same-symbol/year rows for GNTX 2013. Continue independent exact-clock discovery; date-only release pages and conference-call timing are not substitutes."
+    }
+  ],
+  "duplicate_avoidance": {
+    "worker1_batch_0116": "already prepared; not revalidated",
+    "worker3_bio_batch_0118": "already prepared; not revalidated",
+    "worker2_batch_0112": "already prepared but stale; no duplicate package created"
+  }
+}
