@@ -1,0 +1,31 @@
+{
+  "schema_version": "1",
+  "worker": 1,
+  "batch": 116,
+  "base_main_sha": "f5d983f6c5d7dbd84ccbf15271a874366cd42888",
+  "source_branch": "g1/source-0116-worker-1-court14-f5d983f",
+  "source_prep_head": "ec9c5c816ccd2a382610f24fbd24a41925a370c8",
+  "expected_exact_resolved": 164,
+  "expected_reviewed_excluded": 10,
+  "event_ids": [
+    "HEJFE-AC78A2434E4AE8FB",
+    "HEJFE-5089F8E69B6BC646",
+    "HEJFE-7C93D3838E60926C",
+    "HEJFE-EBC49B9A024181AD",
+    "HEJFE-B9C8B3D0EF3DCB5E",
+    "HEJFE-09EF6AD227D3AC5D",
+    "HEJFE-4DEF5FDB3210E91B",
+    "HEJFE-0BAF70D8CC8F1631",
+    "HEJFE-847F0EFE669B2440",
+    "HEJFE-FBFFFD99898188CF",
+    "HEJFE-A76C746507C0D9AF",
+    "HEJFE-8A0517D50278EAE4",
+    "HEJFE-4D7E68AD113380B3",
+    "HEJFE-D6BA56FA6D57427E"
+  ],
+  "court_artifact_id": 11326693734,
+  "court_artifact_sha256": "254e78dcb6218e3cd31cc9bf50a6ec639c966a037957629912af181432a6990e",
+  "controller_main_sha": "f5d983f6c5d7dbd84ccbf15271a874366cd42888",
+  "publisher_triggered_at": "2026-10-05T11:42:00Z",
+  "publisher_trigger_nonce": "worker1-20261005T1142Z"
+}
