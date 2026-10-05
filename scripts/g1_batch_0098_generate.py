@@ -26,7 +26,7 @@ old_exact={r["event_id"]:r for r in rows(md/"announcement_resolutions.csv") if r
 assert len(events)==174 and len(old_exact)==122
 exclusion_path=md/"g1_final_timing_exclusions.json"
 exclusions=load(exclusion_path)
-assert len(exclusions["exclusions"])==51
+assert len(exclusions["exclusions"])==52
 
 batch=Path("data/public/metadata/g1_announcement_times_batch_0098.csv")
 evidence_path=Path("data/public/metadata/g1_public_batch_0098_evidence.json")
