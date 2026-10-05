@@ -1,0 +1,29 @@
+name: G1 Batch 0105 Worker 0 Publisher
+on:
+  push:
+    branches:
+      - g1/integrate-0105-worker-0-41e0713
+permissions:
+  contents: write
+jobs:
+  publish:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: g1/integrate-0105-worker-0-41e0713
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate deterministic G1 batch 0105
+        run: |
+          python scripts/g1_batch_0105_generate.py
+      - name: Commit generated canonical candidate
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "G1: recover 8 court clocks, 145 exact / 29 excluded [g1-generated]"
+          git push origin HEAD:g1/integrate-0105-worker-0-41e0713
