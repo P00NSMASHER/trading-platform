@@ -70,6 +70,78 @@ def load_evidence_files(paths: list[Path]) -> tuple[list[dict[str, str]], list[d
     return rows, inputs
 
 
+def evidence_rows_from_manifest(manifest: dict) -> list[dict[str, str]]:
+    by_id: dict[str, dict[str, str]] = {}
+    for event in manifest.get("events") or []:
+        permno = str(event.get("permno") or "")
+        symbol = str(event.get("historical_symbol") or "").upper()
+        dated = event.get("baseline_identity_evidence") or {}
+        if not isinstance(dated, dict):
+            raise SecurityIdentityStagingError(
+                f"event {event.get('event_id')}: baseline_identity_evidence must be an object"
+            )
+        for trade_date, entries in dated.items():
+            if not isinstance(entries, list):
+                raise SecurityIdentityStagingError(
+                    f"event {event.get('event_id')}/{trade_date}: evidence must be a list"
+                )
+            for raw in entries:
+                row = {
+                    "evidence_id": str(raw.get("evidence_id") or "").strip(),
+                    "permno": permno,
+                    "historical_symbol": symbol,
+                    "market_identifier": str(raw.get("market_identifier") or "").strip(),
+                    "valid_from": str(raw.get("valid_from") or "").strip(),
+                    "valid_through": str(raw.get("valid_through") or "").strip(),
+                    "evidence_lane": str(raw.get("evidence_lane") or "").strip(),
+                    "source_reference": str(raw.get("source_reference") or "").strip(),
+                    "authorization_reference": str(
+                        raw.get("authorization_reference") or ""
+                    ).strip(),
+                    "research_use_only": "1",
+                }
+                evidence_id = row["evidence_id"]
+                if not evidence_id:
+                    raise SecurityIdentityStagingError(
+                        f"event {event.get('event_id')}/{trade_date}: evidence_id is blank"
+                    )
+                previous = by_id.get(evidence_id)
+                if previous is not None and previous != row:
+                    raise SecurityIdentityStagingError(
+                        f"evidence_id {evidence_id} is reused with conflicting fields"
+                    )
+                by_id[evidence_id] = row
+
+    baseline_verified = int(
+        (manifest.get("state") or {}).get("baseline_identity_verified_count", 0) or 0
+    )
+    if baseline_verified > 0 and not by_id:
+        raise SecurityIdentityStagingError(
+            "canonical manifest reports verified baseline identity without embedded evidence"
+        )
+    return [by_id[key] for key in sorted(by_id)]
+
+
+def merge_evidence_rows(*groups: list[dict[str, str]]) -> list[dict[str, str]]:
+    by_id: dict[str, dict[str, str]] = {}
+    for rows in groups:
+        for raw in rows:
+            row = {
+                str(key): str(value or "").strip()
+                for key, value in raw.items()
+            }
+            evidence_id = row.get("evidence_id", "")
+            if not evidence_id:
+                raise SecurityIdentityStagingError("identity evidence_id must be nonblank")
+            previous = by_id.get(evidence_id)
+            if previous is not None and previous != row:
+                raise SecurityIdentityStagingError(
+                    f"evidence_id {evidence_id} conflicts with previously staged evidence"
+                )
+            by_id[evidence_id] = row
+    return [by_id[key] for key in sorted(by_id)]
+
+
 def build_staging_from_rows(
     *,
     events: list[dict[str, str]],
@@ -78,6 +150,8 @@ def build_staging_from_rows(
     evidence_rows: list[dict[str, str]],
     evidence_inputs: list[dict[str, object]] | None = None,
     source_sha256: dict[str, str] | None = None,
+    prior_canonical_evidence_row_count: int = 0,
+    new_evidence_row_count: int | None = None,
 ) -> dict[str, object]:
     candidate_manifest = gate.build_manifest_from_rows(
         events,
@@ -132,6 +206,12 @@ def build_staging_from_rows(
         "coverage_promoted": False,
         "evidence_inputs": list(evidence_inputs or []),
         "evidence_row_count": len(evidence_rows),
+        "prior_canonical_evidence_row_count": prior_canonical_evidence_row_count,
+        "new_evidence_row_count": (
+            len(evidence_rows) - prior_canonical_evidence_row_count
+            if new_evidence_row_count is None
+            else new_evidence_row_count
+        ),
         "candidate_manifest_sha256": manifest_sha256,
         "candidate_state": {
             "event_date_identity_verified_count": event_verified,
@@ -167,23 +247,67 @@ def build_staging(
     events_path: Path = gate.DEFAULT_EVENTS,
     requirements_path: Path = gate.DEFAULT_REQUIREMENTS,
     listing_path: Path = gate.DEFAULT_LISTING,
+    current_manifest_path: Path = gate.DEFAULT_OUTPUT,
 ) -> dict[str, object]:
-    evidence_rows, evidence_inputs = load_evidence_files(evidence_paths)
+    new_evidence_rows, new_evidence_inputs = load_evidence_files(evidence_paths)
+    events = _read_csv(events_path)
+    requirements = _read_csv(requirements_path)
+    listings = _read_csv(listing_path)
+
+    current_manifest_path = current_manifest_path.expanduser().resolve()
+    if not current_manifest_path.is_file():
+        raise SecurityIdentityStagingError(
+            f"current canonical identity manifest does not exist: {current_manifest_path}"
+        )
+    current_text = current_manifest_path.read_text(encoding="utf-8")
+    current_manifest = json.loads(current_text)
+    prior_evidence_rows = evidence_rows_from_manifest(current_manifest)
+
+    if prior_evidence_rows:
+        current_source_hashes = (
+            (current_manifest.get("sources") or {}).get("sha256") or {}
+        )
+        rebuilt_current = gate.build_manifest_from_rows(
+            events,
+            requirements,
+            listings,
+            source_sha256=current_source_hashes,
+            identity_evidence=prior_evidence_rows,
+        )
+        if gate.render_manifest(rebuilt_current) != current_text:
+            raise SecurityIdentityStagingError(
+                "current canonical identity manifest does not reproduce from embedded evidence"
+            )
+
+    evidence_rows = merge_evidence_rows(prior_evidence_rows, new_evidence_rows)
+    current_sha256 = _sha256_path(current_manifest_path)
+    evidence_inputs = [
+        {
+            "path": str(current_manifest_path),
+            "sha256": current_sha256,
+            "row_count": len(prior_evidence_rows),
+            "role": "prior_canonical_identity_manifest",
+        },
+        *new_evidence_inputs,
+    ]
     source_sha256 = {
         "historical_events": _sha256_path(events_path),
         "symbol_date_requirements": _sha256_path(requirements_path),
         "event_date_listing_evidence": _sha256_path(listing_path),
+        "prior_canonical_identity_manifest": current_sha256,
     }
-    for index, item in enumerate(evidence_inputs, 1):
+    for index, item in enumerate(new_evidence_inputs, 1):
         source_sha256[f"identity_evidence_{index:02d}"] = str(item["sha256"])
 
     return build_staging_from_rows(
-        events=_read_csv(events_path),
-        requirements=_read_csv(requirements_path),
-        listings=_read_csv(listing_path),
+        events=events,
+        requirements=requirements,
+        listings=listings,
         evidence_rows=evidence_rows,
         evidence_inputs=evidence_inputs,
         source_sha256=source_sha256,
+        prior_canonical_evidence_row_count=len(prior_evidence_rows),
+        new_evidence_row_count=len(new_evidence_rows),
     )
 
 
@@ -234,6 +358,15 @@ def main() -> int:
     parser.add_argument("--events", type=Path, default=gate.DEFAULT_EVENTS)
     parser.add_argument("--requirements", type=Path, default=gate.DEFAULT_REQUIREMENTS)
     parser.add_argument("--listing", type=Path, default=gate.DEFAULT_LISTING)
+    parser.add_argument(
+        "--current-manifest",
+        type=Path,
+        default=gate.DEFAULT_OUTPUT,
+        help=(
+            "Current canonical identity manifest. Any previously promoted embedded "
+            "evidence is carried forward automatically."
+        ),
+    )
     parser.add_argument("--outdir", type=Path, default=DEFAULT_OUTDIR)
     args = parser.parse_args()
 
@@ -242,6 +375,7 @@ def main() -> int:
         events_path=args.events,
         requirements_path=args.requirements,
         listing_path=args.listing,
+        current_manifest_path=args.current_manifest,
     )
     outputs = write_staging(result, args.outdir)
     print(
