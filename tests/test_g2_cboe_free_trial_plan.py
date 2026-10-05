@@ -58,6 +58,6 @@ def test_cboe_free_trial_plan_uses_published_cap_fail_closed():
     assert optimum["remaining_underlying_date_pairs"] == 2904
     assert len(optimum["selected_dates"]) == 180
 
-    assert "no 2011 request is emitted" in out["warning"]
+    assert "no 2011 request is emitted" in out["warning"].lower()
     assert "462" in out["warning"]
     assert "retention rights" in out["warning"]
