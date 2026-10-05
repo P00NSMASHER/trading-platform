@@ -1683,6 +1683,10 @@
       "expected_sha256": "535ff6e711228a7267ecce1be3e09b724fc00f9e762fdaa3aad8f2667ab85562",
       "reason": "Fail-closed Cboe historical acceptance probe: preserve 2011 equity TAQ smoke, move OPRA smoke to vendor-supported 2012, derive one historical option-quote request from a returned OSI security, and validate non-SIP-annotated NBBO fields; three requests / 45 points maximum."
     },
+    "src/g2_cboe_2011_options_probe.py": {
+      "expected_sha256": "8aee77c4e0ee2018adc37d265d27020a287486418a4555dca81f5edfe6b275b8",
+      "reason": "Bounded fail-closed runtime probe for the unresolved 2011 Cboe OPRA entitlement discrepancy; tests one frozen JNPR/date reference, option-trade, and NBBO quote path with explicit trial acknowledgement, no coverage promotion, and no change to the vendor-confirmed 2012 bulk-planning floor."
+    },
     "src/g2_cboe_all_access_capacity.py": {
       "expected_sha256": "50388cb3a540a63146b070b6e5f0c14d2e382ea9fe32e3f3e5e6bcd0aba62467",
       "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
@@ -2258,6 +2262,10 @@
     "tests/test_g2_cboe_acceptance_probe.py": {
       "expected_sha256": "55b03f891c1217768729036d53fc2e72ae916f0db930275a116462be5d355a24",
       "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
+    },
+    "tests/test_g2_cboe_2011_options_probe.py": {
+      "expected_sha256": "8015d93530882e671baf78eaaac0cf6419eb91728ce49d9ab2ce09dfafb6dd58",
+      "reason": "Regression coverage for the bounded 2011 Cboe OPRA entitlement probe: exact frozen sample, OSI derivation, three-request/31-point ceiling, fail-closed missing-reference behavior, and secret non-disclosure."
     },
     "tests/test_g2_cboe_all_access_capacity.py": {
       "expected_sha256": "44a62d7ee73e6ab9a4d024d95114e720d0a2ba600d1a25105d03a8524d4af49e",
