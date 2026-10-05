@@ -1,0 +1,45 @@
+name: G1 GNTX Marketwired org archive
+on:
+  push:
+    branches: [g1/research-gntx-marketwired-org]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - name: Recover Gentex organization release listing
+        run: |
+          python - <<'PY'
+          import urllib.request,urllib.parse,json,re,gzip,html
+          ua={"User-Agent":"G1-public-research/1.0"}
+          urls=[
+            "http://www.marketwired.com/news_room/PreSearch?type=org&q=Gentex+Corporation",
+            "http://www.marketwired.com/news_room/PreSearch?type=org%26q=Gentex%2bCorporation",
+          ]
+          for target in urls:
+            q="https://index.commoncrawl.org/CC-MAIN-2013-48-index?"+urllib.parse.urlencode({"url":target,"output":"json"})
+            try:
+              req=urllib.request.Request(q,headers=ua); txt=urllib.request.urlopen(req,timeout=20).read().decode()
+            except Exception as e: print("INDEX_ERR",target,repr(e));continue
+            for line in txt.splitlines():
+              try:r=json.loads(line)
+              except:continue
+              print("REC",r)
+              try:
+                off=int(r["offset"]);ln=int(r["length"])
+                req=urllib.request.Request("https://data.commoncrawl.org/"+r["filename"],headers={**ua,"Range":f"bytes={off}-{off+ln-1}"})
+                data=urllib.request.urlopen(req,timeout=30).read()
+                try:data=gzip.decompress(data)
+                except:pass
+                body=data.decode("utf-8","replace")
+                plain=html.unescape(re.sub(r"<[^>]+>"," ",body));plain=re.sub(r"\s+"," ",plain)
+                for href in re.findall(r'href=["\']([^"\']+)["\']',body,re.I):
+                  h=html.unescape(href)
+                  if "gentex" in h.lower() and "press-release" in h.lower(): print("LINK",h)
+                for needle in ["Gentex Reports Third Quarter 2013 Financial Results","October 22, 2013","Oct 22, 2013"]:
+                  i=plain.lower().find(needle.lower())
+                  if i>=0: print("CTX",needle,plain[max(0,i-1000):i+2500])
+              except Exception as e: print("WARC_ERR",repr(e))
+          PY
