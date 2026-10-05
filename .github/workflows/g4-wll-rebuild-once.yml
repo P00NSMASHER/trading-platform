@@ -1,0 +1,150 @@
+name: G4 WLL receipt regeneration
+on:
+  push:
+    branches: [g4/wll-public-sec-exact]
+    paths: [.github/workflows/g4-wll-rebuild-once.yml]
+permissions:
+  contents: write
+concurrency:
+  group: g4-wll-rebuild-once
+  cancel-in-progress: false
+jobs:
+  regenerate:
+    if: github.ref == 'refs/heads/g4/wll-public-sec-exact'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Refresh from main without overwriting concurrent work
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git merge --no-edit origin/main
+          git rev-parse origin/main > /tmp/g4-base-sha
+      - name: Install locked test dependencies
+        run: |
+          python -m pip install -r requirements.lock -r requirements-dev.lock
+          python -m deployment_hardening harden-permissions --config config/runtime.demo.toml
+      - name: Reconcile remaining scope and regenerate canonical receipts
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, re, subprocess
+          from pathlib import Path
+          import research_receipt_rebuild as receipts
+          root = Path.cwd()
+          src = root / 'src/g4_exchange_reference_completion.py'
+          text = src.read_text()
+          for day, prior in [('2015-02-23','2015-02-20'),('2015-02-24','2015-02-23'),('2015-02-25','2015-02-24')]:
+              old = f'    ("WLL", "{day}"): "{prior}",\n'
+              assert text.count(old) == 1, old
+              text = text.replace(old, '')
+          edits = {
+              '!= 3810': '!= 3813', 'from 3,810': 'from 3,813',
+              '!= 18': '!= 15', 'from 18': 'from 15',
+              '"exact_resolved": 3810': '"exact_resolved": 3813',
+              '"reviewed_excluded": 18': '"reviewed_excluded": 15',
+              'all 18': 'all 15', 'exact 18-row': 'exact 15-row',
+          }
+          for old, new in edits.items():
+              assert old in text, old
+              text = text.replace(old, new)
+          src.write_text(text)
+          test = root / 'tests/test_g4_exchange_reference_completion.py'
+          text = test.read_text().replace('_18_', '_15_')
+          for old, new in {
+              '"exact_resolved": 3810': '"exact_resolved": 3813',
+              '"reviewed_excluded": 18': '"reviewed_excluded": 15',
+              '== 18': '== 15', '== 13': '== 10',
+              '== ["ACO", "WLL"]': '== ["ACO"]',
+          }.items():
+              assert old in text, old
+              text = text.replace(old, new)
+          test.write_text(text)
+          import g4_exchange_reference_completion as g4
+          plan_path = root / 'data/processed/authorized_input_real/g4_exact_completion_plan.json'
+          plan = g4.build_completion_plan()
+          assert len(plan['tasks']) == 15
+          assert plan['current_g4']['exact_resolved'] == 3813
+          plan_path.write_text(json.dumps(plan, indent=2, sort_keys=True) + '\n')
+          result = receipts.rebuild(root, publish=True)
+          assert result['after']['up_to_date'], result
+          auth = root / 'data/processed/authorized_input_real'
+          summary = json.loads((auth / 'metadata_readiness_summary.json').read_text())
+          assert summary['shares_symbol_dates_resolved'] == 3813, summary['shares_symbol_dates_resolved']
+          assert summary['shares_symbol_dates_excluded'] == 15
+          assert summary['shares_symbol_dates_accounted_for'] == 3828
+          assert summary['announcement_exact_resolved'] == 174
+          with (auth / 'shares_outstanding_resolutions.csv').open(newline='') as handle:
+              rows = list(csv.DictReader(handle))
+          affected = [r for r in rows if r['historical_symbol'] == 'WLL' and '2015-02-04' <= r['trade_date'] <= '2015-02-25']
+          assert len(affected) == 15
+          assert all(r['shares_outstanding'] == '166889152' and r['resolution_status'] == 'resolved' for r in affected)
+          sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+          coverage_path = root / 'data/processed/coverage_plan_real/coverage_summary.json'
+          coverage = json.loads(coverage_path.read_text())
+          coverage['metadata_readiness_sha256'] = sha(auth / 'metadata_readiness_summary.json')
+          coverage['metadata_quality_sha256'] = sha(auth / 'metadata_quality_summary.json')
+          coverage_path.write_text(json.dumps(coverage, indent=2, sort_keys=True) + '\n')
+          (root / 'data/processed/.research_receipt_rebuild.lock').unlink(missing_ok=True)
+          print(json.dumps({'G4_exact':3813,'G4_excluded':15,'WLL_rows_verified':len(affected),'receipt_bundle_up_to_date':True}))
+          PY
+      - name: Remove one-shot workflow and register only reviewed scoped changes
+        run: |
+          git rm .github/workflows/g4-wll-rebuild-once.yml
+          python - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+          import research_receipt_rebuild as receipts
+          root = Path.cwd()
+          base = Path('/tmp/g4-base-sha').read_text().strip()
+          allowed = {
+              'config/metadata_sources.public_progress.json',
+              'data/public/metadata/g4_shares_wll_20150204_25.csv',
+              'data/processed/authorized_input_real/g4_wll_20150204_25_evidence.json',
+              'data/processed/authorized_input_real/g4_final_blockers.json',
+              'data/processed/authorized_input_real/g4_exact_completion_plan.json',
+              'src/g4_exchange_reference_completion.py',
+              'tests/test_g4_exchange_reference_completion.py',
+              'tests/test_g4_wll_public_sec_exact.py',
+              'data/processed/coverage_plan_real/coverage_summary.json',
+              str(receipts.REPLAY_STATUS_TARGET), str(receipts.BUNDLE_MANIFEST_TARGET),
+          } | {str(receipts.METADATA_TARGET_DIR / name) for name in receipts.METADATA_RECEIPTS}
+          changed = set(subprocess.check_output(['git','diff','--name-only',base], text=True).splitlines())
+          assert changed <= allowed, sorted(changed - allowed)
+          allow_path = root / 'config/release_drift_allowlist.json'
+          policy = json.loads(allow_path.read_text())
+          for name in sorted(changed):
+              entry = {'expected_sha256': hashlib.sha256((root / name).read_bytes()).hexdigest(),
+                       'reason': 'G4 public SEC WLL repair: explicit 166889152 post-Kodiak common shares as of 2014-12-31, public on 2015-01-05; three exclusions closed and twelve older WLL anchors replaced. Canonical 3813 exact / 15 excluded, hard 130-day and pre-cutoff rules unchanged.'}
+              group = 'intentional_release_modifications' if name in policy['intentional_release_modifications'] else 'repository_additions'
+              policy[group][name] = entry
+          allow_path.write_text(json.dumps(policy, indent=2, sort_keys=True) + '\n')
+          subprocess.run(['git','add','--',*sorted(changed),'config/release_drift_allowlist.json'], check=True)
+          print('Reviewed changed paths:', json.dumps(sorted(changed)))
+          PY
+      - name: Run full repository tests
+        run: python -m pytest -q
+      - name: Run secret scan
+        run: python scripts/secret_scan.py --root .
+      - name: Publish only verified WLL branch receipt commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git commit -m 'G4: regenerate verified WLL repair receipts and reconcile 15 residual gaps'
+          python - <<'PY'
+          import base64, os, subprocess
+          credential = base64.b64encode(('x-access-token:' + os.environ['GH_TOKEN']).encode()).decode()
+          subprocess.run(['git','-c','http.https://github.com/.extraheader=AUTHORIZATION: basic ' + credential,
+                          'push','origin','HEAD:refs/heads/g4/wll-public-sec-exact'], check=True)
+          print('VERIFIED_G4_BRANCH_HEAD=' + subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip())
+          PY
