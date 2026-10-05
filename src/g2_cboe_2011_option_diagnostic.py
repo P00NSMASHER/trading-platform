@@ -14,6 +14,9 @@ SAMPLE_DATE = "2011-03-21"
 SAMPLE_UNDERLYING = "JNPR"
 PAGE_LIMIT = 100
 MAX_REQUESTS = 3
+REFERENCE_POINTS = 1
+HISTORICAL_TIME_AND_SALES_POINTS = 15
+MAX_POINTS = REFERENCE_POINTS + (2 * HISTORICAL_TIME_AND_SALES_POINTS)
 REFERENCE_REQUIRED_FIELDS = {"root", "expiry", "strike", "type"}
 
 
@@ -131,6 +134,12 @@ def dry_run_manifest() -> dict[str, Any]:
             ),
         },
         "max_requests": MAX_REQUESTS,
+        "max_points": MAX_POINTS,
+        "point_model": {
+            "reference/options": REFERENCE_POINTS,
+            "historical_option_trades": HISTORICAL_TIME_AND_SALES_POINTS,
+            "historical_option_quotes": HISTORICAL_TIME_AND_SALES_POINTS,
+        },
         "execute_requires": [
             "CBOE_CLIENT_ID",
             "CBOE_CLIENT_SECRET",
@@ -160,6 +169,7 @@ def execute_diagnostic(client_id: str, client_secret: str) -> dict[str, Any]:
         base.OPTION_TRADE_REQUIRED_FIELDS,
     )
     requests_executed = 2
+    points_executed = REFERENCE_POINTS + HISTORICAL_TIME_AND_SALES_POINTS
 
     security = _first_reference_security(reference_payload)
     security_source = "reference/options" if security else None
@@ -176,6 +186,7 @@ def execute_diagnostic(client_id: str, client_secret: str) -> dict[str, Any]:
             base.OPTION_QUOTE_REQUIRED_FIELDS,
         )
         requests_executed += 1
+        points_executed += HISTORICAL_TIME_AND_SALES_POINTS
     else:
         quote_assessment = _blocked_quote_assessment(
             "quote request not executed because neither 2011 reference/options nor "
@@ -184,6 +195,8 @@ def execute_diagnostic(client_id: str, client_secret: str) -> dict[str, Any]:
 
     if requests_executed > MAX_REQUESTS:
         raise RuntimeError("2011 diagnostic exceeded bounded request limit")
+    if points_executed > MAX_POINTS:
+        raise RuntimeError("2011 diagnostic exceeded bounded point limit")
 
     diagnostic_passed = (
         reference_assessment["accepted"]
@@ -197,6 +210,8 @@ def execute_diagnostic(client_id: str, client_secret: str) -> dict[str, Any]:
         "derived_option_security": security,
         "derived_option_security_source": security_source,
         "requests_executed": requests_executed,
+        "points_executed": points_executed,
+        "max_points": MAX_POINTS,
         "reference_assessment": reference_assessment,
         "trade_assessment": trade_assessment,
         "quote_assessment": quote_assessment,
