@@ -12,6 +12,6 @@
   "expected_exact_resolved": 122,
   "expected_reviewed_excluded": 52,
   "step9": "SOURCE_BLOCKED",
-  "publisher_trigger_revision": 1,
-  "publisher_trigger_reason": "Exact-main Worker-4 token validated; publish ROVI only after complete exact-head gates."
+  "publisher_trigger_revision": 2,
+  "publisher_trigger_reason": "Exact-main Worker-4 token validated; second GitHub-native push trigger for ROVI exact-head gates."
 }
