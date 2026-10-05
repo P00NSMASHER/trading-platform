@@ -21,7 +21,7 @@ def validate():
     ev=json.loads(EVIDENCE_PATH.read_text(encoding="utf-8")); rows=_rows(CSV_PATH)
     assert ev["batch_id"]=="0119" and ev["lane"]=="worker-4" and ev["state"]=="PREPARED" and ev["publish_authorized"] is False
     assert ev["base_main_sha"]==EXPECTED_BASE
-    assert ev["expected_baseline"]=={"exact":166,"fail_closed":8,"total":174}
+    assert ev["expected_baseline"]=={"exact":165,"fail_closed":9,"total":174}
     assert ev["expected_after_gated_integration"]=={"exact":166,"fail_closed":8,"total":174}
     assert len(rows)==len(ev["items"])==1
     row=rows[0]; item=ev["items"][0]
