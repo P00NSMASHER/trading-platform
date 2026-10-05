@@ -1935,6 +1935,10 @@
       "expected_sha256": "23439ae6d883b0db831290cb25b22e9a50e1cc308db07c2c186d940a5db50503",
       "reason": "G5 master acquisition planner now incorporates stable-security-identity requirements and acquisition gaps for the full primary-control history footprint alongside market, shares, external metadata, and treated-event requirements."
     },
+    "src/g5_match_quality_gate.py": {
+      "expected_sha256": "ebd01d5fb33595130e90c166c59de52414715aaeface898a5fa5b209574e5a21",
+      "reason": "G5 fail-closed matched-control quality gate: require complete three-control coverage, exact rank/identity integrity, known-positive contamination exclusion, complete matching covariates, and post-match balance within the declared hard SMD limit."
+    },
     "src/g5_prior_fallback_planner.py": {
       "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",
       "reason": "G5 residual structural planning: fill only remaining candidate slots from strictly prior symbol observations, with retrospective labels ignored and all rows kept ineligible until date-specific identity, real four-kind market data, and pre-event metadata are proven."
@@ -2562,6 +2566,10 @@
     "tests/test_g5_master_acquisition_plan.py": {
       "expected_sha256": "404a8ed1c27537de32dc5765a59cb829ccd84a5f419173be581dcf48a446e8c2",
       "reason": "Regression coverage locks the master plan's identity reconciliation, including the full history footprint, 51 unique exact-date public SampleFirms leads, 165 primary controls without exact-date public mapping, and nonzero remaining stable-ID acquisition work."
+    },
+    "tests/test_g5_match_quality_gate.py": {
+      "expected_sha256": "9fd579c64321ca886cbaaa98c68319c7255a99f4b3ee1e4caec46309b8232f2e",
+      "reason": "Mutation-sensitive regression coverage for G5 hard-SMD breaches, known-positive contamination, incomplete matching covariates, duplicate ranks, unmatched events, and valid balanced match sets."
     },
     "tests/test_g5_prior_fallback_planner.py": {
       "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
