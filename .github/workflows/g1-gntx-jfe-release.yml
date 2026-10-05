@@ -1,0 +1,28 @@
+name: G1 GNTX JFE release inspect
+on:
+  push:
+    branches: [g1/research-gntx-jfe-release]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Extract GNTX 2013 release member
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 -o /tmp/2013.zip https://raw.githubusercontent.com/vgreg/hacked_earnings_jfe/c23c7d79d067a79d70cf20e31b072d3703497eae/Data/Press%20releases/2013.zip
+          unzip -l /tmp/2013.zip | grep -Ei '5116_20131022|GNTX|20131022' | head -100 || true
+          python - <<'PY'
+          import zipfile,re
+          z=zipfile.ZipFile("/tmp/2013.zip")
+          names=z.namelist()
+          cand=[n for n in names if "5116_20131022" in n or "20131022" in n]
+          print("CANDIDATES",cand[:100])
+          for n in cand:
+            data=z.read(n).decode("utf-8","replace")
+            if "gentex" in data.lower() or "5116_20131022" in n:
+              print("MEMBER",n,"LEN",len(data))
+              print(data[:12000])
+          PY
