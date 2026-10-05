@@ -1932,8 +1932,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "23439ae6d883b0db831290cb25b22e9a50e1cc308db07c2c186d940a5db50503",
-      "reason": "G5 master acquisition planner now incorporates stable-security-identity requirements and acquisition gaps for the full primary-control history footprint alongside market, shares, external metadata, and treated-event requirements."
+      "expected_sha256": "13f63d26e1d98c373fc9479e5fc30ff63d5f50a221e1718cb9e98122b00ecc8e",
+      "reason": "G5 master acquisition plan now executes and reconciles the merged identity interval/Stocknames routing, incremental market vendor routing, and exact control-shares reconciliation in one fail-closed plan."
     },
     "src/g5_prior_fallback_planner.py": {
       "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",
@@ -2560,8 +2560,8 @@
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
     },
     "tests/test_g5_master_acquisition_plan.py": {
-      "expected_sha256": "404a8ed1c27537de32dc5765a59cb829ccd84a5f419173be581dcf48a446e8c2",
-      "reason": "Regression coverage locks the master plan's identity reconciliation, including the full history footprint, 51 unique exact-date public SampleFirms leads, 165 primary controls without exact-date public mapping, and nonzero remaining stable-ID acquisition work."
+      "expected_sha256": "f1bcec22930523475f320e1eeffd56ad73f18021dd2c959ae3723fd92a02cdc2",
+      "reason": "Regression coverage locks full Stocknames routing, market-pair reconciliation, shares reuse-plus-gap accounting, and emitted component outputs in the real G5 master plan."
     },
     "tests/test_g5_prior_fallback_planner.py": {
       "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
