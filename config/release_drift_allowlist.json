@@ -2562,6 +2562,14 @@
     "tests/test_g5_master_acquisition_plan.py": {
       "expected_sha256": "7ef45f162a7226eca25033aa5ad6a40fda5c913d5e55067f4a4ce287957ee930",
       "reason": "Regression coverage locks the 390 total matching targets, 5,070 field requirements (3,120 derived and 1,950 external), 1,560 external lane requests, 72-date structural coverage, history-overlap reconciliation, and zero canonical G5 readiness/release claims."
+    },
+    "src/g2_cboe_2011_option_diagnostic.py": {
+      "expected_sha256": "30f7b4bea27751a24ede7d13633e51bc922f6a29f4c7e9d57eb5194ac418f491",
+      "reason": "Diagnostic-only Cboe 2011 OPRA availability probe: bounded historical option-trade/quote sample, explicit trial-active acknowledgement, no vendor-floor override and zero G2 coverage promotion."
+    },
+    "tests/test_g2_cboe_2011_option_diagnostic.py": {
+      "expected_sha256": "746762f6afd68fbbcf6d72f9e0e8ef078bdc50088d38a6a555ab8939f28e0406",
+      "reason": "Regression coverage for the diagnostic-only Cboe 2011 OPRA probe, including returned-OSI quote routing, fail-closed empty history, explicit non-coverage semantics, and bounded request behavior."
     }
   },
   "schema_version": "2",
