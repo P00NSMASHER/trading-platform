@@ -102,6 +102,7 @@ def test_hostile_suite_defines_all_required_categories():
         "tests/test_feature_engine.py",
         "tests/test_metadata_resolver.py",
         "tests/test_matched_control_generator.py",
+        "tests/test_g5_match_quality_gate.py",
         "tests/test_model_training_harness.py",
         "tests/test_evaluation_release_controller.py",
         "tests/test_real_data_replay.py",
