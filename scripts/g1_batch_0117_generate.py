@@ -217,7 +217,7 @@ for filename in test_files:
         pairs = [
             ('report["exact_resolved_event_records"] == 166', 'report["exact_resolved_event_records"] == 172'),
             ('report["reviewed_excluded_event_records"] == 8', 'report["reviewed_excluded_event_records"] == 2'),
-            ('state["public_exact_batch_count"] == 83', 'state["public_exact_batch_count"] == 84'),
+            ('state["public_exact_batch_count"] == 86', 'state["public_exact_batch_count"] == 87'),
             ('state["exact_resolved_event_records"] == 166', 'state["exact_resolved_event_records"] == 172'),
         ]
     elif filename.endswith("test_g1_acquisition_manifest.py"):
@@ -231,42 +231,16 @@ for filename in test_files:
             ('"NKE", "EW", "DGI", "PNRA", "ACO"', '"EW", "PNRA", "BIO", "GNTX", "CREE"'),
             ('[4, 1000, 1000, 1000, 1000]', '[1000, 1000, 1000, 1000, 1000]'),
         ]
-        routing_old = """    missing = next(
-        row for row in manifest["work_queue"]
-        if row["public_release_file_status"] == "NO_PUBLIC_REPLICATION_CANDIDATE_FILE"
-    )
-    assert by_id[present["event_id"]]["route_order"][0] == "public_exact_clock_recovery"
-    assert by_id[missing["event_id"]]["route_order"][0] == "licensed_ibes_bulk"
-"""
-        routing_new = """    missing = [
-        row for row in manifest["work_queue"]
-        if row["public_release_file_status"] == "NO_PUBLIC_REPLICATION_CANDIDATE_FILE"
-    ]
-    assert by_id[present["event_id"]]["route_order"][0] == "public_exact_clock_recovery"
-    if missing:
-        assert all(by_id[row["event_id"]]["route_order"][0] == "licensed_ibes_bulk" for row in missing)
-    else:
-        assert all(
-            "PUBLIC_RELEASE_FILE_PRESENT" in row["public_release_file_status"]
-            for row in manifest["work_queue"]
-        )
-        assert all(
-            by_id[row["event_id"]]["route_order"][0] == "public_exact_clock_recovery"
-            for row in manifest["work_queue"]
-        )
-"""
-        assert routing_old in text
-        text = text.replace(routing_old, routing_new)
     elif filename.endswith("test_real_data_release_sprint.py"):
         pairs = [('updated["missing_exact_announcement_timestamps"] == 8', 'updated["missing_exact_announcement_timestamps"] == 2')]
     else:
         pairs = [
             ('(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (166,8)', '(readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (172,2)'),
             ('(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (166, 8)', '(readiness["announcement_exact_resolved"], readiness["announcement_events_excluded"]) == (172, 2)'),
-            ('"150/174" in step9["evidence"] and "24" in step9["evidence"]', '"172/174" in step9["evidence"] and "2" in step9["evidence"]'),
-            ('len(excluded)==8', 'len(excluded)==10'),
+            ('"166/174" in step9["evidence"] and "8" in step9["evidence"]', '"172/174" in step9["evidence"] and "2" in step9["evidence"]'),
+            ('len(excluded)==8', 'len(excluded)==2'),
             ('len(excluded) == 8', 'len(excluded) == 2'),
-            ('len(ex)==8', 'len(ex)==10'),
+            ('len(ex)==8', 'len(ex)==2'),
             ('len(ex) == 8', 'len(ex) == 2'),
         ]
     for old, new in pairs:
@@ -276,13 +250,13 @@ for filename in test_files:
 
 docs = Path("docs/g1_announcement_times.md")
 text = docs.read_text(encoding="utf-8")
-assert "83 public exact-time batches / 150 exact-resolved" in text
-text = text.replace("83 public exact-time batches / 150 exact-resolved", "86 public exact-time batches / 166 exact-resolved", 1)
+assert "86 public exact-time batches / 166 exact-resolved" in text
+text = text.replace("86 public exact-time batches / 166 exact-resolved", "87 public exact-time batches / 172 exact-resolved", 1)
 text += """
 
-### Batch 0117: ACO, KELYA, CMTL, VEEV, CACI, DGI, SWKS, NKE, P, COLM, DGI, POWI, TRAK, SCVL
+### Batch 0117: TXT, CGNX, PNRA, NUAN, EW, PRU
 
-Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for fourteen Worker-2 events. Every release identity/date is independently corroborated by an exact official SEC Exhibit 99.x, with pinned public press-release archive members used as additional identity cross-checks where available. This advances G1 from 166 exact / 8 reviewed exclusions to 172 exact / 2 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for six Worker-2 events. Every release identity/date is independently corroborated by an exact official SEC Exhibit 99.x, with pinned public press-release archive members used as additional identity cross-checks. This advances G1 from 166 exact / 8 reviewed exclusions to 172 exact / 2 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
 """
 docs.write_text(text, encoding="utf-8")
 
