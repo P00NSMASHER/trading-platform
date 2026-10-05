@@ -11,6 +11,7 @@ sys.path.insert(0,str(ROOT/"src"))
 
 from metadata_resolver import (
     build, load_contract, resolve_announcements, resolve_event_exchanges,
+    CONTROL_CATEGORICAL_COVARIATES, CONTROL_COVARIATES,
     resolve_shares, resolve_control_readiness, _load_source_rows,
     AnnouncementResolution, ControlDateReadiness, SharesResolution,
     _apply_reviewed_announcement_exclusions, _apply_reviewed_control_exclusions,
@@ -198,6 +199,30 @@ def test_future_shares_fact_is_not_used(tmp_path):
     finally:
         p.unlink(missing_ok=True); q.unlink(missing_ok=True)
 
+
+
+def test_g5_readiness_contract_matches_matcher_defaults():
+    from matched_control_generator import DEFAULT_NUMERIC_COVARIATES
+
+    assert CONTROL_COVARIATES == [
+        *CONTROL_CATEGORICAL_COVARIATES,
+        *DEFAULT_NUMERIC_COVARIATES,
+    ]
+    assert "trailing_21d_vol" in CONTROL_COVARIATES
+    assert "normal_minute_volume" in CONTROL_COVARIATES
+    assert "normal_relative_spread" in CONTROL_COVARIATES
+    assert "borrow_cost" in CONTROL_COVARIATES
+    assert "pre_event_return" in CONTROL_COVARIATES
+    assert "volatility_21d" not in CONTROL_COVARIATES
+    assert "normal_volume" not in CONTROL_COVARIATES
+    assert "normal_spread" not in CONTROL_COVARIATES
+
+
+def test_g5_accepts_matcher_native_effective_timestamp():
+    x=resolve_control_readiness(events(),load_demo_sources())[0]
+    assert x.candidate_count==3
+    assert x.candidates_with_pre_event_covariates==3
+    assert x.readiness_status=="resolved_for_point_in_time_matching"
 
 def test_control_universe_closes_with_three_pre_event_complete_candidates():
     x=resolve_control_readiness(events(),load_demo_sources())[0]

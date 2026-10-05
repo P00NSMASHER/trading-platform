@@ -12,7 +12,9 @@ from pathlib import Path
 from typing import Iterable
 from zoneinfo import ZoneInfo
 
-SCHEMA_VERSION = "0.17.4"
+from matched_control_generator import DEFAULT_NUMERIC_COVARIATES
+
+SCHEMA_VERSION = "0.17.5"
 NY = ZoneInfo("America/New_York")
 UTC = timezone.utc
 
@@ -691,10 +693,10 @@ def _apply_reviewed_share_exclusions(
     return out, meta
 
 
-CONTROL_COVARIATES = [
-    "sector", "index_bucket", "market_cap", "price", "volatility_21d", "normal_volume",
-    "normal_turnover", "normal_spread", "options_liquidity", "institutional_ownership", "analyst_coverage",
-]
+CONTROL_CATEGORICAL_COVARIATES = ("sector", "index_bucket")
+# Keep the readiness gate and the actual matched-control generator on one canonical
+# schema. A row that can close G5 must be directly consumable by the matcher.
+CONTROL_COVARIATES = [*CONTROL_CATEGORICAL_COVARIATES, *DEFAULT_NUMERIC_COVARIATES]
 
 
 def resolve_control_readiness(events: list[dict[str,str]], sources) -> list[ControlDateReadiness]:
@@ -712,7 +714,7 @@ def resolve_control_readiness(events: list[dict[str,str]], sources) -> list[Cont
                 sym=(_get(row, src, "historical_symbol") or _get(row, src, "symbol")).upper()
                 if not sym: continue
                 # Must be a point-in-time candidate universe for model evaluation.
-                avail=_get(row, src, "available_at")
+                avail=_get(row, src, "effective_ts_utc") or _get(row, src, "available_at")
                 if avail:
                     try:
                         if _parse_aware(avail, field="available_at", default_timezone=src.timezone) > first_cutoff: continue
