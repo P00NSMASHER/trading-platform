@@ -68,7 +68,7 @@ def test_execute_passes_only_when_reference_trade_and_quote_fields_exist(monkeyp
         if "/option-trades?" in url:
             return [{
                 "timestamp": "10:00:00.001",
-                "security": "",
+                "security": "JNPR110416P00025000",
                 "root": "JNPR",
                 "expiry": "2011-04-16",
                 "strike": 20.0,
