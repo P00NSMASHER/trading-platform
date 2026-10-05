@@ -2472,12 +2472,12 @@
       "reason": "Regression coverage locks the current G5 expansion plan at 51 of 52 structural deficit slots, proves retrospective labels do not affect selection, and prevents known positives or existing G2 candidates from being reselected."
     },
     "src/g5_control_acquisition_planner.py": {
-      "expected_sha256": "acb9193e9c795257c2a6bf19cb3baf3ffc1d2dc67187b72304657c94915af066",
-      "reason": "G5 genuine-control acquisition planner: combines existing four-kind G2 candidate scope with the planning-only expansion queue, emits exact field-level pre-event metadata requirements and market acquisition prerequisites, and never promotes planning rows to genuine G5 evidence."
+      "expected_sha256": "4067a7015f9fef7def868717ca320eb33b360fb01cd3bd08047459cd80363fea",
+      "reason": "G5 genuine-control acquisition planner now integrates the prior-only residual fallback so all 52 structural expansion slots are planned, while all rows remain ineligible until date-specific identity, real four-kind market data, complete pre-event metadata, contamination screening, and matcher quality pass."
     },
     "tests/test_g5_control_acquisition_planner.py": {
-      "expected_sha256": "61d56e09e5289863285f234199621dd39887e8c515dc96d06ffb8609afb59bd1",
-      "reason": "Regression coverage for integrated G5 acquisition planning: freezes the 49/23 structural split, 52-slot deficit, 51 planned expansion candidates, 204 expansion market rows, one residual slot, exact readiness-field routing, anti-lookahead cutoffs, and zero evidence/release claims."
+      "expected_sha256": "7a15c17d79159dbbb2158914ed0d24a3f642696209018d544e2a1769079aaba1",
+      "reason": "Regression coverage locks the unified G5 acquisition plan at 52 expansion candidate symbol-dates, 208 market rows, 72/72 dates structurally reaching three candidates, one deterministic prior-only ADBE fallback, and zero evidence or release claims."
     },
     "src/g5_prior_fallback_planner.py": {
       "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",

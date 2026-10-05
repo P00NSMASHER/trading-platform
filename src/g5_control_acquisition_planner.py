@@ -6,11 +6,12 @@ import hashlib
 import json
 from collections import defaultdict
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from g5_control_expansion_planner import _load_planning_universe
+from g5_prior_fallback_planner import DEFAULT_MAX_PRIOR_DAYS, _load_prior_observations
 from g5_control_gap_planner import (
     DEFAULT_MIN_CONTROLS,
     DEFAULT_REQUIRED_MARKET_KINDS,
@@ -20,7 +21,7 @@ from g5_control_gap_planner import (
 )
 from metadata_resolver import CONTROL_COVARIATES
 
-SCHEMA_VERSION = "2"
+SCHEMA_VERSION = "3"
 EVENT_TIMEZONE = ZoneInfo("America/New_York")
 
 FIELD_ROUTES = {
@@ -167,17 +168,21 @@ def build(
     planning_universe_path: Path,
     output_dir: Path,
     min_controls: int = DEFAULT_MIN_CONTROLS,
+    max_prior_days: int = DEFAULT_MAX_PRIOR_DAYS,
     required_market_kinds: tuple[str, ...] = DEFAULT_REQUIRED_MARKET_KINDS,
 ) -> dict:
     _validate_contract()
     if min_controls < 1:
         raise ValueError("min_controls must be positive")
+    if max_prior_days < 1:
+        raise ValueError("max_prior_days must be positive")
     if not required_market_kinds:
         raise ValueError("at least one required market kind is required")
 
     positives_by_date = _load_positive_symbols(events_path)
     market_requirements = _load_market_requirements(requirements_path)
     planning_by_date, ignored_label_columns = _load_planning_universe(planning_universe_path)
+    prior_observations, _ = _load_prior_observations(planning_universe_path)
     cutoffs = _event_cutoffs(events_path)
 
     candidates: list[CandidateSymbolDate] = []
@@ -188,6 +193,8 @@ def build(
     deficient_dates = 0
     initial_deficit_slots = 0
     expansion_candidate_count = 0
+    exact_expansion_candidate_count = 0
+    prior_fallback_candidate_count = 0
     fully_fillable_deficient_dates = 0
     residual_unfilled_slots = 0
 
@@ -207,12 +214,38 @@ def build(
         available = set(planning_by_date.get(event_date, set()))
         available.difference_update(positives)
         available.difference_update(existing_pool)
-        expansion = sorted(available)[:deficit]
+        exact_expansion = sorted(available)[:deficit]
+
+        residual_after_exact = deficit - len(exact_expansion)
+        prior_expansion: list[str] = []
+        if residual_after_exact:
+            target = date.fromisoformat(event_date)
+            latest_prior: dict[str, date] = {}
+            for observed, symbol in prior_observations:
+                age = (target - observed).days
+                if age <= 0 or age > max_prior_days:
+                    continue
+                if symbol in positives or symbol in existing_pool or symbol in exact_expansion:
+                    continue
+                previous = latest_prior.get(symbol)
+                if previous is None or observed > previous:
+                    latest_prior[symbol] = observed
+            ranked_prior = sorted(
+                latest_prior.items(),
+                key=lambda item: ((target - item[1]).days, item[0]),
+            )
+            prior_expansion = [
+                symbol for symbol, _observed in ranked_prior[:residual_after_exact]
+            ]
+
+        expansion = [*exact_expansion, *prior_expansion]
         residual = deficit - len(expansion)
         if deficit and residual == 0:
             fully_fillable_deficient_dates += 1
         residual_unfilled_slots += residual
         expansion_candidate_count += len(expansion)
+        exact_expansion_candidate_count += len(exact_expansion)
+        prior_fallback_candidate_count += len(prior_expansion)
 
         cutoff = cutoffs[event_date]
         planned_candidates = [
@@ -228,7 +261,14 @@ def build(
                 "RETROSPECTIVE_SYMBOL_DATE_PLANNING_ONLY",
                 "EXPANSION_MARKET_ACQUISITION_REQUIRED",
             )
-            for symbol in expansion
+            for symbol in exact_expansion
+        ] + [
+            (
+                symbol,
+                "PRIOR_ONLY_RETROSPECTIVE_SYMBOL_OBSERVATION",
+                "EXPANSION_MARKET_ACQUISITION_REQUIRED",
+            )
+            for symbol in prior_expansion
         ]
 
         for symbol, origin, market_status in planned_candidates:
@@ -332,6 +372,9 @@ def build(
         "initial_minimum_additional_candidate_symbol_dates": initial_deficit_slots,
         "existing_scope_candidate_symbol_date_count": existing_candidate_count,
         "planned_expansion_candidate_symbol_date_count": expansion_candidate_count,
+        "exact_date_expansion_candidate_symbol_date_count": exact_expansion_candidate_count,
+        "prior_only_expansion_candidate_symbol_date_count": prior_fallback_candidate_count,
+        "max_prior_observation_age_days": max_prior_days,
         "generated_expansion_market_requirement_rows": len(expansion_market_rows),
         "fully_fillable_deficient_dates_from_planning_universe": fully_fillable_deficient_dates,
         "dates_structurally_reaching_3_after_plan": (
@@ -394,6 +437,7 @@ def main() -> None:
     parser.add_argument("--planning-universe", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--min-controls", type=int, default=DEFAULT_MIN_CONTROLS)
+    parser.add_argument("--max-prior-days", type=int, default=DEFAULT_MAX_PRIOR_DAYS)
     args = parser.parse_args()
     result = build(
         events_path=args.events,
@@ -401,6 +445,7 @@ def main() -> None:
         planning_universe_path=args.planning_universe,
         output_dir=args.output_dir,
         min_controls=args.min_controls,
+        max_prior_days=args.max_prior_days,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
 
