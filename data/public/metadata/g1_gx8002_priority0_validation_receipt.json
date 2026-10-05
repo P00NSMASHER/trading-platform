@@ -1,0 +1,119 @@
+{
+  "schema_version": "1",
+  "research_use_only": true,
+  "validation_role": "g1_priority0_gx8002_independent_validator",
+  "base_main_sha": "8014585b043217da5d5774382eb79e6a8b0972cc",
+  "validated_on": "2026-10-05",
+  "court_source": {
+    "family": "federal_court_public_distribution_record",
+    "case": "United States v. Vitaly Korchevsky, 1:15-cr-00381 (E.D.N.Y.)",
+    "document": "367-2",
+    "exhibit": "GX 8002",
+    "url": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+    "workflow_run_id": 37268374589,
+    "mapping_head_sha": "2592192e4fd38b14a021d36de7319db332379e38",
+    "artifact_id": 11326693734,
+    "artifact_digest_sha256": "254e78dcb6218e3cd31cc9bf50a6ec639c966a037957629912af181432a6990e",
+    "pdf_sha256": "475540e472356e55f843078d47482179277c0e84647bbeb7874ac2383f0e4bb1"
+  },
+  "canonical_method_check": {
+    "prior_batches": [
+      "0077",
+      "0081",
+      "0093",
+      "0100"
+    ],
+    "timezone_method": "America/New_York offset determined from target public-distribution date; BW/MW are wire-source codes, not timezones",
+    "prohibited_substitutes": [
+      "edgar_acceptance_time",
+      "conference_call_time",
+      "scheduled_release_time",
+      "date_only",
+      "archive_capture_time",
+      "neighboring_release",
+      "inferred_clock"
+    ]
+  },
+  "packages": [
+    {
+      "worker": 4,
+      "batch_id": "0114",
+      "branch": "g1/prep-0114-worker-4-court14-8014585",
+      "head_sha": "528f3c4afb138a84d648c0dc95aeadb78665b05b",
+      "event_ids": [
+        "HEJFE-4080E04F012A7290",
+        "HEJFE-7CEFB3FE3D986464",
+        "HEJFE-9861757889227DD4",
+        "HEJFE-8EAA8616B1750B40",
+        "HEJFE-8415E931D4314106",
+        "HEJFE-0AA84E6E44ED02D8",
+        "HEJFE-947F50EBAFBA54DC",
+        "HEJFE-791693865584F9CB",
+        "HEJFE-22BF36BABB9D19D7",
+        "HEJFE-E28050410A1480C6",
+        "HEJFE-0704950C71CFAFB4",
+        "HEJFE-C926C41F03E66E82",
+        "HEJFE-826F68D9DA88B37C",
+        "HEJFE-A5AE76F13A48C40F"
+      ],
+      "result": "VALID_NO_ROW_DEFECT_FOUND",
+      "checks": [
+        "14/14 package public-distribution date/minutes equal run 37268374589 mapped court rows",
+        "all mapped joins were exact ticker+year+first-order-minute with zero ambiguous matches",
+        "12/14 identities corroborated by PR355 exact event/date release members",
+        "KOPN and AMSG independently corroborated by official SEC Exhibit 99.x",
+        "all chronology intervals positive",
+        "all EST/EDT offsets agree with canonical prior-batch method"
+      ]
+    },
+    {
+      "worker": 0,
+      "batch_id": "0105",
+      "branch": "g1/prep-0105-worker-0-gx8002-eight-8014585",
+      "head_sha": "8b0940a30b646861aa9ce9529fc4cfcc9f975085",
+      "event_ids": [
+        "HEJFE-7F8218B15679F14D",
+        "HEJFE-45559DD90D876D39",
+        "HEJFE-D6AE4ACB99958A73",
+        "HEJFE-5408AADD0CBD54E8",
+        "HEJFE-93A7D27EF425EDF0",
+        "HEJFE-20EC97300E6205B9",
+        "HEJFE-B04F1AF8B6E30A43",
+        "HEJFE-5D222F0F8E0C77D0"
+      ],
+      "result": "VALID_NO_ROW_DEFECT_FOUND",
+      "checks": [
+        "8/8 package public-distribution date/minutes equal run 37268374589 mapped court rows",
+        "8/8 exact PR355 event/date release members",
+        "all chronology intervals positive",
+        "TW correctly rolls to 2015-05-05 06:00 EDT after a 2015-05-04 canonical first trade",
+        "all EST/EDT offsets agree with canonical prior-batch method"
+      ]
+    }
+  ],
+  "pnra_2013": {
+    "event_id": "HEJFE-CCC7747CFBDE893E",
+    "historical_symbol": "PNRA",
+    "owner_worker": 4,
+    "canonical_first_trade": "2013-04-23T14:25:00",
+    "court_row_id": "1657",
+    "raw_court_row": "1657 PNRA 2013 4/23/13 4/23/13 15:00 4/24/13 10:01 4/23/13 13:05 4/23/13 16:00 MW $282,751 $22,921 1 1 1 earnings",
+    "court_headline": "Panera Bread Company Reports Q1 2013 Diluted EPS of $1.64, up 17%",
+    "pr355_release_member": "2013/QTR2/76695_20130423_1.txt",
+    "sec_corroboration": "https://www.sec.gov/Archives/edgar/data/724606/000072460613000016/a20130326ex991pressrelease.htm",
+    "candidate_public_announcement_ts": "2013-04-23T16:00:00-04:00",
+    "asymmetry_seconds_from_canonical_first_trade": 5700,
+    "result": "VALID_SEPARATE_CANDIDATE",
+    "rationale": "The court row's 15:00 earliest-order minute differs from the canonical first-trade minute 14:25, so it was correctly excluded by the automated exact-order join. That mismatch is not a release-clock defect: ticker, year, exact release date, exact headline, PR355 member, and SEC Exhibit identity independently establish that row 1657 is the target Panera release. The filed exhibit's 16:00 public-distribution field is release-level evidence. Preserve canonical first trade 14:25; do not substitute court earliest-order time."
+  },
+  "gntx_2013": {
+    "event_id": "HEJFE-BD3F577ADD90D512",
+    "result": "UNRESOLVED_DISCOVERY_ONLY",
+    "note": "No GX8002 row recovered. The 10:30 EDT value is a conference-call time and remains rejected."
+  },
+  "controller_state_observation": {
+    "latest_comment_id": 5989675143,
+    "result": "POSSIBLE_ELIGIBILITY_STATE_DEFECT",
+    "note": "Latest controller declares no eligible PREPARED/FOUND package although live exact-main prep branches and PREPARED receipts exist for Worker4 batch0114 and Worker0 batch0105. Evidence packages remain valid; controller eligibility/parser state should be refreshed/repaired without manual token bypass."
+  }
+}
