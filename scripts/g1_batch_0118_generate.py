@@ -232,7 +232,7 @@ def test_batch_0118_worker3_shard_ownership():
 ast.parse(ts);tp.write_text(ts)
 assert rebuild.rebuild(ROOT,publish=False)["before"]["up_to_date"]
 
-for prep_only in (Path("data/public/metadata/g1_public_batch_0118_evidence.json"),Path("tests/test_g1_public_batch_0118_prep.py")):
+for prep_only in (Path("data/public/metadata/g1_public_batch_0118_prep_evidence.json"),Path("tests/test_g1_public_batch_0118_prep.py")):
     if prep_only.exists():prep_only.unlink()
 
 changed=set(subprocess.check_output(["git","diff","--name-only",BASE],text=True).splitlines());changed.update([str(batch),str(evidence_path),str(tp),SCRIPT])
