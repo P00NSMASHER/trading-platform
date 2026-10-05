@@ -1,5 +1,5 @@
 {
-  "base_main_sha": "f5d983f6c5d7dbd84ccbf15271a874366cd42888",
+  "base_main_sha": "60764bc4494820e36c001fe13a5e6cbe0a83740e",
   "consolidated_source_search": {
     "companion_semantics_repository": {
       "confirmed_fields": [
@@ -36,11 +36,11 @@
     }
   },
   "current_g1_state": {
-    "exact_resolved_event_records": 164,
-    "note": "The latest integrated recovery is batch_0116; cumulative public exact-time batches are 84 and cumulative exact event records are 164 because some public batches resolve more than one historical event.",
-    "public_exact_batch_count": 84,
+    "exact_resolved_event_records": 165,
+    "note": "The latest integrated recovery is batch_0118; cumulative public exact-time batches are 85 and cumulative exact event records are 165 because some public batches resolve more than one historical event.",
+    "public_exact_batch_count": 85,
     "required_event_count": 174,
-    "reviewed_excluded_event_records": 10
+    "reviewed_excluded_event_records": 9
   },
   "preferred_public_source_families": [
     {
@@ -3716,6 +3716,36 @@
       "timestamp_evidence_kind": "explicit_release_clock",
       "timestamp_kind": "first_public_release",
       "wire_source_code": "BW"
+    },
+    {
+      "corroborating_release_member_path": "2013/QTR2/61516_20130507_0.txt",
+      "corroboration_basis": "Pinned public release identity and official SEC Exhibit 99.1 corroborate issuer, exact title, content and date; the filed court record remains the sole timestamp source.",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/12208/000001220813000012/bio-8k572013xex991.htm",
+      "court_docket_reference": "https://www.courtlistener.com/docket/4324653/united-states-v-korchevsky/",
+      "disposition": "RESOLVED_IN_BATCH_0118",
+      "event_date": "2013-05-07",
+      "event_id": "HEJFE-2FD552B9358078C6",
+      "evidence_eligible": false,
+      "exact_clock_observed": true,
+      "exact_public_release_ts": "2013-05-07T16:15:00-04:00",
+      "explicit_release_clock_text": "GX 8002 row 1702 explicitly records Press Release / Distribution Time 2013-05-07 16:15 Eastern",
+      "first_documented_illicit_trade_ts": "2013-05-07 15:55:00",
+      "gx8002_row_id": "1702",
+      "historical_event_match": true,
+      "historical_symbol": "BIO",
+      "information_asymmetry_seconds": 1200,
+      "probe_id": "BIO-batch0118",
+      "public_announcement_ts": "2013-05-07T16:15:00-04:00",
+      "public_distribution_explicit": true,
+      "reason": "Promoted from filed federal-court GX 8002 explicit public-distribution clock with pinned press-release/SEC identity corroboration.",
+      "release_title": "Bio-Rad Reports First-Quarter 2013 Financial Results.",
+      "reviewed_on": "2026-10-05",
+      "source_family": "federal_court_public_distribution_record",
+      "source_grade": "A",
+      "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+      "timestamp_evidence_kind": "explicit_release_clock",
+      "timestamp_kind": "first_public_release",
+      "wire_source_code": "MW"
     }
   ]
 }
