@@ -2478,6 +2478,14 @@
     "tests/test_g5_control_acquisition_planner.py": {
       "expected_sha256": "61d56e09e5289863285f234199621dd39887e8c515dc96d06ffb8609afb59bd1",
       "reason": "Regression coverage for integrated G5 acquisition planning: freezes the 49/23 structural split, 52-slot deficit, 51 planned expansion candidates, 204 expansion market rows, one residual slot, exact readiness-field routing, anti-lookahead cutoffs, and zero evidence/release claims."
+    },
+    "src/security_identity_publisher.py": {
+      "expected_sha256": "841f630bcfbad64c4b527ecf3c200f43bba581aa16c645b6d1318776e6776190",
+      "reason": "Verified canonical stable-ID publisher: recompute candidate identity from embedded dated evidence, reproduce remaining queue/summary exactly, enforce monotonic identity progress and current source hashes, require exact candidate SHA approval, and atomically update only canonical identity outputs."
+    },
+    "tests/test_security_identity_publisher.py": {
+      "expected_sha256": "4c3f3a11ddd74916fa5ed78c486ec5c461081d6cbd3232770ee1f75e6f43dcd7",
+      "reason": "Regression coverage for staged-bundle verification, tamper detection, exact approval SHA, partial promotion, regression rejection, and embedded evidence reconstruction."
     }
   },
   "schema_version": "2",
