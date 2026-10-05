@@ -2452,8 +2452,8 @@
       "reason": "Cumulative stable-ID staging: automatically carry forward previously promoted embedded canonical evidence, deduplicate by evidence_id, bind the candidate to the exact prior canonical manifest hash, and stage only monotonic additions without canonical writes."
     },
     "tests/test_security_identity_evidence_stager.py": {
-      "expected_sha256": "b7b630d19e9313b1304d136b91fdd4d551bcb2e78fdde7519358242d8ade0104",
-      "reason": "Regression coverage for cumulative prior+new identity evidence, evidence-id conflict rejection, required embedded proof for promoted state, and receipt accounting of prior versus new evidence."
+      "expected_sha256": "83f5f3cde1c4e4bb6af04d8c083c6c243b705b6bc66ce77489cc2527357dc150",
+      "reason": "Regression coverage for cumulative prior+new identity evidence, evidence-id conflict rejection, required embedded proof for promoted state, receipt accounting of prior versus new evidence, and JSON fixture mutation handling."
     },
     "src/g5_control_gap_planner.py": {
       "expected_sha256": "a58f0cc6ac2207f00e2c6beb7dae89467df454538fa84c8ce82414ec9a123947",
