@@ -28,15 +28,21 @@ def _control_csv(path: Path, event_dates: list[str]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
-        for index, event_date in enumerate(event_dates, 1):
-            writer.writerow(
-                {
-                    "event_date": event_date,
-                    "historical_symbol": f"TEST{index}",
-                    "available_at": f"{event_date}T08:00:00-05:00",
-                    "sector": "TECH",
-                }
+        for event_date in event_dates:
+            symbols = (
+                ["ADBE", "LBMH", "WG"]
+                if event_date == "2014-12-15"
+                else ["TEST1", "TEST2", "TEST3"]
             )
+            for symbol in symbols:
+                writer.writerow(
+                    {
+                        "event_date": event_date,
+                        "historical_symbol": symbol,
+                        "available_at": f"{event_date}T08:00:00-05:00",
+                        "sector": "TECH",
+                    }
+                )
 
 
 def _manifest(tmp_path: Path, csv_path: Path, *, sha: str | None = None, license_reference: str = "AUTHORIZED-TEST") -> Path:
@@ -301,6 +307,62 @@ def test_source_availability_after_first_event_cutoff_fails_closed(tmp_path: Pat
             activate_dates=["2014-12-15"],
             output_contract=tmp_path / "active-late.json",
             replacement_exclusions_output=tmp_path / "remaining-late.json",
+            base_contract=ROOT / "config/metadata_sources.public_progress.json",
+            events_path=ROOT / "data/processed/historical_events.csv",
+        )
+
+
+def test_non_candidate_symbol_fails_closed(tmp_path: Path):
+    data = tmp_path / "noncandidate.csv"
+    fields = ["event_date", "historical_symbol", "available_at", "sector"]
+    with data.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        for symbol in ["ADBE", "LBMH", "NOT_A_CANONICAL_CONTROL"]:
+            writer.writerow(
+                {
+                    "event_date": "2014-12-15",
+                    "historical_symbol": symbol,
+                    "available_at": "2014-12-15T08:00:00-05:00",
+                    "sector": "TECH",
+                }
+            )
+    manifest = _manifest(tmp_path, data)
+
+    with pytest.raises(activation.G5ControlActivationError, match="canonical G5 candidate plan"):
+        activation.build_activation_contract(
+            source_manifest=manifest,
+            activate_dates=["2014-12-15"],
+            output_contract=tmp_path / "active-noncandidate.json",
+            replacement_exclusions_output=tmp_path / "remaining-noncandidate.json",
+            base_contract=ROOT / "config/metadata_sources.public_progress.json",
+            events_path=ROOT / "data/processed/historical_events.csv",
+        )
+
+
+def test_activation_requires_at_least_three_canonical_candidate_symbols(tmp_path: Path):
+    data = tmp_path / "two-candidates.csv"
+    fields = ["event_date", "historical_symbol", "available_at", "sector"]
+    with data.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        for symbol in ["ADBE", "LBMH"]:
+            writer.writerow(
+                {
+                    "event_date": "2014-12-15",
+                    "historical_symbol": symbol,
+                    "available_at": "2014-12-15T08:00:00-05:00",
+                    "sector": "TECH",
+                }
+            )
+    manifest = _manifest(tmp_path, data)
+
+    with pytest.raises(activation.G5ControlActivationError, match="fewer than three canonical"):
+        activation.build_activation_contract(
+            source_manifest=manifest,
+            activate_dates=["2014-12-15"],
+            output_contract=tmp_path / "active-two.json",
+            replacement_exclusions_output=tmp_path / "remaining-two.json",
             base_contract=ROOT / "config/metadata_sources.public_progress.json",
             events_path=ROOT / "data/processed/historical_events.csv",
         )

@@ -4,15 +4,21 @@ import argparse
 import csv
 import hashlib
 import json
+import tempfile
 from datetime import date
 from pathlib import Path
 from typing import Any
 
+import g5_control_acquisition_planner as control_planner
 import metadata_resolver as resolver
 
 
 DEFAULT_BASE_CONTRACT = Path("config/metadata_sources.public_progress.json")
 DEFAULT_EVENTS = Path("data/processed/historical_events.csv")
+DEFAULT_MARKET_REQUIREMENTS = Path(
+    "data/processed/coverage_plan_real/source_date_requirements.csv"
+)
+DEFAULT_PLANNING_UNIVERSE = Path("data/raw/hacked_earnings_jfe/SampleFirms.csv")
 
 
 class G5ControlActivationError(ValueError):
@@ -67,6 +73,40 @@ def _event_context(events_path: Path) -> tuple[dict[str, int], dict[str, Any]]:
     if not counts:
         raise G5ControlActivationError("historical events contain no event dates")
     return counts, cutoffs
+
+
+def _canonical_candidate_keys(
+    *,
+    events_path: Path,
+    market_requirements_path: Path,
+    planning_universe_path: Path,
+) -> tuple[set[tuple[str, str]], set[tuple[str, str]]]:
+    with tempfile.TemporaryDirectory(prefix="g5-control-activation-plan-") as raw_tmp:
+        outdir = Path(raw_tmp)
+        control_planner.build(
+            events_path=events_path,
+            requirements_path=market_requirements_path,
+            planning_universe_path=planning_universe_path,
+            output_dir=outdir,
+        )
+        _, all_rows = _read_csv(outdir / "g5_candidate_symbol_dates.csv")
+        _, primary_rows = _read_csv(outdir / "g5_primary_candidate_symbol_dates.csv")
+
+    all_keys = {
+        (str(row["event_date"])[:10], str(row["candidate_symbol"]).strip().upper())
+        for row in all_rows
+    }
+    primary_keys = {
+        (str(row["event_date"])[:10], str(row["candidate_symbol"]).strip().upper())
+        for row in primary_rows
+    }
+    if not all_keys or not primary_keys:
+        raise G5ControlActivationError("canonical G5 candidate plan is empty")
+    if not primary_keys.issubset(all_keys):
+        raise G5ControlActivationError(
+            "canonical G5 primary candidates are not a subset of the candidate universe"
+        )
+    return all_keys, primary_keys
 
 
 def _load_current_exclusions(
@@ -142,6 +182,8 @@ def _load_source_manifest(
     currently_excluded_dates: set[str],
     activated_dates: set[str],
     existing_source_ids: set[str],
+    allowed_candidate_keys: set[tuple[str, str]],
+    primary_candidate_keys: set[tuple[str, str]],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], set[str]]:
     path = manifest_path.expanduser().resolve()
     obj = json.loads(path.read_text(encoding="utf-8"))
@@ -156,6 +198,7 @@ def _load_source_manifest(
     contract_sources: list[dict[str, Any]] = []
     source_audit: list[dict[str, Any]] = []
     observed_dates: set[str] = set()
+    observed_candidate_keys: set[tuple[str, str]] = set()
     seen_ids: set[str] = set()
 
     for index, raw_source in enumerate(raw_sources, 1):
@@ -267,6 +310,13 @@ def _load_source_manifest(
                 raise G5ControlActivationError(
                     f"control source {source_id} row {row_no}: availability is after first event cutoff"
                 )
+            candidate_key = (event_date, symbol)
+            if candidate_key not in allowed_candidate_keys:
+                raise G5ControlActivationError(
+                    f"control source {source_id} row {row_no}: "
+                    f"{symbol}|{event_date} is not in the canonical G5 candidate plan"
+                )
+            observed_candidate_keys.add(candidate_key)
             source_dates.add(event_date)
         observed_dates.update(source_dates)
 
@@ -287,6 +337,9 @@ def _load_source_manifest(
                 "notes": str(raw_source.get("notes", "")).strip(),
             }
         )
+        source_candidate_keys = {
+            key for key in observed_candidate_keys if key[0] in source_dates
+        }
         source_audit.append(
             {
                 "source_id": source_id,
@@ -294,6 +347,10 @@ def _load_source_manifest(
                 "sha256": actual_sha,
                 "row_count": len(rows),
                 "event_dates": sorted(source_dates),
+                "canonical_candidate_symbol_date_count": len(source_candidate_keys),
+                "primary_candidate_symbol_date_count": len(
+                    source_candidate_keys & primary_candidate_keys
+                ),
                 "license_reference_present": True,
             }
         )
@@ -304,6 +361,17 @@ def _load_source_manifest(
             "activated dates are absent from all staged control sources: "
             + ", ".join(missing_activation_dates)
         )
+    for event_date in sorted(activated_dates):
+        symbols = {
+            symbol
+            for observed_date, symbol in observed_candidate_keys
+            if observed_date == event_date
+        }
+        if len(symbols) < 3:
+            raise G5ControlActivationError(
+                f"activated date {event_date} has fewer than three canonical "
+                f"G5 candidate symbols in staged sources: {len(symbols)}"
+            )
     return contract_sources, source_audit, observed_dates
 
 
@@ -315,6 +383,8 @@ def build_activation_contract(
     replacement_exclusions_output: Path,
     base_contract: Path = DEFAULT_BASE_CONTRACT,
     events_path: Path = DEFAULT_EVENTS,
+    market_requirements_path: Path = DEFAULT_MARKET_REQUIREMENTS,
+    planning_universe_path: Path = DEFAULT_PLANNING_UNIVERSE,
 ) -> dict[str, Any]:
     event_counts, event_cutoffs = _event_context(events_path)
     required_dates = set(event_counts)
@@ -333,6 +403,11 @@ def build_activation_contract(
             "activation dates are not currently reviewed exclusions: " + ", ".join(missing)
         )
 
+    candidate_keys, primary_candidate_keys = _canonical_candidate_keys(
+        events_path=events_path,
+        market_requirements_path=market_requirements_path,
+        planning_universe_path=planning_universe_path,
+    )
     existing_source_ids = {
         str(source.get("source_id", "")).strip()
         for source in raw.get("sources", [])
@@ -345,6 +420,8 @@ def build_activation_contract(
         currently_excluded_dates=set(current_exclusions),
         activated_dates=activated,
         existing_source_ids=existing_source_ids,
+        allowed_candidate_keys=candidate_keys,
+        primary_candidate_keys=primary_candidate_keys,
     )
 
     remaining_rows = [
@@ -429,6 +506,18 @@ def build_activation_contract(
         "remaining_excluded_date_count": len(remaining_rows),
         "required_event_date_count": len(required_dates),
         "expected_control_dates_resolved_after_validation": expected_resolved,
+        "candidate_plan_inputs": {
+            "market_requirements": {
+                "path": str(market_requirements_path.expanduser().resolve()),
+                "sha256": _sha256(market_requirements_path.expanduser().resolve()),
+            },
+            "planning_universe": {
+                "path": str(planning_universe_path.expanduser().resolve()),
+                "sha256": _sha256(planning_universe_path.expanduser().resolve()),
+            },
+            "candidate_symbol_date_count": len(candidate_keys),
+            "primary_candidate_symbol_date_count": len(primary_candidate_keys),
+        },
         "private_sources": source_audit,
         "canonical_outputs_modified": False,
         "control_readiness_promoted": False,
@@ -516,6 +605,16 @@ def main() -> int:
     parser.add_argument("--activate-date", action="append", required=True)
     parser.add_argument("--base-contract", type=Path, default=DEFAULT_BASE_CONTRACT)
     parser.add_argument("--events", type=Path, default=DEFAULT_EVENTS)
+    parser.add_argument(
+        "--market-requirements",
+        type=Path,
+        default=DEFAULT_MARKET_REQUIREMENTS,
+    )
+    parser.add_argument(
+        "--planning-universe",
+        type=Path,
+        default=DEFAULT_PLANNING_UNIVERSE,
+    )
     parser.add_argument("--output-contract", type=Path, required=True)
     parser.add_argument("--replacement-exclusions-output", type=Path, required=True)
     parser.add_argument("--receipt-output", type=Path)
@@ -530,6 +629,8 @@ def main() -> int:
         replacement_exclusions_output=args.replacement_exclusions_output,
         base_contract=args.base_contract,
         events_path=args.events,
+        market_requirements_path=args.market_requirements,
+        planning_universe_path=args.planning_universe,
     )
     if args.verify_resolver_dir is not None:
         result["resolver_validation"] = validate_resolver_output(
