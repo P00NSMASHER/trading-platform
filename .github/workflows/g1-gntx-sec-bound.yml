@@ -1,0 +1,28 @@
+name: G1 GNTX SEC public-time bound
+on:
+  push:
+    branches: [g1/research-gntx-sec-bound]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Read official SEC acceptance timestamp
+        run: |
+          python - <<'PY'
+          import urllib.request,re
+          urls=[
+            "https://www.sec.gov/Archives/edgar/data/355811/000035581113000046/0000355811-13-000046-index.html",
+            "https://www.sec.gov/Archives/edgar/data/355811/000035581113000046/0000355811-13-000046.txt",
+          ]
+          for u in urls:
+            try:
+              req=urllib.request.Request(u,headers={"User-Agent":"G1 research contact research@example.com","Accept-Encoding":"identity"})
+              txt=urllib.request.urlopen(req,timeout=20).read().decode("utf-8","replace")
+              print("URL",u,"LEN",len(txt))
+              for pat in [r'Accepted[^0-9]*(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})',r'<ACCEPTANCE-DATETIME>(\d+)',r'20131022\d{6}']:
+                print("MATCH",pat,re.findall(pat,txt,re.I)[:20])
+            except Exception as e: print("ERR",u,repr(e))
+          PY
