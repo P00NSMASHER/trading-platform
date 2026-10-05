@@ -2502,6 +2502,14 @@
     "tests/test_g5_external_metadata_adapter.py": {
       "expected_sha256": "80dff7eba574b409729141e387d36d94f0c98836408607992a10332dbfeaac6e",
       "reason": "Regression coverage for G5 external metadata aliases, source hashes, point-in-time cutoffs, candidate scoping, prohibited retrospective/post-event columns, same-timestamp conflicts, and non-evidence receipts."
+    },
+    "src/g5_derived_market_metadata_adapter.py": {
+      "expected_sha256": "2d4f8205f188b29a1521f2a8e2f5cab65fa564e04f05669c741e001cd777ef73",
+      "reason": "G5 derived market metadata intake: compute only strictly pre-cutoff price, market cap, 21-prior-day volatility, same-minute baseline volume/turnover/spread, option contract-volume liquidity, and pre-event return from real G2/G4 inputs while keeping outputs non-evidence until canonical resolver gates pass."
+    },
+    "tests/test_g5_derived_market_metadata_adapter.py": {
+      "expected_sha256": "0d414cff9384f4b7b08548bee4ef8ef89210cf114d62445f8baaa6e049496f8c",
+      "reason": "Regression coverage for completed-minute anti-lookahead, prior-day volatility, point-in-time shares availability, baseline-history requirements, option-liquidity definition, and zero G5 readiness/release claims."
     }
   },
   "schema_version": "2",
