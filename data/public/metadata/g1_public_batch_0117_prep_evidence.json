@@ -1,0 +1,142 @@
+{
+  "schema_version": "g1-public-batch-evidence-v2",
+  "batch_id": "0117",
+  "lane": "worker-2",
+  "state": "PREPARED",
+  "base_main_sha": "60764bc4494820e36c001fe13a5e6cbe0a83740e",
+  "expected_baseline": {
+    "exact": 164,
+    "fail_closed": 10,
+    "total": 174
+  },
+  "expected_after_gated_integration": {
+    "exact": 171,
+    "fail_closed": 3,
+    "total": 174
+  },
+  "publish_authorized": false,
+  "authority_note": "Preparation only. Canonical regeneration, publisher/PR, and merge require a valid live controller token and full exact-head gates.",
+  "primary_evidence": {
+    "family": "federal_court_public_distribution_record",
+    "court": "E.D.N.Y.",
+    "case": "United States v. Vitaly Korchevsky, No. 1:15-cr-00381",
+    "docket": "gov.uscourts.nyed.373762",
+    "document": "367-2",
+    "exhibit": "GX 8002",
+    "url": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
+    "interpretation": "Filed GX 8002 public-distribution table supplies explicit Press Release / Distribution Time clocks. This source family and America/New_York EST/EDT normalization are already canonical in merged G1 court batches, including 0116; SEC exhibits below corroborate release identity only."
+  },
+  "extraction_provenance": {
+    "github_actions_run_id": 37268374589,
+    "artifact_name": "g1-gx8002-court-map-2592192e4fd38b14a021d36de7319db332379e38",
+    "artifact_id": 11326693734,
+    "artifact_sha256": "254e78dcb6218e3cd31cc9bf50a6ec639c966a037957629912af181432a6990e",
+    "mapping_rule": "Exact event_id-bound ticker/year + first documented illicit-trade minute mapping; raw GX 8002 row ID retained. Convenience headline from PDF layout is not used for identity."
+  },
+  "identity_corroboration": {
+    "repository": "vgreg/hacked_earnings_jfe",
+    "commit": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+    "canonical_index": "data/processed/hacked_earnings_jfe/event_press_release_index.csv",
+    "purpose": "Pinned member corroborates exact target date/member; official SEC Exhibit 99.1 is the controlling identity corroboration for this prep."
+  },
+  "items": [
+    {
+      "event_id": "HEJFE-B5A8A297D14CD19D",
+      "historical_symbol": "TXT",
+      "event_date": "2015-04-27",
+      "first_documented_illicit_trade_ts": "2015-04-27T15:34:00-04:00",
+      "gx8002_row_id": 1947,
+      "press_release_distribution_date": "2015-04-28",
+      "public_announcement_ts": "2015-04-28T06:30:00-04:00",
+      "source_code": "BW",
+      "information_asymmetry_seconds": 53760,
+      "release_title": "Textron Reports First Quarter 2015 Income from Continuing Operations of $0.46 per Share, up 48.4%; Revenues up 7.9%",
+      "release_member": "2015/QTR2/23579_20150428_0.txt",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/217346/000110465915030725/a15-10040_1ex99d1.htm"
+    },
+    {
+      "event_id": "HEJFE-FBA59D82CEE8FD00",
+      "historical_symbol": "CGNX",
+      "event_date": "2015-02-12",
+      "first_documented_illicit_trade_ts": "2015-02-12T14:04:00-05:00",
+      "gx8002_row_id": 1861,
+      "press_release_distribution_date": "2015-02-12",
+      "public_announcement_ts": "2015-02-12T16:06:00-05:00",
+      "source_code": "BW",
+      "information_asymmetry_seconds": 7320,
+      "release_title": "Cognex Reports Record Results for 2014",
+      "release_member": "2015/QTR1/75654_20150212_0.txt",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/851205/000115752315000551/a51039264ex99_1.htm"
+    },
+    {
+      "event_id": "HEJFE-4E643D38FFB3016E",
+      "historical_symbol": "PNRA",
+      "event_date": "2015-02-11",
+      "first_documented_illicit_trade_ts": "2015-02-11T14:58:00-05:00",
+      "gx8002_row_id": 1857,
+      "press_release_distribution_date": "2015-02-11",
+      "public_announcement_ts": "2015-02-11T17:28:00-05:00",
+      "source_code": "MW",
+      "information_asymmetry_seconds": 9000,
+      "release_title": "Panera Bread Company Reports Q4 2014 Diluted EPS of $1.82 and Fiscal Year 2014 Diluted EPS of $6.64",
+      "release_member": "2015/QTR1/76695_20150211_0.txt",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/724606/000072460615000002/a20141230exhibit991.htm"
+    },
+    {
+      "event_id": "HEJFE-81F188C0D790FE70",
+      "historical_symbol": "CREE",
+      "event_date": "2015-01-20",
+      "first_documented_illicit_trade_ts": "2015-01-20T15:39:00-05:00",
+      "gx8002_row_id": 1811,
+      "press_release_distribution_date": "2015-01-20",
+      "public_announcement_ts": "2015-01-20T16:01:00-05:00",
+      "source_code": "BW",
+      "information_asymmetry_seconds": 1320,
+      "release_title": "Cree Reports Financial Results for the Second Quarter of Fiscal Year 2015",
+      "release_member": "2015/QTR1/78875_20150120_0.txt",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/895419/000089541915000004/ex9912qfy2015.htm"
+    },
+    {
+      "event_id": "HEJFE-54A5D1D8A5B593C8",
+      "historical_symbol": "NUAN",
+      "event_date": "2015-02-05",
+      "first_documented_illicit_trade_ts": "2015-02-05T15:33:00-05:00",
+      "gx8002_row_id": 1848,
+      "press_release_distribution_date": "2015-02-05",
+      "public_announcement_ts": "2015-02-05T16:03:00-05:00",
+      "source_code": "BW",
+      "information_asymmetry_seconds": 1800,
+      "release_title": "Nuance Announces First Quarter Fiscal 2015 Results",
+      "release_member": "2015/QTR1/82759_20150205_0.txt",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1002517/000100251715000010/ex991pressreleasedecember3.htm"
+    },
+    {
+      "event_id": "HEJFE-198DE6D99E934F32",
+      "historical_symbol": "EW",
+      "event_date": "2011-04-20",
+      "first_documented_illicit_trade_ts": "2011-04-20T14:29:00-04:00",
+      "gx8002_row_id": 934,
+      "press_release_distribution_date": "2011-04-20",
+      "public_announcement_ts": "2011-04-20T16:01:00-04:00",
+      "source_code": "MW",
+      "information_asymmetry_seconds": 5520,
+      "release_title": "Edwards Lifesciences Reports Strong First Quarter Results Driven by Sales Growth of 18.8 Percent",
+      "release_member": "2011/QTR2/87657_20110420_0.txt",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1099800/000110465911021363/a11-10591_1ex99d1.htm"
+    },
+    {
+      "event_id": "HEJFE-A3C5C43F6AC75C44",
+      "historical_symbol": "PRU",
+      "event_date": "2015-05-06",
+      "first_documented_illicit_trade_ts": "2015-05-06T15:47:00-04:00",
+      "gx8002_row_id": 1979,
+      "press_release_distribution_date": "2015-05-06",
+      "public_announcement_ts": "2015-05-06T16:07:00-04:00",
+      "source_code": "BW",
+      "information_asymmetry_seconds": 1200,
+      "release_title": "Prudential Financial, Inc. Announces First Quarter 2015 Results",
+      "release_member": "2015/QTR2/89258_20150506_0.txt",
+      "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1137774/000119312515174562/d917306dex991.htm"
+    }
+  ]
+}
