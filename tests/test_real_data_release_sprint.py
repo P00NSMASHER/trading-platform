@@ -305,3 +305,82 @@ def test_security_identity_status_rejects_nonreconciling_partial_progress(tmp_pa
     with pytest.raises(ValueError, match="do not reconcile"):
         sprint._security_identity_status(identity)
 
+def test_refresh_coverage_can_preview_noncanonical_identity_path(tmp_path: Path):
+    coverage = tmp_path / "coverage.json"
+    coverage.write_text(
+        (ROOT / "data/processed/coverage_plan_real/coverage_summary.json").read_text(
+            encoding="utf-8"
+        ),
+        encoding="utf-8",
+    )
+    gates = tmp_path / "gates.csv"
+    gates.write_text(
+        (ROOT / "data/processed/coverage_plan_real/unresolved_gates.csv").read_text(
+            encoding="utf-8"
+        ),
+        encoding="utf-8",
+    )
+    candidate = tmp_path / "identity.json"
+    identity = json.loads(
+        (ROOT / "data/processed/security_identity_real/security_identity_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    for event in identity["events"]:
+        event["verified_required_dates"] = list(event["required_dates"])
+        event["unverified_required_dates"] = []
+        event["identity_status"] = "FULL_REQUIRED_DATE_IDENTITY_VERIFIED"
+    identity["state"]["baseline_identity_verified_count"] = 3654
+    identity["state"]["total_identity_verified_count"] = 3828
+    identity["state"]["baseline_identity_unverified_count"] = 0
+    identity["state"]["ready_for_non_synthetic_market_join"] = True
+    identity["state"]["reasons"] = []
+    candidate.write_text(json.dumps(identity, indent=2) + "\n", encoding="utf-8")
+
+    refreshed = sprint.refresh_coverage(
+        coverage_summary_path=coverage,
+        metadata_readiness_path=ROOT / "data/processed/authorized_input_real/metadata_readiness_summary.json",
+        metadata_quality_path=ROOT / "data/processed/authorized_input_real/metadata_quality_summary.json",
+        requirements_manifest_path=ROOT / "data/processed/real_data_release_sprint/requirements_manifest.json",
+        unresolved_gates_path=gates,
+        security_identity_path=candidate,
+    )
+
+    assert refreshed["metadata_gate_overlay"]["G2_STABLE_SECURITY_IDENTITY"] == "READY"
+    assert "G2_STABLE_SECURITY_IDENTITY" not in refreshed["blocking_gates"]
+    assert refreshed["security_identity_gate"]["baseline_identity_unverified_count"] == 0
+    assert refreshed["security_identity_gate"]["baseline_identity_verified_count"] == 3654
+
+
+def test_build_status_can_preview_noncanonical_identity_path(tmp_path: Path):
+    candidate = tmp_path / "identity.json"
+    identity = json.loads(
+        (ROOT / "data/processed/security_identity_real/security_identity_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    for event in identity["events"]:
+        event["verified_required_dates"] = list(event["required_dates"])
+        event["unverified_required_dates"] = []
+        event["identity_status"] = "FULL_REQUIRED_DATE_IDENTITY_VERIFIED"
+    identity["state"]["baseline_identity_verified_count"] = 3654
+    identity["state"]["total_identity_verified_count"] = 3828
+    identity["state"]["baseline_identity_unverified_count"] = 0
+    identity["state"]["ready_for_non_synthetic_market_join"] = True
+    identity["state"]["reasons"] = []
+    candidate.write_text(json.dumps(identity, indent=2) + "\n", encoding="utf-8")
+
+    out = tmp_path / "status.json"
+    status = sprint.build_status(
+        requirements_manifest_path=ROOT / "data/processed/real_data_release_sprint/requirements_manifest.json",
+        coverage_summary_path=ROOT / "data/processed/coverage_plan_real/coverage_summary.json",
+        metadata_readiness_path=ROOT / "data/processed/authorized_input_real/metadata_readiness_summary.json",
+        metadata_quality_path=ROOT / "data/processed/authorized_input_real/metadata_quality_summary.json",
+        outpath=out,
+        security_identity_path=candidate,
+    )
+
+    assert status["security_identity_state"]["ready_for_non_synthetic_market_join"] is True
+    assert status["security_identity_state"]["baseline_identity_unverified_count"] == 0
+    assert out.exists()
+
