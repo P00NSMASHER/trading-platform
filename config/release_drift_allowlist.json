@@ -2426,6 +2426,14 @@
     "config/security_identity_evidence.example.csv": {
       "expected_sha256": "5a6e1f1f3ffb4e222e3504a644165a319503d8e60541e90152b2927e0ba77628",
       "reason": "Header-only schema template for externally supplied authorized dated stable-ID evidence; contains no licensed data and changes no identity coverage."
+    },
+    "src/security_identity_lseg_bridge.py": {
+      "expected_sha256": "d818fc8f8ee53601836be060815d35018eb942072d0ee252e43181a53c56639f",
+      "reason": "Fail-closed exact-date bridge from hash-backed authorized historical RIC validation receipts into the merged dated stable-ID evidence schema; emits one-day intervals only and requires an explicit authorization reference."
+    },
+    "tests/test_security_identity_lseg_bridge.py": {
+      "expected_sha256": "88e5d7f9dd22579ca711d0153130aa6911425a7e2cf29a846182be821eea90bb",
+      "reason": "Regression coverage for exact-date identity evidence bridging, including observed trade/quote requirement, receipt hash binding, candidate consistency, authorization reference, conflict rejection, and direct acceptance by the stable-ID gate."
     }
   },
   "schema_version": "2",
