@@ -1,0 +1,26 @@
+name: G1 GNTX page metadata
+on:
+  push:
+    branches: [g1/research-gntx-page-metadata]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Inspect Gentex release HTML metadata
+        run: |
+          python - <<'PY'
+          import urllib.request,re,html
+          url="https://ir.gentex.com/node/11061"
+          req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
+          raw=urllib.request.urlopen(req,timeout=30).read().decode("utf-8","replace")
+          print("LEN",len(raw))
+          for line in raw.splitlines():
+            low=line.lower()
+            if any(k in low for k in ["2013-10-22","2013-10-21","datepublished","published_time","article:published","field--name-field-nir-news-date","08:","07:","09:","timestamp","created"]):
+              print("META",line[:3000])
+          for m in re.finditer(r'2013.{0,120}',raw,re.I|re.S):
+            print("DATECTX",re.sub(r"\s+"," ",m.group(0))[:500])
+          PY
