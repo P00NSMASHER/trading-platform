@@ -1,0 +1,99 @@
+From https://github.com/P00NSMASHER/trading-platform
+ * branch              main       -> FETCH_HEAD
+HEAD is now at a3fe4734 Assign CREE G1 residual to Worker 2 (#371)
+{
+  "exact": 173,
+  "reviewed_excluded": 1,
+  "new_events": [
+    "HEJFE-81F188C0D790FE70"
+  ]
+}
+...........................................................              [100%]
+59 passed in 0.43s
+{
+  "directories": {
+    "/home/runner/work/trading-platform/trading-platform/private_runtime/audit": {
+      "mode": "0o700",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/private_runtime/backups": {
+      "mode": "0o700",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/private_runtime/exports": {
+      "mode": "0o700",
+      "ok": true
+    }
+  },
+  "files": {
+    "/home/runner/work/trading-platform/trading-platform/config/runtime.demo.toml": {
+      "mode": "0o600",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/data/processed/case_demo/cases.sqlite": {
+      "mode": "0o600",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/data/processed/model_demo/model_bundle.joblib": {
+      "mode": "0o600",
+      "ok": true
+    },
+    "/home/runner/work/trading-platform/trading-platform/data/processed/model_demo/training_manifest.json": {
+      "mode": "0o600",
+      "ok": true
+    }
+  },
+  "ok": true
+}
+........................................................................ [  8%]
+........................................................................ [ 17%]
+..................................................................F..... [ 25%]
+........................................................................ [ 34%]
+........................................................................ [ 42%]
+........................................................................ [ 51%]
+........................................................................ [ 60%]
+........................................................................ [ 68%]
+........................................................................ [ 77%]
+........................................................................ [ 85%]
+........................................................................ [ 94%]
+................................................                         [100%]
+=================================== FAILURES ===================================
+____________ test_remaining_exclusions_stay_blank_and_step9_blocked ____________
+
+    def test_remaining_exclusions_stay_blank_and_step9_blocked():
+        readiness=json.loads((META / "metadata_readiness_summary.json").read_text())
+>       assert (readiness["announcement_exact_resolved"],readiness["announcement_events_excluded"]) == (172,2)
+E       assert (173, 1) == (172, 2)
+E         
+E         At index 0 diff: 173 != 172
+E         
+E         Full diff:
+E           (
+E         -     172,
+E         ?       ^
+E         +     173,
+E         ?       ^
+E         -     2,
+E         ?     ^
+E         +     1,
+E         ?     ^
+E           )
+
+tests/test_g1_public_batch_0032.py:36: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_g1_public_batch_0032.py::test_remaining_exclusions_stay_blank_and_step9_blocked - assert (173, 1) == (172, 2)
+  
+  At index 0 diff: 173 != 172
+  
+  Full diff:
+    (
+  -     172,
+  ?       ^
+  +     173,
+  ?       ^
+  -     2,
+  ?     ^
+  +     1,
+  ?     ^
+    )
+1 failed, 839 passed in 67.24s (0:01:07)
