@@ -2376,8 +2376,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "84fe369992d72c5f8bbc767e6c7d1a7474846a8543c5f52a71fea88fa0c7a24f",
-      "reason": "Regression coverage for partial stable-ID progress, fully completed 3828/3828 identity, and fail-closed rejection of non-reconciling identity counts."
+      "expected_sha256": "dab6850ab0773a53f248abc601c9d1f1f61bcf7bdf411b1c16ed70ab0e8f37f0",
+      "reason": "Regression coverage for partial stable-ID progress, fully completed 3828/3828 identity, fail-closed rejection of non-reconciling identity counts, and explicit pytest exception assertions."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",
