@@ -25,6 +25,8 @@ def test_trial_task_plan_covers_full_vendor_confirmed_2012_2015_scope():
     assert manifest["page_limit"] == 10000
     assert manifest["coverage_claimed"] is False
     assert manifest["runtime_safety"]["execute_requires_explicit_ack"] == "--ack-trial-active"
+    assert manifest["runtime_safety"]["execute_requires_retention_readiness"] == str(runner.DEFAULT_VENDOR_READINESS)
+    assert manifest["runtime_safety"]["required_retention_state"] == runner.REQUIRED_RETENTION_STATE
     assert manifest["runtime_safety"]["no_coverage_promotion"] is True
 
 
@@ -37,6 +39,40 @@ def test_osi_symbol_generation_matches_cboe_compact_format():
         runner.osi_symbol("AF", "2012-01-21", "P", "10.5")
         == "AF120121P00010500"
     )
+
+
+def test_retention_gate_rejects_default_delete_return_state(tmp_path: Path):
+    readiness = tmp_path / "vendor_readiness.json"
+    readiness.write_text(json.dumps({
+        "policy": {"retention_rights_required_before_bulk_acquisition": True},
+        "external_state": {
+            "cboe_trial_retention_rights": (
+                "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES"
+            )
+        },
+    }), encoding="utf-8")
+
+    try:
+        runner.require_retention_authority(readiness)
+    except PermissionError as exc:
+        assert "written retention authority is not verified" in str(exc)
+    else:
+        raise AssertionError("expected fail-closed retention gate")
+
+
+def test_retention_gate_accepts_only_explicit_written_authority(tmp_path: Path):
+    readiness = tmp_path / "vendor_readiness.json"
+    readiness.write_text(json.dumps({
+        "policy": {"retention_rights_required_before_bulk_acquisition": True},
+        "external_state": {
+            "cboe_trial_retention_rights": runner.REQUIRED_RETENTION_STATE
+        },
+    }), encoding="utf-8")
+
+    result = runner.require_retention_authority(readiness)
+    assert result["verified"] is True
+    assert result["state"] == runner.REQUIRED_RETENTION_STATE
+    assert result["source_path"] == str(readiness)
 
 
 def test_urls_are_historical_bounded_and_do_not_contain_credentials():
@@ -209,6 +245,15 @@ def test_execute_slice_is_bounded_and_never_promotes_coverage(monkeypatch, tmp_p
         }
 
     monkeypatch.setattr(runner, "download_task", fake_download)
+    monkeypatch.setattr(
+        runner,
+        "require_retention_authority",
+        lambda: {
+            "verified": True,
+            "state": runner.REQUIRED_RETENTION_STATE,
+            "source_path": str(runner.DEFAULT_VENDOR_READINESS),
+        },
+    )
     result = runner.execute_slice(
         object(),
         tasks,
@@ -222,6 +267,27 @@ def test_execute_slice_is_bounded_and_never_promotes_coverage(monkeypatch, tmp_p
     assert result["tasks_total"] == 3
     assert result["validation_promoted"] is False
     assert result["g2_coverage_change"] == 0
+
+
+def test_execute_slice_rejects_missing_retention_authority(monkeypatch, tmp_path: Path):
+    tasks = [runner.TrialTask("2012-01-03", "AF")]
+
+    def blocked():
+        raise PermissionError("bulk Cboe acquisition blocked")
+
+    monkeypatch.setattr(runner, "require_retention_authority", blocked)
+    try:
+        runner.execute_slice(
+            object(),
+            tasks,
+            tmp_path,
+            start=0,
+            limit=1,
+        )
+    except PermissionError as exc:
+        assert "bulk Cboe acquisition blocked" in str(exc)
+    else:
+        raise AssertionError("expected retention authority failure")
 
 
 def test_dry_run_output_contains_no_credentials():
