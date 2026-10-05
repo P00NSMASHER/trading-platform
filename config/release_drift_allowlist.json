@@ -54,8 +54,8 @@
       "reason": "Intentional post-Step21 security hardening; configured model verification reused by backup/restore/recovery paths"
     },
     "src/evaluation_release_controller.py": {
-      "expected_sha256": "44b4143eb95cc2ed115cad51dc6b40aa12c46220685eeb6e32f5ca6b405073f8",
-      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
+      "expected_sha256": "2f1f2608355d66d26084261144486aca528541ee622b2597b3e3106286007e74",
+      "reason": "G5 release hardening: independently rerun the exact matched-control quality gate, fail closed on missing or invalid match evidence, and hash-bind match events, balance, manifest, and quality receipt into release authority."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "748ffe77a01fb15aad9f1e2ab81af5e09bf6aa58a03568d2632d722b0f5f7ab8",
@@ -90,8 +90,8 @@
       "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
     },
     "tests/test_evaluation_release_controller.py": {
-      "expected_sha256": "322079365adc67b068f88fc6e3ba1ea0b5a3e6700eba93c80aa6e629c2beabee",
-      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
+      "expected_sha256": "a1a8d670a14493b2a7d7f2cd11b303e37e9f44054263c93f7e1cf804b1d258d9",
+      "reason": "Regression coverage for independent G5 match-quality release blocking and exact hash binding of match events, balance, manifest, and gate receipt on the positive controller path."
     },
     "tests/test_historical_market_backfill.py": {
       "expected_sha256": "24b1e98c1911ffd88bd62319144d7cc91402ae8489366aa598fe9216be4272bb",
@@ -1972,8 +1972,8 @@
       "reason": "Real-data sprint stable-ID reconciliation now accepts optional baseline_identity_verified_count, requires event-date count to remain 174, and verifies event + baseline verified + baseline unresolved equals the 3828 required symbol-dates."
     },
     "src/real_data_replay.py": {
-      "expected_sha256": "438ef2f5b9cd5d986f74c974b3715524e7bf37a0ba4876b044d8cde58af0489d",
-      "reason": "Release-authority stable security-identity hardening: require an attached, hash-bearing, zero-unresolved stable-ID gate independently of market-data readiness before offline evaluation can unlock."
+      "expected_sha256": "7c00a1357ec331d5abfae261b64914cfaed53c4f262a9466eb524f578054a413",
+      "reason": "Real-data replay now runs the G5 match-quality gate immediately after matching and blocks challenger/release stages unless the exact match set passes contamination, completeness, and hard balance checks."
     },
     "src/research_receipt_rebuild.py": {
       "expected_sha256": "aad23317e159d300a462575ca8c998ed8891b62e45caf1ee626ca8034f0a3c31",
@@ -2004,8 +2004,8 @@
       "reason": "Fail-closed adapter for explicitly authorized dated PERMNO/ticker name-history evidence: exact PERMNO and historical-symbol matching on each requested date, source SHA and authorization binding, no current-ticker substitution or interval inference, and no coverage change until canonical evidence is applied."
     },
     "src/software_readiness_certification.py": {
-      "expected_sha256": "b472c49c8b88740ffea4c8639117390565b66395337dc1d02f5c76ad9a6511c2",
-      "reason": "Software-proof replay: execute the complete provider-agnostic replay with the synthetic example contract, prove it blocks real evaluation for the correct evidence reasons, and recertify software readiness with the replay status artifact present."
+      "expected_sha256": "29751cacdde897951b1d2cde95ef936d612c845d7ef9afab7f6d73af92ee4399",
+      "reason": "Software-readiness certification now treats the G5 match-quality gate as required release software and includes its hostile regression suite."
     },
     "src/surveillance_feature_diagnostics.py": {
       "expected_sha256": "d9f8459d35bc7e99c941af00187b96ccd3ded2d9b33913f37b4310ebc24c59a8",
@@ -2652,8 +2652,8 @@
       "reason": "Regression coverage for exact dated stocknames identity evidence, symbol/date mismatches, active-identifier ambiguity, duplicate same-ticker rows, open-ended histories, malformed intervals, authorization/hash requirements, and the current 3654-request/146-PERMNO queue shape."
     },
     "tests/test_software_readiness_certification.py": {
-      "expected_sha256": "81b0996abf82efb14b88427812dcfdbfa3bf56e5f037f05bc07ff62d0d3c3174",
-      "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
+      "expected_sha256": "d45ca6f4cc8afa65b9cff1cccbea54aa382f11a858899123ea73ee40dd87319d",
+      "reason": "Regression coverage requires the G5 match-quality hostile tests to remain part of the certified software-readiness test groups."
     },
     "tests/test_surveillance_feature_diagnostics.py": {
       "expected_sha256": "e6d43b6e1bb2ca13722c9f4986d2f156daff1458acb57bdee62db9a82f91cfff",
