@@ -4,6 +4,7 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 from pathlib import Path
 
 
@@ -12,6 +13,13 @@ DEFAULT_EVENTS = Path("data/processed/historical_events.csv")
 DEFAULT_REQUIREMENTS = Path("data/processed/coverage_plan_real/symbol_date_requirements.csv")
 DEFAULT_LISTING = Path("data/public/metadata/g3_primary_listing_history.csv")
 DEFAULT_OUTPUT = Path("data/processed/security_identity_real/security_identity_manifest.json")
+
+DATED_EVIDENCE_STATUS = "VALIDATED_DATE_SPECIFIC_STABLE_ID"
+DATED_EVIDENCE_SOURCE_FAMILIES = frozenset({
+    "licensed_stable_id_master",
+    "authorized_market_security_master",
+    "authorized_historical_lseg_timesales",
+})
 
 
 class SecurityIdentityError(ValueError):
@@ -43,6 +51,7 @@ def build_manifest_from_rows(
     requirements: list[dict[str, str]],
     listings: list[dict[str, str]],
     *,
+    dated_evidence: list[dict[str, str]] | None = None,
     source_sha256: dict[str, str] | None = None,
 ) -> dict:
     if not events:
@@ -117,6 +126,7 @@ def build_manifest_from_rows(
         )
 
     dates_by_event: dict[str, set[str]] = {event_id: set() for event_id in event_by_id}
+    required_permno_dates: set[tuple[str, str]] = set()
     requirement_rows = 0
     for i, row in enumerate(requirements, 2):
         requirement_rows += 1
@@ -150,9 +160,47 @@ def build_manifest_from_rows(
             raise SecurityIdentityError(
                 f"requirement row {i}: one symbol/date resolves to multiple PERMNOs {sorted(permnos)}"
             )
+        required_permno_dates.add((next(iter(permnos)), trade_date))
+
+    dated_evidence_by_key: dict[tuple[str, str], dict[str, str]] = {}
+    for i, row in enumerate(dated_evidence or [], 2):
+        permno = row.get("permno", "").strip()
+        symbol = row.get("historical_symbol", "").strip().upper()
+        trade_date = row.get("trade_date", "").strip()
+        market_identifier = row.get("market_identifier", "").strip()
+        source_family = row.get("source_family", "").strip()
+        source_reference = row.get("source_reference", "").strip()
+        source_digest = row.get("source_sha256", "").strip().lower()
+        validation_status = row.get("validation_status", "").strip()
+        if row.get("research_use_only") != "1":
+            raise SecurityIdentityError(f"dated evidence row {i}: research_use_only must equal 1")
+        if validation_status != DATED_EVIDENCE_STATUS:
+            raise SecurityIdentityError(f"dated evidence row {i}: invalid validation_status")
+        if source_family not in DATED_EVIDENCE_SOURCE_FAMILIES:
+            raise SecurityIdentityError(f"dated evidence row {i}: unsupported source_family")
+        if not market_identifier or not source_reference:
+            raise SecurityIdentityError(f"dated evidence row {i}: market_identifier and source_reference are required")
+        if not re.fullmatch(r"[0-9a-f]{64}", source_digest):
+            raise SecurityIdentityError(f"dated evidence row {i}: source_sha256 must be lowercase SHA-256")
+        if permno not in permno_to_symbols:
+            raise SecurityIdentityError(f"dated evidence row {i}: unknown PERMNO {permno}")
+        expected_symbols = permno_to_symbols[permno]
+        if symbol not in expected_symbols:
+            raise SecurityIdentityError(
+                f"dated evidence row {i}: historical_symbol mismatch for PERMNO {permno}"
+            )
+        key = (permno, trade_date)
+        if key not in required_permno_dates:
+            raise SecurityIdentityError(
+                f"dated evidence row {i}: {permno}/{trade_date} is not a required symbol-date"
+            )
+        if key in dated_evidence_by_key:
+            raise SecurityIdentityError(
+                f"dated evidence row {i}: duplicate PERMNO/date evidence for {permno}/{trade_date}"
+            )
+        dated_evidence_by_key[key] = row
 
     event_records: list[dict] = []
-    verified_date_count = 0
     unverified_date_count = 0
     for event_id in sorted(event_by_id):
         event = event_by_id[event_id]
@@ -164,9 +212,13 @@ def build_manifest_from_rows(
             raise SecurityIdentityError(
                 f"event {event_id}: event date {event['event_date']} is absent from requirements"
             )
-        verified = [event["event_date"]]
-        unverified = [value for value in dates if value != event["event_date"]]
-        verified_date_count += len(verified)
+        verified = [
+            value
+            for value in dates
+            if value == event["event_date"]
+            or (event["permno"], value) in dated_evidence_by_key
+        ]
+        unverified = [value for value in dates if value not in set(verified)]
         unverified_date_count += len(unverified)
         event_records.append({
             "event_id": event_id,
@@ -210,7 +262,7 @@ def build_manifest_from_rows(
             "unique_permno_count": len(permno_to_symbols),
             "unique_historical_symbol_count": len(symbol_to_permnos),
             "required_symbol_date_count": requirement_rows,
-            "event_date_identity_verified_count": verified_date_count,
+            "event_date_identity_verified_count": len(event_by_id),
             "baseline_identity_unverified_count": unverified_date_count,
             "symbol_to_multiple_permno_collision_count": 0,
             "permno_to_multiple_symbol_collision_count": 0,
@@ -253,16 +305,23 @@ def build_manifest(
     events_path: Path = DEFAULT_EVENTS,
     requirements_path: Path = DEFAULT_REQUIREMENTS,
     listing_path: Path = DEFAULT_LISTING,
+    dated_evidence_path: Path | None = None,
 ) -> dict:
+    source_hashes = {
+        "historical_events": _sha256(events_path),
+        "symbol_date_requirements": _sha256(requirements_path),
+        "event_date_listing_evidence": _sha256(listing_path),
+    }
+    dated_rows: list[dict[str, str]] | None = None
+    if dated_evidence_path is not None:
+        dated_rows = _read_csv(dated_evidence_path)
+        source_hashes["dated_security_identity_evidence"] = _sha256(dated_evidence_path)
     return build_manifest_from_rows(
         _read_csv(events_path),
         _read_csv(requirements_path),
         _read_csv(listing_path),
-        source_sha256={
-            "historical_events": _sha256(events_path),
-            "symbol_date_requirements": _sha256(requirements_path),
-            "event_date_listing_evidence": _sha256(listing_path),
-        },
+        dated_evidence=dated_rows,
+        source_sha256=source_hashes,
     )
 
 
@@ -277,12 +336,13 @@ def main() -> int:
     parser.add_argument("--events", type=Path, default=DEFAULT_EVENTS)
     parser.add_argument("--requirements", type=Path, default=DEFAULT_REQUIREMENTS)
     parser.add_argument("--listing", type=Path, default=DEFAULT_LISTING)
+    parser.add_argument("--dated-evidence", type=Path)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
 
     rendered = render_manifest(
-        build_manifest(args.events, args.requirements, args.listing)
+        build_manifest(args.events, args.requirements, args.listing, args.dated_evidence)
     )
     if args.check:
         return 0 if args.output.exists() and args.output.read_text(encoding="utf-8") == rendered else 2
