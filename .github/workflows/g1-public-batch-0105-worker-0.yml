@@ -21,7 +21,7 @@ jobs:
       - name: Generate deterministic G1 batch 0105
         run: |
           set +e
-          python scripts/g1_batch_0105_generate.py > /tmp/g1-output.log 2>&1
+          PYTHONPATH=src python scripts/g1_batch_0105_generate.py > /tmp/g1-output.log 2>&1
           status=$?
           if [ "$status" -ne 0 ]; then
             cp /tmp/g1-output.log g1_batch_0105_failure.log
