@@ -198,13 +198,16 @@ def _build_real(tmp_path: Path):
 def test_real_request_packet_reconciles_every_routable_g5_identity_date(tmp_path: Path):
     interval, expanded, summary, out = _build_real(tmp_path)
 
-    assert summary["state"]["date_level_request_count"] == (
-        expanded["expanded_stocknames_ready_request_count"]
-    )
-    assert summary["state"]["grouped_permno_symbol_request_count"] <= (
-        interval["symbol_level_interval_request_count"]
-    )
-    assert summary["state"]["unique_historical_symbol_count"] <= (
+    assert expanded["identity_queue_count"] == 2707
+    assert expanded["exact_date_ready_request_count"] == 986
+    assert expanded["symbol_level_lead_added_request_count"] == 1721
+    assert expanded["expanded_stocknames_ready_request_count"] == 2707
+    assert expanded["residual_symbol_discovery_request_count"] == 0
+
+    assert summary["state"]["date_level_request_count"] == 2707
+    assert summary["state"]["grouped_permno_symbol_request_count"] == 88
+    assert summary["state"]["unique_historical_symbol_count"] == 88
+    assert summary["state"]["grouped_permno_symbol_request_count"] == (
         interval["symbol_level_interval_request_count"]
     )
     assert summary["state"]["unique_permno_count"] > 0
