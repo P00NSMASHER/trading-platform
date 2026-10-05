@@ -2486,6 +2486,14 @@
     "tests/test_g5_prior_fallback_planner.py": {
       "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
       "reason": "Regression coverage locks the final structural planning slot to deterministic prior-only candidate ADBE from a 2014-12-11 observation for the 2014-12-15 gap and proves future-only symbols are never selected."
+    },
+    "src/security_identity_publisher.py": {
+      "expected_sha256": "841f630bcfbad64c4b527ecf3c200f43bba581aa16c645b6d1318776e6776190",
+      "reason": "Verified canonical stable-ID publisher: recompute candidate identity from embedded dated evidence, reproduce remaining queue/summary exactly, enforce monotonic identity progress and current source hashes, require exact candidate SHA approval, and atomically update only canonical identity outputs."
+    },
+    "tests/test_security_identity_publisher.py": {
+      "expected_sha256": "4c3f3a11ddd74916fa5ed78c486ec5c461081d6cbd3232770ee1f75e6f43dcd7",
+      "reason": "Regression coverage for staged-bundle verification, tamper detection, exact approval SHA, partial promotion, regression rejection, and embedded evidence reconstruction."
     }
   },
   "schema_version": "2",
