@@ -7,34 +7,28 @@ permissions:
 jobs:
   research:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 4
     steps:
-      - name: Extract public search result snippets
+      - name: Search indexed Marketwired URL
         run: |
           python - <<'PY'
-          import urllib.request,urllib.parse,re,html
+          import urllib.request,urllib.parse,re,html,base64
           qs=[
-            '"Gentex Reports Third Quarter 2013 Financial Results" Marketwire',
-            '"Gentex Reports Third Quarter 2013 Financial Results" "8:00 AM ET"',
-            '"Gentex Reports Third Quarter 2013 Financial Results" "8:01 AM ET"',
-            '"Gentex Reports Third Quarter 2013 Financial Results" "8:02 AM ET"',
-            '"Gentex Reports Third Quarter 2013 Financial Results" "8:03 AM ET"',
-            '"Gentex Reports Third Quarter 2013 Financial Results" "8:04 AM ET"',
-            '"Gentex Reports Third Quarter 2013 Financial Results" "8:05 AM ET"',
+            'site:marketwired.com/press-release/ Gentex "Third Quarter 2013 Financial Results" GNTX',
+            'site:marketwired.com "Gentex Reports Third Quarter 2013 Financial Results"',
+            '"Gentex Reports Third Quarter 2013 Financial Results" "marketwired.com/press-release"',
+            '"Gentex Reports Third Quarter 2013 Financial Results" GNTX Marketwired',
           ]
           ua={"User-Agent":"Mozilla/5.0"}
           for q in qs:
-            print("\nQUERY",q)
-            url="https://www.bing.com/search?q="+urllib.parse.quote(q)+"&count=20"
-            req=urllib.request.Request(url,headers=ua)
-            raw=urllib.request.urlopen(req,timeout=20).read().decode("utf-8","replace")
-            blocks=re.findall(r'<li class="b_algo".*?</li>',raw,re.S)
-            print("RESULTS",len(blocks))
-            for block in blocks:
+            print("QUERY",q)
+            url="https://www.bing.com/search?q="+urllib.parse.quote(q)+"&count=50"
+            raw=urllib.request.urlopen(urllib.request.Request(url,headers=ua),timeout=20).read().decode("utf-8","replace")
+            for block in re.findall(r'<li class="b_algo".*?</li>',raw,re.S):
               href=re.search(r'<h2[^>]*>.*?<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>',block,re.S)
               cap=re.search(r'<p[^>]*>(.*?)</p>',block,re.S)
               if not href: continue
               title=html.unescape(re.sub(r"<[^>]+>"," ",href.group(2)))
-              snippet=html.unescape(re.sub(r"<[^>]+>"," ",cap.group(1) if cap else ""))
-              print("RESULT",href.group(1),re.sub(r"\s+"," ",title),re.sub(r"\s+"," ",snippet))
+              snip=html.unescape(re.sub(r"<[^>]+>"," ",cap.group(1) if cap else ""))
+              print("RESULT",href.group(1),re.sub(r"\s+"," ",title),re.sub(r"\s+"," ",snip))
           PY
