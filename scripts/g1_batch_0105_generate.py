@@ -42,8 +42,8 @@ specs=[
     "explicit_release_clock_text": "Filed GX 8002 explicitly records NATI Press Release / Distribution Time 2015-04-28 16:02:00-04:00 Eastern",
     "release_title": "Exact target release preserved as 2015/QTR2/81501_20150428_0.txt",
     "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
-    "corroboration_reference": "https://github.com/vgreg/hacked_earnings_jfe",
-    "corroboration_basis": "Pinned exact event/date press-release member 2015/QTR2/81501_20150428_0.txt at source commit c23c7d79d067a79d70cf20e31b072d3703497eae corroborates identity.",
+    "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/935494/000093549415000009/form8-k.htm",
+    "corroboration_basis": "Official SEC Exhibit 99.x corroborates issuer, release identity/content and date; the pinned public member preserves exact target mapping.",
     "timestamp_evidence_kind": "explicit_release_clock",
     "source_family": "federal_court_public_distribution_record",
     "source_grade": "A",
@@ -62,8 +62,8 @@ specs=[
     "explicit_release_clock_text": "Filed GX 8002 explicitly records ILMN Press Release / Distribution Time 2015-04-21 16:05:00-04:00 Eastern",
     "release_title": "Exact target release preserved as 2015/QTR2/88446_20150421_0.txt",
     "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
-    "corroboration_reference": "https://github.com/vgreg/hacked_earnings_jfe",
-    "corroboration_basis": "Pinned exact event/date press-release member 2015/QTR2/88446_20150421_0.txt at source commit c23c7d79d067a79d70cf20e31b072d3703497eae corroborates identity.",
+    "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1110803/000111080315000114/a1q158-k.htm",
+    "corroboration_basis": "Official SEC Exhibit 99.x corroborates issuer, release identity/content and date; the pinned public member preserves exact target mapping.",
     "timestamp_evidence_kind": "explicit_release_clock",
     "source_family": "federal_court_public_distribution_record",
     "source_grade": "A",
@@ -82,8 +82,8 @@ specs=[
     "explicit_release_clock_text": "Filed GX 8002 explicitly records SGEN Press Release / Distribution Time 2015-04-30 16:02:00-04:00 Eastern",
     "release_title": "Exact target release preserved as 2015/QTR2/88949_20150430_0.txt",
     "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
-    "corroboration_reference": "https://github.com/vgreg/hacked_earnings_jfe",
-    "corroboration_basis": "Pinned exact event/date press-release member 2015/QTR2/88949_20150430_0.txt at source commit c23c7d79d067a79d70cf20e31b072d3703497eae corroborates identity.",
+    "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1060736/000119312515161846/d918945dex991.htm",
+    "corroboration_basis": "Official SEC Exhibit 99.x corroborates issuer, release identity/content and date; the pinned public member preserves exact target mapping.",
     "timestamp_evidence_kind": "explicit_release_clock",
     "source_family": "federal_court_public_distribution_record",
     "source_grade": "A",
@@ -102,8 +102,8 @@ specs=[
     "explicit_release_clock_text": "Filed GX 8002 explicitly records CMP Press Release / Distribution Time 2015-04-27 16:15:00-04:00 Eastern",
     "release_title": "Exact target release preserved as 2015/QTR2/89952_20150427_0.txt",
     "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
-    "corroboration_reference": "https://github.com/vgreg/hacked_earnings_jfe",
-    "corroboration_basis": "Pinned exact event/date press-release member 2015/QTR2/89952_20150427_0.txt at source commit c23c7d79d067a79d70cf20e31b072d3703497eae corroborates identity.",
+    "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1227654/000114036115016472/ex99_1.htm",
+    "corroboration_basis": "Official SEC Exhibit 99.x corroborates issuer, release identity/content and date; the pinned public member preserves exact target mapping.",
     "timestamp_evidence_kind": "explicit_release_clock",
     "source_family": "federal_court_public_distribution_record",
     "source_grade": "A",
@@ -122,8 +122,8 @@ specs=[
     "explicit_release_clock_text": "Filed GX 8002 explicitly records MIC Press Release / Distribution Time 2015-02-18 16:36:00-05:00 Eastern",
     "release_title": "Exact target release preserved as 2015/QTR1/90507_20150218_0.txt",
     "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
-    "corroboration_reference": "https://github.com/vgreg/hacked_earnings_jfe",
-    "corroboration_basis": "Pinned exact event/date press-release member 2015/QTR1/90507_20150218_0.txt at source commit c23c7d79d067a79d70cf20e31b072d3703497eae corroborates identity.",
+    "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1289790/000115752315000634/a51043090.htm",
+    "corroboration_basis": "Official SEC Exhibit 99.x corroborates issuer, release identity/content and date; the pinned public member preserves exact target mapping.",
     "timestamp_evidence_kind": "explicit_release_clock",
     "source_family": "federal_court_public_distribution_record",
     "source_grade": "A",
@@ -142,8 +142,8 @@ specs=[
     "explicit_release_clock_text": "Filed GX 8002 explicitly records INWK Press Release / Distribution Time 2015-02-12 16:10:00-05:00 Eastern",
     "release_title": "Exact target release preserved as 2015/QTR1/91432_20150212_0.txt",
     "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
-    "corroboration_reference": "https://github.com/vgreg/hacked_earnings_jfe",
-    "corroboration_basis": "Pinned exact event/date press-release member 2015/QTR1/91432_20150212_0.txt at source commit c23c7d79d067a79d70cf20e31b072d3703497eae corroborates identity.",
+    "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1350381/000110465915009525/a15-4458_1ex99d1.htm",
+    "corroboration_basis": "Official SEC Exhibit 99.x corroborates issuer, release identity/content and date; the pinned public member preserves exact target mapping.",
     "timestamp_evidence_kind": "explicit_release_clock",
     "source_family": "federal_court_public_distribution_record",
     "source_grade": "A",
@@ -162,8 +162,8 @@ specs=[
     "explicit_release_clock_text": "Filed GX 8002 explicitly records CLD Press Release / Distribution Time 2015-02-17 16:10:00-05:00 Eastern",
     "release_title": "Exact target release preserved as 2015/QTR1/93095_20150217_0.txt",
     "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
-    "corroboration_reference": "https://github.com/vgreg/hacked_earnings_jfe",
-    "corroboration_basis": "Pinned exact event/date press-release member 2015/QTR1/93095_20150217_0.txt at source commit c23c7d79d067a79d70cf20e31b072d3703497eae corroborates identity.",
+    "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1441849/000110465915011271/a15-1789_4ex99d1.htm",
+    "corroboration_basis": "Official SEC Exhibit 99.x corroborates issuer, release identity/content and date; the pinned public member preserves exact target mapping.",
     "timestamp_evidence_kind": "explicit_release_clock",
     "source_family": "federal_court_public_distribution_record",
     "source_grade": "A",
@@ -182,8 +182,8 @@ specs=[
     "explicit_release_clock_text": "Filed GX 8002 explicitly records TW Press Release / Distribution Time 2015-05-05 06:00:00-04:00 Eastern",
     "release_title": "Exact target release preserved as 2015/QTR2/93223_20150505_0.txt",
     "source_reference": "https://storage.courtlistener.com/recap/gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf",
-    "corroboration_reference": "https://github.com/vgreg/hacked_earnings_jfe",
-    "corroboration_basis": "Pinned exact event/date press-release member 2015/QTR2/93223_20150505_0.txt at source commit c23c7d79d067a79d70cf20e31b072d3703497eae corroborates identity.",
+    "corroboration_reference": "https://www.sec.gov/Archives/edgar/data/1470215/000115752315001556/a51094387ex99_1.htm",
+    "corroboration_basis": "Official SEC Exhibit 99.x corroborates issuer, release identity/content and date; the pinned public member preserves exact target mapping.",
     "timestamp_evidence_kind": "explicit_release_clock",
     "source_family": "federal_court_public_distribution_record",
     "source_grade": "A",
@@ -262,7 +262,7 @@ hints["current_g1_state"].update(public_exact_batch_count=82,exact_resolved_even
 for item in items:
     hints["validation_probes"].append(dict(item,probe_id=f'{item["historical_symbol"]}-batch0105',historical_event_match=True,
       exact_clock_observed=True,exact_public_release_ts=item["public_announcement_ts"],evidence_eligible=False,
-      disposition="RESOLVED_IN_BATCH_0105",reason="Promoted from filed federal-court GX 8002 explicit public-distribution clock with pinned pinned press-release identity corroboration."))
+      disposition="RESOLVED_IN_BATCH_0105",reason="Promoted from filed federal-court GX 8002 explicit public-distribution clock with pinned SEC Exhibit and pinned press-release identity corroboration."))
 save(hints_path,hints)
 
 assert rebuild.rebuild(ROOT,publish=True)["after"]["up_to_date"]
@@ -338,7 +338,7 @@ permitted={WORKFLOW,SCRIPT,str(contract_path),str(exclusion_path),str(hints_path
 str(cp),str(cp.parent/"unresolved_gates.csv"),str(sd/"step_status.json"),"data/processed/research_receipt_bundle.json",
 "data/processed/real_data_replay/real_data_replay_status.json","data/public/metadata/g1_public_batch_0105_integration_spec.json","data/public/metadata/g1_public_batch_0105_prep_evidence.json","tests/test_g1_public_batch_0105_prep.py"} | {str(x) for x in Path("tests").glob("test_g1_public_batch_*.py")} | {str(md/name) for name in rebuild.METADATA_RECEIPTS}
 assert changed<=permitted,f"Unexpected {changed-permitted}"
-allowp=Path("config/release_drift_allowlist.json");allow=load(allowp);reason="G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with pinned press-release identity corroboration and prior evidence preserved."
+allowp=Path("config/release_drift_allowlist.json");allow=load(allowp);reason="G1 batch 0105 Worker-0 filed federal-court public-distribution clocks for eight events; deterministic 145 exact / 29 reviewed exclusions with SEC Exhibit and pinned press-release identity corroboration and prior evidence preserved."
 for name in sorted(changed):
     sec="intentional_release_modifications" if name in allow["intentional_release_modifications"] else "repository_additions"
     allow[sec][name]={"expected_sha256":sha(name),"reason":reason}
