@@ -2570,6 +2570,14 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
+    },
+    "src/g2_cboe_2011_option_diagnostic.py": {
+      "expected_sha256": "30f7b4bea27751a24ede7d13633e51bc922f6a29f4c7e9d57eb5194ac418f491",
+      "reason": "Diagnostic-only Cboe 2011 OPRA availability probe: bounded historical option-trade/quote sample, explicit trial-active acknowledgement, no vendor-floor override and zero G2 coverage promotion."
+    },
+    "tests/test_g2_cboe_2011_option_diagnostic.py": {
+      "expected_sha256": "746762f6afd68fbbcf6d72f9e0e8ef078bdc50088d38a6a555ab8939f28e0406",
+      "reason": "Regression coverage for the diagnostic-only Cboe 2011 OPRA probe, including returned-OSI quote routing, fail-closed empty history, explicit non-coverage semantics, and bounded request behavior."
     }
   },
   "schema_version": "2",
