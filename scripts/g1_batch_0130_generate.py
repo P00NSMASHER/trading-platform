@@ -121,7 +121,7 @@ fields = ["event_id", "historical_symbol", "event_date", "public_announcement_ts
 contract_path = Path("config/metadata_sources.public_progress.json")
 contract = load(contract_path)
 contract["sources"].insert(0, {
-    "source_id": "public-worker2-federal-court-gx8002-batch-0130",
+    "source_id": "public-worker0-globenewswire-marketwired-batch-0130",
     "record_kind": "announcement_timestamp",
     "source_family": "official_newswire_archive",
     "path": str(BATCH),
@@ -136,7 +136,7 @@ contract["sources"].insert(0, {
     "notes": "One exact first-public publisher clock from the migrated Marketwired/GlobeNewswire archive; substitute times are not used.",
 })
 contract["reviewed_announcement_exclusions"].update(expected_count=NEW_EXCLUDED, expected_sha256=digest(exclusion_path))
-contract["purpose"] = f"Cumulative public point-in-time metadata: G1 has {NEW_EXACT} exact release timestamps and {NEW_EXCLUDED} reviewed fail-closed exclusions; exact-timing and all independent non-synthetic release locks remain fail-closed."
+contract["purpose"] = f"Cumulative public point-in-time metadata: G1 has {NEW_EXACT} exact release timestamps and {NEW_EXCLUDED} reviewed fail-closed exclusions; G1 exact timing is complete while downstream G2/G5 gates remain independent."
 save(contract_path, contract)
 
 hints["priority_events"] = [row for row in hints.get("priority_events", []) if row.get("event_id") not in ids]
@@ -243,6 +243,9 @@ for filename in test_files:
             ('len(excluded) == 1', 'len(excluded) == 0'),
             ('len(ex)==1', 'len(ex)==0'),
             ('len(ex) == 1', 'len(ex) == 0'),
+            ('step9["status"]=="SOURCE_BLOCKED"', 'step9["status"]=="PASS"'),
+            ('step9["status"] == "SOURCE_BLOCKED"', 'step9["status"] == "PASS"'),
+            ('readiness["ready_g1_exact_timing_analysis"] is False', 'readiness["ready_g1_exact_timing_analysis"] is True'),
         ]
     for old, new in pairs:
         text = text.replace(old, new)
@@ -255,9 +258,9 @@ assert "88 public exact-time batches / 173 exact-resolved" in text
 text = text.replace("88 public exact-time batches / 173 exact-resolved", "89 public exact-time batches / 174 exact-resolved", 1)
 text += """
 
-### Batch 0130: TXT, CGNX, PNRA, NUAN, EW, PRU
+### Batch 0130: GNTX
 
-Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for one Worker-2 event. Every release identity/date is independently corroborated by an exact official SEC Exhibit 99.x, with pinned public press-release archive members used as additional identity cross-checks. This advances G1 from 172 exact / 2 reviewed exclusions to 173 exact / 1 reviewed exclusion. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+GlobeNewswire migrated Marketwired release ID 930758 exposes the exact first-public publisher timestamp for Gentex Q3 2013 results as October 22, 2013 08:03 ET, with machine metadata 2013-10-22T12:03:00Z. Gentex IR and SEC Exhibit 99.1 independently corroborate identity/date/content. Conference-call, EDGAR, archive-capture and inferred times are not used. This advances G1 from 173 exact / 1 reviewed exclusion to 174/174 exact / 0 exclusions. Step 9 passes.
 """
 docs.write_text(text, encoding="utf-8")
 
