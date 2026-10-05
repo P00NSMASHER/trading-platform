@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **83 public exact-time batches / 150 exact-resolved
+The current repository state is **84 public exact-time batches / 164 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -309,3 +309,8 @@ Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-relea
 ### Batch 0113: MAT, IDTI, ISIL, VMW (2011), VMW (2013)
 
 Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for five Worker-3 events. Exact release identity/date is corroborated by pinned public press-release archive members and official SEC Exhibits 99.x. This advances G1 from 145 exact / 29 reviewed exclusions to 150 exact / 24 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+
+### Batch 0116: ACO, KELYA, CMTL, VEEV, CACI, DGI, SWKS, NKE, P, COLM, DGI, POWI, TRAK, SCVL
+
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for fourteen Worker-1 events. Every release identity/date is independently corroborated by an exact official SEC Exhibit 99.x, with pinned public press-release archive members used as additional identity cross-checks where available. This advances G1 from 150 exact / 24 reviewed exclusions to 164 exact / 10 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
