@@ -215,3 +215,135 @@ def test_staging_writer_creates_only_candidate_outputs(tmp_path: Path):
     assert all(Path(path).exists() for path in outputs.values())
     receipt = Path(outputs["receipt"]).read_text(encoding="utf-8")
     assert '"canonical_write_performed": false' in receipt
+
+def _write_evidence_csv(path: Path, rows: list[dict[str, str]]) -> None:
+    import csv
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=gate.IDENTITY_EVIDENCE_FIELDS)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def test_build_staging_carries_forward_previously_promoted_evidence(tmp_path: Path):
+    events, requirements, listings = _current()
+    baseline = gate.build_manifest_from_rows(events, requirements, listings)
+    event = next(row for row in baseline["events"] if len(row["unverified_required_dates"]) >= 2)
+    first_date, second_date = event["unverified_required_dates"][:2]
+    current = gate.build_manifest_from_rows(
+        events,
+        requirements,
+        listings,
+        identity_evidence=[
+            _evidence(
+                evidence_id="PRIOR",
+                permno=event["permno"],
+                symbol=event["historical_symbol"],
+                trade_date=first_date,
+            )
+        ],
+    )
+    current_path = tmp_path / "current.json"
+    current_path.write_text(gate.render_manifest(current), encoding="utf-8")
+
+    new_path = tmp_path / "new.csv"
+    _write_evidence_csv(
+        new_path,
+        [
+            _evidence(
+                evidence_id="NEW",
+                permno=event["permno"],
+                symbol=event["historical_symbol"],
+                trade_date=second_date,
+            )
+        ],
+    )
+
+    result = stager.build_staging(
+        evidence_paths=[new_path],
+        events_path=ROOT / gate.DEFAULT_EVENTS,
+        requirements_path=ROOT / gate.DEFAULT_REQUIREMENTS,
+        listing_path=ROOT / gate.DEFAULT_LISTING,
+        current_manifest_path=current_path,
+    )
+    state = result["receipt"]["candidate_state"]
+
+    assert state["baseline_identity_verified_count"] == 2
+    assert state["baseline_identity_unverified_count"] == 3652
+    assert result["receipt"]["prior_canonical_evidence_row_count"] == 1
+    assert result["receipt"]["new_evidence_row_count"] == 1
+    assert result["receipt"]["evidence_row_count"] == 2
+    assert result["receipt"]["evidence_inputs"][0]["role"] == "prior_canonical_identity_manifest"
+
+
+def test_cumulative_staging_rejects_conflicting_reused_evidence_id(tmp_path: Path):
+    events, requirements, listings = _current()
+    baseline = gate.build_manifest_from_rows(events, requirements, listings)
+    event = next(row for row in baseline["events"] if len(row["unverified_required_dates"]) >= 2)
+    first_date, second_date = event["unverified_required_dates"][:2]
+    current = gate.build_manifest_from_rows(
+        events,
+        requirements,
+        listings,
+        identity_evidence=[
+            _evidence(
+                evidence_id="SAME",
+                permno=event["permno"],
+                symbol=event["historical_symbol"],
+                trade_date=first_date,
+            )
+        ],
+    )
+    current_path = tmp_path / "current.json"
+    current_path.write_text(gate.render_manifest(current), encoding="utf-8")
+    new_path = tmp_path / "new.csv"
+    _write_evidence_csv(
+        new_path,
+        [
+            _evidence(
+                evidence_id="SAME",
+                permno=event["permno"],
+                symbol=event["historical_symbol"],
+                trade_date=second_date,
+            )
+        ],
+    )
+
+    with pytest.raises(stager.SecurityIdentityStagingError, match="conflicts"):
+        stager.build_staging(
+            evidence_paths=[new_path],
+            events_path=ROOT / gate.DEFAULT_EVENTS,
+            requirements_path=ROOT / gate.DEFAULT_REQUIREMENTS,
+            listing_path=ROOT / gate.DEFAULT_LISTING,
+            current_manifest_path=current_path,
+        )
+
+
+def test_cumulative_staging_requires_embedded_evidence_for_promoted_state(tmp_path: Path):
+    current = json.loads((ROOT / gate.DEFAULT_OUTPUT).read_text(encoding="utf-8"))
+    current["state"]["baseline_identity_verified_count"] = 1
+    current["state"]["baseline_identity_unverified_count"] = 3653
+    current_path = tmp_path / "bad-current.json"
+    current_path.write_text(json.dumps(current, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    event = current["events"][0]
+    new_path = tmp_path / "new.csv"
+    _write_evidence_csv(
+        new_path,
+        [
+            _evidence(
+                evidence_id="NEW",
+                permno=event["permno"],
+                symbol=event["historical_symbol"],
+                trade_date=event["unverified_required_dates"][0],
+            )
+        ],
+    )
+
+    with pytest.raises(stager.SecurityIdentityStagingError, match="without embedded evidence"):
+        stager.build_staging(
+            evidence_paths=[new_path],
+            events_path=ROOT / gate.DEFAULT_EVENTS,
+            requirements_path=ROOT / gate.DEFAULT_REQUIREMENTS,
+            listing_path=ROOT / gate.DEFAULT_LISTING,
+            current_manifest_path=current_path,
+        )
+
