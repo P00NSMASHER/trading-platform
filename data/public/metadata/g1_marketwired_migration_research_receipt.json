@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "generated_for": "G1 Wire URL Dataset Miner",
+  "base_main_sha": "8014585b043217da5d5774382eb79e6a8b0972cc",
+  "canonical_state": {
+    "exact": 123,
+    "total": 174,
+    "unresolved": 51,
+    "token": "UNASSIGNED"
+  },
+  "context": {
+    "bulk_court_run": 37268374589,
+    "bulk_court_mapped": 49,
+    "remaining_unmapped": [
+      {
+        "event_id": "HEJFE-BD3F577ADD90D512",
+        "symbol": "GNTX",
+        "trade_ts": "2013-10-21 15:21:00",
+        "target_title": "Gentex Reports Third Quarter 2013 Financial Results",
+        "target_date": "2013-10-22"
+      },
+      {
+        "event_id": "HEJFE-CCC7747CFBDE893E",
+        "symbol": "PNRA",
+        "trade_ts": "2013-04-23 14:25:00",
+        "target_title": "Panera Bread Company Reports Q1 2013 diluted EPS of $1.64, up 17%",
+        "target_date": "2013-04-23"
+      }
+    ]
+  },
+  "new_source_family": {
+    "name": "Marketwired-to-GlobeNewswire migrated historical release pages",
+    "status": "VALID_FAMILY_CLUE_NOT_TARGET_CLOCK",
+    "finding": "GlobeNewswire currently hosts historical Gentex Marketwired-origin releases with explicit ET publication clocks while preserving the original '(Marketwired - date)' body marker and issuer identity.",
+    "verified_examples": [
+      {
+        "title": "Gentex Reports First Quarter Financial Results",
+        "url": "https://www.globenewswire.com/news-release/2013/04/23/930748/0/en/Gentex-Reports-First-Quarter-Financial-Results.html",
+        "clock_text": "April 23, 2013 08:04 ET"
+      },
+      {
+        "title": "Gentex Reports Second Quarter 2013 Financial Results",
+        "url": "https://www.globenewswire.com/news-release/2013/07/24/930753/0/en/Gentex-Reports-Second-Quarter-2013-Financial-Results.html",
+        "clock_text": "July 24, 2013 08:01 ET"
+      },
+      {
+        "title": "Gentex Declares Quarterly Cash Dividend",
+        "url": "https://www.globenewswire.com/news-release/2013/08/20/930754/0/en/Gentex-Declares-Quarterly-Cash-Dividend.html",
+        "clock_text": "August 20, 2013 08:04 ET"
+      },
+      {
+        "title": "Gentex Completes Acquisition of HomeLink(R)",
+        "url": "https://www.globenewswire.com/news-release/2013/09/27/930755/0/en/Gentex-Completes-Acquisition-of-HomeLink-R.html",
+        "clock_text": "September 27, 2013 15:00 ET"
+      }
+    ],
+    "prohibitions": [
+      "Do not infer target time from neighboring releases",
+      "Do not infer target URL from sequential numeric IDs",
+      "Do not treat search-engine normalized timestamps as canonical"
+    ]
+  },
+  "gntx": {
+    "exact_target_url": "https://ir.gentex.com/node/11061",
+    "source_marker": "Marketwired - Oct 22, 2013",
+    "target_clock_status": "NOT_RECOVERED",
+    "additional_family": "ADVFN/InvestorsHub preserves original Marketwire/COMTEX timestamps for Gentex historical releases",
+    "verified_advfn_examples": [
+      {
+        "title": "Gentex Reports First Quarter Financial Results",
+        "clock_text": "8:04 AM ET 4/23/13 | Marketwire"
+      },
+      {
+        "title": "Gentex Announces 1st Quarter 2013 Financial Results Conference CallWebcast",
+        "clock_text": "Apr 23, 2013 06:02:28 (ET) | Marketwired via COMTEX"
+      }
+    ],
+    "note": "Exact Oct 22 2013 Q3 item was not recovered in this bounded pass."
+  },
+  "pnra": {
+    "exact_target_url": "https://www.panerabread.com/content/dam/panerabread/documents/press/2013/St-Louis-April-23-2013.pdf",
+    "marketwired_mirror": "https://www.franchising.com/news/20130424_panera_bread_company_reports_q1_2013_diluted_eps_o.html",
+    "source_marker": "Marketwired - Apr 23, 2013",
+    "target_clock_status": "NOT_RECOVERED",
+    "note": "Franchising mirror and SEC/Panera sources establish exact identity/date but no first-public time."
+  },
+  "handoff": "Concentrate Marketwired Legacy / Legacy Mirror / URL inventory lanes on the exact GNTX and PNRA targets only. Recover an exact migrated GlobeNewswire page, archived Marketwired numeric URL, ADVFN/COMTEX item, or other timestamp-preserving exact target mirror. A clock is admissible only from an exact target page with explicit publication clock and defensible timezone."
+}
