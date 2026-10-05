@@ -2448,12 +2448,12 @@
       "reason": "Regression coverage for exact dated stocknames identity evidence, symbol/date mismatches, active-identifier ambiguity, duplicate same-ticker rows, open-ended histories, malformed intervals, authorization/hash requirements, and the current 3654-request/146-PERMNO queue shape."
     },
     "src/security_identity_evidence_stager.py": {
-      "expected_sha256": "e6c88d2c5490980cd041af75e65324eb5625c1c03864f3385177cb738853f998",
-      "reason": "End-to-end fail-closed stable-ID evidence staging: combine authorized dated evidence, build a candidate identity manifest, regenerate the remaining acquisition queue/summary, reconcile 3828 identity counts, and emit a deterministic receipt without writing canonical identity outputs."
+      "expected_sha256": "4a56909bcdd581821f2f634a2ea8f0053dce2f8da57e9e318ae4ddf509ee2291",
+      "reason": "Cumulative stable-ID staging: automatically carry forward previously promoted embedded canonical evidence, deduplicate by evidence_id, bind the candidate to the exact prior canonical manifest hash, and stage only monotonic additions without canonical writes."
     },
     "tests/test_security_identity_evidence_stager.py": {
-      "expected_sha256": "f851fbfc3c61c3a5325b8fefe1165a2691ed8e1f00f65e0a8fd6ed89303fb10f",
-      "reason": "Regression coverage for one-date progress, synthetic full 3654-date completion, terminal empty queue, duplicate/conflicting evidence rejection, and staging-only output isolation."
+      "expected_sha256": "83f5f3cde1c4e4bb6af04d8c083c6c243b705b6bc66ce77489cc2527357dc150",
+      "reason": "Regression coverage for cumulative prior+new identity evidence, evidence-id conflict rejection, required embedded proof for promoted state, receipt accounting of prior versus new evidence, and JSON fixture mutation handling."
     },
     "src/g5_control_gap_planner.py": {
       "expected_sha256": "a58f0cc6ac2207f00e2c6beb7dae89467df454538fa84c8ce82414ec9a123947",
@@ -2488,12 +2488,12 @@
       "reason": "Regression coverage locks the final structural planning slot to deterministic prior-only candidate ADBE from a 2014-12-11 observation for the 2014-12-15 gap and proves future-only symbols are never selected."
     },
     "src/security_identity_publisher.py": {
-      "expected_sha256": "841f630bcfbad64c4b527ecf3c200f43bba581aa16c645b6d1318776e6776190",
-      "reason": "Verified canonical stable-ID publisher: recompute candidate identity from embedded dated evidence, reproduce remaining queue/summary exactly, enforce monotonic identity progress and current source hashes, require exact candidate SHA approval, and atomically update only canonical identity outputs."
+      "expected_sha256": "55e14cd3b531c0117ae8f1d33b74ccc2b874d58577906ed8389069a8fa99edb3",
+      "reason": "Verified stable-ID publisher additionally rejects staging bundles built from a stale prior canonical identity manifest while preserving exact evidence/source/queue reproduction and SHA-approved promotion."
     },
     "tests/test_security_identity_publisher.py": {
-      "expected_sha256": "4c3f3a11ddd74916fa5ed78c486ec5c461081d6cbd3232770ee1f75e6f43dcd7",
-      "reason": "Regression coverage for staged-bundle verification, tamper detection, exact approval SHA, partial promotion, regression rejection, and embedded evidence reconstruction."
+      "expected_sha256": "a4154462a4ca9f6144480a57418fb8ec2ef412259a59a9e19ab2473973d198f2",
+      "reason": "Regression coverage now includes rejection of staged candidates tied to a stale canonical identity manifest."
     }
   },
   "schema_version": "2",

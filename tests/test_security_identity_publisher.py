@@ -294,3 +294,44 @@ def test_embedded_candidate_evidence_reconstructs_exactly(tmp_path: Path):
     assert len(rows) == 1
     assert rows[0]["evidence_id"] == "RIC-EVIDENCE"
     assert rows[0]["market_identifier"].endswith(".O")
+
+def test_publisher_rejects_staging_built_from_stale_canonical_manifest(tmp_path: Path):
+    events, requirements, listings = _current()
+    baseline = gate.build_manifest_from_rows(events, requirements, listings)
+    event = next(row for row in baseline["events"] if row["unverified_required_dates"])
+    trade_date = event["unverified_required_dates"][0]
+    result = stager.build_staging_from_rows(
+        events=events,
+        requirements=requirements,
+        listings=listings,
+        evidence_rows=[
+            _evidence(
+                evidence_id="ONE",
+                permno=event["permno"],
+                symbol=event["historical_symbol"],
+                trade_date=trade_date,
+            )
+        ],
+        source_sha256={
+            "historical_events": publisher._sha256_path(ROOT / gate.DEFAULT_EVENTS),
+            "symbol_date_requirements": publisher._sha256_path(
+                ROOT / gate.DEFAULT_REQUIREMENTS
+            ),
+            "event_date_listing_evidence": publisher._sha256_path(
+                ROOT / gate.DEFAULT_LISTING
+            ),
+            "prior_canonical_identity_manifest": "0" * 64,
+        },
+    )
+    staged = tmp_path / "stale-stage"
+    stager.write_staging(result, staged)
+
+    with pytest.raises(publisher.SecurityIdentityPublishError, match="stale canonical"):
+        publisher.verify_staged_bundle(
+            staged_dir=staged,
+            current_manifest_path=ROOT / gate.DEFAULT_OUTPUT,
+            events_path=ROOT / gate.DEFAULT_EVENTS,
+            requirements_path=ROOT / gate.DEFAULT_REQUIREMENTS,
+            listing_path=ROOT / gate.DEFAULT_LISTING,
+        )
+
