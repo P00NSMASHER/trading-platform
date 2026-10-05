@@ -2570,6 +2570,14 @@
     "tests/test_g5_control_identity_requirements.py": {
       "expected_sha256": "aaa5f4bf651f59266f52bba33ccaf063e2496599d5941af6c0c5a2017bfc25c3",
       "reason": "Regression coverage locks 216 primary controls, 51 unique exact-date SampleFirms identity leads, 165 primary mappings still missing exact-date public mapping, G2 identity reuse/overlap reconciliation, and zero automatic G5 readiness promotion."
+    },
+    "src/g5_control_identity_interval_requests.py": {
+      "expected_sha256": "bf118876bfa665765b8393a3a48d43fa3d9869ad75dd6d3836c54f74b25943c1",
+      "reason": "G5 identity acquisition optimization: compress unresolved control-history symbol/date requirements into one authorized stable-ID request per symbol while preserving every exact required date and refusing to assume continuous validity."
+    },
+    "tests/test_g5_control_identity_interval_requests.py": {
+      "expected_sha256": "ab5c7e24d60c4ba9813277bbdf5820364753967a3b47ebcb513847d0d84a9bdf",
+      "reason": "Regression coverage proves G5 identity request compression preserves every unresolved symbol/date exactly once, retains canonical/SampleFirms identifier hints, uses only authorized stable-ID lanes, and changes zero G5 readiness."
     }
   },
   "schema_version": "2",
