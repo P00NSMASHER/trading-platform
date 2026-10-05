@@ -53,15 +53,38 @@ def test_full_replication_quote_plan_keeps_tick_fidelity_fail_closed():
     assert candidates["ThetaData"]["source_date_rows"] == 291
     assert (
         candidates["ThetaData"]["license_status"]
-        == "PENDING_WRITTEN_USE_CLASSIFICATION_AND_RETENTION_TERMS"
+        == "WRITTEN_PRIVATE_RESEARCH_ELIGIBLE"
     )
+    assert "30 days" in candidates["ThetaData"]["retention_status"]
     assert summary["fallback_candidates"][0]["vendor"] == "algoseek"
+    assert summary["fallback_candidates"][0]["eligible_start"] == "2015-01-01"
+    assert (
+        summary["fallback_candidates"][0]["status"]
+        == "FALLBACK_2015_ONLY_NOT_ACQUIRED"
+    )
+
+    evaluation = {
+        item["vendor"]: item for item in summary["zero_cash_evaluation_candidates"]
+    }
+    assert evaluation["Cboe"]["product"] == "LiveVol Pro"
+    assert evaluation["Cboe"]["eligible_start"] == "2011-01-01"
+    assert (
+        evaluation["Cboe"]["retention_status"]
+        == "UNVERIFIED_TRIAL_EXPORT_AND_RETENTION"
+    )
+    assert evaluation["QuantHouse"]["eligible_start"] == "2005-01-01"
+    assert (
+        evaluation["QuantHouse"]["sample_status"]
+        == "ZERO_COST_EVALUATION_NOT_YET_CONFIRMED"
+    )
+
     assert summary["fidelity_requirement"]["tick_level_option_quote_updates"] is True
     assert summary["fidelity_requirement"]["minute_snapshot_substitution_allowed"] is False
     assert summary["policy"]["candidate_source_is_not_coverage"] is True
     assert summary["policy"]["purchase_not_authorized"] is True
-    assert summary["policy"]["thetadata_retail_license_not_assumed"] is True
-    assert summary["policy"]["retention_rights_not_assumed"] is True
+    assert summary["policy"]["thetadata_retail_license_not_assumed"] is False
+    assert summary["policy"]["thetadata_raw_retention_is_limited"] is True
+    assert summary["policy"]["zero_cash_evaluation_retention_not_assumed"] is True
     assert summary["policy"]["canonical_full_g2_gate_unchanged"] is True
 
 
