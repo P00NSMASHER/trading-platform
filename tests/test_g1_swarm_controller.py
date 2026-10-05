@@ -21,6 +21,7 @@ def policy() -> dict:
         },
         "token_lease_minutes": 120,
         "worker_count": 5,
+        "fail_closed_until_exact_count": 174,
         "event_owner_overrides": {
             "HEJFE-45E6DA32B37F83D4": 0,
             "HEJFE-66BA40A20548B7E3": 4,
@@ -1265,4 +1266,43 @@ def test_fetch_branch_fallbacks_paginates_matching_refs_before_priority_sort(mon
     assert len(found) == 101
     assert compare_paths[0].endswith("..." + "f" * 40)
     assert "g1/prep-0117-worker-2-current-bbbbbbb" in compares
+
+def test_controller_plan_retires_swarm_at_174_of_174(monkeypatch) -> None:
+    p = policy()
+    m = manifest()
+    monkeypatch.setattr(ctl, "manifest_state", lambda root, policy: m)
+
+    comments = [
+        comment(
+            900,
+            "2026-10-05T15:00:00Z",
+            "WORKER 0 | HEJFE-BD3F577ADD90D512/GNTX | FOUND | batch 0130 | historical stale work",
+        )
+    ]
+    plan = ctl.controller_plan(
+        root=ROOT,
+        policy=p,
+        comments=comments,
+        pulls=[],
+        refs=[],
+        compares={"__main_sha__": "complete-main"},
+        now=datetime(2026, 10, 5, 15, 1, tzinfo=timezone.utc),
+    )
+
+    assert ctl.g1_is_complete(plan["manifest"], p) is True
+    assert plan["evaluation"].state == "COMPLETE"
+    assert plan["action"] == "NONE"
+    assert plan["next_candidate"] is None
+    assert plan["prepared"] == []
+    assert plan["found_updates"] == []
+    assert plan["token"] is None
+
+
+def test_g1_completion_lock_requires_zero_unresolved() -> None:
+    p = policy()
+    complete = manifest()
+    incomplete = manifest(unresolved_symbols={"GNTX": {"HEJFE-BD3F577ADD90D512"}})
+
+    assert ctl.g1_is_complete(complete, p) is True
+    assert ctl.g1_is_complete(incomplete, p) is False
 

@@ -1580,8 +1580,8 @@
       "reason": "G1 batch 0100 Worker-0 filed federal-court exact public-distribution clocks for EHTH/BA/LSCC/GORO/GMCR; deterministic 114 exact / 60 reviewed exclusions with SEC corroboration and prior evidence preserved."
     },
     "scripts/g1_swarm_controller.py": {
-      "expected_sha256": "14ff366a294d52984681c3c477bfb75d8732f3b2b663d7e99a762efddee8d47d",
-      "reason": "G1 controller reliability: paginate all prepared refs, then prioritize newest batches so current exact-base packages cannot be hidden by GitHub's default matching-refs page; ownership, lease, and fail-closed token gates remain unchanged."
+      "expected_sha256": "34f0224e937ac7ce9b240bd4714c92b3850482048c9e8954fa5001d668289952",
+      "reason": "G1 completion lock: when canonical timing reaches 174/174 exact with zero unresolved events, retire the timestamp-recovery swarm, refuse further token assignment/advancement, and skip prep-branch discovery while preserving all fail-closed behavior below completion."
     },
     "scripts/release_attestation.py": {
       "expected_sha256": "b1294f47ee9dd62956024c6a8cf183a4736c170f4b5439c32cc896f585a0ae93",
@@ -2160,8 +2160,8 @@
       "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "tests/test_g1_swarm_controller.py": {
-      "expected_sha256": "72a796340d0ec8ffb3dd291eeb8970ccc80106f6c982b14baf30988094f02fa1",
-      "reason": "G1 controller ownership handoff: assign the retained CREE residual HEJFE-81F188C0D790FE70 to its natural Worker-2 shard while preserving all other ownership, token, lane and fail-closed rules."
+      "expected_sha256": "6a1413c4d1fffd98f6cbce46b6a0a7626654b756c1bb13c79bbc8ad198e82bbc",
+      "reason": "Regression coverage for the G1 completion lock: 174/174 exact with zero unresolved events is terminal, while any unresolved event remains in the existing fail-closed coordination path."
     },
     "tests/test_g2_candidate_route_matrix.py": {
       "expected_sha256": "e054795b597d04e589a10c8be4e4486b2d1d48efa7bfff4df43878a962df1844",
