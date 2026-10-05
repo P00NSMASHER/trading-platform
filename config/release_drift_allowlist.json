@@ -280,8 +280,8 @@
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
     "data/processed/g2_vendor_requests/cboe_trial_capacity_plan.json": {
-      "expected_sha256": "a7bc31cb22e099d09cd2574d0ac231a3af11e2f2338c34f641c9da15566dd6f3",
-      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
+      "expected_sha256": "14f18fee3d37b17d1ddbe4c495548dcbc503bde1235ce9959204225d57768dd6",
+      "reason": "Reconcile Cboe free-trial planning with the current published 500-points/day no-overage trial terms; preserve 2012 vendor floor, cap optimistic trade-only first-page capacity at 180 complete dates / 460 pairs, keep strict quote capacity and runtime/retention/coverage gates fail-closed."
     },
     "data/processed/g2_vendor_requests/cheap_route_partitions/lseg_option_residual.csv": {
       "expected_sha256": "e3a1c6a9976abe59a2dfb5055096be802699a5c02f633c81fd4bb45b44d94be0",
@@ -428,8 +428,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "data/processed/g2_vendor_requests/vendor_readiness.json": {
-      "expected_sha256": "e461e72c40792e2b3ed06deddd90ad5d11bb803f9d026ed689d86efedd7295aa",
-      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+      "expected_sha256": "675b49f88323ff62a0d26fa5127879fda9fef5c3bed338ecb4905e9ad205b1af",
+      "reason": "Reconcile Cboe free-trial planning with the current published 500-points/day no-overage trial terms; preserve 2012 vendor floor, cap optimistic trade-only first-page capacity at 180 complete dates / 460 pairs, keep strict quote capacity and runtime/retention/coverage gates fail-closed."
     },
     "data/processed/g2_vendor_requests/vendor_reply_evidence_2026-10-02.json": {
       "expected_sha256": "565dc93ed7fa119f7c236bb7895da3d1b61c47b590798004e38a86c77db5f3f8",
@@ -1696,12 +1696,12 @@
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     },
     "src/g2_cboe_free_trial_plan.py": {
-      "expected_sha256": "8da902a9c5e8e200a64ee92e8ddd787f7a1cf82c4cade6b15e0f8a5749164847",
-      "reason": "Correct Cboe free-trial planning to honor the vendor-confirmed 2012 OPRA history floor, exclude all 2011 requests, and use the vendor's trial credit guidance without claiming coverage."
+      "expected_sha256": "700ed3b15295c3afb187c4e19aa6787250607627ded1afb97530ac2e033518a9",
+      "reason": "Reconcile Cboe free-trial planning with the current published 500-points/day no-overage trial terms; preserve 2012 vendor floor, cap optimistic trade-only first-page capacity at 180 complete dates / 460 pairs, keep strict quote capacity and runtime/retention/coverage gates fail-closed."
     },
     "src/g2_cboe_free_trial_planner.py": {
-      "expected_sha256": "e7175d429578d49e1fb1cec5ec3c2d4a94459ae4c86cf33879beeab8a2ceb300",
-      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
+      "expected_sha256": "25eec66cf21990ee7b0f9d91ee632989022ba729e9b7ef0797b9b7605f3dbe5a",
+      "reason": "Reconcile Cboe free-trial planning with the current published 500-points/day no-overage trial terms; preserve 2012 vendor floor, cap optimistic trade-only first-page capacity at 180 complete dates / 460 pairs, keep strict quote capacity and runtime/retention/coverage gates fail-closed."
     },
     "src/g2_cboe_trial_bulk_runner.py": {
       "expected_sha256": "aae7c7b273ea3de69fd00807a417cff35ba3f3bede57dbc9255db53f51eef652",
@@ -1844,8 +1844,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "src/g2_vendor_readiness.py": {
-      "expected_sha256": "d809cee2a8b09379c013f23ee1a12aa521c50a525dea0661805b658eb5f41b9b",
-      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+      "expected_sha256": "b888e855301a4ef1361d84a6c1574b52148e1e09c7106d51cb3b5a742674b534",
+      "reason": "Reconcile Cboe free-trial planning with the current published 500-points/day no-overage trial terms; preserve 2012 vendor floor, cap optimistic trade-only first-page capacity at 180 complete dates / 460 pairs, keep strict quote capacity and runtime/retention/coverage gates fail-closed."
     },
     "src/g2_vendor_request_manifests.py": {
       "expected_sha256": "b14fdaf04a482e2bd6c632146fd67cf8722c5d35e37f2924fadbac09a5800838",
@@ -2280,12 +2280,12 @@
       "reason": "No-purchase Cboe equity candidate probe for the 1,242-row G2_CHAMPION_MINIMUM scope; equity trades are candidates, interval quote snapshots remain fidelity-review-required and uncounted."
     },
     "tests/test_g2_cboe_free_trial_plan.py": {
-      "expected_sha256": "c8d25b33252c65b0313821fcac58bd5fb6db03b70ecc3e9a9608c0c3c53d2752",
-      "reason": "Regression coverage for the vendor-confirmed 2012 Cboe OPRA history floor, exact 309-date/3,364-pair eligibility, and hard exclusion of all 2011 requests."
+      "expected_sha256": "a25a5e6917c72fcfd80653942a199bb9d3175117b4450657fa2587e2a2705c6c",
+      "reason": "Reconcile Cboe free-trial planning with the current published 500-points/day no-overage trial terms; preserve 2012 vendor floor, cap optimistic trade-only first-page capacity at 180 complete dates / 460 pairs, keep strict quote capacity and runtime/retention/coverage gates fail-closed."
     },
     "tests/test_g2_cboe_free_trial_planner.py": {
-      "expected_sha256": "712b07ab62f9607d422ac44c63fc34f3824933704081d52ef016ac5527ed6e39",
-      "reason": "Cboe All Access trial correction from vendor reply: daily credit limit does not gate the trial; plan full vendor-confirmed 2012+ option-trade candidate scope while keeping runtime access, license, pagination, and G2 coverage fail-closed."
+      "expected_sha256": "42a9b420d4a79696adc85d8f572bb2eeb7730175dbefac7300f6279ee6fc3a60",
+      "reason": "Reconcile Cboe free-trial planning with the current published 500-points/day no-overage trial terms; preserve 2012 vendor floor, cap optimistic trade-only first-page capacity at 180 complete dates / 460 pairs, keep strict quote capacity and runtime/retention/coverage gates fail-closed."
     },
     "tests/test_g2_cboe_trial_bulk_runner.py": {
       "expected_sha256": "230b5ba0d645165f5a0bf747ebcfc0fd0a19a10e22f239052837f202117fbd81",
@@ -2440,8 +2440,8 @@
       "reason": "Deterministic G2 vendor quote/order packet scope with exact date ranges, request counts, required canonical fields, fidelity requirements, and no automatic purchase authority."
     },
     "tests/test_g2_vendor_readiness.py": {
-      "expected_sha256": "406fe5a560896623f2758799b407ae758b283ad04f086a85890428e389480538",
-      "reason": "ThetaData written-reply operationalization: deterministic 8,888-request dry-run manifests (6,028 options + 2,860 stocks), network disabled, no credentials/purchase authority, and central readiness enforcement."
+      "expected_sha256": "5349c43ffffbc84fcea3a9a3ea736333c877035e121dd31a88fd44a6bb87e438",
+      "reason": "Reconcile Cboe free-trial planning with the current published 500-points/day no-overage trial terms; preserve 2012 vendor floor, cap optimistic trade-only first-page capacity at 180 complete dates / 460 pairs, keep strict quote capacity and runtime/retention/coverage gates fail-closed."
     },
     "tests/test_g2_vendor_request_manifests.py": {
       "expected_sha256": "706dec09963a4bbae658f4e5a7148cd04cef867a65ab0e44e6730c61ed56c993",
