@@ -1,0 +1,18 @@
+{
+  "schema_version": "1",
+  "worker": 3,
+  "batch": 118,
+  "base_main_sha": "60764bc4494820e36c001fe13a5e6cbe0a83740e",
+  "source_branch": "g1/source-0118-worker-3-bio-60764bc",
+  "source_prep_head": "616dca92231e3123e5fe022388faa485d1fe2094",
+  "expected_exact_resolved": 165,
+  "expected_reviewed_excluded": 9,
+  "event_ids": [
+    "HEJFE-2FD552B9358078C6"
+  ],
+  "court_artifact_id": 11326693734,
+  "court_artifact_sha256": "254e78dcb6218e3cd31cc9bf50a6ec639c966a037957629912af181432a6990e",
+  "token_comment_id": 5994434118,
+  "publisher_triggered_at": "2026-10-05T12:33:00Z",
+  "publisher_trigger_nonce": "worker3-bio-20261005T1233Z"
+}
