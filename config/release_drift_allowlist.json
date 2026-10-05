@@ -2572,12 +2572,12 @@
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
     },
     "src/g2_cboe_2011_option_diagnostic.py": {
-      "expected_sha256": "30f7b4bea27751a24ede7d13633e51bc922f6a29f4c7e9d57eb5194ac418f491",
-      "reason": "Diagnostic-only Cboe 2011 OPRA availability probe: bounded historical option-trade/quote sample, explicit trial-active acknowledgement, no vendor-floor override and zero G2 coverage promotion."
+      "expected_sha256": "fb05bef450150462e857b4f3065491b2b8b7274cec62d007cfe175be02ff1d33",
+      "reason": "Diagnostic-only Cboe 2011 OPRA availability probe: independently test dated contract enumeration, option trades, and strict NBBO quotes under a three-request bound; explicit trial-active acknowledgement, no vendor-floor override and zero G2 coverage promotion."
     },
     "tests/test_g2_cboe_2011_option_diagnostic.py": {
-      "expected_sha256": "746762f6afd68fbbcf6d72f9e0e8ef078bdc50088d38a6a555ab8939f28e0406",
-      "reason": "Regression coverage for the diagnostic-only Cboe 2011 OPRA probe, including returned-OSI quote routing, fail-closed empty history, explicit non-coverage semantics, and bounded request behavior."
+      "expected_sha256": "c866b9a96cdb62f51cb98b9faea3d827868945444cc2fde3d584505cf5c79946",
+      "reason": "Regression coverage for independent 2011 contract enumeration, strict trade/NBBO probing, quote testing even without trade prints, fail-closed empty history, explicit non-coverage semantics, and bounded request behavior."
     }
   },
   "schema_version": "2",
