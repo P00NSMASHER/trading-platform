@@ -16,6 +16,7 @@ import g5_control_identity_readiness_preview as identity_readiness
 import g5_control_market_vendor_bridge as market_bridge
 import g5_control_shares_reconciliation as control_shares
 import g5_external_source_queue as external_queue
+import g5_external_acquisition_packet as external_packet
 import g5_treated_metadata_requirements as treated_plan
 
 SCHEMA_VERSION = "1"
@@ -48,6 +49,7 @@ def build(
     treated_dir = output_dir / "treated"
     history_dir = output_dir / "control_history"
     external_dir = output_dir / "control_external_sources"
+    external_packet_dir = output_dir / "external_acquisition_packet"
     identity_dir = output_dir / "control_identity"
     identity_interval_dir = output_dir / "control_identity_intervals"
     identity_lead_dir = output_dir / "control_identity_stocknames_leads"
@@ -75,6 +77,13 @@ def build(
     external = external_queue.build(
         candidate_path=control_dir / "g5_primary_candidate_symbol_dates.csv",
         output_dir=external_dir,
+    )
+    external_acquisition = external_packet.build(
+        control_requests_path=external_dir / "g5_external_source_requests.csv",
+        treated_requests_path=(
+            treated_dir / "g5_treated_external_lane_requests.csv"
+        ),
+        output_dir=external_packet_dir,
     )
     identity = control_identity.build(
         control_history_path=(
@@ -228,6 +237,26 @@ def build(
         raise ValueError("primary control queue does not cover all 72 event dates")
     if control["residual_unfilled_symbol_date_slots"] != 0:
         raise ValueError("control acquisition plan still has structural gaps")
+    if int(external_acquisition["control_lane_request_count"]) != control_lanes:
+        raise ValueError(
+            "external acquisition packet control scope does not match the control lane queue"
+        )
+    if int(external_acquisition["treated_lane_request_count"]) != treated_lanes:
+        raise ValueError(
+            "external acquisition packet treated scope does not match the treated lane queue"
+        )
+    if int(external_acquisition["total_lane_request_count"]) != (
+        control_lanes + treated_lanes
+    ):
+        raise ValueError(
+            "external acquisition packet total scope does not match master external lanes"
+        )
+    if int(external_acquisition["external_field_requirement_count"]) != (
+        control_external + treated_external
+    ):
+        raise ValueError(
+            "external acquisition packet field scope does not match master requirements"
+        )
     if int(intervals["date_level_identity_requirement_count"]) != int(
         identity["identity_acquisition_queue_count"]
     ):
@@ -289,6 +318,24 @@ def build(
         "control_external_lane_request_count": control_lanes,
         "treated_external_lane_request_count": treated_lanes,
         "total_external_lane_request_count": control_lanes + treated_lanes,
+        "external_acquisition_packet": {
+            "control_lane_request_count": int(
+                external_acquisition["control_lane_request_count"]
+            ),
+            "treated_lane_request_count": int(
+                external_acquisition["treated_lane_request_count"]
+            ),
+            "total_lane_request_count": int(
+                external_acquisition["total_lane_request_count"]
+            ),
+            "external_field_requirement_count": int(
+                external_acquisition["external_field_requirement_count"]
+            ),
+            "grouped_lane_symbol_batch_count": int(
+                external_acquisition["grouped_lane_symbol_batch_count"]
+            ),
+            "lane_counts": external_acquisition["lane_counts"],
+        },
         "control_identity": {
             "history_symbol_date_count": int(
                 identity["control_history_symbol_date_count"]
@@ -462,6 +509,7 @@ def build(
             "treated": str(treated_dir),
             "control_history": str(history_dir),
             "control_external_sources": str(external_dir),
+            "external_acquisition_packet": str(external_packet_dir),
             "control_identity": str(identity_dir),
             "control_identity_intervals": str(identity_interval_dir),
             "control_identity_stocknames_leads": str(identity_lead_dir),
