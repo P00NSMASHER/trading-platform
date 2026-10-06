@@ -1956,8 +1956,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "55969843dcba516da151c8adfb07ef8d350a475423c4850ec01fcd2f4472909f",
-      "reason": "G5 master acquisition plan binds the full-history identity readiness preview to the same current canonical G2 identity manifest used for requirement generation, preserving exact promotion/demotion visibility with zero release-gate relaxation."
+      "expected_sha256": "4db1288c5f92faba90bdf65ea6379702c1e63f96188fa0569c4111f8aba0f0f3",
+      "reason": "G5 master acquisition plan now invokes the unified control+treated external acquisition packet, reconciles all 1,560 lane requests and 1,950 external field requirements, exposes grouped lane/symbol batches, and preserves zero readiness promotion."
     },
     "src/g5_match_quality_gate.py": {
       "expected_sha256": "ebd01d5fb33595130e90c166c59de52414715aaeface898a5fa5b209574e5a21",
@@ -2612,8 +2612,8 @@
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
     },
     "tests/test_g5_master_acquisition_plan.py": {
-      "expected_sha256": "c2feb27fa26f95113445a0bb4a838da77db7cfef419eaee4c2b5fd3ae3c7c05e",
-      "reason": "Regression coverage for master-plan full-history identity reconciliation with and without authorized staged evidence, exact unresolved-count deltas, emitted readiness artifacts, and unchanged fail-closed release state."
+      "expected_sha256": "49c927fa8ae25174db5d974ee5366e3aa3934b39c376f8a55134f74d05056cf8",
+      "reason": "Regression coverage for master integration of the unified G5 external acquisition packet, exact 864 control + 696 treated lane conservation, 1,950 external fields, grouped batching, emitted artifacts, and unchanged G5 readiness."
     },
     "tests/test_g5_match_quality_gate.py": {
       "expected_sha256": "9fd579c64321ca886cbaaa98c68319c7255a99f4b3ee1e4caec46309b8232f2e",
