@@ -1927,6 +1927,10 @@
       "expected_sha256": "89cab1fd461b281084fa02bf8531d5bb2ce817af99eae2a1112afc91b13869fa",
       "reason": "G5 market acquisition bridge: subtract frozen G2 symbol/date pairs exactly from control-history requirements and route only incremental equity/option trade and tick-quote pairs through existing candidate vendor lanes without coverage or purchase claims."
     },
+    "src/g5_control_shares_anchor_reuse.py": {
+      "expected_sha256": "e34168ca5f0cdc12a2679593f2313caefa49a296892cdcc7e365eb906635fec2",
+      "reason": "G5 shares acquisition optimization: stage fail-closed cross-date reuse of earlier canonical G4 point-in-time shares facts only when anchor date, fact date, availability cutoff, and target staleness constraints all pass; canonical G4/G5 state remains unchanged."
+    },
     "src/g5_control_shares_reconciliation.py": {
       "expected_sha256": "f003ef2f77675b1b21f500577c7a31aa2845bb270f596c00b24be8a63e577568",
       "reason": "G5 control-history shares reconciliation: reuse only exact pre-cutoff canonical G4 shares rows and emit a fail-closed incremental acquisition queue for every remaining shares requirement."
@@ -2574,6 +2578,10 @@
     "tests/test_g5_control_market_vendor_bridge.py": {
       "expected_sha256": "a50ebaf9034dbf2f1b62ae7e58b9ec1e6c4ff04c99f8a39a098d849d8db3edb5",
       "reason": "Regression coverage for exact frozen-G2 subtraction, all seven existing candidate vendor routes including option quotes, overlap/count drift rejection, and real G5 history reconciliation with zero readiness promotion."
+    },
+    "tests/test_g5_control_shares_anchor_reuse.py": {
+      "expected_sha256": "fcefdc4f08429ad39e3de5098f440148cef4c2bb77f488253ab9ee5af81b14f9",
+      "reason": "Regression coverage for admissible earlier G4 shares anchors, staleness/cutoff/future-anchor rejection, latest-fact selection, conflicting-fact fail-closed behavior, and real-data G5 shares-gap reduction without readiness promotion."
     },
     "tests/test_g5_control_shares_reconciliation.py": {
       "expected_sha256": "0a2cc9b167ecc63d19d65334ba0a64e69d52d3f48144cf95b6f54683434768aa",
