@@ -523,7 +523,7 @@ def walk_strings(obj: Any):
             yield from walk_strings(value)
 
 
-def inspect_notebook(path: Path) -> dict[str, Any]:
+def inspect_notebook(path: Path, binary_output_dir: Path | None = None) -> dict[str, Any]:
     raw = path.read_bytes()
     text, enc = decode_every_byte(raw)
     doc = json.loads(text)
@@ -546,6 +546,20 @@ def inspect_notebook(path: Path) -> dict[str, Any]:
                 if isinstance(encoded, list):
                     encoded = "".join(encoded)
                 raw_payload = base64.b64decode(encoded, validate=False)
+                saved_path = None
+                if binary_output_dir is not None:
+                    binary_output_dir.mkdir(parents=True, exist_ok=True)
+                    extension = {
+                        "image/png": ".png",
+                        "image/jpeg": ".jpg",
+                        "application/pdf": ".pdf",
+                    }[mime]
+                    safe_stem = re.sub(r"[^A-Za-z0-9_.-]+", "_", path.stem)
+                    saved = binary_output_dir / (
+                        f"{safe_stem}_cell{cell_index:03d}_output{output_index:02d}{extension}"
+                    )
+                    saved.write_bytes(raw_payload)
+                    saved_path = saved.name
                 embedded_binary_outputs.append(
                     {
                         "cell_index": cell_index,
@@ -554,6 +568,7 @@ def inspect_notebook(path: Path) -> dict[str, Any]:
                         "encoded_characters": len(encoded),
                         "decoded_bytes": len(raw_payload),
                         "sha256": sha256_bytes(raw_payload),
+                        "saved_path": saved_path,
                     }
                 )
     return {
@@ -575,7 +590,9 @@ def inspect_notebook(path: Path) -> dict[str, Any]:
     }
 
 
-def inspect_source_files(source_root: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def inspect_source_files(
+    source_root: Path, output_dir: Path
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     rows = tracked_files(source_root)
     special = {}
     for row in rows:
@@ -587,7 +604,11 @@ def inspect_source_files(source_root: Path) -> tuple[list[dict[str, Any]], dict[
             row["text_encoding"] = enc
             row.update(scan_text(text))
         if suffix == ".ipynb":
-            special[row["path"]] = {"notebook": inspect_notebook(path)}
+            special[row["path"]] = {
+                "notebook": inspect_notebook(
+                    path, output_dir / "notebook_embedded_outputs"
+                )
+            }
         elif suffix == ".xlsx":
             special[row["path"]] = {"xlsx": inspect_xlsx(path)}
         elif suffix == ".parquet":
@@ -790,7 +811,7 @@ def main() -> None:
         raise RuntimeError(f"Source HEAD {head} != pinned {SOURCE_COMMIT}")
 
     history = history_inventory(source_root)
-    file_rows, special = inspect_source_files(source_root)
+    file_rows, special = inspect_source_files(source_root, output_dir)
     datasets = inspect_datasets(source_root)
     press = inspect_press_archives(source_root, args.event_index.resolve(), output_dir)
 
