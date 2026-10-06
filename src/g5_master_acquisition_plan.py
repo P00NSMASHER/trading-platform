@@ -11,6 +11,7 @@ import g5_control_identity_interval_requests as identity_intervals
 import g5_control_identity_requirements as control_identity
 import g5_control_identity_stocknames_lead_expansion as identity_leads
 import g5_control_identity_stocknames_request as identity_stocknames
+import g5_control_identity_evidence_stager as identity_stager
 import g5_control_market_vendor_bridge as market_bridge
 import g5_control_shares_reconciliation as control_shares
 import g5_external_source_queue as external_queue
@@ -38,6 +39,7 @@ def build(
     canonical_g2_identity_manifest_path: Path,
     output_dir: Path,
     canonical_g4_shares_path: Path = DEFAULT_CANONICAL_G4_SHARES,
+    identity_evidence_path: Path | None = None,
 ) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -49,6 +51,7 @@ def build(
     identity_interval_dir = output_dir / "control_identity_intervals"
     identity_lead_dir = output_dir / "control_identity_stocknames_leads"
     identity_stocknames_dir = output_dir / "control_identity_stocknames_request"
+    identity_staging_dir = output_dir / "control_identity_evidence_staging"
     market_bridge_dir = output_dir / "control_market_vendor_bridge"
     shares_dir = output_dir / "control_shares"
 
@@ -105,6 +108,27 @@ def build(
         ),
         output_dir=identity_stocknames_dir,
     )
+    identity_staging = None
+    if identity_evidence_path is not None:
+        identity_staging = identity_stager.build(
+            identity_queue_path=(
+                identity_dir / "g5_control_identity_acquisition_queue.csv"
+            ),
+            evidence_path=identity_evidence_path,
+            output_dir=identity_staging_dir,
+        )
+        if int(identity_staging["counts"]["identity_queue_count"]) != int(
+            identity["identity_acquisition_queue_count"]
+        ):
+            raise ValueError(
+                "identity staging scope does not match the master identity queue"
+            )
+        if int(
+            identity_staging["counts"]["canonical_g2_overlap_requirement_count"]
+        ) != int(identity["canonical_g2_unverified_overlap_count"]):
+            raise ValueError(
+                "identity staging G2-overlap scope does not match the master identity plan"
+            )
     market = market_bridge.build(
         g5_source_requirements_path=(
             history_dir / "g5_control_history_source_date_requirements.csv"
@@ -365,6 +389,41 @@ def build(
         },
     }
 
+    if identity_staging is not None:
+        staging_counts = identity_staging["counts"]
+        summary["control_identity_evidence_staging"] = {
+            "input_evidence_row_count": int(
+                staging_counts["input_evidence_row_count"]
+            ),
+            "g5_only_requirement_count": int(
+                staging_counts["g5_only_requirement_count"]
+            ),
+            "g5_only_staged_verified_count": int(
+                staging_counts["g5_only_staged_verified_count"]
+            ),
+            "g5_only_remaining_count": int(
+                staging_counts["g5_only_remaining_count"]
+            ),
+            "canonical_g2_forward_evidence_row_count": int(
+                staging_counts["g2_forward_evidence_row_count"]
+            ),
+            "g5_only_identity_staging_complete": bool(
+                identity_staging["g5_only_identity_staging_complete"]
+            ),
+            "overall_g5_identity_ready_claimed": bool(
+                identity_staging["overall_g5_identity_ready_claimed"]
+            ),
+            "coverage_promoted": bool(identity_staging["coverage_promoted"]),
+            "output_sha256": identity_staging["output_sha256"],
+        }
+        summary["inputs"]["identity_evidence"] = {
+            "path": str(identity_evidence_path),
+            "sha256": _sha256(identity_evidence_path),
+        }
+        summary["component_outputs"]["control_identity_evidence_staging"] = str(
+            identity_staging_dir
+        )
+
     (output_dir / "g5_master_acquisition_summary.json").write_text(
         json.dumps(summary, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -385,6 +444,14 @@ def main() -> int:
         type=Path,
         default=DEFAULT_CANONICAL_G4_SHARES,
     )
+    parser.add_argument(
+        "--identity-evidence",
+        type=Path,
+        help=(
+            "Optional authorized dated stable-ID evidence. When supplied, the G5-only "
+            "identity stager runs inside the master plan without promoting canonical readiness."
+        ),
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -394,6 +461,7 @@ def main() -> int:
         planning_universe_path=args.planning_universe,
         canonical_g2_identity_manifest_path=args.canonical_g2_identity_manifest,
         canonical_g4_shares_path=args.canonical_g4_shares,
+        identity_evidence_path=args.identity_evidence,
         output_dir=args.output_dir,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
