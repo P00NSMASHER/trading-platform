@@ -1,0 +1,115 @@
+name: G2 public Tick Data sample inspect
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/g2-public-tickdata-sample-inspect.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download public Tick Data options sample
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://tick-data-s3.s3.amazonaws.com/downloads/SampleOptionsData_US.zip"
+          curl --fail --location --retry 3 --retry-delay 2 "$URL" -o /tmp/SampleOptionsData_US.zip
+          ls -lh /tmp/SampleOptionsData_US.zip
+          sha256sum /tmp/SampleOptionsData_US.zip
+
+      - name: Inspect archive without persisting vendor data
+        shell: bash
+        run: |
+          python - <<'PY'
+          import collections, hashlib, json, re, zipfile
+          from pathlib import PurePosixPath
+
+          path = "/tmp/SampleOptionsData_US.zip"
+          targets = [b"JNPR", b"VMW", b"20110321", b"2011-03-21", b"2011/03/21"]
+          date_re = re.compile(r"(20\d{2})[_-]?(0[1-9]|1[0-2])[_-]?([0-3]\d)")
+          summary = {
+              "sha256": hashlib.sha256(open(path, "rb").read()).hexdigest(),
+              "entries": [],
+              "filename_target_matches": [],
+              "content_target_matches": [],
+              "dates_in_filenames": [],
+              "extensions": {},
+          }
+
+          with zipfile.ZipFile(path) as z:
+              infos = z.infolist()
+              summary["entry_count"] = len(infos)
+              summary["total_uncompressed_bytes"] = sum(i.file_size for i in infos)
+              ext_counts = collections.Counter()
+              dates = set()
+
+              for info in infos:
+                  name = info.filename
+                  ext_counts[PurePosixPath(name).suffix.lower()] += 1
+                  for m in date_re.finditer(name):
+                      dates.add("".join(m.groups()))
+                  if any(t.decode() in name.upper() for t in (b"JNPR", b"VMW")) or "20110321" in name or "2011-03-21" in name:
+                      summary["filename_target_matches"].append(name)
+
+              summary["extensions"] = dict(ext_counts)
+              summary["dates_in_filenames"] = sorted(dates)
+              summary["entries"] = [
+                  {"name": i.filename, "size": i.file_size, "compressed": i.compress_size}
+                  for i in infos[:500]
+              ]
+
+              # Search decompressed member contents for exact target strings.
+              # Keep only bounded context snippets; do not persist raw vendor files.
+              found = []
+              for info in infos:
+                  if info.is_dir():
+                      continue
+                  try:
+                      with z.open(info) as f:
+                          carry = b""
+                          offset = 0
+                          while True:
+                              chunk = f.read(1024 * 1024)
+                              if not chunk:
+                                  break
+                              buf = carry + chunk
+                              upper = buf.upper()
+                              for t in targets:
+                                  needle = t.upper()
+                                  pos = upper.find(needle)
+                                  if pos >= 0:
+                                      lo = max(0, pos - 160)
+                                      hi = min(len(buf), pos + len(needle) + 240)
+                                      snippet = buf[lo:hi].decode("utf-8", "replace").replace("\n", "\\n").replace("\r", "\\r")
+                                      found.append({
+                                          "entry": info.filename,
+                                          "target": t.decode(),
+                                          "approx_offset": max(0, offset - len(carry) + pos),
+                                          "snippet": snippet[:700],
+                                      })
+                              if len(found) >= 100:
+                                  break
+                              carry = buf[-128:]
+                              offset += len(chunk)
+                          if len(found) >= 100:
+                              break
+                  except Exception as e:
+                      found.append({"entry": info.filename, "scan_error": type(e).__name__})
+              summary["content_target_matches"] = found
+
+          print("G2_PUBLIC_TICKDATA_SAMPLE_INSPECTION_BEGIN")
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          print("G2_PUBLIC_TICKDATA_SAMPLE_INSPECTION_END")
+          PY
+
+      - name: Delete downloaded vendor sample
+        if: always()
+        run: rm -f /tmp/SampleOptionsData_US.zip
