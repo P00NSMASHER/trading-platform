@@ -1984,8 +1984,8 @@
       "reason": "Real-data sprint stable-ID reconciliation now accepts optional baseline_identity_verified_count, requires event-date count to remain 174, and verifies event + baseline verified + baseline unresolved equals the 3828 required symbol-dates."
     },
     "src/real_data_replay.py": {
-      "expected_sha256": "2cd03e4b8ec5f83b2e38d98250be16a33cc7dd026aebdcdc25bcf683cea1e39e",
-      "reason": "Real-data replay optionally materializes exact treated/control matcher metadata from normalized G5 sources while preserving legacy replay receipt semantics when the G5 path is not configured."
+      "expected_sha256": "bbfdfbca44903ec38de0984e8b3761de9636f25150f2b15a25795e8d617fc8c6",
+      "reason": "Real-data replay optionally validates complete G5 control-history stable identity before challenger work, hash-binds the four exact identity inputs, and hands them to release authority while preserving legacy replay receipt semantics when the new block is absent."
     },
     "src/research_receipt_rebuild.py": {
       "expected_sha256": "aad23317e159d300a462575ca8c998ed8891b62e45caf1ee626ca8034f0a3c31",
@@ -2714,6 +2714,10 @@
     "tests/test_g5_control_identity_readiness_preview.py": {
       "expected_sha256": "70c1936c7b365176a09e0d1126bf75ea9dca6c460df57fb37d5214e846701e4d",
       "reason": "Regression coverage for current-canonical G2 promotion/demotion visibility, stale requirement-status rejection, G5-only staging integrity, cross-pipeline misuse, PERMNO conflicts, receipt tampering, and exact requirement reconciliation."
+    },
+    "tests/test_real_data_replay_g5_identity.py": {
+      "expected_sha256": "9fe7c3766086f063ba97d7d617b82aa7e33faae6fedd2ff427346e91cf05e9db",
+      "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, byte-compatible legacy replay behavior, and a hash-bound G5-only staged-identity path that remains fail-closed for final evaluation."
     }
   },
   "schema_version": "2",
