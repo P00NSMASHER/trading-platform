@@ -1972,8 +1972,8 @@
       "reason": "Real-data sprint stable-ID reconciliation now accepts optional baseline_identity_verified_count, requires event-date count to remain 174, and verifies event + baseline verified + baseline unresolved equals the 3828 required symbol-dates."
     },
     "src/real_data_replay.py": {
-      "expected_sha256": "7c00a1357ec331d5abfae261b64914cfaed53c4f262a9466eb524f578054a413",
-      "reason": "Real-data replay now runs the G5 match-quality gate immediately after matching and blocks challenger/release stages unless the exact match set passes contamination, completeness, and hard balance checks."
+      "expected_sha256": "48b480c29cbd048bd007fca5fe00ca62a910b01c37fe11786062ea8afdd0a91d",
+      "reason": "Real-data replay now optionally materializes exact treated/control matcher metadata from normalized G5 sources, exposes a fail-closed G5 metadata stage, refuses ambiguous simultaneous manual/generated control metadata, and only hands generated metadata to the matcher after all configured target-scope requirements are complete."
     },
     "src/research_receipt_rebuild.py": {
       "expected_sha256": "aad23317e159d300a462575ca8c998ed8891b62e45caf1ee626ca8034f0a3c31",
@@ -2674,6 +2674,10 @@
     "tests/test_g5_matching_metadata_materializer.py": {
       "expected_sha256": "5ce7e1cff1a836315b571b4ed55e4ddff6cba75d45fe71b6cf06fbb7caec918a",
       "reason": "Regression coverage for exact treated/control target scoping, all-13-covariate completeness, matcher compatibility, missing-field fail-closed behavior, equal-timestamp conflicts, later-value replacement, cutoff enforcement, unknown-target rejection, and treated/control collision rejection."
+    },
+    "tests/test_real_data_replay_g5_materializer.py": {
+      "expected_sha256": "646555649b756e1cdd1bb366bbb746fe81d54c608090a9586cabb04a9966658f",
+      "reason": "Regression coverage for replay-driven G5 matcher metadata materialization, incomplete-input blocking, generated matcher-input provenance, manual/generated input ambiguity rejection, and required normalized-source configuration."
     }
   },
   "schema_version": "2",
