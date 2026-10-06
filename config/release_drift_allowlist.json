@@ -1975,6 +1975,10 @@
       "expected_sha256": "5cae6770ae9872536a5ceae5eaff69ae15e9cc33a5c0234aa4d2a0a37f5ff7b7",
       "reason": "G5 staged-readiness preview: fuse normalized control metadata across files using latest pre-cutoff values, fail closed on equal-timestamp conflicts and unknown candidates, and report completeness without changing canonical G5 readiness."
     },
+    "src/g5_treated_external_source_request_compressor.py": {
+      "expected_sha256": "14333983af151d5385511f915ebb4391e21a9a5eac8c411070690ba56d89bb47",
+      "reason": "G5 treated external metadata acquisition optimization: compress event-level requests into one lane/symbol request while preserving every exact event_id/date/cutoff and making no cross-event continuity or evidence claim."
+    },
     "src/g5_treated_metadata_requirements.py": {
       "expected_sha256": "9cabf3838a12ea70df01694811c0048b7ed051de3bd94f865fb5c786e5b74c74",
       "reason": "G5 treated-event metadata planning now also emits 174 adapter-compatible treated target rows with candidate_symbol aliases and event-specific cutoffs so the same strict external/derived intake adapters can populate treated metadata without weakening evidence rules."
@@ -2630,6 +2634,10 @@
     "tests/test_g5_staged_readiness_preview.py": {
       "expected_sha256": "727734d5d4cb77ae4a18a350f416a464749d417ae1d17da6f01f7d800e7e5577",
       "reason": "Regression coverage for split-source G5 completeness, missing fields, equal-timestamp conflicts, unknown candidates, late rows, and explicit zero canonical-readiness/release change."
+    },
+    "tests/test_g5_treated_external_source_request_compressor.py": {
+      "expected_sha256": "63e2bcc1143633ab3dbb36c9d896fff729cee089139cf1848ac4e3c322a3a290",
+      "reason": "Regression coverage for treated lane/symbol compression, exact event_id/date/cutoff conservation, lane-contract validation, duplicate rejection, and the real 696-to-584 request reduction without readiness promotion."
     },
     "tests/test_g5_treated_metadata_requirements.py": {
       "expected_sha256": "234a57cbc74cfc9469ff0572b830e28131134e25e4cd1bb52ce2dc69f8e3f4a8",
