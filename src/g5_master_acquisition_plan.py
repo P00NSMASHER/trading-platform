@@ -338,11 +338,17 @@ def build(
         "external_request_compression": {
             "control_date_level_request_count": control_lanes,
             "control_compressed_request_count": control_compressed_lanes,
+            "control_unique_symbol_count": int(
+                external_compressed["unique_historical_symbol_count"]
+            ),
             "control_request_reduction_count": (
                 control_lanes - control_compressed_lanes
             ),
             "treated_date_level_request_count": treated_lanes,
             "treated_compressed_request_count": treated_compressed_lanes,
+            "treated_unique_symbol_count": int(
+                treated_external_compressed["unique_treated_symbol_count"]
+            ),
             "treated_request_reduction_count": (
                 treated_lanes - treated_compressed_lanes
             ),
