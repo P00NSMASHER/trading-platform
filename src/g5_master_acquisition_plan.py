@@ -15,6 +15,7 @@ import g5_control_identity_evidence_stager as identity_stager
 import g5_control_identity_readiness_preview as identity_readiness
 import g5_control_market_vendor_bridge as market_bridge
 import g5_control_shares_reconciliation as control_shares
+import g5_external_metadata_intake as external_intake
 import g5_external_source_queue as external_queue
 import g5_treated_metadata_requirements as treated_plan
 
@@ -41,6 +42,7 @@ def build(
     output_dir: Path,
     canonical_g4_shares_path: Path = DEFAULT_CANONICAL_G4_SHARES,
     identity_evidence_path: Path | None = None,
+    external_source_manifest_path: Path | None = None,
 ) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -48,6 +50,7 @@ def build(
     treated_dir = output_dir / "treated"
     history_dir = output_dir / "control_history"
     external_dir = output_dir / "control_external_sources"
+    external_intake_dir = output_dir / "external_metadata_intake"
     identity_dir = output_dir / "control_identity"
     identity_interval_dir = output_dir / "control_identity_intervals"
     identity_lead_dir = output_dir / "control_identity_stocknames_leads"
@@ -76,6 +79,19 @@ def build(
         candidate_path=control_dir / "g5_primary_candidate_symbol_dates.csv",
         output_dir=external_dir,
     )
+
+    external_intake_state = None
+    if external_source_manifest_path is not None:
+        external_intake_state = external_intake.build(
+            control_targets_path=(
+                control_dir / "g5_primary_candidate_symbol_dates.csv"
+            ),
+            treated_targets_path=(
+                treated_dir / "g5_treated_targets.csv"
+            ),
+            source_manifest_path=external_source_manifest_path,
+            output_dir=external_intake_dir,
+        )
     identity = control_identity.build(
         control_history_path=(
             history_dir / "g5_control_history_symbol_date_requirements.csv"
@@ -224,6 +240,35 @@ def build(
         raise ValueError(
             f"expected exactly 174 treated targets, got {treated_targets}"
         )
+    if external_intake_state is not None:
+        if int(external_intake_state["control_target_count"]) != control_targets:
+            raise ValueError(
+                "external metadata intake control scope does not match master controls"
+            )
+        if int(external_intake_state["treated_target_count"]) != treated_targets:
+            raise ValueError(
+                "external metadata intake treated scope does not match master treated targets"
+            )
+        if int(external_intake_state["total_target_count"]) != (
+            control_targets + treated_targets
+        ):
+            raise ValueError(
+                "external metadata intake total target scope does not reconcile"
+            )
+        if int(external_intake_state["external_field_requirement_count"]) != (
+            control_external + treated_external
+        ):
+            raise ValueError(
+                "external metadata intake field scope does not match master external requirements"
+            )
+        if bool(external_intake_state["canonical_g5_readiness_changed"]):
+            raise ValueError(
+                "external metadata intake may not change canonical G5 readiness"
+            )
+        if bool(external_intake_state["release_claimed"]):
+            raise ValueError(
+                "external metadata intake may not make a release claim"
+            )
     if control["primary_complete_event_date_count"] != 72:
         raise ValueError("primary control queue does not cover all 72 event dates")
     if control["residual_unfilled_symbol_date_slots"] != 0:
@@ -481,6 +526,62 @@ def build(
         },
     }
 
+    if external_intake_state is not None:
+        summary["external_metadata_intake"] = {
+            "normalized_source_count": int(
+                external_intake_state["normalized_source_count"]
+            ),
+            "normalized_row_count": int(
+                external_intake_state["normalized_row_count"]
+            ),
+            "observed_nonconflicted_target_field_count": int(
+                external_intake_state[
+                    "observed_nonconflicted_target_field_count"
+                ]
+            ),
+            "missing_target_field_count": int(
+                external_intake_state["missing_target_field_count"]
+            ),
+            "externally_complete_control_target_count": int(
+                external_intake_state[
+                    "externally_complete_control_target_count"
+                ]
+            ),
+            "externally_complete_treated_target_count": int(
+                external_intake_state[
+                    "externally_complete_treated_target_count"
+                ]
+            ),
+            "externally_complete_target_count": int(
+                external_intake_state["externally_complete_target_count"]
+            ),
+            "external_gap_target_count": int(
+                external_intake_state["external_gap_target_count"]
+            ),
+            "missing_field_counts": external_intake_state[
+                "missing_field_counts"
+            ],
+            "conflict_field_counts": external_intake_state[
+                "conflict_field_counts"
+            ],
+            "all_external_metadata_complete": bool(
+                external_intake_state["all_external_metadata_complete"]
+            ),
+            "canonical_g5_readiness_changed": bool(
+                external_intake_state["canonical_g5_readiness_changed"]
+            ),
+            "release_claimed": bool(
+                external_intake_state["release_claimed"]
+            ),
+        }
+        summary["inputs"]["external_source_manifest"] = {
+            "path": str(external_source_manifest_path),
+            "sha256": _sha256(external_source_manifest_path),
+        }
+        summary["component_outputs"]["external_metadata_intake"] = str(
+            external_intake_dir
+        )
+
     if identity_staging is not None:
         staging_counts = identity_staging["counts"]
         summary["control_identity_evidence_staging"] = {
@@ -544,6 +645,15 @@ def main() -> int:
             "identity stager runs inside the master plan without promoting canonical readiness."
         ),
     )
+    parser.add_argument(
+        "--external-source-manifest",
+        type=Path,
+        help=(
+            "Optional hash-bound external metadata source manifest. When supplied, "
+            "the G5 external intake runs inside the master plan for preview/completeness "
+            "reporting without promoting canonical readiness."
+        ),
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -554,6 +664,7 @@ def main() -> int:
         canonical_g2_identity_manifest_path=args.canonical_g2_identity_manifest,
         canonical_g4_shares_path=args.canonical_g4_shares,
         identity_evidence_path=args.identity_evidence,
+        external_source_manifest_path=args.external_source_manifest,
         output_dir=args.output_dir,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
