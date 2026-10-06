@@ -2688,12 +2688,12 @@
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
     },
     "src/g5_control_identity_gate.py": {
-      "expected_sha256": "840a0368d32349ef8673d2908159e1576228e02eff1082f2c84ef2ccbbe567f9",
-      "reason": "G5 stable-identity hardening: independently reconcile the complete control-history symbol/date footprint against canonical G2 identity plus hash-bound authorized G5-only evidence."
+      "expected_sha256": "9c706a32a45ba252eef923507acc0ea52936b02f1133de3bd2aaf99b104a6f6f",
+      "reason": "G5 stable-identity gate hardening: reject staging receipts that claim coverage promotion or overall G5 identity readiness, preserving the staging/canonical trust boundary."
     },
     "tests/test_g5_control_identity_gate.py": {
-      "expected_sha256": "b383c2c2dc23e3d051f9450bdbaa853e264f9ce45c1dbcdb8f67ec18cb5465b7",
-      "reason": "Mutation-sensitive G5 stable-identity gate coverage for unresolved G2 overlap, staged-evidence hash binding, scope escape, PERMNO conflict, and the current real fail-closed acquisition state."
+      "expected_sha256": "5c9167a910c67f3a0bcb93c4a69899c6403aa0518cf8afb90eb3876e3656746d",
+      "reason": "Hostile regressions prove G5 identity staging receipts cannot self-promote coverage or overall identity readiness even when their staged CSV hash and counts are otherwise valid."
     },
     "src/g5_matching_metadata_materializer.py": {
       "expected_sha256": "4680f190763276098e86e3a6c4b0ff56c901cb37c72ac00071a4b901b9ad9b4a",

@@ -238,3 +238,35 @@ def test_current_real_scope_remains_fail_closed_without_new_evidence(tmp_path: P
     assert state["g5_only_required_count"] > 0
     assert state["canonical_g2_overlap_required_count"] > 0
     assert result["ready_for_g5_control_identity"] is False
+
+@pytest.mark.parametrize(
+    ("field", "message"),
+    [
+        ("coverage_promoted", "coverage promotion"),
+        ("overall_g5_identity_ready_claimed", "overall G5 identity readiness"),
+    ],
+)
+def test_staging_receipt_may_not_claim_canonical_readiness(
+    tmp_path: Path,
+    field: str,
+    message: str,
+):
+    requirements = _requirements(tmp_path)
+    manifest = _manifest(
+        tmp_path / "g2.json", ["2015-01-01", "2015-01-02"]
+    )
+    staged = _staged(tmp_path)
+    receipt = _receipt(tmp_path / "receipt.json", staged, 1)
+    receipt_obj = json.loads(receipt.read_text(encoding="utf-8"))
+    receipt_obj[field] = True
+    receipt.write_text(json.dumps(receipt_obj), encoding="utf-8")
+
+    with pytest.raises(gate.G5ControlIdentityGateError, match=message):
+        gate.build(
+            identity_requirements_path=requirements,
+            canonical_g2_identity_manifest_path=manifest,
+            g5_only_staged_verified_path=staged,
+            g5_staging_receipt_path=receipt,
+            output_path=tmp_path / "gate.json",
+        )
+
