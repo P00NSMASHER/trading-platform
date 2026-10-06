@@ -1,0 +1,63 @@
+name: Hacked earnings G5 matched-control experiment
+
+on:
+  push:
+    branches:
+      - research/hacked-earnings-g5-match-20261006
+    paths:
+      - scripts/hacked_earnings_g5_match_experiment.py
+      - .github/workflows/hacked-earnings-g5-match.yml
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+      - name: Install analysis dependencies
+        run: python -m pip install --disable-pip-version-check 'numpy==1.26.4' 'pandas==2.2.3' 'scikit-learn==1.5.2'
+      - name: Run strict G5 test and partial falsification
+        run: python scripts/hacked_earnings_g5_match_experiment.py --repo . --output /tmp/hacked-earnings-g5-match
+      - name: Assert fail-closed G5 boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path("/tmp/hacked-earnings-g5-match/summary.json").read_text())
+          assert s["strict_g5"]["strict_test_executed"] is True
+          assert s["strict_g5"]["g5_quality_result_available"] is False
+          assert s["strict_g5"]["model_evaluation_eligible_dates"] == 0
+          assert s["partial_falsification"]["g5_quality"] is False
+          print("G5 boundary assertions: PASS")
+          PY
+      - name: Save research results
+        run: |
+          set -euo pipefail
+          BRANCH=research/hacked-earnings-g5-match-20261006
+          git fetch origin "$BRANCH"
+          test "$(git rev-parse FETCH_HEAD)" = "$GITHUB_SHA"
+          mkdir -p data/processed/hacked_earnings_g5_match
+          cp -a /tmp/hacked-earnings-g5-match/. data/processed/hacked_earnings_g5_match/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/processed/hacked_earnings_g5_match
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record G5 matched-control text experiment'
+            git push origin "HEAD:refs/heads/$BRANCH"
+          fi
+      - name: Upload artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: hacked-earnings-g5-match
+          path: /tmp/hacked-earnings-g5-match
+          retention-days: 7
