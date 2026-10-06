@@ -1,0 +1,150 @@
+{
+  "status": "VALIDATED_RETROSPECTIVE_RESEARCH",
+  "upstream_files_hash_verified": 13,
+  "model_reconstruction": {
+    "scored_rows": 36750,
+    "intercept_calibration_rows": 1,
+    "additional_arithmetic_checks": 36749,
+    "intercept": 0.0066078727193060755,
+    "maximum_absolute_error": 9.71445146547012e-17,
+    "tolerance": 1e-12,
+    "active_coefficients": 404,
+    "zero_coefficients": 1989,
+    "interpretation": "Reconstructs a published fitted score; does not validate returns or tradability."
+  },
+  "text_identity": {
+    "text_rows": 36750,
+    "unique_content_hashes": 36711,
+    "duplicate_groups": 39,
+    "rows_in_duplicate_groups": 78,
+    "cross_issuer_groups": 2,
+    "cross_issuer_rows": [
+      {
+        "PERMNO": "81541",
+        "GVKEY": "31692",
+        "SYMBOL": "MBFI",
+        "date": "2013-07-15",
+        "Hacked": "0",
+        "Actual": "0",
+        "content_sha256": "31ba210000e4d8ed3a7542aa6c24a057e8d24344ef23a0809dd89a1c0ad9e322",
+        "group_rows": 2,
+        "group_issuer_count": 2,
+        "member": "2013/QTR3/81541_20130715_1.txt",
+        "split_policy": "KEEP_IDENTICAL_TEXT_TOGETHER",
+        "review_status": "CROSS_ISSUER_REVIEW"
+      },
+      {
+        "PERMNO": "89530",
+        "GVKEY": "108449",
+        "SYMBOL": "TAYC",
+        "date": "2013-07-15",
+        "Hacked": "0",
+        "Actual": "0",
+        "content_sha256": "31ba210000e4d8ed3a7542aa6c24a057e8d24344ef23a0809dd89a1c0ad9e322",
+        "group_rows": 2,
+        "group_issuer_count": 2,
+        "member": "2013/QTR3/89530_20130715_1.txt",
+        "split_policy": "KEEP_IDENTICAL_TEXT_TOGETHER",
+        "review_status": "CROSS_ISSUER_REVIEW"
+      },
+      {
+        "PERMNO": "46886",
+        "GVKEY": "6304",
+        "SYMBOL": "KLAC",
+        "date": "2015-10-21",
+        "Hacked": "0",
+        "Actual": "0",
+        "content_sha256": "cf4dce808d7ee664d917a721315065c9f5f9c7d954aee4e38e498e516f3fe077",
+        "group_rows": 2,
+        "group_issuer_count": 2,
+        "member": "2015/QTR4/46886_20151021_0.txt",
+        "split_policy": "KEEP_IDENTICAL_TEXT_TOGETHER",
+        "review_status": "CROSS_ISSUER_REVIEW"
+      },
+      {
+        "PERMNO": "48486",
+        "GVKEY": "6565",
+        "SYMBOL": "LRCX",
+        "date": "2015-10-21",
+        "Hacked": "0",
+        "Actual": "0",
+        "content_sha256": "cf4dce808d7ee664d917a721315065c9f5f9c7d954aee4e38e498e516f3fe077",
+        "group_rows": 2,
+        "group_issuer_count": 2,
+        "member": "2015/QTR4/48486_20151021_0.txt",
+        "split_policy": "KEEP_IDENTICAL_TEXT_TOGETHER",
+        "review_status": "CROSS_ISSUER_REVIEW"
+      }
+    ],
+    "empty_documents": 0,
+    "replacement_characters": 0
+  },
+  "missingness": {
+    "soft_text_availability_disagreements": 0,
+    "missing_soft_rows_still_missing": 6937,
+    "missing_soft_events_still_missing": 14
+  },
+  "control_candidates": {
+    "pairs": 9329,
+    "covered_events": 174,
+    "unique_security_date_candidates": 3568,
+    "unique_candidate_securities": 1678,
+    "minimum_per_event": 1,
+    "median_per_event": 41.0,
+    "maximum_per_event": 203,
+    "events_with_fewer_than_three_candidates": 2,
+    "accepted_G5_matches": 0
+  },
+  "retrospective_cohorts": [
+    {
+      "Hacked": 0,
+      "Actual": 0,
+      "rows": 34707,
+      "scored_rows": 29311,
+      "mean_published_soft": 0.000827829347744758,
+      "median_published_soft": 0.0016473097909346333,
+      "mean_absolute_soft": 0.00898740686450936,
+      "prior_text_comparisons": 26818,
+      "mean_text_jaccard_distance": 0.5166907528927294
+    },
+    {
+      "Hacked": 1,
+      "Actual": 0,
+      "rows": 8256,
+      "scored_rows": 6820,
+      "mean_published_soft": 0.0010782105786902665,
+      "median_published_soft": 0.001991852164797547,
+      "mean_absolute_soft": 0.008844292024837731,
+      "prior_text_comparisons": 6424,
+      "mean_text_jaccard_distance": 0.5160057984223804
+    },
+    {
+      "Hacked": 1,
+      "Actual": 1,
+      "rows": 724,
+      "scored_rows": 619,
+      "mean_published_soft": 0.0015658077758851365,
+      "median_published_soft": 0.0023738439619327666,
+      "mean_absolute_soft": 0.008808877703032326,
+      "prior_text_comparisons": 607,
+      "mean_text_jaccard_distance": 0.5215555086322039
+    }
+  ],
+  "not_estimated": [
+    "causal_effect",
+    "excess_return",
+    "out_of_sample_model_accuracy",
+    "trading_profitability"
+  ],
+  "canonical_G1_G2_G3_G4_G5_modified": false,
+  "validation_checks": [
+    "Upstream artifact SHA-256 verification",
+    "Pinned source expected row counts",
+    "Unique source security/date keys",
+    "Complete exact-key text linkage",
+    "36749 additional arithmetic checks after one-row intercept calibration",
+    "Exact text/Soft missingness equivalence",
+    "All 174 control pools independently rechecked",
+    "Unexposed/same-date/different-security control eligibility checked"
+  ]
+}
