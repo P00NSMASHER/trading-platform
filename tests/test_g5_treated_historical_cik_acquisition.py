@@ -151,3 +151,59 @@ def test_explicit_reviewed_historical_mapping_stages_cleanly(tmp_path: Path):
     rows = list(csv.DictReader(out.open(encoding="utf-8")))
     assert rows[0]["historical_symbol"] == "AAA"
     assert rows[0]["cik"] == "0000012345"
+
+
+def test_reviewed_map_merger_adds_new_symbols_without_overwriting(tmp_path: Path):
+    base = tmp_path / "base.csv"
+    base.write_text(
+        "historical_symbol,cik,notes\n"
+        "BBB,0000000002,existing\n",
+        encoding="utf-8",
+    )
+    staged = tmp_path / "staged.csv"
+    staged.write_text(
+        "historical_symbol,cik,valid_from,valid_through,source_reference,"
+        "evidence_effective_at,review_status,research_use_only\n"
+        "AAA,0000000001,2010-01-01,2020-01-01,SEC_ARCHIVE,"
+        "2020-01-01T00:00:00Z,EXPLICIT_HISTORICAL_CIK_VERIFIED,1\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "merged.csv"
+    summary = cik.merge_reviewed_map(
+        base_map_path=base,
+        staged_reviewed_path=staged,
+        output_path=out,
+    )
+    assert summary["base_symbol_count"] == 1
+    assert summary["added_symbol_count"] == 1
+    assert summary["merged_symbol_count"] == 2
+    rows = {
+        row["historical_symbol"]: row["cik"]
+        for row in csv.DictReader(out.open(encoding="utf-8"))
+    }
+    assert rows == {"AAA": "0000000001", "BBB": "0000000002"}
+
+
+def test_reviewed_map_merger_rejects_conflicting_existing_mapping(tmp_path: Path):
+    base = tmp_path / "base.csv"
+    base.write_text(
+        "historical_symbol,cik,notes\n"
+        "AAA,0000000001,existing\n",
+        encoding="utf-8",
+    )
+    staged = tmp_path / "staged.csv"
+    staged.write_text(
+        "historical_symbol,cik,source_reference\n"
+        "AAA,0000000002,SEC_ARCHIVE\n",
+        encoding="utf-8",
+    )
+    try:
+        cik.merge_reviewed_map(
+            base_map_path=base,
+            staged_reviewed_path=staged,
+            output_path=tmp_path / "merged.csv",
+        )
+    except cik.G5HistoricalCikAcquisitionError as exc:
+        assert "conflicts with existing CIK" in str(exc)
+    else:
+        raise AssertionError("expected existing-map conflict")
