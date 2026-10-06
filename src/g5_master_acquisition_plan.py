@@ -18,6 +18,7 @@ import g5_control_shares_reconciliation as control_shares
 import g5_external_metadata_intake as external_intake
 import g5_external_source_queue as external_queue
 import g5_external_acquisition_packet as external_packet
+import g5_external_source_manifest_scaffold as external_scaffold
 import g5_treated_metadata_requirements as treated_plan
 
 SCHEMA_VERSION = "1"
@@ -52,6 +53,7 @@ def build(
     history_dir = output_dir / "control_history"
     external_dir = output_dir / "control_external_sources"
     external_packet_dir = output_dir / "external_acquisition_packet"
+    external_scaffold_dir = output_dir / "external_source_manifest_scaffold"
     external_intake_dir = output_dir / "external_metadata_intake"
     identity_dir = output_dir / "control_identity"
     identity_interval_dir = output_dir / "control_identity_intervals"
@@ -87,6 +89,12 @@ def build(
             treated_dir / "g5_treated_external_lane_requests.csv"
         ),
         output_dir=external_packet_dir,
+    )
+    external_scaffold_state = external_scaffold.build(
+        acquisition_requests_path=(
+            external_packet_dir / "g5_external_acquisition_requests.csv"
+        ),
+        output_dir=external_scaffold_dir,
     )
 
     external_intake_state = None
@@ -302,6 +310,32 @@ def build(
         raise ValueError(
             "external acquisition packet field scope does not match master requirements"
         )
+    if int(external_scaffold_state["packet_request_count"]) != int(
+        external_acquisition["total_lane_request_count"]
+    ):
+        raise ValueError(
+            "external source scaffold does not reconcile to acquisition packet requests"
+        )
+    if int(external_scaffold_state["source_slot_count"]) != 8:
+        raise ValueError(
+            "external source scaffold must emit exactly eight target/lane slots"
+        )
+    if not bool(external_scaffold_state["all_packet_requests_reconciled"]):
+        raise ValueError(
+            "external source scaffold lost or duplicated acquisition requests"
+        )
+    if bool(external_scaffold_state["manifest_intake_ready"]):
+        raise ValueError(
+            "blank external source scaffold must remain fail-closed for intake"
+        )
+    if int(external_scaffold_state["canonical_g5_dates_resolved_change"]) != 0:
+        raise ValueError(
+            "external source scaffold may not change canonical G5 readiness"
+        )
+    if bool(external_scaffold_state["release_claimed"]):
+        raise ValueError(
+            "external source scaffold may not make a release claim"
+        )
     if int(intervals["date_level_identity_requirement_count"]) != int(
         identity["identity_acquisition_queue_count"]
     ):
@@ -380,6 +414,23 @@ def build(
                 external_acquisition["grouped_lane_symbol_batch_count"]
             ),
             "lane_counts": external_acquisition["lane_counts"],
+        },
+        "external_source_manifest_scaffold": {
+            "packet_request_count": int(
+                external_scaffold_state["packet_request_count"]
+            ),
+            "source_slot_count": int(
+                external_scaffold_state["source_slot_count"]
+            ),
+            "target_slot_counts": external_scaffold_state[
+                "target_slot_counts"
+            ],
+            "lane_slot_counts": external_scaffold_state[
+                "lane_slot_counts"
+            ],
+            "manifest_intake_ready": bool(
+                external_scaffold_state["manifest_intake_ready"]
+            ),
         },
         "control_identity": {
             "history_symbol_date_count": int(
@@ -555,6 +606,7 @@ def build(
             "control_history": str(history_dir),
             "control_external_sources": str(external_dir),
             "external_acquisition_packet": str(external_packet_dir),
+            "external_source_manifest_scaffold": str(external_scaffold_dir),
             "control_identity": str(identity_dir),
             "control_identity_intervals": str(identity_interval_dir),
             "control_identity_stocknames_leads": str(identity_lead_dir),
