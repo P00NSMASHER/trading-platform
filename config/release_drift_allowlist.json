@@ -1976,7 +1976,7 @@
       "reason": "G5 residual structural planning: fill only remaining candidate slots from strictly prior symbol observations, with retrospective labels ignored and all rows kept ineligible until date-specific identity, real four-kind market data, and pre-event metadata are proven."
     },
     "src/g5_sec_sic_classification.py": {
-      "expected_sha256": "5abdd29a6b7dc138c406b85a2497f66ebefa05a8f8dd9f1c6c5de66c85d6c3f5",
+      "expected_sha256": "1e7d7933f081d4defa169c69ae75f5f95b56650275dcc2cd5232ce9d64ea5df0",
       "reason": "Public SEC EDGAR SIC acquisition for G5 classification using explicit historical CIK mappings, archival filing-header acceptance clocks, fail-closed pre-cutoff checks, namespaced SIC-division sector values, and no index/readiness fabrication."
     },
     "src/g5_staged_readiness_preview.py": {
