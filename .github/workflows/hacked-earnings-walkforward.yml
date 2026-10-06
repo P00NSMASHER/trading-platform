@@ -1,0 +1,113 @@
+name: Hacked earnings walk-forward experiment
+
+on:
+  push:
+    branches:
+      - research/hacked-earnings-walkforward-actual-20261006
+    paths:
+      - scripts/hacked_earnings_deep_research.py
+      - scripts/hacked_earnings_walkforward_experiment.py
+      - .github/workflows/hacked-earnings-walkforward.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hacked-earnings-walkforward-actual-20261006
+  cancel-in-progress: false
+
+jobs:
+  experiment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    env:
+      NLTK_DATA: /tmp/hacked-earnings-nltk
+      SOURCE_CACHE: /tmp/hacked-earnings-source
+      DEEP_OUTPUT: /tmp/hacked-earnings-deep
+      EXPERIMENT_OUTPUT: /tmp/hacked-earnings-walkforward
+      RESEARCH_BRANCH: research/hacked-earnings-walkforward-actual-20261006
+    steps:
+      - name: Checkout exact research commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: \${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+
+      - name: Install pinned experiment dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'numpy==1.26.4' \
+            'scipy==1.13.1' \
+            'pandas==2.2.3' \
+            'scikit-learn==1.5.2' \
+            'pyarrow==17.0.0' \
+            'nltk==3.9.1'
+          python -m nltk.downloader -d "$NLTK_DATA" stopwords
+
+      - name: Run source parser safeguards
+        run: python scripts/hacked_earnings_deep_research.py --self-test
+
+      - name: Rebuild verified public text corpus
+        run: |
+          python scripts/hacked_earnings_deep_research.py \
+            --download \
+            --cache "$SOURCE_CACHE" \
+            --output "$DEEP_OUTPUT"
+
+      - name: Run strictly earlier-only experiment
+        run: |
+          python scripts/hacked_earnings_walkforward_experiment.py \
+            --cache "$SOURCE_CACHE" \
+            --features "$DEEP_OUTPUT/sample_text_features.csv" \
+            --repo-root . \
+            --output "$EXPERIMENT_OUTPUT"
+          cat "$EXPERIMENT_OUTPUT/REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Independent receipt assertions
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("/tmp/hacked-earnings-walkforward")
+          s = json.loads((root / "summary.json").read_text())
+          assert s["strictly_earlier_training_all_folds"] is True
+          assert s["duplicate_hash_temporal_overlap"] == 0
+          assert s["text_rows"] == 36750
+          assert s["return_experiment"]["synthetic_market_probe_used"] is False
+          assert s["return_experiment"]["source_count"] == 0
+          print("Independent receipt assertions: PASS")
+          PY
+
+      - name: Save results to unchanged research branch
+        env:
+          EXPECTED_HEAD: \${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin "$RESEARCH_BRANCH"
+          test "$(git rev-parse FETCH_HEAD)" = "$EXPECTED_HEAD"
+          mkdir -p data/processed/hacked_earnings_walkforward
+          cp -a "$EXPERIMENT_OUTPUT/." data/processed/hacked_earnings_walkforward/
+          python -m pip freeze > data/processed/hacked_earnings_walkforward/requirements-runtime.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- data/processed/hacked_earnings_walkforward
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record hacked earnings walk-forward experiment results'
+            git push origin "HEAD:refs/heads/$RESEARCH_BRANCH"
+          fi
+
+      - name: Preserve experiment artifact
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: hacked-earnings-walkforward-\${{ github.sha }}
+          path: /tmp/hacked-earnings-walkforward
+          if-no-files-found: warn
+          retention-days: 7
