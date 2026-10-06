@@ -97,7 +97,7 @@ def test_pre_cutoff_sec_sic_is_namespaced_and_adapter_compatible(tmp_path: Path)
     )
     assert rows[0]["sector"] == "SEC_SIC_DIVISION_I"
     assert rows[0]["sic_code"] == "7370"
-    assert rows[0]["effective_ts_utc"] == "2015-01-05T17:00:00Z"
+    assert rows[0]["effective_ts_utc"] == "2015-01-05T22:00:00Z"
 
     normalized, receipt = adapter.normalize(
         lane="classification",
@@ -134,7 +134,7 @@ def test_same_day_post_cutoff_filing_is_rejected_for_earlier_filing(tmp_path: Pa
 
     def fetch_text(url: str):
         if newer.replace("-", "") in url:
-            return _filing_text(accepted="20150105210000", sic="7370")
+            return _filing_text(accepted="20150105180000", sic="7370")
         return _filing_text(accepted="20150102150000", sic="7370")
 
     out = tmp_path / "out"
@@ -153,7 +153,7 @@ def test_same_day_post_cutoff_filing_is_rejected_for_earlier_filing(tmp_path: Pa
         )
     )
     assert rows[0]["accession_number"] == older
-    assert rows[0]["effective_ts_utc"] == "2015-01-02T15:00:00Z"
+    assert rows[0]["effective_ts_utc"] == "2015-01-02T20:00:00Z"
 
 
 def test_additional_submission_files_are_searched(tmp_path: Path):
