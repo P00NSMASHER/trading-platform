@@ -402,7 +402,7 @@ def assess_release(*, coverage_summary: Path, market_backfill_manifest: Path, ma
     _market_checks(checks, coverage, market)
 
     # G5 control-history stable identity is independently revalidated. G2 overlap
-    must be canonical, while G5-only dates require hash-bound authorized evidence.
+    # must be canonical, while G5-only dates require hash-bound authorized evidence.
     g5_identity_receipt = _g5_control_identity_checks(
         checks,
         identity_requirements=g5_identity_requirements,

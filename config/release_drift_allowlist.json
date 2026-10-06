@@ -54,7 +54,7 @@
       "reason": "Intentional post-Step21 security hardening; configured model verification reused by backup/restore/recovery paths"
     },
     "src/evaluation_release_controller.py": {
-      "expected_sha256": "0e5c0c6a9b1baca06731eb36359af172fc12c23be6817fa04b460cc7fd8823bc",
+      "expected_sha256": "b87df93fd166f687d2da21dd776a55d01f77b118696daa9335712f69293f8f13",
       "reason": "G5 release hardening: independently require the complete control-history stable-identity gate and hash-bind its exact inputs and receipt into release authority."
     },
     "src/historical_market_backfill.py": {
