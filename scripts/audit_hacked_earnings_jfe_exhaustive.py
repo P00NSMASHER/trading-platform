@@ -106,6 +106,31 @@ def scan_text(text: str) -> dict[str, Any]:
     }
 
 
+def scan_release_text(text: str) -> dict[str, Any]:
+    times = list(TIME_RE.finditer(text))
+    acceptance = ACCEPTANCE_RE.findall(text)
+    lowered = text.lower()
+    vendor_counts = {}
+    for term in VENDOR_TERMS:
+        count = lowered.count(term.lower())
+        if count:
+            vendor_counts[term] = count
+    urls = URL_RE.findall(text)
+    return {
+        "characters": len(text),
+        "lines": 0 if not text else text.count("\n") + 1,
+        "decoded_utf8_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+        "time_token_count": len(times),
+        "time_tokens": [m.group(0) for m in times[:200]],
+        "time_contexts": [snippet(text, m.start(), m.end()) for m in times[:50]],
+        "acceptance_datetime_count": len(acceptance),
+        "acceptance_datetimes": acceptance[:200],
+        "url_count": len(urls),
+        "vendor_term_counts": vendor_counts,
+        "file_refs": [],
+    }
+
+
 def tracked_files(source_root: Path) -> list[dict[str, Any]]:
     raw = subprocess.check_output(["git", "ls-files", "-s", "-z"], cwd=source_root)
     rows = []
@@ -518,7 +543,7 @@ def inspect_press_archives(source_root: Path, event_index: Path, output_dir: Pat
                     continue
                 data = zf.read(info)
                 text, enc = decode_every_byte(data)
-                scan = scan_text(text)
+                scan = scan_release_text(text)
                 events = member_to_events.get(info.filename, [])
 
                 total_members += 1
