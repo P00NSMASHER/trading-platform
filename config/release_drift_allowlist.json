@@ -1947,6 +1947,10 @@
       "expected_sha256": "ea6d3df9bf3e7e1805bebb64ca7ee5e597281d74cbca9678d73dea0f4cfae6a8",
       "reason": "G5 external point-in-time metadata intake: strict source hash and authorization binding, primary-candidate scoping, pre-cutoff timestamp enforcement, alias normalization for classification/13F/IBES/borrow lanes, and explicit non-evidence output semantics."
     },
+    "src/g5_external_source_request_compressor.py": {
+      "expected_sha256": "311032d922aea39c1cd158a7a3e47148969bb5c60c58e8af5f30d5d4cd16b2e8",
+      "reason": "G5 external metadata acquisition optimization: compress date-level requests into one lane/symbol request while preserving every exact event-date cutoff and making no cross-date continuity or evidence claim."
+    },
     "src/g5_external_source_queue.py": {
       "expected_sha256": "f5d2818b61bf81c6f59137be91d450ac338793dd5f6b8c6ec601ad9d38749f37",
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
@@ -2594,6 +2598,10 @@
     "tests/test_g5_external_metadata_adapter.py": {
       "expected_sha256": "80dff7eba574b409729141e387d36d94f0c98836408607992a10332dbfeaac6e",
       "reason": "Regression coverage for G5 external metadata aliases, source hashes, point-in-time cutoffs, candidate scoping, prohibited retrospective/post-event columns, same-timestamp conflicts, and non-evidence receipts."
+    },
+    "tests/test_g5_external_source_request_compressor.py": {
+      "expected_sha256": "3ad333f081570793cab6e204ace59eee644b4e3c79d2276edde67ed16cf695e6",
+      "reason": "Regression coverage for deterministic lane/symbol request compression, exact date/cutoff conservation, inconsistent-contract fail-closed behavior, and real G5 control request reduction without readiness promotion."
     },
     "tests/test_g5_external_source_queue.py": {
       "expected_sha256": "0bfdb2b439db11dbb686f95e78bb423b4668e0af0a24fe71ae12e2286c8421e6",
