@@ -2769,7 +2769,7 @@
     }
   ,
     ".github/workflows/hacked-earnings-exhaustive-audit.yml": {
-      "expected_sha256": "70d9dc48ac7ae7a980f54f2cfe5fca2b37b25455d7da4440ffb1510781ae7cfc",
+      "expected_sha256": "38db70befe76eb6e74c95cb66153b11a76654ecded342861f9311b66db324938",
       "reason": "Reproducible read-only CI for the pinned hacked_earnings_jfe exhaustive audit; clones the exact upstream commit and publishes audit evidence without expanding the audited source boundary."
     },
     "docs/hacked_earnings_jfe_exhaustive_audit_2026-10-06.md": {
