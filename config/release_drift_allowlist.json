@@ -1927,6 +1927,10 @@
       "expected_sha256": "f003ef2f77675b1b21f500577c7a31aa2845bb270f596c00b24be8a63e577568",
       "reason": "G5 control-history shares reconciliation: reuse only exact pre-cutoff canonical G4 shares rows and emit a fail-closed incremental acquisition queue for every remaining shares requirement."
     },
+    "src/g5_control_identity_symbol_permno_leads.py": {
+      "expected_sha256": "b4a9c6704403904c8632bac89b3c5e2a1a77f2e968113f622f928c771020b0fb",
+      "reason": "G5 acquisition planning: derive non-evidence same-symbol unique PERMNO leads for no-hint control identity rows while preserving mandatory authorized dated validation and zero readiness change."
+    },
     "src/g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "2d4f8205f188b29a1521f2a8e2f5cab65fa564e04f05669c741e001cd777ef73",
       "reason": "G5 derived market metadata intake: compute only strictly pre-cutoff price, market cap, 21-prior-day volatility, same-minute baseline volume/turnover/spread, option contract-volume liquidity, and pre-event return from real G2/G4 inputs while keeping outputs non-evidence until canonical resolver gates pass."
@@ -2562,6 +2566,10 @@
     "tests/test_g5_control_shares_reconciliation.py": {
       "expected_sha256": "0a2cc9b167ecc63d19d65334ba0a64e69d52d3f48144cf95b6f54683434768aa",
       "reason": "Regression coverage for exact G4 reuse, conservative G5 availability cutoffs, unresolved/late/missing shares routing, malformed canonical rows, and real control-history reconciliation."
+    },
+    "tests/test_g5_control_identity_symbol_permno_leads.py": {
+      "expected_sha256": "972532d5a19684d5e33c68041bc20828e45cc14269bb83b197dea7969474d073",
+      "reason": "Regression coverage for unique same-symbol PERMNO leads, ambiguous-history fail-closed behavior, existing-hint exclusion, and real-data no-hint queue reduction without identity promotion."
     },
     "tests/test_g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "0d414cff9384f4b7b08548bee4ef8ef89210cf114d62445f8baaa6e049496f8c",
