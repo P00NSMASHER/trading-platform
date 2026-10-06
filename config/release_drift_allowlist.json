@@ -1951,6 +1951,10 @@
       "expected_sha256": "311032d922aea39c1cd158a7a3e47148969bb5c60c58e8af5f30d5d4cd16b2e8",
       "reason": "G5 external metadata acquisition optimization: compress date-level requests into one lane/symbol request while preserving every exact event-date cutoff and making no cross-date continuity or evidence claim."
     },
+    "src/g5_external_metadata_intake.py": {
+      "expected_sha256": "4b572f4ab0a1df28bc8a1cffb6d457f205cab98f03a2117ac1b4a7ee6c4751f9",
+      "reason": "G5 external metadata intake orchestration: hash-bound control/treated lane normalization, point-in-time cutoff enforcement, multi-source conflict accounting, and exact 390-target / 1,950-field completeness preview without canonical readiness promotion."
+    },
     "src/g5_external_source_queue.py": {
       "expected_sha256": "f5d2818b61bf81c6f59137be91d450ac338793dd5f6b8c6ec601ad9d38749f37",
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
@@ -2606,6 +2610,10 @@
     "tests/test_g5_external_source_request_compressor.py": {
       "expected_sha256": "3ad333f081570793cab6e204ace59eee644b4e3c79d2276edde67ed16cf695e6",
       "reason": "Regression coverage for deterministic lane/symbol request compression, exact date/cutoff conservation, inconsistent-contract fail-closed behavior, and real G5 control request reduction without readiness promotion."
+    },
+    "tests/test_g5_external_metadata_intake.py": {
+      "expected_sha256": "91b806865398747a7ee9a0f3073e00f52259ed8e700673b07109fd8f2fb24589",
+      "reason": "Regression coverage for complete and partial G5 external intake, equal-timestamp conflicts, treated/control separation, and the real 390-target / 1,950-field scope with zero readiness promotion."
     },
     "tests/test_g5_external_source_queue.py": {
       "expected_sha256": "0bfdb2b439db11dbb686f95e78bb423b4668e0af0a24fe71ae12e2286c8421e6",
