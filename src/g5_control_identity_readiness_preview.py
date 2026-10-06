@@ -44,9 +44,47 @@ def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     return fields, rows
 
 
+
+def _canonical_g2_verified(path: Path) -> dict[tuple[str, str], str]:
+    try:
+        obj = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise G5ControlIdentityReadinessPreviewError(
+            "canonical G2 identity manifest is missing or invalid JSON"
+        ) from exc
+    events = obj.get("events") if isinstance(obj, dict) else None
+    if not isinstance(events, list):
+        raise G5ControlIdentityReadinessPreviewError(
+            "canonical G2 identity manifest missing events"
+        )
+
+    verified: dict[tuple[str, str], str] = {}
+    for index, event in enumerate(events, 1):
+        if not isinstance(event, dict):
+            raise G5ControlIdentityReadinessPreviewError(
+                f"canonical G2 identity event {index} is not an object"
+            )
+        symbol = str(event.get("historical_symbol") or "").strip().upper()
+        permno = str(event.get("permno") or "").strip()
+        if not symbol or not permno:
+            raise G5ControlIdentityReadinessPreviewError(
+                f"canonical G2 identity event {index}: symbol/PERMNO required"
+            )
+        for raw_date in event.get("verified_required_dates") or []:
+            trade_date = str(raw_date)[:10]
+            key = (symbol, trade_date)
+            prior = verified.get(key)
+            if prior is not None and prior != permno:
+                raise G5ControlIdentityReadinessPreviewError(
+                    f"canonical G2 verified identity collision for {symbol}|{trade_date}"
+                )
+            verified[key] = permno
+    return verified
+
 def build_preview(
     *,
     identity_requirements_path: Path,
+    canonical_g2_identity_manifest_path: Path,
     staged_g5_only_path: Path | None,
     staging_receipt_path: Path | None,
     output_path: Path,
@@ -76,7 +114,6 @@ def build_preview(
         )
 
     requirements: dict[tuple[str, str], dict[str, str]] = {}
-    canonical_verified: set[tuple[str, str]] = set()
     for row_no, row in enumerate(requirement_rows, 2):
         symbol = row["historical_symbol"].upper()
         trade_date = row["trade_date"][:10]
@@ -102,7 +139,26 @@ def build_preview(
                 raise G5ControlIdentityReadinessPreviewError(
                     f"canonical verified status disagrees with overlap for {symbol}|{trade_date}"
                 )
-            canonical_verified.add(key)
+    canonical_g2_verified = _canonical_g2_verified(
+        canonical_g2_identity_manifest_path
+    )
+    canonical_verified: set[tuple[str, str]] = set()
+    for key, requirement in requirements.items():
+        overlap = requirement["canonical_g2_overlap"]
+        if overlap in {"CANONICAL_G2_VERIFIED", "CANONICAL_G2_UNVERIFIED"}:
+            actual_permno = canonical_g2_verified.get(key, "")
+            expected_permno = (
+                requirement["canonical_permno"]
+                or requirement["samplefirms_permno"]
+            )
+            if actual_permno and (
+                not expected_permno or actual_permno == expected_permno
+            ):
+                canonical_verified.add(key)
+        elif overlap != "NONE":
+            raise G5ControlIdentityReadinessPreviewError(
+                f"unexpected canonical_g2_overlap for {key[0]}|{key[1]}: {overlap!r}"
+            )
 
     staged_by_key: dict[tuple[str, str], dict[str, str]] = {}
     if (staged_g5_only_path is None) != (staging_receipt_path is None):
@@ -242,7 +298,10 @@ def build_preview(
         elif key in staged_by_key:
             preview_status = "STAGED_G5_ONLY_AUTHORIZED_EVIDENCE"
             verified = "1"
-        elif requirement["canonical_g2_overlap"] == "CANONICAL_G2_UNVERIFIED":
+        elif requirement["canonical_g2_overlap"] in {
+            "CANONICAL_G2_VERIFIED",
+            "CANONICAL_G2_UNVERIFIED",
+        }:
             preview_status = "UNRESOLVED_CANONICAL_G2_OVERLAP"
             verified = "0"
             unresolved_g2_overlap += 1
@@ -290,7 +349,11 @@ def build_preview(
         "identity_requirements": {
             "path": str(identity_requirements_path),
             "sha256": _sha256(identity_requirements_path),
-        }
+        },
+        "canonical_g2_identity_manifest": {
+            "path": str(canonical_g2_identity_manifest_path),
+            "sha256": _sha256(canonical_g2_identity_manifest_path),
+        },
     }
     if staged_g5_only_path is not None:
         inputs["staged_g5_only_identity"] = {
@@ -306,7 +369,7 @@ def build_preview(
         "schema_version": SCHEMA_VERSION,
         "purpose": (
             "Preview full control-history stable-identity completeness for G5 without "
-            "modifying canonical G2 or G5 state. Canonical G2-verified dates may be reused; "
+            "modifying canonical G2 or G5 state. Current canonical G2-verified dates may be reused; "
             "only G5-only rows already staged from authorized dated evidence count as "
             "additional preview verification."
         ),
@@ -330,6 +393,8 @@ def build_preview(
         "release_claimed": False,
         "policy": {
             "g2_overlap_requires_canonical_g2_promotion": True,
+            "requirements_status_alone_may_close_g2_overlap": False,
+            "canonical_g2_manifest_revalidated_each_run": True,
             "staged_g5_only_rows_are_preview_evidence_only": True,
             "event_date_identity_does_not_substitute_for_full_history_identity": True,
             "undated_or_symbol_only_identity_may_close_g5": False,
@@ -347,6 +412,9 @@ def main() -> int:
         description="Preview G5 control-history stable-identity readiness."
     )
     parser.add_argument("--identity-requirements", type=Path, required=True)
+    parser.add_argument(
+        "--canonical-g2-identity-manifest", type=Path, required=True
+    )
     parser.add_argument("--staged-g5-only", type=Path)
     parser.add_argument("--staging-receipt", type=Path)
     parser.add_argument("--output", type=Path, required=True)
@@ -355,6 +423,7 @@ def main() -> int:
 
     result = build_preview(
         identity_requirements_path=args.identity_requirements,
+        canonical_g2_identity_manifest_path=args.canonical_g2_identity_manifest,
         staged_g5_only_path=args.staged_g5_only,
         staging_receipt_path=args.staging_receipt,
         output_path=args.output,

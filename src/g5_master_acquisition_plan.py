@@ -147,6 +147,7 @@ def build(
         identity_requirements_path=(
             identity_dir / "g5_control_identity_requirements.csv"
         ),
+        canonical_g2_identity_manifest_path=canonical_g2_identity_manifest_path,
         staged_g5_only_path=staged_g5_only_path,
         staging_receipt_path=staging_receipt_path,
         output_path=(

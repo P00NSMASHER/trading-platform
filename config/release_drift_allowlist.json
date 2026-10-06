@@ -1944,8 +1944,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "50d69325ef95491cee4d92e71516d1b76e65d086f4af73e34fa760a3967c3a98",
-      "reason": "G5 master acquisition plan now always reconciles full control-history stable-identity readiness, combining canonical G2 verified reuse with hash-bound G5-only staged evidence while preserving zero canonical readiness or release promotion."
+      "expected_sha256": "55969843dcba516da151c8adfb07ef8d350a475423c4850ec01fcd2f4472909f",
+      "reason": "G5 master acquisition plan binds the full-history identity readiness preview to the same current canonical G2 identity manifest used for requirement generation, preserving exact promotion/demotion visibility with zero release-gate relaxation."
     },
     "src/g5_match_quality_gate.py": {
       "expected_sha256": "ebd01d5fb33595130e90c166c59de52414715aaeface898a5fa5b209574e5a21",
@@ -2708,12 +2708,12 @@
       "reason": "Regression coverage for replay-driven G5 matcher metadata materialization, incomplete-input blocking, generated matcher-input provenance, manual/generated input ambiguity rejection, normalized-source configuration, and legacy replay-receipt compatibility."
     },
     "src/g5_control_identity_readiness_preview.py": {
-      "expected_sha256": "870990f061f5402d36b80d93fe51205c3a4712f7a41aed1605be7dc85e415dc9",
-      "reason": "G5 full-history stable-identity preview: reconcile canonical G2 verified reuse with hash-bound G5-only authorized staging receipts, preserve unresolved G2/G5 requirements, and never mutate canonical readiness or release state."
+      "expected_sha256": "0cc72cc82e6d954ba74a78babae6403a70f950e27fae49d3471e9903e4ccd744",
+      "reason": "G5 full-history identity preview now revalidates every G2-overlap requirement against the current canonical G2 identity manifest and hash-binds that manifest instead of trusting stale requirement status."
     },
     "tests/test_g5_control_identity_readiness_preview.py": {
-      "expected_sha256": "0208acdd468c95da5e2a385d9e8ff359869eb5da3903b4bedf11d6c89d553f34",
-      "reason": "Regression coverage for hash-bound full-history G5 identity readiness preview, including fail-closed G2-overlap routing, PERMNO-hint conflicts, receipt tamper rejection, exact requirement accounting, and zero canonical promotion."
+      "expected_sha256": "70c1936c7b365176a09e0d1126bf75ea9dca6c460df57fb37d5214e846701e4d",
+      "reason": "Regression coverage for current-canonical G2 promotion/demotion visibility, stale requirement-status rejection, G5-only staging integrity, cross-pipeline misuse, PERMNO conflicts, receipt tampering, and exact requirement reconciliation."
     },
     "tests/test_real_data_replay_g5_identity.py": {
       "expected_sha256": "9fe7c3766086f063ba97d7d617b82aa7e33faae6fedd2ff427346e91cf05e9db",
