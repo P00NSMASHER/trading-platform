@@ -32,7 +32,7 @@ jobs:
       - name: Checkout exact research commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: \${{ github.sha }}
+          ref: ${{ github.sha }}
           fetch-depth: 1
 
       - name: Set up Python
@@ -73,7 +73,7 @@ jobs:
 
       - name: Save derived research results only
         env:
-          EXPECTED_HEAD: \${{ github.sha }}
+          EXPECTED_HEAD: ${{ github.sha }}
           RESEARCH_BRANCH: research/hacked-earnings-oos-experiment-20261006
         run: |
           set -euo pipefail
@@ -92,7 +92,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
-          name: hacked-earnings-oos-\${{ github.sha }}
+          name: hacked-earnings-oos-${{ github.sha }}
           path: |
             data/processed/hacked_earnings_oos
             private_runtime/hacked_earnings_source
