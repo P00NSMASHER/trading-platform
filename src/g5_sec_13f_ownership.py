@@ -78,13 +78,15 @@ def _get(row: dict[str, str], *names: str) -> str:
 
 
 def _parse_date(value: str, *, label: str) -> date:
-    raw = str(value or "").strip()[:10]
-    try:
-        return date.fromisoformat(raw)
-    except ValueError as exc:
-        raise G5Sec13FOwnershipError(
-            f"{label} must be YYYY-MM-DD"
-        ) from exc
+    raw = str(value or "").strip()
+    for fmt in ("%Y-%m-%d", "%d-%b-%Y"):
+        try:
+            return datetime.strptime(raw, fmt).date()
+        except ValueError:
+            continue
+    raise G5Sec13FOwnershipError(
+        f"{label} must be YYYY-MM-DD or DD-MON-YYYY"
+    )
 
 
 def _parse_aware(value: str, *, label: str) -> datetime:
@@ -245,10 +247,13 @@ def _submission_index(path: Path) -> dict[str, dict[str, str]]:
             "REPORTCALENDARORQUARTER",
             "REPORT_PERIOD",
         )
-        form = _get(row, "SUBMISSIONTYPE", "FORM_TYPE", "FORM")
+        form = _get(row, "SUBMISSIONTYPE", "FORM_TYPE", "FORM").upper()
         if not accession or not cik or not filing_date or not report_period:
             continue
-        if form and not form.upper().startswith("13F-HR"):
+        # Amendment semantics can be restatement or additions-only. Until the
+        # COVERPAGE amendment type is explicitly modeled, use initial holdings
+        # reports only rather than guessing how to combine amendments.
+        if form != "13F-HR":
             continue
         out[accession] = {
             "accession": accession,
@@ -537,7 +542,8 @@ def build(
             "same_day_13f_filings_allowed": False,
             "put_call_rows_counted_as_common_ownership": False,
             "share_principal_amount_type_required": "SH",
-            "latest_pre_event_manager_report_period_filing_only": True,
+            "initial_13f_hr_only": True,
+            "amendments_included": False,
             "post_event_amendments_cannot_replace_pre_event_filings": True,
             "filing_date_only_records_use_conservative_end_of_day_availability": True,
             "pre_cutoff_shares_outstanding_required": True,
