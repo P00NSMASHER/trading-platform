@@ -8,7 +8,7 @@ import math
 import statistics
 from collections import defaultdict
 from dataclasses import asdict, dataclass, fields
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Iterable
 from zoneinfo import ZoneInfo
@@ -258,6 +258,18 @@ def load_metadata(path: Path, covariates: tuple[str, ...]) -> dict[str, list[dic
             if not symbol:
                 raise ValueError(f"metadata row {i}: blank symbol")
             dt = _parse_aware_ts(row.get("effective_ts_utc", ""))
+            event_date_scope = _clean(row.get("event_date"))
+            if event_date_scope:
+                if len(event_date_scope) != 10:
+                    raise ValueError(
+                        f"metadata row {i}: event_date must be YYYY-MM-DD when provided"
+                    )
+                try:
+                    event_date_scope = date.fromisoformat(event_date_scope).isoformat()
+                except ValueError as exc:
+                    raise ValueError(
+                        f"metadata row {i}: invalid event_date {event_date_scope!r}"
+                    ) from exc
             vals = {}
             for c in covariates:
                 vals[c] = _parse_float(row.get(c))
@@ -266,6 +278,7 @@ def load_metadata(path: Path, covariates: tuple[str, ...]) -> dict[str, list[dic
                 "symbol": symbol,
                 "effective_ts_utc": _ts_key(dt),
                 "_dt": dt,
+                "_event_date_scope": event_date_scope,
                 "_values": vals,
                 "_sector": _clean(row.get("sector")),
                 "_index_bucket": _clean(row.get("index_bucket")),
@@ -278,10 +291,19 @@ def load_metadata(path: Path, covariates: tuple[str, ...]) -> dict[str, list[dic
     return dict(out)
 
 
-def latest_metadata(metadata: dict[str, list[dict]], symbol: str, asof: datetime) -> dict | None:
+def latest_metadata(
+    metadata: dict[str, list[dict]],
+    symbol: str,
+    asof: datetime,
+    event_date: str | None = None,
+) -> dict | None:
     rows = metadata.get(symbol, [])
+    scope = _clean(event_date)
     latest = None
     for row in rows:
+        row_scope = _clean(row.get("_event_date_scope"))
+        if scope and row_scope and row_scope != scope:
+            continue
         if row["_dt"] <= asof:
             latest = row
         else:
@@ -426,7 +448,9 @@ def generate_matches(
         ts = event["_event_dt"]
         local_key = (event["_local_date"], event["_local_minute"])
         treated_feature = features_exact.get((treated_symbol, *local_key))
-        treated_meta = latest_metadata(metadata, treated_symbol, ts)
+        treated_meta = latest_metadata(
+            metadata, treated_symbol, ts, event["_local_date"]
+        )
 
         if treated_feature is None:
             summaries.append(EventMatchSummary(event_id, treated_symbol, event["_event_ts_key"], *local_key, 0, 0, "missing_treated_features", "", "", ""))
@@ -444,7 +468,9 @@ def generate_matches(
                 continue
             if _excluded(symbol, ts, exclusions):
                 continue
-            meta = latest_metadata(metadata, symbol, ts)
+            meta = latest_metadata(
+                metadata, symbol, ts, event["_local_date"]
+            )
             if meta is None:
                 continue
             if require_same_sector and treated_meta["_sector"] and meta["_sector"] != treated_meta["_sector"]:
@@ -656,6 +682,7 @@ def build(
             "controls_per_event": controls_per_event,
             "minimum_controls": min_controls,
             "same_local_date_and_minute_required": True,
+            "event_date_scoped_metadata_respected_when_present": True,
             "same_sector_required_when_available": require_same_sector,
             "same_index_bucket_required_when_both_available": True,
             "same_scheduled_event_status_required_when_available": match_scheduled_event,
