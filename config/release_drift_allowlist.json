@@ -1956,7 +1956,7 @@
       "reason": "G5 external metadata intake orchestration: hash-bound control/treated lane normalization, point-in-time cutoff enforcement, multi-source conflict accounting, and exact 390-target / 1,950-field completeness preview without canonical readiness promotion."
     },
     "src/g5_external_source_manifest_finalizer.py": {
-      "expected_sha256": "f25edfee75c5938646364cc67ac26fcd3b931f1e505af8499eb81825385af7ae",
+      "expected_sha256": "2e8e7988d50592324f93c1b4b46d19097b4d698997837f335689d66bbcaf5464",
       "reason": "G5 external intake bridge: finalize the eight-slot scaffold from local source bindings, automatically hash and preflight real files, require source names and authorization references, and emit an intake-ready manifest without copying/fetching data or promoting readiness."
     },
     "src/g5_external_source_manifest_scaffold.py": {
