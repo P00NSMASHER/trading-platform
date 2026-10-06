@@ -156,3 +156,76 @@ def test_explicit_incomplete_g5_identity_config_fails_closed(tmp_path: Path):
     cfg = _config(tmp_path, {})
     with pytest.raises(FileNotFoundError, match="G5 identity requirements"):
         replay.run_replay(cfg)
+
+def test_replay_accepts_hash_bound_g5_only_staged_identity(tmp_path: Path):
+    requirements = _write_csv(
+        tmp_path / "g5_only_requirements.csv",
+        REQ_FIELDS,
+        [
+            {
+                "historical_symbol": "BBB",
+                "trade_date": "2015-01-02",
+                "roles": "event_point",
+                "identity_status": "PUBLIC_EXACT_MAPPING_AVAILABLE_REQUIRES_ADMISSION",
+                "canonical_g2_overlap": "NONE",
+                "canonical_permno": "",
+                "canonical_gvkey": "",
+                "samplefirms_permno": "22222",
+                "samplefirms_gvkey": "2",
+                "samplefirms_exact_mapping_status": "UNIQUE_EXACT_DATE_MAPPING_AVAILABLE",
+                "required_evidence": "ADMISSIBLE_DATE_SPECIFIC_STABLE_ID_EVIDENCE",
+                "research_use_only": "1",
+            }
+        ],
+    )
+    canonical = tmp_path / "canonical_g2_identity_g5_only.json"
+    canonical.write_text(json.dumps({"events": []}), encoding="utf-8")
+    staged = _write_csv(
+        tmp_path / "g5_only_staged_verified.csv",
+        STAGED_FIELDS,
+        [
+            {
+                "historical_symbol": "BBB",
+                "trade_date": "2015-01-02",
+                "permno": "22222",
+                "market_identifier": "BBB",
+                "evidence_ids": "G5-E1",
+                "source_references": "authorized-security-master:G5-E1",
+                "authorization_references": "AUTHORIZED-TEST",
+                "research_use_only": "1",
+            }
+        ],
+    )
+    staged_sha = hashlib.sha256(staged.read_bytes()).hexdigest()
+    receipt = tmp_path / "g5_only_staging_receipt.json"
+    receipt.write_text(
+        json.dumps(
+            {
+                "research_use_only": True,
+                "canonical_g2_write_performed": False,
+                "canonical_g5_write_performed": False,
+                "counts": {"g5_only_staged_verified_count": 1},
+                "output_sha256": {"g5_only_staged_verified": staged_sha},
+            }
+        ),
+        encoding="utf-8",
+    )
+    spec = {
+        "identity_requirements": str(requirements),
+        "canonical_g2_identity_manifest": str(canonical),
+        "g5_only_staged_identity": str(staged),
+        "g5_identity_staging_receipt": str(receipt),
+    }
+
+    result = replay.run_replay(_config(tmp_path, spec))
+
+    stage = result["stages"]["g5_control_identity"]
+    assert stage["status"] == "READY"
+    assert stage["required_symbol_date_count"] == 1
+    assert stage["verified_symbol_date_count"] == 1
+    assert stage["unresolved_symbol_date_count"] == 0
+    assert stage["canonical_g2_overlap_verified_count"] == 0
+    assert stage["g5_only_verified_count"] == 1
+    assert result["ready_for_non_synthetic_offline_evaluation"] is False
+    assert result["evaluation_release_permitted"] is False
+
