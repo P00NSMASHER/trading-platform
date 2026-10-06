@@ -11,11 +11,13 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Callable
 from urllib.request import Request, urlopen
+from zoneinfo import ZoneInfo
 
 
 SCHEMA_VERSION = "1"
 SEC_SUBMISSIONS = "https://data.sec.gov/submissions"
 SEC_ARCHIVES = "https://www.sec.gov/Archives/edgar/data"
+SEC_TIMEZONE = ZoneInfo("America/New_York")
 ALLOWED_FORMS = {
     "10-K",
     "10-K/A",
