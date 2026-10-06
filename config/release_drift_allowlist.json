@@ -1927,6 +1927,10 @@
       "expected_sha256": "f003ef2f77675b1b21f500577c7a31aa2845bb270f596c00b24be8a63e577568",
       "reason": "G5 control-history shares reconciliation: reuse only exact pre-cutoff canonical G4 shares rows and emit a fail-closed incremental acquisition queue for every remaining shares requirement."
     },
+    "src/g5_control_identity_symbol_permno_leads.py": {
+      "expected_sha256": "b4a9c6704403904c8632bac89b3c5e2a1a77f2e968113f622f928c771020b0fb",
+      "reason": "G5 acquisition planning: derive non-evidence same-symbol unique PERMNO leads for no-hint control identity rows while preserving mandatory authorized dated validation and zero readiness change."
+    },
     "src/g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "2d4f8205f188b29a1521f2a8e2f5cab65fa564e04f05669c741e001cd777ef73",
       "reason": "G5 derived market metadata intake: compute only strictly pre-cutoff price, market cap, 21-prior-day volatility, same-minute baseline volume/turnover/spread, option contract-volume liquidity, and pre-event return from real G2/G4 inputs while keeping outputs non-evidence until canonical resolver gates pass."
@@ -1940,8 +1944,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "bfcee76a207e3ba63247b3270a9107242a2301545fb32b6ce019b2b9cf2904e6",
-      "reason": "G5 identity-evidence integration: optionally invoke the G5-scoped authorized stable-ID stager from the master acquisition plan while preserving zero canonical readiness promotion when evidence is absent or merely staged."
+      "expected_sha256": "55969843dcba516da151c8adfb07ef8d350a475423c4850ec01fcd2f4472909f",
+      "reason": "G5 master acquisition plan binds the full-history identity readiness preview to the same current canonical G2 identity manifest used for requirement generation, preserving exact promotion/demotion visibility with zero release-gate relaxation."
     },
     "src/g5_match_quality_gate.py": {
       "expected_sha256": "ebd01d5fb33595130e90c166c59de52414715aaeface898a5fa5b209574e5a21",
@@ -2563,6 +2567,10 @@
       "expected_sha256": "0a2cc9b167ecc63d19d65334ba0a64e69d52d3f48144cf95b6f54683434768aa",
       "reason": "Regression coverage for exact G4 reuse, conservative G5 availability cutoffs, unresolved/late/missing shares routing, malformed canonical rows, and real control-history reconciliation."
     },
+    "tests/test_g5_control_identity_symbol_permno_leads.py": {
+      "expected_sha256": "972532d5a19684d5e33c68041bc20828e45cc14269bb83b197dea7969474d073",
+      "reason": "Regression coverage for unique same-symbol PERMNO leads, ambiguous-history fail-closed behavior, existing-hint exclusion, and real-data no-hint queue reduction without identity promotion."
+    },
     "tests/test_g5_derived_market_metadata_adapter.py": {
       "expected_sha256": "0d414cff9384f4b7b08548bee4ef8ef89210cf114d62445f8baaa6e049496f8c",
       "reason": "Regression coverage for completed-minute anti-lookahead, prior-day volatility, point-in-time shares availability, baseline-history requirements, option-liquidity definition, and zero G5 readiness/release claims."
@@ -2576,8 +2584,8 @@
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
     },
     "tests/test_g5_master_acquisition_plan.py": {
-      "expected_sha256": "e97ee584ef2ac252efa5296482ead2057ec3987b99d7abacf73b1593cec81f60",
-      "reason": "Regression coverage for optional G5-only authorized identity-evidence staging through the master plan, including exact input hashing, staged-output creation, and unchanged fail-closed release/readiness state."
+      "expected_sha256": "c2feb27fa26f95113445a0bb4a838da77db7cfef419eaee4c2b5fd3ae3c7c05e",
+      "reason": "Regression coverage for master-plan full-history identity reconciliation with and without authorized staged evidence, exact unresolved-count deltas, emitted readiness artifacts, and unchanged fail-closed release state."
     },
     "tests/test_g5_match_quality_gate.py": {
       "expected_sha256": "9fd579c64321ca886cbaaa98c68319c7255a99f4b3ee1e4caec46309b8232f2e",
@@ -2698,6 +2706,14 @@
     "tests/test_real_data_replay_g5_materializer.py": {
       "expected_sha256": "3ddf31bc0f8657f551819c3f75694d5c49d04129dec2c19ebc10956791d3f2ba",
       "reason": "Regression coverage for replay-driven G5 matcher metadata materialization, incomplete-input blocking, generated matcher-input provenance, manual/generated input ambiguity rejection, normalized-source configuration, and legacy replay-receipt compatibility."
+    },
+    "src/g5_control_identity_readiness_preview.py": {
+      "expected_sha256": "0cc72cc82e6d954ba74a78babae6403a70f950e27fae49d3471e9903e4ccd744",
+      "reason": "G5 full-history identity preview now revalidates every G2-overlap requirement against the current canonical G2 identity manifest and hash-binds that manifest instead of trusting stale requirement status."
+    },
+    "tests/test_g5_control_identity_readiness_preview.py": {
+      "expected_sha256": "70c1936c7b365176a09e0d1126bf75ea9dca6c460df57fb37d5214e846701e4d",
+      "reason": "Regression coverage for current-canonical G2 promotion/demotion visibility, stale requirement-status rejection, G5-only staging integrity, cross-pipeline misuse, PERMNO conflicts, receipt tampering, and exact requirement reconciliation."
     },
     "tests/test_real_data_replay_g5_identity.py": {
       "expected_sha256": "9fe7c3766086f063ba97d7d617b82aa7e33faae6fedd2ff427346e91cf05e9db",

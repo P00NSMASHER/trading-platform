@@ -12,6 +12,7 @@ import g5_control_identity_requirements as control_identity
 import g5_control_identity_stocknames_lead_expansion as identity_leads
 import g5_control_identity_stocknames_request as identity_stocknames
 import g5_control_identity_evidence_stager as identity_stager
+import g5_control_identity_readiness_preview as identity_readiness
 import g5_control_market_vendor_bridge as market_bridge
 import g5_control_shares_reconciliation as control_shares
 import g5_external_source_queue as external_queue
@@ -52,6 +53,7 @@ def build(
     identity_lead_dir = output_dir / "control_identity_stocknames_leads"
     identity_stocknames_dir = output_dir / "control_identity_stocknames_request"
     identity_staging_dir = output_dir / "control_identity_evidence_staging"
+    identity_readiness_dir = output_dir / "control_identity_readiness"
     market_bridge_dir = output_dir / "control_market_vendor_bridge"
     shares_dir = output_dir / "control_shares"
 
@@ -129,6 +131,65 @@ def build(
             raise ValueError(
                 "identity staging G2-overlap scope does not match the master identity plan"
             )
+
+    staged_g5_only_path = None
+    staging_receipt_path = None
+    if identity_staging is not None:
+        staged_g5_only_path = (
+            identity_staging_dir / "g5_control_identity_staged_verified.csv"
+        )
+        staging_receipt_path = (
+            identity_staging_dir
+            / "g5_control_identity_evidence_staging_receipt.json"
+        )
+
+    identity_readiness_state = identity_readiness.build_preview(
+        identity_requirements_path=(
+            identity_dir / "g5_control_identity_requirements.csv"
+        ),
+        canonical_g2_identity_manifest_path=canonical_g2_identity_manifest_path,
+        staged_g5_only_path=staged_g5_only_path,
+        staging_receipt_path=staging_receipt_path,
+        output_path=(
+            identity_readiness_dir / "g5_control_identity_readiness_preview.csv"
+        ),
+        summary_path=(
+            identity_readiness_dir / "g5_control_identity_readiness_summary.json"
+        ),
+    )
+    if int(identity_readiness_state["identity_requirement_count"]) != int(
+        identity["control_history_symbol_date_count"]
+    ):
+        raise ValueError(
+            "identity readiness scope does not match the master control-history identity plan"
+        )
+    if int(identity_readiness_state["canonical_g2_verified_reuse_count"]) != int(
+        identity["canonical_g2_verified_reuse_count"]
+    ):
+        raise ValueError(
+            "identity readiness canonical G2 reuse count does not match the master identity plan"
+        )
+    expected_staged_g5_verified = (
+        int(identity_staging["counts"]["g5_only_staged_verified_count"])
+        if identity_staging is not None
+        else 0
+    )
+    if int(identity_readiness_state["staged_g5_only_verified_count"]) != (
+        expected_staged_g5_verified
+    ):
+        raise ValueError(
+            "identity readiness staged G5 count does not match the evidence staging receipt"
+        )
+    expected_unresolved_identity = int(
+        identity["identity_acquisition_queue_count"]
+    ) - expected_staged_g5_verified
+    if int(identity_readiness_state["unresolved_identity_requirement_count"]) != (
+        expected_unresolved_identity
+    ):
+        raise ValueError(
+            "identity readiness unresolved count does not reconcile to the acquisition queue"
+        )
+
     market = market_bridge.build(
         g5_source_requirements_path=(
             history_dir / "g5_control_history_source_date_requirements.csv"
@@ -256,6 +317,36 @@ def build(
                 "primary_candidate_exact_sample_mapping"
             ],
         },
+        "control_identity_readiness": {
+            "identity_requirement_count": int(
+                identity_readiness_state["identity_requirement_count"]
+            ),
+            "canonical_g2_verified_reuse_count": int(
+                identity_readiness_state["canonical_g2_verified_reuse_count"]
+            ),
+            "staged_g5_only_verified_count": int(
+                identity_readiness_state["staged_g5_only_verified_count"]
+            ),
+            "preview_verified_count": int(
+                identity_readiness_state["preview_verified_count"]
+            ),
+            "unresolved_canonical_g2_overlap_count": int(
+                identity_readiness_state[
+                    "unresolved_canonical_g2_overlap_count"
+                ]
+            ),
+            "unresolved_g5_only_count": int(
+                identity_readiness_state["unresolved_g5_only_count"]
+            ),
+            "unresolved_identity_requirement_count": int(
+                identity_readiness_state["unresolved_identity_requirement_count"]
+            ),
+            "preview_full_history_identity_complete": bool(
+                identity_readiness_state[
+                    "preview_full_history_identity_complete"
+                ]
+            ),
+        },
         "control_identity_routing": {
             "date_level_unresolved_count": int(
                 intervals["date_level_identity_requirement_count"]
@@ -375,6 +466,7 @@ def build(
             "control_identity_intervals": str(identity_interval_dir),
             "control_identity_stocknames_leads": str(identity_lead_dir),
             "control_identity_stocknames_request": str(identity_stocknames_dir),
+            "control_identity_readiness": str(identity_readiness_dir),
             "control_market_vendor_bridge": str(market_bridge_dir),
             "control_shares": str(shares_dir),
         },
