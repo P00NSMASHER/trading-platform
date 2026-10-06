@@ -1995,6 +1995,10 @@
       "expected_sha256": "14333983af151d5385511f915ebb4391e21a9a5eac8c411070690ba56d89bb47",
       "reason": "G5 treated external metadata acquisition optimization: compress event-level requests into one lane/symbol request while preserving every exact event_id/date/cutoff and making no cross-event continuity or evidence claim."
     },
+    "src/g5_treated_historical_cik_acquisition.py": {
+      "expected_sha256": "1f6c19b2f92f79f8d8f3825fb28f0d5f29180a2933eba63b76cc4023b433d2a9",
+      "reason": "G5 treated historical-CIK acquisition lane: exact 53-symbol gap queue, explicit reviewed-evidence staging, all-event-date interval coverage, and conflict-safe merge into the historical CIK map without current-ticker auto-promotion."
+    },
     "src/g5_treated_metadata_requirements.py": {
       "expected_sha256": "9cabf3838a12ea70df01694811c0048b7ed051de3bd94f865fb5c786e5b74c74",
       "reason": "G5 treated-event metadata planning now also emits 174 adapter-compatible treated target rows with candidate_symbol aliases and event-specific cutoffs so the same strict external/derived intake adapters can populate treated metadata without weakening evidence rules."
@@ -2670,6 +2674,10 @@
     "tests/test_g5_treated_external_source_request_compressor.py": {
       "expected_sha256": "63e2bcc1143633ab3dbb36c9d896fff729cee089139cf1848ac4e3c322a3a290",
       "reason": "Regression coverage for treated lane/symbol compression, exact event_id/date/cutoff conservation, lane-contract validation, duplicate rejection, and the real 696-to-584 request reduction without readiness promotion."
+    },
+    "tests/test_g5_treated_historical_cik_acquisition.py": {
+      "expected_sha256": "ce0b9aac71e92451f4a6c205f0d8c4b3e2380ca7065ea936450b7a407cffd7de",
+      "reason": "Regression coverage for the real 55-event/53-symbol CIK gap, exact-date preservation, explicit review requirements, validity coverage, current-mapping rejection, and conflict-safe reviewed-map merging."
     },
     "tests/test_g5_treated_metadata_requirements.py": {
       "expected_sha256": "234a57cbc74cfc9469ff0572b830e28131134e25e4cd1bb52ce2dc69f8e3f4a8",
