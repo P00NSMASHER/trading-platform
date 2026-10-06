@@ -1944,8 +1944,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "50d69325ef95491cee4d92e71516d1b76e65d086f4af73e34fa760a3967c3a98",
-      "reason": "G5 master acquisition plan now always reconciles full control-history stable-identity readiness, combining canonical G2 verified reuse with hash-bound G5-only staged evidence while preserving zero canonical readiness or release promotion."
+      "expected_sha256": "55969843dcba516da151c8adfb07ef8d350a475423c4850ec01fcd2f4472909f",
+      "reason": "G5 master acquisition plan binds the full-history identity readiness preview to the same current canonical G2 identity manifest used for requirement generation, preserving exact promotion/demotion visibility with zero release-gate relaxation."
     },
     "src/g5_match_quality_gate.py": {
       "expected_sha256": "ebd01d5fb33595130e90c166c59de52414715aaeface898a5fa5b209574e5a21",
