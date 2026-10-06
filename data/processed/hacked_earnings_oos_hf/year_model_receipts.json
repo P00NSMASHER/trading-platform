@@ -1,0 +1,137 @@
+[
+  {
+    "test_year": 2011,
+    "status": "fit",
+    "test_events": 6,
+    "all_prior": {
+      "train_rows": 2796,
+      "train_permnos": 855,
+      "train_components": 855,
+      "vocabulary": 2515,
+      "min_df_count": 13,
+      "max_df_count": 1118,
+      "alpha": 0.1,
+      "l1_ratio": 0.5
+    },
+    "issuer_duplicate_purged": {
+      "train_rows": 2778,
+      "train_permnos": 849,
+      "train_components": 849,
+      "vocabulary": 2507,
+      "min_df_count": 13,
+      "max_df_count": 1111,
+      "alpha": 0.006210169418915616,
+      "l1_ratio": 0.5
+    },
+    "purged_rows_removed": 18,
+    "test_issuers": 6
+  },
+  {
+    "test_year": 2012,
+    "status": "fit",
+    "test_events": 8,
+    "all_prior": {
+      "train_rows": 5705,
+      "train_permnos": 939,
+      "train_components": 939,
+      "vocabulary": 2409,
+      "min_df_count": 28,
+      "max_df_count": 2282,
+      "alpha": 0.0018873918221350976,
+      "l1_ratio": 0.5
+    },
+    "issuer_duplicate_purged": {
+      "train_rows": 5648,
+      "train_permnos": 931,
+      "train_components": 931,
+      "vocabulary": 2399,
+      "min_df_count": 28,
+      "max_df_count": 2259,
+      "alpha": 0.1,
+      "l1_ratio": 0.5
+    },
+    "purged_rows_removed": 57,
+    "test_issuers": 8
+  },
+  {
+    "test_year": 2013,
+    "status": "fit",
+    "test_events": 18,
+    "all_prior": {
+      "train_rows": 8623,
+      "train_permnos": 1007,
+      "train_components": 1007,
+      "vocabulary": 2376,
+      "min_df_count": 43,
+      "max_df_count": 3449,
+      "alpha": 0.0012689610031679235,
+      "l1_ratio": 0.5
+    },
+    "issuer_duplicate_purged": {
+      "train_rows": 8479,
+      "train_permnos": 991,
+      "train_components": 991,
+      "vocabulary": 2378,
+      "min_df_count": 42,
+      "max_df_count": 3391,
+      "alpha": 0.0012689610031679235,
+      "l1_ratio": 0.5
+    },
+    "purged_rows_removed": 144,
+    "test_issuers": 17
+  },
+  {
+    "test_year": 2014,
+    "status": "fit",
+    "test_events": 1,
+    "all_prior": {
+      "train_rows": 11731,
+      "train_permnos": 1072,
+      "train_components": 1071,
+      "vocabulary": 2386,
+      "min_df_count": 58,
+      "max_df_count": 4692,
+      "alpha": 0.0012689610031679235,
+      "l1_ratio": 0.5
+    },
+    "issuer_duplicate_purged": {
+      "train_rows": 11726,
+      "train_permnos": 1071,
+      "train_components": 1070,
+      "vocabulary": 2386,
+      "min_df_count": 58,
+      "max_df_count": 4690,
+      "alpha": 0.0012689610031679235,
+      "l1_ratio": 0.5
+    },
+    "purged_rows_removed": 5,
+    "test_issuers": 1
+  },
+  {
+    "test_year": 2015,
+    "status": "fit",
+    "test_events": 59,
+    "all_prior": {
+      "train_rows": 14774,
+      "train_permnos": 1119,
+      "train_components": 1118,
+      "vocabulary": 2377,
+      "min_df_count": 73,
+      "max_df_count": 5909,
+      "alpha": 0.0012689610031679235,
+      "l1_ratio": 0.5
+    },
+    "issuer_duplicate_purged": {
+      "train_rows": 13934,
+      "train_permnos": 1069,
+      "train_components": 1068,
+      "vocabulary": 2380,
+      "min_df_count": 69,
+      "max_df_count": 5573,
+      "alpha": 0.0012689610031679235,
+      "l1_ratio": 0.5
+    },
+    "purged_rows_removed": 840,
+    "test_issuers": 51
+  }
+]

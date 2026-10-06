@@ -1,0 +1,47 @@
+{
+  "provider": "Hugging Face bulk snapshot plus pinned public SPY CSV",
+  "stocks_repo": "paperswithbacktest/Stocks-Daily-Price",
+  "stocks_revision": "a4aead2543e91598321225b72100abead3ec8908",
+  "stock_files": [
+    "data/train-00000-of-00004.parquet",
+    "data/train-00001-of-00004.parquet",
+    "data/train-00002-of-00004.parquet",
+    "data/train-00003-of-00004.parquet"
+  ],
+  "downloaded_file_meta": [
+    {
+      "filename": "data/train-00000-of-00004.parquet",
+      "bytes": 132915214
+    },
+    {
+      "filename": "data/train-00001-of-00004.parquet",
+      "bytes": 134147722
+    },
+    {
+      "filename": "data/train-00002-of-00004.parquet",
+      "bytes": 132256216
+    },
+    {
+      "filename": "data/train-00003-of-00004.parquet",
+      "bytes": 133955951
+    }
+  ],
+  "date_filter": [
+    "2010-01-01",
+    "2016-01-15"
+  ],
+  "requested_source_symbols": 2990,
+  "requested_aliases": 2990,
+  "returned_source_symbols": 1197,
+  "missing_source_symbols": 1793,
+  "SPY": {
+    "repo": "hackingthemarkets/datasets",
+    "commit": "1f545c1cd9c6ed5764732f23c27f7172128fce0f",
+    "path": "spy.csv",
+    "git_blob_sha1": "effa9438da8a115c30af95d530d11ac9c491bb15",
+    "sha256": "f1682f176f9db69ab654405b0126b5c9840f272ee12c6c5bd5c0fec2345fd6f0",
+    "rows": 1520
+  },
+  "research_only": true,
+  "canonical_G2_credit": 0
+}

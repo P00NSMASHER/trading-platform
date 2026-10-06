@@ -1,0 +1,103 @@
+{
+  "status": "COMPLETED_EXPLORATORY_OUT_OF_TIME_EXPERIMENT",
+  "source_text_commit": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+  "g1_exact_timestamp_rows": 174,
+  "market_data_source": "Hugging Face paperswithbacktest/Stocks-Daily-Price@a4aead2543e91598321225b72100abead3ec8908 daily OHLC; SPY benchmark hackingthemarkets/datasets@1f545c1cd9c6ed5764732f23c27f7172128fce0f/spy.csv",
+  "outcome_definition": "next trading session open-to-close raw stock return minus pinned SPY open-to-close return; session strictly after text/source date",
+  "training_rule": "for test year Y use only rows dated before Jan 1 Y",
+  "primary_purge_rule": "exclude all prior rows for test-year treated PERMNOs and any training text hash identical to test text",
+  "cv_rule": "5-fold GroupKFold over connected issuer/content components inside the earlier-only training set",
+  "coverage": {
+    "sample_text_rows": 36750,
+    "sample_rows_with_market_adjusted_outcome": 18025,
+    "sample_outcome_coverage": 0.49047619047619045,
+    "core_events": 174,
+    "core_events_with_text": 160,
+    "core_events_exact_text_date_match": 174,
+    "core_events_with_market_adjusted_outcome": 92,
+    "primary_evaluation_events": 92,
+    "primary_unique_issuers": 81,
+    "test_year_counts": {
+      "2011": 6,
+      "2012": 8,
+      "2013": 18,
+      "2014": 1,
+      "2015": 59
+    }
+  },
+  "primary_metric": {
+    "predictor": "oos_text_issuer_duplicate_purged",
+    "n": 92,
+    "pearson_ic": 0.0563864348993274,
+    "spearman_ic": 0.04174247081348992,
+    "direction_accuracy": 0.5,
+    "mae": 0.02599384630627827,
+    "r2": -0.05560758817667644,
+    "top_quartile_mean_outcome": -0.012789803946431217,
+    "bottom_quartile_mean_outcome": -0.014466333945580554,
+    "top_minus_bottom_outcome": 0.0016765299991493374,
+    "year_block_permutation_p_spearman": 0.7117627457514162,
+    "spearman_cluster_bootstrap_ci_2_5": -0.1668967659993488,
+    "spearman_cluster_bootstrap_ci_97_5": 0.25056324568796956,
+    "bootstrap_reps_valid": 2000
+  },
+  "novelty_metric": {
+    "predictor": "oos_novelty_only",
+    "n": 92,
+    "pearson_ic": -0.10203888222768845,
+    "spearman_ic": -0.04033413991338255,
+    "direction_accuracy": 0.44565217391304346,
+    "mae": 0.02587120902149842,
+    "r2": -0.05653140888294872,
+    "top_quartile_mean_outcome": -0.007172899686047135,
+    "bottom_quartile_mean_outcome": -0.005877782698547604,
+    "top_minus_bottom_outcome": -0.0012951169874995307,
+    "year_block_permutation_p_spearman": 0.6361212929023659,
+    "spearman_cluster_bootstrap_ci_2_5": -0.2314603384061108,
+    "spearman_cluster_bootstrap_ci_97_5": 0.17224795380094804,
+    "bootstrap_reps_valid": 2000
+  },
+  "published_soft_reference_metric": {
+    "predictor": "published_soft_reference",
+    "n": 92,
+    "pearson_ic": 0.017891554428739218,
+    "spearman_ic": -0.0018032458425165296,
+    "direction_accuracy": 0.5108695652173914,
+    "mae": 0.02870420986804245,
+    "r2": -0.17588858518110984,
+    "top_quartile_mean_outcome": -0.00341659445730523,
+    "bottom_quartile_mean_outcome": -0.008932837502215678,
+    "top_minus_bottom_outcome": 0.005516243044910447,
+    "year_block_permutation_p_spearman": 0.9846717760746417,
+    "spearman_cluster_bootstrap_ci_2_5": -0.19845947147579732,
+    "spearman_cluster_bootstrap_ci_97_5": 0.19932226239098022,
+    "bootstrap_reps_valid": 2000
+  },
+  "market_fetch": {
+    "cache_used": true,
+    "requested_symbols": 2990,
+    "returned_symbols": 1197,
+    "benchmark_found": true,
+    "failure_count": 1793,
+    "source": "Hugging Face bulk snapshot plus pinned public SPY CSV",
+    "stocks_revision": "a4aead2543e91598321225b72100abead3ec8908",
+    "spy_commit": "1f545c1cd9c6ed5764732f23c27f7172128fce0f"
+  },
+  "canonical_coverage_change": {
+    "G1": 0,
+    "G2": 0,
+    "G3": 0,
+    "G4": 0,
+    "G5": 0
+  },
+  "limitations": [
+    "Bulk public daily prices are exploratory external evidence, not canonical G2; the source dataset itself reports limited delisted-company coverage.",
+    "Training press-release dates are source archive dates, not independently verified exact release clocks; using only prior calendar years prevents same-day look-ahead into held-out years.",
+    "Primary test features require the archive text date to equal the independently resolved G1 public-announcement date in America/New_York.",
+    "Next-session open-to-close return deliberately omits immediate after-hours/overnight reaction and intraday microstructure.",
+    "Ticker-only public price retrieval can miss delisted or renamed securities; missing outcomes are excluded and coverage is reported.",
+    "The 174 core events are selected historical illicit-trading cases, not a random population of earnings announcements.",
+    "Published Soft is an optimistic in-sample reference and is not treated as a fair out-of-time benchmark.",
+    "Top-minus-bottom values are descriptive outcome spreads, not executable portfolio returns; no costs, capacity, or slippage are modeled."
+  ]
+}
