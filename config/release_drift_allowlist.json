@@ -1960,8 +1960,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "e552e0a06a81ec069cc46b722be5f181c4923d45f2056dbacdcb2a7bdf14360e",
-      "reason": "G5 master acquisition integration: optionally run the hash-bound external metadata intake across the canonical 216 control + 174 treated targets, reconcile the exact 1,950-field scope, and report preview completeness without changing canonical readiness."
+      "expected_sha256": "cec97cb307c04f1fe618f5708a5f7de6f7aa4f3f798ce0be3dccf1a665587462",
+      "reason": "G5 master acquisition plan invokes the unified control+treated external acquisition packet on the current identity/intake baseline, reconciles all lane and external-field counts, exposes grouped batches, and preserves zero readiness promotion."
     },
     "src/g5_match_quality_gate.py": {
       "expected_sha256": "ebd01d5fb33595130e90c166c59de52414715aaeface898a5fa5b209574e5a21",
@@ -2620,8 +2620,8 @@
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
     },
     "tests/test_g5_master_acquisition_plan.py": {
-      "expected_sha256": "1f116968117b248581af1a1e29f99e3fc12f6a2fec0c14f2487b9f791539df64",
-      "reason": "Regression coverage for optional master-level external metadata intake, canonical 390-target / 1,950-field scope reconciliation, one-source partial completeness accounting, output receipts, and zero readiness/release promotion."
+      "expected_sha256": "3e887c656920ecde003f3e956c012ac881055e285a2860c6efebfee3661dddb3",
+      "reason": "Regression coverage for unified G5 external acquisition packet integration on the current master plan, exact control/treated lane and field conservation, grouped batching, emitted artifacts, and unchanged readiness."
     },
     "tests/test_g5_match_quality_gate.py": {
       "expected_sha256": "9fd579c64321ca886cbaaa98c68319c7255a99f4b3ee1e4caec46309b8232f2e",
