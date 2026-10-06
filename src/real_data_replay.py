@@ -553,7 +553,11 @@ def run_replay(
                 {"path": str(control_metadata), "sha256": _sha256(control_metadata)}
                 if control_metadata is not None and control_metadata.exists() else None
             ),
-            "g5_matching_metadata": g5_matching_inputs,
+            **(
+                {"g5_matching_metadata": g5_matching_inputs}
+                if g5_matching_inputs is not None
+                else {}
+            ),
         },
         "shares_materialization": {
             **shares,
