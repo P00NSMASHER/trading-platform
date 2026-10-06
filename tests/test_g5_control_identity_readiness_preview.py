@@ -39,6 +39,32 @@ def _staged(tmp_path: Path, body: str) -> Path:
 
 
 
+
+def _canonical(
+    tmp_path: Path,
+    rows: list[tuple[str, str, list[str]]],
+) -> Path:
+    path = tmp_path / "canonical_g2_identity.json"
+    path.write_text(
+        json.dumps(
+            {
+                "events": [
+                    {
+                        "historical_symbol": symbol,
+                        "permno": permno,
+                        "verified_required_dates": dates,
+                    }
+                    for symbol, permno, dates in rows
+                ]
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return path
+
 def _receipt(
     tmp_path: Path,
     staged_path: Path,
@@ -85,9 +111,17 @@ def test_preview_reconciles_canonical_reuse_staged_g5_and_unresolved_g2(
         "CCC,2015-01-03,33333,CCC,E1,source:1,AUTHORIZED-TEST,1\n",
     )
 
+    canonical = _canonical(
+        tmp_path,
+        [
+            ("AAA", "11111", ["2015-01-01"]),
+            ("BBB", "22222", []),
+        ],
+    )
     receipt = _receipt(tmp_path, staged, staged_count=1)
     summary = preview.build_preview(
         identity_requirements_path=requirements,
+        canonical_g2_identity_manifest_path=canonical,
         staged_g5_only_path=staged,
         staging_receipt_path=receipt,
         output_path=tmp_path / "preview.csv",
@@ -131,6 +165,8 @@ def test_g2_overlap_cannot_be_closed_by_g5_staging(tmp_path: Path):
         "BBB,2015-01-02,22222,BBB,E2,source:2,AUTHORIZED-TEST,1\n",
     )
 
+    canonical = _canonical(tmp_path, [("BBB", "22222", [])])
+
     with pytest.raises(
         preview.G5ControlIdentityReadinessPreviewError,
         match="must use the canonical G2 pipeline",
@@ -138,6 +174,7 @@ def test_g2_overlap_cannot_be_closed_by_g5_staging(tmp_path: Path):
         receipt = _receipt(tmp_path, staged, staged_count=1)
         preview.build_preview(
             identity_requirements_path=requirements,
+        canonical_g2_identity_manifest_path=canonical,
             staged_g5_only_path=staged,
             staging_receipt_path=receipt,
             output_path=tmp_path / "preview.csv",
@@ -157,6 +194,8 @@ def test_staged_permno_must_match_known_g5_hint(tmp_path: Path):
         "CCC,2015-01-03,99999,CCC,E3,source:3,AUTHORIZED-TEST,1\n",
     )
 
+    canonical = _canonical(tmp_path, [])
+
     with pytest.raises(
         preview.G5ControlIdentityReadinessPreviewError,
         match="conflicts with expected hint",
@@ -164,6 +203,7 @@ def test_staged_permno_must_match_known_g5_hint(tmp_path: Path):
         receipt = _receipt(tmp_path, staged, staged_count=1)
         preview.build_preview(
             identity_requirements_path=requirements,
+        canonical_g2_identity_manifest_path=canonical,
             staged_g5_only_path=staged,
             staging_receipt_path=receipt,
             output_path=tmp_path / "preview.csv",
@@ -186,9 +226,13 @@ def test_full_history_preview_can_complete_without_relaxing_canonical_state(
         "CCC,2015-01-03,33333,CCC,E4,source:4,AUTHORIZED-TEST,1\n",
     )
 
+    canonical = _canonical(
+        tmp_path, [("AAA", "11111", ["2015-01-01"])]
+    )
     receipt = _receipt(tmp_path, staged, staged_count=1)
     summary = preview.build_preview(
         identity_requirements_path=requirements,
+        canonical_g2_identity_manifest_path=canonical,
         staged_g5_only_path=staged,
         staging_receipt_path=receipt,
         output_path=tmp_path / "preview.csv",
@@ -220,15 +264,69 @@ def test_tampered_staged_identity_file_is_rejected_by_receipt_hash(tmp_path: Pat
         staged_sha256="0" * 64,
     )
 
+    canonical = _canonical(tmp_path, [])
+
     with pytest.raises(
         preview.G5ControlIdentityReadinessPreviewError,
         match="file hash does not match staging receipt",
     ):
         preview.build_preview(
             identity_requirements_path=requirements,
+        canonical_g2_identity_manifest_path=canonical,
             staged_g5_only_path=staged,
             staging_receipt_path=receipt,
             output_path=tmp_path / "preview.csv",
             summary_path=tmp_path / "summary.json",
         )
 
+
+
+def test_preview_does_not_trust_stale_verified_requirement_status(tmp_path: Path):
+    requirements = _requirements(
+        tmp_path,
+        "AAA,2015-01-01,event,REUSE_CANONICAL_G2_VERIFIED_IDENTITY,"
+        "CANONICAL_G2_VERIFIED,11111,1,,,NO_EXACT_DATE_MAPPING,,1\n",
+    )
+    canonical = _canonical(tmp_path, [("AAA", "11111", [])])
+
+    summary = preview.build_preview(
+        identity_requirements_path=requirements,
+        canonical_g2_identity_manifest_path=canonical,
+        staged_g5_only_path=None,
+        staging_receipt_path=None,
+        output_path=tmp_path / "preview.csv",
+        summary_path=tmp_path / "summary.json",
+    )
+
+    assert summary["canonical_g2_verified_reuse_count"] == 0
+    assert summary["unresolved_canonical_g2_overlap_count"] == 1
+    assert summary["preview_full_history_identity_complete"] is False
+
+
+def test_preview_observes_new_canonical_g2_promotion_without_rewriting_requirements(
+    tmp_path: Path,
+):
+    requirements = _requirements(
+        tmp_path,
+        "BBB,2015-01-02,history,OVERLAPS_CANONICAL_G2_IDENTITY_QUEUE,"
+        "CANONICAL_G2_UNVERIFIED,22222,2,,,NO_EXACT_DATE_MAPPING,"
+        "DATED_STABLE_ID_CROSSWALK,1\n",
+    )
+    canonical = _canonical(
+        tmp_path, [("BBB", "22222", ["2015-01-02"])]
+    )
+
+    summary = preview.build_preview(
+        identity_requirements_path=requirements,
+        canonical_g2_identity_manifest_path=canonical,
+        staged_g5_only_path=None,
+        staging_receipt_path=None,
+        output_path=tmp_path / "preview.csv",
+        summary_path=tmp_path / "summary.json",
+    )
+
+    assert summary["canonical_g2_verified_reuse_count"] == 1
+    assert summary["unresolved_canonical_g2_overlap_count"] == 0
+    assert summary["preview_full_history_identity_complete"] is True
+    saved = json.loads((tmp_path / "summary.json").read_text(encoding="utf-8"))
+    assert saved["policy"]["canonical_g2_manifest_revalidated_each_run"] is True
