@@ -6,11 +6,13 @@ import hashlib
 import json
 from collections import defaultdict
 from dataclasses import asdict, dataclass
-from datetime import date, datetime, timezone
+from datetime import date, datetime, time, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 
 SCHEMA_VERSION = "1"
+NY = ZoneInfo("America/New_York")
 
 
 @dataclass(frozen=True)
@@ -261,30 +263,16 @@ def _submission_index(path: Path) -> dict[str, dict[str, str]]:
     return out
 
 
-def _aggregate_holdings(
+def _load_holdings(
     *,
     infotable_path: Path,
     submissions: dict[str, dict[str, str]],
 ) -> dict[tuple[str, str], int]:
     _fields, rows = _read_delimited(infotable_path)
-
-    # First identify the latest filing per manager/report period. This prevents
-    # original/amendment double counting inside the structured quarterly file.
-    latest: dict[tuple[str, str], tuple[str, str]] = {}
-    for accession, meta in submissions.items():
-        key = (meta["manager_cik"], meta["report_period"])
-        candidate = (meta["filing_date"], accession)
-        if key not in latest or candidate > latest[key]:
-            latest[key] = candidate
-
-    permitted_accessions = {value[1] for value in latest.values()}
     holdings: dict[tuple[str, str], int] = defaultdict(int)
     for row_no, row in enumerate(rows, 2):
         accession = _get(row, "ACCESSION_NUMBER", "ACCESSIONNUMBER")
-        if accession not in permitted_accessions:
-            continue
-        meta = submissions.get(accession)
-        if meta is None:
+        if accession not in submissions:
             continue
         cusip = _normalize_cusip(_get(row, "CUSIP"))
         if len(cusip) != 9:
@@ -302,8 +290,42 @@ def _aggregate_holdings(
             raise G5Sec13FOwnershipError(
                 f"infotable row {row_no}: negative SSHPRNAMT"
             )
-        holdings[(meta["report_period"], cusip)] += amount
+        holdings[(accession, cusip)] += amount
     return holdings
+
+
+def _selected_accessions_for_target(
+    submissions: dict[str, dict[str, str]],
+    *,
+    event_date: date,
+    report_period: str,
+) -> dict[str, str]:
+    selected: dict[str, tuple[str, str]] = {}
+    for accession, meta in submissions.items():
+        if meta["report_period"] != report_period:
+            continue
+        # The flat dataset only gives filing date, not intraday acceptance time.
+        # Same-day filings therefore remain excluded.
+        if meta["filing_date"] >= event_date.isoformat():
+            continue
+        manager = meta["manager_cik"]
+        candidate = (meta["filing_date"], accession)
+        prior = selected.get(manager)
+        if prior is None or candidate > prior:
+            selected[manager] = candidate
+    return {manager: value[1] for manager, value in selected.items()}
+
+
+def _conservative_filing_available_at(filing_date: str) -> datetime:
+    # Treat a filing-date-only record as available at the end of that filing day
+    # in New York. This avoids pretending the flat quarterly dataset supplied an
+    # intraday timestamp it does not contain.
+    local = datetime.combine(
+        date.fromisoformat(filing_date),
+        time(23, 59, 59),
+        tzinfo=NY,
+    )
+    return local.astimezone(timezone.utc)
 
 
 def build(
@@ -319,7 +341,7 @@ def build(
     mappings = _load_cusip_map(cusip_map_path)
     shares = _load_shares(shares_path)
     submissions = _submission_index(submission_path)
-    holdings = _aggregate_holdings(
+    holdings = _load_holdings(
         infotable_path=infotable_path,
         submissions=submissions,
     )
@@ -358,19 +380,35 @@ def build(
         # event date.
         admissible_reports = []
         for report_period in report_periods:
-            accessions = [
-                meta
-                for meta in submissions.values()
-                if meta["report_period"] == report_period
-                and meta["filing_date"] < event_date.isoformat()
-            ]
-            if accessions and (report_period, cusip) in holdings:
-                latest_filing_date = max(
-                    meta["filing_date"] for meta in accessions
+            selected = _selected_accessions_for_target(
+                submissions,
+                event_date=event_date,
+                report_period=report_period,
+            )
+            selected_accessions = set(selected.values())
+            institutional_shares = sum(
+                amount
+                for (accession, holding_cusip), amount in holdings.items()
+                if accession in selected_accessions and holding_cusip == cusip
+            )
+            if institutional_shares <= 0:
+                continue
+            latest_filing_date = max(
+                submissions[accession]["filing_date"]
+                for accession in selected_accessions
+            )
+            available_at = _conservative_filing_available_at(
+                latest_filing_date
+            )
+            if available_at > cutoff:
+                continue
+            admissible_reports.append(
+                (
+                    report_period,
+                    available_at,
+                    institutional_shares,
                 )
-                admissible_reports.append(
-                    (report_period, latest_filing_date)
-                )
+            )
 
         if not admissible_reports:
             gaps.append(
@@ -383,8 +421,10 @@ def build(
             )
             continue
 
-        report_period, latest_filing_date = max(admissible_reports)
-        institutional_shares = holdings[(report_period, cusip)]
+        report_period, filing_available_at, institutional_shares = max(
+            admissible_reports,
+            key=lambda item: (item[0], item[1]),
+        )
 
         share_candidates = [
             item
@@ -422,11 +462,7 @@ def build(
             )
             continue
 
-        effective = datetime.combine(
-            date.fromisoformat(latest_filing_date),
-            datetime.min.time(),
-            tzinfo=timezone.utc,
-        )
+        effective = filing_available_at
         rows.append(
             OwnershipRow(
                 event_date=event_date.isoformat(),
@@ -501,7 +537,9 @@ def build(
             "same_day_13f_filings_allowed": False,
             "put_call_rows_counted_as_common_ownership": False,
             "share_principal_amount_type_required": "SH",
-            "latest_manager_report_period_filing_only": True,
+            "latest_pre_event_manager_report_period_filing_only": True,
+            "post_event_amendments_cannot_replace_pre_event_filings": True,
+            "filing_date_only_records_use_conservative_end_of_day_availability": True,
             "pre_cutoff_shares_outstanding_required": True,
             "ratio_clipping_allowed": False,
             "source_rows_are_canonical_g5_readiness": False,
