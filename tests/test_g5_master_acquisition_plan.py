@@ -74,6 +74,21 @@ def test_real_master_plan_has_complete_structural_scope(tmp_path: Path):
         "borrow": 390,
     }
 
+    external_scaffold = summary["external_source_manifest_scaffold"]
+    assert external_scaffold["packet_request_count"] == 1560
+    assert external_scaffold["source_slot_count"] == 8
+    assert external_scaffold["target_slot_counts"] == {
+        "control": 4,
+        "treated": 4,
+    }
+    assert external_scaffold["lane_slot_counts"] == {
+        "classification": 2,
+        "ownership": 2,
+        "analyst": 2,
+        "borrow": 2,
+    }
+    assert external_scaffold["manifest_intake_ready"] is False
+
     identity = summary["control_identity"]
     assert identity["history_symbol_date_count"] == (
         summary["control_history"]["unique_symbol_date_pairs"]
@@ -202,6 +217,21 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     assert (
         tmp_path
         / "external_acquisition_packet/g5_external_acquisition_batches.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "external_source_manifest_scaffold/"
+        "g5_external_source_manifest.template.json"
+    ).exists()
+    assert (
+        tmp_path
+        / "external_source_manifest_scaffold/"
+        "g5_external_source_manifest_checklist.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "external_source_manifest_scaffold/sources/"
+        "control_classification.csv"
     ).exists()
     assert (
         tmp_path
