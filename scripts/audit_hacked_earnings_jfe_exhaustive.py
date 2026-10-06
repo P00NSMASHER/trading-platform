@@ -218,8 +218,12 @@ def normalize_scalar(value: Any, column: str = "") -> Any:
             return None
     except Exception:
         pass
-    if isinstance(value, (datetime, date)):
-        return value.isoformat(sep=" ") if isinstance(value, datetime) else value.isoformat()
+    if isinstance(value, datetime):
+        if column.lower() == "date":
+            return value.date().isoformat()
+        return value.isoformat(sep=" ")
+    if isinstance(value, date):
+        return value.isoformat()
     if isinstance(value, bytes):
         return value.hex()
     if isinstance(value, bool):
