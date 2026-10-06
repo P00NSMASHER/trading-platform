@@ -277,6 +277,12 @@ def build(
         encoding="utf-8",
     )
 
+    output_sha256 = {
+        "g5_only_staged_verified": _sha256(staged_path),
+        "g5_only_remaining": _sha256(remaining_path),
+        "canonical_g2_forward_evidence": _sha256(forward_path),
+    }
+
     receipt = {
         "schema_version": SCHEMA_VERSION,
         "purpose": (
@@ -288,6 +294,7 @@ def build(
         "canonical_g2_write_performed": False,
         "canonical_g5_write_performed": False,
         "coverage_promoted": False,
+        "output_sha256": output_sha256,
         "inputs": {
             "identity_queue_path": str(identity_queue_path),
             "identity_queue_sha256": _sha256(identity_queue_path),
