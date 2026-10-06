@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import hashlib
 import json
@@ -420,6 +421,43 @@ def inspect_xlsx(path: Path) -> dict[str, Any]:
     }
 
 
+def inspect_stata(path: Path) -> dict[str, Any]:
+    import pandas as pd
+
+    with pd.io.stata.StataReader(path, convert_categoricals=False) as reader:
+        variable_labels = reader.variable_labels()
+        value_labels = reader.value_labels()
+        data_label = getattr(reader, "data_label", None)
+        time_stamp = getattr(reader, "time_stamp", None)
+        fmtlist = list(getattr(reader, "fmtlist", []) or [])
+        varlist = list(getattr(reader, "varlist", []) or [])
+        typlist = [str(x) for x in (getattr(reader, "typlist", []) or [])]
+    return {
+        "data_label": data_label,
+        "time_stamp": str(time_stamp) if time_stamp is not None else None,
+        "variable_labels": variable_labels,
+        "value_labels": value_labels,
+        "formats": fmtlist,
+        "variables": varlist,
+        "types": typlist,
+        "metadata_text_scan": scan_text(
+            json.dumps(
+                {
+                    "data_label": data_label,
+                    "time_stamp": str(time_stamp) if time_stamp is not None else None,
+                    "variable_labels": variable_labels,
+                    "value_labels": value_labels,
+                    "formats": fmtlist,
+                    "variables": varlist,
+                    "types": typlist,
+                },
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+        ),
+    }
+
+
 def inspect_parquet(path: Path) -> dict[str, Any]:
     import pyarrow.parquet as pq
 
@@ -476,9 +514,28 @@ def inspect_notebook(path: Path) -> dict[str, Any]:
     markdown_cells = [c for c in cells if c.get("cell_type") == "markdown"]
     output_objects = sum(len(c.get("outputs", [])) for c in code_cells)
     output_texts = []
-    for cell in code_cells:
-        for out in cell.get("outputs", []):
+    embedded_binary_outputs = []
+    for cell_index, cell in enumerate(code_cells):
+        for output_index, out in enumerate(cell.get("outputs", [])):
             output_texts.extend(walk_strings(out))
+            data_payload = out.get("data", {}) if isinstance(out, dict) else {}
+            for mime in ("image/png", "image/jpeg", "application/pdf"):
+                encoded = data_payload.get(mime)
+                if encoded is None:
+                    continue
+                if isinstance(encoded, list):
+                    encoded = "".join(encoded)
+                raw_payload = base64.b64decode(encoded, validate=False)
+                embedded_binary_outputs.append(
+                    {
+                        "cell_index": cell_index,
+                        "output_index": output_index,
+                        "mime": mime,
+                        "encoded_characters": len(encoded),
+                        "decoded_bytes": len(raw_payload),
+                        "sha256": sha256_bytes(raw_payload),
+                    }
+                )
     return {
         "encoding": enc,
         "raw_characters": len(text),
@@ -489,6 +546,11 @@ def inspect_notebook(path: Path) -> dict[str, Any]:
         "markdown_cell_count": len(markdown_cells),
         "output_object_count": output_objects,
         "output_text_characters": sum(len(s) for s in output_texts),
+        "embedded_binary_output_count": len(embedded_binary_outputs),
+        "embedded_binary_outputs": embedded_binary_outputs,
+        "embedded_binary_output_bytes": sum(
+            item["decoded_bytes"] for item in embedded_binary_outputs
+        ),
         "joined_string_scan": scan_text(joined),
     }
 
@@ -510,6 +572,8 @@ def inspect_source_files(source_root: Path) -> tuple[list[dict[str, Any]], dict[
             special[row["path"]] = {"xlsx": inspect_xlsx(path)}
         elif suffix == ".parquet":
             special[row["path"]] = {"parquet": inspect_parquet(path)}
+        elif suffix == ".dta":
+            special[row["path"]] = {"stata": inspect_stata(path)}
     return rows, special
 
 
