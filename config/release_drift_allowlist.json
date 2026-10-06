@@ -2694,6 +2694,14 @@
     "tests/test_g5_matching_metadata_materializer.py": {
       "expected_sha256": "3f52298f0739e905a00b90476f507103910b00b8f72c76874337206ee2f67d3e",
       "reason": "Regression coverage for exact treated/control target scoping, all-13-covariate completeness, matcher compatibility, cross-date metadata-scope isolation, missing-field fail-closed behavior, equal-timestamp conflicts, later-value replacement, cutoff enforcement, unknown-target rejection, and treated/control collision rejection."
+    },
+    "src/g5_control_identity_readiness_preview.py": {
+      "expected_sha256": "af63e3955a3716290d2e9e8d5eea4c7e64cc7d3bef10833690f36a08766c7fd2",
+      "reason": "G5 full-history stable-identity preview: reconcile canonical G2 verified reuse, G5-only authorized staged identity, and unresolved G2/G5 requirements without mutating canonical readiness or release state."
+    },
+    "tests/test_g5_control_identity_readiness_preview.py": {
+      "expected_sha256": "9f9650d49c69d08ccf021447c80b50cc21c861f81af66a18fbe88554328c2bf5",
+      "reason": "Regression coverage for full-history G5 identity readiness preview, including fail-closed G2-overlap routing, PERMNO-hint conflicts, exact requirement accounting, and zero canonical promotion."
     }
   },
   "schema_version": "2",
