@@ -173,6 +173,7 @@ def history_inventory(source_root: Path) -> dict[str, Any]:
     historical_paths = set()
     unique_blob_shas = set()
     unique_blob_bytes = 0
+    historical_text_blob_scans = []
 
     for line in run("git", "rev-list", "--objects", "--all", cwd=source_root).splitlines():
         if not line:
@@ -192,6 +193,18 @@ def history_inventory(source_root: Path) -> dict[str, Any]:
                 raise RuntimeError(f"Historical blob short-read {sha}")
             if git_blob_sha_bytes(data) != sha:
                 raise RuntimeError(f"Historical blob hash mismatch {sha}")
+            suffix = Path(path).suffix.lower()
+            if path in {".gitignore", "LICENSE"} or suffix in TEXT_EXTENSIONS:
+                text_value, encoding = decode_every_byte(data)
+                historical_text_blob_scans.append(
+                    {
+                        "sha": sha,
+                        "path": path,
+                        "size_bytes": size,
+                        "encoding": encoding,
+                        **scan_text(text_value),
+                    }
+                )
         object_rows.append({"sha": sha, "type": typ, "size": size, "path": path})
 
     current_paths = set(run("git", "ls-files", cwd=source_root).splitlines())
@@ -207,6 +220,7 @@ def history_inventory(source_root: Path) -> dict[str, Any]:
         "unique_blob_bytes_read": unique_blob_bytes,
         "historical_paths": sorted(historical_paths),
         "historical_only_paths": sorted(historical_paths - current_paths),
+        "historical_text_blob_scans": historical_text_blob_scans,
         "objects": object_rows,
     }
 
@@ -714,6 +728,9 @@ def main() -> None:
             "current_tracked_bytes_read": current_bytes,
             "current_tree_manifest_sha256": tree_digest.hexdigest(),
             "reachable_git_history_all_unique_blobs_read": True,
+            "reachable_historical_text_blobs_semantically_scanned": len(
+                history["historical_text_blob_scans"]
+            ),
             "historical_only_paths": history["historical_only_paths"],
             "all_press_release_zip_members_explicitly_decompressed_and_read": True,
             "press_release_member_count": press["member_count"],
