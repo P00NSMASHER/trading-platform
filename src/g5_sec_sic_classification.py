@@ -282,7 +282,7 @@ def _parse_acceptance(text: str) -> datetime | None:
         return None
     return datetime.strptime(
         match.group(1), "%Y%m%d%H%M%S"
-    ).replace(tzinfo=timezone.utc)
+    ).replace(tzinfo=SEC_TIMEZONE).astimezone(timezone.utc)
 
 
 def _parse_sic(text: str) -> str:
