@@ -71,8 +71,8 @@ def test_public_13f_fraction_is_adapter_compatible(tmp_path: Path):
     )
     submission = _submission(
         tmp_path,
-        "A1\t1001\t2015-02-13\t2014-12-31\t13F-HR\n"
-        "A2\t1002\t2015-02-14\t2014-12-31\t13F-HR\n",
+        "A1\t1001\t13-FEB-2015\t31-DEC-2014\t13F-HR\n"
+        "A2\t1002\t14-FEB-2015\t31-DEC-2014\t13F-HR\n",
     )
     infotable = _infotable(
         tmp_path,
