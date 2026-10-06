@@ -54,8 +54,8 @@
       "reason": "Intentional post-Step21 security hardening; configured model verification reused by backup/restore/recovery paths"
     },
     "src/evaluation_release_controller.py": {
-      "expected_sha256": "2f1f2608355d66d26084261144486aca528541ee622b2597b3e3106286007e74",
-      "reason": "G5 release hardening: independently rerun the exact matched-control quality gate, fail closed on missing or invalid match evidence, and hash-bind match events, balance, manifest, and quality receipt into release authority."
+      "expected_sha256": "0e5c0c6a9b1baca06731eb36359af172fc12c23be6817fa04b460cc7fd8823bc",
+      "reason": "G5 release hardening: independently require the complete control-history stable-identity gate and hash-bind its exact inputs and receipt into release authority."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "748ffe77a01fb15aad9f1e2ab81af5e09bf6aa58a03568d2632d722b0f5f7ab8",
@@ -90,8 +90,8 @@
       "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
     },
     "tests/test_evaluation_release_controller.py": {
-      "expected_sha256": "a1a8d670a14493b2a7d7f2cd11b303e37e9f44054263c93f7e1cf804b1d258d9",
-      "reason": "Regression coverage for independent G5 match-quality release blocking and exact hash binding of match events, balance, manifest, and gate receipt on the positive controller path."
+      "expected_sha256": "3d0383bb88102642b7ec20f352b36c364e1f964d3f795bbe0477d6f9faa4df10",
+      "reason": "Regression coverage makes G5 control stable identity independently release-critical and binds the positive release token to its exact identity inputs and gate receipt."
     },
     "tests/test_historical_market_backfill.py": {
       "expected_sha256": "24b1e98c1911ffd88bd62319144d7cc91402ae8489366aa598fe9216be4272bb",

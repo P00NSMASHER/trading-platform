@@ -199,6 +199,130 @@ def _attach_positive_match_quality_fixture(tmp_path: Path, kw: dict) -> None:
     kw["challenger_manifest"] = challenger_path
 
 
+
+def _attach_positive_g5_control_identity_fixture(tmp_path: Path, kw: dict) -> None:
+    requirements = _write_csv(
+        tmp_path / "release_g5_identity_requirements.csv",
+        [
+            "historical_symbol",
+            "trade_date",
+            "roles",
+            "identity_status",
+            "canonical_g2_overlap",
+            "canonical_permno",
+            "canonical_gvkey",
+            "samplefirms_permno",
+            "samplefirms_gvkey",
+            "samplefirms_exact_mapping_status",
+            "required_evidence",
+            "research_use_only",
+        ],
+        [
+            {
+                "historical_symbol": "AAA",
+                "trade_date": "2015-01-01",
+                "roles": "event_point",
+                "identity_status": "REUSE_CANONICAL_G2_VERIFIED_IDENTITY",
+                "canonical_g2_overlap": "CANONICAL_G2_VERIFIED",
+                "canonical_permno": "11111",
+                "canonical_gvkey": "1",
+                "samplefirms_permno": "",
+                "samplefirms_gvkey": "",
+                "samplefirms_exact_mapping_status": "NO_EXACT_DATE_MAPPING",
+                "required_evidence": "",
+                "research_use_only": "1",
+            },
+            {
+                "historical_symbol": "AAA",
+                "trade_date": "2015-01-02",
+                "roles": "prior_close",
+                "identity_status": "OVERLAPS_CANONICAL_G2_IDENTITY_QUEUE",
+                "canonical_g2_overlap": "CANONICAL_G2_UNVERIFIED",
+                "canonical_permno": "11111",
+                "canonical_gvkey": "1",
+                "samplefirms_permno": "",
+                "samplefirms_gvkey": "",
+                "samplefirms_exact_mapping_status": "NO_EXACT_DATE_MAPPING",
+                "required_evidence": "DATED_STABLE_ID_CROSSWALK",
+                "research_use_only": "1",
+            },
+            {
+                "historical_symbol": "BBB",
+                "trade_date": "2015-01-03",
+                "roles": "event_point",
+                "identity_status": "PUBLIC_EXACT_MAPPING_AVAILABLE_REQUIRES_ADMISSION",
+                "canonical_g2_overlap": "NONE",
+                "canonical_permno": "",
+                "canonical_gvkey": "",
+                "samplefirms_permno": "22222",
+                "samplefirms_gvkey": "2",
+                "samplefirms_exact_mapping_status": "UNIQUE_EXACT_DATE_MAPPING_AVAILABLE",
+                "required_evidence": "ADMISSIBLE_DATE_SPECIFIC_STABLE_ID_EVIDENCE",
+                "research_use_only": "1",
+            },
+        ],
+    )
+    canonical = tmp_path / "release_g5_canonical_identity.json"
+    canonical.write_text(
+        json.dumps(
+            {
+                "events": [
+                    {
+                        "historical_symbol": "AAA",
+                        "permno": "11111",
+                        "verified_required_dates": ["2015-01-01", "2015-01-02"],
+                    }
+                ]
+            }
+        )
+    )
+    staged = _write_csv(
+        tmp_path / "release_g5_only_staged_identity.csv",
+        [
+            "historical_symbol",
+            "trade_date",
+            "permno",
+            "market_identifier",
+            "evidence_ids",
+            "source_references",
+            "authorization_references",
+            "research_use_only",
+        ],
+        [
+            {
+                "historical_symbol": "BBB",
+                "trade_date": "2015-01-03",
+                "permno": "22222",
+                "market_identifier": "BBB",
+                "evidence_ids": "E-G5",
+                "source_references": "stocknames:test",
+                "authorization_references": "AUTHORIZED-TEST",
+                "research_use_only": "1",
+            }
+        ],
+    )
+    staging_receipt = tmp_path / "release_g5_identity_staging_receipt.json"
+    staging_receipt.write_text(
+        json.dumps(
+            {
+                "research_use_only": True,
+                "canonical_g2_write_performed": False,
+                "canonical_g5_write_performed": False,
+                "counts": {"g5_only_staged_verified_count": 1},
+                "output_sha256": {
+                    "g5_only_staged_verified": erc._sha256(staged)
+                },
+            }
+        )
+    )
+    kw.update(
+        g5_identity_requirements=requirements,
+        g5_canonical_g2_identity_manifest=canonical,
+        g5_only_staged_identity=staged,
+        g5_identity_staging_receipt=staging_receipt,
+    )
+
+
 def _base_kwargs(tmp_path: Path) -> dict:
     out = tmp_path / "release"
     return dict(
@@ -284,6 +408,7 @@ def test_release_token_is_bound_to_exact_hashed_inputs(tmp_path):
     # Construct a positive-path controller fixture from the real schemas. It is not a performance claim.
     kw = _base_kwargs(tmp_path)
     _attach_positive_match_quality_fixture(tmp_path, kw)
+    _attach_positive_g5_control_identity_fixture(tmp_path, kw)
 
     coverage = json.loads(Path(kw["coverage_summary"]).read_text())
     a = coverage["contract_audit"]
@@ -344,6 +469,11 @@ def test_release_token_is_bound_to_exact_hashed_inputs(tmp_path):
     assert token["input_hashes"]["match_events"] == erc._sha256(Path(kw["match_events"]))
     assert token["input_hashes"]["match_balance"] == erc._sha256(Path(kw["match_balance"]))
     assert token["input_hashes"]["match_manifest"] == erc._sha256(Path(kw["match_manifest"]))
+    assert token["input_hashes"]["g5_identity_requirements"] == erc._sha256(Path(kw["g5_identity_requirements"]))
+    assert token["input_hashes"]["g5_canonical_g2_identity_manifest"] == erc._sha256(Path(kw["g5_canonical_g2_identity_manifest"]))
+    assert token["input_hashes"]["g5_only_staged_identity"] == erc._sha256(Path(kw["g5_only_staged_identity"]))
+    assert token["input_hashes"]["g5_identity_staging_receipt"] == erc._sha256(Path(kw["g5_identity_staging_receipt"]))
+    assert token["input_hashes"]["g5_control_identity_gate_receipt"]
     assert token["input_hashes"]["g5_match_quality_receipt"]
     assert token["automatic_promotion_permitted"] is False
     assert token["active_champion_modification_permitted"] is False
@@ -437,4 +567,13 @@ def test_missing_g5_match_quality_evidence_independently_blocks_release(tmp_path
     by_gate = {row["gate_id"]: row for row in result["blocking_failures"]}
     assert "G5_MATCH_QUALITY" in by_gate
     assert by_gate["G5_MATCH_QUALITY"]["code"] == "MISSING_EVIDENCE"
+    assert result["evaluation_release_permitted"] is False
+
+
+def test_missing_g5_control_identity_evidence_independently_blocks_release(tmp_path):
+    kw = _base_kwargs(tmp_path)
+    result = erc.assess_release(**kw)
+    by_gate = {row["gate_id"]: row for row in result["blocking_failures"]}
+    assert "G5_CONTROL_STABLE_IDENTITY" in by_gate
+    assert by_gate["G5_CONTROL_STABLE_IDENTITY"]["code"] == "MISSING_EVIDENCE"
     assert result["evaluation_release_permitted"] is False

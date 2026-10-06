@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
 
+import g5_control_identity_gate as g5_control_identity
 import g5_match_quality_gate as g5_match_quality
 import graph_challenger_harness as gch
 import model_training_harness as mt
@@ -177,6 +178,80 @@ def _market_checks(checks: list[GateCheck], coverage: dict, market_manifest: dic
     ))
 
 
+
+def _g5_control_identity_checks(
+    checks: list[GateCheck],
+    *,
+    identity_requirements: Path | None,
+    canonical_g2_identity_manifest: Path | None,
+    g5_only_staged_identity: Path | None,
+    g5_identity_staging_receipt: Path | None,
+    output_dir: Path,
+) -> Path | None:
+    supplied = {
+        "identity_requirements": identity_requirements,
+        "canonical_g2_identity_manifest": canonical_g2_identity_manifest,
+        "g5_only_staged_identity": g5_only_staged_identity,
+        "g5_identity_staging_receipt": g5_identity_staging_receipt,
+    }
+    missing = [
+        name
+        for name, path in supplied.items()
+        if path is None or not path.is_file()
+    ]
+    if missing:
+        checks.append(
+            GateCheck(
+                "G5_CONTROL_STABLE_IDENTITY",
+                "control_identity",
+                False,
+                "MISSING_EVIDENCE",
+                "required G5 control-identity inputs missing: " + ", ".join(missing),
+            )
+        )
+        return None
+
+    receipt = output_dir / "g5_control_identity_gate.json"
+    try:
+        result = g5_control_identity.build(
+            identity_requirements_path=identity_requirements,  # type: ignore[arg-type]
+            canonical_g2_identity_manifest_path=canonical_g2_identity_manifest,  # type: ignore[arg-type]
+            g5_only_staged_verified_path=g5_only_staged_identity,  # type: ignore[arg-type]
+            g5_staging_receipt_path=g5_identity_staging_receipt,  # type: ignore[arg-type]
+            output_path=receipt,
+        )
+    except Exception as exc:
+        checks.append(
+            GateCheck(
+                "G5_CONTROL_STABLE_IDENTITY",
+                "control_identity",
+                False,
+                "AUDIT_ERROR",
+                str(exc),
+            )
+        )
+        return None
+
+    state = result.get("state") or {}
+    ready = bool(result.get("ready_for_g5_control_identity"))
+    checks.append(
+        GateCheck(
+            "G5_CONTROL_STABLE_IDENTITY",
+            "control_identity",
+            ready,
+            "READY" if ready else "BLOCKED",
+            (
+                f"required={state.get('required_symbol_date_count')}; "
+                f"verified={state.get('verified_symbol_date_count')}; "
+                f"unresolved={state.get('unresolved_symbol_date_count')}; "
+                f"g2_overlap_verified={state.get('canonical_g2_overlap_verified_count')}; "
+                f"g5_only_verified={state.get('g5_only_verified_count')}"
+            ),
+        )
+    )
+    return receipt if ready else None
+
+
 def _g5_match_quality_checks(
     checks: list[GateCheck],
     *,
@@ -306,7 +381,11 @@ def assess_release(*, coverage_summary: Path, market_backfill_manifest: Path, ma
                    challenger_manifest: Path, challenger_cv_audit: Path, output_dir: Path,
                    expected_champion_sha256: str = "", holdout_start_year: int = 2015,
                    match_events: Path | None = None, match_balance: Path | None = None,
-                   match_manifest: Path | None = None) -> dict:
+                   match_manifest: Path | None = None,
+                   g5_identity_requirements: Path | None = None,
+                   g5_canonical_g2_identity_manifest: Path | None = None,
+                   g5_only_staged_identity: Path | None = None,
+                   g5_identity_staging_receipt: Path | None = None) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
     checks: list[GateCheck] = []
 
@@ -321,6 +400,17 @@ def assess_release(*, coverage_summary: Path, market_backfill_manifest: Path, ma
     # G1-G6: independent data/readiness gates.
     _metadata_checks(checks, readiness, quality)
     _market_checks(checks, coverage, market)
+
+    # G5 control-history stable identity is independently revalidated. G2 overlap
+    must be canonical, while G5-only dates require hash-bound authorized evidence.
+    g5_identity_receipt = _g5_control_identity_checks(
+        checks,
+        identity_requirements=g5_identity_requirements,
+        canonical_g2_identity_manifest=g5_canonical_g2_identity_manifest,
+        g5_only_staged_identity=g5_only_staged_identity,
+        g5_identity_staging_receipt=g5_identity_staging_receipt,
+        output_dir=output_dir,
+    )
 
     # G5 match-quality evidence is independently revalidated from the exact
     # matched-control outputs rather than trusting readiness flags alone.
@@ -421,6 +511,31 @@ def assess_release(*, coverage_summary: Path, market_backfill_manifest: Path, ma
             "match_manifest": (
                 _sha256(match_manifest)
                 if match_manifest is not None and match_manifest.is_file()
+                else ""
+            ),
+            "g5_identity_requirements": (
+                _sha256(g5_identity_requirements)
+                if g5_identity_requirements is not None and g5_identity_requirements.is_file()
+                else ""
+            ),
+            "g5_canonical_g2_identity_manifest": (
+                _sha256(g5_canonical_g2_identity_manifest)
+                if g5_canonical_g2_identity_manifest is not None and g5_canonical_g2_identity_manifest.is_file()
+                else ""
+            ),
+            "g5_only_staged_identity": (
+                _sha256(g5_only_staged_identity)
+                if g5_only_staged_identity is not None and g5_only_staged_identity.is_file()
+                else ""
+            ),
+            "g5_identity_staging_receipt": (
+                _sha256(g5_identity_staging_receipt)
+                if g5_identity_staging_receipt is not None and g5_identity_staging_receipt.is_file()
+                else ""
+            ),
+            "g5_control_identity_gate_receipt": (
+                _sha256(g5_identity_receipt)
+                if g5_identity_receipt is not None and g5_identity_receipt.is_file()
                 else ""
             ),
             "g5_match_quality_receipt": (
@@ -530,6 +645,10 @@ def main() -> None:
     p.add_argument("--match-events", type=Path, required=True)
     p.add_argument("--match-balance", type=Path, required=True)
     p.add_argument("--match-manifest", type=Path, required=True)
+    p.add_argument("--g5-identity-requirements", type=Path, required=True)
+    p.add_argument("--g5-canonical-g2-identity-manifest", type=Path, required=True)
+    p.add_argument("--g5-only-staged-identity", type=Path, required=True)
+    p.add_argument("--g5-identity-staging-receipt", type=Path, required=True)
     p.add_argument("--base-features", type=Path, required=True)
     p.add_argument("--graph-features", type=Path, required=True)
     p.add_argument("--champion-bundle", type=Path, required=True)
@@ -546,6 +665,10 @@ def main() -> None:
         metadata_readiness=a.metadata_readiness, metadata_quality=a.metadata_quality,
         matched_controls=a.matched_controls, match_events=a.match_events,
         match_balance=a.match_balance, match_manifest=a.match_manifest,
+        g5_identity_requirements=a.g5_identity_requirements,
+        g5_canonical_g2_identity_manifest=a.g5_canonical_g2_identity_manifest,
+        g5_only_staged_identity=a.g5_only_staged_identity,
+        g5_identity_staging_receipt=a.g5_identity_staging_receipt,
         base_features=a.base_features, graph_features=a.graph_features,
         champion_bundle=a.champion_bundle, champion_training_manifest=a.champion_training_manifest,
         challenger_manifest=a.challenger_manifest, challenger_cv_audit=a.challenger_cv_audit,
