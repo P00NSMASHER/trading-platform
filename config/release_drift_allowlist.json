@@ -1911,6 +1911,10 @@
       "expected_sha256": "5b30c3ad89c517712c796c573117c7a95d9bb75c8dfa4dafe9f46aeedf1165de",
       "reason": "G5 control identity handoff: convert unresolved rows with consistent canonical or exact-date SampleFirms PERMNO hints into the existing authorized stocknames adapter queue schema while keeping no-hint rows fail-closed and treating hints as non-evidence."
     },
+    "src/g5_control_identity_stocknames_activation.py": {
+      "expected_sha256": "91a56ff7a4279ed772afdafe2ec11d9946e1db4f6afd7bee760c7a03eeb99f9e",
+      "reason": "G5 identity acquisition activation: reuse the canonical Stocknames adapter and G5 evidence stager in one fail-closed local wrapper for the complete expanded G5 identity queue, with no fetch, purchase, canonical write, coverage promotion, or release claim."
+    },
     "src/g5_control_identity_stocknames_lead_expansion.py": {
       "expected_sha256": "956accb8cdfdd59aa3d7e48de665532ff4f7fbaba6c216b7af7e1d7e09f87062",
       "reason": "G5 identity acquisition optimization: reuse only already-reconciled symbol-level PERMNO hints as non-evidentiary Stocknames query leads for no-hint dates while preserving exact dated symbol validation and zero readiness promotion."
@@ -2550,6 +2554,10 @@
     "tests/test_g5_control_identity_stocknames_handoff.py": {
       "expected_sha256": "f7073613486fcc25ddcacf6bba7123dd8884fdc42445c50b5b4f377d66b3b1dc",
       "reason": "Regression coverage for real G5 identity queue reconciliation, direct compatibility with the authorized stocknames adapter, PERMNO hint conflict rejection, no-hint fail-closed handling, and zero readiness/release promotion."
+    },
+    "tests/test_g5_control_identity_stocknames_activation.py": {
+      "expected_sha256": "31f0fc3d55f189094f451708ebe6d1a8894c62fd63707a57c9d5cd604aa9e0d3",
+      "reason": "Regression coverage for complete and partial authorized Stocknames activation, exact G2/G5 evidence routing, zero canonical promotion, and strict identity-queue scope reconciliation."
     },
     "tests/test_g5_control_identity_stocknames_lead_expansion.py": {
       "expected_sha256": "123b25f7709235bc18993026ad9cea7918ab0acad7ec2979377db42146917329",
