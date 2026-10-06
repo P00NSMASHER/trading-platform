@@ -2714,6 +2714,14 @@
     "tests/test_g5_control_identity_readiness_preview.py": {
       "expected_sha256": "0208acdd468c95da5e2a385d9e8ff359869eb5da3903b4bedf11d6c89d553f34",
       "reason": "Regression coverage for hash-bound full-history G5 identity readiness preview, including fail-closed G2-overlap routing, PERMNO-hint conflicts, receipt tamper rejection, exact requirement accounting, and zero canonical promotion."
+    },
+    "src/g5_control_identity_stocknames_activation.py": {
+      "expected_sha256": "91a56ff7a4279ed772afdafe2ec11d9946e1db4f6afd7bee760c7a03eeb99f9e",
+      "reason": "G5 identity acquisition activation: reuse the canonical Stocknames adapter and G5 evidence stager in one fail-closed local wrapper for the complete expanded G5 identity queue, with no fetch, purchase, canonical write, coverage promotion, or release claim."
+    },
+    "tests/test_g5_control_identity_stocknames_activation.py": {
+      "expected_sha256": "31f0fc3d55f189094f451708ebe6d1a8894c62fd63707a57c9d5cd604aa9e0d3",
+      "reason": "Regression coverage for complete and partial authorized Stocknames activation, exact G2/G5 evidence routing, zero canonical promotion, and strict identity-queue scope reconciliation."
     }
   },
   "schema_version": "2",
