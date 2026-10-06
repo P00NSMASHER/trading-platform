@@ -273,16 +273,16 @@ def build(
                 f"binding {source_id}: empty scaffold template may not be used as real source data"
             )
 
+        source_fields, row_count = _preflight_source(
+            real_path,
+            lane=lane,
+        )
+
         source_sha256 = _sha256(real_path)
         if source_sha256 == recorded_template_sha:
             raise G5ExternalSourceManifestFinalizerError(
                 f"binding {source_id}: source content matches empty scaffold template"
             )
-
-        source_fields, row_count = _preflight_source(
-            real_path,
-            lane=lane,
-        )
 
         source["path"] = str(real_path)
         source["expected_sha256"] = source_sha256
