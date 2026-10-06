@@ -1967,6 +1967,10 @@
       "expected_sha256": "f5d2818b61bf81c6f59137be91d450ac338793dd5f6b8c6ec601ad9d38749f37",
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
+    "src/g5_historical_cusip_acquisition.py": {
+      "expected_sha256": "6567c26b8c3b9321864208d10ea254d93687219ef44c225fb4301fdf042e1dd3",
+      "reason": "G5 historical CUSIP acquisition lane for control and treated ownership targets, preserving all required event dates and requiring explicit reviewed nine-character historical CUSIP evidence before staging."
+    },
     "src/g5_master_acquisition_plan.py": {
       "expected_sha256": "b593182cca1a3cb21fbc09dce0a6a689c417715d380370e43ce37643d3572e6e",
       "reason": "G5 master acquisition plan now emits the fail-closed eight-slot external source-manifest scaffold from the unified packet, reconciles all requests and slot coverage, and preserves zero readiness/release promotion on the current identity/intake baseline."
@@ -2646,6 +2650,10 @@
     "tests/test_g5_external_source_queue.py": {
       "expected_sha256": "0bfdb2b439db11dbb686f95e78bb423b4668e0af0a24fe71ae12e2286c8421e6",
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
+    },
+    "tests/test_g5_historical_cusip_acquisition.py": {
+      "expected_sha256": "e72f516facf38bd92410d77f9b5a17f7df9b014d1749a507f16f0f014427b2c1",
+      "reason": "Regression coverage for real G5 CUSIP request construction, per-target-kind compression, exact CUSIP9 validation, required-date coverage, fuzzy/unreviewed rejection, and explicit historical staging."
     },
     "tests/test_g5_master_acquisition_plan.py": {
       "expected_sha256": "ae48683edba447d8b7ab286dee012d3b0d370b982316a96ecfda22187f9ea0cf",
