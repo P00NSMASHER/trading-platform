@@ -72,6 +72,15 @@ def test_g5_only_evidence_stages_without_mutating_g2_overlap(tmp_path: Path):
     assert receipt["canonical_g5_write_performed"] is False
     assert receipt["coverage_promoted"] is False
     assert receipt["overall_g5_identity_ready_claimed"] is False
+    assert receipt["output_sha256"]["g5_only_staged_verified"] == stager._sha256(
+        out / "g5_control_identity_staged_verified.csv"
+    )
+    assert receipt["output_sha256"]["g5_only_remaining"] == stager._sha256(
+        out / "g5_control_identity_g5_only_remaining.csv"
+    )
+    assert receipt["output_sha256"]["canonical_g2_forward_evidence"] == stager._sha256(
+        out / "g5_control_identity_g2_forward_evidence.csv"
+    )
 
     staged = list(
         csv.DictReader(
