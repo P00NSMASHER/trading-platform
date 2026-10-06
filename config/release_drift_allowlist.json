@@ -1980,8 +1980,8 @@
       "reason": "Real-data sprint stable-ID reconciliation now accepts optional baseline_identity_verified_count, requires event-date count to remain 174, and verifies event + baseline verified + baseline unresolved equals the 3828 required symbol-dates."
     },
     "src/real_data_replay.py": {
-      "expected_sha256": "7c00a1357ec331d5abfae261b64914cfaed53c4f262a9466eb524f578054a413",
-      "reason": "Real-data replay now runs the G5 match-quality gate immediately after matching and blocks challenger/release stages unless the exact match set passes contamination, completeness, and hard balance checks."
+      "expected_sha256": "2cd03e4b8ec5f83b2e38d98250be16a33cc7dd026aebdcdc25bcf683cea1e39e",
+      "reason": "Real-data replay optionally materializes exact treated/control matcher metadata from normalized G5 sources while preserving legacy replay receipt semantics when the G5 path is not configured."
     },
     "src/research_receipt_rebuild.py": {
       "expected_sha256": "aad23317e159d300a462575ca8c998ed8891b62e45caf1ee626ca8034f0a3c31",
@@ -2694,6 +2694,10 @@
     "tests/test_g5_matching_metadata_materializer.py": {
       "expected_sha256": "3f52298f0739e905a00b90476f507103910b00b8f72c76874337206ee2f67d3e",
       "reason": "Regression coverage for exact treated/control target scoping, all-13-covariate completeness, matcher compatibility, cross-date metadata-scope isolation, missing-field fail-closed behavior, equal-timestamp conflicts, later-value replacement, cutoff enforcement, unknown-target rejection, and treated/control collision rejection."
+    },
+    "tests/test_real_data_replay_g5_materializer.py": {
+      "expected_sha256": "3ddf31bc0f8657f551819c3f75694d5c49d04129dec2c19ebc10956791d3f2ba",
+      "reason": "Regression coverage for replay-driven G5 matcher metadata materialization, incomplete-input blocking, generated matcher-input provenance, manual/generated input ambiguity rejection, normalized-source configuration, and legacy replay-receipt compatibility."
     }
   },
   "schema_version": "2",
