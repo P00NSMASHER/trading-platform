@@ -224,3 +224,13 @@ def test_replay_rejects_empty_normalized_source_list(tmp_path: Path):
         match="normalized_sources must be a non-empty list",
     ):
         replay.run_replay(cfg)
+
+
+def test_legacy_replay_without_g5_metadata_preserves_control_metadata_block_reason(tmp_path: Path):
+    cfg = _config(tmp_path, g5_spec=None)
+    result = replay.run_replay(cfg)
+
+    assert "g5_matching_metadata" not in result["stages"]
+    assert result["stages"]["matched_controls"]["status"] == "DEPENDENCY_BLOCKED"
+    assert result["stages"]["matched_controls"]["reason"] == "control_metadata_not_supplied"
+    assert "g5_matching_metadata" not in result["inputs"]

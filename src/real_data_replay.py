@@ -457,12 +457,16 @@ def run_replay(
                 detail=str(exc),
             )
     else:
-        if feature_manifest is None:
+        if g5_matching_spec is None:
+            match_block_reason = (
+                "control_metadata_not_supplied"
+                if control_metadata is None
+                else "features_not_ready"
+            )
+        elif feature_manifest is None:
             match_block_reason = "features_not_ready"
-        elif g5_matching_spec is not None:
-            match_block_reason = "g5_matching_metadata_not_ready"
         else:
-            match_block_reason = "control_metadata_not_supplied"
+            match_block_reason = "g5_matching_metadata_not_ready"
         stages["matched_controls"] = _stage(
             "DEPENDENCY_BLOCKED",
             reason=match_block_reason,
