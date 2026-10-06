@@ -2799,6 +2799,19 @@
       "expected_sha256": "9fe7c3766086f063ba97d7d617b82aa7e33faae6fedd2ff427346e91cf05e9db",
       "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, byte-compatible legacy replay behavior, and a hash-bound G5-only staged-identity path that remains fail-closed for final evaluation."
     }
+  ,
+    ".github/workflows/hacked-earnings-exhaustive-audit.yml": {
+      "expected_sha256": "38db70befe76eb6e74c95cb66153b11a76654ecded342861f9311b66db324938",
+      "reason": "Reproducible read-only CI for the pinned hacked_earnings_jfe exhaustive audit; clones the exact upstream commit and publishes audit evidence without expanding the audited source boundary."
+    },
+    "docs/hacked_earnings_jfe_exhaustive_audit_2026-10-06.md": {
+      "expected_sha256": "9e9de495bb8e6fa0ed9849a2a50fc3ecf58a4583fb82caccb3258eb1e1ef89a6",
+      "reason": "Canonical audit report for the pinned hacked_earnings_jfe source corpus, explicitly separating repository findings from external dependencies such as earnings_news_jar."
+    },
+    "scripts/audit_hacked_earnings_jfe_exhaustive.py": {
+      "expected_sha256": "8a82227d0c2dedd5b0099e77d5c1b398b4513aa3dc6dbcf18eaea5871c8fe56f",
+      "reason": "Reproducible exhaustive-audit implementation covering reachable Git objects, tracked/history blobs, archives, structured alternate formats, notebooks, and embedded outputs for the pinned hacked_earnings_jfe commit."
+    }
   },
   "schema_version": "2",
   "trust_root_notice": "This reviewed file declares intentional drift from the immutable historical release using SHA-256 content identities. Release verification additionally requires an independently supplied SHA-256 of this allowlist; repository contents alone are not the trust anchor."
