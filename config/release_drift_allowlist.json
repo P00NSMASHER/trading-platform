@@ -1911,6 +1911,10 @@
       "expected_sha256": "5b30c3ad89c517712c796c573117c7a95d9bb75c8dfa4dafe9f46aeedf1165de",
       "reason": "G5 control identity handoff: convert unresolved rows with consistent canonical or exact-date SampleFirms PERMNO hints into the existing authorized stocknames adapter queue schema while keeping no-hint rows fail-closed and treating hints as non-evidence."
     },
+    "src/g5_control_identity_stocknames_activation.py": {
+      "expected_sha256": "91a56ff7a4279ed772afdafe2ec11d9946e1db4f6afd7bee760c7a03eeb99f9e",
+      "reason": "G5 identity acquisition activation: reuse the canonical Stocknames adapter and G5 evidence stager in one fail-closed local wrapper for the complete expanded G5 identity queue, with no fetch, purchase, canonical write, coverage promotion, or release claim."
+    },
     "src/g5_control_identity_stocknames_lead_expansion.py": {
       "expected_sha256": "956accb8cdfdd59aa3d7e48de665532ff4f7fbaba6c216b7af7e1d7e09f87062",
       "reason": "G5 identity acquisition optimization: reuse only already-reconciled symbol-level PERMNO hints as non-evidentiary Stocknames query leads for no-hint dates while preserving exact dated symbol validation and zero readiness promotion."
@@ -1944,8 +1948,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "50d69325ef95491cee4d92e71516d1b76e65d086f4af73e34fa760a3967c3a98",
-      "reason": "G5 master acquisition plan now always reconciles full control-history stable-identity readiness, combining canonical G2 verified reuse with hash-bound G5-only staged evidence while preserving zero canonical readiness or release promotion."
+      "expected_sha256": "55969843dcba516da151c8adfb07ef8d350a475423c4850ec01fcd2f4472909f",
+      "reason": "G5 master acquisition plan binds the full-history identity readiness preview to the same current canonical G2 identity manifest used for requirement generation, preserving exact promotion/demotion visibility with zero release-gate relaxation."
     },
     "src/g5_match_quality_gate.py": {
       "expected_sha256": "ebd01d5fb33595130e90c166c59de52414715aaeface898a5fa5b209574e5a21",
@@ -1984,8 +1988,8 @@
       "reason": "Real-data sprint stable-ID reconciliation now accepts optional baseline_identity_verified_count, requires event-date count to remain 174, and verifies event + baseline verified + baseline unresolved equals the 3828 required symbol-dates."
     },
     "src/real_data_replay.py": {
-      "expected_sha256": "2cd03e4b8ec5f83b2e38d98250be16a33cc7dd026aebdcdc25bcf683cea1e39e",
-      "reason": "Real-data replay optionally materializes exact treated/control matcher metadata from normalized G5 sources while preserving legacy replay receipt semantics when the G5 path is not configured."
+      "expected_sha256": "bbfdfbca44903ec38de0984e8b3761de9636f25150f2b15a25795e8d617fc8c6",
+      "reason": "Real-data replay optionally validates complete G5 control-history stable identity before challenger work, hash-binds the four exact identity inputs, and hands them to release authority while preserving legacy replay receipt semantics when the new block is absent."
     },
     "src/research_receipt_rebuild.py": {
       "expected_sha256": "aad23317e159d300a462575ca8c998ed8891b62e45caf1ee626ca8034f0a3c31",
@@ -2551,6 +2555,10 @@
       "expected_sha256": "f7073613486fcc25ddcacf6bba7123dd8884fdc42445c50b5b4f377d66b3b1dc",
       "reason": "Regression coverage for real G5 identity queue reconciliation, direct compatibility with the authorized stocknames adapter, PERMNO hint conflict rejection, no-hint fail-closed handling, and zero readiness/release promotion."
     },
+    "tests/test_g5_control_identity_stocknames_activation.py": {
+      "expected_sha256": "31f0fc3d55f189094f451708ebe6d1a8894c62fd63707a57c9d5cd604aa9e0d3",
+      "reason": "Regression coverage for complete and partial authorized Stocknames activation, exact G2/G5 evidence routing, zero canonical promotion, and strict identity-queue scope reconciliation."
+    },
     "tests/test_g5_control_identity_stocknames_lead_expansion.py": {
       "expected_sha256": "123b25f7709235bc18993026ad9cea7918ab0acad7ec2979377db42146917329",
       "reason": "Regression coverage for exact date-scope conservation, symbol-level PERMNO acquisition leads, direct-hint precedence, conflict rejection, residual symbol discovery, and zero G5 readiness promotion."
@@ -2688,12 +2696,12 @@
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
     },
     "src/g5_control_identity_gate.py": {
-      "expected_sha256": "840a0368d32349ef8673d2908159e1576228e02eff1082f2c84ef2ccbbe567f9",
-      "reason": "G5 stable-identity hardening: independently reconcile the complete control-history symbol/date footprint against canonical G2 identity plus hash-bound authorized G5-only evidence."
+      "expected_sha256": "9c706a32a45ba252eef923507acc0ea52936b02f1133de3bd2aaf99b104a6f6f",
+      "reason": "G5 stable-identity gate hardening: reject staging receipts that claim coverage promotion or overall G5 identity readiness, preserving the staging/canonical trust boundary."
     },
     "tests/test_g5_control_identity_gate.py": {
-      "expected_sha256": "b383c2c2dc23e3d051f9450bdbaa853e264f9ce45c1dbcdb8f67ec18cb5465b7",
-      "reason": "Mutation-sensitive G5 stable-identity gate coverage for unresolved G2 overlap, staged-evidence hash binding, scope escape, PERMNO conflict, and the current real fail-closed acquisition state."
+      "expected_sha256": "5c9167a910c67f3a0bcb93c4a69899c6403aa0518cf8afb90eb3876e3656746d",
+      "reason": "Hostile regressions prove G5 identity staging receipts cannot self-promote coverage or overall identity readiness even when their staged CSV hash and counts are otherwise valid."
     },
     "src/g5_matching_metadata_materializer.py": {
       "expected_sha256": "4680f190763276098e86e3a6c4b0ff56c901cb37c72ac00071a4b901b9ad9b4a",
@@ -2708,20 +2716,16 @@
       "reason": "Regression coverage for replay-driven G5 matcher metadata materialization, incomplete-input blocking, generated matcher-input provenance, manual/generated input ambiguity rejection, normalized-source configuration, and legacy replay-receipt compatibility."
     },
     "src/g5_control_identity_readiness_preview.py": {
-      "expected_sha256": "870990f061f5402d36b80d93fe51205c3a4712f7a41aed1605be7dc85e415dc9",
-      "reason": "G5 full-history stable-identity preview: reconcile canonical G2 verified reuse with hash-bound G5-only authorized staging receipts, preserve unresolved G2/G5 requirements, and never mutate canonical readiness or release state."
+      "expected_sha256": "0cc72cc82e6d954ba74a78babae6403a70f950e27fae49d3471e9903e4ccd744",
+      "reason": "G5 full-history identity preview now revalidates every G2-overlap requirement against the current canonical G2 identity manifest and hash-binds that manifest instead of trusting stale requirement status."
     },
     "tests/test_g5_control_identity_readiness_preview.py": {
-      "expected_sha256": "0208acdd468c95da5e2a385d9e8ff359869eb5da3903b4bedf11d6c89d553f34",
-      "reason": "Regression coverage for hash-bound full-history G5 identity readiness preview, including fail-closed G2-overlap routing, PERMNO-hint conflicts, receipt tamper rejection, exact requirement accounting, and zero canonical promotion."
+      "expected_sha256": "70c1936c7b365176a09e0d1126bf75ea9dca6c460df57fb37d5214e846701e4d",
+      "reason": "Regression coverage for current-canonical G2 promotion/demotion visibility, stale requirement-status rejection, G5-only staging integrity, cross-pipeline misuse, PERMNO conflicts, receipt tampering, and exact requirement reconciliation."
     },
-    "src/g5_control_identity_stocknames_activation.py": {
-      "expected_sha256": "91a56ff7a4279ed772afdafe2ec11d9946e1db4f6afd7bee760c7a03eeb99f9e",
-      "reason": "G5 identity acquisition activation: reuse the canonical Stocknames adapter and G5 evidence stager in one fail-closed local wrapper for the complete expanded G5 identity queue, with no fetch, purchase, canonical write, coverage promotion, or release claim."
-    },
-    "tests/test_g5_control_identity_stocknames_activation.py": {
-      "expected_sha256": "31f0fc3d55f189094f451708ebe6d1a8894c62fd63707a57c9d5cd604aa9e0d3",
-      "reason": "Regression coverage for complete and partial authorized Stocknames activation, exact G2/G5 evidence routing, zero canonical promotion, and strict identity-queue scope reconciliation."
+    "tests/test_real_data_replay_g5_identity.py": {
+      "expected_sha256": "9fe7c3766086f063ba97d7d617b82aa7e33faae6fedd2ff427346e91cf05e9db",
+      "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, byte-compatible legacy replay behavior, and a hash-bound G5-only staged-identity path that remains fail-closed for final evaluation."
     }
   },
   "schema_version": "2",
