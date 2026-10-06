@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 import sys
 from pathlib import Path
@@ -10,7 +11,11 @@ sys.path.insert(0, str(ROOT / "src"))
 import g5_master_acquisition_plan as master
 
 
-def _build(tmp_path: Path):
+def _build(
+    tmp_path: Path,
+    *,
+    identity_evidence_path: Path | None = None,
+):
     return master.build(
         events_path=ROOT / "data/processed/historical_events.csv",
         frozen_market_requirements_path=(
@@ -23,6 +28,7 @@ def _build(tmp_path: Path):
             ROOT
             / "data/processed/security_identity_real/security_identity_manifest.json"
         ),
+        identity_evidence_path=identity_evidence_path,
         output_dir=tmp_path,
     )
 
@@ -192,3 +198,69 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     assert saved["total_matching_target_count"] == 390
     assert saved["policy"]["planning_rows_are_g5_evidence"] is False
     assert saved["policy"]["reviewed_exclusions_may_close_g5"] is False
+
+def test_master_plan_optionally_stages_g5_only_identity_without_promoting_readiness(
+    tmp_path: Path,
+):
+    baseline_dir = tmp_path / "baseline"
+    _build(baseline_dir)
+
+    queue_path = (
+        baseline_dir
+        / "control_identity/g5_control_identity_acquisition_queue.csv"
+    )
+    with queue_path.open(encoding="utf-8", newline="") as handle:
+        queue_rows = list(csv.DictReader(handle))
+    target = next(
+        row for row in queue_rows if row["canonical_g2_overlap"] == "NONE"
+    )
+
+    permno = (
+        target["canonical_permno"]
+        or target["samplefirms_permno"]
+        or "99999999"
+    )
+    evidence_path = tmp_path / "identity_evidence.csv"
+    evidence_path.write_text(
+        (
+            "evidence_id,permno,historical_symbol,market_identifier,valid_from,"
+            "valid_through,evidence_lane,source_reference,authorization_reference,"
+            "research_use_only\n"
+            f"G5-TEST-1,{permno},{target['historical_symbol']},"
+            f"{target['historical_symbol']},{target['trade_date']},"
+            f"{target['trade_date']},AUTHORIZED_MARKET_SECURITY_MASTER,"
+            "authorized-fixture:G5-TEST-1,AUTHORIZED-TEST,1\n"
+        ),
+        encoding="utf-8",
+    )
+
+    staged_dir = tmp_path / "staged"
+    summary = _build(
+        staged_dir,
+        identity_evidence_path=evidence_path,
+    )
+    staging = summary["control_identity_evidence_staging"]
+
+    assert staging["input_evidence_row_count"] == 1
+    assert staging["g5_only_staged_verified_count"] == 1
+    assert staging["g5_only_remaining_count"] == (
+        staging["g5_only_requirement_count"] - 1
+    )
+    assert staging["canonical_g2_forward_evidence_row_count"] == 0
+    assert staging["coverage_promoted"] is False
+    assert staging["overall_g5_identity_ready_claimed"] is False
+
+    assert summary["inputs"]["identity_evidence"]["sha256"] == master._sha256(
+        evidence_path
+    )
+    staging_output = Path(
+        summary["component_outputs"]["control_identity_evidence_staging"]
+    )
+    assert (
+        staging_output / "g5_control_identity_evidence_staging_receipt.json"
+    ).exists()
+
+    assert summary["g5_model_evaluation_controls_ready"] is False
+    assert summary["canonical_g5_dates_resolved_change"] == 0
+    assert summary["release_claimed"] is False
+
