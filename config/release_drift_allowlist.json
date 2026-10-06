@@ -2666,6 +2666,14 @@
     "vendor_sources/lseg/README.md": {
       "expected_sha256": "8cce7d8fc1a8fcc39f69f7fe7452d2073615ba545d2a3f623d10535ef4cfc384",
       "reason": "Licensed LSEG live-normalization hardening: support offset-aware Tick History Date-Time rows and repository-documented OPRA RIC decoding with regression tests; no credentials, downloads, or coverage claims."
+    },
+    "src/g5_matching_metadata_materializer.py": {
+      "expected_sha256": "4680f190763276098e86e3a6c4b0ff56c901cb37c72ac00071a4b901b9ad9b4a",
+      "reason": "G5 matcher-input materialization: fuse latest admissible point-in-time covariates across normalized treated/control sources, emit only complete rows directly consumable by the matcher, and keep incomplete/conflicted targets in an exact fail-closed gap receipt."
+    },
+    "tests/test_g5_matching_metadata_materializer.py": {
+      "expected_sha256": "5ce7e1cff1a836315b571b4ed55e4ddff6cba75d45fe71b6cf06fbb7caec918a",
+      "reason": "Regression coverage for exact treated/control target scoping, all-13-covariate completeness, matcher compatibility, missing-field fail-closed behavior, equal-timestamp conflicts, later-value replacement, cutoff enforcement, unknown-target rejection, and treated/control collision rejection."
     }
   },
   "schema_version": "2",
