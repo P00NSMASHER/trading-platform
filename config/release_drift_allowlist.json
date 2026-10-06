@@ -1955,6 +1955,10 @@
       "expected_sha256": "4b572f4ab0a1df28bc8a1cffb6d457f205cab98f03a2117ac1b4a7ee6c4751f9",
       "reason": "G5 external metadata intake orchestration: hash-bound control/treated lane normalization, point-in-time cutoff enforcement, multi-source conflict accounting, and exact 390-target / 1,950-field completeness preview without canonical readiness promotion."
     },
+    "src/g5_external_source_manifest_finalizer.py": {
+      "expected_sha256": "f25edfee75c5938646364cc67ac26fcd3b931f1e505af8499eb81825385af7ae",
+      "reason": "G5 external intake bridge: finalize the eight-slot scaffold from local source bindings, automatically hash and preflight real files, require source names and authorization references, and emit an intake-ready manifest without copying/fetching data or promoting readiness."
+    },
     "src/g5_external_source_manifest_scaffold.py": {
       "expected_sha256": "b1540eb8d8badaa5ddea5bd754998581ab51babb02730524b7e589d9ecc774e4",
       "reason": "G5 external acquisition bridge: generate an eight-slot fail-closed source-manifest scaffold and canonical empty lane templates from the complete control+treated packet without inventing data, hashes, authorization, or readiness."
@@ -2618,6 +2622,10 @@
     "tests/test_g5_external_metadata_intake.py": {
       "expected_sha256": "91b806865398747a7ee9a0f3073e00f52259ed8e700673b07109fd8f2fb24589",
       "reason": "Regression coverage for complete and partial G5 external intake, equal-timestamp conflicts, treated/control separation, and the real 390-target / 1,950-field scope with zero readiness promotion."
+    },
+    "tests/test_g5_external_source_manifest_finalizer.py": {
+      "expected_sha256": "2cf06983328bcb56868ef2550b6d1dbae3b502c52925207fb2571c514424b9a2",
+      "reason": "Regression coverage for exact eight-slot manifest finalization, automatic source hashes, intake structural compatibility, missing-binding rejection, empty-template rejection, prohibited columns, and nonempty delivery enforcement."
     },
     "tests/test_g5_external_source_manifest_scaffold.py": {
       "expected_sha256": "b0c1b89a90b455a5657f7cb520c72625707cf89fb09519594cbb8616cb910868",
