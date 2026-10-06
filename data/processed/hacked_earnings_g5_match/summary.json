@@ -1,0 +1,74 @@
+{
+  "strict_g5": {
+    "status": "BLOCKED_ZERO_G5_MODEL_EVALUATION_ELIGIBLE_DATES",
+    "required_event_dates": 72,
+    "point_in_time_resolved_dates": 0,
+    "model_evaluation_eligible_dates": 0,
+    "reviewed_excluded_dates": 72,
+    "required_covariates": [
+      "sector",
+      "index_bucket",
+      "market_cap",
+      "price",
+      "volatility_21d",
+      "normal_volume",
+      "normal_turnover",
+      "normal_spread",
+      "options_liquidity",
+      "institutional_ownership",
+      "analyst_coverage"
+    ],
+    "generator_default_covariates": [
+      "sector",
+      "index_bucket",
+      "market_cap",
+      "price",
+      "trailing_21d_vol",
+      "normal_minute_volume",
+      "normal_minute_turnover",
+      "normal_relative_spread",
+      "option_liquidity",
+      "institutional_ownership",
+      "analyst_coverage",
+      "borrow_cost",
+      "pre_event_return"
+    ],
+    "retrospective_samplefirms_as_live_controls_prohibited": true,
+    "strict_test_executed": true,
+    "g5_quality_result_available": false
+  },
+  "partial_falsification": {
+    "status": "COMPLETED_NON_G5_RETROSPECTIVE_PARTIAL_MATCH",
+    "matched_treated_events": 446,
+    "matched_pairs": 1338,
+    "matching_exact_fields": [
+      "calendar_quarter",
+      "Hacked=1",
+      "different_issuer",
+      "control_Actual=0"
+    ],
+    "matching_numeric_fields": [
+      "prior_issuer_rate",
+      "log_text_chars",
+      "novelty"
+    ],
+    "missing_required_g5_dimensions": [
+      "sector/index_bucket",
+      "market_cap/price",
+      "21d volatility",
+      "normal volume/turnover/spread",
+      "option liquidity",
+      "institutional ownership",
+      "analyst coverage",
+      "borrow cost",
+      "pre-event return"
+    ],
+    "mean_text_score_diff": 0.020929083769628185,
+    "median_text_score_diff": 0.013087975630476915,
+    "treated_beats_matched_control_rate": 0.742152466367713,
+    "mean_text_novelty_score_diff": 0.023041520930799492,
+    "treated_beats_matched_control_rate_text_novelty": 0.726457399103139,
+    "g5_quality": false
+  },
+  "interpretation": "No G5-quality causal/control result can be produced until admitted point-in-time matching covariates exist. Partial matching is a falsification diagnostic only."
+}
