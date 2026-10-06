@@ -1,0 +1,110 @@
+{
+  "status": "RETROSPECTIVE_RESEARCH_ONLY",
+  "source_commit": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+  "source_files_verified": 9,
+  "sample": {
+    "rows": 43687,
+    "unique_permnos": 3202,
+    "soft_count": 36750,
+    "soft_missing": 6937,
+    "soft_mean": 0.000886724820998289,
+    "soft_median": 0.0017133761516206479,
+    "mean_absolute_soft": 0.008957840803080387,
+    "text_linked_rows": 36750,
+    "text_ambiguous_rows": 0
+  },
+  "archives": [
+    {
+      "year": 2010,
+      "text_members": 6507,
+      "expanded_bytes": 99749817
+    },
+    {
+      "year": 2011,
+      "text_members": 6484,
+      "expanded_bytes": 103990212
+    },
+    {
+      "year": 2012,
+      "text_members": 6018,
+      "expanded_bytes": 99985590
+    },
+    {
+      "year": 2013,
+      "text_members": 6175,
+      "expanded_bytes": 105616430
+    },
+    {
+      "year": 2014,
+      "text_members": 5755,
+      "expanded_bytes": 100574718
+    },
+    {
+      "year": 2015,
+      "text_members": 5811,
+      "expanded_bytes": 105275791
+    }
+  ],
+  "archive_text_members": 36750,
+  "archive_unique_security_dates": 36750,
+  "archive_unique_content_hashes": 36711,
+  "unparsed_members": 6,
+  "coefficient_rows": 2393,
+  "nonzero_coefficients": 404,
+  "positive_coefficients": 183,
+  "negative_coefficients": 221,
+  "events": {
+    "rows": 174,
+    "unique_permnos": 146,
+    "soft_count": 160,
+    "soft_missing": 14,
+    "soft_mean": 0.002613388072224544,
+    "soft_median": 0.003340305617038797,
+    "mean_absolute_soft": 0.008676258362450699,
+    "text_linked_rows": 160,
+    "text_ambiguous_rows": 0
+  },
+  "events_unresolved": 0,
+  "event_source_label_exceptions": 10,
+  "missing_soft_sample_rows_with_text": 0,
+  "missing_soft_event_rows_with_text": 0,
+  "additional_actual_label_rows_outside_174_join": {
+    "rows": 560,
+    "unique_permnos": 365,
+    "soft_count": 469,
+    "soft_missing": 91,
+    "soft_mean": 0.001075902806486636,
+    "soft_median": 0.0017431693450531294,
+    "mean_absolute_soft": 0.008811798618832169,
+    "text_linked_rows": 469,
+    "text_ambiguous_rows": 0
+  },
+  "same_day_unexposed_candidate_pairs": 9329,
+  "events_with_same_day_unexposed_candidates": 174,
+  "source_label_invariant_violations": 0,
+  "versions": {
+    "python": "3.11.16",
+    "nltk": "3.9.1",
+    "pyarrow": "17.0.0"
+  },
+  "stopword_count": 198,
+  "stopwords_sha256": "47608d511aa4fec95139d41e487109ab4a260313745d397210dbf966b1d3c225",
+  "canonical_coverage_change": {
+    "G1": 0,
+    "G2": 0,
+    "G3": 0,
+    "G4": 0,
+    "G5": 0
+  },
+  "limitations": [
+    "Soft is fitted on the training sample in the published recipe; not independently validated prediction.",
+    "Text and original Soft cannot be used before verified public release; availability clocks are not in archive filenames.",
+    "Fitted-word contribution lacks the unpublished intercept and is NOT a recovered or imputed Soft score.",
+    "Original unsorted directory order and first-appendix choice cannot be reproduced; explicit exploratory choice preserves multiplicity.",
+    "Hacked/Actual are retrospective source labels, not live features; exact-time 174 and broader Actual universe remain distinct.",
+    "First-trade-to-earnings joins are source-date heuristics, not new canonical announcement-time or identity evidence.",
+    "Same-day controls are unbalanced research candidates only; no market cap, liquidity, outcome, or execution evidence is manufactured.",
+    "No raw TAQ/OPRA/ITCH or omitted proprietary MainPanel/return targets recovered; no profit/backtest claims.",
+    "Prior-text changes are descriptive and still need independently verified publication clocks and point-in-time training."
+  ]
+}
