@@ -48,6 +48,7 @@ def build_preview(
     *,
     identity_requirements_path: Path,
     staged_g5_only_path: Path | None,
+    staging_receipt_path: Path | None,
     output_path: Path,
     summary_path: Path,
 ) -> dict:
@@ -104,8 +105,48 @@ def build_preview(
             canonical_verified.add(key)
 
     staged_by_key: dict[tuple[str, str], dict[str, str]] = {}
+    if (staged_g5_only_path is None) != (staging_receipt_path is None):
+        raise G5ControlIdentityReadinessPreviewError(
+            "staged G5 identity rows and staging receipt must be supplied together"
+        )
+
     staged_receipt = None
     if staged_g5_only_path is not None:
+        try:
+            staged_receipt = json.loads(
+                staging_receipt_path.read_text(encoding="utf-8")
+            )
+        except (OSError, json.JSONDecodeError) as exc:
+            raise G5ControlIdentityReadinessPreviewError(
+                "staging receipt is missing or invalid JSON"
+            ) from exc
+
+        if not isinstance(staged_receipt, dict):
+            raise G5ControlIdentityReadinessPreviewError(
+                "staging receipt must be a JSON object"
+            )
+        output_sha256 = staged_receipt.get("output_sha256") or {}
+        expected_staged_sha = str(
+            output_sha256.get("g5_only_staged_verified") or ""
+        )
+        actual_staged_sha = _sha256(staged_g5_only_path)
+        if expected_staged_sha != actual_staged_sha:
+            raise G5ControlIdentityReadinessPreviewError(
+                "staged G5 identity file hash does not match staging receipt"
+            )
+        if bool(staged_receipt.get("canonical_g2_write_performed")):
+            raise G5ControlIdentityReadinessPreviewError(
+                "staging receipt unexpectedly reports a canonical G2 write"
+            )
+        if bool(staged_receipt.get("canonical_g5_write_performed")):
+            raise G5ControlIdentityReadinessPreviewError(
+                "staging receipt unexpectedly reports a canonical G5 write"
+            )
+        if bool(staged_receipt.get("coverage_promoted")):
+            raise G5ControlIdentityReadinessPreviewError(
+                "staging receipt unexpectedly reports coverage promotion"
+            )
+
         staged_fields, staged_rows = _read_csv(staged_g5_only_path)
         required_staged_fields = {
             "historical_symbol",
@@ -121,6 +162,16 @@ def build_preview(
         if missing_staged_fields:
             raise G5ControlIdentityReadinessPreviewError(
                 f"staged G5 identity rows missing columns: {sorted(missing_staged_fields)}"
+            )
+
+        expected_staged_count = int(
+            ((staged_receipt.get("counts") or {}).get(
+                "g5_only_staged_verified_count", -1
+            ))
+        )
+        if expected_staged_count != len(staged_rows):
+            raise G5ControlIdentityReadinessPreviewError(
+                "staged G5 identity row count does not match staging receipt"
             )
 
         for row_no, row in enumerate(staged_rows, 2):
@@ -246,6 +297,10 @@ def build_preview(
             "path": str(staged_g5_only_path),
             "sha256": _sha256(staged_g5_only_path),
         }
+        inputs["staging_receipt"] = {
+            "path": str(staging_receipt_path),
+            "sha256": _sha256(staging_receipt_path),
+        }
 
     summary = {
         "schema_version": SCHEMA_VERSION,
@@ -293,6 +348,7 @@ def main() -> int:
     )
     parser.add_argument("--identity-requirements", type=Path, required=True)
     parser.add_argument("--staged-g5-only", type=Path)
+    parser.add_argument("--staging-receipt", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--summary", type=Path, required=True)
     args = parser.parse_args()
@@ -300,6 +356,7 @@ def main() -> int:
     result = build_preview(
         identity_requirements_path=args.identity_requirements,
         staged_g5_only_path=args.staged_g5_only,
+        staging_receipt_path=args.staging_receipt,
         output_path=args.output,
         summary_path=args.summary,
     )
