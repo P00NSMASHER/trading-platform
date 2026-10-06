@@ -1916,8 +1916,8 @@
       "reason": "G5 identity acquisition activation: reuse the canonical Stocknames adapter and G5 evidence stager in one fail-closed local wrapper for the complete expanded G5 identity queue, with no fetch, purchase, canonical write, coverage promotion, or release claim."
     },
     "src/g5_control_identity_stocknames_lead_expansion.py": {
-      "expected_sha256": "956accb8cdfdd59aa3d7e48de665532ff4f7fbaba6c216b7af7e1d7e09f87062",
-      "reason": "G5 identity acquisition optimization: reuse only already-reconciled symbol-level PERMNO hints as non-evidentiary Stocknames query leads for no-hint dates while preserving exact dated symbol validation and zero readiness promotion."
+      "expected_sha256": "3f6c05e823e440fd35c0a18b82ad0c73b383123ae9fe8ffbea684886fc45f1d0",
+      "reason": "G5 identity acquisition routing now also accepts unique same-symbol SampleFirms PERMNO history as a non-evidence acquisition lead only when stronger date-level or interval-level hints are absent; conflicts fail closed and authorized dated Stocknames validation remains mandatory."
     },
     "src/g5_control_identity_stocknames_request.py": {
       "expected_sha256": "da31f477ac906a8c6fad7d7af03f25841bc3d24b586a316a845645a95de4b879",
@@ -2568,8 +2568,8 @@
       "reason": "Regression coverage for complete and partial authorized Stocknames activation, exact G2/G5 evidence routing, zero canonical promotion, and strict identity-queue scope reconciliation."
     },
     "tests/test_g5_control_identity_stocknames_lead_expansion.py": {
-      "expected_sha256": "123b25f7709235bc18993026ad9cea7918ab0acad7ec2979377db42146917329",
-      "reason": "Regression coverage for exact date-scope conservation, symbol-level PERMNO acquisition leads, direct-hint precedence, conflict rejection, residual symbol discovery, and zero G5 readiness promotion."
+      "expected_sha256": "95e768b6dca79e0157397195a4f7acabea83eaa5dd5bb8a245e1b9ec8872c7cf",
+      "reason": "Regression coverage for same-symbol PERMNO history lead routing, stronger-hint conflict protection, redundant-lead accounting, and real-data residual reduction without identity or release promotion."
     },
     "tests/test_g5_control_identity_stocknames_request.py": {
       "expected_sha256": "c0ebec3e4910b9e7f2ebda115b86660592d515b724a17adcf5e2dc5fcd817748",
