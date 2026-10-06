@@ -183,3 +183,157 @@ def test_rows_without_permno_hint_remain_separate_and_fail_closed(tmp_path: Path
     assert summary["stocknames_ready_request_count"] == 0
     assert summary["no_permno_hint_request_count"] == 1
     assert summary["policy"]["rows_without_permno_hint_fail_closed"] is True
+
+
+def test_symbol_level_permno_lead_can_fill_only_a_no_hint_row(tmp_path: Path):
+    q = tmp_path / "missing.csv"
+    q.write_text(
+        "historical_symbol,trade_date,identity_status,canonical_permno,"
+        "samplefirms_permno,research_use_only\n"
+        "AAA,2015-01-02,NEW_G5_IDENTITY_EVIDENCE_REQUIRED,,,1\n",
+        encoding="utf-8",
+    )
+    lead = tmp_path / "leads.csv"
+    lead.write_text(
+        "request_id,historical_symbol,trade_date,permno,gvkey_hint,lead_source,"
+        "identity_status,research_use_only\n"
+        "G5SIDLEAD-TEST,AAA,2015-01-02,12345,001111,"
+        "SAMPLEFIRMS_SAME_SYMBOL_UNIQUE_PERMNO_HISTORY,"
+        "NEW_G5_IDENTITY_EVIDENCE_REQUIRED,1\n",
+        encoding="utf-8",
+    )
+
+    out = tmp_path / "out"
+    summary = handoff.build(
+        identity_queue_path=q,
+        output_dir=out,
+        symbol_permno_leads_path=lead,
+    )
+
+    ready = list(
+        csv.DictReader(
+            (out / "g5_control_identity_stocknames_ready_queue.csv").open(
+                encoding="utf-8"
+            )
+        )
+    )
+    assert len(ready) == 1
+    assert ready[0]["permno"] == "12345"
+    assert (
+        ready[0]["hint_source"]
+        == "SAMPLEFIRMS_SAME_SYMBOL_UNIQUE_PERMNO_HISTORY_LEAD"
+    )
+    assert summary["symbol_level_permno_lead_request_count"] == 1
+    assert summary["no_permno_hint_request_count"] == 0
+    assert summary["policy"]["symbol_level_permno_lead_is_identity_evidence"] is False
+    assert summary["g5_dates_resolved_change"] == 0
+    assert summary["release_claimed"] is False
+
+
+def test_symbol_level_lead_cannot_override_existing_stronger_hint(tmp_path: Path):
+    q = tmp_path / "hinted.csv"
+    q.write_text(
+        "historical_symbol,trade_date,identity_status,canonical_permno,"
+        "samplefirms_permno,research_use_only\n"
+        "AAA,2015-01-02,OVERLAPS_CANONICAL_G2_IDENTITY_QUEUE,12345,,1\n",
+        encoding="utf-8",
+    )
+    lead = tmp_path / "leads.csv"
+    lead.write_text(
+        "request_id,historical_symbol,trade_date,permno,gvkey_hint,lead_source,"
+        "identity_status,research_use_only\n"
+        "G5SIDLEAD-TEST,AAA,2015-01-02,12345,001111,"
+        "SAMPLEFIRMS_SAME_SYMBOL_UNIQUE_PERMNO_HISTORY,"
+        "OVERLAPS_CANONICAL_G2_IDENTITY_QUEUE,1\n",
+        encoding="utf-8",
+    )
+
+    try:
+        handoff.build(
+            identity_queue_path=q,
+            output_dir=tmp_path / "out",
+            symbol_permno_leads_path=lead,
+        )
+    except ValueError as exc:
+        assert "out of scope for already-hinted row" in str(exc)
+    else:
+        raise AssertionError("expected stronger-hint protection")
+
+
+def test_real_symbol_permno_leads_reduce_no_hint_stocknames_queue(tmp_path: Path):
+    control_dir = tmp_path / "controls"
+    history_dir = tmp_path / "history"
+    identity_dir = tmp_path / "identity"
+    leads_dir = tmp_path / "leads"
+    baseline_dir = tmp_path / "baseline"
+    enriched_dir = tmp_path / "enriched"
+
+    acquisition.build(
+        events_path=ROOT / "data/processed/historical_events.csv",
+        requirements_path=(
+            ROOT / "data/processed/coverage_plan_real/source_date_requirements.csv"
+        ),
+        planning_universe_path=(
+            ROOT / "data/raw/hacked_earnings_jfe/SampleFirms.csv"
+        ),
+        output_dir=control_dir,
+    )
+    history.build(
+        candidate_path=control_dir / "g5_primary_candidate_symbol_dates.csv",
+        output_dir=history_dir,
+        frozen_requirements_path=(
+            ROOT / "data/processed/coverage_plan_real/source_date_requirements.csv"
+        ),
+    )
+    identity.build(
+        control_history_path=(
+            history_dir / "g5_control_history_symbol_date_requirements.csv"
+        ),
+        primary_candidates_path=(
+            control_dir / "g5_primary_candidate_symbol_dates.csv"
+        ),
+        samplefirms_path=(
+            ROOT / "data/raw/hacked_earnings_jfe/SampleFirms.csv"
+        ),
+        canonical_g2_identity_manifest_path=(
+            ROOT
+            / "data/processed/security_identity_real/security_identity_manifest.json"
+        ),
+        output_dir=identity_dir,
+    )
+    identity_queue = identity_dir / "g5_control_identity_acquisition_queue.csv"
+
+    baseline = handoff.build(
+        identity_queue_path=identity_queue,
+        output_dir=baseline_dir,
+    )
+    lead_summary = symbol_leads.build(
+        identity_queue_path=identity_queue,
+        samplefirms_path=ROOT / "data/raw/hacked_earnings_jfe/SampleFirms.csv",
+        output_dir=leads_dir,
+    )
+    enriched = handoff.build(
+        identity_queue_path=identity_queue,
+        output_dir=enriched_dir,
+        symbol_permno_leads_path=(
+            leads_dir / "g5_control_identity_symbol_permno_leads.csv"
+        ),
+    )
+
+    assert lead_summary["symbol_level_permno_lead_count"] > 0
+    assert enriched["symbol_level_permno_lead_request_count"] == (
+        lead_summary["symbol_level_permno_lead_count"]
+    )
+    assert enriched["stocknames_ready_request_count"] > (
+        baseline["stocknames_ready_request_count"]
+    )
+    assert enriched["no_permno_hint_request_count"] < (
+        baseline["no_permno_hint_request_count"]
+    )
+    assert (
+        enriched["stocknames_ready_request_count"]
+        + enriched["no_permno_hint_request_count"]
+        == enriched["identity_queue_count"]
+    )
+    assert enriched["g5_dates_resolved_change"] == 0
+    assert enriched["release_claimed"] is False
