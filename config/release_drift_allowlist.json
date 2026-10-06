@@ -1979,6 +1979,14 @@
       "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",
       "reason": "G5 residual structural planning: fill only remaining candidate slots from strictly prior symbol observations, with retrospective labels ignored and all rows kept ineligible until date-specific identity, real four-kind market data, and pre-event metadata are proven."
     },
+    "src/g5_sec_13f_ownership.py": {
+      "expected_sha256": "db33cecdbdd2fe142a151ca50fe1e8740672ac22a998db0f82b9d2d4c9ea27d5",
+      "reason": "Public SEC 13F ownership acquisition using exact historical CUSIP identity, initial 13F-HR filings only, conservative filing-date availability, common-share holdings only, pre-cutoff shares-outstanding denominators, and fail-closed ownership ratios."
+    },
+    "src/g5_sec_sic_classification.py": {
+      "expected_sha256": "1e7d7933f081d4defa169c69ae75f5f95b56650275dcc2cd5232ce9d64ea5df0",
+      "reason": "Public SEC EDGAR SIC acquisition for G5 classification using explicit historical CIK mappings, archival filing-header acceptance clocks, fail-closed pre-cutoff checks, namespaced SIC-division sector values, and no index/readiness fabrication."
+    },
     "src/g5_staged_readiness_preview.py": {
       "expected_sha256": "5cae6770ae9872536a5ceae5eaff69ae15e9cc33a5c0234aa4d2a0a37f5ff7b7",
       "reason": "G5 staged-readiness preview: fuse normalized control metadata across files using latest pre-cutoff values, fail closed on equal-timestamp conflicts and unknown candidates, and report completeness without changing canonical G5 readiness."
@@ -2646,6 +2654,14 @@
     "tests/test_g5_prior_fallback_planner.py": {
       "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
       "reason": "Regression coverage locks the final structural planning slot to deterministic prior-only candidate ADBE from a 2014-12-11 observation for the 2014-12-15 gap and proves future-only symbols are never selected."
+    },
+    "tests/test_g5_sec_13f_ownership.py": {
+      "expected_sha256": "3a2f4b95b2e13df919d5b2bff52b897d91de703c848871e7a1c92dfa624b342b",
+      "reason": "Regression coverage for SEC 13F ownership fractions, SEC flat-file dates, exact CUSIP mapping, amendment/same-day exclusion, option and principal-amount filtering, denominator cutoffs, and canonical ownership-adapter compatibility."
+    },
+    "tests/test_g5_sec_sic_classification.py": {
+      "expected_sha256": "a082d55254d0dffe387fc83a4510d9ba4f9bd67a3502422f53dbffe1b6e6d0b4",
+      "reason": "Regression coverage for SEC SIC pre-cutoff classification, Eastern-time EDGAR acceptance handling, older submission-file traversal, missing/conflicting historical CIK mappings, deterministic SIC divisions, and canonical external-adapter compatibility."
     },
     "tests/test_g5_staged_readiness_preview.py": {
       "expected_sha256": "727734d5d4cb77ae4a18a350f416a464749d417ae1d17da6f01f7d800e7e5577",
