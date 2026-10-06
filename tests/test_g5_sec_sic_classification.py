@@ -54,7 +54,7 @@ def _filing_text(*, accepted: str, sic: str) -> str:
 def test_pre_cutoff_sec_sic_is_namespaced_and_adapter_compatible(tmp_path: Path):
     targets = _targets(
         tmp_path,
-        "2015-01-05,AAA,2015-01-05T18:00:00Z,1\n",
+        "2015-01-05,AAA,2015-01-05T23:00:00Z,1\n",
     )
     cik_map = _cik_map(
         tmp_path,
@@ -119,7 +119,7 @@ def test_pre_cutoff_sec_sic_is_namespaced_and_adapter_compatible(tmp_path: Path)
 def test_same_day_post_cutoff_filing_is_rejected_for_earlier_filing(tmp_path: Path):
     targets = _targets(
         tmp_path,
-        "2015-01-05,AAA,2015-01-05T18:00:00Z,1\n",
+        "2015-01-05,AAA,2015-01-05T22:00:00Z,1\n",
     )
     cik_map = _cik_map(tmp_path, "AAA,12345,,\n")
     newer = "0000012345-15-000002"
