@@ -6,6 +6,7 @@ on:
       - research/hacked-earnings-deep-extraction-20261005
     paths:
       - scripts/hacked_earnings_deep_research.py
+      - scripts/hacked_earnings_deep_analysis.py
       - .github/workflows/hacked-earnings-deep-research.yml
 
 permissions:
@@ -24,6 +25,7 @@ jobs:
       contents: write
     env:
       NLTK_DATA: /tmp/hacked-earnings-nltk
+      RESEARCH_OUTPUT: /tmp/hacked-earnings-deep-output
     steps:
       - name: Checkout exact research commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -40,13 +42,15 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check 'numpy==1.26.4' 'pyarrow==17.0.0' 'nltk==3.9.1'
           python -m nltk.downloader -d "$NLTK_DATA" stopwords
-          mkdir -p data/processed/hacked_earnings_deep
-          python -m pip freeze > data/processed/hacked_earnings_deep/requirements-runtime.txt
+          mkdir -p "$RESEARCH_OUTPUT"
+          python -m pip freeze > "$RESEARCH_OUTPUT/requirements-runtime.txt"
       - name: Verify source hashes and extract all six archives
         run: |
-          python scripts/hacked_earnings_deep_research.py --download
-          cat data/processed/hacked_earnings_deep/REPORT.md >> "$GITHUB_STEP_SUMMARY"
-      - name: Save derived research only to the unchanged feature branch
+          python scripts/hacked_earnings_deep_research.py --download --output "$RESEARCH_OUTPUT"
+          cat "$RESEARCH_OUTPUT/REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Reconstruct all scores and independently validate duplicate and control groups
+        run: python scripts/hacked_earnings_deep_analysis.py --input "$RESEARCH_OUTPUT"
+      - name: Save validated derived research only to the unchanged feature branch
         env:
           EXPECTED_HEAD: ${{ github.sha }}
           RESEARCH_BRANCH: research/hacked-earnings-deep-extraction-20261005
@@ -54,11 +58,13 @@ jobs:
           set -euo pipefail
           git fetch origin "$RESEARCH_BRANCH"
           test "$(git rev-parse FETCH_HEAD)" = "$EXPECTED_HEAD"
+          mkdir -p data/processed/hacked_earnings_deep
+          cp -a "$RESEARCH_OUTPUT/." data/processed/hacked_earnings_deep/
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- data/processed/hacked_earnings_deep
           if ! git diff --cached --quiet; then
-            git commit -m 'Record pinned-source deeper text research results; no canonical coverage credit'
+            git commit -m 'Record source-model reconstruction and duplicate/control validation; no canonical coverage credit'
             git push origin "HEAD:refs/heads/$RESEARCH_BRANCH"
           fi
       - name: Preserve derived research artifact
@@ -66,6 +72,6 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: hacked-earnings-deep-${{ github.sha }}
-          path: data/processed/hacked_earnings_deep
+          path: /tmp/hacked-earnings-deep-output
           if-no-files-found: warn
           retention-days: 1
