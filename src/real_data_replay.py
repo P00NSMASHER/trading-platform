@@ -11,6 +11,7 @@ import baseline_engine as baseline
 import coverage_planner as coverage_planner
 import evaluation_release_controller as release_controller
 import feature_engine as feature_engine
+import g5_control_identity_gate as g5_control_identity
 import g5_match_quality_gate as g5_match_quality
 import g5_matching_metadata_materializer as g5_matching_metadata
 import graph_challenger_harness as challenger_harness
@@ -287,6 +288,99 @@ def run_replay(
         if materialized_ready:
             control_metadata = materialized_dir / "matcher_metadata.csv"
 
+    g5_control_identity_spec = cfg.get("g5_control_identity")
+    g5_control_identity_ready = False
+    g5_control_identity_inputs: dict[str, Any] | None = None
+    g5_identity_requirements: Path | None = None
+    g5_canonical_g2_identity_manifest: Path | None = None
+    g5_only_staged_identity: Path | None = None
+    g5_identity_staging_receipt: Path | None = None
+
+    if g5_control_identity_spec is not None:
+        if not isinstance(g5_control_identity_spec, dict):
+            raise ValueError("g5_control_identity must be an object")
+        g5_identity_requirements = _require_file(
+            _resolve_config_path(
+                g5_control_identity_spec.get("identity_requirements"),
+                config_path=config_path,
+            ),
+            "G5 identity requirements",
+        )
+        g5_canonical_g2_identity_manifest = _require_file(
+            _resolve_config_path(
+                g5_control_identity_spec.get("canonical_g2_identity_manifest"),
+                config_path=config_path,
+            ),
+            "G5 canonical G2 identity manifest",
+        )
+        g5_only_staged_identity = _require_file(
+            _resolve_config_path(
+                g5_control_identity_spec.get("g5_only_staged_identity"),
+                config_path=config_path,
+            ),
+            "G5-only staged identity",
+        )
+        g5_identity_staging_receipt = _require_file(
+            _resolve_config_path(
+                g5_control_identity_spec.get("g5_identity_staging_receipt"),
+                config_path=config_path,
+            ),
+            "G5 identity staging receipt",
+        )
+        identity_gate_dir = output_dir / "g5_control_identity"
+        identity_gate_result = g5_control_identity.build(
+            identity_requirements_path=g5_identity_requirements,
+            canonical_g2_identity_manifest_path=g5_canonical_g2_identity_manifest,
+            g5_only_staged_verified_path=g5_only_staged_identity,
+            g5_staging_receipt_path=g5_identity_staging_receipt,
+            output_path=identity_gate_dir / "g5_control_identity_gate.json",
+        )
+        identity_state = identity_gate_result.get("state") or {}
+        g5_control_identity_ready = bool(
+            identity_gate_result.get("ready_for_g5_control_identity")
+        )
+        stages["g5_control_identity"] = _stage(
+            "READY" if g5_control_identity_ready else "BLOCKED",
+            required_symbol_date_count=identity_state.get(
+                "required_symbol_date_count"
+            ),
+            verified_symbol_date_count=identity_state.get(
+                "verified_symbol_date_count"
+            ),
+            unresolved_symbol_date_count=identity_state.get(
+                "unresolved_symbol_date_count"
+            ),
+            canonical_g2_overlap_verified_count=identity_state.get(
+                "canonical_g2_overlap_verified_count"
+            ),
+            g5_only_verified_count=identity_state.get(
+                "g5_only_verified_count"
+            ),
+        )
+        g5_control_identity_inputs = {
+            "identity_requirements": {
+                "path": str(g5_identity_requirements),
+                "sha256": _sha256(g5_identity_requirements),
+            },
+            "canonical_g2_identity_manifest": {
+                "path": str(g5_canonical_g2_identity_manifest),
+                "sha256": _sha256(g5_canonical_g2_identity_manifest),
+            },
+            "g5_only_staged_identity": {
+                "path": str(g5_only_staged_identity),
+                "sha256": _sha256(g5_only_staged_identity),
+            },
+            "g5_identity_staging_receipt": {
+                "path": str(g5_identity_staging_receipt),
+                "sha256": _sha256(g5_identity_staging_receipt),
+            },
+        }
+    else:
+        stages["g5_control_identity"] = _stage(
+            "DEPENDENCY_BLOCKED",
+            reason="g5_control_identity_not_supplied",
+        )
+
     # 1) Recompute exact required market coverage against whatever provider
     # contracts are supplied. No vendor-specific orchestration is embedded here.
     coverage_dir = output_dir / "coverage"
@@ -479,6 +573,7 @@ def run_replay(
         and bool(readiness.get("ready_g1_exact_timing_analysis"))
         and bool(readiness.get("ready_g5_model_evaluation_controls"))
         and bool(quality.get("quality_cleared_for_non_synthetic_model_evaluation"))
+        and g5_control_identity_ready
         and match_manifest is not None
         and match_quality_ready
         and graph_manifest is not None
@@ -509,6 +604,10 @@ def run_replay(
             match_events=output_dir / "matches" / "match_events.csv",
             match_balance=output_dir / "matches" / "match_balance.csv",
             match_manifest=output_dir / "matches" / "match_manifest.json",
+            g5_identity_requirements=g5_identity_requirements,
+            g5_canonical_g2_identity_manifest=g5_canonical_g2_identity_manifest,
+            g5_only_staged_identity=g5_only_staged_identity,
+            g5_identity_staging_receipt=g5_identity_staging_receipt,
             base_features=output_dir / "features" / "feature_vectors.csv",
             graph_features=output_dir / "graph_features" / "graph_feature_vectors.csv",
             champion_bundle=champion_bundle,
@@ -554,6 +653,7 @@ def run_replay(
                 if control_metadata is not None and control_metadata.exists() else None
             ),
             "g5_matching_metadata": g5_matching_inputs,
+            "g5_control_identity": g5_control_identity_inputs,
         },
         "shares_materialization": {
             **shares,
