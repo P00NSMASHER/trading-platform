@@ -16,7 +16,9 @@ import g5_control_identity_readiness_preview as identity_readiness
 import g5_control_market_vendor_bridge as market_bridge
 import g5_control_shares_reconciliation as control_shares
 import g5_external_source_queue as external_queue
+import g5_external_source_request_compressor as external_compression
 import g5_treated_metadata_requirements as treated_plan
+import g5_treated_external_source_request_compressor as treated_external_compression
 
 SCHEMA_VERSION = "1"
 DEFAULT_CANONICAL_G4_SHARES = Path(
@@ -48,6 +50,8 @@ def build(
     treated_dir = output_dir / "treated"
     history_dir = output_dir / "control_history"
     external_dir = output_dir / "control_external_sources"
+    external_compressed_dir = output_dir / "control_external_compressed"
+    treated_external_compressed_dir = output_dir / "treated_external_compressed"
     identity_dir = output_dir / "control_identity"
     identity_interval_dir = output_dir / "control_identity_intervals"
     identity_lead_dir = output_dir / "control_identity_stocknames_leads"
@@ -75,6 +79,16 @@ def build(
     external = external_queue.build(
         candidate_path=control_dir / "g5_primary_candidate_symbol_dates.csv",
         output_dir=external_dir,
+    )
+    external_compressed = external_compression.build(
+        external_request_path=external_dir / "g5_external_source_requests.csv",
+        output_dir=external_compressed_dir,
+    )
+    treated_external_compressed = treated_external_compression.build(
+        treated_external_request_path=(
+            treated_dir / "g5_treated_external_lane_requests.csv"
+        ),
+        output_dir=treated_external_compressed_dir,
     )
     identity = control_identity.build(
         control_history_path=(
@@ -215,6 +229,12 @@ def build(
     treated_external = int(treated["treated_external_field_requirement_count"])
     control_lanes = int(external["lane_request_count"])
     treated_lanes = int(treated["treated_external_lane_request_count"])
+    control_compressed_lanes = int(
+        external_compressed["compressed_lane_symbol_request_count"]
+    )
+    treated_compressed_lanes = int(
+        treated_external_compressed["compressed_lane_symbol_request_count"]
+    )
 
     if control_targets != 216:
         raise ValueError(
@@ -228,6 +248,32 @@ def build(
         raise ValueError("primary control queue does not cover all 72 event dates")
     if control["residual_unfilled_symbol_date_slots"] != 0:
         raise ValueError("control acquisition plan still has structural gaps")
+    if int(external_compressed["date_level_request_count"]) != control_lanes:
+        raise ValueError(
+            "control external compression does not match the original lane queue"
+        )
+    if int(
+        external_compressed["exact_request_point_count_reconciled"]
+    ) != control_lanes:
+        raise ValueError(
+            "control external compression lost or duplicated request points"
+        )
+    if int(
+        treated_external_compressed["date_level_request_count"]
+    ) != treated_lanes:
+        raise ValueError(
+            "treated external compression does not match the original lane queue"
+        )
+    if int(
+        treated_external_compressed["exact_request_point_count_reconciled"]
+    ) != treated_lanes:
+        raise ValueError(
+            "treated external compression lost or duplicated request points"
+        )
+    if control_compressed_lanes > control_lanes:
+        raise ValueError("control external compression increased request count")
+    if treated_compressed_lanes > treated_lanes:
+        raise ValueError("treated external compression increased request count")
     if int(intervals["date_level_identity_requirement_count"]) != int(
         identity["identity_acquisition_queue_count"]
     ):
@@ -289,6 +335,42 @@ def build(
         "control_external_lane_request_count": control_lanes,
         "treated_external_lane_request_count": treated_lanes,
         "total_external_lane_request_count": control_lanes + treated_lanes,
+        "external_request_compression": {
+            "control_date_level_request_count": control_lanes,
+            "control_compressed_request_count": control_compressed_lanes,
+            "control_request_reduction_count": (
+                control_lanes - control_compressed_lanes
+            ),
+            "treated_date_level_request_count": treated_lanes,
+            "treated_compressed_request_count": treated_compressed_lanes,
+            "treated_request_reduction_count": (
+                treated_lanes - treated_compressed_lanes
+            ),
+            "total_date_level_request_count": control_lanes + treated_lanes,
+            "total_compressed_request_count": (
+                control_compressed_lanes + treated_compressed_lanes
+            ),
+            "total_request_reduction_count": (
+                control_lanes
+                + treated_lanes
+                - control_compressed_lanes
+                - treated_compressed_lanes
+            ),
+            "exact_request_point_count_reconciled": (
+                int(external_compressed["exact_request_point_count_reconciled"])
+                + int(
+                    treated_external_compressed[
+                        "exact_request_point_count_reconciled"
+                    ]
+                )
+            ),
+            "control_lane_compressed_counts": external_compressed[
+                "lane_compressed_counts"
+            ],
+            "treated_lane_compressed_counts": treated_external_compressed[
+                "lane_compressed_counts"
+            ],
+        },
         "control_identity": {
             "history_symbol_date_count": int(
                 identity["control_history_symbol_date_count"]
@@ -462,6 +544,8 @@ def build(
             "treated": str(treated_dir),
             "control_history": str(history_dir),
             "control_external_sources": str(external_dir),
+            "control_external_compressed": str(external_compressed_dir),
+            "treated_external_compressed": str(treated_external_compressed_dir),
             "control_identity": str(identity_dir),
             "control_identity_intervals": str(identity_interval_dir),
             "control_identity_stocknames_leads": str(identity_lead_dir),
