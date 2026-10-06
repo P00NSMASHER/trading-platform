@@ -43,7 +43,62 @@ def _request_id(symbol: str, trade_date: str, permno: str) -> str:
     return "G5SID-" + hashlib.sha256(raw).hexdigest()[:16].upper()
 
 
-def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
+def _load_symbol_permno_leads(
+    path: Path | None,
+) -> dict[tuple[str, str], dict[str, str]]:
+    if path is None:
+        return {}
+
+    fields, rows = _read_csv(path)
+    required = {
+        "historical_symbol",
+        "trade_date",
+        "permno",
+        "lead_source",
+        "research_use_only",
+    }
+    missing = required.difference(fields)
+    if missing:
+        raise ValueError(
+            f"symbol PERMNO lead file missing columns: {sorted(missing)}"
+        )
+
+    out: dict[tuple[str, str], dict[str, str]] = {}
+    for row_no, row in enumerate(rows, 2):
+        symbol = row["historical_symbol"].upper()
+        trade_date = row["trade_date"][:10]
+        permno = row["permno"]
+        if not symbol or not trade_date or not permno:
+            raise ValueError(
+                f"symbol PERMNO lead row {row_no}: symbol/date/PERMNO required"
+            )
+        if row["research_use_only"] != "1":
+            raise ValueError(
+                f"symbol PERMNO lead row {row_no}: research_use_only must equal 1"
+            )
+        if row["lead_source"] != "SAMPLEFIRMS_SAME_SYMBOL_UNIQUE_PERMNO_HISTORY":
+            raise ValueError(
+                f"symbol PERMNO lead row {row_no}: unexpected lead_source"
+            )
+        key = (symbol, trade_date)
+        if key in out:
+            raise ValueError(
+                f"duplicate symbol PERMNO lead: {symbol}|{trade_date}"
+            )
+
+        normalized = dict(row)
+        normalized["historical_symbol"] = symbol
+        normalized["trade_date"] = trade_date
+        out[key] = normalized
+    return out
+
+
+def build(
+    *,
+    identity_queue_path: Path,
+    output_dir: Path,
+    symbol_permno_leads_path: Path | None = None,
+) -> dict:
     fields, rows = _read_csv(identity_queue_path)
     required = {
         "historical_symbol",
@@ -59,9 +114,11 @@ def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
     if not rows:
         raise ValueError("identity queue is empty")
 
+    symbol_leads = _load_symbol_permno_leads(symbol_permno_leads_path)
     ready: list[dict[str, str]] = []
     no_hint: list[dict[str, str]] = []
     seen: set[tuple[str, str]] = set()
+    consumed_symbol_leads: set[tuple[str, str]] = set()
 
     for row_no, row in enumerate(rows, 2):
         symbol = row["historical_symbol"].upper()
@@ -76,6 +133,7 @@ def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
             raise ValueError(
                 f"identity row {row_no}: research_use_only must equal 1"
             )
+
         key = (symbol, trade_date)
         if key in seen:
             raise ValueError(
@@ -92,7 +150,7 @@ def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
         symbol_lead = symbol_leads.get(key)
         if symbol_lead is not None and (canonical or sample):
             raise ValueError(
-                f"symbol-level PERMNO lead is out of scope for already-hinted row "
+                "symbol-level PERMNO lead is out of scope for already-hinted row "
                 f"{symbol}|{trade_date}"
             )
 
@@ -110,6 +168,7 @@ def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
         if not permno:
             no_hint.append(dict(row))
             continue
+
         ready.append(
             {
                 "request_id": _request_id(symbol, trade_date, permno),
@@ -120,6 +179,16 @@ def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
                 "identity_status": row["identity_status"],
                 "research_use_only": "1",
             }
+        )
+
+    unused_symbol_leads = sorted(set(symbol_leads) - consumed_symbol_leads)
+    if unused_symbol_leads:
+        sample = ", ".join(
+            f"{symbol}|{trade_date}"
+            for symbol, trade_date in unused_symbol_leads[:5]
+        )
+        raise ValueError(
+            f"symbol-level PERMNO leads do not match eligible no-hint rows: {sample}"
         )
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -145,8 +214,9 @@ def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
         "purpose": (
             "Convert unresolved G5 control identity rows with a known PERMNO hint "
             "into the exact queue schema consumed by the existing authorized "
-            "stocknames stable-ID adapter. Rows without a PERMNO hint remain "
-            "separately fail-closed."
+            "stocknames stable-ID adapter. Optional same-symbol PERMNO history "
+            "leads may fill only otherwise no-hint rows, and remain non-evidence "
+            "until dated Stocknames validation succeeds."
         ),
         "research_use_only": True,
         "identity_queue_count": len(rows),
@@ -213,7 +283,16 @@ def main() -> int:
     )
     parser.add_argument("--identity-queue", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--symbol-permno-leads",
+        type=Path,
+        help=(
+            "Optional non-evidence same-symbol PERMNO lead file produced by "
+            "g5_control_identity_symbol_permno_leads."
+        ),
+    )
     args = parser.parse_args()
+
     result = build(
         identity_queue_path=args.identity_queue,
         output_dir=args.output_dir,
