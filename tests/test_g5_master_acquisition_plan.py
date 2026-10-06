@@ -59,6 +59,19 @@ def test_real_master_plan_has_complete_structural_scope(tmp_path: Path):
     assert summary["treated_external_lane_request_count"] == 696
     assert summary["total_external_lane_request_count"] == 1560
 
+    external_packet = summary["external_acquisition_packet"]
+    assert external_packet["control_lane_request_count"] == 864
+    assert external_packet["treated_lane_request_count"] == 696
+    assert external_packet["total_lane_request_count"] == 1560
+    assert external_packet["external_field_requirement_count"] == 1950
+    assert 0 < external_packet["grouped_lane_symbol_batch_count"] < 1560
+    assert external_packet["lane_counts"] == {
+        "classification": 390,
+        "ownership": 390,
+        "analyst": 390,
+        "borrow": 390,
+    }
+
     identity = summary["control_identity"]
     assert identity["history_symbol_date_count"] == (
         summary["control_history"]["unique_symbol_date_pairs"]
@@ -183,6 +196,14 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     assert (
         tmp_path
         / "control_identity/g5_control_identity_requirements.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "external_acquisition_packet/g5_external_acquisition_requests.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "external_acquisition_packet/g5_external_acquisition_batches.csv"
     ).exists()
     assert (
         tmp_path
