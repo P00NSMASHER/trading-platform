@@ -355,7 +355,7 @@ def run(cache: Path, features_path: Path, repo_root: Path, output: Path) -> dict
             "No synthetic market fixture is used to infer return performance.",
         ],
     }
-    (output / "summary.json").write_text(json.dumps(summary, indent=2, allow_nan=False) + "\\n", encoding="utf-8")
+    (output / "summary.json").write_text(json.dumps(summary, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
     def row_for(pool, model):
         return pooled_df[
@@ -417,7 +417,7 @@ def run(cache: Path, features_path: Path, repo_root: Path, output: Path) -> dict
         "- summary.json: machine-readable experiment receipt.",
         "",
     ]
-    (output / "REPORT.md").write_text("\\n".join(report), encoding="utf-8")
+    (output / "REPORT.md").write_text("\n".join(report), encoding="utf-8")
     return summary
 
 
