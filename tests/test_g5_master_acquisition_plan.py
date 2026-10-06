@@ -62,9 +62,17 @@ def test_real_master_plan_has_complete_structural_scope(tmp_path: Path):
     compression = summary["external_request_compression"]
     assert compression["control_date_level_request_count"] == 864
     assert compression["control_compressed_request_count"] < 864
+    assert 0 < compression["control_unique_symbol_count"] <= 216
+    assert compression["control_compressed_request_count"] == (
+        compression["control_unique_symbol_count"] * 4
+    )
     assert compression["control_request_reduction_count"] > 0
     assert compression["treated_date_level_request_count"] == 696
     assert compression["treated_compressed_request_count"] == 584
+    assert compression["treated_unique_symbol_count"] == 146
+    assert compression["treated_compressed_request_count"] == (
+        compression["treated_unique_symbol_count"] * 4
+    )
     assert compression["treated_request_reduction_count"] == 112
     assert compression["total_date_level_request_count"] == 1560
     assert compression["total_compressed_request_count"] == (
