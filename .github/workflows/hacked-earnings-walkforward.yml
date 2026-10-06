@@ -29,10 +29,9 @@ jobs:
       EXPERIMENT_OUTPUT: /tmp/hacked-earnings-walkforward
       RESEARCH_BRANCH: research/hacked-earnings-walkforward-actual-20261006
     steps:
-      - name: Checkout exact research commit
+      - name: Checkout triggering commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: \${{ github.sha }}
           fetch-depth: 1
 
       - name: Set up Python
@@ -86,10 +85,9 @@ jobs:
           PY
 
       - name: Save results to unchanged research branch
-        env:
-          EXPECTED_HEAD: \${{ github.sha }}
         run: |
           set -euo pipefail
+          EXPECTED_HEAD="$GITHUB_SHA"
           git fetch origin "$RESEARCH_BRANCH"
           test "$(git rev-parse FETCH_HEAD)" = "$EXPECTED_HEAD"
           mkdir -p data/processed/hacked_earnings_walkforward
@@ -107,7 +105,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
-          name: hacked-earnings-walkforward-\${{ github.sha }}
+          name: hacked-earnings-walkforward
           path: /tmp/hacked-earnings-walkforward
           if-no-files-found: warn
           retention-days: 7
