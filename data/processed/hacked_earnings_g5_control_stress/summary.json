@@ -1,0 +1,77 @@
+{
+  "status": "CANONICAL_G5_BLOCKED_PROXY_SENSITIVITY_COMPLETED",
+  "canonical_g5": {
+    "required_event_dates": 72,
+    "point_in_time_resolved_dates": 0,
+    "model_evaluation_eligible_dates": 0,
+    "reviewed_excluded_dates": 72,
+    "strict_g5_text_score_test_executed": false,
+    "reason": "No canonical G5-quality matched-control date is model-evaluation eligible.",
+    "required_covariates": [
+      "sector",
+      "index_bucket",
+      "market_cap",
+      "price",
+      "volatility_21d",
+      "normal_volume",
+      "normal_turnover",
+      "normal_spread",
+      "options_liquidity",
+      "institutional_ownership",
+      "analyst_coverage"
+    ]
+  },
+  "proxy_sensitivity": {
+    "label": "PRE_G5_SOURCE_DERIVED_SENSITIVITY_NOT_CANONICAL_G5",
+    "earlier_only_scored_core_events": 144,
+    "events_with_any_scored_same_date_control": 143,
+    "proxy_matchable_events": 31,
+    "controls_per_event": 3,
+    "matched_control_rows": 93,
+    "exact_same_release_date_required": true,
+    "same_issuer_controls_excluded": true,
+    "max_component_z": 2.5,
+    "hard_abs_smd_limit": 0.2,
+    "max_abs_smd_observed": 0.06603176969295513,
+    "covariates": [
+      "prior_actual_rate",
+      "prior_hacked_rate",
+      "prior_n",
+      "prior_text_chars_mean",
+      "prior_jaccard_mean",
+      "last_text_chars",
+      "last_jaccard"
+    ],
+    "covered_dimensions": [
+      "reporting_style_history",
+      "retrospective_issuer_propensity",
+      "issuer_release_history_depth",
+      "exact_calendar_date"
+    ],
+    "uncovered_requested_dimensions": [
+      "canonical_point_in_time_industry",
+      "market_cap_size",
+      "market_liquidity",
+      "pre_event_market_behavior"
+    ],
+    "mean_treated_minus_control_score": 0.0037332355222296494,
+    "median_treated_minus_control_score": 0.0008603971882278037,
+    "pairwise_treated_score_win_rate": 0.6021505376344086,
+    "treated_highest_in_four_count": 14,
+    "treated_highest_in_four_rate": 0.45161290322580644,
+    "treated_highest_null_rate": 0.25,
+    "treated_highest_binomial_p_one_sided": 0.011532804243499114,
+    "randomization_reps": 20000,
+    "matched_set_randomization_p_one_sided": 0.0039998000099995,
+    "wilcoxon_statistic": 341.0,
+    "wilcoxon_p_one_sided": 0.034740681294351816
+  },
+  "interpretation": "The earlier-only text score remains higher for the treated first-trade events in a small, aggressively balanced source-derived subset, but canonical G5 industry/size/liquidity/market-history balance cannot yet be tested because the project has zero model-evaluation-eligible G5 dates.",
+  "prohibited_claims": [
+    "canonical_G5_validation",
+    "causal_effect",
+    "trading_profitability",
+    "return_prediction",
+    "live_signal"
+  ]
+}
