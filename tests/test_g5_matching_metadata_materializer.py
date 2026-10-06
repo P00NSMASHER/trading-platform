@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import sys
+from datetime import datetime
 from pathlib import Path
 
 import pytest
@@ -10,7 +11,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 import g5_matching_metadata_materializer as materializer
-from matched_control_generator import DEFAULT_NUMERIC_COVARIATES, load_metadata
+from matched_control_generator import (
+    DEFAULT_NUMERIC_COVARIATES,
+    latest_metadata,
+    load_metadata,
+)
 from metadata_resolver import CONTROL_COVARIATES
 
 
@@ -169,6 +174,34 @@ def test_complete_sources_materialize_exact_matcher_input(tmp_path: Path):
         tuple(DEFAULT_NUMERIC_COVARIATES),
     )
     assert set(loaded) == {"TRT", "C1", "C2", "C3"}
+
+
+def test_matcher_respects_materialized_event_date_scope(tmp_path: Path):
+    summary = _build(tmp_path)
+    assert summary["matcher_input_ready"] is True
+
+    loaded = load_metadata(
+        tmp_path / "matcher_metadata.csv",
+        tuple(DEFAULT_NUMERIC_COVARIATES),
+    )
+    later_asof = datetime.fromisoformat("2015-02-18T20:00:00+00:00")
+
+    same_date = latest_metadata(
+        loaded,
+        "C1",
+        later_asof,
+        event_date="2015-02-17",
+    )
+    wrong_date = latest_metadata(
+        loaded,
+        "C1",
+        later_asof,
+        event_date="2015-02-18",
+    )
+
+    assert same_date is not None
+    assert same_date["_event_date_scope"] == "2015-02-17"
+    assert wrong_date is None
 
 
 def test_missing_field_omits_target_and_keeps_date_fail_closed(tmp_path: Path):

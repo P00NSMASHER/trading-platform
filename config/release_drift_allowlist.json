@@ -108,6 +108,10 @@
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
+    },
+    "src/matched_control_generator.py": {
+      "expected_sha256": "4ed28d928007b9c47b5b7ed18aa03b6287c7a2760b7b9e150b0198fdaee1bb03",
+      "reason": "G5 matcher scope hardening: honor optional event_date-scoped point-in-time metadata so controls materialized for one event date cannot leak into another date, while preserving legacy unscoped metadata behavior."
     }
   },
   "repository_additions": {
@@ -2688,8 +2692,8 @@
       "reason": "G5 matcher-input materialization: fuse latest admissible point-in-time covariates across normalized treated/control sources, emit only complete rows directly consumable by the matcher, and keep incomplete/conflicted targets in an exact fail-closed gap receipt."
     },
     "tests/test_g5_matching_metadata_materializer.py": {
-      "expected_sha256": "5ce7e1cff1a836315b571b4ed55e4ddff6cba75d45fe71b6cf06fbb7caec918a",
-      "reason": "Regression coverage for exact treated/control target scoping, all-13-covariate completeness, matcher compatibility, missing-field fail-closed behavior, equal-timestamp conflicts, later-value replacement, cutoff enforcement, unknown-target rejection, and treated/control collision rejection."
+      "expected_sha256": "3f52298f0739e905a00b90476f507103910b00b8f72c76874337206ee2f67d3e",
+      "reason": "Regression coverage for exact treated/control target scoping, all-13-covariate completeness, matcher compatibility, cross-date metadata-scope isolation, missing-field fail-closed behavior, equal-timestamp conflicts, later-value replacement, cutoff enforcement, unknown-target rejection, and treated/control collision rejection."
     }
   },
   "schema_version": "2",
