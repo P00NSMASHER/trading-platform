@@ -1,0 +1,60 @@
+name: hacked-earnings exhaustive audit
+
+on:
+  push:
+    branches:
+      - audit/hacked-earnings-jfe-every-byte-20261006
+    paths:
+      - scripts/audit_hacked_earnings_jfe_exhaustive.py
+      - .github/workflows/hacked-earnings-exhaustive-audit.yml
+
+permissions:
+  contents: read
+
+jobs:
+  exhaustive-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out trading platform
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install format readers
+        run: python -m pip install --disable-pip-version-check pandas pyarrow openpyxl pyreadstat
+
+      - name: Clone pinned public research repository
+        run: |
+          git clone https://github.com/vgreg/hacked_earnings_jfe.git /tmp/hacked_earnings_jfe
+          git -C /tmp/hacked_earnings_jfe checkout c23c7d79d067a79d70cf20e31b072d3703497eae
+          test "$(git -C /tmp/hacked_earnings_jfe rev-parse HEAD)" = "c23c7d79d067a79d70cf20e31b072d3703497eae"
+
+      - name: Read every tracked byte and every archive member
+        run: |
+          rm -rf audit-output/hacked_earnings_jfe
+          python scripts/audit_hacked_earnings_jfe_exhaustive.py \
+            --source-root /tmp/hacked_earnings_jfe \
+            --event-index data/processed/hacked_earnings_jfe/event_press_release_index.csv \
+            --output-dir audit-output/hacked_earnings_jfe
+
+      - name: Publish audit summary
+        if: always()
+        run: |
+          if test -f audit-output/hacked_earnings_jfe/SUMMARY.md; then
+            cat audit-output/hacked_earnings_jfe/SUMMARY.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload exhaustive audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hacked-earnings-jfe-exhaustive-audit
+          path: audit-output/hacked_earnings_jfe/
+          if-no-files-found: error
+          compression-level: 9
