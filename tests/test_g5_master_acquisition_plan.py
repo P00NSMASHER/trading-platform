@@ -75,6 +75,27 @@ def test_real_master_plan_has_complete_structural_scope(tmp_path: Path):
     ) > 0
     assert identity["new_g5_identity_evidence_required_count"] > 0
 
+    readiness = summary["control_identity_readiness"]
+    assert readiness["identity_requirement_count"] == identity[
+        "history_symbol_date_count"
+    ]
+    assert readiness["canonical_g2_verified_reuse_count"] == identity[
+        "canonical_g2_verified_reuse_count"
+    ]
+    assert readiness["staged_g5_only_verified_count"] == 0
+    assert readiness["unresolved_canonical_g2_overlap_count"] == identity[
+        "canonical_g2_unverified_overlap_count"
+    ]
+    assert readiness["unresolved_identity_requirement_count"] == identity[
+        "identity_acquisition_queue_count"
+    ]
+    assert (
+        readiness["unresolved_g5_only_count"]
+        + readiness["unresolved_canonical_g2_overlap_count"]
+        == readiness["unresolved_identity_requirement_count"]
+    )
+    assert readiness["preview_full_history_identity_complete"] is False
+
     routing = summary["control_identity_routing"]
     assert routing["date_level_unresolved_count"] == identity[
         "identity_acquisition_queue_count"
@@ -183,6 +204,16 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     ).exists()
     assert (
         tmp_path
+        / "control_identity_readiness/"
+        "g5_control_identity_readiness_preview.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_identity_readiness/"
+        "g5_control_identity_readiness_summary.json"
+    ).exists()
+    assert (
+        tmp_path
         / "control_market_vendor_bridge/g5_control_market_vendor_bridge_summary.json"
     ).exists()
     assert (
@@ -240,6 +271,8 @@ def test_master_plan_optionally_stages_g5_only_identity_without_promoting_readin
         identity_evidence_path=evidence_path,
     )
     staging = summary["control_identity_evidence_staging"]
+    readiness = summary["control_identity_readiness"]
+    identity = summary["control_identity"]
 
     assert staging["input_evidence_row_count"] == 1
     assert staging["g5_only_staged_verified_count"] == 1
@@ -250,6 +283,15 @@ def test_master_plan_optionally_stages_g5_only_identity_without_promoting_readin
     assert staging["coverage_promoted"] is False
     assert staging["overall_g5_identity_ready_claimed"] is False
 
+    assert readiness["staged_g5_only_verified_count"] == 1
+    assert readiness["unresolved_canonical_g2_overlap_count"] == identity[
+        "canonical_g2_unverified_overlap_count"
+    ]
+    assert readiness["unresolved_identity_requirement_count"] == (
+        identity["identity_acquisition_queue_count"] - 1
+    )
+    assert readiness["preview_full_history_identity_complete"] is False
+
     assert summary["inputs"]["identity_evidence"]["sha256"] == master._sha256(
         evidence_path
     )
@@ -258,6 +300,15 @@ def test_master_plan_optionally_stages_g5_only_identity_without_promoting_readin
     )
     assert (
         staging_output / "g5_control_identity_evidence_staging_receipt.json"
+    ).exists()
+    readiness_output = Path(
+        summary["component_outputs"]["control_identity_readiness"]
+    )
+    assert (
+        readiness_output / "g5_control_identity_readiness_preview.csv"
+    ).exists()
+    assert (
+        readiness_output / "g5_control_identity_readiness_summary.json"
     ).exists()
 
     assert summary["g5_model_evaluation_controls_ready"] is False
