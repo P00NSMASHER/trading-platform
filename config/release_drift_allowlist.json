@@ -2700,8 +2700,8 @@
       "reason": "Regression coverage for replay-driven G5 matcher metadata materialization, incomplete-input blocking, generated matcher-input provenance, manual/generated input ambiguity rejection, normalized-source configuration, and legacy replay-receipt compatibility."
     },
     "tests/test_real_data_replay_g5_identity.py": {
-      "expected_sha256": "58d8343cdffb1c1dd55850da804a2350cf4dcfd808b58719559f3b3d0d09664d",
-      "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, and byte-compatible legacy replay behavior when G5 identity is not configured."
+      "expected_sha256": "9fe7c3766086f063ba97d7d617b82aa7e33faae6fedd2ff427346e91cf05e9db",
+      "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, byte-compatible legacy replay behavior, and a hash-bound G5-only staged-identity path that remains fail-closed for final evaluation."
     }
   },
   "schema_version": "2",
