@@ -54,8 +54,8 @@
       "reason": "Intentional post-Step21 security hardening; configured model verification reused by backup/restore/recovery paths"
     },
     "src/evaluation_release_controller.py": {
-      "expected_sha256": "2f1f2608355d66d26084261144486aca528541ee622b2597b3e3106286007e74",
-      "reason": "G5 release hardening: independently rerun the exact matched-control quality gate, fail closed on missing or invalid match evidence, and hash-bind match events, balance, manifest, and quality receipt into release authority."
+      "expected_sha256": "b87df93fd166f687d2da21dd776a55d01f77b118696daa9335712f69293f8f13",
+      "reason": "G5 release hardening: independently require the complete control-history stable-identity gate and hash-bind its exact inputs and receipt into release authority."
     },
     "src/historical_market_backfill.py": {
       "expected_sha256": "748ffe77a01fb15aad9f1e2ab81af5e09bf6aa58a03568d2632d722b0f5f7ab8",
@@ -90,8 +90,8 @@
       "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
     },
     "tests/test_evaluation_release_controller.py": {
-      "expected_sha256": "a1a8d670a14493b2a7d7f2cd11b303e37e9f44054263c93f7e1cf804b1d258d9",
-      "reason": "Regression coverage for independent G5 match-quality release blocking and exact hash binding of match events, balance, manifest, and gate receipt on the positive controller path."
+      "expected_sha256": "3d0383bb88102642b7ec20f352b36c364e1f964d3f795bbe0477d6f9faa4df10",
+      "reason": "Regression coverage makes G5 control stable identity independently release-critical and binds the positive release token to its exact identity inputs and gate receipt."
     },
     "tests/test_historical_market_backfill.py": {
       "expected_sha256": "24b1e98c1911ffd88bd62319144d7cc91402ae8489366aa598fe9216be4272bb",
@@ -108,6 +108,10 @@
     "tests/test_private_dashboard.py": {
       "expected_sha256": "d5dc731384a9c1dec151048a011944f0bf0bc2e6dd7007deb0a8adb63a5b6bbf",
       "reason": "Intentional post-Step21 security hardening; authentication replay and connection-exhaustion regression coverage"
+    },
+    "src/matched_control_generator.py": {
+      "expected_sha256": "4ed28d928007b9c47b5b7ed18aa03b6287c7a2760b7b9e150b0198fdaee1bb03",
+      "reason": "G5 matcher scope hardening: honor optional event_date-scoped point-in-time metadata so controls materialized for one event date cannot leak into another date, while preserving legacy unscoped metadata behavior."
     }
   },
   "repository_additions": {
@@ -1707,6 +1711,10 @@
       "expected_sha256": "b0d5453c241bb8e6ac7bbfc7696a9afa821755ef147a80c99d5c3a579485a084",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
+    "src/g2_dxfeed_option_adapter.py": {
+      "expected_sha256": "c48d8bbef0e76acb18b71d8d677cd500f6e2c39e932359ee0745904b09b603ca",
+      "reason": "Fail-closed dxFeed option tick adapter: normalize authorized native Quote/Trade/TimeAndSale CSVs into canonical G2 option lanes using exact date/underlying scope, public-schema regression coverage, input hashing, and zero authorization/coverage promotion."
+    },
     "src/g2_cheap_route_partitions.py": {
       "expected_sha256": "d8aaa5557c1f52afa6b72c021822e7c80575b0549922c71dbc60d335e8f94cc4",
       "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
@@ -2327,6 +2335,10 @@
       "expected_sha256": "0081dd6e489207cd9fc1fb1fc4b4d9ce846fcd35e411106b22e846c91dcb8cca",
       "reason": "Record exact hashes for the already-merged G2 Cboe trial bulk-runner files present on the exact G1 base; no G2 semantics are changed by this G1 package."
     },
+    "tests/test_g2_dxfeed_option_adapter.py": {
+      "expected_sha256": "d99da74d85a48863664c0e7be56be65fdeb56affbe1c0cc4ccac7094d67cba15",
+      "reason": "Regression coverage for native dxFeed option quote/trade/time-and-sale schemas, scope rejection, crossed-quote handling, production adapter compatibility, input hashing, and zero coverage promotion."
+    },
     "tests/test_g2_cheap_route_partitions.py": {
       "expected_sha256": "4b444b9aea83f5efbeefcf6daaac95d97f27130fd934447867e9e0b2441850c1",
       "reason": "Exact planning-only G2 cheap-route request partitions derived from frozen requirements plus G3 point-in-time listing evidence; preserves pair conservation and keeps purchase, entitlement, license, retention, activation, and coverage gates fail-closed."
@@ -2680,8 +2692,8 @@
       "reason": "G5 matcher-input materialization: fuse latest admissible point-in-time covariates across normalized treated/control sources, emit only complete rows directly consumable by the matcher, and keep incomplete/conflicted targets in an exact fail-closed gap receipt."
     },
     "tests/test_g5_matching_metadata_materializer.py": {
-      "expected_sha256": "5ce7e1cff1a836315b571b4ed55e4ddff6cba75d45fe71b6cf06fbb7caec918a",
-      "reason": "Regression coverage for exact treated/control target scoping, all-13-covariate completeness, matcher compatibility, missing-field fail-closed behavior, equal-timestamp conflicts, later-value replacement, cutoff enforcement, unknown-target rejection, and treated/control collision rejection."
+      "expected_sha256": "3f52298f0739e905a00b90476f507103910b00b8f72c76874337206ee2f67d3e",
+      "reason": "Regression coverage for exact treated/control target scoping, all-13-covariate completeness, matcher compatibility, cross-date metadata-scope isolation, missing-field fail-closed behavior, equal-timestamp conflicts, later-value replacement, cutoff enforcement, unknown-target rejection, and treated/control collision rejection."
     },
     "tests/test_real_data_replay_g5_materializer.py": {
       "expected_sha256": "646555649b756e1cdd1bb366bbb746fe81d54c608090a9586cabb04a9966658f",
