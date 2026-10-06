@@ -1980,8 +1980,8 @@
       "reason": "Real-data sprint stable-ID reconciliation now accepts optional baseline_identity_verified_count, requires event-date count to remain 174, and verifies event + baseline verified + baseline unresolved equals the 3828 required symbol-dates."
     },
     "src/real_data_replay.py": {
-      "expected_sha256": "2cd03e4b8ec5f83b2e38d98250be16a33cc7dd026aebdcdc25bcf683cea1e39e",
-      "reason": "Real-data replay optionally materializes exact treated/control matcher metadata from normalized G5 sources while preserving legacy replay receipt semantics when the G5 path is not configured."
+      "expected_sha256": "bbfdfbca44903ec38de0984e8b3761de9636f25150f2b15a25795e8d617fc8c6",
+      "reason": "Real-data replay optionally validates complete G5 control-history stable identity before challenger work, hash-binds the four exact identity inputs, and hands them to release authority while preserving legacy replay receipt semantics when the new block is absent."
     },
     "src/research_receipt_rebuild.py": {
       "expected_sha256": "aad23317e159d300a462575ca8c998ed8891b62e45caf1ee626ca8034f0a3c31",
@@ -2698,6 +2698,10 @@
     "tests/test_real_data_replay_g5_materializer.py": {
       "expected_sha256": "3ddf31bc0f8657f551819c3f75694d5c49d04129dec2c19ebc10956791d3f2ba",
       "reason": "Regression coverage for replay-driven G5 matcher metadata materialization, incomplete-input blocking, generated matcher-input provenance, manual/generated input ambiguity rejection, normalized-source configuration, and legacy replay-receipt compatibility."
+    },
+    "tests/test_real_data_replay_g5_identity.py": {
+      "expected_sha256": "58d8343cdffb1c1dd55850da804a2350cf4dcfd808b58719559f3b3d0d09664d",
+      "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, and byte-compatible legacy replay behavior when G5 identity is not configured."
     }
   },
   "schema_version": "2",
