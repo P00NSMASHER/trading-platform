@@ -1,0 +1,8 @@
+pool,test_year,train_rows,test_rows,train_positives,test_positives,duplicate_content_hash_overlap,strictly_earlier_training
+full_universe,2012,12991,6018,173,156,0,True
+full_universe,2013,19009,6175,329,140,0,True
+full_universe,2014,25184,5755,469,0,0,True
+full_universe,2015,30939,5811,469,150,0,True
+hacked_only_retrospective,2012,3852,1102,173,156,0,True
+hacked_only_retrospective,2013,4954,1124,329,140,0,True
+hacked_only_retrospective,2015,6078,1361,469,150,0,True

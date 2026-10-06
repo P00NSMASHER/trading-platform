@@ -1,0 +1,281 @@
+{
+  "status": "COMPLETED_RETROSPECTIVE_LABEL_EXPERIMENT",
+  "question": "Can earlier-year press-release language rank later Actual=1 source labels?",
+  "primary_test_years": [
+    2012,
+    2013,
+    2015
+  ],
+  "negative_only_source_regime_year": 2014,
+  "text_rows": 36750,
+  "duplicate_hash_temporal_overlap": 0,
+  "strictly_earlier_training_all_folds": true,
+  "return_experiment": {
+    "status": "BLOCKED_NO_AUTHORIZED_NON_SYNTHETIC_OUTCOME_DATA",
+    "source_count": 0,
+    "eligible_for_real_feature_backfill": false,
+    "reasons": [
+      "no_active_market_sources"
+    ],
+    "synthetic_market_probe_used": false,
+    "paper_target_LRet_12pm_OpenNext_present_row_level": false
+  },
+  "pooled_primary_metrics": [
+    {
+      "pool": "full_universe",
+      "subset": "all",
+      "model": "constant_prior",
+      "n": 18004,
+      "positives": 446,
+      "base_rate": 0.0247722728,
+      "roc_auc": 0.4848480398,
+      "average_precision": 0.023918829,
+      "top_1pct_precision": 0.0331491713,
+      "top_1pct_lift": 1.3381562322,
+      "top_5pct_precision": 0.0155382908,
+      "top_5pct_lift": 0.6272452631,
+      "top_10pct_precision": 0.0172126596,
+      "top_10pct_lift": 0.6948357041,
+      "brier": 0.0242559224,
+      "log_loss": 0.1188872839
+    },
+    {
+      "pool": "full_universe",
+      "subset": "all",
+      "model": "published_soft_contaminated",
+      "n": 18004,
+      "positives": 446,
+      "base_rate": 0.0247722728,
+      "roc_auc": 0.5224752863,
+      "average_precision": 0.0259904916,
+      "top_1pct_precision": 0.0165745856,
+      "top_1pct_lift": 0.6690781161,
+      "top_5pct_precision": 0.025527192,
+      "top_5pct_lift": 1.0304743608,
+      "top_10pct_precision": 0.0266518601,
+      "top_10pct_lift": 1.0758746387,
+      "brier": null,
+      "log_loss": null
+    },
+    {
+      "pool": "full_universe",
+      "subset": "all",
+      "model": "novelty_logit",
+      "n": 18004,
+      "positives": 446,
+      "base_rate": 0.0247722728,
+      "roc_auc": 0.502046261,
+      "average_precision": 0.024285061,
+      "top_1pct_precision": 0.0276243094,
+      "top_1pct_lift": 1.1151301935,
+      "top_5pct_precision": 0.0199778024,
+      "top_5pct_lift": 0.8064581954,
+      "top_10pct_precision": 0.019433648,
+      "top_10pct_lift": 0.784491924,
+      "brier": 0.0242273234,
+      "log_loss": 0.1181598953
+    },
+    {
+      "pool": "full_universe",
+      "subset": "all",
+      "model": "text_logit",
+      "n": 18004,
+      "positives": 446,
+      "base_rate": 0.0247722728,
+      "roc_auc": 0.6791526814,
+      "average_precision": 0.0654834464,
+      "top_1pct_precision": 0.138121547,
+      "top_1pct_lift": 5.5756509675,
+      "top_5pct_precision": 0.0876803552,
+      "top_5pct_lift": 3.5394554133,
+      "top_10pct_precision": 0.0694058856,
+      "top_10pct_lift": 2.8017568715,
+      "brier": 0.0239710066,
+      "log_loss": 0.1130699511
+    },
+    {
+      "pool": "full_universe",
+      "subset": "all",
+      "model": "text_novelty_logit",
+      "n": 18004,
+      "positives": 446,
+      "base_rate": 0.0247722728,
+      "roc_auc": 0.6827091199,
+      "average_precision": 0.0682703005,
+      "top_1pct_precision": 0.1491712707,
+      "top_1pct_lift": 6.0217030449,
+      "top_5pct_precision": 0.0954495006,
+      "top_5pct_lift": 3.8530780448,
+      "top_10pct_precision": 0.0705163798,
+      "top_10pct_lift": 2.8465849814,
+      "brier": 0.0239066643,
+      "log_loss": 0.1121676391
+    },
+    {
+      "pool": "hacked_only_retrospective",
+      "subset": "all",
+      "model": "constant_prior",
+      "n": 3587,
+      "positives": 446,
+      "base_rate": 0.1243378868,
+      "roc_auc": 0.4678703335,
+      "average_precision": 0.117189911,
+      "top_1pct_precision": 0.0277777778,
+      "top_1pct_lift": 0.2234055805,
+      "top_5pct_precision": 0.0944444444,
+      "top_5pct_lift": 0.7595789736,
+      "top_10pct_precision": 0.0919220056,
+      "top_10pct_lift": 0.7392920044,
+      "brier": 0.1130546973,
+      "log_loss": 0.406008591
+    },
+    {
+      "pool": "hacked_only_retrospective",
+      "subset": "all",
+      "model": "published_soft_contaminated",
+      "n": 3587,
+      "positives": 446,
+      "base_rate": 0.1243378868,
+      "roc_auc": 0.4994503479,
+      "average_precision": 0.1251928102,
+      "top_1pct_precision": 0.1111111111,
+      "top_1pct_lift": 0.8936223219,
+      "top_5pct_precision": 0.1333333333,
+      "top_5pct_lift": 1.0723467862,
+      "top_10pct_precision": 0.1281337047,
+      "top_10pct_lift": 1.0305282486,
+      "brier": null,
+      "log_loss": null
+    },
+    {
+      "pool": "hacked_only_retrospective",
+      "subset": "all",
+      "model": "novelty_logit",
+      "n": 3587,
+      "positives": 446,
+      "base_rate": 0.1243378868,
+      "roc_auc": 0.4922970177,
+      "average_precision": 0.1276700555,
+      "top_1pct_precision": 0.0833333333,
+      "top_1pct_lift": 0.6702167414,
+      "top_5pct_precision": 0.15,
+      "top_5pct_lift": 1.2063901345,
+      "top_10pct_precision": 0.1448467967,
+      "top_10pct_lift": 1.1649449767,
+      "brier": 0.1125251715,
+      "log_loss": 0.4023921855
+    },
+    {
+      "pool": "hacked_only_retrospective",
+      "subset": "all",
+      "model": "text_logit",
+      "n": 3587,
+      "positives": 446,
+      "base_rate": 0.1243378868,
+      "roc_auc": 0.637379487,
+      "average_precision": 0.2319446278,
+      "top_1pct_precision": 0.4166666667,
+      "top_1pct_lift": 3.351083707,
+      "top_5pct_precision": 0.3444444444,
+      "top_5pct_lift": 2.7702291978,
+      "top_10pct_precision": 0.3175487465,
+      "top_10pct_lift": 2.5539178335,
+      "brier": 0.108313811,
+      "log_loss": 0.3772679823
+    },
+    {
+      "pool": "hacked_only_retrospective",
+      "subset": "all",
+      "model": "text_novelty_logit",
+      "n": 3587,
+      "positives": 446,
+      "base_rate": 0.1243378868,
+      "roc_auc": 0.636966891,
+      "average_precision": 0.237782228,
+      "top_1pct_precision": 0.4166666667,
+      "top_1pct_lift": 3.351083707,
+      "top_5pct_precision": 0.35,
+      "top_5pct_lift": 2.8149103139,
+      "top_10pct_precision": 0.3147632312,
+      "top_10pct_lift": 2.5315150455,
+      "brier": 0.1077341094,
+      "log_loss": 0.3748501884
+    }
+  ],
+  "cluster_bootstrap": {
+    "full_universe:published_soft_contaminated": {
+      "cluster_bootstrap_reps": 300,
+      "roc_auc_ci95": [
+        0.49832897447050095,
+        0.5520807669865294
+      ],
+      "average_precision_ci95": [
+        0.022544862295089025,
+        0.030676773225242312
+      ]
+    },
+    "full_universe:text_logit": {
+      "cluster_bootstrap_reps": 300,
+      "roc_auc_ci95": [
+        0.6511401358286875,
+        0.7081380499581558
+      ],
+      "average_precision_ci95": [
+        0.051092893419578796,
+        0.08335959547181425
+      ]
+    },
+    "full_universe:text_novelty_logit": {
+      "cluster_bootstrap_reps": 300,
+      "roc_auc_ci95": [
+        0.6555421692063444,
+        0.7093335421396444
+      ],
+      "average_precision_ci95": [
+        0.053523235403961,
+        0.08558544012181966
+      ]
+    },
+    "hacked_only_retrospective:published_soft_contaminated": {
+      "cluster_bootstrap_reps": 300,
+      "roc_auc_ci95": [
+        0.4712809121515777,
+        0.5284014961012213
+      ],
+      "average_precision_ci95": [
+        0.11152146068262925,
+        0.14519733668290774
+      ]
+    },
+    "hacked_only_retrospective:text_logit": {
+      "cluster_bootstrap_reps": 300,
+      "roc_auc_ci95": [
+        0.6114381248255731,
+        0.6657715858197841
+      ],
+      "average_precision_ci95": [
+        0.19736406862528258,
+        0.2738131689426076
+      ]
+    },
+    "hacked_only_retrospective:text_novelty_logit": {
+      "cluster_bootstrap_reps": 300,
+      "roc_auc_ci95": [
+        0.6065805676515859,
+        0.6662338783034913
+      ],
+      "average_precision_ci95": [
+        0.20060632638987516,
+        0.28093998932084346
+      ]
+    }
+  },
+  "warnings": [
+    "Actual is a retrospective SEC-complaint-derived source label, not a trading return and not a live feature.",
+    "Hacked-only evaluation conditions on a retrospective exposure label and is for mechanism research only.",
+    "Published Soft uses coefficients fitted on the full source sample and is included only as a contaminated benchmark.",
+    "Exact public release timestamps are not in archive filenames; no preannouncement tradability claim is made.",
+    "The unseen-issuer subset has very few positives and is a stress test, not a powered headline result.",
+    "No synthetic market fixture is used to infer return performance."
+  ]
+}
