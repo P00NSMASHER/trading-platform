@@ -296,6 +296,85 @@ def stage_reviewed(
     }
 
 
+
+def merge_reviewed_map(
+    *,
+    base_map_path: Path,
+    staged_reviewed_path: Path,
+    output_path: Path,
+) -> dict:
+    base_fields, base_rows = _read_csv(base_map_path)
+    if not {"historical_symbol", "cik"}.issubset(base_fields):
+        raise G5HistoricalCikAcquisitionError("invalid base historical CIK map")
+
+    staged_fields, staged_rows = _read_csv(staged_reviewed_path)
+    if not {"historical_symbol", "cik"}.issubset(staged_fields):
+        raise G5HistoricalCikAcquisitionError("invalid staged reviewed CIK map")
+
+    merged: dict[str, dict[str, str]] = {}
+    for row_no, row in enumerate(base_rows, 2):
+        symbol = row["historical_symbol"].upper()
+        cik_value = _normalize_cik(row["cik"])
+        if symbol in merged and merged[symbol]["cik"] != cik_value:
+            raise G5HistoricalCikAcquisitionError(
+                f"base map row {row_no}: conflicting CIK for {symbol}"
+            )
+        merged[symbol] = {
+            "historical_symbol": symbol,
+            "cik": cik_value,
+            "notes": row.get("notes", ""),
+        }
+
+    added = 0
+    reused = 0
+    for row_no, row in enumerate(staged_rows, 2):
+        symbol = row["historical_symbol"].upper()
+        cik_value = _normalize_cik(row["cik"])
+        prior = merged.get(symbol)
+        if prior is not None:
+            if prior["cik"] != cik_value:
+                raise G5HistoricalCikAcquisitionError(
+                    f"staged row {row_no}: conflicts with existing CIK for {symbol}"
+                )
+            reused += 1
+            continue
+        merged[symbol] = {
+            "historical_symbol": symbol,
+            "cik": cik_value,
+            "notes": (
+                "G5 reviewed historical CIK evidence: "
+                + row.get("source_reference", "")
+            ),
+        }
+        added += 1
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle, fieldnames=["historical_symbol", "cik", "notes"]
+        )
+        writer.writeheader()
+        for symbol in sorted(merged):
+            writer.writerow(merged[symbol])
+
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "base_symbol_count": len({row["historical_symbol"].upper() for row in base_rows}),
+        "staged_input_count": len(staged_rows),
+        "added_symbol_count": added,
+        "already_present_same_cik_count": reused,
+        "merged_symbol_count": len(merged),
+        "output_path": str(output_path),
+        "output_sha256": _sha256(output_path),
+        "policy": {
+            "existing_conflicting_cik_may_be_overwritten": False,
+            "reviewed_rows_only": True,
+        },
+        "canonical_g5_dates_resolved_change": 0,
+        "release_claimed": False,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Build or stage the treated historical-CIK acquisition lane."
@@ -312,6 +391,11 @@ def main() -> int:
     stage.add_argument("--reviewed-evidence", type=Path, required=True)
     stage.add_argument("--output", type=Path, required=True)
 
+    merge = sub.add_parser("merge-reviewed")
+    merge.add_argument("--base-map", type=Path, required=True)
+    merge.add_argument("--staged-reviewed", type=Path, required=True)
+    merge.add_argument("--output", type=Path, required=True)
+
     args = parser.parse_args()
     if args.command == "queue":
         result = build_queue(
@@ -319,10 +403,16 @@ def main() -> int:
             historical_cik_map_path=args.historical_cik_map,
             output_dir=args.output_dir,
         )
-    else:
+    elif args.command == "stage-reviewed":
         result = stage_reviewed(
             acquisition_queue_path=args.acquisition_queue,
             reviewed_evidence_path=args.reviewed_evidence,
+            output_path=args.output,
+        )
+    else:
+        result = merge_reviewed_map(
+            base_map_path=args.base_map,
+            staged_reviewed_path=args.staged_reviewed,
             output_path=args.output,
         )
     print(json.dumps(result, indent=2, sort_keys=True))
