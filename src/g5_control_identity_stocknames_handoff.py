@@ -89,16 +89,27 @@ def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
                 f"{canonical} != {sample}"
             )
 
+        symbol_lead = symbol_leads.get(key)
+        if symbol_lead is not None and (canonical or sample):
+            raise ValueError(
+                f"symbol-level PERMNO lead is out of scope for already-hinted row "
+                f"{symbol}|{trade_date}"
+            )
+
         permno = canonical or sample
+        hint_source = ""
+        if canonical:
+            hint_source = "CANONICAL_G2_PERMNO"
+        elif sample:
+            hint_source = "SAMPLEFIRMS_EXACT_DATE_PERMNO_LEAD"
+        elif symbol_lead is not None:
+            permno = symbol_lead["permno"]
+            hint_source = "SAMPLEFIRMS_SAME_SYMBOL_UNIQUE_PERMNO_HISTORY_LEAD"
+            consumed_symbol_leads.add(key)
+
         if not permno:
             no_hint.append(dict(row))
             continue
-
-        hint_source = (
-            "CANONICAL_G2_PERMNO"
-            if canonical
-            else "SAMPLEFIRMS_EXACT_DATE_PERMNO_LEAD"
-        )
         ready.append(
             {
                 "request_id": _request_id(symbol, trade_date, permno),
@@ -149,10 +160,25 @@ def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
             row["hint_source"] == "SAMPLEFIRMS_EXACT_DATE_PERMNO_LEAD"
             for row in ready
         ),
+        "symbol_level_permno_lead_request_count": sum(
+            row["hint_source"]
+            == "SAMPLEFIRMS_SAME_SYMBOL_UNIQUE_PERMNO_HISTORY_LEAD"
+            for row in ready
+        ),
         "request_ids_unique": len({row["request_id"] for row in ready}) == len(ready),
         "inputs": {
             "identity_queue_path": str(identity_queue_path),
             "identity_queue_sha256": _sha256(identity_queue_path),
+            "symbol_permno_leads_path": (
+                str(symbol_permno_leads_path)
+                if symbol_permno_leads_path is not None
+                else None
+            ),
+            "symbol_permno_leads_sha256": (
+                _sha256(symbol_permno_leads_path)
+                if symbol_permno_leads_path is not None
+                else None
+            ),
         },
         "outputs": {
             "stocknames_ready_queue": str(ready_path),
@@ -160,6 +186,8 @@ def build(*, identity_queue_path: Path, output_dir: Path) -> dict:
         },
         "policy": {
             "samplefirms_hint_is_identity_evidence": False,
+            "symbol_level_permno_lead_is_identity_evidence": False,
+            "symbol_level_permno_lead_may_only_fill_no_hint_rows": True,
             "authorized_stocknames_validation_still_required": True,
             "requested_date_must_be_inside_authorized_name_interval": True,
             "historical_symbol_must_match_authorized_name_interval": True,
@@ -189,6 +217,7 @@ def main() -> int:
     result = build(
         identity_queue_path=args.identity_queue,
         output_dir=args.output_dir,
+        symbol_permno_leads_path=args.symbol_permno_leads,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
