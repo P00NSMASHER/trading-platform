@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import sys
 from pathlib import Path
 
@@ -36,6 +37,35 @@ def _staged(tmp_path: Path, body: str) -> Path:
     return path
 
 
+
+
+def _receipt(
+    tmp_path: Path,
+    staged_path: Path,
+    *,
+    staged_count: int,
+    staged_sha256: str | None = None,
+) -> Path:
+    path = tmp_path / "staging_receipt.json"
+    obj = {
+        "schema_version": "1",
+        "canonical_g2_write_performed": False,
+        "canonical_g5_write_performed": False,
+        "coverage_promoted": False,
+        "output_sha256": {
+            "g5_only_staged_verified": (
+                staged_sha256
+                if staged_sha256 is not None
+                else preview._sha256(staged_path)
+            )
+        },
+        "counts": {
+            "g5_only_staged_verified_count": staged_count,
+        },
+    }
+    path.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return path
+
 def test_preview_reconciles_canonical_reuse_staged_g5_and_unresolved_g2(
     tmp_path: Path,
 ):
@@ -55,9 +85,11 @@ def test_preview_reconciles_canonical_reuse_staged_g5_and_unresolved_g2(
         "CCC,2015-01-03,33333,CCC,E1,source:1,AUTHORIZED-TEST,1\n",
     )
 
+    receipt = _receipt(tmp_path, staged, staged_count=1)
     summary = preview.build_preview(
         identity_requirements_path=requirements,
         staged_g5_only_path=staged,
+        staging_receipt_path=receipt,
         output_path=tmp_path / "preview.csv",
         summary_path=tmp_path / "summary.json",
     )
@@ -103,9 +135,11 @@ def test_g2_overlap_cannot_be_closed_by_g5_staging(tmp_path: Path):
         preview.G5ControlIdentityReadinessPreviewError,
         match="must use the canonical G2 pipeline",
     ):
+        receipt = _receipt(tmp_path, staged, staged_count=1)
         preview.build_preview(
             identity_requirements_path=requirements,
             staged_g5_only_path=staged,
+            staging_receipt_path=receipt,
             output_path=tmp_path / "preview.csv",
             summary_path=tmp_path / "summary.json",
         )
@@ -127,9 +161,11 @@ def test_staged_permno_must_match_known_g5_hint(tmp_path: Path):
         preview.G5ControlIdentityReadinessPreviewError,
         match="conflicts with expected hint",
     ):
+        receipt = _receipt(tmp_path, staged, staged_count=1)
         preview.build_preview(
             identity_requirements_path=requirements,
             staged_g5_only_path=staged,
+            staging_receipt_path=receipt,
             output_path=tmp_path / "preview.csv",
             summary_path=tmp_path / "summary.json",
         )
@@ -150,9 +186,11 @@ def test_full_history_preview_can_complete_without_relaxing_canonical_state(
         "CCC,2015-01-03,33333,CCC,E4,source:4,AUTHORIZED-TEST,1\n",
     )
 
+    receipt = _receipt(tmp_path, staged, staged_count=1)
     summary = preview.build_preview(
         identity_requirements_path=requirements,
         staged_g5_only_path=staged,
+        staging_receipt_path=receipt,
         output_path=tmp_path / "preview.csv",
         summary_path=tmp_path / "summary.json",
     )
@@ -164,3 +202,33 @@ def test_full_history_preview_can_complete_without_relaxing_canonical_state(
     assert summary["canonical_g5_write_performed"] is False
     assert summary["canonical_g5_readiness_changed"] is False
     assert summary["release_claimed"] is False
+
+def test_tampered_staged_identity_file_is_rejected_by_receipt_hash(tmp_path: Path):
+    requirements = _requirements(
+        tmp_path,
+        "CCC,2015-01-03,history,NEW_G5_IDENTITY_EVIDENCE_REQUIRED,"
+        "NONE,,,,,NO_EXACT_DATE_MAPPING,DATED_STABLE_ID_CROSSWALK,1\n",
+    )
+    staged = _staged(
+        tmp_path,
+        "CCC,2015-01-03,33333,CCC,E5,source:5,AUTHORIZED-TEST,1\n",
+    )
+    receipt = _receipt(
+        tmp_path,
+        staged,
+        staged_count=1,
+        staged_sha256="0" * 64,
+    )
+
+    with pytest.raises(
+        preview.G5ControlIdentityReadinessPreviewError,
+        match="file hash does not match staging receipt",
+    ):
+        preview.build_preview(
+            identity_requirements_path=requirements,
+            staged_g5_only_path=staged,
+            staging_receipt_path=receipt,
+            output_path=tmp_path / "preview.csv",
+            summary_path=tmp_path / "summary.json",
+        )
+
