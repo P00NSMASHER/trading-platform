@@ -1908,7 +1908,7 @@
       "reason": "G5 control identity planning: reconcile the entire primary-control history footprint against canonical G2 verified/unverified identity, record exact-date public SampleFirms PERMNO/GVKEY mappings only as admission leads, and emit a fail-closed stable-ID acquisition queue."
     },
     "src/g5_control_identity_stocknames_handoff.py": {
-      "expected_sha256": "b04f64d3635706f29d72c631590fbbec325cf8458af7a796b3d90fc8fb4c20bd",
+      "expected_sha256": "03b7aeae290315e7b70e6d7da84195ab2a3b4e99968c6e701f21362cf4f8c606",
       "reason": "G5 control identity handoff now optionally consumes same-symbol unique-PERMNO acquisition leads only for rows lacking stronger canonical/exact-date hints, while preserving mandatory authorized dated Stocknames validation and zero readiness promotion."
     },
     "src/g5_control_identity_stocknames_activation.py": {
