@@ -184,19 +184,28 @@ def history_inventory(source_root: Path) -> dict[str, Any]:
         path = parts[1] if len(parts) > 1 else ""
         typ = run("git", "cat-file", "-t", sha, cwd=source_root).strip()
         size = int(run("git", "cat-file", "-s", sha, cwd=source_root).strip())
+        raw_object = subprocess.check_output(["git", "cat-file", typ, sha], cwd=source_root)
+        if len(raw_object) != size:
+            raise RuntimeError(f"Git object short-read {sha}: {len(raw_object)} != {size}")
+        object_hash = hashlib.sha1(
+            f"{typ} {len(raw_object)}\0".encode("ascii") + raw_object
+        ).hexdigest()
+        if object_hash != sha:
+            raise RuntimeError(f"Git object hash mismatch {sha}: got {object_hash}")
+
+        semantic_scan = None
+        if typ in {"commit", "tag"}:
+            text_value, encoding = decode_every_byte(raw_object)
+            semantic_scan = {"encoding": encoding, **scan_text(text_value)}
+
         if typ == "blob":
             unique_blob_shas.add(sha)
             unique_blob_bytes += size
             if path:
                 historical_paths.add(path)
-            data = subprocess.check_output(["git", "cat-file", "blob", sha], cwd=source_root)
-            if len(data) != size:
-                raise RuntimeError(f"Historical blob short-read {sha}")
-            if git_blob_sha_bytes(data) != sha:
-                raise RuntimeError(f"Historical blob hash mismatch {sha}")
             suffix = Path(path).suffix.lower()
             if path in {".gitignore", "LICENSE"} or suffix in TEXT_EXTENSIONS:
-                text_value, encoding = decode_every_byte(data)
+                text_value, encoding = decode_every_byte(raw_object)
                 historical_text_blob_scans.append(
                     {
                         "sha": sha,
@@ -206,7 +215,16 @@ def history_inventory(source_root: Path) -> dict[str, Any]:
                         **scan_text(text_value),
                     }
                 )
-        object_rows.append({"sha": sha, "type": typ, "size": size, "path": path})
+        object_rows.append(
+            {
+                "sha": sha,
+                "type": typ,
+                "size": size,
+                "path": path,
+                "raw_sha256": sha256_bytes(raw_object),
+                "semantic_scan": semantic_scan,
+            }
+        )
 
     current_paths = set(run("git", "ls-files", cwd=source_root).splitlines())
     return {
@@ -217,6 +235,8 @@ def history_inventory(source_root: Path) -> dict[str, Any]:
         "tags": tags,
         "branches": branches,
         "reachable_object_count": len(object_rows),
+        "reachable_object_bytes_read": sum(row["size"] for row in object_rows),
+        "all_reachable_object_hashes_verified": True,
         "unique_blob_count": len(unique_blob_shas),
         "unique_blob_bytes_read": unique_blob_bytes,
         "historical_paths": sorted(historical_paths),
@@ -792,6 +812,9 @@ def main() -> None:
             "current_tracked_bytes_read": current_bytes,
             "current_tree_manifest_sha256": tree_digest.hexdigest(),
             "reachable_git_history_all_unique_blobs_read": True,
+            "reachable_git_objects_all_bytes_read_and_hash_verified": history[
+                "all_reachable_object_hashes_verified"
+            ],
             "reachable_historical_text_blobs_semantically_scanned": len(
                 history["historical_text_blob_scans"]
             ),
