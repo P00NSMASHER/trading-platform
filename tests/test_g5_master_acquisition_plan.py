@@ -59,6 +59,29 @@ def test_real_master_plan_has_complete_structural_scope(tmp_path: Path):
     assert summary["treated_external_lane_request_count"] == 696
     assert summary["total_external_lane_request_count"] == 1560
 
+    compression = summary["external_request_compression"]
+    assert compression["control_date_level_request_count"] == 864
+    assert compression["control_compressed_request_count"] < 864
+    assert compression["control_request_reduction_count"] > 0
+    assert compression["treated_date_level_request_count"] == 696
+    assert compression["treated_compressed_request_count"] == 584
+    assert compression["treated_request_reduction_count"] == 112
+    assert compression["total_date_level_request_count"] == 1560
+    assert compression["total_compressed_request_count"] == (
+        compression["control_compressed_request_count"] + 584
+    )
+    assert compression["total_request_reduction_count"] == (
+        1560 - compression["total_compressed_request_count"]
+    )
+    assert compression["total_request_reduction_count"] > 112
+    assert compression["exact_request_point_count_reconciled"] == 1560
+    assert compression["treated_lane_compressed_counts"] == {
+        "analyst": 146,
+        "borrow": 146,
+        "classification": 146,
+        "ownership": 146,
+    }
+
     identity = summary["control_identity"]
     assert identity["history_symbol_date_count"] == (
         summary["control_history"]["unique_symbol_date_pairs"]
@@ -183,6 +206,14 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     assert (
         tmp_path
         / "control_identity/g5_control_identity_requirements.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_external_compressed/g5_external_source_compressed_requests.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "treated_external_compressed/g5_treated_external_compressed_requests.csv"
     ).exists()
     assert (
         tmp_path
