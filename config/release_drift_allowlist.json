@@ -1956,7 +1956,7 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_master_acquisition_plan.py": {
-      "expected_sha256": "252c9c410689a35dcd1916d3396d65bc3b44e8acb75869607caaee63f35ff01f",
+      "expected_sha256": "b47140eed78913e40e7434580604e2c6a3bd16e5f1897791ac9c0e1a35ebbbe4",
       "reason": "G5 master acquisition plan now invokes control and treated external request compression, reconciles all original date/event cutoff points, reports compressed request counts separately from unchanged evidence requirements, and preserves zero readiness promotion."
     },
     "src/g5_match_quality_gate.py": {
@@ -2612,7 +2612,7 @@
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
     },
     "tests/test_g5_master_acquisition_plan.py": {
-      "expected_sha256": "20d13a1b39a079dd334d6f1c73e05d190c979c9a08e0107ee3c320fa63d45695",
+      "expected_sha256": "d6ff26e761927f2eb6b23f29a3d5bfe5f0dcb90e2cf45e8e5f2fc7ec4df8e5ae",
       "reason": "Regression coverage for master-level control and treated external request compression, preserved 1,560 point-in-time request points, treated 696-to-584 compression, control-side reduction, component outputs, and unchanged G5 readiness."
     },
     "tests/test_g5_match_quality_gate.py": {
