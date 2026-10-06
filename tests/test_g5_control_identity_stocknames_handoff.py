@@ -11,7 +11,6 @@ import g5_control_acquisition_planner as acquisition
 import g5_control_history_requirements as history
 import g5_control_identity_requirements as identity
 import g5_control_identity_stocknames_handoff as handoff
-import g5_control_identity_symbol_permno_leads as symbol_leads
 import security_identity_stocknames_adapter as stocknames
 
 
