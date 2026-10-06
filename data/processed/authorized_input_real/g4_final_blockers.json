@@ -150,5 +150,18 @@
     }
   ],
   "completion_rule": "G4 is complete only when every required symbol-date is either resolved by admissible exact point-in-time shares evidence or covered by this SHA-bound reviewed fail-closed exclusion receipt. Excluded rows must remain blank and may not contribute shares outstanding or turnover. The exact-resolved count may increase only if new admissible pre-cutoff evidence is found.",
-  "completion_base_main_sha": "830d87167211c841137985040a558710adf2702f"
+  "completion_base_main_sha": "830d87167211c841137985040a558710adf2702f",
+  "source_research_status": [
+    {
+      "source_route": "Bilkent University Library -> NYSE Daily TAQ",
+      "checked_on": "2026-10-06",
+      "scope": "ACO x10 Daily TAQ Master rows only",
+      "status": "BOUNDED_NO_GO_LICENSE_RESTRICTED",
+      "evidence_summary": "Bilkent University Library replied that its NYSE license permits dataset use only by Bilkent University members; therefore this specific library-assisted route cannot supply the requested ACO Daily TAQ Master rows.",
+      "impact": "No G4 coverage change. ACO x10 remains on the canonical NYSE Daily TAQ Master route under case CC65304066.",
+      "exact_resolved_after": 3813,
+      "required_after": 3828,
+      "reviewed_excluded_after": 15
+    }
+  ]
 }
