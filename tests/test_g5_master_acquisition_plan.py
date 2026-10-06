@@ -15,6 +15,7 @@ def _build(
     tmp_path: Path,
     *,
     identity_evidence_path: Path | None = None,
+    external_source_manifest_path: Path | None = None,
 ):
     return master.build(
         events_path=ROOT / "data/processed/historical_events.csv",
@@ -29,6 +30,7 @@ def _build(
             / "data/processed/security_identity_real/security_identity_manifest.json"
         ),
         identity_evidence_path=identity_evidence_path,
+        external_source_manifest_path=external_source_manifest_path,
         output_dir=tmp_path,
     )
 
@@ -315,3 +317,91 @@ def test_master_plan_optionally_stages_g5_only_identity_without_promoting_readin
     assert summary["canonical_g5_dates_resolved_change"] == 0
     assert summary["release_claimed"] is False
 
+
+
+
+def test_master_plan_optionally_intakes_external_metadata_without_promoting_readiness(
+    tmp_path: Path,
+):
+    baseline_dir = tmp_path / "baseline_external"
+    _build(baseline_dir)
+
+    control_path = (
+        baseline_dir / "controls/g5_primary_candidate_symbol_dates.csv"
+    )
+    with control_path.open(encoding="utf-8", newline="") as handle:
+        first = next(csv.DictReader(handle))
+
+    source_path = tmp_path / "control_classification.csv"
+    source_path.write_text(
+        (
+            "event_date,symbol,effective_ts_utc,sector,index_bucket\n"
+            f"{first['event_date']},{first['candidate_symbol']},"
+            f"{first['latest_acceptable_effective_ts_utc']},"
+            "TEST_SECTOR,TEST_INDEX\n"
+        ),
+        encoding="utf-8",
+    )
+
+    manifest_path = tmp_path / "external_sources.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "schema_version": "1",
+                "sources": [
+                    {
+                        "source_id": "control-classification-test",
+                        "target_kind": "control",
+                        "lane": "classification",
+                        "path": source_path.name,
+                        "expected_sha256": master._sha256(source_path),
+                        "authorization_reference": "AUTHORIZED-TEST",
+                        "source_name": "test-classification",
+                    }
+                ],
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    staged_dir = tmp_path / "with_external"
+    summary = _build(
+        staged_dir,
+        external_source_manifest_path=manifest_path,
+    )
+    external = summary["external_metadata_intake"]
+
+    assert external["normalized_source_count"] == 1
+    assert external["normalized_row_count"] == 1
+    assert external["observed_nonconflicted_target_field_count"] == 2
+    assert external["missing_target_field_count"] == 1948
+    assert external["externally_complete_control_target_count"] == 0
+    assert external["externally_complete_treated_target_count"] == 0
+    assert external["externally_complete_target_count"] == 0
+    assert external["external_gap_target_count"] == 390
+    assert external["all_external_metadata_complete"] is False
+    assert external["canonical_g5_readiness_changed"] is False
+    assert external["release_claimed"] is False
+
+    assert summary["inputs"]["external_source_manifest"]["sha256"] == (
+        master._sha256(manifest_path)
+    )
+    external_output = Path(
+        summary["component_outputs"]["external_metadata_intake"]
+    )
+    assert (
+        external_output / "g5_external_metadata_intake_summary.json"
+    ).exists()
+    assert (
+        external_output / "g5_external_metadata_normalized.csv"
+    ).exists()
+    assert (
+        external_output / "g5_external_metadata_gaps.csv"
+    ).exists()
+
+    assert summary["g5_model_evaluation_controls_ready"] is False
+    assert summary["canonical_g5_dates_resolved_change"] == 0
+    assert summary["release_claimed"] is False
