@@ -1983,6 +1983,10 @@
       "expected_sha256": "db33cecdbdd2fe142a151ca50fe1e8740672ac22a998db0f82b9d2d4c9ea27d5",
       "reason": "Public SEC 13F ownership acquisition using exact historical CUSIP identity, initial 13F-HR filings only, conservative filing-date availability, common-share holdings only, pre-cutoff shares-outstanding denominators, and fail-closed ownership ratios."
     },
+    "src/g5_sec_historical_cik_bracket_verifier.py": {
+      "expected_sha256": "73d16716b663acd0811f848dcee4ac58fbea637471ae23aec16c96a472a21bca",
+      "reason": "SEC historical-CIK verifier: current ticker-to-CIK is lead-only; every required event date must be bracketed by archival filings under the same CIK that explicitly contain the matching historical trading symbol."
+    },
     "src/g5_sec_sic_classification.py": {
       "expected_sha256": "1e7d7933f081d4defa169c69ae75f5f95b56650275dcc2cd5232ce9d64ea5df0",
       "reason": "Public SEC EDGAR SIC acquisition for G5 classification using explicit historical CIK mappings, archival filing-header acceptance clocks, fail-closed pre-cutoff checks, namespaced SIC-division sector values, and no index/readiness fabrication."
@@ -2662,6 +2666,10 @@
     "tests/test_g5_sec_13f_ownership.py": {
       "expected_sha256": "3a2f4b95b2e13df919d5b2bff52b897d91de703c848871e7a1c92dfa624b342b",
       "reason": "Regression coverage for SEC 13F ownership fractions, SEC flat-file dates, exact CUSIP mapping, amendment/same-day exclusion, option and principal-amount filtering, denominator cutoffs, and canonical ownership-adapter compatibility."
+    },
+    "tests/test_g5_sec_historical_cik_bracket_verifier.py": {
+      "expected_sha256": "3996ae5a752283b315bdd521491f7b200cd8dfa619396ebcb3cd3266ed6c81c4",
+      "reason": "Adversarial regression coverage for archival trading-symbol bracketing, ambiguous current leads, one-sided evidence rejection, all-event-date coverage, and nonmatching ticker leads."
     },
     "tests/test_g5_sec_sic_classification.py": {
       "expected_sha256": "a082d55254d0dffe387fc83a4510d9ba4f9bd67a3502422f53dbffe1b6e6d0b4",
