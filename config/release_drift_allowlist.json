@@ -2024,8 +2024,8 @@
       "reason": "Intentional post-Step21 repository hardening addition"
     },
     "src/real_data_release_sprint.py": {
-      "expected_sha256": "e4cf6e496d4a166d667ec755833fbba5b6d80790ddaff5e80bc646707d01d0a5",
-      "reason": "Real-data sprint stable-ID reconciliation now accepts optional baseline_identity_verified_count, requires event-date count to remain 174, and verifies event + baseline verified + baseline unresolved equals the 3828 required symbol-dates."
+      "expected_sha256": "0b92e9809ed7ed21ee0e44f613a1a38eedeeec4ceb169106e51a9d1c5c2e4845",
+      "reason": "Stable-ID preview seam: coverage refresh and sprint status accept an explicit security-identity manifest path, allowing staged candidate identity to prove downstream gate effects without mutating the canonical manifest; default canonical behavior is unchanged."
     },
     "src/real_data_replay.py": {
       "expected_sha256": "bbfdfbca44903ec38de0984e8b3761de9636f25150f2b15a25795e8d617fc8c6",
@@ -2712,8 +2712,8 @@
       "reason": "Public research dashboard now hydrates machine-readable software-readiness and replay receipts with no-store fetches, while retaining a fail-closed static fallback and embedding no vendor secrets."
     },
     "tests/test_real_data_release_sprint.py": {
-      "expected_sha256": "dab6850ab0773a53f248abc601c9d1f1f61bcf7bdf411b1c16ed70ab0e8f37f0",
-      "reason": "Regression coverage for partial stable-ID progress, fully completed 3828/3828 identity, fail-closed rejection of non-reconciling identity counts, and explicit pytest exception assertions."
+      "expected_sha256": "935d8cd23202d1fa096c9b41c7a06dac45a20729c35a8b4e394ac4423fc20721",
+      "reason": "Regression coverage proves a noncanonical complete identity candidate clears only the staged G2_STABLE_SECURITY_IDENTITY view and is accepted by staged sprint status while canonical defaults remain untouched."
     },
     "tests/test_real_data_replay.py": {
       "expected_sha256": "a0b05f9133760807aa86ff46a7db8321b1e2b0726b4d05dea451a95e3e122826",

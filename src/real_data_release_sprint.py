@@ -285,12 +285,13 @@ def refresh_coverage(
     metadata_quality_path: Path,
     requirements_manifest_path: Path,
     unresolved_gates_path: Path,
+    security_identity_path: Path = DEFAULT_SECURITY_IDENTITY_PATH,
 ) -> dict:
     summary = json.loads(coverage_summary_path.read_text(encoding="utf-8"))
     readiness = json.loads(metadata_readiness_path.read_text(encoding="utf-8"))
     quality = json.loads(metadata_quality_path.read_text(encoding="utf-8"))
     req_manifest = json.loads(requirements_manifest_path.read_text(encoding="utf-8"))
-    identity = _security_identity_status()
+    identity = _security_identity_status(security_identity_path)
     if identity["event_count"] != int(summary.get("event_count", 0) or 0):
         raise ValueError("security identity event_count disagrees with coverage universe")
     if identity["required_symbol_date_count"] != int(summary.get("unique_symbol_date_pairs", 0) or 0):
@@ -422,13 +423,14 @@ def build_status(
     metadata_readiness_path: Path,
     metadata_quality_path: Path,
     outpath: Path,
+    security_identity_path: Path = DEFAULT_SECURITY_IDENTITY_PATH,
 ) -> dict:
     req = json.loads(requirements_manifest_path.read_text(encoding="utf-8"))
     cov = json.loads(coverage_summary_path.read_text(encoding="utf-8"))
     meta = json.loads(metadata_readiness_path.read_text(encoding="utf-8"))
     quality = json.loads(metadata_quality_path.read_text(encoding="utf-8"))
     audit = cov.get("contract_audit") or {}
-    identity = _security_identity_status()
+    identity = _security_identity_status(security_identity_path)
     identity_ready = identity["ready_for_non_synthetic_market_join"]
 
     real_covered = int(audit.get("real_authorized_required_rows_covered", 0) or 0)
@@ -542,6 +544,11 @@ def main() -> None:
     b.add_argument("--metadata-quality", type=Path, required=True)
     b.add_argument("--requirements-manifest", type=Path, required=True)
     b.add_argument("--unresolved-gates", type=Path, required=True)
+    b.add_argument(
+        "--security-identity",
+        type=Path,
+        default=DEFAULT_SECURITY_IDENTITY_PATH,
+    )
 
     c = sub.add_parser("status")
     c.add_argument("--requirements-manifest", type=Path, required=True)
@@ -549,6 +556,11 @@ def main() -> None:
     c.add_argument("--metadata-readiness", type=Path, required=True)
     c.add_argument("--metadata-quality", type=Path, required=True)
     c.add_argument("--out", type=Path, required=True)
+    c.add_argument(
+        "--security-identity",
+        type=Path,
+        default=DEFAULT_SECURITY_IDENTITY_PATH,
+    )
     c.add_argument("--require-all-real", action="store_true")
 
     args = p.parse_args()
@@ -565,6 +577,7 @@ def main() -> None:
             metadata_quality_path=args.metadata_quality,
             requirements_manifest_path=args.requirements_manifest,
             unresolved_gates_path=args.unresolved_gates,
+            security_identity_path=args.security_identity,
         )
     else:
         result = build_status(
@@ -573,6 +586,7 @@ def main() -> None:
             metadata_readiness_path=args.metadata_readiness,
             metadata_quality_path=args.metadata_quality,
             outpath=args.out,
+            security_identity_path=args.security_identity,
         )
         if args.require_all_real and not result["all_12_genuinely_complete"]:
             print(json.dumps(result, indent=2, sort_keys=True))
