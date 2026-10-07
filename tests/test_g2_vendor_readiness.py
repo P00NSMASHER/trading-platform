@@ -84,6 +84,7 @@ def test_vendor_readiness_separates_repo_planning_from_real_coverage():
     assert payload["external_state"]["production_content_validation"] == "BLOCKED_ON_DELIVERY"
     assert payload["external_state"]["databento_cost_probe"] == "BLOCKED_API_KEY_NOT_CONFIGURED"
     assert payload["external_state"]["cboe_trial_historical_access"] == "VENDOR_CONFIRMED_ELIGIBLE_RUNTIME_NOT_VERIFIED"
+    assert payload["external_state"]["cboe_trial_capacity"] == "PUBLISHED_500_POINTS_PER_DAY_HARD_CAP_PENDING_RUNTIME_OVERRIDE"
     assert payload["external_state"]["cboe_trial_option_quote_access"] == "DOCUMENTED_HISTORICAL_ENDPOINT_RUNTIME_TRIAL_ACCESS_UNVERIFIED"
     assert payload["external_state"]["cboe_trial_retention_rights"] == "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES"
     assert payload["external_state"]["cboe_custom_tick_quote"] == "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET"
@@ -126,8 +127,10 @@ def test_readiness_next_actions_cover_every_external_dependency():
     assert "8,888" in actions
     assert "network execution disabled" in actions.lower()
     assert "explicit user authorization" in actions
-    assert "daily credit limit does not gate the trial" in actions
-    assert "acceptance probe" in actions
+    assert "500 points/day" in actions
+    assert "trial overage is unavailable" in actions
+    assert "180 complete 2012+ source dates / 460 underlying-date pairs" in actions
+    assert "acceptance probe" not in actions or "Cboe" in actions
     assert "retained internal research use" in actions
     assert "deleted or returned" in actions
     assert "reference/options" in actions
