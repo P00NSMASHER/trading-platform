@@ -120,7 +120,7 @@ jobs:
             --expected-champion-sha256 0c8c16c9be734152c0018aa40e576fe4db9f4621359fafe521465890f9945616
 
       - name: Upload audit pack
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: control-plane-audit-${{ github.event.pull_request.head.sha }}
           path: private_runtime/audit/control-plane-pack
