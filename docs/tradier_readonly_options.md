@@ -7,13 +7,15 @@ The GitHub Actions workflow .github/workflows/tradier-readonly-options.yml acces
 - Read-only HTTPS GET exclusively: /markets/quotes, /markets/options/expirations, /markets/options/chains, /markets/history on api.tradier.com.
 - No brokerage account reads, order previews, order creation, or account writes. Cross-domain redirects are denied.
 - Expirations: **0DTE**, **1DTE**, and **7–21 calendar DTE**, separately.
-- Fixed research universe: SPY, F, SOFI, BAC, PFE. Five symbols maximum; approximately one GET per second.
+- Market-clock-gated research across **16 liquid tickers** (SPY, QQQ, IWM, TLT, GLD, XLF, XLE, SMH, AAPL, NVDA, AMD, MSFT, BAC, SOFI, F, PFE), in isolated chunks of five, max 20 validated tickers. Approximately one market-data GET per second, below Tradier's documented 120/minute production market-data limit.
+- The protected-main workflow runs via GitHub Actions twice on weekdays at 15:40 and 19:40 UTC, automatically respecting NYSE open/closed state. Market-closed checks emit `MARKET_CLOSED_SKIPPED`, not fake zero-signal conclusions. A GitHub cron trigger can be delayed.
+- `/markets/timesales` is used for **1-minute underlying ETF context only** on SPY/QQQ/IWM over the prior 30 minutes; it cannot establish historical executable options quotes or profit.
 - Reject missing/stale option bid/ask timestamps, wide spreads, low open interest, alternate option roots, and unknown/nonstandard contract multipliers.
 - Normalize explicit Unix **seconds or milliseconds** quote timestamps before enforcing the unchanged 120-second maximum age. Tradier's live examples use 13-digit milliseconds, while earlier examples used seconds; ambiguous units remain ineligible. Aggregate counts by unit are safe to log; raw quotes remain private.
 - Illustrative $100 *modeled* loss cap for **two-leg out-of-the-money bear-call and bull-put credit verticals** using natural bid/ask entry and estimated four contract-side fees. Early assignment, slippage, margin, and actual execution losses can exceed this estimate.
-- IV / 20-session realized-volatility ratio is a hypothesis-screening statistic, **not** an expected-profit or fair-value estimate. Option Greeks may update hourly.
+- IV / 20-session realized-volatility ratio (prior **completed** daily bars only) is a hypothesis-screening statistic, **not** an expected-profit or fair-value estimate. Option Greeks may update hourly.
 
-To run: repository **Actions** > **Tradier read-only options research** > **Run workflow** (main). A protected-main push changing the workflow or its source/tests also triggers verification. Missing or invalid authentication causes a failing run; it is never reported as success.
+To run: repository **Actions** > **Tradier read-only options research** > **Run workflow** (main). The scheduled protected-main workflow also runs on weekdays; protected-main changes to its source/tests invoke another run. Closed/holiday sessions log a skip. Missing or invalid authentication causes a failing run; it is never reported as success.
 
 Aggregate quote rejection counts (invalid, stale, low open interest, wide spread, not OTM) are logged so zero matches can be interpreted without weakening safeguards. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
 
