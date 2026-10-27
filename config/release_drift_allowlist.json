@@ -2828,7 +2828,7 @@
       "reason": "Standard-library, fail-closed and explicitly allowlisted read-only market-data quote observer for 0DTE/1DTE/7-21DTE hypothesis research; no account or order endpoints. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy."
     },
     "tests/test_tradier_options_probe.py": {
-      "expected_sha256": "3eee2673ca904275dbde4ce37f2881e125fba17db19187a71448cc7ea26aa49c",
+      "expected_sha256": "24a65a0956c735b52bd73c3e48332464cbd1b5dd75db1b465d4db2dbe903f092",
       "reason": "Deterministic offline safety acceptance tests for Tradier read-only endpoint boundaries, redirect protection, contract filtering, conservative pricing, and missing-credential failure. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy."
     },
     "docs/tradier_readonly_options.md": {
