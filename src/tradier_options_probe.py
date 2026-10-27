@@ -118,15 +118,32 @@ def expiry_dates(payload):
     return sorted(result)
 
 
-def quote_age(option, now):
-    try:
-        bid = int(option["bid_date"])
-        ask = int(option["ask_date"])
-        if bid <= 0 or ask <= 0 or max(bid, ask) > now.timestamp() + 60:
-            return None
-        return round(max(0.0, now.timestamp() - min(bid, ask)), 1)
-    except (ValueError, TypeError, KeyError):
+def _epoch_seconds(value):
+    """Tradier market-data timestamps may be UNIX seconds or milliseconds.
+
+    Ambiguous, zero, future-nonsensical and microsecond timestamps fail closed.
+    """
+    if isinstance(value, bool):
         return None
+    try:
+        numeric = float(value)
+    except (ValueError, TypeError):
+        return None
+    if not math.isfinite(numeric):
+        return None
+    if 1_000_000_000 <= numeric < 100_000_000_000:
+        return numeric
+    if 1_000_000_000_000 <= numeric < 100_000_000_000_000:
+        return numeric / 1000
+    return None
+
+
+def quote_age(option, now):
+    bid = _epoch_seconds(option.get("bid_date"))
+    ask = _epoch_seconds(option.get("ask_date"))
+    if bid is None or ask is None or max(bid, ask) > now.timestamp() + 60:
+        return None
+    return round(max(0.0, now.timestamp() - min(bid, ask)), 1)
 
 
 def option_iv(option):
@@ -300,12 +317,24 @@ def diagnose_chain(chain, symbol, spot, now, max_quote_age=120):
         "stale_or_missing_quote_time": 0, "low_open_interest": 0,
         "wide_quoted_market": 0, "not_out_of_money": 0,
         "otm_liquid_legs": 0,
+        "quotes_with_millisecond_timestamps": 0,
+        "quotes_with_second_timestamps": 0,
     }
     for item in rows:
         stages["raw_option_rows"] += 1
         if not isinstance(item, dict) or item.get("option_type") not in ("call", "put"):
             continue
         stages["call_or_put_rows"] += 1
+        bid_stamp = option_timestamp = item.get("bid_date")
+        ask_stamp = item.get("ask_date")
+        try:
+            bid_num, ask_num = float(bid_stamp), float(ask_stamp)
+            if 1e12 <= bid_num < 1e14 and 1e12 <= ask_num < 1e14:
+                stages["quotes_with_millisecond_timestamps"] += 1
+            elif 1e9 <= bid_num < 1e11 and 1e9 <= ask_num < 1e11:
+                stages["quotes_with_second_timestamps"] += 1
+        except (ValueError, TypeError):
+            pass
         if item.get("root_symbol") != symbol or nonnegative_int(item.get("contract_size")) != 100:
             stages["unknown_or_adjusted_contract"] += 1
             continue
@@ -339,7 +368,8 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     diagnostics = {name: 0 for name in (
         "raw_option_rows", "call_or_put_rows", "unknown_or_adjusted_contract",
         "invalid_market", "stale_or_missing_quote_time", "low_open_interest",
-        "wide_quoted_market", "not_out_of_money", "otm_liquid_legs")}
+        "wide_quoted_market", "not_out_of_money", "otm_liquid_legs",
+        "quotes_with_millisecond_timestamps", "quotes_with_second_timestamps")}
     spread_counts = {"bear_call": 0, "bull_put": 0}
     premium_candidate_count = 0
     chains_with_contracts = 0
