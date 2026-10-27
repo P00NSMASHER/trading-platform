@@ -1,4 +1,5 @@
 name: Tradier read-only options research
+run-name: Read-only Tradier quote verification
 
 # PRs NEVER receive the brokerage secret. Only reviewed main receives it.
 on:
