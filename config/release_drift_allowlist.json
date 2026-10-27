@@ -2844,7 +2844,7 @@
       "reason": "New clock-gated, bounded <=20-symbol market-data-only orchestration, using 1-minute underlying bar context; no trade/account endpoints or public raw market data."
     },
     "tests/test_tradier_market_cycle.py": {
-      "expected_sha256": "222b765b510d26fcf0a19814f9f48f5685f22d8e52cac5780c5f958d51f6e252",
+      "expected_sha256": "67ff52fca96c0c9d087b61dc29666dea9ada86f30560175c28ac7b273b303f11",
       "reason": "Deterministic no-network acceptance for market-closed skip, widened universe, sanitized context, programmatic cap and blocked account/trade routes."
     },
     "docs/tradier_api_capabilities.md": {
