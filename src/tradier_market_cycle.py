@@ -9,7 +9,6 @@ import argparse
 import csv
 from datetime import datetime, timedelta, timezone
 import json
-import math
 import os
 from pathlib import Path
 import re
@@ -80,6 +79,8 @@ def recent_bar_evidence(token: str, now: datetime, symbols: list[str]) -> dict:
 
 def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     """Closed markets cause an explicit SKIP, never a zero-trade edge verdict."""
+    if not 1 <= len(symbols) <= MAX_SYMBOLS:
+        raise probe.ProbeFailure("Symbol count exceeds bounded research universe")
     state = market_state(token)
     if state != "open":
         return [], {
@@ -99,9 +100,9 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     premium = 0
     all_rows = []
     for i in range(0, len(symbols), CHUNK_SIZE):
-        # Fresh clock for each live batch, rather than replaying one original quote time.
-        batch_now = now if now is not None else datetime.now(timezone.utc)
-        rows, result = probe.run(symbols[i:i + CHUNK_SIZE], token, now=batch_now)
+        # Live mode lets the probe use the actual clock on each received chain.
+        # Explicit now remains available only for deterministic offline replay.
+        rows, result = probe.run(symbols[i:i + CHUNK_SIZE], token, now=now)
         all_rows.extend(rows)
         requested += result["chains_requested"]
         observed += result["chains_with_contracts"]
