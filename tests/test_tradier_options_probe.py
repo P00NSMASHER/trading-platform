@@ -68,6 +68,31 @@ class Tests(unittest.TestCase):
                                                     headers={"Authorization": "Bearer TEST-TOKEN"}),
                                            None, 302, "redirect", {}, "https://example.com")
 
+
+    def test_second_and_millisecond_quote_clocks_are_equivalent(self):
+        sec = {"bid_date": TS - 10, "ask_date": TS - 8}
+        millis = {"bid_date": (TS - 10) * 1000, "ask_date": (TS - 8) * 1000}
+        self.assertEqual(quote_age(sec, NOW), 10)
+        self.assertEqual(quote_age(millis, NOW), 10)
+        self.assertEqual(quote_age(sec, NOW), quote_age(millis, NOW))
+
+    def test_malformed_microsecond_or_future_epoch_fails_closed(self):
+        for value in (None, 0, -1, True, "not-a-timestamp", TS * 1000000,
+                      (TS + 120) * 1000):
+            self.assertIsNone(quote_age({"bid_date": value, "ask_date": TS}, NOW))
+
+    def test_millisecond_chain_accepts_eligible_otm_legs(self):
+        o = option(101, 1.25, 1.27)
+        o["bid_date"] = (TS - 10) * 1000
+        o["ask_date"] = (TS - 10) * 1000
+        diag = probe.diagnose_chain(
+            {"options": {"option": [o]}}, symbol="TEST", spot=100, now=NOW
+        )
+        self.assertEqual(diag["quotes_with_millisecond_timestamps"], 1)
+        self.assertEqual(diag["stale_or_missing_quote_time"], 0)
+        self.assertEqual(diag["otm_liquid_legs"], 1)
+
+
     def test_both_quote_timestamps_required(self):
         self.assertIsNone(quote_age({"bid_date": TS}, NOW))
         self.assertIsNone(quote_age({"bid_date": TS+100, "ask_date": TS}, NOW))

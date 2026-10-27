@@ -2824,16 +2824,16 @@
       "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts."
     },
     "src/tradier_options_probe.py": {
-      "expected_sha256": "e630cb6a207114adb4e719abb19de2bca56acb554ce670746f000db34ae53347",
-      "reason": "Standard-library, fail-closed and explicitly allowlisted read-only market-data quote observer for 0DTE/1DTE/7-21DTE hypothesis research; no account or order endpoints. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy."
+      "expected_sha256": "149cd17651da3b549f3723ea33596c19e8303ea0b19b1f24aa727d3d8e774611",
+      "reason": "Standard-library, fail-closed and explicitly allowlisted read-only market-data quote observer for 0DTE/1DTE/7-21DTE hypothesis research; no account or order endpoints. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection."
     },
     "tests/test_tradier_options_probe.py": {
-      "expected_sha256": "24a65a0956c735b52bd73c3e48332464cbd1b5dd75db1b465d4db2dbe903f092",
-      "reason": "Deterministic offline safety acceptance tests for Tradier read-only endpoint boundaries, redirect protection, contract filtering, conservative pricing, and missing-credential failure. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy."
+      "expected_sha256": "bd80eb592a1f82e9b2e3586c46697b50de5262a717ff029153ded9c38d1e40d8",
+      "reason": "Deterministic offline safety acceptance tests for Tradier read-only endpoint boundaries, redirect protection, contract filtering, conservative pricing, and missing-credential failure. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection."
     },
     "docs/tradier_readonly_options.md": {
-      "expected_sha256": "4d6bef9ac40598d0a1df745716a22b78afc80746bc163b1070158af1a73f91f5",
-      "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy."
+      "expected_sha256": "db036cc6848688b89bf784fde060723cdae715abe4c3dc6d03432e7ead75baa7",
+      "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection."
     },
     "docs/options_edge_validation_protocol.md": {
       "expected_sha256": "6481168a962b01322ee394017e9f42a2e6f7e371d61578243fe0f45a699fe6d1",
