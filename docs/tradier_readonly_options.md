@@ -9,10 +9,12 @@ The GitHub Actions workflow .github/workflows/tradier-readonly-options.yml acces
 - Expirations: **0DTE**, **1DTE**, and **7–21 calendar DTE**, separately.
 - Fixed research universe: SPY, F, SOFI, BAC, PFE. Five symbols maximum; approximately one GET per second.
 - Reject missing/stale option bid/ask timestamps, wide spreads, low open interest, alternate option roots, and unknown/nonstandard contract multipliers.
-- Illustrative $100 *modeled* loss cap for **two-leg call credit verticals** using natural bid/ask entry and estimated four contract-side fees. Early assignment, slippage, margin, and actual execution losses can exceed this estimate.
+- Illustrative $100 *modeled* loss cap for **two-leg out-of-the-money bear-call and bull-put credit verticals** using natural bid/ask entry and estimated four contract-side fees. Early assignment, slippage, margin, and actual execution losses can exceed this estimate.
 - IV / 20-session realized-volatility ratio is a hypothesis-screening statistic, **not** an expected-profit or fair-value estimate. Option Greeks may update hourly.
 
 To run: repository **Actions** > **Tradier read-only options research** > **Run workflow** (main). A protected-main push changing the workflow or its source/tests also triggers verification. Missing or invalid authentication causes a failing run; it is never reported as success.
+
+Aggregate quote rejection counts (invalid, stale, low open interest, wide spread, not OTM) are logged so zero matches can be interpreted without weakening safeguards. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
 
 Raw market data exists only in ephemeral GitHub-runner temporary storage and is deleted, with **no uploaded artifacts or committed quotes**. The repository is public. Logs show sanitized counts only. A successful run establishes API and options-chain access, **not a profitable or executable strategy**. Out-of-market-hours quote staleness may yield zero candidates.
 
