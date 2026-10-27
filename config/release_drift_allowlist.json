@@ -2820,8 +2820,8 @@
       "reason": "Reproducible exhaustive-audit implementation covering reachable Git objects, tracked/history blobs, archives, structured alternate formats, notebooks, and embedded outputs for the pinned hacked_earnings_jfe commit."
     },
     ".github/workflows/tradier-readonly-options.yml": {
-      "expected_sha256": "32919e0b59dcaba6820a0970ea0e122d401e9324e4220ef5599cec71ff92d46a",
-      "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts."
+      "expected_sha256": "ee4d0183f775ff9a6e87de2aa8e9f14774c9dc0973074bbe2116b89b4117e97d",
+      "reason": "Reviewed protected-main Tradier read-only market-data workflow with explicit quote-verification run name; no account/order endpoint access and no raw market-data artifacts."
     },
     "src/tradier_options_probe.py": {
       "expected_sha256": "8b5fc8758d9018fc3535a2662a3b2b9ade87f506f22d39f887e773e277cfba0f",
