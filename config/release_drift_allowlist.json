@@ -2806,8 +2806,7 @@
     "tests/test_real_data_replay_g5_identity.py": {
       "expected_sha256": "9fe7c3766086f063ba97d7d617b82aa7e33faae6fedd2ff427346e91cf05e9db",
       "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, byte-compatible legacy replay behavior, and a hash-bound G5-only staged-identity path that remains fail-closed for final evaluation."
-    }
-  ,
+    },
     ".github/workflows/hacked-earnings-exhaustive-audit.yml": {
       "expected_sha256": "38db70befe76eb6e74c95cb66153b11a76654ecded342861f9311b66db324938",
       "reason": "Reproducible read-only CI for the pinned hacked_earnings_jfe exhaustive audit; clones the exact upstream commit and publishes audit evidence without expanding the audited source boundary."
@@ -2819,6 +2818,22 @@
     "scripts/audit_hacked_earnings_jfe_exhaustive.py": {
       "expected_sha256": "8a82227d0c2dedd5b0099e77d5c1b398b4513aa3dc6dbcf18eaea5871c8fe56f",
       "reason": "Reproducible exhaustive-audit implementation covering reachable Git objects, tracked/history blobs, archives, structured alternate formats, notebooks, and embedded outputs for the pinned hacked_earnings_jfe commit."
+    },
+    ".github/workflows/tradier-readonly-options.yml": {
+      "expected_sha256": "32919e0b59dcaba6820a0970ea0e122d401e9324e4220ef5599cec71ff92d46a",
+      "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts."
+    },
+    "src/tradier_options_probe.py": {
+      "expected_sha256": "8b5fc8758d9018fc3535a2662a3b2b9ade87f506f22d39f887e773e277cfba0f",
+      "reason": "Standard-library, fail-closed and explicitly allowlisted read-only market-data quote observer for 0DTE/1DTE/7-21DTE hypothesis research; no account or order endpoints."
+    },
+    "tests/test_tradier_options_probe.py": {
+      "expected_sha256": "40df921a5ed33e25d62e776081939a73afb53dea048aed8b771bd0cc6d7a119a",
+      "reason": "Deterministic offline safety acceptance tests for Tradier read-only endpoint boundaries, redirect protection, contract filtering, conservative pricing, and missing-credential failure."
+    },
+    "docs/tradier_readonly_options.md": {
+      "expected_sha256": "b78637d0335601496c8615c90e905605b6b3022ea6ee3ffea54ba9d327727b29",
+      "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits."
     }
   },
   "schema_version": "2",
