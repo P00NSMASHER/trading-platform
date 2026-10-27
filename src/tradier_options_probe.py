@@ -325,7 +325,7 @@ def diagnose_chain(chain, symbol, spot, now, max_quote_age=120):
         if not isinstance(item, dict) or item.get("option_type") not in ("call", "put"):
             continue
         stages["call_or_put_rows"] += 1
-        bid_stamp = option_timestamp = item.get("bid_date")
+        bid_stamp = item.get("bid_date")
         ask_stamp = item.get("ask_date")
         try:
             bid_num, ask_num = float(bid_stamp), float(ask_stamp)
