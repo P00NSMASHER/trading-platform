@@ -9,6 +9,7 @@ The GitHub Actions workflow .github/workflows/tradier-readonly-options.yml acces
 - Expirations: **0DTE**, **1DTE**, and **7–21 calendar DTE**, separately.
 - Fixed research universe: SPY, F, SOFI, BAC, PFE. Five symbols maximum; approximately one GET per second.
 - Reject missing/stale option bid/ask timestamps, wide spreads, low open interest, alternate option roots, and unknown/nonstandard contract multipliers.
+- Normalize explicit Unix **seconds or milliseconds** quote timestamps before enforcing the unchanged 120-second maximum age. Tradier's live examples use 13-digit milliseconds, while earlier examples used seconds; ambiguous units remain ineligible. Aggregate counts by unit are safe to log; raw quotes remain private.
 - Illustrative $100 *modeled* loss cap for **two-leg out-of-the-money bear-call and bull-put credit verticals** using natural bid/ask entry and estimated four contract-side fees. Early assignment, slippage, margin, and actual execution losses can exceed this estimate.
 - IV / 20-session realized-volatility ratio is a hypothesis-screening statistic, **not** an expected-profit or fair-value estimate. Option Greeks may update hourly.
 
