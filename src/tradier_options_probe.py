@@ -24,7 +24,7 @@ BASE = "https://api.tradier.com/v1"
 ALLOWED = frozenset(("/markets/quotes", "/markets/options/expirations",
                      "/markets/options/chains", "/markets/history"))
 EASTERN = ZoneInfo("America/New_York")
-HEADERS = ("observed_at_utc", "underlying", "bucket", "expiration", "dte",
+HEADERS = ("observed_at_utc", "underlying", "bucket", "expiration", "dte", "spread_side",
            "spot", "short_contract", "long_contract", "short_strike", "long_strike",
            "short_bid", "long_ask", "credit_per_share", "risk_estimate_usd",
            "fees_assumed_usd", "short_iv", "rv20", "iv_rv_ratio",
@@ -209,7 +209,7 @@ def candidates(chain, *, symbol, spot, expiry, now, rv20,
             if risk > max_risk:
                 continue
             iv = option_iv(short)
-            result.append({
+            result.append({"spread_side": "bear_call",
                 "observed_at_utc": now.isoformat(), "underlying": symbol,
                 "bucket": label, "expiration": expiry, "dte": dte,
                 "spot": spot, "short_contract": short.get("symbol"),
@@ -226,11 +226,122 @@ def candidates(chain, *, symbol, spot, expiry, now, rv20,
     return result
 
 
+def put_candidates(chain, *, symbol, spot, expiry, now, rv20,
+               max_risk=100.0, max_quote_age=120, max_spread=0.25,
+               min_open_interest=100, fee_per_side=0.65):
+    """Out-of-the-money defined-width put credit verticals, conservatively marked."""
+    dte = (datetime.strptime(expiry, "%Y-%m-%d").date()
+           - now.astimezone(EASTERN).date()).days
+    label = bucket(dte)
+    if label is None or positive(spot) is None:
+        return []
+    node = chain.get("options") or {}
+    options = many(node.get("option")) if isinstance(node, dict) else []
+    puts = []
+    for item in options:
+        if not isinstance(item, dict) or item.get("option_type") != "put":
+            continue
+        if (nonnegative_int(item.get("contract_size")) != 100
+            or item.get("root_symbol") != symbol):
+            continue  # reject unknown/adjusted contracts and alternate delivery roots
+        strike = positive(item.get("strike"))
+        bid, ask = positive(item.get("bid")), positive(item.get("ask"))
+        age = quote_age(item, now)
+        if (strike is None or bid is None or ask is None or ask < bid
+            or (ask - bid) / ((ask + bid) / 2) > max_spread
+            or age is None or age > max_quote_age
+            or nonnegative_int(item.get("open_interest")) < min_open_interest):
+            continue
+        puts.append((strike, age, item))
+    puts.sort(key=lambda x: -x[0])
+    result = []
+    for i, (short_strike, short_age, short) in enumerate(puts):
+        if short_strike >= spot:
+            continue
+        for long_strike, long_age, long in puts[i + 1:]:
+            width = round(short_strike - long_strike, 3)
+            if width <= 0:
+                continue
+            if width > 3:
+                break
+            credit = round(float(short["bid"]) - float(long["ask"]), 4)
+            if credit <= 0 or credit >= width:
+                continue
+            fees = 4 * fee_per_side  # two legs at entry and at exit, illustrative
+            risk = round((width - credit) * 100 + fees, 2)
+            if risk > max_risk:
+                continue
+            iv = option_iv(short)
+            result.append({"spread_side": "bull_put",
+                "observed_at_utc": now.isoformat(), "underlying": symbol,
+                "bucket": label, "expiration": expiry, "dte": dte,
+                "spot": spot, "short_contract": short.get("symbol"),
+                "long_contract": long.get("symbol"),
+                "short_strike": short_strike, "long_strike": long_strike,
+                "short_bid": short["bid"], "long_ask": long["ask"],
+                "credit_per_share": credit, "risk_estimate_usd": risk,
+                "fees_assumed_usd": round(fees, 2), "short_iv": iv,
+                "rv20": rv20, "iv_rv_ratio": (round(iv / rv20, 3)
+                                                 if iv and rv20 and rv20 > 0 else None),
+                "quote_age_seconds": max(short_age, long_age),
+                "research_only": True,
+            })
+    return result
+
+
+
+def diagnose_chain(chain, symbol, spot, now, max_quote_age=120):
+    """Aggregate why quotes fail. Logs NEVER contain strike, symbol, or prices."""
+    node = chain.get("options") or {}
+    rows = many(node.get("option")) if isinstance(node, dict) else []
+    stages = {
+        "raw_option_rows": 0, "call_or_put_rows": 0,
+        "unknown_or_adjusted_contract": 0, "invalid_market": 0,
+        "stale_or_missing_quote_time": 0, "low_open_interest": 0,
+        "wide_quoted_market": 0, "not_out_of_money": 0,
+        "otm_liquid_legs": 0,
+    }
+    for item in rows:
+        stages["raw_option_rows"] += 1
+        if not isinstance(item, dict) or item.get("option_type") not in ("call", "put"):
+            continue
+        stages["call_or_put_rows"] += 1
+        if item.get("root_symbol") != symbol or nonnegative_int(item.get("contract_size")) != 100:
+            stages["unknown_or_adjusted_contract"] += 1
+            continue
+        strike = positive(item.get("strike"))
+        bid, ask = positive(item.get("bid")), positive(item.get("ask"))
+        if strike is None or bid is None or ask is None or ask < bid:
+            stages["invalid_market"] += 1
+            continue
+        age = quote_age(item, now)
+        if age is None or age > max_quote_age:
+            stages["stale_or_missing_quote_time"] += 1
+            continue
+        if nonnegative_int(item.get("open_interest")) < 100:
+            stages["low_open_interest"] += 1
+            continue
+        if (ask - bid) / ((ask + bid) / 2) > 0.25:
+            stages["wide_quoted_market"] += 1
+            continue
+        if ((item["option_type"] == "call" and strike <= spot)
+            or (item["option_type"] == "put" and strike >= spot)):
+            stages["not_out_of_money"] += 1
+            continue
+        stages["otm_liquid_legs"] += 1
+    return stages
+
 def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     """Fail on missing authentication/market data; zero candidates is not success proof."""
     now = now or datetime.now(timezone.utc)
     counts = {"0DTE": 0, "1DTE": 0, "7-21DTE": 0}
     rows = []
+    diagnostics = {name: 0 for name in (
+        "raw_option_rows", "call_or_put_rows", "unknown_or_adjusted_contract",
+        "invalid_market", "stale_or_missing_quote_time", "low_open_interest",
+        "wide_quoted_market", "not_out_of_money", "otm_liquid_legs")}
+    spread_counts = {"bear_call": 0, "bull_put": 0}
+    premium_candidate_count = 0
     chains_with_contracts = 0
     examined = 0
     for symbol in symbols:
@@ -257,18 +368,31 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
             node = chain.get("options") or {}
             if isinstance(node, dict) and many(node.get("option")):
                 chains_with_contracts += 1
+            for key, value in diagnose_chain(chain, symbol, spot, now, max_quote_age).items():
+                diagnostics[key] += value
             selected = candidates(chain, symbol=symbol, spot=spot, expiry=expiry,
                                   now=now, rv20=rv20, max_risk=max_risk,
                                   max_quote_age=max_quote_age)
+            selected.extend(put_candidates(chain, symbol=symbol, spot=spot, expiry=expiry,
+                                           now=now, rv20=rv20, max_risk=max_risk,
+                                           max_quote_age=max_quote_age))
             rows.extend(selected)
             counts[label] += len(selected)
+            for candidate in selected:
+                spread_counts[candidate["spread_side"]] += 1
+                if (candidate["bucket"] == "7-21DTE"
+                    and (candidate["iv_rv_ratio"] or 0) >= 1.20):
+                    premium_candidate_count += 1
     if examined == 0 or chains_with_contracts == 0:
         raise ProbeFailure("No in-range option chains with actual contracts returned")
     return rows, {"status": "MARKET_DATA_ACCESS_VERIFIED",
                   "symbols_checked": len(symbols),
                   "chains_requested": examined,
                   "chains_with_contracts": chains_with_contracts,
-                  "candidate_counts": counts, "read_only": True,
+                  "candidate_counts": counts, "spread_counts": spread_counts,
+                  "quote_filter_diagnostics": diagnostics,
+                  "iv_rv_ge_1_20_seven_to_21_dte": premium_candidate_count,
+                  "read_only": True,
                   "edge_status": "UNVERIFIED"}
 
 
