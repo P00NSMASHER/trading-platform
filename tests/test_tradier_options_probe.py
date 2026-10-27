@@ -5,6 +5,8 @@ from datetime import datetime, timezone
 from unittest.mock import patch
 from urllib.request import Request
 
+import tradier_options_probe as probe
+
 from tradier_options_probe import (ALLOWED, ProbeFailure, _NoRedirects, bucket,
     candidates, expiry_dates, get_json, main, option_iv, quote_age, run, spot_quote)
 
@@ -98,6 +100,80 @@ class Tests(unittest.TestCase):
         with patch("tradier_options_probe.get_json", return_value={"quotes": {"quote": []}}):
             with self.assertRaises(ProbeFailure):
                 run(["SPY"], "DUMMY", now=NOW)
+
+
+    def test_put_credit_vertical_uses_otm_strikes_and_natural_fills(self):
+        puts = [
+            {**option(99, 1.25, 1.27), "option_type": "put"},
+            {**option(98, 0.78, 0.80), "option_type": "put"},
+        ]
+        rows = probe.put_candidates(
+            {"options": {"option": puts}}, symbol="TEST", spot=100,
+            expiry="2026-11-06", now=NOW, rv20=0.25,
+        )
+        assert len(rows) == 1
+        assert rows[0]["spread_side"] == "bull_put"
+        assert rows[0]["short_strike"] == 99
+        assert rows[0]["long_strike"] == 98
+        assert abs(rows[0]["credit_per_share"] - 0.45) < 1e-9
+        assert abs(rows[0]["risk_estimate_usd"] - 57.60) < 1e-9
+
+
+    def test_put_credit_rejects_itm_or_adjusted_deliverables(self):
+        short = {**option(101, 0.73, 0.75), "option_type": "put"}
+        long = {**option(100, 0.48, 0.51), "option_type": "put"}
+        assert probe.put_candidates(
+            {"options": {"option": [short, long]}},
+            symbol="TEST", spot=100, expiry="2026-11-06", now=NOW,
+            rv20=0.2,
+        ) == []
+        short["strike"] = 99
+        long["strike"] = 98
+        long["contract_size"] = 10
+        assert probe.put_candidates(
+            {"options": {"option": [short, long]}},
+            symbol="TEST", spot=100, expiry="2026-11-06", now=NOW,
+            rv20=0.2,
+        ) == []
+
+
+    def test_diagnostics_one_failure_reason_per_contract_without_quotes_in_output(self):
+        live = option(101, 1.25, 1.27)
+        stale = option(102, 0.78, 0.8, age=10_000)
+        low_oi = option(103, 0.70, 0.73, oi=1)
+        put = {**option(99, 0.65, 0.68), "option_type": "put"}
+        funnel = probe.diagnose_chain(
+            {"options": {"option": [live, stale, low_oi, put]}},
+            symbol="TEST", spot=100, now=NOW,
+        )
+        assert funnel["raw_option_rows"] == 4
+        assert funnel["call_or_put_rows"] == 4
+        assert funnel["stale_or_missing_quote_time"] == 1
+        assert funnel["low_open_interest"] == 1
+        assert funnel["otm_liquid_legs"] == 2
+        assert "TEST" not in str(funnel)
+        assert "1.25" not in str(funnel)
+
+
+    def test_full_probe_reports_aggregate_put_spread_and_premium_count(self):
+        puts = [
+            {**option(99, 1.25, 1.27), "option_type": "put"},
+            {**option(98, 0.78, 0.80), "option_type": "put"},
+        ]
+        responses = {
+            "/markets/quotes": {"quotes": {"quote": {"bid": 100, "ask": 100.02}}},
+            "/markets/options/expirations": {"expirations": {"date": ["2026-11-06"]}},
+            "/markets/history": {"history": {"day": []}},
+            "/markets/options/chains": {"options": {"option": puts}},
+        }
+        with patch("tradier_options_probe.get_json",
+                   side_effect=lambda _token, endpoint, _params: responses[endpoint]):
+            rows, summary = probe.run(["TEST"], "DUMMY", now=NOW)
+        assert len(rows) == 1
+        assert summary["spread_counts"] == {"bear_call": 0, "bull_put": 1}
+        assert summary["quote_filter_diagnostics"]["otm_liquid_legs"] == 2
+        assert summary["edge_status"] == "UNVERIFIED"
+
 
 
 if __name__ == "__main__":
