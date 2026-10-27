@@ -1,0 +1,55 @@
+name: Tradier read-only options research
+
+# PRs NEVER receive the brokerage secret. Only reviewed main receives it.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/tradier-readonly-options.yml
+      - src/tradier_options_probe.py
+      - tests/test_tradier_options_probe.py
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tradier-readonly-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  observe:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact protected-main commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Set up Python (standard library only)
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+
+      - name: Test read-only and fail-closed safeguards without credentials
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -v -s tests -p test_tradier_options_probe.py
+
+      - name: Probe 0DTE, 1DTE, and 7-21DTE Tradier chains (GET only)
+        env:
+          TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+          PYTHONPATH: src
+        run: >-
+          python -m tradier_options_probe
+          --symbols SPY,F,SOFI,BAC,PFE
+          --max-risk 100
+          --max-age 120
+          --out "$RUNNER_TEMP/tradier_market_snapshot.csv"
+
+      - name: Delete temporary market-data snapshot
+        if: always()
+        run: rm -f "$RUNNER_TEMP/tradier_market_snapshot.csv"
