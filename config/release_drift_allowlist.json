@@ -2824,16 +2824,20 @@
       "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts."
     },
     "src/tradier_options_probe.py": {
-      "expected_sha256": "8b5fc8758d9018fc3535a2662a3b2b9ade87f506f22d39f887e773e277cfba0f",
-      "reason": "Standard-library, fail-closed and explicitly allowlisted read-only market-data quote observer for 0DTE/1DTE/7-21DTE hypothesis research; no account or order endpoints."
+      "expected_sha256": "e630cb6a207114adb4e719abb19de2bca56acb554ce670746f000db34ae53347",
+      "reason": "Standard-library, fail-closed and explicitly allowlisted read-only market-data quote observer for 0DTE/1DTE/7-21DTE hypothesis research; no account or order endpoints. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy."
     },
     "tests/test_tradier_options_probe.py": {
-      "expected_sha256": "40df921a5ed33e25d62e776081939a73afb53dea048aed8b771bd0cc6d7a119a",
-      "reason": "Deterministic offline safety acceptance tests for Tradier read-only endpoint boundaries, redirect protection, contract filtering, conservative pricing, and missing-credential failure."
+      "expected_sha256": "3eee2673ca904275dbde4ce37f2881e125fba17db19187a71448cc7ea26aa49c",
+      "reason": "Deterministic offline safety acceptance tests for Tradier read-only endpoint boundaries, redirect protection, contract filtering, conservative pricing, and missing-credential failure. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy."
     },
     "docs/tradier_readonly_options.md": {
-      "expected_sha256": "b78637d0335601496c8615c90e905605b6b3022ea6ee3ffea54ba9d327727b29",
-      "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits."
+      "expected_sha256": "4d6bef9ac40598d0a1df745716a22b78afc80746bc163b1070158af1a73f91f5",
+      "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy."
+    },
+    "docs/options_edge_validation_protocol.md": {
+      "expected_sha256": "6481168a962b01322ee394017e9f42a2e6f7e371d61578243fe0f45a699fe6d1",
+      "reason": "Preregistered prospective, cost-aware 7-21 DTE falsification standard, controls and protected market-data retention requirements, with no verified profit claims."
     }
   },
   "schema_version": "2",
