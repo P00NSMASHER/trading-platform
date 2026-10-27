@@ -3,12 +3,18 @@ name: Tradier read-only options research
 # PRs NEVER receive the brokerage secret. Only reviewed main receives it.
 on:
   workflow_dispatch:
+  schedule:
+    # UTC times deliberately land inside the NYSE session in both EDT and EST.
+    # Holiday/early-close handling is delegated to Tradier /markets/clock.
+    - cron: '40 15,19 * * 1-5'
   push:
     branches: [main]
     paths:
       - .github/workflows/tradier-readonly-options.yml
       - src/tradier_options_probe.py
+      - src/tradier_market_cycle.py
       - tests/test_tradier_options_probe.py
+      - tests/test_tradier_market_cycle.py
 
 permissions:
   contents: read
@@ -37,17 +43,17 @@ jobs:
       - name: Test read-only and fail-closed safeguards without credentials
         env:
           PYTHONPATH: src
-        run: python -m unittest discover -v -s tests -p test_tradier_options_probe.py
+        run: |
+          python -m unittest discover -v -s tests -p test_tradier_options_probe.py
+          python -m unittest discover -v -s tests -p test_tradier_market_cycle.py
 
       - name: Probe 0DTE, 1DTE, and 7-21DTE Tradier chains (GET only)
         env:
           TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
           PYTHONPATH: src
         run: >-
-          python -m tradier_options_probe
-          --symbols SPY,F,SOFI,BAC,PFE
-          --max-risk 100
-          --max-age 120
+          python -m tradier_market_cycle
+          --symbols SPY,QQQ,IWM,TLT,GLD,XLF,XLE,SMH,AAPL,NVDA,AMD,MSFT,BAC,SOFI,F,PFE
           --out "$RUNNER_TEMP/tradier_market_snapshot.csv"
 
       - name: Delete temporary market-data snapshot
