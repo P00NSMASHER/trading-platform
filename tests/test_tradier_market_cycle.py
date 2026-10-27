@@ -15,7 +15,7 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(len(cycle.DEFAULT_SYMBOLS), 16)
         self.assertEqual(len(set(cycle.DEFAULT_SYMBOLS)), 16)
         self.assertEqual(cycle.parse_symbols("SPY,QQQ,SPY"), ["SPY", "QQQ"])
-        for raw in ("", "SPY,../BAD", ",".join(["SPY"] + [f"SYM{i}" for i in range(20))):
+        for raw in ("", "SPY,../BAD", ",".join(["SPY"] + [f"SYM{i}" for i in range(20)])):
             with self.assertRaises(ProbeFailure):
                 cycle.parse_symbols(raw)
 
