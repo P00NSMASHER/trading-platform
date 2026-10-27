@@ -22,7 +22,8 @@ from zoneinfo import ZoneInfo
 
 BASE = "https://api.tradier.com/v1"
 ALLOWED = frozenset(("/markets/quotes", "/markets/options/expirations",
-                     "/markets/options/chains", "/markets/history"))
+                     "/markets/options/chains", "/markets/history",
+                     "/markets/clock", "/markets/timesales"))
 EASTERN = ZoneInfo("America/New_York")
 HEADERS = ("observed_at_utc", "underlying", "bucket", "expiration", "dte", "spread_side",
            "spot", "short_contract", "long_contract", "short_strike", "long_strike",
@@ -42,7 +43,7 @@ class _NoRedirects(HTTPRedirectHandler):
 
 
 def get_json(token, endpoint, params):
-    """Only 4 explicit HTTPS market-data GET routes; rejects all redirects."""
+    """Only six explicit HTTPS market-data GET routes; rejects all redirects."""
     global _last_request
     if endpoint not in ALLOWED:
         raise ProbeFailure("Denied: endpoint is not an allowed market-data route")
@@ -156,14 +157,23 @@ def option_iv(option):
     return round(iv, 5) if 0 < iv < 3 else None
 
 
-def realized_vol20(payload):
+def realized_vol20(payload, *, asof_date=None):
+    """Use ONLY 21 fully completed prior daily closes (never today's partial bar)."""
     history = payload.get("history") or {}
     if not isinstance(history, dict):
         return None
-    days = sorted((row for row in many(history.get("day"))
-                   if isinstance(row, dict)), key=lambda row: row.get("date", ""))
-    closes = [positive(row.get("close")) for row in days[-21:]]
-    if len(closes) != 21 or any(v is None for v in closes):
+    days = [row for row in many(history.get("day")) if isinstance(row, dict)]
+    if asof_date is not None:
+        days = [row for row in days
+                if isinstance(row.get("date"), str)
+                and row["date"] < asof_date.isoformat()]
+    days.sort(key=lambda row: str(row.get("date", "")))
+    latest = days[-21:]
+    dates = [row.get("date") for row in latest]
+    if len(latest) != 21 or len(set(dates)) != 21:
+        return None
+    closes = [positive(row.get("close")) for row in latest]
+    if any(v is None for v in closes):
         return None
     returns = [math.log(closes[i] / closes[i - 1]) for i in range(1, 21)]
     return round(statistics.stdev(returns) * math.sqrt(252), 5)
@@ -362,6 +372,7 @@ def diagnose_chain(chain, symbol, spot, now, max_quote_age=120):
 
 def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     """Fail on missing authentication/market data; zero candidates is not success proof."""
+    use_live_observation_time = now is None
     now = now or datetime.now(timezone.utc)
     counts = {"0DTE": 0, "1DTE": 0, "7-21DTE": 0}
     rows = []
@@ -385,7 +396,7 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                            {"symbol": symbol, "interval": "daily",
                             "start": (now.date() - timedelta(days=50)).isoformat(),
                             "end": now.date().isoformat()})
-        rv20 = realized_vol20(history)
+        rv20 = realized_vol20(history, asof_date=now.astimezone(EASTERN).date())
         for expiry in dates:
             dte = (datetime.strptime(expiry, "%Y-%m-%d").date()
                    - now.astimezone(EASTERN).date()).days
@@ -395,16 +406,18 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
             examined += 1
             chain = get_json(token, "/markets/options/chains",
                              {"symbol": symbol, "expiration": expiry, "greeks": "true"})
+            chain_now = (datetime.now(timezone.utc)
+                         if use_live_observation_time else now)
             node = chain.get("options") or {}
             if isinstance(node, dict) and many(node.get("option")):
                 chains_with_contracts += 1
-            for key, value in diagnose_chain(chain, symbol, spot, now, max_quote_age).items():
+            for key, value in diagnose_chain(chain, symbol, spot, chain_now, max_quote_age).items():
                 diagnostics[key] += value
             selected = candidates(chain, symbol=symbol, spot=spot, expiry=expiry,
-                                  now=now, rv20=rv20, max_risk=max_risk,
+                                  now=chain_now, rv20=rv20, max_risk=max_risk,
                                   max_quote_age=max_quote_age)
             selected.extend(put_candidates(chain, symbol=symbol, spot=spot, expiry=expiry,
-                                           now=now, rv20=rv20, max_risk=max_risk,
+                                           now=chain_now, rv20=rv20, max_risk=max_risk,
                                            max_quote_age=max_quote_age))
             rows.extend(selected)
             counts[label] += len(selected)

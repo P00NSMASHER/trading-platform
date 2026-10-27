@@ -1,7 +1,7 @@
 """Offline, deterministic Tradier observer acceptance tests. No network or token."""
 import io
 import unittest
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from unittest.mock import patch
 from urllib.request import Request
 
@@ -23,6 +23,29 @@ def option(strike, bid, ask, age=10, size=100, oi=500):
 
 
 class Tests(unittest.TestCase):
+
+    def test_completed_close_volatility_excludes_partial_current_day(self):
+        historical = [
+            {"date": f"2026-09-{i:02d}", "close": float(95 + i + (i % 3))}
+            for i in range(1, 22)
+        ]
+        reference = {"history": {"day": historical}}
+        latest = {"history": {"day": historical + [
+            {"date": "2026-09-22", "close": 1_000_000.0}
+        ]}}
+        baseline = probe.realized_vol20(reference, asof_date=date(2026, 9, 22))
+        observed = probe.realized_vol20(latest, asof_date=date(2026, 9, 22))
+        self.assertEqual(baseline, observed)
+        self.assertIsNotNone(baseline)
+        self.assertGreater(baseline, 0)
+
+    def test_duplicate_daily_bars_do_not_generate_false_volatility(self):
+        days = [{"date": f"2026-09-{i:02d}", "close": 100 + i} for i in range(1, 22)]
+        days[-1]["date"] = days[-2]["date"]
+        self.assertIsNone(probe.realized_vol20(
+            {"history": {"day": days}}, asof_date=date(2026, 9, 22)
+        ))
+
     def test_buckets(self):
         self.assertEqual([bucket(i) for i in (0, 1, 6, 7, 21, 22)],
                          ["0DTE", "1DTE", None, "7-21DTE", "7-21DTE", None])
@@ -57,7 +80,9 @@ class Tests(unittest.TestCase):
         self.assertEqual(rows, [])
 
     def test_allowlist_denies_orders_and_account_routes(self):
-        self.assertEqual(len(ALLOWED), 4)
+        self.assertEqual(len(ALLOWED), 6)
+        self.assertIn('/markets/clock', ALLOWED)
+        self.assertIn('/markets/timesales', ALLOWED)
         for path in ("/accounts/123/orders", "/accounts/balances", "/markets/quotes/extra"):
             with self.assertRaises(ProbeFailure):
                 get_json("TEST-TOKEN", path, {})
