@@ -57,7 +57,9 @@ class Tests(unittest.TestCase):
         self.assertEqual(rows, [])
 
     def test_allowlist_denies_orders_and_account_routes(self):
-        self.assertEqual(len(ALLOWED), 4)
+        self.assertEqual(len(ALLOWED), 6)
+        self.assertIn('/markets/clock', ALLOWED)
+        self.assertIn('/markets/timesales', ALLOWED)
         for path in ("/accounts/123/orders", "/accounts/balances", "/markets/quotes/extra"):
             with self.assertRaises(ProbeFailure):
                 get_json("TEST-TOKEN", path, {})
