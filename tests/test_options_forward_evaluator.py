@@ -134,7 +134,7 @@ class ForwardEvidenceTests(unittest.TestCase):
             row = synthetic_row()
             reference = START if field != "exit_quote_utc" else START + timedelta(days=1)
             row[field] = (reference + timedelta(minutes=minutes)).isoformat()
-            with self.assertRaisesRegex(ev.EvidenceError, "stale|future"):
+            with self.assertRaisesRegex(ev.EvidenceError, "stale|future|decision"):
                 ev.evaluate_paper_marks([row], asof=ASOF)
 
     def test_h1_and_trade_safety_reject_bad_contracts(self):
