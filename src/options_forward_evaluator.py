@@ -25,6 +25,7 @@ COLUMNS = (
     "trade_id", "underlying", "expiry", "side", "decision_utc",
     "entry_utc", "entry_quote_utc", "greeks_time_utc", "exit_utc",
     "exit_quote_utc", "entry_spot", "short_strike", "long_strike",
+    "short_contract", "long_contract",
     "entry_short_bid", "entry_short_ask", "entry_long_bid", "entry_long_ask",
     "exit_short_bid", "exit_short_ask", "exit_long_bid", "exit_long_ask",
     "short_open_interest", "long_open_interest",
@@ -91,6 +92,24 @@ def _fresh(asof, quote_time, seconds):
     return 0 <= age <= seconds
 
 
+def _verify_occ_contract(raw, *, underlying, expiry, right, strike):
+    """Reject adjusted, mismatched or unidentified contract delivery roots."""
+    if not isinstance(raw, str):
+        raise EvidenceError("Missing OCC option contract identity")
+    m = re.fullmatch(r"([A-Z]{1,6}) *([0-9]{6})([CP])([0-9]{8})", raw)
+    if m is None:
+        raise EvidenceError("Invalid or adjusted OCC option contract identity")
+    root, expiration, option_right, encoded_strike = m.groups()
+    if root != underlying.replace(".", "") or option_right != right:
+        raise EvidenceError("OCC option root or call/put side mismatch")
+    try:
+        parsed_expiry = datetime.strptime(expiration, "%y%m%d").date()
+    except ValueError:
+        raise EvidenceError("Invalid OCC option expiration") from None
+    if parsed_expiry != expiry or abs(int(encoded_strike) / 1000 - strike) > 0.00001:
+        raise EvidenceError("OCC option expiry or strike does not match paper mark")
+
+
 def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
     if not isinstance(row, dict) or any(key not in row for key in COLUMNS):
         raise EvidenceError("Private paper-mark ledger missing required columns")
@@ -148,6 +167,13 @@ def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
         otm = long < short < spot
     if not otm or not 0 < width <= 3:
         raise EvidenceError("Option spread is not standard OTM defined-width vertical")
+    right = "C" if side == "bear_call" else "P"
+    _verify_occ_contract(row["short_contract"], underlying=underlying,
+                         expiry=expiry, right=right, strike=short)
+    _verify_occ_contract(row["long_contract"], underlying=underlying,
+                         expiry=expiry, right=right, strike=long)
+    if row["short_contract"] == row["long_contract"]:
+        raise EvidenceError("Spread legs must reference distinct OCC contracts")
 
     for column in ("short_open_interest", "long_open_interest"):
         oi = _num(row, column, allow_zero=True)
