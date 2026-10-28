@@ -2876,16 +2876,16 @@
       "reason": "Private admission manifest contract, population gaps, timestamp attestations and explicit limitations; no private source data is uploaded."
     },
     "src/tradier_greeks_crosscheck.py": {
-      "expected_sha256": "af967843fe03899f5accd5ac75df98ab3b8fe35400eaa3275d53d1b21a8542ee",
-      "reason": "Research-only bounded six-GET direct-Greeks timezone/IV cross-endpoint diagnostic; no H1 trading promotion, account access, or raw quote logs. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
+      "expected_sha256": "2d2d57c098bd710e7f6723eaf7487c3925663bd513fa6fc6630074e088132b9b",
+      "reason": "Research-only bounded six-GET direct-Greeks timezone/IV cross-endpoint diagnostic; no H1 trading promotion, account access, or raw quote logs. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged. 2026-10-28 source-limited fallback across at most three listed 7-21DTE expirations while retaining OI100, quote age120s, <=8 market-data GET, exact OCC expiration and no H1 promotion."
     },
     "tests/test_tradier_greeks_crosscheck.py": {
-      "expected_sha256": "7f34ba61b629f020b1b5b0de82d4eac04cd5e825c3c05d5ff21e3e9b382f87ea",
-      "reason": "Synthetic-only no-network checks for UTC wallclock, matched contract IV, stale Greek safety, clock gating and six-request budget. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
+      "expected_sha256": "93e8a99d137c18882432d6bfb9d50f3403ee0e8751083f2e3027ea749d6852cd",
+      "reason": "Synthetic-only no-network checks for UTC wallclock, matched contract IV, stale Greek safety, clock gating and six-request budget. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged. 2026-10-28 source-limited fallback across at most three listed 7-21DTE expirations while retaining OI100, quote age120s, <=8 market-data GET, exact OCC expiration and no H1 promotion."
     },
     "docs/tradier_greeks_cross_endpoint.md": {
-      "expected_sha256": "a359e5b1c5d2ae059120864d74408a4cd65aa4cdc9afae0fdd39e04424605012",
-      "reason": "Explicit limitations, privacy rules and corroboration-only methodology for direct options-Greeks timezone comparisons. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
+      "expected_sha256": "f1dc5b98cc78772be49025b8b10f55e1467d1e9cda799ee8d9f3291ae96a6b6a",
+      "reason": "Explicit limitations, privacy rules and corroboration-only methodology for direct options-Greeks timezone comparisons. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged. 2026-10-28 source-limited fallback across at most three listed 7-21DTE expirations while retaining OI100, quote age120s, <=8 market-data GET, exact OCC expiration and no H1 promotion."
     }
   },
   "schema_version": "2",
