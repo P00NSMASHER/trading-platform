@@ -71,6 +71,13 @@ jobs:
           --symbols SPY,QQQ,IWM,TLT,GLD,XLF,XLE,SMH,AAPL,NVDA,AMD,MSFT,BAC,SOFI,F,PFE
           --out "$RUNNER_TEMP/tradier_market_snapshot.csv"
 
+      - name: Cross-check option timestamps via option-specific quote GETs (diagnostic only)
+        env:
+          TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+          TRADIER_GREEKS_ROUTE: quotes
+          PYTHONPATH: src
+        run: python -m tradier_greeks_crosscheck
+
       - name: Cross-check option Greek timestamps using separate GET endpoint (manual diagnostic only)
         # The current repository token received HTTP 403 on this endpoint
         # on 2026-10-28. Do not repeatedly hit a denied endpoint on cron/push.
