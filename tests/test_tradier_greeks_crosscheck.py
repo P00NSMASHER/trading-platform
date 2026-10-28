@@ -142,6 +142,70 @@ class GreekCorroborationTests(unittest.TestCase):
         example["greeks"]["greek"].append(dict(example["greeks"]["greek"][0]))
         self.assertIsNone(cross._find_unique_direct_contract(example, SYMBOLS["call"]))
 
+    def test_thin_nearest_expiry_falls_back_to_liquid_expiry_with_utc_corrob(self):
+        thin_date = "2026-11-11"  # 14 DTE, closest to the sample target.
+        liquid_date = EXPIRATION  # 16 DTE, same contract IDs as synthetic oracle.
+        seen = []
+
+        def fetch(token, endpoint, params):
+            seen.append((endpoint, params))
+            if endpoint == "/markets/options/expirations":
+                return {"expirations": {"date": [thin_date, liquid_date]}}
+            if endpoint == "/markets/options/chains" and params["expiration"] == thin_date:
+                call = option("call")
+                put = option("put")
+                call["open_interest"] = 0
+                put["open_interest"] = 0
+                return {"options": {"option": [call, put]}}
+            return fake_api(token, endpoint, params)
+
+        with patch("tradier_greeks_crosscheck.probe.get_json", side_effect=fetch):
+            result = cross.run_crosscheck("NONSECRET", now=NOW)
+        self.assertEqual(result["status"], "TWO_SIDES_CORROBORATED_DIAGNOSTIC_ONLY")
+        self.assertEqual(result["h1_signal_status"], "UNVERIFIED")
+        self.assertEqual(result["sampled_expirations"], 2)
+        self.assertEqual(result["selector_filter_funnel"]["raw_rows"], 4)
+        self.assertEqual(result["selector_filter_funnel"]["open_interest_at_least_100"], 2)
+        self.assertEqual(result["direct_side_requests"], 2)
+        self.assertEqual(result["utc_fresh_concordant"], 2)
+        self.assertEqual(len(seen), 7)  # clock + spot + expiries + 2 chains + 2 Greeks
+        self.assertEqual([p["expiration"] for e, p in seen
+                          if e == "/markets/options/chains"],
+                         [thin_date, liquid_date])
+        self.assertNotIn(liquid_date, str(result))
+        self.assertNotIn(SYMBOLS["call"], str(result))
+
+    def test_thin_expiries_never_retry_unboundedly_or_bypass_oi_gate(self):
+        days = ["2026-11-06", "2026-11-09", "2026-11-11",
+                "2026-11-13", "2026-11-17", "2026-11-18"]
+        seen = []
+
+        def fetch(token, endpoint, params):
+            seen.append(endpoint)
+            if endpoint == "/markets/options/expirations":
+                return {"expirations": {"date": days}}
+            if endpoint == "/markets/options/chains":
+                call = option("call")
+                put = option("put")
+                call["open_interest"] = 0
+                put["open_interest"] = 0
+                return {"options": {"option": [call, put]}}
+            if endpoint == "/markets/options/greeks":
+                raise AssertionError("Direct Greek queries require eligible liquid contracts")
+            return fake_api(token, endpoint, params)
+
+        with patch("tradier_greeks_crosscheck.probe.get_json", side_effect=fetch):
+            result = cross.run_crosscheck("NONSECRET", now=NOW)
+        self.assertEqual(result["status"], "INCONCLUSIVE")
+        self.assertEqual(result["sampled_expirations"], cross.MAX_EXPIRATION_CHECKS)
+        self.assertEqual(result["max_expiration_checks"], 4)
+        self.assertEqual(result["expirations_considered"], 6)
+        self.assertEqual(result["direct_side_requests"], 0)
+        self.assertEqual(result["selector_filter_funnel"]["open_interest_at_least_100"], 0)
+        self.assertEqual(seen.count("/markets/options/chains"), 4)
+        self.assertEqual(len(seen), 7)
+        self.assertEqual(result["h1_signal_status"], "UNVERIFIED")
+
     def test_market_closed_never_fetches_tokenized_quotes_or_greeks(self):
         with patch("tradier_greeks_crosscheck.probe.get_json",
                    return_value={"clock": {"state": "closed"}}) as fetch:
