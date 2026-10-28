@@ -43,8 +43,9 @@ H3 (negative control): 0DTE/1DTE quote observations and matched spreads without 
 ## Private forward outcome validation capability
 
 A separate local-only evaluator at src/options_forward_evaluator.py validates
-PRIVATE, independently retained H1 entry/exit paper quote marks: bid/ask
-entry and exit, a full four-side illustrative commission, $0/$5/$10
+PRIVATE, independently retained H1 entry/exit paper quote marks: both sides
+of both legs at entry and exit, no crossed or wider than 25% markets,
+contemporaneous precommitted decision and quote timestamps, a full four-side illustrative commission, $0/$5/$10
 adverse-fill stress, 120-second quote freshness, 90-minute Greek freshness,
 nonoverlapping underlying exposures, 90 days / 12 entry weeks / 60 marks,
 account-level concurrent modeled risk and deterministic entry-week clustered
