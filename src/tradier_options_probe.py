@@ -224,6 +224,84 @@ def atm_chain_iv(chain, *, symbol, spot, now, max_quote_age=120):
     return round(statistics.mean([best["call"][1], best["put"][1]]), 5)
 
 
+
+def straddle_bid_ask_vs_rv_move(chain, *, symbol, spot, rv20, expiry, now,
+                                max_quote_age=120):
+    """Diagnostic-only same-strike ATM straddle price vs a realized-move proxy.
+
+    A Gaussian absolute-move reference uses prior 20-day annualized realized
+    volatility, spot, sqrt(calendar DTE/365) and sqrt(2/pi). This is not an
+    expected-profit or tradable-volatility estimator: no events, jumps,
+    financing, dividends, forward price or broker fill model. It does NOT
+    propose selling an undefined-risk straddle. Only fresh bid/ask quotes
+    with standard 100-share roots and OI>=100 qualify; no ORATS Greeks needed.
+    """
+    if positive(spot) is None or positive(rv20) is None:
+        return None
+    if now.tzinfo is None or now.utcoffset() is None:
+        return None
+    try:
+        days = (datetime.strptime(expiry, "%Y-%m-%d").date()
+                - now.astimezone(EASTERN).date()).days
+    except (ValueError, TypeError):
+        return None
+    if not 7 <= days <= 21:
+        return None
+    baseline = spot * rv20 * math.sqrt(days / 365) * math.sqrt(2 / math.pi)
+    if not math.isfinite(baseline) or baseline <= 0:
+        return None
+    node = chain.get("options") if isinstance(chain, dict) else None
+    options = many(node.get("option")) if isinstance(node, dict) else []
+    # A duplicate root/strike/side is ambiguous, never select arbitrarily.
+    by_strike: dict[float, dict] = {}
+    ambiguous: set[float] = set()
+    for item in options:
+        if not isinstance(item, dict):
+            continue
+        side = item.get("option_type")
+        if (side not in ("call", "put")
+            or item.get("root_symbol") != symbol
+            or nonnegative_int(item.get("contract_size")) != 100):
+            continue
+        strike = positive(item.get("strike"))
+        if strike is None or abs(strike - spot) / spot > 0.01:
+            continue
+        bid, ask = positive(item.get("bid")), positive(item.get("ask"))
+        if (bid is None or ask is None or ask < bid
+            or (ask - bid) / ((ask + bid) / 2) > 0.25
+            or nonnegative_int(item.get("open_interest")) < 100):
+            continue
+        age = quote_age(item, now)
+        if age is None or age > max_quote_age:
+            continue
+        key = round(strike, 3)
+        sides = by_strike.setdefault(key, {})
+        if side in sides:
+            ambiguous.add(key)
+        sides[side] = item
+    usable = []
+    for strike, sides in by_strike.items():
+        if strike in ambiguous or not ("call" in sides and "put" in sides):
+            continue
+        call, put = sides["call"], sides["put"]
+        low = (float(call["bid"]) + float(put["bid"])) / baseline
+        high = (float(call["ask"]) + float(put["ask"])) / baseline
+        if (not (math.isfinite(low) and math.isfinite(high))
+            or low <= 0 or high < low):
+            continue
+        score = (round(abs(strike - spot) / spot, 9),
+                 -min(nonnegative_int(call["open_interest"]),
+                      nonnegative_int(put["open_interest"])))
+        usable.append((score, low, high))
+    if not usable:
+        return None
+    _, low, high = min(usable, key=lambda x: x[0])
+    return {"straddle_bid_over_rv_absolute_move": round(low, 4),
+            "straddle_ask_over_rv_absolute_move": round(high, 4),
+            "research_only": True}
+
+
+
 def atm_greeks_quality(chain, *, symbol, spot, now, max_quote_age=120):
     """Sanitized H1 ATM IV availability reasons, without any raw market prices.
 
@@ -639,6 +717,14 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     premium_candidate_count = 0
     h1_greeks_quality = dict.fromkeys(
         atm_greeks_quality({}, symbol="", spot=1.0, now=now), 0)
+    model_free_move = {
+        "chains_primary_window": 0,
+        "chains_with_paired_atm_quotes_and_rv20": 0,
+        "chains_without_usable_paired_quote_or_rv20": 0,
+        "chains_straddle_bid_ratio_above_1_20": 0,
+        "chains_straddle_ask_ratio_below_0_80": 0,
+        "model_is_not_profit_or_implied_vol": True,
+    }
     best_case_payoff_feasibility = {
         label: {"after_fees_positive": 0,
                 "after_fees_and_5_slippage_positive": 0,
@@ -685,6 +771,18 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                 chain, symbol=symbol, spot=spot,
                 now=chain_now, max_quote_age=max_quote_age)
             if label == "7-21DTE":
+                model_free_move["chains_primary_window"] += 1
+                proxy = straddle_bid_ask_vs_rv_move(
+                    chain, symbol=symbol, spot=spot, rv20=rv20,
+                    expiry=expiry, now=chain_now, max_quote_age=max_quote_age)
+                if proxy is None:
+                    model_free_move["chains_without_usable_paired_quote_or_rv20"] += 1
+                else:
+                    model_free_move["chains_with_paired_atm_quotes_and_rv20"] += 1
+                    if proxy["straddle_bid_over_rv_absolute_move"] >= 1.2:
+                        model_free_move["chains_straddle_bid_ratio_above_1_20"] += 1
+                    if proxy["straddle_ask_over_rv_absolute_move"] <= 0.8:
+                        model_free_move["chains_straddle_ask_ratio_below_0_80"] += 1
                 quality = atm_greeks_quality(
                     chain, symbol=symbol, spot=spot,
                     now=chain_now, max_quote_age=max_quote_age)
@@ -768,6 +866,7 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                   "h1_signal_spread_sides": h1_signal_spread_sides,
                   "atm_iv_coverage": atm_stats,
                   "h1_greeks_quality": h1_greeks_quality,
+                  "greeks_independent_straddle_move_proxy": model_free_move,
                   "best_case_payoff_feasibility_by_dte": best_case_payoff_feasibility,
                   "read_only": True,
                   "edge_status": "UNVERIFIED"}
