@@ -158,11 +158,33 @@ def option_iv(option):
     return round(iv, 5) if iv is not None and 0 < iv <= 3 else None
 
 
+
+def greeks_age(option, now):
+    """How old the provider's actual ORATS calculation is, independently of quote age.
+
+    Missing, timezone-naive, corrupt or implausibly future-dated timestamps are
+    not proof of a fresh Greek; the H1 signal must fail closed on them.
+    """
+    greeks = option.get("greeks") or {}
+    raw = greeks.get("updated_at") if isinstance(greeks, dict) else None
+    if not isinstance(raw, str) or not raw.strip():
+        return None
+    try:
+        stamp = datetime.fromisoformat(raw.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if stamp.tzinfo is None:
+        return None
+    age = (now - stamp.astimezone(timezone.utc)).total_seconds()
+    return max(0.0, age) if age >= -60 else None
+
+
 def atm_chain_iv(chain, *, symbol, spot, now, max_quote_age=120):
     """Two-sided nearest-ATM implied volatility for ONE expiry (decimal units).
 
     Both call and put require eligible standard deliverables, current bid/ask,
-    adequate OI and strikes within 3% of spot. A missing side returns None.
+    adequate OI, IV whose reported ORATS calculation timestamp is within 90
+    minutes, and strikes within 3% of spot. A missing side returns None.
     This is screening metadata, not fair value, IV surface fitting, or edge.
     """
     if positive(spot) is None:
@@ -185,7 +207,9 @@ def atm_chain_iv(chain, *, symbol, spot, now, max_quote_age=120):
         if distance > 0.03 or (ask - bid) / ((ask + bid) / 2) > 0.25:
             continue
         age = quote_age(item, now)
+        iv_age = greeks_age(item, now)
         if (age is None or age > max_quote_age
+            or iv_age is None or iv_age > 90 * 60
             or nonnegative_int(item.get("open_interest")) < 100):
             continue
         iv = option_iv(item)
@@ -520,6 +544,9 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     pair_funnel_by_dte = {label: dict.fromkeys(pair_funnel, 0) for label in counts}
     spread_counts = {"bear_call": 0, "bull_put": 0}
     premium_candidate_count = 0
+    h1_qualifying_chains = 0
+    h1_qualifying_symbols = set()
+    h1_signal_spread_sides = {"bear_call": 0, "bull_put": 0}
     atm_stats = {"chains_primary_window": 0,
                  "chains_with_two_sided_atm_iv": 0,
                  "chains_missing_atm_iv": 0,
@@ -584,6 +611,7 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                 raise ProbeFailure("Internal diagnostics/candidate parity failed")
             rows.extend(selected)
             counts[label] += len(selected)
+            chain_has_h1_signal = False
             for candidate in selected:
                 spread_counts[candidate["spread_side"]] += 1
                 candidate["atm_iv"] = atm_iv
@@ -597,6 +625,11 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                         atm_stats["candidate_spreads_with_complete_atm_signal"] += 1
                     if (candidate["atm_iv_rv_ratio"] or 0) >= 1.20:
                         premium_candidate_count += 1
+                        h1_signal_spread_sides[candidate["spread_side"]] += 1
+                        chain_has_h1_signal = True
+            if chain_has_h1_signal:
+                h1_qualifying_chains += 1
+                h1_qualifying_symbols.add(symbol)
     if examined == 0 or chains_with_contracts == 0:
         raise ProbeFailure("No in-range option chains with actual contracts returned")
     return rows, {"status": "MARKET_DATA_ACCESS_VERIFIED",
@@ -609,6 +642,9 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                   "spread_pair_funnel": pair_funnel,
                   "spread_pair_funnel_by_dte": pair_funnel_by_dte,
                   "iv_rv_ge_1_20_seven_to_21_dte": premium_candidate_count,
+                  "h1_qualifying_chains": h1_qualifying_chains,
+                  "h1_qualifying_symbols": len(h1_qualifying_symbols),
+                  "h1_signal_spread_sides": h1_signal_spread_sides,
                   "atm_iv_coverage": atm_stats,
                   "read_only": True,
                   "edge_status": "UNVERIFIED"}

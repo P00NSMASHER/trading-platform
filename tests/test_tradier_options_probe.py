@@ -19,7 +19,7 @@ def option(strike, bid, ask, age=10, size=100, oi=500):
             "strike": strike, "bid": bid, "ask": ask,
             "bid_date": TS - age, "ask_date": TS - age,
             "open_interest": oi, "contract_size": size, "root_symbol": "TEST",
-            "greeks": {"mid_iv": 0.35}}
+            "greeks": {"mid_iv": 0.35, "updated_at": NOW.isoformat()}}
 
 
 class Tests(unittest.TestCase):
@@ -57,7 +57,7 @@ class Tests(unittest.TestCase):
         call_atm = option(100, 2.20, 2.25)
         call_atm["greeks"]["mid_iv"] = 0.40
         put_atm = {**option(100, 2.10, 2.15), "option_type": "put",
-                   "greeks": {"mid_iv": 0.36}}
+                   "greeks": {"mid_iv": 0.36, "updated_at": NOW.isoformat()}}
         short_call = option(101, 1.25, 1.27)
         short_call["greeks"]["mid_iv"] = 0.80
         long_call = option(102, .78, .80)
@@ -116,9 +116,68 @@ class Tests(unittest.TestCase):
         self.assertEqual(rows[0]["atm_iv"], 0.4)
         self.assertGreater(rows[0]["atm_iv_rv_ratio"], 1.2)
         self.assertEqual(summary["iv_rv_ge_1_20_seven_to_21_dte"], 1)
+        self.assertEqual(summary["h1_qualifying_chains"], 1)
+        self.assertEqual(summary["h1_qualifying_symbols"], 1)
+        self.assertEqual(summary["h1_signal_spread_sides"], {"bear_call": 1, "bull_put": 0})
         self.assertEqual(summary["atm_iv_coverage"]["chains_primary_window"], 1)
         self.assertEqual(summary["atm_iv_coverage"]["chains_with_two_sided_atm_iv"], 1)
         self.assertEqual(summary["atm_iv_coverage"]["candidate_spreads_with_complete_atm_signal"], 1)
+
+
+    def test_many_h1_spread_pairs_count_one_chain_and_symbol(self):
+        spot = 100
+        raw = [
+            option(100, 2.0, 2.04),
+            {**option(100, 2.0, 2.04), "option_type": "put"},
+            option(101, 1.25, 1.27),
+            option(102, .78, .80),
+            option(103, .39, .42),
+        ]
+        for row in raw:
+            row["greeks"]["mid_iv"] = 0.60
+        days = [
+            {"date": f"2026-09-{i:02d}", "close": float(99 + i + (i % 2))}
+            for i in range(1, 22)
+        ]
+        responses = {
+            "/markets/quotes": {"quotes": {"quote": {"bid": 100, "ask": 100.02}}},
+            "/markets/options/expirations": {"expirations": {"date": ["2026-11-06"]}},
+            "/markets/history": {"history": {"day": days}},
+            "/markets/options/chains": {"options": {"option": raw}},
+        }
+        with patch("tradier_options_probe.get_json",
+                   side_effect=lambda _t, p, _x: responses[p]):
+            rows, summary = probe.run(["TEST"], "FAKE", now=NOW)
+        self.assertGreaterEqual(len(rows), 2)
+        self.assertEqual(summary["iv_rv_ge_1_20_seven_to_21_dte"], len(rows))
+        self.assertEqual(summary["h1_qualifying_chains"], 1)
+        self.assertEqual(summary["h1_qualifying_symbols"], 1)
+        self.assertEqual(summary["h1_signal_spread_sides"]["bear_call"], len(rows))
+        self.assertEqual(summary["h1_signal_spread_sides"]["bull_put"], 0)
+
+
+    def test_hourly_greek_freshness_requires_timestamp_not_quote_freshness(self):
+        good = option(100, 1.0, 1.04)
+        put = {**option(100, 1.0, 1.04), "option_type": "put"}
+        good["greeks"]["updated_at"] = (
+            NOW - probe.timedelta(minutes=45)).isoformat()
+        put["greeks"]["updated_at"] = (
+            NOW - probe.timedelta(minutes=89)).isoformat()
+        chain = {"options": {"option": [good, put]}}
+        self.assertEqual(probe.atm_chain_iv(
+            chain, symbol="TEST", spot=100, now=NOW), 0.35)
+        put["greeks"]["updated_at"] = (
+            NOW - probe.timedelta(minutes=92)).isoformat()
+        self.assertIsNone(probe.atm_chain_iv(
+            chain, symbol="TEST", spot=100, now=NOW))
+        for bad in ("", "2026-10-27T18:00:00", "invalid"):
+            put["greeks"]["updated_at"] = bad
+            self.assertIsNone(probe.atm_chain_iv(
+                chain, symbol="TEST", spot=100, now=NOW))
+        put["greeks"]["updated_at"] = (
+            NOW + probe.timedelta(minutes=5)).isoformat()
+        self.assertIsNone(probe.atm_chain_iv(
+            chain, symbol="TEST", spot=100, now=NOW))
 
     def test_buckets(self):
         self.assertEqual([bucket(i) for i in (0, 1, 6, 7, 21, 22)],

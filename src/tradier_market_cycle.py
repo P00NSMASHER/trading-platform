@@ -101,6 +101,9 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     requested = 0
     observed = 0
     premium = 0
+    h1_chains = 0
+    h1_symbols = 0
+    h1_signal_sides = {"bear_call": 0, "bull_put": 0}
     atm_stats = {"chains_primary_window": 0,
                  "chains_with_two_sided_atm_iv": 0,
                  "chains_missing_atm_iv": 0,
@@ -115,6 +118,21 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         requested += result["chains_requested"]
         observed += result["chains_with_contracts"]
         premium += result["iv_rv_ge_1_20_seven_to_21_dte"]
+        h1_chain_count = result.get("h1_qualifying_chains", 0)
+        h1_symbol_count = result.get("h1_qualifying_symbols", 0)
+        if (not isinstance(h1_chain_count, int) or h1_chain_count < 0
+            or not isinstance(h1_symbol_count, int) or h1_symbol_count < 0
+            or h1_symbol_count > len(symbols[i:i + CHUNK_SIZE])
+            or h1_symbol_count > h1_chain_count):
+            raise probe.ProbeFailure("Invalid H1 independent coverage receipt")
+        if h1_chain_count > result["chains_requested"]:
+            raise probe.ProbeFailure("H1 chain count exceeds scanned chains")
+        h1_chains += h1_chain_count
+        h1_symbols += h1_symbol_count  # symbol batches are disjoint by validation
+        for side, count in result.get("h1_signal_spread_sides", {}).items():
+            if side not in h1_signal_sides or not isinstance(count, int) or count < 0:
+                raise probe.ProbeFailure("Invalid H1 spread side count")
+            h1_signal_sides[side] += count
         for key, count in result.get("atm_iv_coverage", {}).items():
             if key not in atm_stats or not isinstance(count, int) or count < 0:
                 raise probe.ProbeFailure("Unexpected primary-window IV coverage receipt")
@@ -144,6 +162,9 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     intraday = recent_bar_evidence(
         token, now if now is not None else datetime.now(timezone.utc), symbols
     )
+    if (sum(h1_signal_sides.values()) != premium
+        or h1_chains > premium or h1_symbols > h1_chains):
+        raise probe.ProbeFailure("H1 nonindependent-count receipt parity failed")
     return all_rows, {
         "status": "MARKET_DATA_ACCESS_VERIFIED",
         "market_state": "open",
@@ -160,6 +181,9 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         "spread_pair_funnel": pair_funnel,
         "spread_pair_funnel_by_dte": pair_funnel_by_dte,
         "iv_rv_ge_1_20_seven_to_21_dte": premium,
+        "h1_qualifying_chains": h1_chains,
+        "h1_qualifying_symbols": h1_symbols,
+        "h1_signal_spread_sides": h1_signal_sides,
         "atm_iv_coverage": atm_stats,
         "intraday_underlying_context": intraday,
     }

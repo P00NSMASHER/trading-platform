@@ -55,6 +55,9 @@ class MarketCycleTests(unittest.TestCase):
                 "candidate_counts": {"0DTE": 1, "1DTE": 2, "7-21DTE": 3},
                 "spread_counts": {"bear_call": 1, "bull_put": 2},
                 "iv_rv_ge_1_20_seven_to_21_dte": 2,
+                "h1_qualifying_chains": 1,
+                "h1_qualifying_symbols": 1,
+                "h1_signal_spread_sides": {"bear_call": 1, "bull_put": 1},
                 "atm_iv_coverage": {
                     "chains_primary_window": 3,
                     "chains_with_two_sided_atm_iv": 2,
@@ -87,6 +90,9 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(summary["spread_pair_funnel"]["pairs_eligible"], 12)
         self.assertEqual(summary["spread_pair_funnel_by_dte"]["7-21DTE"]["pairs_eligible"], 12)
         self.assertEqual(summary["iv_rv_ge_1_20_seven_to_21_dte"], 8)
+        self.assertEqual(summary["h1_qualifying_chains"], 4)
+        self.assertEqual(summary["h1_qualifying_symbols"], 4)
+        self.assertEqual(summary["h1_signal_spread_sides"], {"bear_call": 4, "bull_put": 4})
         self.assertEqual(summary["atm_iv_coverage"]["chains_primary_window"], 12)
         self.assertEqual(summary["atm_iv_coverage"]["chains_with_two_sided_atm_iv"], 8)
         self.assertEqual(summary["atm_iv_coverage"]["chains_missing_atm_iv"], 4)
@@ -109,6 +115,24 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(result["symbols_requested"], 1)
         self.assertEqual(result["bars_observed"], 1)
         self.assertEqual(result["missing_or_invalid_bars"], 3)
+
+
+    def test_h1_counts_cannot_promote_correlated_spreads_to_independent_trades(self):
+        responses = {
+            "chains_requested": 1, "chains_with_contracts": 1,
+            "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 5},
+            "spread_counts": {"bear_call": 5, "bull_put": 0},
+            "iv_rv_ge_1_20_seven_to_21_dte": 5,
+            "h1_qualifying_chains": 6, "h1_qualifying_symbols": 1,
+            "h1_signal_spread_sides": {"bear_call": 5, "bull_put": 0},
+            "quote_filter_diagnostics": {},
+        }
+        with patch("tradier_market_cycle.probe.get_json",
+                   return_value={"clock": {"state": "open"}}), patch(
+                       "tradier_market_cycle.probe.run",
+                       return_value=([], responses)):
+            with self.assertRaisesRegex(ProbeFailure, "exceeds scanned chains"):
+                cycle.run_cycle("NONSECRET", ["SPY"], now=NOW)
 
     def test_any_failed_batch_fails_whole_market_run(self):
         with patch("tradier_market_cycle.probe.get_json", return_value={"clock": {"state": "open"}}), \
