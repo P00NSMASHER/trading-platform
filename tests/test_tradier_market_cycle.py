@@ -58,6 +58,18 @@ class MarketCycleTests(unittest.TestCase):
                 "h1_qualifying_chains": 1,
                 "h1_qualifying_symbols": 1,
                 "h1_signal_spread_sides": {"bear_call": 1, "bull_put": 1},
+                "h1_greeks_quality": {
+                    "near_atm_standard_legs": 3,
+                    "near_atm_liquid_fresh_quote_legs": 2,
+                    "near_atm_fresh_greeks_legs": 1,
+                },
+                "best_case_payoff_feasibility_by_dte": {
+                    "7-21DTE": {
+                        "after_fees_positive": 3,
+                        "after_fees_and_5_slippage_positive": 2,
+                        "after_fees_and_10_slippage_positive": 1,
+                    },
+                },
                 "atm_iv_coverage": {
                     "chains_primary_window": 3,
                     "chains_with_two_sided_atm_iv": 2,
@@ -93,6 +105,11 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(summary["h1_qualifying_chains"], 4)
         self.assertEqual(summary["h1_qualifying_symbols"], 4)
         self.assertEqual(summary["h1_signal_spread_sides"], {"bear_call": 4, "bull_put": 4})
+        self.assertEqual(summary["h1_greeks_quality"]["near_atm_standard_legs"], 12)
+        self.assertEqual(summary["h1_greeks_quality"]["near_atm_fresh_greeks_legs"], 4)
+        self.assertEqual(
+            summary["best_case_payoff_feasibility_by_dte"]["7-21DTE"]
+                   ["after_fees_and_5_slippage_positive"], 8)
         self.assertEqual(summary["atm_iv_coverage"]["chains_primary_window"], 12)
         self.assertEqual(summary["atm_iv_coverage"]["chains_with_two_sided_atm_iv"], 8)
         self.assertEqual(summary["atm_iv_coverage"]["chains_missing_atm_iv"], 4)

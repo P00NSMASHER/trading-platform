@@ -101,6 +101,13 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     requested = 0
     observed = 0
     premium = 0
+    h1_greeks_quality: dict[str, int] = {}
+    best_case_feasibility = {
+        label: {"after_fees_positive": 0,
+                "after_fees_and_5_slippage_positive": 0,
+                "after_fees_and_10_slippage_positive": 0}
+        for label in counts
+    }
     h1_chains = 0
     h1_symbols = 0
     h1_signal_sides = {"bear_call": 0, "bull_put": 0}
@@ -118,6 +125,19 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         requested += result["chains_requested"]
         observed += result["chains_with_contracts"]
         premium += result["iv_rv_ge_1_20_seven_to_21_dte"]
+        for key, n in result.get("h1_greeks_quality", {}).items():
+            if (key not in probe.atm_greeks_quality(
+                    {}, symbol="", spot=1.0, now=(now or datetime.now(timezone.utc)))
+                or not isinstance(n, int) or n < 0):
+                raise probe.ProbeFailure("Invalid Greek-quality aggregate receipt")
+            h1_greeks_quality[key] = h1_greeks_quality.get(key, 0) + n
+        for label, stages in result.get("best_case_payoff_feasibility_by_dte", {}).items():
+            if label not in best_case_feasibility or not isinstance(stages, dict):
+                raise probe.ProbeFailure("Invalid payoff-feasibility expiry bucket")
+            for key, n in stages.items():
+                if key not in best_case_feasibility[label] or not isinstance(n, int) or n < 0:
+                    raise probe.ProbeFailure("Invalid payoff-feasibility aggregate count")
+                best_case_feasibility[label][key] += n
         h1_chain_count = result.get("h1_qualifying_chains", 0)
         h1_symbol_count = result.get("h1_qualifying_symbols", 0)
         if (not isinstance(h1_chain_count, int) or h1_chain_count < 0
@@ -185,6 +205,8 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         "h1_qualifying_symbols": h1_symbols,
         "h1_signal_spread_sides": h1_signal_sides,
         "atm_iv_coverage": atm_stats,
+        "h1_greeks_quality": h1_greeks_quality,
+        "best_case_payoff_feasibility_by_dte": best_case_feasibility,
         "intraday_underlying_context": intraday,
     }
 
