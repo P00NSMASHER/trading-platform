@@ -287,6 +287,87 @@ class Tests(unittest.TestCase):
         self.assertEqual(feasibility["after_fees_and_10_slippage_positive"], 0)
         self.assertEqual(summary["edge_status"], "UNVERIFIED")
 
+    def test_same_strike_straddle_proxy_uses_fresh_bid_ask_not_greeks(self):
+        call = option(100, 2.1, 2.15)
+        put = {**option(100, 2.0, 2.05), "option_type": "put"}
+        call.pop("greeks")
+        put.pop("greeks")
+        chain = {"options": {"option": [call, put]}}
+        out = probe.straddle_bid_ask_vs_rv_move(
+            chain, symbol="TEST", spot=100.0, rv20=0.2,
+            expiry="2026-11-06", now=NOW)
+        self.assertIsNotNone(out)
+        self.assertGreater(out["straddle_bid_over_rv_absolute_move"], 1.2)
+        self.assertGreater(out["straddle_ask_over_rv_absolute_move"],
+                           out["straddle_bid_over_rv_absolute_move"])
+        self.assertTrue(out["research_only"])
+
+    def test_straddle_proxy_rejects_unpaired_or_wrong_strike_or_stale(self):
+        call = option(100, 2.0, 2.05)
+        put = {**option(100, 2.0, 2.05), "option_type": "put"}
+        chain = {"options": {"option": [call, put]}}
+        def check():
+            return probe.straddle_bid_ask_vs_rv_move(
+                chain, symbol="TEST", spot=100.0, rv20=0.2,
+                expiry="2026-11-06", now=NOW)
+        self.assertIsNotNone(check())
+        put["strike"] = 99
+        self.assertIsNone(check())  # same-strike pairing required
+        put["strike"] = 100
+        put["bid_date"] = TS - 400
+        self.assertIsNone(check())
+        put["bid_date"] = TS - 10
+        put["contract_size"] = 10
+        self.assertIsNone(check())
+        put["contract_size"] = 100
+        put["open_interest"] = 1
+        self.assertIsNone(check())
+        put["open_interest"] = 500
+        chain["options"]["option"].append(dict(put))
+        self.assertIsNone(check())  # ambiguous duplicate side fails closed
+
+    def test_straddle_proxy_fails_on_out_of_window_or_missing_rv(self):
+        call = option(100, .2, .22)
+        put = {**option(100, .2, .22), "option_type": "put"}
+        chain = {"options": {"option": [call, put]}}
+        for expiry, rv in (
+            ("2026-10-27", .2), ("2026-10-28", .2),
+            ("2026-11-22", .2), ("2026-11-06", None),
+            ("2026-11-06", 0),
+        ):
+            result = probe.straddle_bid_ask_vs_rv_move(
+                chain, symbol="TEST", spot=100, rv20=rv,
+                expiry=expiry, now=NOW)
+            self.assertIsNone(result)
+
+    def test_model_free_proxy_count_is_not_h1_or_profit_estimate(self):
+        call = option(100, 2.0, 2.05)
+        put = {**option(100, 2.0, 2.05), "option_type": "put"}
+        for row in (call, put):
+            row["greeks"]["updated_at"] = "2026-10-27T18:00:00"  # naive
+        responses = {
+            "/markets/quotes": {"quotes": {"quote": {"bid": 100, "ask": 100.02}}},
+            "/markets/options/expirations": {
+                "expirations": {"date": ["2026-11-06"]}},
+            "/markets/history": {"history": {"day": [
+                {"date": f"2026-09-{i:02d}", "close": 95 + i + i % 3}
+                for i in range(1, 22)
+            ]}},
+            "/markets/options/chains": {"options": {"option": [call, put]}},
+        }
+        with patch("tradier_options_probe.get_json",
+                   side_effect=lambda _t, endpoint, _p: responses[endpoint]):
+            _, summary = probe.run(["TEST"], "FAKE", now=NOW)
+        counts = summary["greeks_independent_straddle_move_proxy"]
+        self.assertEqual(counts["chains_primary_window"], 1)
+        self.assertEqual(counts["chains_with_paired_atm_quotes_and_rv20"], 1)
+        self.assertEqual(counts["chains_without_usable_paired_quote_or_rv20"], 0)
+        self.assertEqual(counts["chains_straddle_bid_ratio_above_1_20"], 1)
+        self.assertEqual(summary["h1_qualifying_chains"], 0)
+        self.assertEqual(summary["edge_status"], "UNVERIFIED")
+        self.assertTrue(counts["model_is_not_profit_or_implied_vol"])
+
+
     def test_buckets(self):
         self.assertEqual([bucket(i) for i in (0, 1, 6, 7, 21, 22)],
                          ["0DTE", "1DTE", None, "7-21DTE", "7-21DTE", None])
