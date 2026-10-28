@@ -69,12 +69,45 @@ class GreekCorroborationTests(unittest.TestCase):
         self.assertTrue(result["does_not_change_h1_gate"])
         self.assertEqual(result["direct_side_requests"], 2)
         self.assertEqual(result["utc_fresh_concordant"], 2)
+        self.assertEqual(result["selector_filter_funnel"]["raw_rows"], 2)
+        self.assertEqual(result["selector_filter_funnel"]["standard_symbol_legs"], 2)
+        self.assertEqual(result["selector_filter_funnel"]["occ_symbol_shape_matches"], 2)
+        self.assertEqual(result["selector_filter_funnel"]["within_3pct_spot"], 2)
+        self.assertEqual(result["selector_filter_funnel"]["fresh_quote_at_most_120s"], 2)
+        self.assertEqual(result["selector_filter_funnel"]["greek_naive_iso_timestamp"], 2)
         self.assertEqual(len(calls), 6)
         self.assertEqual(sum(x[0] == "/markets/options/greeks" for x in calls), 2)
         self.assertEqual([p["type"] for path, p in calls
                           if path == "/markets/options/greeks"], ["call", "put"])
         self.assertNotIn("SPY", str(result))
         self.assertNotIn("2.1", str(result))
+
+
+    def test_selector_funnel_identifies_contract_shape_without_guessing_root(self):
+        pad = option("call")
+        pad["symbol"] = "SPY   261113C00100000"
+        data = {"options": {"option": [pad]}}
+        counters = {}
+        selected = cross._nearest_naive_atm_contracts(
+            data, symbol="SPY", spot=100, now=NOW, counters=counters)
+        self.assertEqual(selected, {})
+        self.assertEqual(counters["raw_rows"], 1)
+        self.assertEqual(counters["standard_symbol_legs"], 1)
+        self.assertEqual(counters["occ_symbol_shape_matches"], 0)
+        self.assertEqual(counters["greek_naive_iso_timestamp"], 0)
+
+    def test_selector_funnel_stale_quote_rejected_without_logging_raw_market_rows(self):
+        stale = option("call")
+        stale["bid_date"] = int((NOW - timedelta(seconds=600)).timestamp() * 1000)
+        data = {"options": {"option": [stale]}}
+        counters = {}
+        selected = cross._nearest_naive_atm_contracts(
+            data, symbol="SPY", spot=100, now=NOW, counters=counters)
+        self.assertEqual(selected, {})
+        self.assertEqual(counters["open_interest_at_least_100"], 1)
+        self.assertEqual(counters["fresh_quote_at_most_120s"], 0)
+        self.assertNotIn(SYMBOLS["call"], str(counters))
+        self.assertNotIn(WHEN, str(counters))
 
     def test_timezones_must_match_same_instant_not_same_wallclock(self):
         good = option("call")
