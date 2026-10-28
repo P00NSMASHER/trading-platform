@@ -2824,28 +2824,28 @@
       "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged."
     },
     "src/tradier_options_probe.py": {
-      "expected_sha256": "1312290b2812ea2d32b05d980de6144be82cce27c14103cf4444b4f08589e194",
-      "reason": "Standard-library, fail-closed and explicitly allowlisted read-only market-data quote observer for 0DTE/1DTE/7-21DTE hypothesis research; no account or order endpoints. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged."
+      "expected_sha256": "eafc73dc7963eed4730ecce7a41f89020b5ec5dbff0b5cde9fa6c038195f7a7d",
+      "reason": "Standard-library, fail-closed and explicitly allowlisted read-only market-data quote observer for 0DTE/1DTE/7-21DTE hypothesis research; no account or order endpoints. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates."
     },
     "tests/test_tradier_options_probe.py": {
-      "expected_sha256": "c3e6b77f200ba42c72f46b2fd211dd526f32869439b83a48b792a7cdd50d5a24",
-      "reason": "Deterministic offline safety acceptance tests for Tradier read-only endpoint boundaries, redirect protection, contract filtering, conservative pricing, and missing-credential failure. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged."
+      "expected_sha256": "f930f7679aa82aec82d23150e4d4f2b24418082e6ff86c6a8f88fe2ee9608625",
+      "reason": "Deterministic offline safety acceptance tests for Tradier read-only endpoint boundaries, redirect protection, contract filtering, conservative pricing, and missing-credential failure. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates."
     },
     "docs/tradier_readonly_options.md": {
-      "expected_sha256": "c0a98ee317b294f0955f566d5a3114caa9ecc8a8924bf0c4914fe07b2dd54d5b",
-      "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged."
+      "expected_sha256": "9d174e49db00e5c94664bbce0c50ce2b77110bbb1a308874fe450cfa5ad8485a",
+      "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates."
     },
     "docs/options_edge_validation_protocol.md": {
       "expected_sha256": "6481168a962b01322ee394017e9f42a2e6f7e371d61578243fe0f45a699fe6d1",
       "reason": "Preregistered prospective, cost-aware 7-21 DTE falsification standard, controls and protected market-data retention requirements, with no verified profit claims."
     },
     "src/tradier_market_cycle.py": {
-      "expected_sha256": "0f1d2c919384b209584af07eb9d0883fb7e60e937956010a099da01960d12fe5",
-      "reason": "New clock-gated, bounded <=20-symbol market-data-only orchestration, using 1-minute underlying bar context; no trade/account endpoints or public raw market data."
+      "expected_sha256": "aa37933ebf290f43cf930709c453cdb188c5dae46656f8d4d9f71a240f52cb75",
+      "reason": "New clock-gated, bounded <=20-symbol market-data-only orchestration, using 1-minute underlying bar context; no trade/account endpoints or public raw market data. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates."
     },
     "tests/test_tradier_market_cycle.py": {
-      "expected_sha256": "67ff52fca96c0c9d087b61dc29666dea9ada86f30560175c28ac7b273b303f11",
-      "reason": "Deterministic no-network acceptance for market-closed skip, widened universe, sanitized context, programmatic cap and blocked account/trade routes."
+      "expected_sha256": "3e6b066b504e0ef076570c10d9a95d64278b5503228ff1e05f9b48a4bb2769fe",
+      "reason": "Deterministic no-network acceptance for market-closed skip, widened universe, sanitized context, programmatic cap and blocked account/trade routes. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates."
     },
     "docs/tradier_api_capabilities.md": {
       "expected_sha256": "801eb933c1096955251adcc1ad6958d50d95f97ff08218c939456ad4fac1ccd6",
