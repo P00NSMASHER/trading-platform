@@ -40,4 +40,21 @@ H3 (negative control): 0DTE/1DTE quote observations and matched spreads without 
 - Bid/ask and margin can erase apparent volatility-spread returns: https://doi.org/10.1002/fut.21729
 - Free historical EOD backtester candidate (unverified third-party feed; its own documentation flags errors and coverage limits): https://www.onclickmedia.com/backtest/overview
 
+## Private forward outcome validation capability
+
+A separate local-only evaluator at src/options_forward_evaluator.py validates
+PRIVATE, independently retained H1 entry/exit paper quote marks: bid/ask
+entry and exit, a full four-side illustrative commission, $0/$5/$10
+adverse-fill stress, 120-second quote freshness, 90-minute Greek freshness,
+nonoverlapping underlying exposures, 90 days / 12 entry weeks / 60 marks,
+account-level concurrent modeled risk and deterministic entry-week clustered
+confidence intervals. See docs/options_forward_evidence.md for the exact
+private CSV contract. It cannot verify prospective timestamp attestation or
+broker fills: even a positive interval yields only
+PAPER_ONLY_PROMISING_NOT_VERIFIED with edge_verdict=UNPROVEN.
+
+This module is not connected to the public GitHub Actions scanner and no
+private quote snapshots are uploaded or saved in the public repository.
+Matched baselines and untouched out-of-sample outcomes remain required.
+
 **Do not import proprietary raw data into this public repository. No claim of a trading edge until independently audited out-of-sample net results exist.**
