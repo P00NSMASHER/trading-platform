@@ -105,6 +105,18 @@ def _find_unique_direct_contract(payload, contract):
     return matches[0] if len(matches) == 1 else None
 
 
+
+def _find_unique_quote_greeks(payload, contract):
+    """Accept exactly one same-contract option quote, never another symbol's IV."""
+    node = payload.get("quotes")
+    options = probe.many(node.get("quote")) if isinstance(node, dict) else []
+    matches = [row for row in options
+               if isinstance(row, dict) and row.get("symbol") == contract]
+    if len(matches) != 1 or not isinstance(matches[0].get("greeks"), dict):
+        return None
+    return dict(matches[0]["greeks"], symbol=contract)
+
+
 def corroborate(chain_option, direct_greeks, *, now):
     """A matching, current, explicit-zone Greek is evidence, not a license to infer all zones."""
     if not isinstance(chain_option, dict) or not isinstance(direct_greeks, dict):
@@ -135,13 +147,15 @@ def corroborate(chain_option, direct_greeks, *, now):
     }
 
 
-def run_crosscheck(token, *, now=None):
+def run_crosscheck(token, *, now=None, data_route="direct"):
     """At most nine HTTPS GET market-data requests, diagnostic-only.
 
     Scan at most four expirations nearest 14 DTE, favoring a chain with
     both liquid near-ATM sides. A single thin expiration must not prevent
     validation of the direct Greek endpoint on a different listed expiry.
     """
+    if data_route not in ("direct", "quotes"):
+        raise probe.ProbeFailure("Greek diagnostic route must be direct or quotes")
     now = now or datetime.now(timezone.utc)
     state = probe.get_json(token, "/markets/clock", {}).get("clock") or {}
     state_name = state.get("state") if isinstance(state, dict) else None
@@ -201,6 +215,8 @@ def run_crosscheck(token, *, now=None):
         "cross_endpoint_only": True,
         "does_not_change_h1_gate": True,
         "read_only": True,
+        "source_route": "option_quote" if data_route == "quotes" else "direct_option_greeks",
+        "provider_access_denials": 0,
         "sampled_expirations": expirations_sampled,
         "expirations_considered": len(eligible),
         "max_expiration_checks": MAX_EXPIRATION_CHECKS,
@@ -219,10 +235,22 @@ def run_crosscheck(token, *, now=None):
         item = selected.get(side)
         if item is None:
             continue
-        direct = probe.get_json(token, "/markets/options/greeks", {
-            "symbol": SYMBOL, "expiration": selected_expiration, "type": side})
+        if data_route == "direct":
+            direct = probe.get_json(token, "/markets/options/greeks", {
+                "symbol": SYMBOL, "expiration": selected_expiration, "type": side})
+            direct_item = _find_unique_direct_contract(direct, item["symbol"])
+        else:
+            try:
+                quotes = probe.get_json(token, "/markets/quotes", {
+                    "symbols": item["symbol"], "greeks": "true"})
+            except probe.ProbeFailure as error:
+                if str(error) != "Tradier rejected access (HTTP 403)":
+                    raise
+                report["status"] = "OPTION_QUOTES_GREEKS_ACCESS_DENIED"
+                report["provider_access_denials"] += 1
+                return report  # Denial is explicit; no H1 promotion or false UTC proof.
+            direct_item = _find_unique_quote_greeks(quotes, item["symbol"])
         report["direct_side_requests"] += 1
-        direct_item = _find_unique_direct_contract(direct, item["symbol"])
         result = corroborate(item, direct_item, now=now)
         report["direct_offset_aware"] += int(result["direct_offset_aware"])
         report["same_contract_iv_matches"] += int(result["iv_concordant"])
@@ -235,7 +263,9 @@ def run_crosscheck(token, *, now=None):
 
 def main():
     try:
-        result = run_crosscheck(os.environ.get("TRADIER_TOKEN", ""))
+        result = run_crosscheck(
+            os.environ.get("TRADIER_TOKEN", ""),
+            data_route=os.environ.get("TRADIER_GREEKS_ROUTE", "direct"))
         print(json.dumps(result, sort_keys=True))
         return 0
     except probe.ProbeFailure as exc:
