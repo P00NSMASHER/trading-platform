@@ -31,40 +31,69 @@ def _datetime_utc(raw, *, require_timezone):
     return stamp if stamp.tzinfo is None else None
 
 
-def _nearest_naive_atm_contracts(chain, *, symbol, spot, now):
-    """Select at most one fresh, standard near-ATM call and put per expiry."""
+def _nearest_naive_atm_contracts(chain, *, symbol, spot, now, counters=None):
+    """Select near-ATM put/call options; return anonymous stage counts if requested.
+
+    Counters are an ordered filter funnel, not independent classifications.
+    No contract ID, quote, strike, timestamp or symbol leaves this process.
+    """
     node = chain.get("options")
     records = probe.many(node.get("option")) if isinstance(node, dict) else []
+    stages = {
+        "raw_rows": 0,
+        "standard_symbol_legs": 0,
+        "occ_symbol_shape_matches": 0,
+        "within_3pct_spot": 0,
+        "valid_market": 0,
+        "open_interest_at_least_100": 0,
+        "fresh_quote_at_most_120s": 0,
+        "valid_fractional_iv": 0,
+        "greek_naive_iso_timestamp": 0,
+    }
     best = {}
     for item in records:
+        stages["raw_rows"] += 1
         if not isinstance(item, dict):
             continue
         side = item.get("option_type")
         contract = item.get("symbol")
         if (side not in ("call", "put")
             or item.get("root_symbol") != symbol
-            or probe.nonnegative_int(item.get("contract_size")) != 100
-            or not isinstance(contract, str)
+            or probe.nonnegative_int(item.get("contract_size")) != 100):
+            continue
+        stages["standard_symbol_legs"] += 1
+        if (not isinstance(contract, str)
             or not re.fullmatch(r"SPY[0-9]{6}[CP][0-9]{8}", contract)):
             continue
+        stages["occ_symbol_shape_matches"] += 1
         strike = probe.positive(item.get("strike"))
-        bid, ask = probe.positive(item.get("bid")), probe.positive(item.get("ask"))
-        if (strike is None or abs(strike - spot) / spot > 0.03
-            or bid is None or ask is None or ask < bid
-            or (ask - bid) / ((ask + bid) / 2) > 0.25
-            or probe.nonnegative_int(item.get("open_interest")) < 100):
+        if strike is None or abs(strike - spot) / spot > 0.03:
             continue
+        stages["within_3pct_spot"] += 1
+        bid, ask = probe.positive(item.get("bid")), probe.positive(item.get("ask"))
+        if (bid is None or ask is None or ask < bid
+            or (ask - bid) / ((ask + bid) / 2) > 0.25):
+            continue
+        stages["valid_market"] += 1
+        if probe.nonnegative_int(item.get("open_interest")) < 100:
+            continue
+        stages["open_interest_at_least_100"] += 1
         quote_age = probe.quote_age(item, now)
         if quote_age is None or quote_age > MAX_QUOTE_AGE_SECONDS:
             continue
+        stages["fresh_quote_at_most_120s"] += 1
         greeks = item.get("greeks")
-        if (not isinstance(greeks, dict)
-            or probe.option_iv(item) is None
-            or _datetime_utc(greeks.get("updated_at"), require_timezone=False) is None):
+        if not isinstance(greeks, dict) or probe.option_iv(item) is None:
             continue
+        stages["valid_fractional_iv"] += 1
+        if _datetime_utc(greeks.get("updated_at"), require_timezone=False) is None:
+            continue
+        stages["greek_naive_iso_timestamp"] += 1
         rank = (abs(strike - spot), -probe.nonnegative_int(item.get("open_interest")))
         if side not in best or rank < best[side][0]:
             best[side] = (rank, item)
+    if counters is not None:
+        counters.update(stages)
     return {side: pair[1] for side, pair in best.items()}
 
 
@@ -131,8 +160,9 @@ def run_crosscheck(token, *, now=None):
     expiration = min(eligible)[1]
     chain = probe.get_json(token, "/markets/options/chains", {
         "symbol": SYMBOL, "expiration": expiration, "greeks": "true"})
+    selector_funnel = {}
     selected = _nearest_naive_atm_contracts(
-        chain, symbol=SYMBOL, spot=spot, now=now)
+        chain, symbol=SYMBOL, spot=spot, now=now, counters=selector_funnel)
     report = {
         "status": "INCONCLUSIVE",
         "h1_signal_status": "UNVERIFIED",
@@ -140,6 +170,7 @@ def run_crosscheck(token, *, now=None):
         "does_not_change_h1_gate": True,
         "read_only": True,
         "sampled_expirations": 1,
+        "selector_filter_funnel": selector_funnel,
         "naive_atm_call_legs_selected": int("call" in selected),
         "naive_atm_put_legs_selected": int("put" in selected),
         "direct_side_requests": 0,
