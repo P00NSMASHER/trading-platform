@@ -287,6 +287,47 @@ class Tests(unittest.TestCase):
         self.assertEqual(feasibility["after_fees_and_10_slippage_positive"], 0)
         self.assertEqual(summary["edge_status"], "UNVERIFIED")
 
+
+    def test_binary_full_loss_hurdle_after_commissions_and_adverse_fill(self):
+        """Pure arithmetic hurdle, not a realized win rate or option probability."""
+        specimen = {
+            "short_strike": 101.0, "long_strike": 102.0,
+            "credit_per_share": 0.35, "fees_assumed_usd": 2.60,
+            "risk_estimate_usd": 67.60,
+        }
+        hurdle = probe.binary_full_loss_breakeven_hurdle(specimen)
+        self.assertAlmostEqual(hurdle, 0.776)
+        self.assertGreater(hurdle, 0.70)
+        self.assertLess(hurdle, 0.80)
+        self.assertAlmostEqual(
+            probe.binary_full_loss_breakeven_hurdle(specimen, adverse_fill_usd=0),
+            0.676,
+        )
+        self.assertIsNone(probe.binary_full_loss_breakeven_hurdle({
+            **specimen, "credit_per_share": 0.05, "risk_estimate_usd": 97.60,
+        }))
+        self.assertIsNone(probe.binary_full_loss_breakeven_hurdle({
+            **specimen, "risk_estimate_usd": 10.0,
+        }))
+        self.assertIsNone(probe.binary_full_loss_breakeven_hurdle({
+            **specimen, "short_strike": float("nan"),
+        }))
+
+    def test_binary_hurdles_require_positive_after_10_stress_and_are_nested(self):
+        rates = []
+        for credit in (0.10, 0.20, 0.35, 0.59):
+            row = {
+                "short_strike": 101.0, "long_strike": 102.0,
+                "credit_per_share": credit, "fees_assumed_usd": 2.6,
+                "risk_estimate_usd": round(100 - credit * 100 + 2.6, 2),
+            }
+            rates.append(probe.binary_full_loss_breakeven_hurdle(row))
+        self.assertIsNone(rates[0])  # $10 credit cannot absorb $2.60+$10
+        self.assertTrue(all(rates[i] > rates[i+1] for i in (1, 2)))
+        self.assertAlmostEqual(rates[-1], 0.536)
+        self.assertEqual(tuple(probe.FULL_LOSS_HURDLE_PCTS), (60, 70, 80, 90, 95))
+        self.assertIn("positive_stressed_max_win", probe.empty_binary_hurdle_diagnostics())
+
     def test_buckets(self):
         self.assertEqual([bucket(i) for i in (0, 1, 6, 7, 21, 22)],
                          ["0DTE", "1DTE", None, "7-21DTE", "7-21DTE", None])
