@@ -125,6 +125,8 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
             or h1_symbol_count > len(symbols[i:i + CHUNK_SIZE])
             or h1_symbol_count > h1_chain_count):
             raise probe.ProbeFailure("Invalid H1 independent coverage receipt")
+        if h1_chain_count > result["chains_requested"]:
+            raise probe.ProbeFailure("H1 chain count exceeds scanned chains")
         h1_chains += h1_chain_count
         h1_symbols += h1_symbol_count  # symbol batches are disjoint by validation
         for side, count in result.get("h1_signal_spread_sides", {}).items():
@@ -160,6 +162,9 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     intraday = recent_bar_evidence(
         token, now if now is not None else datetime.now(timezone.utc), symbols
     )
+    if (sum(h1_signal_sides.values()) != premium
+        or h1_chains > premium or h1_symbols > h1_chains):
+        raise probe.ProbeFailure("H1 nonindependent-count receipt parity failed")
     return all_rows, {
         "status": "MARKET_DATA_ACCESS_VERIFIED",
         "market_state": "open",
