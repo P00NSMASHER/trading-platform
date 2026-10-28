@@ -17,6 +17,7 @@ MAX_GREEK_AGE_SECONDS = 90 * 60
 MAX_QUOTE_AGE_SECONDS = 120
 MAX_CROSS_ENDPOINT_TIME_DIFFERENCE_SECONDS = 60
 MAX_CROSS_ENDPOINT_IV_DIFFERENCE = 0.005
+MAX_EXPIRATION_CHECKS = 4
 
 
 def _datetime_utc(raw, *, require_timezone):
@@ -135,7 +136,12 @@ def corroborate(chain_option, direct_greeks, *, now):
 
 
 def run_crosscheck(token, *, now=None):
-    """At most six HTTPS GET market-data requests, with strict provider timezone isolation."""
+    """At most nine HTTPS GET market-data requests, diagnostic-only.
+
+    Scan at most four expirations nearest 14 DTE, favoring a chain with
+    both liquid near-ATM sides. A single thin expiration must not prevent
+    validation of the direct Greek endpoint on a different listed expiry.
+    """
     now = now or datetime.now(timezone.utc)
     state = probe.get_json(token, "/markets/clock", {}).get("clock") or {}
     state_name = state.get("state") if isinstance(state, dict) else None
@@ -151,26 +157,56 @@ def run_crosscheck(token, *, now=None):
     expiries = probe.expiry_dates(probe.get_json(
         token, "/markets/options/expirations", {"symbol": SYMBOL}))
     local_date = now.astimezone(probe.EASTERN).date()
-    eligible = [(abs((datetime.strptime(x, "%Y-%m-%d").date() - local_date).days - 14), x)
-                for x in expiries
-                if 7 <= (datetime.strptime(x, "%Y-%m-%d").date() - local_date).days <= 21]
+    eligible = sorted(
+        (abs(dte - 14), expiry)
+        for expiry in expiries
+        if 7 <= (dte := (datetime.strptime(expiry, "%Y-%m-%d").date() - local_date).days) <= 21
+    )
     if not eligible:
         return {"status": "NO_ELIGIBLE_EXPIRATION", "h1_signal_status": "UNVERIFIED",
-                "cross_endpoint_only": True, "read_only": True, "requests_beyond_clock": 2}
-    expiration = min(eligible)[1]
-    chain = probe.get_json(token, "/markets/options/chains", {
-        "symbol": SYMBOL, "expiration": expiration, "greeks": "true"})
-    selector_funnel = {}
-    selected = _nearest_naive_atm_contracts(
-        chain, symbol=SYMBOL, spot=spot, now=now, counters=selector_funnel)
+                "cross_endpoint_only": True, "read_only": True,
+                "requests_beyond_clock": 2, "expirations_sampled": 0}
+
+    selector_totals = {}
+    fallback = None
+    selected = {}
+    selected_expiration = None
+    expirations_sampled = 0
+    expirations_with_two_liquid_sides = 0
+    expirations_with_one_liquid_side = 0
+    for _, expiration in eligible[:MAX_EXPIRATION_CHECKS]:
+        chain = probe.get_json(token, "/markets/options/chains", {
+            "symbol": SYMBOL, "expiration": expiration, "greeks": "true"})
+        stages = {}
+        options = _nearest_naive_atm_contracts(
+            chain, symbol=SYMBOL, spot=spot, now=now, counters=stages)
+        expirations_sampled += 1
+        for key, amount in stages.items():
+            selector_totals[key] = selector_totals.get(key, 0) + amount
+        if len(options) == 2:
+            expirations_with_two_liquid_sides += 1
+            selected = options
+            selected_expiration = expiration
+            break
+        if len(options) == 1:
+            expirations_with_one_liquid_side += 1
+            if fallback is None:
+                fallback = (expiration, options)
+    if not selected and fallback is not None:
+        selected_expiration, selected = fallback
+
     report = {
         "status": "INCONCLUSIVE",
         "h1_signal_status": "UNVERIFIED",
         "cross_endpoint_only": True,
         "does_not_change_h1_gate": True,
         "read_only": True,
-        "sampled_expirations": 1,
-        "selector_filter_funnel": selector_funnel,
+        "sampled_expirations": expirations_sampled,
+        "expirations_considered": len(eligible),
+        "max_expiration_checks": MAX_EXPIRATION_CHECKS,
+        "expirations_with_two_liquid_sides": expirations_with_two_liquid_sides,
+        "expirations_with_one_liquid_side": expirations_with_one_liquid_side,
+        "selector_filter_funnel": selector_totals,
         "naive_atm_call_legs_selected": int("call" in selected),
         "naive_atm_put_legs_selected": int("put" in selected),
         "direct_side_requests": 0,
@@ -184,7 +220,7 @@ def run_crosscheck(token, *, now=None):
         if item is None:
             continue
         direct = probe.get_json(token, "/markets/options/greeks", {
-            "symbol": SYMBOL, "expiration": expiration, "type": side})
+            "symbol": SYMBOL, "expiration": selected_expiration, "type": side})
         report["direct_side_requests"] += 1
         direct_item = _find_unique_direct_contract(direct, item["symbol"])
         result = corroborate(item, direct_item, now=now)
@@ -192,7 +228,7 @@ def run_crosscheck(token, *, now=None):
         report["same_contract_iv_matches"] += int(result["iv_concordant"])
         report["utc_wallclock_matches"] += int(result["utc_wallclock_concordant"])
         report["utc_fresh_concordant"] += int(result["utc_fresh_concordant"])
-    if (len(selected) == 2 and report["utc_fresh_concordant"] == 2):
+    if len(selected) == 2 and report["utc_fresh_concordant"] == 2:
         report["status"] = "TWO_SIDES_CORROBORATED_DIAGNOSTIC_ONLY"
     return report
 
