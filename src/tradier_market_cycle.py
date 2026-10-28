@@ -102,6 +102,14 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     observed = 0
     premium = 0
     h1_greeks_quality: dict[str, int] = {}
+    proxy_totals = {
+        "chains_primary_window": 0,
+        "chains_with_paired_atm_quotes_and_rv20": 0,
+        "chains_without_usable_paired_quote_or_rv20": 0,
+        "chains_straddle_bid_ratio_above_1_20": 0,
+        "chains_straddle_ask_ratio_below_0_80": 0,
+        "model_is_not_profit_or_implied_vol": True,
+    }
     best_case_feasibility = {
         label: {"after_fees_positive": 0,
                 "after_fees_and_5_slippage_positive": 0,
@@ -125,6 +133,15 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         requested += result["chains_requested"]
         observed += result["chains_with_contracts"]
         premium += result["iv_rv_ge_1_20_seven_to_21_dte"]
+        proxy_data = result.get("greeks_independent_straddle_move_proxy", {})
+        for key, value in proxy_data.items():
+            if key == "model_is_not_profit_or_implied_vol":
+                if value is not True:
+                    raise probe.ProbeFailure("Model-free screen must deny profit inference")
+                continue
+            if key not in proxy_totals or not isinstance(value, int) or value < 0:
+                raise probe.ProbeFailure("Invalid model-free straddle proxy count")
+            proxy_totals[key] += value
         for key, n in result.get("h1_greeks_quality", {}).items():
             if (key not in probe.atm_greeks_quality(
                     {}, symbol="", spot=1.0, now=(now or datetime.now(timezone.utc)))
@@ -185,6 +202,14 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     if (sum(h1_signal_sides.values()) != premium
         or h1_chains > premium or h1_symbols > h1_chains):
         raise probe.ProbeFailure("H1 nonindependent-count receipt parity failed")
+    if (proxy_totals["chains_primary_window"] !=
+        proxy_totals["chains_with_paired_atm_quotes_and_rv20"] +
+        proxy_totals["chains_without_usable_paired_quote_or_rv20"] or
+        proxy_totals["chains_straddle_bid_ratio_above_1_20"] >
+            proxy_totals["chains_with_paired_atm_quotes_and_rv20"] or
+        proxy_totals["chains_straddle_ask_ratio_below_0_80"] >
+            proxy_totals["chains_with_paired_atm_quotes_and_rv20"]):
+        raise probe.ProbeFailure("Model-free straddle proxy chain coverage parity failed")
     return all_rows, {
         "status": "MARKET_DATA_ACCESS_VERIFIED",
         "market_state": "open",
@@ -206,6 +231,7 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         "h1_signal_spread_sides": h1_signal_sides,
         "atm_iv_coverage": atm_stats,
         "h1_greeks_quality": h1_greeks_quality,
+        "greeks_independent_straddle_move_proxy": proxy_totals,
         "best_case_payoff_feasibility_by_dte": best_case_feasibility,
         "intraday_underlying_context": intraday,
     }
