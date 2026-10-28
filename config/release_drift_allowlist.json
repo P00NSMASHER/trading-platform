@@ -2820,8 +2820,8 @@
       "reason": "Reproducible exhaustive-audit implementation covering reachable Git objects, tracked/history blobs, archives, structured alternate formats, notebooks, and embedded outputs for the pinned hacked_earnings_jfe commit."
     },
     ".github/workflows/tradier-readonly-options.yml": {
-      "expected_sha256": "397926d49791c874128b9e81eecfef6d66b157841c153381164f479389c541b4",
-      "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI."
+      "expected_sha256": "5ae0e18612b244d04209353d52ce9d262647fb857328d17243c5e3c1045fa136",
+      "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI. October 2026 forward admission completeness extension, synthetic tests only, no private market quotes exposed."
     },
     "src/tradier_options_probe.py": {
       "expected_sha256": "48b829bbfbfa983087f496d0c076bb6e0dbd633aa1d8d35ad530a6af00c55a67",
@@ -2836,8 +2836,8 @@
       "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata."
     },
     "docs/options_edge_validation_protocol.md": {
-      "expected_sha256": "e2a1297ab18513116b5249dedad612209d4aff35ad9a7c1d8f7e69f6e98712dc",
-      "reason": "Preregistered prospective, cost-aware 7-21 DTE falsification standard, controls and protected market-data retention requirements, with no verified profit claims. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 independent-evidence normalization: count separate underlying and expiry units for qualifying H1, not correlated overlapping strike-spread permutations; fail closed on inconsistent aggregate counters. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI."
+      "expected_sha256": "6d3b36233dd14279c14460d6e7dad8f11c92c2224423a8c138310a6f4cc44ba6",
+      "reason": "Preregistered prospective, cost-aware 7-21 DTE falsification standard, controls and protected market-data retention requirements, with no verified profit claims. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 independent-evidence normalization: count separate underlying and expiry units for qualifying H1, not correlated overlapping strike-spread permutations; fail closed on inconsistent aggregate counters. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI. October 2026 forward admission completeness extension, synthetic tests only, no private market quotes exposed."
     },
     "src/tradier_market_cycle.py": {
       "expected_sha256": "ea8c7a8bf33fea95940aa407283332b218a8bc39ecb892f4aa54ad36f2470d92",
@@ -2860,8 +2860,20 @@
       "reason": "Deterministic synthetic-only acceptance tests for no-lookahead, quote freshness, H1, missing outcomes, duplicate/correlated trades, risk overlap, sample sufficiency, bootstrap determinism and private data safeguards."
     },
     "docs/options_forward_evidence.md": {
-      "expected_sha256": "c0220b7c4755870b3c1fc9479d98aea6a2be1797038abbbed222a5d9324ad5f3",
-      "reason": "Private CSV field contract, cost formulas, statistical research caveats, evidence limits, required independent fills and provenance; explicitly forbids raw licensed quote publication."
+      "expected_sha256": "ad107a2c7a3093bcd62ecdd22b8763f722dfe39f7801998e223d291da1840bd7",
+      "reason": "Private CSV field contract, cost formulas, statistical research caveats, evidence limits, required independent fills and provenance; explicitly forbids raw licensed quote publication. October 2026 forward admission completeness extension, synthetic tests only, no private market quotes exposed."
+    },
+    "src/options_population_audit.py": {
+      "expected_sha256": "829987e1bc46fe4dbbbbae84726bc8e2651885f0d3d06efef494c1aedf3b151b",
+      "reason": "Offline-only private selection-admission ledger and admitted outcome completeness enforcement. Prevents omitted matured losers, pending outcomes, unknown/posthoc winners and mismatched identities from overstating quote-only research. No broker requests."
+    },
+    "tests/test_options_population_audit.py": {
+      "expected_sha256": "acb571b4d5aa7fdc030750672be19f7ae3a2ebad0f6ef9bc16ecbce0cabcf572",
+      "reason": "Synthetic-only tests for missing losing outcomes, pending selections, invalid admission timestamps, unmatched outcomes and selective-recording failure modes."
+    },
+    "docs/options_population_audit.md": {
+      "expected_sha256": "20e457abd198e2e4f194a66834e687c0dfb7c4fab38279040cb84e601d8df5ab",
+      "reason": "Private admission manifest contract, population gaps, timestamp attestations and explicit limitations; no private source data is uploaded."
     }
   },
   "schema_version": "2",
