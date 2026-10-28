@@ -24,6 +24,8 @@ H3 (negative control): 0DTE/1DTE quote observations and matched spreads without 
 
 ## Evaluation plan and acceptance gates
 
+Because the direct Greek endpoint returned HTTP 403 to the current token on October 28 (successful chain scan, failed separate GET), repeat cross-endpoint attempts are opt-in manual only; neither naive time assumptions nor a paid-access claim can resolve that without independent evidence. H1 remains unverified. 
+
 Greek timezone corroboration remains strictly separate from strategy selection: the
 SPY-only, GET-only diagnostic may sample up to four valid expirations when a
 single nearer 14DTE chain has no liquid call/put pair. It checks option IDs,

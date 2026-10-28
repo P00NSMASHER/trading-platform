@@ -3,6 +3,12 @@ name: Tradier read-only options research
 # PRs NEVER receive the brokerage secret. Only reviewed main receives it.
 on:
   workflow_dispatch:
+    inputs:
+      run_greeks_crosscheck:
+        description: 'Attempt direct Greek endpoint corroboration (may return HTTP 403)'
+        required: false
+        type: boolean
+        default: false
   schedule:
     # UTC times deliberately land inside the NYSE session in both EDT and EST.
     # Holiday/early-close handling is delegated to Tradier /markets/clock.
@@ -65,7 +71,11 @@ jobs:
           --symbols SPY,QQQ,IWM,TLT,GLD,XLF,XLE,SMH,AAPL,NVDA,AMD,MSFT,BAC,SOFI,F,PFE
           --out "$RUNNER_TEMP/tradier_market_snapshot.csv"
 
-      - name: Cross-check option Greek timestamps using separate GET endpoint (diagnostic only)
+      - name: Cross-check option Greek timestamps using separate GET endpoint (manual diagnostic only)
+        # The current repository token received HTTP 403 on this endpoint
+        # on 2026-10-28. Do not repeatedly hit a denied endpoint on cron/push.
+        # A manual explicit opt-in retains genuine failure on 403.
+        if: github.event_name == 'workflow_dispatch' && inputs.run_greeks_crosscheck == true
         env:
           TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
           PYTHONPATH: src

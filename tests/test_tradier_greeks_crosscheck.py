@@ -2,6 +2,7 @@
 import io
 import unittest
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from unittest.mock import patch
 
 import tradier_greeks_crosscheck as cross
@@ -205,6 +206,23 @@ class GreekCorroborationTests(unittest.TestCase):
         self.assertEqual(seen.count("/markets/options/chains"), 4)
         self.assertEqual(len(seen), 7)
         self.assertEqual(result["h1_signal_status"], "UNVERIFIED")
+
+    def test_production_greeks_direct_endpoint_needs_explicit_manual_opt_in(self):
+        workflow = (Path(__file__).resolve().parents[1]
+                    / ".github/workflows/tradier-readonly-options.yml"
+                    ).read_text(encoding="utf-8")
+        self.assertIn("run_greeks_crosscheck:", workflow)
+        self.assertIn("default: false", workflow)
+        self.assertIn(
+            "if: github.event_name == 'workflow_dispatch' && "
+            "inputs.run_greeks_crosscheck == true",
+            workflow,
+        )
+        self.assertNotIn("continue-on-error: true", workflow)
+        self.assertIn(
+            "python -m tradier_market_cycle",
+            workflow,
+        )
 
     def test_market_closed_never_fetches_tokenized_quotes_or_greeks(self):
         with patch("tradier_greeks_crosscheck.probe.get_json",
