@@ -236,9 +236,10 @@ def straddle_bid_ask_vs_rv_move(chain, *, symbol, spot, rv20, expiry, now,
     propose selling an undefined-risk straddle. Only fresh bid/ask quotes
     with standard 100-share roots and OI>=100 qualify; no ORATS Greeks needed.
     """
-    if positive(spot) is None or positive(rv20) is None:
+    spot_value, realized = positive(spot), positive(rv20)
+    if spot_value is None or realized is None:
         return None
-    if now.tzinfo is None or now.utcoffset() is None:
+    if not isinstance(now, datetime) or now.tzinfo is None or now.utcoffset() is None:
         return None
     try:
         days = (datetime.strptime(expiry, "%Y-%m-%d").date()
@@ -247,7 +248,7 @@ def straddle_bid_ask_vs_rv_move(chain, *, symbol, spot, rv20, expiry, now,
         return None
     if not 7 <= days <= 21:
         return None
-    baseline = spot * rv20 * math.sqrt(days / 365) * math.sqrt(2 / math.pi)
+    baseline = spot_value * realized * math.sqrt(days / 365) * math.sqrt(2 / math.pi)
     if not math.isfinite(baseline) or baseline <= 0:
         return None
     node = chain.get("options") if isinstance(chain, dict) else None
@@ -264,7 +265,7 @@ def straddle_bid_ask_vs_rv_move(chain, *, symbol, spot, rv20, expiry, now,
             or nonnegative_int(item.get("contract_size")) != 100):
             continue
         strike = positive(item.get("strike"))
-        if strike is None or abs(strike - spot) / spot > 0.01:
+        if strike is None or abs(strike - spot_value) / spot_value > 0.01:
             continue
         bid, ask = positive(item.get("bid")), positive(item.get("ask"))
         if (bid is None or ask is None or ask < bid
@@ -289,7 +290,7 @@ def straddle_bid_ask_vs_rv_move(chain, *, symbol, spot, rv20, expiry, now,
         if (not (math.isfinite(low) and math.isfinite(high))
             or low <= 0 or high < low):
             continue
-        score = (round(abs(strike - spot) / spot, 9),
+        score = (round(abs(strike - spot_value) / spot_value, 9),
                  -min(nonnegative_int(call["open_interest"]),
                       nonnegative_int(put["open_interest"])))
         usable.append((score, low, high))
