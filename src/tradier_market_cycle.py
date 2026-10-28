@@ -95,6 +95,9 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     counts = {"0DTE": 0, "1DTE": 0, "7-21DTE": 0}
     spread_counts = {"bear_call": 0, "bull_put": 0}
     diagnostics: dict[str, int] = {}
+    diagnostics_by_dte = {label: {} for label in counts}
+    pair_funnel: dict[str, int] = {}
+    pair_funnel_by_dte = {label: {} for label in counts}
     requested = 0
     observed = 0
     premium = 0
@@ -113,6 +116,20 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
             spread_counts[key] += count
         for key, count in result["quote_filter_diagnostics"].items():
             diagnostics[key] = diagnostics.get(key, 0) + count
+        for label, stages in result.get("quote_filter_by_dte", {}).items():
+            if label not in diagnostics_by_dte:
+                raise probe.ProbeFailure("Unexpected expiry bucket in quote diagnostics")
+            for key, count in stages.items():
+                totals = diagnostics_by_dte[label]
+                totals[key] = totals.get(key, 0) + count
+        for key, count in result.get("spread_pair_funnel", {}).items():
+            pair_funnel[key] = pair_funnel.get(key, 0) + count
+        for label, stages in result.get("spread_pair_funnel_by_dte", {}).items():
+            if label not in pair_funnel_by_dte:
+                raise probe.ProbeFailure("Unexpected expiry bucket in spread diagnostics")
+            for key, count in stages.items():
+                totals = pair_funnel_by_dte[label]
+                totals[key] = totals.get(key, 0) + count
     # Time & Sales adds bounded, independent intraday equity-bar context.
     # It cannot be used to infer executable historical option bid-ask.
     intraday = recent_bar_evidence(
@@ -130,6 +147,9 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         "candidate_counts": counts,
         "spread_counts": spread_counts,
         "quote_filter_diagnostics": diagnostics,
+        "quote_filter_by_dte": diagnostics_by_dte,
+        "spread_pair_funnel": pair_funnel,
+        "spread_pair_funnel_by_dte": pair_funnel_by_dte,
         "iv_rv_ge_1_20_seven_to_21_dte": premium,
         "intraday_underlying_context": intraday,
     }
