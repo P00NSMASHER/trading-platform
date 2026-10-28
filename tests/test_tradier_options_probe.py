@@ -46,6 +46,80 @@ class Tests(unittest.TestCase):
             {"history": {"day": days}}, asof_date=date(2026, 9, 22)
         ))
 
+
+    def test_tradier_iv_is_decimal_not_percent_and_rejects_ambiguous_units(self):
+        self.assertEqual(probe.option_iv({"greeks": {"mid_iv": 0.35}}), 0.35)
+        self.assertEqual(probe.option_iv({"greeks": {"mid_iv": 2.5}}), 2.5)
+        self.assertIsNone(probe.option_iv({"greeks": {"mid_iv": 35.0}}))
+        self.assertIsNone(probe.option_iv({"greeks": {"mid_iv": None}}))
+
+    def test_atm_iv_uses_both_nearest_valid_sides_not_short_leg_skew(self):
+        call_atm = option(100, 2.20, 2.25)
+        call_atm["greeks"]["mid_iv"] = 0.40
+        put_atm = {**option(100, 2.10, 2.15), "option_type": "put",
+                   "greeks": {"mid_iv": 0.36}}
+        short_call = option(101, 1.25, 1.27)
+        short_call["greeks"]["mid_iv"] = 0.80
+        long_call = option(102, .78, .80)
+        chain = {"options": {"option": [
+            call_atm, put_atm, short_call, long_call,
+        ]}}
+        observed = probe.atm_chain_iv(chain, symbol="TEST", spot=100, now=NOW)
+        self.assertEqual(observed, 0.38)
+        rows = probe.candidates(
+            chain, symbol="TEST", spot=100, expiry="2026-11-06",
+            now=NOW, rv20=0.25,
+        )
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["short_iv"], 0.8)
+        self.assertNotEqual(observed, rows[0]["short_iv"])
+
+    def test_atm_iv_rejects_one_sided_stale_and_adjusted_data(self):
+        call_atm = option(100, 2.2, 2.25)
+        put_atm = {**option(100, 2.1, 2.15), "option_type": "put"}
+        chain = {"options": {"option": [call_atm]}}
+        self.assertIsNone(probe.atm_chain_iv(
+            chain, symbol="TEST", spot=100, now=NOW))
+        put_atm["bid_date"] = TS - 3600
+        chain["options"]["option"].append(put_atm)
+        self.assertIsNone(probe.atm_chain_iv(
+            chain, symbol="TEST", spot=100, now=NOW))
+        put_atm["bid_date"] = TS - 10
+        put_atm["contract_size"] = 10
+        self.assertIsNone(probe.atm_chain_iv(
+            chain, symbol="TEST", spot=100, now=NOW))
+        put_atm["contract_size"] = 100
+        self.assertEqual(probe.atm_chain_iv(
+            chain, symbol="TEST", spot=100, now=NOW), 0.35)
+
+    def test_primary_iv_screen_requires_both_atm_sides_and_completed_rv(self):
+        calls = [option(100, 2.2, 2.25),
+                 option(101, 1.25, 1.27),
+                 option(102, .78, .80)]
+        put = {**option(100, 2.1, 2.15), "option_type": "put"}
+        for row in calls + [put]:
+            row["greeks"]["mid_iv"] = 0.40
+        history = [
+            {"date": f"2026-09-{i:02d}", "close": float(95 + i + (i % 3))}
+            for i in range(1, 22)
+        ]
+        responses = {
+            "/markets/quotes": {"quotes": {"quote": {"bid": 100, "ask": 100.02}}},
+            "/markets/options/expirations": {"expirations": {"date": ["2026-11-06"]}},
+            "/markets/history": {"history": {"day": history}},
+            "/markets/options/chains": {"options": {"option": calls + [put]}},
+        }
+        with patch("tradier_options_probe.get_json",
+                   side_effect=lambda _t, p, _x: responses[p]):
+            rows, summary = probe.run(["TEST"], "FAKE", now=NOW)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["atm_iv"], 0.4)
+        self.assertGreater(rows[0]["atm_iv_rv_ratio"], 1.2)
+        self.assertEqual(summary["iv_rv_ge_1_20_seven_to_21_dte"], 1)
+        self.assertEqual(summary["atm_iv_coverage"]["chains_primary_window"], 1)
+        self.assertEqual(summary["atm_iv_coverage"]["chains_with_two_sided_atm_iv"], 1)
+        self.assertEqual(summary["atm_iv_coverage"]["candidate_spreads_with_complete_atm_signal"], 1)
+
     def test_buckets(self):
         self.assertEqual([bucket(i) for i in (0, 1, 6, 7, 21, 22)],
                          ["0DTE", "1DTE", None, "7-21DTE", "7-21DTE", None])
