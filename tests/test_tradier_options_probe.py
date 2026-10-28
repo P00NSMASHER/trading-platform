@@ -222,8 +222,79 @@ class Tests(unittest.TestCase):
         assert len(rows) == 1
         assert summary["spread_counts"] == {"bear_call": 0, "bull_put": 1}
         assert summary["quote_filter_diagnostics"]["otm_liquid_legs"] == 2
+        assert summary["quote_filter_by_dte"]["7-21DTE"]["otm_liquid_legs"] == 2
+        assert summary["spread_pair_funnel"]["pairs_eligible"] == 1
+        assert summary["spread_pair_funnel_by_dte"]["7-21DTE"]["pairs_eligible"] == 1
         assert summary["edge_status"] == "UNVERIFIED"
 
+
+    def test_quote_age_bins_are_exclusive_and_do_not_waive_staleness(self):
+        chain = {"options": {"option": [
+            option(101, 1.25, 1.27, age=10),
+            option(102, .78, .80, age=240),
+            option(103, .78, .80, age=720),
+            option(104, .78, .80, age=1600),
+            {**option(105, .78, .80), "ask_date": None},
+        ]}}
+        diag = probe.diagnose_chain(chain, "TEST", 100, NOW)
+        assert diag["call_or_put_rows"] == 5
+        assert [diag[k] for k in (
+            "age_at_most_120s", "age_121_to_300s", "age_301_to_900s",
+            "age_over_900s", "age_missing_or_unparseable",
+        )] == [1, 1, 1, 1, 1]
+        assert diag["stale_or_missing_quote_time"] == 4
+        assert diag["otm_liquid_call_legs"] == 1
+
+    def test_invalid_market_subtypes_do_not_obscure_first_failure(self):
+        raw = [
+            option(None, .25, .28),
+            option(102, 0, .28),
+            option(103, .30, .20),
+            option(104, .20, .22, age=300),
+        ]
+        diag = probe.diagnose_chain(
+            {"options": {"option": raw}}, "TEST", 100, NOW)
+        assert diag["invalid_market"] == 3
+        assert diag["invalid_strike"] == 1
+        assert diag["invalid_nonpositive_bid_or_ask"] == 1
+        assert diag["invalid_crossed_market"] == 1
+        assert diag["stale_or_missing_quote_time"] == 1
+
+    def test_pair_funnel_counts_width_risk_and_actual_candidate_parity(self):
+        calls = [option(101, 1.25, 1.27), option(102, .78, .80),
+                 option(105, .05, .06)]
+        puts = [{**option(99, 1.25, 1.27), "option_type": "put"},
+                {**option(98, .78, .80), "option_type": "put"},
+                {**option(95, .05, .06), "option_type": "put"}]
+        chain = {"options": {"option": calls + puts}}
+        pair = probe.diagnose_spread_pairs(
+            chain, symbol="TEST", spot=100, now=NOW)
+        assert pair["otm_call_legs"] == 3
+        assert pair["otm_put_legs"] == 3
+        assert pair["pairs_considered"] == 6
+        assert pair["pairs_over_3_width"] == 2
+        assert pair["pairs_over_100_risk_cap"] == 2
+        assert pair["pairs_eligible"] == 2
+        selected = probe.candidates(
+            chain, symbol="TEST", spot=100, expiry="2026-11-06", now=NOW, rv20=.2)
+        selected += probe.put_candidates(
+            chain, symbol="TEST", spot=100, expiry="2026-11-06", now=NOW, rv20=.2)
+        assert pair["pairs_eligible"] == len(selected)
+        assert all(row["risk_estimate_usd"] <= 100 for row in selected)
+        assert all(row["credit_per_share"] > 0 for row in selected)
+
+    def test_pair_funnel_never_turns_negative_bid_ask_credit_into_trade(self):
+        chain = {"options": {"option": [
+            option(101, .20, .22), option(102, .21, .23),
+        ]}}
+        pair = probe.diagnose_spread_pairs(
+            chain, symbol="TEST", spot=100, now=NOW)
+        assert pair["pairs_considered"] == 1
+        assert pair["pairs_nonpositive_credit"] == 1
+        assert pair["pairs_eligible"] == 0
+        assert probe.candidates(
+            chain, symbol="TEST", spot=100, expiry="2026-11-06",
+            now=NOW, rv20=.2) == []
 
 
 if __name__ == "__main__":

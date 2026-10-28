@@ -327,6 +327,12 @@ def diagnose_chain(chain, symbol, spot, now, max_quote_age=120):
         "stale_or_missing_quote_time": 0, "low_open_interest": 0,
         "wide_quoted_market": 0, "not_out_of_money": 0,
         "otm_liquid_legs": 0,
+        "otm_liquid_call_legs": 0, "otm_liquid_put_legs": 0,
+        "invalid_strike": 0, "invalid_nonpositive_bid_or_ask": 0,
+        "invalid_crossed_market": 0,
+        "age_missing_or_unparseable": 0, "age_at_most_120s": 0,
+        "age_121_to_300s": 0, "age_301_to_900s": 0,
+        "age_over_900s": 0,
         "quotes_with_millisecond_timestamps": 0,
         "quotes_with_second_timestamps": 0,
     }
@@ -345,15 +351,36 @@ def diagnose_chain(chain, symbol, spot, now, max_quote_age=120):
                 stages["quotes_with_second_timestamps"] += 1
         except (ValueError, TypeError):
             pass
+        # Disjoint age bins cover every call/put row, even rows that fail an
+        # earlier ordered filter. These are diagnostic, not execution waivers.
+        age = quote_age(item, now)
+        if age is None:
+            stages["age_missing_or_unparseable"] += 1
+        elif age <= 120:
+            stages["age_at_most_120s"] += 1
+        elif age <= 300:
+            stages["age_121_to_300s"] += 1
+        elif age <= 900:
+            stages["age_301_to_900s"] += 1
+        else:
+            stages["age_over_900s"] += 1
         if item.get("root_symbol") != symbol or nonnegative_int(item.get("contract_size")) != 100:
             stages["unknown_or_adjusted_contract"] += 1
             continue
         strike = positive(item.get("strike"))
         bid, ask = positive(item.get("bid")), positive(item.get("ask"))
-        if strike is None or bid is None or ask is None or ask < bid:
+        if strike is None:
             stages["invalid_market"] += 1
+            stages["invalid_strike"] += 1
             continue
-        age = quote_age(item, now)
+        if bid is None or ask is None:
+            stages["invalid_market"] += 1
+            stages["invalid_nonpositive_bid_or_ask"] += 1
+            continue
+        if ask < bid:
+            stages["invalid_market"] += 1
+            stages["invalid_crossed_market"] += 1
+            continue
         if age is None or age > max_quote_age:
             stages["stale_or_missing_quote_time"] += 1
             continue
@@ -368,7 +395,75 @@ def diagnose_chain(chain, symbol, spot, now, max_quote_age=120):
             stages["not_out_of_money"] += 1
             continue
         stages["otm_liquid_legs"] += 1
+        stages["otm_liquid_" + item["option_type"] + "_legs"] += 1
     return stages
+
+
+def diagnose_spread_pairs(chain, *, symbol, spot, now, max_risk=100.0,
+                          max_quote_age=120, max_spread=0.25,
+                          min_open_interest=100, fee_per_side=0.65):
+    """Independent aggregate pair funnel; only integer counts leave the runner.
+
+    Legs match the production safety screen. Candidate parity is enforced in
+    run(), so a future filter edit cannot silently corrupt this telemetry.
+    """
+    stages = {
+        "otm_call_legs": 0, "otm_put_legs": 0,
+        "pairs_considered": 0, "pairs_over_3_width": 0,
+        "pairs_within_3_width": 0, "pairs_nonpositive_credit": 0,
+        "pairs_credit_ge_width": 0, "pairs_over_100_risk_cap": 0,
+        "pairs_eligible": 0,
+    }
+    node = chain.get("options") or {}
+    rows = many(node.get("option")) if isinstance(node, dict) else []
+    groups = {"call": [], "put": []}
+    if positive(spot) is None:
+        return stages
+    for item in rows:
+        if not isinstance(item, dict) or item.get("option_type") not in groups:
+            continue
+        if (item.get("root_symbol") != symbol
+            or nonnegative_int(item.get("contract_size")) != 100):
+            continue
+        strike = positive(item.get("strike"))
+        bid, ask = positive(item.get("bid")), positive(item.get("ask"))
+        age = quote_age(item, now)
+        if (strike is None or bid is None or ask is None or ask < bid
+            or (ask - bid) / ((ask + bid) / 2) > max_spread
+            or age is None or age > max_quote_age
+            or nonnegative_int(item.get("open_interest")) < min_open_interest):
+            continue
+        side = item["option_type"]
+        if (side == "call" and strike <= spot) or (side == "put" and strike >= spot):
+            continue
+        groups[side].append((strike, item))
+        stages["otm_" + side + "_legs"] += 1
+    for side, entries in groups.items():
+        entries.sort(key=lambda p: p[0], reverse=side == "put")
+        for i, (short_strike, short) in enumerate(entries):
+            for long_strike, long in entries[i + 1:]:
+                width = round(abs(long_strike - short_strike), 3)
+                if width <= 0:
+                    continue
+                stages["pairs_considered"] += 1
+                if width > 3:
+                    stages["pairs_over_3_width"] += 1
+                    continue
+                stages["pairs_within_3_width"] += 1
+                credit = round(float(short["bid"]) - float(long["ask"]), 4)
+                if credit <= 0:
+                    stages["pairs_nonpositive_credit"] += 1
+                    continue
+                if credit >= width:
+                    stages["pairs_credit_ge_width"] += 1
+                    continue
+                risk = round((width - credit) * 100 + 4 * fee_per_side, 2)
+                if risk > max_risk:
+                    stages["pairs_over_100_risk_cap"] += 1
+                    continue
+                stages["pairs_eligible"] += 1
+    return stages
+
 
 def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     """Fail on missing authentication/market data; zero candidates is not success proof."""
@@ -376,11 +471,11 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     now = now or datetime.now(timezone.utc)
     counts = {"0DTE": 0, "1DTE": 0, "7-21DTE": 0}
     rows = []
-    diagnostics = {name: 0 for name in (
-        "raw_option_rows", "call_or_put_rows", "unknown_or_adjusted_contract",
-        "invalid_market", "stale_or_missing_quote_time", "low_open_interest",
-        "wide_quoted_market", "not_out_of_money", "otm_liquid_legs",
-        "quotes_with_millisecond_timestamps", "quotes_with_second_timestamps")}
+    diagnostics = dict.fromkeys(diagnose_chain({}, "", 1.0, now), 0)
+    diagnostics_by_dte = {label: dict.fromkeys(diagnostics, 0) for label in counts}
+    pair_funnel = dict.fromkeys(diagnose_spread_pairs(
+        {}, symbol="", spot=1.0, now=now), 0)
+    pair_funnel_by_dte = {label: dict.fromkeys(pair_funnel, 0) for label in counts}
     spread_counts = {"bear_call": 0, "bull_put": 0}
     premium_candidate_count = 0
     chains_with_contracts = 0
@@ -411,14 +506,24 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
             node = chain.get("options") or {}
             if isinstance(node, dict) and many(node.get("option")):
                 chains_with_contracts += 1
-            for key, value in diagnose_chain(chain, symbol, spot, chain_now, max_quote_age).items():
+            chain_diagnostics = diagnose_chain(chain, symbol, spot, chain_now, max_quote_age)
+            for key, value in chain_diagnostics.items():
                 diagnostics[key] += value
+                diagnostics_by_dte[label][key] += value
+            chain_pairs = diagnose_spread_pairs(
+                chain, symbol=symbol, spot=spot, now=chain_now,
+                max_risk=max_risk, max_quote_age=max_quote_age)
+            for key, value in chain_pairs.items():
+                pair_funnel[key] += value
+                pair_funnel_by_dte[label][key] += value
             selected = candidates(chain, symbol=symbol, spot=spot, expiry=expiry,
                                   now=chain_now, rv20=rv20, max_risk=max_risk,
                                   max_quote_age=max_quote_age)
             selected.extend(put_candidates(chain, symbol=symbol, spot=spot, expiry=expiry,
                                            now=chain_now, rv20=rv20, max_risk=max_risk,
                                            max_quote_age=max_quote_age))
+            if chain_pairs["pairs_eligible"] != len(selected):
+                raise ProbeFailure("Internal diagnostics/candidate parity failed")
             rows.extend(selected)
             counts[label] += len(selected)
             for candidate in selected:
@@ -434,6 +539,9 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                   "chains_with_contracts": chains_with_contracts,
                   "candidate_counts": counts, "spread_counts": spread_counts,
                   "quote_filter_diagnostics": diagnostics,
+                  "quote_filter_by_dte": diagnostics_by_dte,
+                  "spread_pair_funnel": pair_funnel,
+                  "spread_pair_funnel_by_dte": pair_funnel_by_dte,
                   "iv_rv_ge_1_20_seven_to_21_dte": premium_candidate_count,
                   "read_only": True,
                   "edge_status": "UNVERIFIED"}

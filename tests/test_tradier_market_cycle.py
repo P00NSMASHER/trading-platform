@@ -56,6 +56,13 @@ class MarketCycleTests(unittest.TestCase):
                 "spread_counts": {"bear_call": 1, "bull_put": 2},
                 "iv_rv_ge_1_20_seven_to_21_dte": 2,
                 "quote_filter_diagnostics": {"raw_option_rows": 10, "otm_liquid_legs": 4},
+                "quote_filter_by_dte": {
+                    "7-21DTE": {"raw_option_rows": 10, "otm_liquid_legs": 4}
+                },
+                "spread_pair_funnel": {"pairs_considered": 8, "pairs_eligible": 3},
+                "spread_pair_funnel_by_dte": {
+                    "7-21DTE": {"pairs_considered": 8, "pairs_eligible": 3}
+                },
             }
 
         with patch("tradier_market_cycle.probe.get_json", side_effect=mock_data), \
@@ -69,6 +76,9 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(summary["candidate_counts"]["7-21DTE"], 12)
         self.assertEqual(summary["spread_counts"]["bull_put"], 8)
         self.assertEqual(summary["quote_filter_diagnostics"]["raw_option_rows"], 40)
+        self.assertEqual(summary["quote_filter_by_dte"]["7-21DTE"]["raw_option_rows"], 40)
+        self.assertEqual(summary["spread_pair_funnel"]["pairs_eligible"], 12)
+        self.assertEqual(summary["spread_pair_funnel_by_dte"]["7-21DTE"]["pairs_eligible"], 12)
         self.assertEqual(summary["iv_rv_ge_1_20_seven_to_21_dte"], 8)
         self.assertEqual(summary["intraday_underlying_context"]["bars_observed"], 3)
         self.assertEqual(summary["edge_status"], "UNVERIFIED")
