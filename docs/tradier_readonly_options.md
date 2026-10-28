@@ -22,3 +22,29 @@ Aggregate quote rejection counts (invalid, stale, low open interest, wide spread
 Raw market data exists only in ephemeral GitHub-runner temporary storage and is deleted, with **no uploaded artifacts or committed quotes**. The repository is public. Logs show sanitized counts only. A successful run establishes API and options-chain access, **not a profitable or executable strategy**. Out-of-market-hours quote staleness may yield zero candidates.
 
 Before risking capital, use licensed historical options data or prospectively collect authorized snapshots in private storage. Measure fill rates, slippage, assignment exposure, full exit costs, tail risk, drawdowns, and independent out-of-sample performance. The workflow never submits orders.
+
+## Diagnostic interpretation (protected-main research)
+
+The sanitized rejection funnel now includes **disjoint age bins**, invalid-market
+subtypes and separate counts for 0DTE, 1DTE and 7-21DTE. Quote-age histograms
+cover all option rows (including rows rejected first for invalid bid/ask);
+the sequential rejection reasons count only each row's **first failure**.
+Do not add the age histogram to the sequential rejection count or interpret
+postmarket staleness as an untradeable market-hours universe.
+
+An independent pair-level funnel counts OTM, standard, quote-eligible legs
+by call and put; then same-expiry strike pairs lost to >$3 width, nonpositive
+natural bid/ask credit, credit >= width or the unchanged **$100 modeled maximum
+loss** after four illustrative contract-side fees. It asserts exact equality
+with production candidate selection and fails closed on a discrepancy.
+By-expiration-bucket stage counts distinguish a small-account strike-grid
+constraint from a market-data-quality constraint without publishing strikes,
+quotes, instruments, underlyings or timestamps.
+
+The 2026-10-27 pre-repair intraday run was invalidated as an opportunity screen
+by millisecond/second timestamp handling. The first corrected run occurred
+after market close; a subsequent market-clock-gated run skipped closed hours.
+**No corrected in-session spread-opportunity inference or profitable edge
+has been established.** Underlying bars and IV/HV observations do not
+substitute for licensed historical option bid/ask or prospective private
+entry/exit measurements.
