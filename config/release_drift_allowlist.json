@@ -2836,7 +2836,7 @@
       "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata."
     },
     "docs/options_edge_validation_protocol.md": {
-      "expected_sha256": "e0ad75da22692acc34d4156dbf472448eb1d33b4dae8272fef659ca68eb4d8eb",
+      "expected_sha256": "e2a1297ab18513116b5249dedad612209d4aff35ad9a7c1d8f7e69f6e98712dc",
       "reason": "Preregistered prospective, cost-aware 7-21 DTE falsification standard, controls and protected market-data retention requirements, with no verified profit claims. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 independent-evidence normalization: count separate underlying and expiry units for qualifying H1, not correlated overlapping strike-spread permutations; fail closed on inconsistent aggregate counters. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI."
     },
     "src/tradier_market_cycle.py": {
@@ -2852,15 +2852,15 @@
       "reason": "Up-to-date Tradier API coverage/limits, official references and explicit no-historical-expired-option-bid-ask evidence boundaries."
     },
     "src/options_forward_evaluator.py": {
-      "expected_sha256": "c6bb4c5393608ab02df89164a6befd8fe0db8f5274306cba66d71881ff508434",
+      "expected_sha256": "3ae2a9324301b6de33c135b7b00b3aebe73582fe8bbacb40451ae840b78085a7",
       "reason": "Private-only, standard-library forward options paper quote-mark evaluator: strict point-in-time data/quote/Greek checks, conservative natural bid/ask marks, full-roundtrip assumed fees, adverse slippage stress, portfolio/individual modeled risk ceilings, week-cluster confidence gates and explicit UNVERIFIED status. No brokerage/network access."
     },
     "tests/test_options_forward_evaluator.py": {
-      "expected_sha256": "e18ec830279d2029eaedaf5bb269d59b614fe8ab77adac7239bff7215ac33d4d",
+      "expected_sha256": "ceb12a24dc30cc1852b378e40f1a72fdcaee6428336ef482130443d8ed8ec7b4",
       "reason": "Deterministic synthetic-only acceptance tests for no-lookahead, quote freshness, H1, missing outcomes, duplicate/correlated trades, risk overlap, sample sufficiency, bootstrap determinism and private data safeguards."
     },
     "docs/options_forward_evidence.md": {
-      "expected_sha256": "6aae6b25d2f33839c50576f58bf0a3b38c896d654e6d3a7affe690fff8abf267",
+      "expected_sha256": "367fc16f852a2c37e7e00416938d3fe30f279fa90c264e9042d2887897f11211",
       "reason": "Private CSV field contract, cost formulas, statistical research caveats, evidence limits, required independent fills and provenance; explicitly forbids raw licensed quote publication."
     }
   },
