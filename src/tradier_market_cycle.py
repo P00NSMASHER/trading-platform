@@ -108,6 +108,9 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
                 "after_fees_and_10_slippage_positive": 0}
         for label in counts
     }
+    binary_hurdles = {
+        label: probe.empty_binary_hurdle_diagnostics() for label in counts
+    }
     h1_chains = 0
     h1_symbols = 0
     h1_signal_sides = {"bear_call": 0, "bull_put": 0}
@@ -138,6 +141,28 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
                 if key not in best_case_feasibility[label] or not isinstance(n, int) or n < 0:
                     raise probe.ProbeFailure("Invalid payoff-feasibility aggregate count")
                 best_case_feasibility[label][key] += n
+        for label, stages in result.get("binary_full_loss_hurdle_by_dte", {}).items():
+            if label not in binary_hurdles or not isinstance(stages, dict):
+                raise probe.ProbeFailure("Invalid cost-hurdle expiry bucket")
+            if set(stages) != set(binary_hurdles[label]):
+                raise probe.ProbeFailure("Incomplete binary-hurdle evidence receipt")
+            prior = stages["positive_stressed_max_win"]
+            if (not isinstance(prior, int) or isinstance(prior, bool) or prior < 0
+                or prior > result["candidate_counts"][label]):
+                raise probe.ProbeFailure("Invalid binary-hurdle accepted count")
+            previous = 0
+            for key in binary_hurdles[label]:
+                value = stages[key]
+                if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+                    raise probe.ProbeFailure("Invalid binary-hurdle count")
+                if key != "positive_stressed_max_win":
+                    if value < previous or value > prior:
+                        raise probe.ProbeFailure("Nonmonotonic binary win-rate hurdles")
+                    previous = value
+                binary_hurdles[label][key] += value
+            if label in result.get("best_case_payoff_feasibility_by_dte", {}):
+                if prior != result["best_case_payoff_feasibility_by_dte"][label]["after_fees_and_10_slippage_positive"]:
+                    raise probe.ProbeFailure("Payoff/hurdle receipt disagreement")
         h1_chain_count = result.get("h1_qualifying_chains", 0)
         h1_symbol_count = result.get("h1_qualifying_symbols", 0)
         if (not isinstance(h1_chain_count, int) or h1_chain_count < 0
@@ -207,6 +232,7 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         "atm_iv_coverage": atm_stats,
         "h1_greeks_quality": h1_greeks_quality,
         "best_case_payoff_feasibility_by_dte": best_case_feasibility,
+        "binary_full_loss_hurdle_by_dte": binary_hurdles,
         "intraday_underlying_context": intraday,
     }
 
