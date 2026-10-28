@@ -2876,16 +2876,16 @@
       "reason": "Private admission manifest contract, population gaps, timestamp attestations and explicit limitations; no private source data is uploaded."
     },
     "src/tradier_greeks_crosscheck.py": {
-      "expected_sha256": "c24dc1a9c4b8b39d175988a956599cbe25421f7ee9e8e6ef290d21133064f9ad",
-      "reason": "Research-only bounded six-GET direct-Greeks timezone/IV cross-endpoint diagnostic; no H1 trading promotion, account access, or raw quote logs."
+      "expected_sha256": "af967843fe03899f5accd5ac75df98ab3b8fe35400eaa3275d53d1b21a8542ee",
+      "reason": "Research-only bounded six-GET direct-Greeks timezone/IV cross-endpoint diagnostic; no H1 trading promotion, account access, or raw quote logs. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
     },
     "tests/test_tradier_greeks_crosscheck.py": {
-      "expected_sha256": "262866e30b13e8c85b471038c00a914739e4bc26810d84b454521cb3fd3dcfa8",
-      "reason": "Synthetic-only no-network checks for UTC wallclock, matched contract IV, stale Greek safety, clock gating and six-request budget."
+      "expected_sha256": "7f34ba61b629f020b1b5b0de82d4eac04cd5e825c3c05d5ff21e3e9b382f87ea",
+      "reason": "Synthetic-only no-network checks for UTC wallclock, matched contract IV, stale Greek safety, clock gating and six-request budget. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
     },
     "docs/tradier_greeks_cross_endpoint.md": {
-      "expected_sha256": "9a1dc9c3c1c88a7ea74e4f42f3f02830d854dbe255a5658a068e87918e5c9336",
-      "reason": "Explicit limitations, privacy rules and corroboration-only methodology for direct options-Greeks timezone comparisons."
+      "expected_sha256": "a359e5b1c5d2ae059120864d74408a4cd65aa4cdc9afae0fdd39e04424605012",
+      "reason": "Explicit limitations, privacy rules and corroboration-only methodology for direct options-Greeks timezone comparisons. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
     }
   },
   "schema_version": "2",
