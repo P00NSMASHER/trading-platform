@@ -158,10 +158,10 @@ def evaluate_population(admissions, outcomes, *, asof=None):
         summary["status"] = "INCOMPLETE_EXPIRED_OUTCOMES"
     elif summary["pending_unexpired_outcomes"]:
         summary["status"] = "PENDING_UNCLOSED_SIGNAL_OUTCOMES"
-    elif not summary["selected_signals"]:
-        summary["status"] = "NO_SELECTED_SIGNALS"
     elif not summary["manifest_rows"]:
         summary["status"] = "NO_ADMISSION_MANIFEST"
+    elif not summary["selected_signals"]:
+        summary["status"] = "NO_SELECTED_SIGNALS"
     else:
         paper = forward.evaluate_paper_marks(
             list(outcomes_by_id.values()), asof=asof)
