@@ -36,6 +36,17 @@ DTE first, to avoid a thinly traded single chain suppressing the diagnostic.
 It retains the same 100-contract open-interest floor, at most nine sanitized
 market-data GETs, and no promotion to H1 signal status.
 
+**2026-10-28 access blocker:** The direct `/markets/options/greeks` request
+returned HTTP 403 for the currently configured production token, after the
+16-symbol option-chain scan completed successfully. This is not evidence that
+option chains or their quoted markets are unavailable; it is a separate
+permission/access denial with an unverified reason. The two-sided Greek
+corroboration step is now **manual opt-in only** through the `run_greeks_crosscheck`
+workflow dispatch input (default false). Scheduled and push scans do not
+repeatedly invoke an endpoint known to be denied. An explicitly requested
+manual diagnostic still fails on access errors; no hidden pass or fallback UTC
+assumption is permitted. [Evidence: live run 40736968570](https://github.com/P00NSMASHER/trading-platform/actions/runs/40736968570).
+
 For every expiry bucket the engine separately counts candidate spreads whose **theoretical best-case maximum credit** remains positive after the assumed $2.60 four-side fees, and after additional $5 or $10 adverse-fill stress. This is a necessary economic feasibility check, **not expected value or evidence of an executable fill**. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
 
 Raw market data exists only in ephemeral GitHub-runner temporary storage and is deleted, with **no uploaded artifacts or committed quotes**. The repository is public. Logs show sanitized counts only. A successful run establishes API and options-chain access, **not a profitable or executable strategy**. Out-of-market-hours quote staleness may yield zero candidates.
