@@ -32,6 +32,8 @@ def synthetic_row(index=0, *, losing=False, underlying="TEST"):
         "entry_spot": "100",
         "short_strike": "101",
         "long_strike": "102",
+        "short_contract": underlying + (day + timedelta(days=10)).strftime("%y%m%d") + "C00101000",
+        "long_contract": underlying + (day + timedelta(days=10)).strftime("%y%m%d") + "C00102000",
         "entry_short_bid": "1.25",
         "entry_short_ask": "1.27",
         "entry_long_bid": "0.78",
@@ -173,6 +175,31 @@ class ForwardEvidenceTests(unittest.TestCase):
         row["entry_quote_utc"] = (START - timedelta(minutes=4)).isoformat()
         with self.assertRaisesRegex(ev.EvidenceError, "decision"):
             ev.evaluate_paper_marks([row], asof=ASOF)
+
+
+    def test_occ_contracts_must_match_quote_expiry_type_and_strike(self):
+        for key, val in (
+            ("short_contract", "TEST260115P00101000"),
+            ("short_contract", "OTHER260115C00101000"),
+            ("short_contract", "TEST260122C00101000"),
+            ("short_contract", "TEST260115C00100000"),
+            ("long_contract", "TEST260115C00101000"),
+        ):
+            row = synthetic_row()
+            row[key] = val
+            with self.assertRaises(ev.EvidenceError):
+                ev.evaluate_paper_marks([row], asof=ASOF)
+
+    def test_bull_put_occ_identity_and_risk_are_checked_too(self):
+        row = synthetic_row()
+        row["side"] = "bull_put"
+        row["short_strike"] = "99"
+        row["long_strike"] = "98"
+        row["short_contract"] = "TEST260115P00099000"
+        row["long_contract"] = "TEST260115P00098000"
+        mark = ev.parse_paper_mark(row, asof=ASOF)
+        self.assertEqual(mark.side, "bull_put")
+        self.assertAlmostEqual(mark.modeled_risk_usd, 57.60)
 
     def test_expiry_and_dte_fail_closed(self):
         for d in (1, 6, 22):
