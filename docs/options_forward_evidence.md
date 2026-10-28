@@ -22,17 +22,20 @@ underlying symbols, trade identifiers, or timestamps.
 CSV: **one independently preregistered H1 paper outcome per row**. Required
 column header, in any order:
 
-    trade_id,underlying,expiry,side,decision_utc,entry_utc,entry_quote_utc,greeks_time_utc,exit_utc,exit_quote_utc,entry_spot,short_strike,long_strike,entry_short_bid,entry_long_ask,exit_short_ask,exit_long_bid,short_open_interest,long_open_interest,atm_iv,rv20,multiplier
+    trade_id,underlying,expiry,side,decision_utc,entry_utc,entry_quote_utc,greeks_time_utc,exit_utc,exit_quote_utc,entry_spot,short_strike,long_strike,entry_short_bid,entry_short_ask,entry_long_bid,entry_long_ask,exit_short_bid,exit_short_ask,exit_long_bid,exit_long_ask,short_open_interest,long_open_interest,atm_iv,rv20,multiplier
 
 - trade_id: unique opaque local key. underlying: uppercase ticker; expiry:
   YYYY-MM-DD; side: bear_call or bull_put.
 - All timestamp columns: **timezone-aware** ISO 8601 with offset or Z.
   Keep original observations and independent capture/recording provenance
   privately. The evaluator itself cannot prove when records were created.
-- Bid/ask **entry**: sell short at bid, buy long at ask. **Exit**: buy short
-  at ask, sell long at bid. Quotes must be no older than 120 seconds before
-  the respective event. The Greek calculation timestamp must be no older
-  than 90 minutes before the decision.
+- Require **both bid and ask on each leg at both entry and exit**,
+  with no crossed markets and no bid/ask width greater than 25% of mid.
+  Conservative paper **entry** sells the short bid, buys the long ask;
+  **exit** buys short at ask and sells long at bid. Quotes must be no older
+  than 120 seconds before each event. The preregistered decision must be
+  within 120 seconds of entry and cannot predate its own quote snapshot.
+  The Greek calculation timestamp must be within 90 minutes of decision.
 - Both 100-share option legs have >=100 open interest, positive entry
   credit, OTM defined-width strikes (width <= $3), <= $100 modeled
   per-spread risk and 7–21 calendar DTE at the Eastern decision date.
