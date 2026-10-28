@@ -59,7 +59,7 @@ wide timezone convention. Quote access denial is logged explicitly without
 silently relabeling a blocked signal as valid. The separate HTTP-403 direct
 Greek endpoint remains disabled for automated runs.
 
-For every expiry bucket the engine separately counts candidate spreads whose **theoretical best-case maximum credit** remains positive after the assumed $2.60 four-side fees, and after additional $5 or $10 adverse-fill stress. This is a necessary economic feasibility check, **not expected value or evidence of an executable fill**. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
+For every expiry bucket the engine separately counts candidate spreads whose **theoretical best-case maximum credit** remains positive after the assumed $2.60 four-side fees, and after additional $5 or $10 adverse-fill stress. It also reports nested 60/70/80/90/95% *illustrative full-win/full-loss break-even win-rate hurdles* using natural bid/ask entry and an extra $10 adverse-fill allowance. This is a necessary economic triage check, **not a win-probability forecast, expected return, actual fill or proof of a trading edge**. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
 
 Raw market data exists only in ephemeral GitHub-runner temporary storage and is deleted, with **no uploaded artifacts or committed quotes**. The repository is public. Logs show sanitized counts only. A successful run establishes API and options-chain access, **not a profitable or executable strategy**. Out-of-market-hours quote staleness may yield zero candidates.
 

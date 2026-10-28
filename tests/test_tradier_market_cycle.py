@@ -70,6 +70,16 @@ class MarketCycleTests(unittest.TestCase):
                         "after_fees_and_10_slippage_positive": 1,
                     },
                 },
+                "binary_full_loss_hurdle_by_dte": {
+                    "7-21DTE": {
+                        "positive_stressed_max_win": 1,
+                        "binary_full_loss_break_even_win_rate_at_most_60pct": 0,
+                        "binary_full_loss_break_even_win_rate_at_most_70pct": 0,
+                        "binary_full_loss_break_even_win_rate_at_most_80pct": 1,
+                        "binary_full_loss_break_even_win_rate_at_most_90pct": 1,
+                        "binary_full_loss_break_even_win_rate_at_most_95pct": 1,
+                    },
+                },
                 "atm_iv_coverage": {
                     "chains_primary_window": 3,
                     "chains_with_two_sided_atm_iv": 2,
@@ -110,6 +120,12 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(
             summary["best_case_payoff_feasibility_by_dte"]["7-21DTE"]
                    ["after_fees_and_5_slippage_positive"], 8)
+        self.assertEqual(summary["binary_full_loss_hurdle_by_dte"]["7-21DTE"]
+                         ["positive_stressed_max_win"], 4)
+        self.assertEqual(summary["binary_full_loss_hurdle_by_dte"]["7-21DTE"]
+                         ["binary_full_loss_break_even_win_rate_at_most_70pct"], 0)
+        self.assertEqual(summary["binary_full_loss_hurdle_by_dte"]["7-21DTE"]
+                         ["binary_full_loss_break_even_win_rate_at_most_80pct"], 4)
         self.assertEqual(summary["atm_iv_coverage"]["chains_primary_window"], 12)
         self.assertEqual(summary["atm_iv_coverage"]["chains_with_two_sided_atm_iv"], 8)
         self.assertEqual(summary["atm_iv_coverage"]["chains_missing_atm_iv"], 4)
@@ -117,6 +133,60 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(summary["intraday_underlying_context"]["bars_observed"], 3)
         self.assertEqual(summary["edge_status"], "UNVERIFIED")
         self.assertEqual([x[0] for x in all_calls], ["/markets/clock"] + ["/markets/timesales"] * 3)
+
+
+    def test_hurdle_receipt_cannot_claim_more_favorable_trades_than_seen(self):
+        forged = {
+            "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 2},
+            "best_case_payoff_feasibility_by_dte": {
+                "7-21DTE": {"after_fees_positive": 2,
+                            "after_fees_and_5_slippage_positive": 2,
+                            "after_fees_and_10_slippage_positive": 1}
+            },
+            "binary_full_loss_hurdle_by_dte": {
+                "7-21DTE": {
+                    **cycle.probe.empty_binary_hurdle_diagnostics(),
+                    "positive_stressed_max_win": 3,
+                },
+            },
+            "chains_requested": 1,
+            "chains_with_contracts": 1,
+            "iv_rv_ge_1_20_seven_to_21_dte": 0,
+            "spread_counts": {"bear_call": 0, "bull_put": 0},
+            "quote_filter_diagnostics": {},
+        }
+        with patch("tradier_market_cycle.probe.get_json",
+                   return_value={"clock": {"state": "open"}}), patch(
+                       "tradier_market_cycle.probe.run",
+                       return_value=([], forged)):
+            with self.assertRaisesRegex(ProbeFailure, "Invalid binary-hurdle"):
+                cycle.run_cycle("NONSECRET", ["SPY"], now=NOW)
+
+    def test_hurdle_receipt_rejects_nonmonotonic_values(self):
+        forged = {
+            "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 2},
+            "binary_full_loss_hurdle_by_dte": {
+                "7-21DTE": {
+                    "positive_stressed_max_win": 2,
+                    "binary_full_loss_break_even_win_rate_at_most_60pct": 1,
+                    "binary_full_loss_break_even_win_rate_at_most_70pct": 0,
+                    "binary_full_loss_break_even_win_rate_at_most_80pct": 2,
+                    "binary_full_loss_break_even_win_rate_at_most_90pct": 2,
+                    "binary_full_loss_break_even_win_rate_at_most_95pct": 2,
+                },
+            },
+            "chains_requested": 1,
+            "chains_with_contracts": 1,
+            "iv_rv_ge_1_20_seven_to_21_dte": 0,
+            "spread_counts": {"bear_call": 0, "bull_put": 0},
+            "quote_filter_diagnostics": {},
+        }
+        with patch("tradier_market_cycle.probe.get_json",
+                   return_value={"clock": {"state": "open"}}), patch(
+                       "tradier_market_cycle.probe.run",
+                       return_value=([], forged)):
+            with self.assertRaisesRegex(ProbeFailure, "Nonmonotonic"):
+                cycle.run_cycle("NONSECRET", ["SPY"], now=NOW)
 
     def test_bars_bad_inputs_counted_not_invented(self):
         def fake(_t, path, _p):
