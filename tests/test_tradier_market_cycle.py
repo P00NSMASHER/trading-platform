@@ -77,6 +77,14 @@ class MarketCycleTests(unittest.TestCase):
                     "chains_with_completed_rv20": 3,
                     "candidate_spreads_with_complete_atm_signal": 2,
                 },
+                "greeks_independent_straddle_move_proxy": {
+                    "chains_primary_window": 3,
+                    "chains_with_paired_atm_quotes_and_rv20": 2,
+                    "chains_without_usable_paired_quote_or_rv20": 1,
+                    "chains_straddle_bid_ratio_above_1_20": 1,
+                    "chains_straddle_ask_ratio_below_0_80": 0,
+                    "model_is_not_profit_or_implied_vol": True,
+                },
                 "quote_filter_diagnostics": {"raw_option_rows": 10, "otm_liquid_legs": 4},
                 "quote_filter_by_dte": {
                     "7-21DTE": {"raw_option_rows": 10, "otm_liquid_legs": 4}
@@ -102,6 +110,12 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(summary["spread_pair_funnel"]["pairs_eligible"], 12)
         self.assertEqual(summary["spread_pair_funnel_by_dte"]["7-21DTE"]["pairs_eligible"], 12)
         self.assertEqual(summary["iv_rv_ge_1_20_seven_to_21_dte"], 8)
+        proxy = summary["greeks_independent_straddle_move_proxy"]
+        self.assertEqual(proxy["chains_primary_window"], 12)
+        self.assertEqual(proxy["chains_with_paired_atm_quotes_and_rv20"], 8)
+        self.assertEqual(proxy["chains_without_usable_paired_quote_or_rv20"], 4)
+        self.assertEqual(proxy["chains_straddle_bid_ratio_above_1_20"], 4)
+        self.assertTrue(proxy["model_is_not_profit_or_implied_vol"])
         self.assertEqual(summary["h1_qualifying_chains"], 4)
         self.assertEqual(summary["h1_qualifying_symbols"], 4)
         self.assertEqual(summary["h1_signal_spread_sides"], {"bear_call": 4, "bull_put": 4})
@@ -117,6 +131,29 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(summary["intraday_underlying_context"]["bars_observed"], 3)
         self.assertEqual(summary["edge_status"], "UNVERIFIED")
         self.assertEqual([x[0] for x in all_calls], ["/markets/clock"] + ["/markets/timesales"] * 3)
+
+    def test_corrupt_model_free_coverage_receipt_is_rejected(self):
+        impossible = {
+            "chains_requested": 1, "chains_with_contracts": 1,
+            "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 0},
+            "spread_counts": {"bear_call": 0, "bull_put": 0},
+            "iv_rv_ge_1_20_seven_to_21_dte": 0,
+            "quote_filter_diagnostics": {},
+            "greeks_independent_straddle_move_proxy": {
+                "chains_primary_window": 1,
+                "chains_with_paired_atm_quotes_and_rv20": 2,
+                "chains_without_usable_paired_quote_or_rv20": 0,
+                "chains_straddle_bid_ratio_above_1_20": 2,
+                "chains_straddle_ask_ratio_below_0_80": 0,
+                "model_is_not_profit_or_implied_vol": True,
+            },
+        }
+        with patch("tradier_market_cycle.probe.get_json",
+                   return_value={"clock": {"state": "open"}}), patch(
+                       "tradier_market_cycle.probe.run",
+                       return_value=([], impossible)):
+            with self.assertRaisesRegex(ProbeFailure, "proxy chain coverage parity"):
+                cycle.run_cycle("NONSECRET", ["SPY"], now=NOW)
 
     def test_bars_bad_inputs_counted_not_invented(self):
         def fake(_t, path, _p):
