@@ -7,12 +7,13 @@
 | Exchange clock | GET /v1/markets/clock | Require an open market before accepting live opportunity observations; holidays and after-hours produce MARKET_CLOSED_SKIPPED | ACTIVE |
 | Option expiration discovery | GET /v1/markets/options/expirations | Discover listed dates, then sample 0DTE, 1DTE and 7–21 DTE | ACTIVE |
 | Option chains / hourly Greeks | GET /v1/markets/options/chains | Call and put spreads, standard 100-share contracts, OTM, natural bid/ask pricing, at most $100 *modeled* max loss, IV/RV metadata | ACTIVE |
+| Separate Greek cross-endpoint verification | GET /v1/markets/options/greeks | At most four 7–21DTE SPY expirations to identify a liquid near-ATM call/put pair, then compare matching contract IDs and updated_at timestamps; diagnostic only, never a timezone assumption | ACTIVE DIAGNOSTIC |
 | Equity/ETF quotes | GET /v1/markets/quotes | Spot price and spread validation for each of 16 symbols | ACTIVE |
 | Historical daily prices | GET /v1/markets/history | 20-day realized volatility using **completed prior closes only** | ACTIVE |
 | Underlying one-minute bars | GET /v1/markets/timesales | Three liquid ETF contexts (SPY, QQQ, IWM), 30-minute window, 1-minute bars; aggregate valid bar counts only, **never option fills** | ACTIVE |
 | Streaming quote/trade/timesale | Market streaming WebSocket or HTTP | More efficient for a continuous **private** collector. One market stream permitted at a time. Not suitable for short-lived public GitHub-runner research | NOT ACTIVATED |
 | Historical option OHLC for **unexpired** OCC contracts | GET /v1/markets/history with OCC symbol | Possible OHLC context, **not historical option bid/ask execution prices**. Expired-contract history unavailable | NOT USED |
-| Account/order/trading endpoints | /accounts, /orders, preview/place trade | Explicitly **forbidden** to the observer; secret only in reviewed main GitHub Actions and six GET-only allowlisted endpoints | DENIED |
+| Account/order/trading endpoints | /accounts, /orders, preview/place trade | Explicitly **forbidden** to the observer; secret only in reviewed main GitHub Actions and seven GET-only allowlisted endpoints | DENIED |
 
 ## Capacity and scheduling
 
@@ -33,6 +34,7 @@ The program publishes only **aggregate counts** in GitHub Actions logs, deletes 
 - https://docs.tradier.com/market-data/get-market-clock
 - https://docs.tradier.com/market-data/get-options-expirations
 - https://docs.tradier.com/market-data/get-options-chains
+- https://docs.tradier.com/market-data/get-option-greeks
 - https://docs.tradier.com/market-data/get-time-and-sales
 - https://docs.tradier.com/overview/rate-limits
 - https://docs.tradier.com/docs/streaming-data
