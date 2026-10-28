@@ -179,6 +179,56 @@ class Tests(unittest.TestCase):
         self.assertIsNone(probe.atm_chain_iv(
             chain, symbol="TEST", spot=100, now=NOW))
 
+
+    def test_atm_quality_funnel_distinguishes_missing_stale_and_fresh_greeks(self):
+        call = option(100, 1.1, 1.13)
+        put = {**option(100, 1.2, 1.23), "option_type": "put"}
+        call["greeks"]["mid_iv"] = 0.30
+        put["greeks"]["mid_iv"] = 0.32
+        chain = {"options": {"option": [call, put]}}
+        quality = probe.atm_greeks_quality(
+            chain, symbol="TEST", spot=100, now=NOW)
+        self.assertEqual(quality["near_atm_standard_legs"], 2)
+        self.assertEqual(quality["near_atm_fresh_greeks_legs"], 2)
+        self.assertEqual(quality["near_atm_fresh_call_greeks_legs"], 1)
+        self.assertEqual(quality["near_atm_fresh_put_greeks_legs"], 1)
+        put["greeks"]["updated_at"] = ""
+        quality = probe.atm_greeks_quality(
+            chain, symbol="TEST", spot=100, now=NOW)
+        self.assertEqual(quality["near_atm_greeks_timestamp_missing"], 1)
+        self.assertEqual(quality["near_atm_fresh_greeks_legs"], 1)
+        put["greeks"]["updated_at"] = (
+            NOW - probe.timedelta(hours=3)).isoformat()
+        quality = probe.atm_greeks_quality(
+            chain, symbol="TEST", spot=100, now=NOW)
+        self.assertEqual(quality["near_atm_greeks_timestamp_stale"], 1)
+        put["greeks"]["updated_at"] = "2026-10-27T17:00:00"
+        quality = probe.atm_greeks_quality(
+            chain, symbol="TEST", spot=100, now=NOW)
+        self.assertEqual(
+            quality["near_atm_greeks_timestamp_malformed_or_naive"], 1)
+        self.assertEqual(quality["near_atm_fresh_greeks_legs"], 1)
+
+    def test_positive_bestcase_payoff_requires_more_than_fees_and_fill_stress(self):
+        calls = [option(103, 0.16, 0.17), option(104, 0.10, 0.11)]
+        responses = {
+            "/markets/quotes": {"quotes": {"quote": {"bid": 100, "ask": 100.02}}},
+            "/markets/options/expirations": {
+                "expirations": {"date": ["2026-11-06"]}},
+            "/markets/history": {"history": {"day": []}},
+            "/markets/options/chains": {"options": {"option": calls}},
+        }
+        with patch("tradier_options_probe.get_json",
+                   side_effect=lambda _t, p, _x: responses[p]):
+            rows, summary = probe.run(["TEST"], "FAKE", now=NOW)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(summary["candidate_counts"]["7-21DTE"], 1)
+        feasibility = summary["best_case_payoff_feasibility_by_dte"]["7-21DTE"]
+        self.assertEqual(feasibility["after_fees_positive"], 1)
+        self.assertEqual(feasibility["after_fees_and_5_slippage_positive"], 0)
+        self.assertEqual(feasibility["after_fees_and_10_slippage_positive"], 0)
+        self.assertEqual(summary["edge_status"], "UNVERIFIED")
+
     def test_buckets(self):
         self.assertEqual([bucket(i) for i in (0, 1, 6, 7, 21, 22)],
                          ["0DTE", "1DTE", None, "7-21DTE", "7-21DTE", None])
