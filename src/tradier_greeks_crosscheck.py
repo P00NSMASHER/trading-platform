@@ -31,7 +31,8 @@ def _datetime_utc(raw, *, require_timezone):
     return stamp if stamp.tzinfo is None else None
 
 
-def _nearest_naive_atm_contracts(chain, *, symbol, spot, now, counters=None):
+def _nearest_naive_atm_contracts(chain, *, symbol, spot, now, counters=None,
+                                expiration=None):
     """Select near-ATM put/call options; return anonymous stage counts if requested.
 
     Counters are an ordered filter funnel, not independent classifications.
@@ -43,6 +44,7 @@ def _nearest_naive_atm_contracts(chain, *, symbol, spot, now, counters=None):
         "raw_rows": 0,
         "standard_symbol_legs": 0,
         "occ_symbol_shape_matches": 0,
+        "expiry_matches_requested": 0,
         "within_3pct_spot": 0,
         "valid_market": 0,
         "open_interest_at_least_100": 0,
@@ -66,6 +68,11 @@ def _nearest_naive_atm_contracts(chain, *, symbol, spot, now, counters=None):
             or not re.fullmatch(r"SPY[0-9]{6}[CP][0-9]{8}", contract)):
             continue
         stages["occ_symbol_shape_matches"] += 1
+        if (expiration is not None
+            and contract[3:9] != datetime.strptime(
+                expiration, "%Y-%m-%d").strftime("%y%m%d")):
+            continue
+        stages["expiry_matches_requested"] += 1
         strike = probe.positive(item.get("strike"))
         if strike is None or abs(strike - spot) / spot > 0.03:
             continue
@@ -169,7 +176,8 @@ def run_crosscheck(token, *, now=None):
         sampled += 1
         trial_funnel = {}
         trial_selected = _nearest_naive_atm_contracts(
-            chain, symbol=SYMBOL, spot=spot, now=now, counters=trial_funnel)
+            chain, symbol=SYMBOL, spot=spot, now=now, counters=trial_funnel,
+            expiration=trial_expiration)
         for key, value in trial_funnel.items():
             selector_funnel[key] = selector_funnel.get(key, 0) + value
         if len(trial_selected) == 2:
