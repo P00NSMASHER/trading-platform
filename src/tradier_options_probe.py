@@ -23,7 +23,8 @@ from zoneinfo import ZoneInfo
 BASE = "https://api.tradier.com/v1"
 ALLOWED = frozenset(("/markets/quotes", "/markets/options/expirations",
                      "/markets/options/chains", "/markets/history",
-                     "/markets/clock", "/markets/timesales"))
+                     "/markets/clock", "/markets/timesales",
+                     "/markets/options/greeks"))
 EASTERN = ZoneInfo("America/New_York")
 HEADERS = ("observed_at_utc", "underlying", "bucket", "expiration", "dte", "spread_side",
            "spot", "short_contract", "long_contract", "short_strike", "long_strike",
@@ -43,7 +44,7 @@ class _NoRedirects(HTTPRedirectHandler):
 
 
 def get_json(token, endpoint, params):
-    """Only six explicit HTTPS market-data GET routes; rejects all redirects."""
+    """Only seven explicit HTTPS market-data GET routes; rejects all redirects."""
     global _last_request
     if endpoint not in ALLOWED:
         raise ProbeFailure("Denied: endpoint is not an allowed market-data route")
