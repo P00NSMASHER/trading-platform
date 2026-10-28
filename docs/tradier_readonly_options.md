@@ -19,6 +19,19 @@ To run: repository **Actions** > **Tradier read-only options research** > **Run 
 
 Aggregate quote rejection counts (invalid, stale, low open interest, wide spread, not OTM) are logged so zero matches can be interpreted without weakening safeguards. An independent **near-ATM Greek diagnostics funnel** now distinguishes missing IV, missing/malformed ORATS timestamps, >90-minute stale calculations and truly fresh provider Greeks, with parity against the two-sided ATM-IV check. Counts are aggregated only, with no symbol/contract/price exposure.
 
+The 2026-10-28 post-release market-hours run identified 975 near-ATM
+legs with IV values and live quoted markets whose ORATS updated_at field
+was present but lacked a timezone. Such **naive timestamps remain invalid**
+for H1; they are not silently assumed to be Eastern or UTC. The research
+engine now reports only integer comparison counts for *what their age
+would be* if interpreted as UTC versus America/New_York, plus parseable
+but neither-recent cases. These diagnostics do not alter the existing
+90-minute Greek freshness rule, signal counts, trade eligibility, risk
+caps, or any brokerage API endpoint. The documented Greek response
+example includes an explicit Z (UTC); it does not establish the timezone
+of an actual response that omits an offset. Only corroborated provider
+semantics should justify a future parser change.
+
 For every expiry bucket the engine separately counts candidate spreads whose **theoretical best-case maximum credit** remains positive after the assumed $2.60 four-side fees, and after additional $5 or $10 adverse-fill stress. This is a necessary economic feasibility check, **not expected value or evidence of an executable fill**. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
 
 Raw market data exists only in ephemeral GitHub-runner temporary storage and is deleted, with **no uploaded artifacts or committed quotes**. The repository is public. Logs show sanitized counts only. A successful run establishes API and options-chain access, **not a profitable or executable strategy**. Out-of-market-hours quote staleness may yield zero candidates.

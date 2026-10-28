@@ -237,6 +237,10 @@ def atm_greeks_quality(chain, *, symbol, spot, now, max_quote_age=120):
         "near_atm_mid_iv_missing_or_invalid": 0,
         "near_atm_greeks_timestamp_missing": 0,
         "near_atm_greeks_timestamp_malformed_or_naive": 0,
+        "near_atm_greeks_timestamp_naive_iso": 0,
+        "near_atm_greeks_naive_plausibly_fresh_if_utc": 0,
+        "near_atm_greeks_naive_plausibly_fresh_if_eastern": 0,
+        "near_atm_greeks_naive_not_recent_in_either_clock": 0,
         "near_atm_greeks_timestamp_future": 0,
         "near_atm_greeks_timestamp_stale": 0,
         "near_atm_fresh_greeks_legs": 0,
@@ -283,6 +287,22 @@ def atm_greeks_quality(chain, *, symbol, spot, now, max_quote_age=120):
             continue
         if parsed.tzinfo is None or parsed.utcoffset() is None:
             counts["near_atm_greeks_timestamp_malformed_or_naive"] += 1
+            counts["near_atm_greeks_timestamp_naive_iso"] += 1
+            # Diagnostic hypotheses ONLY. A naive timestamp has no
+            # authoritative timezone; never promote either interpretation
+            # to the live H1 or freshness gate without provider confirmation.
+            age_if_utc = (now - parsed.replace(tzinfo=timezone.utc)).total_seconds()
+            age_if_eastern = (
+                now - parsed.replace(tzinfo=EASTERN).astimezone(timezone.utc)
+            ).total_seconds()
+            utc_recent = -60 <= age_if_utc <= 90 * 60
+            eastern_recent = -60 <= age_if_eastern <= 90 * 60
+            if utc_recent:
+                counts["near_atm_greeks_naive_plausibly_fresh_if_utc"] += 1
+            if eastern_recent:
+                counts["near_atm_greeks_naive_plausibly_fresh_if_eastern"] += 1
+            if not (utc_recent or eastern_recent):
+                counts["near_atm_greeks_naive_not_recent_in_either_clock"] += 1
             continue
         age = (now - parsed.astimezone(timezone.utc)).total_seconds()
         if age < -60:
