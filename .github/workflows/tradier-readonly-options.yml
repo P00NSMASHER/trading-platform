@@ -13,10 +13,12 @@ on:
       - .github/workflows/tradier-readonly-options.yml
       - src/tradier_options_probe.py
       - src/tradier_market_cycle.py
+      - src/tradier_greeks_crosscheck.py
       - src/options_forward_evaluator.py
       - src/options_population_audit.py
       - tests/test_tradier_options_probe.py
       - tests/test_tradier_market_cycle.py
+      - tests/test_tradier_greeks_crosscheck.py
       - tests/test_options_forward_evaluator.py
       - tests/test_options_population_audit.py
 
@@ -50,6 +52,7 @@ jobs:
         run: |
           python -m unittest discover -v -s tests -p test_tradier_options_probe.py
           python -m unittest discover -v -s tests -p test_tradier_market_cycle.py
+          python -m unittest discover -v -s tests -p test_tradier_greeks_crosscheck.py
           python -m unittest discover -v -s tests -p test_options_forward_evaluator.py
           python -m unittest discover -v -s tests -p test_options_population_audit.py
 
@@ -61,6 +64,12 @@ jobs:
           python -m tradier_market_cycle
           --symbols SPY,QQQ,IWM,TLT,GLD,XLF,XLE,SMH,AAPL,NVDA,AMD,MSFT,BAC,SOFI,F,PFE
           --out "$RUNNER_TEMP/tradier_market_snapshot.csv"
+
+      - name: Cross-check option Greek timestamps using separate GET endpoint (diagnostic only)
+        env:
+          TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+          PYTHONPATH: src
+        run: python -m tradier_greeks_crosscheck
 
       - name: Delete temporary market-data snapshot
         if: always()
