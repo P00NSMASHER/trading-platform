@@ -78,6 +78,16 @@ execution_proof=UNVERIFIED remain invariant. Proving an actual edge
 still needs matched baselines, an untouched holdout period, independent
 prospective entry attestations and actual authorized fills.
 
+## Independent selected-population completeness
+
+The evaluator alone cannot prove it received every selected signal. For
+bias-resistant research, ALSO run the private
+[admission completeness audit](options_population_audit.md) with a separate
+contemporaneously recorded SELECTED/REJECTED manifest and matching paper
+outcomes. Missing expired or pending selected outcomes block publication
+of favorable subset P&L. A complete submitted CSV is still not independent
+evidence of an untampered prospective population.
+
 ## Security
 
 The evaluator and its **synthetic-only** acceptance tests run in CI without
