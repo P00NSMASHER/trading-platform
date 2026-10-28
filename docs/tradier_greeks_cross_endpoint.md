@@ -15,7 +15,7 @@ Sources:
 
 The separate read-only `tradier_greeks_crosscheck.py` job uses at most **eight GET requests** to approved Tradier market-data endpoints (including at most three option chains):
 1. Verify the market is **open** with `/markets/clock`; closed market -> skip.
-2. Fetch SPY spot and listed expiration dates; select one 7–21DTE expiry nearest 14DTE.
+2. Fetch SPY spot and listed expiration dates; rank eligible 7–21DTE expirations by distance to 14 calendar days.
 3. Fetch up to **three** listed 7–21DTE chains in order of proximity to 14DTE (one GET per expiry). Select the first with a valid near-ATM **call and put pair** meeting the unchanged OI >=100 and quote-quality rules. Verify each OCC contract's embedded expiration matches the requested chain. If all three fail, report INCONCLUSIVE and perform **zero direct-Greeks calls**.
 4. Find at most one standard 100-share near-ATM contract **per side** with bid/ask <=120s old, <=25% wide, OI >=100, and fractional IV.
 5. Once both sides pass on the **same expiry**, request direct `/markets/options/greeks` once per side (max two calls). No request is made if only one side passes.
