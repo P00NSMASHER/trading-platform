@@ -13,8 +13,10 @@ on:
       - .github/workflows/tradier-readonly-options.yml
       - src/tradier_options_probe.py
       - src/tradier_market_cycle.py
+      - src/options_forward_evaluator.py
       - tests/test_tradier_options_probe.py
       - tests/test_tradier_market_cycle.py
+      - tests/test_options_forward_evaluator.py
 
 permissions:
   contents: read
@@ -46,6 +48,7 @@ jobs:
         run: |
           python -m unittest discover -v -s tests -p test_tradier_options_probe.py
           python -m unittest discover -v -s tests -p test_tradier_market_cycle.py
+          python -m unittest discover -v -s tests -p test_options_forward_evaluator.py
 
       - name: Probe 0DTE, 1DTE, and 7-21DTE Tradier chains (GET only)
         env:
