@@ -4,7 +4,7 @@
 
 The GitHub Actions workflow .github/workflows/tradier-readonly-options.yml accesses the existing repository-level Actions secret named TRADIER_TOKEN. Do not add your token to source, chat, workflow inputs, issues, logs, or artifacts. Only reviewed protected-main push/manual runs receive it; pull-request CI does not.
 
-- Read-only HTTPS GET exclusively: /markets/quotes, /markets/options/expirations, /markets/options/chains, /markets/history on api.tradier.com.
+- Read-only HTTPS GET exclusively: /markets/quotes, /markets/options/expirations, /markets/options/chains, /markets/options/greeks, /markets/history, /markets/clock and /markets/timesales on api.tradier.com. The direct Greek endpoint is used for a separate bounded diagnostic, never for orders.
 - No brokerage account reads, order previews, order creation, or account writes. Cross-domain redirects are denied.
 - Expirations: **0DTE**, **1DTE**, and **7–21 calendar DTE**, separately.
 - Market-clock-gated research across **16 liquid tickers** (SPY, QQQ, IWM, TLT, GLD, XLF, XLE, SMH, AAPL, NVDA, AMD, MSFT, BAC, SOFI, F, PFE), in isolated chunks of five, max 20 validated tickers. Approximately one market-data GET per second, below Tradier's documented 120/minute production market-data limit.
@@ -30,7 +30,11 @@ but neither-recent cases. These diagnostics do not alter the existing
 caps, or any brokerage API endpoint. The documented Greek response
 example includes an explicit Z (UTC); it does not establish the timezone
 of an actual response that omits an offset. Only corroborated provider
-semantics should justify a future parser change.
+semantics should justify a future parser change. The separate Greek cross-endpoint
+probe now checks up to **four** eligible 7–21 DTE SPY expirations, nearest 14
+DTE first, to avoid a thinly traded single chain suppressing the diagnostic.
+It retains the same 100-contract open-interest floor, at most nine sanitized
+market-data GETs, and no promotion to H1 signal status.
 
 For every expiry bucket the engine separately counts candidate spreads whose **theoretical best-case maximum credit** remains positive after the assumed $2.60 four-side fees, and after additional $5 or $10 adverse-fill stress. This is a necessary economic feasibility check, **not expected value or evidence of an executable fill**. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
 
@@ -59,7 +63,10 @@ quotes, instruments, underlyings or timestamps.
 The 2026-10-27 pre-repair intraday run was invalidated as an opportunity screen
 by millisecond/second timestamp handling. The first corrected run occurred
 after market close; a subsequent market-clock-gated run skipped closed hours.
-**No corrected in-session spread-opportunity inference or profitable edge
-has been established.** Underlying bars and IV/HV observations do not
+Corrected market-hours scans on October 28 examined 91 option chains
+per run and identified hundreds of **theoretical** affordable spread combinations;
+the ORATS Greek timestamps remained timezone-naive, so the strict H1 screen
+still reported zero verified signal chains. **No realized profitable edge has
+been established.** Underlying bars and IV/HV observations do not
 substitute for licensed historical option bid/ask or prospective private
 entry/exit measurements.
