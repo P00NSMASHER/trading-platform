@@ -33,9 +33,13 @@ def synthetic_row(index=0, *, losing=False, underlying="TEST"):
         "short_strike": "101",
         "long_strike": "102",
         "entry_short_bid": "1.25",
+        "entry_short_ask": "1.27",
+        "entry_long_bid": "0.78",
         "entry_long_ask": "0.80",
+        "exit_short_bid": "1.48" if losing else "0.19",
         "exit_short_ask": "1.50" if losing else "0.20",
         "exit_long_bid": "0.20" if losing else "0.10",
+        "exit_long_ask": "0.21" if losing else "0.11",
         "short_open_interest": "200",
         "long_open_interest": "250",
         "atm_iv": "0.40",
@@ -143,6 +147,32 @@ class ForwardEvidenceTests(unittest.TestCase):
             row[key] = value
             with self.assertRaises(ev.EvidenceError):
                 ev.evaluate_paper_marks([row], asof=ASOF)
+
+
+    def test_full_option_quotes_must_be_liquid_on_both_sides_at_both_times(self):
+        for key, value in (
+            ("entry_short_ask", "1.24"),
+            ("entry_long_bid", "0.99"),
+            ("exit_short_bid", "0.45"),
+            ("exit_long_ask", "0.75"),
+        ):
+            row = synthetic_row()
+            row[key] = value
+            with self.assertRaisesRegex(
+                ev.EvidenceError, "Crossed|liquidity"
+            ):
+                ev.evaluate_paper_marks([row], asof=ASOF)
+
+    def test_decision_quote_cannot_arrive_after_signal_was_made(self):
+        row = synthetic_row()
+        row["decision_utc"] = (START - timedelta(seconds=20)).isoformat()
+        with self.assertRaisesRegex(ev.EvidenceError, "decision"):
+            ev.evaluate_paper_marks([row], asof=ASOF)
+        row = synthetic_row()
+        row["decision_utc"] = (START - timedelta(minutes=3)).isoformat()
+        row["entry_quote_utc"] = (START - timedelta(minutes=4)).isoformat()
+        with self.assertRaisesRegex(ev.EvidenceError, "decision"):
+            ev.evaluate_paper_marks([row], asof=ASOF)
 
     def test_expiry_and_dte_fail_closed(self):
         for d in (1, 6, 22):
