@@ -520,6 +520,9 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     pair_funnel_by_dte = {label: dict.fromkeys(pair_funnel, 0) for label in counts}
     spread_counts = {"bear_call": 0, "bull_put": 0}
     premium_candidate_count = 0
+    h1_qualifying_chains = 0
+    h1_qualifying_symbols = set()
+    h1_signal_spread_sides = {"bear_call": 0, "bull_put": 0}
     atm_stats = {"chains_primary_window": 0,
                  "chains_with_two_sided_atm_iv": 0,
                  "chains_missing_atm_iv": 0,
@@ -584,6 +587,7 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                 raise ProbeFailure("Internal diagnostics/candidate parity failed")
             rows.extend(selected)
             counts[label] += len(selected)
+            chain_has_h1_signal = False
             for candidate in selected:
                 spread_counts[candidate["spread_side"]] += 1
                 candidate["atm_iv"] = atm_iv
@@ -597,6 +601,11 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                         atm_stats["candidate_spreads_with_complete_atm_signal"] += 1
                     if (candidate["atm_iv_rv_ratio"] or 0) >= 1.20:
                         premium_candidate_count += 1
+                        h1_signal_spread_sides[candidate["spread_side"]] += 1
+                        chain_has_h1_signal = True
+            if chain_has_h1_signal:
+                h1_qualifying_chains += 1
+                h1_qualifying_symbols.add(symbol)
     if examined == 0 or chains_with_contracts == 0:
         raise ProbeFailure("No in-range option chains with actual contracts returned")
     return rows, {"status": "MARKET_DATA_ACCESS_VERIFIED",
@@ -609,6 +618,9 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                   "spread_pair_funnel": pair_funnel,
                   "spread_pair_funnel_by_dte": pair_funnel_by_dte,
                   "iv_rv_ge_1_20_seven_to_21_dte": premium_candidate_count,
+                  "h1_qualifying_chains": h1_qualifying_chains,
+                  "h1_qualifying_symbols": len(h1_qualifying_symbols),
+                  "h1_signal_spread_sides": h1_signal_spread_sides,
                   "atm_iv_coverage": atm_stats,
                   "read_only": True,
                   "edge_status": "UNVERIFIED"}
