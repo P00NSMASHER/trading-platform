@@ -58,4 +58,16 @@ This module is not connected to the public GitHub Actions scanner and no
 private quote snapshots are uploaded or saved in the public repository.
 Matched baselines and untouched out-of-sample outcomes remain required.
 
+## Missing-outcome and selective-recording control
+
+The offline-only [private admissions audit](options_population_audit.md) must
+reconcile a timestamped pre-entry SELECTED/REJECTED decision population against
+every paper outcome before even describing paper-only promise. Any selected
+expired paper position with no outcome, or outstanding unexpired selection,
+suppresses subset-only returns. Entry IDs, underlying, side, expiration and
+decision timestamps must match exactly. This is a consistency check, not
+external proof of timestamp authenticity or completeness of all market
+signals. The status remains UNPROVEN until actual licensed fills and
+independent controls establish a genuine out-of-sample net advantage.
+
 **Do not import proprietary raw data into this public repository. No claim of a trading edge until independently audited out-of-sample net results exist.**
