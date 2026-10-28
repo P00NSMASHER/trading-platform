@@ -14,9 +14,11 @@ on:
       - src/tradier_options_probe.py
       - src/tradier_market_cycle.py
       - src/options_forward_evaluator.py
+      - src/options_population_audit.py
       - tests/test_tradier_options_probe.py
       - tests/test_tradier_market_cycle.py
       - tests/test_options_forward_evaluator.py
+      - tests/test_options_population_audit.py
 
 permissions:
   contents: read
@@ -49,6 +51,7 @@ jobs:
           python -m unittest discover -v -s tests -p test_tradier_options_probe.py
           python -m unittest discover -v -s tests -p test_tradier_market_cycle.py
           python -m unittest discover -v -s tests -p test_options_forward_evaluator.py
+          python -m unittest discover -v -s tests -p test_options_population_audit.py
 
       - name: Probe 0DTE, 1DTE, and 7-21DTE Tradier chains (GET only)
         env:
