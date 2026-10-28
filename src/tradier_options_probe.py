@@ -624,6 +624,54 @@ def diagnose_spread_pairs(chain, *, symbol, spot, now, max_risk=100.0,
     return stages
 
 
+
+FULL_LOSS_HURDLE_PCTS = (60, 70, 80, 90, 95)
+EXTRA_ADVERSE_FILL_STRESS_USD = 10.0
+
+
+def binary_full_loss_breakeven_hurdle(candidate, *, adverse_fill_usd=EXTRA_ADVERSE_FILL_STRESS_USD):
+    """Illustrative WIN-rate hurdle if wins always max-win and losses always max-loss.
+
+    Real options outcomes include partial wins and losses, early exercise and
+    assignment. Thus this is NOT a probability of profit, expected return,
+    trade recommendation or sufficient evidence to select a strategy.
+
+    Entry uses the existing natural sell-bid/buy-ask credit. We subtract all
+    four assumed contract-side commissions AND the specified extra adverse
+    fill in winning and losing outcomes. A nonpositive stressed max win is
+    not economically feasible in this binary thought experiment.
+    """
+    if not isinstance(candidate, dict) or not math.isfinite(adverse_fill_usd) or adverse_fill_usd < 0:
+        return None
+    try:
+        short = float(candidate["short_strike"])
+        long = float(candidate["long_strike"])
+        credit = float(candidate["credit_per_share"]) * 100.0
+        fees = float(candidate["fees_assumed_usd"])
+        risk = float(candidate["risk_estimate_usd"])
+    except (TypeError, ValueError, KeyError):
+        return None
+    width = abs(short - long) * 100.0
+    if (not all(map(math.isfinite, (width, credit, fees, risk)))
+        or width <= 0 or width > 300 or credit <= 0 or credit >= width
+        or fees < 0 or abs(risk - (width - credit + fees)) > 0.02
+        or risk > 100.001):
+        return None
+    stressed_win = credit - fees - adverse_fill_usd
+    stressed_loss = width - credit + fees + adverse_fill_usd
+    if stressed_win <= 0 or stressed_loss <= 0:
+        return None
+    return stressed_loss / (stressed_win + stressed_loss)
+
+
+def empty_binary_hurdle_diagnostics():
+    return {
+        "positive_stressed_max_win": 0,
+        **{"binary_full_loss_break_even_win_rate_at_most_" + str(pct) + "pct": 0
+           for pct in FULL_LOSS_HURDLE_PCTS},
+    }
+
+
 def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     """Fail on missing authentication/market data; zero candidates is not success proof."""
     use_live_observation_time = now is None
@@ -644,6 +692,9 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                 "after_fees_and_5_slippage_positive": 0,
                 "after_fees_and_10_slippage_positive": 0}
         for label in counts
+    }
+    binary_full_loss_hurdle_by_dte = {
+        label: empty_binary_hurdle_diagnostics() for label in counts
     }
     h1_qualifying_chains = 0
     h1_qualifying_symbols = set()
@@ -735,6 +786,14 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                     feasibility["after_fees_and_5_slippage_positive"] += 1
                 if net_best_case > 10:
                     feasibility["after_fees_and_10_slippage_positive"] += 1
+                hurdle = binary_full_loss_breakeven_hurdle(candidate)
+                if hurdle is not None:
+                    bucket_hurdles = binary_full_loss_hurdle_by_dte[label]
+                    bucket_hurdles["positive_stressed_max_win"] += 1
+                    for pct in FULL_LOSS_HURDLE_PCTS:
+                        if hurdle <= pct / 100.0 + 1e-10:
+                            key = "binary_full_loss_break_even_win_rate_at_most_" + str(pct) + "pct"
+                            bucket_hurdles[key] += 1
                 candidate["atm_iv"] = atm_iv
                 candidate["atm_iv_rv_ratio"] = (
                     round(atm_iv / rv20, 3)
@@ -769,6 +828,7 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                   "atm_iv_coverage": atm_stats,
                   "h1_greeks_quality": h1_greeks_quality,
                   "best_case_payoff_feasibility_by_dte": best_case_payoff_feasibility,
+                  "binary_full_loss_hurdle_by_dte": binary_full_loss_hurdle_by_dte,
                   "read_only": True,
                   "edge_status": "UNVERIFIED"}
 
