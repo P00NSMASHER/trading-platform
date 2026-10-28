@@ -223,6 +223,78 @@ def atm_chain_iv(chain, *, symbol, spot, now, max_quote_age=120):
     return round(statistics.mean([best["call"][1], best["put"][1]]), 5)
 
 
+def atm_greeks_quality(chain, *, symbol, spot, now, max_quote_age=120):
+    """Sanitized H1 ATM IV availability reasons, without any raw market prices.
+
+    Only standard, near-ATM option legs enter the funnel. Mutually ordered
+    failures explain why a valid quote does not carry a usable fresh IV.
+    The per-side fresh counts cross-check atm_chain_iv() independently.
+    """
+    counts = {
+        "near_atm_standard_legs": 0,
+        "near_atm_quote_or_liquidity_rejected": 0,
+        "near_atm_liquid_fresh_quote_legs": 0,
+        "near_atm_mid_iv_missing_or_invalid": 0,
+        "near_atm_greeks_timestamp_missing": 0,
+        "near_atm_greeks_timestamp_malformed_or_naive": 0,
+        "near_atm_greeks_timestamp_future": 0,
+        "near_atm_greeks_timestamp_stale": 0,
+        "near_atm_fresh_greeks_legs": 0,
+        "near_atm_fresh_call_greeks_legs": 0,
+        "near_atm_fresh_put_greeks_legs": 0,
+    }
+    if positive(spot) is None:
+        return counts
+    node = chain.get("options") or {}
+    rows = many(node.get("option")) if isinstance(node, dict) else []
+    for item in rows:
+        if not isinstance(item, dict):
+            continue
+        side = item.get("option_type")
+        if (side not in ("call", "put")
+            or item.get("root_symbol") != symbol
+            or nonnegative_int(item.get("contract_size")) != 100):
+            continue
+        strike = positive(item.get("strike"))
+        if strike is None or abs(strike - spot) / spot > 0.03:
+            continue
+        counts["near_atm_standard_legs"] += 1
+        bid, ask = positive(item.get("bid")), positive(item.get("ask"))
+        quote_age_seconds = quote_age(item, now)
+        if (bid is None or ask is None or ask < bid
+            or (ask - bid) / ((ask + bid) / 2) > 0.25
+            or quote_age_seconds is None or quote_age_seconds > max_quote_age
+            or nonnegative_int(item.get("open_interest")) < 100):
+            counts["near_atm_quote_or_liquidity_rejected"] += 1
+            continue
+        counts["near_atm_liquid_fresh_quote_legs"] += 1
+        if option_iv(item) is None:
+            counts["near_atm_mid_iv_missing_or_invalid"] += 1
+            continue
+        raw = item.get("greeks") or {}
+        stamp = raw.get("updated_at") if isinstance(raw, dict) else None
+        if not isinstance(stamp, str) or not stamp.strip():
+            counts["near_atm_greeks_timestamp_missing"] += 1
+            continue
+        try:
+            parsed = datetime.fromisoformat(stamp.strip().replace("Z", "+00:00"))
+        except ValueError:
+            counts["near_atm_greeks_timestamp_malformed_or_naive"] += 1
+            continue
+        if parsed.tzinfo is None or parsed.utcoffset() is None:
+            counts["near_atm_greeks_timestamp_malformed_or_naive"] += 1
+            continue
+        age = (now - parsed.astimezone(timezone.utc)).total_seconds()
+        if age < -60:
+            counts["near_atm_greeks_timestamp_future"] += 1
+        elif age > 90 * 60:
+            counts["near_atm_greeks_timestamp_stale"] += 1
+        else:
+            counts["near_atm_fresh_greeks_legs"] += 1
+            counts["near_atm_fresh_" + side + "_greeks_legs"] += 1
+    return counts
+
+
 def realized_vol20(payload, *, asof_date=None):
     """Use ONLY 21 fully completed prior daily closes (never today's partial bar)."""
     history = payload.get("history") or {}
@@ -544,6 +616,14 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     pair_funnel_by_dte = {label: dict.fromkeys(pair_funnel, 0) for label in counts}
     spread_counts = {"bear_call": 0, "bull_put": 0}
     premium_candidate_count = 0
+    h1_greeks_quality = dict.fromkeys(
+        atm_greeks_quality({}, symbol="", spot=1.0, now=now), 0)
+    best_case_payoff_feasibility = {
+        label: {"after_fees_positive": 0,
+                "after_fees_and_5_slippage_positive": 0,
+                "after_fees_and_10_slippage_positive": 0}
+        for label in counts
+    }
     h1_qualifying_chains = 0
     h1_qualifying_symbols = set()
     h1_signal_spread_sides = {"bear_call": 0, "bull_put": 0}
@@ -584,6 +664,16 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                 chain, symbol=symbol, spot=spot,
                 now=chain_now, max_quote_age=max_quote_age)
             if label == "7-21DTE":
+                quality = atm_greeks_quality(
+                    chain, symbol=symbol, spot=spot,
+                    now=chain_now, max_quote_age=max_quote_age)
+                for key, value in quality.items():
+                    h1_greeks_quality[key] += value
+                fresh_paired = (
+                    quality["near_atm_fresh_call_greeks_legs"] > 0
+                    and quality["near_atm_fresh_put_greeks_legs"] > 0)
+                if fresh_paired != (atm_iv is not None):
+                    raise ProbeFailure("H1 Greek quality/paired ATM IV parity failed")
                 atm_stats["chains_primary_window"] += 1
                 if atm_iv is None:
                     atm_stats["chains_missing_atm_iv"] += 1
@@ -614,6 +704,16 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
             chain_has_h1_signal = False
             for candidate in selected:
                 spread_counts[candidate["spread_side"]] += 1
+                credit_dollars = candidate["credit_per_share"] * 100
+                fees = candidate["fees_assumed_usd"]
+                net_best_case = credit_dollars - fees
+                feasibility = best_case_payoff_feasibility[label]
+                if net_best_case > 0:
+                    feasibility["after_fees_positive"] += 1
+                if net_best_case > 5:
+                    feasibility["after_fees_and_5_slippage_positive"] += 1
+                if net_best_case > 10:
+                    feasibility["after_fees_and_10_slippage_positive"] += 1
                 candidate["atm_iv"] = atm_iv
                 candidate["atm_iv_rv_ratio"] = (
                     round(atm_iv / rv20, 3)
@@ -646,6 +746,8 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                   "h1_qualifying_symbols": len(h1_qualifying_symbols),
                   "h1_signal_spread_sides": h1_signal_spread_sides,
                   "atm_iv_coverage": atm_stats,
+                  "h1_greeks_quality": h1_greeks_quality,
+                  "best_case_payoff_feasibility_by_dte": best_case_payoff_feasibility,
                   "read_only": True,
                   "edge_status": "UNVERIFIED"}
 
