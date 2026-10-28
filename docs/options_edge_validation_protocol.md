@@ -41,6 +41,31 @@ does not count as a profitable observation.
 5. Require >= 60 **nonoverlapping** forward trades across >= 3 months as a minimum exploratory screen, independent time-block/bootstrap uncertainty, positive lower 95% confidence bound for **net dollar expectancy** (not simply win rate), a realistic drawdown/tail-loss profile, and robustness under an additional $5/spread fill penalty. This threshold is a pre-registered research gate, not a statistical guarantee.
 6. If sample is insufficient, quote execution is uncertain, one exceptional market regime dominates, or lower bound <= 0, the verdict is **UNPROVEN/REJECT**. No output can change status to "profitable" on IV/HV or a third-party model EV alone.
 
+## Greek-independent full-win/full-loss economics diagnostic
+
+The scanner also calculates a hypothetical *binary outcome* break-even win-rate
+hurdle separately from the primary H1 hypothesis. For each existing eligible
+one-lot bear-call or bull-put spread, let W be strike width × 100 and C be the
+conservative (sell bid / buy ask) credit × 100. F is the assumed full four-side
+commission total ($2.60), and S is an **extra** adverse-fill allowance ($10
+per spread, in addition to natural-market pricing).
+
+- Hypothetical maximal win: C - F - S. If nonpositive, the trade is **economically infeasible** in this binary thought experiment.
+- Hypothetical maximal loss: W - C + F + S.
+- Full-win/full-loss break-even win proportion: (W - C + F + S) / W.
+
+The aggregate log reports the count of spreads with positive stressed maximum
+win and counts whose hurdle is at most 60%, 70%, 80%, 90%, and 95%.
+Those nested counts must never exceed the primary bucket's previously counted
+$10-stressed positive-credit spreads. Numerical arithmetic is independently
+tested against $1-wide examples.
+
+**Critical:** No win probability, independent trade count, expected return,
+or profitable strategy is inferred from this formula. Actual outcomes include
+partial wins/losses, slippage beyond S, assignment, portfolio correlation,
+exercise fees and bad fills. The binary hurdle is not a forecast of those
+outcomes and does not modify original quote/risk/IV eligibility.
+
 ## Evidence and sources
 
 - Live Tradier authorization/17 valid option-chain response: https://github.com/P00NSMASHER/trading-platform/actions/runs/40565091551 . Valid data access, no valid signal established.
