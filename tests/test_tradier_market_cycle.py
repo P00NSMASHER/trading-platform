@@ -171,6 +171,7 @@ class MarketCycleTests(unittest.TestCase):
             "/markets/quotes", "/markets/options/expirations",
             "/markets/options/chains", "/markets/history",
             "/markets/clock", "/markets/timesales",
+            "/markets/options/greeks",
         })
         for path in ("/accounts/0001/orders", "/markets/stream", "/markets/events"):
             with self.assertRaises(ProbeFailure):
