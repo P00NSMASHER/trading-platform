@@ -8,6 +8,7 @@
 | Option expiration discovery | GET /v1/markets/options/expirations | Discover listed dates, then sample 0DTE, 1DTE and 7–21 DTE | ACTIVE |
 | Option chains / hourly Greeks | GET /v1/markets/options/chains | Call and put spreads, standard 100-share contracts, OTM, natural bid/ask pricing, at most $100 *modeled* max loss, IV/RV metadata | ACTIVE |
 | Separate Greek cross-endpoint verification | GET /v1/markets/options/greeks | At most four 7–21DTE SPY expirations to identify liquid near-ATM call/put pairs, then compare identical contract IDs and updated_at timestamps; diagnostic only, never a timezone assumption | **HTTP 403 on live 2026-10-28; opt-in manual only** |
+| Option-specific quote/Greek corroboration | GET /v1/markets/quotes?symbols=<OCC>&greeks=true | Same permissioned GET quotes endpoint used for underlying quotes; bounded SPY near-ATM contract identity, IV and timezone-aware timestamp comparison, diagnostic only | **ACTIVE bounded diagnostic; timezone/result not yet verified** |
 | Equity/ETF quotes | GET /v1/markets/quotes | Spot price and spread validation for each of 16 symbols | ACTIVE |
 | Historical daily prices | GET /v1/markets/history | 20-day realized volatility using **completed prior closes only** | ACTIVE |
 | Underlying one-minute bars | GET /v1/markets/timesales | Three liquid ETF contexts (SPY, QQQ, IWM), 30-minute window, 1-minute bars; aggregate valid bar counts only, **never option fills** | ACTIVE |
@@ -37,6 +38,7 @@ The program publishes only **aggregate counts** in GitHub Actions logs, deletes 
 - https://docs.tradier.com/market-data/get-options-expirations
 - https://docs.tradier.com/market-data/get-options-chains
 - https://docs.tradier.com/market-data/get-option-greeks
+- https://docs.tradier.com/market-data/get-quotes
 - https://docs.tradier.com/market-data/get-time-and-sales
 - https://docs.tradier.com/overview/rate-limits
 - https://docs.tradier.com/docs/streaming-data
