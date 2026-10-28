@@ -109,6 +109,77 @@ class GreekCorroborationTests(unittest.TestCase):
         self.assertNotIn(SYMBOLS["call"], str(counters))
         self.assertNotIn(WHEN, str(counters))
 
+
+    def test_bounded_fallback_skips_low_oi_weekly_without_loosened_liquidity(self):
+        calls = []
+        def fetch(token, path, params):
+            calls.append((path, params))
+            if path == "/markets/options/expirations":
+                return {"expirations": {"date": ["2026-11-13", "2026-11-06"]}}
+            if path == "/markets/options/chains":
+                if params["expiration"] == "2026-11-13":
+                    first = [option("call"), option("put")]
+                    for leg in first:
+                        leg["open_interest"] = 5
+                    return {"options": {"option": first}}
+                second = [option("call"), option("put")]
+                for leg in second:
+                    leg["symbol"] = leg["symbol"].replace("261113", "261106")
+                return {"options": {"option": second}}
+            if path == "/markets/options/greeks":
+                response = direct(params["type"])
+                response["greeks"]["greek"][0]["symbol"] = (
+                    response["greeks"]["greek"][0]["symbol"]
+                    .replace("261113", "261106"))
+                return response
+            return fake_api(token, path, params)
+        with patch("tradier_greeks_crosscheck.probe.get_json", side_effect=fetch):
+            result = cross.run_crosscheck("NONSECRET", now=NOW)
+        self.assertEqual(result["status"], "TWO_SIDES_CORROBORATED_DIAGNOSTIC_ONLY")
+        self.assertEqual(result["sampled_expirations"], 2)
+        self.assertEqual(result["two_sided_eligible_expirations_found"], 1)
+        self.assertEqual(result["direct_side_requests"], 2)
+        self.assertEqual(result["selector_filter_funnel"]["raw_rows"], 4)
+        self.assertEqual(result["selector_filter_funnel"]["open_interest_at_least_100"], 2)
+        self.assertEqual(len(calls), 7)
+        self.assertEqual(
+            [params["expiration"] for path, params in calls
+             if path == "/markets/options/chains"],
+            ["2026-11-13", "2026-11-06"])
+
+    def test_max_three_expiries_without_liquid_pair_is_bounded_and_inconclusive(self):
+        calls = []
+        def fetch(token, path, params):
+            calls.append(path)
+            if path == "/markets/options/expirations":
+                return {"expirations": {"date": [
+                    "2026-11-06", "2026-11-13", "2026-11-17", "2026-11-18"]}}
+            if path == "/markets/options/chains":
+                row = option("call")
+                row["symbol"] = row["symbol"].replace(
+                    "261113", params["expiration"][2:].replace("-", ""))
+                row["open_interest"] = 5
+                return {"options": {"option": [row]}}
+            return fake_api(token, path, params)
+        with patch("tradier_greeks_crosscheck.probe.get_json", side_effect=fetch):
+            result = cross.run_crosscheck("NONSECRET", now=NOW)
+        self.assertEqual(result["status"], "INCONCLUSIVE")
+        self.assertEqual(result["sampled_expirations"], 3)
+        self.assertEqual(result["direct_side_requests"], 0)
+        self.assertEqual(result["two_sided_eligible_expirations_found"], 0)
+        self.assertEqual(calls.count("/markets/options/chains"), 3)
+        self.assertEqual(len(calls), 6)
+
+    def test_different_expiry_occ_contracts_cannot_substitute_sampled_date(self):
+        counters = {}
+        selected = cross._nearest_naive_atm_contracts(
+            {"options": {"option": [option("call")]}},
+            symbol="SPY", spot=100, now=NOW,
+            expiration="2026-11-06", counters=counters)
+        self.assertEqual(selected, {})
+        self.assertEqual(counters["occ_symbol_shape_matches"], 1)
+        self.assertEqual(counters["expiry_matches_requested"], 0)
+
     def test_timezones_must_match_same_instant_not_same_wallclock(self):
         good = option("call")
         self.assertTrue(cross.corroborate(
@@ -159,10 +230,11 @@ class GreekCorroborationTests(unittest.TestCase):
                    side_effect=get_partial):
             result = cross.run_crosscheck("NONSECRET", now=NOW)
         self.assertEqual(result["status"], "INCONCLUSIVE")
-        self.assertEqual(result["naive_atm_call_legs_selected"], 1)
+        self.assertEqual(result["naive_atm_call_legs_selected"], 0)
         self.assertEqual(result["naive_atm_put_legs_selected"], 0)
-        self.assertEqual(result["utc_fresh_concordant"], 1)
-        self.assertEqual(result["direct_side_requests"], 1)
+        self.assertEqual(result["utc_fresh_concordant"], 0)
+        self.assertEqual(result["direct_side_requests"], 0)
+        self.assertEqual(result["two_sided_eligible_expirations_found"], 0)
 
     def test_invalid_clock_fails_closed_without_token_printing(self):
         with patch("tradier_greeks_crosscheck.probe.get_json",
