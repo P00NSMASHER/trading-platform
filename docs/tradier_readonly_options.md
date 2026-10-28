@@ -17,7 +17,9 @@ The GitHub Actions workflow .github/workflows/tradier-readonly-options.yml acces
 
 To run: repository **Actions** > **Tradier read-only options research** > **Run workflow** (main). The scheduled protected-main workflow also runs on weekdays; protected-main changes to its source/tests invoke another run. Closed/holiday sessions log a skip. Missing or invalid authentication causes a failing run; it is never reported as success.
 
-Aggregate quote rejection counts (invalid, stale, low open interest, wide spread, not OTM) are logged so zero matches can be interpreted without weakening safeguards. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
+Aggregate quote rejection counts (invalid, stale, low open interest, wide spread, not OTM) are logged so zero matches can be interpreted without weakening safeguards. An independent **near-ATM Greek diagnostics funnel** now distinguishes missing IV, missing/malformed ORATS timestamps, >90-minute stale calculations and truly fresh provider Greeks, with parity against the two-sided ATM-IV check. Counts are aggregated only, with no symbol/contract/price exposure.
+
+For every expiry bucket the engine separately counts candidate spreads whose **theoretical best-case maximum credit** remains positive after the assumed $2.60 four-side fees, and after additional $5 or $10 adverse-fill stress. This is a necessary economic feasibility check, **not expected value or evidence of an executable fill**. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
 
 Raw market data exists only in ephemeral GitHub-runner temporary storage and is deleted, with **no uploaded artifacts or committed quotes**. The repository is public. Logs show sanitized counts only. A successful run establishes API and options-chain access, **not a profitable or executable strategy**. Out-of-market-hours quote staleness may yield zero candidates.
 
