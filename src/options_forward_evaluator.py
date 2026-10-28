@@ -25,8 +25,9 @@ COLUMNS = (
     "trade_id", "underlying", "expiry", "side", "decision_utc",
     "entry_utc", "entry_quote_utc", "greeks_time_utc", "exit_utc",
     "exit_quote_utc", "entry_spot", "short_strike", "long_strike",
-    "entry_short_bid", "entry_long_ask", "exit_short_ask",
-    "exit_long_bid", "short_open_interest", "long_open_interest",
+    "entry_short_bid", "entry_short_ask", "entry_long_bid", "entry_long_ask",
+    "exit_short_bid", "exit_short_ask", "exit_long_bid", "exit_long_ask",
+    "short_open_interest", "long_open_interest",
     "atm_iv", "rv20", "multiplier",
 )
 BROKER_MULTIPLIER = 100
@@ -118,6 +119,8 @@ def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
 
     if not decision <= entry < exit_time:
         raise EvidenceError("Lookahead or non-chronological paper entry/exit timestamps")
+    if not _fresh(entry, decision, 120) or entry_quote > decision:
+        raise EvidenceError("Paper entry decision was not contemporaneous with its observed quote")
     if asof is not None and exit_time > asof:
         raise EvidenceError("Paper mark contains an outcome beyond the evaluation cutoff")
     if not (_fresh(entry, entry_quote, 120)
@@ -155,10 +158,24 @@ def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
     if iv > 3 or rv > 3 or iv / rv < 1.20:
         raise EvidenceError("Paper mark fails preregistered paired ATM-IV/realized-vol H1")
 
-    short_bid = _num(row, "entry_short_bid")
-    long_ask = _num(row, "entry_long_ask")
-    short_ask_exit = _num(row, "exit_short_ask")
-    long_bid_exit = _num(row, "exit_long_bid", allow_zero=True)
+    quote = {}
+    for event in ("entry", "exit"):
+        for leg in ("short", "long"):
+            bid_key = event + "_" + leg + "_bid"
+            ask_key = event + "_" + leg + "_ask"
+            bid = _num(row, bid_key, allow_zero=True)
+            ask = _num(row, ask_key)
+            if ask < bid:
+                raise EvidenceError("Crossed or reversed option leg quote")
+            mid = (ask + bid) / 2
+            if mid <= 0 or (ask - bid) / mid > 0.25:
+                raise EvidenceError("Paper option leg market exceeds fixed liquidity spread")
+            quote[bid_key] = bid
+            quote[ask_key] = ask
+    short_bid = quote["entry_short_bid"]
+    long_ask = quote["entry_long_ask"]
+    short_ask_exit = quote["exit_short_ask"]
+    long_bid_exit = quote["exit_long_bid"]
     credit = (short_bid - long_ask) * BROKER_MULTIPLIER
     if not 0 < credit < width * BROKER_MULTIPLIER:
         raise EvidenceError("Missing positive conservative entry credit")
