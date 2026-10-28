@@ -135,7 +135,7 @@ def corroborate(chain_option, direct_greeks, *, now):
 
 
 def run_crosscheck(token, *, now=None):
-    """At most six HTTPS GET market-data requests, with strict provider timezone isolation."""
+    """At most eight HTTPS GET market-data requests, with strict provider timezone isolation."""
     now = now or datetime.now(timezone.utc)
     state = probe.get_json(token, "/markets/clock", {}).get("clock") or {}
     state_name = state.get("state") if isinstance(state, dict) else None
@@ -157,19 +157,32 @@ def run_crosscheck(token, *, now=None):
     if not eligible:
         return {"status": "NO_ELIGIBLE_EXPIRATION", "h1_signal_status": "UNVERIFIED",
                 "cross_endpoint_only": True, "read_only": True, "requests_beyond_clock": 2}
-    expiration = min(eligible)[1]
-    chain = probe.get_json(token, "/markets/options/chains", {
-        "symbol": SYMBOL, "expiration": expiration, "greeks": "true"})
+    # Newly listed weekly expirations can have no 100-OI ATM legs.
+    # Search at most three *listed* 7-21DTE expiries without lowering OI.
+    # Maximum GET budget: clock + quote + expirations + 3 chains + 2 Greeks = 8.
+    selected, expiration = {}, None
     selector_funnel = {}
-    selected = _nearest_naive_atm_contracts(
-        chain, symbol=SYMBOL, spot=spot, now=now, counters=selector_funnel)
+    sampled = 0
+    for _, trial_expiration in sorted(eligible)[:3]:
+        chain = probe.get_json(token, "/markets/options/chains", {
+            "symbol": SYMBOL, "expiration": trial_expiration, "greeks": "true"})
+        sampled += 1
+        trial_funnel = {}
+        trial_selected = _nearest_naive_atm_contracts(
+            chain, symbol=SYMBOL, spot=spot, now=now, counters=trial_funnel)
+        for key, value in trial_funnel.items():
+            selector_funnel[key] = selector_funnel.get(key, 0) + value
+        if len(trial_selected) == 2:
+            selected, expiration = trial_selected, trial_expiration
+            break
     report = {
         "status": "INCONCLUSIVE",
         "h1_signal_status": "UNVERIFIED",
         "cross_endpoint_only": True,
         "does_not_change_h1_gate": True,
         "read_only": True,
-        "sampled_expirations": 1,
+        "sampled_expirations": sampled,
+        "two_sided_eligible_expirations_found": int(len(selected) == 2),
         "selector_filter_funnel": selector_funnel,
         "naive_atm_call_legs_selected": int("call" in selected),
         "naive_atm_put_legs_selected": int("put" in selected),
