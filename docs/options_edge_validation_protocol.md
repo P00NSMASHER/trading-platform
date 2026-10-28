@@ -24,6 +24,14 @@ H3 (negative control): 0DTE/1DTE quote observations and matched spreads without 
 
 ## Evaluation plan and acceptance gates
 
+Greek timezone corroboration remains strictly separate from strategy selection: the
+SPY-only, GET-only diagnostic may sample up to four valid expirations when a
+single nearer 14DTE chain has no liquid call/put pair. It checks option IDs,
+IV agreement and explicitly timezone-qualified UTC timestamps from the separate
+endpoint. An inconclusive sample **does not establish** the timezone of an
+unqualified ORATS timestamp, does not relax the live H1 freshness gate, and
+does not count as a profitable observation.
+
 1. Save input constraints and select strategy/benchmark BEFORE observing prospective outcomes. Separate discovery and forward holdout, with no retuning based on holdout performance.
 2. Obtain rights-cleared historical option quotes with bid/ask, timestamp, strike, expiry, multiplier and corporate-action adjustment, or collect a prospective PRIVATE snapshot ledger from live Tradier under applicable market-data terms. **Public GitHub logs/artifacts must contain only aggregate counts.** Current workflow deliberately destroys raw quotes and cannot by itself prove future realized P&L.
 3. Count signal-bearing **distinct underlying symbols and option expirations**, as well as correlated strike-spread combinations, before making claims about sample size. Many spread combinations on the same chain must NEVER be interpreted as independent trades. Record counterfactual entry, exact as-of, rejection reason, bid/ask, OI, underlying price, position exposure, and exit rules in private storage. Evaluate accepted AND rejected opportunities, delistings, earnings and split events.
