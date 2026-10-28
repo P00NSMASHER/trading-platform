@@ -68,6 +68,16 @@ This module is not connected to the public GitHub Actions scanner and no
 private quote snapshots are uploaded or saved in the public repository.
 Matched baselines and untouched out-of-sample outcomes remain required.
 
+Because the separate `/markets/options/greeks` endpoint denies this token with
+HTTP 403, a bounded `GET /markets/quotes?symbols=<OCC>&greeks=true`
+alternative can compare the same contract across the chain/quote views. A
+provider quote with no explicit timezone proves **nothing** about the chain
+naive updated_at; an offset-qualified exact UTC match is still only provider-
+internal corroboration, never a license to assert all Greek timestamps are
+UTC or that an option edge is profitable. All market-data calls remain GET
+and live orders remain forbidden.
+
+
 ## Missing-outcome and selective-recording control
 
 The offline-only [private admissions audit](options_population_audit.md) must
