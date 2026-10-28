@@ -101,6 +101,11 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     requested = 0
     observed = 0
     premium = 0
+    atm_stats = {"chains_primary_window": 0,
+                 "chains_with_two_sided_atm_iv": 0,
+                 "chains_missing_atm_iv": 0,
+                 "chains_with_completed_rv20": 0,
+                 "candidate_spreads_with_complete_atm_signal": 0}
     all_rows = []
     for i in range(0, len(symbols), CHUNK_SIZE):
         # Live mode lets the probe use the actual clock on each received chain.
@@ -110,6 +115,10 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         requested += result["chains_requested"]
         observed += result["chains_with_contracts"]
         premium += result["iv_rv_ge_1_20_seven_to_21_dte"]
+        for key, count in result.get("atm_iv_coverage", {}).items():
+            if key not in atm_stats or not isinstance(count, int) or count < 0:
+                raise probe.ProbeFailure("Unexpected primary-window IV coverage receipt")
+            atm_stats[key] += count
         for key, count in result["candidate_counts"].items():
             counts[key] += count
         for key, count in result["spread_counts"].items():
@@ -151,6 +160,7 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         "spread_pair_funnel": pair_funnel,
         "spread_pair_funnel_by_dte": pair_funnel_by_dte,
         "iv_rv_ge_1_20_seven_to_21_dte": premium,
+        "atm_iv_coverage": atm_stats,
         "intraday_underlying_context": intraday,
     }
 
