@@ -209,6 +209,64 @@ class Tests(unittest.TestCase):
             quality["near_atm_greeks_timestamp_malformed_or_naive"], 1)
         self.assertEqual(quality["near_atm_fresh_greeks_legs"], 1)
 
+    def test_naive_greek_clock_hypotheses_never_promote_h1(self):
+        call = option(100, 1.20, 1.24)
+        put = {**option(100, 1.10, 1.14), "option_type": "put"}
+        chain = {"options": {"option": [call, put]}}
+        utc_naive = (NOW - probe.timedelta(minutes=30)).replace(
+            tzinfo=None).isoformat()
+        put["greeks"]["updated_at"] = utc_naive
+        result = probe.atm_greeks_quality(
+            chain, symbol="TEST", spot=100, now=NOW)
+        self.assertEqual(result["near_atm_greeks_timestamp_naive_iso"], 1)
+        self.assertEqual(
+            result["near_atm_greeks_naive_plausibly_fresh_if_utc"], 1)
+        self.assertEqual(
+            result["near_atm_greeks_naive_plausibly_fresh_if_eastern"], 0)
+        self.assertEqual(result["near_atm_fresh_greeks_legs"], 1)
+        self.assertIsNone(probe.atm_chain_iv(
+            chain, symbol="TEST", spot=100, now=NOW))
+
+        et_naive = (NOW.astimezone(probe.EASTERN) -
+                    probe.timedelta(minutes=30)).replace(
+                        tzinfo=None).isoformat()
+        put["greeks"]["updated_at"] = et_naive
+        result = probe.atm_greeks_quality(
+            chain, symbol="TEST", spot=100, now=NOW)
+        self.assertEqual(
+            result["near_atm_greeks_naive_plausibly_fresh_if_utc"], 0)
+        self.assertEqual(
+            result["near_atm_greeks_naive_plausibly_fresh_if_eastern"], 1)
+        self.assertIsNone(probe.atm_chain_iv(
+            chain, symbol="TEST", spot=100, now=NOW))
+
+        put["greeks"]["updated_at"] = (
+            NOW - probe.timedelta(hours=8)).replace(tzinfo=None).isoformat()
+        result = probe.atm_greeks_quality(
+            chain, symbol="TEST", spot=100, now=NOW)
+        self.assertEqual(
+            result["near_atm_greeks_naive_not_recent_in_either_clock"], 1)
+        self.assertEqual(result["near_atm_fresh_greeks_legs"], 1)
+
+    def test_naive_clock_diagnostic_handles_winter_dst_without_h1_waiver(self):
+        winter = probe.datetime(2026, 12, 10, 18, 30,
+                                tzinfo=probe.timezone.utc)
+        row = option(100, 1.20, 1.24)
+        row["bid_date"] = int(winter.timestamp()) - 8
+        row["ask_date"] = int(winter.timestamp()) - 8
+        row["greeks"]["updated_at"] = (
+            winter.astimezone(probe.EASTERN) -
+            probe.timedelta(minutes=20)).replace(tzinfo=None).isoformat()
+        result = probe.atm_greeks_quality(
+            {"options": {"option": [row]}},
+            symbol="TEST", spot=100, now=winter)
+        self.assertEqual(result["near_atm_greeks_timestamp_naive_iso"], 1)
+        self.assertEqual(
+            result["near_atm_greeks_naive_plausibly_fresh_if_eastern"], 1)
+        self.assertEqual(
+            result["near_atm_greeks_naive_plausibly_fresh_if_utc"], 0)
+        self.assertEqual(result["near_atm_fresh_greeks_legs"], 0)
+
     def test_positive_bestcase_payoff_requires_more_than_fees_and_fill_stress(self):
         calls = [option(103, 0.16, 0.17), option(104, 0.10, 0.11)]
         responses = {
