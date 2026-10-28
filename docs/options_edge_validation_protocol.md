@@ -4,7 +4,7 @@
 
 ## Fixed, testable hypotheses
 
-H1 (primary, prospective): At 7-21 calendar DTE, a conservatively priced, standard-deliverable, out-of-the-money SPY/IWM or other liquid underlying **defined-risk credit vertical** could outperform a matched same-expiry/delta control **after** the entire bid/ask and estimated trading fees, conditional on pre-entry implied volatility / historical 20-day realized volatility >= 1.20. A high IV/HV ratio is NOT proof of fair-value overpricing. The broker's IV/Greeks can update only hourly.
+H1 (primary, prospective): At 7-21 calendar DTE, a conservatively priced, standard-deliverable, out-of-the-money SPY/IWM or other liquid underlying **defined-risk credit vertical** could outperform a matched same-expiry/delta control **after** the entire bid/ask and estimated trading fees, conditional on **same-expiry two-sided near-ATM** (nearest liquid call and put) implied volatility / prior-completed-close 20-day realized volatility >= 1.20. Missing call, put, Greeks or completed RV is *unknown*, never H1-positive. The short strike's IV/RV is retained separately as exploratory skew metadata, not the primary H1 signal. A high IV/HV ratio is NOT proof of fair-value overpricing. The broker's IV/Greeks can update only hourly.
 
 H2 (secondary exploratory): Lower-price stocks and recent split stocks may have relatively expensive options (see the 2026 peer-reviewed study "Cheap Options Are Expensive", doi:10.1093/rapstu/raag001). That paper concerns delta-hedged option returns, NOT automatically executable 1-point credit spreads. We must not transfer its published return estimate to our strategy without a new test.
 
@@ -34,7 +34,7 @@ H3 (negative control): 0DTE/1DTE quote observations and matched spreads without 
 ## Evidence and sources
 
 - Live Tradier authorization/17 valid option-chain response: https://github.com/P00NSMASHER/trading-platform/actions/runs/40565091551 . Valid data access, no valid signal established.
-- Tradier chain/Greeks docs: https://docs.tradier.com/docs/market-data
+- Tradier chain/Greeks docs (decimal IV units, e.g. 0.13835 = 13.835%): https://docs.tradier.com/market-data/get-option-greeks and https://docs.tradier.com/docs/market-data
 - Cross-sectional low-price premium: https://academic.oup.com/raps/article-abstract/16/2/283/8428129
 - Realized vs implied earnings events and trading frictions: https://www.mdpi.com/1911-8074/16/5/270
 - Bid/ask and margin can erase apparent volatility-spread returns: https://doi.org/10.1002/fut.21729
