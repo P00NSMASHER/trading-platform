@@ -158,11 +158,33 @@ def option_iv(option):
     return round(iv, 5) if iv is not None and 0 < iv <= 3 else None
 
 
+
+def greeks_age(option, now):
+    """How old the provider's actual ORATS calculation is, independently of quote age.
+
+    Missing, timezone-naive, corrupt or implausibly future-dated timestamps are
+    not proof of a fresh Greek; the H1 signal must fail closed on them.
+    """
+    greeks = option.get("greeks") or {}
+    raw = greeks.get("updated_at") if isinstance(greeks, dict) else None
+    if not isinstance(raw, str) or not raw.strip():
+        return None
+    try:
+        stamp = datetime.fromisoformat(raw.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if stamp.tzinfo is None:
+        return None
+    age = (now - stamp.astimezone(timezone.utc)).total_seconds()
+    return max(0.0, age) if age >= -60 else None
+
+
 def atm_chain_iv(chain, *, symbol, spot, now, max_quote_age=120):
     """Two-sided nearest-ATM implied volatility for ONE expiry (decimal units).
 
     Both call and put require eligible standard deliverables, current bid/ask,
-    adequate OI and strikes within 3% of spot. A missing side returns None.
+    adequate OI, IV whose reported ORATS calculation timestamp is within 90
+    minutes, and strikes within 3% of spot. A missing side returns None.
     This is screening metadata, not fair value, IV surface fitting, or edge.
     """
     if positive(spot) is None:
@@ -185,7 +207,9 @@ def atm_chain_iv(chain, *, symbol, spot, now, max_quote_age=120):
         if distance > 0.03 or (ask - bid) / ((ask + bid) / 2) > 0.25:
             continue
         age = quote_age(item, now)
+        iv_age = greeks_age(item, now)
         if (age is None or age > max_quote_age
+            or iv_age is None or iv_age > 90 * 60
             or nonnegative_int(item.get("open_interest")) < 100):
             continue
         iv = option_iv(item)
