@@ -47,6 +47,18 @@ repeatedly invoke an endpoint known to be denied. An explicitly requested
 manual diagnostic still fails on access errors; no hidden pass or fallback UTC
 assumption is permitted. [Evidence: live run 40736968570](https://github.com/P00NSMASHER/trading-platform/actions/runs/40736968570).
 
+A second no-cost read-only diagnostic now requests **option-specific**
+`/markets/quotes?greeks=true` responses for up to two SPY near-ATM contracts
+chosen from at most four listed expirations. That endpoint is already
+allowlisted for underlying market data. It compares exact OCC contract IDs,
+IV values and explicit-timezone Greek timestamps against chain observations;
+matching offset-free timestamps in both responses remain **inconclusive**.
+Even an explicitly UTC-qualified match is *diagnostic only*: this does not
+promote H1, predict returns, prove executable fills or establish a provider-
+wide timezone convention. Quote access denial is logged explicitly without
+silently relabeling a blocked signal as valid. The separate HTTP-403 direct
+Greek endpoint remains disabled for automated runs.
+
 For every expiry bucket the engine separately counts candidate spreads whose **theoretical best-case maximum credit** remains positive after the assumed $2.60 four-side fees, and after additional $5 or $10 adverse-fill stress. This is a necessary economic feasibility check, **not expected value or evidence of an executable fill**. H1 is pre-registered in `docs/options_edge_validation_protocol.md` and remains unverified.
 
 Raw market data exists only in ephemeral GitHub-runner temporary storage and is deleted, with **no uploaded artifacts or committed quotes**. The repository is public. Logs show sanitized counts only. A successful run establishes API and options-chain access, **not a profitable or executable strategy**. Out-of-market-hours quote staleness may yield zero candidates.

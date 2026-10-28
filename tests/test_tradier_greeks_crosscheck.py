@@ -224,6 +224,97 @@ class GreekCorroborationTests(unittest.TestCase):
             workflow,
         )
 
+    def test_option_specific_quote_route_proves_only_matching_utc_greeks(self):
+        calls = []
+
+        def fetch(token, endpoint, params):
+            calls.append((endpoint, params))
+            if endpoint == "/markets/quotes" and params["symbols"] in SYMBOLS.values():
+                sym = params["symbols"]
+                side = "call" if sym == SYMBOLS["call"] else "put"
+                return {"quotes": {"quote": {
+                    "symbol": sym,
+                    "greeks": {
+                        "mid_iv": 0.30 if side == "call" else 0.28,
+                        "updated_at": WHEN + "Z",
+                    },
+                }}}
+            return fake_api(token, endpoint, params)
+
+        with patch("tradier_greeks_crosscheck.probe.get_json", side_effect=fetch):
+            result = cross.run_crosscheck(
+                "NONSECRET", now=NOW, data_route="quotes")
+        self.assertEqual(result["status"], "TWO_SIDES_CORROBORATED_DIAGNOSTIC_ONLY")
+        self.assertEqual(result["source_route"], "option_quote")
+        self.assertEqual(result["direct_side_requests"], 2)
+        self.assertEqual(result["utc_fresh_concordant"], 2)
+        self.assertEqual(result["h1_signal_status"], "UNVERIFIED")
+        self.assertEqual(sum(x[0] == "/markets/options/greeks" for x in calls), 0)
+        self.assertEqual(len(calls), 6)
+        self.assertEqual([x[1]["greeks"] for x in calls
+                          if x[0] == "/markets/quotes"
+                          and x[1].get("symbols") in SYMBOLS.values()],
+                         ["true", "true"])
+        self.assertNotIn(SYMBOLS["put"], str(result))
+
+    def test_option_quote_source_does_not_prove_naive_greek_timezone(self):
+        def fetch(token, endpoint, params):
+            if endpoint == "/markets/quotes" and params["symbols"] in SYMBOLS.values():
+                sym = params["symbols"]
+                side = "call" if sym == SYMBOLS["call"] else "put"
+                return {"quotes": {"quote": {
+                    "symbol": sym,
+                    "greeks": {
+                        "mid_iv": 0.30 if side == "call" else 0.28,
+                        "updated_at": WHEN,  # same wallclock without offset is NOT UTC proof
+                    },
+                }}}
+            return fake_api(token, endpoint, params)
+
+        with patch("tradier_greeks_crosscheck.probe.get_json", side_effect=fetch):
+            result = cross.run_crosscheck(
+                "NONSECRET", now=NOW, data_route="quotes")
+        self.assertEqual(result["status"], "INCONCLUSIVE")
+        self.assertEqual(result["same_contract_iv_matches"], 2)
+        self.assertEqual(result["direct_offset_aware"], 0)
+        self.assertEqual(result["utc_fresh_concordant"], 0)
+        self.assertEqual(result["h1_signal_status"], "UNVERIFIED")
+
+    def test_option_quote_must_match_contract_and_have_unique_greek_fields(self):
+        good = {"symbol": SYMBOLS["call"],
+                "greeks": {"mid_iv": .3, "updated_at": WHEN + "Z"}}
+        wrong = dict(good, symbol=SYMBOLS["put"])
+        self.assertIsNone(cross._find_unique_quote_greeks(
+            {"quotes": {"quote": wrong}}, SYMBOLS["call"]))
+        self.assertIsNone(cross._find_unique_quote_greeks(
+            {"quotes": {"quote": [good, good]}}, SYMBOLS["call"]))
+        self.assertIsNone(cross._find_unique_quote_greeks(
+            {"quotes": {"quote": {"symbol": SYMBOLS["call"]}}}, SYMBOLS["call"]))
+        parsed = cross._find_unique_quote_greeks(
+            {"quotes": {"quote": good}}, SYMBOLS["call"])
+        self.assertEqual(parsed["mid_iv"], 0.3)
+
+    def test_quote_access_denial_is_explicit_no_h1_promotion(self):
+        def fetch(token, endpoint, params):
+            if endpoint == "/markets/quotes" and params["symbols"] in SYMBOLS.values():
+                raise ProbeFailure("Tradier rejected access (HTTP 403)")
+            return fake_api(token, endpoint, params)
+
+        with patch("tradier_greeks_crosscheck.probe.get_json", side_effect=fetch):
+            result = cross.run_crosscheck(
+                "NONSECRET", now=NOW, data_route="quotes")
+        self.assertEqual(result["status"], "OPTION_QUOTES_GREEKS_ACCESS_DENIED")
+        self.assertEqual(result["provider_access_denials"], 1)
+        self.assertEqual(result["h1_signal_status"], "UNVERIFIED")
+        self.assertEqual(result["utc_fresh_concordant"], 0)
+
+    def test_unknown_quote_route_fails_before_network_access(self):
+        with patch("tradier_greeks_crosscheck.probe.get_json") as fetch:
+            with self.assertRaisesRegex(ProbeFailure, "route must"):
+                cross.run_crosscheck(
+                    "NONSECRET", now=NOW, data_route="orders")
+        fetch.assert_not_called()
+
     def test_market_closed_never_fetches_tokenized_quotes_or_greeks(self):
         with patch("tradier_greeks_crosscheck.probe.get_json",
                    return_value={"clock": {"state": "closed"}}) as fetch:
