@@ -2856,7 +2856,7 @@
       "reason": "Private-only, standard-library forward options paper quote-mark evaluator: strict point-in-time data/quote/Greek checks, conservative natural bid/ask marks, full-roundtrip assumed fees, adverse slippage stress, portfolio/individual modeled risk ceilings, week-cluster confidence gates and explicit UNVERIFIED status. No brokerage/network access."
     },
     "tests/test_options_forward_evaluator.py": {
-      "expected_sha256": "c42400c8fb069c3bc34f69610f6582600a594df9ca9ac1adfb927cce663d416b",
+      "expected_sha256": "63733e886ace1b7727e09b55609a13ffe619c219f0793387166a360570f5728f",
       "reason": "Deterministic synthetic-only acceptance tests for no-lookahead, quote freshness, H1, missing outcomes, duplicate/correlated trades, risk overlap, sample sufficiency, bootstrap determinism and private data safeguards."
     },
     "docs/options_forward_evidence.md": {
