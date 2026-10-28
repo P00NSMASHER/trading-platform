@@ -55,6 +55,13 @@ class MarketCycleTests(unittest.TestCase):
                 "candidate_counts": {"0DTE": 1, "1DTE": 2, "7-21DTE": 3},
                 "spread_counts": {"bear_call": 1, "bull_put": 2},
                 "iv_rv_ge_1_20_seven_to_21_dte": 2,
+                "atm_iv_coverage": {
+                    "chains_primary_window": 3,
+                    "chains_with_two_sided_atm_iv": 2,
+                    "chains_missing_atm_iv": 1,
+                    "chains_with_completed_rv20": 3,
+                    "candidate_spreads_with_complete_atm_signal": 2,
+                },
                 "quote_filter_diagnostics": {"raw_option_rows": 10, "otm_liquid_legs": 4},
                 "quote_filter_by_dte": {
                     "7-21DTE": {"raw_option_rows": 10, "otm_liquid_legs": 4}
@@ -80,6 +87,10 @@ class MarketCycleTests(unittest.TestCase):
         self.assertEqual(summary["spread_pair_funnel"]["pairs_eligible"], 12)
         self.assertEqual(summary["spread_pair_funnel_by_dte"]["7-21DTE"]["pairs_eligible"], 12)
         self.assertEqual(summary["iv_rv_ge_1_20_seven_to_21_dte"], 8)
+        self.assertEqual(summary["atm_iv_coverage"]["chains_primary_window"], 12)
+        self.assertEqual(summary["atm_iv_coverage"]["chains_with_two_sided_atm_iv"], 8)
+        self.assertEqual(summary["atm_iv_coverage"]["chains_missing_atm_iv"], 4)
+        self.assertEqual(summary["atm_iv_coverage"]["candidate_spreads_with_complete_atm_signal"], 8)
         self.assertEqual(summary["intraday_underlying_context"]["bars_observed"], 3)
         self.assertEqual(summary["edge_status"], "UNVERIFIED")
         self.assertEqual([x[0] for x in all_calls], ["/markets/clock"] + ["/markets/timesales"] * 3)
