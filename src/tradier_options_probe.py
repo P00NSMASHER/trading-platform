@@ -29,7 +29,7 @@ HEADERS = ("observed_at_utc", "underlying", "bucket", "expiration", "dte", "spre
            "spot", "short_contract", "long_contract", "short_strike", "long_strike",
            "short_bid", "long_ask", "credit_per_share", "risk_estimate_usd",
            "fees_assumed_usd", "short_iv", "rv20", "iv_rv_ratio",
-           "quote_age_seconds", "research_only")
+           "atm_iv", "atm_iv_rv_ratio", "quote_age_seconds", "research_only")
 _last_request = 0.0
 
 
@@ -148,13 +148,55 @@ def quote_age(option, now):
 
 
 def option_iv(option):
+    """Tradier/ORATS mid_iv uses decimal fractions (0.35 means 35%).
+
+    Reject ambiguous 35.0 values rather than silently rescaling high-volatility
+    options (2.5 legitimately represents 250%).
+    """
     greeks = option.get("greeks") or {}
     iv = positive(greeks.get("mid_iv")) if isinstance(greeks, dict) else None
-    if iv is None:
+    return round(iv, 5) if iv is not None and 0 < iv <= 3 else None
+
+
+def atm_chain_iv(chain, *, symbol, spot, now, max_quote_age=120):
+    """Two-sided nearest-ATM implied volatility for ONE expiry (decimal units).
+
+    Both call and put require eligible standard deliverables, current bid/ask,
+    adequate OI and strikes within 3% of spot. A missing side returns None.
+    This is screening metadata, not fair value, IV surface fitting, or edge.
+    """
+    if positive(spot) is None:
         return None
-    if iv > 2:
-        iv /= 100
-    return round(iv, 5) if 0 < iv < 3 else None
+    node = chain.get("options") or {}
+    rows = many(node.get("option")) if isinstance(node, dict) else []
+    best = {"call": None, "put": None}
+    for item in rows:
+        if not isinstance(item, dict):
+            continue
+        side = item.get("option_type")
+        if (side not in best or item.get("root_symbol") != symbol
+            or nonnegative_int(item.get("contract_size")) != 100):
+            continue
+        strike = positive(item.get("strike"))
+        bid, ask = positive(item.get("bid")), positive(item.get("ask"))
+        if strike is None or bid is None or ask is None or ask < bid:
+            continue
+        distance = abs(strike - spot) / spot
+        if distance > 0.03 or (ask - bid) / ((ask + bid) / 2) > 0.25:
+            continue
+        age = quote_age(item, now)
+        if (age is None or age > max_quote_age
+            or nonnegative_int(item.get("open_interest")) < 100):
+            continue
+        iv = option_iv(item)
+        if iv is None:
+            continue
+        key = (round(distance, 9), -nonnegative_int(item.get("open_interest")))
+        if best[side] is None or key < best[side][0]:
+            best[side] = (key, iv)
+    if best["call"] is None or best["put"] is None:
+        return None
+    return round(statistics.mean([best["call"][1], best["put"][1]]), 5)
 
 
 def realized_vol20(payload, *, asof_date=None):
@@ -478,6 +520,11 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
     pair_funnel_by_dte = {label: dict.fromkeys(pair_funnel, 0) for label in counts}
     spread_counts = {"bear_call": 0, "bull_put": 0}
     premium_candidate_count = 0
+    atm_stats = {"chains_primary_window": 0,
+                 "chains_with_two_sided_atm_iv": 0,
+                 "chains_missing_atm_iv": 0,
+                 "chains_with_completed_rv20": 0,
+                 "candidate_spreads_with_complete_atm_signal": 0}
     chains_with_contracts = 0
     examined = 0
     for symbol in symbols:
@@ -506,6 +553,17 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
             node = chain.get("options") or {}
             if isinstance(node, dict) and many(node.get("option")):
                 chains_with_contracts += 1
+            atm_iv = atm_chain_iv(
+                chain, symbol=symbol, spot=spot,
+                now=chain_now, max_quote_age=max_quote_age)
+            if label == "7-21DTE":
+                atm_stats["chains_primary_window"] += 1
+                if atm_iv is None:
+                    atm_stats["chains_missing_atm_iv"] += 1
+                else:
+                    atm_stats["chains_with_two_sided_atm_iv"] += 1
+                if rv20 is not None:
+                    atm_stats["chains_with_completed_rv20"] += 1
             chain_diagnostics = diagnose_chain(chain, symbol, spot, chain_now, max_quote_age)
             for key, value in chain_diagnostics.items():
                 diagnostics[key] += value
@@ -528,9 +586,17 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
             counts[label] += len(selected)
             for candidate in selected:
                 spread_counts[candidate["spread_side"]] += 1
-                if (candidate["bucket"] == "7-21DTE"
-                    and (candidate["iv_rv_ratio"] or 0) >= 1.20):
-                    premium_candidate_count += 1
+                candidate["atm_iv"] = atm_iv
+                candidate["atm_iv_rv_ratio"] = (
+                    round(atm_iv / rv20, 3)
+                    if atm_iv is not None and rv20 is not None and rv20 > 0
+                    else None
+                )
+                if candidate["bucket"] == "7-21DTE":
+                    if candidate["atm_iv_rv_ratio"] is not None:
+                        atm_stats["candidate_spreads_with_complete_atm_signal"] += 1
+                    if (candidate["atm_iv_rv_ratio"] or 0) >= 1.20:
+                        premium_candidate_count += 1
     if examined == 0 or chains_with_contracts == 0:
         raise ProbeFailure("No in-range option chains with actual contracts returned")
     return rows, {"status": "MARKET_DATA_ACCESS_VERIFIED",
@@ -543,6 +609,7 @@ def run(symbols, token, now=None, max_risk=100.0, max_quote_age=120):
                   "spread_pair_funnel": pair_funnel,
                   "spread_pair_funnel_by_dte": pair_funnel_by_dte,
                   "iv_rv_ge_1_20_seven_to_21_dte": premium_candidate_count,
+                  "atm_iv_coverage": atm_stats,
                   "read_only": True,
                   "edge_status": "UNVERIFIED"}
 
