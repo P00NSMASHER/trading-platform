@@ -80,6 +80,16 @@ class TemporalHoldoutTests(unittest.TestCase):
         with self.assertRaises(forward.EvidenceError):
             audit.evaluate_holdout(rows, holdout_start=BOUNDARY, asof=ASOF)
 
+    def test_stream_input_is_bounded_before_materialization(self):
+        def untrusted_stream():
+            for _ in range(forward.MAX_ROWS + 1):
+                yield synthetic_row(0)
+            raise RuntimeError("Unbounded stream consumption")
+
+        with self.assertRaisesRegex(forward.EvidenceError, "bounded"):
+            audit.evaluate_holdout(untrusted_stream(),
+                                   holdout_start=BOUNDARY, asof=ASOF)
+
     def test_deterministic_under_reordered_rows(self):
         rows = [synthetic_row(i) for i in range(120)]
         first = audit.evaluate_holdout(rows, holdout_start=BOUNDARY, asof=ASOF)
