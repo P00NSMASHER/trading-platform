@@ -2852,12 +2852,12 @@
       "reason": "Up-to-date Tradier API coverage/limits, official references and explicit no-historical-expired-option-bid-ask evidence boundaries. 2026-10-28: bound UTC Greek cross-endpoint corroboration to four closest 7–21DTE expiries so thin near-14DTE OI does not prevent checking liquid pairs; preserve no-guessing timezone, strict H1 eligibility, read-only safety, and aggregate-only logs. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure."
     },
     "src/options_forward_evaluator.py": {
-      "expected_sha256": "353f31e4b8c118407ad9766e6d68538b7aabe838bc70a58dd40530ae6ceeff8f",
-      "reason": "Private-only, standard-library forward options paper quote-mark evaluator: strict point-in-time data/quote/Greek checks, conservative natural bid/ask marks, full-roundtrip assumed fees, adverse slippage stress, portfolio/individual modeled risk ceilings, week-cluster confidence gates and explicit UNVERIFIED status. No brokerage/network access."
+      "expected_sha256": "ce1d6833822d2f89b1840b9a976250ec4ee122f55114308334758fd92c0445c6",
+      "reason": "Private-only, standard-library forward options paper quote-mark evaluator: strict point-in-time data/quote/Greek checks, conservative natural bid/ask marks, full-roundtrip assumed fees, adverse slippage stress, portfolio/individual modeled risk ceilings, week-cluster confidence gates and explicit UNVERIFIED status. No brokerage/network access. 2026-10-29: report modeled portfolio-capacity breach ahead of sample sufficiency."
     },
     "tests/test_options_forward_evaluator.py": {
-      "expected_sha256": "63733e886ace1b7727e09b55609a13ffe619c219f0793387166a360570f5728f",
-      "reason": "Deterministic synthetic-only acceptance tests for no-lookahead, quote freshness, H1, missing outcomes, duplicate/correlated trades, risk overlap, sample sufficiency, bootstrap determinism and private data safeguards."
+      "expected_sha256": "a7591fbd3ee3e2a37f3907b9e6376e14b55587f673ae698320ee5d421aebef1e",
+      "reason": "Deterministic synthetic-only acceptance tests for no-lookahead, quote freshness, H1, missing outcomes, duplicate/correlated trades, risk overlap, sample sufficiency, bootstrap determinism and private data safeguards. 2026-10-29: add short-sample over-capacity regression and sequential negative control."
     },
     "docs/options_forward_evidence.md": {
       "expected_sha256": "ad107a2c7a3093bcd62ecdd22b8763f722dfe39f7801998e223d291da1840bd7",

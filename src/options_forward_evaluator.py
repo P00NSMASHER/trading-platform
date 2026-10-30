@@ -328,10 +328,12 @@ def evaluate_paper_marks(rows, *, asof: datetime | None = None):
               and len(weeks) >= MIN_UNIQUE_WEEKS)
     risk_fit = peak_risk <= MODELED_PORTFOLIO_RISK_LIMIT_USD + 1e-8
     stressed_lower = metrics["5"]["weekly_cluster_bootstrap95_usd"][0]
-    if not enough:
-        status = "INSUFFICIENT_FORWARD_EVIDENCE"
-    elif not risk_fit:
+    # A modeled portfolio-risk breach must be explicit even with too few marks.
+    # Sample-size insufficiency never masks a known account-capacity failure.
+    if not risk_fit:
         status = "ACCOUNT_RISK_CAPACITY_EXCEEDED"
+    elif not enough:
+        status = "INSUFFICIENT_FORWARD_EVIDENCE"
     elif stressed_lower <= 0:
         status = "NO_POSITIVE_NET_EVIDENCE"
     else:
