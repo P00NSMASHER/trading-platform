@@ -90,6 +90,29 @@ class TemporalHoldoutTests(unittest.TestCase):
             audit.evaluate_holdout(untrusted_stream(),
                                    holdout_start=BOUNDARY, asof=ASOF)
 
+    def test_pre_cutoff_decision_cannot_become_holdout_due_to_delayed_entry(self):
+        # The i=50 fixture begins exactly at the fixed holdout boundary.
+        # Move its entry 30 seconds later, but take the signal 30 seconds
+        # earlier. The old entry-based split admitted this development signal.
+        rows = [synthetic_row(i) for i in range(120)]
+        crossing = dict(rows[50])
+        crossing["entry_utc"] = (BOUNDARY + timedelta(seconds=30)).isoformat()
+        crossing["decision_utc"] = (BOUNDARY - timedelta(seconds=30)).isoformat()
+        crossing["entry_quote_utc"] = (BOUNDARY - timedelta(seconds=45)).isoformat()
+        crossing["greeks_time_utc"] = (BOUNDARY - timedelta(minutes=45)).isoformat()
+        rows[50] = crossing
+        pre = audit.evaluate_holdout(rows, holdout_start=BOUNDARY, asof=ASOF)
+        self.assertEqual(pre["holdout_rows"], 69)
+        self.assertGreater(pre["withheld_pre_holdout_rows"], 0)
+        # Matched negative control: identical entry and quotes, but the
+        # decision occurs after the boundary, so it is a valid holdout entry.
+        crossing["decision_utc"] = (BOUNDARY + timedelta(seconds=1)).isoformat()
+        rows[50] = crossing
+        post = audit.evaluate_holdout(rows, holdout_start=BOUNDARY, asof=ASOF)
+        self.assertEqual(post["holdout_rows"], 70)
+        self.assertEqual(post["withheld_pre_holdout_rows"] + 1,
+                         pre["withheld_pre_holdout_rows"])
+
     def test_deterministic_under_reordered_rows(self):
         rows = [synthetic_row(i) for i in range(120)]
         first = audit.evaluate_holdout(rows, holdout_start=BOUNDARY, asof=ASOF)
