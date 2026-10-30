@@ -60,8 +60,15 @@ def _valid_id(row):
 
 
 def _check_one(paper, depth, *, asof, contracts):
-    if _time(paper.get("exit_utc")) > asof:
+    decision_time = _time(paper.get("decision_utc"))
+    entry_time = _time(paper.get("entry_utc"))
+    exit_time = _time(paper.get("exit_utc"))
+    if exit_time > asof:
         return "FUTURE_EXIT"
+    # A coherent quote book cannot rehabilitate an entry made before a signal.
+    # Match the standalone chronology rule used by the paper-mark evaluator.
+    if not decision_time <= entry_time < exit_time:
+        return "CLOCK_INCOHERENT"
     for event in EVENTS:
         event_time = _time(paper.get(event + "_utc"))
         source_capture = _time(paper.get(event + "_quote_utc"))
