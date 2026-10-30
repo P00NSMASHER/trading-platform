@@ -2886,6 +2886,18 @@
     "docs/tradier_greeks_cross_endpoint.md": {
       "expected_sha256": "a359e5b1c5d2ae059120864d74408a4cd65aa4cdc9afae0fdd39e04424605012",
       "reason": "Explicit limitations, privacy rules and corroboration-only methodology for direct options-Greeks timezone comparisons. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
+    },
+    "src/options_quote_depth_gate.py": {
+      "expected_sha256": "8aca528d7dd32ed9fadc654a81cb1ee2b13e85c75fce151f1e6b42fce2cabd69",
+      "reason": "2026-10-30: synthetic-only offline quote-side depth, quote update chronology and all-cohort completeness audit; no broker access"
+    },
+    "tests/test_options_quote_depth_gate.py": {
+      "expected_sha256": "2375ed1dd0afbaa964c449195c4e2fddd687b5c27bc2289d3c16e2d53327ef1e",
+      "reason": "2026-10-30: 15 deterministic synthetic-only adverse liquidity, chronology, and selection-completeness tests"
+    },
+    "scripts/options_quote_depth_synthetic_experiment.py": {
+      "expected_sha256": "b2e514b76e467d0d867d689c3a8462f1fc2964ce24e4ed90f8d5712996eedd2d",
+      "reason": "2026-10-30: deterministic 100-row synthetic counterexample showing incomplete depth prevents paper evidence promotion"
     }
   },
   "schema_version": "2",
