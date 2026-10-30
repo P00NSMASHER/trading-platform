@@ -48,7 +48,9 @@ def evaluate_holdout(rows, *, holdout_start, asof=None, embargo_days=21):
             "edge_verdict": "UNPROVEN",
             "execution_proof": "UNVERIFIED",
             "population_rows": len(rows),
-            "cutoff_precommitted_verified": False,
+            "holdout_boundary_precommitted_verified": False,
+            "unretuned_strategy_verified": False,
+            "matched_controls_verified": False,
             "complete_selection_population_verified": False,
         }
     marks = [forward.parse_paper_mark(row, asof=asof) for row in rows]
