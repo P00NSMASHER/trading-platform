@@ -2888,15 +2888,15 @@
       "reason": "Explicit limitations, privacy rules and corroboration-only methodology for direct options-Greeks timezone comparisons. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
     },
     "src/options_quote_depth_gate.py": {
-      "expected_sha256": "c48a5f7d78e38b57d140209b4a84193e81718c8e31dd7d572c5cb426f65cd4d6",
+      "expected_sha256": "6833a2d0f5e292a0a552ed5a3752b258b81e908162628cf6dcba87f18dfb1e73",
       "reason": "2026-10-30: synthetic-only offline quote-side depth, quote update chronology and all-cohort completeness audit; no broker access"
     },
     "tests/test_options_quote_depth_gate.py": {
-      "expected_sha256": "8837b156b7661fa8197346c2c7f9d7e995112f0763e3b7b49597e30a8b4a2fc1",
-      "reason": "2026-10-30: 24 deterministic synthetic-only adverse liquidity, chronology, crossed-book, and selection-completeness tests"
+      "expected_sha256": "c7d070b36eee2d60f8b52edc50ece743e96282d12857139167aeda863be0edbd",
+      "reason": "2026-10-30: 29 synthetic-only adverse liquidity, chronology, crossed-book, OCC-contract-binding, and full-population tests"
     },
     "scripts/options_quote_depth_synthetic_experiment.py": {
-      "expected_sha256": "fe69b1bac0a5c9e983773676a9193c0c185f786db956b62a4ea2105760a99023",
+      "expected_sha256": "820a429b61fef180641bdf30b6b76f41d3c42d8078320e8398f1afd615ebc05a",
       "reason": "2026-10-30: deterministic 100-row synthetic counterexample showing incomplete depth prevents paper evidence promotion"
     }
   },

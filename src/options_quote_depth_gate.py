@@ -60,6 +60,23 @@ def _valid_id(row):
 
 
 def _check_one(paper, depth, *, asof, contracts):
+    # Trade IDs and matching prices do not prove that each quote comes from
+    # the two exact OCC contracts in the paper spread. Require both independent
+    # depth identities, even for a one-row or otherwise perfect-looking book.
+    if any(row.get(leg + "_contract") is None
+           for row in (paper, depth) for leg in ("short", "long")):
+        return "MISSING_CONTRACT_BINDING"
+    symbols = [row.get(leg + "_contract")
+               for row in (paper, depth) for leg in ("short", "long")]
+    if any(not isinstance(symbol, str) or not re.fullmatch(
+           r"[A-Z]{1,6} *[0-9]{6}[CP][0-9]{8}", symbol)
+           for symbol in symbols):
+        return "INVALID_CONTRACT_BINDING"
+    paper_short, paper_long, depth_short, depth_long = symbols
+    if (paper_short == paper_long or depth_short == depth_long
+            or paper_short != depth_short or paper_long != depth_long):
+        return "CONTRACT_MISMATCH"
+
     decision_time = _time(paper.get("decision_utc"))
     entry_time = _time(paper.get("entry_utc"))
     exit_time = _time(paper.get("exit_utc"))
@@ -108,10 +125,11 @@ def _check_one(paper, depth, *, asof, contracts):
 
 
 def audit_quote_depth(paper_rows, depth_rows, *, asof, contracts=1):
-    """Demand 1:1 complete side records, never filter losers from the cohort.
+    """Demand 1:1 complete contract-bound side records; never cherry-pick losers.
 
     Input depth rows contain one bid and one ask with observed side sizes,
-    timestamps and prices for each leg at both entry and exit. These fields
+    timestamps and prices for each leg at both entry and exit, plus exact
+    OCC short_contract and long_contract identities. These fields
     are documented by Tradier's quotes API but NOT a guarantee of executions.
     Returns only sanitized aggregate counts, never paper marks or quotes.
     """

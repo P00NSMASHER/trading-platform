@@ -20,7 +20,11 @@ def make_case(i):
              "decision_utc": decision.isoformat(), "entry_utc": entry.isoformat(),
              "entry_quote_utc": entry_quote.isoformat(),
              "exit_utc": exit_time.isoformat(), "exit_quote_utc": exit_quote.isoformat()}
-    depth = {"trade_id": paper["trade_id"]}
+    paper["short_contract"] = "SPY261113C00660000"
+    paper["long_contract"] = "SPY261113C00661000"
+    depth = {"trade_id": paper["trade_id"],
+             "short_contract": paper["short_contract"],
+             "long_contract": paper["long_contract"]}
     for event, instant in (("entry", entry_quote), ("exit", exit_quote)):
         for side, price in SIDE_PRICES.items():
             key = f"{event}_{side}"
@@ -35,7 +39,11 @@ def run():
     papers, books = [], []
     for i in range(100):
         p, b = make_case(i)
-        if 40 <= i < 50:
+        if 30 <= i < 40:
+            # Prices, clocks, identifiers and size all look valid but the
+            # depth record belongs to a different OCC contract.
+            b["short_contract"] = "SPY261113C00662000"
+        elif 40 <= i < 50:
             # Previously passed: fabricated crossed short-leg bid > ask.
             p["entry_short_bid"] = b["entry_short_bid_px"] = "2.00"
         elif 50 <= i < 70:

@@ -22,7 +22,12 @@ def row(i=0):
              "decision_utc": decision.isoformat(), "entry_utc": entry.isoformat(),
              "entry_quote_utc": entry_quote.isoformat(),
              "exit_utc": exit_time.isoformat(), "exit_quote_utc": exit_quote.isoformat()}
-    depth = {"trade_id": paper["trade_id"]}
+    # Fabricated but OCC-shaped, unique and stable across entry/exit.
+    paper["short_contract"] = "SPY261113C00660000"
+    paper["long_contract"] = "SPY261113C00661000"
+    depth = {"trade_id": paper["trade_id"],
+             "short_contract": paper["short_contract"],
+             "long_contract": paper["long_contract"]}
     for event, stamp in (("entry", entry_quote), ("exit", exit_quote)):
         for side in SIDES:
             key = event + "_" + side
@@ -116,6 +121,43 @@ class DepthTests(unittest.TestCase):
         p, d = row()
         self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["status"],
                          "QUOTE_DEPTH_SCREEN_ONLY")
+
+    def test_identical_prices_cannot_pass_from_wrong_contract(self):
+        p, d = row()
+        # v0.6 accepted this substitute OCC quote: timestamps and prices
+        # were identical and the ID still matched the paper mark.
+        d["short_contract"] = "SPY261113C00662000"
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
+                         {"CONTRACT_MISMATCH": 1})
+
+    def test_missing_contract_binding_is_all_cohort_blocker(self):
+        p, d = row()
+        p2, d2 = row(1)
+        d2.pop("long_contract")
+        report = audit_quote_depth([p, p2], [d, d2], asof=ASOF)
+        self.assertEqual(report["status"], "DEPTH_SCREEN_BLOCKED")
+        self.assertEqual(report["verified_quote_depth_rows"], 1)
+        self.assertEqual(report["reason_counts"],
+                         {"MISSING_CONTRACT_BINDING": 1})
+
+    def test_identical_spread_legs_rejected(self):
+        p, d = row()
+        p["long_contract"] = d["long_contract"] = p["short_contract"]
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
+                         {"CONTRACT_MISMATCH": 1})
+
+    def test_non_occ_identity_rejected_even_when_consistent(self):
+        p, d = row()
+        p["short_contract"] = d["short_contract"] = "NON_OCC"
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
+                         {"INVALID_CONTRACT_BINDING": 1})
+
+    def test_contract_binding_never_echoes_private_symbol(self):
+        p, d = row()
+        d["short_contract"] = "PRIVATE_CONTRACT_MARKER_75431"
+        report = audit_quote_depth([p], [d], asof=ASOF)
+        self.assertEqual(report["status"], "DEPTH_SCREEN_BLOCKED")
+        self.assertNotIn("PRIVATE_CONTRACT_MARKER_75431", str(report))
 
     def test_crossed_entry_short_leg_blocks_false_credit(self):
         p, d = row()
