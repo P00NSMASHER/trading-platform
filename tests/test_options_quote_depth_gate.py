@@ -117,6 +117,39 @@ class DepthTests(unittest.TestCase):
         self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["status"],
                          "QUOTE_DEPTH_SCREEN_ONLY")
 
+    def test_crossed_entry_short_leg_blocks_false_credit(self):
+        p, d = row()
+        p["entry_short_bid"] = d["entry_short_bid_px"] = "2.00"
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
+                         {"CROSSED_LEG_BOOK": 1})
+
+    def test_crossed_exit_long_leg_blocks_impossible_book(self):
+        p, d = row()
+        p["exit_long_bid"] = d["exit_long_bid_px"] = "2.00"
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
+                         {"CROSSED_LEG_BOOK": 1})
+
+    def test_zero_ask_is_not_firm_executable_quote(self):
+        p, d = row()
+        p["entry_long_ask"] = d["entry_long_ask_px"] = "0"
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
+                         {"NONPOSITIVE_ASK": 1})
+
+    def test_locked_leg_book_is_not_automatically_crossed(self):
+        p, d = row()
+        p["entry_short_bid"] = d["entry_short_bid_px"] = "1.27"
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["status"],
+                         "QUOTE_DEPTH_SCREEN_ONLY")
+
+    def test_crossed_market_blocks_whole_population(self):
+        ps, ds = list(zip(*(row(i) for i in range(10))))
+        ps, ds = list(ps), list(ds)
+        ps[9]["entry_short_bid"] = ds[9]["entry_short_bid_px"] = "2.00"
+        result = audit_quote_depth(ps, ds, asof=ASOF)
+        self.assertEqual(result["status"], "DEPTH_SCREEN_BLOCKED")
+        self.assertEqual(result["verified_quote_depth_rows"], 9)
+        self.assertEqual(result["submitted_marks"], 10)
+
     def test_reject_duplicate_evidence_ids(self):
         p, d = row()
         with self.assertRaisesRegex(DepthError, "Duplicate"):

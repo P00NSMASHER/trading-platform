@@ -77,13 +77,15 @@ def _check_one(paper, depth, *, asof, contracts):
         if event_time > asof or source_capture > decision_or_exit:
             return "CLOCK_INCOHERENT"
         observations = []
+        leg_prices = {}
         for leg_side in SIDES:
             key = event + "_" + leg_side
             if key + "_size" not in depth or key + "_utc" not in depth or key + "_px" not in depth:
                 return "MISSING_SIDE"
             if _size(depth[key + "_size"]) < contracts:
                 return "INSUFFICIENT_DEPTH"
-            if _price(depth[key + "_px"]) != _price(paper.get(key)):
+            leg_prices[leg_side] = _price(depth[key + "_px"])
+            if leg_prices[leg_side] != _price(paper.get(key)):
                 return "PRICE_MISMATCH"
             update_time = _time(depth[key + "_utc"])
             if update_time > source_capture or update_time > decision_or_exit:
@@ -92,6 +94,14 @@ def _check_one(paper, depth, *, asof, contracts):
             if not 0 <= age <= MAX_AGE_SECONDS:
                 return "STALE_SIDE_UPDATE"
             observations.append(update_time)
+        # A crossed individual option book can create a fictitious spread credit.
+        # Equal bid/ask (locked book) is allowed; executions are still unproven.
+        for leg in ("short", "long"):
+            bid, ask = leg_prices[leg + "_bid"], leg_prices[leg + "_ask"]
+            if ask == 0:
+                return "NONPOSITIVE_ASK"
+            if bid > ask:
+                return "CROSSED_LEG_BOOK"
         if (max(observations) - min(observations)).total_seconds() > MAX_SIDE_SKEW_SECONDS:
             return "UNSYNCHRONIZED_BOOK"
     return None

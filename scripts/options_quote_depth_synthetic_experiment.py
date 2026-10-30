@@ -35,7 +35,10 @@ def run():
     papers, books = [], []
     for i in range(100):
         p, b = make_case(i)
-        if 50 <= i < 70:
+        if 40 <= i < 50:
+            # Previously passed: fabricated crossed short-leg bid > ask.
+            p["entry_short_bid"] = b["entry_short_bid_px"] = "2.00"
+        elif 50 <= i < 70:
             b["entry_short_bid_size"] = "0"
         elif 70 <= i < 80:
             b["entry_short_bid_utc"] = (START - timedelta(hours=1)).isoformat()
