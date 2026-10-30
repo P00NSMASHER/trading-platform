@@ -2898,6 +2898,14 @@
     "scripts/options_quote_depth_synthetic_experiment.py": {
       "expected_sha256": "820a429b61fef180641bdf30b6b76f41d3c42d8078320e8398f1afd615ebc05a",
       "reason": "2026-10-30: deterministic 100-row synthetic counterexample showing incomplete depth prevents paper evidence promotion"
+    },
+    "src/options_joint_depth_forward_gate.py": {
+      "expected_sha256": "e102b418da4c9f9a2250bf27f42b26d0c25df67389a1fd567de16a20542da666",
+      "reason": "2026-10-30: read-only synthetic-testable full-population join of canonical options forward marks to OCC-bound quote-side depth, without order endpoints or positive-edge certification"
+    },
+    "tests/test_options_joint_depth_forward_gate.py": {
+      "expected_sha256": "cedf1a61e88cd46db7e0f82c7038fc0052417c6486bb1200322d8391493c4417",
+      "reason": "2026-10-30: 14 fully synthetic negative and positive integration controls; no broker, private market data or live execution"
     }
   },
   "schema_version": "2",
