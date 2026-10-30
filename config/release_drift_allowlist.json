@@ -2888,11 +2888,11 @@
       "reason": "Explicit limitations, privacy rules and corroboration-only methodology for direct options-Greeks timezone comparisons. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
     },
     "src/options_quote_depth_gate.py": {
-      "expected_sha256": "8aca528d7dd32ed9fadc654a81cb1ee2b13e85c75fce151f1e6b42fce2cabd69",
+      "expected_sha256": "120c9c59953ea53e48d31680ef83d9a57c9f837f488daf2be1a004d87cf560a2",
       "reason": "2026-10-30: synthetic-only offline quote-side depth, quote update chronology and all-cohort completeness audit; no broker access"
     },
     "tests/test_options_quote_depth_gate.py": {
-      "expected_sha256": "2375ed1dd0afbaa964c449195c4e2fddd687b5c27bc2289d3c16e2d53327ef1e",
+      "expected_sha256": "79cd64d3bfdc0eff9c4c63ce4217ea692a6a502245cca31312e3a1c6bb47b50e",
       "reason": "2026-10-30: 15 deterministic synthetic-only adverse liquidity, chronology, and selection-completeness tests"
     },
     "scripts/options_quote_depth_synthetic_experiment.py": {
