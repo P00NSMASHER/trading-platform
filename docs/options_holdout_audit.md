@@ -15,9 +15,9 @@ The input is the full preselected entry/exit private CSV described in [options_f
 ## Fail-closed split
 
 - All input rows first pass the existing full-population paper-evidence and account-capacity checks. Duplicate IDs, hindsight quotes, contract mismatches or overlapping same-underlying exposure reject the entire audit.
-- **Development:** entry more than 21 days before holdout start **and** the outcome's exit timestamp is at or before the cutoff. A longer 21–365-day embargo may be provided by the library API.
+- **Development:** signal decision more than 21 days before holdout start **and** the outcome's exit timestamp is at or before the cutoff. A longer 21–365-day embargo may be provided by the library API.
 - **Withheld:** pre-holdout entries that are too close to the boundary, or would reveal outcomes not yet known at the cutoff.
-- **Holdout:** entry at or after the immutable study cutoff. No training evidence or future outcomes are used to construct this subset.
+- **Holdout:** signal decision at or after the immutable study cutoff. A pre-cutoff decision whose later entry crosses the boundary is withheld, not admitted to holdout. No training evidence or future outcomes are used to construct this subset.
 - Only holdout quote marks are statistically screened; no training P&L is printed. Output is aggregate-only; no option symbol, raw price, timestamp or identifier is logged.
 - All reports retain `edge_verdict=UNPROVEN`, `execution_proof=UNVERIFIED`, `holdout_boundary_precommitted_verified=false`, `unretuned_strategy_verified=false`, `matched_controls_verified=false` and `complete_selection_population_verified=false`.
 - The strongest possible label is **PAPER_HOLDOUT_SCREEN_ONLY_UNATTESTED**. It is NOT a profitable-strategy claim, even for artificially successful synthetic marks. The concurrent $100 account risk limit remains enforced.
