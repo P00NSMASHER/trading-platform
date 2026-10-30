@@ -61,9 +61,13 @@ def evaluate_holdout(rows, *, holdout_start, asof=None, embargo_days=21):
     withheld = []
     test = []
     for row, mark in zip(rows, marks):
-        if mark.entry >= holdout_start:
+        # The signal decision, not its possibly delayed entry, defines which
+        # strategy version was eligible. A pre-cutoff decision must never slip
+        # into the holdout merely because its entry crossed the boundary.
+        decision_utc = forward._ts(row, "decision_utc")
+        if decision_utc >= holdout_start:
             test.append(row)
-        elif mark.entry < purge_start and mark.exit <= holdout_start:
+        elif decision_utc < purge_start and mark.exit <= holdout_start:
             development.append(row)
         else:
             withheld.append(row)
