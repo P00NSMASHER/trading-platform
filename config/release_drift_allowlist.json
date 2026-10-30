@@ -115,6 +115,18 @@
     }
   },
   "repository_additions": {
+    "docs/options_holdout_audit.md": {
+      "expected_sha256": "b9a37f7562f4adc5aeeb5f34fd889b5e44f4a46448e9f444c84d938133628fb1",
+      "reason": "Prospective paper-only options research: document fail-closed chronological holdout, embargo and unverified real-data prerequisites; no token, orders or real quote uploads."
+    },
+    "src/options_holdout_audit.py": {
+      "expected_sha256": "4ad7eb54ee40fc522a4594af9027cf2bf78ccbcdfc5ac6be74a9bce1c0b8e067",
+      "reason": "Local-only prospective options research: check full-population validity and risk before 21-day purged holdout screening; no broker access or claim of profitable trading."
+    },
+    "tests/test_options_holdout_audit.py": {
+      "expected_sha256": "f7082431886514eab7a9564ea0606b0e4912ad9e41fd98e654c7d59e588df04c",
+      "reason": "Nine synthetic-only regression cases for prospective options holdout temporal separation, missingness, account capacity and false-positive controls."
+    },
     ".github/CODEOWNERS": {
       "expected_sha256": "8550f3a6561bb91b9e7ead7751196e2b9924350b1647f1f18d7ca74044b00953",
       "reason": "Intentional post-Step21 repository hardening addition; current ownership note for active Protect main ruleset"
