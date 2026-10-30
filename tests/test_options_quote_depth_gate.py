@@ -92,6 +92,31 @@ class DepthTests(unittest.TestCase):
         self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
                          {"CLOCK_INCOHERENT": 1})
 
+    def test_entry_before_signal_is_not_depth_eligible(self):
+        p, d = row()
+        decision = datetime.fromisoformat(p["entry_utc"]) + timedelta(seconds=2)
+        p["decision_utc"] = decision.isoformat()
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
+                         {"CLOCK_INCOHERENT": 1})
+
+    def test_signal_after_outcome_is_not_depth_eligible(self):
+        p, d = row()
+        decision = datetime.fromisoformat(p["exit_utc"]) + timedelta(seconds=1)
+        p["decision_utc"] = decision.isoformat()
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
+                         {"CLOCK_INCOHERENT": 1})
+
+    def test_equal_entry_exit_is_not_depth_eligible(self):
+        p, d = row()
+        p["exit_utc"] = p["entry_utc"]
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["reason_counts"],
+                         {"CLOCK_INCOHERENT": 1})
+
+    def test_chronological_control_remains_quote_only(self):
+        p, d = row()
+        self.assertEqual(audit_quote_depth([p], [d], asof=ASOF)["status"],
+                         "QUOTE_DEPTH_SCREEN_ONLY")
+
     def test_reject_duplicate_evidence_ids(self):
         p, d = row()
         with self.assertRaisesRegex(DepthError, "Duplicate"):
