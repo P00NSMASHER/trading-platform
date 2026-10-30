@@ -120,11 +120,11 @@
       "reason": "Prospective paper-only options research: document fail-closed chronological holdout, embargo and unverified real-data prerequisites; no token, orders or real quote uploads."
     },
     "src/options_holdout_audit.py": {
-      "expected_sha256": "4ad7eb54ee40fc522a4594af9027cf2bf78ccbcdfc5ac6be74a9bce1c0b8e067",
+      "expected_sha256": "32806b819df73cd651aaa316556081f51ed6058fa84808c5e224c095ee8a976e",
       "reason": "Local-only prospective options research: check full-population validity and risk before 21-day purged holdout screening; no broker access or claim of profitable trading."
     },
     "tests/test_options_holdout_audit.py": {
-      "expected_sha256": "f7082431886514eab7a9564ea0606b0e4912ad9e41fd98e654c7d59e588df04c",
+      "expected_sha256": "4eecbd2131a5c1dd4da96c00250cd73969bca76363001cf5ef69a4e0f38fee16",
       "reason": "Nine synthetic-only regression cases for prospective options holdout temporal separation, missingness, account capacity and false-positive controls."
     },
     ".github/CODEOWNERS": {
