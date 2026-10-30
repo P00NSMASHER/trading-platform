@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timedelta, timezone
 import json
+from itertools import islice
 
 import options_forward_evaluator as forward
 
@@ -38,11 +39,12 @@ def evaluate_holdout(rows, *, holdout_start, asof=None, embargo_days=21):
     # Validate the ENTIRE admitted sample before allowing a flattering subset.
     # This checks duplicates, stale quotes, nonstandard contracts, exposure
     # overlap and modeled account capacity with the existing audited rules.
-    rows = list(rows)
+    rows = list(islice(rows, forward.MAX_ROWS + 1))
     if len(rows) > forward.MAX_ROWS:
         raise forward.EvidenceError("Private evidence exceeds bounded evaluation row limit")
     population = forward.evaluate_paper_marks(rows, asof=asof)
-    if population["status"] == "ACCOUNT_RISK_CAPACITY_EXCEEDED":
+    if (population.get("max_simultaneous_modeled_risk_usd", 0)
+            > forward.MODELED_PORTFOLIO_RISK_LIMIT_USD + 1e-8):
         return {
             "status": "WHOLE_POPULATION_ACCOUNT_RISK_EXCEEDED",
             "edge_verdict": "UNPROVEN",
