@@ -5,7 +5,7 @@ import pytest
 from equity_reversal_audit import Bar, InvalidPriceEvidence, git_blob_sha
 from equity_calendar_turn_audit import (
     _safe_load, _phase, _summary, bootstrap_ci, evaluate, leave_one_month_out,
-    month_open_indices, shared_calendar,
+    month_open_indices, paired_second_session_control, _moving_block_ci, shared_calendar,
 )
 
 
@@ -143,3 +143,79 @@ def test_leave_one_month_out_rejects_nonfinite_evidence():
         leave_one_month_out([float("nan")] + [10] * 9, 20)
     with pytest.raises(InvalidPriceEvidence, match="Nonfinite"):
         leave_one_month_out([10] * 10, float("inf"))
+
+
+def test_paired_second_session_control_preserves_costs_and_frozen_year():
+    rows = [bar("2018-12-31"), bar("2019-01-02", close=102),
+            bar("2019-01-03", close=101), bar("2019-01-04")]
+    out = paired_second_session_control(rows, rows)
+    cohort = out["periods"]["holdout_2019_2022"]["xjcarter"]
+    assert cohort["paired_months"] == 1
+    assert cohort["first_session"]["mean_net_bps"] == 180.
+    assert cohort["second_session"]["mean_net_bps"] == 80.
+    assert cohort["first_minus_second_mean_bps"] == 100.
+    assert cohort["first_minus_second_ci95_three_month_block_bps"] is None
+    assert cohort["yearly_paired_counts"] == {"2019": 1}
+
+
+def test_paired_control_requires_observed_second_session():
+    rows = [bar("2018-12-28"), bar("2018-12-31"), bar("2019-01-02")]
+    with pytest.raises(InvalidPriceEvidence, match="Second trading session missing"):
+        paired_second_session_control(rows, rows)
+
+
+def test_paired_control_does_not_select_on_same_day_return():
+    rows = [bar("2019-01-31"), bar("2019-02-01", close=105),
+            bar("2019-02-04", close=98), bar("2019-02-05")]
+    changed = [rows[0], bar("2019-02-01", close=70), rows[2], rows[3]]
+    a = paired_second_session_control(rows, rows)
+    b = paired_second_session_control(changed, changed)
+    x = a["periods"]["holdout_2019_2022"]["xjcarter"]
+    y = b["periods"]["holdout_2019_2022"]["xjcarter"]
+    assert x["paired_months"] == y["paired_months"] == 1
+    assert x["first_minus_second_mean_bps"] != y["first_minus_second_mean_bps"]
+
+
+def test_paired_control_reports_economically_overlap_without_false_replication():
+    rows = [bar("2019-01-31"), bar("2019-02-01", close=101),
+            bar("2019-02-04", close=99), bar("2019-02-05")]
+    alt = [rows[0], bar("2019-02-01", close=101.001), rows[2], rows[3]]
+    out = paired_second_session_control(rows, alt)
+    assert out["sources_economically_overlapping"] is True
+    cohort = out["periods"]["holdout_2019_2022"]
+    assert cohort["xjcarter"]["paired_months"] == 1
+    assert cohort["revred"]["paired_months"] == 1
+    assert (cohort["xjcarter"]["first_minus_second_mean_bps"]
+            != cohort["revred"]["first_minus_second_mean_bps"])
+
+
+def test_moving_block_bootstrap_deterministic_and_not_an_alpha_claim():
+    values = [10., -10., -20.] * 8
+    a = _moving_block_ci(values, seed=772, draws=100, block=3)
+    assert a == _moving_block_ci(values, seed=772, draws=100, block=3)
+    assert len(a) == 2 and a[0] <= a[1]
+    assert _moving_block_ci([1.] * 11) is None
+
+
+@pytest.mark.parametrize("invalid,kwargs,error", [
+    ([float("nan")] + [0.] * 11, {}, InvalidPriceEvidence),
+    ([float("inf")] + [0.] * 11, {}, InvalidPriceEvidence),
+    ([0.] * 12, {"draws": 10}, ValueError),
+    ([0.] * 12, {"draws": 10001}, ValueError),
+    ([0.] * 12, {"block": 0}, ValueError),
+    ([0.] * 12, {"block": 13}, ValueError),
+])
+def test_moving_block_bootstrap_rejects_bad_evidence(invalid, kwargs, error):
+    with pytest.raises(error):
+        _moving_block_ci(invalid, **kwargs)
+
+
+def test_paired_control_rejects_future_cohort_and_calendar_mismatch():
+    outside = [bar("2022-12-30"), bar("2023-01-03"),
+               bar("2023-01-04"), bar("2023-01-05")]
+    with pytest.raises(InvalidPriceEvidence, match="outside preregistered"):
+        paired_second_session_control(outside, outside)
+    a = [bar("2019-01-31"), bar("2019-02-01"), bar("2019-02-04"), bar("2019-02-05")]
+    b = [a[0], a[1], a[3]]
+    with pytest.raises(InvalidPriceEvidence, match="calendars disagree"):
+        paired_second_session_control(a, b)
