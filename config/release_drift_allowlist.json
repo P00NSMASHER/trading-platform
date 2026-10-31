@@ -2946,6 +2946,18 @@
     "docs/hunters_intraday_lag_2026-10-31.md": {
       "expected_sha256": "7c31af6bab1446fab34b6c1a0da285c9ef88c9d11d2c577522b84317ceae130a",
       "reason": "2026-10-31 paper-only SPY T-1 intraday reversal falsification; source-pinned immutable CSV, fixed cost stress and adversarial tests; no orders or profit claim."
+    },
+    "src/equity_weekday_audit.py": {
+      "expected_sha256": "9db530bfb1d0c8be19b580b661987f516064d6dbed832a5b65d9419a84cf687f",
+      "reason": "2026-10-31 Golden Goose paper-only SPY Monday weekday falsification: real immutable historical source cohorts, gross-notional 10/20/40 bps cost stress, negative control, fail-closed synthetic regression. No trading, source redistribution, or profitable-edge claim."
+    },
+    "tests/test_equity_weekday_audit.py": {
+      "expected_sha256": "f3940c95c5d4abf4c5bdb02b99bf9906f36e6c82ed141941960b98a8f4b43a34",
+      "reason": "2026-10-31 Golden Goose paper-only SPY Monday weekday falsification: real immutable historical source cohorts, gross-notional 10/20/40 bps cost stress, negative control, fail-closed synthetic regression. No trading, source redistribution, or profitable-edge claim."
+    },
+    "docs/hunters_weekday_falsification_2026-10-31.md": {
+      "expected_sha256": "02906405c765b8bfda3ec07bfcd00ba9cf811822d82956b65737bfafa80d44b5",
+      "reason": "2026-10-31 Golden Goose paper-only SPY Monday weekday falsification: real immutable historical source cohorts, gross-notional 10/20/40 bps cost stress, negative control, fail-closed synthetic regression. No trading, source redistribution, or profitable-edge claim."
     }
   },
   "schema_version": "2",
