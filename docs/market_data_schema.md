@@ -27,6 +27,8 @@ Optional fields include `exchange` and `conditions`.
 
 - Offset-aware ISO-8601 timestamps are converted directly to UTC.
 - Naive timestamps are accepted only with an explicitly supplied source timezone (default CLI setting: `America/New_York`).
+- Timezone-naive local timestamps in a daylight-saving **gap** (a wall time that never happened) or **fold** (a wall time with two possible UTC instants) are rejected with the source row number. Supply an offset-aware ISO-8601 timestamp to disambiguate instead. The adapter never silently guesses an instant.
+- Unambiguous naive timestamps retain their previous UTC normalization. Explicit offsets are authoritative even when the unrelated default source timezone is invalid.
 - Normalized output timestamps are UTC ISO-8601 ending in `Z`.
 
 ## Validation rules
