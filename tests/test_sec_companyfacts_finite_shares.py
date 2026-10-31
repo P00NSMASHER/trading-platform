@@ -16,7 +16,7 @@ def test_sec_companyfacts_rejects_nonfinite_and_boolean_shares_without_dropping_
         encoding="utf-8",
     )
     malformed = ["NaN", "Infinity", "-Infinity", "1e309", True, False, 0, -10, None,
-                 1.5, "2.5", "1.00000000000000001", None, [], "not an object"]
+                 1.5, "2.5", "1.00000000000000001"]
     valid = [1250000, "2500000"]
     observations = [
         {
@@ -27,7 +27,6 @@ def test_sec_companyfacts_rejects_nonfinite_and_boolean_shares_without_dropping_
             "accn": f"TEST-{index:04d}",
         }
         for index, value in enumerate(malformed + valid)
-        if isinstance(value, (int, float, str)) or value is None
     ]
     # Non-object rows must not make an otherwise valid SEC batch crash.
     observations.extend([None, [], "not an object"])
@@ -49,8 +48,8 @@ def test_sec_companyfacts_rejects_nonfinite_and_boolean_shares_without_dropping_
     result = normalize([companyfacts], symbol_map, out)
     rows = list(csv.DictReader(out.open(encoding="utf-8", newline="")))
     assert result["row_count"] == 2
-    # The final three malformed placeholders are appended separately above.
-    assert result["skipped_bad"] == len(malformed)
+    # The final three malformed structural rows are appended separately above.
+    assert result["skipped_bad"] == len(malformed) + 3
     assert result["skipped_no_symbol"] == 0
     assert {row["shares_outstanding"] for row in rows} == {"1250000", "2500000"}
     assert all(math.isfinite(float(row["shares_outstanding"])) for row in rows)
