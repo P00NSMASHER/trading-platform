@@ -83,8 +83,8 @@ risk-adjusted portfolio return is established.
 ## Reproduce with independently obtained exact-commit source files
 
 ```sh
-PYTHONPATH=src python -m equity_intraday_lag_audit \\
-  --file /private/market/SPY.csv \\
+PYTHONPATH=src python -m equity_intraday_lag_audit \
+  --file /private/market/SPY.csv \
   --git-blob-sha 5a17de0b52ed8941aacc2ba16bdc96d7c1073cff
 PYTHONPATH=src python -m pytest -q tests/test_equity_intraday_lag_audit.py
 ```
