@@ -112,6 +112,18 @@
     "src/matched_control_generator.py": {
       "expected_sha256": "4ed28d928007b9c47b5b7ed18aa03b6287c7a2760b7b9e150b0198fdaee1bb03",
       "reason": "G5 matcher scope hardening: honor optional event_date-scoped point-in-time metadata so controls materialized for one event date cannot leak into another date, while preserving legacy unscoped metadata behavior."
+    },
+    "src/market_data_adapter.py": {
+      "expected_sha256": "02226a5a1a5efff85388b796fd534769cf2abb0bcfdda07c85e548776c976fb4",
+      "reason": "Historical market CSV time integrity: reject DST-gap/fold naive timestamps instead of silently inferring chronology; preserve explicit offsets and no broker execution."
+    },
+    "tests/test_market_data_adapter.py": {
+      "expected_sha256": "1459b9cd5a944757f84c2d6632561d0f30158a7da02afd4789cf6eeb04dd5700",
+      "reason": "Historical market time integrity regression tests: spring DST gap, fall fold, quote and trade paths, explicit offsets and ordinary wall times."
+    },
+    "docs/market_data_schema.md": {
+      "expected_sha256": "8098cb22f4de9b1e645201b52d2b0089d052089053efb5be00825fdfbbfcbd78",
+      "reason": "Document source timestamp provenance, DST ambiguous/nonexistent fail-closed policy and stable aware/naive normalization contracts."
     }
   },
   "repository_additions": {
@@ -2898,6 +2910,10 @@
     "docs/hunters_equity_reversal_2026-10-31.md": {
       "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "docs/HUNTER_CORE_DST_2026-10-31.md": {
+      "expected_sha256": "09cb7fc06fcf0880f1795ca49041d188f87770e38eaa9b587d7ef69f449ec925",
+      "reason": "2026-10-31 Hunter core source audit: reproducible DST defect, license comparisons, exact source/verification policy and external trust-anchor boundary."
     }
   },
   "schema_version": "2",
