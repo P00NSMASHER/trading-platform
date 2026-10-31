@@ -133,9 +133,25 @@ def _parse_timestamp(value: str, input_tz: str, *, row_number: int) -> datetime:
 
     if parsed.tzinfo is None:
         try:
-            parsed = parsed.replace(tzinfo=ZoneInfo(input_tz))
+            zone = ZoneInfo(input_tz)
         except Exception as exc:
             raise ValueError(f"invalid input timezone {input_tz!r}") from exc
+        # A wall clock at the DST spring gap never occurred, and at the
+        # fall fold it maps to two different instants. Neither can be safely
+        # ordered as point-in-time evidence without a source UTC offset.
+        candidates = set()
+        for fold in (0, 1):
+            assumed = parsed.replace(tzinfo=zone, fold=fold)
+            instant = assumed.astimezone(timezone.utc)
+            if instant.astimezone(zone).replace(tzinfo=None) == parsed:
+                candidates.add(instant)
+        if len(candidates) != 1:
+            reason = "ambiguous" if candidates else "nonexistent"
+            raise ValueError(
+                f"row {row_number}: {reason} local timestamp {value!r} in {input_tz!r}; "
+                "provide an explicit UTC offset"
+            )
+        return candidates.pop()
     return parsed.astimezone(timezone.utc)
 
 
