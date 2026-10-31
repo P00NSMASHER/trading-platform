@@ -97,13 +97,13 @@ def test_fixed_phase_and_missing_cohort_reports_no_wins():
 
 
 def test_source_bytes_tamper_refused_before_any_research(tmp_path):
-    raw = (b"Date,Open,High,Low,Close,Adj Close\\n"
-           b"2020-01-01,100,100,98,98,98\\n"
-           b"2020-01-02,100,101,99,101,101\\n"
-           b"2020-01-03,100,101,99,99.5,99.5\\n")
+    raw = (b"Date,Open,High,Low,Close,Adj Close\n"
+           b"2020-01-01,100,100,98,98,98\n"
+           b"2020-01-02,100,101,99,101,101\n"
+           b"2020-01-03,100,101,99,99.5,99.5\n")
     p = tmp_path / "SPY.csv"
     p.write_bytes(raw)
     assert len(read_bars(p, git_blob_sha(raw))) == 3
-    p.write_bytes(raw + b"2020-01-04,100,100,99,100,100\\n")
+    p.write_bytes(raw + b"2020-01-04,100,100,99,100,100\n")
     with pytest.raises(InvalidPriceEvidence, match="hash mismatch"):
         read_bars(p, git_blob_sha(raw))
