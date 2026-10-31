@@ -112,6 +112,10 @@
     "src/matched_control_generator.py": {
       "expected_sha256": "4ed28d928007b9c47b5b7ed18aa03b6287c7a2760b7b9e150b0198fdaee1bb03",
       "reason": "G5 matcher scope hardening: honor optional event_date-scoped point-in-time metadata so controls materialized for one event date cannot leak into another date, while preserving legacy unscoped metadata behavior."
+    },
+    "src/sec_companyfacts_normalizer.py": {
+      "expected_sha256": "a522017a620b9b76e2281e8b2600df4351e35fd8f57cb9bc3a1b676a823136ae",
+      "reason": "2026-10-31 source-hunter fail-closed SEC Companyfacts shares intake: reject NaN/Infinity/boolean counts while retaining point-in-time source and CSV contract, subject to protected PR CI."
     }
   },
   "repository_additions": {
@@ -2898,6 +2902,14 @@
     "docs/hunters_equity_reversal_2026-10-31.md": {
       "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "tests/test_sec_companyfacts_finite_shares.py": {
+      "expected_sha256": "6582efc331499c7d6ea95255a40ad27c176fee7626114db93e9657eb7577d719",
+      "reason": "2026-10-31 synthetic adversarial regression verifies nine rejected non-finite/boolean/nonpositive SEC share values and two valid preserved observations."
+    },
+    "docs/HUNTERS_SEC_SHARES_FINITE_2026-10-31.md": {
+      "expected_sha256": "a94e326c6a8e62626c9c2e8589243fff2cbcb165e1f183295966dbd30dae2e75",
+      "reason": "2026-10-31 source-hunter provenance, license comparison, no-dependency decision, release test and rollback record."
     }
   },
   "schema_version": "2",
