@@ -4,7 +4,7 @@
 
 ## Frozen protocol (defined before reading this run's outcome)
 
-- Pair dates only if BOTH SPY and QQQ daily bars have identical session dates; no forward-filling, no asynchronous legs, and skip entry days following >7-day calendar gaps.
+- Require the entire overlapping SPY/QQQ trading-session calendar to match exactly (abort if either leg has an interior missing bar); no forward-filling, no asynchronous legs, no selectively dropped losses, and skip entry days following >7-day calendar gaps.
 - At session T open, compare the **previous** T-1 close versus T-6 close five-session returns: (QQQ adjusted return - SPY adjusted return) <= -2.00 percentage points. If true, the hypothetical position is **50% gross long QQQ and 50% gross short SPY** from T official open to T close. No leverage/residual cash assumption is implied by this per-gross-notional return.
 - Reverse-sign control: when QQQ led SPY by >= +2.00 points, go long SPY and short QQQ. Descriptive all-session control: half-long QQQ/half-short SPY.
 - 20 bps gross-notional roundtrip friction is the predeclared conservative base, 10 bps an optimistic sensitivity, 40 and 80 bps stress. This is not observed bid/ask or a demonstrated borrow fee. Actual short borrow, auction slippage, fill sizes, spreads, taxes, costs and funding could differ.
