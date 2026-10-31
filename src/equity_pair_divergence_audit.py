@@ -40,9 +40,13 @@ def compute_pairs(spy_bars: list[Bar], qqq_bars: list[Bar]) -> list[PairObservat
     Match EXACT dates, never forward-fill missing prices. Both legs use
     50% of gross notional. A 5-session signal is known before entry day T.
     """
-    qqq_on_date = {bar.day: bar for bar in qqq_bars}
-    aligned = [(spy, qqq_on_date[spy.day]) for spy in spy_bars
-               if spy.day in qqq_on_date]
+    first_common = max(spy_bars[0].day, qqq_bars[0].day)
+    last_common = min(spy_bars[-1].day, qqq_bars[-1].day)
+    spy_common = [b for b in spy_bars if first_common <= b.day <= last_common]
+    qqq_common = [b for b in qqq_bars if first_common <= b.day <= last_common]
+    if [b.day for b in spy_common] != [b.day for b in qqq_common]:
+        raise InvalidPriceEvidence("Unsynchronized session calendar: missing one-leg bars.")
+    aligned = list(zip(spy_common, qqq_common))
     if len(aligned) < MIN_ALIGNED_SESSIONS:
         raise InvalidPriceEvidence("Need at least 7 common, ordered price sessions.")
     trials: list[PairObservation] = []
