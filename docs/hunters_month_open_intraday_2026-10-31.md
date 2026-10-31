@@ -66,3 +66,24 @@ The positive 2020 year is retrospective. Do not manufacture a regime strategy fr
 4. **Hunter C:** Pre-register a new hypothesis with prospective holdout and multiple-testing budget; require walk-forward uncertainty, corrections for serial correlation, capacity and crisis risk. Historical opening-price economics, market-data reuse rights and independent release attestation remain unresolved.
 
 **Measured net edge for this rule:** negative under tested costs. **Verified positive edge: none.** No orders, charges, purchases, token exposure, deployments or automation modifications.
+
+
+## Exploratory matched second-session control (2026-10-31)
+
+**A/B/C rotation:** Hunter A reviewed Tradier Options Research v4.5 (2026-10-31, synthetic paired-comparator validation only) and left its options quote/timestamp code untouched. Hunter B froze a **retrospective diagnostic**: compare the first regular trading session's SPY open-to-close price change with the *second* regular trading session's open-to-close price change within the same calendar month. Hunter C added this paired, three-month moving-block bootstrap validation and 13 new synthetic/adversarial pytest cases. The diagnostic was conceived **after seeing first-day results**, so no period is a genuinely undisclosed discovery holdout. The same assumed 20-bps round-trip friction is applied independently to each alternative, and cancels in the relative first-minus-second contrast.
+
+Re-read exactly pinned xjcarter SPY (`7d705ada2d3ca483700eb695772e7de9cfc75cbc`, blob `5a17de0b52ed8941aacc2ba16bdc96d7c1073cff`) and revred SPY (`7d9d769b0f2ddcedf4c1703cc979b865a37b580d`, blob `38acc25a077e23fdf107102960c3df32f1543a7d`); 2,990 calendar-aligned common sessions. Same underlying market; the archives are **not independent samples**. Exact-date verification and mean arithmetic were run directly on fetched GitHub file contents; Python-native input replay needs the original immutable CSV bytes and separately verified redistribution/use rights.
+
+| Frozen cohort | Paired months | First day net @ 20bps | Second day net @ 20bps | First minus second gross |
+| --- | ---: | ---: | ---: | ---: |
+| 2011-2012 exploratory | 23 | -52.490 bps | -23.843 bps | -28.646 bps |
+| 2013-2018 validation | 72 | -16.287 bps | -19.916 bps | +3.630 bps |
+| 2019-2022 retrospective holdout | 47 | -18.419 bps | **-0.679 bps** | **-17.740 bps** |
+
+All figures are **hypothetical, modeled-cost**, not realized fill outcomes. The second-day near-break-even 2019-2022 result was chosen as an exploratory matched control after inspecting existing market history, not a tradable validated alternative. It is especially vulnerable to snooping and unmeasured opening-auction spreads. Its 47 monthly observations are insufficient to support regime-picking or reliable tail risk. By year, the *first-minus-second* retrospective contrast was 2019 -7.451, 2020 -2.594, 2021 -46.979 and Jan-Nov 2022 -13.589 bps. Exploratory three-month-block intervals address limited serial dependence sensitivity only; they do **not** solve retrospective model selection, 4-year regime uncertainty, market-source rights or executable-price absence.
+
+**Reproduce** with the *same* two immutable local source files and CLI already documented above. The new `exploratory_paired_second_day_control` field appears alongside the original primary strategy output, without changing any original strategy result or frozen cohort. `PYTHONPATH=src python -m pytest -q tests/test_equity_calendar_turn_audit.py` covers pairing, cohort boundary, source mismatch, no signal future-data dependency, matched cost arithmetic, and bootstrap failure handling. Every missing second session fails closed; no silent attrition.
+
+**Prior art / non-novelty:** McConnell and Xu (2006/2008) study a four-day *close-to-close* turn-of-month interval, unlike these isolated intraday sessions: https://docs.lib.purdue.edu/ciberwp/43/ . Cooper, Cliff and Gulen (2008) report an overnight-versus-intraday return decomposition: https://doi.org/10.2139/SSRN.1004081 . No claim of discovery or generalization is warranted.
+
+**Next strictly prospective test:** pre-register either second-day standalone benchmark or four-day historical-literature benchmark **before gathering any new independent market observations**; use timestamp-aligned executable bid/ask or auction quotes, slippage, commissions, dividend/exercise/borrowing where relevant, source rights and a fully untouched walk-forward period. Do not select a winner based on these exposed rows. Preserve draft/unmerged PR until exact-head hosted CI and independent release trust-root approval. No trading, fees, token access, schedules or deployments.
