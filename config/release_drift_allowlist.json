@@ -2886,6 +2886,18 @@
     "docs/tradier_greeks_cross_endpoint.md": {
       "expected_sha256": "a359e5b1c5d2ae059120864d74408a4cd65aa4cdc9afae0fdd39e04424605012",
       "reason": "Explicit limitations, privacy rules and corroboration-only methodology for direct options-Greeks timezone comparisons. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
+    },
+    "src/equity_reversal_audit.py": {
+      "expected_sha256": "176611c0421376141a7749eca0a94c243fb24eae186adb06c646d52e86b66f1e",
+      "reason": "Offline immutable-source equity reversal audit: source hash verification, strictly prior-close signal, chronological holdout and cost sensitivity; NO network or trading."
+    },
+    "tests/test_equity_reversal_audit.py": {
+      "expected_sha256": "fd46e0e293b97a6b201d3480fb77850a9417c447c90f0e91966185db6521a4d4",
+      "reason": "Tests of Hunter equity audit no-lookahead, source tamper refusal, malformed OHLC, immutable phase selection and conservative costs."
+    },
+    "docs/hunters_equity_reversal_2026-10-31.md": {
+      "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
+      "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
     }
   },
   "schema_version": "2",
