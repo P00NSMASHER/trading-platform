@@ -80,3 +80,63 @@ def test_build_writes_point_in_time_outputs(tmp_path):
     header = next(csv.reader((tmp_path / "normalized_market_events.csv").open()))
     forbidden = {"expected_return", "target_price", "position_size", "direction"}
     assert forbidden.isdisjoint(header)
+
+
+@pytest.mark.parametrize(
+    ("timestamp", "reason"),
+    [
+        ("2024-03-10 02:30:00", "nonexistent"),
+        ("2024-11-03 01:30:00", "ambiguous"),
+    ],
+)
+@pytest.mark.parametrize("kind", ["equity_trade", "equity_quote"])
+def test_naive_dst_gap_or_fold_is_rejected(tmp_path, timestamp, reason, kind):
+    # The same fail-closed parser must protect both trade and quote inputs.
+    csv_path = tmp_path / "dst.csv"
+    if kind == "equity_trade":
+        csv_path.write_text(
+            "timestamp,symbol,price,size\n"
+            f"{timestamp},TEST,100,10\n",
+            encoding="utf-8",
+        )
+    else:
+        csv_path.write_text(
+            "timestamp,symbol,bid,ask,bid_size,ask_size\n"
+            f"{timestamp},TEST,99,101,10,10\n",
+            encoding="utf-8",
+        )
+    with pytest.raises(ValueError, match=rf"row 2: {reason} local timestamp.*explicit UTC offset"):
+        load_csv(csv_path, kind=kind, input_tz="America/New_York")
+
+
+@pytest.mark.parametrize(
+    ("timestamp", "expected_utc"),
+    [
+        ("2024-11-03T01:30:00-04:00", "2024-11-03T05:30:00.000Z"),
+        ("2024-11-03T01:30:00-05:00", "2024-11-03T06:30:00.000Z"),
+        ("2024-03-10T03:30:00-04:00", "2024-03-10T07:30:00.000Z"),
+        ("2024-11-04 12:00:00", "2024-11-04T17:00:00.000Z"),
+    ],
+)
+def test_dst_explicit_offsets_and_unambiguous_wall_times_preserved(
+    tmp_path, timestamp, expected_utc
+):
+    csv_path = tmp_path / "known-clock.csv"
+    csv_path.write_text(
+        "timestamp,symbol,price,size\n"
+        f"{timestamp},TEST,100,10\n",
+        encoding="utf-8",
+    )
+    rows = load_csv(csv_path, kind="equity_trade", input_tz="America/New_York")
+    assert rows[0].event_ts_utc == expected_utc
+
+
+def test_explicit_offset_does_not_require_an_unrelated_input_timezone(tmp_path):
+    csv_path = tmp_path / "offset.csv"
+    csv_path.write_text(
+        "timestamp,symbol,price,size\n"
+        "2024-11-03T01:30:00-05:00,TEST,100,10\n",
+        encoding="utf-8",
+    )
+    rows = load_csv(csv_path, kind="equity_trade", input_tz="Not/A_Real_Zone")
+    assert rows[0].event_ts_utc == "2024-11-03T06:30:00.000Z"
