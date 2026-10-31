@@ -31,6 +31,8 @@ Optional fields include `exchange` and `conditions`.
 - Unambiguous naive timestamps retain their previous UTC normalization. Explicit offsets are authoritative even when the unrelated default source timezone is invalid.
 - Normalized output timestamps are UTC ISO-8601 ending in `Z`.
 
+- Size fields (trade/quote quantities) must be exact, finite integers with magnitude at most 2^63-1. Vendor forms like `100.0` and `1e2` remain accepted, but fractional values rounded to an integer by binary floating-point are rejected. Original digits are preserved for legitimate large integral inputs.
+
 ## Validation rules
 
 - Trades require strictly positive price and size.
