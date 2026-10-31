@@ -2958,6 +2958,18 @@
     "docs/hunters_weekday_falsification_2026-10-31.md": {
       "expected_sha256": "02906405c765b8bfda3ec07bfcd00ba9cf811822d82956b65737bfafa80d44b5",
       "reason": "2026-10-31 Golden Goose paper-only SPY Monday weekday falsification: real immutable historical source cohorts, gross-notional 10/20/40 bps cost stress, negative control, fail-closed synthetic regression. No trading, source redistribution, or profitable-edge claim."
+    },
+    "src/equity_range_regime_audit.py": {
+      "expected_sha256": "394b015cbb225801ca09692ba9f906a6b89b4df0aac61187ea45fb273b022908",
+      "reason": "Golden Goose research: source-pinned prior-5-session SPY range-regime falsification, synthetic adversarial tests and two-source cost-aware evidence; paper-only, no trading or verified net edge."
+    },
+    "tests/test_equity_range_regime_audit.py": {
+      "expected_sha256": "f946760e225dc0753ddd146a70b79114fa2e951306f6078bd5ea745318b87d72",
+      "reason": "Golden Goose research: source-pinned prior-5-session SPY range-regime falsification, synthetic adversarial tests and two-source cost-aware evidence; paper-only, no trading or verified net edge."
+    },
+    "docs/hunters_range_regime_2026-10-31.md": {
+      "expected_sha256": "c75fe8dfff328ac8818dcbd7968af00c0bc4439258053c16171ff1bdf28069c7",
+      "reason": "Golden Goose research: source-pinned prior-5-session SPY range-regime falsification, synthetic adversarial tests and two-source cost-aware evidence; paper-only, no trading or verified net edge."
     }
   },
   "schema_version": "2",
