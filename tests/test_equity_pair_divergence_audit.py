@@ -50,9 +50,9 @@ def test_missing_calendar_date_never_mixes_legs():
     spy, qqq = _bars()
     missing = _dates()[6]
     qqq = [bar for bar in qqq if bar.day != missing]
-    observations = compute_pairs(spy, qqq)
-    assert all(t.day != missing for t in observations)
-    assert len(observations) == 1
+    # An interior missing bar must abort, not silently change a 5-session lag.
+    with pytest.raises(InvalidPriceEvidence, match="Unsynchronized session calendar"):
+        compute_pairs(spy, qqq)
 
 
 def test_short_side_control_reverses_direction():
