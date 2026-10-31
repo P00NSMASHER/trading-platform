@@ -9,7 +9,7 @@
 - Reverse-sign control: when QQQ led SPY by >= +2.00 points, go long SPY and short QQQ. Descriptive all-session control: half-long QQQ/half-short SPY.
 - 20 bps gross-notional roundtrip friction is the predeclared conservative base, 10 bps an optimistic sensitivity, 40 and 80 bps stress. This is not observed bid/ask or a demonstrated borrow fee. Actual short borrow, auction slippage, fill sizes, spreads, taxes, costs and funding could differ.
 - Train: dates before 2013-01-01; validation: 2013-01-01 to 2018-12-31; retrospective holdout: 2019-01-01 until source termination. Earlier overlapping equity strategies have already been researched: this so-called holdout is NOT genuinely untouched or a prospective OOS trial.
-- Return = 0.5 * (QQQ_close/QQQ_open - SPY_close/SPY_open - two-leg modeled friction expressed per gross pair notional). Per-trigger average bps, not cumulative return, Sharpe ratio, realistic portfolio path, arbitrage, or a proof of profit. Signals use information available at or before T-1 ONLY.
+- Gross return = 0.5 * (QQQ_close/QQQ_open - SPY_close/SPY_open); net = gross return minus modeled two-leg friction, expressed on gross pair notional. Per-trigger average bps, not cumulative return, Sharpe ratio, realistic portfolio path, arbitrage, or a proof of profit. Signals use information available at or before T-1 ONLY.
 - The original source access rights, time-of-availability of retrospective adjustments, exchange official opening auction prices, and real executable 2-sided short orders are not independently verified. This study is suitable for hypothesis falsification, not deployment.
 
 ## Source provenance (exact public GitHub file blobs, NOT copied into this repository)
@@ -39,8 +39,8 @@ Across both source histories, the primary condition triggers in only 15 months i
 Run with externally retrieved exact-commit historical files under permitted data-use rights, verifying the blob SHA-1 before parsing:
 
 ```sh
-PYTHONPATH=src python -m equity_pair_divergence_audit \\
-  --spy-file /private/market/SPY.csv --spy-git-blob-sha 5a17de0b52ed8941aacc2ba16bdc96d7c1073cff \\
+PYTHONPATH=src python -m equity_pair_divergence_audit \
+  --spy-file /private/market/SPY.csv --spy-git-blob-sha 5a17de0b52ed8941aacc2ba16bdc96d7c1073cff \
   --qqq-file /private/market/QQQ.csv --qqq-git-blob-sha 0b60cfa05a0117194440efd686c2df28f656f022
 PYTHONPATH=src python -m pytest -q tests/test_equity_pair_divergence_audit.py
 ```
