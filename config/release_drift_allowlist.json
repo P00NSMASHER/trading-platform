@@ -2910,6 +2910,18 @@
     "docs/hunters_pair_divergence_2026-10-31.md": {
       "expected_sha256": "78c7c68b07be761bcd593c2d2dab3759b0316a13fe539eadec290eafecdeaec3",
       "reason": "Source-pinned paper-only SPY/QQQ falsification: strict calendar integrity, real archive cross-check and synthetic no-duplicate regression; no orders."
+    },
+    "src/equity_pair_adjustment_audit.py": {
+      "expected_sha256": "8b2976466e14f674fc43eadd533d193ae1f11dd27d639273f11a15e1fa95d844",
+      "reason": "2026-10-31 paper-only adjusted-vs-raw pair signal provenance diagnostic; source-pinned evidence and adversarial tests, no alpha claim or broker access."
+    },
+    "tests/test_equity_pair_adjustment_audit.py": {
+      "expected_sha256": "ae82911d94ebc46dc0ae8f873c2e858d8185103313e4bdb1e3b033a978b02195",
+      "reason": "2026-10-31 paper-only adjusted-vs-raw pair signal provenance diagnostic; source-pinned evidence and adversarial tests, no alpha claim or broker access."
+    },
+    "docs/hunters_pair_adjustment_2026-10-31.md": {
+      "expected_sha256": "c29b6289185445fa950e4a13f242d74ecddaece64b9a46580dea98446ab329c0",
+      "reason": "2026-10-31 paper-only adjusted-vs-raw pair signal provenance diagnostic; source-pinned evidence and adversarial tests, no alpha claim or broker access."
     }
   },
   "schema_version": "2",
