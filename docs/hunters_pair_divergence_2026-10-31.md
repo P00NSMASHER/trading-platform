@@ -79,3 +79,36 @@ gross return above zero is not necessarily realizable at auction prints.
 All four means are negative at the conservative 20 bps assumption.
 The independent archive check has not created a new prospective holdout,
 an independent market or an observed fill. The source streams overlap.
+
+## Hunter B/C next-run integrity experiment (2026-10-31, 12:12 ET)
+
+**Failure hypothesis, tested on synthetic evidence:** The prior implementation
+checked only the T-1-to-T calendar gap. When both legs have a synchronized
+30+ day outage *inside* the T-6-to-T five-session lag window but show fresh
+T-1 quotes, the evaluator still admitted two candidate entries. The bounded
+repair now skips an entry unless **all six successive calendar intervals**
+from T-6 through T are <=7 days. Three adversarial regression tests cover
+the synchronized hidden outage, automatic resumption after the entire
+lookback refreshes, and acceptance of the frozen seven-day boundary. No
+threshold tuning, no new trading signal and no changed cost assumptions.
+
+**Actual-source check:** Re-read the same four public, immutable-commit CSVs
+listed above, dated 2000-01-03..2022-11-18 for xjcarter (5,759
+bars/symbol) and 2011-01-05..2026-01-06 for revred (3,773
+bars/symbol). Each symbol had **0 consecutive-calendar gaps >7 days**.
+The new filter therefore alters **0 source observations** in these archival
+cohorts, so earlier documented 20-bp negative result and sample sizes
+are unchanged. This checks date continuity, not licensed real-time quotes,
+borrow rates, executable open/close auction fills or profit.
+
+**Hunter A coordination:** Tradier Options Research v3.7 independently owns
+future-dated quote acceptance. No option collector, quote timing, execution
+or brokerage path changed. **Hunter B:** previously exposed SPY/QQQ samples
+remain retrospective and not a fresh out-of-sample holdout.
+**Hunter C:** real source-date control + adversarial synthetic regression.
+No additional third-party libraries and no new data redistribution.
+Release trust-root attestation is external and remains unresolved.
+
+**Next:** Obtain independently timestamped, executable two-leg quotes,
+borrow capacity and truly prospective untouched observations before any
+attempt to validate a net, risk-adjusted edge. Keep this PR draft.
