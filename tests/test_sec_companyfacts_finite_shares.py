@@ -30,6 +30,12 @@ def test_sec_companyfacts_rejects_nonfinite_and_boolean_shares_without_dropping_
     ]
     # Non-object rows must not make an otherwise valid SEC batch crash.
     observations.extend([None, [], "not an object"])
+    # A source cannot report a future outstanding-share fact as already filed;
+    # compact date strings would also break lexicographic point-in-time joins.
+    observations.extend([
+        {"end": "2026-11-01", "filed": "2026-10-30", "val": 500, "accn": "FUTURE"},
+        {"end": "20150217", "filed": "2015-02-18", "val": 600, "accn": "COMPACT"},
+    ])
     companyfacts = tmp_path / "CIK0000000001.json"
     companyfacts.write_text(
         json.dumps({
@@ -44,12 +50,25 @@ def test_sec_companyfacts_rejects_nonfinite_and_boolean_shares_without_dropping_
         }, allow_nan=False),
         encoding="utf-8",
     )
+    # A corrupt nested container must not abort the ingestion of other
+    # independently sourced, valid Companyfacts files.
+    bad_frames = [
+        [],
+        {"cik": 1, "facts": None},
+        {"cik": 1, "facts": {"dei": []}},
+        {"cik": 1, "facts": {"dei": {"EntityCommonStockSharesOutstanding": {"units": {"shares": None}}}}},
+    ]
+    paths = [companyfacts]
+    for index, payload in enumerate(bad_frames):
+        source = tmp_path / f"corrupt-frame-{index}.json"
+        source.write_text(json.dumps(payload), encoding="utf-8")
+        paths.append(source)
     out = tmp_path / "accepted-shares.csv"
-    result = normalize([companyfacts], symbol_map, out)
+    result = normalize(paths, symbol_map, out)
     rows = list(csv.DictReader(out.open(encoding="utf-8", newline="")))
     assert result["row_count"] == 2
     # The final three malformed structural rows are appended separately above.
-    assert result["skipped_bad"] == len(malformed) + 3
+    assert result["skipped_bad"] == len(malformed) + 3 + 2 + len(bad_frames)
     assert result["skipped_no_symbol"] == 0
     assert {row["shares_outstanding"] for row in rows} == {"1250000", "2500000"}
     assert all(math.isfinite(float(row["shares_outstanding"])) for row in rows)
