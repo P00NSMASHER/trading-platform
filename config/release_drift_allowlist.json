@@ -2898,6 +2898,18 @@
     "docs/hunters_equity_reversal_2026-10-31.md": {
       "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "src/equity_calendar_turn_audit.py": {
+      "expected_sha256": "fcc3d3290bc6ac52f8b867668252232d87ba2d07056fffb158d3811a5891b502",
+      "reason": "Read-only calendar-selected SPY intraday research harness with pinned market-source bytes; no broker access."
+    },
+    "tests/test_equity_calendar_turn_audit.py": {
+      "expected_sha256": "759d095f76a1c7f0086c8e506c21f3ffe153f46983270063d5d0af78579ab88e",
+      "reason": "Twenty-one deterministic synthetic and adversarial cohort, month-boundary, outlier-sensitivity, data-source and friction tests."
+    },
+    "docs/hunters_month_open_intraday_2026-10-31.md": {
+      "expected_sha256": "1546059100292f2ba84c51620c816b87acc1b762eea1eebfb12d368f0dee19b7",
+      "reason": "Source-pinned research record: negative after-cost month-turn result, uncertainty and data-rights warnings."
     }
   },
   "schema_version": "2",
