@@ -122,3 +122,28 @@ def test_extreme_inconsistent_intraday_value_rejected():
 
 def test_empty_cost_summary_not_profitable():
     assert summary(select([], "qqq_lag_2pct"), 20)["mean_net_bps"] is None
+
+def test_mirrored_duplicate_session_does_not_inflate_backtest_denominator():
+    spy, qqq = _bars()
+    # A date duplicated in both streams evaded the earlier equality-only join.
+    # The replicated daily P&L would otherwise be counted more than once.
+    spy.insert(3, spy[3])
+    qqq.insert(3, qqq[3])
+    with pytest.raises(InvalidPriceEvidence, match="duplicate or unordered"):
+        compute_pairs(spy, qqq)
+
+
+def test_identically_unsorted_leg_calendars_fail_closed():
+    spy, qqq = _bars()
+    spy[3], spy[4] = spy[4], spy[3]
+    qqq[3], qqq[4] = qqq[4], qqq[3]
+    with pytest.raises(InvalidPriceEvidence, match="duplicate or unordered"):
+        compute_pairs(spy, qqq)
+
+
+def test_empty_pair_inputs_fail_as_invalid_evidence_not_index_error():
+    spy, qqq = _bars()
+    with pytest.raises(InvalidPriceEvidence, match="Missing SPY or QQQ"):
+        compute_pairs([], qqq)
+    with pytest.raises(InvalidPriceEvidence, match="Missing SPY or QQQ"):
+        compute_pairs(spy, [])
