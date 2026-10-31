@@ -56,3 +56,26 @@ Results from this run were calculated independently by date-aligned JS against f
 3. **Engineering:** preserve and test the full calendar-denominator join, multi-asset joint cost uncertainty, and prevent post-hoc control selection; separate method review is needed before any protected release SHA attestation.
 
 Tradier docs: https://docs.tradier.com/docs/market-data (expired options historical data unavailable; top-of-book Level 1 feeds; hourly Greeks and limited intraday retention). Pairs trading costs prior art: Do and Faff (2012), https://doi.org/10.1111/j.1475-6803.2012.01317.x .
+
+## Source-bound independent source-integrity and cost-hurdle checkpoint (2026-10-31)
+
+At the original full pinned source Git commits/blobs above, an independent
+read-only, four-file archive scan found **0 duplicate dates, 0 decreasing
+dates, 0 nonfinite numeric bar fields**, and **0 calendar gaps >7 days** in
+each of SPY/QQQ (5,759 rows per xjcarter symbol, 3,773 per revred symbol).
+This confirms the new strictly ordered, one-session-one-observation check does
+**not alter** the frozen positive historical samples. The prior direct
+`compute_pairs()` API *did* accept identically duplicated or scrambled dates
+in both legs, potentially double-counting trades. Three synthetic hostile
+calendar tests now reject it; this is a correctness fix, **not a newly
+discovered trading signal**.
+
+Using the exact published pinned blobs and the unchanged frozen 2% rule, the
+**maximum roundtrip cost tolerable at zero average net return** equals the
+idealized gross mean: xjcarter validation 5.539 bps (36 observations),
+holdout 9.079 bps (61); revred validation 5.539 bps (36), holdout
+6.382 bps (75). Actual costs remain unmeasured, and even an average
+gross return above zero is not necessarily realizable at auction prints.
+All four means are negative at the conservative 20 bps assumption.
+The independent archive check has not created a new prospective holdout,
+an independent market or an observed fill. The source streams overlap.
