@@ -2900,15 +2900,15 @@
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
     },
     "src/equity_pair_divergence_audit.py": {
-      "expected_sha256": "ee4696b07acdc7e53e77c7c1c047320207a426cc723e08ff43af37848a1caa69",
+      "expected_sha256": "0900768a2c7acf1ef56cd62fa8085111f0a481bf18ca25870017b69c5e956fe0",
       "reason": "Source-pinned, paper-only SPY/QQQ divergence falsification using authentic Git blobs, no copied market data, no orders."
     },
     "tests/test_equity_pair_divergence_audit.py": {
-      "expected_sha256": "da809fea26a50137f49d857465c390a884fa0cc77a90813bb7b47c1f42fb6748",
+      "expected_sha256": "c555d56f370abdd214c2b29ec23168994374cfdfe1ef2f4c114e838592b35afe",
       "reason": "Source-pinned, paper-only SPY/QQQ divergence falsification using authentic Git blobs, no copied market data, no orders."
     },
     "docs/hunters_pair_divergence_2026-10-31.md": {
-      "expected_sha256": "64e3374a565dfd8991400d4e0edc58e528d7598837a42eb53daf3f3875beb984",
+      "expected_sha256": "7915380c9657b73aa4e5b846abfe83fc18c96043366ad6ab149ec8a14e50a254",
       "reason": "Source-pinned, paper-only SPY/QQQ divergence falsification using authentic Git blobs, no copied market data, no orders."
     }
   },
