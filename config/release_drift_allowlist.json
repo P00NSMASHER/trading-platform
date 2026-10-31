@@ -2898,6 +2898,78 @@
     "docs/hunters_equity_reversal_2026-10-31.md": {
       "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "src/equity_pair_divergence_audit.py": {
+      "expected_sha256": "162103dffeadec0c77a30edaa567063981fa1764e492ab498f886b917c65ae4c",
+      "reason": "Source-pinned paper-only SPY/QQQ falsification: strict calendar integrity, real archive cross-check and synthetic no-duplicate regression; no orders."
+    },
+    "tests/test_equity_pair_divergence_audit.py": {
+      "expected_sha256": "ad1849a9aba9494ecc168c6d5f15017f7deb80d6a8c359d2152116536d22e5c8",
+      "reason": "Source-pinned paper-only SPY/QQQ falsification: strict calendar integrity, real archive cross-check and synthetic no-duplicate regression; no orders."
+    },
+    "docs/hunters_pair_divergence_2026-10-31.md": {
+      "expected_sha256": "d66fed71cfb17b1802abec7242b4133ac4fb4359896e4588a1582740ae54986b",
+      "reason": "Source-pinned paper-only SPY/QQQ falsification: strict calendar integrity, real archive cross-check and synthetic no-duplicate regression; no orders."
+    },
+    "src/equity_pair_adjustment_audit.py": {
+      "expected_sha256": "8b2976466e14f674fc43eadd533d193ae1f11dd27d639273f11a15e1fa95d844",
+      "reason": "2026-10-31 paper-only adjusted-vs-raw pair signal provenance diagnostic; source-pinned evidence and adversarial tests, no alpha claim or broker access."
+    },
+    "tests/test_equity_pair_adjustment_audit.py": {
+      "expected_sha256": "ae82911d94ebc46dc0ae8f873c2e858d8185103313e4bdb1e3b033a978b02195",
+      "reason": "2026-10-31 paper-only adjusted-vs-raw pair signal provenance diagnostic; source-pinned evidence and adversarial tests, no alpha claim or broker access."
+    },
+    "docs/hunters_pair_adjustment_2026-10-31.md": {
+      "expected_sha256": "c29b6289185445fa950e4a13f242d74ecddaece64b9a46580dea98446ab329c0",
+      "reason": "2026-10-31 paper-only adjusted-vs-raw pair signal provenance diagnostic; source-pinned evidence and adversarial tests, no alpha claim or broker access."
+    },
+    "src/equity_overnight_gap_audit.py": {
+      "expected_sha256": "992e8daa30ab386fc88950028efb226effe378cc00b140d28028a4da18c58ba0",
+      "reason": "2026-10-31 offline source-pinned SPY previous-overnight-gap continuation falsification with fixed cost stresses, chronological negative controls and adversarial synthetic tests; no trading APIs, raw data or alpha claim."
+    },
+    "tests/test_equity_overnight_gap_audit.py": {
+      "expected_sha256": "1ce2aa9bfef27955e6d923e3c78243355e0c3ba62ee969ac64957c0038d2331c",
+      "reason": "2026-10-31 offline source-pinned SPY previous-overnight-gap continuation falsification with fixed cost stresses, chronological negative controls and adversarial synthetic tests; no trading APIs, raw data or alpha claim."
+    },
+    "docs/hunters_overnight_gap_2026-10-31.md": {
+      "expected_sha256": "cbbe2b2349794727f92bf6f2dc675f4f7d2df8da19ec2110ae5afc8b84c154db",
+      "reason": "2026-10-31 offline source-pinned SPY previous-overnight-gap continuation falsification with fixed cost stresses, chronological negative controls and adversarial synthetic tests; no trading APIs, raw data or alpha claim."
+    },
+    "src/equity_intraday_lag_audit.py": {
+      "expected_sha256": "32805b8506760083f7f650add671c8b7f151be312b8017bd101cc91c40d9abc1",
+      "reason": "2026-10-31 paper-only SPY T-1 intraday reversal falsification; source-pinned immutable CSV, fixed cost stress and adversarial tests; no orders or profit claim."
+    },
+    "tests/test_equity_intraday_lag_audit.py": {
+      "expected_sha256": "90166e0ed73620252d1136346594ca171c06645e8c2bc5634977d2d44cd129ca",
+      "reason": "2026-10-31 paper-only SPY T-1 intraday reversal falsification; source-pinned immutable CSV, fixed cost stress and adversarial tests; no orders or profit claim."
+    },
+    "docs/hunters_intraday_lag_2026-10-31.md": {
+      "expected_sha256": "7c31af6bab1446fab34b6c1a0da285c9ef88c9d11d2c577522b84317ceae130a",
+      "reason": "2026-10-31 paper-only SPY T-1 intraday reversal falsification; source-pinned immutable CSV, fixed cost stress and adversarial tests; no orders or profit claim."
+    },
+    "src/equity_weekday_audit.py": {
+      "expected_sha256": "9db530bfb1d0c8be19b580b661987f516064d6dbed832a5b65d9419a84cf687f",
+      "reason": "2026-10-31 Golden Goose paper-only SPY Monday weekday falsification: real immutable historical source cohorts, gross-notional 10/20/40 bps cost stress, negative control, fail-closed synthetic regression. No trading, source redistribution, or profitable-edge claim."
+    },
+    "tests/test_equity_weekday_audit.py": {
+      "expected_sha256": "f3940c95c5d4abf4c5bdb02b99bf9906f36e6c82ed141941960b98a8f4b43a34",
+      "reason": "2026-10-31 Golden Goose paper-only SPY Monday weekday falsification: real immutable historical source cohorts, gross-notional 10/20/40 bps cost stress, negative control, fail-closed synthetic regression. No trading, source redistribution, or profitable-edge claim."
+    },
+    "docs/hunters_weekday_falsification_2026-10-31.md": {
+      "expected_sha256": "02906405c765b8bfda3ec07bfcd00ba9cf811822d82956b65737bfafa80d44b5",
+      "reason": "2026-10-31 Golden Goose paper-only SPY Monday weekday falsification: real immutable historical source cohorts, gross-notional 10/20/40 bps cost stress, negative control, fail-closed synthetic regression. No trading, source redistribution, or profitable-edge claim."
+    },
+    "src/equity_range_regime_audit.py": {
+      "expected_sha256": "394b015cbb225801ca09692ba9f906a6b89b4df0aac61187ea45fb273b022908",
+      "reason": "Golden Goose research: source-pinned prior-5-session SPY range-regime falsification, synthetic adversarial tests and two-source cost-aware evidence; paper-only, no trading or verified net edge."
+    },
+    "tests/test_equity_range_regime_audit.py": {
+      "expected_sha256": "f946760e225dc0753ddd146a70b79114fa2e951306f6078bd5ea745318b87d72",
+      "reason": "Golden Goose research: source-pinned prior-5-session SPY range-regime falsification, synthetic adversarial tests and two-source cost-aware evidence; paper-only, no trading or verified net edge."
+    },
+    "docs/hunters_range_regime_2026-10-31.md": {
+      "expected_sha256": "c75fe8dfff328ac8818dcbd7968af00c0bc4439258053c16171ff1bdf28069c7",
+      "reason": "Golden Goose research: source-pinned prior-5-session SPY range-regime falsification, synthetic adversarial tests and two-source cost-aware evidence; paper-only, no trading or verified net edge."
     }
   },
   "schema_version": "2",
