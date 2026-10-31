@@ -64,8 +64,13 @@ def compute_pairs(spy_bars: list[Bar], qqq_bars: list[Bar]) -> list[PairObservat
         s_today, q_today = aligned[i]
         s_prior, q_prior = aligned[i - 1]
         s_old, q_old = aligned[i - LOOKBACK_SESSIONS - 1]
-        if (s_today.day - s_prior.day).days > MAX_CALENDAR_GAP_DAYS:
-            # Do not treat a stale last quote as an ordinary next session.
+        # A fresh T-1 does not prove the entire lag window is fresh.
+        # Validate every transition from T-6 through entry day T.
+        lookback_window = aligned[i - LOOKBACK_SESSIONS - 1 : i + 1]
+        if any(
+            (current[0].day - previous[0].day).days > MAX_CALENDAR_GAP_DAYS
+            for previous, current in zip(lookback_window, lookback_window[1:])
+        ):
             continue
         vals = (
             s_today.open, s_today.close, q_today.open, q_today.close,
