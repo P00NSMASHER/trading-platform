@@ -2898,6 +2898,18 @@
     "docs/hunters_equity_reversal_2026-10-31.md": {
       "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "src/research_archive_concordance.py": {
+      "expected_sha256": "bac770dc92021e6fe8fd60af843f876e33db68a2e472ee8b063d9572abb00dd2",
+      "reason": "Offline immutable-source SPY archive concordance and gap-signal integrity research; no broker calls or copyrighted raw data."
+    },
+    "tests/test_research_archive_concordance.py": {
+      "expected_sha256": "3704921115059ca4b73f9da0bcf72f3418586515f601ef7e97abcd8d0acdb885",
+      "reason": "Fourteen synthetic/adversarial cross-archive provenance tests; no credential, network or market-data fixtures."
+    },
+    "docs/hunters_archive_concordance_2026-10-31.md": {
+      "expected_sha256": "e64ce913f57b0ba3a28608adc0389c1e12b7f2d6f46d82d3169032798812a613",
+      "reason": "Evidence-bound source identity, historical mismatch counts and explicit no-edge/rights caveats."
     }
   },
   "schema_version": "2",
