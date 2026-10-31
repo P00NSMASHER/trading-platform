@@ -91,7 +91,7 @@ def _parse_date(value: str, *, label: str) -> date:
     # Truncating to ten characters would turn a malformed date, or a timestamp
     # masquerading as a civil day, into a valid point-in-time source date.
     raw = str(value or "").strip()
-    if not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", raw):
+    if not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", raw):
         raise G5SecClassificationError(f"{label} must be a valid YYYY-MM-DD date")
     try:
         return date.fromisoformat(raw)
