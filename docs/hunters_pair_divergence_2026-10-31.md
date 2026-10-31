@@ -32,7 +32,9 @@ Figures = **mean net bps per triggered pair** at 20 bps modeled two-leg roundtri
 
 Additional fixed pre-2013 calibration: xjcarter n=393, net -21.426 bps at 20bps; revred n=4, net -8.409 (insufficient sampling, NOT material confirmation). Negative-control (QQQ-led prior 5d, reversed leg) validation -14.435 bps (n=27) for both archives, holdout xjcarter -14.976 (n=67), revred -16.566 (n=92); nothing becomes cost-robust. Source overlap means no duplicate independent evidence.
 
-Across both source histories, the primary condition triggers in only 15 months in validation, 22 months in xjcarter holdout and 28 months in revred holdout. Month-cluster bootstrap is available via the source-pinned CLI; do not over-interpret nominal sample counts or post-hoc intervals. Under **10 bps** optimistic costs, validation is still -4.461 bps, xjcarter holdout -0.921 bps and revred holdout -3.618 bps. No backtest-selected direction is promoted to a new strategy.
+Across both source histories, the primary condition triggers in only 15 months in validation, 22 months in xjcarter holdout and 28 months in revred holdout. Month-cluster bootstrap is available via the source-pinned CLI; do not over-interpret nominal sample counts or post-hoc intervals.
+
+**Independent supplemental uncertainty check:** 2,000 deterministic month-cluster resamples, seed 102391 (LCG), draw months with replacement and preserve every return within a drawn month. Exploratory 95% percentile intervals at the 20 bps cost assumption, net bps per triggered pair: xjcarter validation [-22.665, -5.540], holdout [-20.339, +1.206]; revred validation [-22.665, -5.540], holdout [-21.423, -4.647]. Retrospective, overlapping source histories are NOT independent and the intervals omit auction/borrow, source-method, future-adjustment, selection and hyperparameter uncertainty. They do not certify statistical significance or executable returns. Under **10 bps** optimistic costs, validation is still -4.461 bps, xjcarter holdout -0.921 bps and revred holdout -3.618 bps. No backtest-selected direction is promoted to a new strategy.
 
 ## Reproduce and reconcile
 
