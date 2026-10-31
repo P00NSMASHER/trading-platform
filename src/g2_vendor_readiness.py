@@ -36,14 +36,28 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         quotes["total_record_kind_symbol_date_pairs"],
     } != {11484}:
         raise ValueError("vendor artifacts disagree on 11,484 request-pair footprint")
+    cboe_capacity = cboe_trial.get("capacity_model") or {}
+    cboe_certificate = cboe_capacity.get("optimality_certificate") or {}
+    cboe_quote_capacity = cboe_trial.get("strict_option_quote_capacity") or {}
+    cboe_documented_trial = cboe_trial.get("documented_trial") or {}
     if (
-        cboe_trial["required_source_date_rows"] != 309
+        cboe_trial.get("schema_version") != "4"
+        or cboe_trial["required_source_date_rows"] != 309
         or cboe_trial["required_underlying_date_pairs"] != 3364
-        or cboe_trial["candidate_complete_source_date_rows"] != 309
-        or cboe_trial["candidate_complete_underlying_date_pairs"] != 3364
-        or cboe_trial["remaining_source_date_rows"] != 0
-        or cboe_trial["remaining_underlying_date_pairs"] != 0
-        or cboe_trial["documented_trial"]["vendor_confirmed_daily_credit_limit_gates_trial"] is not False
+        or cboe_trial["candidate_complete_source_date_rows"] != 180
+        or cboe_trial["candidate_complete_underlying_date_pairs"] != 460
+        or cboe_trial["remaining_source_date_rows"] != 129
+        or cboe_trial["remaining_underlying_date_pairs"] != 2904
+        or cboe_documented_trial.get("published_points_per_day") != 500
+        or cboe_documented_trial.get("published_trial_overage_available") is not False
+        or cboe_documented_trial.get("daily_point_limit_used_as_hard_planning_cap") is not True
+        or cboe_capacity.get("scope") != "OPTION_TRADES_FIRST_PAGE_ONLY"
+        or cboe_capacity.get("max_first_page_trade_requests_over_trial") != 462
+        or cboe_certificate.get("180_cheapest_complete_dates_requests") != 460
+        or cboe_certificate.get("181_cheapest_complete_dates_requests") != 467
+        or cboe_certificate.get("maximum_complete_source_dates") != 180
+        or cboe_quote_capacity.get("status") != "UNMODELED_FAIL_CLOSED"
+        or cboe_quote_capacity.get("full_replication_free_trial_claimed") is not False
         or cboe_trial["trial_historical_access_runtime_verified"] is not False
         or cboe_trial["coverage_claimed"] is not False
     ):
@@ -241,6 +255,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
             "runtime_secret_state": "NOT_COMMITTED_TO_REPOSITORY",
             "databento_cost_probe": "BLOCKED_API_KEY_NOT_CONFIGURED",
             "cboe_trial_historical_access": "VENDOR_CONFIRMED_ELIGIBLE_RUNTIME_NOT_VERIFIED",
+            "cboe_trial_capacity": "PUBLISHED_500_POINTS_PER_DAY_HARD_CAP_PENDING_RUNTIME_OVERRIDE",
             "cboe_trial_option_quote_access": "DOCUMENTED_HISTORICAL_ENDPOINT_RUNTIME_TRIAL_ACCESS_UNVERIFIED",
             "cboe_trial_retention_rights": "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES",
             "cboe_custom_tick_quote": "QUOTE_RECEIVED_FULL_OPRA_ONLY_OUTSIDE_TARGET_BUDGET",
@@ -267,7 +282,7 @@ def build_readiness(vendor_dir: Path, coverage_summary: Path) -> dict:
         "next_external_actions": [
             "Configure DATABENTO_API_KEY if cost-only OPRA pricing is desired; the workflow performs no download or purchase.",
             "Tick Data requires a phone call before written pricing/availability; treat the written quote as unavailable unless the user explicitly chooses to call.",
-            "Cboe confirmed the All Access trial should pull historical data and that the daily credit limit does not gate the trial when signup is set to Allow; the merged acceptance probe can test historical equity TAQ, 2012+ option trades, and one OSI-derived historical option NBBO quote, but execution still requires explicit user authorization.",
+            "Cboe confirmed the All Access trial should pull historical data and instructed signup with Allow, but the current public product page still lists 500 points/day and says trial overage is unavailable; plan fail-closed to that published cap until runtime evidence or explicit written clarification proves otherwise. Under the optimistic option-trade first-page-only model, the 14-day trial can close at most 180 complete 2012+ source dates / 460 underlying-date pairs before pagination or quote acquisition.",
             "Before any bulk Cboe trial acquisition, obtain written Order Form or vendor permission that permits retained internal research use after trial termination; the default Cboe subscription agreement requires Data to be deleted or returned at termination unless the applicable Order Form expressly provides otherwise.",
             "If the Cboe quote smoke passes, use reference/options to enumerate the complete contract universe per underlying/date and verify option-quote pagination/request-rate feasibility before treating 2012+ strict option quotes as an acquisition candidate.",
             "Cboe custom tick-level OPRA pricing was received for the full OPRA universe only and is outside the target budget; do not pursue that paid custom route without explicit user authorization.",
