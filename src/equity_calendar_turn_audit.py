@@ -114,6 +114,93 @@ def leave_one_month_out(values_bps: list[float], cost_bps: float) -> dict | None
     }
 
 
+
+def _moving_block_ci(values_bps: list[float], seed: int = 41032,
+                     draws: int = 2000, block: int = 3) -> list[float] | None:
+    """Exploratory serial-dependence sensitivity; not an alpha p-value.
+
+    A three-consecutive-month moving-block bootstrap. This does not correct
+    for strategy search, unknown market-data rights or non-executable fills.
+    """
+    if any(not math.isfinite(v) for v in values_bps):
+        raise InvalidPriceEvidence("Nonfinite matched-month return.")
+    if not isinstance(draws, int) or not 100 <= draws <= 10000:
+        raise ValueError("Bootstrap draws must be in [100, 10000].")
+    if not isinstance(block, int) or block < 1:
+        raise ValueError("Bootstrap block must be positive.")
+    if len(values_bps) < 12:
+        return None
+    n = len(values_bps)
+    if block > n:
+        raise ValueError("Bootstrap block exceeds available months.")
+    rng = random.Random(seed)
+    means = []
+    starts = n - block + 1
+    for _ in range(draws):
+        sample: list[float] = []
+        while len(sample) < n:
+            offset = rng.randrange(starts)
+            sample.extend(values_bps[offset:offset + block])
+        means.append(sum(sample[:n]) / n)
+    means.sort()
+    return [round(means[int((draws - 1) * .025)], 3),
+            round(means[int((draws - 1) * .975)], 3)]
+
+
+def paired_second_session_control(first: list[Bar], second: list[Bar]) -> dict:
+    """Post-hoc negative control: match first and second sessions of each month.
+
+    The calendar is fixed in advance of each hypothetical session's close,
+    but this CONTROL was designed after seeing the earlier primary results.
+    No positive return here qualifies as prospective independent alpha.
+    """
+    a, b = shared_calendar(first, second)
+    for bar in a:
+        _phase(bar.day)
+    records: dict[str, dict[str, list[tuple[date, float, float]]]] = {
+        phase: {"xjcarter": [], "revred": []}
+        for phase in ("train_2011_2012", "validation_2013_2018", "holdout_2019_2022")
+    }
+    for i in sorted(month_open_indices(a)):
+        day = a[i].day
+        if i + 1 >= len(a) or (a[i + 1].day.year, a[i + 1].day.month) != (
+                day.year, day.month):
+            raise InvalidPriceEvidence("Second trading session missing: incomplete paired month.")
+        phase = _phase(day)
+        for label, series in (("xjcarter", a), ("revred", b)):
+            first_bps = 10000 * (series[i].close / series[i].open - 1)
+            second_bps = 10000 * (series[i + 1].close / series[i + 1].open - 1)
+            records[phase][label].append((day, first_bps, second_bps))
+    results: dict = {
+        "status": "EXPLORATORY_POST_HOC_CONTROL_NOT_A_TRADING_EDGE",
+        "cost_bps_per_alternative": 20,
+        "same_month_pairing": True,
+        "sources_economically_overlapping": True,
+        "periods": {},
+    }
+    for phase, sources in records.items():
+        phase_out = {}
+        for label, observations in sources.items():
+            r_first = [entry[1] for entry in observations]
+            r_second = [entry[2] for entry in observations]
+            deltas = [entry[1] - entry[2] for entry in observations]
+            phase_out[label] = {
+                "paired_months": len(observations),
+                "first_session": _summary(r_first, 20),
+                "second_session": _summary(r_second, 20),
+                "first_minus_second_mean_bps": (
+                    round(sum(deltas) / len(deltas), 3) if deltas else None),
+                "first_minus_second_ci95_three_month_block_bps":
+                    _moving_block_ci(deltas),
+                "yearly_paired_counts": {
+                    str(year): sum(entry[0].year == year for entry in observations)
+                    for year in sorted({entry[0].year for entry in observations})
+                },
+            }
+        results["periods"][phase] = phase_out
+    return results
+
+
 def evaluate(first: list[Bar], second: list[Bar]) -> dict:
     a, b = shared_calendar(first, second)
     # Check every common session, including the first record, before statistics.
@@ -146,6 +233,7 @@ def evaluate(first: list[Bar], second: list[Bar]) -> dict:
                 if phase == "holdout_2019_2022" else None,
             }
         result["periods"][phase] = period
+    result["exploratory_paired_second_day_control"] = paired_second_session_control(a, b)
     return result
 
 
