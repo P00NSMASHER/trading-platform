@@ -40,6 +40,16 @@ def compute_pairs(spy_bars: list[Bar], qqq_bars: list[Bar]) -> list[PairObservat
     Match EXACT dates, never forward-fill missing prices. Both legs use
     50% of gross notional. A 5-session signal is known before entry day T.
     """
+    # Direct API callers may bypass read_bars(), so independently reject
+    # mirrored duplicate/out-of-order dates that could inflate both legs'
+    # trade denominator while appearing perfectly synchronized.
+    if not spy_bars or not qqq_bars:
+        raise InvalidPriceEvidence("Missing SPY or QQQ price sessions.")
+    for symbol, bars in (("SPY", spy_bars), ("QQQ", qqq_bars)):
+        if any(left.day >= right.day for left, right in zip(bars, bars[1:])):
+            raise InvalidPriceEvidence(
+                f"{symbol} calendar contains duplicate or unordered sessions."
+            )
     first_common = max(spy_bars[0].day, qqq_bars[0].day)
     last_common = min(spy_bars[-1].day, qqq_bars[-1].day)
     spy_common = [b for b in spy_bars if first_common <= b.day <= last_common]
