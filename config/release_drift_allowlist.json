@@ -1664,8 +1664,8 @@
       "reason": "Control-plane Step 2 foundation"
     },
     "src/event_tape_replay.py": {
-      "expected_sha256": "ba5b7ad14150a95d3d367fe43e320671498e7bde3b927b7ca348ea5344ca70cc",
-      "reason": "Event-tape precision repair: preserve microsecond replay eligibility/order/cutoff semantics and fail closed on unsupported finer precision."
+      "expected_sha256": "838814a32f6359f869bc1a2ea4084745ccb95dba32d60fcbed8fd778081dc5b3",
+      "reason": "Historical replay precision guard preserved; follow-up source-hunter fix rejects explicitly blank or falsey non-string point-in-time as-of inputs before reading source or emitting replay output, preserving None-only omission and exact timezone-aware filtering."
     },
     "src/g1_acquisition_manifest.py": {
       "expected_sha256": "04536264c405e94208e113de3e21a07dc3d2021dad427c5cd8c3b15a8b36da4c",
@@ -2898,6 +2898,14 @@
     "docs/hunters_equity_reversal_2026-10-31.md": {
       "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "tests/test_event_tape_explicit_cutoff.py": {
+      "expected_sha256": "3f192e78339b988c84117bc4411d0df76686a5a4dfe04ef2a7d0aebd4e0aef93",
+      "reason": "Hunter #521 adversarial synthetic regression: six invalid explicit as-of cutoffs fail closed, correct None omission and valid chronological cutoff filtering remain intact."
+    },
+    "docs/hunters_event_tape_cutoff_2026-10-31.md": {
+      "expected_sha256": "3d240d36d32e80a799adc257f64fec2ffffec0a5c17bb9e98334d7644aa238db",
+      "reason": "Hunter #521 source-bound findings, Apache-2.0 date library comparisons, no-import licensing decision, CI requirements and rollback. External independent release trust-root attestation still required."
     }
   },
   "schema_version": "2",
