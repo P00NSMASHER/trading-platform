@@ -19,7 +19,8 @@ def _bars(n: int = 8):
     days = _dates(n)
     spy = [Bar(day, 100, 100, 100) for day in days]
     qqq = [Bar(day, 100, 100, 96 if i == 5 else 100) for i, day in enumerate(days)]
-    qqq[6] = Bar(days[6], 100, 102, 102)
+    if n > 6:
+        qqq[6] = Bar(days[6], 100, 102, 102)
     return spy, qqq
 
 
@@ -39,7 +40,8 @@ def test_target_close_does_not_determine_own_signal():
     baseline = select(compute_pairs(spy, qqq), "qqq_lag_2pct")
     qqq[6] = Bar(_dates()[6], 100, 90, 90)
     changed = select(compute_pairs(spy, qqq), "qqq_lag_2pct")
-    assert [x.day for x in baseline] == [x.day for x in changed]
+    # A change at T close may alter the signal at T+1, never at T.
+    assert baseline[0].day == changed[0].day == _dates()[6]
     assert baseline[0].intraday_return > 0
     assert changed[0].intraday_return < 0
 
