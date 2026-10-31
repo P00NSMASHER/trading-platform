@@ -2898,6 +2898,18 @@
     "docs/hunters_equity_reversal_2026-10-31.md": {
       "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "src/equity_trend_filter_audit.py": {
+      "expected_sha256": "3ff25e3800c0e27b2c838d5d8a0dffa98e86d3e542cbb51db301b8542f1626a2",
+      "reason": "Offline 20-session fixed-threshold ETF trend hypothesis evaluator using prior-session information; no data retrieval, trading or threshold selection."
+    },
+    "tests/test_equity_trend_filter_audit.py": {
+      "expected_sha256": "9f26474df3f6a782c861dc4702854fc0d16b4f8de6011149666cabb7470101d4",
+      "reason": "Adversarial no-lookahead/cost/source-authenticity regression cases for fixed trend audit; synthetic-only fixtures."
+    },
+    "docs/hunters_trend20_falsification_2026-10-31.md": {
+      "expected_sha256": "d383da130525436a95bbeba5c15cdcc01532853c15ddc12704ec0ade7b3778c3",
+      "reason": "Source-pinned 6-cohort failed fixed 20-session momentum hypothesis and limitations; no raw market data or trading promotion."
     }
   },
   "schema_version": "2",
