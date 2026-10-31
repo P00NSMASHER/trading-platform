@@ -141,8 +141,15 @@ def build_event_tape(
 ) -> dict[str, Any]:
     if type(checkpoint_size) is not int or checkpoint_size < 1:
         raise ValueError("checkpoint_size must be a positive integer")
+    # Only an omitted cutoff may disable point-in-time filtering. An explicitly
+    # empty or non-string cutoff must fail closed, before reading source files.
+    if as_of_utc is None:
+        as_of = None
+    elif not isinstance(as_of_utc, str):
+        raise ValueError("as_of_utc must be an ISO timestamp string or None")
+    else:
+        as_of = _parse_ts(as_of_utc, "as_of_utc")
     rows, inputs = load_events(input_paths)
-    as_of = _parse_ts(as_of_utc, "as_of_utc") if as_of_utc else None
     eligible: list[dict[str, Any]] = []
     deferred = 0
     for row in rows:
