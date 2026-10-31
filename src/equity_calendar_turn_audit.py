@@ -20,6 +20,9 @@ MIN_CI_MONTHS = 10
 
 
 def _phase(d: date) -> str:
+    # Never silently admit data outside frozen 2011-2022 research cohorts.
+    if d < date(2011, 1, 1) or d >= date(2023, 1, 1):
+        raise InvalidPriceEvidence("Session outside preregistered 2011-2022 cohort.")
     if d < date(2013, 1, 1):
         return "train_2011_2012"
     if d < date(2019, 1, 1):
@@ -91,8 +94,31 @@ def bootstrap_ci(values_bps: list[float], cost_bps: float,
             round(means[int((draws - 1) * .975)], 3)]
 
 
+def leave_one_month_out(values_bps: list[float], cost_bps: float) -> dict | None:
+    """Sensitivity of the net mean to omitting any single signal month.
+
+    This is a robustness diagnostic, NOT an inferential confidence interval.
+    """
+    if len(values_bps) < MIN_CI_MONTHS:
+        return None
+    if not math.isfinite(cost_bps) or any(not math.isfinite(v) for v in values_bps):
+        raise InvalidPriceEvidence("Nonfinite leave-one-month-out inputs.")
+    n = len(values_bps)
+    total = sum(values_bps)
+    means = [(total - v) / (n - 1) - cost_bps for v in values_bps]
+    return {
+        "n": n,
+        "min_net_mean_bps": round(min(means), 3),
+        "max_net_mean_bps": round(max(means), 3),
+        "all_leave_one_out_positive": all(v > 0 for v in means),
+    }
+
+
 def evaluate(first: list[Bar], second: list[Bar]) -> dict:
     a, b = shared_calendar(first, second)
+    # Check every common session, including the first record, before statistics.
+    for bar in a:
+        _phase(bar.day)
     selected = month_open_indices(a)
     result: dict = {
         "status": "FALSIFICATION_ONLY_NOT_EXECUTABLE_ALPHA",
@@ -115,6 +141,8 @@ def evaluate(first: list[Bar], second: list[Bar]) -> dict:
                 "signal": {str(cost): _summary(pick_returns, cost) for cost in FIXED_COSTS_BPS},
                 "non_signal_control": _summary(other_returns, 0),
                 "ci95_month_bootstrap_net_20bps": bootstrap_ci(pick_returns, 20)
+                if phase == "holdout_2019_2022" else None,
+                "leave_one_month_out_net_20bps": leave_one_month_out(pick_returns, 20)
                 if phase == "holdout_2019_2022" else None,
             }
         result["periods"][phase] = period
