@@ -43,7 +43,7 @@ All results: **net bps per selected trade**, fixed cost assumption; parenthetica
 | SPY / revred through 2026-01-06 | 219 | +3.09 | -16.91 | -36.91 |
 | QQQ / revred through 2026-01-06 | 308 | +7.77 | -12.23 | -32.23 |
 
-**Validation period 2013–2018 (10 bps):** SPY -18.16 bps (123 trades), QQQ -10.65 (169), IWM -17.75 (216), DIA -15.18 (119). The sign-changing weak holdout positives cannot override the earlier uniform validation failure. All six holdout rows turn negative by 30 bps cost. Five? No: **six of six**.
+**Validation period 2013–2018 (10 bps):** SPY -18.16 bps (123 trades), QQQ -10.65 (169), IWM -17.75 (216), DIA -15.18 (119). The sign-changing weak holdout positives cannot override the earlier uniform validation failure. All six holdout rows turn negative by 30 bps cost. **6/6 holdout ETF-source rows are negative at 30 bps.**
 
 A separate seeded month-cluster bootstrap in the initial research run produced broad 95% intervals: SPY xjcarter [-21.97,+21.55] bps; QQQ xjcarter [-14.35,+25.83]; IWM [-20.03,+14.05]; DIA [-24.08,+37.02]; SPY revred [-16.03,+24.54]; QQQ revred [-7.60,+25.85]. These are **exploratory**, use a different deterministic resampling implementation from the included Python CLI, and must not be mistaken for preregistered confirmatory coverage. No observed lower bound was positive.
 
