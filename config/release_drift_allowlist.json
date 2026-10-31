@@ -2900,16 +2900,16 @@
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
     },
     "src/equity_calendar_turn_audit.py": {
-      "expected_sha256": "fcc3d3290bc6ac52f8b867668252232d87ba2d07056fffb158d3811a5891b502",
-      "reason": "Read-only calendar-selected SPY intraday research harness with pinned market-source bytes; no broker access."
+      "expected_sha256": "86113b774c564353bf6fcd4f03a3116296d5ffdf4c64e0ba1899a5f7d0e4cc26",
+      "reason": "Extend offline frozen-calendar research with post-hoc first-vs-second monthly session negative control and three-month moving-block sensitivity; no trading."
     },
     "tests/test_equity_calendar_turn_audit.py": {
-      "expected_sha256": "759d095f76a1c7f0086c8e506c21f3ffe153f46983270063d5d0af78579ab88e",
-      "reason": "Twenty-one deterministic synthetic and adversarial cohort, month-boundary, outlier-sensitivity, data-source and friction tests."
+      "expected_sha256": "ccac35efa616e59d671a0328c01f94d9e3b778a9af30d76b57a05f49e8dde4ee",
+      "reason": "Adversarial synthetic matched calendar, no-lookahead, source conflict, cost cancellation and moving-block validation."
     },
     "docs/hunters_month_open_intraday_2026-10-31.md": {
-      "expected_sha256": "1546059100292f2ba84c51620c816b87acc1b762eea1eebfb12d368f0dee19b7",
-      "reason": "Source-pinned research record: negative after-cost month-turn result, uncertainty and data-rights warnings."
+      "expected_sha256": "c01504ab23451eb48aedbb38ab5bae8dee5aa97b65ecf43d2a7819e77a369cab",
+      "reason": "Immutable-source exploratory second-month-session diagnostic; modeled costs, prospective and data-rights limits, rollback and prior art."
     }
   },
   "schema_version": "2",
