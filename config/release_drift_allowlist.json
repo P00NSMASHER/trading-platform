@@ -2900,15 +2900,15 @@
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
     },
     "src/equity_calendar_turn_audit.py": {
-      "expected_sha256": "733713679807879f82e747f800c8f9479b47be4e61ba22de9cec5c3379d12a81",
+      "expected_sha256": "fcc3d3290bc6ac52f8b867668252232d87ba2d07056fffb158d3811a5891b502",
       "reason": "Read-only calendar-selected SPY intraday research harness with pinned market-source bytes; no broker access."
     },
     "tests/test_equity_calendar_turn_audit.py": {
-      "expected_sha256": "76f2be1e085cb0e7f05f2dd1bd9c33409580b1d8b89fbd0fbc673930cf08780e",
-      "reason": "Fourteen deterministic synthetic and adversarial month boundary, data-source and friction tests."
+      "expected_sha256": "759d095f76a1c7f0086c8e506c21f3ffe153f46983270063d5d0af78579ab88e",
+      "reason": "Twenty-one deterministic synthetic and adversarial cohort, month-boundary, outlier-sensitivity, data-source and friction tests."
     },
     "docs/hunters_month_open_intraday_2026-10-31.md": {
-      "expected_sha256": "9706b3bb2605fa9e8a0fd71c680c92a3223e4b858cf692591f8346d733e39722",
+      "expected_sha256": "1546059100292f2ba84c51620c816b87acc1b762eea1eebfb12d368f0dee19b7",
       "reason": "Source-pinned research record: negative after-cost month-turn result, uncertainty and data-rights warnings."
     }
   },
