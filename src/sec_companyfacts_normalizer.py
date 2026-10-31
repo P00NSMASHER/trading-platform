@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 from math import isfinite
+from decimal import Decimal
 from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -53,6 +54,11 @@ def normalize(companyfacts_paths: list[Path], symbol_map: Path, out: Path) -> di
         units = concept.get("units", {}) if isinstance(concept, dict) else {}
         observations = units.get("shares", []) if isinstance(units, dict) else []
         for o in observations:
+            # Untrusted JSON arrays may contain null or scalar observations.
+            # Quarantine the row, not the whole point-in-time source batch.
+            if not isinstance(o, dict):
+                skipped_bad += 1
+                continue
             fact_date = str(o.get("end", ""))
             filed = str(o.get("filed", ""))
             val = o.get("val")
@@ -61,7 +67,13 @@ def normalize(companyfacts_paths: list[Path], symbol_map: Path, out: Path) -> di
                 # the point-in-time SEC source boundary into shares-outstanding CSV.
                 # Boolean JSON values also coerce to 0/1 despite not being share counts.
                 number = float(val)
-                if not fact_date or not filed or isinstance(val, bool) or not isfinite(number) or number <= 0:
+                exact_count = Decimal(str(val))
+                # Shares are discrete counts. A float comparison alone accepts
+                # positive fractions and can round a fractional decimal to 1.
+                if (not fact_date or not filed or isinstance(val, bool)
+                        or not isfinite(number) or number <= 0
+                        or not exact_count.is_finite()
+                        or exact_count != exact_count.to_integral_value()):
                     skipped_bad += 1; continue
                 date.fromisoformat(fact_date); date.fromisoformat(filed)
             except Exception:
