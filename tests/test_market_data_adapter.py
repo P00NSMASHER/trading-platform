@@ -149,10 +149,10 @@ def test_source_sizes_reject_float_rounding_and_64bit_overflow(tmp_path, kind, i
     # an integer size for fractional values just below/above 1.
     field = "size" if kind.endswith("trade") else "bid_size"
     csv_path = tmp_path / "exact-size.csv"
-    header = "timestamp,symbol,underlying_symbol,option_symbol,expiration,strike,option_type,price,size,bid,ask,bid_size,ask_size\\n"
+    header = "timestamp,symbol,underlying_symbol,option_symbol,expiration,strike,option_type,price,size,bid,ask,bid_size,ask_size\n"
     row = ["2024-05-02T14:00:00Z", "TEST", "TEST", "TEST240517C00100000", "2024-05-17", "100", "C", "100", "10", "99", "101", "10", "10"]
     row[8 if field == "size" else 11] = invalid_size
-    csv_path.write_text(header + ",".join(row) + "\\n", encoding="utf-8")
+    csv_path.write_text(header + ",".join(row) + "\n", encoding="utf-8")
     with pytest.raises(ValueError, match=rf"row 2: invalid {field}="):
         load_csv(csv_path, kind=kind)
 
@@ -166,9 +166,9 @@ def test_source_sizes_reject_float_rounding_and_64bit_overflow(tmp_path, kind, i
 def test_source_sizes_preserve_exact_valid_integrals(tmp_path, kind, size, expected):
     field = "size" if kind.endswith("trade") else "bid_size"
     csv_path = tmp_path / "valid-size.csv"
-    header = "timestamp,symbol,underlying_symbol,option_symbol,expiration,strike,option_type,price,size,bid,ask,bid_size,ask_size\\n"
+    header = "timestamp,symbol,underlying_symbol,option_symbol,expiration,strike,option_type,price,size,bid,ask,bid_size,ask_size\n"
     row = ["2024-05-02T14:00:00Z", "TEST", "TEST", "TEST240517C00100000", "2024-05-17", "100", "C", "100", "10", "99", "101", "10", "10"]
     row[8 if field == "size" else 11] = size
-    csv_path.write_text(header + ",".join(row) + "\\n", encoding="utf-8")
+    csv_path.write_text(header + ",".join(row) + "\n", encoding="utf-8")
     event = load_csv(csv_path, kind=kind)[0]
     assert getattr(event, field) == expected
