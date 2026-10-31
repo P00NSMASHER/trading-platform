@@ -147,3 +147,36 @@ def test_empty_pair_inputs_fail_as_invalid_evidence_not_index_error():
         compute_pairs([], qqq)
     with pytest.raises(InvalidPriceEvidence, match="Missing SPY or QQQ"):
         compute_pairs(spy, [])
+
+def test_stale_gap_inside_t_minus_six_window_prevents_false_pair_signal():
+    spy, qqq = _bars()
+    # Both legs show a synchronized month-long absence; entry's T-1 is fresh.
+    # Old entry-only checks admitted two invalid T-6->T lag calculations.
+    days = _dates()[:3] + [
+        date(2020, 2, 3) + timedelta(days=i) for i in range(5)
+    ]
+    spy = [Bar(d, b.open, b.close, b.adjusted_close)
+           for d, b in zip(days, spy)]
+    qqq = [Bar(d, b.open, b.close, b.adjusted_close)
+           for d, b in zip(days, qqq)]
+    assert compute_pairs(spy, qqq) == []
+
+
+def test_pair_lag_resumes_after_six_fresh_session_transitions():
+    days = _dates()[:3] + [
+        date(2020, 2, 3) + timedelta(days=i) for i in range(11)
+    ]
+    spy = [Bar(day, 100, 100, 100) for day in days]
+    qqq = [Bar(day, 100, 100, 100) for day in days]
+    trials = compute_pairs(spy, qqq)
+    assert len(trials) == 5
+    assert trials[0].day == date(2020, 2, 9)
+
+
+def test_seven_day_calendar_interval_is_allowed_at_frozen_boundary():
+    days = _dates()[:3] + [
+        date(2020, 1, 10) + timedelta(days=i) for i in range(5)
+    ]
+    spy = [Bar(day, 100, 100, 100) for day in days]
+    qqq = [Bar(day, 100, 100, 100) for day in days]
+    assert len(compute_pairs(spy, qqq)) == 2
