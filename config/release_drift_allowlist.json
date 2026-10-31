@@ -2898,6 +2898,18 @@
     "docs/hunters_equity_reversal_2026-10-31.md": {
       "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "src/equity_pair_divergence_audit.py": {
+      "expected_sha256": "ee4696b07acdc7e53e77c7c1c047320207a426cc723e08ff43af37848a1caa69",
+      "reason": "Source-pinned, paper-only SPY/QQQ divergence falsification using authentic Git blobs, no copied market data, no orders."
+    },
+    "tests/test_equity_pair_divergence_audit.py": {
+      "expected_sha256": "da809fea26a50137f49d857465c390a884fa0cc77a90813bb7b47c1f42fb6748",
+      "reason": "Source-pinned, paper-only SPY/QQQ divergence falsification using authentic Git blobs, no copied market data, no orders."
+    },
+    "docs/hunters_pair_divergence_2026-10-31.md": {
+      "expected_sha256": "be3b1bf3f4ed4afd11ca076418db55082aad801da1f673ba2d02a0255d10f2d0",
+      "reason": "Source-pinned, paper-only SPY/QQQ divergence falsification using authentic Git blobs, no copied market data, no orders."
     }
   },
   "schema_version": "2",
