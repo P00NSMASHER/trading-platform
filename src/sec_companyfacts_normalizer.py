@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+from math import isfinite
 from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -56,7 +57,11 @@ def normalize(companyfacts_paths: list[Path], symbol_map: Path, out: Path) -> di
             filed = str(o.get("filed", ""))
             val = o.get("val")
             try:
-                if not fact_date or not filed or float(val) <= 0:
+                # NaN and Infinity compare false to <= 0 and previously crossed
+                # the point-in-time SEC source boundary into shares-outstanding CSV.
+                # Boolean JSON values also coerce to 0/1 despite not being share counts.
+                number = float(val)
+                if not fact_date or not filed or isinstance(val, bool) or not isfinite(number) or number <= 0:
                     skipped_bad += 1; continue
                 date.fromisoformat(fact_date); date.fromisoformat(filed)
             except Exception:
