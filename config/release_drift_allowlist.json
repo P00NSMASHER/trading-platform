@@ -2900,16 +2900,16 @@
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
     },
     "src/equity_pair_divergence_audit.py": {
-      "expected_sha256": "0900768a2c7acf1ef56cd62fa8085111f0a481bf18ca25870017b69c5e956fe0",
-      "reason": "Source-pinned, paper-only SPY/QQQ divergence falsification using authentic Git blobs, no copied market data, no orders."
+      "expected_sha256": "f02ce7d049cecff79aed54bc52eea03080e8cd3da9149701fe69119841e75310",
+      "reason": "Source-pinned paper-only SPY/QQQ falsification: strict calendar integrity, real archive cross-check and synthetic no-duplicate regression; no orders."
     },
     "tests/test_equity_pair_divergence_audit.py": {
-      "expected_sha256": "c555d56f370abdd214c2b29ec23168994374cfdfe1ef2f4c114e838592b35afe",
-      "reason": "Source-pinned, paper-only SPY/QQQ divergence falsification using authentic Git blobs, no copied market data, no orders."
+      "expected_sha256": "2dcdb6f5c9e26b5f2405791156261f0d87613f44068f74f74c9e1eab283e98a1",
+      "reason": "Source-pinned paper-only SPY/QQQ falsification: strict calendar integrity, real archive cross-check and synthetic no-duplicate regression; no orders."
     },
     "docs/hunters_pair_divergence_2026-10-31.md": {
-      "expected_sha256": "7915380c9657b73aa4e5b846abfe83fc18c96043366ad6ab149ec8a14e50a254",
-      "reason": "Source-pinned, paper-only SPY/QQQ divergence falsification using authentic Git blobs, no copied market data, no orders."
+      "expected_sha256": "78c7c68b07be761bcd593c2d2dab3759b0316a13fe539eadec290eafecdeaec3",
+      "reason": "Source-pinned paper-only SPY/QQQ falsification: strict calendar integrity, real archive cross-check and synthetic no-duplicate regression; no orders."
     }
   },
   "schema_version": "2",
