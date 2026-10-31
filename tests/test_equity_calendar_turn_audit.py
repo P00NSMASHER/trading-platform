@@ -4,7 +4,8 @@ import pytest
 
 from equity_reversal_audit import Bar, InvalidPriceEvidence, git_blob_sha
 from equity_calendar_turn_audit import (
-    _safe_load, _phase, _summary, bootstrap_ci, evaluate, month_open_indices, shared_calendar,
+    _safe_load, _phase, _summary, bootstrap_ci, evaluate, leave_one_month_out,
+    month_open_indices, shared_calendar,
 )
 
 
@@ -109,3 +110,36 @@ def test_synthetic_positive_gross_can_be_negative_after_costs():
     assert x["signal"]["20"]["mean_gross_bps"] == pytest.approx(10.)
     assert x["signal"]["20"]["mean_net_bps"] == pytest.approx(-10.)
     assert r["periods"]["holdout_2019_2022"]["other_days"] == 2
+
+
+@pytest.mark.parametrize("day", ["2010-12-31", "2023-01-03", "2025-10-01"])
+def test_phase_rejects_new_or_pre_cohort_years(day):
+    with pytest.raises(InvalidPriceEvidence, match="outside preregistered"):
+        _phase(date.fromisoformat(day))
+
+
+@pytest.mark.parametrize("dates", [
+    ("2010-12-30", "2010-12-31", "2011-01-03"),
+    ("2022-12-29", "2022-12-30", "2023-01-03"),
+])
+def test_evaluation_cannot_extend_frozen_cohorts(dates):
+    a = [bar(day) for day in dates]
+    with pytest.raises(InvalidPriceEvidence, match="outside preregistered"):
+        evaluate(a, a)
+
+
+def test_leave_one_month_out_is_deterministic_and_costed():
+    result = leave_one_month_out([0] * 9 + [100], 20)
+    assert result == {
+        "n": 10, "min_net_mean_bps": -20.0,
+        "max_net_mean_bps": -8.889, "all_leave_one_out_positive": False,
+    }
+    assert leave_one_month_out([30] * 10, 20)["all_leave_one_out_positive"]
+    assert leave_one_month_out([0] * 9, 20) is None
+
+
+def test_leave_one_month_out_rejects_nonfinite_evidence():
+    with pytest.raises(InvalidPriceEvidence, match="Nonfinite"):
+        leave_one_month_out([float("nan")] + [10] * 9, 20)
+    with pytest.raises(InvalidPriceEvidence, match="Nonfinite"):
+        leave_one_month_out([10] * 10, float("inf"))
