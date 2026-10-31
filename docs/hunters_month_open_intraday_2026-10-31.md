@@ -43,6 +43,21 @@ PYTHONPATH=src python -m pytest -q tests/test_equity_calendar_turn_audit.py
 
 Rollback: revert this isolated PR. No existing trading API, broker account, production workflow or protected release baseline is changed. No imported third-party code, new runtime dependencies, external telemetry or copied market-bar files. Passing tests must not bypass the independent release-drift trust-root requirement.
 
+## Reproduced robustness audit and frozen-cohort safety (2026-10-31)
+
+Independent recalculation from the two exact immutable source blobs above (no raw bars redistributed) reproduced **47** 2019-2022 first-month sessions and the **-18.419 bps/event** modeled net mean at 20-bps assumed round-trip friction. Removing any one selected month yields modeled net sample means from **-26.316** to **-13.138** bps/event. None becomes positive. This is *outlier sensitivity*, not a proof of a persistent future edge or a confidence interval; official open/close prints are not verified executable fills.
+
+| Year | Events | Modeled mean net bps/event at 20-bps cost |
+| --- | ---: | ---: |
+| 2019 | 12 | -40.450 |
+| 2020 | 12 | +16.460 |
+| 2021 | 12 | -41.646 |
+| 2022 (through November) | 11 | -7.094 |
+
+The positive 2020 year is retrospective. Do not manufacture a regime strategy from a favorable subgroup.
+
+**Safety correction:** The previous phase selector labeled *all* dates after 2019 as `holdout_2019_2022`, and dates before 2013 as `train_2011_2012`. An overlapping 2023+ archive could silently contaminate the frozen holdout. The evaluator now rejects any session outside 2011-2022, including its first record; any expanded study requires new preregistration. Deterministic leave-one-month-out stress output and synthetic tests cover both cohort boundaries, nonfinite inputs and the outlier arithmetic. Immutable data sources, strategy, costs, brokerage guards and release protections are unchanged.
+
 ## Ranked next studies / division of ownership
 
 1. **Reject** this single-session month-turn strategy as validated after-cost alpha; do not tweak retrospectively to manufacture positives.
