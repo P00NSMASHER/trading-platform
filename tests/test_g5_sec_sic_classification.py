@@ -268,3 +268,41 @@ def test_sic_division_boundaries_are_deterministic():
     assert sec._sic_division("6799") == "SEC_SIC_DIVISION_H"
     assert sec._sic_division("8999") == "SEC_SIC_DIVISION_I"
     assert sec._sic_division("9729") == "SEC_SIC_DIVISION_J"
+
+
+def test_target_civil_date_rejects_truncated_timestamps_and_suffixes(tmp_path: Path):
+    # The old [:10] coercion admitted all of these as January 5 and could
+    # incorrectly bind a research event to a mismatched source date.
+    invalid = (
+        "2015-01-05T23:59:59Z",
+        "2015-01-05UNVERIFIED",
+        "2015-01-051",
+        "20150105",
+        "2026-02-30",
+    )
+    for raw in invalid:
+        try:
+            sec._parse_date(raw, label="target date")
+        except sec.G5SecClassificationError as exc:
+            assert "YYYY-MM-DD" in str(exc)
+        else:
+            raise AssertionError(f"malformed date accepted: {raw!r}")
+    assert sec._parse_date(" 2024-02-29 ", label="date").isoformat() == "2024-02-29"
+    assert sec._parse_date("2015-01-05", label="date").isoformat() == "2015-01-05"
+    target = _targets(tmp_path, "2015-01-05T23:59:59Z,AAA,2015-01-05T23:00:00Z,1\n")
+    try:
+        sec._load_targets(target)
+    except sec.G5SecClassificationError as exc:
+        assert "target row 2 event_date" in str(exc)
+    else:
+        raise AssertionError("target CSV truncated a malformed date")
+
+
+def test_historical_cik_interval_dates_must_be_exact(tmp_path: Path):
+    malformed = _cik_map(tmp_path, "AAA,12345,2010-01-01INVALID,2020-12-31\n")
+    try:
+        sec._load_cik_map(malformed)
+    except sec.G5SecClassificationError as exc:
+        assert "CIK map row 2 valid_from" in str(exc)
+    else:
+        raise AssertionError("historical CIK map accepted a suffixed validity date")
