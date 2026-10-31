@@ -118,7 +118,7 @@
       "reason": "Historical market CSV time integrity: reject DST-gap/fold naive timestamps instead of silently inferring chronology; preserve explicit offsets and no broker execution."
     },
     "tests/test_market_data_adapter.py": {
-      "expected_sha256": "3e8a6778705ee81ac64cf9be44a0e819a2c5ebb220585bf55477632636cc48b6",
+      "expected_sha256": "1459b9cd5a944757f84c2d6632561d0f30158a7da02afd4789cf6eeb04dd5700",
       "reason": "Historical market time integrity regression tests: spring DST gap, fall fold, quote and trade paths, explicit offsets and ordinary wall times."
     },
     "docs/market_data_schema.md": {
