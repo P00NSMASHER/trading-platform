@@ -219,3 +219,7 @@ def test_paired_control_rejects_future_cohort_and_calendar_mismatch():
     b = [a[0], a[1], a[3]]
     with pytest.raises(InvalidPriceEvidence, match="calendars disagree"):
         paired_second_session_control(a, b)
+
+
+def test_moving_block_constant_return_ci_is_constant():
+    assert _moving_block_ci([7.] * 12, seed=1, draws=100, block=3) == [7., 7.]
