@@ -112,6 +112,18 @@
     "src/matched_control_generator.py": {
       "expected_sha256": "4ed28d928007b9c47b5b7ed18aa03b6287c7a2760b7b9e150b0198fdaee1bb03",
       "reason": "G5 matcher scope hardening: honor optional event_date-scoped point-in-time metadata so controls materialized for one event date cannot leak into another date, while preserving legacy unscoped metadata behavior."
+    },
+    "src/equity_long_weekend_audit.py": {
+      "expected_sha256": "993a1efabb7825a349e89506cb2e8b535041d9cbbdce675236189bbe945e7707",
+      "reason": "Offline dual-archive NYSE long-weekend strategy falsification with source-blob pinning, no executable orders or market downloads."
+    },
+    "tests/test_equity_long_weekend_audit.py": {
+      "expected_sha256": "5b64856bee9d8fd9e0e15127868f9aa3456d5698f1c5f2f44fdde52dc53168f5",
+      "reason": "Synthetic/adversarial tests for observation calendar, same-day lookahead, archive conflicts, friction, confidence and provenance."
+    },
+    "docs/hunters_long_weekend_2026-10-31.md": {
+      "expected_sha256": "4a829f610dfa6d99cdb062aff88c6f6bf661c74f50634b84633ed5cac321d008",
+      "reason": "Exact pinned-source measured rejection, cost stress, prior-art, rollback and research limitations; no raw vendor bars."
     }
   },
   "repository_additions": {
