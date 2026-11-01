@@ -256,3 +256,41 @@ performance are unresolved. Existing LONG-only strategy remains rejected.
 Next: licensed executable timestamped quote or auction observation and
 pre-registered prospective paper forward evaluation. Rollback: revert
 this research-only checkpoint in isolated draft PR #524.
+
+
+## Hunter checkpoint 6: compounded hypothetical path risk (2026-11-01)
+
+**Verdict unchanged: no validated after-cost edge.** Added chronological
+event-to-event **hypothetical** full-notional compounding, peak-to-event-close
+maximum drawdown, net losing-event fraction and longest losing streak to the
+existing `describe()` results. New synthetic/adversarial tests enforce unique
+ordered dates, finite bounded returns, permissible costs, correct
+compounding, path dependence and honest empty-cohort handling.
+
+Independently recalculated in JS from original immutable public GitHub SPY
+blobs listed above. **2,990/2,990 matching 2011-01-05..2022-11-18 dates**;
+0 cross-archive intraday return differences >0.05bps. 2023-2025 is
+**single-source** only.
+
+| Retrospective cohort | Events | Net mean at 20bps | Hypothetical compounded net | Event-close max DD | Net loss events | Longest loss streak |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Training 2011-2012 | 14 | -11.923 bps | -1.690% | 2.162% | 71.43% | 4 |
+| Validation 2013-2018 | 39 | -23.555 bps | -8.841% | 9.491% | 66.67% | 7 |
+| Retrospective holdout 2019-2022 | 27 | -33.030 bps | -8.610% | 9.749% | 70.37% | 6 |
+| Single archive 2023-2025 | 20 | -39.684 bps | -7.680% | 7.926% | 75.00% | 6 |
+
+**Not actual profit or a fillable strategy.** Hypothetically allocate 100% of
+equity at each reported opening price and liquidate at reported CLOSE, minus
+flat modeled 20-bps roundtrip cost. Cash between events earns 0. Financing,
+taxes, spread/auction slippage, market impact, dividends, intraday mark risk,
+margin liquidation, true prices available at entry and opportunity cost are
+unmodeled. Maximum drawdown sees selected event closing marks only, not
+within-session excursions. Cohorts start at equity 1 separately. Two
+overlapping GitHub archives are **not** independent market vendor
+replications; upstream data adjustment and redistribution rights are
+unverified. No third-party raw historical prices committed.
+
+No new dependencies, broker routes, orders, paid data, secrets, production
+changes or automations. Rollback: revert this isolated draft PR checkpoint.
+Next: licensed executable timestamped open/close auction/NBBO evidence,
+then freeze a truly prospective full-denominator forward paper trial.
