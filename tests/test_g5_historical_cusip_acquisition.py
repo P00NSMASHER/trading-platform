@@ -8,13 +8,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 import g5_control_acquisition_planner as controls
-import g5_external_acquisition_packet as packet
+import g5_treated_metadata_requirements as treated
 import g5_historical_cusip_acquisition as cusip
 
 
 def _real_targets(tmp_path: Path) -> tuple[Path, Path]:
     control_dir = tmp_path / "controls"
-    packet_dir = tmp_path / "packet"
+    treated_dir = tmp_path / "treated"
     controls.build(
         events_path=ROOT / "data/processed/historical_events.csv",
         requirements_path=(
@@ -23,14 +23,13 @@ def _real_targets(tmp_path: Path) -> tuple[Path, Path]:
         planning_universe_path=ROOT / "data/raw/hacked_earnings_jfe/SampleFirms.csv",
         output_dir=control_dir,
     )
-    packet.build(
-        control_candidates_path=control_dir / "g5_primary_candidate_symbol_dates.csv",
+    treated.build(
         events_path=ROOT / "data/processed/historical_events.csv",
-        output_dir=packet_dir,
+        output_dir=treated_dir,
     )
     return (
-        packet_dir / "g5_control_external_acquisition_targets.csv",
-        packet_dir / "g5_treated_external_acquisition_targets.csv",
+        control_dir / "g5_primary_candidate_symbol_dates.csv",
+        treated_dir / "g5_treated_targets.csv",
     )
 
 
