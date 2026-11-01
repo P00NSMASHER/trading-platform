@@ -175,6 +175,70 @@ def gap_control_diagnostics(rows: list[GapObservation]) -> dict:
     return result
 
 
+
+def same_year_weekday_diagnostics(rows: list[GapObservation]) -> dict:
+    """Post-hoc matched negative control; full-year data are NOT an entry signal.
+
+    For each long-gap day compare its observed open-to-close return with the
+    average of all *non-long-gap* sessions in the SAME year and weekday.
+    This removes a simple weekday/year composition difference, but does not
+    remove holidays, intraday entry-price uncertainty, survivorship or
+    other selection bias. If any event cannot be matched, refuse an
+    incomplete comparison rather than silently dropping a losing event.
+    """
+    events = [r for r in rows if r.previous_session_gap_days >= 4]
+    pool: dict[tuple[int, int], list[float]] = defaultdict(list)
+    for row in rows:
+        if row.previous_session_gap_days < 4:
+            pool[(row.day.year, row.day.weekday())].append(row.intraday_bps)
+    differences: dict[int, list[float]] = defaultdict(list)
+    unmatched: list[str] = []
+    for event in events:
+        peers = pool.get((event.day.year, event.day.weekday()), [])
+        if not peers:
+            unmatched.append(event.day.isoformat())
+            continue
+        differences[event.day.year].append(
+            event.intraday_bps - sum(peers) / len(peers))
+    result = {
+        "exploratory_post_hoc_uses_full_year_controls": True,
+        "same_year_and_weekday": True,
+        "controls_exclude_long_gaps": True,
+        "total_long_events": len(events),
+        "matched_long_events": sum(map(len, differences.values())),
+        "unmatched_event_dates": unmatched,
+        "non_long_gap_control_sessions": sum(map(len, pool.values())),
+        "event_weighted_difference_bps": None,
+        "equal_year_difference_bps": None,
+        "annual_difference_bps": {},
+        "leave_one_year_out_equal_year_range_bps": None,
+    }
+    if not events or unmatched:
+        return result
+    annual = {
+        year: sum(values) / len(values)
+        for year, values in sorted(differences.items())
+    }
+    result["event_weighted_difference_bps"] = round(
+        sum(sum(v) for v in differences.values()) / len(events), 3)
+    result["equal_year_difference_bps"] = round(
+        sum(annual.values()) / len(annual), 3)
+    result["annual_difference_bps"] = {
+        str(year): round(value, 3) for year, value in annual.items()
+    }
+    if len(annual) >= 3:
+        annual_values = list(annual.values())
+        leave_one_out = [
+            (sum(annual_values) - value) / (len(annual_values) - 1)
+            for value in annual_values
+        ]
+        result["leave_one_year_out_equal_year_range_bps"] = [
+            round(min(leave_one_out), 3),
+            round(max(leave_one_out), 3),
+        ]
+    return result
+
+
 def evaluate(first: list[Bar], second: list[Bar], include_single_vendor: bool = False) -> dict:
     paired, max_diff = paired_observations(first, second)
     extension = build_observations(second) if include_single_vendor else []
@@ -194,6 +258,7 @@ def evaluate(first: list[Bar], second: list[Bar], include_single_vendor: bool = 
             "weekday_gap_eq1_control": describe(
                 [x for x in window if x.previous_session_gap_days == 1]),
             "exploratory_gap_control": gap_control_diagnostics(window),
+            "exploratory_same_year_weekday_control": same_year_weekday_diagnostics(window),
         }
     return result
 
