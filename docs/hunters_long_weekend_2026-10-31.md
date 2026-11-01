@@ -216,3 +216,43 @@ forward paper-trial protocol. The
 and [MIT pandas_market_calendars](https://github.com/rsheftel/pandas_market_calendars)
 were considered, but no new heavy dependency introduced. Preserve draft
 status and independent release-drift trust-root authorization.
+
+
+## Hunter checkpoint 5: independent market-calendar continuity gate (2026-11-01)
+
+**Result: a real backtest quality defect fixed; no new profitable edge.**
+Two mutually agreeing SPY archives could both omit an ordinary NYSE
+session, silently turning a Friday-to-Tuesday interval into a false >=4-day
+long-weekend signal. CLI execution now fails closed on missing or unexpected
+`XNYS` sessions through the repository's pre-existing
+`exchange-calendars` dependency. Direct Python synthetic callers remain
+backward-compatible and explicitly report `exchange_calendar_audit.verified=false`
+unless strict checking is requested. No new dependency, price feed or order
+endpoint was introduced.
+
+**Independent historical check:** inspected the two exact pinned GitHub CSV
+source URLs identified above, without committing raw prices. Each has
+**2,990** session dates in **2011-01-05 through 2022-11-18** and an ordered
+date-list FNV-1a checksum of `0d10bf9b`. Independently generated XNYS
+sessions from installed `exchange-calendars==4.13.1` have exactly the same
+count, endpoints and date-list checksum. The stronger SHA-256 for those
+reference XNYS dates, serialized as ISO dates followed by newlines, is
+`60834d1c03074590a7cbcf7961d1418a61bf40cae4b0135449756621f157aac9`.
+The actual runtime gate compares **all dates**, rather than only a checksum,
+and records XNYS library version and date SHA-256 for reproduction.
+
+**Adversarial control:** withholding the genuine 2020-01-27 trading session
+from BOTH synthetic sources manufactures a false January 28 long-gap entry
+under the old dual-source-only rule; the new gate rejects it. **Positive
+control:** 2012-10-29 and 2012-10-30 were genuinely unscheduled NYSE closures
+due to Hurricane Sandy, so 2012-10-31 remains a permissible five-calendar-day
+gap. Independent Associated Press report:
+https://www.cbsnews.com/news/new-york-stock-exchange-to-reopen-wednesday/
+
+Limits: XNYS is a third-party calendar, not an independent price vendor or
+official direct exchange attestation; boundary truncation, data licensing,
+real opening auction fills, bid/ask friction, assignment and prospective
+performance are unresolved. Existing LONG-only strategy remains rejected.
+Next: licensed executable timestamped quote or auction observation and
+pre-registered prospective paper forward evaluation. Rollback: revert
+this research-only checkpoint in isolated draft PR #524.

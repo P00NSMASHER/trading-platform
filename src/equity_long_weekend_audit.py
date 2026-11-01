@@ -301,11 +301,86 @@ def trailing_weekday_control(rows: list[GapObservation], cohort_start: date,
     return result
 
 
-def evaluate(first: list[Bar], second: list[Bar], include_single_vendor: bool = False) -> dict:
+
+def verify_nyse_session_coverage(first: list[Bar], second: list[Bar],
+                                 include_single_vendor: bool = False) -> dict:
+    """Fail closed when two agreeing price archives both omit a valid NYSE session.
+
+    XNYS is independent *calendar* corroboration only, NOT independent
+    price-vendor replication or evidence of executable open/close fills.
+    """
+    import hashlib
+    import exchange_calendars as xc
+
+    try:
+        calendar = xc.get_calendar("XNYS")
+    except (KeyError, TypeError, ValueError) as exc:
+        raise InvalidPriceEvidence("XNYS reference calendar unavailable.") from exc
+
+    def check(observed: list[date], label: str) -> dict:
+        if len(observed) < 2:
+            raise InvalidPriceEvidence(
+                f"{label}: cannot certify fewer than two sessions.")
+        if observed != sorted(set(observed)):
+            raise InvalidPriceEvidence(
+                f"{label}: dates must be ascending and unique.")
+        try:
+            expected = [
+                stamp.date() for stamp in calendar.sessions_in_range(
+                    observed[0].isoformat(), observed[-1].isoformat())
+            ]
+        except (IndexError, OverflowError, ValueError) as exc:
+            raise InvalidPriceEvidence(
+                f"{label}: XNYS calendar cannot cover date range.") from exc
+        if expected != observed:
+            present, valid = set(observed), set(expected)
+            missing = [d.isoformat() for d in expected if d not in present][:5]
+            unexpected = [
+                d.isoformat() for d in observed if d not in valid
+            ][:5]
+            raise InvalidPriceEvidence(
+                f"{label}: XNYS session coverage mismatch; "
+                f"missing={missing}; unexpected={unexpected}")
+        dates = "".join(d.isoformat() + "\n" for d in expected)
+        return {
+            "sessions": len(expected),
+            "first": expected[0].isoformat(),
+            "last": expected[-1].isoformat(),
+            "session_dates_sha256": hashlib.sha256(
+                dates.encode("ascii")).hexdigest(),
+        }
+
+    begin, end = max(first[0].day, second[0].day), min(first[-1].day, second[-1].day)
+    overlap = [bar.day for bar in first if begin <= bar.day <= end]
+    result = {
+        "verified": True,
+        "calendar": "XNYS",
+        "exchange_calendars_version": xc.__version__,
+        "independent_price_vendor_replication": False,
+        "dual_archive_overlap": check(overlap, "dual-archive overlap"),
+        "single_vendor_extension_2023_2025": None,
+    }
+    if include_single_vendor:
+        extension = [
+            bar.day for bar in second
+            if date(2023, 1, 1) <= bar.day <= date(2025, 12, 31)
+        ]
+        if extension:
+            result["single_vendor_extension_2023_2025"] = check(
+                extension, "single-vendor extension")
+    return result
+
+
+def evaluate(first: list[Bar], second: list[Bar], include_single_vendor: bool = False,
+             verify_exchange_calendar: bool = False) -> dict:
     paired, max_diff = paired_observations(first, second)
     extension = build_observations(second) if include_single_vendor else []
+    calendar_audit = (verify_nyse_session_coverage(first, second, include_single_vendor)
+                      if verify_exchange_calendar else
+                      {"verified": False, "reason": "Synthetic-compatible call; real CLI requires strict XNYS calendar validation."})
     result = {"research_only": True, "two_archives_are_independent_vendors": False,
               "matching_sessions": len(paired) + 1,
+              "exchange_calendar_audit": calendar_audit,
               "maximum_cross_archive_intraday_difference_bps": round(max_diff, 6),
               "cohorts": {}}
     for label, start, stop in COHORTS:
@@ -337,7 +412,8 @@ def main() -> None:
     args = p.parse_args()
     result = evaluate(load_source(args.first_file, args.first_blob),
                       load_source(args.second_file, args.second_blob),
-                      args.include_second_source_2023_2025)
+                      args.include_second_source_2023_2025,
+                      verify_exchange_calendar=True)
     result["status"] = "RESEARCH_FALSIFICATION_ONLY_NO_EXECUTABLE_EDGE"
     print(json.dumps(result, indent=2, sort_keys=True))
 

@@ -363,3 +363,64 @@ def test_trailing_control_zero_events_has_no_result():
         date(2021, 1, 1), date(2021, 12, 31))
     assert v["total_long_events"] == 0
     assert v["event_weighted_difference_bps"] is None
+
+
+# Independent XNYS market-calendar integrity, synthetic price bars only.
+from equity_long_weekend_audit import verify_nyse_session_coverage
+
+
+def test_xnys_accepts_sandy_unscheduled_exchange_closure():
+    rows = [b(d) for d in ("2012-10-25", "2012-10-26", "2012-10-31",
+                           "2012-11-01", "2012-11-02")]
+    v = verify_nyse_session_coverage(rows, rows)
+    assert v["verified"] is True
+    assert v["dual_archive_overlap"]["sessions"] == 5
+    assert v["dual_archive_overlap"]["session_dates_sha256"] == (
+        "ed10599e2e1351feb315300519dee0783fa4578409bcf63583950e98ffb2e33b")
+    assert sum(r.previous_session_gap_days >= 5 for r in build_observations(rows)) == 1
+
+
+def test_two_identically_corrupted_sources_cannot_invent_long_weekend():
+    # Genuine NYSE Monday 2020-01-27 is missing from both synthetic archives.
+    rows = [b(d) for d in ("2020-01-23", "2020-01-24",
+                           "2020-01-28", "2020-01-29")]
+    paired, diff = paired_observations(rows, rows)
+    assert diff == 0 and any(x.previous_session_gap_days >= 4 for x in paired)
+    with pytest.raises(InvalidPriceEvidence, match="missing=.*2020-01-27"):
+        verify_nyse_session_coverage(rows, rows)
+    with pytest.raises(InvalidPriceEvidence, match="XNYS session coverage"):
+        evaluate(rows, rows, verify_exchange_calendar=True)
+
+
+def test_xnys_accepts_mlk_holiday_and_true_gap_event():
+    rows = [b(d) for d in ("2020-01-17", "2020-01-21",
+                           "2020-01-22", "2020-01-23")]
+    v = evaluate(rows, rows, verify_exchange_calendar=True)
+    assert v["exchange_calendar_audit"]["verified"] is True
+    assert v["exchange_calendar_audit"]["dual_archive_overlap"]["sessions"] == 4
+    assert v["cohorts"]["retrospective_holdout_2019_2022"][
+        "post_long_weekend_gap_ge4_long_only"]["events"] == 1
+
+
+def test_xnys_rejects_unexpected_weekend_and_duplicate_dates():
+    weekend = [b(d) for d in ("2020-01-17", "2020-01-18", "2020-01-21")]
+    with pytest.raises(InvalidPriceEvidence, match="unexpected="):
+        verify_nyse_session_coverage(weekend, weekend)
+    repeated = [b(d) for d in ("2020-01-17", "2020-01-21", "2020-01-21")]
+    with pytest.raises(InvalidPriceEvidence, match="ascending and unique"):
+        verify_nyse_session_coverage(repeated, repeated)
+
+
+def test_requested_single_archive_extension_cannot_hide_missing_session():
+    left = [b(d) for d in ("2022-12-29", "2022-12-30", "2023-01-03")]
+    right = left + [b("2023-01-04"), b("2023-01-06")]
+    assert verify_nyse_session_coverage(left, right)["verified"] is True
+    with pytest.raises(InvalidPriceEvidence, match="missing=.*2023-01-05"):
+        evaluate(left, right, include_single_vendor=True,
+                 verify_exchange_calendar=True)
+
+
+def test_synthetic_evaluate_is_labeled_unverified_not_silently_attested():
+    assert evaluate(sample(), sample())["exchange_calendar_audit"]["verified"] is False
+    with pytest.raises(InvalidPriceEvidence, match="XNYS session coverage"):
+        evaluate(sample(), sample(), verify_exchange_calendar=True)
