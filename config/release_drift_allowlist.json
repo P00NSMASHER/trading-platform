@@ -34,8 +34,8 @@
       "reason": "G1 batch 0130 GNTX exact first-public publisher timestamp from GlobeNewswire migrated Marketwired release ID 930758; deterministic 174/174 exact with prior evidence preserved."
     },
     "pyproject.toml": {
-      "expected_sha256": "a94ea697e62d4d2e3ffa3f19676a3fc29e3d0157124d84b31a557627e51f3bc9",
-      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests."
+      "expected_sha256": "e0c87df12dc9ca57209b99f5eaf640c7fe5a6649b8b8394a3d642abe785f2cf9",
+      "reason": "Security maintenance: require skops 0.15.x for the optional safer-model path, validated with actual champion export/inspection and fail-closed artifact tests. Candidate-only pandas version range >=2.2,<4 for Dependabot #514. Reviewable compatibility expansion; full PR CI must pass and independent release trust-root approval is separate."
     },
     "src/authorized_input_orchestrator.py": {
       "expected_sha256": "9dae028c98c67d9050b9448118c29de524f338f90dc5c513b347d90870aae8c2",
