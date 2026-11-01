@@ -2900,12 +2900,12 @@
       "reason": "2026-10-30: deterministic 100-row synthetic counterexample showing incomplete depth prevents paper evidence promotion"
     },
     "src/options_joint_depth_forward_gate.py": {
-      "expected_sha256": "ada6dc82a5cefb3d65b3887ec384f6038daea763846ea87043728246ae9a3a3e",
-      "reason": "2026-11-01: conservative NY weekday 09:30-16:00 option entry/exit/quote and side-update admission screen added to the existing synthetic joint gate; exchange holidays, early closes, broker fills, and assignment remain unverified"
+      "expected_sha256": "02c94ae41c92edb87c6963848ce953e85a121c49b39eae3f6fe202031be90783",
+      "reason": "2026-11-01: source-checked Cboe 2026-27 US option RTH calendar blocks full holidays, 13:00 early closes, and unknown years, on all entry/exit/side quote clocks; draft synthetic only, no broker fills"
     },
     "tests/test_options_joint_depth_forward_gate.py": {
-      "expected_sha256": "b61b00945cda30c1139f1b4e63ca7941b95933becb0143e5d5c1e5fdeb39962b",
-      "reason": "2026-11-01: synthetic weekend/premarket/after-hours/side-update/full-cohort rejection tests; corrected 65-case dates to weekdays, not an exchange holiday calendar; zero broker fills or actual market edge"
+      "expected_sha256": "265d2b8a6ecc094a1e53bc6e393c3749189caf68b2397fdaf1da791d4781d58c",
+      "reason": "2026-11-01: synthetic Thanksgiving, Christmas, 13:00 boundary, DST and unknown-calendar controls; positive 65-case generator excludes official closures; no prospective real fills"
     }
   },
   "schema_version": "2",
