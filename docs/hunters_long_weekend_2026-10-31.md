@@ -294,3 +294,34 @@ No new dependencies, broker routes, orders, paid data, secrets, production
 changes or automations. Rollback: revert this isolated draft PR checkpoint.
 Next: licensed executable timestamped open/close auction/NBBO evidence,
 then freeze a truly prospective full-denominator forward paper trial.
+
+## Hunter checkpoint 7: freeze entire study denominators at CLI boundary (2026-11-01)
+
+**New reproducible integrity defect:** before this correction, two identical
+truncated sources could pass the strict XNYS calendar check *within the
+remaining first/last dates*, yet the CLI would still label the partial period
+as the 2019-2022 retrospective holdout. A synthetic four-session
+2020-01-17..2020-01-23 calendar (including the MLK closure) reproduced the
+boundary flaw with exchange_calendars 4.13.1. Previous calendar checks
+protected interior dates, not the preregistered study's endpoints.
+
+**Correction:** the source-pinned CLI now requires BOTH exact documented Git
+blob IDs, complete shared 2011-01-05..2022-11-18 XNYS population
+(2,990 sessions), and, when requested, complete 2023-01-03..2025-12-31
+single-archive extension (752 sessions), *before* reporting cohorts. The
+existing byte-authenticating read_bars() and all-session XNYS validation remain
+required. This rejects arbitrary self-hashed replacement archives and
+silent population truncation. The general-purpose synthetic evaluate()
+API retains its explicitly labelled unverified mode.
+
+Adversarial tests cover jointly truncated but internally calendar-consistent
+archives, invented Git blob IDs, missing shared tail and missing extension
+tail. Positive tests use **synthetic flat prices on genuine XNYS dates only**;
+they are not source-data observations or fills. The original 10/20/30bps
+hypothesis, cohort returns, negative verdict, independent release trust
+requirement, and absence of executable fills are unchanged.
+
+**Stage:** patch on draft PR #524 pending genuine exact-head CI and
+independent authorization. Do not merge, deploy, trade or advertise alpha
+based on this work. Next critical experiment is still source-authorized
+timestamped executable quotes and a fresh prospective paper ledger.

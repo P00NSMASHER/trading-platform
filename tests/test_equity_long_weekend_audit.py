@@ -485,3 +485,60 @@ def test_path_risk_rejects_invalid_cost(cost):
 def test_path_risk_empty_cohort_is_explicitly_unavailable():
     assert path_risk_diagnostics([]) is None
     assert describe([])["hypothetical_path_risk_net20"] is None
+
+# Frozen CLI source/population contract, separate from synthetic evaluate().
+from equity_long_weekend_audit import (
+    FROZEN_FIRST_BLOB, FROZEN_SECOND_BLOB, verify_frozen_study_population,
+)
+
+
+def _calendar_bars(first_day: str, last_day: str):
+    import exchange_calendars as xc
+    calendar = xc.get_calendar("XNYS")
+    return [b(stamp.date().isoformat())
+            for stamp in calendar.sessions_in_range(first_day, last_day)]
+
+
+def test_truncated_dual_archive_can_pass_bounded_xnys_but_not_frozen_study():
+    # Both truncated inputs agree and have no missing sessions internally.
+    partial = [b(x) for x in ("2020-01-17", "2020-01-21",
+                              "2020-01-22", "2020-01-23")]
+    assert verify_nyse_session_coverage(partial, partial)["verified"] is True
+    with pytest.raises(InvalidPriceEvidence, match="source population incomplete"):
+        verify_frozen_study_population(
+            partial, partial, FROZEN_FIRST_BLOB, FROZEN_SECOND_BLOB)
+
+
+def test_frozen_study_refuses_source_identity_substitution():
+    partial = [b("2020-01-17"), b("2020-01-21")]
+    with pytest.raises(InvalidPriceEvidence, match="source identities"):
+        verify_frozen_study_population(
+            partial, partial, "0" * 40, FROZEN_SECOND_BLOB)
+    with pytest.raises(InvalidPriceEvidence, match="source identities"):
+        verify_frozen_study_population(
+            partial, partial, FROZEN_FIRST_BLOB, "0" * 40)
+
+
+def test_frozen_study_accepts_exact_synthetic_exchange_dates_not_price_fills():
+    # Calendar fixtures only: real archive bytes are separately checked by
+    # load_source() in CLI, never established by this in-memory test.
+    shared = _calendar_bars("2011-01-05", "2022-11-18")
+    extension = _calendar_bars("2023-01-03", "2025-12-31")
+    result = verify_frozen_study_population(
+        shared, shared + extension, FROZEN_FIRST_BLOB,
+        FROZEN_SECOND_BLOB, include_extension=True)
+    assert result["shared_sessions"] == 2990
+    assert result["single_archive_extension_sessions"] == 752
+    assert result["actual_executable_fills"] == 0
+
+
+def test_frozen_study_rejects_missing_both_source_tail_and_extension_tail():
+    shared = _calendar_bars("2011-01-05", "2022-11-18")
+    extension = _calendar_bars("2023-01-03", "2025-12-31")
+    with pytest.raises(InvalidPriceEvidence, match="source population incomplete"):
+        verify_frozen_study_population(
+            shared[:-1], shared[:-1], FROZEN_FIRST_BLOB, FROZEN_SECOND_BLOB)
+    with pytest.raises(InvalidPriceEvidence, match="single-archive population incomplete"):
+        verify_frozen_study_population(
+            shared, shared + extension[:-1], FROZEN_FIRST_BLOB,
+            FROZEN_SECOND_BLOB, include_extension=True)

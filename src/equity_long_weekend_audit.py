@@ -17,6 +17,10 @@ from equity_reversal_audit import Bar, InvalidPriceEvidence, read_bars
 
 MAX_SOURCE_BYTES = 10_000_000
 COST_GRID_BPS = (10, 20, 30)
+FROZEN_FIRST_BLOB = "5a17de0b52ed8941aacc2ba16bdc96d7c1073cff"
+FROZEN_SECOND_BLOB = "38acc25a077e23fdf107102960c3df32f1543a7d"
+FROZEN_SHARED_WINDOW = (date(2011, 1, 5), date(2022, 11, 18), 2990)
+FROZEN_EXTENSION_WINDOW = (date(2023, 1, 3), date(2025, 12, 31), 752)
 COHORTS = (
     ("train_2011_2012", date(2011, 1, 1), date(2012, 12, 31)),
     ("validation_2013_2018", date(2013, 1, 1), date(2018, 12, 31)),
@@ -422,6 +426,54 @@ def verify_nyse_session_coverage(first: list[Bar], second: list[Bar],
     return result
 
 
+def verify_frozen_study_population(
+        first: list[Bar], second: list[Bar], first_blob: str,
+        second_blob: str, include_extension: bool = False) -> dict:
+    """Reject truncated or substituted inputs to the preregistered CLI study.
+
+    The CLI must call load_source() first to authenticate actual file bytes
+    against these source hashes. This guard locks the fixed cohort bounds;
+    the separate XNYS check validates every intervening market session.
+    Synthetic direct evaluate() calls are intentionally unaffected.
+    """
+    if first_blob != FROZEN_FIRST_BLOB or second_blob != FROZEN_SECOND_BLOB:
+        raise InvalidPriceEvidence(
+            "Frozen study source identities differ from preregistration.")
+    if not first or not second:
+        raise InvalidPriceEvidence("Frozen study input has no sessions.")
+    begin = max(first[0].day, second[0].day)
+    end = min(first[-1].day, second[-1].day)
+    left = [x.day for x in first if begin <= x.day <= end]
+    right = [x.day for x in second if begin <= x.day <= end]
+    start, stop, total = FROZEN_SHARED_WINDOW
+    if (left != right or len(left) != total
+            or left[0] != start or left[-1] != stop):
+        raise InvalidPriceEvidence(
+            "Frozen 2011-2022 source population incomplete or inconsistent.")
+    extension_count = None
+    if include_extension:
+        extension = [
+            x.day for x in second
+            if date(2023, 1, 1) <= x.day <= date(2025, 12, 31)
+        ]
+        extension_start, extension_stop, expected = FROZEN_EXTENSION_WINDOW
+        if (len(extension) != expected
+                or extension[0] != extension_start
+                or extension[-1] != extension_stop):
+            raise InvalidPriceEvidence(
+                "Frozen 2023-2025 single-archive population incomplete.")
+        extension_count = len(extension)
+    return {
+        "frozen_cli_population_verified": True,
+        "source_blob_arguments_match_preregistration": True,
+        "shared_sessions": len(left),
+        "shared_first": start.isoformat(),
+        "shared_last": stop.isoformat(),
+        "single_archive_extension_sessions": extension_count,
+        "actual_executable_fills": 0,
+    }
+
+
 def evaluate(first: list[Bar], second: list[Bar], include_single_vendor: bool = False,
              verify_exchange_calendar: bool = False) -> dict:
     paired, max_diff = paired_observations(first, second)
@@ -461,10 +513,14 @@ def main() -> None:
     p.add_argument("--second-blob", required=True)
     p.add_argument("--include-second-source-2023-2025", action="store_true")
     args = p.parse_args()
-    result = evaluate(load_source(args.first_file, args.first_blob),
-                      load_source(args.second_file, args.second_blob),
-                      args.include_second_source_2023_2025,
+    first = load_source(args.first_file, args.first_blob)
+    second = load_source(args.second_file, args.second_blob)
+    frozen = verify_frozen_study_population(
+        first, second, args.first_blob, args.second_blob,
+        args.include_second_source_2023_2025)
+    result = evaluate(first, second, args.include_second_source_2023_2025,
                       verify_exchange_calendar=True)
+    result["frozen_study_population"] = frozen
     result["status"] = "RESEARCH_FALSIFICATION_ONLY_NO_EXECUTABLE_EDGE"
     print(json.dumps(result, indent=2, sort_keys=True))
 
