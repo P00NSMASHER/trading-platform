@@ -7,7 +7,7 @@ import pytest
 
 from equity_reversal_audit import Bar, InvalidPriceEvidence, git_blob_sha
 from equity_long_weekend_audit import (
-    build_observations, describe, evaluate, load_source,
+    GapObservation, build_observations, describe, evaluate, load_source,
     paired_observations, year_cluster_ci,
 )
 
@@ -81,10 +81,12 @@ def test_no_false_confidence_for_two_years():
 
 
 def test_year_cluster_resampling_fixed_and_stress_costs():
-    dates = ["2019-01-18", "2019-01-22", "2020-01-17", "2020-01-21",
-             "2021-01-15", "2021-01-19", "2022-01-14", "2022-01-18"]
-    obs = build_observations([b(x, 100, 101) for x in dates])
-    long = [x for x in obs if x.previous_session_gap_days == 4]
+    long = [
+        GapObservation(date(2019, 1, 22), 4, 100),
+        GapObservation(date(2020, 1, 21), 4, -10),
+        GapObservation(date(2021, 1, 19), 4, 25),
+        GapObservation(date(2022, 1, 18), 4, -30),
+    ]
     assert len(long) == 4
     assert year_cluster_ci(long, seed=45, replicates=120) == year_cluster_ci(
         long, seed=45, replicates=120)
@@ -95,7 +97,10 @@ def test_year_cluster_resampling_fixed_and_stress_costs():
 
 def test_optional_extension_is_explicitly_single_vendor():
     left = [b("2022-12-29"), b("2022-12-30"), b("2023-01-03")]
-    right = left + [b("2023-01-04"), b("2023-01-17")]
+    right = left + [b(day) for day in (
+        "2023-01-04", "2023-01-05", "2023-01-06", "2023-01-09",
+        "2023-01-10", "2023-01-11", "2023-01-12", "2023-01-13",
+        "2023-01-17")]
     baseline = evaluate(left, right)
     extension = evaluate(left, right, include_single_vendor=True)
     label = "single_vendor_2023_2025"
