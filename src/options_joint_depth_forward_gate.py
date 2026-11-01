@@ -7,6 +7,7 @@ The result is only a research screen; bid/ask marks do not prove fills or edge.
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from decimal import Decimal
 
 from options_forward_evaluator import (
     EvidenceError,
@@ -58,6 +59,15 @@ def audit_joint_depth_forward(paper_rows, depth_rows, *, asof):
         depth = audit_quote_depth(paper_rows, depth_rows, asof=cutoff, contracts=1)
     except DepthError:
         raise JointEvidenceError("Quote-depth population rejected") from None
+    # Individually valid legs can still imply an impossible, inverted
+    # same-expiry vertical exit. The canonical evaluator floors negative
+    # close debits at zero; never interpret such books as a free paper exit.
+    # Fail the entire submitted cohort rather than dropping an adverse row.
+    for row in paper_rows:
+        if (Decimal(str(row["exit_short_ask"]))
+                < Decimal(str(row["exit_long_bid"]))):
+            raise JointEvidenceError("Cross-leg exit package quote is inverted")
+
     count = forward["completed_marks"]
     if count != depth["submitted_marks"]:
         raise JointEvidenceError("Paper and depth populations disagree")
