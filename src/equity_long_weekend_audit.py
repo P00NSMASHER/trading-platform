@@ -89,10 +89,60 @@ def year_cluster_ci(selected: list[GapObservation], cost_bps: float = 20,
             round(means[int(0.975 * (len(means) - 1))], 3)]
 
 
+
+def path_risk_diagnostics(selected: list[GapObservation], cost_bps: float = 20) -> dict | None:
+    """Chronological hypothetical notional-risk path; never executable P/L.
+
+    Redeploy 100% of hypothetical equity at reported OPEN each selected
+    event; exit at CLOSE less modeled round-trip friction. Idle cash earns
+    zero. No opening auction fills, taxes, financing or intraday drawdowns.
+    """
+    if (not isinstance(cost_bps, (int, float)) or isinstance(cost_bps, bool)
+            or not math.isfinite(cost_bps) or not 0 <= cost_bps < 10_000):
+        raise ValueError("Invalid hypothetical round-trip cost.")
+    if not selected:
+        return None
+    equity = peak = 1.0
+    maximum_drawdown = 0.0
+    losses = streak = longest_streak = 0
+    last_day = None
+    for row in selected:
+        if last_day is not None and row.day <= last_day:
+            raise InvalidPriceEvidence("Risk path must contain ascending unique dates.")
+        last_day = row.day
+        if not math.isfinite(row.intraday_bps) or abs(row.intraday_bps) > 3_500:
+            raise InvalidPriceEvidence("Invalid intraday return in risk path.")
+        net = row.intraday_bps - cost_bps
+        factor = 1 + net / 10_000
+        if factor <= 0:
+            raise InvalidPriceEvidence("Hypothetical event exhausted equity.")
+        equity *= factor
+        if not math.isfinite(equity):
+            raise InvalidPriceEvidence("Nonfinite hypothetical equity.")
+        peak = max(peak, equity)
+        maximum_drawdown = max(maximum_drawdown, 1 - equity / peak)
+        if net < 0:
+            losses += 1
+            streak += 1
+            longest_streak = max(longest_streak, streak)
+        else:
+            streak = 0
+    return {
+        "hypothetical_compounded_return_pct": round(100 * (equity - 1), 3),
+        "event_close_max_drawdown_pct": round(100 * maximum_drawdown, 3),
+        "net_loss_event_pct": round(100 * losses / len(selected), 2),
+        "longest_consecutive_net_losses": longest_streak,
+        "modeled_roundtrip_cost_bps": cost_bps,
+        "assumption": "full_notional_each_event_ideal_open_close_no_idle_interest",
+        "observed_executable_fills": False,
+    }
+
+
 def describe(selected: list[GapObservation]) -> dict:
     if not selected:
         return {"events": 0, "gross_mean_bps": None, "net_mean_bps": None,
-                "year_cluster_ci95_net20_bps": None}
+                "year_cluster_ci95_net20_bps": None,
+                "hypothetical_path_risk_net20": None}
     mean = sum(x.intraday_bps for x in selected) / len(selected)
     return {
         "events": len(selected),
@@ -102,6 +152,7 @@ def describe(selected: list[GapObservation]) -> dict:
             100 * sum(x.intraday_bps > 20 for x in selected) / len(selected), 2),
         "year_cluster_ci95_net20_bps": year_cluster_ci(selected),
         "worst_net20_session_bps": round(min(x.intraday_bps - 20 for x in selected), 3),
+        "hypothetical_path_risk_net20": path_risk_diagnostics(selected, 20),
         "year_counts": {str(year): sum(x.day.year == year for x in selected)
                         for year in sorted({x.day.year for x in selected})},
     }
