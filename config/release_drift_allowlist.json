@@ -2798,6 +2798,14 @@
     "tests/test_real_data_replay_g5_identity.py": {
       "expected_sha256": "9fe7c3766086f063ba97d7d617b82aa7e33faae6fedd2ff427346e91cf05e9db",
       "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, byte-compatible legacy replay behavior, and a hash-bound G5-only staged-identity path that remains fail-closed for final evaluation."
+    },
+    "src/g5_historical_index_membership_intake.py": {
+      "expected_sha256": "703b77b9adb29a1d4b8b3fe2c68e089e4c1ed58f936864e12f3b2be401f0e255",
+      "reason": "G5 source-bound point-in-time historical index membership intake with source/availability checks, reviewable in PR #485; candidate SHA only, not independent trust-root approval."
+    },
+    "tests/test_g5_historical_index_membership_intake.py": {
+      "expected_sha256": "090c92607193088ce4939afc0d37c3b534dcbbfb945414726e6dd77e9f1a2918",
+      "reason": "G5 source-bound index membership intake regression coverage, including overlap, availability and fail-closed negative controls; candidate SHA only, not independent approval."
     }
   },
   "schema_version": "2",
