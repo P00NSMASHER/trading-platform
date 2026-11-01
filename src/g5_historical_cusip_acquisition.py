@@ -4,6 +4,8 @@ import argparse
 import csv
 import hashlib
 import json
+import re
+from datetime import date
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -56,12 +58,25 @@ def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
 
 
 def _normalize_cusip(value: str) -> str:
-    raw = "".join(ch for ch in str(value or "").upper() if ch.isalnum())
+    text = str(value or "").upper()
+    if not text.isascii():
+        raise G5HistoricalCusipError("CUSIP must contain ASCII-only characters")
+    raw = "".join(ch for ch in text if ch.isalnum())
     if len(raw) != 9:
         raise G5HistoricalCusipError(
             f"CUSIP must normalize to exactly 9 alphanumeric characters: {value!r}"
         )
     return raw
+
+
+def _strict_civil_day(value: str, label: str) -> str:
+    raw = str(value or "")
+    if re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", raw) is None:
+        raise G5HistoricalCusipError(f"{label} must be exact YYYY-MM-DD")
+    try:
+        return date.fromisoformat(raw).isoformat()
+    except ValueError as exc:
+        raise G5HistoricalCusipError(f"{label} is not a real civil day") from exc
 
 
 def _request_id(target_kind: str, symbol: str, dates: list[str]) -> str:
@@ -221,9 +236,9 @@ def stage_reviewed(
             raise G5HistoricalCusipError(
                 f"reviewed row {row_no}: research_use_only must equal 1"
             )
-        valid_from = row["valid_from"][:10]
-        valid_through = row["valid_through"][:10]
-        if not valid_from or not valid_through or valid_through < valid_from:
+        valid_from = _strict_civil_day(row["valid_from"], "valid_from")
+        valid_through = _strict_civil_day(row["valid_through"], "valid_through")
+        if valid_through < valid_from:
             raise G5HistoricalCusipError(
                 f"reviewed row {row_no}: invalid validity interval"
             )
