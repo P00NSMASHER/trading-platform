@@ -124,7 +124,7 @@
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
     ".github/workflows/g1-swarm-controller.yml": {
-      "expected_sha256": "5e4c3fcf2c5e4f528ba6703b4900220de5cd433dd813c98131ebc88217531df5",
+      "expected_sha256": "0c99ade598a02525ce2824496101a8f9680b51f07a774418e31a4105e1e56a0a",
       "reason": "G1 swarm coordination: preserve push/PR-close/15-minute/manual reconciliation and add immediate issue #153 WORKER-comment reconciliation; controller remains sole token authority and ignores its own controller comments."
     },
     ".github/workflows/g2-databento-cost-probe.yml": {
@@ -132,11 +132,11 @@
       "reason": "Hardened Databento historical cost-only probe: main-push plus explicit manual dispatch, read-only permissions, secret-gated metadata cost estimates, no downloads, batch jobs, or purchases."
     },
     ".github/workflows/pr-ci.yml": {
-      "expected_sha256": "954931d36fb029118ea6490992a0c7256fc666c6fc3a56459f97a15cabe5f335",
+      "expected_sha256": "f81d094e4163942559d651da5e995faab8a122f3eb15d8f952bb977b09f816f9",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions"
     },
     ".github/workflows/synthetic-ci.yml": {
-      "expected_sha256": "bd147ed763d528638df579a364c706ed2ed4784a98eb931dffd356c44b76c047",
+      "expected_sha256": "731e65124d0161954328db15ba1f4af306606a9092e6d99c337442d54d457443",
       "reason": "Control-plane Step 8: exact dispatched-commit checkout and externally authenticated release audit-pack generation"
     },
     "config/licensed_entitlement_manifest.example.json": {
@@ -2809,7 +2809,7 @@
     }
   ,
     ".github/workflows/hacked-earnings-exhaustive-audit.yml": {
-      "expected_sha256": "38db70befe76eb6e74c95cb66153b11a76654ecded342861f9311b66db324938",
+      "expected_sha256": "361a4e94fc79fa890dedbf68da0d251ee2e6fec7322a63a5df4592a433504418",
       "reason": "Reproducible read-only CI for the pinned hacked_earnings_jfe exhaustive audit; clones the exact upstream commit and publishes audit evidence without expanding the audited source boundary."
     },
     "docs/hacked_earnings_jfe_exhaustive_audit_2026-10-06.md": {
