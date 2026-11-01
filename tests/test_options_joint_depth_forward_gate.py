@@ -110,6 +110,51 @@ class JointGateTests(unittest.TestCase):
         with self.assertRaisesRegex(JointEvidenceError, "Cross-leg exit"):
             audit_joint_depth_forward(p, d, asof=ASOF)
 
+    @staticmethod
+    def _set_expiry_day_clock(p, d, *, utc_rollover=False):
+        expiry = datetime.fromisoformat(p["expiry"])
+        if utc_rollover:
+            # UTC calendar has rolled, but 01:30Z is 20:30 EST expiry day.
+            event = (expiry + timedelta(days=1)).replace(
+                hour=1, minute=30, tzinfo=UTC)
+        else:
+            event = expiry.replace(hour=19, minute=45, tzinfo=UTC)
+        p["exit_utc"] = event.isoformat()
+        p["exit_quote_utc"] = (event - timedelta(seconds=15)).isoformat()
+        for side in SIDES:
+            d["exit_" + side + "_utc"] = (
+                event - timedelta(seconds=17)).isoformat()
+
+    def test_expiry_day_call_quote_and_utc_rollover_rejected(self):
+        for rollover in (False, True):
+            p, d = make_case()
+            self._set_expiry_day_clock(p, d, utc_rollover=rollover)
+            with self.assertRaisesRegex(JointEvidenceError, "Expiry-day quote mark"):
+                audit_joint_depth_forward([p], [d], asof=ASOF)
+
+    def test_expiry_day_put_quote_rejected(self):
+        p, d = make_case()
+        p["side"] = "bull_put"
+        p["entry_spot"] = "103"
+        p["short_strike"] = "101"
+        p["long_strike"] = "100"
+        p["short_contract"] = p["short_contract"].replace(
+            "C00101000", "P00101000")
+        p["long_contract"] = p["long_contract"].replace(
+            "C00102000", "P00100000")
+        d["short_contract"] = p["short_contract"]
+        d["long_contract"] = p["long_contract"]
+        self._set_expiry_day_clock(p, d)
+        with self.assertRaisesRegex(JointEvidenceError, "Expiry-day quote mark"):
+            audit_joint_depth_forward([p], [d], asof=ASOF)
+
+    def test_expiry_day_mark_blocks_whole_65_mark_cohort(self):
+        cases = [make_case(i) for i in range(65)]
+        p, d = map(list, zip(*cases))
+        self._set_expiry_day_clock(p[-1], d[-1])
+        with self.assertRaisesRegex(JointEvidenceError, "Expiry-day quote mark"):
+            audit_joint_depth_forward(p, d, asof=ASOF)
+
     def test_bad_oi_rejected_by_canonical_evaluator(self):
         p, d = make_case()
         p["short_open_interest"] = "0"

@@ -2900,12 +2900,12 @@
       "reason": "2026-10-30: deterministic 100-row synthetic counterexample showing incomplete depth prevents paper evidence promotion"
     },
     "src/options_joint_depth_forward_gate.py": {
-      "expected_sha256": "6855b4c0176e050e80691f6233a22edcddff68ae6cd8df91de4b2e61241d8d92",
-      "reason": "2026-11-01: preserve full-cohort execution safety by rejecting inverted same-expiry vertical exit quote packages; synthetic-only research, no filled trade claim"
+      "expected_sha256": "0ac84a3f6b8835ddf423cd0ee7cf2aff3208c64a8bbd73f780e0a53b8ec93420",
+      "reason": "2026-11-01: conservative expiry-day L1 quote-mark fail-closed admission in full-cohort joint options gate; assignment and 100-share overnight stock exposure remain uncalibrated; no broker fills"
     },
     "tests/test_options_joint_depth_forward_gate.py": {
-      "expected_sha256": "3b4411b9d3a059e23df10be85acbf4a133f0cd55a19ea6c766999b21a4609aea",
-      "reason": "2026-11-01: add two adversarial individual and 65-mark full-cohort inverted exit quote regressions to the existing synthetic suite"
+      "expected_sha256": "2b5b2e7739abe8da167345ab7c321cffac4a8737f22369f1a90b43724263be42",
+      "reason": "2026-11-01: add synthetic bear-call, bull-put, New York/UTC expiry rollover and full-65-cohort assignment-window controls; no empirical market evidence"
     }
   },
   "schema_version": "2",

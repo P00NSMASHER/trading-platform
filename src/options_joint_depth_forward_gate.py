@@ -6,11 +6,12 @@ The result is only a research screen; bid/ask marks do not prove fills or edge.
 """
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from decimal import Decimal
 
 from options_forward_evaluator import (
     EvidenceError,
+    EASTERN,
     MODELED_PORTFOLIO_RISK_LIMIT_USD,
     evaluate_paper_marks,
 )
@@ -67,6 +68,19 @@ def audit_joint_depth_forward(paper_rows, depth_rows, *, asof):
         if (Decimal(str(row["exit_short_ask"]))
                 < Decimal(str(row["exit_long_bid"]))):
             raise JointEvidenceError("Cross-leg exit package quote is inverted")
+
+    # An expiration-day L1 mark is not a broker-confirmed closing fill.
+    # Pin/early assignment can leave 100-share stock exposure after exercise,
+    # even when entry spread width passes the nominal $100 modeled-risk cap.
+    # Apply to the ENTIRE cohort; compare dates in New York, not UTC.
+    for row in paper_rows:
+        exit_day = datetime.fromisoformat(
+            row["exit_utc"].strip().replace("Z", "+00:00")
+        ).astimezone(EASTERN).date()
+        if exit_day == date.fromisoformat(row["expiry"]):
+            raise JointEvidenceError(
+                "Expiry-day quote mark cannot prove assignment-safe close"
+            )
 
     count = forward["completed_marks"]
     if count != depth["submitted_marks"]:
