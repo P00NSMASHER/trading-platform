@@ -2900,15 +2900,15 @@
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
     },
     "src/equity_long_weekend_audit.py": {
-      "expected_sha256": "00bb4f1f2b6d0856e17bcc66d46914b4ac5257399d08569215e1a8bb122b0c8a",
+      "expected_sha256": "a2f38de93dc118679f530a07a231520aed2dae9a4f10dfe1d58f21ef60d37d1c",
       "reason": "Offline dual-archive NYSE long-weekend strategy falsification with source-blob pinning, no executable orders or market downloads."
     },
     "tests/test_equity_long_weekend_audit.py": {
-      "expected_sha256": "30568bdb30ff078931a0ced698f0a3ea840c265f5f043401c11ef99ae184c013",
+      "expected_sha256": "6c0aea5c739e9c5a8533372be7cf99ad8dda37e91c9244e2e50f44eda3fb4bb0",
       "reason": "Synthetic/adversarial tests for observation calendar, same-day lookahead, archive conflicts, friction, confidence and provenance."
     },
     "docs/hunters_long_weekend_2026-10-31.md": {
-      "expected_sha256": "f9a523cb0eff89082b5e2b500b99f1f870845f58aa8c1bc355469a57aeba5ba6",
+      "expected_sha256": "6e1df6cfe4de27c1139d76227c8fcf3b7e52550ff4f10e709d347fd4db16478d",
       "reason": "Exact pinned-source measured rejection, cost stress, prior-art, rollback and research limitations; no raw vendor bars."
     }
   },
