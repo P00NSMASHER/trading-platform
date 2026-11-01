@@ -181,3 +181,97 @@ def test_evaluate_existing_primary_result_unmodified_by_negative_control():
     assert cohort["post_long_weekend_gap_ge4_long_only"]["net_mean_bps"]["20"] == 30
     assert cohort["exploratory_gap_control"]["long_events"] == 2
     assert cohort["exploratory_gap_control"]["gap_ge5_review_dates"] == ["2020-01-27"]
+
+
+# Golden Goose checkpoint 3: prospective-signal-safe, post-hoc-only
+# same-year and weekday negative control. No actual prices or fills.
+from equity_long_weekend_audit import same_year_weekday_diagnostics
+
+
+def test_same_year_weekday_control_is_event_weighted_and_respects_years():
+    rows = [
+        GapObservation(date(2019, 1, 22), 4, 100),  # Tuesday event
+        GapObservation(date(2019, 1, 29), 1, 10),   # Tuesday control
+        GapObservation(date(2019, 2, 5), 1, -10),   # Tuesday control
+        GapObservation(date(2020, 1, 21), 4, -20),
+        GapObservation(date(2020, 1, 28), 1, 10),
+        GapObservation(date(2021, 1, 19), 4, 50),
+        GapObservation(date(2021, 1, 26), 1, -10),
+        GapObservation(date(2021, 1, 27), 1, 250),  # Wrong weekday: ignore
+    ]
+    v = same_year_weekday_diagnostics(rows)
+    assert v["exploratory_post_hoc_uses_full_year_controls"] is True
+    assert v["same_year_and_weekday"] is True
+    assert v["total_long_events"] == v["matched_long_events"] == 3
+    assert v["unmatched_event_dates"] == []
+    assert v["non_long_gap_control_sessions"] == 5
+    # Tuesday baselines: 2019=0, 2020=10, 2021=-10.
+    assert v["event_weighted_difference_bps"] == 43.333
+    assert v["equal_year_difference_bps"] == 43.333
+    assert v["annual_difference_bps"] == {
+        "2019": 100, "2020": -30, "2021": 60,
+    }
+    assert v["leave_one_year_out_equal_year_range_bps"] == [15, 80]
+
+
+def test_same_year_weekday_control_preserves_event_counts_with_unequal_years():
+    rows = [
+        GapObservation(date(2019, 1, 22), 4, 60),
+        GapObservation(date(2019, 2, 19), 4, 20),
+        GapObservation(date(2019, 1, 29), 1, 0),
+        GapObservation(date(2020, 1, 21), 4, 20),
+        GapObservation(date(2020, 1, 28), 1, 10),
+    ]
+    v = same_year_weekday_diagnostics(rows)
+    assert v["matched_long_events"] == 3
+    assert v["event_weighted_difference_bps"] == 30
+    assert v["equal_year_difference_bps"] == 25
+    assert v["leave_one_year_out_equal_year_range_bps"] is None
+
+
+def test_same_year_weekday_control_fails_closed_on_unmatched_event():
+    rows = [
+        GapObservation(date(2019, 1, 22), 4, -80),
+        GapObservation(date(2019, 1, 28), 3, 20),  # Monday only
+        GapObservation(date(2018, 1, 23), 1, 10),  # Tuesday, wrong year
+    ]
+    v = same_year_weekday_diagnostics(rows)
+    assert v["total_long_events"] == 1
+    assert v["matched_long_events"] == 0
+    assert v["unmatched_event_dates"] == ["2019-01-22"]
+    assert v["event_weighted_difference_bps"] is None
+    assert v["equal_year_difference_bps"] is None
+    assert v["annual_difference_bps"] == {}
+
+
+def test_same_year_weekday_control_does_not_promote_event_as_control():
+    rows = [
+        GapObservation(date(2019, 1, 22), 4, 100),
+        GapObservation(date(2019, 2, 19), 4, -50),
+        GapObservation(date(2019, 1, 29), 1, 10),
+    ]
+    v = same_year_weekday_diagnostics(rows)
+    assert v["non_long_gap_control_sessions"] == 1
+    assert v["event_weighted_difference_bps"] == 15
+    assert v["matched_long_events"] == 2
+
+
+def test_same_year_weekday_control_zero_event_is_explicit():
+    v = same_year_weekday_diagnostics([
+        GapObservation(date(2021, 1, 26), 1, 50),
+    ])
+    assert v["total_long_events"] == 0
+    assert v["event_weighted_difference_bps"] is None
+    assert v["leave_one_year_out_equal_year_range_bps"] is None
+
+
+def test_new_control_does_not_change_predeclared_evaluation_counts_or_returns():
+    out = evaluate(sample(), sample())
+    c = out["cohorts"]["retrospective_holdout_2019_2022"]
+    assert c["post_long_weekend_gap_ge4_long_only"]["events"] == 2
+    assert c["post_long_weekend_gap_ge4_long_only"]["net_mean_bps"]["20"] == 30
+    diag = c["exploratory_same_year_weekday_control"]
+    assert diag["total_long_events"] == 2
+    assert diag["matched_long_events"] == 0
+    assert diag["unmatched_event_dates"] == ["2020-01-21", "2020-01-27"]
+    assert diag["event_weighted_difference_bps"] is None
