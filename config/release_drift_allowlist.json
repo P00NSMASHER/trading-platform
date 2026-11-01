@@ -118,7 +118,7 @@
       "reason": "Offline dual-archive NYSE long-weekend strategy falsification with source-blob pinning, no executable orders or market downloads."
     },
     "tests/test_equity_long_weekend_audit.py": {
-      "expected_sha256": "5b64856bee9d8fd9e0e15127868f9aa3456d5698f1c5f2f44fdde52dc53168f5",
+      "expected_sha256": "d4c7be6f764690154d978fa32edeb991931581991d1496cf08e35955eb06671d",
       "reason": "Synthetic/adversarial tests for observation calendar, same-day lookahead, archive conflicts, friction, confidence and provenance."
     },
     "docs/hunters_long_weekend_2026-10-31.md": {
