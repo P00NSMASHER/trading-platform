@@ -8,7 +8,7 @@ import pytest
 from equity_reversal_audit import Bar, InvalidPriceEvidence, git_blob_sha
 from equity_long_weekend_audit import (
     GapObservation, build_observations, describe, evaluate, load_source,
-    paired_observations, year_cluster_ci,
+    paired_observations, path_risk_diagnostics, year_cluster_ci,
 )
 
 
@@ -424,3 +424,64 @@ def test_synthetic_evaluate_is_labeled_unverified_not_silently_attested():
     assert evaluate(sample(), sample())["exchange_calendar_audit"]["verified"] is False
     with pytest.raises(InvalidPriceEvidence, match="XNYS session coverage"):
         evaluate(sample(), sample(), verify_exchange_calendar=True)
+
+
+# Synthetic adverse and positive cases; NOT historical executable fills.
+def test_path_risk_compounds_losses_and_recoveries():
+    rows = [GapObservation(date(2020, 1, 2), 4, 120),
+            GapObservation(date(2020, 1, 3), 1, -80),
+            GapObservation(date(2020, 1, 6), 3, 120)]
+    risk = path_risk_diagnostics(rows)
+    assert risk["hypothetical_compounded_return_pct"] == 0.99
+    assert risk["event_close_max_drawdown_pct"] == 1.0
+    assert risk["net_loss_event_pct"] == pytest.approx(33.33)
+    assert risk["longest_consecutive_net_losses"] == 1
+    assert risk["observed_executable_fills"] is False
+    assert describe(rows)["hypothetical_path_risk_net20"] == risk
+
+
+def test_path_risk_tracks_consecutive_losses():
+    rows = [GapObservation(date(2020, 1, 2), 4, -80),
+            GapObservation(date(2020, 1, 3), 1, -80)]
+    result = path_risk_diagnostics(rows)
+    assert result["hypothetical_compounded_return_pct"] == -1.99
+    assert result["event_close_max_drawdown_pct"] == 1.99
+    assert result["net_loss_event_pct"] == 100
+    assert result["longest_consecutive_net_losses"] == 2
+
+
+def test_path_risk_order_changes_drawdown_not_compounded_return():
+    high_first = [GapObservation(date(2020, 1, 2), 4, 1020),
+                  GapObservation(date(2020, 1, 3), 1, -800),
+                  GapObservation(date(2020, 1, 6), 3, -800)]
+    low_first = [GapObservation(date(2020, 1, 2), 4, -800),
+                 GapObservation(date(2020, 1, 3), 1, 1020),
+                 GapObservation(date(2020, 1, 6), 3, -800)]
+    a, b = path_risk_diagnostics(high_first), path_risk_diagnostics(low_first)
+    assert a["hypothetical_compounded_return_pct"] == b["hypothetical_compounded_return_pct"]
+    assert a["event_close_max_drawdown_pct"] > b["event_close_max_drawdown_pct"]
+
+
+@pytest.mark.parametrize("rows", [
+    [GapObservation(date(2020, 1, 3), 4, 100),
+     GapObservation(date(2020, 1, 2), 1, 100)],
+    [GapObservation(date(2020, 1, 3), 4, 100),
+     GapObservation(date(2020, 1, 3), 1, 100)],
+    [GapObservation(date(2020, 1, 3), 4, float("nan"))],
+    [GapObservation(date(2020, 1, 3), 4, float("inf"))],
+    [GapObservation(date(2020, 1, 3), 4, -3501)],
+])
+def test_path_risk_rejects_bad_observations(rows):
+    with pytest.raises(InvalidPriceEvidence):
+        path_risk_diagnostics(rows)
+
+
+@pytest.mark.parametrize("cost", [True, -1, 10000, float("nan"), float("inf"), "20"])
+def test_path_risk_rejects_invalid_cost(cost):
+    with pytest.raises(ValueError, match="Invalid hypothetical"):
+        path_risk_diagnostics([GapObservation(date(2020, 1, 3), 4, 100)], cost)
+
+
+def test_path_risk_empty_cohort_is_explicitly_unavailable():
+    assert path_risk_diagnostics([]) is None
+    assert describe([])["hypothetical_path_risk_net20"] is None
