@@ -2900,12 +2900,12 @@
       "reason": "2026-10-30: deterministic 100-row synthetic counterexample showing incomplete depth prevents paper evidence promotion"
     },
     "src/options_joint_depth_forward_gate.py": {
-      "expected_sha256": "e102b418da4c9f9a2250bf27f42b26d0c25df67389a1fd567de16a20542da666",
-      "reason": "2026-10-30: read-only synthetic-testable full-population join of canonical options forward marks to OCC-bound quote-side depth, without order endpoints or positive-edge certification"
+      "expected_sha256": "6855b4c0176e050e80691f6233a22edcddff68ae6cd8df91de4b2e61241d8d92",
+      "reason": "2026-11-01: preserve full-cohort execution safety by rejecting inverted same-expiry vertical exit quote packages; synthetic-only research, no filled trade claim"
     },
     "tests/test_options_joint_depth_forward_gate.py": {
-      "expected_sha256": "cedf1a61e88cd46db7e0f82c7038fc0052417c6486bb1200322d8391493c4417",
-      "reason": "2026-10-30: 14 fully synthetic negative and positive integration controls; no broker, private market data or live execution"
+      "expected_sha256": "3b4411b9d3a059e23df10be85acbf4a133f0cd55a19ea6c766999b21a4609aea",
+      "reason": "2026-11-01: add two adversarial individual and 65-mark full-cohort inverted exit quote regressions to the existing synthetic suite"
     }
   },
   "schema_version": "2",
