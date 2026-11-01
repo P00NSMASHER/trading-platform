@@ -275,3 +275,91 @@ def test_new_control_does_not_change_predeclared_evaluation_counts_or_returns():
     assert diag["matched_long_events"] == 0
     assert diag["unmatched_event_dates"] == ["2020-01-21", "2020-01-27"]
     assert diag["event_weighted_difference_bps"] is None
+
+
+# Run 2: prior-only rolling weekday controls, synthetic adverse tests.
+from equity_long_weekend_audit import trailing_weekday_control
+
+
+def _prior_rows():
+    return [
+        GapObservation(date(2020, 12, 22), 1, 0),
+        GapObservation(date(2020, 12, 29), 1, 20),
+        GapObservation(date(2021, 1, 5), 1, 40),
+        GapObservation(date(2021, 1, 19), 4, 100),
+    ]
+
+
+def test_trailing_control_uses_prior_year_only_for_entry_baseline():
+    v = trailing_weekday_control(_prior_rows(), date(2021, 1, 1),
+                                 date(2021, 12, 31), 3, 3)
+    assert v["total_long_events"] == v["matched_long_events"] == 1
+    assert v["minimum_available_peer_count"] == 3
+    assert v["event_weighted_difference_bps"] == 80
+    assert v["annual_difference_bps"] == {"2021": 80}
+
+
+def test_trailing_control_cannot_leak_future_price_outcome():
+    a = trailing_weekday_control(_prior_rows(), date(2021, 1, 19),
+                                 date(2021, 1, 19), 252, 2)
+    future = _prior_rows() + [
+        GapObservation(date(2021, 1, 26), 1, -10000),
+        GapObservation(date(2021, 2, 2), 1, 10000),
+    ]
+    b = trailing_weekday_control(future, date(2021, 1, 19),
+                                 date(2021, 1, 19), 252, 2)
+    assert a == b
+
+
+def test_trailing_control_ignores_old_holidays_and_wrong_weekdays():
+    rows = [
+        GapObservation(date(2020, 12, 21), 1, -800),
+        GapObservation(date(2020, 12, 22), 1, 0),
+        GapObservation(date(2020, 12, 29), 1, 20),
+        GapObservation(date(2021, 1, 5), 4, 9000),
+        GapObservation(date(2021, 1, 19), 4, 100),
+    ]
+    v = trailing_weekday_control(rows, date(2021, 1, 19),
+                                 date(2021, 1, 19), 252, 2)
+    assert v["event_weighted_difference_bps"] == 90
+    assert v["minimum_available_peer_count"] == 2
+
+
+def test_trailing_control_must_refuse_incomplete_cohort():
+    v = trailing_weekday_control(_prior_rows(), date(2021, 1, 19),
+                                 date(2021, 1, 19), 2, 3)
+    assert v["total_long_events"] == 1 and v["matched_long_events"] == 0
+    assert v["unmatched_event_dates"] == ["2021-01-19"]
+    assert v["complete_cohort"] is False
+    assert v["event_weighted_difference_bps"] is None
+
+
+def test_trailing_control_rejects_bad_configuration_and_bad_calendar():
+    for n, m in [(0, 1), (2, 0), (True, 1), (2, False)]:
+        with pytest.raises(ValueError, match="Invalid predeclared"):
+            trailing_weekday_control(_prior_rows(), date(2021, 1, 1),
+                                     date(2021, 12, 31), n, m)
+    with pytest.raises(ValueError, match="Invalid predeclared"):
+        trailing_weekday_control(_prior_rows(), date(2022, 1, 1),
+                                 date(2021, 1, 1))
+    for invalid in (_prior_rows()[::-1], _prior_rows() + [_prior_rows()[-1]]):
+        with pytest.raises(InvalidPriceEvidence, match="sorted unique"):
+            trailing_weekday_control(invalid, date(2021, 1, 1),
+                                     date(2021, 12, 31))
+
+
+def test_trailing_control_preserves_predeclared_falsification():
+    report = evaluate(sample(), sample())
+    c = report["cohorts"]["retrospective_holdout_2019_2022"]
+    assert c["post_long_weekend_gap_ge4_long_only"]["events"] == 2
+    assert c["post_long_weekend_gap_ge4_long_only"]["net_mean_bps"]["20"] == 30
+    assert c["exploratory_prior_only_weekday_control"]["complete_cohort"] is False
+    assert c["exploratory_prior_only_weekday_control"]["total_long_events"] == 2
+
+
+def test_trailing_control_zero_events_has_no_result():
+    v = trailing_weekday_control(
+        [GapObservation(date(2021, 1, 19), 1, 1)],
+        date(2021, 1, 1), date(2021, 12, 31))
+    assert v["total_long_events"] == 0
+    assert v["event_weighted_difference_bps"] is None
