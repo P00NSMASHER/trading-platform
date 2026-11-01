@@ -168,3 +168,51 @@ pass merely because this source is committed.
 **Rollback:** close/revert this draft research PR; it does not touch any
 production strategy, brokerage integration, release trust root, automation or
 protected baseline.
+
+## Run 2: prospective-signal-safe trailing weekday negative control (2026-10-31 ET)
+
+**No positive net trading edge.** Previous same-year/weekday comparison
+used later-in-year price outcomes and was explicitly post-hoc. New evaluator
+compares each long-gap SPY event with non-long-gap sessions on the same
+weekday from the preceding 252 observed sessions only, requiring at least
+10 previous controls. Earliest incomplete events invalidate the whole
+cohort aggregate. The frozen original LONG rule and its modeled cost
+grid are unchanged.
+
+| Source-anchored cohort | Covered events | Gross event minus prior-only weekday mean |
+|---|---:|---:|
+| 2011-2012, shared-source training | 12/14, **incomplete** | NOT ESTIMATED (2011-01-18 and 2011-02-22 lack warmup) |
+| 2013-2018, shared-source validation | 39/39 | **-6.952 bps/event** |
+| 2019-2022 (to Nov 18), shared-source retrospective | 27/27 | **-15.841 bps/event** |
+| 2023-2025, single-archive extension | 20/20 | **-21.173 bps/event** |
+
+All estimates independently recomputed directly from the immutable
+[xjcarter SPY CSV](https://github.com/xjcarter/data/blob/7d705ada2d3ca483700eb695772e7de9cfc75cbc/SPY.csv)
+blob 5a17de0b52ed8941aacc2ba16bdc96d7c1073cff and
+[revred SPY CSV](https://github.com/revred/TradeSmart.Tracker/blob/7d9d769b0f2ddcedf4c1703cc979b865a37b580d/market/us/spy.csv)
+blob 38acc25a077e23fdf107102960c3df32f1543a7d.
+The 2,990 shared sessions are economically overlapping secondary archives,
+NOT independent data vendors. One-source 2023-2025 data are not a genuinely
+independent holdout. Research is exploratory and selected after earlier
+hypotheses: no significance or novelty claim. Annual relative differences
+are positive in some years (2015 +29.427 bps; 2022 +11.196), confirming
+regime uncertainty. Assumed equal transaction cost cancels in a
+*relative return difference* but these controls were not real trades;
+quotes, auction fillability, costs, borrowed shares and complete verified
+NYSE session calendars are still absent. No real market outcome is asserted.
+
+Code changes: 7 deterministic synthetic/adversarial tests, strict past-only
+window, prior-year warmup, all-event completeness, same-weekday/no-long-gap,
+future-poisoning and duplicate/unsorted-date refusal. No dependencies, live
+broker API, orders, secrets, deployment, task edits or data redistribution.
+Reproduce: `PYTHONPATH=src pytest -q tests/test_equity_long_weekend_audit.py`.
+The earlier separate Tradier Options Research v4.9 synthetic rare-loss
+experiment was inspected and not duplicated.
+
+**Next:** source-authorized timestamped prospective SPY bid/ask or auction
+quotes, independently verified NYSE session completeness, frozen
+forward paper-trial protocol. The
+[NYSE official holidays](https://www.nyse.com/trade/hours-calendars)
+and [MIT pandas_market_calendars](https://github.com/rsheftel/pandas_market_calendars)
+were considered, but no new heavy dependency introduced. Preserve draft
+status and independent release-drift trust-root authorization.
