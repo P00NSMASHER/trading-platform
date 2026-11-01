@@ -190,3 +190,43 @@ def test_explicit_historical_cusip_stages(tmp_path: Path):
     assert summary["remaining_request_count"] == 0
     rows = list(csv.DictReader(out.open(encoding="utf-8")))
     assert rows[0]["cusip"] == "123456789"
+
+
+def test_reviewed_fails_closed_on_non_ascii_cusip_and_invalid_dates(tmp_path: Path):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        "treated,AAA,2015-01-01\n",
+        encoding="utf-8",
+    )
+    reviewed = tmp_path / "reviewed.csv"
+    output = tmp_path / "staged.csv"
+    header = (
+        "target_kind,historical_symbol,cusip,valid_from,valid_through,"
+        "source_reference,evidence_effective_at,review_status,research_use_only\n"
+    )
+    cases = [
+        ("12345678É", "2010-01-01", "2020-01-01"),
+        ("123456789", "2010-02-30", "2020-01-01"),
+        ("123456789", "2010-01-01T12:00:00Z", "2020-01-01"),
+        ("123456789", "2010-01-01", "2020-01-01extra"),
+    ]
+    for cusip_value, valid_from, valid_through in cases:
+        reviewed.write_text(
+            header
+            + f"treated,AAA,{cusip_value},{valid_from},{valid_through},"
+            "AUTHORIZED_MASTER,2020-01-02T00:00:00Z,"
+            "EXPLICIT_HISTORICAL_CUSIP_VERIFIED,1\n",
+            encoding="utf-8",
+        )
+        try:
+            cusip.stage_reviewed(
+                acquisition_queue_path=queue,
+                reviewed_evidence_path=reviewed,
+                output_path=output,
+            )
+        except cusip.G5HistoricalCusipError:
+            pass
+        else:
+            raise AssertionError("invalid historical CUSIP evidence was staged")
+        assert not output.exists()
