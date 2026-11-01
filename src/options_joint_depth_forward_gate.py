@@ -19,6 +19,49 @@ from options_quote_depth_gate import DepthError, audit_quote_depth
 
 MAX_ROWS = 5000
 
+# Official Cboe U.S. OPTIONS RTH calendars, confirmed 2026-11-01:
+# https://www.cboe.com/about/hours/us-options (2026 and 2027 tables).
+# This screen supports conservative ordinary equity-option RTH only, not
+# select extended hours or special 13:15/16:15 eligible option classes.
+# Unattested years fail closed rather than silently assuming a normal day.
+_CBOE_RTH_HOLIDAYS = {
+    2026: frozenset(date(2026, m, d) for m, d in (
+        (1, 1), (1, 19), (2, 16), (4, 3), (5, 25), (6, 19),
+        (7, 3), (9, 7), (11, 26), (12, 25),
+    )),
+    2027: frozenset(date(2027, m, d) for m, d in (
+        (1, 1), (1, 18), (2, 15), (3, 26), (5, 31), (6, 18),
+        (7, 5), (9, 6), (11, 25), (12, 24),
+    )),
+}
+_CBOE_RTH_EARLY_CLOSE = {
+    2026: frozenset((date(2026, 11, 27), date(2026, 12, 24))),
+    2027: frozenset((date(2027, 11, 26),)),
+}
+
+
+def _in_attested_regular_session(raw):
+    """Fail closed for unknown calendar years and non-RTH quote timestamps."""
+    if not isinstance(raw, str):
+        return False
+    try:
+        observed = datetime.fromisoformat(
+            raw.strip().replace("Z", "+00:00")
+        )
+    except ValueError:
+        return False
+    if observed.tzinfo is None or observed.utcoffset() is None:
+        return False
+    observed = observed.astimezone(EASTERN)
+    holidays = _CBOE_RTH_HOLIDAYS.get(observed.year)
+    if (holidays is None or observed.weekday() >= 5
+            or observed.date() in holidays):
+        return False
+    close_minutes = (13 * 60 if observed.date()
+                     in _CBOE_RTH_EARLY_CLOSE[observed.year] else 16 * 60)
+    minutes = observed.hour * 60 + observed.minute
+    return 9 * 60 + 30 <= minutes < close_minutes
+
 
 class JointEvidenceError(ValueError):
     """Sanitized admission failure; never embeds private marks or OCC symbols."""
@@ -82,23 +125,14 @@ def audit_joint_depth_forward(paper_rows, depth_rows, *, asof):
                 "Expiry-day quote mark cannot prove assignment-safe close"
             )
 
-    # Regular-session envelope for US equity-option L1 evidence.  Extended
-    # sessions, weekends and premarket quotes must not simulate fillable legs.
-    # 16:00 ET is intentionally a conservative cutoff: some eligible ETF
-    # options trade to 16:15; this screen does not certify those prints.
-    # Exchange holidays and special early closes remain UNATTESTED and need
-    # an independently sourced broker/exchange session calendar before use.
-    def in_conservative_session(raw):
-        observed = datetime.fromisoformat(
-            raw.strip().replace("Z", "+00:00")
-        ).astimezone(EASTERN)
-        minutes = observed.hour * 60 + observed.minute
-        return observed.weekday() < 5 and 570 <= minutes < 960
+    # Conservative regular-session envelope for all entry/exit evidence.
+    # Official closures and 13:00 early closes are included for 2026/2027;
+    # RTH-only marks still NEVER establish broker fillability.
 
     for row in paper_rows:
         for field in ("decision_utc", "entry_utc", "entry_quote_utc",
                       "exit_utc", "exit_quote_utc"):
-            if not in_conservative_session(row[field]):
+            if not _in_attested_regular_session(row[field]):
                 raise JointEvidenceError(
                     "Regular-session quote observation missing"
                 )
@@ -109,7 +143,7 @@ def audit_joint_depth_forward(paper_rows, depth_rows, *, asof):
         for row in depth_rows:
             for event in ("entry", "exit"):
                 for leg_side in ("short_bid", "short_ask", "long_bid", "long_ask"):
-                    if not in_conservative_session(row[event + "_" + leg_side + "_utc"]):
+                    if not _in_attested_regular_session(row[event + "_" + leg_side + "_utc"]):
                         raise JointEvidenceError(
                             "Regular-session quote observation missing"
                         )
