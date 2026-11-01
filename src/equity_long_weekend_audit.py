@@ -239,6 +239,68 @@ def same_year_weekday_diagnostics(rows: list[GapObservation]) -> dict:
     return result
 
 
+
+def trailing_weekday_control(rows: list[GapObservation], cohort_start: date,
+                             cohort_stop: date, lookback_sessions: int = 252,
+                             min_controls: int = 10) -> dict:
+    """EXPLORATORY prior-only negative control, not a live trading signal.
+
+    Compare each long-gap event to its weekday's non-long-gap observations
+    in the previous `lookback_sessions` market sessions. Prior years may
+    provide history, but future and same-day returns cannot enter a baseline.
+    If an event lacks peers, withhold the whole cohort's estimated mean.
+    """
+    if (type(lookback_sessions) is not int or lookback_sessions < 1
+            or type(min_controls) is not int or min_controls < 1
+            or cohort_start > cohort_stop):
+        raise ValueError("Invalid predeclared trailing control settings.")
+    if any(a.day >= b.day for a, b in zip(rows, rows[1:])):
+        raise InvalidPriceEvidence("Trailing controls require sorted unique sessions.")
+    n, matched, missing = 0, [], []
+    minimum_peer_count = None
+    for index, row in enumerate(rows):
+        if not (cohort_start <= row.day <= cohort_stop
+                and row.previous_session_gap_days >= 4):
+            continue
+        n += 1
+        peers = [r.intraday_bps for r in
+                 rows[max(0, index - lookback_sessions):index]
+                 if r.day.weekday() == row.day.weekday()
+                 and r.previous_session_gap_days < 4]
+        minimum_peer_count = (len(peers) if minimum_peer_count is None
+                              else min(minimum_peer_count, len(peers)))
+        if len(peers) < min_controls:
+            missing.append(row.day.isoformat())
+        else:
+            matched.append((row.day.year,
+                            row.intraday_bps - sum(peers) / len(peers)))
+    result = {
+        "exploratory_prior_only_not_a_trading_signal": True,
+        "same_weekday_non_long_gap_peers_only": True,
+        "lookback_prior_sessions": lookback_sessions,
+        "min_controls_required": min_controls,
+        "total_long_events": n,
+        "matched_long_events": len(matched),
+        "minimum_available_peer_count": minimum_peer_count,
+        "unmatched_event_dates": missing,
+        "complete_cohort": n > 0 and not missing,
+        "event_weighted_difference_bps": None,
+        "annual_difference_bps": {},
+    }
+    if not result["complete_cohort"]:
+        return result
+    result["event_weighted_difference_bps"] = round(
+        sum(value for _, value in matched) / len(matched), 3)
+    per_year: dict[int, list[float]] = defaultdict(list)
+    for year, value in matched:
+        per_year[year].append(value)
+    result["annual_difference_bps"] = {
+        str(year): round(sum(values) / len(values), 3)
+        for year, values in sorted(per_year.items())
+    }
+    return result
+
+
 def evaluate(first: list[Bar], second: list[Bar], include_single_vendor: bool = False) -> dict:
     paired, max_diff = paired_observations(first, second)
     extension = build_observations(second) if include_single_vendor else []
@@ -259,6 +321,8 @@ def evaluate(first: list[Bar], second: list[Bar], include_single_vendor: bool = 
                 [x for x in window if x.previous_session_gap_days == 1]),
             "exploratory_gap_control": gap_control_diagnostics(window),
             "exploratory_same_year_weekday_control": same_year_weekday_diagnostics(window),
+            "exploratory_prior_only_weekday_control": trailing_weekday_control(
+                source, start, stop),
         }
     return result
 
