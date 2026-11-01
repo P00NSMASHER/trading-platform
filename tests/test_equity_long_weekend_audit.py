@@ -121,3 +121,63 @@ def test_immutable_source_hash_and_size_guards(tmp_path):
         load_source(path, "0" * 40)
     with pytest.raises(InvalidPriceEvidence, match="Source absent"):
         load_source(tmp_path / "absent.csv", "0" * 40)
+
+
+from equity_long_weekend_audit import gap_control_diagnostics
+
+
+def test_matched_control_exploratory_negative_control_and_leave_one_year_out():
+    # Preset outcomes, three distinct calendar years. No prices or live fills.
+    rows = [
+        GapObservation(date(2019, 1, 22), 4, 100),
+        GapObservation(date(2019, 1, 28), 3, 0),
+        GapObservation(date(2020, 1, 21), 4, -20),
+        GapObservation(date(2020, 1, 27), 3, 10),
+        GapObservation(date(2021, 1, 19), 4, -40),
+        GapObservation(date(2021, 1, 25), 3, -20),
+    ]
+    report = gap_control_diagnostics(rows)
+    assert report["exploratory_not_a_trading_signal"] is True
+    assert report["same_roundtrip_cost_cancels_in_difference"] is True
+    assert report["matched_years"] == [2019, 2020, 2021]
+    assert report["long_events"] == 3
+    assert report["three_day_weekend_controls"] == 3
+    assert report["pooled_long_minus_control_gross_bps"] == 16.667
+    assert report["equal_year_long_minus_control_gross_bps"] == 16.667
+    assert report["leave_one_year_out_equal_year_range_bps"] == [-25, 40]
+    assert report["gap_ge5_review_dates"] == []
+
+
+def test_exploratory_control_flags_unusual_exchange_closure_not_silent_exclusion():
+    # Oct 29-30 2012 NYSE closure by Sandy: Fri Oct 26 -> Wed Oct 31.
+    rows = [
+        GapObservation(date(2012, 10, 31), 5, -35.248499),
+        GapObservation(date(2012, 11, 5), 3, 5),
+        GapObservation(date(2012, 12, 26), 4, 10),
+    ]
+    report = gap_control_diagnostics(rows)
+    assert report["long_events"] == 2
+    assert report["gap_ge5_review_dates"] == ["2012-10-31"]
+    assert report["long_mean_excluding_ge5_gaps_bps"] == 10
+    # Preserve original hypothesis and label this exclusion post-hoc.
+    assert report["pooled_long_minus_control_gross_bps"] == -17.624
+    assert report["leave_one_year_out_equal_year_range_bps"] is None
+
+
+def test_exploratory_control_refuses_unmatched_cohort_claim():
+    rows = [GapObservation(date(2022, 1, 18), 4, 30)]
+    report = gap_control_diagnostics(rows)
+    assert report["matched_years"] == []
+    assert report["pooled_long_minus_control_gross_bps"] is None
+    assert report["equal_year_long_minus_control_gross_bps"] is None
+    assert report["leave_one_year_out_equal_year_range_bps"] is None
+    assert gap_control_diagnostics([])["long_events"] == 0
+
+
+def test_evaluate_existing_primary_result_unmodified_by_negative_control():
+    output = evaluate(sample(), sample())
+    cohort = output["cohorts"]["retrospective_holdout_2019_2022"]
+    assert cohort["post_long_weekend_gap_ge4_long_only"]["events"] == 2
+    assert cohort["post_long_weekend_gap_ge4_long_only"]["net_mean_bps"]["20"] == 30
+    assert cohort["exploratory_gap_control"]["long_events"] == 2
+    assert cohort["exploratory_gap_control"]["gap_ge5_review_dates"] == ["2020-01-27"]

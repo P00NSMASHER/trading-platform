@@ -107,6 +107,74 @@ def describe(selected: list[GapObservation]) -> dict:
     }
 
 
+
+def gap_control_diagnostics(rows: list[GapObservation]) -> dict:
+    """Exploratory negative control, not a new strategy or independent test.
+
+    A same-cost comparison against regular three-day weekends removes the
+    constant assumed transaction cost. It does NOT remove weekday/calendar
+    confounding, execution uncertainty, or post-selection bias.
+    """
+    long = [x for x in rows if x.previous_session_gap_days >= 4]
+    ordinary = [x for x in rows if x.previous_session_gap_days == 3]
+    suspect = [x for x in long if x.previous_session_gap_days >= 5]
+    sensitivity = [x.intraday_bps for x in long
+                   if x.previous_session_gap_days == 4]
+    result = {
+        "exploratory_not_a_trading_signal": True,
+        "same_roundtrip_cost_cancels_in_difference": True,
+        "long_events": len(long),
+        "three_day_weekend_controls": len(ordinary),
+        "pooled_long_minus_control_gross_bps": None,
+        "equal_year_long_minus_control_gross_bps": None,
+        "matched_years": [],
+        "annual_difference_bps": {},
+        "leave_one_year_out_equal_year_range_bps": None,
+        "gap_ge5_review_dates": [x.day.isoformat() for x in suspect],
+        "long_mean_excluding_ge5_gaps_bps": (
+            round(sum(sensitivity) / len(sensitivity), 3)
+            if suspect and sensitivity else None
+        ),
+    }
+    if not long or not ordinary:
+        return result
+    years: dict[int, dict[str, list[float]]] = defaultdict(
+        lambda: {"long": [], "ordinary": []}
+    )
+    for row in rows:
+        if row.previous_session_gap_days >= 4:
+            years[row.day.year]["long"].append(row.intraday_bps)
+        elif row.previous_session_gap_days == 3:
+            years[row.day.year]["ordinary"].append(row.intraday_bps)
+    annual = []
+    for year in sorted(years):
+        buckets = years[year]
+        if not buckets["long"] or not buckets["ordinary"]:
+            continue
+        value = (sum(buckets["long"]) / len(buckets["long"])
+                 - sum(buckets["ordinary"]) / len(buckets["ordinary"]))
+        annual.append(value)
+        result["matched_years"].append(year)
+        result["annual_difference_bps"][str(year)] = round(value, 3)
+    if not annual:
+        return result
+    result["pooled_long_minus_control_gross_bps"] = round(
+        sum(x.intraday_bps for x in long) / len(long)
+        - sum(x.intraday_bps for x in ordinary) / len(ordinary), 3)
+    result["equal_year_long_minus_control_gross_bps"] = round(
+        sum(annual) / len(annual), 3)
+    if len(annual) >= 3:
+        leave_one_out = [
+            (sum(annual) - value) / (len(annual) - 1)
+            for value in annual
+        ]
+        result["leave_one_year_out_equal_year_range_bps"] = [
+            round(min(leave_one_out), 3),
+            round(max(leave_one_out), 3),
+        ]
+    return result
+
+
 def evaluate(first: list[Bar], second: list[Bar], include_single_vendor: bool = False) -> dict:
     paired, max_diff = paired_observations(first, second)
     extension = build_observations(second) if include_single_vendor else []
@@ -125,6 +193,7 @@ def evaluate(first: list[Bar], second: list[Bar], include_single_vendor: bool = 
                 [x for x in window if x.previous_session_gap_days == 3]),
             "weekday_gap_eq1_control": describe(
                 [x for x in window if x.previous_session_gap_days == 1]),
+            "exploratory_gap_control": gap_control_diagnostics(window),
         }
     return result
 
