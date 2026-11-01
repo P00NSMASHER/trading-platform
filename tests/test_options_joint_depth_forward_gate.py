@@ -93,6 +93,23 @@ class JointGateTests(unittest.TestCase):
         r = audit_joint_depth_forward([p], [d], asof=ASOF)
         self.assertEqual(r["status"], "QUOTE_DEPTH_BLOCKED")
 
+    def test_inverted_cross_leg_exit_blocks_quote_only_illusion(self):
+        p, d = make_case()
+        # Each individual leg is uncrossed and within its spread limit,
+        # but short ask $0.05 < long bid $0.10; no executable debit is proven.
+        p["exit_short_bid"] = d["exit_short_bid_px"] = "0.04"
+        p["exit_short_ask"] = d["exit_short_ask_px"] = "0.05"
+        with self.assertRaisesRegex(JointEvidenceError, "Cross-leg exit"):
+            audit_joint_depth_forward([p], [d], asof=ASOF)
+
+    def test_one_inverted_package_rejects_whole_65_mark_cohort(self):
+        cases = [make_case(i) for i in range(65)]
+        p, d = map(list, zip(*cases))
+        p[-1]["exit_short_bid"] = d[-1]["exit_short_bid_px"] = "0.04"
+        p[-1]["exit_short_ask"] = d[-1]["exit_short_ask_px"] = "0.05"
+        with self.assertRaisesRegex(JointEvidenceError, "Cross-leg exit"):
+            audit_joint_depth_forward(p, d, asof=ASOF)
+
     def test_bad_oi_rejected_by_canonical_evaluator(self):
         p, d = make_case()
         p["short_open_interest"] = "0"
