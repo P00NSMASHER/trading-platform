@@ -93,3 +93,78 @@ outcomes remain the options bottleneck; no API calls or live orders.
 NBBO data for the candidate equity entry/exit points and an independent
 verified NYSE exchange schedule; run a preregistered 2026+ prospective
 paper ledger with honest friction and zero selective omissions.
+
+
+## Hunter checkpoint 3: weekday/year confounding (2026-10-31)
+
+**Disposition: REJECT the original LONG rule; no profitable executable edge or independent forward confirmation.**
+This additional *post-hoc diagnostic* controls for one obvious holiday anomaly:
+most long gaps resume on different weekdays than ordinary weekends. For each
+original >=4-calendar-day-gap event, subtract the average OPEN-to-CLOSE gross
+return of **every session with a <4-day gap in that same calendar year and
+weekday**. Each event must have a matched control or the entire cohort fails
+closed; controls are never selected by their outcomes. Compare event-weighted
+and equal-year effects, then delete one entire year at a time. This is a
+retrospective benchmark using the *whole year's returns*, including dates
+after a hypothetical entry, and explicitly cannot serve as a point-in-time
+prediction, tradable benchmark or formal causal identification.
+
+| Source-constrained cohort | Long events matched | Non-long-gap control sessions | Event-weighted event-minus-weekday/year gross bps | Equal-year mean bps | Leave-one-year-out equal-year range bps |
+|---|---:|---:|---:|---:|---:|
+| 2011-12 train, dual-archive overlap | 14/14 | 485 | **-7.729** | -7.729 | too few years |
+| 2013-18 validation, dual-archive overlap | 39/39 | 1,471 | **-5.860** | -6.736 | -14.143 to +1.914 |
+| 2019-22 retrospective holdout (through 2022-11-18), dual-archive overlap | 27/27 | 953 | **-12.177** | -12.419 | -23.864 to -4.848 |
+| 2023-25 single-archive retrospective extension | 20/20 | 732 | **-29.030** | -28.302 | -40.355 to -19.889 |
+
+The matched-source period has 2,990 aligned trading sessions and at most
+0.000759 bps OPEN-to-CLOSE return disagreement. These archives are *not two
+economically independent vendors*. Exact pinned Git blobs and source addresses
+are listed above. Values independently computed in JavaScript directly from
+both linked immutable GitHub source contents, using UTC session dates; the
+testable Python implementation accepts the same pre-existing source hash
+checks and does not commit the underlying unlicensed vendor bars. Any source
+reuse remains subject to checking original data permissions.
+
+**Interpretation and adverse evidence:** the negative measured relative
+differences persist in the later periods after a simple weekday/year control,
+but a 2015 yearly effect is positive, 2022's is +21.917 bps, and the 2013-18
+leave-one-year-out range includes zero. Constant matched round-trip assumed
+costs cancel from a *difference*, but open/close print marks are not
+executable bid/ask fills and actual costs can differ by holiday. The study is
+post-hoc, events are few and correlated, there are multiple prior tested
+hypotheses, and a genuine exchange-session calendar has not been reconciled.
+No p-values, trading significance or reverse-direction alpha are claimed.
+
+**Prior art / confound:** weekday effects have been documented (Berument and
+Kiymaz, 2001, https://doi.org/10.1007/bf02744521); SPY intraday weekday
+effects are discussed in
+https://www.cxoadvisory.com/calendar-effects/spy-by-day-of-week-and-overnight/.
+Hurricane Sandy's 2012-10-29/30 unscheduled NYSE closures were documented
+on 2012-10-30:
+https://www.cbsnews.com/news/new-york-stock-exchange-to-reopen-wednesday/.
+No universal novelty claim.
+
+**Verification:** new `same_year_weekday_diagnostics` is wired into the
+existing offline `evaluate` cohort report, with six synthetic/adversarial
+regressions (year/weekday matching, unequal-year weighting, unmatched-event
+fail-closed, event exclusion, no-event behavior, frozen primary strategy).
+Run: `PYTHONPATH=src python -m pytest -q tests/test_equity_long_weekend_audit.py`.
+No new dependencies, broker paths, order access or data redistribution.
+Exact-head GitHub CI is the required arbiter; do **not** infer that the tests
+pass merely because this source is committed.
+
+**Ranked next experiments (all paper-only):**
+1. Source-authorized 2026+ timestamped executable SPY NBBO/auction observations
+   at both entry and exit; compare actual spreads, fees, adverse selection and
+   slippage with 10/20/30-bps assumptions, and independently verify NYSE
+   closures/session completeness before making any new signal claims.
+2. Prospective, frozen out-of-sample long-gap cohort with fixed sample and
+   cost/power gates, recorded before observing outcomes; report all dates and
+   uncertainty, including null results.
+3. Coordinate with the separate Tradier Options Research task on its v4.8
+   $100 slippage-stress risk-cap patch and quote-consistency issue; do not
+   duplicate its work or fabricate expired-option price histories.
+
+**Rollback:** close/revert this draft research PR; it does not touch any
+production strategy, brokerage integration, release trust root, automation or
+protected baseline.
