@@ -12,17 +12,23 @@ SIDES = ("short_bid", "short_ask", "long_bid", "long_ask")
 
 
 def make_case(i=0, *, underlying="TEST", losing=False):
-    # Weekday-only SYNTHETIC timing: two weekdays between entries, never
-    # imply weekend quote availability. Exchange holidays are not modeled.
+    # Cboe 2026 RTH holidays (source-checked 2026-11-01). Positive synthetic
+    # controls must NOT silently create quote observations on closed days.
+    closed_2026 = {
+        (1, 1), (1, 19), (2, 16), (4, 3), (5, 25), (6, 19),
+        (7, 3), (9, 7), (11, 26), (12, 25),
+    }
+    def open_day(at):
+        return at.weekday() < 5 and (at.month, at.day) not in closed_2026
     entry = START
-    weekday_steps = 0
-    while weekday_steps < 2 * i:
+    trading_steps = 0
+    while trading_steps < 2 * i:
         entry += timedelta(days=1)
-        if entry.weekday() < 5:
-            weekday_steps += 1
+        if open_day(entry):
+            trading_steps += 1
     decision = entry
     exit_time = entry + timedelta(days=1)
-    while exit_time.weekday() >= 5:
+    while not open_day(exit_time):
         exit_time += timedelta(days=1)
     expiry = entry.date() + timedelta(days=(4 - entry.weekday()) % 7 + 7)
     right = "C"
@@ -268,12 +274,89 @@ class JointGateTests(unittest.TestCase):
     def test_one_weekend_exit_blocks_all_65_synthetic_marks(self):
         cases = [make_case(i) for i in range(65)]
         p, d = map(list, zip(*cases))
-        # Last mark enters Thursday in the synthetic schedule; Saturday exit
-        # remains before the later Friday contract expiry.
-        self._retime(p[-1], d[-1], "exit",
-                     datetime(2026, 7, 4, 16, tzinfo=UTC))
+        # Retain an actual weekend EXIT after the holiday-adjusted last entry.
+        last_entry = datetime.fromisoformat(p[-1]["entry_utc"])
+        saturday = last_entry + timedelta(days=(5 - last_entry.weekday()) % 7)
+        self._retime(p[-1], d[-1], "exit", saturday)
         with self.assertRaisesRegex(JointEvidenceError, "Regular-session"):
             audit_joint_depth_forward(p, d, asof=ASOF)
+
+    @classmethod
+    def _calendar_case(cls, *, entry, exit_at, expiry):
+        paper, book = make_case()
+        paper["expiry"] = expiry
+        occ_date = datetime.fromisoformat(expiry).strftime("%y%m%d")
+        paper["short_contract"] = book["short_contract"] = (
+            "TEST" + occ_date + "C00101000")
+        paper["long_contract"] = book["long_contract"] = (
+            "TEST" + occ_date + "C00102000")
+        cls._retime(paper, book, "entry", entry)
+        cls._retime(paper, book, "exit", exit_at)
+        return paper, book
+
+    def test_official_2026_thanksgiving_closed_and_early_cutoff(self):
+        entry = datetime(2026, 11, 24, 15, 30, tzinfo=UTC)
+        asof = datetime(2026, 12, 15, 20, tzinfo=UTC)
+        p, d = self._calendar_case(entry=entry,
+            exit_at=datetime(2026, 11, 27, 17, tzinfo=UTC),
+            expiry="2026-12-11")
+        control = audit_joint_depth_forward([p], [d], asof=asof)
+        self.assertEqual(control["status"], "FORWARD_EVIDENCE_NOT_POSITIVE")
+        self.assertEqual(control["edge_verdict"], "UNPROVEN")
+        for out in (datetime(2026, 11, 26, 17, tzinfo=UTC),
+                    datetime(2026, 11, 27, 18, tzinfo=UTC),
+                    datetime(2026, 11, 27, 19, tzinfo=UTC)):
+            with self.subTest(out=out):
+                bad_p, bad_d = self._calendar_case(
+                    entry=entry, exit_at=out, expiry="2026-12-11")
+                with self.assertRaisesRegex(JointEvidenceError,
+                                            "Regular-session"):
+                    audit_joint_depth_forward([bad_p], [bad_d], asof=asof)
+
+    def test_official_2026_christmas_early_close_and_holiday(self):
+        entry = datetime(2026, 12, 22, 15, 30, tzinfo=UTC)
+        asof = datetime(2027, 1, 15, 20, tzinfo=UTC)
+        for out, valid in ((datetime(2026, 12, 24, 17, tzinfo=UTC), True),
+                           (datetime(2026, 12, 24, 18, tzinfo=UTC), False),
+                           (datetime(2026, 12, 25, 17, tzinfo=UTC), False)):
+            p, d = self._calendar_case(
+                entry=entry, exit_at=out, expiry="2027-01-08")
+            with self.subTest(out=out):
+                if valid:
+                    self.assertEqual(
+                        audit_joint_depth_forward([p], [d], asof=asof)["status"],
+                        "FORWARD_EVIDENCE_NOT_POSITIVE")
+                else:
+                    with self.assertRaisesRegex(JointEvidenceError,
+                                                "Regular-session"):
+                        audit_joint_depth_forward([p], [d], asof=asof)
+
+    def test_2027_thanksgiving_and_unattested_year_fail_closed(self):
+        from options_joint_depth_forward_gate import _in_attested_regular_session
+        self.assertFalse(_in_attested_regular_session(
+            "2027-11-25T12:00:00-05:00"))
+        self.assertTrue(_in_attested_regular_session(
+            "2027-11-26T12:59:59-05:00"))
+        self.assertFalse(_in_attested_regular_session(
+            "2027-11-26T13:00:00-05:00"))
+        self.assertFalse(_in_attested_regular_session(
+            "2028-11-24T12:00:00-05:00"))
+        self.assertTrue(_in_attested_regular_session(
+            "2026-01-05T15:00:00Z"))  # 10:00 EST
+        self.assertTrue(_in_attested_regular_session(
+            "2026-07-06T14:00:00Z"))  # 10:00 EDT
+        # Every 2026 and 2027 Cboe RTH full closure, no cherry-picking.
+        calendar = {
+            2026: ((1, 1), (1, 19), (2, 16), (4, 3), (5, 25),
+                   (6, 19), (7, 3), (9, 7), (11, 26), (12, 25)),
+            2027: ((1, 1), (1, 18), (2, 15), (3, 26), (5, 31),
+                   (6, 18), (7, 5), (9, 6), (11, 25), (12, 24)),
+        }
+        for year, dates in calendar.items():
+            for month, day in dates:
+                with self.subTest(year=year, month=month, day=day):
+                    self.assertFalse(_in_attested_regular_session(
+                        f"{year}-{month:02d}-{day:02d}T12:00:00-05:00"))
 
     def test_no_network_or_order_code(self):
         from pathlib import Path
