@@ -82,6 +82,38 @@ def audit_joint_depth_forward(paper_rows, depth_rows, *, asof):
                 "Expiry-day quote mark cannot prove assignment-safe close"
             )
 
+    # Regular-session envelope for US equity-option L1 evidence.  Extended
+    # sessions, weekends and premarket quotes must not simulate fillable legs.
+    # 16:00 ET is intentionally a conservative cutoff: some eligible ETF
+    # options trade to 16:15; this screen does not certify those prints.
+    # Exchange holidays and special early closes remain UNATTESTED and need
+    # an independently sourced broker/exchange session calendar before use.
+    def in_conservative_session(raw):
+        observed = datetime.fromisoformat(
+            raw.strip().replace("Z", "+00:00")
+        ).astimezone(EASTERN)
+        minutes = observed.hour * 60 + observed.minute
+        return observed.weekday() < 5 and 570 <= minutes < 960
+
+    for row in paper_rows:
+        for field in ("decision_utc", "entry_utc", "entry_quote_utc",
+                      "exit_utc", "exit_quote_utc"):
+            if not in_conservative_session(row[field]):
+                raise JointEvidenceError(
+                    "Regular-session quote observation missing"
+                )
+    # A coherent side book may contain source timestamps that precede the
+    # official 09:30 opening even when quote capture is timestamped at 09:30.
+    # Examine all eight side updates only after depth validity is confirmed.
+    if depth["status"] == "QUOTE_DEPTH_SCREEN_ONLY":
+        for row in depth_rows:
+            for event in ("entry", "exit"):
+                for leg_side in ("short_bid", "short_ask", "long_bid", "long_ask"):
+                    if not in_conservative_session(row[event + "_" + leg_side + "_utc"]):
+                        raise JointEvidenceError(
+                            "Regular-session quote observation missing"
+                        )
+
     count = forward["completed_marks"]
     if count != depth["submitted_marks"]:
         raise JointEvidenceError("Paper and depth populations disagree")

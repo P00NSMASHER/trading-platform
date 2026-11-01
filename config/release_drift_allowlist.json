@@ -2900,12 +2900,12 @@
       "reason": "2026-10-30: deterministic 100-row synthetic counterexample showing incomplete depth prevents paper evidence promotion"
     },
     "src/options_joint_depth_forward_gate.py": {
-      "expected_sha256": "0ac84a3f6b8835ddf423cd0ee7cf2aff3208c64a8bbd73f780e0a53b8ec93420",
-      "reason": "2026-11-01: conservative expiry-day L1 quote-mark fail-closed admission in full-cohort joint options gate; assignment and 100-share overnight stock exposure remain uncalibrated; no broker fills"
+      "expected_sha256": "ada6dc82a5cefb3d65b3887ec384f6038daea763846ea87043728246ae9a3a3e",
+      "reason": "2026-11-01: conservative NY weekday 09:30-16:00 option entry/exit/quote and side-update admission screen added to the existing synthetic joint gate; exchange holidays, early closes, broker fills, and assignment remain unverified"
     },
     "tests/test_options_joint_depth_forward_gate.py": {
-      "expected_sha256": "2b5b2e7739abe8da167345ab7c321cffac4a8737f22369f1a90b43724263be42",
-      "reason": "2026-11-01: add synthetic bear-call, bull-put, New York/UTC expiry rollover and full-65-cohort assignment-window controls; no empirical market evidence"
+      "expected_sha256": "b61b00945cda30c1139f1b4e63ca7941b95933becb0143e5d5c1e5fdeb39962b",
+      "reason": "2026-11-01: synthetic weekend/premarket/after-hours/side-update/full-cohort rejection tests; corrected 65-case dates to weekdays, not an exchange holiday calendar; zero broker fills or actual market edge"
     }
   },
   "schema_version": "2",

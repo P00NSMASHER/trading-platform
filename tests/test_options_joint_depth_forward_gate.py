@@ -12,10 +12,19 @@ SIDES = ("short_bid", "short_ask", "long_bid", "long_ask")
 
 
 def make_case(i=0, *, underlying="TEST", losing=False):
-    entry = START + timedelta(days=2*i)
+    # Weekday-only SYNTHETIC timing: two weekdays between entries, never
+    # imply weekend quote availability. Exchange holidays are not modeled.
+    entry = START
+    weekday_steps = 0
+    while weekday_steps < 2 * i:
+        entry += timedelta(days=1)
+        if entry.weekday() < 5:
+            weekday_steps += 1
     decision = entry
     exit_time = entry + timedelta(days=1)
-    expiry = (entry.date() + timedelta(days=10))
+    while exit_time.weekday() >= 5:
+        exit_time += timedelta(days=1)
+    expiry = entry.date() + timedelta(days=(4 - entry.weekday()) % 7 + 7)
     right = "C"
     short = underlying + expiry.strftime("%y%m%d") + right + "00101000"
     long = underlying + expiry.strftime("%y%m%d") + right + "00102000"
@@ -207,6 +216,64 @@ class JointGateTests(unittest.TestCase):
             audit_joint_depth_forward([], [], asof=None)
         with self.assertRaises(JointEvidenceError):
             audit_joint_depth_forward(iter([]), [], asof=ASOF)
+
+    @staticmethod
+    def _retime(paper, depth, event, at):
+        paper[event + "_utc"] = at.isoformat()
+        paper[event + "_quote_utc"] = (at - timedelta(seconds=15)).isoformat()
+        if event == "entry":
+            paper["decision_utc"] = at.isoformat()
+            paper["greeks_time_utc"] = (at - timedelta(minutes=45)).isoformat()
+        for side in SIDES:
+            depth[event + "_" + side + "_utc"] = (
+                at - timedelta(seconds=17)
+            ).isoformat()
+
+    def test_weekend_entry_is_not_a_quote_fill(self):
+        p, d = make_case()
+        self._retime(p, d, "entry", datetime(2026, 1, 4, 16, tzinfo=UTC))
+        with self.assertRaisesRegex(JointEvidenceError, "Regular-session"):
+            audit_joint_depth_forward([p], [d], asof=ASOF)
+
+    def test_weekend_exit_is_not_a_quote_fill(self):
+        p, d = make_case()
+        self._retime(p, d, "exit", datetime(2026, 1, 10, 16, tzinfo=UTC))
+        with self.assertRaisesRegex(JointEvidenceError, "Regular-session"):
+            audit_joint_depth_forward([p], [d], asof=ASOF)
+
+    def test_premarket_entry_is_not_a_quote_fill(self):
+        p, d = make_case()
+        self._retime(p, d, "entry", datetime(2026, 1, 5, 14, tzinfo=UTC))
+        with self.assertRaisesRegex(JointEvidenceError, "Regular-session"):
+            audit_joint_depth_forward([p], [d], asof=ASOF)
+
+    def test_afterhours_exit_is_not_a_quote_fill(self):
+        p, d = make_case()
+        self._retime(p, d, "exit", datetime(2026, 1, 6, 1, tzinfo=UTC))
+        with self.assertRaisesRegex(JointEvidenceError, "Regular-session"):
+            audit_joint_depth_forward([p], [d], asof=ASOF)
+
+    def test_side_timestamp_premarket_is_not_rehabilitated_by_open_quote(self):
+        p, d = make_case()
+        opening = datetime(2026, 1, 5, 14, 30, tzinfo=UTC)
+        self._retime(p, d, "entry", opening)
+        p["entry_quote_utc"] = opening.isoformat()
+        for side in SIDES:
+            d["entry_" + side + "_utc"] = (
+                opening - timedelta(seconds=2)
+            ).isoformat()
+        with self.assertRaisesRegex(JointEvidenceError, "Regular-session"):
+            audit_joint_depth_forward([p], [d], asof=ASOF)
+
+    def test_one_weekend_exit_blocks_all_65_synthetic_marks(self):
+        cases = [make_case(i) for i in range(65)]
+        p, d = map(list, zip(*cases))
+        # Last mark enters Thursday in the synthetic schedule; Saturday exit
+        # remains before the later Friday contract expiry.
+        self._retime(p[-1], d[-1], "exit",
+                     datetime(2026, 7, 4, 16, tzinfo=UTC))
+        with self.assertRaisesRegex(JointEvidenceError, "Regular-session"):
+            audit_joint_depth_forward(p, d, asof=ASOF)
 
     def test_no_network_or_order_code(self):
         from pathlib import Path
