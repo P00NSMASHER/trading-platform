@@ -1692,8 +1692,8 @@
       "reason": "Fail-closed Cboe historical acceptance probe: preserve 2011 equity TAQ smoke, move OPRA smoke to vendor-supported 2012, derive one historical option-quote request from a returned OSI security, and validate non-SIP-annotated NBBO fields; three requests / 45 points maximum."
     },
     "src/g2_cboe_all_access_capacity.py": {
-      "expected_sha256": "50388cb3a540a63146b070b6e5f0c14d2e382ea9fe32e3f3e5e6bcd0aba62467",
-      "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
+      "expected_sha256": "890b2eaf4f7b48239353d3fa15afb7fe80dfecc9f923dc202fbf339df8c0bff3",
+      "reason": "Source-bound 2012 Cboe OPRA acquisition capacity: 309 supported dates/3364 pairs, 105 2011 option dates/464 pairs excluded, distinct 2011 equity probe, no purchase or coverage claim. Current-main adaptation of old #273 pending independent release trust-root review."
     },
     "src/g2_cboe_equity_probe.py": {
       "expected_sha256": "e5619af42b13dd55526169c230b07b9848d79f9c9baad6b6d0102acfe5531acb",
@@ -2364,8 +2364,8 @@
       "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
     },
     "tests/test_g2_cboe_all_access_capacity.py": {
-      "expected_sha256": "44a62d7ee73e6ab9a4d024d95114e720d0a2ba600d1a25105d03a8524d4af49e",
-      "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
+      "expected_sha256": "1d55bc0719057bd0f844121109e6f1d625b87af51ebd60719b25b6d38e1a033e",
+      "reason": "Regression proof for 2012-only Cboe options versus separate 2011 equity sample; deterministic 1,242-row scope, point caps, no subscription and no coverage promotion. Candidate test only pending independent review."
     },
     "tests/test_g2_cboe_equity_probe.py": {
       "expected_sha256": "065a041bfd46652ba0221e8f17cef257d6f6972389f5ab2cbfe54c44b9a7da69",
@@ -2852,12 +2852,12 @@
       "reason": "Up-to-date Tradier API coverage/limits, official references and explicit no-historical-expired-option-bid-ask evidence boundaries. 2026-10-28: bound UTC Greek cross-endpoint corroboration to four closest 7–21DTE expiries so thin near-14DTE OI does not prevent checking liquid pairs; preserve no-guessing timezone, strict H1 eligibility, read-only safety, and aggregate-only logs. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure."
     },
     "src/options_forward_evaluator.py": {
-      "expected_sha256": "353f31e4b8c118407ad9766e6d68538b7aabe838bc70a58dd40530ae6ceeff8f",
-      "reason": "Private-only, standard-library forward options paper quote-mark evaluator: strict point-in-time data/quote/Greek checks, conservative natural bid/ask marks, full-roundtrip assumed fees, adverse slippage stress, portfolio/individual modeled risk ceilings, week-cluster confidence gates and explicit UNVERIFIED status. No brokerage/network access."
+      "expected_sha256": "ce1d6833822d2f89b1840b9a976250ec4ee122f55114308334758fd92c0445c6",
+      "reason": "Private-only, standard-library forward options paper quote-mark evaluator: strict point-in-time data/quote/Greek checks, conservative natural bid/ask marks, full-roundtrip assumed fees, adverse slippage stress, portfolio/individual modeled risk ceilings, week-cluster confidence gates and explicit UNVERIFIED status. No brokerage/network access. 2026-10-29: report modeled portfolio-capacity breach ahead of sample sufficiency."
     },
     "tests/test_options_forward_evaluator.py": {
-      "expected_sha256": "63733e886ace1b7727e09b55609a13ffe619c219f0793387166a360570f5728f",
-      "reason": "Deterministic synthetic-only acceptance tests for no-lookahead, quote freshness, H1, missing outcomes, duplicate/correlated trades, risk overlap, sample sufficiency, bootstrap determinism and private data safeguards."
+      "expected_sha256": "a7591fbd3ee3e2a37f3907b9e6376e14b55587f673ae698320ee5d421aebef1e",
+      "reason": "Deterministic synthetic-only acceptance tests for no-lookahead, quote freshness, H1, missing outcomes, duplicate/correlated trades, risk overlap, sample sufficiency, bootstrap determinism and private data safeguards. 2026-10-29: add short-sample over-capacity regression and sequential negative control."
     },
     "docs/options_forward_evidence.md": {
       "expected_sha256": "ad107a2c7a3093bcd62ecdd22b8763f722dfe39f7801998e223d291da1840bd7",
@@ -2910,6 +2910,14 @@
     "docs/HUNTERS_SEC_SIC_STRICT_DATE_2026-10-31.md": {
       "expected_sha256": "d878a16255307c571a8da4bbd88ad6306dcbc005382e2cba9393bce56389eb11",
       "reason": "Hunter #520 source-pinned SEC SIC date parser reproduction, two public alternative license assessments, exact source/test SHA evidence, and fail-closed scope/rollback rationale."
+    },
+    "src/g5_historical_index_membership_intake.py": {
+      "expected_sha256": "75260640bd890b0ac9e45a489e66bbde155312c1cb3f8c50ac67a12306341a82",
+      "reason": "Strict original point-in-time G5 index-membership candidate: reject suffixed/impossible civil dates, duplicate/blank source headers and extra CSV fields before any output; protect historical source/authorization boundaries. Review-required, no production readiness."
+    },
+    "tests/test_g5_historical_index_membership_intake.py": {
+      "expected_sha256": "64c343415ce117d8fadf80b8193a8bc1c9469ac48c70b6a1a083991530eb6a7e",
+      "reason": "Independent adversarial candidate regressions for exact civil-day validity, malformed target dates, blank/duplicate CSV headers and preserved date-cutoff/overlap fail-closed behavior. Candidate tests are NOT independent trust-root approval."
     }
   },
   "schema_version": "2",
