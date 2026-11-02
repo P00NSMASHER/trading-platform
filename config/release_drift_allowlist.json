@@ -2900,12 +2900,12 @@
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
     },
     "src/g5_historical_index_membership_intake.py": {
-      "expected_sha256": "703b77b9adb29a1d4b8b3fe2c68e089e4c1ed58f936864e12f3b2be401f0e255",
-      "reason": "G5 source-bound point-in-time historical index membership intake with source/availability checks, reviewable in PR #485; candidate SHA only, not independent trust-root approval. This candidate preserves the original source blob and was reconciled against current main af736bf6d2183160d35cb8a42171f697d0fbdcbb; independent release trust-root review and exact-head CI still required."
+      "expected_sha256": "75260640bd890b0ac9e45a489e66bbde155312c1cb3f8c50ac67a12306341a82",
+      "reason": "Strict original point-in-time G5 index-membership candidate: reject suffixed/impossible civil dates, duplicate/blank source headers and extra CSV fields before any output; protect historical source/authorization boundaries. Review-required, no production readiness."
     },
     "tests/test_g5_historical_index_membership_intake.py": {
-      "expected_sha256": "090c92607193088ce4939afc0d37c3b534dcbbfb945414726e6dd77e9f1a2918",
-      "reason": "G5 source-bound index membership intake regression coverage, including overlap, availability and fail-closed negative controls; candidate SHA only, not independent approval. This candidate preserves the original source blob and was reconciled against current main af736bf6d2183160d35cb8a42171f697d0fbdcbb; independent release trust-root review and exact-head CI still required."
+      "expected_sha256": "64c343415ce117d8fadf80b8193a8bc1c9469ac48c70b6a1a083991530eb6a7e",
+      "reason": "Independent adversarial candidate regressions for exact civil-day validity, malformed target dates, blank/duplicate CSV headers and preserved date-cutoff/overlap fail-closed behavior. Candidate tests are NOT independent trust-root approval."
     }
   },
   "schema_version": "2",
