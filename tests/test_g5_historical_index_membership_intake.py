@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import csv
+
+import pytest
 import sys
 from pathlib import Path
 
@@ -117,3 +119,57 @@ def test_unknown_bucket_is_rejected(tmp_path: Path):
         assert "unsupported bucket" in str(exc)
     else:
         raise AssertionError("expected unsupported bucket failure")
+
+
+@pytest.mark.parametrize("bad_date", [
+    "2014-01-01T00:00:00Z",
+    "2014-01-01garbage",
+    "20140101",
+    "2014-02-30",
+    "2014-01-01-extra",
+])
+def test_source_dates_must_be_exact_real_civil_days(bad_date: str):
+    with pytest.raises(membership.G5IndexMembershipError, match="YYYY-MM-DD"):
+        membership._parse_date(bad_date, label="member interval")
+
+
+def test_malformed_event_day_fails_before_output(tmp_path: Path):
+    targets = _targets(tmp_path)
+    targets.write_text(
+        targets.read_text(encoding="utf-8").replace(
+            "2015-02-17,AAA", "2015-02-17T00:00:00Z,AAA"
+        ),
+        encoding="utf-8",
+    )
+    source = tmp_path / "membership.csv"
+    source.write_text(
+        "historical_symbol,index_bucket,valid_from,valid_through,"
+        "evidence_effective_at,source_reference,authorization_reference,"
+        "research_use_only\n"
+        "AAA,SP500,2014-01-01,2016-01-01,2014-01-02T00:00:00Z,"
+        "PRIMARY_SOURCE,AUTHORIZED,1\n",
+        encoding="utf-8",
+    )
+    output = tmp_path / "out.csv"
+    with pytest.raises(membership.G5IndexMembershipError, match="YYYY-MM-DD"):
+        membership.build(targets_path=targets, membership_intervals_path=source, output_path=output)
+    assert not output.exists()
+
+
+@pytest.mark.parametrize("invalid_header", [
+    "historical_symbol,index_bucket,index_bucket,valid_from,valid_through,"
+    "evidence_effective_at,source_reference,authorization_reference,research_use_only\n",
+    "historical_symbol,,index_bucket,valid_from,valid_through,"
+    "evidence_effective_at,source_reference,authorization_reference,research_use_only\n",
+])
+def test_ambiguous_source_headers_fail_closed(tmp_path: Path, invalid_header: str):
+    source = tmp_path / "membership.csv"
+    source.write_text(invalid_header, encoding="utf-8")
+    output = tmp_path / "out.csv"
+    with pytest.raises(membership.G5IndexMembershipError, match="headers"):
+        membership.build(
+            targets_path=_targets(tmp_path),
+            membership_intervals_path=source,
+            output_path=output,
+        )
+    assert not output.exists()
