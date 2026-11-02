@@ -10,11 +10,14 @@
    institution/entity authorization with applicable TAQ entitlement.
    This repository does not establish personal WRDS access or data rights.
 */
-%let g2_wrds_authorized=%sysget(G2_WRDS_AUTHORIZED);
-%if %upcase(%superq(g2_wrds_authorized)) ne YES %then %do;
-  %put ERROR: G2 WRDS extraction disabled. Set G2_WRDS_AUTHORIZED=YES only after current institutional/entity WRDS and TAQ entitlement are verified.;
-  %abort cancel;
-%end;
+%macro g2_require_wrds_entitlement;
+  %let g2_wrds_authorized=%sysget(G2_WRDS_AUTHORIZED);
+  %if %upcase(%superq(g2_wrds_authorized)) ne YES %then %do;
+    %put ERROR: G2 WRDS extraction disabled. Set G2_WRDS_AUTHORIZED=YES only after current institutional/entity WRDS and TAQ entitlement are verified.;
+    %abort cancel;
+  %end;
+%mend;
+%g2_require_wrds_entitlement;
 
 %let input_file=
 %let output_file=;
