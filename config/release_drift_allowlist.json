@@ -2952,20 +2952,20 @@
       "reason": "Dry-run WRDS historical TAQ request manifest only. Python False flags for current personal access and coverage (not invalid JSON lowercase false), no query/login/market data/acquisition. Candidate SHA only."
     },
     "tests/test_g2_wrds_taq_request_manifest.py": {
-      "expected_sha256": "bd73994bde0c5b464fa27c4b85fc364407aac8176a0b7ba36973bcbdb5c80012",
-      "reason": "Deterministic dry-run WRDS request tests requiring false access flags and 414 dated equity rows; no network/credentials. Candidate SHA only, separate trust anchor needed."
+      "expected_sha256": "e5bf90307ff4a18e6fd44d0d60417c8ab3b91d626f512a40295c07e547d4e145",
+      "reason": "Regression checks original vendor reference scripts cannot execute by default and guarded adapted extractors refuse execution absent G2_WRDS_AUTHORIZED=YES. No licensed data, no credentials, no coverage. Candidate-only hash."
     },
     "vendor_sources/wrds/gen_li/README.md": {
       "expected_sha256": "180115b91a690db1a782fb451045288e742b5bfaee7c35cc39a4a09f0feb5370",
       "reason": "WRDS vendor/source rights, failed individual entitlement, conservative data-retention and no-coverage policy document; no login or extraction. Candidate hash only."
     },
     "vendor_sources/wrds/gen_li/WRDS_batch_ticker_cq.sas": {
-      "expected_sha256": "e5e848ab6a88a5c68bed5d0113ef84a60a093851e9ff9005a48d431b4288f60b",
-      "reason": "Inert licensed WRDS TAQ SAS reference template. No execution unless explicitly authorized institution/entity entitlement G2_WRDS_AUTHORIZED=YES; no licensed rows in this PR, original source provenance preserved. Candidate source hash only."
+      "expected_sha256": "c1d31241edf395c200856dcfe3b53a5aa221f7fec100e7683cd8a8f1a1fe9788",
+      "reason": "Provenance-only WRDS upstream reference text, now unconditionally aborts before any SAS extraction statement; original upstream bytes preserved in PR history. Explicit institution/TAQ entitlement still required. Candidate-only hash, not independent release root."
     },
     "vendor_sources/wrds/gen_li/WRDS_batch_ticker_ct.sas": {
-      "expected_sha256": "a0e2fcac06547be9857b23a9f758ad3efa81c637c92a0697c8a58efa3c7e1de0",
-      "reason": "Inert licensed WRDS TAQ SAS reference template. No execution unless explicitly authorized institution/entity entitlement G2_WRDS_AUTHORIZED=YES; no licensed rows in this PR, original source provenance preserved. Candidate source hash only."
+      "expected_sha256": "4312e5a436921701e80d92347948e2a7638a9f645b55b2aca3689f63de73ef15",
+      "reason": "Provenance-only WRDS upstream reference text, now unconditionally aborts before any SAS extraction statement; original upstream bytes preserved in PR history. Explicit institution/TAQ entitlement still required. Candidate-only hash, not independent release root."
     },
     "vendor_sources/wrds/gen_li/g2_wrds_taq_legacy.sas": {
       "expected_sha256": "22f1f2ded59c76f1b982dc8880f5b465bcc5163292589376a26850181a21a33a",
