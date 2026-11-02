@@ -98,6 +98,26 @@ class ForwardEvidenceTests(unittest.TestCase):
         self.assertEqual(report["status"], "ACCOUNT_RISK_CAPACITY_EXCEEDED")
         self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 115.2)
 
+    def test_account_risk_takes_precedence_over_small_sample(self):
+        # Two simultaneous independently keyed 57.60-risk synthetic spreads
+        # exceed the 100-dollar modeled portfolio ceiling, even at N=2.
+        two_open = [synthetic_row(0, underlying="TEST"),
+                    synthetic_row(0, underlying="PAIR")]
+        report = ev.evaluate_paper_marks(two_open, asof=ASOF)
+        self.assertEqual(report["status"], "ACCOUNT_RISK_CAPACITY_EXCEEDED")
+        self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 115.2)
+        self.assertEqual(report["completed_marks"], 2)
+        self.assertEqual(report["edge_verdict"], "UNPROVEN")
+        self.assertEqual(report["execution_proof"], "UNVERIFIED")
+
+        # Negative control: the same trades opened sequentially fit the
+        # capacity limit but remain insufficient forward evidence.
+        sequential = [synthetic_row(0, underlying="TEST"),
+                      synthetic_row(1, underlying="PAIR")]
+        control = ev.evaluate_paper_marks(sequential, asof=ASOF)
+        self.assertEqual(control["status"], "INSUFFICIENT_FORWARD_EVIDENCE")
+        self.assertEqual(control["max_simultaneous_modeled_risk_usd"], 57.6)
+
     def test_reject_duplicate_ids_and_correlated_strike_optimizations(self):
         row = synthetic_row()
         with self.assertRaisesRegex(ev.EvidenceError, "Duplicate"):
