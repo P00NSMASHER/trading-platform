@@ -112,6 +112,22 @@
     "src/matched_control_generator.py": {
       "expected_sha256": "4ed28d928007b9c47b5b7ed18aa03b6287c7a2760b7b9e150b0198fdaee1bb03",
       "reason": "G5 matcher scope hardening: honor optional event_date-scoped point-in-time metadata so controls materialized for one event date cannot leak into another date, while preserving legacy unscoped metadata behavior."
+    },
+    "src/market_data_adapter.py": {
+      "expected_sha256": "02226a5a1a5efff85388b796fd534769cf2abb0bcfdda07c85e548776c976fb4",
+      "reason": "Historical market CSV time integrity: reject DST-gap/fold naive timestamps instead of silently inferring chronology; preserve explicit offsets and no broker execution."
+    },
+    "tests/test_market_data_adapter.py": {
+      "expected_sha256": "1459b9cd5a944757f84c2d6632561d0f30158a7da02afd4789cf6eeb04dd5700",
+      "reason": "Historical market time integrity regression tests: spring DST gap, fall fold, quote and trade paths, explicit offsets and ordinary wall times."
+    },
+    "docs/market_data_schema.md": {
+      "expected_sha256": "8098cb22f4de9b1e645201b52d2b0089d052089053efb5be00825fdfbbfcbd78",
+      "reason": "Document source timestamp provenance, DST ambiguous/nonexistent fail-closed policy and stable aware/naive normalization contracts."
+    },
+    "src/sec_companyfacts_normalizer.py": {
+      "expected_sha256": "a522017a620b9b76e2281e8b2600df4351e35fd8f57cb9bc3a1b676a823136ae",
+      "reason": "2026-10-31 source-hunter fail-closed SEC Companyfacts shares intake: reject NaN/Infinity/boolean counts while retaining point-in-time source and CSV contract, subject to protected PR CI."
     }
   },
   "repository_additions": {
@@ -1664,8 +1680,8 @@
       "reason": "Control-plane Step 2 foundation"
     },
     "src/event_tape_replay.py": {
-      "expected_sha256": "ba5b7ad14150a95d3d367fe43e320671498e7bde3b927b7ca348ea5344ca70cc",
-      "reason": "Event-tape precision repair: preserve microsecond replay eligibility/order/cutoff semantics and fail closed on unsupported finer precision."
+      "expected_sha256": "838814a32f6359f869bc1a2ea4084745ccb95dba32d60fcbed8fd778081dc5b3",
+      "reason": "Historical replay precision guard preserved; follow-up source-hunter fix rejects explicitly blank or falsey non-string point-in-time as-of inputs before reading source or emitting replay output, preserving None-only omission and exact timezone-aware filtering."
     },
     "src/g1_acquisition_manifest.py": {
       "expected_sha256": "04536264c405e94208e113de3e21a07dc3d2021dad427c5cd8c3b15a8b36da4c",
@@ -1692,8 +1708,8 @@
       "reason": "Fail-closed Cboe historical acceptance probe: preserve 2011 equity TAQ smoke, move OPRA smoke to vendor-supported 2012, derive one historical option-quote request from a returned OSI security, and validate non-SIP-annotated NBBO fields; three requests / 45 points maximum."
     },
     "src/g2_cboe_all_access_capacity.py": {
-      "expected_sha256": "50388cb3a540a63146b070b6e5f0c14d2e382ea9fe32e3f3e5e6bcd0aba62467",
-      "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
+      "expected_sha256": "890b2eaf4f7b48239353d3fa15afb7fe80dfecc9f923dc202fbf339df8c0bff3",
+      "reason": "Source-bound 2012 Cboe OPRA acquisition capacity: 309 supported dates/3364 pairs, 105 2011 option dates/464 pairs excluded, distinct 2011 equity probe, no purchase or coverage claim. Current-main adaptation of old #273 pending independent release trust-root review."
     },
     "src/g2_cboe_equity_probe.py": {
       "expected_sha256": "e5619af42b13dd55526169c230b07b9848d79f9c9baad6b6d0102acfe5531acb",
@@ -1955,6 +1971,10 @@
       "expected_sha256": "4b572f4ab0a1df28bc8a1cffb6d457f205cab98f03a2117ac1b4a7ee6c4751f9",
       "reason": "G5 external metadata intake orchestration: hash-bound control/treated lane normalization, point-in-time cutoff enforcement, multi-source conflict accounting, and exact 390-target / 1,950-field completeness preview without canonical readiness promotion."
     },
+    "src/g5_external_source_manifest_finalizer.py": {
+      "expected_sha256": "2e8e7988d50592324f93c1b4b46d19097b4d698997837f335689d66bbcaf5464",
+      "reason": "G5 external intake bridge: finalize the eight-slot scaffold from local source bindings, automatically hash and preflight real files, require source names and authorization references, and emit an intake-ready manifest without copying/fetching data or promoting readiness."
+    },
     "src/g5_external_source_manifest_scaffold.py": {
       "expected_sha256": "b1540eb8d8badaa5ddea5bd754998581ab51babb02730524b7e589d9ecc774e4",
       "reason": "G5 external acquisition bridge: generate an eight-slot fail-closed source-manifest scaffold and canonical empty lane templates from the complete control+treated packet without inventing data, hashes, authorization, or readiness."
@@ -1975,6 +1995,18 @@
       "expected_sha256": "bb30bfdabbd6c5e88edfb75909704abd7035c8553e8b3ec38c9b701cbe99e5c4",
       "reason": "G5 residual structural planning: fill only remaining candidate slots from strictly prior symbol observations, with retrospective labels ignored and all rows kept ineligible until date-specific identity, real four-kind market data, and pre-event metadata are proven."
     },
+    "src/g5_sec_13f_ownership.py": {
+      "expected_sha256": "db33cecdbdd2fe142a151ca50fe1e8740672ac22a998db0f82b9d2d4c9ea27d5",
+      "reason": "Public SEC 13F ownership acquisition using exact historical CUSIP identity, initial 13F-HR filings only, conservative filing-date availability, common-share holdings only, pre-cutoff shares-outstanding denominators, and fail-closed ownership ratios."
+    },
+    "src/g5_sec_historical_cik_bracket_verifier.py": {
+      "expected_sha256": "73d16716b663acd0811f848dcee4ac58fbea637471ae23aec16c96a472a21bca",
+      "reason": "SEC historical-CIK verifier: current ticker-to-CIK is lead-only; every required event date must be bracketed by archival filings under the same CIK that explicitly contain the matching historical trading symbol."
+    },
+    "src/g5_sec_sic_classification.py": {
+      "expected_sha256": "52d05de5f34be47c4ae56751dda985e59b11ca35288c7bc5cdf47ca0f767afc7",
+      "reason": "Public SEC EDGAR SIC acquisition for G5 classification using explicit historical CIK mappings, archival filing-header acceptance clocks, fail-closed pre-cutoff checks, namespaced SIC-division sector values, and no index/readiness fabrication. Follow-up security hardening: enforce exact ASCII YYYY-MM-DD civil source dates without truncating timestamps or suffixes; adversarial source-bound tests in hunter PR #520."
+    },
     "src/g5_staged_readiness_preview.py": {
       "expected_sha256": "5cae6770ae9872536a5ceae5eaff69ae15e9cc33a5c0234aa4d2a0a37f5ff7b7",
       "reason": "G5 staged-readiness preview: fuse normalized control metadata across files using latest pre-cutoff values, fail closed on equal-timestamp conflicts and unknown candidates, and report completeness without changing canonical G5 readiness."
@@ -1982,6 +2014,10 @@
     "src/g5_treated_external_source_request_compressor.py": {
       "expected_sha256": "14333983af151d5385511f915ebb4391e21a9a5eac8c411070690ba56d89bb47",
       "reason": "G5 treated external metadata acquisition optimization: compress event-level requests into one lane/symbol request while preserving every exact event_id/date/cutoff and making no cross-event continuity or evidence claim."
+    },
+    "src/g5_treated_historical_cik_acquisition.py": {
+      "expected_sha256": "1f6c19b2f92f79f8d8f3825fb28f0d5f29180a2933eba63b76cc4023b433d2a9",
+      "reason": "G5 treated historical-CIK acquisition lane: exact 53-symbol gap queue, explicit reviewed-evidence staging, all-event-date interval coverage, and conflict-safe merge into the historical CIK map without current-ticker auto-promotion."
     },
     "src/g5_treated_metadata_requirements.py": {
       "expected_sha256": "9cabf3838a12ea70df01694811c0048b7ed051de3bd94f865fb5c786e5b74c74",
@@ -2344,8 +2380,8 @@
       "reason": "Regression coverage for the Cboe historical NBBO quote smoke, including the 2012 OPRA floor, OSI-derived quote request, fail-closed no-security behavior, and secret non-disclosure."
     },
     "tests/test_g2_cboe_all_access_capacity.py": {
-      "expected_sha256": "44a62d7ee73e6ab9a4d024d95114e720d0a2ba600d1a25105d03a8524d4af49e",
-      "reason": "Cboe All Access capacity model for G2_CHAMPION_MINIMUM; planning and free-trial acceptance gates only, no purchase or coverage claim."
+      "expected_sha256": "1d55bc0719057bd0f844121109e6f1d625b87af51ebd60719b25b6d38e1a033e",
+      "reason": "Regression proof for 2012-only Cboe options versus separate 2011 equity sample; deterministic 1,242-row scope, point caps, no subscription and no coverage promotion. Candidate test only pending independent review."
     },
     "tests/test_g2_cboe_equity_probe.py": {
       "expected_sha256": "065a041bfd46652ba0221e8f17cef257d6f6972389f5ab2cbfe54c44b9a7da69",
@@ -2619,6 +2655,10 @@
       "expected_sha256": "91b806865398747a7ee9a0f3073e00f52259ed8e700673b07109fd8f2fb24589",
       "reason": "Regression coverage for complete and partial G5 external intake, equal-timestamp conflicts, treated/control separation, and the real 390-target / 1,950-field scope with zero readiness promotion."
     },
+    "tests/test_g5_external_source_manifest_finalizer.py": {
+      "expected_sha256": "2cf06983328bcb56868ef2550b6d1dbae3b502c52925207fb2571c514424b9a2",
+      "reason": "Regression coverage for exact eight-slot manifest finalization, automatic source hashes, intake structural compatibility, missing-binding rejection, empty-template rejection, prohibited columns, and nonempty delivery enforcement."
+    },
     "tests/test_g5_external_source_manifest_scaffold.py": {
       "expected_sha256": "b0c1b89a90b455a5657f7cb520c72625707cf89fb09519594cbb8616cb910868",
       "reason": "Regression coverage for the eight G5 external source slots, canonical lane headers, blank-manifest fail-closed behavior, missing-slot rejection, and exact 1,560-request real packet reconciliation."
@@ -2639,6 +2679,18 @@
       "expected_sha256": "19220026a593e7ed93ab43d91a210c5427a8719440b10cddbb8bd307d196ab4a",
       "reason": "Regression coverage locks the final structural planning slot to deterministic prior-only candidate ADBE from a 2014-12-11 observation for the 2014-12-15 gap and proves future-only symbols are never selected."
     },
+    "tests/test_g5_sec_13f_ownership.py": {
+      "expected_sha256": "3a2f4b95b2e13df919d5b2bff52b897d91de703c848871e7a1c92dfa624b342b",
+      "reason": "Regression coverage for SEC 13F ownership fractions, SEC flat-file dates, exact CUSIP mapping, amendment/same-day exclusion, option and principal-amount filtering, denominator cutoffs, and canonical ownership-adapter compatibility."
+    },
+    "tests/test_g5_sec_historical_cik_bracket_verifier.py": {
+      "expected_sha256": "3996ae5a752283b315bdd521491f7b200cd8dfa619396ebcb3cd3266ed6c81c4",
+      "reason": "Adversarial regression coverage for archival trading-symbol bracketing, ambiguous current leads, one-sided evidence rejection, all-event-date coverage, and nonmatching ticker leads."
+    },
+    "tests/test_g5_sec_sic_classification.py": {
+      "expected_sha256": "a050c3c483d08efc8e70af89a9d48fc9dac9fe71d4d37d1b5100e66d8c922d4e",
+      "reason": "Regression coverage for SEC SIC pre-cutoff classification, Eastern-time EDGAR acceptance handling, older submission-file traversal, missing/conflicting historical CIK mappings, deterministic SIC divisions, and canonical external-adapter compatibility. Follow-up security hardening: enforce exact ASCII YYYY-MM-DD civil source dates without truncating timestamps or suffixes; adversarial source-bound tests in hunter PR #520."
+    },
     "tests/test_g5_staged_readiness_preview.py": {
       "expected_sha256": "727734d5d4cb77ae4a18a350f416a464749d417ae1d17da6f01f7d800e7e5577",
       "reason": "Regression coverage for split-source G5 completeness, missing fields, equal-timestamp conflicts, unknown candidates, late rows, and explicit zero canonical-readiness/release change."
@@ -2646,6 +2698,10 @@
     "tests/test_g5_treated_external_source_request_compressor.py": {
       "expected_sha256": "63e2bcc1143633ab3dbb36c9d896fff729cee089139cf1848ac4e3c322a3a290",
       "reason": "Regression coverage for treated lane/symbol compression, exact event_id/date/cutoff conservation, lane-contract validation, duplicate rejection, and the real 696-to-584 request reduction without readiness promotion."
+    },
+    "tests/test_g5_treated_historical_cik_acquisition.py": {
+      "expected_sha256": "ce0b9aac71e92451f4a6c205f0d8c4b3e2380ca7065ea936450b7a407cffd7de",
+      "reason": "Regression coverage for the real 55-event/53-symbol CIK gap, exact-date preservation, explicit review requirements, validity coverage, current-mapping rejection, and conflict-safe reviewed-map merging."
     },
     "tests/test_g5_treated_metadata_requirements.py": {
       "expected_sha256": "234a57cbc74cfc9469ff0572b830e28131134e25e4cd1bb52ce2dc69f8e3f4a8",
@@ -2766,6 +2822,130 @@
     "tests/test_real_data_replay_g5_identity.py": {
       "expected_sha256": "9fe7c3766086f063ba97d7d617b82aa7e33faae6fedd2ff427346e91cf05e9db",
       "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, byte-compatible legacy replay behavior, and a hash-bound G5-only staged-identity path that remains fail-closed for final evaluation."
+    },
+    ".github/workflows/hacked-earnings-exhaustive-audit.yml": {
+      "expected_sha256": "38db70befe76eb6e74c95cb66153b11a76654ecded342861f9311b66db324938",
+      "reason": "Reproducible read-only CI for the pinned hacked_earnings_jfe exhaustive audit; clones the exact upstream commit and publishes audit evidence without expanding the audited source boundary."
+    },
+    "docs/hacked_earnings_jfe_exhaustive_audit_2026-10-06.md": {
+      "expected_sha256": "9e9de495bb8e6fa0ed9849a2a50fc3ecf58a4583fb82caccb3258eb1e1ef89a6",
+      "reason": "Canonical audit report for the pinned hacked_earnings_jfe source corpus, explicitly separating repository findings from external dependencies such as earnings_news_jar."
+    },
+    "scripts/audit_hacked_earnings_jfe_exhaustive.py": {
+      "expected_sha256": "8a82227d0c2dedd5b0099e77d5c1b398b4513aa3dc6dbcf18eaea5871c8fe56f",
+      "reason": "Reproducible exhaustive-audit implementation covering reachable Git objects, tracked/history blobs, archives, structured alternate formats, notebooks, and embedded outputs for the pinned hacked_earnings_jfe commit."
+    },
+    ".github/workflows/tradier-readonly-options.yml": {
+      "expected_sha256": "f4445e5388c60eca4ce57c0f09a1f87c8f34b1f2d72398e0e81f67c84d77a52b",
+      "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI. October 2026 forward admission completeness extension, synthetic tests only, no private market quotes exposed. 2026-10-28: bounded direct-Greeks cross-endpoint UTC hypothesis corroboration; existing strict H1 and no-order controls unchanged. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure."
+    },
+    "src/tradier_options_probe.py": {
+      "expected_sha256": "64bc954251c23adafc9fcf2bbc9a4ce360784b45a5ab3d3def50cff1cb57de8e",
+      "reason": "Standard-library, fail-closed and explicitly allowlisted read-only market-data quote observer for 0DTE/1DTE/7-21DTE hypothesis research; no account or order endpoints. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 independent-evidence normalization: count separate underlying and expiry units for qualifying H1, not correlated overlapping strike-spread permutations; fail closed on inconsistent aggregate counters. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata. 2026-10-28 Greek freshness evidence funnel and arithmetically positive best-case credit after full fees/$5/$10 fill stress, aggregate counts only; no profitability claim or order capability. 2026-10-28 safe research-only diagnostic: aggregate timestamp-naive Greek clock plausibility under UTC and New York hypotheses, without treating either as an authoritative IV refresh timestamp or relaxing H1 filters. 2026-10-28: bounded direct-Greeks cross-endpoint UTC hypothesis corroboration; existing strict H1 and no-order controls unchanged. 2026-10-28 read-only research: nonpredictive full-win/full-loss rate hurdle by DTE after fee and $10 fill stress, with monotonic and candidate parity tests; no new market data API calls or change in trade eligibility."
+    },
+    "tests/test_tradier_options_probe.py": {
+      "expected_sha256": "2ab3ea6b29ea7ebc2bfac10dee7214e442d293a6ca0e1b1bf08a28576d7b4c2f",
+      "reason": "Deterministic offline safety acceptance tests for Tradier read-only endpoint boundaries, redirect protection, contract filtering, conservative pricing, and missing-credential failure. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 independent-evidence normalization: count separate underlying and expiry units for qualifying H1, not correlated overlapping strike-spread permutations; fail closed on inconsistent aggregate counters. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata. 2026-10-28 Greek freshness evidence funnel and arithmetically positive best-case credit after full fees/$5/$10 fill stress, aggregate counts only; no profitability claim or order capability. 2026-10-28 safe research-only diagnostic: aggregate timestamp-naive Greek clock plausibility under UTC and New York hypotheses, without treating either as an authoritative IV refresh timestamp or relaxing H1 filters. 2026-10-28: bounded direct-Greeks cross-endpoint UTC hypothesis corroboration; existing strict H1 and no-order controls unchanged. 2026-10-28 read-only research: nonpredictive full-win/full-loss rate hurdle by DTE after fee and $10 fill stress, with monotonic and candidate parity tests; no new market data API calls or change in trade eligibility."
+    },
+    "docs/tradier_readonly_options.md": {
+      "expected_sha256": "0635cfe94e780b455134c7af4ea95830f0bd95c3ba44376799dc893b190c3fdb",
+      "reason": "Documentation of credentials containment, public-repo data restrictions, provisional cost model and options-edge validation limits. Add a safe two-sided OTM vertical funnel with aggregate rejection telemetry; preserves $100 cap and no-trade policy. Normalize Tradier quote timestamps as exact Unix seconds/milliseconds without weakening the 120-second freshness threshold; preserve fail-closed protection. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata. 2026-10-28 Greek freshness evidence funnel and arithmetically positive best-case credit after full fees/$5/$10 fill stress, aggregate counts only; no profitability claim or order capability. 2026-10-28 safe research-only diagnostic: aggregate timestamp-naive Greek clock plausibility under UTC and New York hypotheses, without treating either as an authoritative IV refresh timestamp or relaxing H1 filters. 2026-10-28: bound UTC Greek cross-endpoint corroboration to four closest 7–21DTE expiries so thin near-14DTE OI does not prevent checking liquid pairs; preserve no-guessing timezone, strict H1 eligibility, read-only safety, and aggregate-only logs. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure. 2026-10-28 read-only research: nonpredictive full-win/full-loss rate hurdle by DTE after fee and $10 fill stress, with monotonic and candidate parity tests; no new market data API calls or change in trade eligibility."
+    },
+    "docs/options_edge_validation_protocol.md": {
+      "expected_sha256": "bcf73ef400de86bf262b5eae497ad7ff296b410d190cb7fd73be4a37e0f3490d",
+      "reason": "Preregistered prospective, cost-aware 7-21 DTE falsification standard, controls and protected market-data retention requirements, with no verified profit claims. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 independent-evidence normalization: count separate underlying and expiry units for qualifying H1, not correlated overlapping strike-spread permutations; fail closed on inconsistent aggregate counters. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI. 2026-10-28 Greek freshness evidence funnel and arithmetically positive best-case credit after full fees/$5/$10 fill stress, aggregate counts only; no profitability claim or order capability. Conflict reconciliation preserved admission-ledger safeguards from #498. 2026-10-28: bound UTC Greek cross-endpoint corroboration to four closest 7–21DTE expiries so thin near-14DTE OI does not prevent checking liquid pairs; preserve no-guessing timezone, strict H1 eligibility, read-only safety, and aggregate-only logs. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure. 2026-10-28 read-only research: nonpredictive full-win/full-loss rate hurdle by DTE after fee and $10 fill stress, with monotonic and candidate parity tests; no new market data API calls or change in trade eligibility."
+    },
+    "src/tradier_market_cycle.py": {
+      "expected_sha256": "f9c298c7c8573d6fbd70894e18d43ac735e311f920abc6e2572dd74072ffd6bf",
+      "reason": "New clock-gated, bounded <=20-symbol market-data-only orchestration, using 1-minute underlying bar context; no trade/account endpoints or public raw market data. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 independent-evidence normalization: count separate underlying and expiry units for qualifying H1, not correlated overlapping strike-spread permutations; fail closed on inconsistent aggregate counters. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata. 2026-10-28 Greek freshness evidence funnel and arithmetically positive best-case credit after full fees/$5/$10 fill stress, aggregate counts only; no profitability claim or order capability. 2026-10-28 read-only research: nonpredictive full-win/full-loss rate hurdle by DTE after fee and $10 fill stress, with monotonic and candidate parity tests; no new market data API calls or change in trade eligibility."
+    },
+    "tests/test_tradier_market_cycle.py": {
+      "expected_sha256": "c035ec13b24adb7b002963d165637da4f2c203f85d51e724e6d877995458af41",
+      "reason": "Deterministic no-network acceptance for market-closed skip, widened universe, sanitized context, programmatic cap and blocked account/trade routes. 2026-10-27: richer sanitized expiry-specific quote/width/risk stage telemetry with parity checks, retaining all risk and GET-only gates. 2026-10-28 research correction: H1 uses same-expiry two-sided near-ATM Tradier decimal IV, explicitly distinguishes short-leg skew and missing Greeks/realized volatility; tracked in standalone safe test suite. 2026-10-28 independent-evidence normalization: count separate underlying and expiry units for qualifying H1, not correlated overlapping strike-spread permutations; fail closed on inconsistent aggregate counters. 2026-10-28 provider-Greeks integrity: H1 requires timestamped ORATS greeks updated within <=90 minutes independently of <=120-sec quote age; no H1 premium claims from unknown/early-session stale model metadata. 2026-10-28 Greek freshness evidence funnel and arithmetically positive best-case credit after full fees/$5/$10 fill stress, aggregate counts only; no profitability claim or order capability. 2026-10-28: bounded direct-Greeks cross-endpoint UTC hypothesis corroboration; existing strict H1 and no-order controls unchanged. 2026-10-28 read-only research: nonpredictive full-win/full-loss rate hurdle by DTE after fee and $10 fill stress, with monotonic and candidate parity tests; no new market data API calls or change in trade eligibility."
+    },
+    "docs/tradier_api_capabilities.md": {
+      "expected_sha256": "b937eeb1ba229340028e081c861b4346c268534a517be24ab1a069b1398301b7",
+      "reason": "Up-to-date Tradier API coverage/limits, official references and explicit no-historical-expired-option-bid-ask evidence boundaries. 2026-10-28: bound UTC Greek cross-endpoint corroboration to four closest 7–21DTE expiries so thin near-14DTE OI does not prevent checking liquid pairs; preserve no-guessing timezone, strict H1 eligibility, read-only safety, and aggregate-only logs. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure."
+    },
+    "src/options_forward_evaluator.py": {
+      "expected_sha256": "ce1d6833822d2f89b1840b9a976250ec4ee122f55114308334758fd92c0445c6",
+      "reason": "Private-only, standard-library forward options paper quote-mark evaluator: strict point-in-time data/quote/Greek checks, conservative natural bid/ask marks, full-roundtrip assumed fees, adverse slippage stress, portfolio/individual modeled risk ceilings, week-cluster confidence gates and explicit UNVERIFIED status. No brokerage/network access. 2026-10-29: report modeled portfolio-capacity breach ahead of sample sufficiency."
+    },
+    "tests/test_options_forward_evaluator.py": {
+      "expected_sha256": "a7591fbd3ee3e2a37f3907b9e6376e14b55587f673ae698320ee5d421aebef1e",
+      "reason": "Deterministic synthetic-only acceptance tests for no-lookahead, quote freshness, H1, missing outcomes, duplicate/correlated trades, risk overlap, sample sufficiency, bootstrap determinism and private data safeguards. 2026-10-29: add short-sample over-capacity regression and sequential negative control."
+    },
+    "docs/options_forward_evidence.md": {
+      "expected_sha256": "ad107a2c7a3093bcd62ecdd22b8763f722dfe39f7801998e223d291da1840bd7",
+      "reason": "Private CSV field contract, cost formulas, statistical research caveats, evidence limits, required independent fills and provenance; explicitly forbids raw licensed quote publication. October 2026 forward admission completeness extension, synthetic tests only, no private market quotes exposed."
+    },
+    "src/options_population_audit.py": {
+      "expected_sha256": "829987e1bc46fe4dbbbbae84726bc8e2651885f0d3d06efef494c1aedf3b151b",
+      "reason": "Offline-only private selection-admission ledger and admitted outcome completeness enforcement. Prevents omitted matured losers, pending outcomes, unknown/posthoc winners and mismatched identities from overstating quote-only research. No broker requests."
+    },
+    "tests/test_options_population_audit.py": {
+      "expected_sha256": "acb571b4d5aa7fdc030750672be19f7ae3a2ebad0f6ef9bc16ecbce0cabcf572",
+      "reason": "Synthetic-only tests for missing losing outcomes, pending selections, invalid admission timestamps, unmatched outcomes and selective-recording failure modes."
+    },
+    "docs/options_population_audit.md": {
+      "expected_sha256": "20e457abd198e2e4f194a66834e687c0dfb7c4fab38279040cb84e601d8df5ab",
+      "reason": "Private admission manifest contract, population gaps, timestamp attestations and explicit limitations; no private source data is uploaded."
+    },
+    "src/tradier_greeks_crosscheck.py": {
+      "expected_sha256": "0c5769f59fbe11e1b996bc7a8efe12ac4e53b594fd7caac1ff537dddb6a42307",
+      "reason": "Research-only bounded six-GET direct-Greeks timezone/IV cross-endpoint diagnostic; no H1 trading promotion, account access, or raw quote logs. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged. 2026-10-28: bound UTC Greek cross-endpoint corroboration to four closest 7–21DTE expiries so thin near-14DTE OI does not prevent checking liquid pairs; preserve no-guessing timezone, strict H1 eligibility, read-only safety, and aggregate-only logs. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure."
+    },
+    "tests/test_tradier_greeks_crosscheck.py": {
+      "expected_sha256": "73be9313e9fbb47b891ca232cee0fadf424b874c7dad6404d1a799014bc21f16",
+      "reason": "Synthetic-only no-network checks for UTC wallclock, matched contract IV, stale Greek safety, clock gating and six-request budget. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged. 2026-10-28: bound UTC Greek cross-endpoint corroboration to four closest 7–21DTE expiries so thin near-14DTE OI does not prevent checking liquid pairs; preserve no-guessing timezone, strict H1 eligibility, read-only safety, and aggregate-only logs. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure."
+    },
+    "docs/tradier_greeks_cross_endpoint.md": {
+      "expected_sha256": "a359e5b1c5d2ae059120864d74408a4cd65aa4cdc9afae0fdd39e04424605012",
+      "reason": "Explicit limitations, privacy rules and corroboration-only methodology for direct options-Greeks timezone comparisons. 2026-10-28 anonymized ordered selector stage telemetry, with exact existing eligibility and market-data scope unchanged."
+    },
+    "src/equity_reversal_audit.py": {
+      "expected_sha256": "176611c0421376141a7749eca0a94c243fb24eae186adb06c646d52e86b66f1e",
+      "reason": "Offline immutable-source equity reversal audit: source hash verification, strictly prior-close signal, chronological holdout and cost sensitivity; NO network or trading."
+    },
+    "tests/test_equity_reversal_audit.py": {
+      "expected_sha256": "fd46e0e293b97a6b201d3480fb77850a9417c447c90f0e91966185db6521a4d4",
+      "reason": "Tests of Hunter equity audit no-lookahead, source tamper refusal, malformed OHLC, immutable phase selection and conservative costs."
+    },
+    "docs/hunters_equity_reversal_2026-10-31.md": {
+      "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
+      "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "tests/test_event_tape_explicit_cutoff.py": {
+      "expected_sha256": "3f192e78339b988c84117bc4411d0df76686a5a4dfe04ef2a7d0aebd4e0aef93",
+      "reason": "Hunter #521 adversarial synthetic regression: six invalid explicit as-of cutoffs fail closed, correct None omission and valid chronological cutoff filtering remain intact."
+    },
+    "docs/hunters_event_tape_cutoff_2026-10-31.md": {
+      "expected_sha256": "3d240d36d32e80a799adc257f64fec2ffffec0a5c17bb9e98334d7644aa238db",
+      "reason": "Hunter #521 source-bound findings, Apache-2.0 date library comparisons, no-import licensing decision, CI requirements and rollback. External independent release trust-root attestation still required."
+    },
+    "docs/HUNTERS_SEC_SIC_STRICT_DATE_2026-10-31.md": {
+      "expected_sha256": "d878a16255307c571a8da4bbd88ad6306dcbc005382e2cba9393bce56389eb11",
+      "reason": "Hunter #520 source-pinned SEC SIC date parser reproduction, two public alternative license assessments, exact source/test SHA evidence, and fail-closed scope/rollback rationale."
+    },
+    "src/g5_historical_index_membership_intake.py": {
+      "expected_sha256": "75260640bd890b0ac9e45a489e66bbde155312c1cb3f8c50ac67a12306341a82",
+      "reason": "Strict original point-in-time G5 index-membership candidate: reject suffixed/impossible civil dates, duplicate/blank source headers and extra CSV fields before any output; protect historical source/authorization boundaries. Review-required, no production readiness."
+    },
+    "tests/test_g5_historical_index_membership_intake.py": {
+      "expected_sha256": "64c343415ce117d8fadf80b8193a8bc1c9469ac48c70b6a1a083991530eb6a7e",
+      "reason": "Independent adversarial candidate regressions for exact civil-day validity, malformed target dates, blank/duplicate CSV headers and preserved date-cutoff/overlap fail-closed behavior. Candidate tests are NOT independent trust-root approval."
+    },
+    "docs/HUNTER_CORE_DST_2026-10-31.md": {
+      "expected_sha256": "09cb7fc06fcf0880f1795ca49041d188f87770e38eaa9b587d7ef69f449ec925",
+      "reason": "2026-10-31 Hunter core source audit: reproducible DST defect, license comparisons, exact source/verification policy and external trust-anchor boundary."
+    },
+    "tests/test_sec_companyfacts_finite_shares.py": {
+      "expected_sha256": "6582efc331499c7d6ea95255a40ad27c176fee7626114db93e9657eb7577d719",
+      "reason": "2026-10-31 synthetic adversarial regression verifies nine rejected non-finite/boolean/nonpositive SEC share values and two valid preserved observations."
+    },
+    "docs/HUNTERS_SEC_SHARES_FINITE_2026-10-31.md": {
+      "expected_sha256": "a94e326c6a8e62626c9c2e8589243fff2cbcb165e1f183295966dbd30dae2e75",
+      "reason": "2026-10-31 source-hunter provenance, license comparison, no-dependency decision, release test and rollback record."
     },
     "src/g2_wrds_taq_request_manifest.py": {
       "expected_sha256": "f54882709a16caa31e376f92ebb93c7d329f3070153f75661c2ccf5705e0bec0",

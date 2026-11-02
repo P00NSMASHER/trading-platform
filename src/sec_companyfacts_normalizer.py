@@ -3,6 +3,8 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+from math import isfinite
+from decimal import Decimal
 from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -46,19 +48,63 @@ def normalize(companyfacts_paths: list[Path], symbol_map: Path, out: Path) -> di
     skipped_bad = 0
     for p in companyfacts_paths:
         obj = json.loads(p.read_text(encoding="utf-8"))
+        # Missing SEC concepts are valid; malformed source containers are not.
+        # Quarantine one malformed frame without discarding other valid files.
+        if not isinstance(obj, dict):
+            skipped_bad += 1
+            continue
         cik = _norm_cik(obj.get("cik", ""))
         facts = obj.get("facts", {})
-        concept = (facts.get("dei", {}) or {}).get("EntityCommonStockSharesOutstanding", {})
-        units = concept.get("units", {}) if isinstance(concept, dict) else {}
-        observations = units.get("shares", []) if isinstance(units, dict) else []
+        if not isinstance(facts, dict):
+            skipped_bad += 1
+            continue
+        dei = facts.get("dei", {})
+        if not isinstance(dei, dict):
+            skipped_bad += 1
+            continue
+        concept = dei.get("EntityCommonStockSharesOutstanding", {})
+        if not isinstance(concept, dict):
+            skipped_bad += 1
+            continue
+        units = concept.get("units", {})
+        if not isinstance(units, dict):
+            skipped_bad += 1
+            continue
+        observations = units.get("shares", [])
+        if not isinstance(observations, list):
+            skipped_bad += 1
+            continue
         for o in observations:
+            # Untrusted JSON arrays may contain null or scalar observations.
+            # Quarantine the row, not the whole point-in-time source batch.
+            if not isinstance(o, dict):
+                skipped_bad += 1
+                continue
             fact_date = str(o.get("end", ""))
             filed = str(o.get("filed", ""))
             val = o.get("val")
             try:
-                if not fact_date or not filed or float(val) <= 0:
+                # NaN and Infinity compare false to <= 0 and previously crossed
+                # the point-in-time SEC source boundary into shares-outstanding CSV.
+                # Boolean JSON values also coerce to 0/1 despite not being share counts.
+                number = float(val)
+                exact_count = Decimal(str(val))
+                # Shares are discrete counts. A float comparison alone accepts
+                # positive fractions and can round a fractional decimal to 1.
+                if (not fact_date or not filed or isinstance(val, bool)
+                        or not isfinite(number) or number <= 0
+                        or not exact_count.is_finite()
+                        or exact_count != exact_count.to_integral_value()):
                     skipped_bad += 1; continue
-                date.fromisoformat(fact_date); date.fromisoformat(filed)
+                fact_day = date.fromisoformat(fact_date)
+                filed_day = date.fromisoformat(filed)
+                # Python accepts compact ISO dates; downstream joins require
+                # canonical YYYY-MM-DD strings and no future-dated share facts.
+                if (fact_day.isoformat() != fact_date
+                        or filed_day.isoformat() != filed
+                        or filed_day < fact_day):
+                    skipped_bad += 1
+                    continue
             except Exception:
                 skipped_bad += 1; continue
             symbol = _symbol_for(cik, fact_date, mappings)
