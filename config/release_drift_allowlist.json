@@ -3038,6 +3038,18 @@
     "data/processed/security_identity_real/security_identity_stocknames_request_summary.json": {
       "expected_sha256": "b66f622026c87153678e808be7b7ebe11a431dacaacefc2c5c137ea3df263a2c",
       "reason": "Machine-readable request contract locking 3654 unresolved PERMNO/date requests, 146 securities, 2011-03-21 to 2015-05-19 bounds, required authorized-source policy, and prohibition on unverified mirrors or entitlement bypass."
+    },
+    "src/g2_wrds_taq_request_manifest.py": {
+      "expected_sha256": "f54882709a16caa31e376f92ebb93c7d329f3070153f75661c2ccf5705e0bec0",
+      "reason": "Dry-run WRDS historical TAQ request manifest only. Python False flags for current personal access and coverage (not invalid JSON lowercase false), no query/login/market data/acquisition. Candidate SHA only."
+    },
+    "tests/test_g2_wrds_taq_request_manifest.py": {
+      "expected_sha256": "bf21c5b4c5df0cbac4f68855a15fdc3477575a0d3b3a7abd48d7385b414c9004",
+      "reason": "Original dry-run WRDS request manifest and adversarial fail-closed access/rights regressions. No third-party SAS source redistributed or executed; current institutional authorization still required."
+    },
+    "vendor_sources/wrds/gen_li/README.md": {
+      "expected_sha256": "8d6ab99f565bd4a2de52322006faaaa13a56bb10faf12d60912039835bf7dc37",
+      "reason": "Provenance- and rights-aware research-only WRDS request plan; no copied upstream source or licensed data, and no claimed WRDS entitlement."
     }
   },
   "schema_version": "2",
