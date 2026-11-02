@@ -3002,6 +3002,22 @@
     "tests/test_g2_taq_afterhours_replication.py": {
       "expected_sha256": "d2f423c9ea2e6f5a9bda1dd1cf82fd32229a0f677697b200889bb8de598e610c",
       "reason": "Research-only TAQ extended-hours and NBBO negative-control adapter, preserving anomalous raw quotes without G2 source coverage; excludes invalid, NaN, Infinity numeric price inputs. Port from original PR #348; no licensed data acquired, candidate only."
+    },
+    "data/processed/g2_vendor_requests/thetadata_coverage_impact.json": {
+      "expected_sha256": "bc91c6eea96ff78b9f81b8a2766f58f949334fac2e781e47276be7d50a7c3577",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
+    },
+    "data/processed/g2_vendor_requests/thetadata_coverage_impact_rows.csv": {
+      "expected_sha256": "44c8730ad8aee6e0a273ee1b37e4d633bdf8c98cbbe1cc5201b5d5e5ede479ce",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
+    },
+    "src/g2_thetadata_coverage_impact.py": {
+      "expected_sha256": "b635d03b36fd2b1a949ebca830fee6c2614da387900bd5827898190f5133abee",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
+    },
+    "tests/test_g2_thetadata_coverage_impact.py": {
+      "expected_sha256": "6f8f40598f9b3de276198708ce7c4d9625c91ac69c34937ff9bfa5a7c9f61936",
+      "reason": "ThetaData written-route impact accounting: deterministic canonical/champion full-vs-partial row closure from frozen requirements, planning only, no purchase or coverage claim."
     }
   },
   "schema_version": "2",
