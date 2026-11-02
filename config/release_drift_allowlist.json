@@ -1668,8 +1668,8 @@
       "reason": "Control-plane Step 2 foundation"
     },
     "src/event_tape_replay.py": {
-      "expected_sha256": "ba5b7ad14150a95d3d367fe43e320671498e7bde3b927b7ca348ea5344ca70cc",
-      "reason": "Event-tape precision repair: preserve microsecond replay eligibility/order/cutoff semantics and fail closed on unsupported finer precision."
+      "expected_sha256": "838814a32f6359f869bc1a2ea4084745ccb95dba32d60fcbed8fd778081dc5b3",
+      "reason": "Historical replay precision guard preserved; follow-up source-hunter fix rejects explicitly blank or falsey non-string point-in-time as-of inputs before reading source or emitting replay output, preserving None-only omission and exact timezone-aware filtering."
     },
     "src/g1_acquisition_manifest.py": {
       "expected_sha256": "04536264c405e94208e113de3e21a07dc3d2021dad427c5cd8c3b15a8b36da4c",
@@ -1992,8 +1992,8 @@
       "reason": "SEC historical-CIK verifier: current ticker-to-CIK is lead-only; every required event date must be bracketed by archival filings under the same CIK that explicitly contain the matching historical trading symbol."
     },
     "src/g5_sec_sic_classification.py": {
-      "expected_sha256": "1e7d7933f081d4defa169c69ae75f5f95b56650275dcc2cd5232ce9d64ea5df0",
-      "reason": "Public SEC EDGAR SIC acquisition for G5 classification using explicit historical CIK mappings, archival filing-header acceptance clocks, fail-closed pre-cutoff checks, namespaced SIC-division sector values, and no index/readiness fabrication."
+      "expected_sha256": "52d05de5f34be47c4ae56751dda985e59b11ca35288c7bc5cdf47ca0f767afc7",
+      "reason": "Public SEC EDGAR SIC acquisition for G5 classification using explicit historical CIK mappings, archival filing-header acceptance clocks, fail-closed pre-cutoff checks, namespaced SIC-division sector values, and no index/readiness fabrication. Follow-up security hardening: enforce exact ASCII YYYY-MM-DD civil source dates without truncating timestamps or suffixes; adversarial source-bound tests in hunter PR #520."
     },
     "src/g5_staged_readiness_preview.py": {
       "expected_sha256": "5cae6770ae9872536a5ceae5eaff69ae15e9cc33a5c0234aa4d2a0a37f5ff7b7",
@@ -2676,8 +2676,8 @@
       "reason": "Adversarial regression coverage for archival trading-symbol bracketing, ambiguous current leads, one-sided evidence rejection, all-event-date coverage, and nonmatching ticker leads."
     },
     "tests/test_g5_sec_sic_classification.py": {
-      "expected_sha256": "a082d55254d0dffe387fc83a4510d9ba4f9bd67a3502422f53dbffe1b6e6d0b4",
-      "reason": "Regression coverage for SEC SIC pre-cutoff classification, Eastern-time EDGAR acceptance handling, older submission-file traversal, missing/conflicting historical CIK mappings, deterministic SIC divisions, and canonical external-adapter compatibility."
+      "expected_sha256": "a050c3c483d08efc8e70af89a9d48fc9dac9fe71d4d37d1b5100e66d8c922d4e",
+      "reason": "Regression coverage for SEC SIC pre-cutoff classification, Eastern-time EDGAR acceptance handling, older submission-file traversal, missing/conflicting historical CIK mappings, deterministic SIC divisions, and canonical external-adapter compatibility. Follow-up security hardening: enforce exact ASCII YYYY-MM-DD civil source dates without truncating timestamps or suffixes; adversarial source-bound tests in hunter PR #520."
     },
     "tests/test_g5_staged_readiness_preview.py": {
       "expected_sha256": "727734d5d4cb77ae4a18a350f416a464749d417ae1d17da6f01f7d800e7e5577",
@@ -2902,6 +2902,18 @@
     "docs/hunters_equity_reversal_2026-10-31.md": {
       "expected_sha256": "d7d880d215f3bdc5c33d994411610ea7ea3f99799cfb2d3da3b4a072efdc7da5",
       "reason": "Source-pinned October 31 rejection evidence and data-rights limitations; no proprietary historical prices deposited."
+    },
+    "tests/test_event_tape_explicit_cutoff.py": {
+      "expected_sha256": "3f192e78339b988c84117bc4411d0df76686a5a4dfe04ef2a7d0aebd4e0aef93",
+      "reason": "Hunter #521 adversarial synthetic regression: six invalid explicit as-of cutoffs fail closed, correct None omission and valid chronological cutoff filtering remain intact."
+    },
+    "docs/hunters_event_tape_cutoff_2026-10-31.md": {
+      "expected_sha256": "3d240d36d32e80a799adc257f64fec2ffffec0a5c17bb9e98334d7644aa238db",
+      "reason": "Hunter #521 source-bound findings, Apache-2.0 date library comparisons, no-import licensing decision, CI requirements and rollback. External independent release trust-root attestation still required."
+    },
+    "docs/HUNTERS_SEC_SIC_STRICT_DATE_2026-10-31.md": {
+      "expected_sha256": "d878a16255307c571a8da4bbd88ad6306dcbc005382e2cba9393bce56389eb11",
+      "reason": "Hunter #520 source-pinned SEC SIC date parser reproduction, two public alternative license assessments, exact source/test SHA evidence, and fail-closed scope/rollback rationale."
     },
     "tests/test_sec_companyfacts_finite_shares.py": {
       "expected_sha256": "6582efc331499c7d6ea95255a40ad27c176fee7626114db93e9657eb7577d719",
