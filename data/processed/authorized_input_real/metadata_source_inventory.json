@@ -1285,5 +1285,18 @@
     "row_count": 1,
     "sha256": "429731e2f6e6b9e11474c4e35a4b0c5494e5ef1b8b7ccc029a782416074cf736",
     "license_reference_present": true
+  },
+  {
+    "source_id": "public-sec-shares-wll-20150105",
+    "record_kind": "shares_outstanding",
+    "source_family": "sec_xbrl_companyfacts",
+    "enabled": true,
+    "authorized": true,
+    "data_classification": "public_official_data",
+    "path": "/home/runner/work/trading-platform/trading-platform/data/public/metadata/g4_shares_wll_20150204_25.csv",
+    "exists": true,
+    "row_count": 15,
+    "sha256": "963b83b5bc7a824cd7550b8e52a62513d28b113bef56be9b83b6e265519f0d2e",
+    "license_reference_present": true
   }
 ]

@@ -39,7 +39,13 @@ def test_real_g5_acquisition_plan_combines_existing_and_expansion_queues(tmp_pat
     assert summary["fully_fillable_deficient_dates_from_planning_universe"] == 23
     assert summary["dates_structurally_reaching_3_after_plan"] == 72
     assert summary["residual_unfilled_symbol_date_slots"] == 0
-    assert summary["candidate_symbol_date_count"] > 51
+    assert summary["candidate_symbol_date_count"] == 982
+    assert summary["primary_candidate_symbol_date_count"] == 216
+    assert summary["reserve_candidate_symbol_date_count"] == 766
+    assert summary["primary_complete_event_date_count"] == 72
+    assert summary["primary_field_requirement_count"] == 2808
+    assert summary["primary_derived_field_requirement_count"] == 1728
+    assert summary["primary_external_field_requirement_count"] == 1080
     assert summary["control_field_count"] == len(CONTROL_COVARIATES)
     assert summary["field_requirement_count"] == (
         summary["candidate_symbol_date_count"] * len(CONTROL_COVARIATES)
@@ -73,7 +79,10 @@ def test_field_routes_cover_exact_g5_readiness_contract():
 def test_candidate_rows_exclude_positives_and_remain_planning_only(tmp_path: Path):
     _build_real(tmp_path)
     candidates = list(csv.DictReader((tmp_path / "g5_candidate_symbol_dates.csv").open(encoding="utf-8")))
+    primary = list(csv.DictReader((tmp_path / "g5_primary_candidate_symbol_dates.csv").open(encoding="utf-8")))
+    reserve = list(csv.DictReader((tmp_path / "g5_reserve_candidate_symbol_dates.csv").open(encoding="utf-8")))
     fields = list(csv.DictReader((tmp_path / "g5_candidate_field_requirements.csv").open(encoding="utf-8")))
+    primary_fields = list(csv.DictReader((tmp_path / "g5_primary_field_requirements.csv").open(encoding="utf-8")))
     market_rows = list(csv.DictReader((tmp_path / "g5_expansion_market_requirements.csv").open(encoding="utf-8")))
 
     positives_by_date = {}
@@ -101,6 +110,33 @@ def test_candidate_rows_exclude_positives_and_remain_planning_only(tmp_path: Pat
 
     assert len(expansion) == 52
     assert len(market_rows) == 208
+    assert len(primary) == 216
+    assert len(reserve) == 766
+    assert len(primary_fields) == 216 * len(CONTROL_COVARIATES)
+
+    primary_by_date = {}
+    for row in primary:
+        primary_by_date.setdefault(row["event_date"], []).append(row)
+    assert len(primary_by_date) == 72
+    assert all(len(rows) == 3 for rows in primary_by_date.values())
+    assert {
+        row["candidate_symbol"] for row in primary_by_date["2014-12-15"]
+    } == {"ADBE", "LBMH", "WG"}
+
+    primary_keys = {
+        (row["event_date"], row["candidate_symbol"])
+        for row in primary
+    }
+    reserve_keys = {
+        (row["event_date"], row["candidate_symbol"])
+        for row in reserve
+    }
+    assert primary_keys.isdisjoint(reserve_keys)
+    assert primary_keys | reserve_keys == {
+        (row["event_date"], row["candidate_symbol"])
+        for row in candidates
+    }
+
     prior = [row for row in expansion if row["structural_origin"] == "PRIOR_ONLY_RETROSPECTIVE_SYMBOL_OBSERVATION"]
     assert [(row["event_date"], row["candidate_symbol"]) for row in prior] == [("2014-12-15", "ADBE")]
     assert {row["record_kind"] for row in market_rows} == {

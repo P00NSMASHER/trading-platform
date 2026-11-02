@@ -1,0 +1,40 @@
+{
+  "schema_version": "1",
+  "purpose": "Replace the WLL G4 reviewed exclusions and stale pre-Kodiak February anchors with an exact post-acquisition issuer share count from a public SEC Form 8-K filed before every affected target cutoff.",
+  "research_use_only": true,
+  "historical_symbol": "WLL",
+  "target_trade_dates": [
+    "2015-02-04",
+    "2015-02-05",
+    "2015-02-06",
+    "2015-02-09",
+    "2015-02-10",
+    "2015-02-11",
+    "2015-02-12",
+    "2015-02-13",
+    "2015-02-17",
+    "2015-02-18",
+    "2015-02-19",
+    "2015-02-20",
+    "2015-02-23",
+    "2015-02-24",
+    "2015-02-25"
+  ],
+  "target_cutoff_local": "15:24 America/New_York",
+  "fact_date": "2014-12-31",
+  "shares_outstanding": 166889152,
+  "accession": "0001193125-15-001735",
+  "form": "8-K",
+  "filing_date": "2015-01-05",
+  "accepted_local": "2015-01-05T16:02:59-05:00",
+  "accepted_before_all_target_cutoffs": true,
+  "corporate_action_context": "Whiting's December 8, 2014 Kodiak acquisition is already reflected in this explicit outstanding-share total.",
+  "sec_filing_index": "https://www.sec.gov/Archives/edgar/data/1255474/000119312515001735/0001193125-15-001735-index.html",
+  "sec_document": "https://www.sec.gov/Archives/edgar/data/1255474/000119312515001735/d844890d8k.htm",
+  "evidence_notes": [
+    "SEC filing detail reports Accepted 2015-01-05 16:02:59.",
+    "Item 8.01 explicitly states that as of December 31, 2014 the Company had 166,889,152 common shares outstanding.",
+    "The filing explicitly states that this amount takes into account shares issued in the Kodiak acquisition.",
+    "The source was public more than a month before all February 2015 WLL target cutoffs; no arithmetic reconstruction or inference is used."
+  ]
+}

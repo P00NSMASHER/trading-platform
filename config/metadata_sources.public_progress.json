@@ -21,8 +21,8 @@
   "reviewed_share_exclusions": {
     "downstream_policy": "Excluded symbol-dates remain blank, are marked excluded_fail_closed, and may not contribute shares outstanding or turnover.",
     "enabled": true,
-    "expected_count": 18,
-    "expected_sha256": "ce36e5cb2839f5f8dc22b2d955954231ddeb32838c97a487b1c482f7279096ed",
+    "expected_count": 15,
+    "expected_sha256": "bc2014a117e4932f9052582a46086601215d4b408c5fcd83a7468446efbd67e3",
     "mode": "reviewed_fail_closed_exclusions",
     "path": "data/processed/authorized_input_real/g4_final_blockers.json",
     "require_resolution_status": "FAIL_CLOSED_NO_ADMISSIBLE_PRE_CUTOFF_EXACT_TOTAL"
@@ -1883,7 +1883,7 @@
       "delimiter": ",",
       "enabled": true,
       "encoding": "utf-8",
-      "license_reference": "SEC-hosted Avista earnings release explicitly states SPOKANE, Wash. \u2013 Feb. 20, 2013, 4:05 a.m. PT.",
+      "license_reference": "SEC-hosted Avista earnings release explicitly states SPOKANE, Wash. – Feb. 20, 2013, 4:05 a.m. PT.",
       "path": "data/public/metadata/g1_announcement_times_batch_0009.csv",
       "record_kind": "announcement_timestamp",
       "source_family": "official_newswire_archive",
@@ -2272,6 +2272,28 @@
       "record_kind": "shares_outstanding",
       "source_family": "sec_xbrl_companyfacts",
       "source_id": "public-sec-shares-aco-20130410",
+      "timezone": "America/New_York"
+    },
+    {
+      "authorized": true,
+      "column_map": {
+        "available_at": "available_at",
+        "fact_date": "fact_date",
+        "historical_symbol": "historical_symbol",
+        "shares_outstanding": "shares_outstanding",
+        "source_reference": "source_reference",
+        "target_trade_date": "target_trade_date"
+      },
+      "data_classification": "public_official_data",
+      "delimiter": ",",
+      "enabled": true,
+      "encoding": "utf-8",
+      "license_reference": "SEC EDGAR Form 8-K, accession 0001193125-15-001735, Item 8.01 exact shares outstanding",
+      "notes": "Exact post-Kodiak Whiting common shares outstanding as of 2014-12-31, accepted by SEC 2015-01-05 16:02:59 ET; applied only to explicit February 2015 WLL target dates.",
+      "path": "data/public/metadata/g4_shares_wll_20150204_25.csv",
+      "record_kind": "shares_outstanding",
+      "source_family": "sec_xbrl_companyfacts",
+      "source_id": "public-sec-shares-wll-20150105",
       "timezone": "America/New_York"
     }
   ]
