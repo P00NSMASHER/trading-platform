@@ -1968,8 +1968,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_historical_cusip_acquisition.py": {
-      "expected_sha256": "203054c6b9fc0274c6d42ad4f54bf9a5509c733f6f738e69b0ad4e212fb63094",
-      "reason": "G5 historical CUSIP intake now rejects suffix/impossible event dates, tampered duplicate/empty queue required dates, CSV duplicate headers and extra fields; preserves original source/authorization and reviewed CUSIP9 controls. Candidate hash only, release trust root still independent."
+      "expected_sha256": "23ec9cc896f4efdbe0e6c54613b72328dc01d7a82fcd558b70dab2075f508428",
+      "reason": "G5 historical CUSIP request/staging validates exact civil days, CUSIP9 and strict offset-aware source-evidence clock; retrospective ID evidence is not pre-event source availability, and canonical readiness remains unchanged. Candidate only, independent release trust root still required."
     },
     "src/g5_master_acquisition_plan.py": {
       "expected_sha256": "b593182cca1a3cb21fbc09dce0a6a689c417715d380370e43ce37643d3572e6e",
@@ -2652,8 +2652,8 @@
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
     },
     "tests/test_g5_historical_cusip_acquisition.py": {
-      "expected_sha256": "3f6ae1df3eccf1440c6228892b627c131ef8d2df92ed06a2d861386777bdf1e8",
-      "reason": "Exact-head adversarial tests for invalid source/queue days, forged duplicate review targets, ambiguous/extra CSV fields, canonical historical CUSIP9 and interval coverage. Candidate regression, not a source-rights proof."
+      "expected_sha256": "db9361bcacd85ac8b677aff155c6b276204bde44fb3a0302b4ebac85e0c17359",
+      "reason": "G5 historical CUSIP provenance regressions include invalid/ambiguous dates, malformed source headers, source/evidence clock naive/invalid/unknown-offset rejection and valid offset cases. No licensed data or source authorization implied."
     },
     "tests/test_g5_master_acquisition_plan.py": {
       "expected_sha256": "ae48683edba447d8b7ab286dee012d3b0d370b982316a96ecfda22187f9ea0cf",
