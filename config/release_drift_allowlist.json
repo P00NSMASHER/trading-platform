@@ -2946,6 +2946,14 @@
     "docs/HUNTERS_SEC_SHARES_FINITE_2026-10-31.md": {
       "expected_sha256": "a94e326c6a8e62626c9c2e8589243fff2cbcb165e1f183295966dbd30dae2e75",
       "reason": "2026-10-31 source-hunter provenance, license comparison, no-dependency decision, release test and rollback record."
+    },
+    "src/g5_historical_cusip_acquisition.py": {
+      "expected_sha256": "23ec9cc896f4efdbe0e6c54613b72328dc01d7a82fcd558b70dab2075f508428",
+      "reason": "G5 historical CUSIP request/staging validates exact civil days, CUSIP9 and strict offset-aware source-evidence clock; retrospective ID evidence is not pre-event source availability, and canonical readiness remains unchanged. Candidate only, independent release trust root still required."
+    },
+    "tests/test_g5_historical_cusip_acquisition.py": {
+      "expected_sha256": "db9361bcacd85ac8b677aff155c6b276204bde44fb3a0302b4ebac85e0c17359",
+      "reason": "G5 historical CUSIP provenance regressions include invalid/ambiguous dates, malformed source headers, source/evidence clock naive/invalid/unknown-offset rejection and valid offset cases. No licensed data or source authorization implied."
     }
   },
   "schema_version": "2",
