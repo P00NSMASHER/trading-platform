@@ -46,3 +46,21 @@ def test_wrds_access_contract_fails_closed_for_personal_direct_access():
     assert access["coverage_authority"] is False
     assert "institution/entity WRDS authorization" in access["execution_requires"]
     assert "157666" in access["support_ticket"]
+
+
+
+def test_wrds_reference_sas_files_abort_unconditionally():
+    # Raw upstream examples are retained for provenance, not as an
+    # alternate path around the authorized adapted extractors.
+    root = ROOT / "vendor_sources/wrds/gen_li"
+    for name in ("WRDS_batch_ticker_cq.sas", "WRDS_batch_ticker_ct.sas"):
+        content = (root / name).read_text(encoding="utf-8")
+        assert content.startswith("/* PROVENANCE-ONLY REFERENCE COPY: NEVER RUN.")
+        assert content.split("*/", 1)[1].lstrip().startswith("%abort cancel;")
+        assert "filename input" in content
+
+    for name in ("g2_wrds_taq_legacy.sas", "g2_wrds_taq_msec.sas"):
+        content = (root / name).read_text(encoding="utf-8")
+        assert "%sysget(G2_WRDS_AUTHORIZED)" in content
+        assert "%abort cancel;" in content
+        assert content.index("%abort cancel;") < content.index("data g2_pairs;")
