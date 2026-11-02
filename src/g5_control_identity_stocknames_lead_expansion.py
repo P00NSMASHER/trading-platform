@@ -138,11 +138,65 @@ def _load_symbol_leads(
     return leads, interval_pairs
 
 
+def _load_same_symbol_history_leads(
+    path: Path | None,
+) -> dict[tuple[str, str], dict[str, str]]:
+    if path is None:
+        return {}
+
+    fields, rows = _read_csv(path)
+    required = {
+        "historical_symbol",
+        "trade_date",
+        "permno",
+        "lead_source",
+        "research_use_only",
+    }
+    missing = required.difference(fields)
+    if missing:
+        raise ValueError(
+            f"same-symbol PERMNO lead file missing columns: {sorted(missing)}"
+        )
+
+    out: dict[tuple[str, str], dict[str, str]] = {}
+    for row_no, row in enumerate(rows, 2):
+        symbol = row["historical_symbol"].upper()
+        trade_date = row["trade_date"][:10]
+        permno = row["permno"]
+        if not symbol or not trade_date or not permno:
+            raise ValueError(
+                f"same-symbol PERMNO lead row {row_no}: symbol/date/PERMNO required"
+            )
+        if not permno.isdigit() or int(permno) <= 0:
+            raise ValueError(
+                f"same-symbol PERMNO lead row {row_no}: PERMNO must be positive digits"
+            )
+        if row["research_use_only"] != "1":
+            raise ValueError(
+                f"same-symbol PERMNO lead row {row_no}: research_use_only must equal 1"
+            )
+        if row["lead_source"] != "SAMPLEFIRMS_SAME_SYMBOL_UNIQUE_PERMNO_HISTORY":
+            raise ValueError(
+                f"same-symbol PERMNO lead row {row_no}: unexpected lead_source"
+            )
+        key = (symbol, trade_date)
+        if key in out:
+            raise ValueError(
+                f"duplicate same-symbol PERMNO lead: {symbol}|{trade_date}"
+            )
+        normalized = dict(row)
+        normalized["historical_symbol"] = symbol
+        normalized["trade_date"] = trade_date
+        out[key] = normalized
+    return out
+
+
 def build(
     *,
     identity_queue_path: Path,
     interval_requests_path: Path,
     output_dir: Path,
+    same_symbol_history_leads_path: Path | None = None,
 ) -> dict:
     queue_fields, queue_rows = _read_csv(identity_queue_path)
     required_queue = {
@@ -165,6 +219,9 @@ def build(
     symbol_leads, interval_pairs = _load_symbol_leads(
         interval_fields,
         interval_rows,
+    )
+    same_symbol_history_leads = _load_same_symbol_history_leads(
+        same_symbol_history_leads_path
     )
 
     queue_pairs: set[tuple[str, str]] = set()
@@ -199,12 +256,23 @@ def build(
             f"missing={missing_from_intervals[:5]} extra={extra_in_intervals[:5]}"
         )
 
+    out_of_scope_history_leads = sorted(
+        set(same_symbol_history_leads) - queue_pairs
+    )
+    if out_of_scope_history_leads:
+        raise ValueError(
+            "same-symbol PERMNO leads fall outside the identity queue: "
+            f"{out_of_scope_history_leads[:5]}"
+        )
+
     ready: list[dict[str, str]] = []
     residual: list[dict[str, str]] = []
     exact_date_ready = 0
     symbol_level_added = 0
     symbol_level_canonical_added = 0
     symbol_level_sample_added = 0
+    same_symbol_history_added = 0
+    same_symbol_history_redundant = 0
 
     for row in sorted(
         normalized_queue,
@@ -241,7 +309,18 @@ def build(
                 f"{direct_permno} != {symbol_permno}"
             )
 
-        permno = direct_permno or symbol_permno
+        history_lead = same_symbol_history_leads.get((symbol, trade_date))
+        history_permno = history_lead["permno"] if history_lead is not None else ""
+        stronger_permno = direct_permno or symbol_permno
+        if stronger_permno and history_permno and stronger_permno != history_permno:
+            raise ValueError(
+                f"same-symbol history PERMNO lead conflict for {symbol}|{trade_date}: "
+                f"{history_permno} != {stronger_permno}"
+            )
+        if stronger_permno and history_permno:
+            same_symbol_history_redundant += 1
+
+        permno = stronger_permno or history_permno
         if not permno:
             residual.append(dict(row))
             continue
@@ -249,7 +328,7 @@ def build(
         if direct_permno:
             hint_source = direct_source
             exact_date_ready += 1
-        else:
+        elif symbol_permno:
             hint_source = symbol_lead.source
             symbol_level_added += 1
             if hint_source == "SYMBOL_LEVEL_CANONICAL_PERMNO_ACQUISITION_LEAD":
@@ -260,6 +339,9 @@ def build(
                 raise ValueError(
                     f"symbol-level PERMNO lead source missing for {symbol}|{trade_date}"
                 )
+        else:
+            hint_source = "SAMPLEFIRMS_SAME_SYMBOL_UNIQUE_PERMNO_HISTORY_LEAD"
+            same_symbol_history_added += 1
 
         ready.append(
             {
@@ -275,7 +357,12 @@ def build(
 
     if len(ready) + len(residual) != len(queue_rows):
         raise ValueError("expanded Stocknames handoff accounting does not reconcile")
-    if exact_date_ready + symbol_level_added != len(ready):
+    if (
+        exact_date_ready
+        + symbol_level_added
+        + same_symbol_history_added
+        != len(ready)
+    ):
         raise ValueError("ready Stocknames request accounting does not reconcile")
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -297,7 +384,8 @@ def build(
         "purpose": (
             "Expand the G5 dated Stocknames validation handoff by using only "
             "symbol-level PERMNO hints already reconciled by the interval-request "
-            "planner as acquisition leads for otherwise no-hint dates. Every date "
+            "planner plus optional unique same-symbol SampleFirms PERMNO history leads "
+            "as acquisition leads for otherwise no-hint dates. Every date "
             "still requires authorized dated Stocknames validation; no identity "
             "continuity is inferred."
         ),
@@ -308,6 +396,11 @@ def build(
         "symbol_level_lead_added_request_count": symbol_level_added,
         "symbol_level_canonical_lead_added_request_count": symbol_level_canonical_added,
         "symbol_level_samplefirms_lead_added_request_count": symbol_level_sample_added,
+        "same_symbol_history_lead_input_count": len(same_symbol_history_leads),
+        "same_symbol_history_lead_added_request_count": same_symbol_history_added,
+        "same_symbol_history_lead_redundant_request_count": (
+            same_symbol_history_redundant
+        ),
         "expanded_stocknames_ready_request_count": len(ready),
         "residual_symbol_discovery_request_count": len(residual),
         "request_ids_unique": len({row["request_id"] for row in ready}) == len(ready),
@@ -316,6 +409,16 @@ def build(
             "identity_queue_sha256": _sha256(identity_queue_path),
             "interval_requests_path": str(interval_requests_path),
             "interval_requests_sha256": _sha256(interval_requests_path),
+            "same_symbol_history_leads_path": (
+                str(same_symbol_history_leads_path)
+                if same_symbol_history_leads_path is not None
+                else None
+            ),
+            "same_symbol_history_leads_sha256": (
+                _sha256(same_symbol_history_leads_path)
+                if same_symbol_history_leads_path is not None
+                else None
+            ),
         },
         "outputs": {
             "expanded_stocknames_ready_queue": str(ready_path),
@@ -324,6 +427,8 @@ def build(
         "policy": {
             "symbol_level_permno_is_acquisition_lead_only": True,
             "symbol_level_permno_is_identity_evidence": False,
+            "same_symbol_history_permno_is_acquisition_lead_only": True,
+            "same_symbol_history_permno_is_identity_evidence": False,
             "cross_date_identity_continuity_assumed": False,
             "authorized_stocknames_validation_still_required": True,
             "requested_date_must_be_inside_authorized_name_interval": True,
@@ -350,6 +455,14 @@ def main() -> int:
     )
     parser.add_argument("--identity-queue", type=Path, required=True)
     parser.add_argument("--interval-requests", type=Path, required=True)
+    parser.add_argument(
+        "--same-symbol-history-leads",
+        type=Path,
+        help=(
+            "Optional non-evidence date-level PERMNO leads generated by "
+            "g5_control_identity_symbol_permno_leads."
+        ),
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -357,6 +470,7 @@ def main() -> int:
         identity_queue_path=args.identity_queue,
         interval_requests_path=args.interval_requests,
         output_dir=args.output_dir,
+        same_symbol_history_leads_path=args.same_symbol_history_leads,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0

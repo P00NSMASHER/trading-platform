@@ -185,6 +185,14 @@ def build(
         raise G5ControlIdentityGateError("G5 staging receipt unexpectedly mutated canonical G2")
     if bool(staging_receipt.get("canonical_g5_write_performed")):
         raise G5ControlIdentityGateError("G5 staging receipt unexpectedly claims canonical G5 write")
+    if bool(staging_receipt.get("coverage_promoted")):
+        raise G5ControlIdentityGateError(
+            "G5 staging receipt unexpectedly claims coverage promotion"
+        )
+    if bool(staging_receipt.get("overall_g5_identity_ready_claimed")):
+        raise G5ControlIdentityGateError(
+            "G5 staging receipt unexpectedly claims overall G5 identity readiness"
+        )
 
     hashes = staging_receipt.get("output_sha256") or {}
     expected_staged_sha = str(hashes.get("g5_only_staged_verified") or "")

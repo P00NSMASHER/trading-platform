@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 import sys
 from pathlib import Path
@@ -10,7 +11,12 @@ sys.path.insert(0, str(ROOT / "src"))
 import g5_master_acquisition_plan as master
 
 
-def _build(tmp_path: Path):
+def _build(
+    tmp_path: Path,
+    *,
+    identity_evidence_path: Path | None = None,
+    external_source_manifest_path: Path | None = None,
+):
     return master.build(
         events_path=ROOT / "data/processed/historical_events.csv",
         frozen_market_requirements_path=(
@@ -23,6 +29,8 @@ def _build(tmp_path: Path):
             ROOT
             / "data/processed/security_identity_real/security_identity_manifest.json"
         ),
+        identity_evidence_path=identity_evidence_path,
+        external_source_manifest_path=external_source_manifest_path,
         output_dir=tmp_path,
     )
 
@@ -53,6 +61,34 @@ def test_real_master_plan_has_complete_structural_scope(tmp_path: Path):
     assert summary["treated_external_lane_request_count"] == 696
     assert summary["total_external_lane_request_count"] == 1560
 
+    external_packet = summary["external_acquisition_packet"]
+    assert external_packet["control_lane_request_count"] == 864
+    assert external_packet["treated_lane_request_count"] == 696
+    assert external_packet["total_lane_request_count"] == 1560
+    assert external_packet["external_field_requirement_count"] == 1950
+    assert 0 < external_packet["grouped_lane_symbol_batch_count"] < 1560
+    assert external_packet["lane_counts"] == {
+        "classification": 390,
+        "ownership": 390,
+        "analyst": 390,
+        "borrow": 390,
+    }
+
+    external_scaffold = summary["external_source_manifest_scaffold"]
+    assert external_scaffold["packet_request_count"] == 1560
+    assert external_scaffold["source_slot_count"] == 8
+    assert external_scaffold["target_slot_counts"] == {
+        "control": 4,
+        "treated": 4,
+    }
+    assert external_scaffold["lane_slot_counts"] == {
+        "classification": 2,
+        "ownership": 2,
+        "analyst": 2,
+        "borrow": 2,
+    }
+    assert external_scaffold["manifest_intake_ready"] is False
+
     identity = summary["control_identity"]
     assert identity["history_symbol_date_count"] == (
         summary["control_history"]["unique_symbol_date_pairs"]
@@ -68,6 +104,27 @@ def test_real_master_plan_has_complete_structural_scope(tmp_path: Path):
         + identity["canonical_g2_unverified_overlap_count"]
     ) > 0
     assert identity["new_g5_identity_evidence_required_count"] > 0
+
+    readiness = summary["control_identity_readiness"]
+    assert readiness["identity_requirement_count"] == identity[
+        "history_symbol_date_count"
+    ]
+    assert readiness["canonical_g2_verified_reuse_count"] == identity[
+        "canonical_g2_verified_reuse_count"
+    ]
+    assert readiness["staged_g5_only_verified_count"] == 0
+    assert readiness["unresolved_canonical_g2_overlap_count"] == identity[
+        "canonical_g2_unverified_overlap_count"
+    ]
+    assert readiness["unresolved_identity_requirement_count"] == identity[
+        "identity_acquisition_queue_count"
+    ]
+    assert (
+        readiness["unresolved_g5_only_count"]
+        + readiness["unresolved_canonical_g2_overlap_count"]
+        == readiness["unresolved_identity_requirement_count"]
+    )
+    assert readiness["preview_full_history_identity_complete"] is False
 
     routing = summary["control_identity_routing"]
     assert routing["date_level_unresolved_count"] == identity[
@@ -155,6 +212,29 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     ).exists()
     assert (
         tmp_path
+        / "external_acquisition_packet/g5_external_acquisition_requests.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "external_acquisition_packet/g5_external_acquisition_batches.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "external_source_manifest_scaffold/"
+        "g5_external_source_manifest.template.json"
+    ).exists()
+    assert (
+        tmp_path
+        / "external_source_manifest_scaffold/"
+        "g5_external_source_manifest_checklist.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "external_source_manifest_scaffold/sources/"
+        "control_classification.csv"
+    ).exists()
+    assert (
+        tmp_path
         / "control_identity/g5_control_identity_requirements.csv"
     ).exists()
     assert (
@@ -177,6 +257,16 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     ).exists()
     assert (
         tmp_path
+        / "control_identity_readiness/"
+        "g5_control_identity_readiness_preview.csv"
+    ).exists()
+    assert (
+        tmp_path
+        / "control_identity_readiness/"
+        "g5_control_identity_readiness_summary.json"
+    ).exists()
+    assert (
+        tmp_path
         / "control_market_vendor_bridge/g5_control_market_vendor_bridge_summary.json"
     ).exists()
     assert (
@@ -192,3 +282,177 @@ def test_master_plan_emits_all_component_outputs(tmp_path: Path):
     assert saved["total_matching_target_count"] == 390
     assert saved["policy"]["planning_rows_are_g5_evidence"] is False
     assert saved["policy"]["reviewed_exclusions_may_close_g5"] is False
+
+def test_master_plan_optionally_stages_g5_only_identity_without_promoting_readiness(
+    tmp_path: Path,
+):
+    baseline_dir = tmp_path / "baseline"
+    _build(baseline_dir)
+
+    queue_path = (
+        baseline_dir
+        / "control_identity/g5_control_identity_acquisition_queue.csv"
+    )
+    with queue_path.open(encoding="utf-8", newline="") as handle:
+        queue_rows = list(csv.DictReader(handle))
+    target = next(
+        row for row in queue_rows if row["canonical_g2_overlap"] == "NONE"
+    )
+
+    permno = (
+        target["canonical_permno"]
+        or target["samplefirms_permno"]
+        or "99999999"
+    )
+    evidence_path = tmp_path / "identity_evidence.csv"
+    evidence_path.write_text(
+        (
+            "evidence_id,permno,historical_symbol,market_identifier,valid_from,"
+            "valid_through,evidence_lane,source_reference,authorization_reference,"
+            "research_use_only\n"
+            f"G5-TEST-1,{permno},{target['historical_symbol']},"
+            f"{target['historical_symbol']},{target['trade_date']},"
+            f"{target['trade_date']},AUTHORIZED_MARKET_SECURITY_MASTER,"
+            "authorized-fixture:G5-TEST-1,AUTHORIZED-TEST,1\n"
+        ),
+        encoding="utf-8",
+    )
+
+    staged_dir = tmp_path / "staged"
+    summary = _build(
+        staged_dir,
+        identity_evidence_path=evidence_path,
+    )
+    staging = summary["control_identity_evidence_staging"]
+    readiness = summary["control_identity_readiness"]
+    identity = summary["control_identity"]
+
+    assert staging["input_evidence_row_count"] == 1
+    assert staging["g5_only_staged_verified_count"] == 1
+    assert staging["g5_only_remaining_count"] == (
+        staging["g5_only_requirement_count"] - 1
+    )
+    assert staging["canonical_g2_forward_evidence_row_count"] == 0
+    assert staging["coverage_promoted"] is False
+    assert staging["overall_g5_identity_ready_claimed"] is False
+
+    assert readiness["staged_g5_only_verified_count"] == 1
+    assert readiness["unresolved_canonical_g2_overlap_count"] == identity[
+        "canonical_g2_unverified_overlap_count"
+    ]
+    assert readiness["unresolved_identity_requirement_count"] == (
+        identity["identity_acquisition_queue_count"] - 1
+    )
+    assert readiness["preview_full_history_identity_complete"] is False
+
+    assert summary["inputs"]["identity_evidence"]["sha256"] == master._sha256(
+        evidence_path
+    )
+    staging_output = Path(
+        summary["component_outputs"]["control_identity_evidence_staging"]
+    )
+    assert (
+        staging_output / "g5_control_identity_evidence_staging_receipt.json"
+    ).exists()
+    readiness_output = Path(
+        summary["component_outputs"]["control_identity_readiness"]
+    )
+    assert (
+        readiness_output / "g5_control_identity_readiness_preview.csv"
+    ).exists()
+    assert (
+        readiness_output / "g5_control_identity_readiness_summary.json"
+    ).exists()
+
+    assert summary["g5_model_evaluation_controls_ready"] is False
+    assert summary["canonical_g5_dates_resolved_change"] == 0
+    assert summary["release_claimed"] is False
+
+
+
+
+def test_master_plan_optionally_intakes_external_metadata_without_promoting_readiness(
+    tmp_path: Path,
+):
+    baseline_dir = tmp_path / "baseline_external"
+    _build(baseline_dir)
+
+    control_path = (
+        baseline_dir / "controls/g5_primary_candidate_symbol_dates.csv"
+    )
+    with control_path.open(encoding="utf-8", newline="") as handle:
+        first = next(csv.DictReader(handle))
+
+    source_path = tmp_path / "control_classification.csv"
+    source_path.write_text(
+        (
+            "event_date,symbol,effective_ts_utc,sector,index_bucket\n"
+            f"{first['event_date']},{first['candidate_symbol']},"
+            f"{first['latest_acceptable_effective_ts_utc']},"
+            "TEST_SECTOR,TEST_INDEX\n"
+        ),
+        encoding="utf-8",
+    )
+
+    manifest_path = tmp_path / "external_sources.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "schema_version": "1",
+                "sources": [
+                    {
+                        "source_id": "control-classification-test",
+                        "target_kind": "control",
+                        "lane": "classification",
+                        "path": source_path.name,
+                        "expected_sha256": master._sha256(source_path),
+                        "authorization_reference": "AUTHORIZED-TEST",
+                        "source_name": "test-classification",
+                    }
+                ],
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    staged_dir = tmp_path / "with_external"
+    summary = _build(
+        staged_dir,
+        external_source_manifest_path=manifest_path,
+    )
+    external = summary["external_metadata_intake"]
+
+    assert external["normalized_source_count"] == 1
+    assert external["normalized_row_count"] == 1
+    assert external["observed_nonconflicted_target_field_count"] == 2
+    assert external["missing_target_field_count"] == 1948
+    assert external["externally_complete_control_target_count"] == 0
+    assert external["externally_complete_treated_target_count"] == 0
+    assert external["externally_complete_target_count"] == 0
+    assert external["external_gap_target_count"] == 390
+    assert external["all_external_metadata_complete"] is False
+    assert external["canonical_g5_readiness_changed"] is False
+    assert external["release_claimed"] is False
+
+    assert summary["inputs"]["external_source_manifest"]["sha256"] == (
+        master._sha256(manifest_path)
+    )
+    external_output = Path(
+        summary["component_outputs"]["external_metadata_intake"]
+    )
+    assert (
+        external_output / "g5_external_metadata_intake_summary.json"
+    ).exists()
+    assert (
+        external_output / "g5_external_metadata_normalized.csv"
+    ).exists()
+    assert (
+        external_output / "g5_external_metadata_gaps.csv"
+    ).exists()
+
+    assert summary["g5_model_evaluation_controls_ready"] is False
+    assert summary["canonical_g5_dates_resolved_change"] == 0
+    assert summary["release_claimed"] is False

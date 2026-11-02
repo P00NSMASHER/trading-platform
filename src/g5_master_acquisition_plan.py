@@ -11,9 +11,14 @@ import g5_control_identity_interval_requests as identity_intervals
 import g5_control_identity_requirements as control_identity
 import g5_control_identity_stocknames_lead_expansion as identity_leads
 import g5_control_identity_stocknames_request as identity_stocknames
+import g5_control_identity_evidence_stager as identity_stager
+import g5_control_identity_readiness_preview as identity_readiness
 import g5_control_market_vendor_bridge as market_bridge
 import g5_control_shares_reconciliation as control_shares
+import g5_external_metadata_intake as external_intake
 import g5_external_source_queue as external_queue
+import g5_external_acquisition_packet as external_packet
+import g5_external_source_manifest_scaffold as external_scaffold
 import g5_treated_metadata_requirements as treated_plan
 
 SCHEMA_VERSION = "1"
@@ -38,6 +43,8 @@ def build(
     canonical_g2_identity_manifest_path: Path,
     output_dir: Path,
     canonical_g4_shares_path: Path = DEFAULT_CANONICAL_G4_SHARES,
+    identity_evidence_path: Path | None = None,
+    external_source_manifest_path: Path | None = None,
 ) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -45,10 +52,15 @@ def build(
     treated_dir = output_dir / "treated"
     history_dir = output_dir / "control_history"
     external_dir = output_dir / "control_external_sources"
+    external_packet_dir = output_dir / "external_acquisition_packet"
+    external_scaffold_dir = output_dir / "external_source_manifest_scaffold"
+    external_intake_dir = output_dir / "external_metadata_intake"
     identity_dir = output_dir / "control_identity"
     identity_interval_dir = output_dir / "control_identity_intervals"
     identity_lead_dir = output_dir / "control_identity_stocknames_leads"
     identity_stocknames_dir = output_dir / "control_identity_stocknames_request"
+    identity_staging_dir = output_dir / "control_identity_evidence_staging"
+    identity_readiness_dir = output_dir / "control_identity_readiness"
     market_bridge_dir = output_dir / "control_market_vendor_bridge"
     shares_dir = output_dir / "control_shares"
 
@@ -71,6 +83,32 @@ def build(
         candidate_path=control_dir / "g5_primary_candidate_symbol_dates.csv",
         output_dir=external_dir,
     )
+    external_acquisition = external_packet.build(
+        control_requests_path=external_dir / "g5_external_source_requests.csv",
+        treated_requests_path=(
+            treated_dir / "g5_treated_external_lane_requests.csv"
+        ),
+        output_dir=external_packet_dir,
+    )
+    external_scaffold_state = external_scaffold.build(
+        acquisition_requests_path=(
+            external_packet_dir / "g5_external_acquisition_requests.csv"
+        ),
+        output_dir=external_scaffold_dir,
+    )
+
+    external_intake_state = None
+    if external_source_manifest_path is not None:
+        external_intake_state = external_intake.build(
+            control_targets_path=(
+                control_dir / "g5_primary_candidate_symbol_dates.csv"
+            ),
+            treated_targets_path=(
+                treated_dir / "g5_treated_targets.csv"
+            ),
+            source_manifest_path=external_source_manifest_path,
+            output_dir=external_intake_dir,
+        )
     identity = control_identity.build(
         control_history_path=(
             history_dir / "g5_control_history_symbol_date_requirements.csv"
@@ -105,6 +143,86 @@ def build(
         ),
         output_dir=identity_stocknames_dir,
     )
+    identity_staging = None
+    if identity_evidence_path is not None:
+        identity_staging = identity_stager.build(
+            identity_queue_path=(
+                identity_dir / "g5_control_identity_acquisition_queue.csv"
+            ),
+            evidence_path=identity_evidence_path,
+            output_dir=identity_staging_dir,
+        )
+        if int(identity_staging["counts"]["identity_queue_count"]) != int(
+            identity["identity_acquisition_queue_count"]
+        ):
+            raise ValueError(
+                "identity staging scope does not match the master identity queue"
+            )
+        if int(
+            identity_staging["counts"]["canonical_g2_overlap_requirement_count"]
+        ) != int(identity["canonical_g2_unverified_overlap_count"]):
+            raise ValueError(
+                "identity staging G2-overlap scope does not match the master identity plan"
+            )
+
+    staged_g5_only_path = None
+    staging_receipt_path = None
+    if identity_staging is not None:
+        staged_g5_only_path = (
+            identity_staging_dir / "g5_control_identity_staged_verified.csv"
+        )
+        staging_receipt_path = (
+            identity_staging_dir
+            / "g5_control_identity_evidence_staging_receipt.json"
+        )
+
+    identity_readiness_state = identity_readiness.build_preview(
+        identity_requirements_path=(
+            identity_dir / "g5_control_identity_requirements.csv"
+        ),
+        canonical_g2_identity_manifest_path=canonical_g2_identity_manifest_path,
+        staged_g5_only_path=staged_g5_only_path,
+        staging_receipt_path=staging_receipt_path,
+        output_path=(
+            identity_readiness_dir / "g5_control_identity_readiness_preview.csv"
+        ),
+        summary_path=(
+            identity_readiness_dir / "g5_control_identity_readiness_summary.json"
+        ),
+    )
+    if int(identity_readiness_state["identity_requirement_count"]) != int(
+        identity["control_history_symbol_date_count"]
+    ):
+        raise ValueError(
+            "identity readiness scope does not match the master control-history identity plan"
+        )
+    if int(identity_readiness_state["canonical_g2_verified_reuse_count"]) != int(
+        identity["canonical_g2_verified_reuse_count"]
+    ):
+        raise ValueError(
+            "identity readiness canonical G2 reuse count does not match the master identity plan"
+        )
+    expected_staged_g5_verified = (
+        int(identity_staging["counts"]["g5_only_staged_verified_count"])
+        if identity_staging is not None
+        else 0
+    )
+    if int(identity_readiness_state["staged_g5_only_verified_count"]) != (
+        expected_staged_g5_verified
+    ):
+        raise ValueError(
+            "identity readiness staged G5 count does not match the evidence staging receipt"
+        )
+    expected_unresolved_identity = int(
+        identity["identity_acquisition_queue_count"]
+    ) - expected_staged_g5_verified
+    if int(identity_readiness_state["unresolved_identity_requirement_count"]) != (
+        expected_unresolved_identity
+    ):
+        raise ValueError(
+            "identity readiness unresolved count does not reconcile to the acquisition queue"
+        )
+
     market = market_bridge.build(
         g5_source_requirements_path=(
             history_dir / "g5_control_history_source_date_requirements.csv"
@@ -139,10 +257,85 @@ def build(
         raise ValueError(
             f"expected exactly 174 treated targets, got {treated_targets}"
         )
+    if external_intake_state is not None:
+        if int(external_intake_state["control_target_count"]) != control_targets:
+            raise ValueError(
+                "external metadata intake control scope does not match master controls"
+            )
+        if int(external_intake_state["treated_target_count"]) != treated_targets:
+            raise ValueError(
+                "external metadata intake treated scope does not match master treated targets"
+            )
+        if int(external_intake_state["total_target_count"]) != (
+            control_targets + treated_targets
+        ):
+            raise ValueError(
+                "external metadata intake total target scope does not reconcile"
+            )
+        if int(external_intake_state["external_field_requirement_count"]) != (
+            control_external + treated_external
+        ):
+            raise ValueError(
+                "external metadata intake field scope does not match master external requirements"
+            )
+        if bool(external_intake_state["canonical_g5_readiness_changed"]):
+            raise ValueError(
+                "external metadata intake may not change canonical G5 readiness"
+            )
+        if bool(external_intake_state["release_claimed"]):
+            raise ValueError(
+                "external metadata intake may not make a release claim"
+            )
     if control["primary_complete_event_date_count"] != 72:
         raise ValueError("primary control queue does not cover all 72 event dates")
     if control["residual_unfilled_symbol_date_slots"] != 0:
         raise ValueError("control acquisition plan still has structural gaps")
+    if int(external_acquisition["control_lane_request_count"]) != control_lanes:
+        raise ValueError(
+            "external acquisition packet control scope does not match the control lane queue"
+        )
+    if int(external_acquisition["treated_lane_request_count"]) != treated_lanes:
+        raise ValueError(
+            "external acquisition packet treated scope does not match the treated lane queue"
+        )
+    if int(external_acquisition["total_lane_request_count"]) != (
+        control_lanes + treated_lanes
+    ):
+        raise ValueError(
+            "external acquisition packet total scope does not match master external lanes"
+        )
+    if int(external_acquisition["external_field_requirement_count"]) != (
+        control_external + treated_external
+    ):
+        raise ValueError(
+            "external acquisition packet field scope does not match master requirements"
+        )
+    if int(external_scaffold_state["packet_request_count"]) != int(
+        external_acquisition["total_lane_request_count"]
+    ):
+        raise ValueError(
+            "external source scaffold does not reconcile to acquisition packet requests"
+        )
+    if int(external_scaffold_state["source_slot_count"]) != 8:
+        raise ValueError(
+            "external source scaffold must emit exactly eight target/lane slots"
+        )
+    if not bool(external_scaffold_state["all_packet_requests_reconciled"]):
+        raise ValueError(
+            "external source scaffold lost or duplicated acquisition requests"
+        )
+    if bool(external_scaffold_state["manifest_intake_ready"]):
+        raise ValueError(
+            "blank external source scaffold must remain fail-closed for intake"
+        )
+    if int(external_scaffold_state["canonical_g5_dates_resolved_change"]) != 0:
+        raise ValueError(
+            "external source scaffold may not change canonical G5 readiness"
+        )
+    if bool(external_scaffold_state["release_claimed"]):
+        raise ValueError(
+            "external source scaffold may not make a release claim"
+        )
     if int(intervals["date_level_identity_requirement_count"]) != int(
         identity["identity_acquisition_queue_count"]
     ):
@@ -204,6 +397,41 @@ def build(
         "control_external_lane_request_count": control_lanes,
         "treated_external_lane_request_count": treated_lanes,
         "total_external_lane_request_count": control_lanes + treated_lanes,
+        "external_acquisition_packet": {
+            "control_lane_request_count": int(
+                external_acquisition["control_lane_request_count"]
+            ),
+            "treated_lane_request_count": int(
+                external_acquisition["treated_lane_request_count"]
+            ),
+            "total_lane_request_count": int(
+                external_acquisition["total_lane_request_count"]
+            ),
+            "external_field_requirement_count": int(
+                external_acquisition["external_field_requirement_count"]
+            ),
+            "grouped_lane_symbol_batch_count": int(
+                external_acquisition["grouped_lane_symbol_batch_count"]
+            ),
+            "lane_counts": external_acquisition["lane_counts"],
+        },
+        "external_source_manifest_scaffold": {
+            "packet_request_count": int(
+                external_scaffold_state["packet_request_count"]
+            ),
+            "source_slot_count": int(
+                external_scaffold_state["source_slot_count"]
+            ),
+            "target_slot_counts": external_scaffold_state[
+                "target_slot_counts"
+            ],
+            "lane_slot_counts": external_scaffold_state[
+                "lane_slot_counts"
+            ],
+            "manifest_intake_ready": bool(
+                external_scaffold_state["manifest_intake_ready"]
+            ),
+        },
         "control_identity": {
             "history_symbol_date_count": int(
                 identity["control_history_symbol_date_count"]
@@ -231,6 +459,36 @@ def build(
             "primary_candidate_exact_sample_mapping": identity[
                 "primary_candidate_exact_sample_mapping"
             ],
+        },
+        "control_identity_readiness": {
+            "identity_requirement_count": int(
+                identity_readiness_state["identity_requirement_count"]
+            ),
+            "canonical_g2_verified_reuse_count": int(
+                identity_readiness_state["canonical_g2_verified_reuse_count"]
+            ),
+            "staged_g5_only_verified_count": int(
+                identity_readiness_state["staged_g5_only_verified_count"]
+            ),
+            "preview_verified_count": int(
+                identity_readiness_state["preview_verified_count"]
+            ),
+            "unresolved_canonical_g2_overlap_count": int(
+                identity_readiness_state[
+                    "unresolved_canonical_g2_overlap_count"
+                ]
+            ),
+            "unresolved_g5_only_count": int(
+                identity_readiness_state["unresolved_g5_only_count"]
+            ),
+            "unresolved_identity_requirement_count": int(
+                identity_readiness_state["unresolved_identity_requirement_count"]
+            ),
+            "preview_full_history_identity_complete": bool(
+                identity_readiness_state[
+                    "preview_full_history_identity_complete"
+                ]
+            ),
         },
         "control_identity_routing": {
             "date_level_unresolved_count": int(
@@ -347,10 +605,13 @@ def build(
             "treated": str(treated_dir),
             "control_history": str(history_dir),
             "control_external_sources": str(external_dir),
+            "external_acquisition_packet": str(external_packet_dir),
+            "external_source_manifest_scaffold": str(external_scaffold_dir),
             "control_identity": str(identity_dir),
             "control_identity_intervals": str(identity_interval_dir),
             "control_identity_stocknames_leads": str(identity_lead_dir),
             "control_identity_stocknames_request": str(identity_stocknames_dir),
+            "control_identity_readiness": str(identity_readiness_dir),
             "control_market_vendor_bridge": str(market_bridge_dir),
             "control_shares": str(shares_dir),
         },
@@ -364,6 +625,97 @@ def build(
             "real_source_data_and_point_in_time_cutoffs_required": True,
         },
     }
+
+    if external_intake_state is not None:
+        summary["external_metadata_intake"] = {
+            "normalized_source_count": int(
+                external_intake_state["normalized_source_count"]
+            ),
+            "normalized_row_count": int(
+                external_intake_state["normalized_row_count"]
+            ),
+            "observed_nonconflicted_target_field_count": int(
+                external_intake_state[
+                    "observed_nonconflicted_target_field_count"
+                ]
+            ),
+            "missing_target_field_count": int(
+                external_intake_state["missing_target_field_count"]
+            ),
+            "externally_complete_control_target_count": int(
+                external_intake_state[
+                    "externally_complete_control_target_count"
+                ]
+            ),
+            "externally_complete_treated_target_count": int(
+                external_intake_state[
+                    "externally_complete_treated_target_count"
+                ]
+            ),
+            "externally_complete_target_count": int(
+                external_intake_state["externally_complete_target_count"]
+            ),
+            "external_gap_target_count": int(
+                external_intake_state["external_gap_target_count"]
+            ),
+            "missing_field_counts": external_intake_state[
+                "missing_field_counts"
+            ],
+            "conflict_field_counts": external_intake_state[
+                "conflict_field_counts"
+            ],
+            "all_external_metadata_complete": bool(
+                external_intake_state["all_external_metadata_complete"]
+            ),
+            "canonical_g5_readiness_changed": bool(
+                external_intake_state["canonical_g5_readiness_changed"]
+            ),
+            "release_claimed": bool(
+                external_intake_state["release_claimed"]
+            ),
+        }
+        summary["inputs"]["external_source_manifest"] = {
+            "path": str(external_source_manifest_path),
+            "sha256": _sha256(external_source_manifest_path),
+        }
+        summary["component_outputs"]["external_metadata_intake"] = str(
+            external_intake_dir
+        )
+
+    if identity_staging is not None:
+        staging_counts = identity_staging["counts"]
+        summary["control_identity_evidence_staging"] = {
+            "input_evidence_row_count": int(
+                staging_counts["input_evidence_row_count"]
+            ),
+            "g5_only_requirement_count": int(
+                staging_counts["g5_only_requirement_count"]
+            ),
+            "g5_only_staged_verified_count": int(
+                staging_counts["g5_only_staged_verified_count"]
+            ),
+            "g5_only_remaining_count": int(
+                staging_counts["g5_only_remaining_count"]
+            ),
+            "canonical_g2_forward_evidence_row_count": int(
+                staging_counts["g2_forward_evidence_row_count"]
+            ),
+            "g5_only_identity_staging_complete": bool(
+                identity_staging["g5_only_identity_staging_complete"]
+            ),
+            "overall_g5_identity_ready_claimed": bool(
+                identity_staging["overall_g5_identity_ready_claimed"]
+            ),
+            "coverage_promoted": bool(identity_staging["coverage_promoted"]),
+            "output_sha256": identity_staging["output_sha256"],
+        }
+        summary["inputs"]["identity_evidence"] = {
+            "path": str(identity_evidence_path),
+            "sha256": _sha256(identity_evidence_path),
+        }
+        summary["component_outputs"]["control_identity_evidence_staging"] = str(
+            identity_staging_dir
+        )
 
     (output_dir / "g5_master_acquisition_summary.json").write_text(
         json.dumps(summary, indent=2, sort_keys=True) + "\n",
@@ -385,6 +737,23 @@ def main() -> int:
         type=Path,
         default=DEFAULT_CANONICAL_G4_SHARES,
     )
+    parser.add_argument(
+        "--identity-evidence",
+        type=Path,
+        help=(
+            "Optional authorized dated stable-ID evidence. When supplied, the G5-only "
+            "identity stager runs inside the master plan without promoting canonical readiness."
+        ),
+    )
+    parser.add_argument(
+        "--external-source-manifest",
+        type=Path,
+        help=(
+            "Optional hash-bound external metadata source manifest. When supplied, "
+            "the G5 external intake runs inside the master plan for preview/completeness "
+            "reporting without promoting canonical readiness."
+        ),
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -394,6 +763,8 @@ def main() -> int:
         planning_universe_path=args.planning_universe,
         canonical_g2_identity_manifest_path=args.canonical_g2_identity_manifest,
         canonical_g4_shares_path=args.canonical_g4_shares,
+        identity_evidence_path=args.identity_evidence,
+        external_source_manifest_path=args.external_source_manifest,
         output_dir=args.output_dir,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
