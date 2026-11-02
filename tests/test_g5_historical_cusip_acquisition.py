@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import csv
+
+import pytest
 import sys
 from pathlib import Path
 
@@ -230,3 +232,84 @@ def test_reviewed_fails_closed_on_non_ascii_cusip_and_invalid_dates(tmp_path: Pa
         else:
             raise AssertionError("invalid historical CUSIP evidence was staged")
         assert not output.exists()
+
+
+@pytest.mark.parametrize("invalid_day", [
+    "2015-01-01garbage",
+    "2015-01-01T00:00:00Z",
+    "2015-02-30",
+    "20150101",
+])
+def test_cusip_target_dates_fail_closed(tmp_path: Path, invalid_day: str):
+    control = tmp_path / "control.csv"
+    control.write_text(
+        "event_date,candidate_symbol\n"
+        f"{invalid_day},AAA\n",
+        encoding="utf-8",
+    )
+    treated = tmp_path / "treated.csv"
+    treated.write_text(
+        "event_date,historical_symbol\n2015-01-01,BBB\n", encoding="utf-8"
+    )
+    output = tmp_path / "result"
+    with pytest.raises(cusip.G5HistoricalCusipError, match="event_date"):
+        cusip.build(control_targets_path=control, treated_targets_path=treated, output_dir=output)
+    assert not output.exists()
+
+
+@pytest.mark.parametrize("bad", [
+    "2015-01-01extra",
+    "2015-02-30",
+    "20150101",
+    "",
+    "2015-01-01;",
+    "2015-01-01;2015-01-01",
+])
+def test_cusip_review_queue_required_days_are_authenticated(tmp_path: Path, bad: str):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        f"treated,AAA,{bad}\n",
+        encoding="utf-8",
+    )
+    output = tmp_path / "staged.csv"
+    with pytest.raises(cusip.G5HistoricalCusipError):
+        cusip.stage_reviewed(
+            acquisition_queue_path=queue,
+            reviewed_evidence_path=tmp_path / "not-needed.csv",
+            output_path=output,
+        )
+    assert not output.exists()
+
+
+def test_duplicate_review_queue_targets_are_rejected(tmp_path: Path):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        "treated,AAA,2015-01-01\n"
+        "treated,AAA,2015-01-02\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(cusip.G5HistoricalCusipError, match="duplicate target"):
+        cusip.stage_reviewed(
+            acquisition_queue_path=queue,
+            reviewed_evidence_path=tmp_path / "not-needed.csv",
+            output_path=tmp_path / "staged.csv",
+        )
+
+
+@pytest.mark.parametrize("control_text", [
+    "event_date,candidate_symbol,candidate_symbol\n2015-01-01,AAA,BBB\n",
+    "event_date,candidate_symbol\n2015-01-01,AAA,EXTRA\n",
+])
+def test_cusip_source_csv_malformed_headers_or_extra_fields_fail(tmp_path: Path, control_text: str):
+    control = tmp_path / "control.csv"
+    control.write_text(control_text, encoding="utf-8")
+    treated = tmp_path / "treated.csv"
+    treated.write_text(
+        "event_date,historical_symbol\n2015-01-01,BBB\n", encoding="utf-8"
+    )
+    out = tmp_path / "result"
+    with pytest.raises(cusip.G5HistoricalCusipError, match="headers|extra fields"):
+        cusip.build(control_targets_path=control, treated_targets_path=treated, output_dir=out)
+    assert not out.exists()
