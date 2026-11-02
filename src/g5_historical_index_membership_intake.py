@@ -4,6 +4,7 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -28,16 +29,23 @@ def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         fields = list(reader.fieldnames or [])
-        rows = [
-            {str(k): str(v or "").strip() for k, v in row.items()}
-            for row in reader
-        ]
+        normalized = [str(field or "").strip().casefold() for field in fields]
+        if not normalized or any(not key for key in normalized) or len(set(normalized)) != len(normalized):
+            raise G5IndexMembershipError("ambiguous or duplicate CSV headers")
+        rows = []
+        for row in reader:
+            if None in row:
+                raise G5IndexMembershipError("CSV row has unexpected extra fields")
+            rows.append({str(k): str(v or "").strip() for k, v in row.items()})
     return fields, rows
 
 
 def _parse_date(value: str, *, label: str) -> date:
+    raw = str(value or "").strip()
+    if re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", raw) is None:
+        raise G5IndexMembershipError(f"{label} must be YYYY-MM-DD")
     try:
-        return date.fromisoformat(str(value or "").strip()[:10])
+        return date.fromisoformat(raw)
     except ValueError as exc:
         raise G5IndexMembershipError(f"{label} must be YYYY-MM-DD") from exc
 
