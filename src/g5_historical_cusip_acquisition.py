@@ -50,10 +50,14 @@ def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
         fields = list(reader.fieldnames or [])
-        rows = [
-            {str(k): str(v or "").strip() for k, v in row.items()}
-            for row in reader
-        ]
+        names = [str(k or "").strip().casefold() for k in fields]
+        if not names or any(not k for k in names) or len(set(names)) != len(names):
+            raise G5HistoricalCusipError("ambiguous or duplicate CSV headers")
+        rows = []
+        for row in reader:
+            if None in row:
+                raise G5HistoricalCusipError("CSV row has unexpected extra fields")
+            rows.append({str(k): str(v or "").strip() for k, v in row.items()})
     return fields, rows
 
 
@@ -119,7 +123,9 @@ def build(
             )
         for row_no, row in enumerate(rows, 2):
             symbol = row[symbol_field].upper()
-            event_date = row[date_field][:10]
+            event_date = _strict_civil_day(
+                row[date_field], f"{target_kind} row {row_no} {date_field}"
+            )
             if not symbol or not event_date:
                 raise G5HistoricalCusipError(
                     f"{target_kind} row {row_no}: symbol/date required"
@@ -197,11 +203,20 @@ def stage_reviewed(
 ) -> dict:
     _qfields, queue = _read_csv(acquisition_queue_path)
     required_dates: dict[tuple[str, str], set[str]] = {}
-    for row in queue:
-        key = (row["target_kind"], row["historical_symbol"].upper())
-        required_dates[key] = {
-            item for item in row["required_event_dates"].split(";") if item
+    for row_no, row in enumerate(queue, 2):
+        key = (row["target_kind"].lower(), row["historical_symbol"].upper())
+        if key in required_dates:
+            raise G5HistoricalCusipError(f"queue row {row_no}: duplicate target")
+        parts = row["required_event_dates"].split(";")
+        if not parts or any(not item for item in parts):
+            raise G5HistoricalCusipError(f"queue row {row_no}: missing required date")
+        days = {
+            _strict_civil_day(item, f"queue row {row_no} required_event_dates")
+            for item in parts
         }
+        if len(days) != len(parts):
+            raise G5HistoricalCusipError(f"queue row {row_no}: duplicate required date")
+        required_dates[key] = days
 
     fields, rows = _read_csv(reviewed_evidence_path)
     required = {
