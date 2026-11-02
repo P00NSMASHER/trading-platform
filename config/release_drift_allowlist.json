@@ -124,19 +124,19 @@
       "reason": "Intentional post-Step21 repository hardening addition; weekly pip and GitHub Actions dependency update monitoring"
     },
     ".github/workflows/g1-swarm-controller.yml": {
-      "expected_sha256": "cd0dc4a47c99306d1032b630fc0c6c67ff0341986422f12ff4bc37f4529f78b5",
+      "expected_sha256": "6c209a8cfa4a8b15b3e982d62bd3daebcf9854381e519098afc39a54e5784734",
       "reason": "G1 swarm coordination: preserve push/PR-close/15-minute/manual reconciliation and add immediate issue #153 WORKER-comment reconciliation; controller remains sole token authority and ignores its own controller comments. Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required."
     },
     ".github/workflows/g2-databento-cost-probe.yml": {
-      "expected_sha256": "d7e6e65f8d50eba866d4c3fc15a67a5274d43c6060a6aa7d3dced50e3005d694",
+      "expected_sha256": "89d889f5521da6d3055debbbfffb5b82d49a609417a11d6b343b54c3cdcd0ecf",
       "reason": "Hardened Databento historical cost-only probe: main-push plus explicit manual dispatch, read-only permissions, secret-gated metadata cost estimates, no downloads, batch jobs, or purchases. Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required."
     },
     ".github/workflows/pr-ci.yml": {
-      "expected_sha256": "6c7a49ac5685a9ea3517ff6b55bef9f9bb3a8656fb2fb44a4fffaffc684adab8",
+      "expected_sha256": "4f2da7c3ff92a46fa634805ccb47f8ccaa32a08b30e0dfc3a246f06ea3392475",
       "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required."
     },
     ".github/workflows/synthetic-ci.yml": {
-      "expected_sha256": "57347edcd394c3255244bd1e93c5e6aa96348d722bf33a740eb8ba38fb871e2c",
+      "expected_sha256": "65d206bbbd81a6f8e0057b17819612278ec86ca2a158674abca282654387a057",
       "reason": "Control-plane Step 8: exact dispatched-commit checkout and externally authenticated release audit-pack generation Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required."
     },
     "config/licensed_entitlement_manifest.example.json": {
@@ -2808,7 +2808,7 @@
       "reason": "Regression coverage for replay-level G5 control-identity validation, exact input hash binding, explicit malformed-config failure, byte-compatible legacy replay behavior, and a hash-bound G5-only staged-identity path that remains fail-closed for final evaluation."
     },
     ".github/workflows/hacked-earnings-exhaustive-audit.yml": {
-      "expected_sha256": "ef40f9d25d7092ab8fc0bac1f7016641ffebcb1df117f48e3cdc19e5093c7084",
+      "expected_sha256": "ae88def99303b4195949e59126df12c7aea475bd678e52949cf17f22a2a8abc5",
       "reason": "Reproducible read-only CI for the pinned hacked_earnings_jfe exhaustive audit; clones the exact upstream commit and publishes audit evidence without expanding the audited source boundary. Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required."
     },
     "docs/hacked_earnings_jfe_exhaustive_audit_2026-10-06.md": {
@@ -2820,7 +2820,7 @@
       "reason": "Reproducible exhaustive-audit implementation covering reachable Git objects, tracked/history blobs, archives, structured alternate formats, notebooks, and embedded outputs for the pinned hacked_earnings_jfe commit."
     },
     ".github/workflows/tradier-readonly-options.yml": {
-      "expected_sha256": "c191386d149a8f14dcc9552437e694298e03ab61195da615265705aff2e8badf",
+      "expected_sha256": "f306c4eec93b7a3ceba14363bbc66ff317f4bce25140553fc7772d43a85ab685",
       "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI. October 2026 forward admission completeness extension, synthetic tests only, no private market quotes exposed. 2026-10-28: bounded direct-Greeks cross-endpoint UTC hypothesis corroboration; existing strict H1 and no-order controls unchanged. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure. Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required."
     },
     "src/tradier_options_probe.py": {
