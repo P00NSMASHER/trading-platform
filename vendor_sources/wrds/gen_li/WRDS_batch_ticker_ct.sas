@@ -1,3 +1,8 @@
+/* PROVENANCE-ONLY REFERENCE COPY: NEVER RUN. Original upstream bytes remain in PR history.
+   WRDS TAQ queries require separately verified institutional entitlement.
+   Intentionally abort before the original SAS statements below. */
+%abort cancel;
+
 /*
   Authorized source copy for G2 reproduction.
   Upstream: https://github.com/gen-li/Extract_TAQ_from_WRDS_Cloud
