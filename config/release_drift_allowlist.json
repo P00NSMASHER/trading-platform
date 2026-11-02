@@ -2955,6 +2955,38 @@
       "expected_sha256": "db9361bcacd85ac8b677aff155c6b276204bde44fb3a0302b4ebac85e0c17359",
       "reason": "G5 historical CUSIP provenance regressions include invalid/ambiguous dates, malformed source headers, source/evidence clock naive/invalid/unknown-offset rejection and valid offset cases. No licensed data or source authorization implied."
     },
+    "src/options_holdout_audit.py": {
+      "expected_sha256": "692280aee3cf7ff14c8fcabec04ede48789c1c56e430aec4a6cea00c0ba8b70c",
+      "reason": "Local-only prospective options research: check full-population validity and risk before 21-day purged holdout screening; no broker access or claim of profitable trading."
+    },
+    "tests/test_options_holdout_audit.py": {
+      "expected_sha256": "c26bb0592e170db476083b535008e054269c6761740ec6d83c0cbb1bf9ab3a10",
+      "reason": "Ten synthetic-only regression cases for prospective options holdout temporal separation, missingness, account capacity and false-positive controls."
+    },
+    "docs/options_holdout_audit.md": {
+      "expected_sha256": "1f0e55d1038fdab4fbd52c5067ac0078b94eefe982e34e65d9508f0c93761f17",
+      "reason": "Prospective paper-only options research: document fail-closed chronological holdout, embargo and unverified real-data prerequisites; no token, orders or real quote uploads."
+    },
+    "src/options_quote_depth_gate.py": {
+      "expected_sha256": "6833a2d0f5e292a0a552ed5a3752b258b81e908162628cf6dcba87f18dfb1e73",
+      "reason": "2026-10-30: synthetic-only offline quote-side depth, quote update chronology and all-cohort completeness audit; no broker access"
+    },
+    "tests/test_options_quote_depth_gate.py": {
+      "expected_sha256": "c7d070b36eee2d60f8b52edc50ece743e96282d12857139167aeda863be0edbd",
+      "reason": "2026-10-30: 29 synthetic-only adverse liquidity, chronology, crossed-book, OCC-contract-binding, and full-population tests"
+    },
+    "scripts/options_quote_depth_synthetic_experiment.py": {
+      "expected_sha256": "820a429b61fef180641bdf30b6b76f41d3c42d8078320e8398f1afd615ebc05a",
+      "reason": "2026-10-30: deterministic 100-row synthetic counterexample showing incomplete depth prevents paper evidence promotion"
+    },
+    "src/options_joint_depth_forward_gate.py": {
+      "expected_sha256": "02c94ae41c92edb87c6963848ce953e85a121c49b39eae3f6fe202031be90783",
+      "reason": "2026-11-01: source-checked Cboe 2026-27 US option RTH calendar blocks full holidays, 13:00 early closes, and unknown years, on all entry/exit/side quote clocks; draft synthetic only, no broker fills"
+    },
+    "tests/test_options_joint_depth_forward_gate.py": {
+      "expected_sha256": "265d2b8a6ecc094a1e53bc6e393c3749189caf68b2397fdaf1da791d4781d58c",
+      "reason": "2026-11-01: synthetic Thanksgiving, Christmas, 13:00 boundary, DST and unknown-calendar controls; positive 65-case generator excludes official closures; no prospective real fills"
+    },
     "src/g2_dxfeed_2011_manifest.py": {
       "expected_sha256": "f0ea62e5e5a5e785f9a1d2fbc03aa48ff0dd04bd3810538c817856cfd40a28fe",
       "reason": "Read-only frozen dxFeed 2011 option-source request manifest; 105 dates and 464 pairs, explicit license/retention authorization gates, zero actual data acquisition or coverage. Source-exact historical PR #453, candidate only."
