@@ -313,3 +313,47 @@ def test_cusip_source_csv_malformed_headers_or_extra_fields_fail(tmp_path: Path,
     with pytest.raises(cusip.G5HistoricalCusipError, match="headers|extra fields"):
         cusip.build(control_targets_path=control, treated_targets_path=treated, output_dir=out)
     assert not out.exists()
+
+
+
+@pytest.mark.parametrize("bad_time", [
+    "not-a-timestamp",
+    "2020-01-02",
+    "2020-01-02T00:00:00",
+    "2020-01-02T00:00:00Zjunk",
+    "2020-02-30T00:00:00Z",
+    "2020-01-02T00:00:00+25:00",
+    "2020-01-02T00:00:00-00:00",
+])
+def test_invalid_review_timestamp_rejects_before_output(tmp_path: Path, bad_time: str):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        "treated,AAA,2015-01-01\n",
+        encoding="utf-8",
+    )
+    reviewed = tmp_path / "reviewed.csv"
+    reviewed.write_text(
+        "target_kind,historical_symbol,cusip,valid_from,valid_through,"
+        "source_reference,evidence_effective_at,review_status,research_use_only\n"
+        f"treated,AAA,123456789,2010-01-01,2020-01-01,AUTH,{bad_time},"
+        "EXPLICIT_HISTORICAL_CUSIP_VERIFIED,1\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "staged.csv"
+    with pytest.raises(cusip.G5HistoricalCusipError, match="evidence_effective_at"):
+        cusip.stage_reviewed(
+            acquisition_queue_path=queue,
+            reviewed_evidence_path=reviewed,
+            output_path=out,
+        )
+    assert not out.exists()
+
+
+def test_valid_offset_timestamp_is_retained_but_not_pit_certified():
+    assert cusip._checked_evidence_timestamp("2020-01-02T01:30:00+01:30") == (
+        "2020-01-02T01:30:00+01:30"
+    )
+    assert cusip._checked_evidence_timestamp("2020-01-02T00:00:00Z") == (
+        "2020-01-02T00:00:00Z"
+    )
