@@ -30,6 +30,18 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SECURITY_IDENTITY_PATH = REPO_ROOT / "data/processed/security_identity_real/security_identity_manifest.json"
 
 
+def _protect_noncanonical_identity_preview(identity_path: Path, *outputs: Path) -> None:
+    """Never allow a synthetic/alternate identity to rewrite repository evidence."""
+    if Path(identity_path).resolve() == DEFAULT_SECURITY_IDENTITY_PATH.resolve():
+        return
+    root = REPO_ROOT.resolve()
+    for output in outputs:
+        if Path(output).resolve().is_relative_to(root):
+            raise ValueError(
+                "noncanonical identity preview outputs must be outside repository"
+            )
+
+
 def _manifest_path(path: Path) -> str:
     resolved = path.resolve()
     try:
@@ -287,6 +299,7 @@ def refresh_coverage(
     unresolved_gates_path: Path,
     security_identity_path: Path = DEFAULT_SECURITY_IDENTITY_PATH,
 ) -> dict:
+    _protect_noncanonical_identity_preview(security_identity_path, coverage_summary_path, unresolved_gates_path)
     summary = json.loads(coverage_summary_path.read_text(encoding="utf-8"))
     readiness = json.loads(metadata_readiness_path.read_text(encoding="utf-8"))
     quality = json.loads(metadata_quality_path.read_text(encoding="utf-8"))
@@ -425,6 +438,7 @@ def build_status(
     outpath: Path,
     security_identity_path: Path = DEFAULT_SECURITY_IDENTITY_PATH,
 ) -> dict:
+    _protect_noncanonical_identity_preview(security_identity_path, outpath)
     req = json.loads(requirements_manifest_path.read_text(encoding="utf-8"))
     cov = json.loads(coverage_summary_path.read_text(encoding="utf-8"))
     meta = json.loads(metadata_readiness_path.read_text(encoding="utf-8"))

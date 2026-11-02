@@ -384,3 +384,40 @@ def test_build_status_can_preview_noncanonical_identity_path(tmp_path: Path):
     assert status["security_identity_state"]["ready_for_non_synthetic_market_join"] is True
     assert status["security_identity_state"]["baseline_identity_unverified_count"] == 0
     assert out.exists()
+
+
+def test_noncanonical_identity_cannot_write_canonical_coverage_or_status(tmp_path: Path):
+    alternate = tmp_path / "synthetic-identity.json"
+    coverage = ROOT / "data/processed/coverage_plan_real/coverage_summary.json"
+    status = ROOT / "data/processed/real_data_release_sprint/step_status.json"
+    before_coverage = coverage.read_bytes()
+    before_status = status.read_bytes()
+    with pytest.raises(ValueError, match="preview outputs must be outside repository"):
+        sprint.refresh_coverage(
+            coverage_summary_path=coverage,
+            metadata_readiness_path=tmp_path / "unused-readiness.json",
+            metadata_quality_path=tmp_path / "unused-quality.json",
+            requirements_manifest_path=tmp_path / "unused-requirements.json",
+            unresolved_gates_path=tmp_path / "preview-gates.csv",
+            security_identity_path=alternate,
+        )
+    with pytest.raises(ValueError, match="preview outputs must be outside repository"):
+        sprint.build_status(
+            requirements_manifest_path=tmp_path / "unused-requirements.json",
+            coverage_summary_path=tmp_path / "unused-coverage.json",
+            metadata_readiness_path=tmp_path / "unused-readiness.json",
+            metadata_quality_path=tmp_path / "unused-quality.json",
+            outpath=status,
+            security_identity_path=alternate,
+        )
+    assert coverage.read_bytes() == before_coverage
+    assert status.read_bytes() == before_status
+
+
+def test_noncanonical_identity_guard_rejects_symlink_to_repository(tmp_path: Path):
+    alternate = tmp_path / "preview-identity.json"
+    canonical = ROOT / "data/processed/coverage_plan_real/coverage_summary.json"
+    alias = tmp_path / "alias.json"
+    alias.symlink_to(canonical)
+    with pytest.raises(ValueError, match="preview outputs must be outside repository"):
+        sprint._protect_noncanonical_identity_preview(alternate, alias)
