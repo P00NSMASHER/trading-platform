@@ -1,7 +1,11 @@
 /* PROVENANCE-ONLY REFERENCE COPY: NEVER RUN. Original upstream bytes remain in PR history.
    WRDS TAQ queries require separately verified institutional entitlement.
    Intentionally abort before the original SAS statements below. */
-%abort cancel;
+%macro g2_wrds_provenance_abort;
+  %put ERROR: Reference-only upstream WRDS code is disabled. Use the authorized G2 adapter only with licensed entitlement.;
+  %abort cancel;
+%mend;
+%g2_wrds_provenance_abort;
 
 /*
   Authorized source copy for G2 reproduction.
