@@ -1968,8 +1968,8 @@
       "reason": "G5 external source planning: emit deterministic classification, ownership, analyst, and borrow request lanes for each primary control candidate, preserving cutoffs and explicit source routes without changing evidence readiness."
     },
     "src/g5_historical_cusip_acquisition.py": {
-      "expected_sha256": "0088c7c2a147df5b2a07b46380fe3c19c6b05bac68ae661a6128e7b6dd264d3a",
-      "reason": "G5 historical CUSIP acquisition lane for control and treated ownership targets, preserving all required event dates and requiring explicit reviewed nine-character historical CUSIP evidence before staging. Strict ASCII CUSIP and exact real ISO civil-day validation with adversarial regressions; source-candidate only, independent release authority unchanged."
+      "expected_sha256": "203054c6b9fc0274c6d42ad4f54bf9a5509c733f6f738e69b0ad4e212fb63094",
+      "reason": "G5 historical CUSIP intake now rejects suffix/impossible event dates, tampered duplicate/empty queue required dates, CSV duplicate headers and extra fields; preserves original source/authorization and reviewed CUSIP9 controls. Candidate hash only, release trust root still independent."
     },
     "src/g5_master_acquisition_plan.py": {
       "expected_sha256": "b593182cca1a3cb21fbc09dce0a6a689c417715d380370e43ce37643d3572e6e",
@@ -2652,8 +2652,8 @@
       "reason": "Regression coverage for four G5 external source lanes per candidate, deterministic request IDs, explicit field/source routes, duplicate rejection, and zero G5 readiness/release change."
     },
     "tests/test_g5_historical_cusip_acquisition.py": {
-      "expected_sha256": "a3111ca1db9c17f63a4f8b87711cfac151a750425cf2faba8b063d1e840e22b3",
-      "reason": "Test real G5 CUSIP queue via current control and treated target builders; preserves independently checked CUSIP9, date coverage, and fail-closed stage validation. Candidate SHA, not independent release approval. Strict ASCII CUSIP and exact real ISO civil-day validation with adversarial regressions; source-candidate only, independent release authority unchanged."
+      "expected_sha256": "3f6ae1df3eccf1440c6228892b627c131ef8d2df92ed06a2d861386777bdf1e8",
+      "reason": "Exact-head adversarial tests for invalid source/queue days, forged duplicate review targets, ambiguous/extra CSV fields, canonical historical CUSIP9 and interval coverage. Candidate regression, not a source-rights proof."
     },
     "tests/test_g5_master_acquisition_plan.py": {
       "expected_sha256": "ae48683edba447d8b7ab286dee012d3b0d370b982316a96ecfda22187f9ea0cf",
