@@ -1,0 +1,359 @@
+from __future__ import annotations
+
+import csv
+
+import pytest
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+import g5_control_acquisition_planner as controls
+import g5_treated_metadata_requirements as treated
+import g5_historical_cusip_acquisition as cusip
+
+
+def _real_targets(tmp_path: Path) -> tuple[Path, Path]:
+    control_dir = tmp_path / "controls"
+    treated_dir = tmp_path / "treated"
+    controls.build(
+        events_path=ROOT / "data/processed/historical_events.csv",
+        requirements_path=(
+            ROOT / "data/processed/coverage_plan_real/source_date_requirements.csv"
+        ),
+        planning_universe_path=ROOT / "data/raw/hacked_earnings_jfe/SampleFirms.csv",
+        output_dir=control_dir,
+    )
+    treated.build(
+        events_path=ROOT / "data/processed/historical_events.csv",
+        output_dir=treated_dir,
+    )
+    return (
+        control_dir / "g5_primary_candidate_symbol_dates.csv",
+        treated_dir / "g5_treated_targets.csv",
+    )
+
+
+def test_real_g5_cusip_queue_preserves_control_and_treated_targets(tmp_path: Path):
+    control, treated = _real_targets(tmp_path)
+    out = tmp_path / "cusip"
+    summary = cusip.build(
+        control_targets_path=control,
+        treated_targets_path=treated,
+        output_dir=out,
+    )
+    assert summary["request_count_by_target_kind"]["control"] > 0
+    assert summary["request_count_by_target_kind"]["treated"] > 0
+    assert summary["request_count"] == (
+        summary["request_count_by_target_kind"]["control"]
+        + summary["request_count_by_target_kind"]["treated"]
+    )
+    assert summary["canonical_g5_dates_resolved_change"] == 0
+    rows = list(
+        csv.DictReader(
+            (out / "g5_historical_cusip_acquisition_queue.csv").open(
+                encoding="utf-8"
+            )
+        )
+    )
+    assert len(rows) == summary["request_count"]
+    assert len({row["request_id"] for row in rows}) == len(rows)
+    assert all(row["required_event_dates"] for row in rows)
+    assert all(row["status"] == "HISTORICAL_CUSIP_EVIDENCE_REQUIRED" for row in rows)
+
+
+def test_queue_compresses_same_symbol_within_target_kind(tmp_path: Path):
+    control = tmp_path / "control.csv"
+    control.write_text(
+        "event_date,candidate_symbol\n"
+        "2015-01-01,AAA\n"
+        "2015-02-01,AAA\n",
+        encoding="utf-8",
+    )
+    treated = tmp_path / "treated.csv"
+    treated.write_text(
+        "event_date,historical_symbol\n"
+        "2015-01-01,AAA\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "out"
+    summary = cusip.build(
+        control_targets_path=control,
+        treated_targets_path=treated,
+        output_dir=out,
+    )
+    assert summary["request_count"] == 2
+    rows = list(
+        csv.DictReader(
+            (out / "g5_historical_cusip_acquisition_queue.csv").open(
+                encoding="utf-8"
+            )
+        )
+    )
+    control_row = next(row for row in rows if row["target_kind"] == "control")
+    assert control_row["required_event_dates"] == "2015-01-01;2015-02-01"
+
+
+def test_reviewed_cusip_requires_exact_nine_characters_and_date_coverage(tmp_path: Path):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        "treated,AAA,2013-01-01;2015-01-01\n",
+        encoding="utf-8",
+    )
+    reviewed = tmp_path / "reviewed.csv"
+    reviewed.write_text(
+        "target_kind,historical_symbol,cusip,valid_from,valid_through,"
+        "source_reference,evidence_effective_at,review_status,research_use_only\n"
+        "treated,AAA,12345678,2010-01-01,2016-01-01,SEC,"
+        "2016-01-02T00:00:00Z,EXPLICIT_HISTORICAL_CUSIP_VERIFIED,1\n",
+        encoding="utf-8",
+    )
+    try:
+        cusip.stage_reviewed(
+            acquisition_queue_path=queue,
+            reviewed_evidence_path=reviewed,
+            output_path=tmp_path / "out.csv",
+        )
+    except cusip.G5HistoricalCusipError as exc:
+        assert "exactly 9" in str(exc)
+    else:
+        raise AssertionError("expected invalid CUSIP failure")
+
+    reviewed.write_text(
+        "target_kind,historical_symbol,cusip,valid_from,valid_through,"
+        "source_reference,evidence_effective_at,review_status,research_use_only\n"
+        "treated,AAA,123456789,2014-01-01,2016-01-01,SEC,"
+        "2016-01-02T00:00:00Z,EXPLICIT_HISTORICAL_CUSIP_VERIFIED,1\n",
+        encoding="utf-8",
+    )
+    try:
+        cusip.stage_reviewed(
+            acquisition_queue_path=queue,
+            reviewed_evidence_path=reviewed,
+            output_path=tmp_path / "out.csv",
+        )
+    except cusip.G5HistoricalCusipError as exc:
+        assert "misses required dates" in str(exc)
+    else:
+        raise AssertionError("expected date coverage failure")
+
+
+def test_unreviewed_or_fuzzy_cusip_cannot_stage(tmp_path: Path):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        "control,AAA,2015-01-01\n",
+        encoding="utf-8",
+    )
+    reviewed = tmp_path / "reviewed.csv"
+    reviewed.write_text(
+        "target_kind,historical_symbol,cusip,valid_from,valid_through,"
+        "source_reference,evidence_effective_at,review_status,research_use_only\n"
+        "control,AAA,123456789,2010-01-01,2020-01-01,ISSUER_NAME_GUESS,"
+        "2026-01-01T00:00:00Z,FUZZY_NAME_MATCH,1\n",
+        encoding="utf-8",
+    )
+    try:
+        cusip.stage_reviewed(
+            acquisition_queue_path=queue,
+            reviewed_evidence_path=reviewed,
+            output_path=tmp_path / "out.csv",
+        )
+    except cusip.G5HistoricalCusipError as exc:
+        assert "review_status is not closing-authorized" in str(exc)
+    else:
+        raise AssertionError("expected review-status failure")
+
+
+def test_explicit_historical_cusip_stages(tmp_path: Path):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        "treated,AAA,2015-01-01\n",
+        encoding="utf-8",
+    )
+    reviewed = tmp_path / "reviewed.csv"
+    reviewed.write_text(
+        "target_kind,historical_symbol,cusip,valid_from,valid_through,"
+        "source_reference,evidence_effective_at,review_status,research_use_only\n"
+        "treated,AAA,123456789,2010-01-01,2020-01-01,AUTHORIZED_MASTER,"
+        "2020-01-02T00:00:00Z,EXPLICIT_HISTORICAL_CUSIP_VERIFIED,1\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "out.csv"
+    summary = cusip.stage_reviewed(
+        acquisition_queue_path=queue,
+        reviewed_evidence_path=reviewed,
+        output_path=out,
+    )
+    assert summary["staged_verified_request_count"] == 1
+    assert summary["remaining_request_count"] == 0
+    rows = list(csv.DictReader(out.open(encoding="utf-8")))
+    assert rows[0]["cusip"] == "123456789"
+
+
+def test_reviewed_fails_closed_on_non_ascii_cusip_and_invalid_dates(tmp_path: Path):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        "treated,AAA,2015-01-01\n",
+        encoding="utf-8",
+    )
+    reviewed = tmp_path / "reviewed.csv"
+    output = tmp_path / "staged.csv"
+    header = (
+        "target_kind,historical_symbol,cusip,valid_from,valid_through,"
+        "source_reference,evidence_effective_at,review_status,research_use_only\n"
+    )
+    cases = [
+        ("12345678É", "2010-01-01", "2020-01-01"),
+        ("123456789", "2010-02-30", "2020-01-01"),
+        ("123456789", "2010-01-01T12:00:00Z", "2020-01-01"),
+        ("123456789", "2010-01-01", "2020-01-01extra"),
+    ]
+    for cusip_value, valid_from, valid_through in cases:
+        reviewed.write_text(
+            header
+            + f"treated,AAA,{cusip_value},{valid_from},{valid_through},"
+            "AUTHORIZED_MASTER,2020-01-02T00:00:00Z,"
+            "EXPLICIT_HISTORICAL_CUSIP_VERIFIED,1\n",
+            encoding="utf-8",
+        )
+        try:
+            cusip.stage_reviewed(
+                acquisition_queue_path=queue,
+                reviewed_evidence_path=reviewed,
+                output_path=output,
+            )
+        except cusip.G5HistoricalCusipError:
+            pass
+        else:
+            raise AssertionError("invalid historical CUSIP evidence was staged")
+        assert not output.exists()
+
+
+@pytest.mark.parametrize("invalid_day", [
+    "2015-01-01garbage",
+    "2015-01-01T00:00:00Z",
+    "2015-02-30",
+    "20150101",
+])
+def test_cusip_target_dates_fail_closed(tmp_path: Path, invalid_day: str):
+    control = tmp_path / "control.csv"
+    control.write_text(
+        "event_date,candidate_symbol\n"
+        f"{invalid_day},AAA\n",
+        encoding="utf-8",
+    )
+    treated = tmp_path / "treated.csv"
+    treated.write_text(
+        "event_date,historical_symbol\n2015-01-01,BBB\n", encoding="utf-8"
+    )
+    output = tmp_path / "result"
+    with pytest.raises(cusip.G5HistoricalCusipError, match="event_date"):
+        cusip.build(control_targets_path=control, treated_targets_path=treated, output_dir=output)
+    assert not output.exists()
+
+
+@pytest.mark.parametrize("bad", [
+    "2015-01-01extra",
+    "2015-02-30",
+    "20150101",
+    "",
+    "2015-01-01;",
+    "2015-01-01;2015-01-01",
+])
+def test_cusip_review_queue_required_days_are_authenticated(tmp_path: Path, bad: str):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        f"treated,AAA,{bad}\n",
+        encoding="utf-8",
+    )
+    output = tmp_path / "staged.csv"
+    with pytest.raises(cusip.G5HistoricalCusipError):
+        cusip.stage_reviewed(
+            acquisition_queue_path=queue,
+            reviewed_evidence_path=tmp_path / "not-needed.csv",
+            output_path=output,
+        )
+    assert not output.exists()
+
+
+def test_duplicate_review_queue_targets_are_rejected(tmp_path: Path):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        "treated,AAA,2015-01-01\n"
+        "treated,AAA,2015-01-02\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(cusip.G5HistoricalCusipError, match="duplicate target"):
+        cusip.stage_reviewed(
+            acquisition_queue_path=queue,
+            reviewed_evidence_path=tmp_path / "not-needed.csv",
+            output_path=tmp_path / "staged.csv",
+        )
+
+
+@pytest.mark.parametrize("control_text", [
+    "event_date,candidate_symbol,candidate_symbol\n2015-01-01,AAA,BBB\n",
+    "event_date,candidate_symbol\n2015-01-01,AAA,EXTRA\n",
+])
+def test_cusip_source_csv_malformed_headers_or_extra_fields_fail(tmp_path: Path, control_text: str):
+    control = tmp_path / "control.csv"
+    control.write_text(control_text, encoding="utf-8")
+    treated = tmp_path / "treated.csv"
+    treated.write_text(
+        "event_date,historical_symbol\n2015-01-01,BBB\n", encoding="utf-8"
+    )
+    out = tmp_path / "result"
+    with pytest.raises(cusip.G5HistoricalCusipError, match="headers|extra fields"):
+        cusip.build(control_targets_path=control, treated_targets_path=treated, output_dir=out)
+    assert not out.exists()
+
+
+
+@pytest.mark.parametrize("bad_time", [
+    "not-a-timestamp",
+    "2020-01-02",
+    "2020-01-02T00:00:00",
+    "2020-01-02T00:00:00Zjunk",
+    "2020-02-30T00:00:00Z",
+    "2020-01-02T00:00:00+25:00",
+    "2020-01-02T00:00:00-00:00",
+])
+def test_invalid_review_timestamp_rejects_before_output(tmp_path: Path, bad_time: str):
+    queue = tmp_path / "queue.csv"
+    queue.write_text(
+        "target_kind,historical_symbol,required_event_dates\n"
+        "treated,AAA,2015-01-01\n",
+        encoding="utf-8",
+    )
+    reviewed = tmp_path / "reviewed.csv"
+    reviewed.write_text(
+        "target_kind,historical_symbol,cusip,valid_from,valid_through,"
+        "source_reference,evidence_effective_at,review_status,research_use_only\n"
+        f"treated,AAA,123456789,2010-01-01,2020-01-01,AUTH,{bad_time},"
+        "EXPLICIT_HISTORICAL_CUSIP_VERIFIED,1\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "staged.csv"
+    with pytest.raises(cusip.G5HistoricalCusipError, match="evidence_effective_at"):
+        cusip.stage_reviewed(
+            acquisition_queue_path=queue,
+            reviewed_evidence_path=reviewed,
+            output_path=out,
+        )
+    assert not out.exists()
+
+
+def test_valid_offset_timestamp_is_retained_but_not_pit_certified():
+    assert cusip._checked_evidence_timestamp("2020-01-02T01:30:00+01:30") == (
+        "2020-01-02T01:30:00+01:30"
+    )
+    assert cusip._checked_evidence_timestamp("2020-01-02T00:00:00Z") == (
+        "2020-01-02T00:00:00Z"
+    )

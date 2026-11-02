@@ -1,0 +1,103 @@
+{
+  "schema_version": "1",
+  "purpose": "Planning-only impact receipt for the written ThetaData $320 one-month route. Full/partial candidate status does not claim authorization, delivery, validation, or G2 coverage.",
+  "vendor": "ThetaData",
+  "written_bundle_price_usd": 320,
+  "written_terms_source_date": "2026-10-02",
+  "request_plan_total_requests": 8888,
+  "canonical_full_g2": {
+    "required_source_date_rows": 1656,
+    "full_candidate_rows": 650,
+    "partial_candidate_rows": 392,
+    "untouched_rows": 614,
+    "remaining_rows_not_fully_closed": 1006,
+    "required_record_kind_symbol_date_pairs": 15312,
+    "thetadata_touched_record_kind_symbol_date_pairs": 8888,
+    "full_candidate_required_symbol_date_pairs": 6132,
+    "by_record_kind": {
+      "equity_quote": {
+        "required_rows": 414,
+        "full_candidate_rows": 34,
+        "partial_candidate_rows": 196,
+        "untouched_rows": 184,
+        "required_symbol_date_pairs": 3828,
+        "touched_symbol_date_pairs": 1430
+      },
+      "equity_trade": {
+        "required_rows": 414,
+        "full_candidate_rows": 34,
+        "partial_candidate_rows": 196,
+        "untouched_rows": 184,
+        "required_symbol_date_pairs": 3828,
+        "touched_symbol_date_pairs": 1430
+      },
+      "option_quote": {
+        "required_rows": 414,
+        "full_candidate_rows": 291,
+        "partial_candidate_rows": 0,
+        "untouched_rows": 123,
+        "required_symbol_date_pairs": 3828,
+        "touched_symbol_date_pairs": 3014
+      },
+      "option_trade": {
+        "required_rows": 414,
+        "full_candidate_rows": 291,
+        "partial_candidate_rows": 0,
+        "untouched_rows": 123,
+        "required_symbol_date_pairs": 3828,
+        "touched_symbol_date_pairs": 3014
+      }
+    }
+  },
+  "champion_minimum": {
+    "required_source_date_rows": 1242,
+    "full_candidate_rows": 359,
+    "partial_candidate_rows": 392,
+    "untouched_rows": 491,
+    "remaining_rows_not_fully_closed": 883,
+    "required_record_kind_symbol_date_pairs": 11484,
+    "thetadata_touched_record_kind_symbol_date_pairs": 5874,
+    "full_candidate_required_symbol_date_pairs": 3118,
+    "by_record_kind": {
+      "equity_quote": {
+        "required_rows": 414,
+        "full_candidate_rows": 34,
+        "partial_candidate_rows": 196,
+        "untouched_rows": 184,
+        "required_symbol_date_pairs": 3828,
+        "touched_symbol_date_pairs": 1430
+      },
+      "equity_trade": {
+        "required_rows": 414,
+        "full_candidate_rows": 34,
+        "partial_candidate_rows": 196,
+        "untouched_rows": 184,
+        "required_symbol_date_pairs": 3828,
+        "touched_symbol_date_pairs": 1430
+      },
+      "option_trade": {
+        "required_rows": 414,
+        "full_candidate_rows": 291,
+        "partial_candidate_rows": 0,
+        "untouched_rows": 123,
+        "required_symbol_date_pairs": 3828,
+        "touched_symbol_date_pairs": 3014
+      }
+    }
+  },
+  "economics": {
+    "usd_per_fully_closable_canonical_source_date_row": 0.49230769230769234,
+    "usd_per_planned_request": 0.036003600360036005
+  },
+  "retention_constraint": {
+    "raw_delete_days_after_billing_period_end": 30,
+    "derived_or_modified_research_data_retention_allowed": true,
+    "retention_plan": "data/processed/g2_vendor_requests/thetadata_retention_plan.json"
+  },
+  "guardrails": {
+    "candidate_is_not_coverage": true,
+    "purchase_requires_explicit_user_authorization": true,
+    "partial_rows_require_residual_vendor_symbols_before_source_date_closure": true,
+    "g2_release_gate_unchanged": true
+  }
+}

@@ -1,45 +1,15 @@
-# WRDS TAQ extraction path
+# G2 WRDS TAQ research-only request plan
 
-This directory preserves and adapts the relevant extraction logic from `gen-li/Extract_TAQ_from_WRDS_Cloud` for the frozen G2 equity workflow.
+This folder intentionally **does not contain or execute SAS extraction templates, any licensed WRDS rows, or copied upstream source code**. The publicly viewable reference [gen-li/Extract_TAQ_from_WRDS_Cloud](https://github.com/gen-li/Extract_TAQ_from_WRDS_Cloud) had no declared LICENSE file or GitHub-recognized license at the 2026-11-02 review. Public visibility alone does not grant redistribution rights. The original unmerged PR history preserves the research trail, but the current integration tree excludes those external copies.
 
-## Included source references
+## Safe local planning command
 
-- `WRDS_batch_ticker_ct.sas` — upstream legacy consolidated trades reference (`taq.ct_YYYYMMDD`).
-- `WRDS_batch_ticker_cq.sas` — upstream legacy consolidated quotes reference (`taq.cq_YYYYMMDD`).
-- `g2_wrds_taq_legacy.sas` — parameterized legacy extractor with no hard-coded user path.
-- `g2_wrds_taq_msec.sas` — parameterized millisecond extractor for `taqmsec.ctm_YYYYMMDD` / `taqmsec.cqm_YYYYMMDD`.
-
-The extraction logic is preserved for reproducibility, but **no personal direct WRDS access is assumed**. WRDS Support ticket #157666 replied on 2026-10-05 that WRDS does not offer individual subscriptions and would not provide information about other platforms. Execution is therefore authorized only when the operator has a current institution/entity WRDS account and the applicable TAQ entitlement. No shared credentials, account bypass, WRDS credentials, or licensed market-data rows are stored here.
-
-The Python request-manifest path is safe to run locally because it only materializes symbol/date requests. The SAS extractors below are dormant reference/execution templates and must not be treated as evidence that WRDS access, TAQ entitlement, a successful query, a download, or G2 coverage exists.
-
-## Frozen G2 request generation
-
-Generate exact symbol/date request files without contacting a vendor or accessing WRDS:
-
-```bash
-python src/g2_wrds_taq_request_manifest.py \
-  --output-dir data/private/g2_wrds_requests
+```sh
+python src/g2_wrds_taq_request_manifest.py --output-dir data/private/g2_wrds_requests
 ```
 
-Expected frozen scope:
+This produces only `legacy_symbol_dates.csv`, `millisecond_symbol_dates.csv`, and `summary.json` from already-frozen local G2 requirement manifests. The expected, test-locked scope is **414 dates, 146 historical symbols, 3,828 symbol/date pairs** (836 legacy, 2,992 millisecond). The generated symbol/date requests are **not** market-data observations, order authority, validated NBBO, entitlements, or actual data coverage.
 
-- 414 source dates
-- 146 unique historical symbols
-- 3,828 symbol/date pairs
-- 836 legacy pairs before 2013-01-01
-- 2,992 millisecond pairs on/after 2013-01-01
+WRDS Support ticket #157666 (2026-10-05) states individual subscriptions are unavailable; no current personal WRDS authorization is established. Future extraction requires independently approved current institutional/entity access and the applicable TAQ dataset entitlement. Consolidated quotes require genuine NBBO construction/validation before they could ever count as G2 coverage. This PR does **not** log in, contact WRDS, download data, place an order, change a trading rule, or make a purchase.
 
-Generated files:
-
-- `legacy_symbol_dates.csv`
-- `millisecond_symbol_dates.csv`
-- `summary.json`
-
-The request generator is dry-run only. It does not log in to WRDS, execute queries, download data, or change G2 coverage.
-
-## Quote fidelity
-
-The copied/adapted quote path retrieves consolidated quote inputs. Strict G2 NBBO coverage remains fail-closed until NBBO construction or direct NBBO validation is proven from actual returned rows.
-
-No external outreach is required by this workflow.
+Release policy: keep original upstream code out of the tree unless redistribution terms are verifiably established. Do not bypass authentication, share institutional credentials, use an unverified mirror, or treat the planning manifest as licensed data.

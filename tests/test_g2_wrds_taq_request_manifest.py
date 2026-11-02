@@ -49,29 +49,27 @@ def test_wrds_access_contract_fails_closed_for_personal_direct_access():
 
 
 
-def test_wrds_reference_sas_files_abort_unconditionally():
-    # Raw upstream examples are retained for provenance, not as an
-    # alternate path around the authorized adapted extractors.
-    root = ROOT / "vendor_sources/wrds/gen_li"
-    for name in ("WRDS_batch_ticker_cq.sas", "WRDS_batch_ticker_ct.sas"):
-        content = (root / name).read_text(encoding="utf-8")
-        assert content.startswith("/* PROVENANCE-ONLY REFERENCE COPY: NEVER RUN.")
-        program = content.split("*/", 1)[1].lstrip()
-        assert program.startswith("%macro g2_wrds_provenance_abort;")
-        assert (
-            program.index("%abort cancel;")
-            < program.index("%mend;")
-            < program.index("%g2_wrds_provenance_abort;")
-            < program.index("filename input")
-        )
+def test_wrds_access_plan_does_not_bundle_unlicensed_sas():
+    # A publicly visible upstream repository without a declared redistribution
+    # license is a research reference, not permission to copy source files.
+    upstream = "https://github.com/gen-li/Extract_TAQ_from_WRDS_Cloud"
+    payload = wrds.build_requests(wrds._read(TRADES), wrds._read(QUOTES))
+    assert payload["source_logic"]["upstream_reference"] == upstream
+    assert payload["access_contract"]["personal_direct_wrds_access"] is False
+    assert payload["access_contract"]["coverage_authority"] is False
+    assert not (ROOT / "vendor_sources" / "wrds" / "gen_li"
+                / "WRDS_batch_ticker_cq.sas").exists()
+    assert not (ROOT / "vendor_sources" / "wrds" / "gen_li"
+                / "WRDS_batch_ticker_ct.sas").exists()
 
-    for name in ("g2_wrds_taq_legacy.sas", "g2_wrds_taq_msec.sas"):
-        content = (root / name).read_text(encoding="utf-8")
-        assert "%macro g2_require_wrds_entitlement;" in content
-        assert "%sysget(G2_WRDS_AUTHORIZED)" in content
-        assert (
-            content.index("%abort cancel;")
-            < content.index("%mend;")
-            < content.index("%g2_require_wrds_entitlement;")
-            < content.index("data g2_pairs;")
-        )
+
+def test_wrds_manifest_rejects_mismatched_trade_quote_rows():
+    import pytest
+    trades = wrds._read(TRADES)
+    quotes = wrds._read(QUOTES)
+    with pytest.raises(ValueError, match="row-count mismatch"):
+        wrds.build_requests(trades, quotes[:-1])
+    altered = [dict(row) for row in quotes]
+    altered[0]["historical_symbols"] = "NOT_AN_AUTHORIZED_SUBSTITUTE"
+    with pytest.raises(ValueError, match="symbol mismatch"):
+        wrds.build_requests(trades, altered)
