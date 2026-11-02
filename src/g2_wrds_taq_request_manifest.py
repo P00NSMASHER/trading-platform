@@ -53,10 +53,10 @@ def build_requests(trade_rows: list[dict[str, str]], quote_rows: list[dict[str, 
     return {
         "schema_version": "2",
         "access_contract": {
-            "personal_direct_wrds_access": false,
+            "personal_direct_wrds_access": False,
             "execution_requires": "current institution/entity WRDS authorization and applicable TAQ entitlement",
             "support_ticket": "WRDS #157666 (2026-10-05): no individual subscriptions; no alternative-platform referral",
-            "coverage_authority": false,
+            "coverage_authority": False,
         },
         "purpose": (
             "Dry-run WRDS TAQ request manifest derived from the frozen G2 equity scope. "
