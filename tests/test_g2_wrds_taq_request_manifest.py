@@ -56,11 +56,22 @@ def test_wrds_reference_sas_files_abort_unconditionally():
     for name in ("WRDS_batch_ticker_cq.sas", "WRDS_batch_ticker_ct.sas"):
         content = (root / name).read_text(encoding="utf-8")
         assert content.startswith("/* PROVENANCE-ONLY REFERENCE COPY: NEVER RUN.")
-        assert content.split("*/", 1)[1].lstrip().startswith("%abort cancel;")
-        assert "filename input" in content
+        program = content.split("*/", 1)[1].lstrip()
+        assert program.startswith("%macro g2_wrds_provenance_abort;")
+        assert (
+            program.index("%abort cancel;")
+            < program.index("%mend;")
+            < program.index("%g2_wrds_provenance_abort;")
+            < program.index("filename input")
+        )
 
     for name in ("g2_wrds_taq_legacy.sas", "g2_wrds_taq_msec.sas"):
         content = (root / name).read_text(encoding="utf-8")
+        assert "%macro g2_require_wrds_entitlement;" in content
         assert "%sysget(G2_WRDS_AUTHORIZED)" in content
-        assert "%abort cancel;" in content
-        assert content.index("%abort cancel;") < content.index("data g2_pairs;")
+        assert (
+            content.index("%abort cancel;")
+            < content.index("%mend;")
+            < content.index("%g2_require_wrds_entitlement;")
+            < content.index("data g2_pairs;")
+        )
