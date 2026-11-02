@@ -1,0 +1,56 @@
+{
+  "source_repository": "vgreg/hacked_earnings_jfe",
+  "audited_commit": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+  "note": "The source README references requirements.txt, but no requirements.txt exists in the recursively enumerated repository tree or visible history. This list is inferred strictly from import statements in the provided notebooks and Python scripts; standard-library modules are retained for completeness.",
+  "imports_by_file": {
+    "Main Analysis/Insider Trading Measures.ipynb": [
+      "linearmodels",
+      "matplotlib",
+      "numpy",
+      "pandas",
+      "warnings"
+    ],
+    "Main Analysis/Main Analysis.ipynb": [
+      "linearmodels",
+      "matplotlib",
+      "numpy",
+      "pandas",
+      "seaborn",
+      "statsmodels",
+      "warnings"
+    ],
+    "Text Analysis/Wordcloud.ipynb": [
+      "matplotlib",
+      "numpy",
+      "pandas",
+      "wordcloud"
+    ],
+    "Text Analysis/clean_pr_text.py": [
+      "datetime",
+      "nltk",
+      "os",
+      "pandas"
+    ],
+    "Text Analysis/pr sentiment.py": [
+      "numpy",
+      "pandas",
+      "sklearn"
+    ]
+  },
+  "third_party_import_roots": [
+    "linearmodels",
+    "matplotlib",
+    "nltk",
+    "numpy",
+    "pandas",
+    "seaborn",
+    "sklearn",
+    "statsmodels",
+    "wordcloud"
+  ],
+  "standard_library_import_roots": [
+    "datetime",
+    "os",
+    "warnings"
+  ]
+}

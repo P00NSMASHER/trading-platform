@@ -1,0 +1,34 @@
+{
+  "schema_version": "1",
+  "generated_by": "src/g2_cboe_trial_bulk_runner.py",
+  "purpose": "Pre-trial execution readiness receipt for vendor-confirmed 2012-2015 Cboe OPRA acquisition.",
+  "vendor_confirmed_opra_floor": "2012-01-01",
+  "eligible_dates": 309,
+  "underlying_date_tasks": 3364,
+  "source_date_rows_targeted": {
+    "option_trade": 309,
+    "option_quote": 309
+  },
+  "contract_enumeration": "reference/options per historical underlying/date",
+  "trade_stream": "time-and-sales/option-trades",
+  "quote_stream": "time-and-sales/quotes per enumerated OSI contract",
+  "page_limit": 10000,
+  "pagination": "next cursor = max returned seq_no + 1",
+  "resumable": true,
+  "sha256_receipts": true,
+  "execute_requires": [
+    "CBOE_CLIENT_ID",
+    "CBOE_CLIENT_SECRET",
+    "--ack-trial-active",
+    "vendor_readiness:cboe_trial_retention_rights=WRITTEN_RETENTION_AUTHORITY_VERIFIED"
+  ],
+  "trial_activated": false,
+  "vendor_network_calls_made": false,
+  "coverage_claimed": false,
+  "g2_coverage_change": 0,
+  "retention_authority_required": true,
+  "required_retention_state": "WRITTEN_RETENTION_AUTHORITY_VERIFIED",
+  "current_retention_state": "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES",
+  "bulk_execution_currently_blocked": true,
+  "retention_readiness_source": "data/processed/g2_vendor_requests/vendor_readiness.json"
+}

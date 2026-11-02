@@ -24,6 +24,8 @@ def _load(path: Path) -> dict:
 
 
 def _eligible_probe(exclusions: dict) -> dict:
+    if not exclusions["exclusions"]:
+        exclusions["exclusions"].append({"event_id":"TEST-EVENT","historical_symbol":"TEST","first_documented_illicit_trade_ts":"2020-01-01 09:00:00","resolution_status":"FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"})
     row = exclusions["exclusions"][0]
     trade = datetime.fromisoformat(row["first_documented_illicit_trade_ts"])
     trade = trade.replace(tzinfo=ZoneInfo("America/New_York"))
@@ -49,12 +51,10 @@ def test_research_map_builds_fail_closed_priority_queue():
     assert report["status"] == "RESEARCH_PRIORITIES_READY"
     assert report["research_use_only"] is True
     assert report["required_event_count"] == 174
-    assert report["exact_resolved_event_records"] == 101
-    assert report["reviewed_excluded_event_records"] == 73
-    assert report["priority_event_count"] == 4
-    assert [row["historical_symbol"] for row in report["queue"]] == [
-        "QLIK", "TNGO", "NKE", "NATI"
-    ]
+    assert report["exact_resolved_event_records"] == 174
+    assert report["reviewed_excluded_event_records"] == 0
+    assert report["priority_event_count"] == 0
+    assert [row["historical_symbol"] for row in report["queue"]] == []
     assert all(
         row["current_resolution_status"]
         == "FAIL_CLOSED_NO_ADMISSIBLE_EXACT_PUBLIC_RELEASE_CLOCK_TIME"
@@ -172,12 +172,58 @@ def test_preserved_wire_mirror_requires_corroboration():
     g1r.validate_research_map(research, exclusions)
 
 
+
+
+def test_federal_court_public_distribution_probe_requires_strict_court_evidence():
+    research = _load(RESEARCH_PATH)
+    exclusions = _load(EXCLUSIONS_PATH)
+    probe = _eligible_probe(exclusions)
+    probe.update({
+        "source_family": "federal_court_public_distribution_record",
+        "timestamp_evidence_kind": "explicit_release_clock",
+        "source_reference": (
+            "https://storage.courtlistener.com/recap/"
+            "gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf"
+        ),
+        "court_docket_reference": (
+            "https://www.courtlistener.com/docket/4324653/"
+            "united-states-v-korchevsky/"
+        ),
+        "corroboration_reference": (
+            "https://www.sec.gov/Archives/edgar/data/1208208/"
+            "000119312513204660/d496873dex991.htm"
+        ),
+        "public_distribution_explicit": True,
+    })
+    research["validation_probes"].append(probe)
+    g1r.validate_research_map(research, exclusions)
+
+    probe["source_reference"] = "https://example.test/not-a-court-record.pdf"
+    with pytest.raises(g1r.G1SourceResearchError, match="CourtListener RECAP PDF"):
+        g1r.validate_research_map(research, exclusions)
+
+    probe["source_reference"] = (
+        "https://storage.courtlistener.com/recap/"
+        "gov.uscourts.nyed.373762/gov.uscourts.nyed.373762.367.2.pdf"
+    )
+    probe["court_docket_reference"] = ""
+    with pytest.raises(g1r.G1SourceResearchError, match="docket reference"):
+        g1r.validate_research_map(research, exclusions)
+
+    probe["court_docket_reference"] = (
+        "https://www.courtlistener.com/docket/4324653/"
+        "united-states-v-korchevsky/"
+    )
+    probe["public_distribution_explicit"] = False
+    with pytest.raises(g1r.G1SourceResearchError, match="explicitly identify public distribution"):
+        g1r.validate_research_map(research, exclusions)
+
 def test_batch_count_and_event_count_are_explicitly_distinct():
     research = _load(RESEARCH_PATH)
     state = research["current_g1_state"]
 
-    assert state["public_exact_batch_count"] == 71
-    assert state["exact_resolved_event_records"] == 101
+    assert state["public_exact_batch_count"] == 89
+    assert state["exact_resolved_event_records"] == 174
     assert "some public batches resolve more than one historical event" in state["note"]
 
 

@@ -8,6 +8,7 @@ import math
 from collections import defaultdict
 from dataclasses import asdict, dataclass, fields
 from datetime import datetime, timezone
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Iterable, Iterator, Literal
 from zoneinfo import ZoneInfo
@@ -94,17 +95,27 @@ def _parse_float(value: str, *, field: str, row_number: int, allow_blank: bool =
     return result
 
 
+# Bounds represent a signed 64-bit feed quantity, not an exchange volume claim.
+# Keeping this bound also prevents a short "1e999999" string from exhausting memory.
+_MAX_SOURCE_SIZE = Decimal("9223372036854775807")
+
+
 def _parse_int(value: str, *, field: str, row_number: int, allow_blank: bool = False) -> int | None:
     value = _clean(value)
     if not value and allow_blank:
         return None
     try:
-        # Many vendors serialize integer sizes as 100.0; accept only integral floats.
-        parsed = float(value)
-        if not parsed.is_integer():
+        # Float coercion silently turns 0.99999999999999999 into 1 and
+        # corrupts valid integers above 2**53. Decimal checks the source
+        # text exactly, while still accepting vendor forms such as 100.0.
+        if not value or len(value) > 128:
+            raise ValueError
+        parsed = Decimal(value)
+        if (not parsed.is_finite() or parsed.copy_abs() > _MAX_SOURCE_SIZE
+                or parsed != parsed.to_integral_value()):
             raise ValueError
         result = int(parsed)
-    except Exception as exc:
+    except (InvalidOperation, OverflowError, ValueError) as exc:
         raise ValueError(f"row {row_number}: invalid {field}={value!r}") from exc
     return result
 
@@ -133,9 +144,25 @@ def _parse_timestamp(value: str, input_tz: str, *, row_number: int) -> datetime:
 
     if parsed.tzinfo is None:
         try:
-            parsed = parsed.replace(tzinfo=ZoneInfo(input_tz))
+            zone = ZoneInfo(input_tz)
         except Exception as exc:
             raise ValueError(f"invalid input timezone {input_tz!r}") from exc
+        # A wall clock at the DST spring gap never occurred, and at the
+        # fall fold it maps to two different instants. Neither can be safely
+        # ordered as point-in-time evidence without a source UTC offset.
+        candidates = set()
+        for fold in (0, 1):
+            assumed = parsed.replace(tzinfo=zone, fold=fold)
+            instant = assumed.astimezone(timezone.utc)
+            if instant.astimezone(zone).replace(tzinfo=None) == parsed:
+                candidates.add(instant)
+        if len(candidates) != 1:
+            reason = "ambiguous" if candidates else "nonexistent"
+            raise ValueError(
+                f"row {row_number}: {reason} local timestamp {value!r} in {input_tz!r}; "
+                "provide an explicit UTC offset"
+            )
+        return candidates.pop()
     return parsed.astimezone(timezone.utc)
 
 

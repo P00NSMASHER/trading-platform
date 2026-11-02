@@ -1,0 +1,71 @@
+{
+  "schema_version": "1",
+  "purpose": "Extracted LSEG repository information for the frozen G2 market-data acquisition path.",
+  "rights_status": "user_reports_verified_rights_and_licenses",
+  "g2_scope": {
+    "source_dates": 414,
+    "unique_historical_symbols": 146,
+    "source_date_rows_total": 1656,
+    "symbol_kind_date_requests_total": 15312
+  },
+  "ric_mapping": {
+    "study_permno_linked_companion_symbols": 111,
+    "companion_root_only_symbols": 1,
+    "companion_root_only_symbol_list": [
+      "MUSA"
+    ],
+    "secondary_repository_candidate_symbols": 34,
+    "unresolved_symbols": 0,
+    "study_permno_linked_equity_symbol_kind_dates": 5764,
+    "companion_root_only_equity_symbol_kind_dates": 88,
+    "secondary_equity_symbol_kind_dates": 1804,
+    "study_permno_linked_option_underlying_kind_dates": 5764,
+    "companion_root_only_option_underlying_kind_dates": 88,
+    "secondary_option_underlying_kind_dates": 1804,
+    "secondary_and_root_only_validation_required": true
+  },
+  "extracted_lseg_capabilities": {
+    "historical_instruments": true,
+    "time_and_sales_fields": [
+      "#RIC",
+      "Date-Time",
+      "Price",
+      "Volume",
+      "Bid Price",
+      "Bid Size",
+      "Ask Price",
+      "Ask Size"
+    ],
+    "option_contract_discovery": [
+      "FuturesAndOptionsSearch",
+      "HistoricalChainResolution"
+    ],
+    "candidate_lanes": [
+      "equity_trade",
+      "equity_quote",
+      "option_trade",
+      "option_quote"
+    ]
+  },
+  "provenance": [
+    "vgreg/earnings_news_jar:Sample_Stocks/PERMNO_TRHT _Ticker.csv",
+    "hanlonlab/datascope-cli:config/datascope.conf",
+    "hanlonlab/datascope-cli:scripts/pipelines/options_pipeline.py",
+    "mgao6767/mktstructure:mktstructure/request_templates.py",
+    "mgao6767/mktstructure:mktstructure/trth.py",
+    "LSEG-API-Samples/Article.TickHistory.Python.AllOptions:RTH_SPX_Options.py"
+  ],
+  "limits": {
+    "raw_licensed_tick_rows_present_in_examined_github_repos": false,
+    "live_lseg_api_execution_performed": false,
+    "g2_coverage_changed": false
+  },
+  "extracted_assets": [
+    "lseg_equity_ric_mapping.csv",
+    "lseg_secondary_ric_candidates.csv",
+    "lseg_event_permno_ric_mapping.csv",
+    "lseg_tick_history_contract.json",
+    "lseg_option_discovery_recipe.json",
+    "g2_lseg_request_manifest.py"
+  ]
+}

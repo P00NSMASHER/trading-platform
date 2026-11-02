@@ -44,7 +44,7 @@ def test_real_data_validation_requires_replay_release_not_only_coarse_metadata(t
     assert state["validated"] is False
     assert state["gates"]["G3_PRIMARY_LISTING_HISTORY"] is True
     assert state["gates"]["G4_SHARES_OUTSTANDING"] is True
-    assert state["gates"]["G1_EXACT_TIMING_ANALYSIS"] is False
+    assert state["gates"]["G1_EXACT_TIMING_ANALYSIS"] is True
     assert state["gates"]["G2_REAL_MARKET_DATA"] is False
     assert state["gates"]["G5_MODEL_EVALUATION_CONTROLS"] is False
     assert state["gates"]["REAL_DATA_REPLAY"] is False
@@ -102,6 +102,7 @@ def test_hostile_suite_defines_all_required_categories():
         "tests/test_feature_engine.py",
         "tests/test_metadata_resolver.py",
         "tests/test_matched_control_generator.py",
+        "tests/test_g5_match_quality_gate.py",
         "tests/test_model_training_harness.py",
         "tests/test_evaluation_release_controller.py",
         "tests/test_real_data_replay.py",

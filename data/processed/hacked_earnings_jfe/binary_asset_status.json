@@ -1,0 +1,29 @@
+{
+  "source_repository": "vgreg/hacked_earnings_jfe",
+  "source_commit_sha": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+  "status_as_of": "2026-10-04",
+  "word_coefficient_parquet": {
+    "source_path": "Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet",
+    "source_blob_sha": "72d66171f5eb28cd3ec629f13b0b1d15219cbf96",
+    "source_size_bytes": 40084,
+    "decoded_rows": 2393,
+    "decoded_output": "data/processed/hacked_earnings_jfe/word_coefficients.csv",
+    "minimum_coefficient": {"word": "disappoint", "coef": -0.027960599263064642},
+    "maximum_coefficient": {"word": "rais", "coef": 0.006815500110691692}
+  },
+  "press_release_archives": {
+    "archive_count": 6,
+    "all_git_blob_hashes_verified": true,
+    "all_zip_members_integrity_checked": true,
+    "zip_member_count": 36756,
+    "parsed_release_count": 36750,
+    "event_count": 174,
+    "events_with_release_match": 160,
+    "events_without_release_match": 14,
+    "inventory": "data/processed/hacked_earnings_jfe/github_binary_extraction_manifest.json",
+    "event_index": "data/processed/hacked_earnings_jfe/event_press_release_index.csv"
+  },
+  "blocker": null,
+  "g2_market_data_coverage_change": 0,
+  "coverage_note": "The GitHub repository's binary assets are fully available and indexed. They contain public SEC press releases and text-model coefficients, not licensed TAQ/LSEG trade or quote payloads."
+}

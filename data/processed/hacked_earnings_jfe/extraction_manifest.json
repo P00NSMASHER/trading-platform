@@ -1,0 +1,190 @@
+{
+  "source_repository": "https://github.com/vgreg/hacked_earnings_jfe",
+  "source_ref": "main",
+  "source_commit_sha": "c23c7d79d067a79d70cf20e31b072d3703497eae",
+  "extraction_branch": "data/hacked-earnings-jfe-complete-extraction-20261003",
+  "source_file_inventory": [
+    {
+      "path": ".gitignore",
+      "size": 1799,
+      "blob_sha": "b6e47617de110dea7ca47e087ff1347cc2646eda"
+    },
+    {
+      "path": "Data/Press releases/2010.zip",
+      "size": 27346855,
+      "blob_sha": "b4b45ba8bb5e5bf4c502373914fdcaaae268d3aa"
+    },
+    {
+      "path": "Data/Press releases/2011.zip",
+      "size": 28136902,
+      "blob_sha": "8f4b9b391e8e87649d2a5f5615a30371741c5e6a"
+    },
+    {
+      "path": "Data/Press releases/2012.zip",
+      "size": 26908193,
+      "blob_sha": "afa44be02ab5aaea6e6105cbca247286bc892fd7"
+    },
+    {
+      "path": "Data/Press releases/2013.zip",
+      "size": 28229369,
+      "blob_sha": "59e183f05e377ebd0ef2f581ba88522863663972"
+    },
+    {
+      "path": "Data/Press releases/2014.zip",
+      "size": 26563716,
+      "blob_sha": "0e0e349b76318bb9558a790000c9cbe5ee933001"
+    },
+    {
+      "path": "Data/Press releases/2015.zip",
+      "size": 27696531,
+      "blob_sha": "919ba9f271abdc06ba7c539ad278d5bb4fcb3715"
+    },
+    {
+      "path": "Data/Press releases/README.txt",
+      "size": 434,
+      "blob_sha": "2bb97956c06b49c59dcbcc29e54593186ed8c07d"
+    },
+    {
+      "path": "Data/SampleFirms.csv",
+      "size": 2175660,
+      "blob_sha": "bbb68de172f7ab2104714513a72547f3dad3b86c"
+    },
+    {
+      "path": "Data/SampleFirms.dta",
+      "size": 1617928,
+      "blob_sha": "e4ccdbbf134725dacd0f21385001a85a15d85b3d"
+    },
+    {
+      "path": "Data/SampleFirms.parquet",
+      "size": 541465,
+      "blob_sha": "6e79789b016af7e988d2802829b893b40442687d"
+    },
+    {
+      "path": "Data/SampleFirms.xlsx",
+      "size": 1751351,
+      "blob_sha": "ed86d47a33027705785182c7627133a77bcf0f1c"
+    },
+    {
+      "path": "Data/TimeOfFirstTrade.csv",
+      "size": 6381,
+      "blob_sha": "8e823995d45b0bb536809a8499d559cddd929c8b"
+    },
+    {
+      "path": "Data/TimeOfFirstTrade.dta",
+      "size": 4566,
+      "blob_sha": "147023f82743ad8cd62aa41b663d0d92265f32c3"
+    },
+    {
+      "path": "Data/TimeOfFirstTrade.parquet",
+      "size": 7176,
+      "blob_sha": "db64c54c7ff78254c2de74028414329146e84714"
+    },
+    {
+      "path": "Data/TimeOfFirstTrade.xlsx",
+      "size": 10492,
+      "blob_sha": "2d292c8c348526ae69f4c0f86a92166cf9cfbcad"
+    },
+    {
+      "path": "LICENSE",
+      "size": 1074,
+      "blob_sha": "18583f4a67c60dae620c700914a3532eef96ea26"
+    },
+    {
+      "path": "Main Analysis/Insider Trading Measures.ipynb",
+      "size": 37887,
+      "blob_sha": "69b06eb1821ebf57ccd1a81e44dcf8280ec1bede"
+    },
+    {
+      "path": "Main Analysis/Main Analysis.ipynb",
+      "size": 227040,
+      "blob_sha": "4b8bc4b356440a7d66d4ec6c7eb5a67f6d75696a"
+    },
+    {
+      "path": "README.md",
+      "size": 5480,
+      "blob_sha": "8006a4cb3861a32322c93c44c8722d737ab64487"
+    },
+    {
+      "path": "Text Analysis/PR_fit_EN_0_5_text_clean_stemmed_400_Count_0_005_0_4_WORDS.parquet",
+      "size": 40084,
+      "blob_sha": "72d66171f5eb28cd3ec629f13b0b1d15219cbf96"
+    },
+    {
+      "path": "Text Analysis/Wordcloud.ipynb",
+      "size": 1154677,
+      "blob_sha": "c02a5b6bb6bd2f8580a94dae59490b69161f57d6"
+    },
+    {
+      "path": "Text Analysis/clean_pr_text.py",
+      "size": 2742,
+      "blob_sha": "640cf652372734f0cf1768ef35acec2d30d0d7f9"
+    },
+    {
+      "path": "Text Analysis/pr sentiment.py",
+      "size": 1653,
+      "blob_sha": "613ea91267da56837e2a8405640f886fd4ba3f90"
+    }
+  ],
+  "extracted_raw_files": [
+    {
+      "path": "data/raw/hacked_earnings_jfe/SampleFirms.csv",
+      "source_blob_sha": "bbb68de172f7ab2104714513a72547f3dad3b86c",
+      "rows": 43687
+    },
+    {
+      "path": "data/raw/hacked_earnings_jfe/TimeOfFirstTrade.csv",
+      "source_blob_sha": "8e823995d45b0bb536809a8499d559cddd929c8b",
+      "rows": 174
+    }
+  ],
+  "sample_firms": {
+    "rows": 43687,
+    "columns": [
+      "PERMNO",
+      "GVKEY",
+      "SYMBOL",
+      "date",
+      "Hacked",
+      "Actual",
+      "Soft"
+    ],
+    "soft_nonmissing": 36750,
+    "hacked_rows": 8980,
+    "actual_rows": 724
+  },
+  "first_trade": {
+    "rows": 174,
+    "unique_permno": 146,
+    "unique_gvkey": 146,
+    "unique_symbol": 146
+  },
+  "alignment": {
+    "rule": "For each TimeOfFirstTrade row, select the same PERMNO+GVKEY+SYMBOL SampleFirms earnings row on or after the first-trade date with the smallest nonnegative calendar-day gap, bounded at 10 days.",
+    "matched_rows": 174,
+    "gap_distribution_days": {
+      "0": 133,
+      "1": 39,
+      "3": 2
+    },
+    "label_discrepancy_rows": 10,
+    "soft_nonmissing_on_aligned_events": 160
+  },
+  "press_release_filename_schema": "PERMNO_YYYYMMDD_X.txt",
+  "soft_model_recipe": {
+    "preprocessing": "lowercase alphabetic tokens; English NLTK stop-word removal; Porter stemming",
+    "target": "LRet_12pm_OpenNext",
+    "max_words_per_release": 400,
+    "vectorizer": "CountVectorizer",
+    "min_df_ratio": 0.005,
+    "max_df_ratio": 0.4,
+    "estimator": "ElasticNetCV",
+    "cv_folds": 5,
+    "l1_ratio": 0.5,
+    "max_iter": 10000
+  },
+  "notes": [
+    "Source repository tree was enumerated recursively and was not truncated.",
+    "The 174-event timestamp file and 43,687-row SampleFirms panel are distinct assets; do not infer that Actual=1 rows are one-to-one with TimeOfFirstTrade.",
+    "All 174 first-trade events align to a same-security SampleFirms earnings row within 0-3 calendar days under the documented forward-match rule."
+  ]
+}
