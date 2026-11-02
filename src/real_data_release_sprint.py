@@ -74,24 +74,33 @@ def _security_identity_status(path: Path = DEFAULT_SECURITY_IDENTITY_PATH) -> di
         raise ValueError("security identity manifest schema_version must equal '1'")
     state = payload.get("state") or {}
     event_count = int(state.get("event_count", 0) or 0)
-    verified = int(state.get("event_date_identity_verified_count", 0) or 0)
+    event_verified = int(state.get("event_date_identity_verified_count", 0) or 0)
+    baseline_verified = int(state.get("baseline_identity_verified_count", 0) or 0)
     required = int(state.get("required_symbol_date_count", 0) or 0)
     unverified = int(state.get("baseline_identity_unverified_count", 0) or 0)
     ready = bool(state.get("ready_for_non_synthetic_market_join"))
-    if event_count <= 0 or required <= 0 or min(verified, unverified) < 0:
+    if event_count <= 0 or required <= 0 or min(
+        event_verified, baseline_verified, unverified
+    ) < 0:
         raise ValueError("invalid security identity counts")
-    if verified != event_count or verified + unverified != required:
+    if event_verified != event_count:
+        raise ValueError("event-date identity count disagrees with event_count")
+    if event_verified + baseline_verified + unverified != required:
         raise ValueError("security identity counts do not reconcile")
     if ready != (unverified == 0):
         raise ValueError("security identity readiness disagrees with unresolved baseline count")
-    return {
+    result = {
         "ready_for_non_synthetic_market_join": ready,
         "event_count": event_count,
-        "event_date_identity_verified_count": verified,
+        "event_date_identity_verified_count": event_verified,
         "required_symbol_date_count": required,
         "baseline_identity_unverified_count": unverified,
         "sha256": _sha256(path),
     }
+    if "baseline_identity_verified_count" in state:
+        result["baseline_identity_verified_count"] = baseline_verified
+        result["total_identity_verified_count"] = event_verified + baseline_verified
+    return result
 
 
 def freeze_requirements(

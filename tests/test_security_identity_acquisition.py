@@ -103,3 +103,36 @@ def test_prohibited_shortcuts_include_no_ticker_or_alias_inference():
     assert "current_ticker_substitution" in blocked
     assert "symbol_only_join_without_stable_id" in blocked
     assert "inferred_rename_or_merger_alias" in blocked
+
+def test_complete_identity_manifest_emits_empty_queue_and_ready_summary():
+    identity = sia.load_identity(IDENTITY)
+    complete = copy.deepcopy(identity)
+    for event in complete["events"]:
+        event["verified_required_dates"] = list(event["required_dates"])
+        event["unverified_required_dates"] = []
+        event["identity_status"] = "FULL_REQUIRED_DATE_IDENTITY_VERIFIED"
+    complete["state"]["baseline_identity_unverified_count"] = 0
+    complete["state"]["baseline_identity_verified_count"] = 3654
+    complete["state"]["total_identity_verified_count"] = 3828
+    complete["state"]["ready_for_non_synthetic_market_join"] = True
+
+    queue, summary = sia.build_acquisition(complete)
+
+    assert queue == []
+    assert summary["state"]["raw_unverified_event_date_instances"] == 0
+    assert summary["state"]["unique_permno_date_requests"] == 0
+    assert summary["state"]["unique_permno_count"] == 0
+    assert summary["state"]["ready_for_non_synthetic_market_join"] is True
+    assert summary["state"]["reasons"] == []
+    rendered = sia.render_queue(queue)
+    assert rendered.splitlines() == [",".join(sia.QUEUE_FIELDS)]
+
+
+def test_identity_readiness_must_match_unresolved_queue_state():
+    identity = sia.load_identity(IDENTITY)
+    bad = copy.deepcopy(identity)
+    bad["state"]["ready_for_non_synthetic_market_join"] = True
+
+    with pytest.raises(sia.IdentityAcquisitionError, match="readiness disagrees"):
+        sia.build_acquisition(bad)
+

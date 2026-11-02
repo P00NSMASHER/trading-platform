@@ -9,6 +9,7 @@
     "features",
     "graph_features",
     "matched_controls",
+    "match_quality",
     "challenger",
     "release"
   ],
@@ -31,7 +32,7 @@
     },
     "metadata_contract": {
       "path": "/home/runner/work/trading-platform/trading-platform/config/metadata_sources.public_progress.json",
-      "sha256": "d44a4b97be2a9853951af461dcb6f48d2f65a3cf13bd68a91ef11864d09829ad"
+      "sha256": "938074ab4489094f099a7a3ef782323db1eeaab90b786039eac6da6f2b662dc1"
     }
   },
   "prohibited_outputs": [
@@ -50,8 +51,8 @@
   "shares_materialization": {
     "excluded_rows_not_materialized": true,
     "path": "/home/runner/work/trading-platform/trading-platform/data/processed/real_data_replay/derived/shares_for_baselines.csv",
-    "resolved_rows": 3810,
-    "sha256": "1f32992070b3d8344ad689b771c2d94e4032178b322058383ef21c12766a1048"
+    "resolved_rows": 3813,
+    "sha256": "75780374c6c398ee2fd40fa8452bdc8cd2d89faf7a7c9be38106172b996c85fa"
   },
   "stages": {
     "baselines": {
@@ -91,16 +92,20 @@
       "status": "BLOCKED_SYNTHETIC_SOURCE_PRESENT",
       "synthetic_source_count": 5
     },
+    "match_quality": {
+      "reason": "matched_controls_not_ready",
+      "status": "DEPENDENCY_BLOCKED"
+    },
     "matched_controls": {
       "reason": "control_metadata_not_supplied",
       "status": "DEPENDENCY_BLOCKED"
     },
     "metadata": {
-      "announcement_exact_resolved": 114,
+      "announcement_exact_resolved": 174,
       "announcement_required": 174,
       "control_dates_required": 72,
       "control_dates_resolved": 0,
-      "exact_timing_ready": false,
+      "exact_timing_ready": true,
       "model_controls_ready": false,
       "quality_ready": false,
       "status": "BLOCKED"

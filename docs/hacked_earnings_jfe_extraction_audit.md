@@ -54,3 +54,17 @@ All readable UTF-8 source artifacts (README/license, press-release README, both 
 ### Remaining extraction target
 
 When a raw-binary path is available, download the six ZIPs, verify their hashes against the source inventory, enumerate every member, and extract the press-release corpus. Prioritize matching files to the 174 first-trade events, then preserve the full corpus and derive a searchable event-to-release index.
+
+## GitHub binary extraction completed (2026-10-04)
+
+This section supersedes the earlier binary-asset blocker above. The public repository was cloned directly at commit `c23c7d79d067a79d70cf20e31b072d3703497eae`.
+
+- All six 2010-2015 press-release ZIP archives match their recorded Git blob SHAs.
+- Every ZIP member passes CRC validation.
+- The archives contain 36,756 members, including 36,750 press releases matching the documented `PERMNO_YYYYMMDD_X.txt` naming contract.
+- The 174-event enrichment joins 160 events to at least one release on the matched SampleFirms earnings date; 14 have no archived match, consistent with the existing 160 non-missing Soft scores.
+- The word-coefficient Parquet is fully decoded into 2,393 rows.
+
+Compact derivatives are stored in `github_binary_extraction_manifest.json`, `event_press_release_index.csv`, and `word_coefficients.csv` under `data/processed/hacked_earnings_jfe/`. The large source archives remain in the separate GitHub checkout instead of being duplicated into this repository.
+
+These assets complete the public GitHub extraction, but they do not contain TAQ/LSEG trade or quote payloads and therefore do not change G2 market-data coverage.

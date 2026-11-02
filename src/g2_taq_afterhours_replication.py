@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+import math
 from typing import Iterable, Mapping
 
 import g2_lseg_trth_event_pipeline as trth_event
@@ -64,7 +65,11 @@ def quote_replication_flags(row: Mapping[str, object]) -> dict[str, bool]:
     def number(value: object) -> float | None:
         if value in (None, "", "."):
             return None
-        return float(value)
+        try:
+            parsed = float(value)
+        except (ValueError, TypeError, OverflowError):
+            return None
+        return parsed if math.isfinite(parsed) else None
 
     b = number(bid)
     a = number(ask)
@@ -173,9 +178,10 @@ def _nbbo_number(value: object):
     if value in (None, "", "."):
         return None
     try:
-        return Decimal(str(value))
+        parsed = Decimal(str(value))
     except (InvalidOperation, ValueError):
         return None
+    return parsed if parsed.is_finite() else None
 
 
 def construct_strict_nbbo(rows: Iterable[Mapping[str, object]]) -> list[dict[str, object]]:

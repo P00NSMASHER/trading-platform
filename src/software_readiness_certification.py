@@ -25,6 +25,7 @@ HOSTILE_TEST_GROUPS: dict[str, tuple[str, ...]] = {
     "control_and_metadata_integrity": (
         "tests/test_metadata_quality.py",
         "tests/test_matched_control_generator.py",
+        "tests/test_g5_match_quality_gate.py",
         "tests/test_coverage_planner.py",
     ),
     "model_and_release_isolation": (
@@ -55,6 +56,7 @@ REQUIRED_SOFTWARE = (
     "src/metadata_resolver.py",
     "src/metadata_quality.py",
     "src/matched_control_generator.py",
+    "src/g5_match_quality_gate.py",
     "src/model_training_harness.py",
     "src/graph_challenger_harness.py",
     "src/evaluation_release_controller.py",

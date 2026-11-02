@@ -58,7 +58,7 @@ The public exact-time sweep now has a separate machine-readable research layer a
 `data/public/metadata/g1_source_research_20260928.json`, validated by
 `src/g1_source_research.py`.
 
-The current repository state is **75 public exact-time batches / 114 exact-resolved
+The current repository state is **89 public exact-time batches / 174 exact-resolved
 historical event records**. Those are different counters because some batches resolve
 more than one historical event.
 
@@ -277,3 +277,63 @@ A filed federal-court public-distribution table preserved by CourtListener RECAP
 ### Batch 0100: EHTH / BA / LSCC / GORO / GMCR
 
 A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for EHTH (2011-04-26 16:15 EDT), BA (2012-01-25 07:30 EST), LSCC (2013-04-18 16:00 EDT), GORO (2013-05-08 17:27 EDT), and GMCR (2015-02-04 16:00 EST). Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 109 exact / 65 reviewed exclusions to 114 exact / 60 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0093: NOW / AMP / CAMP
+
+A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for NOW (2015-04-16 16:06 EDT), AMP (2015-04-22 16:05 EDT), and CAMP (2013-04-25 16:01 EDT). Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 114 exact / 60 reviewed exclusions to 117 exact / 57 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0081: TNGO / TER / ECOL
+
+A filed federal-court public-distribution record preserved by CourtListener RECAP supplies exact first-public clocks for TNGO (2015-02-12 16:05 EST), TER (2015-01-28 17:32 EST), and ECOL (2013-04-25 06:00 EDT). Matching SEC press-release exhibits independently corroborate each issuer/release identity and date. This advances G1 from 117 exact / 57 reviewed exclusions to 120 exact / 54 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0104: WMB
+
+A filed federal-court public-distribution record preserved by CourtListener RECAP supplies the exact first-public clock for WMB (2015-02-18 16:05 EST). A matching SEC Exhibit 99.1 independently corroborates the issuer/release identity and date. This advances G1 from 120 exact / 54 reviewed exclusions to 121 exact / 53 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0109: ROVI
+
+An exact-title timestamp-preserving StreetInsider mirror supplies the explicit Business Wire first-public release clock for ROVI (2015-04-30 16:02 EDT). A matching SEC Exhibit 99.1 independently corroborates the issuer/release identity, content and date. This advances G1 from 121 exact / 53 reviewed exclusions to 122 exact / 52 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0098: SM
+
+SM Energy's official historical press-release index supplies the explicit exact-title Business Wire first-public release clock for SM (2015-05-05 17:30 EDT). The issuer-hosted preserved release PDF independently corroborates issuer/release identity, content and date. This advances G1 from 122 exact / 52 reviewed exclusions to 123 exact / 51 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0114: QLIK, ROG, IDTI, CGNX, KOPN, AMSG, CRL, COL, ALNY, DYN, TXRH, PAY, ATRC, DGI
+
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for fourteen Worker-4 events. Exact release identity/date is corroborated by pinned public press-release archive members and official SEC Exhibits 99.x. This advances G1 from 123 exact / 51 reviewed exclusions to 137 exact / 37 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0105: NATI, ILMN, SGEN, CMP, MIC, INWK, CLD, TW
+
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for eight Worker-0 events. Exact release identity/date is corroborated by pinned public press-release archive members and official SEC Exhibits 99.x. This advances G1 from 137 exact / 37 reviewed exclusions to 145 exact / 29 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0113: MAT, IDTI, ISIL, VMW (2011), VMW (2013)
+
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for five Worker-3 events. Exact release identity/date is corroborated by pinned public press-release archive members and official SEC Exhibits 99.x. This advances G1 from 145 exact / 29 reviewed exclusions to 150 exact / 24 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+
+### Batch 0116: ACO, KELYA, CMTL, VEEV, CACI, DGI, SWKS, NKE, P, COLM, DGI, POWI, TRAK, SCVL
+
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for fourteen Worker-1 events. Every release identity/date is independently corroborated by an exact official SEC Exhibit 99.x, with pinned public press-release archive members used as additional identity cross-checks where available. This advances G1 from 150 exact / 24 reviewed exclusions to 164 exact / 10 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0118: BIO
+
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies the explicit first-public press-release distribution clock for Bio-Rad on 2013-05-07 at 16:15 EDT. Official SEC Exhibit 99.1 independently corroborates the exact release identity, content and date. This advances G1 from 164 exact / 10 reviewed exclusions to 165 exact / 9 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+### Batch 0119: PNRA 2013
+
+Filed E.D.N.Y. GX 8002 Document 367-2 row 1657 supplies the explicit first-public press-release distribution clock for Panera Bread on 2013-04-23 at 16:00 EDT. Official SEC Exhibit 99.1 independently corroborates the exact release identity, headline, content and date. The canonical first documented illicit trade at 14:25 EDT predates the court row's 15:00 Earliest Order Time; the latter was used only by the original research mapper and is not substituted for the canonical trade timestamp. This advances G1 from 165 exact / 9 reviewed exclusions to 166 exact / 8 reviewed exclusions. Step 9 remains SOURCE_BLOCKED.
+
+
+### Batch 0122: TXT, CGNX, PNRA, NUAN, EW, PRU
+
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for six Worker-2 events. Every release identity/date is independently corroborated by an exact official SEC Exhibit 99.x, with pinned public press-release archive members used as additional identity cross-checks. This advances G1 from 166 exact / 8 reviewed exclusions to 172 exact / 2 reviewed exclusions. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+
+### Batch 0127: TXT, CGNX, PNRA, NUAN, EW, PRU
+
+Filed E.D.N.Y. GX 8002 Document 367-2 supplies explicit first-public press-release distribution clocks for one Worker-2 event. Every release identity/date is independently corroborated by an exact official SEC Exhibit 99.x, with pinned public press-release archive members used as additional identity cross-checks. This advances G1 from 172 exact / 2 reviewed exclusions to 173 exact / 1 reviewed exclusion. Conference-call, EDGAR acceptance, archive-capture, date-only, scheduled-release and inferred clocks are not used. Step 9 remains SOURCE_BLOCKED.
+
+
+### Batch 0130: GNTX
+
+GlobeNewswire migrated Marketwired release ID 930758 exposes the exact first-public publisher timestamp for Gentex Q3 2013 results as October 22, 2013 08:03 ET, with machine metadata 2013-10-22T12:03:00Z. Gentex IR and SEC Exhibit 99.1 independently corroborate identity/date/content. Conference-call, EDGAR, archive-capture and inferred times are not used. This advances G1 from 173 exact / 1 reviewed exclusion to 174/174 exact / 0 exclusions. Step 9 passes.

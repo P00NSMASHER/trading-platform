@@ -1,8 +1,8 @@
 {
-  "bundle_sha256": "dd12e8f69f467187123be4f82534478481c2e227bee9554901f95e6e6ecf2e39",
+  "bundle_sha256": "4a2841978cde04cc3ad64107b410547f98c4103ccf3746f59b8efc227daa3958",
   "input_sha256": {
     "events": "43fb221eed14c2a00a0e9d4531fe365dd264128625877a6cfc986cf50f862f12",
-    "metadata_contract": "d44a4b97be2a9853951af461dcb6f48d2f65a3cf13bd68a91ef11864d09829ad",
+    "metadata_contract": "938074ab4489094f099a7a3ef782323db1eeaab90b786039eac6da6f2b662dc1",
     "replay_config": "03a6165b68d2ca3857ee0d92693af72f6527ec374dce99a1b6fac38516562532",
     "symbol_date_requirements": "58e05613603b95b806eedb49ede774fce763f5ca7519487bed66282e4fe0a3fb"
   },
@@ -16,25 +16,25 @@
   },
   "purpose": "Deterministic manifest for one coherent metadata/quality/real-data-replay receipt generation.",
   "receipt_sha256": {
-    "data/processed/authorized_input_real/announcement_resolutions.csv": "a4e08b233d13467dbbe033863466afe0f75f725cd766c875905d65a2afe5b21c",
+    "data/processed/authorized_input_real/announcement_resolutions.csv": "211625ae2679341b1d787ff057f5a711ea7c4d73539212797d35eeee0337a52a",
     "data/processed/authorized_input_real/control_universe_readiness.csv": "f99e2805d1ba3818e3a186a49a518d53f689c83ffa1bcf3d786f992ef38cec89",
     "data/processed/authorized_input_real/event_exchange_resolutions.csv": "8a0d6c63dd3b1dfbfd0a7f621c5e0cb7eff385e1ede25b5dabe2fc150bf2953e",
-    "data/processed/authorized_input_real/metadata_domain_quality.csv": "909c1445639a8dfc6c2e069aa5b6f491f97145e9ca4fac91c885f3bebeff1a80",
+    "data/processed/authorized_input_real/metadata_domain_quality.csv": "312196de54d9189cac48bf1d300a0feac1f28d9df754d97e17a3cee0330a6702",
     "data/processed/authorized_input_real/metadata_quality_gate.csv": "a45cb84f25dc77bd5846a1d608ad7b8b8eac2813576234e11505a5ec3ea42e8e",
-    "data/processed/authorized_input_real/metadata_quality_issues.csv": "51739ea6e3752a946b249895cd3770342c10c4125fb19f89986cc5df6cd8007e",
-    "data/processed/authorized_input_real/metadata_quality_summary.json": "c8e5479e048b7573c671c10951fb5e5cd030b9f64c5bcb65fd365c5200685861",
+    "data/processed/authorized_input_real/metadata_quality_issues.csv": "72066cfb2b18e47df6013d5db02787114cfa41593ab48be7f35dce995d1342cf",
+    "data/processed/authorized_input_real/metadata_quality_summary.json": "e515cf1cb7be77c1f78f94e464abddfd10277154c2c46902f4b1dd8fa7276e4c",
     "data/processed/authorized_input_real/metadata_quarantine.csv": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "data/processed/authorized_input_real/metadata_readiness_summary.json": "61a3aa0caaf157975b61ac0467cbb0653bdf4e78c60a63055473d3b01989fef2",
-    "data/processed/authorized_input_real/metadata_source_inventory.json": "e431ca0c2b34d9f3c4b0f78a5998750246913dd2888c73560a076588efcffb50",
-    "data/processed/authorized_input_real/metadata_unresolved_gates.csv": "4eaf756d89e746ac7e6dbc9570966bfc6476638a260f493732bacb3b7956a019",
-    "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": "c31c871aedc360a2108fd6d5abe617f1f2a3fe75404454eb3791aa0a567457f9",
-    "data/processed/real_data_replay/real_data_replay_status.json": "2a606f05fd3eacaae7c60fab040127f49c6eb3dd5555985c56337cf3c4d5bf06"
+    "data/processed/authorized_input_real/metadata_readiness_summary.json": "5f46fa11b903830941116810e576c339119007bd394958d9c35f7289d8d20885",
+    "data/processed/authorized_input_real/metadata_source_inventory.json": "ed63dfdbed5253a0b7550a897b5e928e6f4cada3a1ce0a73d0c9e45e2946fbfc",
+    "data/processed/authorized_input_real/metadata_unresolved_gates.csv": "dcaa4d71712cde2f4054cc4705c7fdd7c82441968fe0f916aeded1be5d3b426e",
+    "data/processed/authorized_input_real/shares_outstanding_resolutions.csv": "61da7f69b4aa3c489b8f70023623acc879b4222152d0ac1055a2d50139739582",
+    "data/processed/real_data_replay/real_data_replay_status.json": "5a0c89563d7866b52e79ea48b91d54fc76156e08b882560b3d9c931dfd54b497"
   },
   "research_use_only": true,
   "schema_version": "1",
   "summary": {
-    "announcement_events_excluded": 60,
-    "announcement_exact_resolved": 114,
+    "announcement_events_excluded": 0,
+    "announcement_exact_resolved": 174,
     "announcement_unresolved": 0,
     "control_dates_required": 72,
     "control_dates_resolved": 0,

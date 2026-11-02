@@ -151,3 +151,16 @@ def test_wide_spread_can_be_strict_nbbo_without_deleting_raw_evidence():
     out = taq.construct_strict_nbbo([row])
     assert out[0]["taq_replication_flags"]["wide_spread_over_5"] is True
     assert out[0]["nbbo"] is not None
+
+
+def test_nonfinite_taq_quote_values_fail_closed_without_discarding_raw_updates():
+    for bad in ("NaN", "Infinity", "-Infinity", "not-a-price"):
+        raw = _q("2015-02-12T17:00:00", 1, "N", bad, "11.00", 1, 2)
+        flags = taq.quote_replication_flags(raw)
+        assert flags["withdrawn_bid"] is True
+        assert taq.keep_quote_for_replication(raw) is True
+        row = taq.construct_strict_nbbo([raw])[0]
+        assert row["nbbo"] is None
+        assert row["nbbo_rejection_reason"] == "strict_nbbo_incomplete"
+        assert row["raw_update"] == raw
+        assert row["g2_coverage_claim"] is False

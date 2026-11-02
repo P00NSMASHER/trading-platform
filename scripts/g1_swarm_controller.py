@@ -275,6 +275,19 @@ def lane_valid(worker: int, batch: int, policy: dict[str, Any]) -> bool:
     return batch >= start and (batch - start) % step == 0
 
 
+def event_owner(event_id: str, policy: dict[str, Any]) -> int | None:
+    overrides = policy.get("event_owner_overrides") or {}
+    if event_id in overrides:
+        owner = overrides[event_id]
+        return None if owner is None else int(owner)
+    digest = hashlib.sha256(event_id.encode("utf-8")).hexdigest()
+    return int(digest, 16) % int(policy["worker_count"])
+
+
+def worker_owns_events(worker: int, event_ids: Iterable[str], policy: dict[str, Any]) -> bool:
+    return all(event_owner(event_id, policy) == worker for event_id in event_ids)
+
+
 def manifest_state(root: Path, policy: dict[str, Any]) -> dict[str, Any]:
     path = root / policy["canonical_inputs"]["acquisition_manifest"]
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -300,6 +313,15 @@ def manifest_state(root: Path, policy: dict[str, Any]) -> dict[str, Any]:
         "unresolved_ids": unresolved_ids,
         "unresolved_by_symbol": unresolved_by_symbol,
     }
+
+
+def g1_is_complete(manifest: dict[str, Any], policy: dict[str, Any]) -> bool:
+    target = int(policy["fail_closed_until_exact_count"])
+    return (
+        int(manifest["total"]) == target
+        and int(manifest["exact"]) == target
+        and int(manifest["unresolved"]) == 0
+    )
 
 
 def candidate_is_resolved(candidate: Candidate, manifest: dict[str, Any], pulls: list[dict[str, Any]], updates: list[WorkerUpdate]) -> bool:
@@ -384,9 +406,12 @@ def evaluate_token(
     lease_minutes: int,
     now: datetime,
     candidates: list[Candidate] | None = None,
+    policy: dict[str, Any] | None = None,
 ) -> TokenEvaluation:
     if token is None or token.worker is None or token.batch is None:
         return TokenEvaluation("UNASSIGNED", "no active token assignment", None, False, None, None)
+    if policy is None:
+        policy = load_policy()
 
     assigned_at = parse_time(token.assigned_at)
     age_minutes = None if assigned_at is None else max(0.0, (now - assigned_at).total_seconds() / 60.0)
@@ -439,6 +464,17 @@ def evaluate_token(
             matching_open,
             matching_merged,
         )
+
+    token_event_ids = tuple(EVENT_ID_RE.findall(token.package.upper()))
+    if token_event_ids and not worker_owns_events(token.worker, token_event_ids, policy):
+        return TokenEvaluation(
+            "INVALID",
+            "token assignment contains event IDs outside the assigned worker ownership shard",
+            age_minutes,
+            False,
+            matching_open,
+            matching_closed,
+        )
     if matching_closed is not None:
         return TokenEvaluation(
             "CLOSED_UNMERGED",
@@ -484,6 +520,7 @@ def evaluate_token(
             )
 
     progress_after = matching_open is not None and matching_open_fresh
+    latest_progress_at = assigned_at
     if assigned_at is not None:
         for update in updates:
             update_time = parse_time(update.created_at)
@@ -491,14 +528,20 @@ def evaluate_token(
                 continue
             if update.status in MEANINGFUL_PROGRESS and update_matches_token(update, token):
                 progress_after = True
-                break
+                if latest_progress_at is None or update_time > latest_progress_at:
+                    latest_progress_at = update_time
 
-    if age_minutes is not None and age_minutes > lease_minutes and not progress_after:
+    idle_minutes = (
+        None
+        if latest_progress_at is None
+        else max(0.0, (now - latest_progress_at).total_seconds() / 60.0)
+    )
+    if idle_minutes is not None and idle_minutes > lease_minutes and not matching_open_fresh:
         return TokenEvaluation(
             "STALLED",
-            f"token lease exceeded {lease_minutes} minutes without BUILDING/CI/PR evidence",
+            f"token lease exceeded {lease_minutes} minutes without fresh BUILDING/CI/PR evidence",
             age_minutes,
-            False,
+            progress_after,
             matching_open,
             matching_closed,
         )
@@ -671,6 +714,8 @@ def choose_prepared_candidate(
             continue
         if not lane_valid(candidate.worker, candidate.batch, policy):
             continue
+        if candidate.event_ids and not worker_owns_events(candidate.worker, candidate.event_ids, policy):
+            continue
         if candidate_is_resolved(candidate, manifest, pulls, updates):
             continue
         eligible.append(candidate)
@@ -755,7 +800,9 @@ def choose_found_candidate(
     found: list[WorkerUpdate] = [
         update
         for update in latest_updates_by_identity(updates).values()
-        if update.status == "FOUND" and not update_is_resolved(update, manifest)
+        if update.status == "FOUND"
+        and not update_is_resolved(update, manifest)
+        and (not update.event_ids or worker_owns_events(update.worker, update.event_ids, policy))
     ]
     found.sort(key=lambda u: parse_time(u.created_at) or datetime.max.replace(tzinfo=timezone.utc))
     if not found:
@@ -821,7 +868,7 @@ def paginated(repo: str, token: str, path: str, *, max_pages: int = 10) -> list[
 
 def fetch_branch_fallbacks(repo: str, token: str, main_sha: str) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
     try:
-        refs = github_api(repo, token, "/git/matching-refs/heads/g1/prep-")
+        refs = paginated(repo, token, "/git/matching-refs/heads/g1/prep-", max_pages=10)
     except RuntimeError:
         return [], {}
     if not isinstance(refs, list):
@@ -830,7 +877,18 @@ def fetch_branch_fallbacks(repo: str, token: str, main_sha: str) -> tuple[list[d
     compares: dict[str, dict[str, Any]] = {}
     # Do not cap prep-branch discovery: workers may legitimately accumulate
     # more than 30 disposable prep branches between cleanup cycles.
-    for ref in refs:
+    # Probe newest batch numbers first so current prepared work remains visible
+    # even when GitHub's compare endpoint throttles a repository with a large
+    # backlog of disposable prep refs.
+    def prep_priority(ref: dict[str, Any]) -> tuple[int, int, str]:
+        branch = str(ref.get("ref") or "").removeprefix("refs/heads/")
+        parsed = parse_prep_branch(branch)
+        if parsed is None:
+            return (-1, -1, branch)
+        worker, batch, _package = parsed
+        return (batch, worker, branch)
+
+    for ref in sorted(refs, key=prep_priority, reverse=True):
         branch = str(ref.get("ref") or "").removeprefix("refs/heads/")
         parsed = parse_prep_branch(branch)
         if parsed is None:
@@ -970,6 +1028,27 @@ def controller_plan(
     # Thread the exact main snapshot through token evaluation so open PRs based
     # on older main commits cannot masquerade as live progress.
     manifest["main_sha"] = str(compares.get("__main_sha__") or "")
+
+    if g1_is_complete(manifest, policy):
+        return {
+            "manifest": manifest,
+            "updates": [],
+            "token": None,
+            "evaluation": TokenEvaluation(
+                "COMPLETE",
+                "G1 exact timing is 174/174 with zero unresolved events; swarm retired",
+                None,
+                False,
+                None,
+                None,
+            ),
+            "prepared": [],
+            "found_updates": [],
+            "next_candidate": None,
+            "action": "NONE",
+            "action_reason": "G1 exact timing complete; no timestamp-recovery work remains",
+        }
+
     updates = parse_worker_updates(comments)
     token = parse_latest_token(comments)
 
@@ -985,6 +1064,7 @@ def controller_plan(
         lease_minutes=int(policy["token_lease_minutes"]),
         now=now,
         candidates=candidate_evidence,
+        policy=policy,
     )
 
     all_prepared = dedupe_candidates(require_live_prepared_support(candidate_evidence))
@@ -1075,8 +1155,13 @@ def main() -> int:
     pulls = paginated(repo, api_token, "/pulls?state=all&sort=updated&direction=desc", max_pages=3)
     main = github_api(repo, api_token, "/branches/main")
     main_sha = str(((main or {}).get("commit") or {}).get("sha") or "")
-    refs, compares = fetch_branch_fallbacks(repo, api_token, main_sha)
-    compares["__main_sha__"] = main_sha
+    pre_manifest = manifest_state(root, policy)
+    if g1_is_complete(pre_manifest, policy):
+        refs: list[dict[str, Any]] = []
+        compares: dict[str, dict[str, Any] | str] = {"__main_sha__": main_sha}
+    else:
+        refs, compares = fetch_branch_fallbacks(repo, api_token, main_sha)
+        compares["__main_sha__"] = main_sha
 
     now = datetime.now(timezone.utc)
     plan = controller_plan(
