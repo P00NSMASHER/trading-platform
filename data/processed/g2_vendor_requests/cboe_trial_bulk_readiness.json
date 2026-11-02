@@ -19,10 +19,16 @@
   "execute_requires": [
     "CBOE_CLIENT_ID",
     "CBOE_CLIENT_SECRET",
-    "--ack-trial-active"
+    "--ack-trial-active",
+    "vendor_readiness:cboe_trial_retention_rights=WRITTEN_RETENTION_AUTHORITY_VERIFIED"
   ],
   "trial_activated": false,
   "vendor_network_calls_made": false,
   "coverage_claimed": false,
-  "g2_coverage_change": 0
+  "g2_coverage_change": 0,
+  "retention_authority_required": true,
+  "required_retention_state": "WRITTEN_RETENTION_AUTHORITY_VERIFIED",
+  "current_retention_state": "DEFAULT_TERMINATION_DELETE_RETURN_UNLESS_ORDER_FORM_OVERRIDES",
+  "bulk_execution_currently_blocked": true,
+  "retention_readiness_source": "data/processed/g2_vendor_requests/vendor_readiness.json"
 }

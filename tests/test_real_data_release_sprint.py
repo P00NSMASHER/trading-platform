@@ -305,6 +305,7 @@ def test_security_identity_status_rejects_nonreconciling_partial_progress(tmp_pa
     with pytest.raises(ValueError, match="do not reconcile"):
         sprint._security_identity_status(identity)
 
+
 def test_refresh_coverage_can_preview_noncanonical_identity_path(tmp_path: Path):
     coverage = tmp_path / "coverage.json"
     coverage.write_text(
@@ -383,4 +384,3 @@ def test_build_status_can_preview_noncanonical_identity_path(tmp_path: Path):
     assert status["security_identity_state"]["ready_for_non_synthetic_market_join"] is True
     assert status["security_identity_state"]["baseline_identity_unverified_count"] == 0
     assert out.exists()
-

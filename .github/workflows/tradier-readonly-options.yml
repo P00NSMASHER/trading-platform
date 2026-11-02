@@ -1,0 +1,93 @@
+name: Tradier read-only options research
+
+# PRs NEVER receive the brokerage secret. Only reviewed main receives it.
+on:
+  workflow_dispatch:
+    inputs:
+      run_greeks_crosscheck:
+        description: 'Attempt direct Greek endpoint corroboration (may return HTTP 403)'
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    # UTC times deliberately land inside the NYSE session in both EDT and EST.
+    # Holiday/early-close handling is delegated to Tradier /markets/clock.
+    - cron: '40 15,19 * * 1-5'
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/tradier-readonly-options.yml
+      - src/tradier_options_probe.py
+      - src/tradier_market_cycle.py
+      - src/tradier_greeks_crosscheck.py
+      - src/options_forward_evaluator.py
+      - src/options_population_audit.py
+      - tests/test_tradier_options_probe.py
+      - tests/test_tradier_market_cycle.py
+      - tests/test_tradier_greeks_crosscheck.py
+      - tests/test_options_forward_evaluator.py
+      - tests/test_options_population_audit.py
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tradier-readonly-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  observe:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact protected-main commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Set up Python (standard library only)
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+
+      - name: Test read-only and fail-closed safeguards without credentials
+        env:
+          PYTHONPATH: src
+        run: |
+          python -m unittest discover -v -s tests -p test_tradier_options_probe.py
+          python -m unittest discover -v -s tests -p test_tradier_market_cycle.py
+          python -m unittest discover -v -s tests -p test_tradier_greeks_crosscheck.py
+          python -m unittest discover -v -s tests -p test_options_forward_evaluator.py
+          python -m unittest discover -v -s tests -p test_options_population_audit.py
+
+      - name: Probe 0DTE, 1DTE, and 7-21DTE Tradier chains (GET only)
+        env:
+          TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+          PYTHONPATH: src
+        run: >-
+          python -m tradier_market_cycle
+          --symbols SPY,QQQ,IWM,TLT,GLD,XLF,XLE,SMH,AAPL,NVDA,AMD,MSFT,BAC,SOFI,F,PFE
+          --out "$RUNNER_TEMP/tradier_market_snapshot.csv"
+
+      - name: Cross-check option timestamps via option-specific quote GETs (diagnostic only)
+        env:
+          TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+          TRADIER_GREEKS_ROUTE: quotes
+          PYTHONPATH: src
+        run: python -m tradier_greeks_crosscheck
+
+      - name: Cross-check option Greek timestamps using separate GET endpoint (manual diagnostic only)
+        # The current repository token received HTTP 403 on this endpoint
+        # on 2026-10-28. Do not repeatedly hit a denied endpoint on cron/push.
+        # A manual explicit opt-in retains genuine failure on 403.
+        if: github.event_name == 'workflow_dispatch' && inputs.run_greeks_crosscheck == true
+        env:
+          TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+          PYTHONPATH: src
+        run: python -m tradier_greeks_crosscheck
+
+      - name: Delete temporary market-data snapshot
+        if: always()
+        run: rm -f "$RUNNER_TEMP/tradier_market_snapshot.csv"

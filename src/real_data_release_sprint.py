@@ -544,11 +544,7 @@ def main() -> None:
     b.add_argument("--metadata-quality", type=Path, required=True)
     b.add_argument("--requirements-manifest", type=Path, required=True)
     b.add_argument("--unresolved-gates", type=Path, required=True)
-    b.add_argument(
-        "--security-identity",
-        type=Path,
-        default=DEFAULT_SECURITY_IDENTITY_PATH,
-    )
+    b.add_argument("--security-identity", type=Path, default=DEFAULT_SECURITY_IDENTITY_PATH)
 
     c = sub.add_parser("status")
     c.add_argument("--requirements-manifest", type=Path, required=True)
@@ -556,11 +552,7 @@ def main() -> None:
     c.add_argument("--metadata-readiness", type=Path, required=True)
     c.add_argument("--metadata-quality", type=Path, required=True)
     c.add_argument("--out", type=Path, required=True)
-    c.add_argument(
-        "--security-identity",
-        type=Path,
-        default=DEFAULT_SECURITY_IDENTITY_PATH,
-    )
+    c.add_argument("--security-identity", type=Path, default=DEFAULT_SECURITY_IDENTITY_PATH)
     c.add_argument("--require-all-real", action="store_true")
 
     args = p.parse_args()
