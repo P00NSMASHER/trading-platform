@@ -5,7 +5,7 @@ import csv
 import hashlib
 import json
 import re
-from datetime import date
+from datetime import date, datetime
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -81,6 +81,28 @@ def _strict_civil_day(value: str, label: str) -> str:
         return date.fromisoformat(raw).isoformat()
     except ValueError as exc:
         raise G5HistoricalCusipError(f"{label} is not a real civil day") from exc
+
+
+def _checked_evidence_timestamp(value: str) -> str:
+    """Validate an explicit timezone-bearing source time; do not assert PIT availability."""
+    raw = str(value or "")
+    if re.fullmatch(
+        r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"
+        r"(?:\.[0-9]{1,6})?(?:Z|[+-][0-9]{2}:[0-9]{2})",
+        raw,
+    ) is None or raw.endswith("-00:00"):
+        raise G5HistoricalCusipError(
+            "evidence_effective_at requires exact offset-aware timestamp"
+        )
+    try:
+        timestamp = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        if timestamp.utcoffset() is None:
+            raise ValueError("missing UTC offset")
+    except ValueError as exc:
+        raise G5HistoricalCusipError(
+            "evidence_effective_at invalid calendar date or offset"
+        ) from exc
+    return raw
 
 
 def _request_id(target_kind: str, symbol: str, dates: list[str]) -> str:
@@ -268,6 +290,7 @@ def stage_reviewed(
             raise G5HistoricalCusipError(
                 f"reviewed row {row_no}: source/effective evidence required"
             )
+        evidence_time = _checked_evidence_timestamp(row["evidence_effective_at"])
         staged.append(
             {
                 "target_kind": key[0],
@@ -276,7 +299,7 @@ def stage_reviewed(
                 "valid_from": valid_from,
                 "valid_through": valid_through,
                 "source_reference": row["source_reference"],
-                "evidence_effective_at": row["evidence_effective_at"],
+                "evidence_effective_at": evidence_time,
                 "review_status": row["review_status"],
                 "research_use_only": "1",
             }
@@ -307,6 +330,7 @@ def stage_reviewed(
             "explicit_historical_review_required": True,
             "validity_must_cover_all_required_event_dates": True,
             "staging_changes_canonical_g5_readiness": False,
+            "retrospective_identity_evidence_is_not_pre_event_availability": True,
         },
         "canonical_g5_dates_resolved_change": 0,
         "release_claimed": False,
