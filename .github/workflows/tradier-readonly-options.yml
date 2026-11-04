@@ -10,9 +10,10 @@ on:
         type: boolean
         default: false
   schedule:
-    # UTC times deliberately land inside the NYSE session in both EDT and EST.
-    # Holiday/early-close handling is delegated to Tradier /markets/clock.
-    - cron: '40 15,19 * * 1-5'
+    # Target early session for EDT and EST; GitHub scheduled jobs can be delayed.
+    # 15:13 and 17:13 UTC are 10:13/12:13 ET (EST), 11:13/13:13 (EDT).
+    # Provider /markets/clock rejects market holidays and early closures.
+    - cron: '13 15,17 * * 1-5'
   push:
     branches: [main]
     paths:
@@ -66,10 +67,37 @@ jobs:
         env:
           TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
           PYTHONPATH: src
-        run: >-
-          python -m tradier_market_cycle
-          --symbols SPY,QQQ,IWM,TLT,GLD,XLF,XLE,SMH,AAPL,NVDA,AMD,MSFT,BAC,SOFI,F,PFE
-          --out "$RUNNER_TEMP/tradier_market_snapshot.csv"
+        run: |
+          set -euo pipefail
+          python -m tradier_market_cycle \
+            --symbols SPY,QQQ,IWM,TLT,GLD,XLF,XLE,SMH,AAPL,NVDA,AMD,MSFT,BAC,SOFI,F,PFE \
+            --out "$RUNNER_TEMP/tradier_market_snapshot.csv" \
+            | tee "$RUNNER_TEMP/tradier_market_receipt.json"
+
+      - name: Require nonempty open-session Tradier option chains
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          receipt = Path(os.environ["RUNNER_TEMP"]) / "tradier_market_receipt.json"
+          try:
+              result = json.loads(receipt.read_text(encoding="utf-8").strip().splitlines()[-1])
+              valid = (
+                  result.get("status") == "MARKET_DATA_ACCESS_VERIFIED"
+                  and result.get("market_state") == "open"
+                  and type(result.get("chains_requested")) is int
+                  and result["chains_requested"] > 0
+                  and type(result.get("chains_with_contracts")) is int
+                  and result["chains_with_contracts"] > 0
+              )
+          except (OSError, ValueError, IndexError, TypeError, AttributeError):
+              valid = False
+          if not valid:
+              raise SystemExit("NO_VERIFIED_OPTION_CHAINS: workflow cannot succeed after an empty/closed collection")
+          print("OPEN_SESSION_OPTION_CHAINS_OBSERVED; freshness and tradable edge remain unproven")
+          PY
 
       - name: Cross-check option timestamps via option-specific quote GETs (diagnostic only)
         env:
