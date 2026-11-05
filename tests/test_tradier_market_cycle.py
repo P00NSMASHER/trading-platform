@@ -263,6 +263,24 @@ class MarketCycleTests(unittest.TestCase):
                     self.assertFalse(target.exists())
                     self.assertIn("NO_VERIFIED_OPTION_CHAINS", out.getvalue())
 
+    def test_cli_preserves_valid_open_session_with_no_strategy_candidates(self):
+        from pathlib import Path
+        import tempfile
+
+        snapshot = {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+                    "chains_requested": 2, "chains_with_contracts": 1,
+                    "edge_status": "UNVERIFIED"}
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "valid_observation.csv"
+            with patch.dict("os.environ", {"TRADIER_TOKEN": "NONSECRET"}), \
+                 patch("tradier_market_cycle.run_cycle",
+                       return_value=([], snapshot)), \
+                 patch("sys.stdout", new_callable=io.StringIO) as out:
+                self.assertEqual(cycle.main(["--out", str(target)]), 0)
+            self.assertTrue(target.is_file())
+            self.assertIn("MARKET_DATA_ACCESS_VERIFIED", out.getvalue())
+            self.assertIn("UNVERIFIED", out.getvalue())
+
     def test_only_explicit_market_data_routes_can_be_used(self):
         import tradier_options_probe as probe
         self.assertEqual(set(probe.ALLOWED), {
