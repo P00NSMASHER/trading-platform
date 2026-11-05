@@ -235,6 +235,34 @@ class MarketCycleTests(unittest.TestCase):
         self.assertIn("TRADIER_TOKEN missing", out.getvalue())
         observe.assert_not_called()
 
+    def test_cli_fails_closed_for_closed_or_empty_session_without_writing(self):
+        from pathlib import Path
+        import tempfile
+
+        snapshots = (
+            {"status": "MARKET_CLOSED_SKIPPED", "market_state": "closed",
+             "chains_requested": 0},
+            {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+             "chains_requested": 0, "chains_with_contracts": 0},
+            {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+             "chains_requested": 1, "chains_with_contracts": 0},
+            {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+             "chains_requested": 1, "chains_with_contracts": 2},
+            {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+             "chains_requested": True, "chains_with_contracts": 1},
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "must_not_exist.csv"
+            for snapshot in snapshots:
+                with self.subTest(snapshot=snapshot), \
+                     patch.dict("os.environ", {"TRADIER_TOKEN": "NONSECRET"}), \
+                     patch("tradier_market_cycle.run_cycle",
+                           return_value=([], snapshot)), \
+                     patch("sys.stdout", new_callable=io.StringIO) as out:
+                    self.assertEqual(cycle.main(["--out", str(target)]), 1)
+                    self.assertFalse(target.exists())
+                    self.assertIn("NO_VERIFIED_OPTION_CHAINS", out.getvalue())
+
     def test_only_explicit_market_data_routes_can_be_used(self):
         import tradier_options_probe as probe
         self.assertEqual(set(probe.ALLOWED), {
