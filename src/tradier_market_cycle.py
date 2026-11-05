@@ -248,6 +248,22 @@ def main(argv=None):
         if not token:
             raise probe.ProbeFailure("TRADIER_TOKEN missing from protected GitHub Actions secret")
         rows, summary = run_cycle(token, symbols)
+        # The CLI must fail closed on its own. A later workflow guard is
+        # defense in depth, not a substitute for rejecting empty collections.
+        if not (
+            isinstance(summary, dict)
+            and summary.get("status") == "MARKET_DATA_ACCESS_VERIFIED"
+            and summary.get("market_state") == "open"
+            and type(summary.get("chains_requested")) is int
+            and summary["chains_requested"] > 0
+            and type(summary.get("chains_with_contracts")) is int
+            and 0 < summary["chains_with_contracts"] <= summary["chains_requested"]
+        ):
+            if isinstance(summary, dict):
+                print(json.dumps(summary, sort_keys=True))
+            raise probe.ProbeFailure(
+                "NO_VERIFIED_OPTION_CHAINS: open market and nonempty chain receipt required"
+            )
         if summary["status"] == "MARKET_DATA_ACCESS_VERIFIED":
             out = Path(args.out)
             out.parent.mkdir(parents=True, exist_ok=True)
