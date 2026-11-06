@@ -40,7 +40,7 @@ def test_plan_uses_existing_observed_minute_index_without_joins():
     assert "WHERE observed_minute=?" in plan.sql
     assert "AND underlying=?" in plan.sql
     assert "JOIN" not in plan.sql.upper()
-    assert "ORDER BY expiration,right,strike LIMIT ?" in plan.sql
+    assert "LIMIT ?" in plan.sql\n    assert "ORDER BY" not in plan.sql
     assert plan.params == (MINUTE, "SPY", SOURCE, 60)
 
 
