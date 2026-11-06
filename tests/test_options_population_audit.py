@@ -20,7 +20,7 @@ def mark(index=0, *, underlying="TEST", losing=False):
     exit_time = entry + timedelta(days=1)
     expiry = entry.astimezone(ev.EASTERN).date() + timedelta(days=10)
     occ_date = expiry.strftime("%y%m%d")
-    return {
+    row = {
         "trade_id": "SYN_" + underlying + "_" + str(index),
         "underlying": underlying,
         "expiry": expiry.isoformat(),
@@ -50,6 +50,11 @@ def mark(index=0, *, underlying="TEST", losing=False):
         "rv20": "0.2",
         "multiplier": "100",
     }
+    for event in ("entry", "exit"):
+        for leg in ("short", "long"):
+            for side in ("bid", "ask"):
+                row[f"{event}_{leg}_{side}_quote_utc"] = row[f"{event}_quote_utc"]
+    return row
 
 
 def admission(outcome, *, selected=True, reason="DATA_QUALITY"):
