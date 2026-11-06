@@ -3076,7 +3076,7 @@
       "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
     },
     "tests/golden_goose_worker_v24.test.mjs": {
-      "expected_sha256": "c9f2404137a5d8e6f6a9499589aaadc80b8d6869e738e8535e4354a9313f443b",
+      "expected_sha256": "30debe5668ee689cbee0fa5cff53df8053d61999fbf57c53fd2f947dbff5f331",
       "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
     },
     "tests/test_golden_goose_candidates.py": {
@@ -3108,7 +3108,7 @@
       "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
     },
     "workers/tradier_poller_v24_candidate.mjs": {
-      "expected_sha256": "6f6f52c7224c78ddbe58dde6ab7452a22b9da6d66ce8335a4bd4d2192c030baf",
+      "expected_sha256": "33c609bf285af6a0b344e0534296d20fcc0cb5237e64e85db7c92fad66d49b78",
       "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
     }
   },
