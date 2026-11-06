@@ -70,6 +70,7 @@ def make_case(i=0, *, underlying="TEST", losing=False):
             depth[key + "_px"] = values[key]
             depth[key + "_size"] = "1"
             depth[key + "_utc"] = (source - timedelta(seconds=2)).isoformat()
+            paper[key + "_quote_utc"] = depth[key + "_utc"]
     return paper, depth
 
 
@@ -139,6 +140,7 @@ class JointGateTests(unittest.TestCase):
         for side in SIDES:
             d["exit_" + side + "_utc"] = (
                 event - timedelta(seconds=17)).isoformat()
+            p["exit_" + side + "_quote_utc"] = d["exit_" + side + "_utc"]
 
     def test_expiry_day_call_quote_and_utc_rollover_rejected(self):
         for rollover in (False, True):
@@ -234,6 +236,8 @@ class JointGateTests(unittest.TestCase):
             depth[event + "_" + side + "_utc"] = (
                 at - timedelta(seconds=17)
             ).isoformat()
+            paper[event + "_" + side + "_quote_utc"] = (
+                depth[event + "_" + side + "_utc"])
 
     def test_weekend_entry_is_not_a_quote_fill(self):
         p, d = make_case()
