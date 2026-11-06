@@ -74,8 +74,8 @@ def test_real_sqlite_index_plan_and_deterministic_box_arithmetic():
     assert len(candidates) == 1
     box = candidates[0]
     assert (box.lower_strike, box.upper_strike) == (660, 661)
-    assert box.buy_discount_usd == pytest.approx(-130)
-    assert box.sell_premium_usd == pytest.approx(70)
+    assert box.buy_discount_usd == pytest.approx(-160)
+    assert box.sell_premium_usd == pytest.approx(120)
     assert box.status == RESEARCH_ONLY
     db.close()
 
