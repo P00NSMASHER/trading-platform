@@ -28,6 +28,11 @@ COLUMNS = (
     "short_contract", "long_contract",
     "entry_short_bid", "entry_short_ask", "entry_long_bid", "entry_long_ask",
     "exit_short_bid", "exit_short_ask", "exit_long_bid", "exit_long_ask",
+    # Independent source timestamps: each bid/ask side of both legs at entry/exit.
+    "entry_short_bid_quote_utc", "entry_short_ask_quote_utc",
+    "entry_long_bid_quote_utc", "entry_long_ask_quote_utc",
+    "exit_short_bid_quote_utc", "exit_short_ask_quote_utc",
+    "exit_long_bid_quote_utc", "exit_long_ask_quote_utc",
     "short_open_interest", "long_open_interest",
     "atm_iv", "rv20", "multiplier",
 )
@@ -37,6 +42,7 @@ MODELED_PORTFOLIO_RISK_LIMIT_USD = 100.0
 COMMISSION_PER_CONTRACT_SIDE_USD = 0.65
 ROUND_TRIP_COMMISSION_USD = 4 * COMMISSION_PER_CONTRACT_SIDE_USD
 SLIPPAGE_STRESS_USD = (0, 5, 10)
+MAX_CROSS_LEG_QUOTE_SKEW_SECONDS = 30
 MIN_PROSPECTIVE_TRADES = 60
 MIN_CALENDAR_SPAN_DAYS = 90
 MIN_UNIQUE_WEEKS = 12
@@ -146,6 +152,22 @@ def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
             and _fresh(exit_time, exit_quote, 120)
             and _fresh(decision, greek_time, 90 * 60)):
         raise EvidenceError("Missing, future, or stale entry/exit quote or IV calculation")
+
+    # An aggregate entry/exit timestamp cannot attest four distinct bid/ask
+    # observations. Validate eight independently supplied UTC-aware clocks;
+    # never synthesize a missing side clock from a bundle timestamp.
+    for event, event_time in (("entry", entry), ("exit", exit_time)):
+        clocks = []
+        for leg in ("short", "long"):
+            for side_name in ("bid", "ask"):
+                clock = _ts(row, f"{event}_{leg}_{side_name}_quote_utc")
+                if not _fresh(event_time, clock, 120):
+                    raise EvidenceError("Future or stale individual option side quote")
+                if event == "entry" and not _fresh(decision, clock, 120):
+                    raise EvidenceError("Entry option side quote unavailable at decision time")
+                clocks.append(clock)
+        if (max(clocks) - min(clocks)).total_seconds() > MAX_CROSS_LEG_QUOTE_SKEW_SECONDS:
+            raise EvidenceError("Option spread side clocks not contemporaneous (skew)")
 
     entry_date = decision.astimezone(EASTERN).date()
     exit_date = exit_time.astimezone(EASTERN).date()
