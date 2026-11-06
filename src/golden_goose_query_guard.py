@@ -23,7 +23,8 @@ _TABLES = {
     'option': ('broad_options_v23', 'symbol', 'observed_minute',
                'observed_minute,root,symbol,expiration,dte,right,strike,bid,ask,bid_size_raw,ask_size_raw,bid_at,ask_at,captured_at,open_interest,delta,mid_iv,source'),
 }
-_SYMBOL = re.compile(r'^[A-Z][A-Z0-9]{0,31}
+_SYMBOL = re.compile(r'^[A-Z][A-Z0-9]{0,31}$')
+_OCC = re.compile(r'^([A-Z]{1,6})[0-9]{6}[CP][0-9]{8}$')
 
 class QueryRejected(ValueError):
     pass
