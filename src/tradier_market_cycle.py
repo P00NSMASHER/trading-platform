@@ -125,8 +125,17 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         # Explicit now remains available only for deterministic offline replay.
         rows, result = probe.run(symbols[i:i + CHUNK_SIZE], token, now=now)
         all_rows.extend(rows)
-        requested += result["chains_requested"]
-        observed += result["chains_with_contracts"]
+        # Reject each corrupted batch before later batches can mask its counts.
+        # In particular, bool is an int subclass and cannot represent a count.
+        batch_requested = result.get("chains_requested")
+        batch_observed = result.get("chains_with_contracts")
+        if (type(batch_requested) is not int
+            or type(batch_observed) is not int
+            or batch_requested < 0
+            or not 0 <= batch_observed <= batch_requested):
+            raise probe.ProbeFailure("Invalid per-batch option chain coverage receipt")
+        requested += batch_requested
+        observed += batch_observed
         premium += result["iv_rv_ge_1_20_seven_to_21_dte"]
         for key, n in result.get("h1_greeks_quality", {}).items():
             if (key not in probe.atm_greeks_quality(

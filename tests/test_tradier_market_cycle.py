@@ -221,6 +221,37 @@ class MarketCycleTests(unittest.TestCase):
             with self.assertRaisesRegex(ProbeFailure, "exceeds scanned chains"):
                 cycle.run_cycle("NONSECRET", ["SPY"], now=NOW)
 
+    def test_invalid_per_batch_chain_counts_cannot_be_masked_by_later_batch(self):
+        # Before this guard, the two batches yielded a valid aggregate despite
+        # the first batch claiming more observed chains than it requested.
+        scenarios = ((1, 2), (True, 1), (1, True))
+        for bad_requested, bad_observed in scenarios:
+            with self.subTest(bad_requested=bad_requested, bad_observed=bad_observed):
+                def mock_batch(symbols, token, now=None):
+                    batch_requested, batch_observed = (
+                        (bad_requested, bad_observed)
+                        if len(symbols) == 5 else (5, 1)
+                    )
+                    return [], {
+                        "chains_requested": batch_requested,
+                        "chains_with_contracts": batch_observed,
+                        "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 0},
+                        "spread_counts": {"bear_call": 0, "bull_put": 0},
+                        "iv_rv_ge_1_20_seven_to_21_dte": 0,
+                        "quote_filter_diagnostics": {},
+                    }
+
+                with patch("tradier_market_cycle.probe.get_json",
+                           return_value={"clock": {"state": "open"}}), \\
+                     patch("tradier_market_cycle.probe.run",
+                           side_effect=mock_batch) as observe:
+                    with self.assertRaisesRegex(
+                            ProbeFailure, "Invalid per-batch option chain coverage receipt"):
+                        cycle.run_cycle(
+                            "NONSECRET",
+                            ["AAPL", "NVDA", "AMD", "MSFT", "BAC", "SOFI"], now=NOW)
+                self.assertEqual(observe.call_count, 1)
+
     def test_any_failed_batch_fails_whole_market_run(self):
         with patch("tradier_market_cycle.probe.get_json", return_value={"clock": {"state": "open"}}), \
              patch("tradier_market_cycle.probe.run", side_effect=ProbeFailure("Synthetic market gap")):
