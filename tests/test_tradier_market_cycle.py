@@ -242,7 +242,7 @@ class MarketCycleTests(unittest.TestCase):
                     }
 
                 with patch("tradier_market_cycle.probe.get_json",
-                           return_value={"clock": {"state": "open"}}), \\
+                           return_value={"clock": {"state": "open"}}), \
                      patch("tradier_market_cycle.probe.run",
                            side_effect=mock_batch) as observe:
                     with self.assertRaisesRegex(
