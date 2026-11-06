@@ -1,0 +1,16 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "options-tradier-paper-poller",
+  "main": "tradier_poller_v24_candidate.mjs",
+  "compatibility_date": "2026-10-24",
+  "triggers": {
+    "crons": ["* * * * *"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "options-research-tradier-private",
+      "database_id": "07f6bd0d-a582-4244-be9f-d42e7c2d6d81"
+    }
+  ]
+}
