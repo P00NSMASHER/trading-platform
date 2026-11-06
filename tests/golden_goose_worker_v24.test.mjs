@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {collectBroadV21, collectBroadOptionsV23, classifyOptionFailureV24}
+import {collectBroadV21, collectBroadOptionsV23, classifyCollectorFailureV25,
+  classifyOptionFailureV24}
   from '../workers/tradier_poller_v24_candidate.mjs';
 
 const NOW='2026-11-05T17:14:00.000Z';
@@ -86,6 +87,11 @@ test('missing previous spot fails visibly rather than querying unbounded D1',asy
 });
 
 test('quota error classes are sanitized and do not embed provider secrets',()=>{
+  assert.equal(classifyCollectorFailureV25("Your account exceeded the D1 daily row read quota"),
+    'd1_read_quota');
+  assert.equal(classifyCollectorFailureV25('D1 SQL database is unavailable'),'database_error');
+  assert.equal(classifyCollectorFailureV25('an arbitrary secret token: REDACT_ME'),
+    'collector_unknown_failure');
   assert.equal(classifyOptionFailureV24("Your account has exceeded D1's free tier daily row read limit"),
     'd1_read_quota');
   assert.equal(classifyOptionFailureV24('D1 SQL database is unavailable'),'database_error');
