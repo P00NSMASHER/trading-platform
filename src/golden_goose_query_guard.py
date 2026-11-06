@@ -144,6 +144,6 @@ def plan_box_minute(root: str, observed_minute: str, *, limit: int = MAX_ROWS_PE
         'bid,ask,bid_size_raw,ask_size_raw,bid_quote_at,ask_quote_at,source '
         'FROM quote_samples_v17 '
         "WHERE observed_minute=? AND underlying=? AND kind='option' AND source=? "
-        'ORDER BY expiration,right,strike LIMIT ?'
+        'LIMIT ?'
     )
     return QueryPlan(sql, (iso, root, BOX_SOURCE, limit), limit, 'box_minute')
