@@ -117,3 +117,33 @@ class DailyReadBudget:
             raise QueryRejected('single query exceeded permitted read budget')
         if self.rows_read > self.ceiling:
             raise QueryRejected('research read budget exhausted')
+
+# The 2026-11-05 D1 quota incident was dominated by repeated full-history
+# multi-way quote_samples_v17 self-joins. The existing primary-key index starts
+# with observed_minute; an exact-minute read avoids that history-wide fan-out.
+# This is a research snapshot only: it does not reconstruct a full option chain.
+BOX_SOURCE = 'tradier_prod_rest_bidask_snapshot_v18_not_executable'
+
+
+def plan_box_minute(root: str, observed_minute: str, *, limit: int = MAX_ROWS_PER_QUERY) -> QueryPlan:
+    """One indexed minute of one root, never a D1 join or a full-table scan.
+
+    The caller must inspect the returned D1 meta.rows_read and fail closed if
+    the LIMIT is reached; a row limit does not itself cap database rows scanned.
+    """
+    if not isinstance(root, str) or not re.fullmatch(r'[A-Z]{1,6}', root):
+        raise QueryRejected('standard underlying root required')
+    minute = _utc_iso(observed_minute)
+    if minute.second != 0 or minute.microsecond != 0:
+        raise QueryRejected('exact UTC minute boundary required')
+    if type(limit) is not int or not (1 <= limit <= MAX_ROWS_PER_QUERY):
+        raise QueryRejected('box snapshot limit outside budget')
+    iso = minute.isoformat(timespec='milliseconds').replace('+00:00', 'Z')
+    sql = (
+        'SELECT observed_minute,symbol,underlying,expiration,strike,right,'
+        'bid,ask,bid_size_raw,ask_size_raw,bid_quote_at,ask_quote_at,source '
+        'FROM quote_samples_v17 '
+        "WHERE observed_minute=? AND underlying=? AND kind='option' AND source=? "
+        'ORDER BY expiration,right,strike LIMIT ?'
+    )
+    return QueryPlan(sql, (iso, root, BOX_SOURCE, limit), limit, 'box_minute')
