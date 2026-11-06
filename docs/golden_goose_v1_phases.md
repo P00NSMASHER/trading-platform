@@ -53,4 +53,20 @@ Offline simulation code is present and refuses to produce chance-of-doubling or 
 - Read D1 using symbol-indexed bounded queries, avoid exploratory full-history joins.
 - Inspect per-minute audit rows and saved option contracts; successful crons are not evidence of useful collection.
 - Keep credentials in Cloudflare secrets. Public GitHub CI uses synthetic fixtures only.
+
+## Production collector scheduling invariant (2026-11-06)
+
+The production Worker schedule is declared in `workers/wrangler.tradier.json`.
+Cloudflare accepted but did not deliver either the original bounded-hour cron or an
+equivalent explicit-hour list during a live-session control test. The unrestricted
+one-minute trigger delivered consecutive receipts. It is therefore the failover trigger.
+
+This does not broaden market-data collection. `isRegularSession()` rejects weekends,
+configured exchange holidays, early-close overrun, premarket, postmarket, and dates beyond
+the explicit calendar horizon before provider or D1 collection begins. CI must fail if the
+trigger, binding, compatibility date, session guards, or no-order invariant drift.
+
+The Cloudflare `TRADIER_TOKEN` remains a secret binding and is intentionally absent from
+the deployment configuration. Production acceptance requires fresh D1 receipts; a healthy
+HTTP endpoint or successful synthetic test is not sufficient by itself.
 - No emails, third-party submissions, trading, or account changes are authorized.
