@@ -6,9 +6,9 @@ from golden_goose_query_guard import (
 
 def test_range_only_indexed_bound_symbol_and_period():
     q = plan_range('option','QQQ261116C00650000','2026-11-05T14:00:00Z','2026-11-05T15:00:00Z',limit=61)
-    assert 'FROM broad_options_v23 WHERE symbol=?' in q.sql
-    assert 'LIMIT ?' in q.sql
-    assert q.params == ('QQQ261116C00650000', '2026-11-05T14:00:00Z', '2026-11-05T15:00:00Z',61)
+    assert 'FROM broad_options_v23 WHERE root=?' in q.sql
+    assert 'AND symbol=?' in q.sql and 'LIMIT ?' in q.sql
+    assert q.params == ('QQQ','2026-11-05T14:00:00.000Z','2026-11-05T15:00:00.000Z','QQQ261116C00650000',61)
     assert 'QQQ261116' not in q.sql
 
 
@@ -47,3 +47,11 @@ def test_daily_ledger_metered_and_fail_closed():
 def test_int_only_limit():
     with pytest.raises(QueryRejected):
         plan_range('stock','SPY','2026-11-05T14:00:00Z','2026-11-05T14:03:00Z',limit=True)
+
+def test_exact_start_minute_and_index_path():
+    q=plan_range('stock','SPY','2026-11-05T14:00:00Z','2026-11-05T14:03:00Z')
+    assert q.params[1] == '2026-11-05T14:00:00.000Z'
+    assert q.params[2] == '2026-11-05T14:03:00.000Z'
+    assert 'FROM broad_quotes_v21 WHERE symbol=?' in q.sql
+    with pytest.raises(QueryRejected):
+        plan_range('option','NOT_A_STANDARD_CONTRACT','2026-11-05T14:00:00Z','2026-11-05T14:03:00Z')
