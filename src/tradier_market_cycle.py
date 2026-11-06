@@ -216,6 +216,10 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     intraday = recent_bar_evidence(
         token, now if now is not None else datetime.now(timezone.utc), symbols
     )
+    # A multi-symbol live scan can cross market close after the entry clock.
+    # Reject that transition instead of labeling an after-close run as open.
+    if now is None and market_state(token) != "open":
+        raise probe.ProbeFailure("Market closed during collection; snapshot rejected")
     if (sum(h1_signal_sides.values()) != premium
         or h1_chains > premium or h1_symbols > h1_chains):
         raise probe.ProbeFailure("H1 nonindependent-count receipt parity failed")

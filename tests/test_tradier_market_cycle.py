@@ -30,6 +30,42 @@ class MarketCycleTests(unittest.TestCase):
         fetch.assert_called_once_with("NONSECRET", "/markets/clock", {})
         observe.assert_not_called()
 
+    def test_live_collection_closing_mid_scan_is_rejected(self):
+        batch = {
+            "chains_requested": 1, "chains_with_contracts": 1,
+            "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 0},
+            "spread_counts": {"bear_call": 0, "bull_put": 0},
+            "iv_rv_ge_1_20_seven_to_21_dte": 0,
+            "quote_filter_diagnostics": {},
+        }
+        with patch("tradier_market_cycle.market_state",
+                   side_effect=["open", "postmarket"]) as clock, \
+             patch("tradier_market_cycle.probe.run",
+                   return_value=([], batch)), \
+             patch("tradier_market_cycle.recent_bar_evidence", return_value={}):
+            with self.assertRaisesRegex(ProbeFailure, "Market closed during collection"):
+                cycle.run_cycle("NONSECRET", ["SPY"])
+        self.assertEqual(clock.call_count, 2)
+
+    def test_live_collection_open_at_both_ends_preserves_research(self):
+        batch = {
+            "chains_requested": 1, "chains_with_contracts": 1,
+            "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 0},
+            "spread_counts": {"bear_call": 0, "bull_put": 0},
+            "iv_rv_ge_1_20_seven_to_21_dte": 0,
+            "quote_filter_diagnostics": {},
+        }
+        with patch("tradier_market_cycle.market_state",
+                   side_effect=["open", "open"]) as clock, \
+             patch("tradier_market_cycle.probe.run",
+                   return_value=([], batch)), \
+             patch("tradier_market_cycle.recent_bar_evidence", return_value={}):
+            rows, receipt = cycle.run_cycle("NONSECRET", ["SPY"])
+        self.assertEqual(rows, [])
+        self.assertEqual(receipt["status"], "MARKET_DATA_ACCESS_VERIFIED")
+        self.assertEqual(receipt["edge_status"], "UNVERIFIED")
+        self.assertEqual(clock.call_count, 2)
+
     def test_invalid_clock_never_defaults_to_open(self):
         for payload in ({}, {"clock": {}}, {"clock": {"state": "unknown"}}, {"clock": {"state": True}}):
             with patch("tradier_market_cycle.probe.get_json", return_value=payload):
