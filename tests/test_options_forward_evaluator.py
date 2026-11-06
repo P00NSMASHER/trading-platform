@@ -18,7 +18,7 @@ def synthetic_row(index=0, *, losing=False, underlying="TEST"):
     entry = START + timedelta(days=2 * index)
     exit_time = entry + timedelta(days=1)
     day = entry.astimezone(ev.EASTERN).date()
-    return {
+    row = {
         "trade_id": "SYNTHETIC_" + str(index) + "_" + underlying,
         "underlying": underlying,
         "expiry": (day + timedelta(days=10)).isoformat(),
@@ -48,6 +48,12 @@ def synthetic_row(index=0, *, losing=False, underlying="TEST"):
         "rv20": "0.20",
         "multiplier": "100",
     }
+    # Test-only deterministic quote fixtures; these are never real fills.
+    for event in ("entry", "exit"):
+        for leg in ("short", "long"):
+            for side in ("bid", "ask"):
+                row[f"{event}_{leg}_{side}_quote_utc"] = row[f"{event}_quote_utc"]
+    return row
 
 
 class ForwardEvidenceTests(unittest.TestCase):
@@ -133,6 +139,9 @@ class ForwardEvidenceTests(unittest.TestCase):
         exit_time = START + timedelta(days=3)
         a["exit_utc"] = exit_time.isoformat()
         a["exit_quote_utc"] = (exit_time - timedelta(seconds=10)).isoformat()
+        for leg in ("short", "long"):
+            for side in ("bid", "ask"):
+                a[f"exit_{leg}_{side}_quote_utc"] = a["exit_quote_utc"]
         with self.assertRaisesRegex(ev.EvidenceError, "Overlapping"):
             ev.evaluate_paper_marks([a, b], asof=ASOF)
 
@@ -156,6 +165,52 @@ class ForwardEvidenceTests(unittest.TestCase):
             row[field] = (reference + timedelta(minutes=minutes)).isoformat()
             with self.assertRaisesRegex(ev.EvidenceError, "stale|future|decision"):
                 ev.evaluate_paper_marks([row], asof=ASOF)
+
+    def test_all_eight_per_side_quote_timestamps_required(self):
+        for event in ("entry", "exit"):
+            for leg in ("short", "long"):
+                for side in ("bid", "ask"):
+                    key = f"{event}_{leg}_{side}_quote_utc"
+                    row = synthetic_row()
+                    del row[key]
+                    with self.subTest(field=key), self.assertRaises(ev.EvidenceError):
+                        ev.parse_paper_mark(row, asof=ASOF)
+                    row = synthetic_row()
+                    row[key] = ""
+                    with self.subTest(field=key, case="empty"), self.assertRaises(ev.EvidenceError):
+                        ev.parse_paper_mark(row, asof=ASOF)
+
+    def test_per_side_quote_clock_rejects_stale_future_and_tzless(self):
+        for key in ("entry_short_bid_quote_utc", "entry_long_ask_quote_utc",
+                    "exit_short_ask_quote_utc", "exit_long_bid_quote_utc"):
+            reference = START if key.startswith("entry_") else START + timedelta(days=1)
+            for changed in ((reference - timedelta(minutes=3)).isoformat(),
+                            (reference + timedelta(seconds=2)).isoformat(),
+                            (reference - timedelta(seconds=15)).replace(tzinfo=None).isoformat()):
+                row = synthetic_row()
+                row[key] = changed
+                with self.subTest(field=key, value_type=changed[-6:]), self.assertRaises(ev.EvidenceError):
+                    ev.parse_paper_mark(row, asof=ASOF)
+
+    def test_per_side_quote_after_decision_rejected_even_if_before_entry(self):
+        row = synthetic_row()
+        row["decision_utc"] = (START - timedelta(seconds=25)).isoformat()
+        row["entry_quote_utc"] = (START - timedelta(seconds=30)).isoformat()
+        with self.assertRaises(ev.EvidenceError):
+            ev.parse_paper_mark(row, asof=ASOF)
+
+    def test_spread_quotes_must_share_contemporaneous_side_clocks(self):
+        row = synthetic_row()
+        row["entry_long_ask_quote_utc"] = (START - timedelta(seconds=50)).isoformat()
+        with self.assertRaisesRegex(ev.EvidenceError, "skew|contemporaneous"):
+            ev.parse_paper_mark(row, asof=ASOF)
+
+    def test_small_side_clock_skew_remains_eligible(self):
+        row = synthetic_row()
+        row["entry_short_bid_quote_utc"] = (START - timedelta(seconds=20)).isoformat()
+        row["exit_long_ask_quote_utc"] = (
+            START + timedelta(days=1, seconds=-18)).isoformat()
+        self.assertEqual(ev.parse_paper_mark(row, asof=ASOF).underlying, "TEST")
 
     def test_h1_and_trade_safety_reject_bad_contracts(self):
         for key, value in (
