@@ -3050,6 +3050,66 @@
     "vendor_sources/wrds/gen_li/README.md": {
       "expected_sha256": "8d6ab99f565bd4a2de52322006faaaa13a56bb10faf12d60912039835bf7dc37",
       "reason": "Provenance- and rights-aware research-only WRDS request plan; no copied upstream source or licensed data, and no claimed WRDS entitlement."
+    },
+    "docs/golden_goose_v1_phases.md": {
+      "expected_sha256": "f7a8248faac868edcc164e09bf03c901065e887b35a52ce9601c34298312933a",
+      "reason": "Golden Goose staged delivery, acceptance and non-trading audit instructions"
+    },
+    "src/golden_goose_candidates.py": {
+      "expected_sha256": "695f82e52a4053c8f1b27bbc182a382969ce3d518b4bef935bfdb4c8d8d39914",
+      "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
+    },
+    "src/golden_goose_data.py": {
+      "expected_sha256": "979db4d971af777c72084e4b32af48834ecba046ea826d74bc69f300b759c8ce",
+      "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
+    },
+    "src/golden_goose_query_guard.py": {
+      "expected_sha256": "951b95c69d2252f99e50e534011935cdd9fb9bac15f59e59bfd043cc1f46eb4b",
+      "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
+    },
+    "src/golden_goose_signals.py": {
+      "expected_sha256": "7ecd8d2b3ba81912e701536943fbb8bf5a8b46e6af3cfcd10445817390ca3f1d",
+      "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
+    },
+    "src/golden_goose_simulator.py": {
+      "expected_sha256": "48a536aac13cb6c324c612788408cfa4a16fe25561098701062b461be53c90f8",
+      "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
+    },
+    "tests/golden_goose_worker_v24.test.mjs": {
+      "expected_sha256": "c9f2404137a5d8e6f6a9499589aaadc80b8d6869e738e8535e4354a9313f443b",
+      "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
+    },
+    "tests/test_golden_goose_candidates.py": {
+      "expected_sha256": "cf538f3a2aa46e27c6d648a7a31ac38cfabb827c3b8bd004f86772eae7cd411f",
+      "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
+    },
+    "tests/test_golden_goose_data.py": {
+      "expected_sha256": "8fbc485828488e6248590fcee17418b1446af2a42b7d2cf7c2f88fdd1f45c883",
+      "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
+    },
+    "tests/test_golden_goose_query_guard.py": {
+      "expected_sha256": "1ce7b88da1097e4e581afbf485d28012a39cb2e1d04842a0e7561587fa62e05b",
+      "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
+    },
+    "tests/test_golden_goose_signals.py": {
+      "expected_sha256": "23a45b03ec485dab417f43b790bb185ebc21fa0af9adc31a350384a73c61c5b0",
+      "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
+    },
+    "tests/test_golden_goose_simulator.py": {
+      "expected_sha256": "02156c174d01e707ec2e388f7f712b0541e15371b69177b81accb3f20dd81bbf",
+      "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
+    },
+    "tests/test_golden_goose_worker_v24.py": {
+      "expected_sha256": "9284d3f5c3d227ac4b2bfb432615c0f6cc207b31e082c1f0d66fc47c6d9589fa",
+      "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
+    },
+    "workers/tradier_poller_v23.mjs": {
+      "expected_sha256": "2a644fc95cad423a5b6569a7510affbf3675478aaed14eb13d3a5825ab06bbe6",
+      "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
+    },
+    "workers/tradier_poller_v24_candidate.mjs": {
+      "expected_sha256": "6f6f52c7224c78ddbe58dde6ab7452a22b9da6d66ce8335a4bd4d2192c030baf",
+      "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
     }
   },
   "schema_version": "2",
