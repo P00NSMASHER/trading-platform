@@ -316,10 +316,11 @@ export default {
     ctx.waitUntil((async()=>{
       const outcome=await collectV19(env,new Date());
       if(outcome==='market_closed'||outcome==='provider_cooldown')return;
-      const broad=await collectBroadV21(env,new Date());
+      const snapshotSink={};
+      const broad=await collectBroadV21(env,new Date(),fetch,Date.now,snapshotSink);
       if(broad!=='broad_complete'&&broad!=='broad_partial')
         throw new Error('TRADIER_BROAD_NOT_VERIFIED: '+String(broad).replace(/[^a-z0-9_]/gi,'').slice(0,48));
-      const optionOutcome=await collectBroadOptionsV23(env,new Date());
+      const optionOutcome=await collectBroadOptionsV23(env,new Date(),fetch,Date.now,snapshotSink);
       if(!['option_complete','option_partial','option_no_eligible_expiry'].includes(optionOutcome))
         throw new Error('TRADIER_OPTION_TAPE_NOT_VERIFIED: '+String(optionOutcome).replace(/[^a-z0-9_]/gi,'').slice(0,48));
       if(typeof outcome==='string'&&/^captured_2_stocks_[1-9]\d*_options$/.test(outcome))return;
@@ -497,7 +498,7 @@ function quoteIntV21(value) {
   const n = quoteNumberV21(value);
   return n !== null && Number.isSafeInteger(n) && n >= 0 ? n : null;
 }
-export async function collectBroadV21(env, now = new Date(), fetcher = fetch, clock = Date.now) {
+export async function collectBroadV21(env, now = new Date(), fetcher = fetch, clock = Date.now, snapshotSink = null) {
   if (!env?.DB) return 'broad_database_missing';
   if (!isRegularSession(now)) return 'broad_market_closed';
   const started = new Date(clock()).toISOString();
@@ -531,6 +532,11 @@ export async function collectBroadV21(env, now = new Date(), fetcher = fetch, cl
         );
       }));
     }
+    if (snapshotSink && typeof snapshotSink === 'object' && !Array.isArray(snapshotSink)) {
+      // Reuse the same validated market-data quotes for the option pass.
+      snapshotSink.minute = minute;
+      snapshotSink.spots = Object.fromEntries(entries.map(q => [q.symbol, {bid:q.bid,ask:q.ask}]));
+    }
     state = accepted === BROAD_SYMBOLS_V21.length ? 'complete' : accepted ? 'partial' : 'empty';
   } catch (error) {
     const key = error instanceof Error ? error.message : '';
@@ -559,17 +565,21 @@ function occBroadV23(root,expiration,right,strike){
   if(padded.length!==8)return null;
   return root+expiration.slice(2,4)+expiration.slice(5,7)+expiration.slice(8,10)+right+padded;
 }
-export async function collectBroadOptionsV23(env,now=new Date(),fetcher=fetch,clock=Date.now){
+export async function collectBroadOptionsV23(env,now=new Date(),fetcher=fetch,clock=Date.now,snapshot=null){
   if(!env?.DB)return 'option_database_missing';
   if(!isRegularSession(now))return 'option_market_closed';
-  const ms=clock(),minute=new Date(Math.floor(ms/60000)*60000).toISOString();
+  // Pin option snapshot to underlying collection minute to avoid minute rollover.
+  const ms=snapshot && typeof snapshot.minute==='string' && Number.isFinite(Date.parse(snapshot.minute))
+    ? Date.parse(snapshot.minute) : clock();
+  const minute=new Date(Math.floor(ms/60000)*60000).toISOString();
   const idx=Math.floor(ms/60000)%BROAD_SYMBOLS_V21.length;
   const root=BROAD_SYMBOLS_V21[idx],started=new Date(ms).toISOString();
   const audit={state:'error',expiry:null,dte:null,requested:0,returned:0,valid:0,saved:0,error:null};
   try{
     if(!env.TRADIER_TOKEN)throw new Error('credential_missing');
-    const spotRow=await env.DB.prepare('SELECT bid,ask FROM broad_quotes_v21 WHERE observed_minute=? AND symbol=?')
-      .bind(minute,root).first();
+    // No redundant D1 SELECT: account-wide free-tier read exhaustion must not
+    // break an option scan when this minute's validated spot is in memory.
+    const spotRow=snapshot?.minute===minute?snapshot?.spots?.[root]:null;
     if(!spotRow)throw new Error('underlying_spot_missing');
     const spot=(Number(spotRow.bid)+Number(spotRow.ask))/2;
     if(!Number.isFinite(spot)||spot<=0)throw new Error('underlying_spot_invalid');
