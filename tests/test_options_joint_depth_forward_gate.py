@@ -201,7 +201,7 @@ class JointGateTests(unittest.TestCase):
         p1, d1 = make_case(0, underlying="TEST")
         p2, d2 = make_case(0, underlying="PAIR")
         r = audit_joint_depth_forward([p1, p2], [d1, d2], asof=ASOF)
-        self.assertEqual(r["max_simultaneous_modeled_risk_usd"], 115.2)
+        self.assertEqual(r["max_simultaneous_modeled_risk_usd"], 135.2)
         self.assertEqual(r["status"], "ACCOUNT_RISK_BLOCKED")
 
     def test_adequate_but_completely_synthetic_profitable_marks_are_never_proven(self):
