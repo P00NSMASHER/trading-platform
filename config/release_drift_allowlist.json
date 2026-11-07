@@ -3052,8 +3052,8 @@
       "reason": "Provenance- and rights-aware research-only WRDS request plan; no copied upstream source or licensed data, and no claimed WRDS entitlement."
     },
     "docs/golden_goose_v1_phases.md": {
-      "expected_sha256": "4fd433c1c9f3a4b04ec6d315bafb9f706291389d841b003dbc4d9820a802637e",
-      "reason": "Golden Goose staged delivery, acceptance and non-trading audit instructions"
+      "expected_sha256": "53c52d675876f08f5b2315f8709014439fda045d178d5291216779ac5a6b1192",
+      "reason": "Golden Goose evidence gates, retained deployment context and bounded indexed D1 read-quota incident response; no production caller integration claimed."
     },
     "src/golden_goose_candidates.py": {
       "expected_sha256": "695f82e52a4053c8f1b27bbc182a382969ce3d518b4bef935bfdb4c8d8d39914",
@@ -3064,8 +3064,8 @@
       "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
     },
     "src/golden_goose_query_guard.py": {
-      "expected_sha256": "951b95c69d2252f99e50e534011935cdd9fb9bac15f59e59bfd043cc1f46eb4b",
-      "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
+      "expected_sha256": "de37dc9788a32a97f1f56aff449dfe95d8249c1cf64a9aeaefe3fe8de0d59bba",
+      "reason": "Golden Goose budgeted indexed query plans including exact-minute D1 options box snapshots"
     },
     "src/golden_goose_signals.py": {
       "expected_sha256": "7ecd8d2b3ba81912e701536943fbb8bf5a8b46e6af3cfcd10445817390ca3f1d",
@@ -3118,6 +3118,14 @@
     "workers/wrangler.tradier.json": {
       "expected_sha256": "96830cfba104bc9d469c21f75eebb295326b611d120fe09693a99a1be4fd2c91",
       "reason": "Source-reviewed per-minute production Worker configuration and D1 binding; no literal Tradier provider token."
+    },
+    "src/golden_goose_box_research.py": {
+      "expected_sha256": "8fa05de624a5f4ff31b020fd0873eb5f89ad845ab54cfd8a4881a59e4a421209",
+      "reason": "Read-only budgeted in-memory box analysis with account-wide headroom gating"
+    },
+    "tests/test_golden_goose_box_research.py": {
+      "expected_sha256": "646db8651b19c42fc22f9d5543585b8d3c5ccefa075ae93d537e4f4552872d5f",
+      "reason": "Synthetic indexed D1 query, four-leg math and fail-closed quota regression tests"
     }
   },
   "schema_version": "2",
