@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {collectBroadV21, collectBroadOptionsV23, classifyCollectorFailureV25,
   classifyOptionFailureV24, shouldCollectBroadV26}
   from '../workers/tradier_poller_v24_candidate.mjs';
