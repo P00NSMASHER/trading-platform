@@ -320,6 +320,14 @@ export function classifyCollectorFailureV25(msg) {
   if(/fetch failed|networkerror|dns|connection refused/.test(s))return 'transport_error';
   return 'collector_unknown_failure';
 }
+// Keep core SPY/QQQ and coverage observation on the original minute cron.
+// Broad equity and option snapshots are intentionally reduced to five-minute cadence.
+// Missing/malformed event time fails closed for the broad pass, never for primary collection.
+export function shouldCollectBroadV26(when) {
+  return when instanceof Date && Number.isFinite(when.getTime()) &&
+    isRegularSession(when) && when.getUTCMinutes()%5===0;
+}
+
 export default {
   async fetch(req){
     const {pathname}=new URL(req.url);
@@ -333,6 +341,10 @@ export default {
     ctx.waitUntil((async()=>{
       const outcome=await collectV19(env,new Date());
       if(outcome==='market_closed'||outcome==='provider_cooldown')return;
+      if(typeof outcome!=='string'||!/^captured_2_stocks_[1-9]\d*_options$/.test(outcome))
+        throw new Error('TRADIER_COLLECTOR_NOT_VERIFIED: '+String(outcome).replace(/[^a-z0-9_]/gi,'').slice(0,48));
+      // Cloudflare scheduledTime is UTC epoch milliseconds; late dispatch must not shift cadence.
+      if(!shouldCollectBroadV26(new Date(_event?.scheduledTime)))return;
       const snapshotSink={};
       const broad=await collectBroadV21(env,new Date(),fetch,Date.now,snapshotSink);
       if(broad!=='broad_complete'&&broad!=='broad_partial')
