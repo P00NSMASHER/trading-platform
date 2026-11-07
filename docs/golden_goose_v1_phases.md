@@ -70,3 +70,53 @@ The Cloudflare `TRADIER_TOKEN` remains a secret binding and is intentionally abs
 the deployment configuration. Production acceptance requires fresh D1 receipts; a healthy
 HTTP endpoint or successful synthetic test is not sufficient by itself.
 - No emails, third-party submissions, trading, or account changes are authorized.
+
+## November 6 D1 row-read quota incident (research engineering)
+
+Authenticated Cloudflare account SQL analytics for Nov 5 identified the
+**options research D1 database**, not the RETALLY inquiry database, as the
+dominant row-read consumer. A repeatedly evaluated historical option-box
+self-join of `quote_samples_v17` was sampled reading **605,278** rows for
+**two** returned rows, with individual samples at 19:36:19 and 19:36:55 UTC.
+Other historical aggregate scans also ran. The available telemetry names the
+database and query, **not the user, script, agent or HTTP client submitting
+it**. Approximate query-count aggregates are sampling-weighted, not a bill.
+
+Do **not** run the historical wide C/P self-join again to benchmark it.
+`src/golden_goose_query_guard.py::plan_box_minute` now plans an
+existing-primary-key-indexed exact-minute, one-root, fixed-source SELECT.
+`src/golden_goose_box_research.py::run_box_minute` computes four-leg bid/ask
+math in private caller memory; it requires a **fresh authenticated account-wide
+UTC-day read total** (no older than 120 seconds) with at least **500,000**
+remaining rows reserved for other Cloudflare services and an external
+per-day research budget (100,000 rows). It charges each D1
+`meta.rows_read`, rejects missing meters and saturated LIMIT results, and
+refuses to present rotating snapshots as full chains or executable prices.
+Before and after every invocation, persist the research budget outside D1 with
+serialized access; this helper does not safely coordinate concurrent writers
+on its own. Do not use direct REST SQL access or an ad-hoc multi-minute scan
+as a fallback when the quota preflight is unavailable.
+
+Production D1 observed, read-only: an indexed one-minute, one-root retrieval
+returned 12 rows with `meta.rows_read=54`; `EXPLAIN QUERY PLAN` confirmed
+the existing `observed_minute` index. The contrast with 605,278 reads is a
+**different-scope, feasibility comparison**, not an equivalent whole-history
+optimization or evidence that historical results were replicated.
+
+The protection applies **only to clients adopting this helper**. There is
+no account-wide Cloudflare mechanism established here to reject external
+unbounded SQL automatically. This PR deliberately changes no production
+database, index, Worker, token, schedule, deployment, or inquiry endpoint.
+In particular, the safe collector is not confirmed to be the source of the
+expensive read query. Its v24 error-handling/reliability work is a separate
+release. The recovery-check automation remains responsible for read-only D1
+and inquiry service recovery; this section is root-cause engineering only.
+
+**Acceptance before declaring permanent repair:** trace the direct query
+caller(s), replace or remove their high-read SQL, secure usage of the bounded
+research path and metered budget, independently exercise representative
+synthetic math/negative cases, and collect a complete **post-adoption UTC day**
+of Cloudflare per-database read totals below the **5,000,000 shared account**
+limit with meaningful reserve. Check successful RETALLY submission only
+through a separately authorized noncustomer test; its email-draft fallback
+must remain usable without D1. Never submit a real customer inquiry as QA.
