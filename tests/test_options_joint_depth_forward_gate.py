@@ -75,6 +75,20 @@ def make_case(i=0, *, underlying="TEST", losing=False):
 
 
 class JointGateTests(unittest.TestCase):
+    def test_paper_side_clocks_must_bind_to_independent_depth_clocks(self):
+        # Same ID, OCC contract and quote price can still conceal different
+        # provider update times. Individually fresh clocks are not identical
+        # evidence: the joined audit must fail closed rather than bless it.
+        for event in ("entry", "exit"):
+            with self.subTest(event=event):
+                paper, depth = make_case()
+                key = event + "_short_bid_quote_utc"
+                paper[key] = (
+                    datetime.fromisoformat(paper[key]) - timedelta(seconds=10)
+                ).isoformat()
+                with self.assertRaisesRegex(JointEvidenceError, "clock identity"):
+                    audit_joint_depth_forward([paper], [depth], asof=ASOF)
+
     def test_empty_is_not_an_edge(self):
         result = audit_joint_depth_forward([], [], asof=ASOF)
         self.assertEqual(result["status"], "NO_COMPLETED_EVIDENCE")
