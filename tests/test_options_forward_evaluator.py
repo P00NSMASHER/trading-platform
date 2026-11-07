@@ -317,6 +317,24 @@ class ForwardEvidenceTests(unittest.TestCase):
         self.assertEqual(mark.side, "bull_put")
         self.assertAlmostEqual(mark.modeled_risk_usd, 67.60)
 
+    def test_expiry_day_quote_mark_is_not_assignment_safe(self):
+        # No broker closing fill is attested merely by a fresh expiry-day
+        # bid/ask mark. The standalone evaluator must reject this just
+        # as the stricter joint-depth screen already does.
+        row = synthetic_row()
+        expiry_time = datetime.fromisoformat(row["expiry"]).replace(
+            hour=16, tzinfo=UTC
+        )
+        row["exit_utc"] = expiry_time.isoformat()
+        row["exit_quote_utc"] = (
+            expiry_time - timedelta(seconds=15)
+        ).isoformat()
+        for leg in ("short", "long"):
+            for side in ("bid", "ask"):
+                row[f"exit_{leg}_{side}_quote_utc"] = row["exit_quote_utc"]
+        with self.assertRaisesRegex(ev.EvidenceError, "Expiry-day|assignment"):
+            ev.parse_paper_mark(row, asof=ASOF)
+
     def test_expiry_and_dte_fail_closed(self):
         for d in (1, 6, 22):
             row = synthetic_row()
