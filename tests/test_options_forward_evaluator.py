@@ -63,6 +63,24 @@ class ForwardEvidenceTests(unittest.TestCase):
         self.assertEqual(mark.quote_mark_pnl_before_costs_usd, 35)
         self.assertEqual(mark.underlying, "TEST")
 
+    def test_slippage_stress_fails_closed_at_individual_risk_limit(self):
+        # Synthetic $1-wide spread: $5 credit, $2.60 fees, $10 stress.
+        # Base risk $97.60 appears eligible, but stress risk $107.60
+        # must be rejected under the absolute $100 research ceiling.
+        over = synthetic_row()
+        over["entry_short_bid"] = "0.85"
+        over["entry_short_ask"] = "0.87"
+        with self.assertRaisesRegex(ev.EvidenceError, "stress-adjusted"):
+            ev.parse_paper_mark(over, asof=ASOF)
+
+        # The same liquid synthetic chain with $15 credit fits at $97.60
+        # inclusive of the $10 worst configured roundtrip stress.
+        control = synthetic_row()
+        control["entry_short_bid"] = "0.95"
+        control["entry_short_ask"] = "0.97"
+        mark = ev.parse_paper_mark(control, asof=ASOF)
+        self.assertAlmostEqual(mark.modeled_risk_usd, 97.60)
+
     def test_small_winning_sample_never_claims_positive_edge(self):
         report = ev.evaluate_paper_marks(
             [synthetic_row(i) for i in range(5)], asof=ASOF)
