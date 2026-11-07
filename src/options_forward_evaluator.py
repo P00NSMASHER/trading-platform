@@ -234,9 +234,13 @@ def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
     credit = (short_bid - long_ask) * BROKER_MULTIPLIER
     if not 0 < credit < width * BROKER_MULTIPLIER:
         raise EvidenceError("Missing positive conservative entry credit")
-    risk = width * BROKER_MULTIPLIER - credit + ROUND_TRIP_COMMISSION_USD
+    # A credit spread's $100 risk limit includes the worst configured
+    # adverse round-trip slippage, not just the unstressed quote-mark loss.
+    # Use the same stressed amount for per-trade and concurrent-account risk.
+    risk = (width * BROKER_MULTIPLIER - credit
+            + ROUND_TRIP_COMMISSION_USD + max(SLIPPAGE_STRESS_USD))
     if risk > MODELED_TRADE_RISK_LIMIT_USD + 1e-8:
-        raise EvidenceError("Paper spread exceeds modeled individual risk limit")
+        raise EvidenceError("Paper spread exceeds stress-adjusted individual risk limit")
 
     # No free profits from a crossed package exit: buying back at negative
     # debit is floored at zero, and real execution may be worse than quoted.
