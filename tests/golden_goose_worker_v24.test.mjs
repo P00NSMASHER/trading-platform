@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {collectBroadV21, collectBroadOptionsV23, classifyCollectorFailureV25,
-  classifyOptionFailureV24}
+  classifyOptionFailureV24, shouldCollectBroadV26}
   from '../workers/tradier_poller_v24_candidate.mjs';
 
 const NOW='2026-11-05T17:14:00.000Z';
@@ -97,4 +98,29 @@ test('quota error classes are sanitized and do not embed provider secrets',()=>{
   assert.equal(classifyOptionFailureV24('D1 SQL database is unavailable'),'database_error');
   assert.equal(classifyOptionFailureV24('provider_rate_limited'),'provider_rate_limited');
   assert.equal(classifyOptionFailureV24('an arbitrary secret token: REDACT_ME'),'option_unknown_failure');
+});
+
+test('five-minute broad sampling is closed-market-safe and independent of primary minute cadence', () => {
+  for (const [scheduledAt, expected] of [
+    ['2026-11-06T15:20:00.000Z', true],
+    ['2026-11-06T15:21:00.000Z', false],
+    ['2026-11-06T15:25:00.000Z', true],
+    ['2026-11-06T14:25:00.000Z', false],
+    ['2026-11-06T21:00:00.000Z', false],
+    ['2026-11-07T15:20:00.000Z', false],
+    ['2026-11-26T15:20:00.000Z', false],
+  ]) {
+    assert.equal(shouldCollectBroadV26(new Date(scheduledAt)), expected, scheduledAt);
+  }
+  assert.equal(shouldCollectBroadV26(new Date(NaN)), false);
+  assert.equal(shouldCollectBroadV26(null), false);
+  const source=readFileSync(new URL('../workers/tradier_poller_v24_candidate.mjs',import.meta.url),'utf8');
+  const scheduled=source.slice(source.indexOf('async scheduled('),source.indexOf('/* v19 swing'));
+  const primary=scheduled.indexOf('const outcome=await collectV19');
+  const failure=scheduled.indexOf('TRADIER_COLLECTOR_NOT_VERIFIED');
+  const cadence=scheduled.indexOf('shouldCollectBroadV26(new Date(_event?.scheduledTime))');
+  const broad=scheduled.indexOf('const broad=await collectBroadV21');
+  const option=scheduled.indexOf('const optionOutcome=await collectBroadOptionsV23');
+  assert.ok(primary>=0&&failure>primary&&cadence>failure&&broad>cadence&&option>broad,
+    'Run primary every scheduled minute; fail closed on its error; throttle only broad collectors');
 });
