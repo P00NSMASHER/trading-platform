@@ -96,7 +96,13 @@ def audit_joint_depth_forward(paper_rows, depth_rows, *, asof):
         # Run the complete canonical model: it enforces OCC expiry/strike,
         # 7-21 DTE, timestamp order, risk, overlap, fee, and cost stresses.
         forward = evaluate_paper_marks(paper_rows, asof=cutoff)
-    except EvidenceError:
+    except EvidenceError as error:
+        # Preserve the existing privacy-safe, expiry-specific joint-gate
+        # rejection when the canonical standalone gate catches it first.
+        if str(error) == "Expiry-day quote mark does not prove assignment-safe closure":
+            raise JointEvidenceError(
+                "Expiry-day quote mark cannot prove assignment-safe close"
+            ) from None
         raise JointEvidenceError("Canonical paper population rejected") from None
     try:
         # Independently require depth/side clocks for the EXACT same IDs.
