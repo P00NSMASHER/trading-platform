@@ -2836,8 +2836,8 @@
       "reason": "Reproducible exhaustive-audit implementation covering reachable Git objects, tracked/history blobs, archives, structured alternate formats, notebooks, and embedded outputs for the pinned hacked_earnings_jfe commit."
     },
     ".github/workflows/tradier-readonly-options.yml": {
-      "expected_sha256": "1ecd38aa946b8756076be904c6ab1b902d5a194f9cc6ddd30940789779ebbd58",
-      "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI. October 2026 forward admission completeness extension, synthetic tests only, no private market quotes exposed. 2026-10-28: bounded direct-Greeks cross-endpoint UTC hypothesis corroboration; existing strict H1 and no-order controls unchanged. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure. Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required. 2026-11-04: move delayed GitHub cron windows to earlier UTC sessions; retain direct provider market-clock authority and require a parsed, nonempty open-session options-chain receipt so zero-chain/postmarket runs fail instead of false-green. GitHub logs remain aggregate-only; separate Cloudflare private collector remains the prospective data store."
+      "expected_sha256": "fbbf40886dd050ed388f0ecd939daf3b2d131a53954390571a00a641b1925794",
+      "reason": "New restricted protected-main-only Tradier market-data observability workflow. Its credential is only exposed to read-only API GETs, after offline safety tests, without orders or public option data artifacts. 2026-10-27 capacity optimization: market-clock gating, 16-symbol coverage, 1-minute underlying context and PIT completed-close checks; separate private-evidence requirements remain unchanged. Reviewed Oct 2026 private forward quote-mark evidence extension: no raw logs or trade execution and synthetic-only CI. October 2026 forward admission completeness extension, synthetic tests only, no private market quotes exposed. 2026-10-28: bounded direct-Greeks cross-endpoint UTC hypothesis corroboration; existing strict H1 and no-order controls unchanged. 2026-10-28: direct Greek endpoint returned HTTP 403 for current production token. Require explicit manual workflow_dispatch opt-in for denied diagnostic; preserve scheduled main GET-only options scan and H1 fail-closed temporal integrity, no false success on 403. 2026-10-28: optional bounded same-contract Greek timestamp corroboration via already-authorized GET /markets/quotes?symbols=OCC&greeks=true; keep direct 403 endpoint manual-only and H1 timezone inference fail-closed, with no orders or raw quote disclosure. Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required. 2026-11-04: move delayed GitHub cron windows to earlier UTC sessions; retain direct provider market-clock authority and require a parsed, nonempty open-session options-chain receipt so zero-chain/postmarket runs fail instead of false-green. GitHub logs remain aggregate-only; separate Cloudflare private collector remains the prospective data store. 2026-11-06: include Worker source and its synthetic regressions in the protected-main trigger paths so collector changes cannot merge without a follow-through authenticated market-data workflow run."
     },
     "src/tradier_options_probe.py": {
       "expected_sha256": "64bc954251c23adafc9fcf2bbc9a4ce360784b45a5ab3d3def50cff1cb57de8e",
@@ -3052,8 +3052,8 @@
       "reason": "Provenance- and rights-aware research-only WRDS request plan; no copied upstream source or licensed data, and no claimed WRDS entitlement."
     },
     "docs/golden_goose_v1_phases.md": {
-      "expected_sha256": "93c4cf77d3c56dcae4c82b4852640936dcbb777708a89445d447918b73dcc8a2",
-      "reason": "Golden Goose staged delivery and 2026-11-06 D1 read-quota root-cause and bounded-query acceptance gates"
+      "expected_sha256": "53c52d675876f08f5b2315f8709014439fda045d178d5291216779ac5a6b1192",
+      "reason": "Golden Goose evidence gates, retained deployment context and bounded indexed D1 read-quota incident response; no production caller integration claimed."
     },
     "src/golden_goose_candidates.py": {
       "expected_sha256": "695f82e52a4053c8f1b27bbc182a382969ce3d518b4bef935bfdb4c8d8d39914",
@@ -3076,7 +3076,7 @@
       "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
     },
     "tests/golden_goose_worker_v24.test.mjs": {
-      "expected_sha256": "c9f2404137a5d8e6f6a9499589aaadc80b8d6869e738e8535e4354a9313f443b",
+      "expected_sha256": "b99b4839bcb797e9950d29c53571cd7671f1983a872f7de6cac880967f30f5d3",
       "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
     },
     "tests/test_golden_goose_candidates.py": {
@@ -3108,8 +3108,16 @@
       "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
     },
     "workers/tradier_poller_v24_candidate.mjs": {
-      "expected_sha256": "6f6f52c7224c78ddbe58dde6ab7452a22b9da6d66ce8335a4bd4d2192c030baf",
+      "expected_sha256": "12fa3ce26ee75da8404c839b616c6d4975dd1ec5025efbbcd873a70c3e115c10",
       "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
+    },
+    "tests/test_tradier_worker_deployment.py": {
+      "expected_sha256": "cd6b2ae4f542c0203e927c9aabe6e4bf44302f4f60a47f06f62102e53ba8cc90",
+      "reason": "Source-reviewed deployment tests guard retained every-minute cron, read-only market-data Worker and Cloudflare secret outside repo."
+    },
+    "workers/wrangler.tradier.json": {
+      "expected_sha256": "96830cfba104bc9d469c21f75eebb295326b611d120fe09693a99a1be4fd2c91",
+      "reason": "Source-reviewed per-minute production Worker configuration and D1 binding; no literal Tradier provider token."
     },
     "src/golden_goose_box_research.py": {
       "expected_sha256": "8fa05de624a5f4ff31b020fd0873eb5f89ad845ab54cfd8a4881a59e4a421209",
