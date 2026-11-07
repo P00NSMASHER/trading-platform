@@ -212,6 +212,29 @@ class ForwardEvidenceTests(unittest.TestCase):
             START + timedelta(days=1, seconds=-18)).isoformat()
         self.assertEqual(ev.parse_paper_mark(row, asof=ASOF).underlying, "TEST")
 
+    def test_individual_side_update_cannot_follow_recorded_bundle_capture(self):
+        # The quote bundle's own capture time must not precede a constituent
+        # bid/ask update. Otherwise the standalone evaluator can award a
+        # fictitious coherent historical book even when every side is fresh.
+        for event in ("entry", "exit"):
+            row = synthetic_row()
+            when = START if event == "entry" else START + timedelta(days=1)
+            row[f"{event}_short_bid_quote_utc"] = (
+                when - timedelta(seconds=10)
+            ).isoformat()  # bundle says it was captured at when-15 seconds
+            with self.subTest(event=event), self.assertRaisesRegex(
+                ev.EvidenceError, "bundle|capture"
+            ):
+                ev.parse_paper_mark(row, asof=ASOF)
+
+        # A side older than its bundle capture is valid when the other
+        # freshness/skew conditions remain satisfied.
+        control = synthetic_row()
+        control["entry_short_bid_quote_utc"] = (
+            START - timedelta(seconds=20)
+        ).isoformat()
+        self.assertEqual(ev.parse_paper_mark(control, asof=ASOF).underlying, "TEST")
+
     def test_h1_and_trade_safety_reject_bad_contracts(self):
         for key, value in (
             ("atm_iv", "0.10"), ("rv20", "0.50"),
