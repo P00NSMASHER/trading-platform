@@ -59,7 +59,7 @@ def synthetic_row(index=0, *, losing=False, underlying="TEST"):
 class ForwardEvidenceTests(unittest.TestCase):
     def test_valid_example_is_quote_mark_not_broker_fill(self):
         mark = ev.parse_paper_mark(synthetic_row(), asof=ASOF)
-        self.assertEqual(mark.modeled_risk_usd, 57.6)
+        self.assertEqual(mark.modeled_risk_usd, 67.6)
         self.assertEqual(mark.quote_mark_pnl_before_costs_usd, 35)
         self.assertEqual(mark.underlying, "TEST")
 
@@ -120,16 +120,16 @@ class ForwardEvidenceTests(unittest.TestCase):
             rows.append(synthetic_row(i, underlying="PAIR"))
         report = ev.evaluate_paper_marks(rows, asof=ASOF)
         self.assertEqual(report["status"], "ACCOUNT_RISK_CAPACITY_EXCEEDED")
-        self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 115.2)
+        self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 135.2)
 
     def test_account_risk_takes_precedence_over_small_sample(self):
-        # Two simultaneous independently keyed 57.60-risk synthetic spreads
+        # Two simultaneous independently keyed 67.60-risk synthetic spreads
         # exceed the 100-dollar modeled portfolio ceiling, even at N=2.
         two_open = [synthetic_row(0, underlying="TEST"),
                     synthetic_row(0, underlying="PAIR")]
         report = ev.evaluate_paper_marks(two_open, asof=ASOF)
         self.assertEqual(report["status"], "ACCOUNT_RISK_CAPACITY_EXCEEDED")
-        self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 115.2)
+        self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 135.2)
         self.assertEqual(report["completed_marks"], 2)
         self.assertEqual(report["edge_verdict"], "UNPROVEN")
         self.assertEqual(report["execution_proof"], "UNVERIFIED")
@@ -140,7 +140,7 @@ class ForwardEvidenceTests(unittest.TestCase):
                       synthetic_row(1, underlying="PAIR")]
         control = ev.evaluate_paper_marks(sequential, asof=ASOF)
         self.assertEqual(control["status"], "INSUFFICIENT_FORWARD_EVIDENCE")
-        self.assertEqual(control["max_simultaneous_modeled_risk_usd"], 57.6)
+        self.assertEqual(control["max_simultaneous_modeled_risk_usd"], 67.6)
 
     def test_reject_duplicate_ids_and_correlated_strike_optimizations(self):
         row = synthetic_row()
@@ -315,7 +315,7 @@ class ForwardEvidenceTests(unittest.TestCase):
         row["long_contract"] = "TEST260115P00098000"
         mark = ev.parse_paper_mark(row, asof=ASOF)
         self.assertEqual(mark.side, "bull_put")
-        self.assertAlmostEqual(mark.modeled_risk_usd, 57.60)
+        self.assertAlmostEqual(mark.modeled_risk_usd, 67.60)
 
     def test_expiry_and_dte_fail_closed(self):
         for d in (1, 6, 22):
