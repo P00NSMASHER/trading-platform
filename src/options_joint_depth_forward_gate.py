@@ -103,6 +103,25 @@ def audit_joint_depth_forward(paper_rows, depth_rows, *, asof):
         depth = audit_quote_depth(paper_rows, depth_rows, asof=cutoff, contracts=1)
     except DepthError:
         raise JointEvidenceError("Quote-depth population rejected") from None
+    # The canonical paper validator and the independent depth validator each
+    # require fresh side clocks, but independent freshness alone does not
+    # prove that matching prices represent the SAME side update. Bind all
+    # eight observations across both ledgers before crediting a joint book.
+    # The depth screen can return an explicit blocked status for partial
+    # evidence: do not access missing fields in that case.
+    if depth["status"] == "QUOTE_DEPTH_SCREEN_ONLY":
+        by_id = {row["trade_id"]: row for row in depth_rows}
+        for paper in paper_rows:
+            depth_row = by_id[paper["trade_id"]]
+            for event in ("entry", "exit"):
+                for leg_side in ("short_bid", "short_ask", "long_bid", "long_ask"):
+                    paper_clock = _cutoff(paper[event + "_" + leg_side + "_quote_utc"])
+                    depth_clock = _cutoff(depth_row[event + "_" + leg_side + "_utc"])
+                    if paper_clock != depth_clock:
+                        raise JointEvidenceError(
+                            "Quote side clock identity mismatch across research ledgers"
+                        )
+
     # Individually valid legs can still imply an impossible, inverted
     # same-expiry vertical exit. The canonical evaluator floors negative
     # close debits at zero; never interpret such books as a free paper exit.
