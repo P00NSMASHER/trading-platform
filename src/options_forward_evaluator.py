@@ -181,6 +181,11 @@ def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
     dte = (expiry - entry_date).days
     if not 7 <= dte <= 21 or exit_date > expiry:
         raise EvidenceError("Paper mark outside preregistered 7-21 DTE or expires before exit")
+    # Quotes on expiration day do not attest assignment-safe broker exits.
+    # A separate joint-depth screen already rejects these; standalone
+    # private CSV research must fail closed on the same hazard.
+    if exit_date == expiry:
+        raise EvidenceError("Expiry-day quote mark does not prove assignment-safe closure")
 
     multiplier = _num(row, "multiplier")
     if multiplier != BROKER_MULTIPLIER:
