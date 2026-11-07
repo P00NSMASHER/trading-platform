@@ -161,6 +161,13 @@ def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
         for leg in ("short", "long"):
             for side_name in ("bid", "ask"):
                 clock = _ts(row, f"{event}_{leg}_{side_name}_quote_utc")
+                # Every side update included in an aggregate capture must
+                # already exist at the recorded bundle observation time.
+                # Standalone forward evaluation cannot let a later side
+                # masquerade as part of an earlier captured quote.
+                bundle_capture = entry_quote if event == "entry" else exit_quote
+                if clock > bundle_capture:
+                    raise EvidenceError("Option side update postdates bundle capture")
                 if not _fresh(event_time, clock, 120):
                     raise EvidenceError("Future or stale individual option side quote")
                 if event == "entry" and not _fresh(decision, clock, 120):
