@@ -70,10 +70,25 @@ def make_case(i=0, *, underlying="TEST", losing=False):
             depth[key + "_px"] = values[key]
             depth[key + "_size"] = "1"
             depth[key + "_utc"] = (source - timedelta(seconds=2)).isoformat()
+            paper[key + "_quote_utc"] = depth[key + "_utc"]
     return paper, depth
 
 
 class JointGateTests(unittest.TestCase):
+    def test_paper_side_clocks_must_bind_to_independent_depth_clocks(self):
+        # Same ID, OCC contract and quote price can still conceal different
+        # provider update times. Individually fresh clocks are not identical
+        # evidence: the joined audit must fail closed rather than bless it.
+        for event in ("entry", "exit"):
+            with self.subTest(event=event):
+                paper, depth = make_case()
+                key = event + "_short_bid_quote_utc"
+                paper[key] = (
+                    datetime.fromisoformat(paper[key]) - timedelta(seconds=10)
+                ).isoformat()
+                with self.assertRaisesRegex(JointEvidenceError, "clock identity"):
+                    audit_joint_depth_forward([paper], [depth], asof=ASOF)
+
     def test_empty_is_not_an_edge(self):
         result = audit_joint_depth_forward([], [], asof=ASOF)
         self.assertEqual(result["status"], "NO_COMPLETED_EVIDENCE")
@@ -139,6 +154,7 @@ class JointGateTests(unittest.TestCase):
         for side in SIDES:
             d["exit_" + side + "_utc"] = (
                 event - timedelta(seconds=17)).isoformat()
+            p["exit_" + side + "_quote_utc"] = d["exit_" + side + "_utc"]
 
     def test_expiry_day_call_quote_and_utc_rollover_rejected(self):
         for rollover in (False, True):
@@ -185,7 +201,7 @@ class JointGateTests(unittest.TestCase):
         p1, d1 = make_case(0, underlying="TEST")
         p2, d2 = make_case(0, underlying="PAIR")
         r = audit_joint_depth_forward([p1, p2], [d1, d2], asof=ASOF)
-        self.assertEqual(r["max_simultaneous_modeled_risk_usd"], 115.2)
+        self.assertEqual(r["max_simultaneous_modeled_risk_usd"], 135.2)
         self.assertEqual(r["status"], "ACCOUNT_RISK_BLOCKED")
 
     def test_adequate_but_completely_synthetic_profitable_marks_are_never_proven(self):
@@ -234,6 +250,8 @@ class JointGateTests(unittest.TestCase):
             depth[event + "_" + side + "_utc"] = (
                 at - timedelta(seconds=17)
             ).isoformat()
+            paper[event + "_" + side + "_quote_utc"] = (
+                depth[event + "_" + side + "_utc"])
 
     def test_weekend_entry_is_not_a_quote_fill(self):
         p, d = make_case()

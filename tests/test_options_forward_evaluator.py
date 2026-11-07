@@ -18,7 +18,7 @@ def synthetic_row(index=0, *, losing=False, underlying="TEST"):
     entry = START + timedelta(days=2 * index)
     exit_time = entry + timedelta(days=1)
     day = entry.astimezone(ev.EASTERN).date()
-    return {
+    row = {
         "trade_id": "SYNTHETIC_" + str(index) + "_" + underlying,
         "underlying": underlying,
         "expiry": (day + timedelta(days=10)).isoformat(),
@@ -48,14 +48,38 @@ def synthetic_row(index=0, *, losing=False, underlying="TEST"):
         "rv20": "0.20",
         "multiplier": "100",
     }
+    # Test-only deterministic quote fixtures; these are never real fills.
+    for event in ("entry", "exit"):
+        for leg in ("short", "long"):
+            for side in ("bid", "ask"):
+                row[f"{event}_{leg}_{side}_quote_utc"] = row[f"{event}_quote_utc"]
+    return row
 
 
 class ForwardEvidenceTests(unittest.TestCase):
     def test_valid_example_is_quote_mark_not_broker_fill(self):
         mark = ev.parse_paper_mark(synthetic_row(), asof=ASOF)
-        self.assertEqual(mark.modeled_risk_usd, 57.6)
+        self.assertEqual(mark.modeled_risk_usd, 67.6)
         self.assertEqual(mark.quote_mark_pnl_before_costs_usd, 35)
         self.assertEqual(mark.underlying, "TEST")
+
+    def test_slippage_stress_fails_closed_at_individual_risk_limit(self):
+        # Synthetic $1-wide spread: $5 credit, $2.60 fees, $10 stress.
+        # Base risk $97.60 appears eligible, but stress risk $107.60
+        # must be rejected under the absolute $100 research ceiling.
+        over = synthetic_row()
+        over["entry_short_bid"] = "0.85"
+        over["entry_short_ask"] = "0.87"
+        with self.assertRaisesRegex(ev.EvidenceError, "stress-adjusted"):
+            ev.parse_paper_mark(over, asof=ASOF)
+
+        # The same liquid synthetic chain with $15 credit fits at $97.60
+        # inclusive of the $10 worst configured roundtrip stress.
+        control = synthetic_row()
+        control["entry_short_bid"] = "0.95"
+        control["entry_short_ask"] = "0.97"
+        mark = ev.parse_paper_mark(control, asof=ASOF)
+        self.assertAlmostEqual(mark.modeled_risk_usd, 97.60)
 
     def test_small_winning_sample_never_claims_positive_edge(self):
         report = ev.evaluate_paper_marks(
@@ -96,16 +120,16 @@ class ForwardEvidenceTests(unittest.TestCase):
             rows.append(synthetic_row(i, underlying="PAIR"))
         report = ev.evaluate_paper_marks(rows, asof=ASOF)
         self.assertEqual(report["status"], "ACCOUNT_RISK_CAPACITY_EXCEEDED")
-        self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 115.2)
+        self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 135.2)
 
     def test_account_risk_takes_precedence_over_small_sample(self):
-        # Two simultaneous independently keyed 57.60-risk synthetic spreads
+        # Two simultaneous independently keyed 67.60-risk synthetic spreads
         # exceed the 100-dollar modeled portfolio ceiling, even at N=2.
         two_open = [synthetic_row(0, underlying="TEST"),
                     synthetic_row(0, underlying="PAIR")]
         report = ev.evaluate_paper_marks(two_open, asof=ASOF)
         self.assertEqual(report["status"], "ACCOUNT_RISK_CAPACITY_EXCEEDED")
-        self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 115.2)
+        self.assertEqual(report["max_simultaneous_modeled_risk_usd"], 135.2)
         self.assertEqual(report["completed_marks"], 2)
         self.assertEqual(report["edge_verdict"], "UNPROVEN")
         self.assertEqual(report["execution_proof"], "UNVERIFIED")
@@ -116,7 +140,7 @@ class ForwardEvidenceTests(unittest.TestCase):
                       synthetic_row(1, underlying="PAIR")]
         control = ev.evaluate_paper_marks(sequential, asof=ASOF)
         self.assertEqual(control["status"], "INSUFFICIENT_FORWARD_EVIDENCE")
-        self.assertEqual(control["max_simultaneous_modeled_risk_usd"], 57.6)
+        self.assertEqual(control["max_simultaneous_modeled_risk_usd"], 67.6)
 
     def test_reject_duplicate_ids_and_correlated_strike_optimizations(self):
         row = synthetic_row()
@@ -133,6 +157,9 @@ class ForwardEvidenceTests(unittest.TestCase):
         exit_time = START + timedelta(days=3)
         a["exit_utc"] = exit_time.isoformat()
         a["exit_quote_utc"] = (exit_time - timedelta(seconds=10)).isoformat()
+        for leg in ("short", "long"):
+            for side in ("bid", "ask"):
+                a[f"exit_{leg}_{side}_quote_utc"] = a["exit_quote_utc"]
         with self.assertRaisesRegex(ev.EvidenceError, "Overlapping"):
             ev.evaluate_paper_marks([a, b], asof=ASOF)
 
@@ -156,6 +183,75 @@ class ForwardEvidenceTests(unittest.TestCase):
             row[field] = (reference + timedelta(minutes=minutes)).isoformat()
             with self.assertRaisesRegex(ev.EvidenceError, "stale|future|decision"):
                 ev.evaluate_paper_marks([row], asof=ASOF)
+
+    def test_all_eight_per_side_quote_timestamps_required(self):
+        for event in ("entry", "exit"):
+            for leg in ("short", "long"):
+                for side in ("bid", "ask"):
+                    key = f"{event}_{leg}_{side}_quote_utc"
+                    row = synthetic_row()
+                    del row[key]
+                    with self.subTest(field=key), self.assertRaises(ev.EvidenceError):
+                        ev.parse_paper_mark(row, asof=ASOF)
+                    row = synthetic_row()
+                    row[key] = ""
+                    with self.subTest(field=key, case="empty"), self.assertRaises(ev.EvidenceError):
+                        ev.parse_paper_mark(row, asof=ASOF)
+
+    def test_per_side_quote_clock_rejects_stale_future_and_tzless(self):
+        for key in ("entry_short_bid_quote_utc", "entry_long_ask_quote_utc",
+                    "exit_short_ask_quote_utc", "exit_long_bid_quote_utc"):
+            reference = START if key.startswith("entry_") else START + timedelta(days=1)
+            for changed in ((reference - timedelta(minutes=3)).isoformat(),
+                            (reference + timedelta(seconds=2)).isoformat(),
+                            (reference - timedelta(seconds=15)).replace(tzinfo=None).isoformat()):
+                row = synthetic_row()
+                row[key] = changed
+                with self.subTest(field=key, value_type=changed[-6:]), self.assertRaises(ev.EvidenceError):
+                    ev.parse_paper_mark(row, asof=ASOF)
+
+    def test_per_side_quote_after_decision_rejected_even_if_before_entry(self):
+        row = synthetic_row()
+        row["decision_utc"] = (START - timedelta(seconds=25)).isoformat()
+        row["entry_quote_utc"] = (START - timedelta(seconds=30)).isoformat()
+        with self.assertRaises(ev.EvidenceError):
+            ev.parse_paper_mark(row, asof=ASOF)
+
+    def test_spread_quotes_must_share_contemporaneous_side_clocks(self):
+        row = synthetic_row()
+        row["entry_long_ask_quote_utc"] = (START - timedelta(seconds=50)).isoformat()
+        with self.assertRaisesRegex(ev.EvidenceError, "skew|contemporaneous"):
+            ev.parse_paper_mark(row, asof=ASOF)
+
+    def test_small_side_clock_skew_remains_eligible(self):
+        row = synthetic_row()
+        row["entry_short_bid_quote_utc"] = (START - timedelta(seconds=20)).isoformat()
+        row["exit_long_ask_quote_utc"] = (
+            START + timedelta(days=1, seconds=-18)).isoformat()
+        self.assertEqual(ev.parse_paper_mark(row, asof=ASOF).underlying, "TEST")
+
+    def test_individual_side_update_cannot_follow_recorded_bundle_capture(self):
+        # The quote bundle's own capture time must not precede a constituent
+        # bid/ask update. Otherwise the standalone evaluator can award a
+        # fictitious coherent historical book even when every side is fresh.
+        for event in ("entry", "exit"):
+            row = synthetic_row()
+            when = START if event == "entry" else START + timedelta(days=1)
+            row[f"{event}_short_bid_quote_utc"] = (
+                when - timedelta(seconds=10)
+            ).isoformat()  # bundle says it was captured at when-15 seconds
+            with self.subTest(event=event), self.assertRaisesRegex(
+                ev.EvidenceError, "bundle|capture"
+            ):
+                ev.parse_paper_mark(row, asof=ASOF)
+
+        # A side older than its bundle capture is valid when the other
+        # freshness/skew conditions remain satisfied.
+        control = synthetic_row()
+        control["entry_short_bid_quote_utc"] = (
+            START - timedelta(seconds=20)
+        ).isoformat()
+        self.assertEqual(ev.parse_paper_mark(control, asof=ASOF).underlying, "TEST")
 
     def test_h1_and_trade_safety_reject_bad_contracts(self):
         for key, value in (
@@ -219,7 +315,25 @@ class ForwardEvidenceTests(unittest.TestCase):
         row["long_contract"] = "TEST260115P00098000"
         mark = ev.parse_paper_mark(row, asof=ASOF)
         self.assertEqual(mark.side, "bull_put")
-        self.assertAlmostEqual(mark.modeled_risk_usd, 57.60)
+        self.assertAlmostEqual(mark.modeled_risk_usd, 67.60)
+
+    def test_expiry_day_quote_mark_is_not_assignment_safe(self):
+        # No broker closing fill is attested merely by a fresh expiry-day
+        # bid/ask mark. The standalone evaluator must reject this just
+        # as the stricter joint-depth screen already does.
+        row = synthetic_row()
+        expiry_time = datetime.fromisoformat(row["expiry"]).replace(
+            hour=16, tzinfo=UTC
+        )
+        row["exit_utc"] = expiry_time.isoformat()
+        row["exit_quote_utc"] = (
+            expiry_time - timedelta(seconds=15)
+        ).isoformat()
+        for leg in ("short", "long"):
+            for side in ("bid", "ask"):
+                row[f"exit_{leg}_{side}_quote_utc"] = row["exit_quote_utc"]
+        with self.assertRaisesRegex(ev.EvidenceError, "Expiry-day|assignment"):
+            ev.parse_paper_mark(row, asof=ASOF)
 
     def test_expiry_and_dte_fail_closed(self):
         for d in (1, 6, 22):
