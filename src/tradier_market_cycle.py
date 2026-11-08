@@ -125,8 +125,17 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
         # Explicit now remains available only for deterministic offline replay.
         rows, result = probe.run(symbols[i:i + CHUNK_SIZE], token, now=now)
         all_rows.extend(rows)
-        requested += result["chains_requested"]
-        observed += result["chains_with_contracts"]
+        # Reject each corrupted batch before later batches can mask its counts.
+        # In particular, bool is an int subclass and cannot represent a count.
+        batch_requested = result.get("chains_requested")
+        batch_observed = result.get("chains_with_contracts")
+        if (type(batch_requested) is not int
+            or type(batch_observed) is not int
+            or batch_requested < 0
+            or not 0 <= batch_observed <= batch_requested):
+            raise probe.ProbeFailure("Invalid per-batch option chain coverage receipt")
+        requested += batch_requested
+        observed += batch_observed
         premium += result["iv_rv_ge_1_20_seven_to_21_dte"]
         for key, n in result.get("h1_greeks_quality", {}).items():
             if (key not in probe.atm_greeks_quality(
@@ -207,6 +216,10 @@ def run_cycle(token: str, symbols: list[str], now: datetime | None = None):
     intraday = recent_bar_evidence(
         token, now if now is not None else datetime.now(timezone.utc), symbols
     )
+    # A multi-symbol live scan can cross market close after the entry clock.
+    # Reject that transition instead of labeling an after-close run as open.
+    if now is None and market_state(token) != "open":
+        raise probe.ProbeFailure("Market closed during collection; snapshot rejected")
     if (sum(h1_signal_sides.values()) != premium
         or h1_chains > premium or h1_symbols > h1_chains):
         raise probe.ProbeFailure("H1 nonindependent-count receipt parity failed")
@@ -248,6 +261,22 @@ def main(argv=None):
         if not token:
             raise probe.ProbeFailure("TRADIER_TOKEN missing from protected GitHub Actions secret")
         rows, summary = run_cycle(token, symbols)
+        # The CLI must fail closed on its own. A later workflow guard is
+        # defense in depth, not a substitute for rejecting empty collections.
+        if not (
+            isinstance(summary, dict)
+            and summary.get("status") == "MARKET_DATA_ACCESS_VERIFIED"
+            and summary.get("market_state") == "open"
+            and type(summary.get("chains_requested")) is int
+            and summary["chains_requested"] > 0
+            and type(summary.get("chains_with_contracts")) is int
+            and 0 < summary["chains_with_contracts"] <= summary["chains_requested"]
+        ):
+            if isinstance(summary, dict):
+                print(json.dumps(summary, sort_keys=True))
+            raise probe.ProbeFailure(
+                "NO_VERIFIED_OPTION_CHAINS: open market and nonempty chain receipt required"
+            )
         if summary["status"] == "MARKET_DATA_ACCESS_VERIFIED":
             out = Path(args.out)
             out.parent.mkdir(parents=True, exist_ok=True)

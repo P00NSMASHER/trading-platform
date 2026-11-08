@@ -30,6 +30,42 @@ class MarketCycleTests(unittest.TestCase):
         fetch.assert_called_once_with("NONSECRET", "/markets/clock", {})
         observe.assert_not_called()
 
+    def test_live_collection_closing_mid_scan_is_rejected(self):
+        batch = {
+            "chains_requested": 1, "chains_with_contracts": 1,
+            "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 0},
+            "spread_counts": {"bear_call": 0, "bull_put": 0},
+            "iv_rv_ge_1_20_seven_to_21_dte": 0,
+            "quote_filter_diagnostics": {},
+        }
+        with patch("tradier_market_cycle.market_state",
+                   side_effect=["open", "postmarket"]) as clock, \
+             patch("tradier_market_cycle.probe.run",
+                   return_value=([], batch)), \
+             patch("tradier_market_cycle.recent_bar_evidence", return_value={}):
+            with self.assertRaisesRegex(ProbeFailure, "Market closed during collection"):
+                cycle.run_cycle("NONSECRET", ["SPY"])
+        self.assertEqual(clock.call_count, 2)
+
+    def test_live_collection_open_at_both_ends_preserves_research(self):
+        batch = {
+            "chains_requested": 1, "chains_with_contracts": 1,
+            "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 0},
+            "spread_counts": {"bear_call": 0, "bull_put": 0},
+            "iv_rv_ge_1_20_seven_to_21_dte": 0,
+            "quote_filter_diagnostics": {},
+        }
+        with patch("tradier_market_cycle.market_state",
+                   side_effect=["open", "open"]) as clock, \
+             patch("tradier_market_cycle.probe.run",
+                   return_value=([], batch)), \
+             patch("tradier_market_cycle.recent_bar_evidence", return_value={}):
+            rows, receipt = cycle.run_cycle("NONSECRET", ["SPY"])
+        self.assertEqual(rows, [])
+        self.assertEqual(receipt["status"], "MARKET_DATA_ACCESS_VERIFIED")
+        self.assertEqual(receipt["edge_status"], "UNVERIFIED")
+        self.assertEqual(clock.call_count, 2)
+
     def test_invalid_clock_never_defaults_to_open(self):
         for payload in ({}, {"clock": {}}, {"clock": {"state": "unknown"}}, {"clock": {"state": True}}):
             with patch("tradier_market_cycle.probe.get_json", return_value=payload):
@@ -221,6 +257,37 @@ class MarketCycleTests(unittest.TestCase):
             with self.assertRaisesRegex(ProbeFailure, "exceeds scanned chains"):
                 cycle.run_cycle("NONSECRET", ["SPY"], now=NOW)
 
+    def test_invalid_per_batch_chain_counts_cannot_be_masked_by_later_batch(self):
+        # Before this guard, the two batches yielded a valid aggregate despite
+        # the first batch claiming more observed chains than it requested.
+        scenarios = ((1, 2), (True, 1), (1, True))
+        for bad_requested, bad_observed in scenarios:
+            with self.subTest(bad_requested=bad_requested, bad_observed=bad_observed):
+                def mock_batch(symbols, token, now=None):
+                    batch_requested, batch_observed = (
+                        (bad_requested, bad_observed)
+                        if len(symbols) == 5 else (5, 1)
+                    )
+                    return [], {
+                        "chains_requested": batch_requested,
+                        "chains_with_contracts": batch_observed,
+                        "candidate_counts": {"0DTE": 0, "1DTE": 0, "7-21DTE": 0},
+                        "spread_counts": {"bear_call": 0, "bull_put": 0},
+                        "iv_rv_ge_1_20_seven_to_21_dte": 0,
+                        "quote_filter_diagnostics": {},
+                    }
+
+                with patch("tradier_market_cycle.probe.get_json",
+                           return_value={"clock": {"state": "open"}}), \
+                     patch("tradier_market_cycle.probe.run",
+                           side_effect=mock_batch) as observe:
+                    with self.assertRaisesRegex(
+                            ProbeFailure, "Invalid per-batch option chain coverage receipt"):
+                        cycle.run_cycle(
+                            "NONSECRET",
+                            ["AAPL", "NVDA", "AMD", "MSFT", "BAC", "SOFI"], now=NOW)
+                self.assertEqual(observe.call_count, 1)
+
     def test_any_failed_batch_fails_whole_market_run(self):
         with patch("tradier_market_cycle.probe.get_json", return_value={"clock": {"state": "open"}}), \
              patch("tradier_market_cycle.probe.run", side_effect=ProbeFailure("Synthetic market gap")):
@@ -234,6 +301,52 @@ class MarketCycleTests(unittest.TestCase):
             self.assertEqual(cycle.main(["--out", "/tmp/no-write.csv"]), 1)
         self.assertIn("TRADIER_TOKEN missing", out.getvalue())
         observe.assert_not_called()
+
+    def test_cli_fails_closed_for_closed_or_empty_session_without_writing(self):
+        from pathlib import Path
+        import tempfile
+
+        snapshots = (
+            {"status": "MARKET_CLOSED_SKIPPED", "market_state": "closed",
+             "chains_requested": 0},
+            {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+             "chains_requested": 0, "chains_with_contracts": 0},
+            {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+             "chains_requested": 1, "chains_with_contracts": 0},
+            {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+             "chains_requested": 1, "chains_with_contracts": 2},
+            {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+             "chains_requested": True, "chains_with_contracts": 1},
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "must_not_exist.csv"
+            for snapshot in snapshots:
+                with self.subTest(snapshot=snapshot), \
+                     patch.dict("os.environ", {"TRADIER_TOKEN": "NONSECRET"}), \
+                     patch("tradier_market_cycle.run_cycle",
+                           return_value=([], snapshot)), \
+                     patch("sys.stdout", new_callable=io.StringIO) as out:
+                    self.assertEqual(cycle.main(["--out", str(target)]), 1)
+                    self.assertFalse(target.exists())
+                    self.assertIn("NO_VERIFIED_OPTION_CHAINS", out.getvalue())
+
+    def test_cli_preserves_valid_open_session_with_no_strategy_candidates(self):
+        from pathlib import Path
+        import tempfile
+
+        snapshot = {"status": "MARKET_DATA_ACCESS_VERIFIED", "market_state": "open",
+                    "chains_requested": 2, "chains_with_contracts": 1,
+                    "edge_status": "UNVERIFIED"}
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "valid_observation.csv"
+            with patch.dict("os.environ", {"TRADIER_TOKEN": "NONSECRET"}), \
+                 patch("tradier_market_cycle.run_cycle",
+                       return_value=([], snapshot)), \
+                 patch("sys.stdout", new_callable=io.StringIO) as out:
+                self.assertEqual(cycle.main(["--out", str(target)]), 0)
+            self.assertTrue(target.is_file())
+            self.assertIn("MARKET_DATA_ACCESS_VERIFIED", out.getvalue())
+            self.assertIn("UNVERIFIED", out.getvalue())
 
     def test_only_explicit_market_data_routes_can_be_used(self):
         import tradier_options_probe as probe
