@@ -28,6 +28,11 @@ COLUMNS = (
     "short_contract", "long_contract",
     "entry_short_bid", "entry_short_ask", "entry_long_bid", "entry_long_ask",
     "exit_short_bid", "exit_short_ask", "exit_long_bid", "exit_long_ask",
+    # Independent source timestamps: each bid/ask side of both legs at entry/exit.
+    "entry_short_bid_quote_utc", "entry_short_ask_quote_utc",
+    "entry_long_bid_quote_utc", "entry_long_ask_quote_utc",
+    "exit_short_bid_quote_utc", "exit_short_ask_quote_utc",
+    "exit_long_bid_quote_utc", "exit_long_ask_quote_utc",
     "short_open_interest", "long_open_interest",
     "atm_iv", "rv20", "multiplier",
 )
@@ -37,6 +42,7 @@ MODELED_PORTFOLIO_RISK_LIMIT_USD = 100.0
 COMMISSION_PER_CONTRACT_SIDE_USD = 0.65
 ROUND_TRIP_COMMISSION_USD = 4 * COMMISSION_PER_CONTRACT_SIDE_USD
 SLIPPAGE_STRESS_USD = (0, 5, 10)
+MAX_CROSS_LEG_QUOTE_SKEW_SECONDS = 30
 MIN_PROSPECTIVE_TRADES = 60
 MIN_CALENDAR_SPAN_DAYS = 90
 MIN_UNIQUE_WEEKS = 12
@@ -147,11 +153,39 @@ def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
             and _fresh(decision, greek_time, 90 * 60)):
         raise EvidenceError("Missing, future, or stale entry/exit quote or IV calculation")
 
+    # An aggregate entry/exit timestamp cannot attest four distinct bid/ask
+    # observations. Validate eight independently supplied UTC-aware clocks;
+    # never synthesize a missing side clock from a bundle timestamp.
+    for event, event_time in (("entry", entry), ("exit", exit_time)):
+        clocks = []
+        for leg in ("short", "long"):
+            for side_name in ("bid", "ask"):
+                clock = _ts(row, f"{event}_{leg}_{side_name}_quote_utc")
+                # Every side update included in an aggregate capture must
+                # already exist at the recorded bundle observation time.
+                # Standalone forward evaluation cannot let a later side
+                # masquerade as part of an earlier captured quote.
+                bundle_capture = entry_quote if event == "entry" else exit_quote
+                if clock > bundle_capture:
+                    raise EvidenceError("Option side update postdates bundle capture")
+                if not _fresh(event_time, clock, 120):
+                    raise EvidenceError("Future or stale individual option side quote")
+                if event == "entry" and not _fresh(decision, clock, 120):
+                    raise EvidenceError("Entry option side quote unavailable at decision time")
+                clocks.append(clock)
+        if (max(clocks) - min(clocks)).total_seconds() > MAX_CROSS_LEG_QUOTE_SKEW_SECONDS:
+            raise EvidenceError("Option spread side clocks not contemporaneous (skew)")
+
     entry_date = decision.astimezone(EASTERN).date()
     exit_date = exit_time.astimezone(EASTERN).date()
     dte = (expiry - entry_date).days
     if not 7 <= dte <= 21 or exit_date > expiry:
         raise EvidenceError("Paper mark outside preregistered 7-21 DTE or expires before exit")
+    # Quotes on expiration day do not attest assignment-safe broker exits.
+    # A separate joint-depth screen already rejects these; standalone
+    # private CSV research must fail closed on the same hazard.
+    if exit_date == expiry:
+        raise EvidenceError("Expiry-day quote mark does not prove assignment-safe closure")
 
     multiplier = _num(row, "multiplier")
     if multiplier != BROKER_MULTIPLIER:
@@ -205,9 +239,13 @@ def parse_paper_mark(row: dict, *, asof: datetime | None = None) -> PaperMark:
     credit = (short_bid - long_ask) * BROKER_MULTIPLIER
     if not 0 < credit < width * BROKER_MULTIPLIER:
         raise EvidenceError("Missing positive conservative entry credit")
-    risk = width * BROKER_MULTIPLIER - credit + ROUND_TRIP_COMMISSION_USD
+    # A credit spread's $100 risk limit includes the worst configured
+    # adverse round-trip slippage, not just the unstressed quote-mark loss.
+    # Use the same stressed amount for per-trade and concurrent-account risk.
+    risk = (width * BROKER_MULTIPLIER - credit
+            + ROUND_TRIP_COMMISSION_USD + max(SLIPPAGE_STRESS_USD))
     if risk > MODELED_TRADE_RISK_LIMIT_USD + 1e-8:
-        raise EvidenceError("Paper spread exceeds modeled individual risk limit")
+        raise EvidenceError("Paper spread exceeds stress-adjusted individual risk limit")
 
     # No free profits from a crossed package exit: buying back at negative
     # debit is floored at zero, and real execution may be worse than quoted.

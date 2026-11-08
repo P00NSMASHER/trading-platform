@@ -23,6 +23,11 @@ on:
       - src/tradier_greeks_crosscheck.py
       - src/options_forward_evaluator.py
       - src/options_population_audit.py
+      - workers/tradier_poller_v24_candidate.mjs
+      - workers/wrangler.tradier.json
+      - tests/golden_goose_worker_v24.test.mjs
+      - tests/test_golden_goose_worker_v24.py
+      - tests/test_tradier_worker_deployment.py
       - tests/test_tradier_options_probe.py
       - tests/test_tradier_market_cycle.py
       - tests/test_tradier_greeks_crosscheck.py
@@ -62,6 +67,8 @@ jobs:
           python -m unittest discover -v -s tests -p test_tradier_greeks_crosscheck.py
           python -m unittest discover -v -s tests -p test_options_forward_evaluator.py
           python -m unittest discover -v -s tests -p test_options_population_audit.py
+          python -m unittest discover -v -s tests -p test_tradier_worker_deployment.py
+          node --test tests/golden_goose_worker_v24.test.mjs
 
       - name: Probe 0DTE, 1DTE, and 7-21DTE Tradier chains (GET only)
         env:

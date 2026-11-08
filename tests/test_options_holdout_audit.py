@@ -99,6 +99,9 @@ class TemporalHoldoutTests(unittest.TestCase):
         crossing["entry_utc"] = (BOUNDARY + timedelta(seconds=30)).isoformat()
         crossing["decision_utc"] = (BOUNDARY - timedelta(seconds=30)).isoformat()
         crossing["entry_quote_utc"] = (BOUNDARY - timedelta(seconds=45)).isoformat()
+        for leg in ("short", "long"):
+            for side in ("bid", "ask"):
+                crossing[f"entry_{leg}_{side}_quote_utc"] = crossing["entry_quote_utc"]
         crossing["greeks_time_utc"] = (BOUNDARY - timedelta(minutes=45)).isoformat()
         rows[50] = crossing
         pre = audit.evaluate_holdout(rows, holdout_start=BOUNDARY, asof=ASOF)

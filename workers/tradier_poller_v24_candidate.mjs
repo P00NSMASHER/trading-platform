@@ -289,8 +289,10 @@ export async function collect(env, now=new Date(), fetcher=fetch, clock=Date.now
     }
   }catch(error){
     const code=error instanceof Error?error.message:'unknown';
-    result=['authorization_denied','provider_rate_limited','provider_http_error','provider_invalid_json',
-      'credential_missing','invalid_symbols','route_not_allowed'].includes(code)?code:'collection_failed';
+    result=classifyCollectorFailureV25(code);
+    // collector_runs_v18 predates error_code. Keep a bounded, non-secret reason in
+    // its existing coverage_state so production failures remain diagnosable.
+    audit.coverageState='failure_'+result;
   }
   audit.state=result;
   audit.completedAt=new Date(clock()).toISOString();
@@ -303,11 +305,34 @@ export async function collect(env, now=new Date(), fetcher=fetch, clock=Date.now
   }catch{return 'research_storage_failed';}
   return result;
 }
+
+/* V25: bounded primary-collector failure reasons. Never persist raw provider,
+ * credential, network, or database error text. */
+export function classifyCollectorFailureV25(msg) {
+  const allowed=new Set(['authorization_denied','provider_rate_limited','provider_http_error',
+    'provider_invalid_json','credential_missing','invalid_symbols','route_not_allowed']);
+  if(allowed.has(msg))return msg;
+  const s=typeof msg==='string'?msg.slice(0,400).toLowerCase():'';
+  if(/(daily|quota|limit).*(read|row)|(read|row).*(daily|quota|limit)/.test(s))return 'd1_read_quota';
+  if(/(daily|quota|limit).*(write)|(write).*(daily|quota|limit)/.test(s))return 'd1_write_quota';
+  if(/timeout|timed out|aborterror|deadline/i.test(s))return 'provider_timeout';
+  if(/sqlite|database|\.prepare|\.batch|d1\b/.test(s))return 'database_error';
+  if(/fetch failed|networkerror|dns|connection refused/.test(s))return 'transport_error';
+  return 'collector_unknown_failure';
+}
+// Keep core SPY/QQQ and coverage observation on the original minute cron.
+// Broad equity and option snapshots are intentionally reduced to five-minute cadence.
+// Missing/malformed event time fails closed for the broad pass, never for primary collection.
+export function shouldCollectBroadV26(when) {
+  return when instanceof Date && Number.isFinite(when.getTime()) &&
+    isRegularSession(when) && when.getUTCMinutes()%5===0;
+}
+
 export default {
   async fetch(req){
     const {pathname}=new URL(req.url);
     if(req.method!=='GET'||pathname!=='/health')return new Response('Not found',{status:404});
-    return new Response(JSON.stringify({service:'options-tradier-paper-poller',version:'v24',
+    return new Response(JSON.stringify({service:'options-tradier-paper-poller',version:'v25',
       data:'research_quote_snapshots_only',orders_enabled:false,licensed_market_data_required:true}),
       {headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
   },
@@ -316,6 +341,10 @@ export default {
     ctx.waitUntil((async()=>{
       const outcome=await collectV19(env,new Date());
       if(outcome==='market_closed'||outcome==='provider_cooldown')return;
+      if(typeof outcome!=='string'||!/^captured_2_stocks_[1-9]\d*_options$/.test(outcome))
+        throw new Error('TRADIER_COLLECTOR_NOT_VERIFIED: '+String(outcome).replace(/[^a-z0-9_]/gi,'').slice(0,48));
+      // Cloudflare scheduledTime is UTC epoch milliseconds; late dispatch must not shift cadence.
+      if(!shouldCollectBroadV26(new Date(_event?.scheduledTime)))return;
       const snapshotSink={};
       const broad=await collectBroadV21(env,new Date(),fetch,Date.now,snapshotSink);
       if(broad!=='broad_complete'&&broad!=='broad_partial')

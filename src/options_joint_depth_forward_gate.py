@@ -96,7 +96,13 @@ def audit_joint_depth_forward(paper_rows, depth_rows, *, asof):
         # Run the complete canonical model: it enforces OCC expiry/strike,
         # 7-21 DTE, timestamp order, risk, overlap, fee, and cost stresses.
         forward = evaluate_paper_marks(paper_rows, asof=cutoff)
-    except EvidenceError:
+    except EvidenceError as error:
+        # Preserve the existing privacy-safe, expiry-specific joint-gate
+        # rejection when the canonical standalone gate catches it first.
+        if str(error) == "Expiry-day quote mark does not prove assignment-safe closure":
+            raise JointEvidenceError(
+                "Expiry-day quote mark cannot prove assignment-safe close"
+            ) from None
         raise JointEvidenceError("Canonical paper population rejected") from None
     try:
         # Independently require depth/side clocks for the EXACT same IDs.
@@ -146,6 +152,25 @@ def audit_joint_depth_forward(paper_rows, depth_rows, *, asof):
                     if not _in_attested_regular_session(row[event + "_" + leg_side + "_utc"]):
                         raise JointEvidenceError(
                             "Regular-session quote observation missing"
+                        )
+
+    # The canonical paper validator and the independent depth validator each
+    # require fresh side clocks, but independent freshness alone does not
+    # prove that matching prices represent the SAME side update. Bind all
+    # eight observations across both ledgers before crediting a joint book.
+    # The depth screen can return an explicit blocked status for partial
+    # evidence: do not access missing fields in that case.
+    if depth["status"] == "QUOTE_DEPTH_SCREEN_ONLY":
+        by_id = {row["trade_id"]: row for row in depth_rows}
+        for paper in paper_rows:
+            depth_row = by_id[paper["trade_id"]]
+            for event in ("entry", "exit"):
+                for leg_side in ("short_bid", "short_ask", "long_bid", "long_ask"):
+                    paper_clock = _cutoff(paper[event + "_" + leg_side + "_quote_utc"])
+                    depth_clock = _cutoff(depth_row[event + "_" + leg_side + "_utc"])
+                    if paper_clock != depth_clock:
+                        raise JointEvidenceError(
+                            "Quote side clock identity mismatch across research ledgers"
                         )
 
     count = forward["completed_marks"]
