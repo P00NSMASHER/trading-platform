@@ -42,5 +42,39 @@ class TradierWorkerDeploymentTests(unittest.TestCase):
             self.assertNotIn(forbidden, source)
 
 
+    def test_protected_main_push_is_offline_and_scheduled_probe_stays_fail_closed(self):
+        """Closed-market pushes run deterministic tests; scheduled/manual probes retain hard gates."""
+        workflow = (ROOT / ".github/workflows/tradier-readonly-options.yml").read_text(encoding="utf-8")
+        self.assertIn("  push:\n    branches: [main]", workflow)
+        self.assertIn("    - cron: '13 15,17 * * 1-5'", workflow)
+        def step(name):
+            marker = "      - name: " + name + "\n"
+            self.assertEqual(workflow.count(marker), 1, name)
+            return workflow.split(marker, 1)[1].split("\n      - name: ", 1)[0]
+        offline = step("Test read-only and fail-closed safeguards without credentials")
+        self.assertIn("python -m unittest discover -v -s tests", offline)
+        self.assertNotIn("if: github.event_name != 'push'", offline)
+        for name in (
+            "Probe 0DTE, 1DTE, and 7-21DTE Tradier chains (GET only)",
+            "Require nonempty open-session Tradier option chains",
+            "Cross-check option timestamps via option-specific quote GETs (diagnostic only)",
+        ):
+            live = step(name)
+            self.assertIn("        if: github.event_name != 'push'\n", live, name)
+        probe = step("Probe 0DTE, 1DTE, and 7-21DTE Tradier chains (GET only)")
+        self.assertIn("python -m tradier_market_cycle", probe)
+        self.assertIn("TRADIER_TOKEN:", probe)
+        guard = step("Require nonempty open-session Tradier option chains")
+        self.assertIn('result.get("market_state") == "open"', guard)
+        self.assertIn("NO_VERIFIED_OPTION_CHAINS", guard)
+        self.assertIn("chains_with_contracts", guard)
+        quote = step("Cross-check option timestamps via option-specific quote GETs (diagnostic only)")
+        self.assertIn("python -m tradier_greeks_crosscheck", quote)
+        manual = step("Cross-check option Greek timestamps using separate GET endpoint (manual diagnostic only)")
+        self.assertIn("github.event_name == 'workflow_dispatch'", manual)
+        cleanup = step("Delete temporary market-data snapshot")
+        self.assertIn("if: always()", cleanup)
+
+
 if __name__ == "__main__":
     unittest.main()
