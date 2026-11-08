@@ -70,7 +70,10 @@ jobs:
           python -m unittest discover -v -s tests -p test_tradier_worker_deployment.py
           node --test tests/golden_goose_worker_v24.test.mjs
 
+      # A source push must validate safeguards offline, not require an open live market.
+      # Scheduled/manual research still requires verified nonempty option chains.
       - name: Probe 0DTE, 1DTE, and 7-21DTE Tradier chains (GET only)
+        if: github.event_name != 'push'
         env:
           TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
           PYTHONPATH: src
@@ -82,6 +85,7 @@ jobs:
             | tee "$RUNNER_TEMP/tradier_market_receipt.json"
 
       - name: Require nonempty open-session Tradier option chains
+        if: github.event_name != 'push'
         run: |
           python - <<'PY'
           import json
@@ -107,6 +111,7 @@ jobs:
           PY
 
       - name: Cross-check option timestamps via option-specific quote GETs (diagnostic only)
+        if: github.event_name != 'push'
         env:
           TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
           TRADIER_GREEKS_ROUTE: quotes
