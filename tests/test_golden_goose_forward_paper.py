@@ -120,7 +120,7 @@ def test_unverified_admission_and_backfill_fail_closed(tmp_path):
             admit(book, calendar_receipt="")
         with pytest.raises(EvidenceRejected, match="Retroactive"):
             admit(book, received_at=BASE + timedelta(hours=5))
-        with pytest.raises(EvidenceRejected, match="future"):
+        with pytest.raises(EvidenceRejected, match="Future"):
             q = fixture()[3]
             admit(book, target_quotes=[
                 OptionQuote(**{**vars(q[0]), "bid_at": BASE + timedelta(minutes=1)}),
