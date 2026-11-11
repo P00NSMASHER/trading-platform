@@ -131,6 +131,18 @@
     }
   },
   "repository_additions": {
+    "docs/tradier_d1_capture_audit.md": {
+      "expected_sha256": "27b03ccb6e4e6c4192cd33bb2cfdf407794f4ba5216c36e14cf2f55ff47d5586",
+      "reason": "Candidate-only private D1 read-only continuity runbook. No production schedule, secret, or deployment change."
+    },
+    "scripts/tradier_d1_capture_audit.py": {
+      "expected_sha256": "7f9e9c23e4b2bbf26b2989a0cd5be8f668d340884254f459db9018aa7d2cb97d",
+      "reason": "Candidate-only bounded Cloudflare D1 SELECT observer; preserves market-data and brokerage execution gates."
+    },
+    "tests/test_tradier_d1_capture_audit.py": {
+      "expected_sha256": "a3d00d4e83300dbaf200683d65323406df89b23d5f1aeafb1dd4d6cbd91b3747",
+      "reason": "Synthetic fail-closed continuity, postmarket diagnostic separation, DST, and millisecond D1 timestamp regressions."
+    },
     ".github/CODEOWNERS": {
       "expected_sha256": "8550f3a6561bb91b9e7ead7751196e2b9924350b1647f1f18d7ca74044b00953",
       "reason": "Intentional post-Step21 repository hardening addition; current ownership note for active Protect main ruleset"
