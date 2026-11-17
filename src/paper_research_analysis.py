@@ -224,6 +224,43 @@ def summarize_costs(rows: list[dict]) -> dict:
                "no_fill_probabilities":"illustrative, not empirical", "premia_gain_scenarios":"10% and 25%, not forecasts"}}
 
 
+def validate_entry_receipt(decision, entry, config):
+    """Missing exits retain an independently checked entry and maximum-loss bound."""
+    contracts=json.loads(decision['contracts_json']);quotes=json.loads(entry['quotes_json'])
+    if sha(entry['quotes_json'].encode())!=entry['quote_sha256']:
+        raise ValueError('Quote digest mismatch')
+    if not 0<=(at(entry['received_at'])-at(decision['decision_at'])).total_seconds()<=120:
+        raise ValueError('Entry capture window mismatch')
+    if len(contracts)!=4 or len(quotes)!=4 or len({c['symbol'] for c in contracts})!=4 or {q['symbol'] for q in quotes}!={c['symbol'] for c in contracts}:
+        raise ValueError('Changed contracts')
+    times=[]
+    for c in contracts:
+        q=next(q for q in quotes if q['symbol']==c['symbol'])
+        identity=c['root']+at(c['expiry']+'T12:00:00Z').strftime('%y%m%d')+c['right']+f"{round(c['strike']*1000):08d}"
+        if c['symbol']!=identity or any(q[k]!=c[k] for k in ('root','expiry','right','strike','role','leg')) or c['expiry']<str(at(entry['received_at']).astimezone(ET).date()):
+            raise ValueError('Changed contract metadata')
+        if q['captured_at']!=entry['received_at'] or not q['source'].startswith('tradier_') or 'synthetic' in q['source']:
+            raise ValueError('Unverified receipt')
+        if not all(isinstance(q[k],(int,float)) and math.isfinite(q[k]) and q[k]>0 for k in ('bid','ask')) or q['ask']<q['bid']:
+            raise ValueError('Malformed quote receipt')
+        if not all(0<=(at(q['captured_at'])-at(q[k])).total_seconds()<=60 for k in ('bid_at','ask_at')):
+            raise ValueError('Stale entry receipt')
+        times.extend(at(q[k]) for k in ('bid_at','ask_at'))
+    if (max(times)-min(times)).total_seconds()>45:
+        raise ValueError('Entry cross-leg clock skew')
+    fee=4*config['fee_per_contract_side_usd']+config['adverse_round_trip_usd']
+    for role in ('target','control'):
+        pair=[q for q in quotes if q['role']==role]
+        if len(pair)!=2 or {q['leg'] for q in pair}!={'buy','sell'} or len({(q['root'],q['expiry'],q['right']) for q in pair})!=1:
+            raise ValueError('Incomplete frozen contracts')
+        buy=next(q for q in pair if q['leg']=='buy');sell=next(q for q in pair if q['leg']=='sell')
+        if (sell['strike']-buy['strike'])*(1 if buy['right']=='C' else -1)!=config['width']:
+            raise ValueError('Invalid defined risk width')
+        debit=round((buy['ask']-sell['bid'])*100,2)
+        if not 0<debit<100*config['width'] or debit+fee>config['max_risk_usd'] or abs(entry[role+'_debit']-debit)>.011 or abs(entry[role+'_risk']-debit-fee)>.011:
+            raise ValueError('Entry arithmetic mismatch')
+
+
 def validate_receipts(decision, entry, outcome, marks, config):
     """Recompute a completed quote model from the frozen identities and raw marks."""
     contracts=json.loads(decision['contracts_json'])
@@ -304,10 +341,13 @@ def prospective_scorecard(design: dict, decisions: list[dict], entries: list[dic
         o=outcome.get(d['id'])
         if o and (o['evidence_mode']!='prospective' or at(o['received_at'])>at(now)):
             raise ValueError('Nonprospective or future outcome')
+        if entry.get(d['id'],{}).get('state')=='QUOTE_MODEL' and o:
+            validate_entry_receipt(d,entry[d['id']],config)
         if o and o['state']=='COMPLETE_QUOTE_MODEL':
             validate_receipts(d,entry[d['id']],o,marks or [],config)
     report = {"as_of":now,"design_sha256":design["config_sha256"],"holdout_start":design["holdout_start"],"strategies":[]}
     all_ready = True
+    independent=config.get("evaluation_policy")=="independent_strategy_locked_evaluation_no_holdout_tuning"
     for strategy in config["strategies"]:
         ds = [d for d in chosen if d["strategy"]==strategy]
         filled = [d for d in ds if entry.get(d["id"],{}).get("state")=="QUOTE_MODEL"]
@@ -317,8 +357,9 @@ def prospective_scorecard(design: dict, decisions: list[dict], entries: list[dic
         times = [at(d["decision_at"]) for d in complete]
         span = (max(times)-min(times)).days if times else 0
         weeks = len({t.astimezone(ET).strftime('%G-%V') for t in times})
-        ready = len(complete)>=max(100,config["min_outcomes"]) and span>=max(90,config["min_calendar_span_days"]) and weeks>=max(12,config["min_entry_weeks"]) and len(hold)>=max(30,config["min_holdout_outcomes"]) and len(complete)==len(filled)
+        ready = len(complete)>=max(100,config["min_outcomes"]) and span>=max(90,config["min_calendar_span_days"]) and weeks>=max(12,config["min_entry_weeks"]) and len(hold)>=max(30,config["min_holdout_outcomes"]) and (len(complete)/len(filled) if filled else 0)>=config.get("min_completion_rate",1) and all(d["id"] in outcome for d in ds)
         all_ready &= ready
+        expired=(at(now)-at(design['forward_start'])).total_seconds()>=config.get('max_collection_calendar_days',float('inf'))*86400
         mean = lambda key: round(float(np.mean([outcome[d['id']][key] for d in dev])),4) if dev else None
         equity = peak = dd = 0
         for d in dev:
@@ -326,9 +367,57 @@ def prospective_scorecard(design: dict, decisions: list[dict], entries: list[dic
             peak = max(peak,equity);dd=max(dd,peak-equity)
         report["strategies"].append({"strategy":strategy,"selected":len(ds),"quote_model_entries":len(filled),"complete":len(complete),"incomplete":len(filled)-len(complete),
             "no_fills":sum(outcome.get(d['id'],{}).get('state')=='NO_FILL' for d in ds),"completion_rate":len(complete)/len(filled) if filled else None,
-            "calendar_span_days":span,"entry_weeks":weeks,"untouched_holdout_complete":len(hold),"minima_pass":ready,
+            "calendar_span_days":span,"entry_weeks":weeks,"untouched_holdout_complete":len(hold),"minima_pass":ready,"operating_state":"PAUSED_READY_FOR_LOCKED_REVIEW" if ready else "PAUSED_TIME_LIMIT" if expired else "COLLECTING",
             "development_mean_net":mean('target_net'),"development_mean_excess":mean('excess_net'),"development_mean_stress_net":mean('stress_net'),
             "development_drawdown":round(dd,2) if dev else None,"holdout_returns":"EMBARGOED","verdict":"continue collecting"})
+    if independent:
+        for row in report['strategies']:
+            # One immutable result per strategy: a rare signal cannot stall the other.
+            name=sha((design['config_sha256']+':'+row['strategy']).encode())[:20]
+            path=lock_path.with_name(lock_path.stem+'-'+name+lock_path.suffix) if lock_path else None
+            if path and path.exists():
+                locked=json.loads(path.read_text())
+                if locked.get('design_sha256')!=design['config_sha256'] or locked.get('strategy')!=row['strategy']:
+                    raise ValueError('Evaluation lock mismatch')
+                row.update(locked['result']);continue
+            if not row['minima_pass']:
+                if row['operating_state']=='PAUSED_TIME_LIMIT':
+                    row['verdict']='reject'
+                    row['interpretation']='Insufficient evidence within the frozen window; not a finding of negative profitability.'
+                row['next_action']='REVIEW_OR_RETIRE_PROTOCOL_BEFORE_RESTART' if row['operating_state']=='PAUSED_TIME_LIMIT' else 'CONTINUE_OR_REPAIR_COLLECTION'
+                continue
+            row['next_action']='RUN_ONE_LOCKED_PRIVATE_HOLDOUT_REVIEW'
+            if path is None:
+                continue
+            held=[d for d in chosen if d['strategy']==row['strategy'] and at(d['decision_at'])>=at(design['holdout_start'])]
+            samples={k:[] for k in ('target_net','excess_net','stress_net')}
+            missing=0
+            for d in held:
+                o=outcome[d['id']];e=entry.get(d['id'],{})
+                if o['state']=='COMPLETE_QUOTE_MODEL':
+                    values={k:o[k] for k in samples}
+                elif o['state']=='MISSING_EXIT' and e.get('state')=='QUOTE_MODEL':
+                    # Sensitivity bound only, explicitly NOT an observed/fabricated outcome.
+                    target=-e['target_risk'];control_best=100*config['width']-e['control_risk']
+                    values={'target_net':target,'excess_net':target-control_best*e['target_risk']/e['control_risk'],'stress_net':target-config['stress_extra_usd']}
+                    missing+=1
+                elif o['state']=='NO_FILL':
+                    values={k:0. for k in samples}
+                else:
+                    raise ValueError('Unresolved holdout outcome')
+                for k in samples:samples[k].append((d['decision_at'],values[k]))
+            intervals={k:cluster_interval(v) for k,v in samples.items()}
+            row.update(holdout_returns=intervals,missing_exit_sensitivity_count=missing,
+                sensitivity_policy='missing target maximum loss; control maximum gain; no-fill zero',
+                verdict='qualified for further paper validation' if all(x['weeks']>=4 and x['lower'] is not None and x['lower']>0 for x in intervals.values()) else 'reject',
+                evaluation='FIRST_LOCKED_STRATEGY_EVALUATION',next_action='KEEP_REAL_MONEY_DISABLED_REVIEW_LOCKED_RESULT',
+                interpretation='Quoted prices and minimum evidence do not prove profitability or execution.')
+            locked={'design_sha256':design['config_sha256'],'strategy':row['strategy'],'evaluated_at':now,'result':row,
+                'input_sha256':sha(canonical({'design':design,'decisions':decisions,'entries':entries,'outcomes':outcomes,'marks':marks}))}
+            private_write(path,canonical(locked),immutable=True)
+        report['evaluation']='INDEPENDENT_STRATEGY_LOCKS_HOLDOUT_EMBARGOED_UNTIL_READY'
+        return report
+
     if not all_ready:
         return report
     if lock_path is None:

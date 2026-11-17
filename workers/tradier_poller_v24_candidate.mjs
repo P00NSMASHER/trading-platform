@@ -5,7 +5,7 @@
  * NOT proof of executable depth. Source timestamps are separate for bid and ask.
  */
 
-import {runPaperResearch} from './paper_research_v1.mjs';
+import {runPaperResearch,runPaperMaintenance} from './paper_research_v1.mjs';
 
 const API = 'https://api.tradier.com';
 const ROOTS = ['SPY', 'QQQ'];
@@ -387,21 +387,24 @@ export default {
   async fetch(req){
     const {pathname}=new URL(req.url);
     if(req.method!=='GET'||pathname!=='/health')return new Response('Not found',{status:404});
-    return new Response(JSON.stringify({service:'options-tradier-paper-poller',version:'v27',paper_research:'private_prospective_quote_models',
+    return new Response(JSON.stringify({service:'options-tradier-paper-poller',version:'v28',paper_research:'private_prospective_quote_models',
       data:'research_quote_snapshots_only',orders_enabled:false,licensed_market_data_required:true}),
       {headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
   },
   async scheduled(_event,env,ctx){
     // Original 1-minute SPY/QQQ options and 7-21D research remain first.
     ctx.waitUntil((async()=>{
+      const maintenance=await runPaperMaintenance(env,{isSession:isRegularSession});
+      if(['paper_design_not_registered','paper_report_budget'].includes(maintenance))throw Error(maintenance);
       const outcome=await collectV19(env,new Date());
       if(outcome==='market_closed'||outcome==='provider_cooldown')return;
       let paperFailed=false;
       try{
-        await runPaperResearch(env,{getQuotes,getCatalog:getResearchCatalog,validateQuote,
+        const paperResult=await runPaperResearch(env,{getQuotes,getCatalog:getResearchCatalog,validateQuote,
           isSession:isRegularSession,fetcher:fetch,classify:classifyCollectorFailureV25,
           allowNew:/^captured_2_stocks_[1-9]\d*_options$/.test(outcome),
           cooldown:code=>setStatus(env.DB,code,new Date())});
+        if(['paper_design_not_registered','paper_daily_budget'].includes(paperResult))paperFailed=true;
       }catch{paperFailed=true;}
       if(typeof outcome!=='string'||!/^captured_2_stocks_[1-9]\d*_options$/.test(outcome))
         throw new Error('TRADIER_COLLECTOR_NOT_VERIFIED: '+String(outcome).replace(/[^a-z0-9_]/gi,'').slice(0,48));

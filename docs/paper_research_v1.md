@@ -1,4 +1,4 @@
-# Private forward price research v1
+# Private forward price research v2
 
 This release integrates the prospective ledger work from PR #544 and bounded
 collector recovery from PR #547 into the existing collector. It adds no service,
@@ -51,7 +51,7 @@ interrupted entry capture, stale quotes, invalid vertical close marks and late
 exits are explicit no-fill or missing outcomes. Quotes do not establish available
 size, execution probability, assignment costs or simultaneous leg execution.
 
-Greek timestamps remain raw in the existing collector. Price-only v1 does not
+Greek timestamps remain raw in the existing collector. Price-only v2 does not
 use IV or Greeks. Naive Greek clocks remain unknown; even timezone-explicit
 values are hourly provider updates, not tick updates. The existing direct-Greek
 cross-check remains diagnostic only. Do not infer a timezone from a plausible
@@ -80,17 +80,27 @@ The offline evaluator requires, per hypothesis:
 - at least 90 calendar days between first and last complete entry;
 - at least 12 distinct entry weeks;
 - at least 30 complete untouched holdout observations;
-- complete accounting for every modeled entry, with no unresolved missing exit;
+- at least 95% completed modeled entries, no pending outcomes, and explicit missing-exit sensitivity;
 - recomputation from hashed entry/exit quotes with exact frozen identities.
 
-Then one immutable evaluation file locks the input digest and result. Re-running
-returns that locked result. Changing rules after evaluation requires a new
+Each strategy independently receives one immutable evaluation file containing its input
+digest and result. A slower hypothesis cannot block the other. Re-running returns
+its locked result. Missing exits remain missing in the immutable ledger. For
+qualification sensitivity only, their target is assigned its maximum possible
+loss and its comparison the maximum possible gain; no-fills contribute zero.
+These bounds are never labeled observed returns. Changing rules after evaluation requires a new
 future experiment. Whole entry weeks are resampled together (4,000 deterministic
 bootstrap draws); a 95% lower bound must exceed zero for holdout net P&L,
 risk-scaled excess P&L and the adverse-cost stress case. At least four holdout
 weeks are required. Passing means **qualified for further paper validation**,
 never proven profitability or permission to trade. Failing at the one locked
-evaluation rejects v1; insufficient observations continue collecting. Reporting
+evaluation rejects v2. The Worker pauses each strategy as soon as its count/time
+requirements are met, without inspecting holdout profits. New entries also stop
+180 calendar days after the frozen start regardless of outcome counts. This is a
+protocol review/retirement boundary, not evidence of profitability or a request
+to loosen thresholds. Existing positions drain to their fixed exits. Restarting
+requires a separately preregistered future design; the stop state cannot reopen
+this study automatically. Reporting
 and holdout access remain private, and manual access to embargoed returns must
 invalidate the untouched designation.
 
@@ -98,8 +108,12 @@ invalidate the untouched designation.
 
 Paper processing uses the existing minute trigger. An indexed per-symbol,
 per-session underlying extract is capped at 390 rows. The active queue has one
-row. The private daily summary reads at most 1,001 indexed decisions, explicitly
-labels a bounded window, and publishes no market data. Limits reserve room before
+row. The daily summary includes the entire selected-outcome history using the
+new `(design_id, selected, decision_at)` index. The frozen 180-day horizon and
+ten possible selected candidates per day give a hard 1,800-row bound; an
+unexpected overflow fails closed rather than silently truncating results. The
+separate daily rejected-candidate query is limited to 21 rows and rejects
+overflow above the expected 20 candidates. No report publishes market data. Limits reserve room before
 new work: 25,000 reported paper D1 reads/day, 6,000 writes/day, 250 provider
 requests/day; no individual query may report over 25,000 reads and a run stops
 above 12,000 reads. These are paper-module counters with conservative bookkeeping
@@ -132,7 +146,7 @@ Historical hypothesis screening uses the exact Worker function and a chronologic
 
 Required checks run the Python suite and the Node 24 SQLite-backed Worker tests.
 Fixtures are synthetic and isolated; production contains only genuine captures.
-Apply the additive migration after checks pass; register the exact design JSON,
+Apply both additive migrations after checks pass; register the exact design JSON,
 hash and future starts; upload both Worker modules with the existing D1 binding
 and inherited secret. Enable `PAPER_RESEARCH_ENABLED=true` only after registration.
 Keep the original minute cron, calendar guards, broad five-minute cadence and
@@ -144,3 +158,47 @@ receipts, continued same-ID marks and the planned exit, all independently read
 from D1. A closed-market deployment cannot satisfy that gate. Verify actual
 provider metadata, latency, quotas, resource counters and scorecard persistence
 at the next session. Never backdate registration or inject fixtures to claim it.
+
+## Useful daily decisions and ownership
+
+The existing minute trigger attempts the private report at 16:00, 16:05, 16:10,
+16:15, 16:20, 16:25 and 16:30 Eastern, or 13:00–13:30 on verified early closes.
+There are no provider calls in this path. A durable daily key stops repeat
+work after success. A missed final market minute therefore cannot suppress
+the report. Expired queued positions become explicit missing exits/no-fills.
+The report and count-based pause states commit transactionally.
+
+The scorecard contains cumulative completeness, pending/missing/no-fill counts,
+calendar/week progress, untouched holdout counts, development expectancy,
+comparison excess, stress expectancy and drawdown. Today's expected versus
+recorded candidates exposes silent skipped decision times. Rejection counts
+separate no signal, missing history, contract availability and overlapping
+exposure. Cost counters cover this paper module (not the entire account);
+report-generation bookkeeping after the snapshot is excluded. Complete outcomes
+per 1,000 reads and per provider request make collection efficiency visible.
+
+Actions are explicit: repair collection; review signal/rejection counts;
+continue collecting; run one locked private holdout review; or review/retire
+the protocol at its time limit. No action enables real-money trading. A
+statistically qualified result still requires further paper validation.
+
+Use the existing read-only Fleet oversight task for one bounded after-close
+check; do not add another scheduler. Its private query is:
+
+```sql
+SELECT day,created_at,report_sha256,report_json
+FROM paper_scorecards_v1 WHERE day = ?;
+```
+
+Check the current Eastern session day after the retry window, verify the JSON
+SHA-256, and expose only a concise private decision summary. A missing report
+on a verified trading day is a collection/reporting blocker, not zero results.
+On weekends/holidays do not expect a new report. Never inspect holdout P&L or
+export licensed quotes into notifications, public repositories or CI. The
+locked review command consumes complete private indexed ledger extracts and
+creates one deterministic file per strategy beneath the requested lock path.
+
+Version 2 was introduced before forward outcomes existed. Preserve version 1's
+immutable registration as superseded history; do not mutate or backdate it.
+The versioned Wrangler config retains `PAPER_RESEARCH_ENABLED=true`, while the
+exact registration/hash check still fails closed on an unregistered design.

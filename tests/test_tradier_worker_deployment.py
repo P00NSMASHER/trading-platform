@@ -26,6 +26,7 @@ class TradierWorkerDeploymentTests(unittest.TestCase):
                 "database_id": "07f6bd0d-a582-4244-be9f-d42e7c2d6d81",
             }],
         )
+        self.assertEqual(config["vars"]["PAPER_RESEARCH_ENABLED"], "true")
         # The token stays a Cloudflare secret. It must never be serialized in config.
         self.assertNotIn("TRADIER_TOKEN", CONFIG.read_text(encoding="utf-8"))
 

@@ -4,7 +4,7 @@
  * are retained until the fixed exit; no strike or affordability reselection at exit.
  */
 export const DESIGN = Object.freeze({
-  id:'price-action-v1-20261117', roots:['SPY','QQQ'],
+  id:'price-action-v2-20261117', roots:['SPY','QQQ'],
   strategies:['opening_range_continuation','failed_breakout_reversal'],
   decision_minutes_et:[605,635,665,785,845], holding_minutes:30,
   range_minutes:30, min_range_bps:5, breakout_buffer_bps:2,
@@ -17,7 +17,9 @@ export const DESIGN = Object.freeze({
   max_reads_day:25000,max_writes_day:6000,max_provider_requests_day:250,
   min_outcomes:100,min_calendar_span_days:90,min_entry_weeks:12,
   holdout_after_calendar_days:60,min_holdout_outcomes:30,
-  evaluation_policy:'one_locked_evaluation_after_all_minima_no_holdout_tuning',
+  max_collection_calendar_days:180,min_completion_rate:0.95,
+  missing_exit_policy:'target_max_loss_control_max_gain_in_holdout_sensitivity',
+  evaluation_policy:'independent_strategy_locked_evaluation_no_holdout_tuning',
   benchmark:'same-root-expiry-side-width-two-strikes-further-OTM-risk-scaled',
   price_field:'one-minute-underlying-midquote-not-trade-OHLC',
   greeks_used:false, evidence_mode:'prospective', execution:'quote_model_only'
@@ -113,8 +115,8 @@ async function track(m,d,deps,env,clock){
   const now=clock(),deadline=Date.parse(d.exit_at),contracts=JSON.parse(d.contracts_json);
   const entries=await m.rows('SELECT * FROM paper_entries_v1 WHERE decision_id=?',[d.id]);
   const entry=entries[0];
-  if(now>deadline+DESIGN.max_exit_delay_ms){await outcome(m,d,'MISSING_EXIT',now,'PLANNED_EXIT_WINDOW_MISSED');return;}
   if(!entry&&now-Date.parse(d.decision_at)>120000){await outcome(m,d,'NO_FILL',now,'ENTRY_CAPTURE_INTERRUPTED');return;}
+  if(now>deadline+DESIGN.max_exit_delay_ms){await outcome(m,d,'MISSING_EXIT',now,'PLANNED_EXIT_WINDOW_MISSED');return;}
   if(entry?.state==='NO_FILL'){await outcome(m,d,'NO_FILL',now,entry.reason);return;}
   if(now%60000>=45000){
     await m.sql('INSERT OR IGNORE INTO paper_marks_v1 VALUES (?,?,?,?,?,?,?)',[d.id,stamp(Math.floor(now/60000)*60000),stamp(now),'CAPTURE_DEADLINE','[]',JSON.stringify(contracts.map(c=>c.symbol)),await digest('[]')]);
@@ -161,14 +163,87 @@ export function descriptiveScorecard(rows,now){
       completeness:filled.length?complete.length/filled.length:null,mean_net_observed_only:mean('target_net'),mean_control_excess_observed_only:mean('excess_net'),mean_stress_net_observed_only:mean('stress_net'),
       realized_quote_model_drawdown_usd:complete.length?money(drawdown):null,verdict:'CONTINUE_COLLECTING',qualification:'OFFLINE_UNTOUCHED_HOLDOUT_AND_WEEK_CLUSTER_VALIDATION_REQUIRED'};})};
 }
+// Run on the existing minute trigger after either a normal or early market close.
+// These retries use D1 only. No quote or catalog requests are made after hours.
+export function maintenanceWindow(now,isSession){
+  const {minute}=etParts(now),atMinute=n=>new Date(now+(n-minute)*60000);
+  const close=isSession(atMinute(959))?960:isSession(atMinute(779))?780:null;
+  return close!==null&&minute>=close&&minute<=close+30&&minute%5===0;
+}
+const week=t=>{const d=new Date(etParts(Date.parse(t)).day+'T12:00:00Z');d.setUTCDate(d.getUTCDate()-(d.getUTCDay()+6)%7);return d.toISOString().slice(0,10);};
+export function evidenceProgress(rows,design,now){
+  const filled=rows.filter(r=>r.entry_state==='QUOTE_MODEL'),complete=filled.filter(r=>r.outcome_state==='COMPLETE_QUOTE_MODEL');
+  const times=complete.map(r=>Date.parse(r.decision_at)),span=times.length?Math.floor((Math.max(...times)-Math.min(...times))/86400000):0;
+  const weeks=new Set(complete.map(r=>week(r.decision_at))).size,held=complete.filter(r=>r.decision_at>=design.holdout_start).length;
+  const pending=rows.filter(r=>!r.outcome_state).length,completion=filled.length?complete.length/filled.length:null;
+  const ready=complete.length>=DESIGN.min_outcomes&&span>=DESIGN.min_calendar_span_days&&weeks>=DESIGN.min_entry_weeks&&held>=DESIGN.min_holdout_outcomes&&completion>=DESIGN.min_completion_rate&&pending===0;
+  const expired=now>=Date.parse(design.forward_start)+DESIGN.max_collection_calendar_days*86400000;
+  return {selected:rows.length,quote_model_entries:filled.length,complete:complete.length,
+    no_fills:rows.filter(r=>r.outcome_state==='NO_FILL').length,missing_exits:rows.filter(r=>r.outcome_state==='MISSING_EXIT').length,
+    pending,completion_rate:completion,calendar_span_days:span,entry_weeks:weeks,untouched_holdout_complete:held,
+    minima_pass:ready,state:ready?'PAUSED_READY_FOR_LOCKED_REVIEW':expired?'PAUSED_TIME_LIMIT':'COLLECTING'};
+}
+async function registeredDesign(m,now){
+  const d=(await m.rows('SELECT * FROM paper_designs_v1 WHERE id=?',[DESIGN.id]))[0],config=JSON.stringify(DESIGN),hash=await digest(config);
+  return d&&d.config_json===config&&d.config_sha256===hash&&[d.registered_at,d.forward_start,d.holdout_start].every(t=>Number.isFinite(Date.parse(t))&&/(Z|[+-]\d\d:\d\d)$/.test(t))&&Date.parse(d.registered_at)<Date.parse(d.forward_start)&&Date.parse(d.holdout_start)-Date.parse(d.forward_start)===DESIGN.holdout_after_calendar_days*86400000&&now>=Date.parse(d.forward_start)?d:null;
+}
+async function recordUsage(env,m,utcday){
+  await env.DB.prepare('INSERT INTO paper_budget_v1 VALUES (?,?,?,?) ON CONFLICT(day) DO UPDATE SET rows_read=rows_read+excluded.rows_read,rows_written=rows_written+excluded.rows_written,provider_requests=provider_requests+excluded.provider_requests').bind(utcday,m.reads+4,m.writes+6,m.requests).run();
+}
+export async function runPaperMaintenance(env,deps,clock=Date.now){
+  const now=clock();if(env.PAPER_RESEARCH_ENABLED!=='true'||!maintenanceWindow(now,deps.isSession))return 'paper_maintenance_not_due';
+  const m=new Meter(env.DB),et=etParts(now),day=stamp(now).slice(0,10);
+  // Unique daily key is the durable retry guard; a lost final market minute cannot lose the report.
+  if((await m.rows('SELECT day FROM paper_scorecards_v1 WHERE day=?',[et.day])).length)return 'paper_report_already_saved';
+  const design=await registeredDesign(m,now);if(!design)return 'paper_design_not_registered';
+  const budget=(await m.rows('SELECT * FROM paper_budget_v1 WHERE day=?',[day]))[0]??{rows_read:0,rows_written:0,provider_requests:0};
+  if(budget.rows_read+12000>DESIGN.max_reads_day||budget.rows_written+30>DESIGN.max_writes_day)return 'paper_report_budget';
+  try{
+    const open=await m.rows('SELECT d.* FROM paper_open_v1 o JOIN paper_decisions_v1 d ON d.id=o.decision_id WHERE o.slot=1 LIMIT 1');
+    if(open[0]&&Date.parse(open[0].exit_at)+60000<now){
+      const entry=(await m.rows('SELECT state FROM paper_entries_v1 WHERE decision_id=?',[open[0].id]))[0];
+      await outcome(m,open[0],entry?.state==='QUOTE_MODEL'?'MISSING_EXIT':'NO_FILL',now,'RECOVERED_AFTER_SESSION_NO_EXIT_INVENTED');
+    }
+    const rows=await m.rows('SELECT d.strategy,d.selected,d.decision_at,d.exit_at,e.state entry_state,e.reason entry_reason,o.state outcome_state,o.target_net,o.excess_net,o.stress_net FROM paper_decisions_v1 d LEFT JOIN paper_entries_v1 e ON e.decision_id=d.id LEFT JOIN paper_outcomes_v1 o ON o.decision_id=d.id WHERE d.design_id=? AND d.selected=1 ORDER BY d.decision_at LIMIT 1801',[DESIGN.id]);
+    if(rows.length>1800)throw Error('paper_selected_report_bound');
+    const today=await m.rows('SELECT strategy,selected,reason FROM paper_decisions_v1 WHERE design_id=? AND decision_at>=? AND decision_at<? ORDER BY decision_at LIMIT 21',[DESIGN.id,stamp(now-et.minute*60000-now%60000),stamp(now+(1440-et.minute)*60000-now%60000)]);
+    if(today.length>20)throw Error('paper_candidate_report_bound');
+    const development=rows.filter(r=>r.decision_at<design.holdout_start),descriptive=descriptiveScorecard(development,now);
+    const states=await m.rows('SELECT strategy,state FROM paper_strategy_state_v2 WHERE design_id=?',[DESIGN.id]);
+    const prior=new Map(states.map(x=>[x.strategy,x.state]));
+    const available=DESIGN.decision_minutes_et.filter(minute=>deps.isSession(new Date(now+(minute-et.minute+DESIGN.holding_minutes)*60000))).length*DESIGN.roots.length;
+    const strategies=DESIGN.strategies.map(strategy=>{
+      const life=evidenceProgress(rows.filter(r=>r.strategy===strategy),design,now),ds=today.filter(r=>r.strategy===strategy),reasons={};
+      for(const r of ds)if(!r.selected)reasons[r.reason]=(reasons[r.reason]??0)+1;
+      const todaysSelected=rows.filter(r=>r.strategy===strategy&&etParts(Date.parse(r.decision_at)).day===et.day);
+      const missingToday=todaysSelected.filter(r=>r.outcome_state==='MISSING_EXIT').length,noFills=todaysSelected.filter(r=>r.outcome_state==='NO_FILL');
+      for(const r of noFills){const key='ENTRY_'+(r.entry_reason??'INTERRUPTED');reasons[key]=(reasons[key]??0)+1;}
+      const expected=prior.has(strategy)||now>=Date.parse(design.forward_start)+DESIGN.max_collection_calendar_days*86400000?0:available,missing=Math.max(0,expected-ds.length);
+      const action=life.state==='PAUSED_READY_FOR_LOCKED_REVIEW'?'RUN_ONE_LOCKED_PRIVATE_HOLDOUT_REVIEW':life.state==='PAUSED_TIME_LIMIT'?'REVIEW_OR_RETIRE_PROTOCOL_BEFORE_ANY_RESTART':missing||missingToday||reasons.MISSING_UNDERLYING_HISTORY?'REPAIR_COLLECTION':noFills.length&&!todaysSelected.some(r=>r.outcome_state==='COMPLETE_QUOTE_MODEL')?'REVIEW_ENTRY_LIQUIDITY_AND_COST_LIMITS':life.selected===0?'REVIEW_SIGNAL_AND_REJECTION_COUNTS':'CONTINUE_COLLECTING';
+      return {strategy,lifetime:life,today:{considered:ds.length,expected_candidates:expected,missing_candidates:missing,missing_exits:missingToday,no_fills:noFills.length,rejected:ds.filter(r=>!r.selected).length,reasons},
+        development:descriptive.strategies.find(r=>r.strategy===strategy),holdout_returns:'EMBARGOED',next_action:action,verdict:life.state==='PAUSED_TIME_LIMIT'?'reject':life.state==='PAUSED_READY_FOR_LOCKED_REVIEW'?'pending locked review':'continue collecting',verdict_basis:life.state==='PAUSED_TIME_LIMIT'?'INSUFFICIENT_EVIDENCE_WITHIN_FROZEN_WINDOW_NOT_A_PROFITABILITY_FINDING':'MINIMUM_COUNTS_DO_NOT_PROVE_PROFITABILITY'};
+    });
+    const usage={rows_read:budget.rows_read+m.reads,rows_written:budget.rows_written+m.writes,provider_requests:budget.provider_requests+m.requests};
+    const completeToday=rows.filter(r=>etParts(Date.parse(r.decision_at)).day===et.day&&r.outcome_state==='COMPLETE_QUOTE_MODEL').length;
+    const payload=JSON.stringify({as_of:stamp(now),design_id:DESIGN.id,design_sha256:design.config_sha256,forward_start:design.forward_start,holdout_start:design.holdout_start,
+      collection_deadline:stamp(Date.parse(design.forward_start)+DESIGN.max_collection_calendar_days*86400000),strategies,
+      performance_scope:'development_only_holdout_embargoed',resource_scope:'paper_research_only_excludes_other_collectors',resource_usage_today:usage,
+      complete_outcomes_today:completeToday,complete_outcomes_per_1000_reads:usage.rows_read?completeToday*1000/usage.rows_read:null,
+      complete_outcomes_per_provider_request:usage.provider_requests?completeToday/usage.provider_requests:null,
+      full_selected_history:true,selected_limit:1800});
+    // Report and stop states commit together; repeats are idempotent and cannot reopen a paused study.
+    const statements=strategies.filter(s=>s.lifetime.state!=='COLLECTING').map(s=>['INSERT OR IGNORE INTO paper_strategy_state_v2 VALUES (?,?,?,?)',[DESIGN.id,s.strategy,s.lifetime.state,stamp(now)]]);
+    statements.push(['INSERT OR IGNORE INTO paper_scorecards_v1 VALUES (?,?,?,?)',[et.day,stamp(now),payload,await digest(payload)]]);
+    await m.batch(statements);return 'paper_report_saved';
+  }finally{await recordUsage(env,m,day);}
+}
 export async function runPaperResearch(env,deps,clock=Date.now){
   if(env.PAPER_RESEARCH_ENABLED!=='true'||!deps.isSession(new Date(clock())))return 'paper_disabled_or_closed';
   const start=clock(),minute=stamp(Math.floor(start/60000)*60000),utcday=minute.slice(0,10),et=etParts(start),m=new Meter(env.DB);
   let claimed=false,state='paper_failed';
   try{
-    const design=(await m.rows('SELECT * FROM paper_designs_v1 WHERE id=?',[DESIGN.id]))[0];
-    const config=JSON.stringify(DESIGN),hash=await digest(config);
-    if(!design||design.config_json!==config||design.config_sha256!==hash||![design.registered_at,design.forward_start,design.holdout_start].every(t=>Number.isFinite(Date.parse(t))&&/(Z|[+-]\d\d:\d\d)$/.test(t))||Date.parse(design.registered_at)>=Date.parse(design.forward_start)||Date.parse(design.holdout_start)-Date.parse(design.forward_start)!==DESIGN.holdout_after_calendar_days*86400000||start<Date.parse(design.forward_start))return 'paper_design_not_registered';
+    const design=await registeredDesign(m,start);if(!design)return 'paper_design_not_registered';
+    const hash=design.config_sha256;
     const budget=(await m.rows('SELECT * FROM paper_budget_v1 WHERE day=?',[utcday]))[0]??{rows_read:0,rows_written:0,provider_requests:0};
     if(budget.rows_read+1200>DESIGN.max_reads_day||budget.rows_written+80>DESIGN.max_writes_day||budget.provider_requests+6>DESIGN.max_provider_requests_day)return 'paper_daily_budget';
     m.requestLimit=DESIGN.max_provider_requests_day-budget.provider_requests;
@@ -176,12 +251,14 @@ export async function runPaperResearch(env,deps,clock=Date.now){
     if(!claim.meta.changes)return 'paper_duplicate_minute';claimed=true;
     const open=await m.rows('SELECT d.* FROM paper_open_v1 o JOIN paper_decisions_v1 d ON d.id=o.decision_id WHERE o.slot=1 LIMIT 1');
     if(open[0])await track(m,open[0],deps,env,clock);
-    if(DESIGN.decision_minutes_et.includes(et.minute)&&deps.allowNew&&clock()%60000<40000){
+    if(DESIGN.decision_minutes_et.includes(et.minute)&&deps.allowNew&&clock()%60000<40000&&start<Date.parse(design.forward_start)+DESIGN.max_collection_calendar_days*86400000){
+      const stopped=new Set((await m.rows('SELECT strategy FROM paper_strategy_state_v2 WHERE design_id=?',[DESIGN.id])).map(x=>x.strategy));
       for(const root of DESIGN.roots){
         const opening=start-(et.minute-570)*60000;
         const history=await m.rows('SELECT observed_minute,bid,ask,bid_quote_at,ask_quote_at,captured_at,source FROM quote_samples_v17 WHERE symbol=? AND observed_minute>=? AND observed_minute<? ORDER BY observed_minute LIMIT 390',[root,stamp(Math.floor(opening/60000)*60000),minute]);
         const signal=signalAt(history,start),context=JSON.stringify(signal),exitAt=stamp(Math.floor(start/60000)*60000+DESIGN.holding_minutes*60000);
         for(const strategy of DESIGN.strategies){
+          if(stopped.has(strategy))continue;
           const id=DESIGN.id+':'+minute+':'+root+':'+strategy,side=signal.signals[strategy];
           if((await m.rows('SELECT id FROM paper_decisions_v1 WHERE id=?',[id])).length)continue;
           let reason=!signal.ready?signal.reason:!side?'NO_SIGNAL':'TRACK_REQUESTED',contracts=[];
@@ -206,14 +283,8 @@ export async function runPaperResearch(env,deps,clock=Date.now){
         }
       }
     }
-    if(!deps.isSession(new Date(start+60000))&&budget.rows_read+m.reads+12000<DESIGN.max_reads_day){
-      const rows=await m.rows('SELECT d.strategy,d.selected,d.decision_at,d.exit_at,e.state entry_state,o.state outcome_state,o.target_net,o.excess_net,o.stress_net FROM paper_decisions_v1 d LEFT JOIN paper_entries_v1 e ON e.decision_id=d.id LEFT JOIN paper_outcomes_v1 o ON o.decision_id=d.id WHERE d.design_id=? ORDER BY d.decision_at DESC LIMIT 1001',[DESIGN.id]);
-      {const window=rows.slice(0,1000).reverse(),development=window.filter(r=>r.decision_at<design.holdout_start),holdout=window.filter(r=>r.decision_at>=design.holdout_start);
-        const payload=JSON.stringify({...descriptiveScorecard(development,clock()),performance_scope:'prospective_development_only_holdout_performance_embargoed',holdout:{starts_at:design.holdout_start,selected:holdout.filter(r=>r.selected).length,complete:holdout.filter(r=>r.outcome_state==='COMPLETE_QUOTE_MODEL').length},bounded_window:rows.length>1000,decision_limit:1000,resource_usage_today:{rows_read:budget.rows_read+m.reads,rows_written:budget.rows_written+m.writes,provider_requests:budget.provider_requests+m.requests}});
-        await m.sql('INSERT OR IGNORE INTO paper_scorecards_v1 VALUES (?,?,?,?)',[et.day,stamp(clock()),payload,await digest(payload)]);}
-    }
     state='paper_complete';return state;
   }catch(e){const allowed=new Set(['paper_unmetered_database','paper_query_budget','paper_provider_budget']);state=allowed.has(e.message)?e.message:'paper_database_or_provider_failure';throw Error(state);}
   finally{if(claimed){await env.DB.prepare('UPDATE paper_runs_v1 SET completed_at=?,state=?,rows_read=?,rows_written=?,provider_requests=? WHERE observed_minute=?').bind(stamp(clock()),state,m.reads,m.writes,m.requests,minute).run();
-    await env.DB.prepare('INSERT INTO paper_budget_v1 VALUES (?,?,?,?) ON CONFLICT(day) DO UPDATE SET rows_read=rows_read+excluded.rows_read,rows_written=rows_written+excluded.rows_written,provider_requests=provider_requests+excluded.provider_requests').bind(utcday,m.reads+4,m.writes+6,m.requests).run();}}
+    await recordUsage(env,m,utcday);}}
 }
