@@ -5,6 +5,8 @@
  * NOT proof of executable depth. Source timestamps are separate for bid and ask.
  */
 
+import {runPaperResearch} from './paper_research_v1.mjs';
+
 const API = 'https://api.tradier.com';
 const ROOTS = ['SPY', 'QQQ'];
 const MAX_SIDE_AGE_MS = 60_000;
@@ -142,9 +144,12 @@ async function getJson(token, path, query, fetcher=fetch, clock=Date.now) {
     if(/quota violation|rate.?limit/i.test(raw))throw new Error('provider_rate_limited');
     throw new Error('provider_http_error');
   }
+  if(res.status>=500)throw new Error('provider_server_error');
   if(!res.ok)throw new Error('provider_http_error');
   let data;try{data=await res.json();}catch{throw new Error('provider_invalid_json');}
-  return {data,receivedAtMs};
+  const available=res.headers?.get?.('X-Ratelimit-Available');
+  const remaining=available==null?null:Number(available);
+  return {data,receivedAtMs,rateLimitRemaining:Number.isSafeInteger(remaining)&&remaining>=0?remaining:null};
 }
 export async function getQuotes(token, symbols, fetcher=fetch, clock=Date.now) {
   if(!Array.isArray(symbols)||!symbols.length||symbols.length>MAX_SYMBOLS||
@@ -152,13 +157,51 @@ export async function getQuotes(token, symbols, fetcher=fetch, clock=Date.now) {
     throw new Error('invalid_symbols');
   const r=await getJson(token,'/v1/markets/quotes',{symbols:symbols.join(','),greeks:'false'},fetcher,clock);
   const raw=r.data?.quotes?.quote;
-  return {quotes:raw?(Array.isArray(raw)?raw:[raw]):[],receivedAtMs:r.receivedAtMs};
+  return {quotes:raw?(Array.isArray(raw)?raw:[raw]):[],receivedAtMs:r.receivedAtMs,
+    rateLimitRemaining:r.rateLimitRemaining};
 }
+
+// A single, budgeted retry for transient incomplete SPY/QQQ batches. This never
+// reuses prior-minute quotes or weakens per-side freshness and cross-source alignment.
+export async function coreQuoteBatchWithRecovery(token,symbols,verify,expected,fetcher=fetch,clock=Date.now){
+  if(typeof verify!=='function'||!Number.isSafeInteger(expected)||expected<1||expected>MAX_SYMBOLS)
+    throw new Error('invalid_core_validation');
+  let best=null;
+  for(let attempt=0;attempt<2;attempt++){
+    let batch;
+    try{
+      batch=await getQuotes(token,symbols,fetcher,clock);
+    }catch(error){
+      const description=error instanceof Error?error.name+' '+error.message:'';
+      const transient=/provider_server_error|aborterror|timeouterror|timeout|timed out|fetch failed|networkerror|econnreset/i.test(description);
+      if(attempt===1&&best&&transient)break; // preserve the first incomplete observation
+      if(attempt!==0||!transient||clock()%60_000>=40_000)throw error;
+      await new Promise(resolve=>setTimeout(resolve,400));
+      continue;
+    }
+    const quality=verify(batch);
+    if(!quality||!Number.isSafeInteger(quality.score)||quality.score<0||quality.score>expected)
+      throw new Error('invalid_core_validation');
+    if(!best||quality.score>best.quality.score)best={batch,quality};
+    if(quality.score===expected||attempt!==0||clock()%60_000>=40_000||
+        (batch.rateLimitRemaining!==null&&batch.rateLimitRemaining<2))break;
+    await new Promise(resolve=>setTimeout(resolve,400));
+  }
+  if(!best)throw new Error('collector_unknown_failure');
+  return best;
+}
+
 export async function getExpirations(token,root,fetcher=fetch,clock=Date.now) {
   if(!ROOTS.includes(root))throw new Error('invalid_symbols');
   const r=await getJson(token,'/v1/markets/options/expirations',
     {symbol:root,includeAllRoots:'false',strikes:'false'},fetcher,clock);
   return r.data?.expirations?.date;
+}
+export async function getResearchCatalog(token,root,fetcher=fetch,clock=Date.now){
+  if(!ROOTS.includes(root))throw new Error('invalid_symbols');
+  const r=await getJson(token,'/v1/markets/options/expirations',
+    {symbol:root,includeAllRoots:'false',strikes:'true',contractSize:'true'},fetcher,clock);
+  return r.data?.expirations?.expiration??[];
 }
 async function readStatus(db){
   return db.prepare('SELECT checked_at,state FROM collector_status WHERE id=1').first();
@@ -245,10 +288,16 @@ export async function collect(env, now=new Date(), fetcher=fetch, clock=Date.now
     if(!env.TRADIER_TOKEN){result='awaiting_tradier_token';}
     else if(isBackoff(await readStatus(env.DB),now)){result='provider_cooldown';}
     else {
-      const stockResult=await getQuotes(env.TRADIER_TOKEN,ROOTS,fetcher,clock);
+      const stockSelection=await coreQuoteBatchWithRecovery(env.TRADIER_TOKEN,ROOTS,snapshot=>{
+        const valid=snapshot.quotes.map(x=>validateQuote(x,snapshot.receivedAtMs))
+          .filter(x=>x && ROOTS.includes(x.symbol) &&
+            (!x.original.type||['etf','stock'].includes(x.original.type)));
+        const stock=[...new Map(valid.map(x=>[x.symbol,x])).values()];
+        return {score:stock.length,stock};
+      },ROOTS.length,fetcher,clock);
+      const stockResult=stockSelection.batch;
       audit.stocksReturned=stockResult.quotes.length;
-      const stock=stockResult.quotes.map(x=>validateQuote(x,stockResult.receivedAtMs))
-        .filter(x=>x && ROOTS.includes(x.symbol) && (!x.original.type||['etf','stock'].includes(x.original.type)));
+      const stock=stockSelection.quality.stock;
       audit.stocksAccepted=stock.length;
       const stockMap=new Map(stock.map(x=>[x.symbol,x]));
       const spot=Object.fromEntries(stock.map(x=>[x.symbol,(x.bid+x.ask)/2]));
@@ -261,16 +310,22 @@ export async function collect(env, now=new Date(), fetcher=fetch, clock=Date.now
       audit.optionsPlanned=planned.size;
       let options=[];
       if(planned.size){
-        const optionResult=await getQuotes(env.TRADIER_TOKEN,[...planned.keys()],fetcher,clock);
+        const optionSelection=await coreQuoteBatchWithRecovery(env.TRADIER_TOKEN,
+          [...planned.keys()],snapshot=>{
+            const clean=[...new Map(snapshot.quotes.map(x=>validateQuote(x,snapshot.receivedAtMs))
+              .filter(v=>v && contractMetadataMatches(v,planned.get(v.symbol)))
+              .map(v=>[v.symbol,v])).values()];
+            const aligned=clean.filter(v=>{
+              const c=planned.get(v.symbol),s=stockMap.get(c.root);
+              return Boolean(s)&&Math.abs(v.providerAt-s.providerAt)<=MAX_STOCK_OPTION_SKEW_MS &&
+                Math.abs(snapshot.receivedAtMs-stockResult.receivedAtMs)<=MAX_STOCK_OPTION_CAPTURE_MS;
+            });
+            return {score:aligned.length,clean,aligned};
+          },planned.size,fetcher,clock);
+        const optionResult=optionSelection.batch;
         audit.optionsReturned=optionResult.quotes.length;
-        const clean=optionResult.quotes.map(x=>validateQuote(x,optionResult.receivedAtMs))
-          .filter(v=>v && contractMetadataMatches(v,planned.get(v.symbol)));
-        audit.optionsValid=clean.length;
-        options=clean.filter(v=>{
-          const c=planned.get(v.symbol), s=stockMap.get(c.root);
-          return Boolean(s) && Math.abs(v.providerAt-s.providerAt)<=MAX_STOCK_OPTION_SKEW_MS &&
-            Math.abs(optionResult.receivedAtMs-stockResult.receivedAtMs)<=MAX_STOCK_OPTION_CAPTURE_MS;
-        });
+        audit.optionsValid=optionSelection.quality.clean.length;
+        options=optionSelection.quality.aligned;
         audit.optionsAligned=options.length;
       }
       const done=new Date(clock());
@@ -309,7 +364,7 @@ export async function collect(env, now=new Date(), fetcher=fetch, clock=Date.now
 /* V25: bounded primary-collector failure reasons. Never persist raw provider,
  * credential, network, or database error text. */
 export function classifyCollectorFailureV25(msg) {
-  const allowed=new Set(['authorization_denied','provider_rate_limited','provider_http_error',
+  const allowed=new Set(['authorization_denied','provider_rate_limited','provider_http_error','provider_server_error',
     'provider_invalid_json','credential_missing','invalid_symbols','route_not_allowed']);
   if(allowed.has(msg))return msg;
   const s=typeof msg==='string'?msg.slice(0,400).toLowerCase():'';
@@ -332,7 +387,7 @@ export default {
   async fetch(req){
     const {pathname}=new URL(req.url);
     if(req.method!=='GET'||pathname!=='/health')return new Response('Not found',{status:404});
-    return new Response(JSON.stringify({service:'options-tradier-paper-poller',version:'v25',
+    return new Response(JSON.stringify({service:'options-tradier-paper-poller',version:'v27',paper_research:'private_prospective_quote_models',
       data:'research_quote_snapshots_only',orders_enabled:false,licensed_market_data_required:true}),
       {headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
   },
@@ -341,10 +396,20 @@ export default {
     ctx.waitUntil((async()=>{
       const outcome=await collectV19(env,new Date());
       if(outcome==='market_closed'||outcome==='provider_cooldown')return;
+      let paperFailed=false;
+      try{
+        await runPaperResearch(env,{getQuotes,getCatalog:getResearchCatalog,validateQuote,
+          isSession:isRegularSession,fetcher:fetch,classify:classifyCollectorFailureV25,
+          allowNew:/^captured_2_stocks_[1-9]\d*_options$/.test(outcome),
+          cooldown:code=>setStatus(env.DB,code,new Date())});
+      }catch{paperFailed=true;}
       if(typeof outcome!=='string'||!/^captured_2_stocks_[1-9]\d*_options$/.test(outcome))
         throw new Error('TRADIER_COLLECTOR_NOT_VERIFIED: '+String(outcome).replace(/[^a-z0-9_]/gi,'').slice(0,48));
       // Cloudflare scheduledTime is UTC epoch milliseconds; late dispatch must not shift cadence.
-      if(!shouldCollectBroadV26(new Date(_event?.scheduledTime)))return;
+      if(!shouldCollectBroadV26(new Date(_event?.scheduledTime))){
+        if(paperFailed)throw new Error('PAPER_RESEARCH_NOT_VERIFIED');
+        return;
+      }
       const snapshotSink={};
       const broad=await collectBroadV21(env,new Date(),fetch,Date.now,snapshotSink);
       if(broad!=='broad_complete'&&broad!=='broad_partial')
@@ -352,6 +417,7 @@ export default {
       const optionOutcome=await collectBroadOptionsV23(env,new Date(),fetch,Date.now,snapshotSink);
       if(!['option_complete','option_partial','option_no_eligible_expiry'].includes(optionOutcome))
         throw new Error('TRADIER_OPTION_TAPE_NOT_VERIFIED: '+String(optionOutcome).replace(/[^a-z0-9_]/gi,'').slice(0,48));
+      if(paperFailed)throw new Error('PAPER_RESEARCH_NOT_VERIFIED');
       if(typeof outcome==='string'&&/^captured_2_stocks_[1-9]\d*_options$/.test(outcome))return;
       throw new Error('TRADIER_COLLECTOR_NOT_VERIFIED: '+String(outcome).replace(/[^a-z0-9_]/gi,'').slice(0,48));
     })());

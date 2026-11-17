@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {collectBroadV21, collectBroadOptionsV23, classifyCollectorFailureV25,
-  classifyOptionFailureV24, shouldCollectBroadV26}
+  classifyOptionFailureV24, shouldCollectBroadV26, coreQuoteBatchWithRecovery, validateQuote}
   from '../workers/tradier_poller_v24_candidate.mjs';
 
 const NOW='2026-11-05T17:14:00.000Z';
@@ -123,4 +123,88 @@ test('five-minute broad sampling is closed-market-safe and independent of primar
   const option=scheduled.indexOf('const optionOutcome=await collectBroadOptionsV23');
   assert.ok(primary>=0&&failure>primary&&cadence>failure&&broad>cadence&&option>broad,
     'Run primary every scheduled minute; fail closed on its error; throttle only broad collectors');
+});
+
+
+function responseFor(quote, status=200, remaining='100') {
+  return {status,ok:status>=200&&status<300,
+    headers:{get:(key)=>key==='X-Ratelimit-Available'?remaining:null},
+    json:async()=>({quotes:{quote}}),
+    text:async()=>status===400?'Quota Violation':'test transient failure'};
+}
+const coreScore = result => ({score:result.quotes.length});
+
+test('core quote batch uses one GET when complete', async () => {
+  let count=0;
+  const fetcher=async()=>{count++;return responseFor([mockQuote('SPY'),mockQuote('QQQ')]);};
+  const out=await coreQuoteBatchWithRecovery('SYNTHETIC_NO_REAL_SECRET',
+    ['SPY','QQQ'],coreScore,2,fetcher,()=>TIME);
+  assert.equal(count,1);
+  assert.equal(out.quality.score,2);
+});
+
+test('partial primary underlying batch receives at most one bounded recovery attempt', async () => {
+  let count=0;
+  const fetcher=async()=>responseFor(++count===1?[mockQuote('SPY')]:
+    [mockQuote('SPY'),mockQuote('QQQ')]);
+  const out=await coreQuoteBatchWithRecovery('SYNTHETIC_NO_REAL_SECRET',
+    ['SPY','QQQ'],coreScore,2,fetcher,()=>TIME);
+  assert.equal(count,2);
+  assert.equal(out.quality.score,2);
+});
+
+test('a stale option-side batch never becomes verified without fresh source timestamps', async () => {
+  let count=0;
+  const stale={...mockQuote('SPY'),bid_date:new Date(TIME-180_000).toISOString()};
+  const fetcher=async()=>responseFor(++count===1?[stale]:
+    [mockQuote('SPY')]);
+  const verify=batch=>({score:batch.quotes.filter(q=>
+    validateQuote(q,batch.receivedAtMs)).length});
+  const out=await coreQuoteBatchWithRecovery('SYNTHETIC_NO_REAL_SECRET',
+    ['SPY'],verify,1,fetcher,()=>TIME);
+  assert.equal(count,2);
+  assert.equal(out.quality.score,1);
+  assert.equal(validateQuote(stale,TIME),null);
+});
+
+test('one provider timeout or 503 may retry, but authorization and quota denials never do', async () => {
+  for(const first of ['timeout','503']){
+    let count=0;
+    const fetcher=async()=>{
+      count++;
+      if(count===1&&first==='timeout')throw new Error('fetch failed: network timeout');
+      return responseFor([mockQuote('SPY')],count===1?503:200);
+    };
+    const out=await coreQuoteBatchWithRecovery('SYNTHETIC_NO_REAL_SECRET',
+      ['SPY'],coreScore,1,fetcher,()=>TIME);
+    assert.equal(count,2,first);
+    assert.equal(out.quality.score,1);
+  }
+  for(const status of [401,403,400,429]){
+    let count=0;
+    const fetcher=async()=>{count++;return responseFor([],status);};
+    await assert.rejects(coreQuoteBatchWithRecovery('SYNTHETIC_NO_REAL_SECRET',
+      ['SPY'],coreScore,1,fetcher,()=>TIME),/authorization_denied|provider_rate_limited/);
+    assert.equal(count,1,status);
+  }
+});
+
+test('persistent incomplete source evidence remains partial after bounded retries', async () => {
+  let count=0;
+  const fetcher=async()=>{count++;return responseFor([mockQuote('SPY')]);};
+  const out=await coreQuoteBatchWithRecovery('SYNTHETIC_NO_REAL_SECRET',
+    ['SPY','QQQ'],coreScore,2,fetcher,()=>TIME);
+  assert.equal(count,2);
+  assert.equal(out.quality.score,1);
+});
+
+test('no retry when provider signals low rate-limit headroom or minute is ending', async () => {
+  for(const [time,remaining] of [[TIME,'1'],[TIME+50_000,'100']]){
+    let count=0;
+    const fetcher=async()=>{count++;return responseFor([mockQuote('SPY')],200,remaining);};
+    const out=await coreQuoteBatchWithRecovery('SYNTHETIC_NO_REAL_SECRET',
+      ['SPY','QQQ'],coreScore,2,fetcher,()=>time);
+    assert.equal(count,1);
+    assert.equal(out.quality.score,1);
+  }
 });
