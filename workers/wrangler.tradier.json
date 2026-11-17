@@ -3,6 +3,7 @@
   "name": "options-tradier-paper-poller",
   "main": "tradier_poller_v24_candidate.mjs",
   "compatibility_date": "2026-10-24",
+  "vars": {"PAPER_RESEARCH_ENABLED": "true"},
   "triggers": {
     "crons": ["* * * * *"]
   },

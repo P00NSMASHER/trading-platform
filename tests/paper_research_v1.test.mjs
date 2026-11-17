@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {DESIGN,EXTRA_COST,digest,signalAt,frozenContracts,validatePaperBatch,qualifiedGreekTime,runPaperResearch} from '../workers/paper_research_v1.mjs';
+import {DESIGN,EXTRA_COST,digest,signalAt,frozenContracts,validatePaperBatch,qualifiedGreekTime,runPaperResearch,runPaperMaintenance,maintenanceWindow,evidenceProgress} from '../workers/paper_research_v1.mjs';
 import {validateQuote,isRegularSession,classifyCollectorFailureV25} from '../workers/tradier_poller_v24_candidate.mjs';
 
 // All prices and observations in this file are synthetic, isolated in SQLite memory.
@@ -16,6 +16,7 @@ const START=Date.parse('2026-11-17T15:05:10Z');
 const catalog=[{date:'2026-11-23',contract_size:100,strikes:{strike:Array.from({length:30},(_,i)=>490+i)}}];
 function raw(c,t,bid=3,ask=3.02){return {symbol:c.symbol,underlying:c.root,root_symbol:c.root,expiration_date:c.expiry,option_type:c.right==='C'?'call':'put',strike:c.strike,contract_size:100,bid,ask,bidsize:10,asksize:10,bid_date:t-1000,ask_date:t-2000,open_interest:200};}
 async function setup(){const d1=new D1();d1.db.exec(readFileSync(new URL('../workers/migrations/0001_paper_research.sql',import.meta.url),'utf8'));
+  d1.db.exec(readFileSync(new URL('../workers/migrations/0002_paper_usefulness.sql',import.meta.url),'utf8'));
   d1.db.exec('CREATE TABLE quote_samples_v17 (observed_minute TEXT,symbol TEXT,bid REAL,ask REAL,bid_quote_at TEXT,ask_quote_at TEXT,captured_at TEXT,source TEXT,PRIMARY KEY(symbol,observed_minute));');
   const config=JSON.stringify(DESIGN);d1.db.prepare('INSERT INTO paper_designs_v1 VALUES (?,?,?,?,?,?)').run(DESIGN.id,'2026-11-17T13:00:00Z','2026-11-17T14:30:00Z','2027-01-16T14:30:00Z',config,await digest(config));
   for(const root of DESIGN.roots)for(let i=0;i<35;i++){const t=Date.parse('2026-11-17T14:30:00Z')+i*60000,mid=i<30?500+(i%2):502;d1.db.prepare('INSERT INTO quote_samples_v17 VALUES (?,?,?,?,?,?,?,?)').run(new Date(t).toISOString(),root,mid-.01,mid+.01,new Date(t+1000).toISOString(),new Date(t+2000).toISOString(),new Date(t+3000).toISOString(),'tradier_synthetic_test');}
@@ -77,4 +78,47 @@ test('source history excludes future information, synthetic provenance, missing 
 });
 test('authorization/quota failure makes one request and explicitly no-fills without same-run retry',async()=>{
  const s=await setup();let attempts=0,cooldowns=0;s.deps.getQuotes=async()=>{attempts++;throw Error('tradier_http_429');};s.deps.classify=()=> 'provider_rate_limited';s.deps.cooldown=async()=>{cooldowns++;};await runPaperResearch(s.env,s.deps,s.clock);assert.equal(attempts,1);assert(cooldowns>=1);assert(rows(s,'paper_outcomes_v1').every(x=>x.state==='NO_FILL'));
+});
+
+test('post-close retry recovers missed exits and saves one actionable private report without provider calls',async()=>{
+ const s=await setup();await runPaperResearch(s.env,s.deps,s.clock);const calls=s.requests.length;
+ s.setNow(Date.parse('2026-11-17T21:05:10Z'));
+ assert.equal(await runPaperMaintenance(s.env,s.deps,s.clock),'paper_report_saved');
+ assert.equal(s.requests.length,calls);assert.equal(rows(s,'paper_open_v1').length,0);
+ assert.equal(rows(s,'paper_outcomes_v1')[0].state,'MISSING_EXIT');
+ const receipt=rows(s,'paper_scorecards_v1')[0],report=JSON.parse(receipt.report_json);
+ assert.equal(await digest(receipt.report_json),receipt.report_sha256);
+ assert.equal(report.strategies[0].lifetime.missing_exits,1);
+ assert.equal(report.strategies[0].today.expected_candidates,10);
+ assert.equal(report.strategies[0].today.missing_candidates,8);
+ assert.equal(report.strategies[0].next_action,'REPAIR_COLLECTION');
+ assert.equal(report.full_selected_history,true);assert.equal(report.strategies[0].holdout_returns,'EMBARGOED');
+ s.setNow(s.clock()+5*60000);assert.equal(await runPaperMaintenance(s.env,s.deps,s.clock),'paper_report_already_saved');assert.equal(rows(s,'paper_scorecards_v1').length,1);
+});
+test('report persistence failure retries safely and early-close/holiday calendar never polls provider',async()=>{
+ const s=await setup();s.setNow(Date.parse('2026-11-17T21:00:10Z'));
+ const original=s.d1.execute.bind(s.d1);let fail=true;s.d1.execute=(sql,args)=>{if(fail&&sql.includes('INSERT OR IGNORE INTO paper_scorecards_v1')){fail=false;throw Error('synthetic_storage_failure');}return original(sql,args);};
+ await assert.rejects(runPaperMaintenance(s.env,s.deps,s.clock),/synthetic_storage_failure/);
+ assert.equal(rows(s,'paper_scorecards_v1').length,0);s.setNow(s.clock()+5*60000);
+ assert.equal(await runPaperMaintenance(s.env,s.deps,s.clock),'paper_report_saved');assert.equal(s.requests.length,0);
+ for(const [t,want] of [['2026-11-27T18:05:00Z',true],['2026-11-26T21:05:00Z',false],['2026-11-21T21:05:00Z',false],['2026-11-17T20:59:00Z',false],['2026-11-17T21:31:00Z',false],['2029-01-03T21:05:00Z',false]])assert.equal(maintenanceWindow(Date.parse(t),isRegularSession),want,t);
+ const z=await setup();z.setNow(Date.parse('2026-11-27T18:05:10Z'));await runPaperMaintenance(z.env,z.deps,z.clock);
+ assert.equal(JSON.parse(rows(z,'paper_scorecards_v1')[0].report_json).strategies[0].today.expected_candidates,6);
+});
+test('frozen collection deadline stops entries and paused strategies cannot restart',async()=>{
+ const s=await setup();s.setNow(Date.parse('2027-05-17T14:05:10Z'));await runPaperResearch(s.env,s.deps,s.clock);
+ assert.equal(rows(s,'paper_decisions_v1').length,0);assert.equal(s.requests.length,0);
+ s.setNow(Date.parse('2027-05-17T20:05:10Z'));await runPaperMaintenance(s.env,s.deps,s.clock);
+ assert(rows(s,'paper_strategy_state_v2').every(x=>x.state==='PAUSED_TIME_LIMIT'));assert.equal(rows(s,'paper_strategy_state_v2').length,2);
+ const z=await setup();z.d1.db.prepare('INSERT INTO paper_strategy_state_v2 VALUES (?,?,?,?)').run(DESIGN.id,DESIGN.strategies[0],'PAUSED_READY_FOR_LOCKED_REVIEW',new Date(START-60000).toISOString());
+ await runPaperResearch(z.env,z.deps,z.clock);assert(rows(z,'paper_decisions_v1').every(x=>x.strategy!==DESIGN.strategies[0]));
+});
+test('100 complete outcomes remain required; missing exits do not permanently stall an independent review',()=>{
+ const design={forward_start:'2026-11-17T14:30:00Z',holdout_start:'2027-01-16T14:30:00Z'};
+ const complete=Array.from({length:120},(_,i)=>({decision_at:new Date(START+i*86400000).toISOString(),entry_state:'QUOTE_MODEL',outcome_state:'COMPLETE_QUOTE_MODEL'}));
+ const missing={...complete.at(-1),outcome_state:'MISSING_EXIT'};
+ const ready=evidenceProgress([...complete,missing],design,START+121*86400000);assert.equal(ready.state,'PAUSED_READY_FOR_LOCKED_REVIEW');assert.equal(ready.missing_exits,1);assert.equal(ready.complete,120);
+ assert.equal(evidenceProgress(complete.slice(0,99),design,START+121*86400000).minima_pass,false);
+ assert.equal(evidenceProgress([...complete,...Array(10).fill(missing)],design,START+121*86400000).minima_pass,false);
+ assert.equal(evidenceProgress([...complete,{...missing,outcome_state:null}],design,START+121*86400000).minima_pass,false);
 });
