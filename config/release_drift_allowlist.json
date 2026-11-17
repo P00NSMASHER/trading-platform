@@ -148,8 +148,8 @@
       "reason": "Hardened Databento historical cost-only probe: main-push plus explicit manual dispatch, read-only permissions, secret-gated metadata cost estimates, no downloads, batch jobs, or purchases. Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required."
     },
     ".github/workflows/pr-ci.yml": {
-      "expected_sha256": "4f2da7c3ff92a46fa634805ccb47f8ccaa32a08b30e0dfc3a246f06ea3392475",
-      "reason": "Control-plane Step 8: exact PR-head checkout, dedicated adversarial audit job, full-SHA-pinned audit artifact upload, read-only permissions Candidate-only consolidation of genuine upstream GitHub tag SHA pins: setup-python v7.1.0 and/or upload-artifact v7.0.2; exact-head native CI and separate independent release trust-root approval still required."
+      "expected_sha256": "f475187ac40cf5bd5b1df22d751c0da43510458b85d7f19b841b29e14a467d25",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
     },
     ".github/workflows/synthetic-ci.yml": {
       "expected_sha256": "65d206bbbd81a6f8e0057b17819612278ec86ca2a158674abca282654387a057",
@@ -3076,7 +3076,7 @@
       "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
     },
     "tests/golden_goose_worker_v24.test.mjs": {
-      "expected_sha256": "b99b4839bcb797e9950d29c53571cd7671f1983a872f7de6cac880967f30f5d3",
+      "expected_sha256": "179c8852bb94d3cb7e17013d206467b462d3531adea8fa91cac4204b475ef738",
       "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
     },
     "tests/test_golden_goose_candidates.py": {
@@ -3108,8 +3108,8 @@
       "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
     },
     "workers/tradier_poller_v24_candidate.mjs": {
-      "expected_sha256": "12fa3ce26ee75da8404c839b616c6d4975dd1ec5025efbbcd873a70c3e115c10",
-      "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
+      "expected_sha256": "c0a101148ed27eed0cf1f59c60cc75551e1f8c4c83ea57c68fed51e392b73da0",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
     },
     "tests/test_tradier_worker_deployment.py": {
       "expected_sha256": "97909d54506733bc0fe33ff21086c423e6774da4ad5cb89315ee21066ef11053",
@@ -3126,6 +3126,50 @@
     "tests/test_golden_goose_box_research.py": {
       "expected_sha256": "646db8651b19c42fc22f9d5543585b8d3c5ccefa075ae93d537e4f4552872d5f",
       "reason": "Synthetic indexed D1 query, four-leg math and fail-closed quota regression tests"
+    },
+    "src/golden_goose_forward_paper.py": {
+      "expected_sha256": "cc3d40a60049706aea0b9a955bbc9cc96918b7d75941b8f1f1a4409c550cb886",
+      "reason": "Offline private append-only prospective two-leg-plus-control paper evidence journal with no execution or external network"
+    },
+    "tests/test_golden_goose_forward_paper.py": {
+      "expected_sha256": "4b0da08513e7fb339025f8ae55f3a79c5457d78dd906919ec1839819bbdb0067",
+      "reason": "Synthetic-only fail-closed controls for point-in-time admission, exits, risk, idempotency, tampering, and benchmark evidence"
+    },
+    "docs/golden_goose_forward_paper.md": {
+      "expected_sha256": "0dadaa65ce7d47659edd411dfd78fa930b3592659e58215dee692ae7af0f6a30",
+      "reason": "Paper-only prospective workflow, missing real-world preconditions, and independent trust-root audit guidance"
+    },
+    "docs/paper_research_v1.md": {
+      "expected_sha256": "d9340c175f07c711772d7bf4a275748d62f71fe446ec3bd3753cf4f15f68aa22",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
+    },
+    "scripts/paper_price_screen.mjs": {
+      "expected_sha256": "17d0c675b130f476fa12ed809a868e91f6cfad1c39ad579ba4704cfe0aed2352",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
+    },
+    "src/paper_research_analysis.py": {
+      "expected_sha256": "e0ff2d62e0cf22842e061fa29a7784c36228e2566fdbb8cf43a1dd1ded23a6d2",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
+    },
+    "tests/paper_research_v1.test.mjs": {
+      "expected_sha256": "29a3238cf069c389ef956f6cabf1a0bc2241e3e507e26a0c9d456ef2dcdd46af",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
+    },
+    "tests/test_paper_research_analysis.py": {
+      "expected_sha256": "a94f6b4ea53ba6a3b2d522d9e99f70b420d8b8fbcc8a2e3bd9cdbf01578f2fdc",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
+    },
+    "tests/test_paper_research_worker.py": {
+      "expected_sha256": "997bd384904da19bd7f16f8cc2250db279d0690c1a2daabdcf072cb3af373880",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
+    },
+    "workers/migrations/0001_paper_research.sql": {
+      "expected_sha256": "900c1e46abdd7c603c1f0ee1a18ad0443fd8e2d71b8954a96f614c159284dad5",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
+    },
+    "workers/paper_research_v1.mjs": {
+      "expected_sha256": "51e9a816f31b2fb96bf89f422261c5cdcc6e0bf2d4daa6d24c77c418ba2f4963",
+      "reason": "Authorized November 16 assessment implementation: private frozen-contract paper evidence, bounded analysis, guarded holdout and synthetic persistence verification; no real-money execution."
     }
   },
   "schema_version": "2",
