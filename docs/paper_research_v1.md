@@ -182,8 +182,8 @@ continue collecting; run one locked private holdout review; or review/retire
 the protocol at its time limit. No action enables real-money trading. A
 statistically qualified result still requires further paper validation.
 
-Use the existing read-only Fleet oversight task for one bounded after-close
-check; do not add another scheduler. Its private query is:
+Use the existing read-only Tradier Paper Research task for one bounded after-close
+check after the report retry window; do not add another scheduler. Its private query is:
 
 ```sql
 SELECT day,created_at,report_sha256,report_json
