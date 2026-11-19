@@ -7,7 +7,7 @@ class FakeDB {
   constructor(){this.quoteRows=[];this.audits=[];this.statuses=[];}
   prepare(sql){
     const db=this;
-    return {bind(...args){return {
+    const statement=args=>({
       sql,args,
       async first(){return null;},
       async run(){
@@ -15,7 +15,10 @@ class FakeDB {
         if(sql.startsWith('INSERT INTO collector_status'))db.statuses.push(args);
         return {success:true,meta:{rows_read:0,rows_written:1}};
       }
-    };}};
+    });
+    // Production's readStatus() calls prepare().first() without bind().
+    return {bind(...args){return statement(args);},async first(){return null;},
+      async run(){return statement([]).run();}};
   }
   async batch(statements){
     for(const statement of statements){
