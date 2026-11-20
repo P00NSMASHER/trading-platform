@@ -3076,7 +3076,7 @@
       "reason": "Golden Goose research-only module: indexed read budgets, quote provenance, signals, risk gates, or gated scenario simulation"
     },
     "tests/golden_goose_worker_v24.test.mjs": {
-      "expected_sha256": "179c8852bb94d3cb7e17013d206467b462d3531adea8fa91cac4204b475ef738",
+      "expected_sha256": "14b36e2706f4807d2d4a314c8b9b2346eca9a69ff269545883689133bb97b7f8",
       "reason": "Golden Goose synthetic/CI regression covering point-in-time market data, option collection, and risk controls"
     },
     "tests/test_golden_goose_candidates.py": {
@@ -3108,7 +3108,7 @@
       "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
     },
     "workers/tradier_poller_v24_candidate.mjs": {
-      "expected_sha256": "03825804d66b5c6572901570ebbd77a8436aacd5fac544961394c6145e55bf90",
+      "expected_sha256": "ab27513f4f62f09ff553e7b3ee9a99520a086b8ce8086baa3d2e398f565596e2",
       "reason": "Nonproduction PR #550 only: persist authentic minute-level SPY/QQQ underlying quotes before optional vendor requests; fail closed on minute rollover; unchanged paper design and no deployment authorization."
     },
     "tests/test_tradier_worker_deployment.py": {

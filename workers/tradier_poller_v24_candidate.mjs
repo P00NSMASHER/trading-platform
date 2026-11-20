@@ -163,29 +163,31 @@ export async function getQuotes(token, symbols, fetcher=fetch, clock=Date.now) {
 
 // A single, budgeted retry for transient incomplete SPY/QQQ batches. This never
 // reuses prior-minute quotes or weakens per-side freshness and cross-source alignment.
-export async function coreQuoteBatchWithRecovery(token,symbols,verify,expected,fetcher=fetch,clock=Date.now){
+export async function coreQuoteBatchWithRecovery(token,symbols,verify,expected,fetcher=fetch,clock=Date.now,maxAttempts=2){
+  // Extra bounded retry is opt-in for primary SPY/QQQ only; all quotes retain original timestamps.
+  if(maxAttempts!==2&&maxAttempts!==3)throw new Error('invalid_retry_limit');
   if(typeof verify!=='function'||!Number.isSafeInteger(expected)||expected<1||expected>MAX_SYMBOLS)
     throw new Error('invalid_core_validation');
   let best=null;
-  for(let attempt=0;attempt<2;attempt++){
+  for(let attempt=0;attempt<maxAttempts;attempt++){
     let batch;
     try{
       batch=await getQuotes(token,symbols,fetcher,clock);
     }catch(error){
       const description=error instanceof Error?error.name+' '+error.message:'';
       const transient=/provider_server_error|aborterror|timeouterror|timeout|timed out|fetch failed|networkerror|econnreset/i.test(description);
-      if(attempt===1&&best&&transient)break; // preserve the first incomplete observation
-      if(attempt!==0||!transient||clock()%60_000>=40_000)throw error;
-      await new Promise(resolve=>setTimeout(resolve,400));
+      if(attempt===maxAttempts-1&&best&&transient)break; // preserve the first incomplete observation
+      if(attempt===maxAttempts-1||!transient||clock()%60_000>=40_000)throw error;
+      await new Promise(resolve=>setTimeout(resolve,attempt===0?400:1600));
       continue;
     }
     const quality=verify(batch);
     if(!quality||!Number.isSafeInteger(quality.score)||quality.score<0||quality.score>expected)
       throw new Error('invalid_core_validation');
     if(!best||quality.score>best.quality.score)best={batch,quality};
-    if(quality.score===expected||attempt!==0||clock()%60_000>=40_000||
+    if(quality.score===expected||attempt===maxAttempts-1||clock()%60_000>=40_000||
         (batch.rateLimitRemaining!==null&&batch.rateLimitRemaining<2))break;
-    await new Promise(resolve=>setTimeout(resolve,400));
+    await new Promise(resolve=>setTimeout(resolve,attempt===0?400:1600));
   }
   if(!best)throw new Error('collector_unknown_failure');
   return best;
@@ -294,7 +296,7 @@ export async function collect(env, now=new Date(), fetcher=fetch, clock=Date.now
             (!x.original.type||['etf','stock'].includes(x.original.type)));
         const stock=[...new Map(valid.map(x=>[x.symbol,x])).values()];
         return {score:stock.length,stock};
-      },ROOTS.length,fetcher,clock);
+      },ROOTS.length,fetcher,clock,3);
       const stockResult=stockSelection.batch;
       audit.stocksReturned=stockResult.quotes.length;
       const stock=stockSelection.quality.stock;
