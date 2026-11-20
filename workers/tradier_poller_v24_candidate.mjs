@@ -299,6 +299,16 @@ export async function collect(env, now=new Date(), fetcher=fetch, clock=Date.now
       audit.stocksReturned=stockResult.quotes.length;
       const stock=stockSelection.quality.stock;
       audit.stocksAccepted=stock.length;
+      // Record genuine stock quote minutes before slower expiration/option requests.
+      // Otherwise a later vendor error or a minute rollover destroys valid history.
+      const stockCapturedAt=new Date(stockResult.receivedAtMs);
+      if(!isRegularSession(stockCapturedAt))throw new Error('stock_capture_outside_session');
+      const underlyingRows=stock.map(q=>({q,kind:'underlying',root:q.symbol,expiry:null,strike:null,right:null}));
+      if(underlyingRows.length){
+        await persist(env.DB,underlyingRows,stockCapturedAt);
+        audit.observedMinute=new Date(Math.floor(stockResult.receivedAtMs/60000)*60000).toISOString();
+        audit.quotesAccepted=underlyingRows.length;
+      }
       const stockMap=new Map(stock.map(x=>[x.symbol,x]));
       const spot=Object.fromEntries(stock.map(x=>[x.symbol,(x.bid+x.ask)/2]));
       const day=tradingDate(now), expiries={};
@@ -328,15 +338,18 @@ export async function collect(env, now=new Date(), fetcher=fetch, clock=Date.now
         options=optionSelection.quality.aligned;
         audit.optionsAligned=options.length;
       }
-      const done=new Date(clock());
-      // Match the audit minute to the same completion instant used for quote storage.
-      audit.observedMinute=new Date(Math.floor(done.getTime()/60000)*60000).toISOString();
+      const done=new Date(clock()),completionMinute=new Date(Math.floor(done.getTime()/60000)*60000).toISOString();
+      if(!audit.quotesAccepted)audit.observedMinute=completionMinute;
       if(!isRegularSession(done))result='session_ended_during_capture';
-      else {
-        const rows=[...stock.map(q=>({q,kind:'underlying',root:q.symbol,expiry:null,strike:null,right:null})),
-          ...options.map(q=>({...planned.get(q.symbol),q,kind:'option'}))];
+      else if(audit.quotesAccepted&&audit.observedMinute!==completionMinute){
+        // Never relabel an older stock quote as a newer minute or credit a
+        // cross-minute option snapshot as a same-minute aligned capture.
+        audit.coverageState='cross_minute_underlying_only';
+        result='underlyings_only_cross_minute';
+      }else{
+        const rows=options.map(q=>({...planned.get(q.symbol),q,kind:'option'}));
         await persist(env.DB,rows,done);
-        audit.quotesAccepted=rows.length;
+        audit.quotesAccepted+=rows.length;
         audit.coverageState=coverageStatus(audit);
         result=options.length?`captured_${stock.length}_stocks_${options.length}_options`:
           stock.length?'underlyings_only_no_verified_options':'no_verified_quotes';
