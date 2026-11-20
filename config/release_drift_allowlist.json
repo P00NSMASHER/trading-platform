@@ -3108,7 +3108,7 @@
       "reason": "Golden Goose phase-1 versioned read-only Tradier Worker source and separately staged candidate"
     },
     "workers/tradier_poller_v24_candidate.mjs": {
-      "expected_sha256": "ab27513f4f62f09ff553e7b3ee9a99520a086b8ce8086baa3d2e398f565596e2",
+      "expected_sha256": "f98acff2e074c0df8f60b992141928b22d841702a9c1ec1590e8383f127d150d",
       "reason": "Nonproduction PR #550 only: persist authentic minute-level SPY/QQQ underlying quotes before optional vendor requests; fail closed on minute rollover; unchanged paper design and no deployment authorization."
     },
     "tests/test_tradier_worker_deployment.py": {
@@ -3176,7 +3176,7 @@
       "reason": "Private paper usefulness v2: reliable after-close reports, independent locked evaluation, conservative missing-exit sensitivity and finite collection; no orders or added schedules."
     },
     "tests/tradier_underlying_minute_integrity.test.mjs": {
-      "expected_sha256": "080f7be9b6f792df2f2b5548b20fae60855f2dcd0c3fd8100db71fa773a1b919",
+      "expected_sha256": "c48387c30ad1a31a6fbb3cf721a20f09c3569d0534875e760961a5875b097944",
       "reason": "Synthetic isolated Node regression for collector stock-minute preservation, cross-minute rejection, and no false options evidence; no network or live D1."
     },
     "tests/test_tradier_underlying_minute_integrity.py": {

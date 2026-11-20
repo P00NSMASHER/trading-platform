@@ -34,15 +34,15 @@ function quote(symbol,receivedAtMs){
     bidsize:25,asksize:25,bid_date:receivedAtMs-1000,ask_date:receivedAtMs-1200};
 }
 function response(payload){return {ok:true,status:200,headers:{get:()=>null},json:async()=>payload};}
-function stocks(receivedAtMs){return response({quotes:{quote:['SPY','QQQ'].map(s=>quote(s,receivedAtMs))}});}
-const run=async ({start,stocksAt,expirationResponses})=>{
+function stocks(receivedAtMs,staleMs=0){return response({quotes:{quote:['SPY','QQQ'].map(s=>{const q=quote(s,receivedAtMs);if(staleMs){q.bid_date=receivedAtMs-staleMs;q.ask_date=receivedAtMs-staleMs;}return q;})}});}
+const run=async ({start,stocksAt,expirationResponses,stockAgesMs=[]})=>{
   const db=new FakeDB(),now=new Date(start),env={DB:db,TRADIER_TOKEN:'unit-test-placeholder'};
-  let t=MS(start),expirations=0;
+  let t=MS(start),expirations=0,stockCalls=0;
   const fetcher=async url=>{
     const u=new URL(url);
     if(u.pathname==='/v1/markets/quotes'){
       assert.equal(u.searchParams.get('symbols'),'SPY,QQQ');
-      t=MS(stocksAt);return stocks(t);
+      t=MS(stocksAt);return stocks(t,stockAgesMs[stockCalls++]||0);
     }
     assert.equal(u.pathname,'/v1/markets/options/expirations');
     const next=expirationResponses[expirations++];
@@ -51,7 +51,7 @@ const run=async ({start,stocksAt,expirationResponses})=>{
     return response({expirations:{date:[]}});
   };
   const result=await collect(env,now,fetcher,()=>t);
-  return {db,result,expirations};
+  return {db,result,expirations,stockCalls};
 };
 
 test('a later options/expiration provider failure cannot discard valid stock minute history',async()=>{
@@ -89,4 +89,16 @@ test('same-minute underlying-only attempt remains correctly attributed and never
   assert.equal(s.db.quoteRows.length,2);
   assert.equal(s.db.audits[0][8],0); // zero options returned
   assert.equal(s.db.audits[0][11],2); // two genuine underlyings persisted
+});
+
+test('collector itself uses a bounded third fresh stock probe before downstream option failure',async()=>{
+  const s=await run({start:'2026-11-19T15:03:05.000Z',
+    stocksAt:'2026-11-19T15:03:08.000Z',
+    stockAgesMs:[180000,180000,0],
+    expirationResponses:[{at:'2026-11-19T15:03:35.000Z',http_error:true}]});
+  assert.equal(s.stockCalls,3);
+  assert.equal(s.result,'provider_server_error');
+  assert.equal(s.db.quoteRows.length,2);
+  assert(s.db.quoteRows.every(x=>x[0]==='2026-11-19T15:03:00.000Z'));
+  assert(s.db.quoteRows.every(x=>x[15]==='2026-11-19T15:03:08.000Z'));
 });

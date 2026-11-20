@@ -161,8 +161,8 @@ export async function getQuotes(token, symbols, fetcher=fetch, clock=Date.now) {
     rateLimitRemaining:r.rateLimitRemaining};
 }
 
-// A single, budgeted retry for transient incomplete SPY/QQQ batches. This never
-// reuses prior-minute quotes or weakens per-side freshness and cross-source alignment.
+// Bounded source-exact retry: standard callers use two probes, primary SPY/QQQ
+// may use three. Never reuse prior-minute quotes or weaken per-side timestamp checks.
 export async function coreQuoteBatchWithRecovery(token,symbols,verify,expected,fetcher=fetch,clock=Date.now,maxAttempts=2){
   // Extra bounded retry is opt-in for primary SPY/QQQ only; all quotes retain original timestamps.
   if(maxAttempts!==2&&maxAttempts!==3)throw new Error('invalid_retry_limit');
