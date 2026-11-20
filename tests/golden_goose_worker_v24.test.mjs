@@ -208,3 +208,28 @@ test('no retry when provider signals low rate-limit headroom or minute is ending
     assert.equal(out.quality.score,1);
   }
 });
+
+test('opt-in third primary stock probe accepts only genuinely fresh two-symbol source evidence', async () => {
+  let count=0;
+  const stale=symbol=>({...mockQuote(symbol),
+    bid_date:new Date(TIME-180_000).toISOString(),ask_date:new Date(TIME-180_000).toISOString()});
+  const fetcher=async()=>responseFor(++count<3?[stale('SPY'),stale('QQQ')]:
+    [mockQuote('SPY'),mockQuote('QQQ')]);
+  const verify=batch=>({score:batch.quotes.filter(q=>validateQuote(q,batch.receivedAtMs)).length});
+  const out=await coreQuoteBatchWithRecovery('SYNTHETIC_NO_REAL_SECRET',
+    ['SPY','QQQ'],verify,2,fetcher,()=>TIME,3);
+  assert.equal(count,3);
+  assert.equal(out.quality.score,2);
+  assert.equal(validateQuote(stale('SPY'),TIME),null);
+});
+
+test('opt-in extra stock retry never violates rate limit or end-of-minute guard', async () => {
+  for(const [clockMs,headroom] of [[TIME+50_000,'100'],[TIME,'1']]){
+    let count=0;
+    const fetcher=async()=>{count++;return responseFor([mockQuote('SPY')],200,headroom);};
+    const out=await coreQuoteBatchWithRecovery('SYNTHETIC_NO_REAL_SECRET',
+      ['SPY','QQQ'],coreScore,2,fetcher,()=>clockMs,3);
+    assert.equal(count,1);
+    assert.equal(out.quality.score,1);
+  }
+});
